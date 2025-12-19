@@ -1,26 +1,23 @@
 // swift-tools-version: 6.2
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
-    name: "swift-manual-d",
-    products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "swift-manual-d",
-            targets: ["swift-manual-d"]
-        ),
-    ],
-    targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "swift-manual-d"
-        ),
-        .testTarget(
-            name: "swift-manual-dTests",
-            dependencies: ["swift-manual-d"]
-        ),
-    ]
+  name: "swift-manual-d",
+  products: [
+    .library(name: "swift-manual-d", targets: ["swift-manual-d"]),
+    .library(name: "ManualDCore", targets: ["ManualDCore"]),
+  ],
+  targets: [
+    .target(
+      name: "swift-manual-d"
+    ),
+    .target(
+      name: "ManualDCore"
+    ),
+    .testTarget(
+      name: "swift-manual-dTests",
+      dependencies: ["swift-manual-d"]
+    ),
+  ]
 )
