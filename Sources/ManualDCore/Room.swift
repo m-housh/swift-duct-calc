@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Room: Codable, Equatable {
+public struct Room: Codable, Equatable, Sendable {
   public let name: String
   public let heatingLoad: Double
   public let coolingLoad: CoolingLoad

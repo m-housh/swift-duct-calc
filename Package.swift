@@ -7,6 +7,10 @@ let package = Package(
   products: [
     .library(name: "swift-manual-d", targets: ["swift-manual-d"]),
     .library(name: "ManualDCore", targets: ["ManualDCore"]),
+    .library(name: "ManualDClient", targets: ["ManualDClient"]),
+  ],
+  dependencies: [
+    .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.0.0")
   ],
   targets: [
     .target(
@@ -14,6 +18,18 @@ let package = Package(
     ),
     .target(
       name: "ManualDCore"
+    ),
+    .target(
+      name: "ManualDClient",
+      dependencies: [
+        "ManualDCore",
+        .product(name: "Dependencies", package: "swift-dependencies"),
+        .product(name: "DependenciesMacros", package: "swift-dependencies"),
+      ]
+    ),
+    .testTarget(
+      name: "ManualDClientTests",
+      dependencies: ["ManualDClient"]
     ),
     .testTarget(
       name: "swift-manual-dTests",

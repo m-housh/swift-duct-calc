@@ -2,7 +2,7 @@ import Foundation
 
 // TODO: Add other description / label for items that have same group & letter, but
 //       different effective length.
-public struct EffectiveLengthGroup: Codable, Equatable {
+public struct EffectiveLengthGroup: Codable, Equatable, Sendable {
   public let group: Int
   public let letter: String
   public let effectiveLength: Int
@@ -24,7 +24,7 @@ public struct EffectiveLengthGroup: Codable, Equatable {
 
 extension EffectiveLengthGroup {
 
-  public enum Category: String, Codable, Equatable {
+  public enum Category: String, Codable, Equatable, Sendable {
     case any
     case supply
     case `return`
@@ -32,7 +32,7 @@ extension EffectiveLengthGroup {
 
 }
 
-public let effectiveLengthsLookup: [String: EffectiveLengthGroup] {
+public let effectiveLengthsLookup: [String: EffectiveLengthGroup] = {
   [
     "1a": .init(group: 1, letter: "a", effectiveLength: 35, category: .supply),
     "1b": .init(group: 1, letter: "b", effectiveLength: 10, category: .supply),
@@ -625,4 +625,4 @@ public let effectiveLengthsLookup: [String: EffectiveLengthGroup] {
     "12u": .init(group: 12, letter: "u", effectiveLength: 25, category: .any),
     "12v": .init(group: 12, letter: "v", effectiveLength: 30, category: .any),
   ]
-}
+}()

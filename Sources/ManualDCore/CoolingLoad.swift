@@ -1,6 +1,6 @@
 import Foundation
 
-public struct CoolingLoad: Codable, Equatable {
+public struct CoolingLoad: Codable, Equatable, Sendable {
   public let total: Double
   public let sensible: Double
   public var latent: Double { total - sensible }
