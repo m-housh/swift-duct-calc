@@ -29,7 +29,10 @@ let package = Package(
     ),
     .testTarget(
       name: "ManualDClientTests",
-      dependencies: ["ManualDClient"]
+      dependencies: [
+        "ManualDClient",
+        .product(name: "DependenciesTestSupport", package: "swift-dependencies"),
+      ]
     ),
     .testTarget(
       name: "swift-manual-dTests",

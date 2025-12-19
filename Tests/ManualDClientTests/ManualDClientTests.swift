@@ -1,11 +1,18 @@
 import Dependencies
+import DependenciesTestSupport
 import Foundation
 import ManualDClient
 import ManualDCore
 import Testing
 
-@Suite("ManualDClient Tests")
+@Suite(
+  .dependencies {
+    $0.manualD = ManualDClient.liveValue
+  }
+)
 struct ManualDClientTests {
+
+  @Dependency(\.manualD) var manualD
 
   var numberFormatter: NumberFormatter {
     let formatter = NumberFormatter()
@@ -17,7 +24,6 @@ struct ManualDClientTests {
 
   @Test
   func frictionRate() async throws {
-    let manualD = ManualDClient.liveValue
     let response = try await manualD.frictionRate(
       .init(
         externalStaticPressure: 0.5,
@@ -32,7 +38,6 @@ struct ManualDClientTests {
   @Test
   func frictionRateFails() async throws {
     await #expect(throws: ManualDError.self) {
-      let manualD = ManualDClient.liveValue
       _ = try await manualD.frictionRate(
         .init(
           externalStaticPressure: 0.5,
@@ -41,5 +46,30 @@ struct ManualDClientTests {
         )
       )
     }
+  }
+
+  @Test
+  func totalEffectiveLength() async throws {
+    let response = try await manualD.totalEffectiveLength(
+      .init(
+        trunkLengths: [25],
+        runoutLengths: [10],
+        effectiveLengthGroups: [
+          // NOTE: These are made up and may not correspond to actual manual-d group tel's.
+          EffectiveLengthGroup(group: 1, letter: "a", effectiveLength: 20, category: .supply),
+          EffectiveLengthGroup(group: 2, letter: "a", effectiveLength: 30, category: .supply),
+          EffectiveLengthGroup(group: 3, letter: "a", effectiveLength: 10, category: .supply),
+          EffectiveLengthGroup(group: 12, letter: "a", effectiveLength: 10, category: .supply),
+        ]
+      )
+    )
+    #expect(response == 105)
+  }
+
+  @Test
+  func equivalentRectangularDuct() async throws {
+    let response = try await manualD.equivalentRectangularDuct(.init(round: 7, height: 8))
+    #expect(response.height == 8)
+    #expect(response.width == 5)
   }
 }

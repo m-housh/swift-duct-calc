@@ -1,4 +1,5 @@
 import Dependencies
+import Foundation
 import ManualDCore
 
 extension ManualDClient: DependencyKey {
@@ -13,6 +14,31 @@ extension ManualDClient: DependencyKey {
       let availableStaticPressure = request.externalStaticPressure - totalComponentLosses
       let frictionRate = availableStaticPressure * 100.0 / Double(request.totalEffectiveLength)
       return .init(availableStaticPressure: availableStaticPressure, frictionRate: frictionRate)
+    },
+    totalEffectiveLength: { request in
+      let trunkLengths = request.trunkLengths.reduce(0) { $0 + $1 }
+      let runoutLengths = request.runoutLengths.reduce(0) { $0 + $1 }
+      let groupLengths = request.effectiveLengthGroups.totalEffectiveLength
+      return trunkLengths + runoutLengths + groupLengths
+    },
+    equivalentRectangularDuct: { request in
+      let width = (Double.pi * (pow(Double(request.roundSize) / 2.0, 2.0))) / Double(request.height)
+      guard let widthStr = numberFormatter.string(for: width),
+        let widthInt = Int(widthStr)
+      else {
+        throw ManualDError(
+          message: "Failed to convert to to rectangular duct size, width: \(width)"
+        )
+      }
+      return .init(height: request.height, width: widthInt)
     }
   )
 }
+
+private let numberFormatter: NumberFormatter = {
+  let formatter = NumberFormatter()
+  formatter.maximumFractionDigits = 0
+  formatter.minimumFractionDigits = 0
+  formatter.roundingMode = .ceiling
+  return formatter
+}()
