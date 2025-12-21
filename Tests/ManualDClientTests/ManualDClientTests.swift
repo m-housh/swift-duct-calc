@@ -23,6 +23,17 @@ struct ManualDClientTests {
   }
 
   @Test
+  func ductSize() async throws {
+    let response = try await manualD.ductSize(
+      .init(designCFM: 88, frictionRate: 0.06)
+    )
+    #expect(numberFormatter.string(for: response.ductulatorSize) == "6.07")
+    #expect(response.finalSize == 7)
+    #expect(response.flexSize == 7)
+    #expect(response.velocity == 329)
+  }
+
+  @Test
   func frictionRate() async throws {
     let response = try await manualD.frictionRate(
       .init(

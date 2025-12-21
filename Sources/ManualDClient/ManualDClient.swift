@@ -4,6 +4,7 @@ import ManualDCore
 
 @DependencyClient
 public struct ManualDClient: Sendable {
+  public var ductSize: @Sendable (DuctSizeRequest) async throws -> DuctSizeResponse
   public var frictionRate: @Sendable (FrictionRateRequest) async throws -> FrictionRateResponse
   public var totalEffectiveLength: @Sendable (TotalEffectiveLengthRequest) async throws -> Int
   public var equivalentRectangularDuct:
@@ -18,6 +19,42 @@ extension DependencyValues {
   public var manualD: ManualDClient {
     get { self[ManualDClient.self] }
     set { self[ManualDClient.self] = newValue }
+  }
+}
+
+// MARK: Duct Size
+extension ManualDClient {
+  public struct DuctSizeRequest: Codable, Equatable, Sendable {
+    public let designCFM: Int
+    public let frictionRate: Double
+
+    public init(
+      designCFM: Int,
+      frictionRate: Double
+    ) {
+      self.designCFM = designCFM
+      self.frictionRate = frictionRate
+    }
+  }
+
+  public struct DuctSizeResponse: Codable, Equatable, Sendable {
+
+    public let ductulatorSize: Double
+    public let finalSize: Int
+    public let flexSize: Int
+    public let velocity: Int
+
+    public init(
+      ductulatorSize: Double,
+      finalSize: Int,
+      flexSize: Int,
+      velocity: Int
+    ) {
+      self.ductulatorSize = ductulatorSize
+      self.finalSize = finalSize
+      self.flexSize = flexSize
+      self.velocity = velocity
+    }
   }
 }
 

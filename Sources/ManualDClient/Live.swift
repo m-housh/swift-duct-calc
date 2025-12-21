@@ -4,6 +4,21 @@ import ManualDCore
 
 extension ManualDClient: DependencyKey {
   public static let liveValue: Self = .init(
+    ductSize: { request in
+      guard request.designCFM > 0 else {
+        throw ManualDError(message: "Design CFM should be greater than 0.")
+      }
+      let fr = pow(request.frictionRate, 0.5)
+      let ductulatorSize = pow(Double(request.designCFM) / (3.12 * fr), 0.38)
+      let finalSize = try roundSize(ductulatorSize)
+      let flexSize = try flexSize(request)
+      return .init(
+        ductulatorSize: ductulatorSize,
+        finalSize: finalSize,
+        flexSize: flexSize,
+        velocity: velocity(cfm: request.designCFM, roundSize: finalSize)
+      )
+    },
     frictionRate: { request in
       // Ensure the total effective length is greater than 0.
       guard request.totalEffectiveLength > 0 else {
