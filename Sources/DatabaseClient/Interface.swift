@@ -1,0 +1,35 @@
+import Dependencies
+import DependenciesMacros
+import FluentKit
+import ManualDCore
+
+extension DependencyValues {
+  public var database: DatabaseClient {
+    get { self[DatabaseClient.self] }
+    set { self[DatabaseClient.self] = newValue }
+  }
+}
+
+@DependencyClient
+public struct DatabaseClient: Sendable {
+  public var migrations: Migrations
+  public var projects: Projects
+}
+
+extension DatabaseClient {
+  @DependencyClient
+  public struct Migrations: Sendable {
+    public var run: @Sendable () async throws -> [any AsyncMigration]
+  }
+}
+
+extension DatabaseClient: TestDependencyKey {
+  public static let testValue: DatabaseClient = Self(
+    migrations: .testValue,
+    projects: .testValue
+  )
+}
+
+extension DatabaseClient.Migrations: TestDependencyKey {
+  public static let testValue = Self()
+}

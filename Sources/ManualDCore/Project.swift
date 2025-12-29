@@ -8,6 +8,8 @@ public struct Project: Codable, Equatable, Identifiable, Sendable {
   public let city: String
   public let state: String
   public let zipCode: String
+  public let createdAt: Date
+  public let updatedAt: Date
 
   public init(
     id: UUID,
@@ -15,7 +17,9 @@ public struct Project: Codable, Equatable, Identifiable, Sendable {
     streetAddress: String,
     city: String,
     state: String,
-    zipCode: String
+    zipCode: String,
+    createdAt: Date,
+    updatedAt: Date
   ) {
     self.id = id
     self.name = name
@@ -23,6 +27,8 @@ public struct Project: Codable, Equatable, Identifiable, Sendable {
     self.city = city
     self.state = state
     self.zipCode = zipCode
+    self.createdAt = createdAt
+    self.updatedAt = updatedAt
   }
 }
 
