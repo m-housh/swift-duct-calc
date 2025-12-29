@@ -100,3 +100,44 @@ extension SiteRoute.Api {
     }
   }
 }
+
+extension SiteRoute.Api {
+
+  public enum EquipmentRoute: Sendable, Equatable {
+    case create(EquipmentInfo.Create)
+    case delete(id: EquipmentInfo.ID)
+    case fetch(projectID: Project.ID)
+    case get(id: EquipmentInfo.ID)
+
+    static let rootPath = "rooms"
+
+    public static let router = OneOf {
+      Route(.case(Self.create)) {
+        Path { rootPath }
+        Method.post
+        Body(.json(EquipmentInfo.Create.self))
+      }
+      Route(.case(Self.delete(id:))) {
+        Path {
+          rootPath
+          EquipmentInfo.ID.parser()
+        }
+        Method.delete
+      }
+      Route(.case(Self.fetch(projectID:))) {
+        Path { rootPath }
+        Method.get
+        Query {
+          Field("projectID") { Project.ID.parser() }
+        }
+      }
+      Route(.case(Self.get(id:))) {
+        Path {
+          rootPath
+          EquipmentInfo.ID.parser()
+        }
+        Method.get
+      }
+    }
+  }
+}
