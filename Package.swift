@@ -42,8 +42,10 @@ let package = Package(
       ]
     ),
     .testTarget(
-      name: "swift-manual-dTests",
-      dependencies: ["swift-manual-d"]
+      name: "ApiRouteTests",
+      dependencies: [
+        .target(name: "ManualDCore")
+      ]
     ),
   ]
 )
