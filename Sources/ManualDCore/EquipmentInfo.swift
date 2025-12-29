@@ -1,6 +1,6 @@
 import Foundation
 
-public struct EquipmentInfo: Codable, Equatable {
+public struct EquipmentInfo: Codable, Equatable, Sendable {
   public let staticPressure: Double
   public let heatingCFM: Int
   public let coolingCFM: Int
