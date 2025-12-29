@@ -10,6 +10,8 @@ extension SiteRoute {
 
     case project(Self.ProjectRoute)
     case room(Self.RoomRoute)
+    case equipment(Self.EquipmentRoute)
+    case componentLoss(Self.ComponentLossRoute)
 
     public static let rootPath = Path {
       "api"
@@ -24,6 +26,14 @@ extension SiteRoute {
       Route(.case(Self.room)) {
         rootPath
         RoomRoute.router
+      }
+      Route(.case(Self.equipment)) {
+        rootPath
+        EquipmentRoute.router
+      }
+      Route(.case(Self.componentLoss)) {
+        rootPath
+        ComponentLossRoute.router
       }
     }
 
@@ -109,7 +119,7 @@ extension SiteRoute.Api {
     case fetch(projectID: Project.ID)
     case get(id: EquipmentInfo.ID)
 
-    static let rootPath = "rooms"
+    static let rootPath = "equipment"
 
     public static let router = OneOf {
       Route(.case(Self.create)) {
@@ -135,6 +145,47 @@ extension SiteRoute.Api {
         Path {
           rootPath
           EquipmentInfo.ID.parser()
+        }
+        Method.get
+      }
+    }
+  }
+}
+
+extension SiteRoute.Api {
+
+  public enum ComponentLossRoute: Sendable, Equatable {
+    case create(ComponentPressureLoss.Create)
+    case delete(id: ComponentPressureLoss.ID)
+    case fetch(projectID: Project.ID)
+    case get(id: ComponentPressureLoss.ID)
+
+    static let rootPath = "componentLoss"
+
+    public static let router = OneOf {
+      Route(.case(Self.create)) {
+        Path { rootPath }
+        Method.post
+        Body(.json(ComponentPressureLoss.Create.self))
+      }
+      Route(.case(Self.delete(id:))) {
+        Path {
+          rootPath
+          ComponentPressureLoss.ID.parser()
+        }
+        Method.delete
+      }
+      Route(.case(Self.fetch(projectID:))) {
+        Path { rootPath }
+        Method.get
+        Query {
+          Field("projectID") { Project.ID.parser() }
+        }
+      }
+      Route(.case(Self.get(id:))) {
+        Path {
+          rootPath
+          ComponentPressureLoss.ID.parser()
         }
         Method.get
       }

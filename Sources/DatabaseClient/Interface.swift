@@ -16,6 +16,7 @@ public struct DatabaseClient: Sendable {
   public var projects: Projects
   public var rooms: Rooms
   public var equipment: Equipment
+  public var componentLoss: ComponentLoss
 }
 
 extension DatabaseClient: TestDependencyKey {
@@ -23,7 +24,8 @@ extension DatabaseClient: TestDependencyKey {
     migrations: .testValue,
     projects: .testValue,
     rooms: .testValue,
-    equipment: .testValue
+    equipment: .testValue,
+    componentLoss: .testValue
   )
 
   public static func live(database: any Database) -> Self {
@@ -31,7 +33,8 @@ extension DatabaseClient: TestDependencyKey {
       migrations: .liveValue,
       projects: .live(database: database),
       rooms: .live(database: database),
-      equipment: .live(database: database)
+      equipment: .live(database: database),
+      componentLoss: .live(database: database)
     )
   }
 }
@@ -51,6 +54,7 @@ extension DatabaseClient.Migrations: DependencyKey {
   public static let liveValue = Self(
     run: {
       [
+        ComponentPressureLoss.Migrate(),
         EquipmentInfo.Migrate(),
         Project.Migrate(),
         Room.Migrate(),
