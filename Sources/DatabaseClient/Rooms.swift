@@ -1,0 +1,165 @@
+import Dependencies
+import DependenciesMacros
+import Fluent
+import Foundation
+import ManualDCore
+
+extension DatabaseClient {
+  @DependencyClient
+  public struct Rooms: Sendable {
+    public var create: @Sendable (Room.Create) async throws -> Room
+    public var delete: @Sendable (Room.ID) async throws -> Void
+    public var get: @Sendable (Room.ID) async throws -> Room?
+  }
+}
+
+extension DatabaseClient.Rooms: TestDependencyKey {
+  public static let testValue = Self()
+}
+
+extension DatabaseClient.Rooms {
+  public static func live(database: any Database) -> Self {
+    .init(
+      create: { request in
+        let model = try request.toModel()
+        try await model.save(on: database)
+        return try model.toDTO()
+      },
+      delete: { id in
+        guard let model = try await RoomModel.find(id, on: database) else {
+          throw NotFoundError()
+        }
+        try await model.delete(on: database)
+      },
+      get: { id in
+        try await RoomModel.find(id, on: database).map { try $0.toDTO() }
+      }
+    )
+  }
+}
+
+extension Room.Create {
+
+  func toModel() throws(ValidationError) -> RoomModel {
+    try validate()
+    return .init(
+      name: name,
+      heatingLoad: heatingLoad,
+      coolingTotal: coolingTotal,
+      coolingSensible: coolingSensible,
+      registerCount: registerCount,
+      projectID: projectID
+    )
+  }
+
+  func validate() throws(ValidationError) {
+    guard !name.isEmpty else {
+      throw ValidationError("Room name should not be empty.")
+    }
+    guard heatingLoad >= 0 else {
+      throw ValidationError("Room heating load should not be less than 0.")
+    }
+    guard coolingTotal >= 0 else {
+      throw ValidationError("Room cooling total should not be less than 0.")
+    }
+    guard coolingSensible >= 0 else {
+      throw ValidationError("Room cooling sensible should not be less than 0.")
+    }
+    guard registerCount >= 1 else {
+      throw ValidationError("Room cooling sensible should not be less than 1.")
+    }
+  }
+}
+
+extension Room {
+  struct Migrate: AsyncMigration {
+    let name = "CreateRoom"
+
+    func prepare(on database: any Database) async throws {
+      try await database.schema(RoomModel.schema)
+        .id()
+        .field("name", .string, .required)
+        .field("heatingLoad", .double, .required)
+        .field("coolingTotal", .double, .required)
+        .field("coolingSensible", .double, .required)
+        .field("registerCount", .int8, .required)
+        .foreignKey("projectID", references: ProjectModel.schema, "id", onDelete: .cascade)
+        .unique(on: "projectID", "name")
+        .create()
+    }
+
+    func revert(on database: any Database) async throws {
+      try await database.schema(RoomModel.schema).delete()
+    }
+  }
+}
+
+final class RoomModel: Model, @unchecked Sendable {
+
+  static let schema = "room"
+
+  @ID(key: .id)
+  var id: UUID?
+
+  @Field(key: "name")
+  var name: String
+
+  @Field(key: "heatingLoad")
+  var heatingLoad: Double
+
+  @Field(key: "coolingTotal")
+  var coolingTotal: Double
+
+  @Field(key: "coolingSensible")
+  var coolingSensible: Double
+
+  @Field(key: "registerCount")
+  var registerCount: Int
+
+  @Timestamp(key: "createdAt", on: .create, format: .iso8601)
+  var createdAt: Date?
+
+  @Timestamp(key: "updatedAt", on: .update, format: .iso8601)
+  var updatedAt: Date?
+
+  @Parent(key: "projectID")
+  var project: ProjectModel
+
+  init() {}
+
+  init(
+    id: UUID? = nil,
+    name: String,
+    heatingLoad: Double,
+    coolingTotal: Double,
+    coolingSensible: Double,
+    registerCount: Int,
+    createdAt: Date? = nil,
+    updatedAt: Date? = nil,
+    projectID: Project.ID
+  ) {
+    self.id = id
+    self.name = name
+    self.heatingLoad = heatingLoad
+    self.coolingTotal = coolingTotal
+    self.coolingSensible = coolingSensible
+    self.registerCount = registerCount
+    self.createdAt = createdAt
+    self.updatedAt = updatedAt
+    $project.id = projectID
+  }
+
+  func toDTO() throws -> Room {
+    try .init(
+      id: requireID(),
+      projectID: $project.id,
+      name: name,
+      heatingLoad: heatingLoad,
+      coolingLoad: .init(total: coolingTotal, sensible: coolingSensible),
+      registerCount: registerCount,
+      createdAt: createdAt!,
+      updatedAt: updatedAt!
+    )
+
+  }
+}

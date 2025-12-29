@@ -9,6 +9,7 @@ extension SiteRoute {
   public enum Api: Sendable, Equatable {
 
     case project(Self.ProjectRoute)
+    case room(Self.RoomRoute)
 
     public static let rootPath = Path {
       "api"
@@ -19,6 +20,10 @@ extension SiteRoute {
       Route(.case(Self.project)) {
         rootPath
         ProjectRoute.router
+      }
+      Route(.case(Self.room)) {
+        rootPath
+        RoomRoute.router
       }
     }
 
@@ -61,5 +66,37 @@ extension SiteRoute.Api {
       }
     }
   }
+}
 
+extension SiteRoute.Api {
+
+  public enum RoomRoute: Sendable, Equatable {
+    case create(Room.Create)
+    case delete(id: Room.ID)
+    case get(id: Room.ID)
+
+    static let rootPath = "rooms"
+
+    public static let router = OneOf {
+      Route(.case(Self.create)) {
+        Path { rootPath }
+        Method.post
+        Body(.json(Room.Create.self))
+      }
+      Route(.case(Self.delete(id:))) {
+        Path {
+          rootPath
+          Room.ID.parser()
+        }
+        Method.delete
+      }
+      Route(.case(Self.get(id:))) {
+        Path {
+          rootPath
+          Room.ID.parser()
+        }
+        Method.get
+      }
+    }
+  }
 }

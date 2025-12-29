@@ -26,13 +26,13 @@ extension DatabaseClient.Projects {
         return try model.toDTO()
       },
       delete: { id in
-        guard let model = ProjectModel.find(id, on: database) else {
+        guard let model = try await ProjectModel.find(id, on: database) else {
           throw NotFoundError()
         }
         try await model.delete(on: database)
       },
       get: { id in
-        ProjectModel.find(id, on: database).map { try $0.toDTO() }
+        try await ProjectModel.find(id, on: database).map { try $0.toDTO() }
       }
     )
   }

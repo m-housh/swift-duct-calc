@@ -14,6 +14,23 @@ extension DependencyValues {
 public struct DatabaseClient: Sendable {
   public var migrations: Migrations
   public var projects: Projects
+  public var rooms: Rooms
+}
+
+extension DatabaseClient: TestDependencyKey {
+  public static let testValue: DatabaseClient = Self(
+    migrations: .testValue,
+    projects: .testValue,
+    rooms: .testValue
+  )
+
+  public static func live(database: any Database) -> Self {
+    .init(
+      migrations: .liveValue,
+      projects: .live(database: database),
+      rooms: .live(database: database)
+    )
+  }
 }
 
 extension DatabaseClient {
@@ -23,13 +40,17 @@ extension DatabaseClient {
   }
 }
 
-extension DatabaseClient: TestDependencyKey {
-  public static let testValue: DatabaseClient = Self(
-    migrations: .testValue,
-    projects: .testValue
-  )
-}
-
 extension DatabaseClient.Migrations: TestDependencyKey {
   public static let testValue = Self()
+}
+
+extension DatabaseClient.Migrations: DependencyKey {
+  public static let liveValue = Self(
+    run: {
+      [
+        Project.Migrate(),
+        Room.Migrate(),
+      ]
+    }
+  )
 }
