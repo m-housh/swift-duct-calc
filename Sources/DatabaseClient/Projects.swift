@@ -123,6 +123,9 @@ final class ProjectModel: Model, @unchecked Sendable {
   @Timestamp(key: "updatedAt", on: .update, format: .iso8601)
   var updatedAt: Date?
 
+  @Children(for: \.$project)
+  var componentLosses: [ComponentLossModel]
+
   init() {}
 
   init(

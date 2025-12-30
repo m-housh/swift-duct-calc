@@ -117,13 +117,12 @@ private func siteHandler(
   request: Request,
   route: SiteRoute
 ) async throws -> any AsyncResponseEncodable {
-  // @Dependency(\.apiController) var apiController
+  @Dependency(\.apiController) var apiController
   @Dependency(\.viewController) var viewController
 
   switch route {
   case .api(let route):
-    return HTTPStatus.ok
-  // return try await apiController.respond(route, request: request)
+    return try await apiController.respond(route, request: request)
   case .health:
     return HTTPStatus.ok
   case .view(let route):

@@ -91,7 +91,7 @@ extension EquipmentInfo {
         .field("coolingCFM", .int16, .required)
         .field("createdAt", .datetime)
         .field("updatedAt", .datetime)
-        .foreignKey("projectID", references: ProjectModel.schema, "id", onDelete: .cascade)
+        .field("projectID", .uuid, .required, .references(ProjectModel.schema, "id"))
         .unique(on: "projectID")
         .create()
     }

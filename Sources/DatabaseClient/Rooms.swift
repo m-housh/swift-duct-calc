@@ -83,7 +83,7 @@ extension Room {
         .field("coolingTotal", .double, .required)
         .field("coolingSensible", .double, .required)
         .field("registerCount", .int8, .required)
-        .foreignKey("projectID", references: ProjectModel.schema, "id", onDelete: .cascade)
+        .field("projectID", .uuid, .required, .references(ProjectModel.schema, "id"))
         .unique(on: "projectID", "name")
         .create()
     }

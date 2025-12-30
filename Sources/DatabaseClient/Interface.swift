@@ -54,9 +54,9 @@ extension DatabaseClient.Migrations: DependencyKey {
   public static let liveValue = Self(
     run: {
       [
+        Project.Migrate(),
         ComponentPressureLoss.Migrate(),
         EquipmentInfo.Migrate(),
-        Project.Migrate(),
         Room.Migrate(),
       ]
     }
