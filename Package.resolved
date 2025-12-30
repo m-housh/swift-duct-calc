@@ -1,5 +1,5 @@
 {
-  "originHash" : "f8ca659e4ec9041ea590b94c8dc267718be8941a4594eb74964b6396e987ca95",
+  "originHash" : "5d6dad57209ac74e3c47d8e8eb162768b81c9e63e15df87d29019d46a13cfec2",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -35,6 +35,24 @@
       "state" : {
         "revision" : "742f624a998cba2a9e653d9b1e91ad3f3a5dff6b",
         "version" : "4.15.2"
+      }
+    },
+    {
+      "identity" : "elementary",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elementary-swift/elementary.git",
+      "state" : {
+        "revision" : "65803c4770b6c8b6452c6ce83ab570c1b7042528",
+        "version" : "0.6.1"
+      }
+    },
+    {
+      "identity" : "elementary-htmx",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elementary-swift/elementary-htmx.git",
+      "state" : {
+        "revision" : "f7ba147f2a076142a90a4f8300a89584164dba6d",
+        "version" : "0.5.1"
       }
     },
     {
@@ -377,6 +395,24 @@
       "state" : {
         "revision" : "f7090db27390ebc4cadbff06d76fe8ce79d6ece6",
         "version" : "4.120.0"
+      }
+    },
+    {
+      "identity" : "vapor-elementary",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vapor-community/vapor-elementary.git",
+      "state" : {
+        "revision" : "e1326d2439a9d4bd271c24b9765c195f7f793e77",
+        "version" : "0.2.2"
+      }
+    },
+    {
+      "identity" : "vapor-routing",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/vapor-routing.git",
+      "state" : {
+        "revision" : "ae1db2ec96fad88b00173a265313de2c447a9945",
+        "version" : "0.1.3"
       }
     },
     {
