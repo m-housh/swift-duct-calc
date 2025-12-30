@@ -42,5 +42,5 @@ RUN npm install -g browser-sync
 ENV SWIFT_BACKTRACE=enable=no
 ENV LOG_LEVEL=debug
 
-CMD ["swift", "test"]
+CMD ["swift", "run", "App", "serve", "--hostname", "0.0.0.0", "--port", "8080"]
 

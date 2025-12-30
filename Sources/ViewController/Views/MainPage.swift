@@ -11,14 +11,18 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
 
   public var head: some HTML {
     meta(.charset(.utf8))
+    meta(.name(.viewport), .content("width=device-width, initial-scale=1.0"))
     script(.src("https://unpkg.com/htmx.org@2.0.8")) {}
+    script(.src("https://cdn.tailwindcss.com")) {}
     script(.src("/js/main.js")) {}
     link(.rel(.stylesheet), .href("/css/main.css"))
     link(.rel(.icon), .href("/images/favicon.ico"), .custom(name: "type", value: "image/x-icon"))
   }
 
   public var body: some HTML {
-    inner
+    div(.class("bg-white dark:bg-gray-800 dark:text-white")) {
+      inner
+    }
   }
 }
 

@@ -43,13 +43,8 @@ extension ViewController: DependencyKey {
 
   // FIX: Fix.
   public static let liveValue = Self(
-    view: { _ in
-      return MainPage {
-        div {
-          h1 { "It works!" }
-          h2 { "Browser sync works!" }
-        }
-      }
+    view: { request in
+      try await request.render()
     }
   )
 }
