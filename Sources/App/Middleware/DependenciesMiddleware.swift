@@ -17,7 +17,7 @@ struct DependenciesMiddleware: AsyncMiddleware {
   init(
     database: DatabaseClient,
     apiController: ApiController = .liveValue,
-    viewController: ViewController = .testValue
+    viewController: ViewController = .liveValue
   ) {
     self.values = withEscapedDependencies { $0 }
     self.apiController = apiController

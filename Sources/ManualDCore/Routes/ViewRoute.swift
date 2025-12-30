@@ -9,7 +9,7 @@ extension SiteRoute {
   public enum View: Equatable, Sendable {
     case project(ProjectRoute)
 
-    static let router = OneOf {
+    public static let router = OneOf {
       Route(.case(Self.project)) {
         SiteRoute.View.ProjectRoute.router
       }

@@ -21,7 +21,7 @@ public func configure(
   addMiddleware(to: app, database: databaseClient)
   #if DEBUG
     // Live reload of the application for development when launched with the `./swift-dev` command
-    app.lifecycle.use(BrowserSyncHandler())
+    // app.lifecycle.use(BrowserSyncHandler())
   #endif
   // Add our route handlers.
   addRoutes(to: app)
@@ -72,10 +72,10 @@ private func setupDatabase(
 }
 
 private func addRoutes(to app: Application) {
-  // Redirect the index path to purchase order route.
-  // app.get { req in
-  //   req.redirect(to: SiteRoute.View.router.path(for: .purchaseOrder(.index)))
-  // }
+  // Redirect the index path to project route.
+  app.get { req in
+    req.redirect(to: SiteRoute.View.router.path(for: .project(.index)))
+  }
 
   app.mount(
     SiteRoute.router,

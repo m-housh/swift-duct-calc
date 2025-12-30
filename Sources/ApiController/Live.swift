@@ -14,7 +14,6 @@ extension SiteRoute.Api {
       return try await route.respond(logger: logger)
     case .componentLoss(let route):
       return try await route.respond(logger: logger)
-
     }
   }
 }

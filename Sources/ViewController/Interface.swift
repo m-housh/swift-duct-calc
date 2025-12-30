@@ -38,6 +38,18 @@ extension ViewController {
   }
 }
 
-extension ViewController: TestDependencyKey {
+extension ViewController: DependencyKey {
   public static let testValue = Self()
+
+  // FIX: Fix.
+  public static let liveValue = Self(
+    view: { _ in
+      return MainPage {
+        div {
+          h1 { "It works!" }
+          h2 { "Browser sync works!" }
+        }
+      }
+    }
+  )
 }
