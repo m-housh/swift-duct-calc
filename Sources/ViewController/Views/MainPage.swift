@@ -21,7 +21,12 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
 
   public var body: some HTML {
     div(.class("bg-white dark:bg-gray-800 dark:text-white")) {
+      Sidebar()
       inner
+    }
+    script(.src("https://unpkg.com/lucide@latest")) {}
+    script {
+      "lucide.createIcons();"
     }
   }
 }
