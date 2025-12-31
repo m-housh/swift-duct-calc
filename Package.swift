@@ -10,6 +10,7 @@ let package = Package(
     .library(name: "DatabaseClient", targets: ["DatabaseClient"]),
     .library(name: "ManualDCore", targets: ["ManualDCore"]),
     .library(name: "ManualDClient", targets: ["ManualDClient"]),
+    .library(name: "Styleguide", targets: ["Styleguide"]),
     .library(name: "ViewController", targets: ["ViewController"]),
   ],
   dependencies: [
@@ -84,6 +85,14 @@ let package = Package(
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
       ]
     ),
+    .target(
+      name: "Styleguide",
+      dependencies: [
+        "ManualDCore",
+        .product(name: "Elementary", package: "elementary"),
+        .product(name: "ElementaryHTMX", package: "elementary-htmx"),
+      ]
+    ),
     .testTarget(
       name: "ManualDClientTests",
       dependencies: [
@@ -95,6 +104,7 @@ let package = Package(
       name: "ViewController",
       dependencies: [
         .target(name: "ManualDCore"),
+        .target(name: "Styleguide"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
         .product(name: "Elementary", package: "elementary"),

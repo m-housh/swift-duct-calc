@@ -37,8 +37,13 @@ extension SiteRoute.View.RoomRoute {
   func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
     switch self {
     case .form:
+      // TODO: Check that it's an htmx request.
+      return RoomForm()
+    case .index:
       return MainPage {
-        RoomTable(rooms: Room.mocks)
+        div {
+          RoomTable(rooms: Room.mocks)
+        }
       }
     }
   }

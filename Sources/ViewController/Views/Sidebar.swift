@@ -1,26 +1,28 @@
 import Elementary
+import Styleguide
 
+// TODO: Need to add active to sidebar links.
 struct Sidebar: HTML {
 
   var body: some HTML {
     aside(
       .class(
         """
-        h-screen sticky top-0 border-r-3 border-gray-800 bg-gray-100 shadow
+        h-screen sticky top-0 min-w-[280px] flex-none border border-r-3 border-gray-800 bg-gray-100 shadow
         """
       )
     ) {
-      row(title: "Project", icon: "map-pin", href: "/projects")
-      row(title: "Rooms", icon: "door-closed", href: "/rooms")
-      row(title: "Equivalent Lengths", icon: "ruler-dimension-line", href: "#")
-      row(title: "Friction Rate", icon: "square-function", href: "#")
-      row(title: "Duct Sizes", icon: "wind", href: "#")
+      row(title: "Project", icon: .mapPin, href: "/projects")
+      row(title: "Rooms", icon: .doorClosed, href: "/rooms")
+      row(title: "Equivalent Lengths", icon: .rulerDimensionLine, href: "#")
+      row(title: "Friction Rate", icon: .squareFunction, href: "#")
+      row(title: "Duct Sizes", icon: .wind, href: "#")
     }
   }
 
   private func row(
     title: String,
-    icon: String,
+    icon: Icon.Key,
     href: String
   ) -> some HTML {
     a(
@@ -31,10 +33,8 @@ struct Sidebar: HTML {
       ),
       .href(href)
     ) {
-      i(.data("lucide", value: icon)) {}
-      p(
-        .class("text-xl font-bold")
-      ) {
+      Icon(icon)
+      span(.class("text-xl font-bold")) {
         title
       }
     }

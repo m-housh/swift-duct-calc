@@ -62,11 +62,19 @@ extension SiteRoute.View {
 extension SiteRoute.View {
   public enum RoomRoute: Equatable, Sendable {
     case form
+    case index
 
     static let rootPath = "rooms"
 
     public static let router = OneOf {
       Route(.case(Self.form)) {
+        Path {
+          rootPath
+          "create"
+        }
+        Method.get
+      }
+      Route(.case(Self.index)) {
         Path { rootPath }
         Method.get
       }
