@@ -8,10 +8,14 @@ extension SiteRoute {
   /// The routes return html.
   public enum View: Equatable, Sendable {
     case project(ProjectRoute)
+    case room(RoomRoute)
 
     public static let router = OneOf {
       Route(.case(Self.project)) {
         SiteRoute.View.ProjectRoute.router
+      }
+      Route(.case(Self.room)) {
+        SiteRoute.View.RoomRoute.router
       }
     }
   }
@@ -48,6 +52,21 @@ extension SiteRoute.View {
         Method.get
       }
       Route(.case(Self.index)) {
+        Path { rootPath }
+        Method.get
+      }
+    }
+  }
+}
+
+extension SiteRoute.View {
+  public enum RoomRoute: Equatable, Sendable {
+    case form
+
+    static let rootPath = "rooms"
+
+    public static let router = OneOf {
+      Route(.case(Self.form)) {
         Path { rootPath }
         Method.get
       }

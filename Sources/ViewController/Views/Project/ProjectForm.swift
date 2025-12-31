@@ -15,6 +15,7 @@ struct ProjectForm: HTML, Sendable {
   var body: some HTML {
     // TODO: Add htmx attributes.
     div(.class("mx-20 my-20")) {
+      h1(.class("text-3xl font-bold")) { "Project" }
       form(.class("w-full max-w-sm")) {
         div(.class("flex items-center mb-6")) {
           label(

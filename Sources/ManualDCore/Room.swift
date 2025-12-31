@@ -1,3 +1,4 @@
+import Dependencies
 import Foundation
 
 public struct Room: Codable, Equatable, Identifiable, Sendable {
@@ -59,3 +60,42 @@ extension Room {
     }
   }
 }
+
+#if DEBUG
+
+  extension Room {
+    public static let mocks = [
+      Room(
+        id: UUID(0),
+        projectID: UUID(0),
+        name: "Test",
+        heatingLoad: 12345,
+        coolingLoad: .init(total: 12345, sensible: 12345),
+        registerCount: 2,
+        createdAt: Date(),
+        updatedAt: Date()
+      ),
+      Room(
+        id: UUID(1),
+        projectID: UUID(1),
+        name: "Test",
+        heatingLoad: 12345,
+        coolingLoad: .init(total: 12345, sensible: 12345),
+        registerCount: 2,
+        createdAt: Date(),
+        updatedAt: Date()
+      ),
+      Room(
+        id: UUID(2),
+        projectID: UUID(2),
+        name: "Test",
+        heatingLoad: 12345,
+        coolingLoad: .init(total: 12345, sensible: 12345),
+        registerCount: 2,
+        createdAt: Date(),
+        updatedAt: Date()
+      ),
+    ]
+  }
+
+#endif

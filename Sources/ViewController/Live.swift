@@ -7,6 +7,8 @@ extension ViewController.Request {
     switch route {
     case .project(let route):
       return try await route.renderView(isHtmxRequest: isHtmxRequest)
+    case .room(let route):
+      return try await route.renderView(isHtmxRequest: isHtmxRequest)
     default:
       // FIX: FIX
       return mainPage
@@ -18,13 +20,26 @@ extension SiteRoute.View.ProjectRoute {
   func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
     switch self {
     case .index:
-      return mainPage
+      return MainPage {
+        ProjectForm()
+      }
     case .form:
       return MainPage {
         ProjectForm()
       }
     case .create:
       return mainPage
+    }
+  }
+}
+
+extension SiteRoute.View.RoomRoute {
+  func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
+    switch self {
+    case .form:
+      return MainPage {
+        RoomTable(rooms: Room.mocks)
+      }
     }
   }
 }
