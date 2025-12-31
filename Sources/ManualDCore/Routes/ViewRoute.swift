@@ -9,6 +9,7 @@ extension SiteRoute {
   public enum View: Equatable, Sendable {
     case project(ProjectRoute)
     case room(RoomRoute)
+    case frictionRate(FrictionRateRoute)
 
     public static let router = OneOf {
       Route(.case(Self.project)) {
@@ -16,6 +17,9 @@ extension SiteRoute {
       }
       Route(.case(Self.room)) {
         SiteRoute.View.RoomRoute.router
+      }
+      Route(.case(Self.frictionRate)) {
+        SiteRoute.View.FrictionRateRoute.router
       }
     }
   }
@@ -76,6 +80,29 @@ extension SiteRoute.View {
       }
       Route(.case(Self.index)) {
         Path { rootPath }
+        Method.get
+      }
+    }
+  }
+}
+
+extension SiteRoute.View {
+  public enum FrictionRateRoute: Equatable, Sendable {
+    case index
+    case form
+
+    static let rootPath = "friction-rate"
+
+    public static let router = OneOf {
+      Route(.case(Self.index)) {
+        Path { rootPath }
+        Method.get
+      }
+      Route(.case(Self.form)) {
+        Path {
+          rootPath
+          "create"
+        }
         Method.get
       }
     }

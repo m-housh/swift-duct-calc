@@ -15,7 +15,7 @@ struct Sidebar: HTML {
       row(title: "Project", icon: .mapPin, href: "/projects")
       row(title: "Rooms", icon: .doorClosed, href: "/rooms")
       row(title: "Equivalent Lengths", icon: .rulerDimensionLine, href: "#")
-      row(title: "Friction Rate", icon: .squareFunction, href: "#")
+      row(title: "Friction Rate", icon: .squareFunction, href: "/friction-rate")
       row(title: "Duct Sizes", icon: .wind, href: "#")
     }
   }

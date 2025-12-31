@@ -9,6 +9,8 @@ extension ViewController.Request {
       return try await route.renderView(isHtmxRequest: isHtmxRequest)
     case .room(let route):
       return try await route.renderView(isHtmxRequest: isHtmxRequest)
+    case .frictionRate(let route):
+      return try await route.renderView(isHtmxRequest: isHtmxRequest)
     default:
       // FIX: FIX
       return mainPage
@@ -44,6 +46,22 @@ extension SiteRoute.View.RoomRoute {
         div {
           RoomTable(rooms: Room.mocks)
         }
+      }
+    }
+  }
+}
+
+extension SiteRoute.View.FrictionRateRoute {
+  func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
+    switch self {
+    case .index:
+      return MainPage {
+        FrictionRateView()
+      }
+    // FIX:
+    default:
+      return MainPage {
+        FrictionRateView()
       }
     }
   }
