@@ -23,7 +23,7 @@ extension SiteRoute.View.ProjectRoute {
     switch self {
     case .index:
       return MainPage {
-        ProjectForm()
+        ProjectView(project: .mock)
       }
     case .form:
       return MainPage {

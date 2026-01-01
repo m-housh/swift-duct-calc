@@ -20,10 +20,12 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
   }
 
   public var body: some HTML {
-    div(.class("flex bg-white dark:bg-gray-800 dark:text-white")) {
-      Sidebar()
-      main {
-        inner
+    div(.class("bg-white dark:bg-gray-800 dark:text-white")) {
+      div(.class("flex flex-row")) {
+        Sidebar()
+        main(.class("flex flex-col h-screen w-full")) {
+          inner
+        }
       }
     }
     script(.src("https://unpkg.com/lucide@latest")) {}

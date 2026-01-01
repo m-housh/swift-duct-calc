@@ -8,7 +8,9 @@ struct Sidebar: HTML {
     aside(
       .class(
         """
-        h-screen sticky top-0 min-w-[280px] flex-none border border-r-3 border-gray-800 bg-gray-100 shadow
+        h-screen sticky top-0 max-w-[280px] flex-none 
+        border-r-2 border-gray-200 
+        shadow-lg
         """
       )
     ) {
@@ -16,6 +18,7 @@ struct Sidebar: HTML {
       row(title: "Rooms", icon: .doorClosed, href: "/rooms")
       row(title: "Equivalent Lengths", icon: .rulerDimensionLine, href: "#")
       row(title: "Friction Rate", icon: .squareFunction, href: "/friction-rate")
+        .attributes(.data("active", value: "true"))
       row(title: "Duct Sizes", icon: .wind, href: "#")
     }
   }
@@ -24,17 +27,20 @@ struct Sidebar: HTML {
     title: String,
     icon: Icon.Key,
     href: String
-  ) -> some HTML {
+  ) -> some HTML<HTMLTag.a> {
     a(
       .class(
         """
-        flex w-full items-center gap-4 text-gray-800 hover:bg-gray-300 px-4 py-2
+        flex w-full items-center gap-4
+        hover:bg-gray-300 hover:text-gray-800
+        data-[active=true]:bg-gray-300 data-[active=true]:text-gray-800
+        px-4 py-2
         """
       ),
       .href(href)
     ) {
       Icon(icon)
-      span(.class("text-xl font-bold")) {
+      span(.class("text-xl")) {
         title
       }
     }

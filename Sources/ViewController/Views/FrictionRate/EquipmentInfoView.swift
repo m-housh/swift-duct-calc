@@ -13,19 +13,19 @@ struct EquipmentInfoView: HTML, Sendable {
 
       Row {
         Label { "Static Pressure" }
-        span { "\(equipmentInfo.staticPressure)" }
+        Number(equipmentInfo.staticPressure)
       }
       .attributes(.class("border-b border-gray-200"))
 
       Row {
         Label { "Heating CFM" }
-        span { "\(equipmentInfo.heatingCFM)" }
+        Number(equipmentInfo.heatingCFM)
       }
       .attributes(.class("border-b border-gray-200"))
 
       Row {
         Label { "Cooling CFM" }
-        span { "\(equipmentInfo.coolingCFM)" }
+        Number(equipmentInfo.coolingCFM)
       }
       .attributes(.class("border-b border-gray-200"))
 
