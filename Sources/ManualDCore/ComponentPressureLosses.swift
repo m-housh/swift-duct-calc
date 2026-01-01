@@ -59,4 +59,51 @@ public typealias ComponentPressureLosses = [String: Double]
       ]
     }
   }
+
+  extension ComponentPressureLoss {
+    public static var mock: [Self] {
+      [
+        .init(
+          id: UUID(0),
+          projectID: UUID(0),
+          name: "evaporator-coil",
+          value: 0.2,
+          createdAt: Date(),
+          updatedAt: Date()
+        ),
+        .init(
+          id: UUID(1),
+          projectID: UUID(0),
+          name: "filter",
+          value: 0.1,
+          createdAt: Date(),
+          updatedAt: Date()
+        ),
+        .init(
+          id: UUID(2),
+          projectID: UUID(0),
+          name: "supply-outlet",
+          value: 0.03,
+          createdAt: Date(),
+          updatedAt: Date()
+        ),
+        .init(
+          id: UUID(3),
+          projectID: UUID(0),
+          name: "return-grille",
+          value: 0.03,
+          createdAt: Date(),
+          updatedAt: Date()
+        ),
+        .init(
+          id: UUID(4),
+          projectID: UUID(0),
+          name: "balance-damper",
+          value: 0.03,
+          createdAt: Date(),
+          updatedAt: Date()
+        ),
+      ]
+    }
+  }
 #endif

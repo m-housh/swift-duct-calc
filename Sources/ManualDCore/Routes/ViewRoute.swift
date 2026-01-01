@@ -89,7 +89,7 @@ extension SiteRoute.View {
 extension SiteRoute.View {
   public enum FrictionRateRoute: Equatable, Sendable {
     case index
-    case form
+    case form(FormType, dismiss: Bool = false)
 
     static let rootPath = "friction-rate"
 
@@ -104,7 +104,18 @@ extension SiteRoute.View {
           "create"
         }
         Method.get
+        Query {
+          Field("type") { FormType.parser() }
+          Field("dismiss", default: false) { Bool.parser() }
+        }
       }
     }
+  }
+}
+
+extension SiteRoute.View.FrictionRateRoute {
+  public enum FormType: String, CaseIterable, Codable, Equatable, Sendable {
+    case equipmentInfo
+    case componentPressureLoss
   }
 }

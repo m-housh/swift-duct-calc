@@ -58,11 +58,28 @@ extension SiteRoute.View.FrictionRateRoute {
       return MainPage {
         FrictionRateView()
       }
-    // FIX:
-    default:
-      return MainPage {
-        FrictionRateView()
+    case .form(let type, let dismiss):
+      guard !dismiss else {
+        return div(.id(type.id)) {}
       }
+      // FIX: Forms need to reference existing items.
+      switch type {
+      case .equipmentInfo:
+        return EquipmentForm()
+      case .componentPressureLoss:
+        return ComponentLossForm()
+      }
+    }
+  }
+}
+
+extension SiteRoute.View.FrictionRateRoute.FormType {
+  var id: String {
+    switch self {
+    case .equipmentInfo:
+      return "equipmentForm"
+    case .componentPressureLoss:
+      return "componentLossForm"
     }
   }
 }

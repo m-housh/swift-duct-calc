@@ -1,3 +1,4 @@
+import Dependencies
 import Foundation
 
 public struct EquipmentInfo: Codable, Equatable, Identifiable, Sendable {
@@ -50,3 +51,16 @@ extension EquipmentInfo {
     }
   }
 }
+
+#if DEBUG
+  extension EquipmentInfo {
+    public static let mock = Self(
+      id: UUID(0),
+      projectID: UUID(0),
+      heatingCFM: 1000,
+      coolingCFM: 1000,
+      createdAt: Date(),
+      updatedAt: Date()
+    )
+  }
+#endif
