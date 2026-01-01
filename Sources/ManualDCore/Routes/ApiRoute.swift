@@ -192,3 +192,48 @@ extension SiteRoute.Api {
     }
   }
 }
+
+extension SiteRoute.Api {
+  public enum EffectiveLengthRoute: Equatable, Sendable {
+    case create(EffectiveLength.Create)
+    case delete(id: EffectiveLength.ID)
+    case fetch(projectID: Project.ID)
+    case get(id: EffectiveLength.ID)
+
+    static let rootPath = "effectiveLength"
+
+    public static let router = OneOf {
+      Route(.case(Self.create)) {
+        Path {
+          rootPath
+          "create"
+        }
+        Method.post
+        Body(.json(EffectiveLength.Create.self))
+      }
+      Route(.case(Self.delete(id:))) {
+        Path {
+          rootPath
+          EffectiveLength.ID.parser()
+        }
+        Method.delete
+      }
+      Route(.case(Self.fetch(projectID:))) {
+        Path {
+          rootPath
+        }
+        Method.get
+        Query {
+          Field("projectID") { Project.ID.parser() }
+        }
+      }
+      Route(.case(Self.get(id:))) {
+        Path {
+          rootPath
+          EffectiveLength.ID.parser()
+        }
+        Method.get
+      }
+    }
+  }
+}
