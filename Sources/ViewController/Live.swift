@@ -25,10 +25,12 @@ extension SiteRoute.View.ProjectRoute {
       return MainPage {
         ProjectView(project: .mock)
       }
-    case .form:
-      return MainPage {
-        ProjectForm()
+    case .form(let dismiss):
+      guard !dismiss else {
+        return div(.id("projectForm")) {}
       }
+      return ProjectForm()
+
     case .create:
       return mainPage
     }
@@ -38,14 +40,14 @@ extension SiteRoute.View.ProjectRoute {
 extension SiteRoute.View.RoomRoute {
   func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
     switch self {
-    case .form:
-      // TODO: Check that it's an htmx request.
+    case .form(let dismiss):
+      guard !dismiss else {
+        return div(.id("roomForm")) {}
+      }
       return RoomForm()
     case .index:
       return MainPage {
-        div {
-          RoomTable(rooms: Room.mocks)
-        }
+        RoomsView(rooms: Room.mocks)
       }
     }
   }

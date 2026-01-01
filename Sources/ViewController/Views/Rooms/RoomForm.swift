@@ -10,19 +10,17 @@ struct RoomForm: HTML, Sendable {
 
   var body: some HTML {
     div(
+      .id("roomForm"),
       .class(
-        "fixed top-20 z-50 w-1/2 mx-[20vw] my-10 bg-gray-700 rounded-lg shadow-lg p-4"
-      ),
-      .id("roomForm")
+        """
+        fixed top-40 left-[25vw] w-1/2 z-50 text-gray-800
+        bg-gray-200 border border-gray-400 
+        rounded-lg shadow-lg mx-10 p-4
+        """
+      )
     ) {
-      h1(.class("text-3xl font-bold pb-6")) { "New Room" }
-      form(
-        .class(
-          """
-          space-y-4
-          """
-        )
-      ) {
+      h1(.class("text-3xl font-bold pb-6")) { "Room" }
+      form {
         div {
           label(.for("name")) { "Name:" }
           Input(id: "name", placeholder: "Room Name")
@@ -49,8 +47,8 @@ struct RoomForm: HTML, Sendable {
           div(.class("space-x-4")) {
             CancelButton()
               .attributes(
-                .hx.get(route: .room(.index)),
-                .hx.target("body"),
+                .hx.get(route: .room(.form(dismiss: true))),
+                .hx.target("#roomForm"),
                 .hx.swap(.outerHTML)
               )
             SubmitButton()

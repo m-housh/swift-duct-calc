@@ -1,6 +1,7 @@
 import Elementary
 import ElementaryHTMX
 import ManualDCore
+import Styleguide
 
 struct ProjectForm: HTML, Sendable {
 
@@ -13,75 +14,58 @@ struct ProjectForm: HTML, Sendable {
   }
 
   var body: some HTML {
-    // TODO: Add htmx attributes.
-    div(.class("mx-20 my-20")) {
-      h1(.class("text-3xl font-bold")) { "Project" }
-      form(.class("w-full max-w-sm")) {
-        div(.class("flex items-center mb-6")) {
-          label(
-            .for("name"), .class("block text-gray-500 font-bold mr-4")
-          ) { "Name:" }
-          input(
-            .type(.text), .name("name"), .placeholder("Customer Name"),
-            .value(project?.name ?? ""), .required, .autofocus
-          )
-          .defaultInput()
+    div(
+      .id("projectForm"),
+      .class(
+        """
+        fixed top-40 left-[25vw] w-1/2 z-50 text-gray-800
+        bg-gray-200 border border-gray-400 
+        rounded-lg shadow-lg mx-10
+        """
+      )
+    ) {
+      h1(.class("text-3xl font-bold pb-6 ps-2")) { "Project" }
+      form(.class("space-y-4 p-4")) {
+        div {
+          label(.for("name")) { "Name" }
+          Input(id: "name", placeholder: "Name")
+            .attributes(.type(.text), .required, .autofocus)
         }
-        div(.class("flex items-center mb-6")) {
-          label(.for("streetAddress"), .class("block text-gray-500 font-bold mr-4")) { "Address:" }
-          input(
-            .type(.text), .name("streetAddress"),
-            .placeholder("Street Address"),
-            .value(project?.streetAddress ?? ""),
-            .required
-          )
-          .defaultInput()
+        div {
+          label(.for("streetAddress")) { "Address" }
+          Input(id: "streetAddress", placeholder: "Street Address")
+            .attributes(.type(.text), .required)
         }
-        // div(.class("w-full space-x-2")) {
-        //   label(.for("city")) { "City:" }
-        //
-        //   input(
-        //     .type(.text), .name("city"),
-        //     .placeholder("City"),
-        //     .value(project?.city ?? ""),
-        //     .required
-        //   )
-        //   .defaultInput()
-        // }
-        // div(.class("w-full space-y-2")) {
-        //   label(.for("state")) { "State:" }
-        //   input(
-        //     .type(.text), .name("state"),
-        //     .placeholder("State"),
-        //     .value(project?.state ?? ""),
-        //     .required
-        //   )
-        //   .defaultInput()
-        // }
-        // div(.class("w-full space-y-2")) {
-        //   label(.for("zipCode")) {
-        //     "Zip:"
-        //   }
-        //   input(
-        //     .type(.text), .name("zipCode"),
-        //     .placeholder("Zip Code"),
-        //     .value(project?.zipCode ?? ""),
-        //     .required
-        //   )
-        //   .defaultInput()
-        // }
+        div {
+          label(.for("city")) { "City" }
+          Input(id: "city", placeholder: "City")
+            .attributes(.type(.text), .required)
+        }
+        div {
+          label(.for("state")) { "State" }
+          Input(id: "state", placeholder: "State")
+            .attributes(.type(.text), .required)
+        }
+        div {
+          label(.for("zipCode")) { "Zip" }
+          Input(id: "zipCode", placeholder: "Zip code")
+            .attributes(.type(.text), .required)
+        }
+
+        Row {
+          div {}
+          div(.class("space-x-4")) {
+            CancelButton()
+              .attributes(
+                .hx.get(route: .project(.form(dismiss: true))),
+                .hx.target("#projectForm"),
+                .hx.swap(.outerHTML)
+              )
+            SubmitButton()
+          }
+        }
       }
     }
   }
-}
 
-// TODO: Move
-extension input {
-  func defaultInput() -> some HTML<HTMLTag.input> {
-    attributes(
-      .class(
-        "w-full rounded-md bg-white px-3 py-1.5 text-slate-900 outline-1 -outline-offset-1 outline-slate-300 focus:outline focus:-outline-offset-2 focus:outline-indigo-600"
-      )
-    )
-  }
 }

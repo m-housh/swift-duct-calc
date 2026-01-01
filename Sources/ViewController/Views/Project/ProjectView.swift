@@ -16,7 +16,12 @@ struct ProjectView: HTML, Sendable {
     ) {
       Row {
         h1(.class("text-2xl font-bold")) { "Project" }
-        // FIX: Add edit button.
+        EditButton()
+          .attributes(
+            .hx.get(route: .project(.form(dismiss: false))),
+            .hx.target("#projectForm"),
+            .hx.swap(.outerHTML)
+          )
       }
 
       Row {
