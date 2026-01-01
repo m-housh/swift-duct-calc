@@ -93,6 +93,8 @@ extension EffectiveLength {
   }
 }
 
+// TODO: Add total effective length field so that we can lookup / compare which one is
+//       the longest for a given project.
 final class EffectiveLengthModel: Model, @unchecked Sendable {
 
   static let schema = "effective_length"

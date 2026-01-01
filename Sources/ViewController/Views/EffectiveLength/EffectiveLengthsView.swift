@@ -9,11 +9,7 @@ struct EffectiveLengthsView: HTML, Sendable {
 
   var body: some HTML {
     div(
-      .class(
-        """
-        m-4
-        """
-      )
+      .class("m-4")
     ) {
       Row {
         h1(.class("text-2xl font-bold")) { "Effective Lengths" }
@@ -29,11 +25,7 @@ struct EffectiveLengthsView: HTML, Sendable {
 
       div(
         .id("effectiveLengths"),
-        .class(
-          """
-          border border-gray-200 rounded-lg shadow-lg
-          """
-        )
+        .class("space-y-6")
       ) {
         for row in effectiveLengths {
           EffectiveLengthView(effectiveLength: row)
@@ -63,7 +55,7 @@ struct EffectiveLengthsView: HTML, Sendable {
       div(
         .class(
           """
-          pb-6
+          border border-gray-200 rounded-lg shadow-lg p-4
           """
         )
       ) {
@@ -99,7 +91,7 @@ struct EffectiveLengthsView: HTML, Sendable {
           Number(Double(straightLengthsTotal) + groupsTotal, digits: 0)
             .attributes(.class("text-xl font-bold"))
         }
-        .attributes(.class("border border-gray-200"))
+        .attributes(.class("border-b border-t border-gray-200"))
       }
     }
   }

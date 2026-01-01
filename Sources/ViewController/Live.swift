@@ -101,6 +101,14 @@ extension SiteRoute.View.EffectiveLengthRoute {
         return div(.id("effectiveLengthForm")) {}
       }
       return EffectiveLengthForm()
+
+    case .field(let type):
+      switch type {
+      case .straightLength:
+        return StraightLengthField()
+      case .group:
+        return GroupField()
+      }
     }
   }
 }

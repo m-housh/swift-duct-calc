@@ -1,9 +1,27 @@
 import Elementary
 
 public struct Input: HTML, Sendable {
-  let id: String
+
+  let id: String?
   let name: String?
   let placeholder: String
+
+  private var _name: String {
+    guard let name else {
+      return id ?? ""
+    }
+    return name
+  }
+
+  init(
+    id: String? = nil,
+    name: String? = nil,
+    placeholder: String
+  ) {
+    self.id = id
+    self.name = name
+    self.placeholder = placeholder
+  }
 
   public init(
     id: String,
@@ -15,9 +33,16 @@ public struct Input: HTML, Sendable {
     self.placeholder = placeholder
   }
 
+  public init(
+    name: String,
+    placeholder: String
+  ) {
+    self.init(id: nil, name: name, placeholder: placeholder)
+  }
+
   public var body: some HTML<HTMLTag.input> {
     input(
-      .id(id), .name(name ?? id), .placeholder(placeholder),
+      .id(id ?? ""), .name(_name), .placeholder(placeholder),
       .class(
         """
         w-full rounded-md bg-white px-3 py-1.5 text-slate-900 outline-1

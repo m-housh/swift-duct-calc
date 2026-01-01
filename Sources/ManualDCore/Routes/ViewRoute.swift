@@ -132,6 +132,7 @@ extension SiteRoute.View.FrictionRateRoute {
 
 extension SiteRoute.View {
   public enum EffectiveLengthRoute: Equatable, Sendable {
+    case field(FieldType)
     case form(dismiss: Bool = false)
     case index
 
@@ -152,6 +153,23 @@ extension SiteRoute.View {
           Field("dismiss", default: false) { Bool.parser() }
         }
       }
+      Route(.case(Self.field)) {
+        Path {
+          rootPath
+          "field"
+        }
+        Method.get
+        Query {
+          Field("type") { FieldType.parser() }
+        }
+      }
     }
+  }
+}
+
+extension SiteRoute.View.EffectiveLengthRoute {
+  public enum FieldType: String, CaseIterable, Equatable, Sendable {
+    case straightLength
+    case group
   }
 }
