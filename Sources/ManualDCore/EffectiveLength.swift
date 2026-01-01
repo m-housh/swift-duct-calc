@@ -1,3 +1,4 @@
+import Dependencies
 import Foundation
 
 // TODO: Not sure how to model effective length groups in the database.
@@ -85,3 +86,40 @@ extension EffectiveLength {
     }
   }
 }
+
+#if DEBUG
+
+  extension EffectiveLength {
+    public static let mocks: [Self] = [
+      .init(
+        id: UUID(0),
+        projectID: UUID(0),
+        name: "Test Supply - 1",
+        type: .supply,
+        straightLengths: [10, 20, 25],
+        groups: [
+          .init(group: 1, letter: "a", value: 20),
+          .init(group: 2, letter: "b", value: 15, quantity: 2),
+          .init(group: 3, letter: "c", value: 10, quantity: 1),
+        ],
+        createdAt: Date(),
+        updatedAt: Date()
+      ),
+      .init(
+        id: UUID(1),
+        projectID: UUID(0),
+        name: "Test Return - 1",
+        type: .return,
+        straightLengths: [10, 20, 25],
+        groups: [
+          .init(group: 1, letter: "a", value: 20),
+          .init(group: 2, letter: "b", value: 15, quantity: 2),
+          .init(group: 3, letter: "c", value: 10, quantity: 1),
+        ],
+        createdAt: Date(),
+        updatedAt: Date()
+      ),
+    ]
+  }
+
+#endif

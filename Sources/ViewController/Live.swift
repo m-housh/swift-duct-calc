@@ -11,6 +11,8 @@ extension ViewController.Request {
       return try await route.renderView(isHtmxRequest: isHtmxRequest)
     case .frictionRate(let route):
       return try await route.renderView(isHtmxRequest: isHtmxRequest)
+    case .effectiveLength(let route):
+      return try await route.renderView(isHtmxRequest: isHtmxRequest)
     default:
       // FIX: FIX
       return mainPage
@@ -82,6 +84,23 @@ extension SiteRoute.View.FrictionRateRoute.FormType {
       return "equipmentForm"
     case .componentPressureLoss:
       return "componentLossForm"
+    }
+  }
+}
+
+extension SiteRoute.View.EffectiveLengthRoute {
+
+  func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
+    switch self {
+    case .index:
+      return MainPage {
+        EffectiveLengthsView(effectiveLengths: EffectiveLength.mocks)
+      }
+    case .form(let dismiss):
+      guard !dismiss else {
+        return div(.id("effectiveLengthForm")) {}
+      }
+      return EffectiveLengthForm()
     }
   }
 }

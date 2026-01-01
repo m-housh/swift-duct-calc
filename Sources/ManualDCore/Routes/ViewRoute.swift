@@ -10,6 +10,7 @@ extension SiteRoute {
     case project(ProjectRoute)
     case room(RoomRoute)
     case frictionRate(FrictionRateRoute)
+    case effectiveLength(EffectiveLengthRoute)
 
     public static let router = OneOf {
       Route(.case(Self.project)) {
@@ -20,6 +21,9 @@ extension SiteRoute {
       }
       Route(.case(Self.frictionRate)) {
         SiteRoute.View.FrictionRateRoute.router
+      }
+      Route(.case(Self.effectiveLength)) {
+        SiteRoute.View.EffectiveLengthRoute.router
       }
     }
   }
@@ -123,5 +127,31 @@ extension SiteRoute.View.FrictionRateRoute {
   public enum FormType: String, CaseIterable, Codable, Equatable, Sendable {
     case equipmentInfo
     case componentPressureLoss
+  }
+}
+
+extension SiteRoute.View {
+  public enum EffectiveLengthRoute: Equatable, Sendable {
+    case form(dismiss: Bool = false)
+    case index
+
+    static let rootPath = "effective-lengths"
+
+    public static let router = OneOf {
+      Route(.case(Self.index)) {
+        Path { rootPath }
+        Method.get
+      }
+      Route(.case(Self.form(dismiss:))) {
+        Path {
+          rootPath
+          "create"
+        }
+        Method.get
+        Query {
+          Field("dismiss", default: false) { Bool.parser() }
+        }
+      }
+    }
   }
 }
