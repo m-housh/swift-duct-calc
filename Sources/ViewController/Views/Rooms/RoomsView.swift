@@ -9,9 +9,9 @@ struct RoomsView: HTML, Sendable {
   let rooms: [Room]
 
   var body: some HTML {
-    div(.class("m-10")) {
+    div {
       Row {
-        h1(.class("text-3xl font-bold pb-6")) { "Room Loads" }
+        h1(.class("text-2xl font-bold")) { "Room Loads" }
         div(
           .class("tooltip tooltip-left"),
           .data("tip", value: "Add room")
@@ -20,94 +20,67 @@ struct RoomsView: HTML, Sendable {
             .hx.get(route: .room(.form(dismiss: false))),
             .hx.target("#roomForm"),
             .hx.swap(.outerHTML),
-            .class("btn btn-primary w-[40px]")
+            .class("btn btn-primary w-[40px] text-2xl")
           ) {
             "+"
           }
         }
       }
+      .attributes(.class("pb-6"))
 
-      div(
-        .id("roomTable"),
-        .class(
-          """
-          border border-gray-200 rounded-lg shadow-lg
-          grid grid-cols-5 p-4
-          """
-        )
-      ) {
-        // Header
-        Label("Name")
-        // Pushes items to right
-        Row {
-          div {}
-          Label("Heating Load")
-        }
-        Row {
-          div {}
-          Label("Cooling Total")
-        }
-        Row {
-          div {}
-          Label("Cooling Sensible")
-        }
-        Row {
-          div {}
-          Label("Register Count")
-        }
-
-        // Divider
-        div(.class("border-b border-gray-200 col-span-5 mb-2")) {}
-
-        // Rows
-        for row in rooms {
-          span { row.name }
-          // Pushes items to right
-          Row {
-            div {}
-            Number(row.heatingLoad)
-              .attributes(.class("text-red-500"))
+      div(.class("overflow-x-auto rounded-box border")) {
+        table(.class("table table-zebra"), .id("roomsTable")) {
+          thead {
+            tr {
+              th { Label("Name") }
+              th { Label("Heating Load") }
+              th { Label("Cooling Total") }
+              th { Label("Cooling Sensible") }
+              th { Label("Register Count") }
+            }
           }
-          Row {
-            div {}
-            Number(row.coolingLoad.total)
-              .attributes(.class("text-green-400"))
+          tbody {
+            for room in rooms {
+              tr {
+                td { room.name }
+                td {
+                  Number(room.heatingLoad)
+                    .attributes(.class("text-error"))
+                }
+                td {
+                  Number(room.coolingLoad.total)
+                    .attributes(.class("text-success"))
+                }
+                td {
+                  Number(room.coolingLoad.sensible)
+                    .attributes(.class("text-info"))
+                }
+                td {
+                  Number(room.registerCount)
+                }
+              }
+            }
+            // TOTALS
+            tr(.class("font-bold text-xl")) {
+              td { Label("Total") }
+              td {
+                Number(rooms.heatingTotal)
+                  .attributes(.class("badge badge-outline badge-error badge-xl"))
+              }
+              td {
+                Number(rooms.coolingTotal)
+                  .attributes(
+                    .class("badge badge-outline badge-success badge-xl"))
+              }
+              td {
+                Number(rooms.coolingSensibleTotal)
+                  .attributes(.class("badge badge-outline badge-info badge-xl"))
+              }
+              td {}
+            }
           }
-          Row {
-            div {}
-            Number(row.coolingLoad.sensible)
-              .attributes(.class("text-blue-400"))
-          }
-          Row {
-            div {}
-            Number(row.registerCount)
-          }
-
-          // Divider
-          div(.class("border-b border-gray-200 col-span-5 mb-2")) {}
         }
-
-        // Totals
-        Label("Total")
-        Row {
-          div {}
-          Number(rooms.heatingTotal)
-            .attributes(.class("badge badge-outline badge-error badge-xl text-xl font-bold"))
-        }
-        Row {
-          div {}
-          Number(rooms.coolingTotal)
-            .attributes(.class("badge badge-outline badge-success badge-xl text-xl font-bold"))
-        }
-        Row {
-          div {}
-          Number(rooms.coolingSensibleTotal)
-            .attributes(.class("badge badge-outline badge-info badge-xl text-xl font-bold"))
-        }
-        // Empty register count column
-        div {}
       }
-
       RoomForm(dismiss: true)
     }
   }

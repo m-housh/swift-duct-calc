@@ -11,6 +11,7 @@ extension SiteRoute {
     case room(RoomRoute)
     case frictionRate(FrictionRateRoute)
     case effectiveLength(EffectiveLengthRoute)
+    case user(UserRoute)
 
     public static let router = OneOf {
       Route(.case(Self.project)) {
@@ -24,6 +25,9 @@ extension SiteRoute {
       }
       Route(.case(Self.effectiveLength)) {
         SiteRoute.View.EffectiveLengthRoute.router
+      }
+      Route(.case(Self.user)) {
+        SiteRoute.View.UserRoute.router
       }
     }
   }
@@ -171,5 +175,76 @@ extension SiteRoute.View.EffectiveLengthRoute {
   public enum FieldType: String, CaseIterable, Equatable, Sendable {
     case straightLength
     case group
+  }
+}
+
+extension SiteRoute.View {
+  public enum UserRoute: Equatable, Sendable {
+    case login(Login)
+    case signup(Signup)
+
+    public static let router = OneOf {
+      Route(.case(Self.login)) {
+        SiteRoute.View.UserRoute.Login.router
+      }
+      Route(.case(Self.signup)) {
+        SiteRoute.View.UserRoute.Signup.router
+      }
+    }
+  }
+}
+
+extension SiteRoute.View.UserRoute {
+
+  public enum Login: Equatable, Sendable {
+    case index
+    case submit(User.Login)
+
+    static let rootPath = "login"
+
+    public static let router = OneOf {
+      Route(.case(Self.index)) {
+        Path { rootPath }
+        Method.get
+      }
+      Route(.case(Self.submit)) {
+        Path { rootPath }
+        Method.post
+        Body {
+          FormData {
+            Field("email", .string)
+            Field("password", .string)
+          }
+          .map(.memberwise(User.Login.init))
+        }
+      }
+    }
+  }
+
+  public enum Signup: Equatable, Sendable {
+    case index
+    case submit(User.Create)
+
+    static let rootPath = "signup"
+
+    public static let router = OneOf {
+      Route(.case(Self.index)) {
+        Path { rootPath }
+        Method.get
+      }
+      Route(.case(Self.submit)) {
+        Path { rootPath }
+        Method.post
+        Body {
+          FormData {
+            Field("username", .string)
+            Field("email", .string)
+            Field("password", .string)
+            Field("confirmPassword", .string)
+          }
+          .map(.memberwise(User.Create.init))
+        }
+      }
+    }
   }
 }

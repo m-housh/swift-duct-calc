@@ -2,7 +2,7 @@ import Elementary
 import ManualDCore
 import Styleguide
 
-// TODO: Need to add active to sidebar links.
+// TODO: Update to use DaisyUI drawer.
 struct Sidebar: HTML {
 
   let active: ActiveTab
@@ -23,7 +23,7 @@ struct Sidebar: HTML {
         Label("Theme")
         input(.type(.checkbox), .class("toggle theme-controller"), .value("light"))
       }
-      .attributes(.class("py-4"))
+      .attributes(.class("p-4"))
 
       row(title: "Project", icon: .mapPin, route: .project(.index))
         .attributes(.data("active", value: active == .projects ? "true" : "false"))

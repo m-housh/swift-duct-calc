@@ -13,6 +13,8 @@ extension ViewController.Request {
       return try await route.renderView(isHtmxRequest: isHtmxRequest)
     case .effectiveLength(let route):
       return try await route.renderView(isHtmxRequest: isHtmxRequest)
+    case .user(let route):
+      return try await route.renderView(isHtmxRequest: isHtmxRequest)
     default:
       // FIX: FIX
       return mainPage
@@ -97,6 +99,24 @@ extension SiteRoute.View.EffectiveLengthRoute {
       case .group:
         return GroupField()
       }
+    }
+  }
+}
+
+extension SiteRoute.View.UserRoute {
+
+  func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
+    switch self {
+    case .login(.index):
+      return MainPage(active: .projects, showSidebar: false) {
+        LoginForm()
+      }
+    case .signup(.index):
+      return MainPage(active: .projects, showSidebar: false) {
+        LoginForm(style: .signup)
+      }
+    default:
+      return div { "Fix Me!" }
     }
   }
 }
