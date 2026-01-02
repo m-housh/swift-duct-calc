@@ -1,8 +1,11 @@
 import Elementary
+import ManualDCore
 import Styleguide
 
 // TODO: Need to add active to sidebar links.
 struct Sidebar: HTML {
+
+  let active: ActiveTab
 
   var body: some HTML {
     aside(
@@ -14,12 +17,20 @@ struct Sidebar: HTML {
         """
       )
     ) {
-      row(title: "Project", icon: .mapPin, href: "/projects")
-      row(title: "Rooms", icon: .doorClosed, href: "/rooms")
-      row(title: "Equivalent Lengths", icon: .rulerDimensionLine, href: "/effective-lengths")
-      row(title: "Friction Rate", icon: .squareFunction, href: "/friction-rate")
-        .attributes(.data("active", value: "true"))
+      row(title: "Project", icon: .mapPin, route: .project(.index))
+        .attributes(.data("active", value: active == .projects ? "true" : "false"))
+
+      row(title: "Rooms", icon: .doorClosed, route: .room(.index))
+        .attributes(.data("active", value: active == .rooms ? "true" : "false"))
+
+      row(title: "Equivalent Lengths", icon: .rulerDimensionLine, route: .effectiveLength(.index))
+        .attributes(.data("active", value: active == .effectiveLength ? "true" : "false"))
+
+      row(title: "Friction Rate", icon: .squareFunction, route: .frictionRate(.index))
+        .attributes(.data("active", value: active == .frictionRate ? "true" : "false"))
+
       row(title: "Duct Sizes", icon: .wind, href: "#")
+        .attributes(.data("active", value: active == .ductSizing ? "true" : "false"))
     }
   }
 
@@ -45,5 +56,23 @@ struct Sidebar: HTML {
         title
       }
     }
+  }
+
+  private func row(
+    title: String,
+    icon: Icon.Key,
+    route: SiteRoute.View
+  ) -> some HTML<HTMLTag.a> {
+    row(title: title, icon: icon, href: SiteRoute.View.router.path(for: route))
+  }
+}
+
+extension Sidebar {
+  enum ActiveTab: Equatable, Sendable {
+    case projects
+    case rooms
+    case effectiveLength
+    case frictionRate
+    case ductSizing
   }
 }

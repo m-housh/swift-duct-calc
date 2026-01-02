@@ -24,14 +24,11 @@ extension SiteRoute.View.ProjectRoute {
   func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
     switch self {
     case .index:
-      return MainPage {
+      return MainPage(active: .projects) {
         ProjectView(project: .mock)
       }
     case .form(let dismiss):
-      guard !dismiss else {
-        return div(.id("projectForm")) {}
-      }
-      return ProjectForm()
+      return ProjectForm(dismiss: dismiss)
 
     case .create:
       return mainPage
@@ -48,7 +45,7 @@ extension SiteRoute.View.RoomRoute {
       }
       return RoomForm()
     case .index:
-      return MainPage {
+      return MainPage(active: .rooms) {
         RoomsView(rooms: Room.mocks)
       }
     }
@@ -59,19 +56,16 @@ extension SiteRoute.View.FrictionRateRoute {
   func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
     switch self {
     case .index:
-      return MainPage {
+      return MainPage(active: .frictionRate) {
         FrictionRateView()
       }
     case .form(let type, let dismiss):
-      guard !dismiss else {
-        return div(.id(type.id)) {}
-      }
       // FIX: Forms need to reference existing items.
       switch type {
       case .equipmentInfo:
-        return EquipmentForm()
+        return EquipmentForm(dismiss: dismiss)
       case .componentPressureLoss:
-        return ComponentLossForm()
+        return ComponentLossForm(dismiss: dismiss)
       }
     }
   }
@@ -93,14 +87,11 @@ extension SiteRoute.View.EffectiveLengthRoute {
   func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
     switch self {
     case .index:
-      return MainPage {
+      return MainPage(active: .effectiveLength) {
         EffectiveLengthsView(effectiveLengths: EffectiveLength.mocks)
       }
     case .form(let dismiss):
-      guard !dismiss else {
-        return div(.id("effectiveLengthForm")) {}
-      }
-      return EffectiveLengthForm()
+      return EffectiveLengthForm(dismiss: dismiss)
 
     case .field(let type):
       switch type {
@@ -114,7 +105,7 @@ extension SiteRoute.View.EffectiveLengthRoute {
 }
 
 private let mainPage: AnySendableHTML = {
-  MainPage {
+  MainPage(active: .projects) {
     div {
       h1 { "It works!" }
     }

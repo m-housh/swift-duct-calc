@@ -4,8 +4,10 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
   public var title: String { "Manual-D" }
   public var lang: String { "en" }
   let inner: Inner
+  let activeTab: Sidebar.ActiveTab
 
-  init(_ inner: () -> Inner) {
+  init(active activeTab: Sidebar.ActiveTab, _ inner: () -> Inner) {
+    self.activeTab = activeTab
     self.inner = inner()
   }
 
@@ -22,7 +24,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
   public var body: some HTML {
     div(.class("bg-white dark:bg-gray-800 dark:text-white")) {
       div(.class("flex flex-row")) {
-        Sidebar()
+        Sidebar(active: activeTab)
         main(.class("flex flex-col h-screen w-full")) {
           inner
         }

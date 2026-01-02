@@ -6,24 +6,18 @@ import Styleguide
 struct ProjectForm: HTML, Sendable {
 
   let project: Project?
+  let dismiss: Bool
 
   init(
+    dismiss: Bool,
     project: Project? = nil
   ) {
+    self.dismiss = dismiss
     self.project = project
   }
 
   var body: some HTML {
-    div(
-      .id("projectForm"),
-      .class(
-        """
-        fixed top-40 left-[25vw] w-1/2 z-50 text-gray-800
-        bg-gray-200 border border-gray-400 
-        rounded-lg shadow-lg mx-10
-        """
-      )
-    ) {
+    ModalForm(id: "projectForm", dismiss: dismiss) {
       h1(.class("text-3xl font-bold pb-6 ps-2")) { "Project" }
       form(.class("space-y-4 p-4")) {
         div {
