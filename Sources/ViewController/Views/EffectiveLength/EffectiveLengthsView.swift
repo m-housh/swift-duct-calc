@@ -13,13 +13,19 @@ struct EffectiveLengthsView: HTML, Sendable {
     ) {
       Row {
         h1(.class("text-2xl font-bold")) { "Effective Lengths" }
-        button(
-          .hx.get(route: .effectiveLength(.form(dismiss: false))),
-          .hx.target("#effectiveLengthForm"),
-          .hx.swap(.outerHTML)
-        ) {
-          Icon(.circlePlus)
-        }
+        PlusButton()
+          .attributes(
+            .hx.get(route: .effectiveLength(.form(dismiss: false))),
+            .hx.target("#effectiveLengthForm"),
+            .hx.swap(.outerHTML)
+          )
+        // button(
+        //   .hx.get(route: .effectiveLength(.form(dismiss: false))),
+        //   .hx.target("#effectiveLengthForm"),
+        //   .hx.swap(.outerHTML)
+        // ) {
+        //   Icon(.circlePlus)
+        // }
       }
       .attributes(.class("pb-6"))
 
@@ -32,7 +38,7 @@ struct EffectiveLengthsView: HTML, Sendable {
         }
       }
 
-      div(.id("effectiveLengthForm")) {}
+      EffectiveLengthForm(dismiss: true)
     }
   }
 

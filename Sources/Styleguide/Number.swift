@@ -8,6 +8,7 @@ public struct Number: HTML, Sendable {
   private var formatter: NumberFormatter {
     let formatter = NumberFormatter()
     formatter.maximumFractionDigits = fractionDigits
+    formatter.numberStyle = .decimal
     return formatter
   }
 

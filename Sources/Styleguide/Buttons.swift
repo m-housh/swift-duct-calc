@@ -80,3 +80,12 @@ public struct EditButton: HTML, Sendable {
     }
   }
 }
+
+public struct PlusButton: HTML, Sendable {
+
+  public init() {}
+
+  public var body: some HTML<HTMLTag.button> {
+    button(.type(.button)) { SVG(.circlePlus) }
+  }
+}

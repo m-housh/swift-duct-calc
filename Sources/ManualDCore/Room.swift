@@ -68,7 +68,7 @@ extension Room {
       Room(
         id: UUID(0),
         projectID: UUID(0),
-        name: "Test",
+        name: "Kitchen",
         heatingLoad: 12345,
         coolingLoad: .init(total: 12345, sensible: 12345),
         registerCount: 2,
@@ -78,20 +78,20 @@ extension Room {
       Room(
         id: UUID(1),
         projectID: UUID(1),
-        name: "Test",
+        name: "Bedroom - 1",
         heatingLoad: 12345,
         coolingLoad: .init(total: 12345, sensible: 12345),
-        registerCount: 2,
+        registerCount: 1,
         createdAt: Date(),
         updatedAt: Date()
       ),
       Room(
         id: UUID(2),
         projectID: UUID(2),
-        name: "Test",
+        name: "Family Room",
         heatingLoad: 12345,
         coolingLoad: .init(total: 12345, sensible: 12345),
-        registerCount: 2,
+        registerCount: 3,
         createdAt: Date(),
         updatedAt: Date()
       ),

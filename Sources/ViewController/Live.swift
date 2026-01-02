@@ -40,10 +40,7 @@ extension SiteRoute.View.RoomRoute {
   func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
     switch self {
     case .form(let dismiss):
-      guard !dismiss else {
-        return div(.id("roomForm")) {}
-      }
-      return RoomForm()
+      return RoomForm(dismiss: dismiss)
     case .index:
       return MainPage(active: .rooms) {
         RoomsView(rooms: Room.mocks)

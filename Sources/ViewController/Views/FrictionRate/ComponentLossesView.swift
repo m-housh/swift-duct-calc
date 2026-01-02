@@ -21,13 +21,12 @@ struct ComponentPressureLossesView: HTML, Sendable {
     ) {
       Row {
         h1(.class("text-2xl font-bold")) { "Component Pressure Losses" }
-        button(
-          .hx.get(route: .frictionRate(.form(.componentPressureLoss, dismiss: false))),
-          .hx.target("#componentLossForm"),
-          .hx.swap(.outerHTML)
-        ) {
-          Icon(.circlePlus)
-        }
+        PlusButton()
+          .attributes(
+            .hx.get(route: .frictionRate(.form(.componentPressureLoss, dismiss: false))),
+            .hx.target("#componentLossForm"),
+            .hx.swap(.outerHTML)
+          )
       }
 
       for row in componentPressureLosses {
@@ -44,7 +43,8 @@ struct ComponentPressureLossesView: HTML, Sendable {
           .attributes(.class("text-xl font-bold"))
       }
     }
-    div(.id("componentLossForm")) {}
+    // div(.id("componentLossForm")) {}
+    ComponentLossForm(dismiss: true)
   }
 
 }

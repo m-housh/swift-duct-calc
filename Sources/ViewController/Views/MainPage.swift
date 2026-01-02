@@ -17,6 +17,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     script(.src("https://unpkg.com/htmx.org@2.0.8")) {}
     script(.src("https://cdn.tailwindcss.com")) {}
     script(.src("/js/main.js")) {}
+    script(.src("https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4")) {}
     link(.rel(.stylesheet), .href("/css/main.css"))
     link(.rel(.icon), .href("/images/favicon.ico"), .custom(name: "type", value: "image/x-icon"))
   }
