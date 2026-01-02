@@ -1,0 +1,23 @@
+{
+  "name": "swift-manual-d",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "npx @tailwindcss/cli -i Public/css/main.css -o Public/css/output.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.housh.dev:2222/michael/swift-manual-d.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.18",
+    "daisyui": "^5.5.14",
+    "tailwindcss": "^4.1.18"
+  }
+}

@@ -12,25 +12,19 @@ struct RoomsView: HTML, Sendable {
     div(.class("m-10")) {
       Row {
         h1(.class("text-3xl font-bold pb-6")) { "Room Loads" }
-        // div(
-        //   .class("tooltip"),
-        //   .data("tip", value: "Add room")
-        // ) {
-        //   PlusButton()
-        //     .attributes(
-        //       .hx.get(route: .room(.form(dismiss: false))),
-        //       .hx.target("#roomForm"),
-        //       .hx.swap(.outerHTML),
-        //       .class("btn")
-        //     )
-        // }
-        HTMLRaw(
-          """
-          <div class="tooltip" data-tip="hello">
-            <button class="btn">Hover me</button>
-          </div>
-          """
-        )
+        div(
+          .class("tooltip tooltip-left"),
+          .data("tip", value: "Add room")
+        ) {
+          button(
+            .hx.get(route: .room(.form(dismiss: false))),
+            .hx.target("#roomForm"),
+            .hx.swap(.outerHTML),
+            .class("btn btn-primary w-[40px]")
+          ) {
+            "+"
+          }
+        }
       }
 
       div(
@@ -98,17 +92,17 @@ struct RoomsView: HTML, Sendable {
         Row {
           div {}
           Number(rooms.heatingTotal)
-            .attributes(.class("bg-red-500 text-white font-bold rounded-lg shadow-lg px-4 py-2"))
+            .attributes(.class("badge badge-outline badge-error badge-xl text-xl font-bold"))
         }
         Row {
           div {}
           Number(rooms.coolingTotal)
-            .attributes(.class("bg-green-400 text-white font-bold rounded-lg shadow-lg px-4 py-2"))
+            .attributes(.class("badge badge-outline badge-success badge-xl text-xl font-bold"))
         }
         Row {
           div {}
           Number(rooms.coolingSensibleTotal)
-            .attributes(.class("bg-blue-400 text-white font-bold rounded-lg shadow-lg px-4 py-2"))
+            .attributes(.class("badge badge-outline badge-info badge-xl text-xl font-bold"))
         }
         // Empty register count column
         div {}

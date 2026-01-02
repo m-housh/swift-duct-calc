@@ -17,6 +17,14 @@ struct Sidebar: HTML {
         """
       )
     ) {
+
+      // TODO: Move somewhere outside of the sidebar.
+      Row {
+        Label("Theme")
+        input(.type(.checkbox), .class("toggle theme-controller"), .value("light"))
+      }
+      .attributes(.class("py-4"))
+
       row(title: "Project", icon: .mapPin, route: .project(.index))
         .attributes(.data("active", value: active == .projects ? "true" : "false"))
 

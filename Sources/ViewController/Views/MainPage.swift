@@ -15,18 +15,17 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     meta(.charset(.utf8))
     meta(.name(.viewport), .content("width=device-width, initial-scale=1.0"))
     script(.src("https://unpkg.com/htmx.org@2.0.8")) {}
-    script(.src("https://cdn.tailwindcss.com")) {}
     script(.src("/js/main.js")) {}
-    script(.src("https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4")) {}
-    link(.rel(.stylesheet), .href("/css/main.css"))
+    link(.rel(.stylesheet), .href("/css/output.css"))
     link(.rel(.icon), .href("/images/favicon.ico"), .custom(name: "type", value: "image/x-icon"))
   }
 
   public var body: some HTML {
-    div(.class("bg-white dark:bg-gray-800 dark:text-white")) {
+    // div(.class("bg-white dark:bg-gray-800 dark:text-white")) {
+    div {
       div(.class("flex flex-row")) {
         Sidebar(active: activeTab)
-        main(.class("flex flex-col h-screen w-full")) {
+        main(.class("flex flex-col h-screen w-full px-6 py-10")) {
           inner
         }
       }
