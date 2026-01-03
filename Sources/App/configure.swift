@@ -100,15 +100,14 @@ private func addCommands(to app: Application) {
 extension SiteRoute {
 
   fileprivate func middleware() -> [any Middleware]? {
-    return nil
-    // switch self {
-    // case .api(let route):
-    //   return route.middleware
-    // // case .health:
-    // //   return nil
-    // case .view(let route):
-    //   return route.middleware
-    // }
+    switch self {
+    case .api:
+      return nil
+    case .health:
+      return nil
+    case .view(let route):
+      return route.middleware
+    }
   }
 }
 

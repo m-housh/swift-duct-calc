@@ -15,7 +15,9 @@ struct LoginForm: HTML, Sendable {
       .id("loginForm"),
       .class("flex items-center justify-center")
     ) {
-      form {
+      form(
+        .method(.post)
+      ) {
         fieldset(.class("fieldset bg-base-200 border-base-300 rounded-box w-xl border p-4")) {
           legend(.class("fieldset-legend")) { style.title }
 
@@ -24,6 +26,7 @@ struct LoginForm: HTML, Sendable {
               SVG(.user)
               input(
                 .type(.text), .required, .placeholder("Username"),
+                .name("username"), .id("username"),
                 .minlength("3"), .pattern(.username)
               )
             }
@@ -37,7 +40,8 @@ struct LoginForm: HTML, Sendable {
           label(.class("input validator w-full")) {
             SVG(.email)
             input(
-              .type(.email), .placeholder("Email"), .required
+              .type(.email), .placeholder("Email"), .required,
+              .name("email"), .id("email"),
             )
           }
           div(.class("validator-hint hidden")) { "Enter valid email address." }
@@ -46,7 +50,8 @@ struct LoginForm: HTML, Sendable {
             SVG(.key)
             input(
               .type(.password), .placeholder("Password"), .required,
-              .pattern(.password), .minlength("8")
+              .pattern(.password), .minlength("8"),
+              .name("password"), .id("password"),
             )
           }
 
@@ -55,7 +60,8 @@ struct LoginForm: HTML, Sendable {
               SVG(.key)
               input(
                 .type(.password), .placeholder("Confirm Password"), .required,
-                .pattern(.password), .minlength("8")
+                .pattern(.password), .minlength("8"),
+                .name("confirmPassword"), .id("confirmPassword"),
               )
             }
           }
@@ -75,7 +81,7 @@ struct LoginForm: HTML, Sendable {
           button(.class("btn btn-secondary mt-4")) { style.title }
           a(
             .class("btn btn-link mt-4"),
-            .href(route: style == .signup ? .login(.index) : .user(.signup(.index)))
+            .href(route: style == .signup ? .login(.index) : .signup(.index))
           ) {
             style == .login ? "Sign Up" : "Login"
           }

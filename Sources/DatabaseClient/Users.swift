@@ -83,8 +83,8 @@ extension User {
         .field("username", .string, .required)
         .field("email", .string, .required)
         .field("password_hash", .string, .required)
-        .field("created_at", .datetime)
-        .field("updated_at", .datetime)
+        .field("createdAt", .datetime)
+        .field("updatedAt", .datetime)
         .unique(on: "email", "username")
         .create()
     }

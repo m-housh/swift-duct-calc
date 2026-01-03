@@ -10,7 +10,7 @@ extension DatabaseClient {
     public var create: @Sendable (User.ID, Project.Create) async throws -> Project
     public var delete: @Sendable (Project.ID) async throws -> Void
     public var get: @Sendable (Project.ID) async throws -> Project?
-    public var fetch: @Sendable (User.ID) async throws -> [Project]
+    public var fetch: @Sendable (User.ID, PageRequest) async throws -> Page<Project>
   }
 }
 
@@ -33,11 +33,12 @@ extension DatabaseClient.Projects: TestDependencyKey {
       get: { id in
         try await ProjectModel.find(id, on: database).map { try $0.toDTO() }
       },
-      fetch: { userID in
+      fetch: { userID, request in
         try await ProjectModel.query(on: database)
+          .sort(\.$createdAt, .descending)
           .with(\.$user)
           .filter(\.$user.$id == userID)
-          .all()
+          .paginate(request)
           .map { try $0.toDTO() }
       }
     )

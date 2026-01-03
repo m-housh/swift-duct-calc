@@ -8,15 +8,19 @@ extension SiteRoute {
   /// The routes return html.
   public enum View: Equatable, Sendable {
     case login(LoginRoute)
+    case signup(SignupRoute)
     case project(ProjectRoute)
     case room(RoomRoute)
     case frictionRate(FrictionRateRoute)
     case effectiveLength(EffectiveLengthRoute)
-    case user(UserRoute)
+    // case user(UserRoute)
 
     public static let router = OneOf {
       Route(.case(Self.login)) {
         SiteRoute.View.LoginRoute.router
+      }
+      Route(.case(Self.signup)) {
+        SiteRoute.View.SignupRoute.router
       }
       Route(.case(Self.project)) {
         SiteRoute.View.ProjectRoute.router
@@ -30,9 +34,9 @@ extension SiteRoute {
       Route(.case(Self.effectiveLength)) {
         SiteRoute.View.EffectiveLengthRoute.router
       }
-      Route(.case(Self.user)) {
-        SiteRoute.View.UserRoute.router
-      }
+      // Route(.case(Self.user)) {
+      //   SiteRoute.View.UserRoute.router
+      // }
     }
   }
 }
@@ -42,6 +46,7 @@ extension SiteRoute.View {
     case create(Project.Create)
     case form(dismiss: Bool = false)
     case index
+    case page(page: Int = 1, limit: Int = 25)
 
     static let rootPath = "projects"
 
@@ -73,6 +78,17 @@ extension SiteRoute.View {
       Route(.case(Self.index)) {
         Path { rootPath }
         Method.get
+      }
+      Route(.case(Self.page(page:limit:))) {
+        Path {
+          rootPath
+          "page"
+        }
+        Method.get
+        Query {
+          Field("page", default: 1) { Int.parser() }
+          Field("limit", default: 25) { Int.parser() }
+        }
       }
     }
   }
@@ -182,17 +198,17 @@ extension SiteRoute.View.EffectiveLengthRoute {
   }
 }
 
-extension SiteRoute.View {
-  public enum UserRoute: Equatable, Sendable {
-    case signup(Signup)
-
-    public static let router = OneOf {
-      Route(.case(Self.signup)) {
-        SiteRoute.View.UserRoute.Signup.router
-      }
-    }
-  }
-}
+// extension SiteRoute.View {
+//   public enum UserRoute: Equatable, Sendable {
+//     case signup(Signup)
+//
+//     public static let router = OneOf {
+//       Route(.case(Self.signup)) {
+//         SiteRoute.View.UserRoute.Signup.router
+//       }
+//     }
+//   }
+// }
 
 extension SiteRoute.View {
 
@@ -222,9 +238,9 @@ extension SiteRoute.View {
   }
 }
 
-extension SiteRoute.View.UserRoute {
+extension SiteRoute.View {
 
-  public enum Signup: Equatable, Sendable {
+  public enum SignupRoute: Equatable, Sendable {
     case index
     case submit(User.Create)
 

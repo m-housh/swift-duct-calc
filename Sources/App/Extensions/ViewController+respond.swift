@@ -13,10 +13,10 @@ extension ViewController {
         route: route,
         isHtmxRequest: request.isHtmxRequest,
         logger: request.logger,
-        // authenticate: { request.session.authenticate($0) },
-        // currentUser: {
-        //   try request.auth.require(User.self)
-        // }
+        authenticateUser: { request.session.authenticate($0) },
+        currentUser: {
+          try request.auth.require(User.self)
+        }
       )
     )
     return AnyHTMLResponse(value: html)
