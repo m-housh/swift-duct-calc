@@ -9,11 +9,19 @@ import Styleguide
 struct RoomForm: HTML, Sendable {
 
   let dismiss: Bool
+  let projectID: Project.ID
 
   var body: some HTML {
     ModalForm(id: "roomForm", dismiss: dismiss) {
       h1(.class("text-3xl font-bold pb-6")) { "Room" }
-      form {
+      // TODO: Use htmx here.
+      form(
+        .method(.post),
+        .action(route: .room(.index(projectID)))
+      ) {
+        div(.class("hidden")) {
+          input(.name("projectID"), .id("projectID"), .value("\(projectID)"))
+        }
         div {
           label(.for("name")) { "Name:" }
           Input(id: "name", placeholder: "Room Name")
@@ -40,7 +48,7 @@ struct RoomForm: HTML, Sendable {
           div(.class("space-x-4")) {
             CancelButton()
               .attributes(
-                .hx.get(route: .room(.form(dismiss: true))),
+                .hx.get(route: .room(.form(projectID, dismiss: true))),
                 .hx.target("#roomForm"),
                 .hx.swap(.outerHTML)
               )

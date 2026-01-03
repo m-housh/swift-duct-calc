@@ -6,7 +6,7 @@ public struct Room: Codable, Equatable, Identifiable, Sendable {
   public let projectID: Project.ID
   public let name: String
   public let heatingLoad: Double
-  public let coolingLoad: CoolingLoad
+  public let coolingLoad: Double
   public let registerCount: Int
   public let createdAt: Date
   public let updatedAt: Date
@@ -16,7 +16,7 @@ public struct Room: Codable, Equatable, Identifiable, Sendable {
     projectID: Project.ID,
     name: String,
     heatingLoad: Double,
-    coolingLoad: CoolingLoad,
+    coolingLoad: Double,
     registerCount: Int = 1,
     createdAt: Date,
     updatedAt: Date
@@ -39,23 +39,20 @@ extension Room {
     public let projectID: Project.ID
     public let name: String
     public let heatingLoad: Double
-    public let coolingTotal: Double
-    public let coolingSensible: Double
+    public let coolingLoad: Double
     public let registerCount: Int
 
     public init(
       projectID: Project.ID,
       name: String,
       heatingLoad: Double,
-      coolingTotal: Double,
-      coolingSensible: Double,
+      coolingLoad: Double,
       registerCount: Int = 1
     ) {
       self.projectID = projectID
       self.name = name
       self.heatingLoad = heatingLoad
-      self.coolingTotal = coolingTotal
-      self.coolingSensible = coolingSensible
+      self.coolingLoad = coolingLoad
       self.registerCount = registerCount
     }
   }
@@ -70,7 +67,7 @@ extension Room {
         projectID: UUID(0),
         name: "Kitchen",
         heatingLoad: 12345,
-        coolingLoad: .init(total: 12345, sensible: 12345),
+        coolingLoad: 1234,
         registerCount: 2,
         createdAt: Date(),
         updatedAt: Date()
@@ -80,7 +77,7 @@ extension Room {
         projectID: UUID(1),
         name: "Bedroom - 1",
         heatingLoad: 12345,
-        coolingLoad: .init(total: 12345, sensible: 12345),
+        coolingLoad: 1456,
         registerCount: 1,
         createdAt: Date(),
         updatedAt: Date()
@@ -90,7 +87,7 @@ extension Room {
         projectID: UUID(2),
         name: "Family Room",
         heatingLoad: 12345,
-        coolingLoad: .init(total: 12345, sensible: 12345),
+        coolingLoad: 1673,
         registerCount: 3,
         createdAt: Date(),
         updatedAt: Date()

@@ -120,13 +120,25 @@ extension SiteRoute.View.RoomRoute {
     @Dependency(\.database) var database
 
     switch self {
-    case .form(let dismiss):
-      return RoomForm(dismiss: dismiss)
+
+    case .form(let projectID, let dismiss):
+      return RoomForm(dismiss: dismiss, projectID: projectID)
+
     case .index(let projectID):
       let rooms = try await database.rooms.fetch(projectID)
       return request.view {
         ProjectView(projectID: projectID, activeTab: .rooms) {
-          RoomsView(rooms: rooms)
+          RoomsView(projectID: projectID, rooms: rooms)
+        }
+      }
+
+    case .submit(let form):
+      request.logger.debug("New room form submitted.")
+      let _ = try await database.rooms.create(form)
+      let rooms = try await database.rooms.fetch(form.projectID)
+      return request.view {
+        ProjectView(projectID: form.projectID, activeTab: .rooms) {
+          RoomsView(projectID: form.projectID, rooms: rooms)
         }
       }
     }

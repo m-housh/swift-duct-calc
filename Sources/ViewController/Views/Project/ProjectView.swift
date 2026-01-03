@@ -3,6 +3,8 @@ import ElementaryHTMX
 import ManualDCore
 import Styleguide
 
+// TODO: Need a back button to navigate to all projects table.
+
 struct ProjectView<Inner: HTML>: HTML, Sendable where Inner: Sendable {
   let projectID: Project.ID
   let activeTab: Sidebar.ActiveTab
@@ -54,7 +56,7 @@ struct Sidebar: HTML {
       }
       .attributes(.class("p-4"))
 
-      row(title: "Project", icon: .mapPin, route: .project(.index))
+      row(title: "Project", icon: .mapPin, route: .project(.detail(projectID)))
         .attributes(.data("active", value: active == .projects ? "true" : "false"))
 
       row(title: "Rooms", icon: .doorClosed, route: .room(.index(projectID)))

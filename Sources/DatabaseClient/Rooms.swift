@@ -53,8 +53,7 @@ extension Room.Create {
     return .init(
       name: name,
       heatingLoad: heatingLoad,
-      coolingTotal: coolingTotal,
-      coolingSensible: coolingSensible,
+      coolingLoad: coolingLoad,
       registerCount: registerCount,
       projectID: projectID
     )
@@ -67,11 +66,8 @@ extension Room.Create {
     guard heatingLoad >= 0 else {
       throw ValidationError("Room heating load should not be less than 0.")
     }
-    guard coolingTotal >= 0 else {
+    guard coolingLoad >= 0 else {
       throw ValidationError("Room cooling total should not be less than 0.")
-    }
-    guard coolingSensible >= 0 else {
-      throw ValidationError("Room cooling sensible should not be less than 0.")
     }
     guard registerCount >= 1 else {
       throw ValidationError("Room cooling sensible should not be less than 1.")
@@ -88,8 +84,7 @@ extension Room {
         .id()
         .field("name", .string, .required)
         .field("heatingLoad", .double, .required)
-        .field("coolingTotal", .double, .required)
-        .field("coolingSensible", .double, .required)
+        .field("coolingLoad", .double, .required)
         .field("registerCount", .int8, .required)
         .field("createdAt", .datetime)
         .field("updatedAt", .datetime)
@@ -117,11 +112,8 @@ final class RoomModel: Model, @unchecked Sendable {
   @Field(key: "heatingLoad")
   var heatingLoad: Double
 
-  @Field(key: "coolingTotal")
-  var coolingTotal: Double
-
-  @Field(key: "coolingSensible")
-  var coolingSensible: Double
+  @Field(key: "coolingLoad")
+  var coolingLoad: Double
 
   @Field(key: "registerCount")
   var registerCount: Int
@@ -141,8 +133,7 @@ final class RoomModel: Model, @unchecked Sendable {
     id: UUID? = nil,
     name: String,
     heatingLoad: Double,
-    coolingTotal: Double,
-    coolingSensible: Double,
+    coolingLoad: Double,
     registerCount: Int,
     createdAt: Date? = nil,
     updatedAt: Date? = nil,
@@ -151,8 +142,7 @@ final class RoomModel: Model, @unchecked Sendable {
     self.id = id
     self.name = name
     self.heatingLoad = heatingLoad
-    self.coolingTotal = coolingTotal
-    self.coolingSensible = coolingSensible
+    self.coolingLoad = coolingLoad
     self.registerCount = registerCount
     self.createdAt = createdAt
     self.updatedAt = updatedAt
@@ -165,11 +155,10 @@ final class RoomModel: Model, @unchecked Sendable {
       projectID: $project.id,
       name: name,
       heatingLoad: heatingLoad,
-      coolingLoad: .init(total: coolingTotal, sensible: coolingSensible),
+      coolingLoad: coolingLoad,
       registerCount: registerCount,
       createdAt: createdAt!,
       updatedAt: updatedAt!
     )
-
   }
 }

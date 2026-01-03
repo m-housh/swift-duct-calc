@@ -5,7 +5,10 @@ import Foundation
 import ManualDCore
 import Styleguide
 
+// TODO: Calculate rooms sensible based on project wide SHR.
+
 struct RoomsView: HTML, Sendable {
+  let projectID: Project.ID
   let rooms: [Room]
 
   var body: some HTML {
@@ -17,7 +20,7 @@ struct RoomsView: HTML, Sendable {
           .data("tip", value: "Add room")
         ) {
           button(
-            .hx.get(route: .room(.form(dismiss: false))),
+            .hx.get(route: .room(.form(projectID, dismiss: false))),
             .hx.target("#roomForm"),
             .hx.swap(.outerHTML),
             .class("btn btn-primary w-[40px] text-2xl")
@@ -35,7 +38,6 @@ struct RoomsView: HTML, Sendable {
               th { Label("Name") }
               th { Label("Heating Load") }
               th { Label("Cooling Total") }
-              th { Label("Cooling Sensible") }
               th { Label("Register Count") }
             }
           }
@@ -48,12 +50,8 @@ struct RoomsView: HTML, Sendable {
                     .attributes(.class("text-error"))
                 }
                 td {
-                  Number(room.coolingLoad.total)
+                  Number(room.coolingLoad)
                     .attributes(.class("text-success"))
-                }
-                td {
-                  Number(room.coolingLoad.sensible)
-                    .attributes(.class("text-info"))
                 }
                 td {
                   Number(room.registerCount)
@@ -72,16 +70,12 @@ struct RoomsView: HTML, Sendable {
                   .attributes(
                     .class("badge badge-outline badge-success badge-xl"))
               }
-              td {
-                Number(rooms.coolingSensibleTotal)
-                  .attributes(.class("badge badge-outline badge-info badge-xl"))
-              }
               td {}
             }
           }
         }
       }
-      RoomForm(dismiss: true)
+      RoomForm(dismiss: true, projectID: projectID)
     }
   }
 
@@ -93,10 +87,6 @@ extension Array where Element == Room {
   }
 
   var coolingTotal: Double {
-    reduce(into: 0) { $0 += $1.coolingLoad.total }
-  }
-
-  var coolingSensibleTotal: Double {
-    reduce(into: 0) { $0 += $1.coolingLoad.sensible }
+    reduce(into: 0) { $0 += $1.coolingLoad }
   }
 }
