@@ -46,9 +46,6 @@ extension ViewController {
       self.currentUser = currentUser
     }
 
-    func authenticate(_ user: User) {
-      self.authenticateUser(user)
-    }
   }
 }
 
@@ -61,4 +58,31 @@ extension ViewController: DependencyKey {
       try await request.render()
     }
   )
+}
+
+extension ViewController.Request {
+
+  func authenticate(
+    _ login: User.Login
+  ) async throws -> User {
+    @Dependency(\.database.users) var users
+    let token = try await users.login(login)
+    let user = try await users.get(token.userID)!
+    authenticateUser(user)
+    logger.debug("Logged in user: \(user.id)")
+    return user
+  }
+
+  func createAndAuthenticate(
+    _ signup: User.Create
+  ) async throws -> User {
+    @Dependency(\.database.users) var users
+    let user = try await users.create(signup)
+    let _ = try await users.login(
+      .init(email: signup.email, password: signup.password)
+    )
+    authenticateUser(user)
+    logger.debug("Created and logged in user: \(user.id)")
+    return user
+  }
 }

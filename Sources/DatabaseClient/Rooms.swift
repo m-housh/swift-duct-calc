@@ -10,6 +10,7 @@ extension DatabaseClient {
     public var create: @Sendable (Room.Create) async throws -> Room
     public var delete: @Sendable (Room.ID) async throws -> Void
     public var get: @Sendable (Room.ID) async throws -> Room?
+    public var fetch: @Sendable (Project.ID) async throws -> [Room]
   }
 }
 
@@ -33,6 +34,13 @@ extension DatabaseClient.Rooms {
       },
       get: { id in
         try await RoomModel.find(id, on: database).map { try $0.toDTO() }
+      },
+      fetch: { projectID in
+        try await RoomModel.query(on: database)
+          .with(\.$project)
+          .filter(\.$project.$id, .equal, projectID)
+          .all()
+          .map { try $0.toDTO() }
       }
     )
   }
@@ -83,6 +91,8 @@ extension Room {
         .field("coolingTotal", .double, .required)
         .field("coolingSensible", .double, .required)
         .field("registerCount", .int8, .required)
+        .field("createdAt", .datetime)
+        .field("updatedAt", .datetime)
         .field("projectID", .uuid, .required, .references(ProjectModel.schema, "id"))
         .unique(on: "projectID", "name")
         .create()

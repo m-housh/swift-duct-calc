@@ -7,3 +7,10 @@ extension HTMLAttribute where Tag: HTMLTrait.Attributes.href {
     href(SiteRoute.View.router.path(for: route))
   }
 }
+
+extension HTMLAttribute where Tag == HTMLTag.form {
+
+  public static func action(route: SiteRoute.View) -> Self {
+    action(SiteRoute.View.router.path(for: route))
+  }
+}

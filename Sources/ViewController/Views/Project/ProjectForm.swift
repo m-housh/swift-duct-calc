@@ -19,7 +19,11 @@ struct ProjectForm: HTML, Sendable {
   var body: some HTML {
     ModalForm(id: "projectForm", dismiss: dismiss) {
       h1(.class("text-3xl font-bold pb-6 ps-2")) { "Project" }
-      form(.class("space-y-4 p-4")) {
+      form(
+        .class("space-y-4 p-4"),
+        .method(.post),
+        .action(route: .project(.index))
+      ) {
         div {
           label(.for("name")) { "Name" }
           Input(id: "name", placeholder: "Name")

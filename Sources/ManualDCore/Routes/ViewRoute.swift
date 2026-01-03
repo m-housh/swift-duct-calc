@@ -44,6 +44,7 @@ extension SiteRoute {
 extension SiteRoute.View {
   public enum ProjectRoute: Equatable, Sendable {
     case create(Project.Create)
+    case detail(Project.ID)
     case form(dismiss: Bool = false)
     case index
     case page(page: Int = 1, limit: Int = 25)
@@ -64,6 +65,13 @@ extension SiteRoute.View {
           }
           .map(.memberwise(Project.Create.init))
         }
+      }
+      Route(.case(Self.detail)) {
+        Path {
+          rootPath
+          Project.ID.parser()
+        }
+        Method.get
       }
       Route(.case(Self.form)) {
         Path {
@@ -97,7 +105,7 @@ extension SiteRoute.View {
 extension SiteRoute.View {
   public enum RoomRoute: Equatable, Sendable {
     case form(dismiss: Bool = false)
-    case index
+    case index(Project.ID)
 
     static let rootPath = "rooms"
 
@@ -115,6 +123,9 @@ extension SiteRoute.View {
       Route(.case(Self.index)) {
         Path { rootPath }
         Method.get
+        Query {
+          Field("projectID") { Project.ID.parser() }
+        }
       }
     }
   }

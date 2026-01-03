@@ -24,7 +24,10 @@ struct ProjectsTable: HTML, Sendable {
           .data("tip", value: "Add project")
         ) {
           button(
-            .class("btn btn-primary w-[40px] text-2xl")
+            .class("btn btn-primary w-[40px] text-2xl"),
+            .hx.get(route: .project(.form(dismiss: false))),
+            .hx.target("#projectForm"),
+            .hx.swap(.outerHTML)
           ) {
             "+"
           }
@@ -39,6 +42,7 @@ struct ProjectsTable: HTML, Sendable {
               th { Label("Date") }
               th { Label("Name") }
               th { Label("Address") }
+              th {}
             }
           }
           tbody {
@@ -46,6 +50,8 @@ struct ProjectsTable: HTML, Sendable {
           }
         }
       }
+
+      ProjectForm(dismiss: true)
     }
   }
 }
@@ -57,9 +63,15 @@ extension ProjectsTable {
     var body: some HTML {
       for project in projects.items {
         tr(.id("\(project.id)")) {
-          td { "\(project.createdAt)" }
+          td { DateView(project.createdAt) }
           td { "\(project.name)" }
           td { "\(project.streetAddress)" }
+          td {
+            a(
+              .class("btn btn-success"),
+              .href(route: .project(.detail(project.id)))
+            ) { ">" }
+          }
         }
       }
       // Have a row that when revealed fetches the next page,

@@ -7,7 +7,7 @@ run-css:
 	@./tailwindcss -i input.css -o output.css --watch
 
 run:
-	@SWIFT_BACTRACE=enable=no swift run App
+	@swift run App serve --log debug
 
 build-docker:
 	@podman build -f docker/Dockerfile.dev -t {{docker_image}}:dev .

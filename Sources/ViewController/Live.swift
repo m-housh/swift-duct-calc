@@ -14,24 +14,34 @@ extension ViewController.Request {
     case .login(let route):
       switch route {
       case .index:
-        return try await _render(isHtmxRequest: isHtmxRequest, showSidebar: false) {
+        return view {
           LoginForm()
         }
       case .submit(let login):
-        let token = try await database.users.login(login)
-        let user = try await database.users.get(token.userID)!
-        authenticate(user)
+        let user = try await authenticate(login)
         let projects = try await database.projects.fetch(user.id, .init(page: 1, per: 25))
-        return try await _render(isHtmxRequest: isHtmxRequest, showSidebar: false) {
+        return view {
           ProjectsTable(userID: user.id, projects: projects)
         }
       }
     case .signup(let route):
-      return try await route.renderView(isHtmxRequest: isHtmxRequest)
+      switch route {
+      case .index:
+        return view {
+          LoginForm(style: .signup)
+        }
+      case .submit(let request):
+        // Create a new user and log them in.
+        let user = try await createAndAuthenticate(request)
+        let projects = try await database.projects.fetch(user.id, .init(page: 1, per: 25))
+        return view {
+          ProjectsTable(userID: user.id, projects: projects)
+        }
+      }
     case .project(let route):
-      return try await route.renderView(isHtmxRequest: isHtmxRequest)
+      return try await route.renderView(on: self)
     case .room(let route):
-      return try await route.renderView(isHtmxRequest: isHtmxRequest)
+      return try await route.renderView(on: self)
     case .frictionRate(let route):
       return try await route.renderView(isHtmxRequest: isHtmxRequest)
     case .effectiveLength(let route):
@@ -40,54 +50,84 @@ extension ViewController.Request {
     //   return try await route.renderView(isHtmxRequest: isHtmxRequest)
     default:
       // FIX: FIX
-      return try await _render(isHtmxRequest: false) {
+      return _render(isHtmxRequest: false) {
         div { "Fix me!" }
       }
+    }
+  }
+
+  func view<C: HTML>(
+    @HTMLBuilder inner: () -> C
+  ) -> AnySendableHTML where C: Sendable {
+    _render(isHtmxRequest: isHtmxRequest, showSidebar: showSidebar) {
+      inner()
+    }
+  }
+
+  var showSidebar: Bool {
+    switch route {
+    case .login, .signup, .project(.page):
+      return false
+    default:
+      return true
     }
   }
 }
 
 extension SiteRoute.View.ProjectRoute {
 
-  private var shouldShowSidebar: Bool {
+  func renderView(on request: ViewController.Request) async throws -> AnySendableHTML {
+    @Dependency(\.database) var database
+    let user = try request.currentUser()
+
     switch self {
-    case .index, .page: return false
-    default: return true
-    }
-  }
-
-  func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
-    @Dependency(\.database.projects) var projects
-
-    return try await _render(
-      isHtmxRequest: isHtmxRequest,
-      showSidebar: shouldShowSidebar
-    ) {
-      switch self {
-      case .index:
-        // ProjectView(project: .mock)
-        let page = try await projects.fetch(UUID(0), .init(page: 1, per: 25))
-        ProjectsTable(userID: UUID(0), projects: page)
-      case .page(let page, let limit):
-        let page = try await projects.fetch(UUID(0), .init(page: page, per: limit))
-        ProjectsTable.Rows(projects: page)
-      case .form(let dismiss):
-        ProjectForm(dismiss: dismiss)
-      case .create:
-        div { "Fix me!" }
+    case .index:
+      let projects = try await database.projects.fetchPage(userID: user.id)
+      return request.view {
+        ProjectsTable(userID: user.id, projects: projects)
       }
+    case .page(let page, let limit):
+      let projects = try await database.projects.fetchPage(
+        userID: user.id, page: page, limit: limit)
+      return ProjectsTable(userID: user.id, projects: projects)
+
+    case .form(let dismiss):
+      return ProjectForm(dismiss: dismiss)
+
+    case .create(let form):
+      let project = try await database.projects.create(user.id, form)
+      return request.view {
+        ProjectView(projectID: project.id, activeTab: .projects) {
+          ProjectDetail(project: project)
+        }
+      }
+
+    case .detail(let projectID):
+      let project = try await database.projects.get(projectID)!
+      return request.view {
+        ProjectView(projectID: projectID, activeTab: .projects) {
+          ProjectDetail(project: project)
+        }
+      }
+
     }
+
   }
 }
 
 extension SiteRoute.View.RoomRoute {
-  func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
+  func renderView(on request: ViewController.Request) async throws -> AnySendableHTML {
+    @Dependency(\.database) var database
+
     switch self {
     case .form(let dismiss):
       return RoomForm(dismiss: dismiss)
-    case .index:
-      return try await _render(isHtmxRequest: isHtmxRequest, active: .rooms) {
-        RoomsView(rooms: Room.mocks)
+    case .index(let projectID):
+      let rooms = try await database.rooms.fetch(projectID)
+      return request.view {
+        ProjectView(projectID: projectID, activeTab: .rooms) {
+          RoomsView(rooms: rooms)
+        }
       }
     }
   }
@@ -97,7 +137,7 @@ extension SiteRoute.View.FrictionRateRoute {
   func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
     switch self {
     case .index:
-      return try await _render(isHtmxRequest: isHtmxRequest, active: .frictionRate) {
+      return _render(isHtmxRequest: isHtmxRequest, active: .frictionRate) {
         FrictionRateView()
       }
     case .form(let type, let dismiss):
@@ -128,7 +168,7 @@ extension SiteRoute.View.EffectiveLengthRoute {
   func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
     switch self {
     case .index:
-      return try await _render(isHtmxRequest: isHtmxRequest, active: .effectiveLength) {
+      return _render(isHtmxRequest: isHtmxRequest, active: .effectiveLength) {
         EffectiveLengthsView(effectiveLengths: EffectiveLength.mocks)
       }
     case .form(let dismiss):
@@ -145,52 +185,6 @@ extension SiteRoute.View.EffectiveLengthRoute {
   }
 }
 
-extension SiteRoute.View.SignupRoute {
-
-  func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
-    @Dependency(\.database.users) var users
-
-    switch self {
-    case .index:
-      return try await _render(isHtmxRequest: isHtmxRequest, showSidebar: false) {
-        LoginForm(style: .signup)
-      }
-    case .submit(let request):
-      _ = try await users.create(request)
-      // FIX: We should just login the new user at this point.
-      return try await _render(isHtmxRequest: isHtmxRequest, showSidebar: false) {
-        LoginForm()
-      }
-
-    // default:
-    //   return div { "Fix Me!" }
-    }
-  }
-}
-
-// extension SiteRoute.View.LoginRoute {
-//   func renderView(on req: ViewController.Request) async throws -> AnySendableHTML {
-//
-//     @Dependency(\.database) var database
-//
-//     return try await _render(isHtmxRequest: req.isHtmxRequest, showSidebar: false) {
-//       switch self {
-//       case .index:
-//         LoginForm()
-//       case .submit(let login):
-//         // FIX:
-//         // div { "Logged in Success! Fix me!" }
-//         let token = try await database.users.login(login)
-//         let user = try await database.users.get(token.userID)!
-//         _ = req.authenticate(user)
-//         // req.authenticate(user)
-//         let page = try await database.projects.fetch(user.id, .init(page: 1, per: 25))
-//         ProjectsTable(userID: user.id, projects: page)
-//       }
-//     }
-//   }
-// }
-
 private func _render<C: HTML>(
   isHtmxRequest: Bool,
   active activeTab: Sidebar.ActiveTab = .projects,
@@ -201,10 +195,18 @@ private func _render<C: HTML>(
   if isHtmxRequest {
     return inner
   }
-  return MainPage(
-    active: activeTab,
-    showSidebar: showSidebar
-  ) {
-    inner
+  return MainPage { inner }
+}
+
+private func _render<C: HTML>(
+  isHtmxRequest: Bool,
+  active activeTab: Sidebar.ActiveTab = .projects,
+  showSidebar: Bool = true,
+  @HTMLBuilder inner: () -> C
+) -> AnySendableHTML where C: Sendable {
+  let inner = inner()
+  if isHtmxRequest {
+    return inner
   }
+  return MainPage { inner }
 }
