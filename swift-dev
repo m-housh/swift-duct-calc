@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 touch .build/browser-dev-sync
-# browser-sync start --proxy localhost:8080 --ws -w --no-notify &
+browser-sync start --proxy localhost:8080 --ws &
 watchexec -w Sources -e .swift -r 'swift build --product App && touch .build/browser-dev-sync' &
 watchexec -w .build/browser-dev-sync -r 'swift run App'

@@ -7,6 +7,7 @@ extension SiteRoute {
   ///
   /// The routes return html.
   public enum View: Equatable, Sendable {
+    case login(LoginRoute)
     case project(ProjectRoute)
     case room(RoomRoute)
     case frictionRate(FrictionRateRoute)
@@ -14,6 +15,9 @@ extension SiteRoute {
     case user(UserRoute)
 
     public static let router = OneOf {
+      Route(.case(Self.login)) {
+        SiteRoute.View.LoginRoute.router
+      }
       Route(.case(Self.project)) {
         SiteRoute.View.ProjectRoute.router
       }
@@ -180,13 +184,9 @@ extension SiteRoute.View.EffectiveLengthRoute {
 
 extension SiteRoute.View {
   public enum UserRoute: Equatable, Sendable {
-    case login(Login)
     case signup(Signup)
 
     public static let router = OneOf {
-      Route(.case(Self.login)) {
-        SiteRoute.View.UserRoute.Login.router
-      }
       Route(.case(Self.signup)) {
         SiteRoute.View.UserRoute.Signup.router
       }
@@ -194,9 +194,9 @@ extension SiteRoute.View {
   }
 }
 
-extension SiteRoute.View.UserRoute {
+extension SiteRoute.View {
 
-  public enum Login: Equatable, Sendable {
+  public enum LoginRoute: Equatable, Sendable {
     case index
     case submit(User.Login)
 
@@ -220,6 +220,9 @@ extension SiteRoute.View.UserRoute {
       }
     }
   }
+}
+
+extension SiteRoute.View.UserRoute {
 
   public enum Signup: Equatable, Sendable {
     case index

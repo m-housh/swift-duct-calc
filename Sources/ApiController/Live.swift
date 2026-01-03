@@ -25,7 +25,9 @@ extension SiteRoute.Api.ProjectRoute {
 
     switch self {
     case .create(let request):
-      return try await database.projects.create(request)
+      // return try await database.projects.create(request)
+      // FIX:
+      fatalError()
     case .delete(let id):
       try await database.projects.delete(id)
       return nil

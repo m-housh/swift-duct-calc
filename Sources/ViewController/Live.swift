@@ -5,6 +5,8 @@ extension ViewController.Request {
 
   func render() async throws -> AnySendableHTML {
     switch route {
+    case .login(let route):
+      return try await route.renderView(isHtmxRequest: isHtmxRequest)
     case .project(let route):
       return try await route.renderView(isHtmxRequest: isHtmxRequest)
     case .room(let route):
@@ -17,23 +19,24 @@ extension ViewController.Request {
       return try await route.renderView(isHtmxRequest: isHtmxRequest)
     default:
       // FIX: FIX
-      return mainPage
+      return _render(isHtmxRequest: false) {
+        div { "Fix me!" }
+      }
     }
   }
 }
 
 extension SiteRoute.View.ProjectRoute {
   func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
-    switch self {
-    case .index:
-      return MainPage(active: .projects) {
+    _render(isHtmxRequest: isHtmxRequest) {
+      switch self {
+      case .index:
         ProjectView(project: .mock)
+      case .form(let dismiss):
+        ProjectForm(dismiss: dismiss)
+      case .create:
+        div { "Fix me!" }
       }
-    case .form(let dismiss):
-      return ProjectForm(dismiss: dismiss)
-
-    case .create:
-      return mainPage
     }
   }
 }
@@ -44,7 +47,7 @@ extension SiteRoute.View.RoomRoute {
     case .form(let dismiss):
       return RoomForm(dismiss: dismiss)
     case .index:
-      return MainPage(active: .rooms) {
+      return _render(isHtmxRequest: isHtmxRequest, active: .rooms) {
         RoomsView(rooms: Room.mocks)
       }
     }
@@ -55,7 +58,7 @@ extension SiteRoute.View.FrictionRateRoute {
   func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
     switch self {
     case .index:
-      return MainPage(active: .frictionRate) {
+      return _render(isHtmxRequest: isHtmxRequest, active: .frictionRate) {
         FrictionRateView()
       }
     case .form(let type, let dismiss):
@@ -86,7 +89,7 @@ extension SiteRoute.View.EffectiveLengthRoute {
   func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
     switch self {
     case .index:
-      return MainPage(active: .effectiveLength) {
+      return _render(isHtmxRequest: isHtmxRequest, active: .effectiveLength) {
         EffectiveLengthsView(effectiveLengths: EffectiveLength.mocks)
       }
     case .form(let dismiss):
@@ -107,12 +110,12 @@ extension SiteRoute.View.UserRoute {
 
   func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
     switch self {
-    case .login(.index):
-      return MainPage(active: .projects, showSidebar: false) {
-        LoginForm()
-      }
+    // case .login(.index):
+    //   return _render(isHtmxRequest: isHtmxRequest, showSidebar: false) {
+    //     LoginForm()
+    //   }
     case .signup(.index):
-      return MainPage(active: .projects, showSidebar: false) {
+      return _render(isHtmxRequest: isHtmxRequest, showSidebar: false) {
         LoginForm(style: .signup)
       }
     default:
@@ -121,31 +124,33 @@ extension SiteRoute.View.UserRoute {
   }
 }
 
-private let mainPage: AnySendableHTML = {
-  MainPage(active: .projects) {
-    div {
-      h1 { "It works!" }
+extension SiteRoute.View.LoginRoute {
+  func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
+    _render(isHtmxRequest: isHtmxRequest, showSidebar: false) {
+      switch self {
+      case .index:
+        LoginForm()
+      case .submit:
+        // FIX:
+        div { "Fix me!" }
+      }
     }
   }
-}()
-
-@Sendable
-private func render<C: HTML>(
-  _ mainPage: (C) async throws -> AnySendableHTML,
-  _ isHtmxRequest: Bool,
-  @HTMLBuilder html: () -> C
-) async rethrows -> AnySendableHTML where C: Sendable {
-  guard isHtmxRequest else {
-    return try await mainPage(html())
-  }
-  return html()
 }
 
-@Sendable
-private func render<C: HTML>(
-  _ mainPage: (C) async throws -> AnySendableHTML,
-  _ isHtmxRequest: Bool,
-  _ html: @autoclosure @escaping () -> C
-) async rethrows -> AnySendableHTML where C: Sendable {
-  try await render(mainPage, isHtmxRequest) { html() }
+private func _render<C: HTML>(
+  isHtmxRequest: Bool,
+  active activeTab: Sidebar.ActiveTab = .projects,
+  showSidebar: Bool = true,
+  @HTMLBuilder inner: () -> C
+) -> AnySendableHTML where C: Sendable {
+  if isHtmxRequest {
+    return inner()
+  }
+  return MainPage(
+    active: activeTab,
+    showSidebar: showSidebar
+  ) {
+    inner()
+  }
 }

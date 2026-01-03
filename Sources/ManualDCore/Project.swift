@@ -48,7 +48,7 @@ extension Project {
       streetAddress: String,
       city: String,
       state: String,
-      zipCode: String
+      zipCode: String,
     ) {
       self.name = name
       self.streetAddress = streetAddress

@@ -7,21 +7,20 @@ import ManualDCore
 extension DatabaseClient {
   @DependencyClient
   public struct Projects: Sendable {
-    public var create: @Sendable (Project.Create) async throws -> Project
+    public var create: @Sendable (User.ID, Project.Create) async throws -> Project
     public var delete: @Sendable (Project.ID) async throws -> Void
     public var get: @Sendable (Project.ID) async throws -> Project?
+    public var fetch: @Sendable (User.ID) async throws -> [Project]
   }
 }
 
 extension DatabaseClient.Projects: TestDependencyKey {
   public static let testValue = Self()
-}
 
-extension DatabaseClient.Projects {
   public static func live(database: any Database) -> Self {
     .init(
-      create: { request in
-        let model = try request.toModel()
+      create: { userID, request in
+        let model = try request.toModel(userID: userID)
         try await model.save(on: database)
         return try model.toDTO()
       },
@@ -33,6 +32,13 @@ extension DatabaseClient.Projects {
       },
       get: { id in
         try await ProjectModel.find(id, on: database).map { try $0.toDTO() }
+      },
+      fetch: { userID in
+        try await ProjectModel.query(on: database)
+          .with(\.$user)
+          .filter(\.$user.$id == userID)
+          .all()
+          .map { try $0.toDTO() }
       }
     )
   }
@@ -40,14 +46,15 @@ extension DatabaseClient.Projects {
 
 extension Project.Create {
 
-  func toModel() throws -> ProjectModel {
+  func toModel(userID: User.ID) throws -> ProjectModel {
     try validate()
     return .init(
       name: name,
       streetAddress: streetAddress,
       city: city,
       state: state,
-      zipCode: zipCode
+      zipCode: zipCode,
+      userID: userID
     )
   }
 
@@ -84,7 +91,8 @@ extension Project {
         .field("zipCode", .string, .required)
         .field("createdAt", .datetime)
         .field("updatedAt", .datetime)
-        .unique(on: "name")
+        .field("userID", .uuid, .required, .references(UserModel.schema, "id"))
+        .unique(on: "userID", "name")
         .create()
     }
 
@@ -126,6 +134,9 @@ final class ProjectModel: Model, @unchecked Sendable {
   @Children(for: \.$project)
   var componentLosses: [ComponentLossModel]
 
+  @Parent(key: "userID")
+  var user: UserModel
+
   init() {}
 
   init(
@@ -135,6 +146,7 @@ final class ProjectModel: Model, @unchecked Sendable {
     city: String,
     state: String,
     zipCode: String,
+    userID: User.ID,
     createdAt: Date? = nil,
     updatedAt: Date? = nil
   ) {
@@ -145,6 +157,7 @@ final class ProjectModel: Model, @unchecked Sendable {
     self.city = city
     self.state = state
     self.zipCode = zipCode
+    $user.id = userID
     self.createdAt = createdAt
     self.updatedAt = updatedAt
   }
