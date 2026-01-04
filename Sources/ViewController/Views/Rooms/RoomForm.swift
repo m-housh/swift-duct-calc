@@ -19,9 +19,6 @@ struct RoomForm: HTML, Sendable {
         .method(.post),
         .action(route: .room(.index(projectID)))
       ) {
-        div(.class("hidden")) {
-          input(.name("projectID"), .id("projectID"), .value("\(projectID)"))
-        }
         div {
           label(.for("name")) { "Name:" }
           Input(id: "name", placeholder: "Room Name")

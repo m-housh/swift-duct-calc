@@ -34,7 +34,6 @@ public struct Room: Codable, Equatable, Identifiable, Sendable {
 
 extension Room {
 
-  // TODO: Maybe remove project ID, and make dependencies that retrieves current project id??
   public struct Create: Codable, Equatable, Sendable {
     public let projectID: Project.ID
     public let name: String
@@ -50,6 +49,38 @@ extension Room {
       registerCount: Int = 1
     ) {
       self.projectID = projectID
+      self.name = name
+      self.heatingLoad = heatingLoad
+      self.coolingLoad = coolingLoad
+      self.registerCount = registerCount
+    }
+
+    public init(
+      form: Room.Form,
+      projectID: Project.ID
+    ) {
+      self.init(
+        projectID: projectID,
+        name: form.name,
+        heatingLoad: form.heatingLoad,
+        coolingLoad: form.coolingLoad,
+        registerCount: form.registerCount
+      )
+    }
+  }
+
+  public struct Form: Codable, Equatable, Sendable {
+    public let name: String
+    public let heatingLoad: Double
+    public let coolingLoad: Double
+    public let registerCount: Int
+
+    public init(
+      name: String,
+      heatingLoad: Double,
+      coolingLoad: Double,
+      registerCount: Int
+    ) {
       self.name = name
       self.heatingLoad = heatingLoad
       self.coolingLoad = coolingLoad

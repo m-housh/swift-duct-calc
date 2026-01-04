@@ -106,41 +106,42 @@ extension SiteRoute.View {
   public enum RoomRoute: Equatable, Sendable {
     case form(Project.ID, dismiss: Bool = false)
     case index(Project.ID)
-    case submit(Room.Create)
+    case submit(Project.ID, Room.Form)
 
-    static let rootPath = "rooms"
+    static let rootPath = Path {
+      ProjectRoute.rootPath
+      Project.ID.parser()
+      "rooms"
+    }
 
     public static let router = OneOf {
       Route(.case(Self.form)) {
         Path {
-          rootPath
+          ProjectRoute.rootPath
+          Project.ID.parser()
+          "rooms"
           "create"
         }
         Method.get
         Query {
-          Field("projectID") { Project.ID.parser() }
           Field("dismiss", default: false) { Bool.parser() }
         }
       }
       Route(.case(Self.index)) {
-        Path { rootPath }
+        rootPath
         Method.get
-        Query {
-          Field("projectID") { Project.ID.parser() }
-        }
       }
       Route(.case(Self.submit)) {
-        Path { rootPath }
+        rootPath
         Method.post
         Body {
           FormData {
-            Field("projectID") { Project.ID.parser() }
             Field("name", .string)
             Field("heatingLoad") { Double.parser() }
             Field("coolingLoad") { Double.parser() }
             Field("registerCount") { Digits() }
           }
-          .map(.memberwise(Room.Create.init))
+          .map(.memberwise(Room.Form.init))
         }
       }
     }

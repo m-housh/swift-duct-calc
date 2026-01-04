@@ -132,13 +132,13 @@ extension SiteRoute.View.RoomRoute {
         }
       }
 
-    case .submit(let form):
+    case .submit(let projectID, let form):
       request.logger.debug("New room form submitted.")
-      let _ = try await database.rooms.create(form)
-      let rooms = try await database.rooms.fetch(form.projectID)
+      let _ = try await database.rooms.create(.init(form: form, projectID: projectID))
+      let rooms = try await database.rooms.fetch(projectID)
       return request.view {
-        ProjectView(projectID: form.projectID, activeTab: .rooms) {
-          RoomsView(projectID: form.projectID, rooms: rooms)
+        ProjectView(projectID: projectID, activeTab: .rooms) {
+          RoomsView(projectID: projectID, rooms: rooms)
         }
       }
     }
