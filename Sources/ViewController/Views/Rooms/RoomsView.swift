@@ -20,7 +20,7 @@ struct RoomsView: HTML, Sendable {
           .data("tip", value: "Add room")
         ) {
           button(
-            .hx.get(route: .room(.form(projectID, dismiss: false))),
+            .hx.get(route: .project(.detail(projectID, .rooms(.form(dismiss: false))))),
             .hx.target("#roomForm"),
             .hx.swap(.outerHTML),
             .class("btn btn-primary w-[40px] text-2xl")

@@ -5,9 +5,11 @@ import Styleguide
 struct LoginForm: HTML, Sendable {
 
   let style: Style
+  let next: String?
 
-  init(style: Style = .login) {
+  init(style: Style = .login, next: String? = nil) {
     self.style = style
+    self.next = next
   }
 
   var body: some HTML {
@@ -18,6 +20,11 @@ struct LoginForm: HTML, Sendable {
       form(
         .method(.post)
       ) {
+
+        if let next {
+          input(.class("hidden"), .name("next"), .value(next))
+        }
+
         fieldset(.class("fieldset bg-base-200 border-base-300 rounded-box w-xl border p-4")) {
           legend(.class("fieldset-legend")) { style.title }
 
@@ -81,7 +88,7 @@ struct LoginForm: HTML, Sendable {
           button(.class("btn btn-secondary mt-4")) { style.title }
           a(
             .class("btn btn-link mt-4"),
-            .href(route: style == .signup ? .login(.index) : .signup(.index))
+            .href(route: style == .signup ? .login(.index(next: next)) : .signup(.index))
           ) {
             style == .login ? "Sign Up" : "Login"
           }

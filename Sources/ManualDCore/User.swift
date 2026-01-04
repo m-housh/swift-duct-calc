@@ -48,10 +48,12 @@ extension User {
   public struct Login: Codable, Equatable, Sendable {
     public let email: String
     public let password: String
+    public let next: String?
 
-    public init(email: String, password: String) {
+    public init(email: String, password: String, next: String? = nil) {
       self.email = email
       self.password = password
+      self.next = next
     }
   }
 

@@ -1,4 +1,7 @@
 import Elementary
+import ElementaryHTMX
+import ManualDCore
+import Styleguide
 
 public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable {
 
@@ -6,16 +9,10 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
   public var lang: String { "en" }
 
   let inner: Inner
-  // let activeTab: Sidebar.ActiveTab
-  // let showSidebar: Bool
 
   init(
-    // active activeTab: Sidebar.ActiveTab,
-    // showSidebar: Bool = true,
     _ inner: () -> Inner
   ) {
-    // self.activeTab = activeTab
-    // self.showSidebar = showSidebar
     self.inner = inner()
   }
 
@@ -37,6 +34,23 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
       "lucide.createIcons();"
     }
   }
+}
+
+struct LoggedIn: HTML, Sendable {
+  let next: String?
+
+  var body: some HTML {
+    div(
+      .hx.get(next ?? SiteRoute.View.router.path(for: .project(.index))),
+      .hx.pushURL(true),
+      .hx.target("body"),
+      .hx.trigger(.event(.revealed)),
+      .hx.indicator(".hx-indicator")
+    ) {
+      Indicator()
+    }
+  }
+
 }
 
 public protocol SendableHTMLDocument: HTMLDocument, Sendable {}

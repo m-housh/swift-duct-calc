@@ -56,10 +56,10 @@ struct Sidebar: HTML {
       }
       .attributes(.class("p-4"))
 
-      row(title: "Project", icon: .mapPin, route: .project(.detail(projectID)))
+      row(title: "Project", icon: .mapPin, route: .project(.detail(projectID, .index)))
         .attributes(.data("active", value: active == .projects ? "true" : "false"))
 
-      row(title: "Rooms", icon: .doorClosed, route: .room(.index(projectID)))
+      row(title: "Rooms", icon: .doorClosed, route: .project(.detail(projectID, .rooms(.index))))
         .attributes(.data("active", value: active == .rooms ? "true" : "false"))
 
       row(title: "Equivalent Lengths", icon: .rulerDimensionLine, route: .effectiveLength(.index))

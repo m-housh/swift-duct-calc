@@ -10,7 +10,6 @@ extension SiteRoute {
     case login(LoginRoute)
     case signup(SignupRoute)
     case project(ProjectRoute)
-    case room(RoomRoute)
     case frictionRate(FrictionRateRoute)
     case effectiveLength(EffectiveLengthRoute)
     // case user(UserRoute)
@@ -24,9 +23,6 @@ extension SiteRoute {
       }
       Route(.case(Self.project)) {
         SiteRoute.View.ProjectRoute.router
-      }
-      Route(.case(Self.room)) {
-        SiteRoute.View.RoomRoute.router
       }
       Route(.case(Self.frictionRate)) {
         SiteRoute.View.FrictionRateRoute.router
@@ -44,7 +40,7 @@ extension SiteRoute {
 extension SiteRoute.View {
   public enum ProjectRoute: Equatable, Sendable {
     case create(Project.Create)
-    case detail(Project.ID)
+    case detail(Project.ID, DetailRoute)
     case form(dismiss: Bool = false)
     case index
     case page(page: Int = 1, limit: Int = 25)
@@ -71,7 +67,7 @@ extension SiteRoute.View {
           rootPath
           Project.ID.parser()
         }
-        Method.get
+        DetailRoute.router
       }
       Route(.case(Self.form)) {
         Path {
@@ -102,24 +98,33 @@ extension SiteRoute.View {
   }
 }
 
-extension SiteRoute.View {
-  public enum RoomRoute: Equatable, Sendable {
-    case form(Project.ID, dismiss: Bool = false)
-    case index(Project.ID)
-    case submit(Project.ID, Room.Form)
+extension SiteRoute.View.ProjectRoute {
 
-    static let rootPath = Path {
-      ProjectRoute.rootPath
-      Project.ID.parser()
-      "rooms"
+  public enum DetailRoute: Equatable, Sendable {
+    case index
+    case rooms(RoomRoute)
+
+    static let router = OneOf {
+      Route(.case(Self.index)) {
+        Method.get
+      }
+      Route(.case(Self.rooms)) {
+        RoomRoute.router
+      }
     }
+  }
+
+  public enum RoomRoute: Equatable, Sendable {
+    case form(dismiss: Bool = false)
+    case index
+    case submit(Room.Form)
+
+    static let rootPath = "rooms"
 
     public static let router = OneOf {
       Route(.case(Self.form)) {
         Path {
-          ProjectRoute.rootPath
-          Project.ID.parser()
-          "rooms"
+          rootPath
           "create"
         }
         Method.get
@@ -128,11 +133,13 @@ extension SiteRoute.View {
         }
       }
       Route(.case(Self.index)) {
-        rootPath
+        Path {
+          rootPath
+        }
         Method.get
       }
       Route(.case(Self.submit)) {
-        rootPath
+        Path { rootPath }
         Method.post
         Body {
           FormData {
@@ -241,7 +248,7 @@ extension SiteRoute.View.EffectiveLengthRoute {
 extension SiteRoute.View {
 
   public enum LoginRoute: Equatable, Sendable {
-    case index
+    case index(next: String? = nil)
     case submit(User.Login)
 
     static let rootPath = "login"
@@ -250,6 +257,13 @@ extension SiteRoute.View {
       Route(.case(Self.index)) {
         Path { rootPath }
         Method.get
+        Query {
+          Optionally {
+            Field("next", default: nil) {
+              CharacterSet.urlPathAllowed.map(.string)
+            }
+          }
+        }
       }
       Route(.case(Self.submit)) {
         Path { rootPath }
@@ -258,6 +272,11 @@ extension SiteRoute.View {
           FormData {
             Field("email", .string)
             Field("password", .string)
+            Optionally {
+              Field("next", default: nil) {
+                CharacterSet.urlPathAllowed.map(.string)
+              }
+            }
           }
           .map(.memberwise(User.Login.init))
         }

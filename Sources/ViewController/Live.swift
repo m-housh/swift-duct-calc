@@ -13,15 +13,14 @@ extension ViewController.Request {
     switch route {
     case .login(let route):
       switch route {
-      case .index:
+      case .index(let next):
         return view {
-          LoginForm()
+          LoginForm(next: next)
         }
       case .submit(let login):
-        let user = try await authenticate(login)
-        let projects = try await database.projects.fetch(user.id, .init(page: 1, per: 25))
+        let _ = try await authenticate(login)
         return view {
-          ProjectsTable(userID: user.id, projects: projects)
+          LoggedIn(next: login.next)
         }
       }
     case .signup(let route):
@@ -40,8 +39,8 @@ extension ViewController.Request {
       }
     case .project(let route):
       return try await route.renderView(on: self)
-    case .room(let route):
-      return try await route.renderView(on: self)
+    // case .room(let route):
+    //   return try await route.renderView(on: self)
     case .frictionRate(let route):
       return try await route.renderView(isHtmxRequest: isHtmxRequest)
     case .effectiveLength(let route):
@@ -102,29 +101,40 @@ extension SiteRoute.View.ProjectRoute {
         }
       }
 
-    case .detail(let projectID):
-      let project = try await database.projects.get(projectID)!
-      return request.view {
-        ProjectView(projectID: projectID, activeTab: .projects) {
-          ProjectDetail(project: project)
+    case .detail(let projectID, let route):
+      switch route {
+      case .index:
+        let project = try await database.projects.get(projectID)!
+        return request.view {
+          ProjectView(projectID: projectID, activeTab: .projects) {
+            ProjectDetail(project: project)
+          }
         }
+      case .rooms(let route):
+        return try await route.renderView(on: request, projectID: projectID)
       }
+
+    // case .rooms(let projectID, let route):
+    //   return try await route.renderView(on: request, projectID: projectID)
 
     }
 
   }
 }
 
-extension SiteRoute.View.RoomRoute {
-  func renderView(on request: ViewController.Request) async throws -> AnySendableHTML {
+extension SiteRoute.View.ProjectRoute.RoomRoute {
+  func renderView(
+    on request: ViewController.Request,
+    projectID: Project.ID
+  ) async throws -> AnySendableHTML {
     @Dependency(\.database) var database
 
     switch self {
 
-    case .form(let projectID, let dismiss):
+    case .form(let dismiss):
       return RoomForm(dismiss: dismiss, projectID: projectID)
 
-    case .index(let projectID):
+    case .index:
       let rooms = try await database.rooms.fetch(projectID)
       return request.view {
         ProjectView(projectID: projectID, activeTab: .rooms) {
@@ -132,7 +142,7 @@ extension SiteRoute.View.RoomRoute {
         }
       }
 
-    case .submit(let projectID, let form):
+    case .submit(let form):
       request.logger.debug("New room form submitted.")
       let _ = try await database.rooms.create(.init(form: form, projectID: projectID))
       let rooms = try await database.rooms.fetch(projectID)

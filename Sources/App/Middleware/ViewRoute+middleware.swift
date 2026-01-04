@@ -6,7 +6,9 @@ import Vapor
 private let viewRouteMiddleware: [any Middleware] = [
   UserPasswordAuthenticator(),
   UserSessionAuthenticator(),
-  User.redirectMiddleware(path: "/login"),
+  User.redirectMiddleware { req in
+    "/login?next=\(req.url.string)"
+  },
 ]
 
 extension SiteRoute.View {
@@ -14,8 +16,7 @@ extension SiteRoute.View {
     switch self {
     case .project,
       .frictionRate,
-      .effectiveLength,
-      .room:
+      .effectiveLength:
       return viewRouteMiddleware
     case .login, .signup:
       return nil

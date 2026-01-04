@@ -17,7 +17,7 @@ struct RoomForm: HTML, Sendable {
       // TODO: Use htmx here.
       form(
         .method(.post),
-        .action(route: .room(.index(projectID)))
+        .action(route: .project(.detail(projectID, .rooms(.index))))
       ) {
         div {
           label(.for("name")) { "Name:" }
@@ -45,7 +45,7 @@ struct RoomForm: HTML, Sendable {
           div(.class("space-x-4")) {
             CancelButton()
               .attributes(
-                .hx.get(route: .room(.form(projectID, dismiss: true))),
+                .hx.get(route: .project(.detail(projectID, .rooms(.form(dismiss: true))))),
                 .hx.target("#roomForm"),
                 .hx.swap(.outerHTML)
               )

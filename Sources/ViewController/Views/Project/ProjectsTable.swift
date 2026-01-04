@@ -69,7 +69,7 @@ extension ProjectsTable {
           td {
             a(
               .class("btn btn-success"),
-              .href(route: .project(.detail(project.id)))
+              .href(route: .project(.detail(project.id, .index)))
             ) { ">" }
           }
         }
