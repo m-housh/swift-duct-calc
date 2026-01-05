@@ -33,6 +33,7 @@ extension SiteRoute {
 extension SiteRoute.View {
   public enum ProjectRoute: Equatable, Sendable {
     case create(Project.Create)
+    case delete(id: Project.ID)
     case detail(Project.ID, DetailRoute)
     case form(dismiss: Bool = false)
     case index
@@ -58,6 +59,13 @@ extension SiteRoute.View {
           }
           .map(.memberwise(Project.Create.init))
         }
+      }
+      Route(.case(Self.delete)) {
+        Path {
+          rootPath
+          Project.ID.parser()
+        }
+        Method.delete
       }
       Route(.case(Self.detail)) {
         Path {
@@ -99,7 +107,7 @@ extension SiteRoute.View {
 extension SiteRoute.View.ProjectRoute {
 
   public enum DetailRoute: Equatable, Sendable {
-    case index
+    case index(tab: Tab = .default)
     case equipment(EquipmentInfoRoute)
     case frictionRate(FrictionRateRoute)
     case rooms(RoomRoute)
@@ -107,6 +115,11 @@ extension SiteRoute.View.ProjectRoute {
     static let router = OneOf {
       Route(.case(Self.index)) {
         Method.get
+        Query {
+          Field("tab", default: Tab.default) {
+            Tab.parser()
+          }
+        }
       }
       Route(.case(Self.equipment)) {
         EquipmentInfoRoute.router
@@ -118,16 +131,35 @@ extension SiteRoute.View.ProjectRoute {
         RoomRoute.router
       }
     }
+
+    public enum Tab: String, CaseIterable, Equatable, Sendable {
+      case project
+      case rooms
+      case effectiveLength
+      case frictionRate
+      case ductSizing
+
+      public static var `default`: Self { .rooms }
+    }
   }
 
   public enum RoomRoute: Equatable, Sendable {
-    case form(dismiss: Bool = false)
+    case delete(id: Room.ID)
+    case form(id: Room.ID? = nil, dismiss: Bool = false)
     case index
     case submit(Room.Form)
+    case update(Room.Update)
 
     static let rootPath = "rooms"
 
     public static let router = OneOf {
+      Route(.case(Self.delete)) {
+        Path {
+          rootPath
+          Room.ID.parser()
+        }
+        Method.delete
+      }
       Route(.case(Self.form)) {
         Path {
           rootPath
@@ -135,6 +167,9 @@ extension SiteRoute.View.ProjectRoute {
         }
         Method.get
         Query {
+          Optionally {
+            Field("id", default: nil) { Room.ID.parser() }
+          }
           Field("dismiss", default: false) { Bool.parser() }
         }
       }
@@ -155,6 +190,28 @@ extension SiteRoute.View.ProjectRoute {
             Field("registerCount") { Digits() }
           }
           .map(.memberwise(Room.Form.init))
+        }
+      }
+      Route(.case(Self.update)) {
+        Path { rootPath }
+        Method.patch
+        Body {
+          FormData {
+            Field("id") { Room.ID.parser() }
+            Optionally {
+              Field("name", .string)
+            }
+            Optionally {
+              Field("heatingLoad") { Double.parser() }
+            }
+            Optionally {
+              Field("coolingLoad") { Double.parser() }
+            }
+            Optionally {
+              Field("registerCount") { Digits() }
+            }
+          }
+          .map(.memberwise(Room.Update.init))
         }
       }
     }

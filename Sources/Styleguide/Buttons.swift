@@ -94,3 +94,16 @@ public struct PlusButton: HTML, Sendable {
     ) { SVG(.circlePlus) }
   }
 }
+
+public struct TrashButton: HTML, Sendable {
+  public init() {}
+
+  public var body: some HTML<HTMLTag.button> {
+    button(
+      .type(.button),
+      .class("btn btn-error dark:text-white")
+    ) {
+      SVG(.trash)
+    }
+  }
+}

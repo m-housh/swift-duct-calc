@@ -125,7 +125,9 @@ extension EquipmentInfo {
         .field("coolingCFM", .int16, .required)
         .field("createdAt", .datetime)
         .field("updatedAt", .datetime)
-        .field("projectID", .uuid, .required, .references(ProjectModel.schema, "id"))
+        .field(
+          "projectID", .uuid, .required, .references(ProjectModel.schema, "id", onDelete: .cascade)
+        )
         .unique(on: "projectID")
         .create()
     }

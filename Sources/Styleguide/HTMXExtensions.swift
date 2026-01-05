@@ -23,10 +23,10 @@ extension HTMLAttribute.hx {
     put(SiteRoute.View.router.path(for: route))
   }
 
-  // @Sendable
-  // static func delete(route: SiteRoute.Api) -> HTMLAttribute {
-  //   delete(SiteRoute.Api.router.path(for: route))
-  // }
+  @Sendable
+  public static func delete(route: SiteRoute.View) -> HTMLAttribute {
+    delete(SiteRoute.View.router.path(for: route))
+  }
 }
 
 extension HTMLAttribute.hx {

@@ -10,34 +10,48 @@ struct RoomForm: HTML, Sendable {
 
   let dismiss: Bool
   let projectID: Project.ID
+  let room: Room?
 
   var body: some HTML {
     ModalForm(id: "roomForm", dismiss: dismiss) {
       h1(.class("text-3xl font-bold pb-6")) { "Room" }
       // TODO: Use htmx here.
       form(
-        .method(.post),
-        .action(route: .project(.detail(projectID, .rooms(.index))))
+        room == nil
+          ? .hx.post(route: .project(.detail(projectID, .rooms(.index))))
+          : .hx.patch(route: .project(.detail(projectID, .rooms(.index)))),
+        .hx.target("body"),
+        .hx.swap(.outerHTML)
       ) {
+
+        input(.class("hidden"), .name("projectID"), .value("\(projectID)"))
+
+        if let id = room?.id {
+          input(.class("hidden"), .name("id"), .value("\(id)"))
+        }
+
         div {
           label(.for("name")) { "Name:" }
           Input(id: "name", placeholder: "Room Name")
-            .attributes(.type(.text), .required, .autofocus)
+            .attributes(.type(.text), .required, .autofocus, .value(room?.name))
         }
         div {
           label(.for("heatingLoad")) { "Heating Load:" }
           Input(id: "heatingLoad", placeholder: "Heating Load")
-            .attributes(.type(.number), .required, .min("0"))
+            .attributes(.type(.number), .required, .min("0"), .value(room?.heatingLoad))
         }
         div {
           label(.for("coolingLoad")) { "Cooling Load:" }
           Input(id: "coolingLoad", placeholder: "Cooling Load")
-            .attributes(.type(.number), .required, .min("0"))
+            .attributes(.type(.number), .required, .min("0"), .value(room?.coolingLoad))
         }
         div {
           label(.for("registerCount")) { "Registers:" }
           Input(id: "registerCount", placeholder: "Register Count")
-            .attributes(.type(.number), .required, .value("1"), .min("1"))
+            .attributes(
+              .type(.number), .required, .min("0"),
+              .value("\(room != nil ? room!.registerCount : 1)"),
+            )
         }
         Row {
           // Force button to the right, probably a better way.

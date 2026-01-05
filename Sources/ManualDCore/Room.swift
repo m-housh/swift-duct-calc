@@ -69,6 +69,29 @@ extension Room {
     }
   }
 
+  public struct Update: Codable, Equatable, Sendable {
+    public let id: Room.ID
+    public let name: String?
+    public let heatingLoad: Double?
+    public let coolingLoad: Double?
+    public let registerCount: Int?
+
+    public init(
+      id: Room.ID,
+      name: String? = nil,
+      heatingLoad: Double? = nil,
+      coolingLoad: Double? = nil,
+      registerCount: Int? = nil
+    ) {
+      self.id = id
+      self.name = name
+      self.heatingLoad = heatingLoad
+      self.coolingLoad = coolingLoad
+      self.registerCount = registerCount
+    }
+  }
+
+  // TODO: Remove and just use create.
   public struct Form: Codable, Equatable, Sendable {
     public let name: String
     public let heatingLoad: Double

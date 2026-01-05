@@ -9,7 +9,7 @@ extension DatabaseClient {
   public struct EffectiveLengthClient: Sendable {
     public var create: @Sendable (EffectiveLength.Create) async throws -> EffectiveLength
     public var delete: @Sendable (EffectiveLength.ID) async throws -> Void
-    public var fetch: @Sendable (Project.ID) async throws -> EffectiveLength?
+    public var fetch: @Sendable (Project.ID) async throws -> [EffectiveLength]
     public var get: @Sendable (EffectiveLength.ID) async throws -> EffectiveLength?
   }
 }
@@ -31,15 +31,11 @@ extension DatabaseClient.EffectiveLengthClient: TestDependencyKey {
         try await model.delete(on: database)
       },
       fetch: { projectID in
-        guard
-          let model = try await EffectiveLengthModel.query(on: database)
-            .filter("projectID", .equal, projectID)
-            .first()
-        else {
-          throw NotFoundError()
-        }
-
-        return try model.toDTO()
+        try await EffectiveLengthModel.query(on: database)
+          .with(\.$project)
+          .filter(\.$project.$id, .equal, projectID)
+          .all()
+          .map { try $0.toDTO() }
       },
       get: { id in
         try await EffectiveLengthModel.find(id, on: database).map { try $0.toDTO() }
@@ -82,7 +78,9 @@ extension EffectiveLength {
         .field("groups", .data)
         .field("createdAt", .datetime)
         .field("updatedAt", .datetime)
-        .field("projectID", .uuid, .required, .references(ProjectModel.schema, "id"))
+        .field(
+          "projectID", .uuid, .required, .references(ProjectModel.schema, "id", onDelete: .cascade)
+        )
         .unique(on: "projectID", "name", "type")
         .create()
     }

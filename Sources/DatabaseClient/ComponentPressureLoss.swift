@@ -79,8 +79,10 @@ extension ComponentPressureLoss {
         .field("value", .double, .required)
         .field("createdAt", .datetime)
         .field("updatedAt", .datetime)
-        .field("projectID", .uuid, .required, .references(ProjectModel.schema, "id"))
-        .unique(on: "projectID", "name")
+        .field(
+          "projectID", .uuid, .required, .references(ProjectModel.schema, "id", onDelete: .cascade)
+        )
+        // .unique(on: "projectID", "name")
         .create()
     }
 

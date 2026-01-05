@@ -91,36 +91,28 @@ extension SiteRoute.View.ProjectRoute {
     case .create(let form):
       let project = try await database.projects.create(user.id, form)
       try await database.componentLoss.createDefaults(projectID: project.id)
-      return request.view {
-        ProjectView(projectID: project.id, activeTab: .projects) {
-          ProjectDetail(project: project)
-        }
-      }
+      return ProjectView(projectID: project.id, activeTab: .rooms)
+
+    case .delete(let id):
+      try await database.projects.delete(id)
+      return EmptyHTML()
 
     case .detail(let projectID, let route):
       switch route {
-      case .index:
-        let project = try await database.projects.get(projectID)!
-        return request.view {
-          ProjectView(projectID: projectID, activeTab: .projects) {
-            ProjectDetail(project: project)
-          }
-        }
+      case .index(let tab):
+        return ProjectView(projectID: projectID, activeTab: tab)
+      // return try await defaultDetailView(projectID: projectID, activeTab: tab)
       case .equipment(let route):
         return try await route.renderView(on: request, projectID: projectID)
       case .frictionRate(let route):
         return try await route.renderView(on: request, projectID: projectID)
-
       case .rooms(let route):
         return try await route.renderView(on: request, projectID: projectID)
       }
-
-    // case .rooms(let projectID, let route):
-    //   return try await route.renderView(on: request, projectID: projectID)
-
     }
 
   }
+
 }
 
 extension SiteRoute.View.ProjectRoute.EquipmentInfoRoute {
@@ -156,26 +148,32 @@ extension SiteRoute.View.ProjectRoute.RoomRoute {
 
     switch self {
 
-    case .form(let dismiss):
-      return RoomForm(dismiss: dismiss, projectID: projectID)
+    case .delete(let id):
+      try await database.rooms.delete(id)
+      return EmptyHTML()
+
+    case .form(let id, let dismiss):
+      var room: Room? = nil
+      if let id, dismiss == false {
+        room = try await database.rooms.get(id)
+      }
+      return RoomForm(dismiss: dismiss, projectID: projectID, room: room)
 
     case .index:
-      let rooms = try await database.rooms.fetch(projectID)
       return request.view {
-        ProjectView(projectID: projectID, activeTab: .rooms) {
-          RoomsView(projectID: projectID, rooms: rooms)
-        }
+        ProjectView(projectID: projectID, activeTab: .rooms)
       }
 
     case .submit(let form):
       request.logger.debug("New room form submitted.")
       let _ = try await database.rooms.create(.init(form: form, projectID: projectID))
-      let rooms = try await database.rooms.fetch(projectID)
       return request.view {
-        ProjectView(projectID: projectID, activeTab: .rooms) {
-          RoomsView(projectID: projectID, rooms: rooms)
-        }
+        ProjectView(projectID: projectID, activeTab: .rooms)
       }
+
+    case .update(let form):
+      _ = try await database.rooms.update(form)
+      return ProjectView(projectID: projectID, activeTab: .rooms)
     }
   }
 }
@@ -192,14 +190,9 @@ extension SiteRoute.View.ProjectRoute.FrictionRateRoute {
       let componentLosses = try await database.componentLoss.fetch(projectID)
 
       return request.view {
-        ProjectView(projectID: projectID, activeTab: .frictionRate) {
-          FrictionRateView(
-            equipmentInfo: equipment,
-            componentLosses: componentLosses,
-            projectID: projectID
-          )
-        }
+        ProjectView(projectID: projectID, activeTab: .frictionRate)
       }
+
     case .form(let type, let dismiss):
       // FIX: Forms need to reference existing items.
       switch type {
@@ -249,7 +242,7 @@ extension SiteRoute.View.EffectiveLengthRoute {
 
 private func _render<C: HTML>(
   isHtmxRequest: Bool,
-  active activeTab: Sidebar.ActiveTab = .projects,
+  active activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab = .rooms,
   showSidebar: Bool = true,
   @HTMLBuilder inner: () async throws -> C
 ) async throws -> AnySendableHTML where C: Sendable {
@@ -262,7 +255,7 @@ private func _render<C: HTML>(
 
 private func _render<C: HTML>(
   isHtmxRequest: Bool,
-  active activeTab: Sidebar.ActiveTab = .projects,
+  active activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab = .rooms,
   showSidebar: Bool = true,
   @HTMLBuilder inner: () -> C
 ) -> AnySendableHTML where C: Sendable {

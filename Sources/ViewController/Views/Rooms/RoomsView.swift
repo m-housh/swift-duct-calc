@@ -39,23 +39,13 @@ struct RoomsView: HTML, Sendable {
               th { Label("Heating Load") }
               th { Label("Cooling Total") }
               th { Label("Register Count") }
+              th {}
             }
           }
           tbody {
-            for room in rooms {
-              tr {
-                td { room.name }
-                td {
-                  Number(room.heatingLoad)
-                    .attributes(.class("text-error"))
-                }
-                td {
-                  Number(room.coolingLoad)
-                    .attributes(.class("text-success"))
-                }
-                td {
-                  Number(room.registerCount)
-                }
+            div(.id("rooms")) {
+              for room in rooms {
+                RoomRow(room: room)
               }
             }
             // TOTALS
@@ -75,7 +65,48 @@ struct RoomsView: HTML, Sendable {
           }
         }
       }
-      RoomForm(dismiss: true, projectID: projectID)
+      RoomForm(dismiss: true, projectID: projectID, room: nil)
+    }
+  }
+
+  public struct RoomRow: HTML, Sendable {
+    let room: Room
+
+    public var body: some HTML {
+      tr(.id("\(room.id)")) {
+        td { room.name }
+        td {
+          Number(room.heatingLoad)
+            .attributes(.class("text-error"))
+        }
+        td {
+          Number(room.coolingLoad)
+            .attributes(.class("text-success"))
+        }
+        td {
+          Number(room.registerCount)
+        }
+        td {
+          Row {
+            TrashButton()
+              .attributes(
+                .hx.delete(route: .project(.detail(room.projectID, .rooms(.delete(id: room.id))))),
+                .hx.target("closest tr"),
+                .hx.confirm("Are you sure?")
+              )
+            EditButton()
+              .attributes(
+                .hx.get(
+                  route: .project(
+                    .detail(room.projectID, .rooms(.form(id: room.id, dismiss: false)))
+                  )
+                ),
+                .hx.target("#roomForm"),
+                .hx.swap(.outerHTML)
+              )
+          }
+        }
+      }
     }
   }
 

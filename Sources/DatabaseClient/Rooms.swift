@@ -11,14 +11,13 @@ extension DatabaseClient {
     public var delete: @Sendable (Room.ID) async throws -> Void
     public var get: @Sendable (Room.ID) async throws -> Room?
     public var fetch: @Sendable (Project.ID) async throws -> [Room]
+    public var update: @Sendable (Room.Update) async throws -> Room
   }
 }
 
 extension DatabaseClient.Rooms: TestDependencyKey {
   public static let testValue = Self()
-}
 
-extension DatabaseClient.Rooms {
   public static func live(database: any Database) -> Self {
     .init(
       create: { request in
@@ -41,6 +40,17 @@ extension DatabaseClient.Rooms {
           .filter(\.$project.$id, .equal, projectID)
           .all()
           .map { try $0.toDTO() }
+      },
+      update: { updates in
+        guard let model = try await RoomModel.find(updates.id, on: database) else {
+          throw NotFoundError()
+        }
+
+        try updates.validate()
+        if model.applyUpdates(updates) {
+          try await model.save(on: database)
+        }
+        return try model.toDTO()
       }
     )
   }
@@ -75,6 +85,32 @@ extension Room.Create {
   }
 }
 
+extension Room.Update {
+
+  func validate() throws(ValidationError) {
+    if let name {
+      guard !name.isEmpty else {
+        throw ValidationError("Room name should not be empty.")
+      }
+    }
+    if let heatingLoad {
+      guard heatingLoad >= 0 else {
+        throw ValidationError("Room heating load should not be less than 0.")
+      }
+    }
+    if let coolingLoad {
+      guard coolingLoad >= 0 else {
+        throw ValidationError("Room cooling total should not be less than 0.")
+      }
+    }
+    if let registerCount {
+      guard registerCount >= 1 else {
+        throw ValidationError("Room cooling sensible should not be less than 1.")
+      }
+    }
+  }
+}
+
 extension Room {
   struct Migrate: AsyncMigration {
     let name = "CreateRoom"
@@ -88,7 +124,9 @@ extension Room {
         .field("registerCount", .int8, .required)
         .field("createdAt", .datetime)
         .field("updatedAt", .datetime)
-        .field("projectID", .uuid, .required, .references(ProjectModel.schema, "id"))
+        .field(
+          "projectID", .uuid, .required, .references(ProjectModel.schema, "id", onDelete: .cascade)
+        )
         .unique(on: "projectID", "name")
         .create()
     }
@@ -161,4 +199,27 @@ final class RoomModel: Model, @unchecked Sendable {
       updatedAt: updatedAt!
     )
   }
+
+  func applyUpdates(_ updates: Room.Update) -> Bool {
+    var hasUpdates = false
+
+    if let name = updates.name, name != self.name {
+      hasUpdates = true
+      self.name = name
+    }
+    if let heatingLoad = updates.heatingLoad, heatingLoad != self.heatingLoad {
+      hasUpdates = true
+      self.heatingLoad = heatingLoad
+    }
+    if let coolingLoad = updates.coolingLoad, coolingLoad != self.coolingLoad {
+      hasUpdates = true
+      self.coolingLoad = coolingLoad
+    }
+    if let registerCount = updates.registerCount, registerCount != self.registerCount {
+      hasUpdates = true
+      self.registerCount = registerCount
+    }
+    return hasUpdates
+  }
+
 }

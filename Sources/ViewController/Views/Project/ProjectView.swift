@@ -1,23 +1,24 @@
+import DatabaseClient
+import Dependencies
 import Elementary
 import ElementaryHTMX
 import ManualDCore
 import Styleguide
 
-// TODO: Need a back button to navigate to all projects table.
+// TODO: Make view async and load based on the active tab.
 
-struct ProjectView<Inner: HTML>: HTML, Sendable where Inner: Sendable {
+struct ProjectView: HTML, Sendable {
+  @Dependency(\.database) var database
+
   let projectID: Project.ID
-  let activeTab: Sidebar.ActiveTab
-  let inner: Inner
+  let activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab
 
   init(
     projectID: Project.ID,
-    activeTab: Sidebar.ActiveTab,
-    @HTMLBuilder inner: () -> Inner
+    activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab
   ) {
     self.projectID = projectID
     self.activeTab = activeTab
-    self.inner = inner()
   }
 
   var body: some HTML {
@@ -25,7 +26,30 @@ struct ProjectView<Inner: HTML>: HTML, Sendable where Inner: Sendable {
       div(.class("flex flex-row")) {
         Sidebar(active: activeTab, projectID: projectID)
         main(.class("flex flex-col h-screen w-full px-6 py-10")) {
-          inner
+          switch self.activeTab {
+          case .project:
+            if let project = try await database.projects.get(projectID) {
+              ProjectDetail(project: project)
+            } else {
+              div {
+                "FIX ME!"
+              }
+            }
+          case .rooms:
+            try await RoomsView(projectID: projectID, rooms: database.rooms.fetch(projectID))
+
+          case .effectiveLength:
+            try await EffectiveLengthsView(
+              effectiveLengths: database.effectiveLength.fetch(projectID)
+            )
+          case .frictionRate:
+            try await FrictionRateView(
+              equipmentInfo: database.equipment.fetch(projectID),
+              componentLosses: database.componentLoss.fetch(projectID), projectID: projectID)
+          case .ductSizing:
+            div { "FIX ME!" }
+
+          }
         }
       }
     }
@@ -35,7 +59,7 @@ struct ProjectView<Inner: HTML>: HTML, Sendable where Inner: Sendable {
 // TODO: Update to use DaisyUI drawer.
 struct Sidebar: HTML {
 
-  let active: ActiveTab
+  let active: SiteRoute.View.ProjectRoute.DetailRoute.Tab
   let projectID: Project.ID
 
   var body: some HTML {
@@ -49,15 +73,31 @@ struct Sidebar: HTML {
       )
     ) {
 
-      // TODO: Move somewhere outside of the sidebar.
+      div(.class("flex")) {
+        // TODO: Move somewhere outside of the sidebar.
+        button(
+          .class("w-full btn btn-secondary"),
+          .hx.get(route: .project(.index)),
+          .hx.target("body"),
+          .hx.pushURL(true),
+          .hx.swap(.outerHTML),
+        ) {
+          "< All Projects"
+        }
+      }
+
       Row {
         Label("Theme")
         input(.type(.checkbox), .class("toggle theme-controller"), .value("light"))
       }
       .attributes(.class("p-4"))
 
-      row(title: "Project", icon: .mapPin, route: .project(.detail(projectID, .index)))
-        .attributes(.data("active", value: active == .projects ? "true" : "false"))
+      row(
+        title: "Project",
+        icon: .mapPin,
+        route: .project(.detail(projectID, .index(tab: .project)))
+      )
+      .attributes(.data("active", value: active == .project ? "true" : "false"))
 
       row(title: "Rooms", icon: .doorClosed, route: .project(.detail(projectID, .rooms(.index))))
         .attributes(.data("active", value: active == .rooms ? "true" : "false"))
@@ -107,15 +147,5 @@ struct Sidebar: HTML {
     route: SiteRoute.View
   ) -> some HTML<HTMLTag.a> {
     row(title: title, icon: icon, href: SiteRoute.View.router.path(for: route))
-  }
-}
-
-extension Sidebar {
-  enum ActiveTab: Equatable, Sendable {
-    case projects
-    case rooms
-    case effectiveLength
-    case frictionRate
-    case ductSizing
   }
 }

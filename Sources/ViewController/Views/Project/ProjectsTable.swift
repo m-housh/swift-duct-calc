@@ -67,10 +67,19 @@ extension ProjectsTable {
           td { "\(project.name)" }
           td { "\(project.streetAddress)" }
           td {
-            a(
-              .class("btn btn-success"),
-              .href(route: .project(.detail(project.id, .index)))
-            ) { ">" }
+            Row {
+              div {}
+              TrashButton()
+                .attributes(
+                  .hx.delete(route: .project(.delete(id: project.id))),
+                  .hx.confirm("Are you sure?"),
+                  .hx.target("closest tr")
+                )
+              a(
+                .class("btn btn-success dark:text-white"),
+                .href(route: .project(.detail(project.id, .index())))
+              ) { ">" }
+            }
           }
         }
       }
