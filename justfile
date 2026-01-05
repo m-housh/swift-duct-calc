@@ -4,7 +4,7 @@ install-deps:
 	@curl -sL daisyui.com/fast | bash
 
 run-css:
-	@./tailwindcss -i input.css -o output.css --watch
+	@./tailwindcss -i Public/css/main.css -o Public/css/output.css --watch
 
 run:
 	@swift run App serve --log debug

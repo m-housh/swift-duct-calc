@@ -65,8 +65,12 @@ struct Sidebar: HTML {
       row(title: "Equivalent Lengths", icon: .rulerDimensionLine, route: .effectiveLength(.index))
         .attributes(.data("active", value: active == .effectiveLength ? "true" : "false"))
 
-      row(title: "Friction Rate", icon: .squareFunction, route: .frictionRate(.index))
-        .attributes(.data("active", value: active == .frictionRate ? "true" : "false"))
+      row(
+        title: "Friction Rate",
+        icon: .squareFunction,
+        route: .project(.detail(projectID, .frictionRate(.index)))
+      )
+      .attributes(.data("active", value: active == .frictionRate ? "true" : "false"))
 
       row(title: "Duct Sizes", icon: .wind, href: "#")
         .attributes(.data("active", value: active == .ductSizing ? "true" : "false"))

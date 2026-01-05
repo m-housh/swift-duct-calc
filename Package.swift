@@ -103,6 +103,7 @@ let package = Package(
     .target(
       name: "ViewController",
       dependencies: [
+        .target(name: "DatabaseClient"),
         .target(name: "ManualDCore"),
         .target(name: "Styleguide"),
         .product(name: "Dependencies", package: "swift-dependencies"),

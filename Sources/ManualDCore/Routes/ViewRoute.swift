@@ -10,7 +10,7 @@ extension SiteRoute {
     case login(LoginRoute)
     case signup(SignupRoute)
     case project(ProjectRoute)
-    case frictionRate(FrictionRateRoute)
+    // case frictionRate(FrictionRateRoute)
     case effectiveLength(EffectiveLengthRoute)
     // case user(UserRoute)
 
@@ -24,9 +24,9 @@ extension SiteRoute {
       Route(.case(Self.project)) {
         SiteRoute.View.ProjectRoute.router
       }
-      Route(.case(Self.frictionRate)) {
-        SiteRoute.View.FrictionRateRoute.router
-      }
+      // Route(.case(Self.frictionRate)) {
+      //   SiteRoute.View.FrictionRateRoute.router
+      // }
       Route(.case(Self.effectiveLength)) {
         SiteRoute.View.EffectiveLengthRoute.router
       }
@@ -102,11 +102,15 @@ extension SiteRoute.View.ProjectRoute {
 
   public enum DetailRoute: Equatable, Sendable {
     case index
+    case frictionRate(FrictionRateRoute)
     case rooms(RoomRoute)
 
     static let router = OneOf {
       Route(.case(Self.index)) {
         Method.get
+      }
+      Route(.case(Self.frictionRate)) {
+        FrictionRateRoute.router
       }
       Route(.case(Self.rooms)) {
         RoomRoute.router
@@ -153,9 +157,7 @@ extension SiteRoute.View.ProjectRoute {
       }
     }
   }
-}
 
-extension SiteRoute.View {
   public enum FrictionRateRoute: Equatable, Sendable {
     case index
     case form(FormType, dismiss: Bool = false)
@@ -179,15 +181,12 @@ extension SiteRoute.View {
         }
       }
     }
-  }
-}
 
-extension SiteRoute.View.FrictionRateRoute {
-  public enum FormType: String, CaseIterable, Codable, Equatable, Sendable {
-    case equipmentInfo
-    case componentPressureLoss
+    public enum FormType: String, CaseIterable, Codable, Equatable, Sendable {
+      case equipmentInfo
+      case componentPressureLoss
+    }
   }
-
 }
 
 extension SiteRoute.View {

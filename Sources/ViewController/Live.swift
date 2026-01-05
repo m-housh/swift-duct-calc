@@ -39,10 +39,6 @@ extension ViewController.Request {
       }
     case .project(let route):
       return try await route.renderView(on: self)
-    // case .room(let route):
-    //   return try await route.renderView(on: self)
-    case .frictionRate(let route):
-      return try await route.renderView(isHtmxRequest: isHtmxRequest)
     case .effectiveLength(let route):
       return try await route.renderView(isHtmxRequest: isHtmxRequest)
     // case .user(let route):
@@ -110,6 +106,9 @@ extension SiteRoute.View.ProjectRoute {
             ProjectDetail(project: project)
           }
         }
+      case .frictionRate(let route):
+        return try await route.renderView(on: request, projectID: projectID)
+
       case .rooms(let route):
         return try await route.renderView(on: request, projectID: projectID)
       }
@@ -155,26 +154,34 @@ extension SiteRoute.View.ProjectRoute.RoomRoute {
   }
 }
 
-extension SiteRoute.View.FrictionRateRoute {
-  func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
+extension SiteRoute.View.ProjectRoute.FrictionRateRoute {
+  func renderView(on request: ViewController.Request, projectID: Project.ID) async throws
+    -> AnySendableHTML
+  {
+    @Dependency(\.database) var database
+
     switch self {
     case .index:
-      return _render(isHtmxRequest: isHtmxRequest, active: .frictionRate) {
-        FrictionRateView()
+      let componentLosses = try await database.componentLoss.fetch(projectID)
+
+      return request.view {
+        ProjectView(projectID: projectID, activeTab: .frictionRate) {
+          FrictionRateView(componentLosses: componentLosses, projectID: projectID)
+        }
       }
     case .form(let type, let dismiss):
       // FIX: Forms need to reference existing items.
       switch type {
       case .equipmentInfo:
-        return EquipmentForm(dismiss: dismiss)
+        return EquipmentForm(dismiss: dismiss, projectID: projectID)
       case .componentPressureLoss:
-        return ComponentLossForm(dismiss: dismiss)
+        return ComponentLossForm(dismiss: dismiss, projectID: projectID)
       }
     }
   }
 }
 
-extension SiteRoute.View.FrictionRateRoute.FormType {
+extension SiteRoute.View.ProjectRoute.FrictionRateRoute.FormType {
   var id: String {
     switch self {
     case .equipmentInfo:

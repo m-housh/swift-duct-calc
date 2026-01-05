@@ -4,6 +4,7 @@ import Styleguide
 
 struct EquipmentInfoView: HTML, Sendable {
   let equipmentInfo: EquipmentInfo
+  var projectID: Project.ID { equipmentInfo.projectID }
 
   var body: some HTML {
     div(.class("space-y-4 border border-gray-200 rounded-lg shadow-lg p-4")) {
@@ -33,7 +34,7 @@ struct EquipmentInfoView: HTML, Sendable {
         div {}
         EditButton()
           .attributes(
-            .hx.get(route: .frictionRate(.form(.equipmentInfo))),
+            .hx.get(route: .project(.detail(projectID, .frictionRate(.form(.equipmentInfo))))),
             .hx.target("#equipmentForm"),
             .hx.swap(.outerHTML)
           )

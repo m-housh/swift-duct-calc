@@ -5,6 +5,7 @@ import Styleguide
 
 struct ComponentLossForm: HTML, Sendable {
   let dismiss: Bool
+  let projectID: Project.ID
 
   var body: some HTML {
     ModalForm(id: "componentLossForm", dismiss: dismiss) {
@@ -25,7 +26,10 @@ struct ComponentLossForm: HTML, Sendable {
           div {
             CancelButton()
               .attributes(
-                .hx.get(route: .frictionRate(.form(.componentPressureLoss, dismiss: true))),
+                .hx.get(
+                  route: .project(
+                    .detail(projectID, .frictionRate(.form(.componentPressureLoss, dismiss: true))))
+                ),
                 .hx.target("#componentLossForm"),
                 .hx.swap(.outerHTML)
               )

@@ -6,6 +6,7 @@ import Styleguide
 struct EquipmentForm: HTML, Sendable {
 
   let dismiss: Bool
+  let projectID: Project.ID
 
   var body: some HTML {
     ModalForm(id: "equipmentForm", dismiss: dismiss) {
@@ -33,7 +34,11 @@ struct EquipmentForm: HTML, Sendable {
           div(.class("space-x-4")) {
             CancelButton()
               .attributes(
-                .hx.get(route: .frictionRate(.form(.equipmentInfo, dismiss: true))),
+                .hx.get(
+                  route: .project(
+                    .detail(projectID, .frictionRate(.form(.equipmentInfo, dismiss: true)))
+                    )
+                ),
                 .hx.target("#equipmentForm"),
                 .hx.swap(.outerHTML)
               )

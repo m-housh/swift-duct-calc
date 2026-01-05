@@ -3,9 +3,12 @@ import ElementaryHTMX
 import ManualDCore
 import Styleguide
 
+// TODO: Load component losses when view appears??
+
 struct ComponentPressureLossesView: HTML, Sendable {
 
   let componentPressureLosses: [ComponentPressureLoss]
+  let projectID: Project.ID
 
   private var total: Double {
     componentPressureLosses.reduce(into: 0) { $0 += $1.value }
@@ -23,7 +26,10 @@ struct ComponentPressureLossesView: HTML, Sendable {
         h1(.class("text-2xl font-bold")) { "Component Pressure Losses" }
         PlusButton()
           .attributes(
-            .hx.get(route: .frictionRate(.form(.componentPressureLoss, dismiss: false))),
+            .hx.get(
+              route: .project(
+                .detail(projectID, .frictionRate(.form(.componentPressureLoss, dismiss: false))))
+            ),
             .hx.target("#componentLossForm"),
             .hx.swap(.outerHTML)
           )
@@ -43,8 +49,7 @@ struct ComponentPressureLossesView: HTML, Sendable {
           .attributes(.class("text-xl font-bold"))
       }
     }
-    // div(.id("componentLossForm")) {}
-    ComponentLossForm(dismiss: true)
+    ComponentLossForm(dismiss: true, projectID: projectID)
   }
 
 }

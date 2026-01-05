@@ -15,7 +15,6 @@ extension SiteRoute.View {
   var middleware: [any Middleware]? {
     switch self {
     case .project,
-      .frictionRate,
       .effectiveLength:
       return viewRouteMiddleware
     case .login, .signup:

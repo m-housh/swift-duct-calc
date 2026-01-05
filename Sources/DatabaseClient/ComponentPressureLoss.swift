@@ -10,7 +10,7 @@ extension DatabaseClient {
     public var create:
       @Sendable (ComponentPressureLoss.Create) async throws -> ComponentPressureLoss
     public var delete: @Sendable (ComponentPressureLoss.ID) async throws -> Void
-    public var fetch: @Sendable (Project.ID) async throws -> ComponentPressureLoss
+    public var fetch: @Sendable (Project.ID) async throws -> [ComponentPressureLoss]
     public var get: @Sendable (ComponentPressureLoss.ID) async throws -> ComponentPressureLoss?
   }
 }
@@ -34,14 +34,11 @@ extension DatabaseClient.ComponentLoss {
         try await model.delete(on: database)
       },
       fetch: { projectID in
-        guard
-          let model = try await ComponentLossModel.query(on: database)
-            .filter("projectID", .equal, projectID)
-            .first()
-        else {
-          throw NotFoundError()
-        }
-        return try model.toDTO()
+        try await ComponentLossModel.query(on: database)
+          .with(\.$project)
+          .filter(\.$project.$id, .equal, projectID)
+          .all()
+          .map { try $0.toDTO() }
 
       },
       get: { id in
