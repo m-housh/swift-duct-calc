@@ -28,3 +28,10 @@ extension HTMLAttribute.hx {
   //   delete(SiteRoute.Api.router.path(for: route))
   // }
 }
+
+extension HTMLAttribute.hx {
+  @Sendable
+  public static func indicator() -> HTMLAttribute {
+    indicator(".hx-indicator")
+  }
+}

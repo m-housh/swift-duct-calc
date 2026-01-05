@@ -3,8 +3,20 @@ import ElementaryHTMX
 import ManualDCore
 import Styleguide
 
+// TODO: May need a multi-step form were the the effective length type is
+//       determined before groups selections are made in order to use the
+//       appropriate select field values when the type is supply vs. return.
+//       Currently when the select field is changed it doesn't change the group
+//       I can get it to add a new one.
+
 struct EffectiveLengthForm: HTML, Sendable {
   let dismiss: Bool
+  let type: EffectiveLength.EffectiveLengthType
+
+  init(dismiss: Bool, type: EffectiveLength.EffectiveLengthType = .supply) {
+    self.dismiss = dismiss
+    self.type = type
+  }
 
   var body: some HTML {
     ModalForm(id: "effectiveLengthForm", dismiss: dismiss) {
@@ -17,13 +29,8 @@ struct EffectiveLengthForm: HTML, Sendable {
         }
         div {
           label(.for("type")) { "Type" }
-          select(
-            .id("type"), .name("type"),
-            .class("w-full border rounded-md")
-          ) {
-            option(.value("supply")) { "Supply" }
-            option(.value("return")) { "Return" }
-          }
+          GroupTypeSelect(selected: type)
+            .attributes(.class("w-full border rounded-md"))
         }
         Row {
           Label { "Straigth Lengths" }
@@ -44,7 +51,7 @@ struct EffectiveLengthForm: HTML, Sendable {
           Label { "Groups" }
           button(
             .type(.button),
-            .hx.get(route: .effectiveLength(.field(.group))),
+            .hx.get(route: .effectiveLength(.field(.group, style: type))),
             .hx.target("#groups"),
             .hx.swap(.beforeEnd)
           ) {
@@ -52,7 +59,7 @@ struct EffectiveLengthForm: HTML, Sendable {
           }
         }
         div(.id("groups"), .class("space-y-4")) {
-          GroupField()
+          GroupField(style: type)
         }
 
         Row {
@@ -92,10 +99,13 @@ struct StraightLengthField: HTML, Sendable {
 
 struct GroupField: HTML, Sendable {
 
+  let style: EffectiveLength.EffectiveLengthType
+
   var body: some HTML {
     Row {
-      Input(name: "group[][group]", placeholder: "Group")
-        .attributes(.type(.number), .min("0"))
+      // Input(name: "group[][group]", placeholder: "Group")
+      //   .attributes(.type(.number), .min("0"))
+      GroupSelect(style: style)
       Input(name: "group[][letter]", placeholder: "Letter")
         .attributes(.type(.text))
       Input(name: "group[][length]", placeholder: "Length")
@@ -104,5 +114,55 @@ struct GroupField: HTML, Sendable {
         .attributes(.type(.number), .min("1"), .value("1"))
     }
     .attributes(.class("space-x-2"))
+  }
+}
+
+struct GroupSelect: HTML, Sendable {
+
+  let style: EffectiveLength.EffectiveLengthType
+
+  var body: some HTML {
+    select(
+      .name("group")
+    ) {
+      for value in style.selectOptions {
+        option(.value("\(value)")) { "\(value)" }
+      }
+    }
+  }
+
+}
+
+struct GroupTypeSelect: HTML, Sendable {
+
+  var selected: EffectiveLength.EffectiveLengthType
+
+  var body: some HTML<HTMLTag.select> {
+    select(.name("type"), .id("type")) {
+      for value in EffectiveLength.EffectiveLengthType.allCases {
+        option(
+          .value("\(value.rawValue)"),
+          .hx.get(route: .effectiveLength(.field(.group, style: value))),
+          .hx.target("#groups"),
+          .hx.swap(.beforeEnd),
+          .hx.trigger(.event(.change).from("#type"))
+        ) { value.title }
+        .attributes(.selected, when: value == selected)
+      }
+    }
+  }
+}
+
+extension EffectiveLength.EffectiveLengthType {
+
+  var title: String { rawValue.capitalized }
+
+  var selectOptions: [Int] {
+    switch self {
+    case .return:
+      return [5, 6, 7, 8, 10, 11, 12]
+    case .supply:
+      return [1, 2, 4, 8, 9, 11, 12]
+    }
   }
 }

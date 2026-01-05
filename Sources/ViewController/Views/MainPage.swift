@@ -37,15 +37,19 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
 }
 
 struct LoggedIn: HTML, Sendable {
-  let next: String?
+  let next: String
+
+  init(next: String? = nil) {
+    self.next = next ?? SiteRoute.View.router.path(for: .project(.index))
+  }
 
   var body: some HTML {
     div(
-      .hx.get(next ?? SiteRoute.View.router.path(for: .project(.index))),
+      .hx.get(next),
       .hx.pushURL(true),
       .hx.target("body"),
       .hx.trigger(.event(.revealed)),
-      .hx.indicator(".hx-indicator")
+      .hx.indicator()
     ) {
       Indicator()
     }

@@ -196,12 +196,13 @@ extension SiteRoute.View.EffectiveLengthRoute {
     case .form(let dismiss):
       return EffectiveLengthForm(dismiss: dismiss)
 
-    case .field(let type):
+    case .field(let type, let style):
       switch type {
       case .straightLength:
         return StraightLengthField()
       case .group:
-        return GroupField()
+        // FIX:
+        return GroupField(style: style ?? .supply)
       }
     }
   }

@@ -187,11 +187,12 @@ extension SiteRoute.View.FrictionRateRoute {
     case equipmentInfo
     case componentPressureLoss
   }
+
 }
 
 extension SiteRoute.View {
   public enum EffectiveLengthRoute: Equatable, Sendable {
-    case field(FieldType)
+    case field(FieldType, style: EffectiveLength.EffectiveLengthType? = nil)
     case form(dismiss: Bool = false)
     case index
 
@@ -220,6 +221,11 @@ extension SiteRoute.View {
         Method.get
         Query {
           Field("type") { FieldType.parser() }
+          Optionally {
+            Field("style", default: nil) {
+              EffectiveLength.EffectiveLengthType.parser()
+            }
+          }
         }
       }
     }
@@ -231,19 +237,13 @@ extension SiteRoute.View.EffectiveLengthRoute {
     case straightLength
     case group
   }
-}
 
-// extension SiteRoute.View {
-//   public enum UserRoute: Equatable, Sendable {
-//     case signup(Signup)
-//
-//     public static let router = OneOf {
-//       Route(.case(Self.signup)) {
-//         SiteRoute.View.UserRoute.Signup.router
-//       }
-//     }
-//   }
-// }
+  public enum FormStep: String, CaseIterable, Equatable, Sendable {
+    case nameAndType
+    case straightLengths
+    case groups
+  }
+}
 
 extension SiteRoute.View {
 
