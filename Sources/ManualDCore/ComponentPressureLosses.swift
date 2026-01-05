@@ -42,6 +42,15 @@ extension ComponentPressureLoss {
       self.name = name
       self.value = value
     }
+
+    // Return's commonly used default component pressure losses.
+    public static func `default`(projectID: Project.ID) -> [Self] {
+      [
+        .init(projectID: projectID, name: "supply-outlet", value: 0.03),
+        .init(projectID: projectID, name: "return-grille", value: 0.03),
+        .init(projectID: projectID, name: "balancing-damper", value: 0.03),
+      ]
+    }
   }
 }
 

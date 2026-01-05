@@ -67,6 +67,7 @@ let package = Package(
       name: "ManualDCore",
       dependencies: [
         .product(name: "Dependencies", package: "swift-dependencies"),
+        .product(name: "Fluent", package: "fluent"),
         .product(name: "URLRouting", package: "swift-url-routing"),
         .product(name: "CasePaths", package: "swift-case-paths"),
       ]

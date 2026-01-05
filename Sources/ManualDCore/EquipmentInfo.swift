@@ -50,6 +50,25 @@ extension EquipmentInfo {
       self.coolingCFM = coolingCFM
     }
   }
+
+  public struct Update: Codable, Equatable, Sendable {
+    public let id: EquipmentInfo.ID
+    public let staticPressure: Double?
+    public let heatingCFM: Int?
+    public let coolingCFM: Int?
+
+    public init(
+      id: EquipmentInfo.ID,
+      staticPressure: Double? = nil,
+      heatingCFM: Int? = nil,
+      coolingCFM: Int? = nil
+    ) {
+      self.id = id
+      self.staticPressure = staticPressure
+      self.heatingCFM = heatingCFM
+      self.coolingCFM = coolingCFM
+    }
+  }
 }
 
 #if DEBUG

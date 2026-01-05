@@ -3,6 +3,7 @@ import Fluent
 import ManualDCore
 import Vapor
 
+// FIX: Remove these, not used currently.
 extension DatabaseClient.Projects {
 
   func fetchPage(
@@ -18,6 +19,16 @@ extension DatabaseClient.Projects {
     page: PageRequest
   ) async throws -> Page<Project> {
     try await fetch(userID, page)
+  }
+}
+
+extension DatabaseClient.ComponentLoss {
+
+  func createDefaults(projectID: Project.ID) async throws {
+    let defaults = ComponentPressureLoss.Create.default(projectID: projectID)
+    for loss in defaults {
+      _ = try await create(loss)
+    }
   }
 }
 

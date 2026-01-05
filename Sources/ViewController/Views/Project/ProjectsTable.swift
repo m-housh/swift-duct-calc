@@ -78,7 +78,7 @@ extension ProjectsTable {
       // if there are more pages left.
       if projects.metadata.pageCount > projects.metadata.page {
         tr(
-          .hx.get(route: .project(.page(page: projects.metadata.page + 1, limit: 25))),
+          .hx.get(route: .project(.page(.next(projects)))),
           .hx.trigger(.event(.revealed)),
           .hx.swap(.outerHTML),
           .hx.target("this"),

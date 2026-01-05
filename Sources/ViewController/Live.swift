@@ -81,9 +81,8 @@ extension SiteRoute.View.ProjectRoute {
       return request.view {
         ProjectsTable(userID: user.id, projects: projects)
       }
-    case .page(let page, let limit):
-      let projects = try await database.projects.fetchPage(
-        userID: user.id, page: page, limit: limit)
+    case .page(let page):
+      let projects = try await database.projects.fetch(user.id, page)
       return ProjectsTable(userID: user.id, projects: projects)
 
     case .form(let dismiss):
@@ -91,6 +90,7 @@ extension SiteRoute.View.ProjectRoute {
 
     case .create(let form):
       let project = try await database.projects.create(user.id, form)
+      try await database.componentLoss.createDefaults(projectID: project.id)
       return request.view {
         ProjectView(projectID: project.id, activeTab: .projects) {
           ProjectDetail(project: project)
@@ -106,6 +106,8 @@ extension SiteRoute.View.ProjectRoute {
             ProjectDetail(project: project)
           }
         }
+      case .equipment(let route):
+        return try await route.renderView(on: request, projectID: projectID)
       case .frictionRate(let route):
         return try await route.renderView(on: request, projectID: projectID)
 
@@ -118,6 +120,30 @@ extension SiteRoute.View.ProjectRoute {
 
     }
 
+  }
+}
+
+extension SiteRoute.View.ProjectRoute.EquipmentInfoRoute {
+  func renderView(
+    on request: ViewController.Request,
+    projectID: Project.ID
+  ) async throws -> AnySendableHTML {
+    @Dependency(\.database) var database
+
+    switch self {
+    case .index:
+      let equipment = try await database.equipment.fetch(projectID)
+      return EquipmentInfoView(equipmentInfo: equipment, projectID: projectID)
+    case .form(let dismiss):
+      let equipment = try await database.equipment.fetch(projectID)
+      return EquipmentInfoForm(dismiss: dismiss, projectID: projectID, equipmentInfo: equipment)
+    case .submit(let form):
+      let equipment = try await database.equipment.create(form)
+      return EquipmentInfoView(equipmentInfo: equipment, projectID: projectID)
+    case .update(let updates):
+      let equipment = try await database.equipment.update(updates)
+      return EquipmentInfoView(equipmentInfo: equipment, projectID: projectID)
+    }
   }
 }
 
@@ -162,18 +188,24 @@ extension SiteRoute.View.ProjectRoute.FrictionRateRoute {
 
     switch self {
     case .index:
+      let equipment = try await database.equipment.fetch(projectID)
       let componentLosses = try await database.componentLoss.fetch(projectID)
 
       return request.view {
         ProjectView(projectID: projectID, activeTab: .frictionRate) {
-          FrictionRateView(componentLosses: componentLosses, projectID: projectID)
+          FrictionRateView(
+            equipmentInfo: equipment,
+            componentLosses: componentLosses,
+            projectID: projectID
+          )
         }
       }
     case .form(let type, let dismiss):
       // FIX: Forms need to reference existing items.
       switch type {
       case .equipmentInfo:
-        return EquipmentForm(dismiss: dismiss, projectID: projectID)
+        return div { "REMOVE ME!" }
+      // return EquipmentForm(dismiss: dismiss, projectID: projectID)
       case .componentPressureLoss:
         return ComponentLossForm(dismiss: dismiss, projectID: projectID)
       }

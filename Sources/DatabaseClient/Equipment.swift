@@ -11,6 +11,7 @@ extension DatabaseClient {
     public var delete: @Sendable (EquipmentInfo.ID) async throws -> Void
     public var fetch: @Sendable (Project.ID) async throws -> EquipmentInfo?
     public var get: @Sendable (EquipmentInfo.ID) async throws -> EquipmentInfo?
+    public var update: @Sendable (EquipmentInfo.Update) async throws -> EquipmentInfo
   }
 }
 
@@ -38,12 +39,21 @@ extension DatabaseClient.Equipment {
             .filter("projectID", .equal, projectId)
             .first()
         else {
-          throw NotFoundError()
+          return nil
         }
         return try model.toDTO()
       },
       get: { id in
         try await EquipmentModel.find(id, on: database).map { try $0.toDTO() }
+      },
+      update: { request in
+        guard let model = try await EquipmentModel.find(request.id, on: database) else {
+          throw NotFoundError()
+        }
+        guard request.hasUpdates else { return try model.toDTO() }
+        try model.applyUpdates(request)
+        try await model.save(on: database)
+        return try model.toDTO()
       }
     )
   }
@@ -73,6 +83,30 @@ extension EquipmentInfo.Create {
     }
     guard coolingCFM >= 0 else {
       throw ValidationError("Equipment info heating CFM should be greater than 0.")
+    }
+  }
+}
+
+extension EquipmentInfo.Update {
+  var hasUpdates: Bool {
+    staticPressure != nil || heatingCFM != nil || coolingCFM != nil
+  }
+
+  func validate() throws(ValidationError) {
+    if let staticPressure {
+      guard staticPressure >= 0 else {
+        throw ValidationError("Equipment info static pressure should be greater than 0.")
+      }
+    }
+    if let heatingCFM {
+      guard heatingCFM >= 0 else {
+        throw ValidationError("Equipment info heating CFM should be greater than 0.")
+      }
+    }
+    if let coolingCFM {
+      guard coolingCFM >= 0 else {
+        throw ValidationError("Equipment info heating CFM should be greater than 0.")
+      }
     }
   }
 }
@@ -158,5 +192,18 @@ final class EquipmentModel: Model, @unchecked Sendable {
       createdAt: createdAt!,
       updatedAt: updatedAt!
     )
+  }
+
+  func applyUpdates(_ updates: EquipmentInfo.Update) throws {
+    try updates.validate()
+    if let staticPressure = updates.staticPressure {
+      self.staticPressure = staticPressure
+    }
+    if let heatingCFM = updates.heatingCFM {
+      self.heatingCFM = heatingCFM
+    }
+    if let coolingCFM = updates.coolingCFM {
+      self.coolingCFM = coolingCFM
+    }
   }
 }

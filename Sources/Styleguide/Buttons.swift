@@ -53,11 +53,11 @@ public struct CancelButton: HTML, Sendable {
 }
 
 public struct EditButton: HTML, Sendable {
-  let title: String
+  let title: String?
   let type: HTMLAttribute<HTMLTag.button>.ButtonType
 
   public init(
-    title: String = "Edit",
+    title: String? = nil,
     type: HTMLAttribute<HTMLTag.button>.ButtonType = .button
   ) {
     self.title = title
@@ -68,13 +68,15 @@ public struct EditButton: HTML, Sendable {
     button(
       .class(
         """
-        text-white font-bold text-xl bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg shadow-lg
+        btn btn-primary
         """
       ),
       .type(type)
     ) {
       div(.class("flex")) {
-        span(.class("pe-2")) { title }
+        if let title {
+          span(.class("pe-2")) { title }
+        }
         SVG(.squarePen)
       }
     }
@@ -86,6 +88,9 @@ public struct PlusButton: HTML, Sendable {
   public init() {}
 
   public var body: some HTML<HTMLTag.button> {
-    button(.type(.button)) { SVG(.circlePlus) }
+    button(
+      .type(.button),
+      .class("btn btn-primary")
+    ) { SVG(.circlePlus) }
   }
 }

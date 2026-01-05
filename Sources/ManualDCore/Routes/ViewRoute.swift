@@ -1,4 +1,5 @@
 import CasePathsCore
+import FluentKit
 import Foundation
 @preconcurrency import URLRouting
 
@@ -10,9 +11,7 @@ extension SiteRoute {
     case login(LoginRoute)
     case signup(SignupRoute)
     case project(ProjectRoute)
-    // case frictionRate(FrictionRateRoute)
     case effectiveLength(EffectiveLengthRoute)
-    // case user(UserRoute)
 
     public static let router = OneOf {
       Route(.case(Self.login)) {
@@ -24,15 +23,9 @@ extension SiteRoute {
       Route(.case(Self.project)) {
         SiteRoute.View.ProjectRoute.router
       }
-      // Route(.case(Self.frictionRate)) {
-      //   SiteRoute.View.FrictionRateRoute.router
-      // }
       Route(.case(Self.effectiveLength)) {
         SiteRoute.View.EffectiveLengthRoute.router
       }
-      // Route(.case(Self.user)) {
-      //   SiteRoute.View.UserRoute.router
-      // }
     }
   }
 }
@@ -43,7 +36,11 @@ extension SiteRoute.View {
     case detail(Project.ID, DetailRoute)
     case form(dismiss: Bool = false)
     case index
-    case page(page: Int = 1, limit: Int = 25)
+    case page(PageRequest)
+
+    public static func page(page: Int, per limit: Int) -> Self {
+      .page(.init(page: page, per: limit))
+    }
 
     static let rootPath = "projects"
 
@@ -83,7 +80,7 @@ extension SiteRoute.View {
         Path { rootPath }
         Method.get
       }
-      Route(.case(Self.page(page:limit:))) {
+      Route(.case(Self.page)) {
         Path {
           rootPath
           "page"
@@ -91,8 +88,9 @@ extension SiteRoute.View {
         Method.get
         Query {
           Field("page", default: 1) { Int.parser() }
-          Field("limit", default: 25) { Int.parser() }
+          Field("per", default: 25) { Int.parser() }
         }
+        .map(.memberwise(PageRequest.init))
       }
     }
   }
@@ -102,12 +100,16 @@ extension SiteRoute.View.ProjectRoute {
 
   public enum DetailRoute: Equatable, Sendable {
     case index
+    case equipment(EquipmentInfoRoute)
     case frictionRate(FrictionRateRoute)
     case rooms(RoomRoute)
 
     static let router = OneOf {
       Route(.case(Self.index)) {
         Method.get
+      }
+      Route(.case(Self.equipment)) {
+        EquipmentInfoRoute.router
       }
       Route(.case(Self.frictionRate)) {
         FrictionRateRoute.router
@@ -160,6 +162,7 @@ extension SiteRoute.View.ProjectRoute {
 
   public enum FrictionRateRoute: Equatable, Sendable {
     case index
+    // TODO: Remove form or move equipment / component losses routes here.
     case form(FormType, dismiss: Bool = false)
 
     static let rootPath = "friction-rate"
@@ -185,6 +188,64 @@ extension SiteRoute.View.ProjectRoute {
     public enum FormType: String, CaseIterable, Codable, Equatable, Sendable {
       case equipmentInfo
       case componentPressureLoss
+    }
+  }
+
+  public enum EquipmentInfoRoute: Equatable, Sendable {
+    case index
+    case form(dismiss: Bool)
+    case submit(EquipmentInfo.Create)
+    case update(EquipmentInfo.Update)
+
+    static let rootPath = "equipment"
+
+    public static let router = OneOf {
+      Route(.case(Self.index)) {
+        Path { rootPath }
+        Method.get
+      }
+      Route(.case(Self.form)) {
+        Path {
+          rootPath
+          "create"
+        }
+        Method.get
+        Query {
+          Field("dismiss", default: true) { Bool.parser() }
+        }
+      }
+      Route(.case(Self.submit)) {
+        Path { rootPath }
+        Method.post
+        Body {
+          FormData {
+            Field("projectID") { Project.ID.parser() }
+            Field("staticPressure") { Double.parser() }
+            Field("heatingCFM") { Int.parser() }
+            Field("coolingCFM") { Int.parser() }
+          }
+          .map(.memberwise(EquipmentInfo.Create.init))
+        }
+      }
+      Route(.case(Self.update)) {
+        Path { rootPath }
+        Method.patch
+        Body {
+          FormData {
+            Field("id") { EquipmentInfo.ID.parser() }
+            Optionally {
+              Field("staticPressure", default: nil) { Double.parser() }
+            }
+            Optionally {
+              Field("heatingCFM", default: nil) { Int.parser() }
+            }
+            Optionally {
+              Field("coolingCFM", default: nil) { Int.parser() }
+            }
+          }
+          .map(.memberwise(EquipmentInfo.Update.init))
+        }
+      }
     }
   }
 }
@@ -311,5 +372,11 @@ extension SiteRoute.View {
         }
       }
     }
+  }
+}
+
+extension PageRequest: @retroactive Equatable {
+  public static func == (lhs: FluentKit.PageRequest, rhs: FluentKit.PageRequest) -> Bool {
+    lhs.page == rhs.page && lhs.per == rhs.per
   }
 }
