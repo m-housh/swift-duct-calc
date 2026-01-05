@@ -35,9 +35,10 @@ extension SiteRoute.View {
     case create(Project.Create)
     case delete(id: Project.ID)
     case detail(Project.ID, DetailRoute)
-    case form(dismiss: Bool = false)
+    case form(id: Project.ID? = nil, dismiss: Bool = false)
     case index
     case page(PageRequest)
+    case update(Project.Update)
 
     public static func page(page: Int, per limit: Int) -> Self {
       .page(.init(page: page, per: limit))
@@ -81,6 +82,9 @@ extension SiteRoute.View {
         }
         Method.get
         Query {
+          Optionally {
+            Field("id", default: nil) { Project.ID.parser() }
+          }
           Field("dismiss", default: false) { Bool.parser() }
         }
       }
@@ -99,6 +103,31 @@ extension SiteRoute.View {
           Field("per", default: 25) { Int.parser() }
         }
         .map(.memberwise(PageRequest.init))
+      }
+      Route(.case(Self.update)) {
+        Path { rootPath }
+        Method.patch
+        Body {
+          FormData {
+            Field("id") { Project.ID.parser() }
+            Optionally {
+              Field("name", .string)
+            }
+            Optionally {
+              Field("streetAddress", .string)
+            }
+            Optionally {
+              Field("city", .string)
+            }
+            Optionally {
+              Field("state", .string)
+            }
+            Optionally {
+              Field("zipCode", .string)
+            }
+          }
+          .map(.memberwise(Project.Update.init))
+        }
       }
     }
   }

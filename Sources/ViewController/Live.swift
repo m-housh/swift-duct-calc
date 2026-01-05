@@ -85,8 +85,16 @@ extension SiteRoute.View.ProjectRoute {
       let projects = try await database.projects.fetch(user.id, page)
       return ProjectsTable(userID: user.id, projects: projects)
 
-    case .form(let dismiss):
-      return ProjectForm(dismiss: dismiss)
+    case .form(let id, let dismiss):
+      request.logger.debug("Project form: \(id != nil ? "Fetching project for: \(id!)" : "N/A")")
+      var project: Project? = nil
+      if let id, dismiss == false {
+        project = try await database.projects.get(id)
+      }
+      request.logger.debug(
+        project == nil ? "No project found" : "Showing form for existing project"
+      )
+      return ProjectForm(dismiss: dismiss, project: project)
 
     case .create(let form):
       let project = try await database.projects.create(user.id, form)
@@ -97,11 +105,16 @@ extension SiteRoute.View.ProjectRoute {
       try await database.projects.delete(id)
       return EmptyHTML()
 
+    case .update(let form):
+      let project = try await database.projects.update(form)
+      return ProjectView(projectID: project.id, activeTab: .project)
+
     case .detail(let projectID, let route):
       switch route {
       case .index(let tab):
-        return ProjectView(projectID: projectID, activeTab: tab)
-      // return try await defaultDetailView(projectID: projectID, activeTab: tab)
+        return request.view {
+          ProjectView(projectID: projectID, activeTab: tab)
+        }
       case .equipment(let route):
         return try await route.renderView(on: request, projectID: projectID)
       case .frictionRate(let route):

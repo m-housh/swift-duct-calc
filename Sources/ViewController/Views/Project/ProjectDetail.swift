@@ -18,7 +18,7 @@ struct ProjectDetail: HTML, Sendable {
         h1(.class("text-2xl font-bold")) { "Project" }
         EditButton()
           .attributes(
-            .hx.get(route: .project(.form(dismiss: false))),
+            .hx.get(route: .project(.form(id: project.id, dismiss: false))),
             .hx.target("#projectForm"),
             .hx.swap(.outerHTML)
           )
@@ -54,6 +54,6 @@ struct ProjectDetail: HTML, Sendable {
       }
     }
 
-    div(.id("projectForm")) {}
+    ProjectForm(dismiss: true)
   }
 }

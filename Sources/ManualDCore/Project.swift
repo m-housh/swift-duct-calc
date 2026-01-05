@@ -57,6 +57,32 @@ extension Project {
       self.zipCode = zipCode
     }
   }
+
+  public struct Update: Codable, Equatable, Sendable {
+
+    public let id: Project.ID
+    public let name: String?
+    public let streetAddress: String?
+    public let city: String?
+    public let state: String?
+    public let zipCode: String?
+
+    public init(
+      id: Project.ID,
+      name: String? = nil,
+      streetAddress: String? = nil,
+      city: String? = nil,
+      state: String? = nil,
+      zipCode: String? = nil
+    ) {
+      self.id = id
+      self.name = name
+      self.streetAddress = streetAddress
+      self.city = city
+      self.state = state
+      self.zipCode = zipCode
+    }
+  }
 }
 
 #if DEBUG

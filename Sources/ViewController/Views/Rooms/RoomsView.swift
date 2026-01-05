@@ -61,6 +61,7 @@ struct RoomsView: HTML, Sendable {
                     .class("badge badge-outline badge-success badge-xl"))
               }
               td {}
+              td {}
             }
           }
         }
@@ -87,10 +88,11 @@ struct RoomsView: HTML, Sendable {
           Number(room.registerCount)
         }
         td {
-          Row {
+          div(.class("flex justify-end space-x-6")) {
             TrashButton()
               .attributes(
-                .hx.delete(route: .project(.detail(room.projectID, .rooms(.delete(id: room.id))))),
+                .hx.delete(
+                  route: .project(.detail(room.projectID, .rooms(.delete(id: room.id))))),
                 .hx.target("closest tr"),
                 .hx.confirm("Are you sure?")
               )

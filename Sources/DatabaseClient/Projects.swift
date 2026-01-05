@@ -11,6 +11,7 @@ extension DatabaseClient {
     public var delete: @Sendable (Project.ID) async throws -> Void
     public var get: @Sendable (Project.ID) async throws -> Project?
     public var fetch: @Sendable (User.ID, PageRequest) async throws -> Page<Project>
+    public var update: @Sendable (Project.Update) async throws -> Project
   }
 }
 
@@ -40,6 +41,16 @@ extension DatabaseClient.Projects: TestDependencyKey {
           .filter(\.$user.$id == userID)
           .paginate(request)
           .map { try $0.toDTO() }
+      },
+      update: { updates in
+        guard let model = try await ProjectModel.find(updates.id, on: database) else {
+          throw NotFoundError()
+        }
+        try updates.validate()
+        if model.applyUpdates(updates) {
+          try await model.save(on: database)
+        }
+        return try model.toDTO()
       }
     )
   }
@@ -74,6 +85,37 @@ extension Project.Create {
     }
     guard !zipCode.isEmpty else {
       throw ValidationError("Project zipCode should not be empty.")
+    }
+  }
+}
+
+extension Project.Update {
+
+  func validate() throws(ValidationError) {
+    if let name {
+      guard !name.isEmpty else {
+        throw ValidationError("Project name should not be empty.")
+      }
+    }
+    if let streetAddress {
+      guard !streetAddress.isEmpty else {
+        throw ValidationError("Project street address should not be empty.")
+      }
+    }
+    if let city {
+      guard !city.isEmpty else {
+        throw ValidationError("Project city should not be empty.")
+      }
+    }
+    if let state {
+      guard !state.isEmpty else {
+        throw ValidationError("Project state should not be empty.")
+      }
+    }
+    if let zipCode {
+      guard !zipCode.isEmpty else {
+        throw ValidationError("Project zipCode should not be empty.")
+      }
     }
   }
 }
@@ -155,7 +197,6 @@ final class ProjectModel: Model, @unchecked Sendable {
     self.name = name
     self.streetAddress = streetAddress
     self.city = city
-    self.city = city
     self.state = state
     self.zipCode = zipCode
     $user.id = userID
@@ -174,5 +215,30 @@ final class ProjectModel: Model, @unchecked Sendable {
       createdAt: createdAt!,
       updatedAt: updatedAt!
     )
+  }
+
+  func applyUpdates(_ updates: Project.Update) -> Bool {
+    var hasUpdates = false
+    if let name = updates.name, name != self.name {
+      hasUpdates = true
+      self.name = name
+    }
+    if let streetAddress = updates.streetAddress, streetAddress != self.streetAddress {
+      hasUpdates = true
+      self.streetAddress = streetAddress
+    }
+    if let city = updates.city, city != self.city {
+      hasUpdates = true
+      self.city = city
+    }
+    if let state = updates.state, state != self.state {
+      hasUpdates = true
+      self.state = state
+    }
+    if let zipCode = updates.zipCode, zipCode != self.zipCode {
+      hasUpdates = true
+      self.zipCode = zipCode
+    }
+    return hasUpdates
   }
 }
