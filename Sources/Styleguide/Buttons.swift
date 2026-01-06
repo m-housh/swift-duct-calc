@@ -16,7 +16,7 @@ public struct SubmitButton: HTML, Sendable {
     button(
       .class(
         """
-        text-white font-bold text-xl bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg shadow-lg
+        btn btn-secondary
         """
       ),
       .type(type)

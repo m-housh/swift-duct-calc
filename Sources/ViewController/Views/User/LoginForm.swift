@@ -13,22 +13,20 @@ struct LoginForm: HTML, Sendable {
   }
 
   var body: some HTML {
-    div(
-      .id("loginForm"),
-      .class("flex items-center justify-center")
-    ) {
+    ModalForm(id: "loginForm", closeButton: false, dismiss: false) {
+      h1(.class("text-2xl font-bold mb-6")) { style.title }
+
       form(
-        .method(.post)
+        .method(.post),
+        .class("space-y-4")
       ) {
 
         if let next {
           input(.class("hidden"), .name("next"), .value(next))
         }
 
-        fieldset(.class("fieldset bg-base-200 border-base-300 rounded-box w-xl border p-4")) {
-          legend(.class("fieldset-legend")) { style.title }
-
-          if style == .signup {
+        if style == .signup {
+          div {
             label(.class("input validator w-full")) {
               SVG(.user)
               input(
@@ -43,7 +41,9 @@ struct LoginForm: HTML, Sendable {
               "Must be at least 3 characters"
             }
           }
+        }
 
+        div {
           label(.class("input validator w-full")) {
             SVG(.email)
             input(
@@ -52,7 +52,9 @@ struct LoginForm: HTML, Sendable {
             )
           }
           div(.class("validator-hint hidden")) { "Enter valid email address." }
+        }
 
+        div {
           label(.class("input validator w-full")) {
             SVG(.key)
             input(
@@ -61,8 +63,10 @@ struct LoginForm: HTML, Sendable {
               .name("password"), .id("password"),
             )
           }
+        }
 
-          if style == .signup {
+        if style == .signup {
+          div {
             label(.class("input validator w-full")) {
               SVG(.key)
               input(
@@ -84,10 +88,15 @@ struct LoginForm: HTML, Sendable {
               "At least one uppercase letter"
             }
           }
+        }
 
-          button(.class("btn btn-secondary mt-4")) { style.title }
+        div(.class("flex")) {
+          button(.class("btn btn-secondary mt-4 w-full")) { style.title }
+        }
+
+        div(.class("flex justify-center")) {
           a(
-            .class("btn btn-link mt-4"),
+            .class("btn btn-link"),
             .href(route: style == .signup ? .login(.index(next: next)) : .signup(.index))
           ) {
             style == .login ? "Sign Up" : "Login"

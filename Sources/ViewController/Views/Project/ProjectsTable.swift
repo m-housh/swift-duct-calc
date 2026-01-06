@@ -67,8 +67,7 @@ extension ProjectsTable {
           td { "\(project.name)" }
           td { "\(project.streetAddress)" }
           td {
-            Row {
-              div {}
+            div(.class("flex justify-end space-x-6")) {
               TrashButton()
                 .attributes(
                   .hx.delete(route: .project(.delete(id: project.id))),

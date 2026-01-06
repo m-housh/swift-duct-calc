@@ -20,9 +20,10 @@ struct RoomsView: HTML, Sendable {
           .data("tip", value: "Add room")
         ) {
           button(
-            .hx.get(route: .project(.detail(projectID, .rooms(.form(dismiss: false))))),
-            .hx.target("#roomForm"),
-            .hx.swap(.outerHTML),
+            // .hx.get(route: .project(.detail(projectID, .rooms(.form(dismiss: false))))),
+            // .hx.target("#roomForm"),
+            // .hx.swap(.outerHTML),
+            .on(.click, "roomForm.showModal()"),
             .class("btn btn-primary w-[40px] text-2xl")
           ) {
             "+"
@@ -81,9 +82,10 @@ struct RoomsView: HTML, Sendable {
             .attributes(.class("text-error"))
         }
         td {
-          Number(room.coolingLoad)
+          Number(room.coolingTotal)
             .attributes(.class("text-success"))
         }
+        // FIX: Add cooling sensible.
         td {
           Number(room.registerCount)
         }
@@ -120,6 +122,6 @@ extension Array where Element == Room {
   }
 
   var coolingTotal: Double {
-    reduce(into: 0) { $0 += $1.coolingLoad }
+    reduce(into: 0) { $0 += $1.coolingTotal }
   }
 }

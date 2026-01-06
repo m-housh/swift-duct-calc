@@ -26,7 +26,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
   }
 
   public var body: some HTML {
-    div {
+    div(.class("h-screen w-full")) {
       inner
     }
     script(.src("https://unpkg.com/lucide@latest")) {}

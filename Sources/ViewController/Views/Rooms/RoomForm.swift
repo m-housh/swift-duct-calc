@@ -17,6 +17,8 @@ struct RoomForm: HTML, Sendable {
       h1(.class("text-3xl font-bold pb-6")) { "Room" }
       // TODO: Use htmx here.
       form(
+        .class("modal-backdrop"),
+        .init(name: "method", value: "dialog"),
         room == nil
           ? .hx.post(route: .project(.detail(projectID, .rooms(.index))))
           : .hx.patch(route: .project(.detail(projectID, .rooms(.index)))),
@@ -41,11 +43,16 @@ struct RoomForm: HTML, Sendable {
             .attributes(.type(.number), .required, .min("0"), .value(room?.heatingLoad))
         }
         div {
-          label(.for("coolingLoad")) { "Cooling Load:" }
-          Input(id: "coolingLoad", placeholder: "Cooling Load")
-            .attributes(.type(.number), .required, .min("0"), .value(room?.coolingLoad))
+          label(.for("coolingTotal")) { "Cooling Total:" }
+          Input(id: "coolingTotal", placeholder: "Cooling Total")
+            .attributes(.type(.number), .required, .min("0"), .value(room?.coolingTotal))
         }
         div {
+          label(.for("coolingSensible")) { "Cooling Sensible:" }
+          Input(id: "coolingSensible", placeholder: "Cooling Sensible (Optional)")
+            .attributes(.type(.number), .min("0"), .value(room?.coolingSensible))
+        }
+        div(.class("pb-6")) {
           label(.for("registerCount")) { "Registers:" }
           Input(id: "registerCount", placeholder: "Register Count")
             .attributes(
@@ -53,20 +60,9 @@ struct RoomForm: HTML, Sendable {
               .value("\(room != nil ? room!.registerCount : 1)"),
             )
         }
-        Row {
-          // Force button to the right, probably a better way.
-          div {}
-          div(.class("space-x-4")) {
-            CancelButton()
-              .attributes(
-                .hx.get(route: .project(.detail(projectID, .rooms(.form(dismiss: true))))),
-                .hx.target("#roomForm"),
-                .hx.swap(.outerHTML)
-              )
-            SubmitButton()
-          }
+        div(.class("flex justify-end space-x-4")) {
+          SubmitButton()
         }
-        .attributes(.class("py-4"))
       }
     }
   }

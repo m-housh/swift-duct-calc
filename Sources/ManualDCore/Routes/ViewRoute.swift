@@ -176,7 +176,7 @@ extension SiteRoute.View.ProjectRoute {
     case delete(id: Room.ID)
     case form(id: Room.ID? = nil, dismiss: Bool = false)
     case index
-    case submit(Room.Form)
+    case submit(Room.Create)
     case update(Room.Update)
 
     static let rootPath = "rooms"
@@ -213,12 +213,16 @@ extension SiteRoute.View.ProjectRoute {
         Method.post
         Body {
           FormData {
+            Field("projectID") { Project.ID.parser() }
             Field("name", .string)
             Field("heatingLoad") { Double.parser() }
-            Field("coolingLoad") { Double.parser() }
+            Field("coolingTotal") { Double.parser() }
+            Optionally {
+              Field("coolingSensible", default: nil) { Double.parser() }
+            }
             Field("registerCount") { Digits() }
           }
-          .map(.memberwise(Room.Form.init))
+          .map(.memberwise(Room.Create.init))
         }
       }
       Route(.case(Self.update)) {
@@ -234,7 +238,10 @@ extension SiteRoute.View.ProjectRoute {
               Field("heatingLoad") { Double.parser() }
             }
             Optionally {
-              Field("coolingLoad") { Double.parser() }
+              Field("coolingTotal") { Double.parser() }
+            }
+            Optionally {
+              Field("coolingSensible") { Double.parser() }
             }
             Optionally {
               Field("registerCount") { Digits() }
@@ -405,9 +412,10 @@ extension SiteRoute.View {
         Method.get
         Query {
           Optionally {
-            Field("next", default: nil) {
-              CharacterSet.urlPathAllowed.map(.string)
-            }
+            Field("next", .string, default: nil)
+            // {
+            //   CharacterSet.map(.string)
+            // }
           }
         }
       }
@@ -419,9 +427,7 @@ extension SiteRoute.View {
             Field("email", .string)
             Field("password", .string)
             Optionally {
-              Field("next", default: nil) {
-                CharacterSet.urlPathAllowed.map(.string)
-              }
+              Field("next", .string, default: nil)
             }
           }
           .map(.memberwise(User.Login.init))

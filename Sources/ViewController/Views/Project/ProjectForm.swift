@@ -34,7 +34,7 @@ struct ProjectForm: HTML, Sendable {
         div {
           label(.for("name")) { "Name" }
           Input(id: "name", placeholder: "Name")
-            .attributes(.type(.text), .required, .autofocus)
+            .attributes(.type(.text), .required, .autofocus, .value(project?.name))
         }
         div {
           label(.for("streetAddress")) { "Address" }
@@ -57,14 +57,9 @@ struct ProjectForm: HTML, Sendable {
             .attributes(.type(.text), .required, .value(project?.zipCode))
         }
 
-        div(.class("flex justify-end space-x-6")) {
-          CancelButton()
-            .attributes(
-              .hx.get(route: .project(.form(dismiss: true))),
-              .hx.target("#projectForm"),
-              .hx.swap(.outerHTML)
-            )
+        div(.class("flex mt-6")) {
           SubmitButton()
+            .attributes(.class("btn-block"))
         }
       }
     }

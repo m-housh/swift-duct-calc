@@ -2,36 +2,37 @@ import Elementary
 
 public struct ModalForm<T: HTML>: HTML, Sendable where T: Sendable {
 
+  let closeButton: Bool
   let dismiss: Bool
   let id: String
   let inner: T
 
   public init(
     id: String,
+    closeButton: Bool = true,
     dismiss: Bool,
     @HTMLBuilder inner: () -> T
   ) {
+    self.closeButton = closeButton
     self.dismiss = dismiss
     self.id = id
     self.inner = inner()
   }
 
   public var body: some HTML {
-    if dismiss {
-      div(.id(id)) {}
-    } else {
-      div(
-        .id(id),
-        .class(
-          """
-          fixed top-40 left-[25vw] w-1/2 z-50 text-gray-800
-          bg-gray-200 border border-gray-400 
-          rounded-lg shadow-lg mx-10
-          """
-        )
-      ) {
+    dialog(.id(id), .class("modal")) {
+      div(.class("modal-box")) {
+        if closeButton {
+          button(
+            .class("btn btn-sm btn-circle btn-ghost absolute right-2 top-2"),
+            .on(.click, "\(id).close()")
+          ) {
+            SVG(.close)
+          }
+        }
         inner
       }
     }
+    .attributes(.class("modal-open"), when: dismiss == false)
   }
 }
