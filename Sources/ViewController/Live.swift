@@ -187,6 +187,14 @@ extension SiteRoute.View.ProjectRoute.RoomRoute {
     case .update(let form):
       _ = try await database.rooms.update(form)
       return ProjectView(projectID: projectID, activeTab: .rooms)
+
+    case .updateSensibleHeatRatio(let form):
+      let _ = try await database.projects.update(
+        .init(id: form.projectID, sensibleHeatRatio: form.sensibleHeatRatio)
+      )
+      return request.view {
+        ProjectView(projectID: projectID, activeTab: .rooms)
+      }
     }
   }
 }

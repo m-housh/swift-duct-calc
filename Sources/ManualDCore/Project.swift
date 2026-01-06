@@ -9,6 +9,7 @@ public struct Project: Codable, Equatable, Identifiable, Sendable {
   public let city: String
   public let state: String
   public let zipCode: String
+  public let sensibleHeatRatio: Double?
   public let createdAt: Date
   public let updatedAt: Date
 
@@ -19,6 +20,7 @@ public struct Project: Codable, Equatable, Identifiable, Sendable {
     city: String,
     state: String,
     zipCode: String,
+    sensibleHeatRatio: Double? = nil,
     createdAt: Date,
     updatedAt: Date
   ) {
@@ -28,6 +30,7 @@ public struct Project: Codable, Equatable, Identifiable, Sendable {
     self.city = city
     self.state = state
     self.zipCode = zipCode
+    self.sensibleHeatRatio = sensibleHeatRatio
     self.createdAt = createdAt
     self.updatedAt = updatedAt
   }
@@ -42,6 +45,7 @@ extension Project {
     public let city: String
     public let state: String
     public let zipCode: String
+    public let sensibleHeatRatio: Double?
 
     public init(
       name: String,
@@ -49,12 +53,14 @@ extension Project {
       city: String,
       state: String,
       zipCode: String,
+      sensibleHeatRatio: Double? = nil,
     ) {
       self.name = name
       self.streetAddress = streetAddress
       self.city = city
       self.state = state
       self.zipCode = zipCode
+      self.sensibleHeatRatio = sensibleHeatRatio
     }
   }
 
@@ -66,6 +72,7 @@ extension Project {
     public let city: String?
     public let state: String?
     public let zipCode: String?
+    public let sensibleHeatRatio: Double?
 
     public init(
       id: Project.ID,
@@ -73,7 +80,8 @@ extension Project {
       streetAddress: String? = nil,
       city: String? = nil,
       state: String? = nil,
-      zipCode: String? = nil
+      zipCode: String? = nil,
+      sensibleHeatRatio: Double? = nil
     ) {
       self.id = id
       self.name = name
@@ -81,6 +89,7 @@ extension Project {
       self.city = city
       self.state = state
       self.zipCode = zipCode
+      self.sensibleHeatRatio = sensibleHeatRatio
     }
   }
 }

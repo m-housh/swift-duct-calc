@@ -57,6 +57,11 @@ extension SiteRoute.View {
             Field("city", .string)
             Field("state", .string)
             Field("zipCode", .string)
+            Optionally {
+              Field("sensibleHeatRatio", default: nil) {
+                Double.parser()
+              }
+            }
           }
           .map(.memberwise(Project.Create.init))
         }
@@ -125,6 +130,11 @@ extension SiteRoute.View {
             Optionally {
               Field("zipCode", .string)
             }
+            Optionally {
+              Field("sensibleHeatRatio", default: nil) {
+                Double.parser()
+              }
+            }
           }
           .map(.memberwise(Project.Update.init))
         }
@@ -178,6 +188,7 @@ extension SiteRoute.View.ProjectRoute {
     case index
     case submit(Room.Create)
     case update(Room.Update)
+    case updateSensibleHeatRatio(SHRUpdate)
 
     static let rootPath = "rooms"
 
@@ -250,6 +261,27 @@ extension SiteRoute.View.ProjectRoute {
           .map(.memberwise(Room.Update.init))
         }
       }
+      Route(.case(Self.updateSensibleHeatRatio)) {
+        Path {
+          rootPath
+          "update-shr"
+        }
+        Method.patch
+        Body {
+          FormData {
+            Field("projectID") { Project.ID.parser() }
+            Optionally {
+              Field("sensibleHeatRatio") { Double.parser() }
+            }
+          }
+          .map(.memberwise(SHRUpdate.init))
+        }
+      }
+    }
+
+    public struct SHRUpdate: Codable, Equatable, Sendable {
+      public let projectID: Project.ID
+      public let sensibleHeatRatio: Double?
     }
   }
 

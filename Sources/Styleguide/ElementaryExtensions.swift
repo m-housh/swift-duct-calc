@@ -29,3 +29,9 @@ extension HTMLAttribute where Tag == HTMLTag.input {
     value(double == nil ? "" : "\(double!)")
   }
 }
+
+extension HTMLAttribute where Tag == HTMLTag.button {
+  public static func showModal(id: String) -> Self {
+    .on(.click, "\(id).showModal()")
+  }
+}

@@ -5,6 +5,8 @@ import Styleguide
 // TODO: Have form hold onto equipment info model to edit.
 struct EquipmentInfoForm: HTML, Sendable {
 
+  static let id = "equipmentForm"
+
   let dismiss: Bool
   let projectID: Project.ID
   let equipmentInfo: EquipmentInfo?
@@ -31,7 +33,7 @@ struct EquipmentInfoForm: HTML, Sendable {
   }
 
   var body: some HTML {
-    ModalForm(id: "equipmentForm", dismiss: dismiss) {
+    ModalForm(id: Self.id, dismiss: dismiss) {
       h1(.class("text-3xl font-bold pb-6 ps-2")) { "Equipment Info" }
       form(
         .class("space-y-4 p-4"),
@@ -64,21 +66,9 @@ struct EquipmentInfoForm: HTML, Sendable {
           Input(id: "coolingCFM", placeholder: "CFM")
             .attributes(.type(.number), .min("0"), .value(coolingCFM))
         }
-        Row {
-          div {}
-          div(.class("space-x-4")) {
-            CancelButton()
-              .attributes(
-                .hx.get(
-                  route: .project(
-                    .detail(projectID, .equipment(.form(dismiss: true)))
-                  )
-                ),
-                .hx.target("#equipmentForm"),
-                .hx.swap(.outerHTML)
-              )
-            SubmitButton(title: "Save")
-          }
+        div {
+          SubmitButton(title: "Save")
+            .attributes(.class("btn-block"))
         }
       }
     }

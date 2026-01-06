@@ -8,12 +8,14 @@ import Styleguide
 // TODO: Need to hold the project ID in hidden input field.
 struct RoomForm: HTML, Sendable {
 
+  static let id = "roomForm"
+
   let dismiss: Bool
   let projectID: Project.ID
   let room: Room?
 
   var body: some HTML {
-    ModalForm(id: "roomForm", dismiss: dismiss) {
+    ModalForm(id: Self.id, dismiss: dismiss) {
       h1(.class("text-3xl font-bold pb-6")) { "Room" }
       // TODO: Use htmx here.
       form(

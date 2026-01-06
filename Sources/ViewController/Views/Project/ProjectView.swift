@@ -36,7 +36,11 @@ struct ProjectView: HTML, Sendable {
               }
             }
           case .rooms:
-            try await RoomsView(projectID: projectID, rooms: database.rooms.fetch(projectID))
+            try await RoomsView(
+              projectID: projectID,
+              rooms: database.rooms.fetch(projectID),
+              sensibleHeatRatio: database.projects.getSensibleHeatRatio(projectID)
+            )
 
           case .effectiveLength:
             try await EffectiveLengthsView(

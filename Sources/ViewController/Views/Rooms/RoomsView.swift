@@ -10,6 +10,7 @@ import Styleguide
 struct RoomsView: HTML, Sendable {
   let projectID: Project.ID
   let rooms: [Room]
+  let sensibleHeatRatio: Double?
 
   var body: some HTML {
     div {
@@ -20,10 +21,7 @@ struct RoomsView: HTML, Sendable {
           .data("tip", value: "Add room")
         ) {
           button(
-            // .hx.get(route: .project(.detail(projectID, .rooms(.form(dismiss: false))))),
-            // .hx.target("#roomForm"),
-            // .hx.swap(.outerHTML),
-            .on(.click, "roomForm.showModal()"),
+            .showModal(id: RoomForm.id),
             .class("btn btn-primary w-[40px] text-2xl")
           ) {
             "+"
@@ -31,6 +29,23 @@ struct RoomsView: HTML, Sendable {
         }
       }
       .attributes(.class("pb-6"))
+
+      div(.class("border rounded-lg mb-6")) {
+        Row {
+          div(.class("space-x-6")) {
+            Label("Sensible Heat Ratio")
+            if let sensibleHeatRatio {
+              Number(sensibleHeatRatio)
+            }
+          }
+
+          EditButton()
+            .attributes(.showModal(id: SHRForm.id))
+        }
+        .attributes(.class("m-4"))
+
+        SHRForm(projectID: projectID, sensibleHeatRatio: sensibleHeatRatio)
+      }
 
       div(.class("overflow-x-auto rounded-box border")) {
         table(.class("table table-zebra"), .id("roomsTable")) {
@@ -114,6 +129,34 @@ struct RoomsView: HTML, Sendable {
     }
   }
 
+  struct SHRForm: HTML, Sendable {
+    static let id = "shrForm"
+
+    let projectID: Project.ID
+    let sensibleHeatRatio: Double?
+
+    var body: some HTML {
+      ModalForm(id: Self.id, dismiss: true) {
+        form(
+          .class("space-y-6"),
+          .hx.patch("/projects/\(projectID)/rooms/update-shr"),
+          .hx.target("body"),
+          .hx.swap(.outerHTML)
+        ) {
+          input(.class("hidden"), .name("projectID"), .value("\(projectID)"))
+          div {
+            label(.for("sensibleHeatRatio")) { "Sensible Heat Ratio" }
+            Input(id: "sensibleHeatRatio", placeholder: "Sensible Heat Ratio")
+              .attributes(.min("0"), .max("1"), .step("0.01"), .value(sensibleHeatRatio))
+          }
+          div {
+            SubmitButton()
+              .attributes(.class("btn-block"))
+          }
+        }
+      }
+    }
+  }
 }
 
 extension Array where Element == Room {

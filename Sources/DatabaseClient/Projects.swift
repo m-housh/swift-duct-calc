@@ -10,6 +10,7 @@ extension DatabaseClient {
     public var create: @Sendable (User.ID, Project.Create) async throws -> Project
     public var delete: @Sendable (Project.ID) async throws -> Void
     public var get: @Sendable (Project.ID) async throws -> Project?
+    public var getSensibleHeatRatio: @Sendable (Project.ID) async throws -> Double?
     public var fetch: @Sendable (User.ID, PageRequest) async throws -> Page<Project>
     public var update: @Sendable (Project.Update) async throws -> Project
   }
@@ -33,6 +34,12 @@ extension DatabaseClient.Projects: TestDependencyKey {
       },
       get: { id in
         try await ProjectModel.find(id, on: database).map { try $0.toDTO() }
+      },
+      getSensibleHeatRatio: { id in
+        guard let model = try await ProjectModel.find(id, on: database) else {
+          throw NotFoundError()
+        }
+        return model.sensibleHeatRatio
       },
       fetch: { userID, request in
         try await ProjectModel.query(on: database)
@@ -86,6 +93,14 @@ extension Project.Create {
     guard !zipCode.isEmpty else {
       throw ValidationError("Project zipCode should not be empty.")
     }
+    if let sensibleHeatRatio {
+      guard sensibleHeatRatio >= 0 else {
+        throw ValidationError("Project sensible heat ratio should be greater than 0.")
+      }
+      guard sensibleHeatRatio <= 1 else {
+        throw ValidationError("Project sensible heat ratio should be less than 1.")
+      }
+    }
   }
 }
 
@@ -117,6 +132,14 @@ extension Project.Update {
         throw ValidationError("Project zipCode should not be empty.")
       }
     }
+    if let sensibleHeatRatio {
+      guard sensibleHeatRatio >= 0 else {
+        throw ValidationError("Project sensible heat ratio should be greater than 0.")
+      }
+      guard sensibleHeatRatio <= 1 else {
+        throw ValidationError("Project sensible heat ratio should be less than 1.")
+      }
+    }
   }
 }
 
@@ -132,6 +155,7 @@ extension Project {
         .field("city", .string, .required)
         .field("state", .string, .required)
         .field("zipCode", .string, .required)
+        .field("sensibleHeatRatio", .double)
         .field("createdAt", .datetime)
         .field("updatedAt", .datetime)
         .field("userID", .uuid, .required, .references(UserModel.schema, "id"))
@@ -168,6 +192,9 @@ final class ProjectModel: Model, @unchecked Sendable {
   @Field(key: "zipCode")
   var zipCode: String
 
+  @Field(key: "sensibleHeatRatio")
+  var sensibleHeatRatio: Double?
+
   @Timestamp(key: "createdAt", on: .create, format: .iso8601)
   var createdAt: Date?
 
@@ -189,6 +216,7 @@ final class ProjectModel: Model, @unchecked Sendable {
     city: String,
     state: String,
     zipCode: String,
+    sensibleHeatRatio: Double? = nil,
     userID: User.ID,
     createdAt: Date? = nil,
     updatedAt: Date? = nil
@@ -199,6 +227,7 @@ final class ProjectModel: Model, @unchecked Sendable {
     self.city = city
     self.state = state
     self.zipCode = zipCode
+    self.sensibleHeatRatio = sensibleHeatRatio
     $user.id = userID
     self.createdAt = createdAt
     self.updatedAt = updatedAt
@@ -212,6 +241,7 @@ final class ProjectModel: Model, @unchecked Sendable {
       city: city,
       state: state,
       zipCode: zipCode,
+      sensibleHeatRatio: sensibleHeatRatio,
       createdAt: createdAt!,
       updatedAt: updatedAt!
     )
@@ -238,6 +268,12 @@ final class ProjectModel: Model, @unchecked Sendable {
     if let zipCode = updates.zipCode, zipCode != self.zipCode {
       hasUpdates = true
       self.zipCode = zipCode
+    }
+    if let sensibleHeatRatio = updates.sensibleHeatRatio,
+      sensibleHeatRatio != self.sensibleHeatRatio
+    {
+      hasUpdates = true
+      self.sensibleHeatRatio = sensibleHeatRatio
     }
     return hasUpdates
   }
