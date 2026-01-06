@@ -20,11 +20,9 @@ struct RoomsView: HTML, Sendable {
           .class("tooltip tooltip-left"),
           .data("tip", value: "Add room")
         ) {
-          button(
-            .showModal(id: RoomForm.id),
-            .class("btn btn-primary w-[40px] text-2xl")
-          ) {
-            "+"
+          div(.class("flex me-4")) {
+            PlusButton()
+              .attributes(.showModal(id: RoomForm.id))
           }
         }
       }
@@ -32,7 +30,7 @@ struct RoomsView: HTML, Sendable {
 
       div(.class("border rounded-lg mb-6")) {
         Row {
-          div(.class("space-x-6")) {
+          div(.class("space-x-6 my-2")) {
             Label("Sensible Heat Ratio")
             if let sensibleHeatRatio {
               Number(sensibleHeatRatio)
@@ -54,27 +52,29 @@ struct RoomsView: HTML, Sendable {
               th { Label("Name") }
               th { Label("Heating Load") }
               th { Label("Cooling Total") }
+              th { Label("Cooling Sensible") }
               th { Label("Register Count") }
               th {}
             }
           }
           tbody {
-            div(.id("rooms")) {
-              for room in rooms {
-                RoomRow(room: room)
-              }
+            for room in rooms {
+              RoomRow(room: room, shr: sensibleHeatRatio)
             }
             // TOTALS
             tr(.class("font-bold text-xl")) {
               td { Label("Total") }
               td {
-                Number(rooms.heatingTotal)
+                Number(rooms.heatingTotal, digits: 0)
                   .attributes(.class("badge badge-outline badge-error badge-xl"))
               }
               td {
-                Number(rooms.coolingTotal)
-                  .attributes(
-                    .class("badge badge-outline badge-success badge-xl"))
+                Number(rooms.coolingTotal, digits: 0)
+                  .attributes(.class("badge badge-outline badge-success badge-xl"))
+              }
+              td {
+                Number(rooms.coolingSensible(shr: sensibleHeatRatio), digits: 0)
+                  .attributes(.class("badge badge-outline badge-info badge-xl"))
               }
               td {}
               td {}
@@ -88,19 +88,35 @@ struct RoomsView: HTML, Sendable {
 
   public struct RoomRow: HTML, Sendable {
     let room: Room
+    let shr: Double
+
+    var coolingSensible: Double {
+      guard let value = room.coolingSensible else {
+        return room.coolingTotal * shr
+      }
+      return value
+    }
+
+    init(room: Room, shr: Double?) {
+      self.room = room
+      self.shr = shr ?? 1.0
+    }
 
     public var body: some HTML {
-      tr(.id("\(room.id)")) {
+      tr(.id("roomRow_\(room.name)")) {
         td { room.name }
         td {
-          Number(room.heatingLoad)
+          Number(room.heatingLoad, digits: 0)
             .attributes(.class("text-error"))
         }
         td {
-          Number(room.coolingTotal)
+          Number(room.coolingTotal, digits: 0)
             .attributes(.class("text-success"))
         }
-        // FIX: Add cooling sensible.
+        td {
+          Number(coolingSensible, digits: 0)
+            .attributes(.class("text-info"))
+        }
         td {
           Number(room.registerCount)
         }
@@ -115,15 +131,15 @@ struct RoomsView: HTML, Sendable {
               )
             EditButton()
               .attributes(
-                .hx.get(
-                  route: .project(
-                    .detail(room.projectID, .rooms(.form(id: room.id, dismiss: false)))
-                  )
-                ),
-                .hx.target("#roomForm"),
-                .hx.swap(.outerHTML)
+                .showModal(id: "roomForm_\(room.name)")
               )
           }
+          RoomForm(
+            id: "roomForm_\(room.name)",
+            dismiss: true,
+            projectID: room.projectID,
+            room: room
+          )
         }
       }
     }
@@ -166,5 +182,14 @@ extension Array where Element == Room {
 
   var coolingTotal: Double {
     reduce(into: 0) { $0 += $1.coolingTotal }
+  }
+
+  func coolingSensible(shr: Double?) -> Double {
+    let shr = shr ?? 1.0
+
+    return reduce(into: 0) {
+      let sensible = $1.coolingSensible ?? ($1.coolingTotal * shr)
+      $0 += sensible
+    }
   }
 }

@@ -10,14 +10,26 @@ struct RoomForm: HTML, Sendable {
 
   static let id = "roomForm"
 
+  let id: String
   let dismiss: Bool
   let projectID: Project.ID
   let room: Room?
 
+  init(
+    id: String = Self.id,
+    dismiss: Bool,
+    projectID: Project.ID,
+    room: Room? = nil
+  ) {
+    self.id = id
+    self.dismiss = dismiss
+    self.projectID = projectID
+    self.room = room
+  }
+
   var body: some HTML {
-    ModalForm(id: Self.id, dismiss: dismiss) {
+    ModalForm(id: id, dismiss: dismiss) {
       h1(.class("text-3xl font-bold pb-6")) { "Room" }
-      // TODO: Use htmx here.
       form(
         .class("modal-backdrop"),
         .init(name: "method", value: "dialog"),
@@ -62,9 +74,8 @@ struct RoomForm: HTML, Sendable {
               .value("\(room != nil ? room!.registerCount : 1)"),
             )
         }
-        div(.class("flex justify-end space-x-4")) {
-          SubmitButton()
-        }
+        SubmitButton()
+          .attributes(.class("btn-block"))
       }
     }
   }

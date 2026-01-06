@@ -32,7 +32,8 @@ struct LoginForm: HTML, Sendable {
               input(
                 .type(.text), .required, .placeholder("Username"),
                 .name("username"), .id("username"),
-                .minlength("3"), .pattern(.username)
+                .minlength("3"), .pattern(.username),
+                .autofocus
               )
             }
             div(.class("validator-hint hidden")) {
@@ -48,7 +49,7 @@ struct LoginForm: HTML, Sendable {
             SVG(.email)
             input(
               .type(.email), .placeholder("Email"), .required,
-              .name("email"), .id("email"),
+              .name("email"), .id("email"), .autofocus
             )
           }
           div(.class("validator-hint hidden")) { "Enter valid email address." }

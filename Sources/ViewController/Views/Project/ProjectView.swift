@@ -80,7 +80,7 @@ struct Sidebar: HTML {
       div(.class("flex")) {
         // TODO: Move somewhere outside of the sidebar.
         button(
-          .class("w-full btn btn-secondary"),
+          .class("btn btn-secondary btn-block"),
           .hx.get(route: .project(.index)),
           .hx.target("body"),
           .hx.pushURL(true),

@@ -16,21 +16,17 @@ struct ProjectsTable: HTML, Sendable {
   }
 
   var body: some HTML {
-    div {
+    div(.class("m-6")) {
       Row {
         h1(.class("text-2xl font-bold")) { "Projects" }
         div(
           .class("tooltip tooltip-left"),
           .data("tip", value: "Add project")
         ) {
-          button(
-            .class("btn btn-primary w-[40px] text-2xl"),
-            .hx.get(route: .project(.form(dismiss: false))),
-            .hx.target("#projectForm"),
-            .hx.swap(.outerHTML)
-          ) {
-            "+"
-          }
+          PlusButton()
+            .attributes(
+              .showModal(id: ProjectForm.id)
+            )
         }
       }
       .attributes(.class("pb-6"))
@@ -75,9 +71,11 @@ extension ProjectsTable {
                   .hx.target("closest tr")
                 )
               a(
-                .class("btn btn-success dark:text-white"),
+                .class("btn btn-success btn-circle dark:text-white"),
                 .href(route: .project(.detail(project.id, .index())))
-              ) { ">" }
+              ) {
+                SVG(.chevronRight)
+              }
             }
           }
         }

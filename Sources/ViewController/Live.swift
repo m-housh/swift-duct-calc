@@ -179,13 +179,14 @@ extension SiteRoute.View.ProjectRoute.RoomRoute {
 
     case .submit(let form):
       request.logger.debug("New room form submitted.")
+      // FIX: Just return a room row??
       let _ = try await database.rooms.create(form)
       return request.view {
         ProjectView(projectID: projectID, activeTab: .rooms)
       }
 
     case .update(let form):
-      _ = try await database.rooms.update(form)
+      let _ = try await database.rooms.update(form)
       return ProjectView(projectID: projectID, activeTab: .rooms)
 
     case .updateSensibleHeatRatio(let form):
