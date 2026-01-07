@@ -42,8 +42,9 @@ struct ProjectView: HTML, Sendable {
               sensibleHeatRatio: database.projects.getSensibleHeatRatio(projectID)
             )
 
-          case .effectiveLength:
+          case .equivalentLength:
             try await EffectiveLengthsView(
+              projectID: projectID,
               effectiveLengths: database.effectiveLength.fetch(projectID)
             )
           case .frictionRate:
@@ -103,11 +104,19 @@ struct Sidebar: HTML {
       )
       .attributes(.data("active", value: active == .project ? "true" : "false"))
 
-      row(title: "Rooms", icon: .doorClosed, route: .project(.detail(projectID, .rooms(.index))))
-        .attributes(.data("active", value: active == .rooms ? "true" : "false"))
+      row(
+        title: "Rooms",
+        icon: .doorClosed,
+        route: .project(.detail(projectID, .rooms(.index)))
+      )
+      .attributes(.data("active", value: active == .rooms ? "true" : "false"))
 
-      row(title: "Equivalent Lengths", icon: .rulerDimensionLine, route: .effectiveLength(.index))
-        .attributes(.data("active", value: active == .effectiveLength ? "true" : "false"))
+      row(
+        title: "Equivalent Lengths",
+        icon: .rulerDimensionLine,
+        route: .project(.detail(projectID, .equivalentLength(.index)))
+      )
+      .attributes(.data("active", value: active == .equivalentLength ? "true" : "false"))
 
       row(
         title: "Friction Rate",

@@ -11,7 +11,6 @@ extension SiteRoute {
     case login(LoginRoute)
     case signup(SignupRoute)
     case project(ProjectRoute)
-    case effectiveLength(EffectiveLengthRoute)
 
     public static let router = OneOf {
       Route(.case(Self.login)) {
@@ -22,9 +21,6 @@ extension SiteRoute {
       }
       Route(.case(Self.project)) {
         SiteRoute.View.ProjectRoute.router
-      }
-      Route(.case(Self.effectiveLength)) {
-        SiteRoute.View.EffectiveLengthRoute.router
       }
     }
   }
@@ -148,6 +144,7 @@ extension SiteRoute.View.ProjectRoute {
   public enum DetailRoute: Equatable, Sendable {
     case index(tab: Tab = .default)
     case equipment(EquipmentInfoRoute)
+    case equivalentLength(EquivalentLengthRoute)
     case frictionRate(FrictionRateRoute)
     case rooms(RoomRoute)
 
@@ -163,6 +160,9 @@ extension SiteRoute.View.ProjectRoute {
       Route(.case(Self.equipment)) {
         EquipmentInfoRoute.router
       }
+      Route(.case(Self.equivalentLength)) {
+        EquivalentLengthRoute.router
+      }
       Route(.case(Self.frictionRate)) {
         FrictionRateRoute.router
       }
@@ -174,7 +174,7 @@ extension SiteRoute.View.ProjectRoute {
     public enum Tab: String, CaseIterable, Equatable, Sendable {
       case project
       case rooms
-      case effectiveLength
+      case equivalentLength
       case frictionRate
       case ductSizing
 
@@ -373,13 +373,12 @@ extension SiteRoute.View.ProjectRoute {
       }
     }
   }
-}
 
-extension SiteRoute.View {
-  public enum EffectiveLengthRoute: Equatable, Sendable {
+  public enum EquivalentLengthRoute: Equatable, Sendable {
     case field(FieldType, style: EffectiveLength.EffectiveLengthType? = nil)
     case form(dismiss: Bool = false)
     case index
+    case submit(FormStep)
 
     static let rootPath = "effective-lengths"
 
@@ -413,20 +412,144 @@ extension SiteRoute.View {
           }
         }
       }
+      Route(.case(Self.submit)) {
+        Path { rootPath }
+        Method.post
+        FormStep.router
+      }
     }
-  }
-}
 
-extension SiteRoute.View.EffectiveLengthRoute {
-  public enum FieldType: String, CaseIterable, Equatable, Sendable {
-    case straightLength
-    case group
-  }
+    public enum FormStep: Equatable, Sendable {
+      case one(StepOne)
+      case two(StepTwo)
+      case three(StepThree)
 
-  public enum FormStep: String, CaseIterable, Equatable, Sendable {
-    case nameAndType
-    case straightLengths
-    case groups
+      static let router = OneOf {
+        Route(.case(Self.one)) {
+          Path {
+            Key.stepOne.rawValue
+          }
+          Body {
+            FormData {
+              Optionally {
+                Field("id", default: nil) { EffectiveLength.ID.parser() }
+              }
+              Field("name", .string)
+              Field("type") { EffectiveLength.EffectiveLengthType.parser() }
+            }
+            .map(.memberwise(StepOne.init))
+          }
+        }
+        Route(.case(Self.two)) {
+          Path {
+            Key.stepTwo.rawValue
+          }
+          Body {
+            FormData {
+              Optionally {
+                Field("id", default: nil) { EffectiveLength.ID.parser() }
+              }
+              Field("name", .string)
+              Field("type") { EffectiveLength.EffectiveLengthType.parser() }
+              Many {
+                Field("straightLengths") {
+                  Int.parser()
+                }
+              }
+            }
+            .map(.memberwise(StepTwo.init))
+          }
+        }
+        Route(.case(Self.three)) {
+          Path {
+            Key.stepThree.rawValue
+          }
+          Body {
+            FormData {
+              Optionally {
+                Field("id", default: nil) { EffectiveLength.ID.parser() }
+              }
+              Field("name", .string)
+              Field("type") { EffectiveLength.EffectiveLengthType.parser() }
+              Many {
+                Field("straightLengths") {
+                  Int.parser()
+                }
+              }
+              Many {
+                Field("group[group]") {
+                  Int.parser()
+                }
+              }
+              Many {
+                Field("group[letter]", .string)
+              }
+              Many {
+                Field("group[length]") {
+                  Int.parser()
+                }
+
+              }
+              Many {
+                Field("group[quantity]") {
+                  Int.parser()
+                }
+              }
+            }
+            .map(.memberwise(StepThree.init))
+          }
+        }
+      }
+
+      public enum Key: String, CaseIterable, Codable, Equatable, Sendable {
+        case stepOne
+        case stepTwo
+        case stepThree
+      }
+    }
+
+    public struct StepOne: Codable, Equatable, Sendable {
+      public let id: EffectiveLength.ID?
+      public let name: String
+      public let type: EffectiveLength.EffectiveLengthType
+    }
+
+    public struct StepTwo: Codable, Equatable, Sendable {
+
+      public let id: EffectiveLength.ID?
+      public let name: String
+      public let type: EffectiveLength.EffectiveLengthType
+      public let straightLengths: [Int]
+
+      public init(
+        id: EffectiveLength.ID? = nil,
+        name: String,
+        type: EffectiveLength.EffectiveLengthType,
+        straightLengths: [Int]
+      ) {
+        self.id = id
+        self.name = name
+        self.type = type
+        self.straightLengths = straightLengths
+      }
+    }
+
+    public struct StepThree: Codable, Equatable, Sendable {
+      public let id: EffectiveLength.ID?
+      public let name: String
+      public let type: EffectiveLength.EffectiveLengthType
+      public let straightLengths: [Int]
+      public let groupGroups: [Int]
+      public let groupLetters: [String]
+      public let groupLengths: [Int]
+      public let groupQuantities: [Int]
+    }
+
+    public enum FieldType: String, CaseIterable, Equatable, Sendable {
+      case straightLength
+      case group
+    }
+
   }
 }
 

@@ -39,10 +39,6 @@ extension ViewController.Request {
       }
     case .project(let route):
       return try await route.renderView(on: self)
-    case .effectiveLength(let route):
-      return try await route.renderView(isHtmxRequest: isHtmxRequest)
-    // case .user(let route):
-    //   return try await route.renderView(isHtmxRequest: isHtmxRequest)
     default:
       // FIX: FIX
       return _render(isHtmxRequest: false) {
@@ -116,6 +112,8 @@ extension SiteRoute.View.ProjectRoute {
           ProjectView(projectID: projectID, activeTab: tab)
         }
       case .equipment(let route):
+        return try await route.renderView(on: request, projectID: projectID)
+      case .equivalentLength(let route):
         return try await route.renderView(on: request, projectID: projectID)
       case .frictionRate(let route):
         return try await route.renderView(on: request, projectID: projectID)
@@ -239,16 +237,21 @@ extension SiteRoute.View.ProjectRoute.FrictionRateRoute.FormType {
   }
 }
 
-extension SiteRoute.View.EffectiveLengthRoute {
+extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
 
-  func renderView(isHtmxRequest: Bool) async throws -> AnySendableHTML {
+  func renderView(
+    on request: ViewController.Request,
+    projectID: Project.ID
+  ) async throws -> AnySendableHTML {
+    @Dependency(\.database) var database
+
     switch self {
     case .index:
-      return _render(isHtmxRequest: isHtmxRequest, active: .effectiveLength) {
-        EffectiveLengthsView(effectiveLengths: EffectiveLength.mocks)
+      return request.view {
+        ProjectView(projectID: projectID, activeTab: .equivalentLength)
       }
     case .form(let dismiss):
-      return EffectiveLengthForm(dismiss: dismiss)
+      return EffectiveLengthForm(projectID: projectID, dismiss: dismiss)
 
     case .field(let type, let style):
       switch type {
@@ -258,7 +261,27 @@ extension SiteRoute.View.EffectiveLengthRoute {
         // FIX:
         return GroupField(style: style ?? .supply)
       }
+
+    case .submit(let step):
+      switch step {
+      case .one(let stepOne):
+        return EffectiveLengthForm.StepTwo(
+          projectID: projectID, stepOne: stepOne, effectiveLength: nil
+        )
+      case .two(let stepTwo):
+        request.logger.debug("ViewController: Got step two...")
+        return EffectiveLengthForm.StepThree(
+          projectID: projectID, effectiveLength: nil, stepTwo: stepTwo
+        )
+      case .three(let stepThree):
+        request.logger.debug("ViewController: Got step three: \(stepThree)")
+        try stepThree.validate()
+        _ = try await database.effectiveLength.create(.init(form: stepThree, projectID: projectID))
+        return ProjectView(projectID: projectID, activeTab: .equivalentLength)
+
+      }
     }
+
   }
 }
 

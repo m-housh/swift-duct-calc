@@ -9,34 +9,100 @@ import Styleguide
 //       Currently when the select field is changed it doesn't change the group
 //       I can get it to add a new one.
 
+// TODO: Add back buttons / capability??
+
 struct EffectiveLengthForm: HTML, Sendable {
+  static let id = "equivalentLengthForm"
+
+  let projectID: Project.ID
   let dismiss: Bool
   let type: EffectiveLength.EffectiveLengthType
 
-  init(dismiss: Bool, type: EffectiveLength.EffectiveLengthType = .supply) {
+  init(
+    projectID: Project.ID,
+    dismiss: Bool,
+    type: EffectiveLength.EffectiveLengthType = .supply
+  ) {
+    self.projectID = projectID
     self.dismiss = dismiss
     self.type = type
   }
 
   var body: some HTML {
-    ModalForm(id: "effectiveLengthForm", dismiss: dismiss) {
+    ModalForm(id: Self.id, dismiss: dismiss) {
       h1(.class("text-2xl font-bold")) { "Effective Length" }
-      form(.class("space-y-4 p-4")) {
-        div {
-          label(.for("name")) { "Name" }
-          Input(id: "name", placeholder: "Name")
-            .attributes(.type(.text), .required, .autofocus)
+      div(.id("formStep")) {
+        StepOne(projectID: projectID, effectiveLength: nil)
+      }
+    }
+  }
+
+  struct StepOne: HTML, Sendable {
+    let projectID: Project.ID
+    let effectiveLength: EffectiveLength?
+
+    var route: String {
+      let baseRoute = SiteRoute.View.router.path(
+        for: .project(.detail(projectID, .equivalentLength(.index)))
+      )
+      return "\(baseRoute)/stepOne"
+    }
+
+    var body: some HTML {
+      form(
+        .class("space-y-4"),
+        .hx.post(route),
+        .hx.target("#formStep"),
+        .hx.swap(.innerHTML)
+      ) {
+        if let id = effectiveLength?.id {
+          input(.class("hidden"), .name("id"), .value("\(id)"))
         }
-        div {
-          label(.for("type")) { "Type" }
-          GroupTypeSelect(selected: type)
-            .attributes(.class("w-full border rounded-md"))
+        Input(id: "name", placeholder: "Name")
+          .attributes(.type(.text), .required, .autofocus, .value(effectiveLength?.name))
+
+        GroupTypeSelect(projectID: projectID, selected: effectiveLength?.type ?? .supply)
+
+        Row {
+          div {}
+          SubmitButton(title: "Next")
         }
+      }
+    }
+  }
+
+  struct StepTwo: HTML, Sendable {
+    let projectID: Project.ID
+    let stepOne: SiteRoute.View.ProjectRoute.EquivalentLengthRoute.StepOne
+    let effectiveLength: EffectiveLength?
+
+    var route: String {
+      let baseRoute = SiteRoute.View.router.path(
+        for: .project(.detail(projectID, .equivalentLength(.index)))
+      )
+      return "\(baseRoute)/stepTwo"
+    }
+
+    var body: some HTML {
+      form(
+        .class("space-y-4"),
+        .hx.post(route),
+        .hx.target("#formStep"),
+        .hx.swap(.innerHTML)
+      ) {
+        if let id = effectiveLength?.id {
+          input(.class("hidden"), .name("id"), .value("\(id)"))
+        }
+        input(.class("hidden"), .name("name"), .value(stepOne.name))
+        input(.class("hidden"), .name("type"), .value(stepOne.type.rawValue))
+
         Row {
           Label { "Straigth Lengths" }
           button(
             .type(.button),
-            .hx.get(route: .effectiveLength(.field(.straightLength))),
+            .hx.get(
+              route: .project(.detail(projectID, .equivalentLength(.field(.straightLength))))
+            ),
             .hx.target("#straightLengths"),
             .hx.swap(.beforeEnd)
           ) {
@@ -48,10 +114,49 @@ struct EffectiveLengthForm: HTML, Sendable {
         }
 
         Row {
+          div {}
+          SubmitButton(title: "Next")
+        }
+      }
+    }
+  }
+
+  struct StepThree: HTML, Sendable {
+    let projectID: Project.ID
+    let effectiveLength: EffectiveLength?
+    let stepTwo: SiteRoute.View.ProjectRoute.EquivalentLengthRoute.StepTwo
+
+    var route: String {
+      let baseRoute = SiteRoute.View.router.path(
+        for: .project(.detail(projectID, .equivalentLength(.index)))
+      )
+      return "\(baseRoute)/stepThree"
+    }
+
+    var body: some HTML {
+      form(
+        .class("space-y-4"),
+        .hx.post(route),
+        .hx.target("body"),
+        .hx.swap(.outerHTML)
+      ) {
+        if let id = effectiveLength?.id {
+          input(.class("hidden"), .name("id"), .value("\(id)"))
+        }
+        input(.class("hidden"), .name("name"), .value(stepTwo.name))
+        input(.class("hidden"), .name("type"), .value(stepTwo.type.rawValue))
+        for length in stepTwo.straightLengths {
+          input(.class("hidden"), .name("straightLengths"), .value("\(length)"))
+        }
+
+        Row {
           Label { "Groups" }
           button(
             .type(.button),
-            .hx.get(route: .effectiveLength(.field(.group, style: type))),
+            .hx.get(
+              route: .project(
+                .detail(projectID, .equivalentLength(.field(.group, style: stepTwo.type))))
+            ),
             .hx.target("#groups"),
             .hx.swap(.beforeEnd)
           ) {
@@ -59,20 +164,11 @@ struct EffectiveLengthForm: HTML, Sendable {
           }
         }
         div(.id("groups"), .class("space-y-4")) {
-          GroupField(style: type)
+          GroupField(style: stepTwo.type)
         }
-
         Row {
           div {}
-          div(.class("space-x-4")) {
-            CancelButton()
-              .attributes(
-                .hx.get(route: .effectiveLength(.form(dismiss: true))),
-                .hx.target("#effectiveLengthForm"),
-                .hx.swap(.outerHTML)
-              )
-            SubmitButton()
-          }
+          SubmitButton()
         }
       }
     }
@@ -87,13 +183,17 @@ struct StraightLengthField: HTML, Sendable {
   }
 
   var body: some HTML<HTMLTag.div> {
-    div(.class("pb-4")) {
+    Row {
       Input(
-        name: "straightLengths[]",
+        name: "straightLengths",
         placeholder: "Length"
       )
-      .attributes(.type(.number), .min("0"))
+      .attributes(.type(.number), .min("0"), .autofocus, .required)
+
+      TrashButton()
+        .attributes(.data("remove", value: "true"))
     }
+    .attributes(.hx.ext("remove"))
   }
 }
 
@@ -103,17 +203,17 @@ struct GroupField: HTML, Sendable {
 
   var body: some HTML {
     Row {
-      // Input(name: "group[][group]", placeholder: "Group")
-      //   .attributes(.type(.number), .min("0"))
       GroupSelect(style: style)
-      Input(name: "group[][letter]", placeholder: "Letter")
-        .attributes(.type(.text))
-      Input(name: "group[][length]", placeholder: "Length")
-        .attributes(.type(.number), .min("0"))
-      Input(name: "group[][quantity]", placeholder: "Quantity")
-        .attributes(.type(.number), .min("1"), .value("1"))
+      Input(name: "group[letter]", placeholder: "Letter")
+        .attributes(.type(.text), .autofocus, .required)
+      Input(name: "group[length]", placeholder: "Length")
+        .attributes(.type(.number), .min("0"), .required)
+      Input(name: "group[quantity]", placeholder: "Quantity")
+        .attributes(.type(.number), .min("1"), .value("1"), .required)
+      TrashButton()
+        .attributes(.data("remove", value: "true"))
     }
-    .attributes(.class("space-x-2"))
+    .attributes(.class("space-x-2"), .hx.ext("remove"))
   }
 }
 
@@ -123,7 +223,8 @@ struct GroupSelect: HTML, Sendable {
 
   var body: some HTML {
     select(
-      .name("group")
+      .name("group[group]"),
+      .class("select")
     ) {
       for value in style.selectOptions {
         option(.value("\(value)")) { "\(value)" }
@@ -135,17 +236,14 @@ struct GroupSelect: HTML, Sendable {
 
 struct GroupTypeSelect: HTML, Sendable {
 
-  var selected: EffectiveLength.EffectiveLengthType
+  let projectID: Project.ID
+  let selected: EffectiveLength.EffectiveLengthType
 
   var body: some HTML<HTMLTag.select> {
-    select(.name("type"), .id("type")) {
+    select(.class("select"), .name("type"), .id("type")) {
       for value in EffectiveLength.EffectiveLengthType.allCases {
         option(
           .value("\(value.rawValue)"),
-          .hx.get(route: .effectiveLength(.field(.group, style: value))),
-          .hx.target("#groups"),
-          .hx.swap(.beforeEnd),
-          .hx.trigger(.event(.change).from("#type"))
         ) { value.title }
         .attributes(.selected, when: value == selected)
       }

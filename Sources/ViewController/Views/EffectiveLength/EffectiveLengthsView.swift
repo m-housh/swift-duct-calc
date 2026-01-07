@@ -5,6 +5,7 @@ import Styleguide
 
 struct EffectiveLengthsView: HTML, Sendable {
 
+  let projectID: Project.ID
   let effectiveLengths: [EffectiveLength]
 
   var body: some HTML {
@@ -12,20 +13,9 @@ struct EffectiveLengthsView: HTML, Sendable {
       .class("m-4")
     ) {
       Row {
-        h1(.class("text-2xl font-bold")) { "Effective Lengths" }
+        h1(.class("text-2xl font-bold")) { "Equivalent Lengths" }
         PlusButton()
-          .attributes(
-            .hx.get(route: .effectiveLength(.form(dismiss: false))),
-            .hx.target("#effectiveLengthForm"),
-            .hx.swap(.outerHTML)
-          )
-        // button(
-        //   .hx.get(route: .effectiveLength(.form(dismiss: false))),
-        //   .hx.target("#effectiveLengthForm"),
-        //   .hx.swap(.outerHTML)
-        // ) {
-        //   Icon(.circlePlus)
-        // }
+          .attributes(.showModal(id: EffectiveLengthForm.id))
       }
       .attributes(.class("pb-6"))
 
@@ -38,7 +28,7 @@ struct EffectiveLengthsView: HTML, Sendable {
         }
       }
 
-      EffectiveLengthForm(dismiss: true)
+      EffectiveLengthForm(projectID: projectID, dismiss: true)
     }
   }
 

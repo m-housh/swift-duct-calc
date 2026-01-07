@@ -22,6 +22,8 @@
     --breakpoint-lg: 64rem;
     --container-lg: 32rem;
     --container-xl: 36rem;
+    --container-4xl: 56rem;
+    --container-7xl: 80rem;
     --text-sm: 0.875rem;
     --text-sm--line-height: calc(1.25 / 0.875);
     --text-xl: 1.25rem;
@@ -5270,6 +5272,9 @@
       }
     }
   }
+  .mx-auto {
+    margin-inline: auto;
+  }
   .file-input-ghost {
     @layer daisyui.l1.l2 {
       background-color: transparent;
@@ -6534,8 +6539,20 @@
   .w-full {
     width: 100%;
   }
+  .w-screen {
+    width: 100vw;
+  }
   .max-w-\[280px\] {
     max-width: 280px;
+  }
+  .max-w-lg {
+    max-width: var(--container-lg);
+  }
+  .max-w-screen-lg {
+    max-width: var(--breakpoint-lg);
+  }
+  .max-w-xl {
+    max-width: var(--container-xl);
   }
   .flex-none {
     flex: none;

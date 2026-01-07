@@ -119,6 +119,20 @@ private func siteHandler(
   @Dependency(\.apiController) var apiController
   @Dependency(\.viewController) var viewController
 
+  request.logger.debug("Site Handler: Route:  \(route)")
+  request.logger.debug("Content: \(request.content)")
+  //
+  // // HACK: Can't get arrays to decode currently.
+  if let content = try? request.content.decode(
+    SiteRoute.View.ProjectRoute.EquivalentLengthRoute.StepTwo.self
+  ) {
+    request.logger.debug("Site Handler: Got step two: \(content)")
+    //   return try await viewController.respond(
+    //     route: .project(.detail(content.projectID, .equivalentLength(.submit(.two(content))))),
+    //     request: request
+    //   )
+  }
+
   switch route {
   case .api(let route):
     return try await apiController.respond(route, request: request)
