@@ -23,14 +23,11 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     script(.src("/js/main.js")) {}
     link(.rel(.stylesheet), .href("/css/output.css"))
     link(.rel(.icon), .href("/images/favicon.ico"), .custom(name: "type", value: "image/x-icon"))
-    HTMLRaw(
-      """
-      <script src="https://unpkg.com/htmx-remove@latest"
-          integrity="sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT"
-          crossorigin="anonymous">
-      </script>
-      """
-    )
+    script(
+      .src("https://unpkg.com/htmx-remove@latest"),
+      .crossorigin(.anonymous),
+      .integrity("sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT")
+    ) {}
   }
 
   public var body: some HTML {

@@ -22,7 +22,7 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute.StepThree {
           value: Double(groupLengths[n]),
           quantity: groupQuantities[n]
         )
-        )
+      )
     }
     return groups
 
@@ -37,6 +37,24 @@ extension EffectiveLength.Create {
   ) {
     self.init(
       projectID: projectID,
+      name: form.name,
+      type: form.type,
+      straightLengths: form.straightLengths,
+      groups: form.groups
+    )
+  }
+}
+
+extension EffectiveLength.Update {
+  init(
+    form: SiteRoute.View.ProjectRoute.EquivalentLengthRoute.StepThree,
+    projectID: Project.ID
+  ) throws {
+    guard let id = form.id else {
+      throw ValidationError("Id not found.")
+    }
+    self.init(
+      id: id,
       name: form.name,
       type: form.type,
       straightLengths: form.straightLengths,

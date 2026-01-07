@@ -375,14 +375,23 @@ extension SiteRoute.View.ProjectRoute {
   }
 
   public enum EquivalentLengthRoute: Equatable, Sendable {
+    case delete(id: EffectiveLength.ID)
     case field(FieldType, style: EffectiveLength.EffectiveLengthType? = nil)
     case form(dismiss: Bool = false)
     case index
     case submit(FormStep)
+    case update(StepThree)
 
     static let rootPath = "effective-lengths"
 
     public static let router = OneOf {
+      Route(.case(Self.delete(id:))) {
+        Path {
+          rootPath
+          EffectiveLength.ID.parser()
+        }
+        Method.delete
+      }
       Route(.case(Self.index)) {
         Path { rootPath }
         Method.get
@@ -416,6 +425,44 @@ extension SiteRoute.View.ProjectRoute {
         Path { rootPath }
         Method.post
         FormStep.router
+      }
+      Route(.case(Self.update)) {
+        Path { rootPath }
+        Method.patch
+        Body {
+          FormData {
+            Optionally {
+              Field("id", default: nil) { EffectiveLength.ID.parser() }
+            }
+            Field("name", .string)
+            Field("type") { EffectiveLength.EffectiveLengthType.parser() }
+            Many {
+              Field("straightLengths") {
+                Int.parser()
+              }
+            }
+            Many {
+              Field("group[group]") {
+                Int.parser()
+              }
+            }
+            Many {
+              Field("group[letter]", .string)
+            }
+            Many {
+              Field("group[length]") {
+                Int.parser()
+              }
+
+            }
+            Many {
+              Field("group[quantity]") {
+                Int.parser()
+              }
+            }
+          }
+          .map(.memberwise(StepThree.init))
+        }
       }
     }
 

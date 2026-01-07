@@ -10,7 +10,9 @@ extension DatabaseClient {
     public var create: @Sendable (EffectiveLength.Create) async throws -> EffectiveLength
     public var delete: @Sendable (EffectiveLength.ID) async throws -> Void
     public var fetch: @Sendable (Project.ID) async throws -> [EffectiveLength]
+    public var fetchMax: @Sendable (Project.ID) async throws -> EffectiveLength.MaxContainer
     public var get: @Sendable (EffectiveLength.ID) async throws -> EffectiveLength?
+    public var update: @Sendable (EffectiveLength.Update) async throws -> EffectiveLength
   }
 }
 
@@ -37,8 +39,34 @@ extension DatabaseClient.EffectiveLengthClient: TestDependencyKey {
           .all()
           .map { try $0.toDTO() }
       },
+      fetchMax: { projectID in
+        let effectiveLengths = try await EffectiveLengthModel.query(on: database)
+          .with(\.$project)
+          .filter(\.$project.$id, .equal, projectID)
+          .all()
+          .map { try $0.toDTO() }
+
+        return .init(
+          supply: effectiveLengths.filter({ $0.type == .supply })
+            .sorted(by: { $0.totalEquivalentLength > $1.totalEquivalentLength })
+            .first,
+          return: effectiveLengths.filter({ $0.type == .return })
+            .sorted(by: { $0.totalEquivalentLength > $1.totalEquivalentLength })
+            .first
+        )
+
+      },
       get: { id in
         try await EffectiveLengthModel.find(id, on: database).map { try $0.toDTO() }
+      },
+      update: { updates in
+        guard let model = try await EffectiveLengthModel.find(updates.id, on: database) else {
+          throw NotFoundError()
+        }
+        if try model.applyUpdates(updates) {
+          try await model.save(on: database)
+        }
+        return try model.toDTO()
       }
     )
   }
@@ -154,5 +182,26 @@ final class EffectiveLengthModel: Model, @unchecked Sendable {
       createdAt: createdAt!,
       updatedAt: updatedAt!
     )
+  }
+
+  func applyUpdates(_ updates: EffectiveLength.Update) throws -> Bool {
+    var hasUpdates = false
+    if let name = updates.name, name != self.name {
+      hasUpdates = true
+      self.name = name
+    }
+    if let type = updates.type, type.rawValue != self.type {
+      hasUpdates = true
+      self.type = type.rawValue
+    }
+    if let straightLengths = updates.straightLengths, straightLengths != self.straightLengths {
+      hasUpdates = true
+      self.straightLengths = straightLengths
+    }
+    if let groups = updates.groups {
+      hasUpdates = true
+      self.groups = try JSONEncoder().encode(groups)
+    }
+    return hasUpdates
   }
 }

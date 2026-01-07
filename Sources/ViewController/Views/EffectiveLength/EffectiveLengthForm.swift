@@ -11,12 +11,22 @@ import Styleguide
 
 // TODO: Add back buttons / capability??
 
+// TODO: Add patch / update capability
+
 struct EffectiveLengthForm: HTML, Sendable {
-  static let id = "equivalentLengthForm"
+
+  static func id(_ equivalentLength: EffectiveLength?) -> String {
+    let base = "equivalentLengthForm"
+    guard let equivalentLength else { return base }
+    return "\(base)_\(equivalentLength.id.uuidString.replacing("-", with: ""))"
+  }
 
   let projectID: Project.ID
   let dismiss: Bool
   let type: EffectiveLength.EffectiveLengthType
+  let effectiveLength: EffectiveLength?
+
+  var id: String { Self.id(effectiveLength) }
 
   init(
     projectID: Project.ID,
@@ -26,13 +36,27 @@ struct EffectiveLengthForm: HTML, Sendable {
     self.projectID = projectID
     self.dismiss = dismiss
     self.type = type
+    self.effectiveLength = nil
+  }
+
+  init(
+    effectiveLength: EffectiveLength
+  ) {
+    self.dismiss = true
+    self.type = effectiveLength.type
+    self.projectID = effectiveLength.projectID
+    self.effectiveLength = effectiveLength
+
   }
 
   var body: some HTML {
-    ModalForm(id: Self.id, dismiss: dismiss) {
+    ModalForm(
+      id: id,
+      dismiss: dismiss
+    ) {
       h1(.class("text-2xl font-bold")) { "Effective Length" }
-      div(.id("formStep")) {
-        StepOne(projectID: projectID, effectiveLength: nil)
+      div(.id("formStep_\(id)")) {
+        StepOne(projectID: projectID, effectiveLength: effectiveLength)
       }
     }
   }
@@ -52,7 +76,7 @@ struct EffectiveLengthForm: HTML, Sendable {
       form(
         .class("space-y-4"),
         .hx.post(route),
-        .hx.target("#formStep"),
+        .hx.target("#formStep_\(EffectiveLengthForm.id(effectiveLength))"),
         .hx.swap(.innerHTML)
       ) {
         if let id = effectiveLength?.id {
@@ -87,7 +111,7 @@ struct EffectiveLengthForm: HTML, Sendable {
       form(
         .class("space-y-4"),
         .hx.post(route),
-        .hx.target("#formStep"),
+        .hx.target("#formStep_\(EffectiveLengthForm.id(effectiveLength))"),
         .hx.swap(.innerHTML)
       ) {
         if let id = effectiveLength?.id {
@@ -109,8 +133,14 @@ struct EffectiveLengthForm: HTML, Sendable {
             SVG(.circlePlus)
           }
         }
-        div(.id("straightLengths")) {
-          StraightLengthField()
+        div(.id("straightLengths"), .class("space-y-4")) {
+          if let effectiveLength {
+            for length in effectiveLength.straightLengths {
+              StraightLengthField(value: length)
+            }
+          } else {
+            StraightLengthField()
+          }
         }
 
         Row {
@@ -127,16 +157,23 @@ struct EffectiveLengthForm: HTML, Sendable {
     let stepTwo: SiteRoute.View.ProjectRoute.EquivalentLengthRoute.StepTwo
 
     var route: String {
-      let baseRoute = SiteRoute.View.router.path(
-        for: .project(.detail(projectID, .equivalentLength(.index)))
-      )
-      return "\(baseRoute)/stepThree"
+      if effectiveLength != nil {
+        return SiteRoute.View.router.path(
+          for: .project(.detail(projectID, .equivalentLength(.index))))
+      } else {
+        let baseRoute = SiteRoute.View.router.path(
+          for: .project(.detail(projectID, .equivalentLength(.index)))
+        )
+        return "\(baseRoute)/stepThree"
+      }
     }
 
     var body: some HTML {
       form(
         .class("space-y-4"),
-        .hx.post(route),
+        effectiveLength == nil
+          ? .hx.post(route)
+          : .hx.patch(route),
         .hx.target("body"),
         .hx.swap(.outerHTML)
       ) {
@@ -163,8 +200,23 @@ struct EffectiveLengthForm: HTML, Sendable {
             SVG(.circlePlus)
           }
         }
+
+        div(.class("grid grid-cols-5 gap-2")) {
+          Label("Group")
+          Label("Letter")
+          Label("Length")
+          Label("Quantity")
+            .attributes(.class("col-span-2"))
+        }
+
         div(.id("groups"), .class("space-y-4")) {
-          GroupField(style: stepTwo.type)
+          if let effectiveLength {
+            for group in effectiveLength.groups {
+              GroupField(style: effectiveLength.type, group: group)
+            }
+          } else {
+            GroupField(style: stepTwo.type)
+          }
         }
         Row {
           div {}
@@ -188,30 +240,38 @@ struct StraightLengthField: HTML, Sendable {
         name: "straightLengths",
         placeholder: "Length"
       )
-      .attributes(.type(.number), .min("0"), .autofocus, .required)
+      .attributes(.type(.number), .min("0"), .autofocus, .required, .value(value))
 
       TrashButton()
         .attributes(.data("remove", value: "true"))
     }
-    .attributes(.hx.ext("remove"))
+    .attributes(.hx.ext("remove"), .class("space-x-4"))
   }
 }
 
 struct GroupField: HTML, Sendable {
 
   let style: EffectiveLength.EffectiveLengthType
+  let group: EffectiveLength.Group?
+
+  init(style: EffectiveLength.EffectiveLengthType, group: EffectiveLength.Group? = nil) {
+    self.style = style
+    self.group = group
+  }
 
   var body: some HTML {
-    Row {
+    div(.class("grid grid-cols-5 gap-2")) {
       GroupSelect(style: style)
       Input(name: "group[letter]", placeholder: "Letter")
-        .attributes(.type(.text), .autofocus, .required)
+        .attributes(.type(.text), .autofocus, .required, .value(group?.letter))
       Input(name: "group[length]", placeholder: "Length")
-        .attributes(.type(.number), .min("0"), .required)
+        .attributes(.type(.number), .min("0"), .required, .value(group?.value))
       Input(name: "group[quantity]", placeholder: "Quantity")
-        .attributes(.type(.number), .min("1"), .value("1"), .required)
-      TrashButton()
-        .attributes(.data("remove", value: "true"))
+        .attributes(.type(.number), .min("1"), .value("1"), .required, .value(group?.quantity ?? 1))
+      div(.class("flex justify-end")) {
+        TrashButton()
+          .attributes(.data("remove", value: "true"), .class("mx-2"))
+      }
     }
     .attributes(.class("space-x-2"), .hx.ext("remove"))
   }

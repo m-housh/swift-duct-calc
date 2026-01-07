@@ -246,6 +246,11 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
     @Dependency(\.database) var database
 
     switch self {
+
+    case .delete(let id):
+      try await database.effectiveLength.delete(id)
+      return EmptyHTML()
+
     case .index:
       return request.view {
         ProjectView(projectID: projectID, activeTab: .equivalentLength)
@@ -262,16 +267,30 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
         return GroupField(style: style ?? .supply)
       }
 
+    case .update(let form):
+      _ = try await database.effectiveLength.update(.init(form: form, projectID: projectID))
+      return ProjectView(projectID: projectID, activeTab: .equivalentLength)
+
     case .submit(let step):
       switch step {
       case .one(let stepOne):
+        var effectiveLength: EffectiveLength? = nil
+        if let id = stepOne.id {
+          effectiveLength = try await database.effectiveLength.get(id)
+        }
         return EffectiveLengthForm.StepTwo(
-          projectID: projectID, stepOne: stepOne, effectiveLength: nil
+          projectID: projectID,
+          stepOne: stepOne,
+          effectiveLength: effectiveLength
         )
       case .two(let stepTwo):
         request.logger.debug("ViewController: Got step two...")
+        var effectiveLength: EffectiveLength? = nil
+        if let id = stepTwo.id {
+          effectiveLength = try await database.effectiveLength.get(id)
+        }
         return EffectiveLengthForm.StepThree(
-          projectID: projectID, effectiveLength: nil, stepTwo: stepTwo
+          projectID: projectID, effectiveLength: effectiveLength, stepTwo: stepTwo
         )
       case .three(let stepThree):
         request.logger.debug("ViewController: Got step three: \(stepThree)")

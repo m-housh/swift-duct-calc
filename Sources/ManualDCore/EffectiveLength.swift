@@ -61,6 +61,29 @@ extension EffectiveLength {
     }
   }
 
+  public struct Update: Codable, Equatable, Sendable {
+
+    public let id: EffectiveLength.ID
+    public let name: String?
+    public let type: EffectiveLengthType?
+    public let straightLengths: [Int]?
+    public let groups: [Group]?
+
+    public init(
+      id: EffectiveLength.ID, 
+      name: String? = nil, 
+      type: EffectiveLength.EffectiveLengthType? = nil,
+      straightLengths: [Int]? = nil, 
+      groups: [EffectiveLength.Group]? = nil
+    ) {
+      self.id = id
+      self.name = name
+      self.type = type
+      self.straightLengths = straightLengths
+      self.groups = groups
+    }
+  }
+
   public enum EffectiveLengthType: String, CaseIterable, Codable, Sendable {
     case `return`
     case supply
@@ -83,6 +106,32 @@ extension EffectiveLength {
       self.letter = letter
       self.value = value
       self.quantity = quantity
+    }
+  }
+
+  public struct MaxContainer: Codable, Equatable, Sendable {
+    public let supply: EffectiveLength?
+    public let `return`: EffectiveLength?
+
+    public init(supply: EffectiveLength? = nil, return: EffectiveLength? = nil) {
+      self.supply = supply
+      self.return = `return`
+    }
+  }
+}
+
+extension EffectiveLength {
+  public var totalEquivalentLength: Double {
+    straightLengths.reduce(into: 0.0) { $0 += Double($1) }
+      + groups.totalEquivalentLength
+  }
+}
+
+extension Array where Element == EffectiveLength.Group {
+
+  public var totalEquivalentLength: Double {
+    reduce(into: 0.0) {
+      $0 += ($1.value * Double($1.quantity))
     }
   }
 }

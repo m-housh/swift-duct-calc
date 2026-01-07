@@ -80,7 +80,6 @@ struct ProjectRouteTests {
         Optionally {
           Field("id", default: nil) { EffectiveLength.ID.parser() }
         }
-        Field("projectID") { Project.ID.parser() }
         Field("name", .string)
         Field("type") { EffectiveLength.EffectiveLengthType.parser() }
         Many {
@@ -94,7 +93,7 @@ struct ProjectRouteTests {
 
     var request = URLRequestData(
       body: .init(
-        "projectID=15062A72-7AB5-4F15-9B1F-74A4BFA53CBB&name=Test&type=supply&straightLengths=20&straightLengths=10"
+        "name=Test&type=supply&straightLengths=20&straightLengths=10"
           .utf8
       )
     )
