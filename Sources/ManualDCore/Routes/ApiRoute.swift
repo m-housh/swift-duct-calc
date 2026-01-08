@@ -45,6 +45,7 @@ extension SiteRoute.Api {
   public enum ProjectRoute: Sendable, Equatable {
     case create(Project.Create)
     case delete(id: Project.ID)
+    case detail(id: Project.ID, route: DetailRoute)
     case get(id: Project.ID)
     case index
 
@@ -72,6 +73,31 @@ extension SiteRoute.Api {
       }
       Route(.case(Self.index)) {
         Path { rootPath }
+        Method.get
+      }
+      Route(.case(Self.detail(id:route:))) {
+        Path {
+          rootPath
+          Project.ID.parser()
+        }
+        DetailRoute.router
+      }
+    }
+  }
+}
+
+extension SiteRoute.Api.ProjectRoute {
+  public enum DetailRoute: Equatable, Sendable {
+    case completedSteps
+
+    static let rootPath = "details"
+
+    static let router = OneOf {
+      Route(.case(Self.completedSteps)) {
+        Path {
+          rootPath
+          "completed"
+        }
         Method.get
       }
     }

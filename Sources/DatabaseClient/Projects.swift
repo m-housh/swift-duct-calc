@@ -10,6 +10,7 @@ extension DatabaseClient {
     public var create: @Sendable (User.ID, Project.Create) async throws -> Project
     public var delete: @Sendable (Project.ID) async throws -> Void
     public var get: @Sendable (Project.ID) async throws -> Project?
+    public var getCompletedSteps: @Sendable (Project.ID) async throws -> Project.CompletedSteps
     public var getSensibleHeatRatio: @Sendable (Project.ID) async throws -> Double?
     public var fetch: @Sendable (User.ID, PageRequest) async throws -> Page<Project>
     public var update: @Sendable (Project.Update) async throws -> Project
@@ -34,6 +35,41 @@ extension DatabaseClient.Projects: TestDependencyKey {
       },
       get: { id in
         try await ProjectModel.find(id, on: database).map { try $0.toDTO() }
+      },
+      getCompletedSteps: { id in
+        let roomsCount = try await RoomModel.query(on: database)
+          .with(\.$project)
+          .filter(\.$project.$id == id)
+          .count()
+
+        let equivalentLengths = try await EffectiveLengthModel.query(on: database)
+          .with(\.$project)
+          .filter(\.$project.$id == id)
+          .all()
+
+        var equivalentLengthsCompleted = false
+
+        if equivalentLengths.filter({ $0.type == "supply" }).first != nil,
+          equivalentLengths.filter({ $0.type == "return" }).first != nil
+        {
+          equivalentLengthsCompleted = true
+        }
+
+        let componentLosses = try await ComponentLossModel.query(on: database)
+          .with(\.$project)
+          .filter(\.$project.$id == id)
+          .count()
+
+        let equipmentInfo = try await EquipmentModel.query(on: database)
+          .with(\.$project)
+          .filter(\.$project.$id == id)
+          .first()
+
+        return .init(
+          rooms: roomsCount > 0,
+          equivalentLength: equivalentLengthsCompleted,
+          frictionRate: equipmentInfo != nil && componentLosses > 0
+        )
       },
       getSensibleHeatRatio: { id in
         guard let model = try await ProjectModel.find(id, on: database) else {

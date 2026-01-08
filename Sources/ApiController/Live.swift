@@ -31,6 +31,13 @@ extension SiteRoute.Api.ProjectRoute {
     case .delete(let id):
       try await database.projects.delete(id)
       return nil
+    case .detail(let id, let route):
+      switch route {
+      case .completedSteps:
+        // FIX:
+        fatalError()
+
+      }
     case .get(let id):
       guard let project = try await database.projects.get(id) else {
         logger.error("Project not found for id: \(id)")

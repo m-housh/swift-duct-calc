@@ -11,8 +11,14 @@ extension SiteRoute {
     case login(LoginRoute)
     case signup(SignupRoute)
     case project(ProjectRoute)
+    //FIX: Remove.
+    case test
 
     public static let router = OneOf {
+      Route(.case(Self.test)) {
+        Path { "test" }
+        Method.get
+      }
       Route(.case(Self.login)) {
         SiteRoute.View.LoginRoute.router
       }

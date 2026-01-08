@@ -11,6 +11,10 @@ extension ViewController.Request {
     @Dependency(\.database) var database
 
     switch route {
+    case .test:
+      return view {
+        TestPage()
+      }
     case .login(let route):
       switch route {
       case .index(let next):

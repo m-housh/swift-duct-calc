@@ -1,5 +1,6 @@
 import Elementary
 
+// TODO: Remove, using svg's.
 public struct Icon: HTML, Sendable {
 
   let icon: String

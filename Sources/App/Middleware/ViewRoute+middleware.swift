@@ -16,7 +16,7 @@ extension SiteRoute.View {
     switch self {
     case .project:
       return viewRouteMiddleware
-    case .login, .signup:
+    case .login, .signup, .test:
       return nil
     }
   }
