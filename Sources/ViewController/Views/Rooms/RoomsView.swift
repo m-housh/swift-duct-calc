@@ -121,18 +121,22 @@ struct RoomsView: HTML, Sendable {
           Number(room.registerCount)
         }
         td {
-          div(.class("flex justify-end space-x-6")) {
-            TrashButton()
-              .attributes(
-                .hx.delete(
-                  route: .project(.detail(room.projectID, .rooms(.delete(id: room.id))))),
-                .hx.target("closest tr"),
-                .hx.confirm("Are you sure?")
-              )
-            EditButton()
-              .attributes(
-                .showModal(id: "roomForm_\(room.name)")
-              )
+          div(.class("flex justify-end")) {
+            div(.class("join")) {
+              TrashButton()
+                .attributes(
+                  .class("join-item"),
+                  .hx.delete(
+                    route: .project(.detail(room.projectID, .rooms(.delete(id: room.id))))),
+                  .hx.target("closest tr"),
+                  .hx.confirm("Are you sure?")
+                )
+              EditButton()
+                .attributes(
+                  .class("join-item"),
+                  .showModal(id: "roomForm_\(room.name)")
+                )
+            }
           }
           RoomForm(
             id: "roomForm_\(room.name)",

@@ -23,24 +23,28 @@ struct EquipmentInfoView: HTML, Sendable {
 
       if let equipmentInfo {
 
-        Row {
-          Label { "Static Pressure" }
-          Number(equipmentInfo.staticPressure)
+        table(.class("table table-zebra")) {
+          thead {
+            tr {
+              th { Label("Name") }
+              th { Label("Value") }
+            }
+          }
+          tbody(.class("text-lg")) {
+            tr {
+              td { "Static Pressure" }
+              td { Number(equipmentInfo.staticPressure) }
+            }
+            tr {
+              td { "Heating CFM" }
+              td { Number(equipmentInfo.heatingCFM) }
+            }
+            tr {
+              td { "Cooling CFM" }
+              td { Number(equipmentInfo.coolingCFM) }
+            }
+          }
         }
-        .attributes(.class("border-b border-gray-200"))
-
-        Row {
-          Label { "Heating CFM" }
-          Number(equipmentInfo.heatingCFM)
-        }
-        .attributes(.class("border-b border-gray-200"))
-
-        Row {
-          Label { "Cooling CFM" }
-          Number(equipmentInfo.coolingCFM)
-        }
-        .attributes(.class("border-b border-gray-200"))
-
       }
       EquipmentInfoForm(
         dismiss: true, projectID: projectID, equipmentInfo: equipmentInfo

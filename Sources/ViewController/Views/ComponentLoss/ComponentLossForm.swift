@@ -4,38 +4,62 @@ import ManualDCore
 import Styleguide
 
 struct ComponentLossForm: HTML, Sendable {
+
+  static func id(_ componentLoss: ComponentPressureLoss? = nil) -> String {
+    let base = "componentLossForm"
+    guard let componentLoss else { return base }
+    return "\(base)_\(componentLoss.id.idString)"
+  }
+
   let dismiss: Bool
   let projectID: Project.ID
+  let componentLoss: ComponentPressureLoss?
+
+  var route: String {
+    SiteRoute.View.router.path(
+      for: .project(.detail(projectID, .componentLoss(.index)))
+    )
+    .appendingPath(componentLoss?.id)
+    // if let componentLoss {
+    //   return baseRoute.appending("/\(componentLoss.id)")
+    // }
+    // return baseRoute
+  }
 
   var body: some HTML {
-    ModalForm(id: "componentLossForm", dismiss: dismiss) {
+    ModalForm(id: Self.id(componentLoss), dismiss: dismiss) {
       h1(.class("text-2xl font-bold")) { "Component Loss" }
-      form(.class("space-y-4 p-4")) {
+      form(
+        .class("space-y-4 p-4"),
+        componentLoss == nil
+          ? .hx.post(route)
+          : .hx.patch(route),
+        .hx.target("body"),
+        .hx.swap(.outerHTML)
+      ) {
+
+        if let componentLoss {
+          input(.class("hidden"), .name("id"), .value("\(componentLoss.id)"))
+        }
+
+        input(.class("hidden"), .name("projectID"), .value("\(projectID)"))
+
         div {
           label(.for("name")) { "Name" }
           Input(id: "name", placeholder: "Name")
-            .attributes(.type(.text), .required, .autofocus)
+            .attributes(.type(.text), .required, .autofocus, .value(componentLoss?.name))
         }
         div {
           label(.for("value")) { "Value" }
-          Input(id: "name", placeholder: "Pressure loss")
-            .attributes(.type(.number), .min("0"), .max("1"), .step("0.1"), .required)
+          Input(id: "value", placeholder: "Pressure loss")
+            .attributes(
+              .type(.number), .min("0.03"), .max("1.0"), .step("0.1"), .required,
+              .value(componentLoss?.value)
+            )
         }
-        Row {
-          div {}
-          div {
-            CancelButton()
-              .attributes(
-                .hx.get(
-                  route: .project(
-                    .detail(projectID, .frictionRate(.form(.componentPressureLoss, dismiss: true))))
-                ),
-                .hx.target("#componentLossForm"),
-                .hx.swap(.outerHTML)
-              )
-            SubmitButton()
-          }
-        }
+
+        SubmitButton()
+          .attributes(.class("btn-block"))
       }
     }
   }

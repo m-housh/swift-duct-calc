@@ -18,14 +18,19 @@ struct ProjectForm: HTML, Sendable {
     self.project = project
   }
 
+  var route: String {
+    SiteRoute.View.router.path(for: .project(.index))
+      .appendingPath(project?.id)
+  }
+
   var body: some HTML {
     ModalForm(id: Self.id, dismiss: dismiss) {
       h1(.class("text-3xl font-bold pb-6 ps-2")) { "Project" }
       form(
         .class("space-y-4 p-4"),
         project == nil
-          ? .hx.post(route: .project(.index))
-          : .hx.patch(route: .project(.index)),
+          ? .hx.post(route)
+          : .hx.patch(route),
         .hx.target("body"),
         .hx.swap(.outerHTML)
       ) {

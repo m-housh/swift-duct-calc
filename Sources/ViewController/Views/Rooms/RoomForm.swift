@@ -27,6 +27,13 @@ struct RoomForm: HTML, Sendable {
     self.room = room
   }
 
+  var route: String {
+    SiteRoute.View.router.path(
+      for: .project(.detail(projectID, .rooms(.index)))
+    )
+    .appendingPath(room?.id)
+  }
+
   var body: some HTML {
     ModalForm(id: id, dismiss: dismiss) {
       h1(.class("text-3xl font-bold pb-6")) { "Room" }
@@ -34,8 +41,8 @@ struct RoomForm: HTML, Sendable {
         .class("modal-backdrop"),
         .init(name: "method", value: "dialog"),
         room == nil
-          ? .hx.post(route: .project(.detail(projectID, .rooms(.index))))
-          : .hx.patch(route: .project(.detail(projectID, .rooms(.index)))),
+          ? .hx.post(route)
+          : .hx.patch(route),
         .hx.target("body"),
         .hx.swap(.outerHTML)
       ) {

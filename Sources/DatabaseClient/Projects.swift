@@ -13,7 +13,7 @@ extension DatabaseClient {
     public var getCompletedSteps: @Sendable (Project.ID) async throws -> Project.CompletedSteps
     public var getSensibleHeatRatio: @Sendable (Project.ID) async throws -> Double?
     public var fetch: @Sendable (User.ID, PageRequest) async throws -> Page<Project>
-    public var update: @Sendable (Project.Update) async throws -> Project
+    public var update: @Sendable (Project.ID, Project.Update) async throws -> Project
   }
 }
 
@@ -85,12 +85,13 @@ extension DatabaseClient.Projects: TestDependencyKey {
           .paginate(request)
           .map { try $0.toDTO() }
       },
-      update: { updates in
-        guard let model = try await ProjectModel.find(updates.id, on: database) else {
+      update: { id, updates in
+        guard let model = try await ProjectModel.find(id, on: database) else {
           throw NotFoundError()
         }
         try updates.validate()
-        if model.applyUpdates(updates) {
+        model.applyUpdates(updates)
+        if model.hasChanges {
           try await model.save(on: database)
         }
         return try model.toDTO()
@@ -283,34 +284,26 @@ final class ProjectModel: Model, @unchecked Sendable {
     )
   }
 
-  func applyUpdates(_ updates: Project.Update) -> Bool {
-    var hasUpdates = false
+  func applyUpdates(_ updates: Project.Update) {
     if let name = updates.name, name != self.name {
-      hasUpdates = true
       self.name = name
     }
     if let streetAddress = updates.streetAddress, streetAddress != self.streetAddress {
-      hasUpdates = true
       self.streetAddress = streetAddress
     }
     if let city = updates.city, city != self.city {
-      hasUpdates = true
       self.city = city
     }
     if let state = updates.state, state != self.state {
-      hasUpdates = true
       self.state = state
     }
     if let zipCode = updates.zipCode, zipCode != self.zipCode {
-      hasUpdates = true
       self.zipCode = zipCode
     }
     if let sensibleHeatRatio = updates.sensibleHeatRatio,
       sensibleHeatRatio != self.sensibleHeatRatio
     {
-      hasUpdates = true
       self.sensibleHeatRatio = sensibleHeatRatio
     }
-    return hasUpdates
   }
 }

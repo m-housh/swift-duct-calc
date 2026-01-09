@@ -52,6 +52,26 @@ extension ComponentPressureLoss {
       ]
     }
   }
+
+  public struct Update: Codable, Equatable, Sendable {
+
+    public let name: String?
+    public let value: Double?
+
+    public init(
+      name: String? = nil,
+      value: Double? = nil
+    ) {
+      self.name = name
+      self.value = value
+    }
+  }
+}
+
+extension Array where Element == ComponentPressureLoss {
+  public var totalComponentPressureLoss: Double {
+    reduce(into: 0) { $0 += $1.value }
+  }
 }
 
 public typealias ComponentPressureLosses = [String: Double]

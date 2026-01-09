@@ -12,6 +12,9 @@ extension DatabaseClient {
     public var delete: @Sendable (ComponentPressureLoss.ID) async throws -> Void
     public var fetch: @Sendable (Project.ID) async throws -> [ComponentPressureLoss]
     public var get: @Sendable (ComponentPressureLoss.ID) async throws -> ComponentPressureLoss?
+    public var update:
+      @Sendable (ComponentPressureLoss.ID, ComponentPressureLoss.Update) async throws ->
+        ComponentPressureLoss
   }
 }
 
@@ -43,6 +46,17 @@ extension DatabaseClient.ComponentLoss {
       },
       get: { id in
         try await ComponentLossModel.find(id, on: database).map { try $0.toDTO() }
+      },
+      update: { id, updates in
+        try updates.validate()
+        guard let model = try await ComponentLossModel.find(id, on: database) else {
+          throw NotFoundError()
+        }
+        model.applyUpdates(updates)
+        if model.hasChanges {
+          try await model.save(on: database)
+        }
+        return try model.toDTO()
       }
     )
   }
@@ -64,6 +78,24 @@ extension ComponentPressureLoss.Create {
     }
     guard value < 1.0 else {
       throw ValidationError("Component loss value should be less than 1.0.")
+    }
+  }
+}
+
+extension ComponentPressureLoss.Update {
+  func validate() throws(ValidationError) {
+    if let name {
+      guard !name.isEmpty else {
+        throw ValidationError("Component loss name should not be empty.")
+      }
+    }
+    if let value {
+      guard value > 0 else {
+        throw ValidationError("Component loss value should be greater than 0.")
+      }
+      guard value < 1.0 else {
+        throw ValidationError("Component loss value should be less than 1.0.")
+      }
     }
   }
 }
@@ -141,5 +173,14 @@ final class ComponentLossModel: Model, @unchecked Sendable {
       createdAt: createdAt!,
       updatedAt: updatedAt!
     )
+  }
+
+  func applyUpdates(_ updates: ComponentPressureLoss.Update) {
+    if let name = updates.name, name != self.name {
+      self.name = name
+    }
+    if let value = updates.value, value != self.value {
+      self.value = value
+    }
   }
 }

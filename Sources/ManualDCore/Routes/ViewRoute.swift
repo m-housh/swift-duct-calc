@@ -40,7 +40,7 @@ extension SiteRoute.View {
     case form(id: Project.ID? = nil, dismiss: Bool = false)
     case index
     case page(PageRequest)
-    case update(Project.Update)
+    case update(Project.ID, Project.Update)
 
     public static func page(page: Int, per limit: Int) -> Self {
       .page(.init(page: page, per: limit))
@@ -112,11 +112,13 @@ extension SiteRoute.View {
         .map(.memberwise(PageRequest.init))
       }
       Route(.case(Self.update)) {
-        Path { rootPath }
+        Path {
+          rootPath
+          Project.ID.parser()
+        }
         Method.patch
         Body {
           FormData {
-            Field("id") { Project.ID.parser() }
             Optionally {
               Field("name", .string)
             }
@@ -149,6 +151,7 @@ extension SiteRoute.View.ProjectRoute {
 
   public enum DetailRoute: Equatable, Sendable {
     case index(tab: Tab = .default)
+    case componentLoss(ComponentLossRoute)
     case equipment(EquipmentInfoRoute)
     case equivalentLength(EquivalentLengthRoute)
     case frictionRate(FrictionRateRoute)
@@ -162,6 +165,9 @@ extension SiteRoute.View.ProjectRoute {
             Tab.parser()
           }
         }
+      }
+      Route(.case(Self.componentLoss)) {
+        ComponentLossRoute.router
       }
       Route(.case(Self.equipment)) {
         EquipmentInfoRoute.router
@@ -193,7 +199,7 @@ extension SiteRoute.View.ProjectRoute {
     case form(id: Room.ID? = nil, dismiss: Bool = false)
     case index
     case submit(Room.Create)
-    case update(Room.Update)
+    case update(Room.ID, Room.Update)
     case updateSensibleHeatRatio(SHRUpdate)
 
     static let rootPath = "rooms"
@@ -243,11 +249,13 @@ extension SiteRoute.View.ProjectRoute {
         }
       }
       Route(.case(Self.update)) {
-        Path { rootPath }
+        Path {
+          rootPath
+          Room.ID.parser()
+        }
         Method.patch
         Body {
           FormData {
-            Field("id") { Room.ID.parser() }
             Optionally {
               Field("name", .string)
             }
@@ -291,6 +299,59 @@ extension SiteRoute.View.ProjectRoute {
     }
   }
 
+  public enum ComponentLossRoute: Equatable, Sendable {
+    case index
+    case delete(ComponentPressureLoss.ID)
+    case submit(ComponentPressureLoss.Create)
+    case update(ComponentPressureLoss.ID, ComponentPressureLoss.Update)
+
+    static let rootPath = "component-loss"
+
+    static let router = OneOf {
+      Route(.case(Self.index)) {
+        Path { rootPath }
+        Method.get
+      }
+      Route(.case(Self.delete)) {
+        Path {
+          rootPath
+          ComponentPressureLoss.ID.parser()
+        }
+        Method.delete
+      }
+      Route(.case(Self.submit)) {
+        Path { rootPath }
+        Method.post
+        Body {
+          FormData {
+            Field("projectID") { Project.ID.parser() }
+            Field("name", .string)
+            Field("value") { Double.parser() }
+          }
+          .map(.memberwise(ComponentPressureLoss.Create.init))
+        }
+      }
+      Route(.case(Self.update)) {
+        Path {
+          rootPath
+          ComponentPressureLoss.ID.parser()
+        }
+        Method.patch
+        Body {
+          FormData {
+            Optionally {
+              Field("name", .string)
+            }
+            Optionally {
+              Field("value") { Double.parser() }
+            }
+          }
+          .map(.memberwise(ComponentPressureLoss.Update.init))
+        }
+      }
+    }
+  }
+
   public enum FrictionRateRoute: Equatable, Sendable {
     case index
     // TODO: Remove form or move equipment / component losses routes here.
@@ -326,7 +387,7 @@ extension SiteRoute.View.ProjectRoute {
     case index
     case form(dismiss: Bool)
     case submit(EquipmentInfo.Create)
-    case update(EquipmentInfo.Update)
+    case update(EquipmentInfo.ID, EquipmentInfo.Update)
 
     static let rootPath = "equipment"
 
@@ -359,11 +420,13 @@ extension SiteRoute.View.ProjectRoute {
         }
       }
       Route(.case(Self.update)) {
-        Path { rootPath }
+        Path {
+          rootPath
+          EquipmentInfo.ID.parser()
+        }
         Method.patch
         Body {
           FormData {
-            Field("id") { EquipmentInfo.ID.parser() }
             Optionally {
               Field("staticPressure", default: nil) { Double.parser() }
             }
@@ -386,7 +449,7 @@ extension SiteRoute.View.ProjectRoute {
     case form(dismiss: Bool = false)
     case index
     case submit(FormStep)
-    case update(StepThree)
+    case update(EffectiveLength.ID, StepThree)
 
     static let rootPath = "effective-lengths"
 
@@ -433,7 +496,10 @@ extension SiteRoute.View.ProjectRoute {
         FormStep.router
       }
       Route(.case(Self.update)) {
-        Path { rootPath }
+        Path {
+          rootPath
+          EffectiveLength.ID.parser()
+        }
         Method.patch
         Body {
           FormData {

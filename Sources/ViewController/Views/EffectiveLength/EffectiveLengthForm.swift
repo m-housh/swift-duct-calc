@@ -157,14 +157,14 @@ struct EffectiveLengthForm: HTML, Sendable {
     let stepTwo: SiteRoute.View.ProjectRoute.EquivalentLengthRoute.StepTwo
 
     var route: String {
-      if effectiveLength != nil {
-        return SiteRoute.View.router.path(
-          for: .project(.detail(projectID, .equivalentLength(.index))))
+      let baseRoute = SiteRoute.View.router.path(
+        for: .project(.detail(projectID, .equivalentLength(.index)))
+      )
+
+      if let effectiveLength {
+        return baseRoute.appendingPath(effectiveLength.id)
       } else {
-        let baseRoute = SiteRoute.View.router.path(
-          for: .project(.detail(projectID, .equivalentLength(.index)))
-        )
-        return "\(baseRoute)/stepThree"
+        return baseRoute.appendingPath("stepThree")
       }
     }
 

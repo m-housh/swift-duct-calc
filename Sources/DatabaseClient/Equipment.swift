@@ -11,7 +11,8 @@ extension DatabaseClient {
     public var delete: @Sendable (EquipmentInfo.ID) async throws -> Void
     public var fetch: @Sendable (Project.ID) async throws -> EquipmentInfo?
     public var get: @Sendable (EquipmentInfo.ID) async throws -> EquipmentInfo?
-    public var update: @Sendable (EquipmentInfo.Update) async throws -> EquipmentInfo
+    public var update:
+      @Sendable (EquipmentInfo.ID, EquipmentInfo.Update) async throws -> EquipmentInfo
   }
 }
 
@@ -46,13 +47,15 @@ extension DatabaseClient.Equipment {
       get: { id in
         try await EquipmentModel.find(id, on: database).map { try $0.toDTO() }
       },
-      update: { request in
-        guard let model = try await EquipmentModel.find(request.id, on: database) else {
+      update: { id, updates in
+        guard let model = try await EquipmentModel.find(id, on: database) else {
           throw NotFoundError()
         }
-        guard request.hasUpdates else { return try model.toDTO() }
-        try model.applyUpdates(request)
-        try await model.save(on: database)
+        try updates.validate()
+        model.applyUpdates(updates)
+        if model.hasChanges {
+          try await model.save(on: database)
+        }
         return try model.toDTO()
       }
     )
@@ -196,8 +199,7 @@ final class EquipmentModel: Model, @unchecked Sendable {
     )
   }
 
-  func applyUpdates(_ updates: EquipmentInfo.Update) throws {
-    try updates.validate()
+  func applyUpdates(_ updates: EquipmentInfo.Update) {
     if let staticPressure = updates.staticPressure {
       self.staticPressure = staticPressure
     }

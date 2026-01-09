@@ -23,33 +23,71 @@ struct ComponentPressureLossesView: HTML, Sendable {
       )
     ) {
       Row {
-        h1(.class("text-2xl font-bold")) { "Component Pressure Losses" }
+        div(.class("flex space-x-4 items-center")) {
+          h1(.class("text-2xl font-bold")) { "Component Pressure Losses" }
+          div(.class("flex text-primary space-x-2 items-baseline")) {
+            Number(total)
+              .attributes(.class("text-xl font-bold badge badge-outline badge-primary"))
+            span(.class("text-sm italic")) { "Total" }
+          }
+        }
         PlusButton()
           .attributes(
-            .hx.get(
-              route: .project(
-                .detail(projectID, .frictionRate(.form(.componentPressureLoss, dismiss: false))))
-            ),
-            .hx.target("#componentLossForm"),
-            .hx.swap(.outerHTML)
+            .showModal(id: ComponentLossForm.id())
           )
       }
 
-      for row in componentPressureLosses {
-        Row {
-          Label { row.name }
-          Number(row.value)
+      table(.class("table table-zebra")) {
+        thead {
+          tr(.class("text-xl font-bold")) {
+            th { "Name" }
+            th { "Value" }
+            th {}
+          }
         }
-        .attributes(.class("border-b border-gray-200"))
-      }
+        tbody {
+          for row in componentPressureLosses {
+            TableRow(row: row)
+          }
+        }
 
-      Row {
-        Label { "Total" }
-        Number(total)
-          .attributes(.class("text-xl font-bold"))
       }
     }
-    ComponentLossForm(dismiss: true, projectID: projectID)
+    ComponentLossForm(dismiss: true, projectID: projectID, componentLoss: nil)
   }
 
+  struct TableRow: HTML, Sendable {
+    let row: ComponentPressureLoss
+
+    var body: some HTML<HTMLTag.tr> {
+      tr(.class("text-lg")) {
+        td { row.name }
+        td { Number(row.value) }
+        td {
+          div(.class("flex join items-end justify-end mx-auto")) {
+            TrashButton()
+              .attributes(
+                .class("join-item"),
+                .hx.delete(
+                  route: .project(
+                    .detail(row.projectID, .componentLoss(.delete(row.id)))
+                  )
+                ),
+                .hx.target("body"),
+                .hx.swap(.outerHTML),
+                .hx.confirm("Are your sure?")
+
+              )
+            EditButton()
+              .attributes(
+                .class("join-item"),
+                .showModal(id: ComponentLossForm.id(row))
+              )
+          }
+
+          ComponentLossForm(dismiss: true, projectID: row.projectID, componentLoss: row)
+        }
+      }
+    }
+  }
 }

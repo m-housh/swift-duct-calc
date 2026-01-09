@@ -63,20 +63,17 @@ extension EffectiveLength {
 
   public struct Update: Codable, Equatable, Sendable {
 
-    public let id: EffectiveLength.ID
     public let name: String?
     public let type: EffectiveLengthType?
     public let straightLengths: [Int]?
     public let groups: [Group]?
 
     public init(
-      id: EffectiveLength.ID, 
-      name: String? = nil, 
+      name: String? = nil,
       type: EffectiveLength.EffectiveLengthType? = nil,
-      straightLengths: [Int]? = nil, 
+      straightLengths: [Int]? = nil,
       groups: [EffectiveLength.Group]? = nil
     ) {
-      self.id = id
       self.name = name
       self.type = type
       self.straightLengths = straightLengths
@@ -112,6 +109,12 @@ extension EffectiveLength {
   public struct MaxContainer: Codable, Equatable, Sendable {
     public let supply: EffectiveLength?
     public let `return`: EffectiveLength?
+
+    public var total: Double? {
+      guard let supply else { return nil }
+      guard let `return` else { return nil }
+      return supply.totalEquivalentLength + `return`.totalEquivalentLength
+    }
 
     public init(supply: EffectiveLength? = nil, return: EffectiveLength? = nil) {
       self.supply = supply

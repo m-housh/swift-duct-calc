@@ -12,7 +12,8 @@ extension DatabaseClient {
     public var fetch: @Sendable (Project.ID) async throws -> [EffectiveLength]
     public var fetchMax: @Sendable (Project.ID) async throws -> EffectiveLength.MaxContainer
     public var get: @Sendable (EffectiveLength.ID) async throws -> EffectiveLength?
-    public var update: @Sendable (EffectiveLength.Update) async throws -> EffectiveLength
+    public var update:
+      @Sendable (EffectiveLength.ID, EffectiveLength.Update) async throws -> EffectiveLength
   }
 }
 
@@ -59,11 +60,12 @@ extension DatabaseClient.EffectiveLengthClient: TestDependencyKey {
       get: { id in
         try await EffectiveLengthModel.find(id, on: database).map { try $0.toDTO() }
       },
-      update: { updates in
-        guard let model = try await EffectiveLengthModel.find(updates.id, on: database) else {
+      update: { id, updates in
+        guard let model = try await EffectiveLengthModel.find(id, on: database) else {
           throw NotFoundError()
         }
-        if try model.applyUpdates(updates) {
+        try model.applyUpdates(updates)
+        if model.hasChanges {
           try await model.save(on: database)
         }
         return try model.toDTO()
@@ -184,24 +186,18 @@ final class EffectiveLengthModel: Model, @unchecked Sendable {
     )
   }
 
-  func applyUpdates(_ updates: EffectiveLength.Update) throws -> Bool {
-    var hasUpdates = false
+  func applyUpdates(_ updates: EffectiveLength.Update) throws {
     if let name = updates.name, name != self.name {
-      hasUpdates = true
       self.name = name
     }
     if let type = updates.type, type.rawValue != self.type {
-      hasUpdates = true
       self.type = type.rawValue
     }
     if let straightLengths = updates.straightLengths, straightLengths != self.straightLengths {
-      hasUpdates = true
       self.straightLengths = straightLengths
     }
     if let groups = updates.groups {
-      hasUpdates = true
       self.groups = try JSONEncoder().encode(groups)
     }
-    return hasUpdates
   }
 }

@@ -63,7 +63,6 @@ extension Room {
   }
 
   public struct Update: Codable, Equatable, Sendable {
-    public let id: Room.ID
     public let name: String?
     public let heatingLoad: Double?
     public let coolingTotal: Double?
@@ -71,14 +70,12 @@ extension Room {
     public let registerCount: Int?
 
     public init(
-      id: Room.ID,
       name: String? = nil,
       heatingLoad: Double? = nil,
       coolingTotal: Double? = nil,
       coolingSensible: Double? = nil,
       registerCount: Int? = nil
     ) {
-      self.id = id
       self.name = name
       self.heatingLoad = heatingLoad
       self.coolingTotal = coolingTotal

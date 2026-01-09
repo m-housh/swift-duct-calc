@@ -18,18 +18,11 @@ struct EquipmentInfoForm: HTML, Sendable {
     return "\(staticPressure)"
   }
 
-  var heatingCFM: String {
-    guard let heatingCFM = equipmentInfo?.heatingCFM else {
-      return ""
-    }
-    return "\(heatingCFM)"
-  }
-
-  var coolingCFM: String {
-    guard let heatingCFM = equipmentInfo?.heatingCFM else {
-      return ""
-    }
-    return "\(heatingCFM)"
+  var route: String {
+    SiteRoute.View.router.path(
+      for: .project(.detail(projectID, .equipment(.index)))
+    )
+    .appendingPath(equipmentInfo?.id)
   }
 
   var body: some HTML {
@@ -38,8 +31,8 @@ struct EquipmentInfoForm: HTML, Sendable {
       form(
         .class("space-y-4 p-4"),
         equipmentInfo != nil
-          ? .hx.patch(route: .project(.detail(projectID, .equipment(.index))))
-          : .hx.post(route: .project(.detail(projectID, .equipment(.index)))),
+          ? .hx.patch(route)
+          : .hx.post(route),
         .hx.target("#equipmentInfo"),
         .hx.swap(.outerHTML)
       ) {
@@ -59,12 +52,12 @@ struct EquipmentInfoForm: HTML, Sendable {
         div {
           label(.for("heatingCFM")) { "Heating CFM" }
           Input(id: "heatingCFM", placeholder: "CFM")
-            .attributes(.type(.number), .min("0"), .value(heatingCFM))
+            .attributes(.type(.number), .min("0"), .value(equipmentInfo?.heatingCFM))
         }
         div {
           label(.for("coolingCFM")) { "Cooling CFM" }
           Input(id: "coolingCFM", placeholder: "CFM")
-            .attributes(.type(.number), .min("0"), .value(coolingCFM))
+            .attributes(.type(.number), .min("0"), .value(equipmentInfo?.coolingCFM))
         }
         div {
           SubmitButton(title: "Save")

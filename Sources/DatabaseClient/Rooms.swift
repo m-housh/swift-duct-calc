@@ -11,7 +11,7 @@ extension DatabaseClient {
     public var delete: @Sendable (Room.ID) async throws -> Void
     public var get: @Sendable (Room.ID) async throws -> Room?
     public var fetch: @Sendable (Project.ID) async throws -> [Room]
-    public var update: @Sendable (Room.Update) async throws -> Room
+    public var update: @Sendable (Room.ID, Room.Update) async throws -> Room
   }
 }
 
@@ -41,13 +41,14 @@ extension DatabaseClient.Rooms: TestDependencyKey {
           .all()
           .map { try $0.toDTO() }
       },
-      update: { updates in
-        guard let model = try await RoomModel.find(updates.id, on: database) else {
+      update: { id, updates in
+        guard let model = try await RoomModel.find(id, on: database) else {
           throw NotFoundError()
         }
 
         try updates.validate()
-        if model.applyUpdates(updates) {
+        model.applyUpdates(updates)
+        if model.hasChanges {
           try await model.save(on: database)
         }
         return try model.toDTO()
@@ -218,30 +219,24 @@ final class RoomModel: Model, @unchecked Sendable {
     )
   }
 
-  func applyUpdates(_ updates: Room.Update) -> Bool {
-    var hasUpdates = false
+  func applyUpdates(_ updates: Room.Update) {
 
     if let name = updates.name, name != self.name {
-      hasUpdates = true
       self.name = name
     }
     if let heatingLoad = updates.heatingLoad, heatingLoad != self.heatingLoad {
-      hasUpdates = true
       self.heatingLoad = heatingLoad
     }
     if let coolingTotal = updates.coolingTotal, coolingTotal != self.coolingTotal {
-      hasUpdates = true
       self.coolingTotal = coolingTotal
     }
     if let coolingSensible = updates.coolingSensible, coolingSensible != self.coolingSensible {
-      hasUpdates = true
       self.coolingSensible = coolingSensible
     }
     if let registerCount = updates.registerCount, registerCount != self.registerCount {
-      hasUpdates = true
       self.registerCount = registerCount
     }
-    return hasUpdates
+
   }
 
 }

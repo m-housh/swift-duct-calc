@@ -105,8 +105,8 @@ extension SiteRoute.View.ProjectRoute {
       try await database.projects.delete(id)
       return EmptyHTML()
 
-    case .update(let form):
-      let project = try await database.projects.update(form)
+    case .update(let id, let form):
+      let project = try await database.projects.update(id, form)
       return ProjectView(projectID: project.id, activeTab: .project)
 
     case .detail(let projectID, let route):
@@ -115,6 +115,8 @@ extension SiteRoute.View.ProjectRoute {
         return request.view {
           ProjectView(projectID: projectID, activeTab: tab)
         }
+      case .componentLoss(let route):
+        return try await route.renderView(on: request, projectID: projectID)
       case .equipment(let route):
         return try await route.renderView(on: request, projectID: projectID)
       case .equivalentLength(let route):
@@ -147,8 +149,8 @@ extension SiteRoute.View.ProjectRoute.EquipmentInfoRoute {
     case .submit(let form):
       let equipment = try await database.equipment.create(form)
       return EquipmentInfoView(equipmentInfo: equipment, projectID: projectID)
-    case .update(let updates):
-      let equipment = try await database.equipment.update(updates)
+    case .update(let id, let updates):
+      let equipment = try await database.equipment.update(id, updates)
       return EquipmentInfoView(equipmentInfo: equipment, projectID: projectID)
     }
   }
@@ -187,13 +189,14 @@ extension SiteRoute.View.ProjectRoute.RoomRoute {
         ProjectView(projectID: projectID, activeTab: .rooms)
       }
 
-    case .update(let form):
-      let _ = try await database.rooms.update(form)
+    case .update(let id, let form):
+      let _ = try await database.rooms.update(id, form)
       return ProjectView(projectID: projectID, activeTab: .rooms)
 
     case .updateSensibleHeatRatio(let form):
       let _ = try await database.projects.update(
-        .init(id: form.projectID, sensibleHeatRatio: form.sensibleHeatRatio)
+        form.projectID,
+        .init(sensibleHeatRatio: form.sensibleHeatRatio)
       )
       return request.view {
         ProjectView(projectID: projectID, activeTab: .rooms)
@@ -210,8 +213,8 @@ extension SiteRoute.View.ProjectRoute.FrictionRateRoute {
 
     switch self {
     case .index:
-      let equipment = try await database.equipment.fetch(projectID)
-      let componentLosses = try await database.componentLoss.fetch(projectID)
+      // let equipment = try await database.equipment.fetch(projectID)
+      // let componentLosses = try await database.componentLoss.fetch(projectID)
 
       return request.view {
         ProjectView(projectID: projectID, activeTab: .frictionRate)
@@ -224,8 +227,32 @@ extension SiteRoute.View.ProjectRoute.FrictionRateRoute {
         return div { "REMOVE ME!" }
       // return EquipmentForm(dismiss: dismiss, projectID: projectID)
       case .componentPressureLoss:
-        return ComponentLossForm(dismiss: dismiss, projectID: projectID)
+        return ComponentLossForm(dismiss: dismiss, projectID: projectID, componentLoss: nil)
       }
+    }
+  }
+}
+
+extension SiteRoute.View.ProjectRoute.ComponentLossRoute {
+
+  func renderView(
+    on request: ViewController.Request,
+    projectID: Project.ID
+  ) async throws -> AnySendableHTML {
+    @Dependency(\.database) var database
+
+    switch self {
+    case .index:
+      return EmptyHTML()
+    case .delete(let id):
+      _ = try await database.componentLoss.delete(id)
+      return EmptyHTML()
+    case .submit(let form):
+      _ = try await database.componentLoss.create(form)
+      return ProjectView(projectID: projectID, activeTab: .frictionRate)
+    case .update(let id, let form):
+      _ = try await database.componentLoss.update(id, form)
+      return ProjectView(projectID: projectID, activeTab: .frictionRate)
     }
   }
 }
@@ -271,8 +298,8 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
         return GroupField(style: style ?? .supply)
       }
 
-    case .update(let form):
-      _ = try await database.effectiveLength.update(.init(form: form, projectID: projectID))
+    case .update(let id, let form):
+      _ = try await database.effectiveLength.update(id, .init(form: form, projectID: projectID))
       return ProjectView(projectID: projectID, activeTab: .equivalentLength)
 
     case .submit(let step):

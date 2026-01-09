@@ -79,7 +79,6 @@ extension Project {
 
   public struct Update: Codable, Equatable, Sendable {
 
-    public let id: Project.ID
     public let name: String?
     public let streetAddress: String?
     public let city: String?
@@ -88,7 +87,6 @@ extension Project {
     public let sensibleHeatRatio: Double?
 
     public init(
-      id: Project.ID,
       name: String? = nil,
       streetAddress: String? = nil,
       city: String? = nil,
@@ -96,7 +94,6 @@ extension Project {
       zipCode: String? = nil,
       sensibleHeatRatio: Double? = nil
     ) {
-      self.id = id
       self.name = name
       self.streetAddress = streetAddress
       self.city = city

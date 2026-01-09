@@ -126,20 +126,28 @@ struct EffectiveLengthsView: HTML, Sendable {
           }
 
           div(.class("card-actions justify-end pt-6 space-y-4 mt-auto")) {
-            // TODO: Delete.
-            TrashButton()
-              .attributes(
-                .hx.delete(
-                  route: .project(
-                    .detail(
-                      effectiveLength.projectID, .equivalentLength(.delete(id: effectiveLength.id)))
-                  )),
-                .hx.confirm("Are you sure?"),
-                .hx.target("#\(id)"),
-                .hx.swap(.outerHTML)
-              )
-            EditButton()
-              .attributes(.showModal(id: EffectiveLengthForm.id(effectiveLength)))
+            div(.class("join")) {
+              TrashButton()
+                .attributes(
+                  .class("join-item"),
+                  .hx.delete(
+                    route: .project(
+                      .detail(
+                        effectiveLength.projectID,
+                        .equivalentLength(.delete(id: effectiveLength.id))
+                      )
+                    )
+                  ),
+                  .hx.confirm("Are you sure?"),
+                  .hx.target("#\(id)"),
+                  .hx.swap(.outerHTML)
+                )
+              EditButton()
+                .attributes(
+                  .class("join-item"),
+                  .showModal(id: EffectiveLengthForm.id(effectiveLength))
+                )
+            }
           }
 
           EffectiveLengthForm(effectiveLength: effectiveLength)

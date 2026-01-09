@@ -50,11 +50,7 @@ extension EffectiveLength.Update {
     form: SiteRoute.View.ProjectRoute.EquivalentLengthRoute.StepThree,
     projectID: Project.ID
   ) throws {
-    guard let id = form.id else {
-      throw ValidationError("Id not found.")
-    }
     self.init(
-      id: id,
       name: form.name,
       type: form.type,
       straightLengths: form.straightLengths,
