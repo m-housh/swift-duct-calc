@@ -85,6 +85,24 @@ extension Room {
   }
 }
 
+extension Array where Element == Room {
+
+  public var totalHeatingLoad: Double {
+    reduce(into: 0) { $0 += $1.heatingLoad }
+  }
+
+  public var totalCoolingLoad: Double {
+    reduce(into: 0) { $0 += $1.coolingTotal }
+  }
+
+  public func totalCoolingSensible(shr: Double) -> Double {
+    reduce(into: 0) {
+      let sensible = $1.coolingSensible ?? ($1.coolingTotal * shr)
+      $0 += sensible
+    }
+  }
+}
+
 #if DEBUG
 
   extension Room {

@@ -22,6 +22,30 @@ extension DatabaseClient.Projects {
   }
 }
 
+extension DatabaseClient {
+
+  func designFrictionRate(
+    projectID: Project.ID
+  ) async throws -> (EquipmentInfo, EffectiveLength.MaxContainer, Double)? {
+    guard let equipmentInfo = try await equipment.fetch(projectID) else {
+      return nil
+    }
+
+    let equivalentLengths = try await effectiveLength.fetchMax(projectID)
+    guard let tel = equivalentLengths.total else { return nil }
+
+    let componentLosses = try await componentLoss.fetch(projectID)
+    guard componentLosses.count > 0 else { return nil }
+
+    let availableStaticPressure =
+      equipmentInfo.staticPressure - componentLosses.totalComponentPressureLoss
+
+    let designFrictionRate = (availableStaticPressure * 100) / tel
+
+    return (equipmentInfo, equivalentLengths, designFrictionRate)
+  }
+}
+
 extension DatabaseClient.ComponentLoss {
 
   func createDefaults(projectID: Project.ID) async throws {

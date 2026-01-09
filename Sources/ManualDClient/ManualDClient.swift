@@ -1,5 +1,6 @@
 import Dependencies
 import DependenciesMacros
+import Logging
 import ManualDCore
 
 @DependencyClient
@@ -9,6 +10,57 @@ public struct ManualDClient: Sendable {
   public var totalEffectiveLength: @Sendable (TotalEffectiveLengthRequest) async throws -> Int
   public var equivalentRectangularDuct:
     @Sendable (EquivalentRectangularDuctRequest) async throws -> EquivalentRectangularDuctResponse
+
+  public func calculateSizes(
+    rooms: [Room],
+    equipmentInfo: EquipmentInfo,
+    maxSupplyLength: EffectiveLength,
+    maxReturnLength: EffectiveLength,
+    designFrictionRate: Double,
+    projectSHR: Double,
+    logger: Logger? = nil
+  ) async throws -> [DuctSizing.RoomContainer] {
+    var registerIDCount = 1
+    var retval: [DuctSizing.RoomContainer] = []
+    let totalHeatingLoad = rooms.totalHeatingLoad
+    let totalCoolingSensible = rooms.totalCoolingSensible(shr: projectSHR)
+
+    for room in rooms {
+      let heatingLoad = room.heatingLoadPerRegister
+      let coolingLoad = room.coolingSensiblePerRegister(projectSHR: projectSHR)
+      let heatingPercent = heatingLoad / totalHeatingLoad
+      let coolingPercent = coolingLoad / totalCoolingSensible
+      let heatingCFM = heatingPercent * Double(equipmentInfo.heatingCFM)
+      let coolingCFM = coolingPercent * Double(equipmentInfo.coolingCFM)
+      let designCFM = DuctSizing.DesignCFM(heating: heatingCFM, cooling: coolingCFM)
+      let sizes = try await self.ductSize(
+        .init(designCFM: Int(designCFM.value), frictionRate: designFrictionRate)
+      )
+
+      for n in 1...room.registerCount {
+        retval.append(
+          .init(
+            registerID: "SR-\(registerIDCount)",
+            roomID: room.id,
+            roomName: "\(room.name)-\(n)",
+            heatingLoad: heatingLoad,
+            coolingLoad: coolingLoad,
+            heatingCFM: heatingCFM,
+            coolingCFM: coolingCFM,
+            designCFM: designCFM,
+            roundSize: sizes.ductulatorSize,
+            finalSize: sizes.finalSize,
+            velocity: sizes.velocity,
+            flexSize: sizes.flexSize
+          )
+        )
+        registerIDCount += 1
+      }
+    }
+
+    return retval
+  }
+
 }
 
 extension ManualDClient: TestDependencyKey {

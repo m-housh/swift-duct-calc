@@ -117,6 +117,8 @@ extension SiteRoute.View.ProjectRoute {
         }
       case .componentLoss(let route):
         return try await route.renderView(on: request, projectID: projectID)
+      case .ductSizing(let route):
+        return try await route.renderView(on: request, projectID: projectID)
       case .equipment(let route):
         return try await route.renderView(on: request, projectID: projectID)
       case .equivalentLength(let route):
@@ -332,6 +334,20 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
       }
     }
 
+  }
+}
+
+extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
+
+  func renderView(on request: ViewController.Request, projectID: Project.ID) async throws
+    -> AnySendableHTML
+  {
+    switch self {
+    case .index:
+      return request.view {
+        ProjectView(projectID: projectID, activeTab: .ductSizing, logger: request.logger)
+      }
+    }
   }
 }
 

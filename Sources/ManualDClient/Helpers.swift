@@ -1,6 +1,18 @@
 import Foundation
 import ManualDCore
 
+extension Room {
+
+  var heatingLoadPerRegister: Double {
+    heatingLoad / Double(registerCount)
+  }
+
+  func coolingSensiblePerRegister(projectSHR: Double) -> Double {
+    let sensible = coolingSensible ?? (coolingTotal * projectSHR)
+    return sensible / Double(registerCount)
+  }
+}
+
 extension ComponentPressureLosses {
   var totalLosses: Double { values.reduce(0) { $0 + $1 } }
 }

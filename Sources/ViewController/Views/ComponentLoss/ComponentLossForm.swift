@@ -20,10 +20,6 @@ struct ComponentLossForm: HTML, Sendable {
       for: .project(.detail(projectID, .componentLoss(.index)))
     )
     .appendingPath(componentLoss?.id)
-    // if let componentLoss {
-    //   return baseRoute.appending("/\(componentLoss.id)")
-    // }
-    // return baseRoute
   }
 
   var body: some HTML {

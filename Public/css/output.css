@@ -2206,6 +2206,9 @@
   .collapse {
     visibility: collapse;
   }
+  .invisible {
+    visibility: hidden;
+  }
   .visible {
     visibility: visible;
   }
@@ -5360,6 +5363,9 @@
       }
     }
   }
+  .my-1 {
+    margin-block: calc(var(--spacing) * 1);
+  }
   .my-1\.5 {
     margin-block: calc(var(--spacing) * 1.5);
   }
@@ -7805,11 +7811,17 @@
   .px-4 {
     padding-inline: calc(var(--spacing) * 4);
   }
+  .py-1 {
+    padding-block: calc(var(--spacing) * 1);
+  }
   .py-1\.5 {
     padding-block: calc(var(--spacing) * 1.5);
   }
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
+  }
+  .py-4 {
+    padding-block: calc(var(--spacing) * 4);
   }
   .ps-2 {
     padding-inline-start: calc(var(--spacing) * 2);
@@ -9444,6 +9456,26 @@
       }
     }
   }
+  .lg\:visible {
+    @media (width >= 64rem) {
+      visibility: visible;
+    }
+  }
+  .lg\:block {
+    @media (width >= 64rem) {
+      display: block;
+    }
+  }
+  .lg\:inline-block {
+    @media (width >= 64rem) {
+      display: inline-block;
+    }
+  }
+  .lg\:table-cell {
+    @media (width >= 64rem) {
+      display: table-cell;
+    }
+  }
   .lg\:grid-cols-2 {
     @media (width >= 64rem) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -9454,6 +9486,16 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
+  .xl\:visible {
+    @media (width >= 80rem) {
+      visibility: visible;
+    }
+  }
+  .xl\:table-cell {
+    @media (width >= 80rem) {
+      display: table-cell;
+    }
+  }
   .xl\:grid-cols-2 {
     @media (width >= 80rem) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -9462,6 +9504,11 @@
   .xl\:grid-cols-3 {
     @media (width >= 80rem) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .\32 xl\:table-cell {
+    @media (width >= 96rem) {
+      display: table-cell;
     }
   }
   .dark\:text-white {

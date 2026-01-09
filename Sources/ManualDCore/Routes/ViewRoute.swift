@@ -152,6 +152,7 @@ extension SiteRoute.View.ProjectRoute {
   public enum DetailRoute: Equatable, Sendable {
     case index(tab: Tab = .default)
     case componentLoss(ComponentLossRoute)
+    case ductSizing(DuctSizingRoute)
     case equipment(EquipmentInfoRoute)
     case equivalentLength(EquivalentLengthRoute)
     case frictionRate(FrictionRateRoute)
@@ -168,6 +169,9 @@ extension SiteRoute.View.ProjectRoute {
       }
       Route(.case(Self.componentLoss)) {
         ComponentLossRoute.router
+      }
+      Route(.case(Self.ductSizing)) {
+        DuctSizingRoute.router
       }
       Route(.case(Self.equipment)) {
         EquipmentInfoRoute.router
@@ -669,6 +673,19 @@ extension SiteRoute.View.ProjectRoute {
       case group
     }
 
+  }
+
+  public enum DuctSizingRoute: Equatable, Sendable {
+    case index
+
+    static let rootPath = "duct-sizing"
+
+    static let router = OneOf {
+      Route(.case(Self.index)) {
+        Path { rootPath }
+        Method.get
+      }
+    }
   }
 }
 

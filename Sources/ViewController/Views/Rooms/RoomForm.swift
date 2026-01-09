@@ -8,20 +8,21 @@ import Styleguide
 // TODO: Need to hold the project ID in hidden input field.
 struct RoomForm: HTML, Sendable {
 
-  static let id = "roomForm"
+  static func id(_ room: Room? = nil) -> String {
+    let baseId = "roomForm"
+    guard let room else { return baseId }
+    return baseId.appending("_\(room.id.idString)")
+  }
 
-  let id: String
   let dismiss: Bool
   let projectID: Project.ID
   let room: Room?
 
   init(
-    id: String = Self.id,
     dismiss: Bool,
     projectID: Project.ID,
     room: Room? = nil
   ) {
-    self.id = id
     self.dismiss = dismiss
     self.projectID = projectID
     self.room = room
@@ -35,7 +36,7 @@ struct RoomForm: HTML, Sendable {
   }
 
   var body: some HTML {
-    ModalForm(id: id, dismiss: dismiss) {
+    ModalForm(id: Self.id(room), dismiss: dismiss) {
       h1(.class("text-3xl font-bold pb-6")) { "Room" }
       form(
         .class("modal-backdrop"),

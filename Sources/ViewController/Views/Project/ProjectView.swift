@@ -2,21 +2,27 @@ import DatabaseClient
 import Dependencies
 import Elementary
 import ElementaryHTMX
+import Logging
+import ManualDClient
 import ManualDCore
 import Styleguide
 
 struct ProjectView: HTML, Sendable {
   @Dependency(\.database) var database
+  @Dependency(\.manualD) var manualD
 
   let projectID: Project.ID
   let activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab
+  let logger: Logger?
 
   init(
     projectID: Project.ID,
-    activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab
+    activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab,
+    logger: Logger? = nil
   ) {
     self.projectID = projectID
     self.activeTab = activeTab
+    self.logger = logger
   }
 
   var body: some HTML {
@@ -61,7 +67,15 @@ struct ProjectView: HTML, Sendable {
               projectID: projectID
             )
           case .ductSizing:
-            div { "FIX ME!" }
+            try await DuctSizingView(
+              rooms: manualD.calculate(
+                rooms: database.rooms.fetch(projectID),
+                designFrictionRateResult: database.designFrictionRate(projectID: projectID),
+                projectSHR: database.projects.getSensibleHeatRatio(projectID),
+                logger: logger
+              )
+            )
+          // div { "FIX ME!" }
 
           }
         }
@@ -178,7 +192,11 @@ extension ProjectView {
             }
             li(.class("w-full")) {
               row(
-                title: "Duct Sizes", icon: .wind, href: "#", isComplete: false, hideIsComplete: true
+                title: "Duct Sizes",
+                icon: .wind,
+                route: .project(.detail(projectID, .ductSizing(.index))),
+                isComplete: false,
+                hideIsComplete: true
               )
               .attributes(.class("btn-active"), when: active == .ductSizing)
             }

@@ -22,7 +22,7 @@ struct RoomsView: HTML, Sendable {
         ) {
           div(.class("flex me-4")) {
             PlusButton()
-              .attributes(.showModal(id: RoomForm.id))
+              .attributes(.showModal(id: RoomForm.id()))
           }
         }
       }
@@ -134,12 +134,11 @@ struct RoomsView: HTML, Sendable {
               EditButton()
                 .attributes(
                   .class("join-item"),
-                  .showModal(id: "roomForm_\(room.name)")
+                  .showModal(id: RoomForm.id(room))
                 )
             }
           }
           RoomForm(
-            id: "roomForm_\(room.name)",
             dismiss: true,
             projectID: room.projectID,
             room: room
