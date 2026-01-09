@@ -7,12 +7,27 @@ import Styleguide
 
 struct DuctSizingView: HTML, Sendable {
 
+  let projectID: Project.ID
   let rooms: [DuctSizing.RoomContainer]
 
   var body: some HTML {
     div {
       h1(.class("text-2xl py-4")) { "Duct Sizes" }
+      if rooms.count == 0 {
+        p(.class("text-error italic")) {
+          "Must complete all the previous sections to display duct sizing calculations."
+        }
+      } else {
+        RoomsTable(projectID: projectID, rooms: rooms)
+      }
+    }
+  }
 
+  struct RoomsTable: HTML, Sendable {
+    let projectID: Project.ID
+    let rooms: [DuctSizing.RoomContainer]
+
+    var body: some HTML<HTMLTag.div> {
       div(.class("overflow-x-auto")) {
         table(.class("table table-zebra")) {
           thead {
@@ -27,12 +42,14 @@ struct DuctSizingView: HTML, Sendable {
               th(.class("hidden xl:table-cell")) { "Round Size" }
               th { "Velocity" }
               th { "Final Size" }
+              th { "Height" }
+              th { "Width" }
               th { "Flex Size" }
             }
           }
           tbody {
             for room in rooms {
-              RoomRow(room: room)
+              RoomRow(projectID: projectID, room: room)
             }
           }
         }
@@ -41,10 +58,19 @@ struct DuctSizingView: HTML, Sendable {
   }
 
   struct RoomRow: HTML, Sendable {
+    let projectID: Project.ID
     let room: DuctSizing.RoomContainer
 
+    var route: String {
+      SiteRoute.View.router.path(
+        for: .project(.detail(projectID, .ductSizing(.index)))
+      )
+      .appendingPath("room")
+      .appendingPath(room.roomID)
+    }
+
     var body: some HTML<HTMLTag.tr> {
-      tr(.class("text-lg")) {
+      tr(.class("text-lg"), .id(room.roomID.idString)) {
         td { room.registerID }
         td { room.roomName }
         td { Number(room.heatingLoad, digits: 0) }
@@ -61,6 +87,32 @@ struct DuctSizingView: HTML, Sendable {
         td {
           Number(room.finalSize)
             .attributes(.class("badge badge-outline badge-secondary text-xl  font-bold"))
+        }
+        td {
+          form(
+            .hx.post(route),
+            .hx.target("body"),
+            .hx.swap(.outerHTML)
+            // .hx.trigger(
+            //   .event(.change).from("#rectangularSize_\(room.roomID.idString)")
+            // )
+          ) {
+            input(.class("hidden"), .name("register"), .value("\(room.roomName.last!)"))
+            Row {
+              Input(
+                id: "height",
+                name: "height",
+                placeholder: "Height"
+              )
+              .attributes(.type(.number), .min("0"), .value(room.rectangularSize?.height))
+              SubmitButton()
+            }
+          }
+        }
+        td {
+          if let width = room.rectangularWidth {
+            Number(width)
+          }
         }
         td {
           Number(room.flexSize)

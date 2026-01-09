@@ -677,6 +677,7 @@ extension SiteRoute.View.ProjectRoute {
 
   public enum DuctSizingRoute: Equatable, Sendable {
     case index
+    case roomRectangularForm(Room.ID, RoomRectangularForm)
 
     static let rootPath = "duct-sizing"
 
@@ -685,6 +686,26 @@ extension SiteRoute.View.ProjectRoute {
         Path { rootPath }
         Method.get
       }
+      Route(.case(Self.roomRectangularForm)) {
+        Path {
+          rootPath
+          "room"
+          Room.ID.parser()
+        }
+        Method.post
+        Body {
+          FormData {
+            Field("register") { Int.parser() }
+            Field("height") { Int.parser() }
+          }
+          .map(.memberwise(RoomRectangularForm.init))
+        }
+      }
+    }
+
+    public struct RoomRectangularForm: Equatable, Sendable {
+      public let register: Int
+      public let height: Int
     }
   }
 }

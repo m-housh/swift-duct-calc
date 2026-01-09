@@ -9,6 +9,7 @@ public struct Room: Codable, Equatable, Identifiable, Sendable {
   public let coolingTotal: Double
   public let coolingSensible: Double?
   public let registerCount: Int
+  public let rectangularSizes: [DuctSizing.RectangularDuct]?
   public let createdAt: Date
   public let updatedAt: Date
 
@@ -20,6 +21,7 @@ public struct Room: Codable, Equatable, Identifiable, Sendable {
     coolingTotal: Double,
     coolingSensible: Double? = nil,
     registerCount: Int = 1,
+    rectangularSizes: [DuctSizing.RectangularDuct]? = nil,
     createdAt: Date,
     updatedAt: Date
   ) {
@@ -30,6 +32,7 @@ public struct Room: Codable, Equatable, Identifiable, Sendable {
     self.coolingTotal = coolingTotal
     self.coolingSensible = coolingSensible
     self.registerCount = registerCount
+    self.rectangularSizes = rectangularSizes
     self.createdAt = createdAt
     self.updatedAt = updatedAt
   }
@@ -68,6 +71,7 @@ extension Room {
     public let coolingTotal: Double?
     public let coolingSensible: Double?
     public let registerCount: Int?
+    public let rectangularSizes: [DuctSizing.RectangularDuct]?
 
     public init(
       name: String? = nil,
@@ -81,6 +85,18 @@ extension Room {
       self.coolingTotal = coolingTotal
       self.coolingSensible = coolingSensible
       self.registerCount = registerCount
+      self.rectangularSizes = nil
+    }
+
+    public init(
+      rectangularSizes: [DuctSizing.RectangularDuct]
+    ) {
+      self.name = nil
+      self.heatingLoad = nil
+      self.coolingTotal = nil
+      self.coolingSensible = nil
+      self.registerCount = nil
+      self.rectangularSizes = rectangularSizes
     }
   }
 }

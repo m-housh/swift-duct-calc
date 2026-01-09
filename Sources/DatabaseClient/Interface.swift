@@ -18,6 +18,7 @@ public struct DatabaseClient: Sendable {
   public var equipment: Equipment
   public var componentLoss: ComponentLoss
   public var effectiveLength: EffectiveLengthClient
+  // public var rectangularDuct: RectangularDuct
   public var users: Users
 }
 
@@ -29,6 +30,7 @@ extension DatabaseClient: TestDependencyKey {
     equipment: .testValue,
     componentLoss: .testValue,
     effectiveLength: .testValue,
+    // rectangularDuct: .testValue,
     users: .testValue
   )
 
@@ -40,6 +42,7 @@ extension DatabaseClient: TestDependencyKey {
       equipment: .live(database: database),
       componentLoss: .live(database: database),
       effectiveLength: .live(database: database),
+      // rectangularDuct: .live(database: database),
       users: .live(database: database)
     )
   }
@@ -67,6 +70,7 @@ extension DatabaseClient.Migrations: DependencyKey {
         EquipmentInfo.Migrate(),
         Room.Migrate(),
         EffectiveLength.Migrate(),
+          // DuctSizing.RectangularDuct.Migrate(),
       ]
     }
   )

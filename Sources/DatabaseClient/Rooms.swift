@@ -38,6 +38,7 @@ extension DatabaseClient.Rooms: TestDependencyKey {
         try await RoomModel.query(on: database)
           .with(\.$project)
           .filter(\.$project.$id, .equal, projectID)
+          .sort(\.$name, .ascending)
           .all()
           .map { try $0.toDTO() }
       },
@@ -135,6 +136,7 @@ extension Room {
         .field("coolingTotal", .double, .required)
         .field("coolingSensible", .double)
         .field("registerCount", .int8, .required)
+        .field("rectangularSizes", .array)
         .field("createdAt", .datetime)
         .field("updatedAt", .datetime)
         .field(
@@ -172,6 +174,9 @@ final class RoomModel: Model, @unchecked Sendable {
   @Field(key: "registerCount")
   var registerCount: Int
 
+  @Field(key: "rectangularSizes")
+  var rectangularSizes: [DuctSizing.RectangularDuct]?
+
   @Timestamp(key: "createdAt", on: .create, format: .iso8601)
   var createdAt: Date?
 
@@ -190,6 +195,7 @@ final class RoomModel: Model, @unchecked Sendable {
     coolingTotal: Double,
     coolingSensible: Double? = nil,
     registerCount: Int,
+    rectangularSizes: [DuctSizing.RectangularDuct]? = nil,
     createdAt: Date? = nil,
     updatedAt: Date? = nil,
     projectID: Project.ID
@@ -200,6 +206,7 @@ final class RoomModel: Model, @unchecked Sendable {
     self.coolingTotal = coolingTotal
     self.coolingSensible = coolingSensible
     self.registerCount = registerCount
+    self.rectangularSizes = rectangularSizes
     self.createdAt = createdAt
     self.updatedAt = updatedAt
     $project.id = projectID
@@ -214,6 +221,7 @@ final class RoomModel: Model, @unchecked Sendable {
       coolingTotal: coolingTotal,
       coolingSensible: coolingSensible,
       registerCount: registerCount,
+      rectangularSizes: rectangularSizes,
       createdAt: createdAt!,
       updatedAt: updatedAt!
     )
@@ -235,6 +243,9 @@ final class RoomModel: Model, @unchecked Sendable {
     }
     if let registerCount = updates.registerCount, registerCount != self.registerCount {
       self.registerCount = registerCount
+    }
+    if let rectangularSizes = updates.rectangularSizes, rectangularSizes != self.rectangularSizes {
+      self.rectangularSizes = rectangularSizes
     }
 
   }

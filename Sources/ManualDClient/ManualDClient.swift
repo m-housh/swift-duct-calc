@@ -20,6 +20,7 @@ public struct ManualDClient: Sendable {
     projectSHR: Double,
     logger: Logger? = nil
   ) async throws -> [DuctSizing.RoomContainer] {
+
     var registerIDCount = 1
     var retval: [DuctSizing.RoomContainer] = []
     let totalHeatingLoad = rooms.totalHeatingLoad
@@ -38,6 +39,18 @@ public struct ManualDClient: Sendable {
       )
 
       for n in 1...room.registerCount {
+
+        var rectangularWidth: Int? = nil
+        let rectangularSize = room.rectangularSizes?
+          .first(where: { $0.register == nil || $0.register == n })
+
+        if let rectangularSize {
+          let response = try await self.equivalentRectangularDuct(
+            .init(round: sizes.finalSize, height: rectangularSize.height)
+          )
+          rectangularWidth = response.width
+        }
+
         retval.append(
           .init(
             registerID: "SR-\(registerIDCount)",
@@ -51,7 +64,9 @@ public struct ManualDClient: Sendable {
             roundSize: sizes.ductulatorSize,
             finalSize: sizes.finalSize,
             velocity: sizes.velocity,
-            flexSize: sizes.flexSize
+            flexSize: sizes.flexSize,
+            rectangularSize: rectangularSize,
+            rectangularWidth: rectangularWidth
           )
         )
         registerIDCount += 1

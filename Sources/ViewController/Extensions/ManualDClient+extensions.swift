@@ -28,7 +28,7 @@ extension ManualDClient {
       logger: logger
     )
 
-    logger?.debug("Rooms: \(ductRooms)")
+    // logger?.debug("Rooms: \(ductRooms)")
 
     return ductRooms
 

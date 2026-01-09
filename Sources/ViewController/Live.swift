@@ -342,11 +342,31 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
   func renderView(on request: ViewController.Request, projectID: Project.ID) async throws
     -> AnySendableHTML
   {
+    @Dependency(\.database) var database
+    @Dependency(\.manualD) var manualD
+
     switch self {
     case .index:
       return request.view {
         ProjectView(projectID: projectID, activeTab: .ductSizing, logger: request.logger)
       }
+    case .roomRectangularForm(let roomID, let form):
+      let _ = try await database.rooms.update(
+        roomID,
+        .init(rectangularSizes: [.init(register: form.register, height: form.height)])
+      )
+      // request.logger.debug("Got room rectangular form: \(roomID)")
+      //
+      // let containers = try await manualD.calculate(
+      //   rooms: [room],
+      //   designFrictionRateResult: database.designFrictionRate(projectID: projectID),
+      //   projectSHR: database.projects.getSensibleHeatRatio(projectID)
+      // )
+      // request.logger.debug("Room Containers: \(containers)")
+      // let container = containers.first(where: { $0.roomName == "\(room.name)-\(form.register)" })!
+      // request.logger.debug("Room Container: \(container)")
+      // return DuctSizingView.RoomRow(projectID: projectID, room: container)
+      return ProjectView(projectID: projectID, activeTab: .ductSizing, logger: request.logger)
     }
   }
 }

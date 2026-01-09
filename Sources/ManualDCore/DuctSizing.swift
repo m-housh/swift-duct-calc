@@ -3,6 +3,21 @@ import Foundation
 
 public enum DuctSizing {
 
+  public struct RectangularDuct: Codable, Equatable, Sendable {
+
+    public let register: Int?
+    public let height: Int
+
+    public init(
+      register: Int? = nil,
+      height: Int,
+    ) {
+      self.register = register
+      self.height = height
+    }
+
+  }
+
   public struct RoomContainer: Codable, Equatable, Sendable {
 
     public let registerID: String
@@ -17,6 +32,8 @@ public enum DuctSizing {
     public let finalSize: Int
     public let velocity: Int
     public let flexSize: Int
+    public let rectangularSize: RectangularDuct?
+    public let rectangularWidth: Int?
 
     public init(
       registerID: String,
@@ -30,7 +47,9 @@ public enum DuctSizing {
       roundSize: Double,
       finalSize: Int,
       velocity: Int,
-      flexSize: Int
+      flexSize: Int,
+      rectangularSize: RectangularDuct? = nil,
+      rectangularWidth: Int? = nil
     ) {
       self.registerID = registerID
       self.roomID = roomID
@@ -44,6 +63,8 @@ public enum DuctSizing {
       self.finalSize = finalSize
       self.velocity = velocity
       self.flexSize = flexSize
+      self.rectangularSize = rectangularSize
+      self.rectangularWidth = rectangularWidth
     }
   }
 

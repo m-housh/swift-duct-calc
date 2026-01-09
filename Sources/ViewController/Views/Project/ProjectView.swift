@@ -68,6 +68,7 @@ struct ProjectView: HTML, Sendable {
             )
           case .ductSizing:
             try await DuctSizingView(
+              projectID: projectID,
               rooms: manualD.calculate(
                 rooms: database.rooms.fetch(projectID),
                 designFrictionRateResult: database.designFrictionRate(projectID: projectID),

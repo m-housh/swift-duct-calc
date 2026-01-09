@@ -2,6 +2,8 @@ import Elementary
 import ManualDCore
 import Styleguide
 
+// FIX: Need to update available static, etc. when equipment info is submitted.
+
 struct FrictionRateView: HTML, Sendable {
 
   let equipmentInfo: EquipmentInfo?
@@ -46,8 +48,8 @@ struct FrictionRateView: HTML, Sendable {
     div(.class("p-4 space-y-6")) {
       h1(.class("text-4xl font-bold pb-6")) { "Friction Rate" }
       div(.class("flex space-x-4")) {
-        Label("Available Static Pressure")
         if let availableStaticPressure {
+          Label("Available Static Pressure")
           Number(availableStaticPressure, digits: 2)
             .attributes(.class("badge badge-lg badge-outline font-bold ms-4"))
         }

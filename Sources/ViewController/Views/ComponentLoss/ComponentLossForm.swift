@@ -3,6 +3,8 @@ import ElementaryHTMX
 import ManualDCore
 import Styleguide
 
+// FIX: The value field is sometimes wonky as far as what values it accepts.
+
 struct ComponentLossForm: HTML, Sendable {
 
   static func id(_ componentLoss: ComponentPressureLoss? = nil) -> String {
@@ -49,7 +51,7 @@ struct ComponentLossForm: HTML, Sendable {
           label(.for("value")) { "Value" }
           Input(id: "value", placeholder: "Pressure loss")
             .attributes(
-              .type(.number), .min("0.03"), .max("1.0"), .step("0.1"), .required,
+              .type(.number), .min("0.03"), .max("1.0"), .step("0.01"), .required,
               .value(componentLoss?.value)
             )
         }
