@@ -7,7 +7,9 @@ import Styleguide
 
 struct EffectiveLengthsView: HTML, Sendable {
 
-  let projectID: Project.ID
+  @Environment(ProjectViewValue.$projectID) var projectID
+
+  // let projectID: Project.ID
   let effectiveLengths: [EffectiveLength]
 
   var supplies: [EffectiveLength] {

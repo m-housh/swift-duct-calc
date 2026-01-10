@@ -4,6 +4,7 @@ import ManualDCore
 extension Room {
 
   var heatingLoadPerRegister: Double {
+
     heatingLoad / Double(registerCount)
   }
 

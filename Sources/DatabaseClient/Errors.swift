@@ -9,4 +9,6 @@ public struct ValidationError: Error {
   }
 }
 
-public struct NotFoundError: Error {}
+public struct NotFoundError: Error {
+  public init() {}
+}

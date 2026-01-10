@@ -707,6 +707,9 @@ extension SiteRoute.View.ProjectRoute {
         Method.post
         Body {
           FormData {
+            Optionally {
+              Field("id") { DuctSizing.RectangularDuct.ID.parser() }
+            }
             Field("register") { Int.parser() }
             Field("height") { Int.parser() }
           }
@@ -716,6 +719,7 @@ extension SiteRoute.View.ProjectRoute {
     }
 
     public struct RoomRectangularForm: Equatable, Sendable {
+      public let id: DuctSizing.RectangularDuct.ID?
       public let register: Int
       public let height: Int
     }

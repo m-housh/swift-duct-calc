@@ -1,4 +1,5 @@
 import Elementary
+import ManualDClient
 import ManualDCore
 import Styleguide
 
@@ -6,23 +7,20 @@ import Styleguide
 
 struct FrictionRateView: HTML, Sendable {
 
+  @Environment(ProjectViewValue.$projectID) var projectID
+
   let equipmentInfo: EquipmentInfo?
   let componentLosses: [ComponentPressureLoss]
   let equivalentLengths: EffectiveLength.MaxContainer
-  let projectID: Project.ID
+  // let projectID: Project.ID
+  let frictionRateResponse: ManualDClient.FrictionRateResponse?
 
   var availableStaticPressure: Double? {
-    guard let staticPressure = equipmentInfo?.staticPressure else {
-      return nil
-    }
-    return staticPressure - componentLosses.totalComponentPressureLoss
+    frictionRateResponse?.availableStaticPressure
   }
 
   var frictionRateDesignValue: Double? {
-    guard let availableStaticPressure, let tel = equivalentLengths.total else {
-      return nil
-    }
-    return (((availableStaticPressure * 100) / tel) * 100) / 100
+    frictionRateResponse?.frictionRate
   }
 
   var badgeColor: String {

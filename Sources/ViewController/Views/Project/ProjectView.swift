@@ -7,6 +7,10 @@ import ManualDClient
 import ManualDCore
 import Styleguide
 
+enum ProjectViewValue {
+  @TaskLocal static var projectID = Project.ID(0)
+}
+
 struct ProjectView: HTML, Sendable {
   @Dependency(\.database) var database
   @Dependency(\.manualD) var manualD
@@ -34,50 +38,65 @@ struct ProjectView: HTML, Sendable {
         div(.class("drawer-content p-4")) {
           label(
             .for("my-drawer-1"),
-            .class("btn btn-square btn-ghost drawer-button size-7")
+            .class("btn btn-square btn-ghost drawer-button size-7 pb-6")
           ) {
             SVG(.sidebarToggle)
           }
           switch self.activeTab {
           case .project:
-            if let project = try await database.projects.get(projectID) {
-              ProjectDetail(project: project)
-            } else {
-              div {
-                "FIX ME!"
+            await resultView(projectID) {
+              guard let project = try await database.projects.get(projectID) else {
+                throw NotFoundError()
               }
+              return project
+            } onSuccess: { project in
+              ProjectDetail(project: project)
             }
           case .rooms:
-            try await RoomsView(
-              projectID: projectID,
-              rooms: database.rooms.fetch(projectID),
-              sensibleHeatRatio: database.projects.getSensibleHeatRatio(projectID)
-            )
+            await resultView(projectID) {
+              try await (
+                database.rooms.fetch(projectID),
+                database.projects.getSensibleHeatRatio(projectID)
+              )
+            } onSuccess: { (rooms, shr) in
+              RoomsView(rooms: rooms, sensibleHeatRatio: shr)
+            }
 
           case .equivalentLength:
-            try await EffectiveLengthsView(
-              projectID: projectID,
-              effectiveLengths: database.effectiveLength.fetch(projectID)
-            )
+            await resultView(projectID) {
+              try await database.effectiveLength.fetch(projectID)
+            } onSuccess: {
+              EffectiveLengthsView(effectiveLengths: $0)
+            }
           case .frictionRate:
-            try await FrictionRateView(
-              equipmentInfo: database.equipment.fetch(projectID),
-              componentLosses: database.componentLoss.fetch(projectID),
-              equivalentLengths: database.effectiveLength.fetchMax(projectID),
-              projectID: projectID
-            )
-          case .ductSizing:
-            try await DuctSizingView(
-              projectID: projectID,
-              rooms: manualD.calculate(
-                rooms: database.rooms.fetch(projectID),
-                designFrictionRateResult: database.designFrictionRate(projectID: projectID),
-                projectSHR: database.projects.getSensibleHeatRatio(projectID),
-                logger: logger
-              )
-            )
-          // div { "FIX ME!" }
 
+            await resultView(projectID) {
+
+              let equipmentInfo = try await database.equipment.fetch(projectID)
+              let componentLosses = try await database.componentLoss.fetch(projectID)
+              let equivalentLengths = try await database.effectiveLength.fetchMax(projectID)
+              let frictionRateResponse = try await manualD.frictionRate(
+                equipmentInfo: equipmentInfo,
+                componentLosses: componentLosses,
+                effectiveLength: equivalentLengths
+              )
+              return (
+                equipmentInfo, componentLosses, equivalentLengths, frictionRateResponse
+              )
+            } onSuccess: {
+              FrictionRateView(
+                equipmentInfo: $0.0,
+                componentLosses: $0.1,
+                equivalentLengths: $0.2,
+                frictionRateResponse: $0.3
+              )
+            }
+          case .ductSizing:
+            await resultView(projectID) {
+              try await database.calculateDuctSizes(projectID: projectID)
+            } onSuccess: {
+              DuctSizingView(rooms: $0)
+            }
           }
         }
 
@@ -89,7 +108,76 @@ struct ProjectView: HTML, Sendable {
       }
     }
   }
+
+  func resultView<V: Sendable, E: Error, ValueView: HTML>(
+    _ projectID: Project.ID,
+    catching: @escaping @Sendable () async throws(E) -> V,
+    onSuccess: @escaping @Sendable (V) -> ValueView
+  ) async -> ResultView<V, E, _ModifiedTaskLocal<Project.ID, ValueView>, ErrorView<E>>
+  where
+    ValueView: Sendable, E: Sendable
+  {
+    await .init(
+      result: .init(catching: catching),
+      onSuccess: { result in
+        onSuccess(result)
+          .environment(ProjectViewValue.$projectID, projectID)
+      }
+    )
+  }
 }
+
+// extension SiteRoute.View.ProjectRoute.DetailRoute.Tab {
+//
+//   func view(projectID: Project.ID) async throws -> AnySendableHTML {
+//     @Dependency(\.database) var database
+//     @Dependency(\.manualD) var manualD
+//
+//     switch self {
+//     case .project:
+//       if let project = try await database.projects.get(projectID) {
+//         return ProjectDetail(project: project)
+//       } else {
+//         return div {
+//           "FIX ME!"
+//         }
+//       }
+//     case .rooms:
+//       return try await RoomsView(
+//         projectID: projectID,
+//         rooms: database.rooms.fetch(projectID),
+//         sensibleHeatRatio: database.projects.getSensibleHeatRatio(projectID)
+//       )
+//
+//     case .equivalentLength:
+//       return try await EffectiveLengthsView(
+//         projectID: projectID,
+//         effectiveLengths: database.effectiveLength.fetch(projectID)
+//       )
+//     case .frictionRate:
+//       let equipmentInfo = try await database.equipment.fetch(projectID)
+//       let componentLosses = try await database.componentLoss.fetch(projectID)
+//       let equivalentLengths = try await database.effectiveLength.fetchMax(projectID)
+//
+//       return try await FrictionRateView(
+//         equipmentInfo: equipmentInfo,
+//         componentLosses: componentLosses,
+//         equivalentLengths: equivalentLengths,
+//         projectID: projectID,
+//         frictionRateResponse: manualD.frictionRate(
+//           equipmentInfo: equipmentInfo,
+//           componentLosses: componentLosses,
+//           effectiveLength: equivalentLengths
+//         )
+//       )
+//     case .ductSizing:
+//       return try await DuctSizingView(
+//         projectID: projectID,
+//         rooms: database.calculateDuctSizes(projectID: projectID)
+//       )
+//     }
+//   }
+// }
 
 extension ProjectView {
 
@@ -260,4 +348,28 @@ extension ProjectView {
       )
     }
   }
+}
+
+extension ManualDClient {
+
+  func frictionRate(
+    equipmentInfo: EquipmentInfo?,
+    componentLosses: [ComponentPressureLoss],
+    effectiveLength: EffectiveLength.MaxContainer
+  ) async throws -> FrictionRateResponse? {
+    guard let staticPressure = equipmentInfo?.staticPressure else {
+      return nil
+    }
+    guard let totalEquivalentLength = effectiveLength.total else {
+      return nil
+    }
+    return try await self.frictionRate(
+      .init(
+        externalStaticPressure: staticPressure,
+        componentPressureLosses: componentLosses,
+        totalEffectiveLength: Int(totalEquivalentLength)
+      )
+    )
+  }
+
 }

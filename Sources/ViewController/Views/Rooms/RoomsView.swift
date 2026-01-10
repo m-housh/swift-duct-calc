@@ -5,40 +5,36 @@ import Foundation
 import ManualDCore
 import Styleguide
 
-// TODO: Calculate rooms sensible based on project wide SHR.
-
 struct RoomsView: HTML, Sendable {
-  let projectID: Project.ID
+  @Environment(ProjectViewValue.$projectID) var projectID
+  // let projectID: Project.ID
   let rooms: [Room]
   let sensibleHeatRatio: Double?
 
   var body: some HTML {
     div {
-      Row {
-        h1(.class("text-2xl font-bold")) { "Room Loads" }
-        // div(
-        //   .class("tooltip tooltip-left"),
-        //   .data("tip", value: "Add room")
-        // ) {
-        //   div(.class("flex me-4")) {
-        //     PlusButton()
-        //       .attributes(.showModal(id: RoomForm.id()))
-        //   }
-        // }
-      }
-      .attributes(.class("pb-6"))
+      h1(.class("text-2xl font-bold pb-6")) { "Room Loads" }
 
       div(.class("border rounded-lg mb-6")) {
         Row {
-          div(.class("space-x-6 my-2")) {
-            Label("Sensible Heat Ratio")
-            if let sensibleHeatRatio {
-              Number(sensibleHeatRatio)
+          div {
+            div(.class("space-x-6 my-2 items-center")) {
+              Label("Sensible Heat Ratio")
+                .attributes(.class("my-auto"))
+              if let sensibleHeatRatio {
+                Number(sensibleHeatRatio)
+                  .attributes(.class("badge badge-outline"))
+              }
+            }
+            p(.class("text-sm italic")) {
+              "Project wide sensible heat ratio"
             }
           }
 
-          EditButton()
-            .attributes(.showModal(id: SHRForm.id))
+          Tooltip("Edit SHR") {
+            EditButton()
+              .attributes(.showModal(id: SHRForm.id))
+          }
         }
         .attributes(.class("m-4"))
 
@@ -134,7 +130,7 @@ struct RoomsView: HTML, Sendable {
         td {
           div(.class("flex justify-end")) {
             div(.class("join")) {
-              Tooltip("Delete room") {
+              Tooltip("Delete room", position: .bottom) {
                 TrashButton()
                   .attributes(
                     .class("join-item btn-ghost"),
@@ -144,16 +140,14 @@ struct RoomsView: HTML, Sendable {
                     .hx.confirm("Are you sure?")
                   )
               }
-              .attributes(.class("tooltip-bottom"))
 
-              Tooltip("Edit room") {
+              Tooltip("Edit room", position: .bottom) {
                 EditButton()
                   .attributes(
                     .class("join-item btn-ghost"),
                     .showModal(id: RoomForm.id(room))
                   )
               }
-              .attributes(.class("tooltip-bottom"))
             }
           }
           RoomForm(

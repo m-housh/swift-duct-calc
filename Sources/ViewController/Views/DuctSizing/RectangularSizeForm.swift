@@ -74,7 +74,7 @@ struct RectangularSizeForm: HTML, Sendable {
       form(
         .class("space-y-4"),
         .hx.post(route),
-        .hx.target("body"),
+        .hx.target("closest tr"),
         .hx.swap(.outerHTML)
       ) {
         input(.class("hidden"), .name("register"), .value(register))

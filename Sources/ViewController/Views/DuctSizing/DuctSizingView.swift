@@ -7,7 +7,9 @@ import Styleguide
 
 struct DuctSizingView: HTML, Sendable {
 
-  let projectID: Project.ID
+  @Environment(ProjectViewValue.$projectID) var projectID
+
+  // let projectID: Project.ID
   let rooms: [DuctSizing.RoomContainer]
 
   var body: some HTML {

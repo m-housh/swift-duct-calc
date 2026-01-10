@@ -1,5 +1,7 @@
 import DatabaseClient
+import Dependencies
 import Fluent
+import ManualDClient
 import ManualDCore
 import Vapor
 
@@ -23,6 +25,16 @@ extension DatabaseClient.Projects {
 }
 
 extension DatabaseClient {
+
+  func calculateDuctSizes(projectID: Project.ID) async throws -> [DuctSizing.RoomContainer] {
+    @Dependency(\.manualD) var manualD
+
+    return try await manualD.calculate(
+      rooms: rooms.fetch(projectID),
+      designFrictionRateResult: designFrictionRate(projectID: projectID),
+      projectSHR: projects.getSensibleHeatRatio(projectID)
+    )
+  }
 
   func designFrictionRate(
     projectID: Project.ID

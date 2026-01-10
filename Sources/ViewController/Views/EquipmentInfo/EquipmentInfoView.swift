@@ -15,10 +15,13 @@ struct EquipmentInfoView: HTML, Sendable {
       Row {
         h1(.class("text-2xl font-bold")) { "Equipment Info" }
 
-        EditButton()
-          .attributes(
-            .on(.click, "\(EquipmentInfoForm.id).showModal()")
-          )
+        Tooltip("Edit equipment info") {
+          EditButton()
+            .attributes(
+              .class("btn-ghost"),
+              .showModal(id: EquipmentInfoForm.id)
+            )
+        }
       }
 
       if let equipmentInfo {

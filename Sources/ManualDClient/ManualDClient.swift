@@ -130,12 +130,12 @@ extension ManualDClient {
   public struct FrictionRateRequest: Codable, Equatable, Sendable {
 
     public let externalStaticPressure: Double
-    public let componentPressureLosses: ComponentPressureLosses
+    public let componentPressureLosses: [ComponentPressureLoss]
     public let totalEffectiveLength: Int
 
     public init(
       externalStaticPressure: Double,
-      componentPressureLosses: ComponentPressureLosses,
+      componentPressureLosses: [ComponentPressureLoss],
       totalEffectiveLength: Int
     ) {
       self.externalStaticPressure = externalStaticPressure

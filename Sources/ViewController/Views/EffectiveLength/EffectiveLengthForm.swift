@@ -3,15 +3,7 @@ import ElementaryHTMX
 import ManualDCore
 import Styleguide
 
-// TODO: May need a multi-step form were the the effective length type is
-//       determined before groups selections are made in order to use the
-//       appropriate select field values when the type is supply vs. return.
-//       Currently when the select field is changed it doesn't change the group
-//       I can get it to add a new one.
-
 // TODO: Add back buttons / capability??
-
-// TODO: Add patch / update capability
 
 struct EffectiveLengthForm: HTML, Sendable {
 

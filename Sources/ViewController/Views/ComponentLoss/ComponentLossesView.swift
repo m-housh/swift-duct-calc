@@ -31,10 +31,13 @@ struct ComponentPressureLossesView: HTML, Sendable {
             span(.class("text-sm italic")) { "Total" }
           }
         }
-        PlusButton()
-          .attributes(
-            .showModal(id: ComponentLossForm.id())
-          )
+        Tooltip("Add Component Loss") {
+          PlusButton()
+            .attributes(
+              .class("btn-ghost text-2xl"),
+              .showModal(id: ComponentLossForm.id())
+            )
+        }
       }
 
       table(.class("table table-zebra")) {
@@ -65,24 +68,28 @@ struct ComponentPressureLossesView: HTML, Sendable {
         td { Number(row.value) }
         td {
           div(.class("flex join items-end justify-end mx-auto")) {
-            TrashButton()
-              .attributes(
-                .class("join-item"),
-                .hx.delete(
-                  route: .project(
-                    .detail(row.projectID, .componentLoss(.delete(row.id)))
-                  )
-                ),
-                .hx.target("body"),
-                .hx.swap(.outerHTML),
-                .hx.confirm("Are your sure?")
+            Tooltip("Delete", position: .bottom) {
+              TrashButton()
+                .attributes(
+                  .class("join-item btn-ghost"),
+                  .hx.delete(
+                    route: .project(
+                      .detail(row.projectID, .componentLoss(.delete(row.id)))
+                    )
+                  ),
+                  .hx.target("body"),
+                  .hx.swap(.outerHTML),
+                  .hx.confirm("Are your sure?")
 
-              )
-            EditButton()
-              .attributes(
-                .class("join-item"),
-                .showModal(id: ComponentLossForm.id(row))
-              )
+                )
+            }
+            Tooltip("Edit", position: .bottom) {
+              EditButton()
+                .attributes(
+                  .class("join-item btn-ghost"),
+                  .showModal(id: ComponentLossForm.id(row))
+                )
+            }
           }
 
           ComponentLossForm(dismiss: true, projectID: row.projectID, componentLoss: row)
