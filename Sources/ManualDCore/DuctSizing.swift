@@ -3,15 +3,18 @@ import Foundation
 
 public enum DuctSizing {
 
-  public struct RectangularDuct: Codable, Equatable, Sendable {
+  public struct RectangularDuct: Codable, Equatable, Identifiable, Sendable {
 
+    public let id: UUID
     public let register: Int?
     public let height: Int
 
     public init(
+      id: UUID = .init(),
       register: Int? = nil,
       height: Int,
     ) {
+      self.id = id
       self.register = register
       self.height = height
     }

@@ -350,6 +350,16 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
       return request.view {
         ProjectView(projectID: projectID, activeTab: .ductSizing, logger: request.logger)
       }
+
+    case .deleteRectangularSize(let roomID, let rectangularSizeID):
+      let room = try await database.rooms.deleteRectangularSize(roomID, rectangularSizeID)
+      let container = try await manualD.calculate(
+        rooms: [room],
+        designFrictionRateResult: database.designFrictionRate(projectID: projectID),
+        projectSHR: database.projects.getSensibleHeatRatio(projectID)
+      ).first!
+      return DuctSizingView.RoomRow(projectID: projectID, room: container)
+
     case .roomRectangularForm(let roomID, let form):
       let _ = try await database.rooms.update(
         roomID,

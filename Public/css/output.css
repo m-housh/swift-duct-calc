@@ -2206,9 +2206,6 @@
   .collapse {
     visibility: collapse;
   }
-  .invisible {
-    visibility: hidden;
-  }
   .visible {
     visibility: visible;
   }
@@ -5372,6 +5369,9 @@
   .my-2 {
     margin-block: calc(var(--spacing) * 2);
   }
+  .my-auto {
+    margin-block: auto;
+  }
   .label {
     @layer daisyui.l1.l2.l3 {
       display: inline-flex;
@@ -5578,12 +5578,6 @@
   .ms-4 {
     margin-inline-start: calc(var(--spacing) * 4);
   }
-  .ms-6 {
-    margin-inline-start: calc(var(--spacing) * 6);
-  }
-  .ms-8 {
-    margin-inline-start: calc(var(--spacing) * 8);
-  }
   .me-4 {
     margin-inline-end: calc(var(--spacing) * 4);
   }
@@ -5625,6 +5619,15 @@
         border-radius: calc( min(var(--tab-height) / 2, var(--radius-field)) + min(0.25rem, var(--tabs-box-radius)) - var(--border) );
       }
     }
+  }
+  .mt-1 {
+    margin-top: calc(var(--spacing) * 1);
+  }
+  .mt-1\.5 {
+    margin-top: calc(var(--spacing) * 1.5);
+  }
+  .mt-2 {
+    margin-top: calc(var(--spacing) * 2);
   }
   .mt-4 {
     margin-top: calc(var(--spacing) * 4);
@@ -6760,9 +6763,6 @@
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
-  .grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
   .grid-cols-5 {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
@@ -7826,9 +7826,6 @@
   .ps-2 {
     padding-inline-start: calc(var(--spacing) * 2);
   }
-  .ps-8 {
-    padding-inline-start: calc(var(--spacing) * 8);
-  }
   .file-input-xl {
     @layer daisyui.l1.l2 {
       padding-inline-end: calc(0.25rem * 6);
@@ -7843,6 +7840,9 @@
   .pe-2 {
     padding-inline-end: calc(var(--spacing) * 2);
   }
+  .pt-4 {
+    padding-top: calc(var(--spacing) * 4);
+  }
   .pt-6 {
     padding-top: calc(var(--spacing) * 6);
   }
@@ -7851,6 +7851,9 @@
   }
   .pb-6 {
     padding-bottom: calc(var(--spacing) * 6);
+  }
+  .align-baseline {
+    vertical-align: baseline;
   }
   .file-input-lg {
     @layer daisyui.l1.l2 {
@@ -9377,6 +9380,13 @@
       }
     }
   }
+  .hover\:text-white {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-white);
+      }
+    }
+  }
   .focus\:outline {
     &:focus {
       outline-style: var(--tw-outline-style);
@@ -9391,11 +9401,6 @@
   .focus\:outline-indigo-600 {
     &:focus {
       outline-color: var(--color-indigo-600);
-    }
-  }
-  .md\:grid-cols-1 {
-    @media (width >= 48rem) {
-      grid-template-columns: repeat(1, minmax(0, 1fr));
     }
   }
   .md\:grid-cols-2 {
@@ -9456,26 +9461,6 @@
       }
     }
   }
-  .lg\:visible {
-    @media (width >= 64rem) {
-      visibility: visible;
-    }
-  }
-  .lg\:block {
-    @media (width >= 64rem) {
-      display: block;
-    }
-  }
-  .lg\:inline-block {
-    @media (width >= 64rem) {
-      display: inline-block;
-    }
-  }
-  .lg\:table-cell {
-    @media (width >= 64rem) {
-      display: table-cell;
-    }
-  }
   .lg\:grid-cols-2 {
     @media (width >= 64rem) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -9486,24 +9471,9 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
-  .xl\:visible {
-    @media (width >= 80rem) {
-      visibility: visible;
-    }
-  }
   .xl\:table-cell {
     @media (width >= 80rem) {
       display: table-cell;
-    }
-  }
-  .xl\:grid-cols-2 {
-    @media (width >= 80rem) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-  .xl\:grid-cols-3 {
-    @media (width >= 80rem) {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
   .\32 xl\:table-cell {

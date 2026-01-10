@@ -1,4 +1,5 @@
 import Elementary
+import Foundation
 import ManualDCore
 
 extension HTMLAttribute where Tag: HTMLTrait.Attributes.href {
@@ -27,6 +28,10 @@ extension HTMLAttribute where Tag == HTMLTag.input {
 
   public static func value(_ double: Double?) -> Self {
     value(double == nil ? "" : "\(double!)")
+  }
+
+  public static func value(_ uuid: UUID?) -> Self {
+    value(uuid?.uuidString ?? "")
   }
 }
 

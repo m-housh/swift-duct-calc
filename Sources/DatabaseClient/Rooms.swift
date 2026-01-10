@@ -9,6 +9,8 @@ extension DatabaseClient {
   public struct Rooms: Sendable {
     public var create: @Sendable (Room.Create) async throws -> Room
     public var delete: @Sendable (Room.ID) async throws -> Void
+    public var deleteRectangularSize:
+      @Sendable (Room.ID, DuctSizing.RectangularDuct.ID) async throws -> Room
     public var get: @Sendable (Room.ID) async throws -> Room?
     public var fetch: @Sendable (Project.ID) async throws -> [Room]
     public var update: @Sendable (Room.ID, Room.Update) async throws -> Room
@@ -30,6 +32,18 @@ extension DatabaseClient.Rooms: TestDependencyKey {
           throw NotFoundError()
         }
         try await model.delete(on: database)
+      },
+      deleteRectangularSize: { roomID, rectangularDuctID in
+        guard let model = try await RoomModel.find(roomID, on: database) else {
+          throw NotFoundError()
+        }
+        model.rectangularSizes?.removeAll {
+          $0.id == rectangularDuctID
+        }
+        if model.hasChanges {
+          try await model.save(on: database)
+        }
+        return try model.toDTO()
       },
       get: { id in
         try await RoomModel.find(id, on: database).map { try $0.toDTO() }

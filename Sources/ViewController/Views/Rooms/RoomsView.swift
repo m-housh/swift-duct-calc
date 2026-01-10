@@ -16,15 +16,15 @@ struct RoomsView: HTML, Sendable {
     div {
       Row {
         h1(.class("text-2xl font-bold")) { "Room Loads" }
-        div(
-          .class("tooltip tooltip-left"),
-          .data("tip", value: "Add room")
-        ) {
-          div(.class("flex me-4")) {
-            PlusButton()
-              .attributes(.showModal(id: RoomForm.id()))
-          }
-        }
+        // div(
+        //   .class("tooltip tooltip-left"),
+        //   .data("tip", value: "Add room")
+        // ) {
+        //   div(.class("flex me-4")) {
+        //     PlusButton()
+        //       .attributes(.showModal(id: RoomForm.id()))
+        //   }
+        // }
       }
       .attributes(.class("pb-6"))
 
@@ -54,7 +54,18 @@ struct RoomsView: HTML, Sendable {
               th { Label("Cooling Total") }
               th { Label("Cooling Sensible") }
               th { Label("Register Count") }
-              th {}
+              th {
+                div(.class("flex justify-end")) {
+                  Tooltip("Add Room") {
+                    PlusButton()
+                      .attributes(
+                        .class("mx-auto"),
+                        .showModal(id: RoomForm.id())
+                      )
+                  }
+                  .attributes(.class("tooltip-left"))
+                }
+              }
             }
           }
           tbody {
@@ -123,19 +134,26 @@ struct RoomsView: HTML, Sendable {
         td {
           div(.class("flex justify-end")) {
             div(.class("join")) {
-              TrashButton()
-                .attributes(
-                  .class("join-item"),
-                  .hx.delete(
-                    route: .project(.detail(room.projectID, .rooms(.delete(id: room.id))))),
-                  .hx.target("closest tr"),
-                  .hx.confirm("Are you sure?")
-                )
-              EditButton()
-                .attributes(
-                  .class("join-item"),
-                  .showModal(id: RoomForm.id(room))
-                )
+              Tooltip("Delete room") {
+                TrashButton()
+                  .attributes(
+                    .class("join-item btn-ghost"),
+                    .hx.delete(
+                      route: .project(.detail(room.projectID, .rooms(.delete(id: room.id))))),
+                    .hx.target("closest tr"),
+                    .hx.confirm("Are you sure?")
+                  )
+              }
+              .attributes(.class("tooltip-bottom"))
+
+              Tooltip("Edit room") {
+                EditButton()
+                  .attributes(
+                    .class("join-item btn-ghost"),
+                    .showModal(id: RoomForm.id(room))
+                  )
+              }
+              .attributes(.class("tooltip-bottom"))
             }
           }
           RoomForm(

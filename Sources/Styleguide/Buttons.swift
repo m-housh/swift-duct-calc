@@ -94,7 +94,7 @@ public struct TrashButton: HTML, Sendable {
   public var body: some HTML<HTMLTag.button> {
     button(
       .type(.button),
-      .class("btn btn-error btn-circle dark:text-white")
+      .class("btn btn-error")
     ) {
       SVG(.trash)
     }

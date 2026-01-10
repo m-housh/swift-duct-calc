@@ -42,9 +42,9 @@ struct DuctSizingView: HTML, Sendable {
               th(.class("hidden xl:table-cell")) { "Round Size" }
               th { "Velocity" }
               th { "Final Size" }
-              th { "Height" }
-              th { "Width" }
               th { "Flex Size" }
+              th { "Width" }
+              th { "Height" }
             }
           }
           tbody {
@@ -70,7 +70,7 @@ struct DuctSizingView: HTML, Sendable {
     }
 
     var body: some HTML<HTMLTag.tr> {
-      tr(.class("text-lg"), .id(room.roomID.idString)) {
+      tr(.class("text-lg items-baseline"), .id(room.roomID.idString)) {
         td { room.registerID }
         td { room.roomName }
         td { Number(room.heatingLoad, digits: 0) }
@@ -89,25 +89,8 @@ struct DuctSizingView: HTML, Sendable {
             .attributes(.class("badge badge-outline badge-secondary text-xl  font-bold"))
         }
         td {
-          form(
-            .hx.post(route),
-            .hx.target("body"),
-            .hx.swap(.outerHTML)
-            // .hx.trigger(
-            //   .event(.change).from("#rectangularSize_\(room.roomID.idString)")
-            // )
-          ) {
-            input(.class("hidden"), .name("register"), .value("\(room.roomName.last!)"))
-            Row {
-              Input(
-                id: "height",
-                name: "height",
-                placeholder: "Height"
-              )
-              .attributes(.type(.number), .min("0"), .value(room.rectangularSize?.height))
-              SubmitButton()
-            }
-          }
+          Number(room.flexSize)
+            .attributes(.class("badge badge-outline badge-primary text-xl  font-bold"))
         }
         td {
           if let width = room.rectangularWidth {
@@ -115,8 +98,44 @@ struct DuctSizingView: HTML, Sendable {
           }
         }
         td {
-          Number(room.flexSize)
-            .attributes(.class("badge badge-outline badge-primary text-xl  font-bold"))
+          div(.class("flex justify-between items-center space-x-4")) {
+            div(.id("height_\(room.roomID.idString)"), .class("h-full my-auto")) {
+              if let height = room.rectangularSize?.height {
+                Number(height)
+              }
+            }
+            div {
+              div(.class("join")) {
+                // FIX: Delete rectangular size from room.
+                TrashButton()
+                  .attributes(.class("join-item btn-ghost"))
+                  .attributes(
+                    .hx.delete(
+                      route: .project(
+                        .detail(
+                          projectID,
+                          .ductSizing(
+                            .deleteRectangularSize(
+                              room.roomID,
+                              room.rectangularSize?.id ?? .init())
+                          )
+                        )
+                      )
+                    ),
+                    .hx.target("closest tr"),
+                    .hx.swap(.outerHTML),
+                    when: room.rectangularSize != nil
+                  )
+
+                EditButton()
+                  .attributes(
+                    .class("join-item btn-ghost text-success hover:text-white"),
+                    .showModal(id: RectangularSizeForm.id(room))
+                  )
+              }
+            }
+          }
+          RectangularSizeForm(projectID: projectID, room: room)
         }
       }
     }
