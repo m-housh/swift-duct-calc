@@ -54,6 +54,17 @@ extension ResultView {
       Styleguide.ErrorView(error: error)
     }
   }
+
+  public init(
+    catching: @escaping @Sendable () async throws(E) -> V,
+  ) async where ErrorView == Styleguide.ErrorView<E>, V == Void, ValueView == EmptyHTML {
+    await self.init(
+      result: .init(catching: catching),
+      onSuccess: { EmptyHTML() }
+    ) { error in
+      Styleguide.ErrorView(error: error)
+    }
+  }
 }
 
 extension ResultView: Sendable where Error: Sendable, ValueView: Sendable, ErrorView: Sendable {}
