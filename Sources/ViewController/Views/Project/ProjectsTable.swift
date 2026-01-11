@@ -16,36 +16,39 @@ struct ProjectsTable: HTML, Sendable {
   }
 
   var body: some HTML {
-    div(.class("m-6")) {
-      Row {
-        h1(.class("text-2xl font-bold")) { "Projects" }
-        Tooltip("Add project") {
-          PlusButton()
-            .attributes(
-              .class("btn-ghost"),
-              .showModal(id: ProjectForm.id)
-            )
+    div {
+      Navbar(sidebarToggle: false)
+      div(.class("m-6")) {
+        Row {
+          h1(.class("text-2xl font-bold")) { "Projects" }
+          Tooltip("Add project") {
+            PlusButton()
+              .attributes(
+                .class("btn-ghost"),
+                .showModal(id: ProjectForm.id)
+              )
+          }
         }
-      }
-      .attributes(.class("pb-6"))
+        .attributes(.class("pb-6"))
 
-      div(.class("overflow-x-auto rounded-box border")) {
-        table(.class("table table-zebra")) {
-          thead {
-            tr {
-              th { Label("Date") }
-              th { Label("Name") }
-              th { Label("Address") }
-              th {}
+        div(.class("overflow-x-auto rounded-box border")) {
+          table(.class("table table-zebra")) {
+            thead {
+              tr {
+                th { Label("Date") }
+                th { Label("Name") }
+                th { Label("Address") }
+                th {}
+              }
+            }
+            tbody {
+              Rows(projects: projects)
             }
           }
-          tbody {
-            Rows(projects: projects)
-          }
         }
-      }
 
-      ProjectForm(dismiss: true)
+        ProjectForm(dismiss: true)
+      }
     }
   }
 }

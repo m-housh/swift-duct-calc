@@ -35,69 +35,64 @@ struct ProjectView: HTML, Sendable {
       div(.class("drawer lg:drawer-open")) {
         input(.id("my-drawer-1"), .type(.checkbox), .class("drawer-toggle"))
 
-        div(.class("drawer-content p-4")) {
-          Tooltip("Open sidebar", position: .right) {
-            label(
-              .for("my-drawer-1"),
-              .class("btn btn-square btn-ghost drawer-button size-7 pb-6")
-            ) {
-              SVG(.sidebarToggle)
-            }
-          }
-          switch self.activeTab {
-          case .project:
-            await resultView(projectID) {
-              guard let project = try await database.projects.get(projectID) else {
-                throw NotFoundError()
+        div(.class("drawer-content")) {
+          Navbar(sidebarToggle: true)
+          div(.class("p-4")) {
+            switch self.activeTab {
+            case .project:
+              await resultView(projectID) {
+                guard let project = try await database.projects.get(projectID) else {
+                  throw NotFoundError()
+                }
+                return project
+              } onSuccess: { project in
+                ProjectDetail(project: project)
               }
-              return project
-            } onSuccess: { project in
-              ProjectDetail(project: project)
-            }
-          case .rooms:
-            await resultView(projectID) {
-              try await (
-                database.rooms.fetch(projectID),
-                database.projects.getSensibleHeatRatio(projectID)
-              )
-            } onSuccess: { (rooms, shr) in
-              RoomsView(rooms: rooms, sensibleHeatRatio: shr)
-            }
+            case .rooms:
+              await resultView(projectID) {
+                try await (
+                  database.rooms.fetch(projectID),
+                  database.projects.getSensibleHeatRatio(projectID)
+                )
+              } onSuccess: { (rooms, shr) in
+                RoomsView(rooms: rooms, sensibleHeatRatio: shr)
+              }
 
-          case .equivalentLength:
-            await resultView(projectID) {
-              try await database.effectiveLength.fetch(projectID)
-            } onSuccess: {
-              EffectiveLengthsView(effectiveLengths: $0)
-            }
-          case .frictionRate:
+            case .equivalentLength:
+              await resultView(projectID) {
+                try await database.effectiveLength.fetch(projectID)
+              } onSuccess: {
+                EffectiveLengthsView(effectiveLengths: $0)
+              }
+            case .frictionRate:
 
-            await resultView(projectID) {
+              await resultView(projectID) {
 
-              let equipmentInfo = try await database.equipment.fetch(projectID)
-              let componentLosses = try await database.componentLoss.fetch(projectID)
-              let equivalentLengths = try await database.effectiveLength.fetchMax(projectID)
-              let frictionRateResponse = try await manualD.frictionRate(
-                equipmentInfo: equipmentInfo,
-                componentLosses: componentLosses,
-                effectiveLength: equivalentLengths
-              )
-              return (
-                equipmentInfo, componentLosses, equivalentLengths, frictionRateResponse
-              )
-            } onSuccess: {
-              FrictionRateView(
-                equipmentInfo: $0.0,
-                componentLosses: $0.1,
-                equivalentLengths: $0.2,
-                frictionRateResponse: $0.3
-              )
-            }
-          case .ductSizing:
-            await resultView(projectID) {
-              try await database.calculateDuctSizes(projectID: projectID)
-            } onSuccess: {
-              DuctSizingView(rooms: $0)
+                let equipmentInfo = try await database.equipment.fetch(projectID)
+                let componentLosses = try await database.componentLoss.fetch(projectID)
+                let equivalentLengths = try await database.effectiveLength.fetchMax(projectID)
+                let frictionRateResponse = try await manualD.frictionRate(
+                  equipmentInfo: equipmentInfo,
+                  componentLosses: componentLosses,
+                  effectiveLength: equivalentLengths
+                )
+                return (
+                  equipmentInfo, componentLosses, equivalentLengths, frictionRateResponse
+                )
+              } onSuccess: {
+                FrictionRateView(
+                  equipmentInfo: $0.0,
+                  componentLosses: $0.1,
+                  equivalentLengths: $0.2,
+                  frictionRateResponse: $0.3
+                )
+              }
+            case .ductSizing:
+              await resultView(projectID) {
+                try await database.calculateDuctSizes(projectID: projectID)
+              } onSuccess: {
+                DuctSizingView(rooms: $0)
+              }
             }
           }
         }
@@ -148,39 +143,13 @@ extension ProjectView {
         div(
           .class(
             """
-            flex min-h-full flex-col items-start bg-base-200 
+            flex min-h-full flex-col items-start bg-base-300 text-base-content
             is-drawer-close:min-w-[80px] is-drawer-open:max-w-[300px]
             """
           )
         ) {
 
           ul(.class("w-full")) {
-
-            li(.class("w-full")) {
-              div(
-                .class("w-full is-drawer-close:tooltip is-drawer-close:tooltip-right"),
-                .data("tip", value: "All Projects")
-              ) {
-                a(
-                  .class(
-                    """
-                    flex btn btn-secondary btn-square btn-block 
-                    items-center
-                    """
-                  ),
-                  .hx.get(route: .project(.index)),
-                  .hx.target("body"),
-                  .hx.pushURL(true),
-                  .hx.swap(.outerHTML),
-                ) {
-                  div(.class("flex is-drawer-open:space-x-4")) {
-                    // span { "<" }
-                    SVG(.chevronsLeft)
-                    span(.class("is-drawer-close:hidden")) { "All Projects" }
-                  }
-                }
-              }
-            }
 
             // FIX: Move to user profile / settings page.
             li(.class("w-full is-drawer-close:hidden")) {
@@ -198,7 +167,6 @@ extension ProjectView {
                 isComplete: true
               )
               .attributes(.data("active", value: "true"), when: active == .project)
-              .attributes(.class("btn-active"), when: active == .project)
             }
 
             li(.class("w-full")) {
@@ -208,7 +176,6 @@ extension ProjectView {
                 route: .project(.detail(projectID, .rooms(.index))),
                 isComplete: completedSteps.rooms
               )
-              .attributes(.class("btn-active"), when: active == .rooms)
               .attributes(.data("active", value: "true"), when: active == .rooms)
             }
 
@@ -221,7 +188,6 @@ extension ProjectView {
                 isComplete: completedSteps.equivalentLength
               )
               .attributes(.data("active", value: "true"), when: active == .equivalentLength)
-              .attributes(.class("btn-active"), when: active == .equivalentLength)
               // }
 
             }
@@ -233,7 +199,6 @@ extension ProjectView {
                 isComplete: completedSteps.frictionRate
               )
               .attributes(.data("active", value: "true"), when: active == .frictionRate)
-              .attributes(.class("btn-active"), when: active == .frictionRate)
 
             }
             li(.class("w-full")) {
@@ -245,7 +210,6 @@ extension ProjectView {
                 hideIsComplete: true
               )
               .attributes(.data("active", value: "true"), when: active == .ductSizing)
-              .attributes(.class("btn-active"), when: active == .ductSizing)
             }
           }
         }
@@ -316,47 +280,6 @@ extension ProjectView {
           }
         }
       }
-      // a(
-      //
-      //   // flex w-full btn btn-soft btn-square btn-block btn-lg
-      //   .class(
-      //     """
-      //     flex w-full hover:bg-gray-900 data-active:bg-gray-900
-      //     is-drawer-open:justify-between is-drawer-close:items-center
-      //     is-drawer-close:tooltip is-drawer-close:tooltip-right
-      //     is-drawer-close:justify-center
-      //     """
-      //   ),
-      //   .href(href),
-      //   .data("tip", value: title)
-      // ) {
-      //   div(
-      //     .class(
-      //       """
-      //       justify-center items-center mx-auto space-4 py-2
-      //       is-drawer-open:flex is-drawer-open:space-x-4
-      //       """
-      //     )
-      //   ) {
-      //     SVG(icon)
-      //     span(.class("text-gray-200 is-drawer-open:text-xl is-drawer-close:text-sm")) {
-      //       title
-      //     }
-      //   }
-      //   if !hideIsComplete {
-      //     div(.class("is-drawer-close:hidden")) {
-      //       if isComplete {
-      //         SVG(.badgeCheck)
-      //       } else {
-      //         SVG(.ban)
-      //       }
-      //     }
-      //     .attributes(.class("text-green-400"), when: isComplete)
-      //     .attributes(.class("text-error"), when: !isComplete)
-      //   }
-      // }
-      // .attributes(.class("is-drawer-close:text-green-400"), when: isComplete)
-      // .attributes(.class("is-drawer-close:text-error"), when: !isComplete && !hideIsComplete)
     }
 
     private func row(
