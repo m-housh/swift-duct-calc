@@ -33,7 +33,7 @@ struct RoomsView: HTML, Sendable {
 
           Tooltip("Edit SHR") {
             EditButton()
-              .attributes(.showModal(id: SHRForm.id))
+              .attributes(.class("btn-ghost"), .showModal(id: SHRForm.id))
           }
         }
         .attributes(.class("m-4"))
@@ -55,7 +55,7 @@ struct RoomsView: HTML, Sendable {
                   Tooltip("Add Room") {
                     PlusButton()
                       .attributes(
-                        .class("mx-auto"),
+                        .class("btn-ghost mx-auto"),
                         .showModal(id: RoomForm.id())
                       )
                   }

@@ -29,7 +29,10 @@ struct EffectiveLengthsView: HTML, Sendable {
       Row {
         h1(.class("text-2xl font-bold")) { "Equivalent Lengths" }
         PlusButton()
-          .attributes(.showModal(id: EffectiveLengthForm.id(nil)))
+          .attributes(
+            .class("btn-ghost"),
+            .showModal(id: EffectiveLengthForm.id(nil))
+          )
       }
       .attributes(.class("pb-6"))
 
@@ -131,7 +134,7 @@ struct EffectiveLengthsView: HTML, Sendable {
             div(.class("join")) {
               TrashButton()
                 .attributes(
-                  .class("join-item"),
+                  .class("join-item btn-ghost"),
                   .hx.delete(
                     route: .project(
                       .detail(
@@ -146,7 +149,7 @@ struct EffectiveLengthsView: HTML, Sendable {
                 )
               EditButton()
                 .attributes(
-                  .class("join-item"),
+                  .class("join-item btn-ghost"),
                   .showModal(id: EffectiveLengthForm.id(effectiveLength))
                 )
             }

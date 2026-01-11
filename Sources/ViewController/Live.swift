@@ -92,7 +92,6 @@ extension SiteRoute.View.ProjectRoute {
 
   func renderView(on request: ViewController.Request) async -> AnySendableHTML {
     @Dependency(\.database) var database
-    // let user = try request.currentUser()
 
     switch self {
     case .index:

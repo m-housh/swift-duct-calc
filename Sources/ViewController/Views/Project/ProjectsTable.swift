@@ -19,12 +19,10 @@ struct ProjectsTable: HTML, Sendable {
     div(.class("m-6")) {
       Row {
         h1(.class("text-2xl font-bold")) { "Projects" }
-        div(
-          .class("tooltip tooltip-left"),
-          .data("tip", value: "Add project")
-        ) {
+        Tooltip("Add project") {
           PlusButton()
             .attributes(
+              .class("btn-ghost"),
               .showModal(id: ProjectForm.id)
             )
         }
@@ -56,25 +54,42 @@ extension ProjectsTable {
   struct Rows: HTML, Sendable {
     let projects: Page<Project>
 
+    func tooltipPosition(_ n: Int) -> TooltipPosition {
+      if projects.metadata.page == 1 && projects.items.count == 1 {
+        return .left
+      } else if n == (projects.items.count - 1) {
+        return .left
+      } else {
+        return .bottom
+      }
+    }
+
     var body: some HTML {
-      for project in projects.items {
+      for (n, project) in projects.items.enumerated() {
         tr(.id("\(project.id)")) {
           td { DateView(project.createdAt) }
           td { "\(project.name)" }
           td { "\(project.streetAddress)" }
           td {
             div(.class("flex justify-end space-x-6")) {
-              TrashButton()
-                .attributes(
-                  .hx.delete(route: .project(.delete(id: project.id))),
-                  .hx.confirm("Are you sure?"),
-                  .hx.target("closest tr")
-                )
-              a(
-                .class("btn btn-success btn-circle dark:text-white"),
-                .href(route: .project(.detail(project.id, .index())))
-              ) {
-                SVG(.chevronRight)
+              div(.class("join")) {
+                Tooltip("Delete project", position: tooltipPosition(n)) {
+                  TrashButton()
+                    .attributes(
+                      .class("join-item btn-ghost"),
+                      .hx.delete(route: .project(.delete(id: project.id))),
+                      .hx.confirm("Are you sure?"),
+                      .hx.target("closest tr")
+                    )
+                }
+                Tooltip("View project", position: tooltipPosition(n)) {
+                  a(
+                    .class("join-item btn btn-success btn-ghost"),
+                    .href(route: .project(.detail(project.id, .index())))
+                  ) {
+                    SVG(.chevronRight)
+                  }
+                }
               }
             }
           }
