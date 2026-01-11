@@ -23,6 +23,22 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     script(.src("/js/main.js")) {}
     link(.rel(.stylesheet), .href("/css/output.css"))
     link(.rel(.icon), .href("/images/favicon.ico"), .custom(name: "type", value: "image/x-icon"))
+    link(
+      .rel(.icon),
+      .href("/images/favicon-32x32.png"),
+      .init(name: "type", value: "image/png")
+    )
+    link(
+      .rel(.icon),
+      .href("/images/favicon-16x16.png"),
+      .init(name: "type", value: "image/png")
+    )
+    link(
+      .rel(.init(rawValue: "apple-touch-icon")),
+      .init(name: "sizes", value: "180x180"),
+      .href("/images/apple-touch-icon.png")
+    )
+    link(.rel(.init(rawValue: "manifest")), .href("/site.webmanifest"))
     script(
       .src("https://unpkg.com/htmx-remove@latest"),
       .crossorigin(.anonymous),

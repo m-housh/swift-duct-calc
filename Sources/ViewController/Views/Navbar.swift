@@ -6,8 +6,14 @@ struct Navbar: HTML, Sendable {
   let sidebarToggle: Bool
 
   var body: some HTML<HTMLTag.nav> {
-    nav(.class("navbar w-full bg-base-300 text-base-content shadow-sm mb-4")) {
-      div(.class("flex-1 space-x-4 items-center")) {
+    nav(
+      .class(
+        """
+        navbar w-full bg-base-300 text-base-content shadow-sm mb-4
+        """
+      )
+    ) {
+      div(.class("flex flex-1 space-x-4 items-center")) {
         if sidebarToggle {
           Tooltip("Open sidebar", position: .right) {
             label(
@@ -20,12 +26,16 @@ struct Navbar: HTML, Sendable {
             .navButton()
           }
         }
+
         Tooltip("Home", position: .right) {
           a(
-            .class("w-fit text-xl py-2 px-4"),
+            .class("flex w-fit h-fit text-xl items-end px-4 py-2"),
             .href(route: .project(.index))
           ) {
-            "Manual-D"
+            img(
+              .src("/images/mand_logo_sm.webp"),
+            )
+            span { "Manual-D" }
           }
           .navButton()
         }
