@@ -44,19 +44,24 @@ struct FrictionRateView: HTML, Sendable {
 
   var body: some HTML {
     div(.class("p-4 space-y-6")) {
-      h1(.class("text-4xl font-bold pb-6")) { "Friction Rate" }
-      div(.class("flex space-x-4")) {
-        if let availableStaticPressure {
-          Label("Available Static Pressure")
-          Number(availableStaticPressure, digits: 2)
-            .attributes(.class("badge badge-lg badge-outline font-bold ms-4"))
-        }
-      }
-      div(.class("flex space-x-4")) {
-        if let frictionRateDesignValue {
-          Label("Friction Rate Design Value")
-          Number(frictionRateDesignValue, digits: 2)
-            .attributes(.class("badge badge-lg badge-outline \(badgeColor) font-bold"))
+      Row {
+        h1(.class("text-4xl font-bold pb-6")) { "Friction Rate" }
+        div(.class("space-y-4")) {
+          div(.class("flex space-x-4 justify-end")) {
+            if let availableStaticPressure {
+              Label("Available Static Pressure")
+              Number(availableStaticPressure, digits: 2)
+                .attributes(.class("badge badge-lg badge-outline font-bold ms-4"))
+            }
+          }
+
+          div(.class("flex space-x-4 justify-end")) {
+            if let frictionRateDesignValue {
+              Label("Friction Rate Design Value")
+              Number(frictionRateDesignValue, digits: 2)
+                .attributes(.class("badge badge-lg badge-outline \(badgeColor) font-bold"))
+            }
+          }
         }
       }
 

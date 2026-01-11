@@ -4,3 +4,5 @@
 @source not "./daisyui{,*}.mjs";
 
 @plugin "./daisyui.mjs";
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+

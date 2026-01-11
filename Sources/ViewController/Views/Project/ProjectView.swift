@@ -36,11 +36,13 @@ struct ProjectView: HTML, Sendable {
         input(.id("my-drawer-1"), .type(.checkbox), .class("drawer-toggle"))
 
         div(.class("drawer-content p-4")) {
-          label(
-            .for("my-drawer-1"),
-            .class("btn btn-square btn-ghost drawer-button size-7 pb-6")
-          ) {
-            SVG(.sidebarToggle)
+          Tooltip("Open sidebar", position: .right) {
+            label(
+              .for("my-drawer-1"),
+              .class("btn btn-square btn-ghost drawer-button size-7 pb-6")
+            ) {
+              SVG(.sidebarToggle)
+            }
           }
           switch self.activeTab {
           case .project:
@@ -127,58 +129,6 @@ struct ProjectView: HTML, Sendable {
   }
 }
 
-// extension SiteRoute.View.ProjectRoute.DetailRoute.Tab {
-//
-//   func view(projectID: Project.ID) async throws -> AnySendableHTML {
-//     @Dependency(\.database) var database
-//     @Dependency(\.manualD) var manualD
-//
-//     switch self {
-//     case .project:
-//       if let project = try await database.projects.get(projectID) {
-//         return ProjectDetail(project: project)
-//       } else {
-//         return div {
-//           "FIX ME!"
-//         }
-//       }
-//     case .rooms:
-//       return try await RoomsView(
-//         projectID: projectID,
-//         rooms: database.rooms.fetch(projectID),
-//         sensibleHeatRatio: database.projects.getSensibleHeatRatio(projectID)
-//       )
-//
-//     case .equivalentLength:
-//       return try await EffectiveLengthsView(
-//         projectID: projectID,
-//         effectiveLengths: database.effectiveLength.fetch(projectID)
-//       )
-//     case .frictionRate:
-//       let equipmentInfo = try await database.equipment.fetch(projectID)
-//       let componentLosses = try await database.componentLoss.fetch(projectID)
-//       let equivalentLengths = try await database.effectiveLength.fetchMax(projectID)
-//
-//       return try await FrictionRateView(
-//         equipmentInfo: equipmentInfo,
-//         componentLosses: componentLosses,
-//         equivalentLengths: equivalentLengths,
-//         projectID: projectID,
-//         frictionRateResponse: manualD.frictionRate(
-//           equipmentInfo: equipmentInfo,
-//           componentLosses: componentLosses,
-//           effectiveLength: equivalentLengths
-//         )
-//       )
-//     case .ductSizing:
-//       return try await DuctSizingView(
-//         projectID: projectID,
-//         rooms: database.calculateDuctSizes(projectID: projectID)
-//       )
-//     }
-//   }
-// }
-
 extension ProjectView {
 
   struct Sidebar: HTML {
@@ -199,7 +149,7 @@ extension ProjectView {
           .class(
             """
             flex min-h-full flex-col items-start bg-base-200 
-            is-drawer-close:min-w-[80px] is-drawer-open:min-w-[340px]
+            is-drawer-close:min-w-[80px] is-drawer-open:max-w-[300px]
             """
           )
         ) {
@@ -215,7 +165,7 @@ extension ProjectView {
                   .class(
                     """
                     flex btn btn-secondary btn-square btn-block 
-                    is-drawer-close:items-center
+                    items-center
                     """
                   ),
                   .hx.get(route: .project(.index)),
@@ -224,7 +174,8 @@ extension ProjectView {
                   .hx.swap(.outerHTML),
                 ) {
                   div(.class("flex is-drawer-open:space-x-4")) {
-                    span { "<" }
+                    // span { "<" }
+                    SVG(.chevronsLeft)
                     span(.class("is-drawer-close:hidden")) { "All Projects" }
                   }
                 }
@@ -239,13 +190,14 @@ extension ProjectView {
               }
             }
 
-            li(.class("w-full")) {
+            li(.class("flex w-full")) {
               row(
                 title: "Project",
                 icon: .mapPin,
                 route: .project(.detail(projectID, .index(tab: .project))),
                 isComplete: true
               )
+              .attributes(.data("active", value: "true"), when: active == .project)
               .attributes(.class("btn-active"), when: active == .project)
             }
 
@@ -257,16 +209,20 @@ extension ProjectView {
                 isComplete: completedSteps.rooms
               )
               .attributes(.class("btn-active"), when: active == .rooms)
+              .attributes(.data("active", value: "true"), when: active == .rooms)
             }
 
             li(.class("w-full")) {
+              // Tooltip("Equivalent Lengths", position: .right) {
               row(
-                title: "Equivalent Lengths",
+                title: "T.E.L.",
                 icon: .rulerDimensionLine,
                 route: .project(.detail(projectID, .equivalentLength(.index))),
                 isComplete: completedSteps.equivalentLength
               )
+              .attributes(.data("active", value: "true"), when: active == .equivalentLength)
               .attributes(.class("btn-active"), when: active == .equivalentLength)
+              // }
 
             }
             li(.class("w-full")) {
@@ -276,6 +232,7 @@ extension ProjectView {
                 route: .project(.detail(projectID, .frictionRate(.index))),
                 isComplete: completedSteps.frictionRate
               )
+              .attributes(.data("active", value: "true"), when: active == .frictionRate)
               .attributes(.class("btn-active"), when: active == .frictionRate)
 
             }
@@ -287,6 +244,7 @@ extension ProjectView {
                 isComplete: false,
                 hideIsComplete: true
               )
+              .attributes(.data("active", value: "true"), when: active == .ductSizing)
               .attributes(.class("btn-active"), when: active == .ductSizing)
             }
           }
@@ -301,38 +259,104 @@ extension ProjectView {
       href: String,
       isComplete: Bool,
       hideIsComplete: Bool = false
-    ) -> some HTML<HTMLTag.a> {
-      a(
+    ) -> some HTML<HTMLTag.button> {
+      button(
         .class(
           """
-          flex w-full btn btn-soft btn-square btn-block 
-          is-drawer-open:justify-between is-drawer-close:items-center
-          is-drawer-close:tooltip is-drawer-close:tooltip-right
+          w-full gap-1 py-2 border-b-1 border-gray-200
+          hover:bg-neutral data-active:bg-neutral
+          hover:text-white data-active:text-white
+          is-drawer-open:flex is-drawer-open:space-x-4
+          is-drawer-close:grid-cols-1
           """
         ),
-        .href(href),
-        .data("tip", value: title)
+        .hx.get(href),
+        .hx.target("body"),
+        .hx.swap(.outerHTML)
       ) {
-        div(.class("flex is-drawer-open:space-x-4")) {
-          SVG(icon)
-          span(.class("text-xl is-drawer-close:hidden")) {
-            title
-          }
-        }
-        if !hideIsComplete {
-          div(.class("is-drawer-close:hidden")) {
-            if isComplete {
-              SVG(.badgeCheck)
-            } else {
-              SVG(.ban)
+        div(
+          .class(
+            """
+            w-full p-2 gap-1
+            is-drawer-open:flex is-drawer-open:space-x-4
+            is-drawer-close:grid-cols-1
+            """
+          )
+        ) {
+          div(
+            .class(
+              """
+              items-center
+              is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
+              is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2
+              """
+            )
+          ) {
+            div(.class("flex items-center justify-center")) {
+              SVG(icon)
+            }
+            .attributes(.class("is-drawer-close:text-green-400"), when: isComplete)
+            .attributes(.class("is-drawer-close:text-error"), when: !isComplete && !hideIsComplete)
+
+            div(.class("flex items-center justify-center")) {
+              span { title }
             }
           }
-          .attributes(.class("text-green-400"), when: isComplete)
-          .attributes(.class("text-error"), when: !isComplete)
+
+          if !hideIsComplete {
+            div(.class("flex grow justify-end items-end is-drawer-close:hidden")) {
+              if isComplete {
+                SVG(.badgeCheck)
+              } else {
+                SVG(.ban)
+              }
+            }
+            .attributes(.class("text-green-400"), when: isComplete)
+            .attributes(.class("text-error"), when: !isComplete)
+          }
         }
       }
-      .attributes(.class("is-drawer-close:text-green-400"), when: isComplete)
-      .attributes(.class("is-drawer-close:text-error"), when: !isComplete && !hideIsComplete)
+      // a(
+      //
+      //   // flex w-full btn btn-soft btn-square btn-block btn-lg
+      //   .class(
+      //     """
+      //     flex w-full hover:bg-gray-900 data-active:bg-gray-900
+      //     is-drawer-open:justify-between is-drawer-close:items-center
+      //     is-drawer-close:tooltip is-drawer-close:tooltip-right
+      //     is-drawer-close:justify-center
+      //     """
+      //   ),
+      //   .href(href),
+      //   .data("tip", value: title)
+      // ) {
+      //   div(
+      //     .class(
+      //       """
+      //       justify-center items-center mx-auto space-4 py-2
+      //       is-drawer-open:flex is-drawer-open:space-x-4
+      //       """
+      //     )
+      //   ) {
+      //     SVG(icon)
+      //     span(.class("text-gray-200 is-drawer-open:text-xl is-drawer-close:text-sm")) {
+      //       title
+      //     }
+      //   }
+      //   if !hideIsComplete {
+      //     div(.class("is-drawer-close:hidden")) {
+      //       if isComplete {
+      //         SVG(.badgeCheck)
+      //       } else {
+      //         SVG(.ban)
+      //       }
+      //     }
+      //     .attributes(.class("text-green-400"), when: isComplete)
+      //     .attributes(.class("text-error"), when: !isComplete)
+      //   }
+      // }
+      // .attributes(.class("is-drawer-close:text-green-400"), when: isComplete)
+      // .attributes(.class("is-drawer-close:text-error"), when: !isComplete && !hideIsComplete)
     }
 
     private func row(
@@ -341,7 +365,7 @@ extension ProjectView {
       route: SiteRoute.View,
       isComplete: Bool,
       hideIsComplete: Bool = false
-    ) -> some HTML<HTMLTag.a> {
+    ) -> some HTML<HTMLTag.button> {
       row(
         title: title, icon: icon, href: SiteRoute.View.router.path(for: route),
         isComplete: isComplete, hideIsComplete: hideIsComplete
