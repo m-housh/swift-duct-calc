@@ -11,22 +11,23 @@ enum ProjectViewValue {
   @TaskLocal static var projectID = Project.ID(0)
 }
 
-struct ProjectView: HTML, Sendable {
-  @Dependency(\.database) var database
-  @Dependency(\.manualD) var manualD
+struct ProjectView<Inner: HTML>: HTML, Sendable where Inner: Sendable {
 
   let projectID: Project.ID
   let activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab
-  let logger: Logger?
+  let inner: Inner
+  let completedSteps: Project.CompletedSteps
 
   init(
     projectID: Project.ID,
     activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab,
-    logger: Logger? = nil
+    completedSteps: Project.CompletedSteps,
+    @HTMLBuilder content: () -> Inner
   ) {
     self.projectID = projectID
     self.activeTab = activeTab
-    self.logger = logger
+    self.inner = content()
+    self.completedSteps = completedSteps
   }
 
   var body: some HTML {
@@ -38,97 +39,118 @@ struct ProjectView: HTML, Sendable {
         div(.class("drawer-content")) {
           Navbar(sidebarToggle: true)
           div(.class("p-4")) {
-            switch self.activeTab {
-            case .project:
-              await resultView(projectID) {
-                guard let project = try await database.projects.get(projectID) else {
-                  throw NotFoundError()
-                }
-                return project
-              } onSuccess: { project in
-                ProjectDetail(project: project)
-              }
-            case .equipment:
-              await resultView(projectID) {
-                try await database.equipment.fetch(projectID)
-              } onSuccess: { equipment in
-                EquipmentInfoView(equipmentInfo: equipment, projectID: projectID)
-              }
-            // FIX:
-            // div { "Fix Me" }
-            case .rooms:
-              await resultView(projectID) {
-                try await (
-                  database.rooms.fetch(projectID),
-                  database.projects.getSensibleHeatRatio(projectID)
-                )
-              } onSuccess: { (rooms, shr) in
-                RoomsView(rooms: rooms, sensibleHeatRatio: shr)
-              }
-
-            case .equivalentLength:
-              await resultView(projectID) {
-                try await database.effectiveLength.fetch(projectID)
-              } onSuccess: {
-                EffectiveLengthsView(effectiveLengths: $0)
-              }
-            case .frictionRate:
-
-              await resultView(projectID) {
-
-                let equipmentInfo = try await database.equipment.fetch(projectID)
-                let componentLosses = try await database.componentLoss.fetch(projectID)
-                let equivalentLengths = try await database.effectiveLength.fetchMax(projectID)
-                let frictionRateResponse = try await manualD.frictionRate(
-                  equipmentInfo: equipmentInfo,
-                  componentLosses: componentLosses,
-                  effectiveLength: equivalentLengths
-                )
-                return (
-                  equipmentInfo, componentLosses, equivalentLengths, frictionRateResponse
-                )
-              } onSuccess: {
-                FrictionRateView(
-                  equipmentInfo: $0.0,
-                  componentLosses: $0.1,
-                  equivalentLengths: $0.2,
-                  frictionRateResponse: $0.3
-                )
-              }
-            case .ductSizing:
-              await resultView(projectID) {
-                try await database.calculateDuctSizes(projectID: projectID)
-              } onSuccess: {
-                DuctSizingView(rooms: $0)
-              }
-            }
+            inner
+              .environment(ProjectViewValue.$projectID, projectID)
+            // switch self.activeTab {
+            // case .project:
+            //   await resultView(projectID) {
+            //     guard let project = try await database.projects.get(projectID) else {
+            //       throw NotFoundError()
+            //     }
+            //     return project
+            //   } onSuccess: { project in
+            //     ProjectDetail(project: project)
+            //   }
+            // case .equipment:
+            //   await resultView(projectID) {
+            //     try await database.equipment.fetch(projectID)
+            //   } onSuccess: { equipment in
+            //     EquipmentInfoView(equipmentInfo: equipment, projectID: projectID)
+            //   }
+            // // FIX:
+            // // div { "Fix Me" }
+            // case .rooms:
+            //   await resultView(projectID) {
+            //     try await (
+            //       database.rooms.fetch(projectID),
+            //       database.projects.getSensibleHeatRatio(projectID)
+            //     )
+            //   } onSuccess: { (rooms, shr) in
+            //     RoomsView(rooms: rooms, sensibleHeatRatio: shr)
+            //   }
+            //
+            // case .equivalentLength:
+            //   await resultView(projectID) {
+            //     try await database.effectiveLength.fetch(projectID)
+            //   } onSuccess: {
+            //     EffectiveLengthsView(effectiveLengths: $0)
+            //   }
+            // case .frictionRate:
+            //
+            //   await resultView(projectID) {
+            //
+            //     let equipmentInfo = try await database.equipment.fetch(projectID)
+            //     let componentLosses = try await database.componentLoss.fetch(projectID)
+            //     let equivalentLengths = try await database.effectiveLength.fetchMax(projectID)
+            //     let frictionRateResponse = try await manualD.frictionRate(
+            //       equipmentInfo: equipmentInfo,
+            //       componentLosses: componentLosses,
+            //       effectiveLength: equivalentLengths
+            //     )
+            //     return (
+            //       equipmentInfo, componentLosses, equivalentLengths, frictionRateResponse
+            //     )
+            //   } onSuccess: {
+            //     FrictionRateView(
+            //       equipmentInfo: $0.0,
+            //       componentLosses: $0.1,
+            //       equivalentLengths: $0.2,
+            //       frictionRateResponse: $0.3
+            //     )
+            //   }
+            // case .ductSizing:
+            //   await resultView(projectID) {
+            //     try await database.calculateDuctSizes(projectID: projectID)
+            //   } onSuccess: {
+            //     DuctSizingView(rooms: $0)
+            //   }
+            // }
           }
         }
 
-        try await Sidebar(
+        Sidebar(
           active: activeTab,
           projectID: projectID,
-          completedSteps: database.projects.getCompletedSteps(projectID)
+          completedSteps: completedSteps
         )
       }
     }
   }
 
-  func resultView<V: Sendable, E: Error, ValueView: HTML>(
-    _ projectID: Project.ID,
-    catching: @escaping @Sendable () async throws(E) -> V,
-    onSuccess: @escaping @Sendable (V) -> ValueView
-  ) async -> ResultView<V, E, _ModifiedTaskLocal<Project.ID, ValueView>, ErrorView<E>>
-  where
-    ValueView: Sendable, E: Sendable
-  {
-    await .init(
-      result: .init(catching: catching),
-      onSuccess: { result in
-        onSuccess(result)
-          .environment(ProjectViewValue.$projectID, projectID)
-      }
+  // func resultView<V: Sendable, E: Error, ValueView: HTML>(
+  //   _ projectID: Project.ID,
+  //   catching: @escaping @Sendable () async throws(E) -> V,
+  //   onSuccess: @escaping @Sendable (V) -> ValueView
+  // ) async -> ResultView<V, E, _ModifiedTaskLocal<Project.ID, ValueView>, ErrorView<E>>
+  // where
+  //   ValueView: Sendable, E: Sendable
+  // {
+  //   await .init(
+  //     result: .init(catching: catching),
+  //     onSuccess: { result in
+  //       onSuccess(result)
+  //         .environment(ProjectViewValue.$projectID, projectID)
+  //     }
+  //   )
+  // }
+}
+
+// TODO: Remove
+extension ProjectView where Inner == EmptyHTML {
+  init(
+    projectID: Project.ID,
+    activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab,
+    completedSteps: Project.CompletedSteps = .init(
+      equipmentInfo: false,
+      rooms: false,
+      equivalentLength: false,
+      frictionRate: false
     )
+  ) {
+    self.projectID = projectID
+    self.activeTab = activeTab
+    self.inner = EmptyHTML()
+    self.completedSteps = completedSteps
   }
 }
 

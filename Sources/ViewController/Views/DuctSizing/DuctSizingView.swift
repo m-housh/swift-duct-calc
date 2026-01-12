@@ -80,15 +80,14 @@ struct DuctSizingView: HTML, Sendable {
         td(.class("hidden 2xl:table-cell")) { Number(room.heatingCFM, digits: 0) }
         td(.class("hidden 2xl:table-cell")) { Number(room.coolingCFM, digits: 0) }
         td {
-          Number(room.designCFM.value, digits: 0)
-            .attributes(
-              .class("badge badge-outline badge-\(room.designCFM.color) text-xl font-bold"))
+          Badge(number: room.designCFM.value, digits: 0)
+            .attributes(.class("badge-\(room.designCFM.color)"))
         }
-        td(.class("hidden 2xl:table-cell")) { Number(room.roundSize, digits: 0) }
+        td(.class("hidden 2xl:table-cell")) { Number(room.roundSize, digits: 1) }
         td { Number(room.velocity) }
         td {
-          Number(room.finalSize)
-            .attributes(.class("badge badge-outline badge-secondary text-xl  font-bold"))
+          Badge(number: room.finalSize)
+            .attributes(.class("badge-secondary"))
         }
         td {
           Number(room.flexSize)

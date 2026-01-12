@@ -9,10 +9,8 @@ struct FrictionRateView: HTML, Sendable {
 
   @Environment(ProjectViewValue.$projectID) var projectID
 
-  let equipmentInfo: EquipmentInfo?
   let componentLosses: [ComponentPressureLoss]
   let equivalentLengths: EffectiveLength.MaxContainer
-  // let projectID: Project.ID
   let frictionRateResponse: ManualDClient.FrictionRateResponse?
 
   var availableStaticPressure: Double? {
@@ -98,12 +96,9 @@ struct FrictionRateView: HTML, Sendable {
 
       div(.class("divider")) {}
 
-      // div(.class("grid grid-cols-1 lg:grid-cols-2 gap-4")) {
-      //   EquipmentInfoView(equipmentInfo: equipmentInfo, projectID: projectID)
       ComponentPressureLossesView(
         componentPressureLosses: componentLosses, projectID: projectID
       )
-      // }
     }
   }
 }
