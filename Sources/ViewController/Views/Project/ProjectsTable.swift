@@ -88,7 +88,7 @@ extension ProjectsTable {
                 Tooltip("View project", position: tooltipPosition(n)) {
                   a(
                     .class("join-item btn btn-success btn-ghost"),
-                    .href(route: .project(.detail(project.id, .index())))
+                    .href(route: .project(.detail(project.id, .rooms(.index))))
                   ) {
                     SVG(.chevronRight)
                   }

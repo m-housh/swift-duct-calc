@@ -118,17 +118,6 @@ extension SiteRoute.View.ProjectRoute {
         ProjectsTable(userID: userID, projects: projects)
       }
 
-    case .form(let id, let dismiss):
-      return await ResultView {
-        var project: Project? = nil
-        if let id, dismiss == false {
-          project = try await database.projects.get(id)
-        }
-        return project
-      } onSuccess: { project in
-        ProjectForm(dismiss: dismiss, project: project)
-      }
-
     case .create(let form):
       return await ResultView {
         let user = try request.currentUser()
@@ -151,8 +140,6 @@ extension SiteRoute.View.ProjectRoute {
     case .delete(let id):
       return await ResultView {
         try await database.projects.delete(id)
-      } onSuccess: {
-        EmptyHTML()
       }
 
     case .update(let id, let form):
@@ -162,8 +149,7 @@ extension SiteRoute.View.ProjectRoute {
 
     case .detail(let projectID, let route):
       switch route {
-      case .index(let tab):
-        // FIX: Handle tab
+      case .index:
         return await projectView(on: request, projectID: projectID)
       case .componentLoss(let route):
         return await route.renderView(on: request, projectID: projectID)
@@ -220,14 +206,6 @@ extension SiteRoute.View.ProjectRoute.EquipmentInfoRoute {
     case .index:
       return await equipmentView(on: request, projectID: projectID)
 
-    // TODO: Remove form route, not needed.
-    case .form(let dismiss):
-      return await ResultView {
-        try await database.equipment.fetch(projectID)
-      } onSuccess: { equipment in
-        EquipmentInfoForm(dismiss: dismiss, projectID: projectID, equipmentInfo: equipment)
-      }
-
     case .submit(let form):
       return await ResultView {
         try await database.equipment.create(form)
@@ -277,17 +255,6 @@ extension SiteRoute.View.ProjectRoute.RoomRoute {
     case .delete(let id):
       return await ResultView {
         try await database.rooms.delete(id)
-      }
-
-    case .form(let id, let dismiss):
-      return await ResultView {
-        var room: Room? = nil
-        if let id, dismiss == false {
-          room = try await database.rooms.get(id)
-        }
-        return room
-      } onSuccess: { room in
-        RoomForm(dismiss: dismiss, projectID: projectID, room: room)
       }
 
     case .index:
@@ -349,16 +316,6 @@ extension SiteRoute.View.ProjectRoute.FrictionRateRoute {
     switch self {
     case .index:
       return await view(on: request, projectID: projectID)
-
-    case .form(let type, let dismiss):
-      // FIX: Forms need to reference existing items.
-      switch type {
-      case .equipmentInfo:
-        return div { "REMOVE ME!" }
-      // return EquipmentForm(dismiss: dismiss, projectID: projectID)
-      case .componentPressureLoss:
-        return ComponentLossForm(dismiss: dismiss, projectID: projectID, componentLoss: nil)
-      }
     }
   }
 
@@ -471,17 +428,6 @@ extension SiteRoute.View.ProjectRoute.ComponentLossRoute {
 
 }
 
-extension SiteRoute.View.ProjectRoute.FrictionRateRoute.FormType {
-  var id: String {
-    switch self {
-    case .equipmentInfo:
-      return "equipmentForm"
-    case .componentPressureLoss:
-      return "componentLossForm"
-    }
-  }
-}
-
 extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
 
   func renderView(
@@ -499,9 +445,6 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
 
     case .index:
       return await self.view(on: request, projectID: projectID)
-
-    case .form(let dismiss):
-      return EffectiveLengthForm(projectID: projectID, dismiss: dismiss)
 
     case .field(let type, let style):
       switch type {

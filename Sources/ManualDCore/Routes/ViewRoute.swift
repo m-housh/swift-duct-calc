@@ -37,7 +37,6 @@ extension SiteRoute.View {
     case create(Project.Create)
     case delete(id: Project.ID)
     case detail(Project.ID, DetailRoute)
-    case form(id: Project.ID? = nil, dismiss: Bool = false)
     case index
     case page(PageRequest)
     case update(Project.ID, Project.Update)
@@ -81,19 +80,6 @@ extension SiteRoute.View {
           Project.ID.parser()
         }
         DetailRoute.router
-      }
-      Route(.case(Self.form)) {
-        Path {
-          rootPath
-          "create"
-        }
-        Method.get
-        Query {
-          Optionally {
-            Field("id", default: nil) { Project.ID.parser() }
-          }
-          Field("dismiss", default: false) { Bool.parser() }
-        }
       }
       Route(.case(Self.index)) {
         Path { rootPath }
@@ -150,7 +136,7 @@ extension SiteRoute.View {
 extension SiteRoute.View.ProjectRoute {
 
   public enum DetailRoute: Equatable, Sendable {
-    case index(tab: Tab = .default)
+    case index
     case componentLoss(ComponentLossRoute)
     case ductSizing(DuctSizingRoute)
     case equipment(EquipmentInfoRoute)
@@ -161,11 +147,6 @@ extension SiteRoute.View.ProjectRoute {
     static let router = OneOf {
       Route(.case(Self.index)) {
         Method.get
-        Query {
-          Field("tab", default: Tab.default) {
-            Tab.parser()
-          }
-        }
       }
       Route(.case(Self.componentLoss)) {
         ComponentLossRoute.router
@@ -194,14 +175,11 @@ extension SiteRoute.View.ProjectRoute {
       case equivalentLength
       case frictionRate
       case ductSizing
-
-      public static var `default`: Self { .rooms }
     }
   }
 
   public enum RoomRoute: Equatable, Sendable {
     case delete(id: Room.ID)
-    case form(id: Room.ID? = nil, dismiss: Bool = false)
     case index
     case submit(Room.Create)
     case update(Room.ID, Room.Update)
@@ -216,19 +194,6 @@ extension SiteRoute.View.ProjectRoute {
           Room.ID.parser()
         }
         Method.delete
-      }
-      Route(.case(Self.form)) {
-        Path {
-          rootPath
-          "create"
-        }
-        Method.get
-        Query {
-          Optionally {
-            Field("id", default: nil) { Room.ID.parser() }
-          }
-          Field("dismiss", default: false) { Bool.parser() }
-        }
       }
       Route(.case(Self.index)) {
         Path {
@@ -359,8 +324,6 @@ extension SiteRoute.View.ProjectRoute {
 
   public enum FrictionRateRoute: Equatable, Sendable {
     case index
-    // TODO: Remove form or move equipment / component losses routes here.
-    case form(FormType, dismiss: Bool = false)
 
     static let rootPath = "friction-rate"
 
@@ -369,28 +332,11 @@ extension SiteRoute.View.ProjectRoute {
         Path { rootPath }
         Method.get
       }
-      Route(.case(Self.form)) {
-        Path {
-          rootPath
-          "create"
-        }
-        Method.get
-        Query {
-          Field("type") { FormType.parser() }
-          Field("dismiss", default: false) { Bool.parser() }
-        }
-      }
-    }
-
-    public enum FormType: String, CaseIterable, Codable, Equatable, Sendable {
-      case equipmentInfo
-      case componentPressureLoss
     }
   }
 
   public enum EquipmentInfoRoute: Equatable, Sendable {
     case index
-    case form(dismiss: Bool)
     case submit(EquipmentInfo.Create)
     case update(EquipmentInfo.ID, EquipmentInfo.Update)
 
@@ -400,16 +346,6 @@ extension SiteRoute.View.ProjectRoute {
       Route(.case(Self.index)) {
         Path { rootPath }
         Method.get
-      }
-      Route(.case(Self.form)) {
-        Path {
-          rootPath
-          "create"
-        }
-        Method.get
-        Query {
-          Field("dismiss", default: true) { Bool.parser() }
-        }
       }
       Route(.case(Self.submit)) {
         Path { rootPath }
@@ -451,7 +387,6 @@ extension SiteRoute.View.ProjectRoute {
   public enum EquivalentLengthRoute: Equatable, Sendable {
     case delete(id: EffectiveLength.ID)
     case field(FieldType, style: EffectiveLength.EffectiveLengthType? = nil)
-    case form(dismiss: Bool = false)
     case index
     case submit(FormStep)
     case update(EffectiveLength.ID, StepThree)
@@ -469,16 +404,6 @@ extension SiteRoute.View.ProjectRoute {
       Route(.case(Self.index)) {
         Path { rootPath }
         Method.get
-      }
-      Route(.case(Self.form(dismiss:))) {
-        Path {
-          rootPath
-          "create"
-        }
-        Method.get
-        Query {
-          Field("dismiss", default: false) { Bool.parser() }
-        }
       }
       Route(.case(Self.field)) {
         Path {
