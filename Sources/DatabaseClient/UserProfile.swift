@@ -9,6 +9,7 @@ extension DatabaseClient {
   public struct UserProfile: Sendable {
     public var create: @Sendable (User.Profile.Create) async throws -> User.Profile
     public var delete: @Sendable (User.Profile.ID) async throws -> Void
+    public var fetch: @Sendable (User.ID) async throws -> User.Profile?
     public var get: @Sendable (User.Profile.ID) async throws -> User.Profile?
     public var update: @Sendable (User.Profile.ID, User.Profile.Update) async throws -> User.Profile
   }
@@ -31,6 +32,13 @@ extension DatabaseClient.UserProfile: TestDependencyKey {
           throw NotFoundError()
         }
         try await model.delete(on: database)
+      },
+      fetch: { userID in
+        try await UserProfileModel.query(on: database)
+          .with(\.$user)
+          .filter(\.$user.$id == userID)
+          .first()
+          .map { try $0.toDTO() }
       },
       get: { id in
         try await UserProfileModel.find(id, on: database)

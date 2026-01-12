@@ -73,6 +73,7 @@ extension ViewController.Request {
     return user
   }
 
+  @discardableResult
   func createAndAuthenticate(
     _ signup: User.Create
   ) async throws -> User {

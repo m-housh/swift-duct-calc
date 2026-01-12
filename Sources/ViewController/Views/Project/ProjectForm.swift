@@ -27,7 +27,7 @@ struct ProjectForm: HTML, Sendable {
     ModalForm(id: Self.id, dismiss: dismiss) {
       h1(.class("text-3xl font-bold pb-6 ps-2")) { "Project" }
       form(
-        .class("space-y-4 p-4"),
+        .class("grid grid-cols-1 gap-4"),
         project == nil
           ? .hx.post(route)
           : .hx.patch(route),
@@ -38,36 +38,54 @@ struct ProjectForm: HTML, Sendable {
           input(.class("hidden"), .name("id"), .value("\(project.id)"))
         }
 
-        div {
-          label(.for("name")) { "Name" }
-          Input(id: "name", placeholder: "Name")
-            .attributes(.type(.text), .required, .autofocus, .value(project?.name))
-        }
-        div {
-          label(.for("streetAddress")) { "Address" }
-          Input(id: "streetAddress", placeholder: "Street Address")
-            .attributes(.type(.text), .required, .value(project?.streetAddress))
-        }
-        div {
-          label(.for("city")) { "City" }
-          Input(id: "city", placeholder: "City")
-            .attributes(.type(.text), .required, .value(project?.city))
-        }
-        div {
-          label(.for("state")) { "State" }
-          Input(id: "state", placeholder: "State")
-            .attributes(.type(.text), .required, .value(project?.state))
-        }
-        div {
-          label(.for("zipCode")) { "Zip" }
-          Input(id: "zipCode", placeholder: "Zip code")
-            .attributes(.type(.text), .required, .value(project?.zipCode))
-        }
+        LabeledInput(
+          "Name",
+          .name("name"),
+          .type(.text),
+          .value(project?.name),
+          .placeholder("Project Name"),
+          .required,
+          .autofocus
+        )
 
-        div(.class("flex mt-6")) {
-          SubmitButton()
-            .attributes(.class("btn-block"))
-        }
+        LabeledInput(
+          "Address",
+          .name("streetAddress"),
+          .type(.text),
+          .value(project?.streetAddress),
+          .placeholder("Street Address"),
+          .required
+        )
+
+        LabeledInput(
+          "City",
+          .name("city"),
+          .type(.text),
+          .value(project?.city),
+          .placeholder("City"),
+          .required
+        )
+
+        LabeledInput(
+          "State",
+          .name("state"),
+          .type(.text),
+          .value(project?.state),
+          .placeholder("State"),
+          .required
+        )
+
+        LabeledInput(
+          "Zip",
+          .name("zipCode"),
+          .type(.text),
+          .value(project?.zipCode),
+          .placeholder("Zip Code"),
+          .required
+        )
+
+        SubmitButton()
+          .attributes(.class("btn-block my-6"))
       }
     }
   }

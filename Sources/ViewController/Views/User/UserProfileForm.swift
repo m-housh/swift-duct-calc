@@ -57,37 +57,37 @@ struct UserProfileForm: HTML, Sendable {
 
         label(.class("input w-full")) {
           span(.class("label")) { "First Name" }
-          input(.name("firstName"), .required, .autofocus)
+          input(.name("firstName"), .value(profile?.firstName), .required, .autofocus)
         }
 
         label(.class("input w-full")) {
           span(.class("label")) { "Last Name" }
-          input(.name("lastName"), .required)
+          input(.name("lastName"), .value(profile?.lastName), .required)
         }
 
         label(.class("input w-full")) {
           span(.class("label")) { "Company" }
-          input(.name("companyName"), .required)
+          input(.name("companyName"), .value(profile?.companyName), .required)
         }
 
         label(.class("input w-full")) {
           span(.class("label")) { "Address" }
-          input(.name("streetAddress"), .required)
+          input(.name("streetAddress"), .value(profile?.streetAddress), .required)
         }
 
         label(.class("input w-full")) {
           span(.class("label")) { "City" }
-          input(.name("city"), .required)
+          input(.name("city"), .value(profile?.city), .required)
         }
 
         label(.class("input w-full")) {
           span(.class("label")) { "State" }
-          input(.name("state"), .required)
+          input(.name("state"), .value(profile?.state), .required)
         }
 
         label(.class("input w-full")) {
           span(.class("label")) { "Zip" }
-          input(.name("zipCode"), .required)
+          input(.name("zipCode"), .value(profile?.zipCode), .required)
         }
 
         div(.class("dropdown dropdown-top")) {

@@ -1,5 +1,26 @@
 import Elementary
 
+public struct LabeledInput: HTML, Sendable {
+
+  let labelText: String
+  let inputAttributes: [HTMLAttribute<HTMLTag.input>]
+
+  public init(
+    _ label: String,
+    _ attributes: HTMLAttribute<HTMLTag.input>...
+  ) {
+    self.labelText = label
+    self.inputAttributes = attributes
+  }
+
+  public var body: some HTML<HTMLTag.label> {
+    label(.class("input w-full")) {
+      span(.class("label")) { labelText }
+      input(attributes: inputAttributes)
+    }
+  }
+}
+
 public struct Input: HTML, Sendable {
 
   let id: String?

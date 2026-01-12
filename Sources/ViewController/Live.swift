@@ -13,13 +13,13 @@ extension ViewController.Request {
 
     switch route {
     case .test:
-      return view {
+      return await view {
         TestPage()
       }
     case .login(let route):
       switch route {
       case .index(let next):
-        return view {
+        return await view {
           LoginForm(next: next)
         }
       case .submit(let login):
@@ -35,7 +35,7 @@ extension ViewController.Request {
     case .signup(let route):
       switch route {
       case .index:
-        return view {
+        return await view {
           LoginForm(style: .signup)
         }
       case .submit(let request):
@@ -53,10 +53,11 @@ extension ViewController.Request {
         return await view {
           await ResultView {
             _ = try await database.userProfile.create(profile)
-            let user = try currentUser()
+            let userID = profile.userID
+            // let user = try currentUser()
             return (
-              user.id,
-              try await database.projects.fetch(user.id, .init(page: 1, per: 25))
+              userID,
+              try await database.projects.fetch(userID, .init(page: 1, per: 25))
             )
           } onSuccess: { (userID, projects) in
             ProjectsTable(userID: userID, projects: projects)
@@ -72,15 +73,10 @@ extension ViewController.Request {
   }
 
   func view<C: HTML>(
-    @HTMLBuilder inner: () -> C
-  ) -> AnySendableHTML where C: Sendable {
-    MainPage(theme: theme) { inner() }
-  }
-
-  func view<C: HTML>(
     @HTMLBuilder inner: () async -> C
   ) async -> AnySendableHTML where C: Sendable {
     let inner = await inner()
+    let theme = await self.theme
 
     return MainPage(theme: theme) {
       inner
@@ -88,8 +84,11 @@ extension ViewController.Request {
   }
 
   var theme: Theme? {
-    nil
-    // .dracula
+    get async {
+      @Dependency(\.database) var database
+      guard let user = try? currentUser() else { return nil }
+      return try? await database.userProfile.fetch(user.id)?.theme
+    }
   }
 }
 
@@ -634,7 +633,7 @@ extension SiteRoute.View.UserRoute.Profile {
         let user = try request.currentUser()
         return (
           user,
-          try await database.userProfile.get(user.id)
+          try await database.userProfile.fetch(user.id)
         )
       } onSuccess: { (user, profile) in
         UserView(user: user, profile: profile)

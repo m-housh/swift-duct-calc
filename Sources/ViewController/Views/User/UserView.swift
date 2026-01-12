@@ -8,46 +8,50 @@ struct UserView: HTML, Sendable {
 
   var body: some HTML {
     div {
-      Row {
-        h1(.class("text-2xl font-bold")) { "Account" }
-        EditButton()
-          .attributes(.showModal(id: UserProfileForm.id(profile)))
-      }
+      Navbar(sidebarToggle: false, userProfile: false)
 
-      if let profile {
-        table(.class("table table-zebra")) {
-          tr {
-            td { Label("Name") }
-            td { "\(profile.firstName) \(profile.lastName)" }
-          }
-          tr {
-            td { Label("Company") }
-            td { profile.companyName }
-          }
-          tr {
-            td { Label("Street Address") }
-            td { profile.streetAddress }
-          }
-          tr {
-            td { Label("City") }
-            td { profile.city }
-          }
-          tr {
-            td { Label("State") }
-            td { profile.state }
-          }
-          tr {
-            td { Label("Zip Code") }
-            td { profile.zipCode }
-          }
-          tr {
-            td { Label("Theme") }
-            td { profile.theme?.rawValue ?? "" }
-          }
-
+      div(.class("p-4")) {
+        Row {
+          h1(.class("text-2xl font-bold")) { "Account" }
+          EditButton()
+            .attributes(.showModal(id: UserProfileForm.id(profile)))
         }
+
+        if let profile {
+          table(.class("table table-zebra border rounded-lg")) {
+            tr {
+              td { Label("Name") }
+              td { "\(profile.firstName) \(profile.lastName)" }
+            }
+            tr {
+              td { Label("Company") }
+              td { profile.companyName }
+            }
+            tr {
+              td { Label("Street Address") }
+              td { profile.streetAddress }
+            }
+            tr {
+              td { Label("City") }
+              td { profile.city }
+            }
+            tr {
+              td { Label("State") }
+              td { profile.state }
+            }
+            tr {
+              td { Label("Zip Code") }
+              td { profile.zipCode }
+            }
+            tr {
+              td { Label("Theme") }
+              td { profile.theme?.rawValue ?? "" }
+            }
+
+          }
+        }
+        UserProfileForm(userID: user.id, profile: profile, dismiss: true)
       }
-      UserProfileForm(userID: user.id, profile: profile, dismiss: true)
     }
   }
 }

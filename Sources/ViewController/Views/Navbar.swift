@@ -4,6 +4,15 @@ import Styleguide
 
 struct Navbar: HTML, Sendable {
   let sidebarToggle: Bool
+  let userProfile: Bool
+
+  init(
+    sidebarToggle: Bool,
+    userProfile: Bool = true
+  ) {
+    self.sidebarToggle = sidebarToggle
+    self.userProfile = userProfile
+  }
 
   var body: some HTML<HTMLTag.nav> {
     nav(
@@ -41,41 +50,44 @@ struct Navbar: HTML, Sendable {
           .navButton()
         }
       }
-      div(.class("flex-none")) {
-        a(
-          .href(route: .user(.profile(.index))),
-        ) {
-          SVG(.circleUser)
+      if userProfile {
+        // TODO: Make dropdown
+        div(.class("flex-none")) {
+          a(
+            .href(route: .user(.profile(.index))),
+          ) {
+            SVG(.circleUser)
+          }
+          .navButton()
+          // details(.class("dropdown dropdown-left dropdown-bottom")) {
+          //   summary(.class("btn w-fit px-4 py-2")) {
+          //     SVG(.circleUser)
+          //   }
+          //   .navButton()
+          //
+          //   ul(
+          //     .class(
+          //       """
+          //       menu dropdown-content bg-base-100
+          //       rounded-box z-1 w-fit p-2 shadow-sm
+          //       """
+          //     )
+          //   ) {
+          //     li(.class("w-full")) {
+          //       // TODO: Save theme to user profile ??
+          //       div(.class("flex justify-between p-4 space-x-6")) {
+          //         Label("Theme")
+          //         input(.type(.checkbox), .class("toggle theme-controller"), .value("light"))
+          //       }
+          //     }
+          //   }
+          //
+          //   // button(.class("w-fit px-4 py-2")) {
+          //   //   SVG(.circleUser)
+          //   // }
+          //   // .navButton()
+          // }
         }
-        .navButton()
-        // details(.class("dropdown dropdown-left dropdown-bottom")) {
-        //   summary(.class("btn w-fit px-4 py-2")) {
-        //     SVG(.circleUser)
-        //   }
-        //   .navButton()
-        //
-        //   ul(
-        //     .class(
-        //       """
-        //       menu dropdown-content bg-base-100
-        //       rounded-box z-1 w-fit p-2 shadow-sm
-        //       """
-        //     )
-        //   ) {
-        //     li(.class("w-full")) {
-        //       // TODO: Save theme to user profile ??
-        //       div(.class("flex justify-between p-4 space-x-6")) {
-        //         Label("Theme")
-        //         input(.type(.checkbox), .class("toggle theme-controller"), .value("light"))
-        //       }
-        //     }
-        //   }
-        //
-        //   // button(.class("w-fit px-4 py-2")) {
-        //   //   SVG(.circleUser)
-        //   // }
-        //   // .navButton()
-        // }
       }
     }
   }
