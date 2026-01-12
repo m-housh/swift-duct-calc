@@ -121,6 +121,7 @@ struct RoomsView: HTML, Sendable {
   }
 
   public struct RoomRow: HTML, Sendable {
+
     let room: Room
     let shr: Double
 
@@ -137,7 +138,7 @@ struct RoomsView: HTML, Sendable {
     }
 
     public var body: some HTML {
-      tr(.id("roomRow_\(room.name)")) {
+      tr(.id("roomRow_\(room.id.idString)")) {
         td { room.name }
         td {
           div(.class("flex justify-center")) {

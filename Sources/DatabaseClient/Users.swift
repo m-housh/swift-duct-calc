@@ -104,6 +104,8 @@ extension User.Token {
         .id()
         .field("value", .string, .required)
         .field("user_id", .uuid, .required, .references(UserModel.schema, "id"))
+        .field("createdAt", .datetime)
+        .field("updatedAt", .datetime)
         .unique(on: "value")
         .create()
     }

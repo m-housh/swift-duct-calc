@@ -82,13 +82,6 @@ extension ProjectView {
 
           ul(.class("w-full")) {
 
-            // FIX: Move to user profile / settings page.
-            li(.class("w-full is-drawer-close:hidden")) {
-              div(.class("flex justify-between p-4")) {
-                Label("Theme")
-                input(.type(.checkbox), .class("toggle theme-controller"), .value("light"))
-              }
-            }
 
             li(.class("flex w-full")) {
               row(

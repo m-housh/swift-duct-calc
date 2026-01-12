@@ -18,8 +18,8 @@ public struct DatabaseClient: Sendable {
   public var equipment: Equipment
   public var componentLoss: ComponentLoss
   public var effectiveLength: EffectiveLengthClient
-  // public var rectangularDuct: RectangularDuct
   public var users: Users
+  public var userProfile: UserProfile
 }
 
 extension DatabaseClient: TestDependencyKey {
@@ -30,8 +30,8 @@ extension DatabaseClient: TestDependencyKey {
     equipment: .testValue,
     componentLoss: .testValue,
     effectiveLength: .testValue,
-    // rectangularDuct: .testValue,
-    users: .testValue
+    users: .testValue,
+    userProfile: .testValue
   )
 
   public static func live(database: any Database) -> Self {
@@ -42,8 +42,8 @@ extension DatabaseClient: TestDependencyKey {
       equipment: .live(database: database),
       componentLoss: .live(database: database),
       effectiveLength: .live(database: database),
-      // rectangularDuct: .live(database: database),
-      users: .live(database: database)
+      users: .live(database: database),
+      userProfile: .live(database: database)
     )
   }
 }
@@ -66,11 +66,11 @@ extension DatabaseClient.Migrations: DependencyKey {
         Project.Migrate(),
         User.Migrate(),
         User.Token.Migrate(),
+        User.Profile.Migrate(),
         ComponentPressureLoss.Migrate(),
         EquipmentInfo.Migrate(),
         Room.Migrate(),
         EffectiveLength.Migrate(),
-          // DuctSizing.RectangularDuct.Migrate(),
       ]
     }
   )

@@ -9,10 +9,13 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
   public var lang: String { "en" }
 
   let inner: Inner
+  let theme: Theme?
 
   init(
+    theme: Theme? = nil,
     _ inner: () -> Inner
   ) {
+    self.theme = theme
     self.inner = inner()
   }
 
@@ -54,10 +57,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     div(.class("h-screen w-full")) {
       inner
     }
-    script(.src("https://unpkg.com/lucide@latest")) {}
-    script {
-      "lucide.createIcons();"
-    }
+    .attributes(.data("theme", value: theme!.rawValue), when: theme != nil)
   }
 }
 

@@ -1,6 +1,7 @@
 import Dependencies
 import Foundation
 
+// FIX: Remove username.
 public struct User: Codable, Equatable, Identifiable, Sendable {
 
   public let id: UUID

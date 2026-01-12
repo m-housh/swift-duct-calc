@@ -54,37 +54,27 @@ extension ViewController.Request {
       }
     case .project(let route):
       return await route.renderView(on: self)
-    default:
-      // FIX: FIX
-      return _render(isHtmxRequest: false) {
-        div { "Fix me!" }
-      }
     }
   }
 
   func view<C: HTML>(
     @HTMLBuilder inner: () -> C
   ) -> AnySendableHTML where C: Sendable {
-    _render(isHtmxRequest: isHtmxRequest, showSidebar: showSidebar) {
-      inner()
-    }
+    MainPage(theme: theme) { inner() }
   }
 
   func view<C: HTML>(
     @HTMLBuilder inner: () async -> C
   ) async -> AnySendableHTML where C: Sendable {
-    await _render(isHtmxRequest: isHtmxRequest, showSidebar: showSidebar) {
-      await inner()
+    let inner = await inner()
+
+    return MainPage(theme: theme) {
+      inner
     }
   }
 
-  var showSidebar: Bool {
-    switch route {
-    case .login, .signup, .project(.page):
-      return false
-    default:
-      return true
-    }
+  var theme: Theme? {
+    .dracula
   }
 }
 
@@ -261,7 +251,6 @@ extension SiteRoute.View.ProjectRoute.RoomRoute {
       return await roomsView(on: request, projectID: projectID)
 
     case .submit(let form):
-      // FIX: Just return a room row.
       return await roomsView(on: request, projectID: projectID) {
         _ = try await database.rooms.create(form)
       }
@@ -587,41 +576,53 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
   }
 }
 
-private func _render<C: HTML>(
-  isHtmxRequest: Bool,
-  active activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab = .rooms,
-  showSidebar: Bool = true,
-  @HTMLBuilder inner: () async throws -> C
-) async throws -> AnySendableHTML where C: Sendable {
-  let inner = try await inner()
-  if isHtmxRequest {
-    return inner
-  }
-  return MainPage { inner }
-}
-
-private func _render<C: HTML>(
-  isHtmxRequest: Bool,
-  active activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab = .rooms,
-  showSidebar: Bool = true,
-  @HTMLBuilder inner: () async -> C
-) async -> AnySendableHTML where C: Sendable {
-  let inner = await inner()
-  if isHtmxRequest {
-    return inner
-  }
-  return MainPage { inner }
-}
-
-private func _render<C: HTML>(
-  isHtmxRequest: Bool,
-  active activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab = .rooms,
-  showSidebar: Bool = true,
-  @HTMLBuilder inner: () -> C
-) -> AnySendableHTML where C: Sendable {
-  let inner = inner()
-  if isHtmxRequest {
-    return inner
-  }
-  return MainPage { inner }
-}
+// private func _render<C: HTML>(
+//   isHtmxRequest: Bool,
+//   active activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab = .rooms,
+//   showSidebar: Bool = true,
+//   theme: Theme? = nil,
+//   @HTMLBuilder inner: () async throws -> C
+// ) async throws -> AnySendableHTML where C: Sendable {
+//   let inner = try await inner()
+//   if isHtmxRequest {
+//     return div(.class("h-screen w-full")) {
+//       inner
+//     }
+//     .attributes(.data("theme", value: theme!.rawValue), when: theme != nil)
+//   }
+//   return MainPage(theme: theme) { inner }
+// }
+//
+// private func _render<C: HTML>(
+//   isHtmxRequest: Bool,
+//   active activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab = .rooms,
+//   showSidebar: Bool = true,
+//   theme: Theme? = nil,
+//   @HTMLBuilder inner: () async -> C
+// ) async -> AnySendableHTML where C: Sendable {
+//   let inner = await inner()
+//   if isHtmxRequest {
+//     return div(.class("h-screen w-full")) {
+//       inner
+//     }
+//     .attributes(.data("theme", value: theme!.rawValue), when: theme != nil)
+//   }
+//   return MainPage(theme: theme) { inner }
+// }
+//
+// private func _render<C: HTML>(
+//   isHtmxRequest: Bool,
+//   active activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab = .rooms,
+//   showSidebar: Bool = true,
+//   theme: Theme? = nil,
+//   @HTMLBuilder inner: () -> C
+// ) -> AnySendableHTML where C: Sendable {
+//   let inner = inner()
+//   if isHtmxRequest {
+//     return div(.class("h-screen w-full")) {
+//       inner
+//     }
+//     .attributes(.data("theme", value: theme!.rawValue), when: theme != nil)
+//   }
+//   return MainPage(theme: theme) { inner }
+// }
