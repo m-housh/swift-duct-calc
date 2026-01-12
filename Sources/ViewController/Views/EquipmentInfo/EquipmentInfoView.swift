@@ -8,7 +8,7 @@ struct EquipmentInfoView: HTML, Sendable {
 
   var body: some HTML {
     div(
-      .class("space-y-4 border border-gray-200 rounded-lg shadow-lg p-4"),
+      .class("space-y-4 p-4"),
       .id("equipmentInfo")
     ) {
 
@@ -27,23 +27,17 @@ struct EquipmentInfoView: HTML, Sendable {
       if let equipmentInfo {
 
         table(.class("table table-zebra")) {
-          thead {
-            tr {
-              th { Label("Name") }
-              th { Label("Value") }
-            }
-          }
           tbody(.class("text-lg")) {
             tr {
-              td { "Static Pressure" }
+              td { Label("Static Pressure") }
               td { Number(equipmentInfo.staticPressure) }
             }
             tr {
-              td { "Heating CFM" }
+              td { Label("Heating CFM") }
               td { Number(equipmentInfo.heatingCFM) }
             }
             tr {
-              td { "Cooling CFM" }
+              td { Label("Cooling CFM") }
               td { Number(equipmentInfo.coolingCFM) }
             }
           }

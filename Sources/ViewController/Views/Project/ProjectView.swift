@@ -48,6 +48,14 @@ struct ProjectView: HTML, Sendable {
               } onSuccess: { project in
                 ProjectDetail(project: project)
               }
+            case .equipment:
+              await resultView(projectID) {
+                try await database.equipment.fetch(projectID)
+              } onSuccess: { equipment in
+                EquipmentInfoView(equipmentInfo: equipment, projectID: projectID)
+              }
+            // FIX:
+            // div { "Fix Me" }
             case .rooms:
               await resultView(projectID) {
                 try await (
@@ -179,6 +187,16 @@ extension ProjectView {
               .attributes(.data("active", value: "true"), when: active == .rooms)
             }
 
+            li(.class("flex w-full")) {
+              row(
+                title: "Equipment",
+                icon: .fan,
+                route: .project(.detail(projectID, .equipment(.index))),
+                isComplete: completedSteps.equipmentInfo
+              )
+              .attributes(.data("active", value: "true"), when: active == .equipment)
+            }
+
             li(.class("w-full")) {
               // Tooltip("Equivalent Lengths", position: .right) {
               row(
@@ -235,6 +253,7 @@ extension ProjectView {
           """
         ),
         .hx.get(href),
+        .hx.pushURL(true),
         .hx.target("body"),
         .hx.swap(.outerHTML)
       ) {

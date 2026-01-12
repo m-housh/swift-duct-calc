@@ -66,11 +66,18 @@ extension Project {
 
   public struct CompletedSteps: Codable, Equatable, Sendable {
 
+    public let equipmentInfo: Bool
     public let rooms: Bool
     public let equivalentLength: Bool
     public let frictionRate: Bool
 
-    public init(rooms: Bool, equivalentLength: Bool, frictionRate: Bool) {
+    public init(
+      equipmentInfo: Bool,
+      rooms: Bool,
+      equivalentLength: Bool,
+      frictionRate: Bool
+    ) {
+      self.equipmentInfo = equipmentInfo
       self.rooms = rooms
       self.equivalentLength = equivalentLength
       self.frictionRate = frictionRate

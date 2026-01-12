@@ -66,9 +66,10 @@ extension DatabaseClient.Projects: TestDependencyKey {
           .first()
 
         return .init(
+          equipmentInfo: equipmentInfo != nil,
           rooms: roomsCount > 0,
           equivalentLength: equivalentLengthsCompleted,
-          frictionRate: equipmentInfo != nil && componentLosses > 0
+          frictionRate: componentLosses > 0
         )
       },
       getSensibleHeatRatio: { id in

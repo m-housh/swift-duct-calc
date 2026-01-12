@@ -43,24 +43,26 @@ struct FrictionRateView: HTML, Sendable {
   }
 
   var body: some HTML {
-    div(.class("p-4 space-y-6")) {
-      Row {
-        h1(.class("text-4xl font-bold pb-6")) { "Friction Rate" }
-        div(.class("space-y-4")) {
-          div(.class("flex space-x-4 justify-end")) {
-            if let availableStaticPressure {
-              Label("Available Static Pressure")
-              Number(availableStaticPressure, digits: 2)
-                .attributes(.class("badge badge-lg badge-outline font-bold ms-4"))
+    div(.class("space-y-6")) {
+      div(.class("grid grid-cols-2 px-4")) {
+
+        h1(.class("text-4xl font-bold items-end my-auto")) { "Friction Rate" }
+
+        div(.class("space-y-4 justify-end")) {
+
+          if let frictionRateDesignValue {
+            LabeledContent("Friction Rate Design Value") {
+              Badge(number: frictionRateDesignValue, digits: 2)
+                .attributes(.class("\(badgeColor)"))
             }
+            .attributes(.class("justify-end"))
           }
 
-          div(.class("flex space-x-4 justify-end")) {
-            if let frictionRateDesignValue {
-              Label("Friction Rate Design Value")
-              Number(frictionRateDesignValue, digits: 2)
-                .attributes(.class("badge badge-lg badge-outline \(badgeColor) font-bold"))
+          if let availableStaticPressure {
+            LabeledContent("Available Static Pressure") {
+              Badge(number: availableStaticPressure, digits: 2)
             }
+            .attributes(.class("justify-end"))
           }
         }
       }
@@ -94,12 +96,14 @@ struct FrictionRateView: HTML, Sendable {
         .attributes(.class("hidden"), when: !showHighErrors)
       }
 
-      div(.class("grid grid-cols-1 lg:grid-cols-2 gap-4")) {
-        EquipmentInfoView(equipmentInfo: equipmentInfo, projectID: projectID)
-        ComponentPressureLossesView(
-          componentPressureLosses: componentLosses, projectID: projectID
-        )
-      }
+      div(.class("divider")) {}
+
+      // div(.class("grid grid-cols-1 lg:grid-cols-2 gap-4")) {
+      //   EquipmentInfoView(equipmentInfo: equipmentInfo, projectID: projectID)
+      ComponentPressureLossesView(
+        componentPressureLosses: componentLosses, projectID: projectID
+      )
+      // }
     }
   }
 }

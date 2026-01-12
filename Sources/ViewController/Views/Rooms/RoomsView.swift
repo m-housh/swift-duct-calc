@@ -12,44 +12,65 @@ struct RoomsView: HTML, Sendable {
   let sensibleHeatRatio: Double?
 
   var body: some HTML {
-    div {
-      h1(.class("text-2xl font-bold pb-6")) { "Room Loads" }
+    div(.class("flex w-full flex-col")) {
+      Row {
+        h1(
+          .class("flex flex-row text-2xl font-bold pb-6 h-full items-center")
+        ) { "Room Loads" }
 
-      div(.class("border rounded-lg mb-6")) {
-        Row {
-          div {
-            div(.class("space-x-6 my-2 items-center")) {
-              Label("Sensible Heat Ratio")
-                .attributes(.class("my-auto"))
-              if let sensibleHeatRatio {
-                Number(sensibleHeatRatio)
-                  .attributes(.class("badge badge-outline"))
+        div(.class("flex justify-end")) {
+          Tooltip("Project wide sensible heat ratio", position: .left) {
+            button(
+              .class(
+                """
+                grid grid-cols-1 gap-2 p-4 justify-end
+                hover:bg-neutral hover:text-white hover:rounded-lg
+                """
+              ),
+              .showModal(id: SHRForm.id)
+            ) {
+              LabeledContent("Sensible Heat Ratio") {
+                if let sensibleHeatRatio {
+                  Badge(number: sensibleHeatRatio)
+                }
+              }
+              div(.class("flex justify-end")) {
+                SVG(.squarePen)
               }
             }
-            p(.class("text-sm italic")) {
-              "Project wide sensible heat ratio"
-            }
-          }
-
-          Tooltip("Edit SHR") {
-            EditButton()
-              .attributes(.class("btn-ghost"), .showModal(id: SHRForm.id))
           }
         }
-        .attributes(.class("m-4"))
-
-        SHRForm(projectID: projectID, sensibleHeatRatio: sensibleHeatRatio)
       }
 
-      div(.class("overflow-x-auto rounded-box border")) {
+      div(.class("divider")) {}
+
+      SHRForm(projectID: projectID, sensibleHeatRatio: sensibleHeatRatio)
+
+      div(.class("overflow-x-auto")) {
         table(.class("table table-zebra"), .id("roomsTable")) {
           thead {
             tr {
               th { Label("Name") }
-              th { Label("Heating Load") }
-              th { Label("Cooling Total") }
-              th { Label("Cooling Sensible") }
-              th { Label("Register Count") }
+              th {
+                div(.class("flex justify-center")) {
+                  Label("Heating Load")
+                }
+              }
+              th {
+                div(.class("flex justify-center")) {
+                  Label("Cooling Total")
+                }
+              }
+              th {
+                div(.class("flex justify-center")) {
+                  Label("Cooling Sensible")
+                }
+              }
+              th {
+                div(.class("flex justify-center")) {
+                  Label("Register Count")
+                }
+              }
               th {
                 div(.class("flex justify-end")) {
                   Tooltip("Add Room") {
@@ -58,8 +79,8 @@ struct RoomsView: HTML, Sendable {
                         .class("btn-ghost mx-auto"),
                         .showModal(id: RoomForm.id())
                       )
+                      .attributes(.class("tooltip-left"))
                   }
-                  .attributes(.class("tooltip-left"))
                 }
               }
             }
@@ -72,16 +93,22 @@ struct RoomsView: HTML, Sendable {
             tr(.class("font-bold text-xl")) {
               td { Label("Total") }
               td {
-                Number(rooms.heatingTotal, digits: 0)
-                  .attributes(.class("badge badge-outline badge-error badge-xl"))
+                div(.class("flex justify-center")) {
+                  Badge(number: rooms.heatingTotal)
+                    .attributes(.class("badge-error badge-xl"))
+                }
               }
               td {
-                Number(rooms.coolingTotal, digits: 0)
-                  .attributes(.class("badge badge-outline badge-success badge-xl"))
+                div(.class("flex justify-center")) {
+                  Badge(number: rooms.coolingTotal, digits: 0)
+                    .attributes(.class("badge-success badge-xl"))
+                }
               }
               td {
-                Number(rooms.coolingSensible(shr: sensibleHeatRatio), digits: 0)
-                  .attributes(.class("badge badge-outline badge-info badge-xl"))
+                div(.class("flex justify-center")) {
+                  Badge(number: rooms.coolingSensible(shr: sensibleHeatRatio), digits: 0)
+                    .attributes(.class("badge-info badge-xl"))
+                }
               }
               td {}
               td {}
@@ -113,19 +140,27 @@ struct RoomsView: HTML, Sendable {
       tr(.id("roomRow_\(room.name)")) {
         td { room.name }
         td {
-          Number(room.heatingLoad, digits: 0)
-            .attributes(.class("text-error"))
+          div(.class("flex justify-center")) {
+            Number(room.heatingLoad, digits: 0)
+              .attributes(.class("text-error"))
+          }
         }
         td {
-          Number(room.coolingTotal, digits: 0)
-            .attributes(.class("text-success"))
+          div(.class("flex justify-center")) {
+            Number(room.coolingTotal, digits: 0)
+              .attributes(.class("text-success"))
+          }
         }
         td {
-          Number(coolingSensible, digits: 0)
-            .attributes(.class("text-info"))
+          div(.class("flex justify-center")) {
+            Number(coolingSensible, digits: 0)
+              .attributes(.class("text-info"))
+          }
         }
         td {
-          Number(room.registerCount)
+          div(.class("flex justify-center")) {
+            Number(room.registerCount)
+          }
         }
         td {
           div(.class("flex justify-end")) {

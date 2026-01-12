@@ -5,7 +5,7 @@ import Styleguide
 
 public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable {
 
-  public var title: String { "Manual-D" }
+  public var title: String { "Duct Calc" }
   public var lang: String { "en" }
 
   let inner: Inner
@@ -22,7 +22,11 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     script(.src("https://unpkg.com/htmx.org@2.0.8")) {}
     script(.src("/js/main.js")) {}
     link(.rel(.stylesheet), .href("/css/output.css"))
-    link(.rel(.icon), .href("/images/favicon.ico"), .custom(name: "type", value: "image/x-icon"))
+    link(
+      .rel(.icon),
+      .href("/images/favicon.ico"),
+      .init(name: "type", value: "image/x-icon")
+    )
     link(
       .rel(.icon),
       .href("/images/favicon-32x32.png"),

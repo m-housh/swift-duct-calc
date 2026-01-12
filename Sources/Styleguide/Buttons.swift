@@ -65,7 +65,7 @@ public struct EditButton: HTML, Sendable {
   }
 
   public var body: some HTML<HTMLTag.button> {
-    button(.class("btn btn-success btn-circle"), .type(type)) {
+    button(.class("btn hover:btn-success"), .type(type)) {
       div(.class("flex")) {
         if let title {
           span(.class("pe-2")) { title }

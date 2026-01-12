@@ -189,6 +189,7 @@ extension SiteRoute.View.ProjectRoute {
 
     public enum Tab: String, CaseIterable, Equatable, Sendable {
       case project
+      case equipment
       case rooms
       case equivalentLength
       case frictionRate

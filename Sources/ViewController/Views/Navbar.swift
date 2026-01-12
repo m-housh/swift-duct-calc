@@ -25,6 +25,7 @@ struct Navbar: HTML, Sendable {
             }
             .navButton()
           }
+
         }
 
         Tooltip("Home", position: .right) {
@@ -35,7 +36,7 @@ struct Navbar: HTML, Sendable {
             img(
               .src("/images/mand_logo_sm.webp"),
             )
-            span { "Manual-D" }
+            span { "Duct Calc" }
           }
           .navButton()
         }

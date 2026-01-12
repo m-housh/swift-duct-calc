@@ -40,3 +40,9 @@ extension HTMLAttribute where Tag == HTMLTag.button {
     .on(.click, "\(id).showModal()")
   }
 }
+
+extension HTML where Tag: HTMLTrait.Attributes.Global {
+  public func badge() -> _AttributedElement<Self> {
+    attributes(.class("badge badge-lg badge-outline font-bold"))
+  }
+}

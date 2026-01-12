@@ -15,37 +15,31 @@ struct ComponentPressureLossesView: HTML, Sendable {
   }
 
   var body: some HTML {
-    div(
-      .class(
-        """
-        border border-gray-200 rounded-lg shadow-lg space-y-4 p-4
-        """
-      )
-    ) {
+    div(.class("space-y-4")) {
       Row {
-        div(.class("flex space-x-4 items-center")) {
-          h1(.class("text-2xl font-bold")) { "Component Pressure Losses" }
-          div(.class("flex text-primary space-x-2 items-baseline")) {
-            Number(total)
-              .attributes(.class("text-xl font-bold badge badge-outline badge-primary"))
-            span(.class("text-sm italic")) { "Total" }
-          }
-        }
-        Tooltip("Add Component Loss") {
-          PlusButton()
-            .attributes(
-              .class("btn-ghost text-2xl"),
-              .showModal(id: ComponentLossForm.id())
-            )
+        h1(.class("text-2xl font-bold")) { "Component Pressure Losses" }
+        LabeledContent("Total") {
+          Badge(number: total)
         }
       }
+      .attributes(.class("px-4"))
 
       table(.class("table table-zebra")) {
         thead {
           tr(.class("text-xl font-bold")) {
             th { "Name" }
             th { "Value" }
-            th {}
+            th {
+              div(.class("flex justify-end mx-auto")) {
+                Tooltip("Add Component Loss") {
+                  PlusButton()
+                    .attributes(
+                      .class("btn-ghost text-2xl"),
+                      .showModal(id: ComponentLossForm.id())
+                    )
+                }
+              }
+            }
           }
         }
         tbody {

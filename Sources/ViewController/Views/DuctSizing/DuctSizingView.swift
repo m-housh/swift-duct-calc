@@ -41,7 +41,7 @@ struct DuctSizingView: HTML, Sendable {
               th(.class("hidden 2xl:table-cell")) { "Htg CFM" }
               th(.class("hidden 2xl:table-cell")) { "Clg CFM" }
               th { "Dsn CFM" }
-              th(.class("hidden xl:table-cell")) { "Round Size" }
+              th(.class("hidden 2xl:table-cell")) { "Round Size" }
               th { "Velocity" }
               th { "Final Size" }
               th { "Flex Size" }
@@ -84,7 +84,7 @@ struct DuctSizingView: HTML, Sendable {
             .attributes(
               .class("badge badge-outline badge-\(room.designCFM.color) text-xl font-bold"))
         }
-        td(.class("hidden xl:table-cell")) { Number(room.roundSize, digits: 0) }
+        td(.class("hidden 2xl:table-cell")) { Number(room.roundSize, digits: 0) }
         td { Number(room.velocity) }
         td {
           Number(room.finalSize)
@@ -131,7 +131,7 @@ struct DuctSizingView: HTML, Sendable {
 
                 EditButton()
                   .attributes(
-                    .class("join-item btn-ghost text-success hover:text-white"),
+                    .class("join-item btn-ghost"),
                     .showModal(id: RectangularSizeForm.id(room))
                   )
               }

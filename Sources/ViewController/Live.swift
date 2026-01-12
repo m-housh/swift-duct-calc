@@ -188,10 +188,8 @@ extension SiteRoute.View.ProjectRoute.EquipmentInfoRoute {
 
     switch self {
     case .index:
-      return await ResultView {
-        try await database.equipment.fetch(projectID)
-      } onSuccess: { equipment in
-        EquipmentInfoView(equipmentInfo: equipment, projectID: projectID)
+      return request.view {
+        ProjectView(projectID: projectID, activeTab: .equipment)
       }
     case .form(let dismiss):
       return await ResultView {
