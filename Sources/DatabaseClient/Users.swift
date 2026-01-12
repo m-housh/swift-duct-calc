@@ -80,12 +80,11 @@ extension User {
     func prepare(on database: any Database) async throws {
       try await database.schema(UserModel.schema)
         .id()
-        .field("username", .string, .required)
         .field("email", .string, .required)
         .field("password_hash", .string, .required)
         .field("createdAt", .datetime)
         .field("updatedAt", .datetime)
-        .unique(on: "email", "username")
+        .unique(on: "email")
         .create()
     }
 
@@ -128,13 +127,10 @@ extension User.Create {
 
   func toModel() throws -> UserModel {
     try validate()
-    return try .init(username: username, email: email, passwordHash: User.hashPassword(password))
+    return try .init(email: email, passwordHash: User.hashPassword(password))
   }
 
   func validate() throws {
-    guard !username.isEmpty else {
-      throw ValidationError("Username should not be empty.")
-    }
     guard !email.isEmpty else {
       throw ValidationError("Email should not be empty")
     }
@@ -153,9 +149,6 @@ final class UserModel: Model, @unchecked Sendable {
 
   @ID(key: .id)
   var id: UUID?
-
-  @Field(key: "username")
-  var username: String
 
   @Field(key: "email")
   var email: String
@@ -176,12 +169,10 @@ final class UserModel: Model, @unchecked Sendable {
 
   init(
     id: UUID? = nil,
-    username: String,
     email: String,
     passwordHash: String
   ) {
     self.id = id
-    self.username = username
     self.email = email
     self.passwordHash = passwordHash
   }
@@ -190,7 +181,6 @@ final class UserModel: Model, @unchecked Sendable {
     try .init(
       id: requireID(),
       email: email,
-      username: username,
       createdAt: createdAt!,
       updatedAt: updatedAt!
     )
@@ -239,7 +229,7 @@ final class UserTokenModel: Model, Codable, @unchecked Sendable {
 
 extension User: Authenticatable {}
 extension User: SessionAuthenticatable {
-  public var sessionID: String { username }
+  public var sessionID: String { email }
 }
 
 public struct UserPasswordAuthenticator: AsyncBasicAuthenticator {
@@ -250,7 +240,7 @@ public struct UserPasswordAuthenticator: AsyncBasicAuthenticator {
   public func authenticate(basic: BasicAuthorization, for request: Request) async throws {
     guard
       let user = try await UserModel.query(on: request.db)
-        .filter(\UserModel.$username == basic.username)
+        .filter(\UserModel.$email == basic.username)
         .first(),
       try user.verifyPassword(basic.password)
     else {
@@ -286,7 +276,7 @@ public struct UserSessionAuthenticator: AsyncSessionAuthenticator {
   public func authenticate(sessionID: User.SessionID, for request: Request) async throws {
     guard
       let user = try await UserModel.query(on: request.db)
-        .filter(\UserModel.$username == sessionID)
+        .filter(\UserModel.$email == sessionID)
         .first()
     else {
       throw Abort(.unauthorized)

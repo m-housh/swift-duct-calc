@@ -60,10 +60,35 @@ extension User.Profile.Create {
     guard !lastName.isEmpty else {
       throw ValidationError("User last name should not be empty.")
     }
+    guard !companyName.isEmpty else {
+      throw ValidationError("User company name should not be empty.")
+    }
+    guard !streetAddress.isEmpty else {
+      throw ValidationError("User street address should not be empty.")
+    }
+    guard !city.isEmpty else {
+      throw ValidationError("User city should not be empty.")
+    }
+    guard !state.isEmpty else {
+      throw ValidationError("User state should not be empty.")
+    }
+    guard !zipCode.isEmpty else {
+      throw ValidationError("User zip code should not be empty.")
+    }
   }
 
   func toModel() -> UserProfileModel {
-    .init(userID: userID, firstName: firstName, lastName: lastName, theme: theme)
+    .init(
+      userID: userID,
+      firstName: firstName,
+      lastName: lastName,
+      companyName: companyName,
+      streetAddress: streetAddress,
+      city: city,
+      state: state,
+      zipCode: zipCode,
+      theme: theme
+    )
   }
 }
 
@@ -80,6 +105,31 @@ extension User.Profile.Update {
         throw ValidationError("User last name should not be empty.")
       }
     }
+    if let companyName {
+      guard !companyName.isEmpty else {
+        throw ValidationError("User company name should not be empty.")
+      }
+    }
+    if let streetAddress {
+      guard !streetAddress.isEmpty else {
+        throw ValidationError("User street address should not be empty.")
+      }
+    }
+    if let city {
+      guard !city.isEmpty else {
+        throw ValidationError("User city should not be empty.")
+      }
+    }
+    if let state {
+      guard !state.isEmpty else {
+        throw ValidationError("User state should not be empty.")
+      }
+    }
+    if let zipCode {
+      guard !zipCode.isEmpty else {
+        throw ValidationError("User zip code should not be empty.")
+      }
+    }
   }
 }
 
@@ -93,6 +143,11 @@ extension User.Profile {
         .id()
         .field("firstName", .string, .required)
         .field("lastName", .string, .required)
+        .field("companyName", .string, .required)
+        .field("streetAddress", .string, .required)
+        .field("city", .string, .required)
+        .field("state", .string, .required)
+        .field("zipCode", .string, .required)
         .field("theme", .string)
         .field("userID", .uuid, .references(UserModel.schema, "id", onDelete: .cascade))
         .field("createdAt", .datetime)
@@ -123,6 +178,21 @@ final class UserProfileModel: Model, @unchecked Sendable {
   @Field(key: "lastName")
   var lastName: String
 
+  @Field(key: "companyName")
+  var companyName: String
+
+  @Field(key: "streetAddress")
+  var streetAddress: String
+
+  @Field(key: "city")
+  var city: String
+
+  @Field(key: "state")
+  var state: String
+
+  @Field(key: "zipCode")
+  var zipCode: String
+
   @Field(key: "theme")
   var theme: String?
 
@@ -139,12 +209,22 @@ final class UserProfileModel: Model, @unchecked Sendable {
     userID: User.ID,
     firstName: String,
     lastName: String,
+    companyName: String,
+    streetAddress: String,
+    city: String,
+    state: String,
+    zipCode: String,
     theme: Theme? = nil
   ) {
     self.id = id
     $user.id = userID
     self.firstName = firstName
     self.lastName = lastName
+    self.companyName = companyName
+    self.streetAddress = streetAddress
+    self.city = city
+    self.state = state
+    self.zipCode = zipCode
     self.theme = theme?.rawValue
   }
 
@@ -154,6 +234,11 @@ final class UserProfileModel: Model, @unchecked Sendable {
       userID: $user.id,
       firstName: firstName,
       lastName: lastName,
+      companyName: companyName,
+      streetAddress: streetAddress,
+      city: city,
+      state: state,
+      zipCode: zipCode,
       theme: self.theme.flatMap(Theme.init),
       createdAt: createdAt!,
       updatedAt: updatedAt!
@@ -166,6 +251,21 @@ final class UserProfileModel: Model, @unchecked Sendable {
     }
     if let lastName = updates.lastName, lastName != self.lastName {
       self.lastName = lastName
+    }
+    if let companyName = updates.companyName, companyName != self.companyName {
+      self.companyName = companyName
+    }
+    if let streetAddress = updates.streetAddress, streetAddress != self.streetAddress {
+      self.streetAddress = streetAddress
+    }
+    if let city = updates.city, city != self.city {
+      self.city = city
+    }
+    if let state = updates.state, state != self.state {
+      self.state = state
+    }
+    if let zipCode = updates.zipCode, zipCode != self.zipCode {
+      self.zipCode = zipCode
     }
     if let theme = updates.theme, theme.rawValue != self.theme {
       self.theme = theme.rawValue

@@ -14,7 +14,7 @@ private let viewRouteMiddleware: [any Middleware] = [
 extension SiteRoute.View {
   var middleware: [any Middleware]? {
     switch self {
-    case .project:
+    case .project, .user:
       return viewRouteMiddleware
     case .login, .signup, .test:
       return nil

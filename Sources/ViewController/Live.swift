@@ -42,7 +42,18 @@ extension ViewController.Request {
         // Create a new user and log them in.
         return await view {
           await ResultView {
-            let user = try await createAndAuthenticate(request)
+            try await createAndAuthenticate(request)
+          } onSuccess: { user in
+            MainPage {
+              UserProfileForm(userID: user.id, profile: nil, dismiss: false, signup: true)
+            }
+          }
+        }
+      case .submitProfile(let profile):
+        return await view {
+          await ResultView {
+            _ = try await database.userProfile.create(profile)
+            let user = try currentUser()
             return (
               user.id,
               try await database.projects.fetch(user.id, .init(page: 1, per: 25))
@@ -53,6 +64,9 @@ extension ViewController.Request {
         }
       }
     case .project(let route):
+      return await route.renderView(on: self)
+
+    case .user(let route):
       return await route.renderView(on: self)
     }
   }
@@ -74,7 +88,8 @@ extension ViewController.Request {
   }
 
   var theme: Theme? {
-    .dracula
+    nil
+    // .dracula
   }
 }
 
@@ -576,53 +591,54 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
   }
 }
 
-// private func _render<C: HTML>(
-//   isHtmxRequest: Bool,
-//   active activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab = .rooms,
-//   showSidebar: Bool = true,
-//   theme: Theme? = nil,
-//   @HTMLBuilder inner: () async throws -> C
-// ) async throws -> AnySendableHTML where C: Sendable {
-//   let inner = try await inner()
-//   if isHtmxRequest {
-//     return div(.class("h-screen w-full")) {
-//       inner
-//     }
-//     .attributes(.data("theme", value: theme!.rawValue), when: theme != nil)
-//   }
-//   return MainPage(theme: theme) { inner }
-// }
-//
-// private func _render<C: HTML>(
-//   isHtmxRequest: Bool,
-//   active activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab = .rooms,
-//   showSidebar: Bool = true,
-//   theme: Theme? = nil,
-//   @HTMLBuilder inner: () async -> C
-// ) async -> AnySendableHTML where C: Sendable {
-//   let inner = await inner()
-//   if isHtmxRequest {
-//     return div(.class("h-screen w-full")) {
-//       inner
-//     }
-//     .attributes(.data("theme", value: theme!.rawValue), when: theme != nil)
-//   }
-//   return MainPage(theme: theme) { inner }
-// }
-//
-// private func _render<C: HTML>(
-//   isHtmxRequest: Bool,
-//   active activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab = .rooms,
-//   showSidebar: Bool = true,
-//   theme: Theme? = nil,
-//   @HTMLBuilder inner: () -> C
-// ) -> AnySendableHTML where C: Sendable {
-//   let inner = inner()
-//   if isHtmxRequest {
-//     return div(.class("h-screen w-full")) {
-//       inner
-//     }
-//     .attributes(.data("theme", value: theme!.rawValue), when: theme != nil)
-//   }
-//   return MainPage(theme: theme) { inner }
-// }
+extension SiteRoute.View.UserRoute {
+
+  func renderView(on request: ViewController.Request) async -> AnySendableHTML {
+    switch self {
+    case .profile(let route):
+      return await route.renderView(on: request)
+    }
+  }
+}
+
+extension SiteRoute.View.UserRoute.Profile {
+
+  func renderView(
+    on request: ViewController.Request
+  ) async -> AnySendableHTML {
+    @Dependency(\.database) var database
+
+    switch self {
+    case .index:
+      return await view(on: request)
+    case .submit(let form):
+      return await view(on: request) {
+        _ = try await database.userProfile.create(form)
+      }
+    case .update(let id, let updates):
+      return await view(on: request) {
+        _ = try await database.userProfile.update(id, updates)
+      }
+    }
+  }
+
+  func view(
+    on request: ViewController.Request,
+    catching: @escaping @Sendable () async throws -> Void = {}
+  ) async -> AnySendableHTML {
+    @Dependency(\.database) var database
+
+    return await request.view {
+      await ResultView {
+        try await catching()
+        let user = try request.currentUser()
+        return (
+          user,
+          try await database.userProfile.get(user.id)
+        )
+      } onSuccess: { (user, profile) in
+        UserView(user: user, profile: profile)
+      }
+    }
+  }
+}

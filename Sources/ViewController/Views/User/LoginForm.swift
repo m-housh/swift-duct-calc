@@ -25,25 +25,6 @@ struct LoginForm: HTML, Sendable {
           input(.class("hidden"), .name("next"), .value(next))
         }
 
-        if style == .signup {
-          div {
-            label(.class("input validator w-full")) {
-              SVG(.user)
-              input(
-                .type(.text), .required, .placeholder("Username"),
-                .name("username"), .id("username"),
-                .minlength("3"), .pattern(.username),
-                .autofocus
-              )
-            }
-            div(.class("validator-hint hidden")) {
-              "Enter valid username"
-              br()
-              "Must be at least 3 characters"
-            }
-          }
-        }
-
         div {
           label(.class("input validator w-full")) {
             SVG(.email)

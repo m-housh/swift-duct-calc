@@ -11,6 +11,7 @@ extension SiteRoute {
     case login(LoginRoute)
     case signup(SignupRoute)
     case project(ProjectRoute)
+    case user(UserRoute)
     //FIX: Remove.
     case test
 
@@ -27,6 +28,9 @@ extension SiteRoute {
       }
       Route(.case(Self.project)) {
         SiteRoute.View.ProjectRoute.router
+      }
+      Route(.case(Self.user)) {
+        SiteRoute.View.UserRoute.router
       }
     }
   }
@@ -696,6 +700,7 @@ extension SiteRoute.View {
   public enum SignupRoute: Equatable, Sendable {
     case index
     case submit(User.Create)
+    case submitProfile(User.Profile.Create)
 
     static let rootPath = "signup"
 
@@ -709,12 +714,119 @@ extension SiteRoute.View {
         Method.post
         Body {
           FormData {
-            Field("username", .string)
             Field("email", .string)
             Field("password", .string)
             Field("confirmPassword", .string)
           }
           .map(.memberwise(User.Create.init))
+        }
+      }
+      Route(.case(Self.submitProfile)) {
+        Path {
+          rootPath
+          "profile"
+        }
+        Method.post
+        Body {
+          FormData {
+            Field("userID") { User.ID.parser() }
+            Field("firstName", .string)
+            Field("lastName", .string)
+            Field("companyName", .string)
+            Field("streetAddress", .string)
+            Field("city", .string)
+            Field("state", .string)
+            Field("zipCode", .string)
+            Optionally {
+              Field("theme") { Theme.parser() }
+            }
+          }
+          .map(.memberwise(User.Profile.Create.init))
+        }
+      }
+    }
+  }
+}
+
+extension SiteRoute.View {
+  public enum UserRoute: Equatable, Sendable {
+    case profile(Profile)
+
+    static let router = OneOf {
+      Route(.case(Self.profile)) {
+        Profile.router
+      }
+    }
+  }
+}
+
+extension SiteRoute.View.UserRoute {
+  public enum Profile: Equatable, Sendable {
+    case index
+    case submit(User.Profile.Create)
+    case update(User.Profile.ID, User.Profile.Update)
+
+    static let rootPath = "profile"
+
+    static let router = OneOf {
+      Route(.case(Self.index)) {
+        Path { rootPath }
+        Method.get
+      }
+      Route(.case(Self.submit)) {
+        Path { rootPath }
+        Method.post
+        Body {
+          FormData {
+            Field("userID") { User.ID.parser() }
+            Field("firstName", .string)
+            Field("lastName", .string)
+            Field("companyName", .string)
+            Field("streetAddress", .string)
+            Field("city", .string)
+            Field("state", .string)
+            Field("zipCode", .string)
+            Optionally {
+              Field("theme") { Theme.parser() }
+            }
+          }
+          .map(.memberwise(User.Profile.Create.init))
+        }
+      }
+      Route(.case(Self.update)) {
+        Path {
+          rootPath
+          User.Profile.ID.parser()
+        }
+        Method.patch
+        Body {
+          FormData {
+            Optionally {
+              Field("firstName", .string)
+            }
+            Optionally {
+              Field("lastName", .string)
+            }
+            Optionally {
+              Field("companyName", .string)
+            }
+            Optionally {
+              Field("streetAddress", .string)
+            }
+            Optionally {
+              Field("city", .string)
+            }
+            Optionally {
+              Field("state", .string)
+            }
+            Optionally {
+              Field("zipCode", .string)
+            }
+            Optionally {
+              Field("theme") { Theme.parser() }
+            }
+          }
+          .map(.memberwise(User.Profile.Update.init))
         }
       }
     }

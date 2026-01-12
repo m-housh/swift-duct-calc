@@ -5,6 +5,7 @@ public enum Theme: String, CaseIterable, Codable, Equatable, Sendable {
   case cupcake
   case cyberpunk
   case dark
+  case `default`
   case dracula
   case light
   case night
@@ -20,7 +21,7 @@ public enum Theme: String, CaseIterable, Codable, Equatable, Sendable {
     Self.synthwave,
   ]
 
-  public static let lightThems = [
+  public static let lightThemes = [
     Self.cupcake,
     Self.cyberpunk,
     Self.light,

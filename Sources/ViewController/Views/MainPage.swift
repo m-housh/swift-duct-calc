@@ -57,7 +57,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     div(.class("h-screen w-full")) {
       inner
     }
-    .attributes(.data("theme", value: theme!.rawValue), when: theme != nil)
+    .attributes(.data("theme", value: theme?.rawValue ?? "default"), when: theme != nil)
   }
 }
 
