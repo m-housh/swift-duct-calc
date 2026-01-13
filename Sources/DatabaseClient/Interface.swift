@@ -20,6 +20,7 @@ public struct DatabaseClient: Sendable {
   public var effectiveLength: EffectiveLengthClient
   public var users: Users
   public var userProfile: UserProfile
+  public var trunkSizes: TrunkSizes
 }
 
 extension DatabaseClient: TestDependencyKey {
@@ -31,7 +32,8 @@ extension DatabaseClient: TestDependencyKey {
     componentLoss: .testValue,
     effectiveLength: .testValue,
     users: .testValue,
-    userProfile: .testValue
+    userProfile: .testValue,
+    trunkSizes: .testValue
   )
 
   public static func live(database: any Database) -> Self {
@@ -43,7 +45,8 @@ extension DatabaseClient: TestDependencyKey {
       componentLoss: .live(database: database),
       effectiveLength: .live(database: database),
       users: .live(database: database),
-      userProfile: .live(database: database)
+      userProfile: .live(database: database),
+      trunkSizes: .live(database: database)
     )
   }
 }
@@ -71,6 +74,7 @@ extension DatabaseClient.Migrations: DependencyKey {
         EquipmentInfo.Migrate(),
         Room.Migrate(),
         EffectiveLength.Migrate(),
+        DuctSizing.TrunkSize.Migrate(),
       ]
     }
   )

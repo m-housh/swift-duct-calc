@@ -91,3 +91,70 @@ public enum DuctSizing {
     }
   }
 }
+
+extension DuctSizing {
+
+  public struct TrunkSize: Codable, Equatable, Identifiable, Sendable {
+
+    public let id: UUID
+    public let projectID: Project.ID
+    public let type: TrunkType
+    public let rooms: [RoomProxy]
+    public let height: Int?
+
+    public init(
+      id: UUID,
+      projectID: Project.ID,
+      type: DuctSizing.TrunkSize.TrunkType,
+      rooms: [DuctSizing.TrunkSize.RoomProxy],
+      height: Int? = nil
+    ) {
+      self.id = id
+      self.projectID = projectID
+      self.type = type
+      self.rooms = rooms
+      self.height = height
+    }
+  }
+
+}
+
+extension DuctSizing.TrunkSize {
+  public struct Create: Codable, Equatable, Sendable {
+
+    public let projectID: Project.ID
+    public let type: TrunkType
+    public let rooms: [Room.ID: [Int]]
+    public let height: Int?
+
+    public init(
+      projectID: Project.ID,
+      type: DuctSizing.TrunkSize.TrunkType,
+      rooms: [Room.ID: [Int]],
+      height: Int? = nil
+    ) {
+      self.projectID = projectID
+      self.type = type
+      self.rooms = rooms
+      self.height = height
+    }
+  }
+
+  // TODO: Make registers non-optional
+  public struct RoomProxy: Codable, Equatable, Identifiable, Sendable {
+
+    public var id: Room.ID { room.id }
+    public let room: Room
+    public let registers: [Int]?
+
+    public init(room: Room, registers: [Int]? = nil) {
+      self.room = room
+      self.registers = registers
+    }
+  }
+
+  public enum TrunkType: String, Codable, Equatable, Sendable {
+    case `return`
+    case supply
+  }
+}
