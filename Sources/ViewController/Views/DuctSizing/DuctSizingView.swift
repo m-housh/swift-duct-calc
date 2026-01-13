@@ -14,7 +14,7 @@ struct DuctSizingView: HTML, Sendable {
 
   var body: some HTML {
     div {
-      h1(.class("text-2xl py-4")) { "Duct Sizes" }
+      PageTitle { "Duct Sizes" }
       if rooms.count == 0 {
         p(.class("text-error italic")) {
           "Must complete all the previous sections to display duct sizing calculations."

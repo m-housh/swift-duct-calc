@@ -44,7 +44,7 @@ struct FrictionRateView: HTML, Sendable {
     div(.class("space-y-6")) {
       div(.class("grid grid-cols-2 px-4")) {
 
-        h1(.class("text-4xl font-bold items-end my-auto")) { "Friction Rate" }
+        PageTitle { "Friction Rate" }
 
         div(.class("space-y-4 justify-end")) {
 

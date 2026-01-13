@@ -23,11 +23,9 @@ struct EffectiveLengthsView: HTML, Sendable {
   }
 
   var body: some HTML {
-    div(
-      .class("m-4 space-y-4")
-    ) {
+    div(.class("space-y-4")) {
       Row {
-        h1(.class("text-2xl font-bold")) { "Equivalent Lengths" }
+        PageTitle { "Equivalent Lengths" }
         PlusButton()
           .attributes(
             .class("btn-ghost"),
@@ -40,6 +38,8 @@ struct EffectiveLengthsView: HTML, Sendable {
 
       div {
         h2(.class("text-xl font-bold pb-4")) { "Supplies" }
+          .attributes(.class("hidden"), when: supplies.count == 0)
+
         div(.class("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4")) {
           for (n, row) in supplies.enumerated() {
             EffectiveLengthView(effectiveLength: row)
@@ -50,6 +50,7 @@ struct EffectiveLengthsView: HTML, Sendable {
 
       div {
         h2(.class("text-xl font-bold pb-4")) { "Returns" }
+          .attributes(.class("hidden"), when: returns.count == 0)
         div(.class("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-x-4 space-y-4")) {
           for (n, row) in returns.enumerated() {
             EffectiveLengthView(effectiveLength: row)

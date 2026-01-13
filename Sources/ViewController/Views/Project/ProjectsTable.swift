@@ -20,7 +20,7 @@ struct ProjectsTable: HTML, Sendable {
       Navbar(sidebarToggle: false)
       div(.class("m-6")) {
         Row {
-          h1(.class("text-2xl font-bold")) { "Projects" }
+          PageTitle { "Projects" }
           Tooltip("Add project") {
             PlusButton()
               .attributes(
@@ -31,7 +31,7 @@ struct ProjectsTable: HTML, Sendable {
         }
         .attributes(.class("pb-6"))
 
-        div(.class("overflow-x-auto rounded-box border")) {
+        div(.class("overflow-x-auto")) {
           table(.class("table table-zebra")) {
             thead {
               tr {

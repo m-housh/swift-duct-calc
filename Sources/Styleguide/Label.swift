@@ -13,7 +13,7 @@ public struct Label: HTML, Sendable {
   }
 
   public var body: some HTML<HTMLTag.span> {
-    span(.class("text-xl text-secondary font-bold")) {
+    span(.class("text-lg text-secondary font-bold")) {
       title
     }
   }

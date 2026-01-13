@@ -15,6 +15,7 @@ public enum Theme: String, CaseIterable, Codable, Equatable, Sendable {
 
   public static let darkThemes = [
     Self.aqua,
+    Self.cyberpunk,
     Self.dark,
     Self.dracula,
     Self.night,
@@ -23,7 +24,6 @@ public enum Theme: String, CaseIterable, Codable, Equatable, Sendable {
 
   public static let lightThemes = [
     Self.cupcake,
-    Self.cyberpunk,
     Self.light,
     Self.nord,
     Self.retro,

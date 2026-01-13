@@ -9,7 +9,7 @@ struct ProjectDetail: HTML, Sendable {
   var body: some HTML {
     div {
       Row {
-        h1(.class("text-2xl font-bold")) { "Project" }
+        h1(.class("text-3xl font-bold")) { "Project" }
         EditButton()
           .attributes(
             .class("btn-ghost"),
@@ -21,24 +21,44 @@ struct ProjectDetail: HTML, Sendable {
         table(.class("table table-zebra text-lg")) {
           tbody {
             tr {
-              td { Label("Name") }
-              td { project.name }
+              td { "Name" }
+              td {
+                div(.class("flex justify-end")) {
+                  project.name
+                }
+              }
             }
             tr {
-              td { Label("Street Address") }
-              td { project.streetAddress }
+              td { "Street Address" }
+              td {
+                div(.class("flex justify-end")) {
+                  project.streetAddress
+                }
+              }
             }
             tr {
-              td { Label("City") }
-              td { project.city }
+              td { "City" }
+              td {
+                div(.class("flex justify-end")) {
+                  project.city
+                }
+              }
             }
             tr {
-              td { Label("State") }
-              td { project.state }
+              td { "State" }
+              td {
+                div(.class("flex justify-end")) {
+                  project.state
+                }
+              }
             }
             tr {
-              td { Label("Zip") }
-              td { project.zipCode }
+              td { "Zip" }
+              td {
+                div(.class("flex justify-end")) {
+                  project.zipCode
+                }
+              }
             }
           }
         }

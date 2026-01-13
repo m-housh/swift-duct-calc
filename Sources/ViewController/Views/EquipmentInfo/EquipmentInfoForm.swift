@@ -29,7 +29,7 @@ struct EquipmentInfoForm: HTML, Sendable {
     ModalForm(id: Self.id, dismiss: dismiss) {
       h1(.class("text-3xl font-bold pb-6 ps-2")) { "Equipment Info" }
       form(
-        .class("space-y-4 p-4"),
+        .class("grid grid-cols-1 gap-4"),
         equipmentInfo != nil
           ? .hx.patch(route)
           : .hx.post(route),
@@ -42,27 +42,40 @@ struct EquipmentInfoForm: HTML, Sendable {
           input(.class("hidden"), .name("id"), .value("\(equipmentInfo.id)"))
         }
 
-        div {
-          label(.for("staticPressure")) { "Static Pressure" }
-          Input(id: "staticPressure", placeholder: "Static pressure")
-            .attributes(
-              .type(.number), .value(staticPressure), .min("0"), .max("1.0"), .step("0.1")
-            )
-        }
-        div {
-          label(.for("heatingCFM")) { "Heating CFM" }
-          Input(id: "heatingCFM", placeholder: "CFM")
-            .attributes(.type(.number), .min("0"), .value(equipmentInfo?.heatingCFM))
-        }
-        div {
-          label(.for("coolingCFM")) { "Cooling CFM" }
-          Input(id: "coolingCFM", placeholder: "CFM")
-            .attributes(.type(.number), .min("0"), .value(equipmentInfo?.coolingCFM))
-        }
-        div {
-          SubmitButton(title: "Save")
-            .attributes(.class("btn-block"))
-        }
+        LabeledInput(
+          "Static Pressure",
+          .name("staticPressure"),
+          .type(.number),
+          .value(staticPressure),
+          .min("0"),
+          .max("1.0"),
+          .step("0.1"),
+          .required
+        )
+
+        LabeledInput(
+          "Heating CFM",
+          .name("heatingCFM"),
+          .type(.number),
+          .value(equipmentInfo?.heatingCFM),
+          .placeholder("1000"),
+          .min("0"),
+          .required,
+          .autofocus
+        )
+
+        LabeledInput(
+          "Cooling CFM",
+          .name("coolingCFM"),
+          .type(.number),
+          .value(equipmentInfo?.coolingCFM),
+          .placeholder("1000"),
+          .min("0"),
+          .required
+        )
+
+        SubmitButton(title: "Save")
+          .attributes(.class("btn-block my-6"))
       }
     }
   }

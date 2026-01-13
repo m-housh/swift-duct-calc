@@ -39,8 +39,7 @@ struct RoomForm: HTML, Sendable {
     ModalForm(id: Self.id(room), dismiss: dismiss) {
       h1(.class("text-3xl font-bold pb-6")) { "Room" }
       form(
-        .class("modal-backdrop"),
-        .init(name: "method", value: "dialog"),
+        .class("grid grid-cols-1 gap-4"),
         room == nil
           ? .hx.post(route)
           : .hx.patch(route),
@@ -54,34 +53,54 @@ struct RoomForm: HTML, Sendable {
           input(.class("hidden"), .name("id"), .value("\(id)"))
         }
 
-        div {
-          label(.for("name")) { "Name:" }
-          Input(id: "name", placeholder: "Room Name")
-            .attributes(.type(.text), .required, .autofocus, .value(room?.name))
-        }
-        div {
-          label(.for("heatingLoad")) { "Heating Load:" }
-          Input(id: "heatingLoad", placeholder: "Heating Load")
-            .attributes(.type(.number), .required, .min("0"), .value(room?.heatingLoad))
-        }
-        div {
-          label(.for("coolingTotal")) { "Cooling Total:" }
-          Input(id: "coolingTotal", placeholder: "Cooling Total")
-            .attributes(.type(.number), .required, .min("0"), .value(room?.coolingTotal))
-        }
-        div {
-          label(.for("coolingSensible")) { "Cooling Sensible:" }
-          Input(id: "coolingSensible", placeholder: "Cooling Sensible (Optional)")
-            .attributes(.type(.number), .min("0"), .value(room?.coolingSensible))
-        }
-        div(.class("pb-6")) {
-          label(.for("registerCount")) { "Registers:" }
-          Input(id: "registerCount", placeholder: "Register Count")
-            .attributes(
-              .type(.number), .required, .min("0"),
-              .value("\(room != nil ? room!.registerCount : 1)"),
-            )
-        }
+        LabeledInput(
+          "Name",
+          .name("name"),
+          .type(.text),
+          .placeholder("Name"),
+          .required,
+          .autofocus,
+          .value(room?.name)
+        )
+
+        LabeledInput(
+          "Heating Load",
+          .name("heatingLoad"),
+          .type(.number),
+          .placeholder("1234"),
+          .required,
+          .min("0"),
+          .value(room?.heatingLoad)
+        )
+
+        LabeledInput(
+          "Cooling Total",
+          .name("coolingTotal"),
+          .type(.number),
+          .placeholder("1234"),
+          .required,
+          .min("0"),
+          .value(room?.coolingTotal)
+        )
+
+        LabeledInput(
+          "Cooling Sensible",
+          .name("coolingSensible"),
+          .type(.number),
+          .placeholder("1234 (Optional)"),
+          .min("0"),
+          .value(room?.coolingSensible)
+        )
+
+        LabeledInput(
+          "Registers",
+          .name("registerCount"),
+          .type(.number),
+          .min("1"),
+          .required,
+          .value(room?.registerCount ?? 1)
+        )
+
         SubmitButton()
           .attributes(.class("btn-block"))
       }

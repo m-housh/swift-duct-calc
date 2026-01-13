@@ -14,61 +14,84 @@ struct RoomsView: HTML, Sendable {
   var body: some HTML {
     div(.class("flex w-full flex-col")) {
       Row {
-        h1(
-          .class("flex flex-row text-2xl font-bold pb-6 h-full items-center")
-        ) { "Room Loads" }
+        PageTitle { "Room Loads" }
 
-        div(.class("flex justify-end")) {
+        div(.class("flex justify-end items-end -my-2")) {
           Tooltip("Project wide sensible heat ratio", position: .left) {
             button(
               .class(
                 """
-                grid grid-cols-1 gap-2 p-4 justify-end
+                justify-end items-end p-4
                 hover:bg-neutral hover:text-white hover:rounded-lg
                 """
               ),
               .showModal(id: SHRForm.id)
             ) {
-              LabeledContent("Sensible Heat Ratio") {
+              LabeledContent {
+                div(.class("flex justify-end items-end space-x-4")) {
+                  // SVG(.squarePen)
+                  span(.class("font-bold")) {
+                    "Sensible Heat Ratio"
+                  }
+                }
+              } content: {
                 if let sensibleHeatRatio {
                   Badge(number: sensibleHeatRatio)
                 }
-              }
-              div(.class("flex justify-end")) {
-                SVG(.squarePen)
               }
             }
           }
         }
       }
 
+      div(.class("flex flex-wrap justify-between mt-6")) {
+        div(.class("flex items-end space-x-4")) {
+          span(.class("font-bold")) { "Heating Total" }
+          Badge(number: rooms.heatingTotal, digits: 0)
+            .attributes(.class("badge-error"))
+        }
+
+        div(.class("flex items-end space-x-4")) {
+          span(.class("font-bold")) { "Cooling Total" }
+          Badge(number: rooms.coolingTotal, digits: 0)
+            .attributes(.class("badge-success"))
+        }
+
+        div(.class("flex justify-end items-end space-x-4 me-4")) {
+          span(.class("font-bold")) { "Cooling Sensible" }
+          Badge(number: rooms.coolingSensible(shr: sensibleHeatRatio), digits: 0)
+            .attributes(.class("badge-info"))
+        }
+      }
+      // .attributes(.class("mt-6 me-4"))
+
       div(.class("divider")) {}
 
       SHRForm(projectID: projectID, sensibleHeatRatio: sensibleHeatRatio)
 
       div(.class("overflow-x-auto")) {
-        table(.class("table table-zebra"), .id("roomsTable")) {
+        table(.class("table table-zebra text-lg"), .id("roomsTable")) {
           thead {
-            tr {
-              th { Label("Name") }
+            tr(.class("text-lg font-bold")) {
+              th { "Name" }
               th {
                 div(.class("flex justify-center")) {
-                  Label("Heating Load")
+                  "Heating Load"
                 }
               }
               th {
                 div(.class("flex justify-center")) {
-                  Label("Cooling Total")
+                  "Cooling Total"
                 }
               }
               th {
                 div(.class("flex justify-center")) {
-                  Label("Cooling Sensible")
+                  "Cooling Sensible"
                 }
               }
               th {
                 div(.class("flex justify-center")) {
-                  Label("Register Count")
+                  "Register Count"
                 }
               }
               th {
@@ -88,30 +111,6 @@ struct RoomsView: HTML, Sendable {
           tbody {
             for room in rooms {
               RoomRow(room: room, shr: sensibleHeatRatio)
-            }
-            // TOTALS
-            tr(.class("font-bold text-xl")) {
-              td { Label("Total") }
-              td {
-                div(.class("flex justify-center")) {
-                  Badge(number: rooms.heatingTotal)
-                    .attributes(.class("badge-error badge-xl"))
-                }
-              }
-              td {
-                div(.class("flex justify-center")) {
-                  Badge(number: rooms.coolingTotal, digits: 0)
-                    .attributes(.class("badge-success badge-xl"))
-                }
-              }
-              td {
-                div(.class("flex justify-center")) {
-                  Badge(number: rooms.coolingSensible(shr: sensibleHeatRatio), digits: 0)
-                    .attributes(.class("badge-info badge-xl"))
-                }
-              }
-              td {}
-              td {}
             }
           }
         }
@@ -143,19 +142,19 @@ struct RoomsView: HTML, Sendable {
         td {
           div(.class("flex justify-center")) {
             Number(room.heatingLoad, digits: 0)
-              .attributes(.class("text-error"))
+            // .attributes(.class("text-error"))
           }
         }
         td {
           div(.class("flex justify-center")) {
             Number(room.coolingTotal, digits: 0)
-              .attributes(.class("text-success"))
+            // .attributes(.class("text-success"))
           }
         }
         td {
           div(.class("flex justify-center")) {
             Number(coolingSensible, digits: 0)
-              .attributes(.class("text-info"))
+            // .attributes(.class("text-info"))
           }
         }
         td {
@@ -204,22 +203,28 @@ struct RoomsView: HTML, Sendable {
 
     var body: some HTML {
       ModalForm(id: Self.id, dismiss: true) {
+        h1(.class("text-xl font-bold mb-6")) {
+          "Sensible Heat Ratio"
+        }
         form(
-          .class("space-y-6"),
+          .class("grid grid-cols-1 gap-4"),
           .hx.patch("/projects/\(projectID)/rooms/update-shr"),
           .hx.target("body"),
           .hx.swap(.outerHTML)
         ) {
           input(.class("hidden"), .name("projectID"), .value("\(projectID)"))
-          div {
-            label(.for("sensibleHeatRatio")) { "Sensible Heat Ratio" }
-            Input(id: "sensibleHeatRatio", placeholder: "Sensible Heat Ratio")
-              .attributes(.min("0"), .max("1"), .step("0.01"), .value(sensibleHeatRatio))
-          }
-          div {
-            SubmitButton()
-              .attributes(.class("btn-block"))
-          }
+          LabeledInput(
+            "SHR",
+            .type(.number),
+            .placeholder("0.83"),
+            .min("0"),
+            .max("1"),
+            .step("0.01"),
+            .value(sensibleHeatRatio),
+            .autofocus
+          )
+          SubmitButton()
+            .attributes(.class("btn-block my-6"))
         }
       }
     }
