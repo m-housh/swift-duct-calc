@@ -47,7 +47,7 @@ struct EffectiveLengthForm: HTML, Sendable {
       dismiss: dismiss
     ) {
       h1(.class("text-2xl font-bold")) { "Effective Length" }
-      div(.id("formStep_\(id)")) {
+      div(.id("formStep_\(id)"), .class("mt-4")) {
         StepOne(projectID: projectID, effectiveLength: effectiveLength)
       }
     }
@@ -74,8 +74,15 @@ struct EffectiveLengthForm: HTML, Sendable {
         if let id = effectiveLength?.id {
           input(.class("hidden"), .name("id"), .value("\(id)"))
         }
-        Input(id: "name", placeholder: "Name")
-          .attributes(.type(.text), .required, .autofocus, .value(effectiveLength?.name))
+
+        LabeledInput(
+          "Name",
+          .name("name"),
+          .type(.text),
+          .value(effectiveLength?.name),
+          .required,
+          .autofocus
+        )
 
         GroupTypeSelect(projectID: projectID, selected: effectiveLength?.type ?? .supply)
 
@@ -193,14 +200,6 @@ struct EffectiveLengthForm: HTML, Sendable {
           }
         }
 
-        div(.class("grid grid-cols-5 gap-2")) {
-          Label("Group")
-          Label("Letter")
-          Label("Length")
-          Label("Quantity")
-            .attributes(.class("col-span-2"))
-        }
-
         div(.id("groups"), .class("space-y-4")) {
           if let effectiveLength {
             for group in effectiveLength.groups {
@@ -228,12 +227,16 @@ struct StraightLengthField: HTML, Sendable {
 
   var body: some HTML<HTMLTag.div> {
     Row {
-      Input(
-        name: "straightLengths",
-        placeholder: "Length"
+      LabeledInput(
+        "Length",
+        .name("straightLengths"),
+        .type(.number),
+        .value(value),
+        .placeholder("10"),
+        .min("0"),
+        .autofocus,
+        .required
       )
-      .attributes(.type(.number), .min("0"), .autofocus, .required, .value(value))
-
       TrashButton()
         .attributes(.data("remove", value: "true"))
     }
@@ -252,18 +255,43 @@ struct GroupField: HTML, Sendable {
   }
 
   var body: some HTML {
-    div(.class("grid grid-cols-5 gap-2")) {
+    div(.class("grid grid-cols-3 gap-2 p-2 border rounded-lg shadow-sm")) {
       GroupSelect(style: style)
-      Input(name: "group[letter]", placeholder: "Letter")
-        .attributes(.type(.text), .autofocus, .required, .value(group?.letter))
-      Input(name: "group[length]", placeholder: "Length")
-        .attributes(.type(.number), .min("0"), .required, .value(group?.value))
-      Input(name: "group[quantity]", placeholder: "Quantity")
-        .attributes(.type(.number), .min("1"), .value("1"), .required, .value(group?.quantity ?? 1))
-      div(.class("flex justify-end")) {
-        TrashButton()
-          .attributes(.data("remove", value: "true"), .class("mx-2"))
-      }
+
+      LabeledInput(
+        "Letter",
+        .name("group[letter]"),
+        .type(.text),
+        .value(group?.letter),
+        .placeholder("a"),
+        .required
+      )
+
+      LabeledInput(
+        "Length",
+        .name("group[length]"),
+        .type(.number),
+        .value(group?.value),
+        .placeholder("10"),
+        .min("0"),
+        .required
+      )
+
+      LabeledInput(
+        "Quantity",
+        .name("group[quantity]"),
+        .type(.number),
+        .value(group?.quantity ?? 1),
+        .min("1"),
+        .required
+      )
+      .attributes(.class("col-span-2"))
+
+      TrashButton()
+        .attributes(
+          .data("remove", value: "true"),
+          .class("me-2 btn-block")
+        )
     }
     .attributes(.class("space-x-2"), .hx.ext("remove"))
   }
@@ -274,12 +302,15 @@ struct GroupSelect: HTML, Sendable {
   let style: EffectiveLength.EffectiveLengthType
 
   var body: some HTML {
-    select(
-      .name("group[group]"),
-      .class("select")
-    ) {
-      for value in style.selectOptions {
-        option(.value("\(value)")) { "\(value)" }
+    label(.class("select")) {
+      span(.class("label")) { "Group" }
+      select(
+        .name("group[group]"),
+        .autofocus
+      ) {
+        for value in style.selectOptions {
+          option(.value("\(value)")) { "\(value)" }
+        }
       }
     }
   }
@@ -291,13 +322,16 @@ struct GroupTypeSelect: HTML, Sendable {
   let projectID: Project.ID
   let selected: EffectiveLength.EffectiveLengthType
 
-  var body: some HTML<HTMLTag.select> {
-    select(.class("select"), .name("type"), .id("type")) {
-      for value in EffectiveLength.EffectiveLengthType.allCases {
-        option(
-          .value("\(value.rawValue)"),
-        ) { value.title }
-        .attributes(.selected, when: value == selected)
+  var body: some HTML<HTMLTag.label> {
+    label(.class("select")) {
+      span(.class("label")) { "Type" }
+      select(.name("type"), .id("type")) {
+        for value in EffectiveLength.EffectiveLengthType.allCases {
+          option(
+            .value("\(value.rawValue)"),
+          ) { value.title }
+          .attributes(.selected, when: value == selected)
+        }
       }
     }
   }

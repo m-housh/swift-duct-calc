@@ -29,7 +29,7 @@ struct EquipmentInfoView: HTML, Sendable {
         table(.class("table table-zebra")) {
           tbody(.class("text-lg")) {
             tr {
-              td { span { "Static Pressure" } }
+              td { Label { "Static Pressure" } }
               td {
                 div(.class("flex justify-end")) {
                   Number(equipmentInfo.staticPressure)
@@ -37,7 +37,7 @@ struct EquipmentInfoView: HTML, Sendable {
               }
             }
             tr {
-              td { span { "Heating CFM" } }
+              td { Label { "Heating CFM" } }
               td {
                 div(.class("flex justify-end")) {
                   Number(equipmentInfo.heatingCFM)
@@ -45,7 +45,7 @@ struct EquipmentInfoView: HTML, Sendable {
               }
             }
             tr {
-              td { span { "Cooling CFM" } }
+              td { Label { "Cooling CFM" } }
               td {
                 div(.class("flex justify-end")) {
                   Number(equipmentInfo.coolingCFM)

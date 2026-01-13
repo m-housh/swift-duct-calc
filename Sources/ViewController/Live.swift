@@ -211,10 +211,8 @@ extension SiteRoute.View.ProjectRoute.EquipmentInfoRoute {
       return await equipmentView(on: request, projectID: projectID)
 
     case .submit(let form):
-      return await ResultView {
-        try await database.equipment.create(form)
-      } onSuccess: { equipment in
-        EquipmentInfoView(equipmentInfo: equipment, projectID: projectID)
+      return await equipmentView(on: request, projectID: projectID) {
+        _ = try await database.equipment.create(form)
       }
 
     case .update(let id, let updates):
@@ -576,15 +574,17 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
   ) async -> AnySendableHTML {
     @Dependency(\.database) var database
 
-    return await ResultView {
-      try await catching()
-      return (
-        try await database.projects.getCompletedSteps(projectID),
-        try await database.calculateDuctSizes(projectID: projectID)
-      )
-    } onSuccess: { (steps, rooms) in
-      ProjectView(projectID: projectID, activeTab: .ductSizing, completedSteps: steps) {
-        DuctSizingView(rooms: rooms)
+    return await request.view {
+      await ResultView {
+        try await catching()
+        return (
+          try await database.projects.getCompletedSteps(projectID),
+          try await database.calculateDuctSizes(projectID: projectID)
+        )
+      } onSuccess: { (steps, rooms) in
+        ProjectView(projectID: projectID, activeTab: .ductSizing, completedSteps: steps) {
+          DuctSizingView(rooms: rooms)
+        }
       }
     }
   }

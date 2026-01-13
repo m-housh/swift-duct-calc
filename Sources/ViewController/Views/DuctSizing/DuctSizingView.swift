@@ -13,7 +13,7 @@ struct DuctSizingView: HTML, Sendable {
   let rooms: [DuctSizing.RoomContainer]
 
   var body: some HTML {
-    div {
+    div(.class("space-y-4")) {
       PageTitle { "Duct Sizes" }
       if rooms.count == 0 {
         p(.class("text-error italic")) {

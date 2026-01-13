@@ -42,19 +42,27 @@ struct ComponentLossForm: HTML, Sendable {
 
         input(.class("hidden"), .name("projectID"), .value("\(projectID)"))
 
-        div {
-          label(.for("name")) { "Name" }
-          Input(id: "name", placeholder: "Name")
-            .attributes(.type(.text), .required, .autofocus, .value(componentLoss?.name))
-        }
-        div {
-          label(.for("value")) { "Value" }
-          Input(id: "value", placeholder: "Pressure loss")
-            .attributes(
-              .type(.number), .min("0.03"), .max("1.0"), .step("0.01"), .required,
-              .value(componentLoss?.value)
-            )
-        }
+        LabeledInput(
+          "Name",
+          .name("name"),
+          .type(.text),
+          .value(componentLoss?.name),
+          .placeholder("Name"),
+          .required,
+          .autofocus
+        )
+
+        LabeledInput(
+          "Value",
+          .name("value"),
+          .type(.number),
+          .value(componentLoss?.value),
+          .placeholder("0.2"),
+          .min("0.03"),
+          .max("1.0"),
+          .step("0.01"),
+          .required
+        )
 
         SubmitButton()
           .attributes(.class("btn-block"))

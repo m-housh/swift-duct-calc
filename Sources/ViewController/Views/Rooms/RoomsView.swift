@@ -29,36 +29,39 @@ struct RoomsView: HTML, Sendable {
             ) {
               LabeledContent {
                 div(.class("flex justify-end items-end space-x-4")) {
-                  // SVG(.squarePen)
-                  span(.class("font-bold")) {
+                  Label {
                     "Sensible Heat Ratio"
                   }
+                  .attributes(.class("me-8"), when: sensibleHeatRatio == nil)
                 }
               } content: {
                 if let sensibleHeatRatio {
                   Badge(number: sensibleHeatRatio)
+                } else {
+                  SVG(.squarePen)
                 }
               }
             }
+            .attributes(.class("border rounded-lg border-error"), when: sensibleHeatRatio == nil)
           }
         }
       }
 
       div(.class("flex flex-wrap justify-between mt-6")) {
         div(.class("flex items-end space-x-4")) {
-          span(.class("font-bold")) { "Heating Total" }
+          Label { "Heating Total" }
           Badge(number: rooms.heatingTotal, digits: 0)
             .attributes(.class("badge-error"))
         }
 
         div(.class("flex items-end space-x-4")) {
-          span(.class("font-bold")) { "Cooling Total" }
+          Label { "Cooling Total" }
           Badge(number: rooms.coolingTotal, digits: 0)
             .attributes(.class("badge-success"))
         }
 
         div(.class("flex justify-end items-end space-x-4 me-4")) {
-          span(.class("font-bold")) { "Cooling Sensible" }
+          Label { "Cooling Sensible" }
           Badge(number: rooms.coolingSensible(shr: sensibleHeatRatio), digits: 0)
             .attributes(.class("badge-info"))
         }
@@ -95,7 +98,7 @@ struct RoomsView: HTML, Sendable {
                 }
               }
               th {
-                div(.class("flex justify-end")) {
+                div(.class("flex justify-end me-2")) {
                   Tooltip("Add Room") {
                     PlusButton()
                       .attributes(
@@ -201,6 +204,12 @@ struct RoomsView: HTML, Sendable {
     let projectID: Project.ID
     let sensibleHeatRatio: Double?
 
+    var route: String {
+      SiteRoute.View.router
+        .path(for: .project(.detail(projectID, .rooms(.index))))
+        .appendingPath("update-shr")
+    }
+
     var body: some HTML {
       ModalForm(id: Self.id, dismiss: true) {
         h1(.class("text-xl font-bold mb-6")) {
@@ -208,19 +217,20 @@ struct RoomsView: HTML, Sendable {
         }
         form(
           .class("grid grid-cols-1 gap-4"),
-          .hx.patch("/projects/\(projectID)/rooms/update-shr"),
+          .hx.patch(route),
           .hx.target("body"),
           .hx.swap(.outerHTML)
         ) {
           input(.class("hidden"), .name("projectID"), .value("\(projectID)"))
           LabeledInput(
             "SHR",
+            .name("sensibleHeatRatio"),
             .type(.number),
+            .value(sensibleHeatRatio),
             .placeholder("0.83"),
             .min("0"),
             .max("1"),
             .step("0.01"),
-            .value(sensibleHeatRatio),
             .autofocus
           )
           SubmitButton()

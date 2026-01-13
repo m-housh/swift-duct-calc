@@ -80,8 +80,16 @@ struct RectangularSizeForm: HTML, Sendable {
         input(.class("hidden"), .name("register"), .value(register))
         input(.class("hidden"), .name("id"), .value(rectangularSizeID))
 
-        Input(id: "height", placeholder: "Height")
-          .attributes(.type(.number), .min("0"), .value(height), .required, .autofocus)
+        LabeledInput(
+          "Height",
+          .name("height"),
+          .type(.number),
+          .value(height),
+          .placeholder("8"),
+          .min("0"),
+          .required,
+          .autofocus
+        )
 
         SubmitButton()
           .attributes(.class("btn-block"))

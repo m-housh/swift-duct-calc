@@ -21,7 +21,7 @@ struct ProjectDetail: HTML, Sendable {
         table(.class("table table-zebra text-lg")) {
           tbody {
             tr {
-              td { "Name" }
+              td(.class("label font-bold")) { "Name" }
               td {
                 div(.class("flex justify-end")) {
                   project.name
@@ -29,7 +29,7 @@ struct ProjectDetail: HTML, Sendable {
               }
             }
             tr {
-              td { "Street Address" }
+              td(.class("label font-bold")) { "Street Address" }
               td {
                 div(.class("flex justify-end")) {
                   project.streetAddress
@@ -37,7 +37,7 @@ struct ProjectDetail: HTML, Sendable {
               }
             }
             tr {
-              td { "City" }
+              td(.class("label font-bold")) { "City" }
               td {
                 div(.class("flex justify-end")) {
                   project.city
@@ -45,7 +45,7 @@ struct ProjectDetail: HTML, Sendable {
               }
             }
             tr {
-              td { "State" }
+              td(.class("label font-bold")) { "State" }
               td {
                 div(.class("flex justify-end")) {
                   project.state
@@ -53,7 +53,7 @@ struct ProjectDetail: HTML, Sendable {
               }
             }
             tr {
-              td { "Zip" }
+              td(.class("label font-bold")) { "Zip" }
               td {
                 div(.class("flex justify-end")) {
                   project.zipCode

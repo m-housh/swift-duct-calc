@@ -3,13 +3,10 @@ import ElementaryHTMX
 import ManualDCore
 import Styleguide
 
-// TODO: Group into grids of supply / return.
-
 struct EffectiveLengthsView: HTML, Sendable {
 
   @Environment(ProjectViewValue.$projectID) var projectID
 
-  // let projectID: Project.ID
   let effectiveLengths: [EffectiveLength]
 
   var supplies: [EffectiveLength] {
@@ -41,9 +38,8 @@ struct EffectiveLengthsView: HTML, Sendable {
           .attributes(.class("hidden"), when: supplies.count == 0)
 
         div(.class("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4")) {
-          for (n, row) in supplies.enumerated() {
+          for row in supplies {
             EffectiveLengthView(effectiveLength: row)
-              .attributes(.class(n == 0 ? "border-primary" : "border-gray-200"))
           }
         }
       }
@@ -52,9 +48,8 @@ struct EffectiveLengthsView: HTML, Sendable {
         h2(.class("text-xl font-bold pb-4")) { "Returns" }
           .attributes(.class("hidden"), when: returns.count == 0)
         div(.class("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-x-4 space-y-4")) {
-          for (n, row) in returns.enumerated() {
+          for row in returns {
             EffectiveLengthView(effectiveLength: row)
-              .attributes(.class(n == 0 ? "border-secondary" : "border-gray-200"))
           }
         }
       }
@@ -84,44 +79,41 @@ struct EffectiveLengthsView: HTML, Sendable {
         .class("card h-full bg-base-100 shadow-sm border rounded-lg"),
         .id(id)
       ) {
-        div(.class("card-body")) {
+        div(.class("card-body text-lg")) {
           Row {
             h2 { effectiveLength.name }
             div(
               .class("space-x-4")
             ) {
-              span(.class("text-sm italic")) {
+              span(.class("text-primary text-sm italic")) {
                 "Total"
               }
-              .attributes(.class("text-primary"), when: effectiveLength.type == .supply)
-              .attributes(.class("text-secondary"), when: effectiveLength.type == .return)
 
               Number(self.effectiveLength.totalEquivalentLength, digits: 0)
-                .attributes(.class("badge badge-outline text-lg"))
-                .attributes(
-                  .class("badge-primary"), when: effectiveLength.type == .supply
-                )
-                .attributes(
-                  .class("badge-secondary"), when: effectiveLength.type == .return
-                )
+                .attributes(.class("badge badge-outline badge-primary text-lg"))
             }
           }
           .attributes(.class("card-title pb-6"))
 
-          Label("Straight Lengths")
+          Row {
+            Label { "Straight Lengths" }
 
-          for length in effectiveLength.straightLengths {
-            div(.class("flex justify-end")) {
-              Number(length)
+            ul {
+              for length in effectiveLength.straightLengths {
+                li {
+                  Number(length)
+                }
+              }
             }
           }
+          .attributes(.class("pb-6"))
 
           Row {
-            Label("Groups")
-            Label("Equivalent Length")
-            Label("Quantity")
+            span { "Groups" }
+            span { "Equivalent Length" }
+            span { "Quantity" }
           }
-          .attributes(.class("border-b border-gray-200"))
+          .attributes(.class("label font-bold border-b border-label"))
 
           for group in effectiveLength.groups {
             Row {

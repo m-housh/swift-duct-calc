@@ -24,30 +24,32 @@ struct ComponentPressureLossesView: HTML, Sendable {
       }
       .attributes(.class("px-4"))
 
-      table(.class("table table-zebra")) {
-        thead {
-          tr(.class("text-xl font-bold")) {
-            th { "Name" }
-            th { "Value" }
-            th {
-              div(.class("flex justify-end mx-auto")) {
-                Tooltip("Add Component Loss") {
-                  PlusButton()
-                    .attributes(
-                      .class("btn-ghost text-2xl"),
-                      .showModal(id: ComponentLossForm.id())
-                    )
+      div(.class("overflow-x-auto")) {
+        table(.class("table table-zebra")) {
+          thead {
+            tr(.class("text-xl font-bold")) {
+              th { "Name" }
+              th { "Value" }
+              th {
+                div(.class("flex justify-end mx-auto")) {
+                  Tooltip("Add Component Loss") {
+                    PlusButton()
+                      .attributes(
+                        .class("btn-ghost text-2xl me-2"),
+                        .showModal(id: ComponentLossForm.id())
+                      )
+                  }
                 }
               }
             }
           }
-        }
-        tbody {
-          for row in componentPressureLosses {
-            TableRow(row: row)
+          tbody {
+            for row in componentPressureLosses {
+              TableRow(row: row)
+            }
           }
-        }
 
+        }
       }
     }
     ComponentLossForm(dismiss: true, projectID: projectID, componentLoss: nil)
