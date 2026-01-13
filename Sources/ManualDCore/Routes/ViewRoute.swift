@@ -609,7 +609,9 @@ extension SiteRoute.View.ProjectRoute {
     case index
     case deleteRectangularSize(Room.ID, DuctSizing.RectangularDuct.ID)
     case roomRectangularForm(Room.ID, RoomRectangularForm)
+    case trunk(TrunkRoute)
 
+    public static let roomPath = "room"
     static let rootPath = "duct-sizing"
 
     static let router = OneOf {
@@ -620,7 +622,7 @@ extension SiteRoute.View.ProjectRoute {
       Route(.case(Self.deleteRectangularSize)) {
         Path {
           rootPath
-          "room"
+          roomPath
           Room.ID.parser()
         }
         Method.delete
@@ -631,7 +633,7 @@ extension SiteRoute.View.ProjectRoute {
       Route(.case(Self.roomRectangularForm)) {
         Path {
           rootPath
-          "room"
+          roomPath
           Room.ID.parser()
         }
         Method.post
@@ -646,12 +648,80 @@ extension SiteRoute.View.ProjectRoute {
           .map(.memberwise(RoomRectangularForm.init))
         }
       }
+      Route(.case(Self.trunk)) {
+        Path { rootPath }
+        TrunkRoute.router
+      }
+    }
+
+    public enum TrunkRoute: Equatable, Sendable {
+      case delete(DuctSizing.TrunkSize.ID)
+      case submit(TrunkSizeForm)
+      case update(DuctSizing.TrunkSize.ID, TrunkSizeForm)
+
+      public static let rootPath = "trunk"
+
+      static let router = OneOf {
+        Route(.case(Self.delete)) {
+          Path {
+            rootPath
+            DuctSizing.TrunkSize.ID.parser()
+          }
+          Method.delete
+        }
+        Route(.case(Self.submit)) {
+          Path {
+            rootPath
+          }
+          Method.post
+          Body {
+            FormData {
+              Field("projectID") { Project.ID.parser() }
+              Field("type") { DuctSizing.TrunkSize.TrunkType.parser() }
+              Optionally {
+                Field("height") { Int.parser() }
+              }
+              Many {
+                Field("rooms", .string)
+              }
+            }
+            .map(.memberwise(TrunkSizeForm.init))
+          }
+        }
+        Route(.case(Self.update)) {
+          Path {
+            rootPath
+            DuctSizing.TrunkSize.ID.parser()
+          }
+          Method.patch
+          Body {
+            FormData {
+              Field("projectID") { Project.ID.parser() }
+              Field("type") { DuctSizing.TrunkSize.TrunkType.parser() }
+              Optionally {
+                Field("height") { Int.parser() }
+              }
+              Many {
+                Field("rooms", .string)
+              }
+            }
+            .map(.memberwise(TrunkSizeForm.init))
+          }
+        }
+      }
     }
 
     public struct RoomRectangularForm: Equatable, Sendable {
       public let id: DuctSizing.RectangularDuct.ID?
       public let register: Int
       public let height: Int
+    }
+
+    public struct TrunkSizeForm: Equatable, Sendable {
+      public let projectID: Project.ID
+      public let type: DuctSizing.TrunkSize.TrunkType
+      public let height: Int?
+      public let rooms: [String]
     }
   }
 }

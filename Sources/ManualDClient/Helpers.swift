@@ -14,6 +14,28 @@ extension Room {
   }
 }
 
+extension DuctSizing.TrunkSize.RoomProxy {
+
+  var totalHeatingLoad: Double {
+    room.heatingLoadPerRegister * Double(registers.count)
+  }
+
+  func totalCoolingSensible(projectSHR: Double) -> Double {
+    room.coolingSensiblePerRegister(projectSHR: projectSHR) * Double(registers.count)
+  }
+}
+
+extension DuctSizing.TrunkSize {
+
+  var totalHeatingLoad: Double {
+    rooms.reduce(into: 0) { $0 += $1.totalHeatingLoad }
+  }
+
+  func totalCoolingSensible(projectSHR: Double) -> Double {
+    rooms.reduce(into: 0) { $0 += $1.totalCoolingSensible(projectSHR: projectSHR) }
+  }
+}
+
 extension ComponentPressureLosses {
   var totalLosses: Double { values.reduce(0) { $0 + $1 } }
 }

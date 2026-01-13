@@ -13,6 +13,29 @@ public struct ManualDClient: Sendable {
 
   public func calculateSizes(
     rooms: [Room],
+    trunks: [DuctSizing.TrunkSize],
+    equipmentInfo: EquipmentInfo,
+    maxSupplyLength: EffectiveLength,
+    maxReturnLength: EffectiveLength,
+    designFrictionRate: Double,
+    projectSHR: Double,
+    logger: Logger? = nil
+  ) async throws -> (rooms: [DuctSizing.RoomContainer], trunks: [DuctSizing.TrunkContainer]) {
+    try await (
+      calculateSizes(
+        rooms: rooms, equipmentInfo: equipmentInfo,
+        maxSupplyLength: maxSupplyLength, maxReturnLength: maxReturnLength,
+        designFrictionRate: designFrictionRate, projectSHR: projectSHR
+      ),
+      calculateSizes(
+        rooms: rooms, trunks: trunks, equipmentInfo: equipmentInfo,
+        maxSupplyLength: maxSupplyLength, maxReturnLength: maxReturnLength,
+        designFrictionRate: designFrictionRate, projectSHR: projectSHR)
+    )
+  }
+
+  func calculateSizes(
+    rooms: [Room],
     equipmentInfo: EquipmentInfo,
     maxSupplyLength: EffectiveLength,
     maxReturnLength: EffectiveLength,
@@ -56,6 +79,7 @@ public struct ManualDClient: Sendable {
             registerID: "SR-\(registerIDCount)",
             roomID: room.id,
             roomName: "\(room.name)-\(n)",
+            roomRegister: n,
             heatingLoad: heatingLoad,
             coolingLoad: coolingLoad,
             heatingCFM: heatingCFM,
@@ -71,6 +95,56 @@ public struct ManualDClient: Sendable {
         )
         registerIDCount += 1
       }
+    }
+
+    return retval
+  }
+
+  func calculateSizes(
+    rooms: [Room],
+    trunks: [DuctSizing.TrunkSize],
+    equipmentInfo: EquipmentInfo,
+    maxSupplyLength: EffectiveLength,
+    maxReturnLength: EffectiveLength,
+    designFrictionRate: Double,
+    projectSHR: Double,
+    logger: Logger? = nil
+  ) async throws -> [DuctSizing.TrunkContainer] {
+
+    var retval = [DuctSizing.TrunkContainer]()
+    let totalHeatingLoad = rooms.totalHeatingLoad
+    let totalCoolingSensible = rooms.totalCoolingSensible(shr: projectSHR)
+
+    for trunk in trunks {
+      let heatingLoad = trunk.totalHeatingLoad
+      let coolingLoad = trunk.totalCoolingSensible(projectSHR: projectSHR)
+      let heatingPercent = heatingLoad / totalHeatingLoad
+      let coolingPercent = coolingLoad / totalCoolingSensible
+      let heatingCFM = heatingPercent * Double(equipmentInfo.heatingCFM)
+      let coolingCFM = coolingPercent * Double(equipmentInfo.coolingCFM)
+      let designCFM = DuctSizing.DesignCFM(heating: heatingCFM, cooling: coolingCFM)
+      let sizes = try await self.ductSize(
+        .init(designCFM: Int(designCFM.value), frictionRate: designFrictionRate)
+      )
+      var width: Int? = nil
+      if let height = trunk.height {
+        let rectangularSize = try await self.equivalentRectangularDuct(
+          .init(round: sizes.finalSize, height: height)
+        )
+        width = rectangularSize.width
+      }
+
+      retval.append(
+        .init(
+          trunk: trunk,
+          ductSize: .init(
+            designCFM: designCFM,
+            roundSize: sizes.ductulatorSize,
+            finalSize: sizes.finalSize,
+            velocity: sizes.velocity,
+            flexSize: sizes.flexSize)
+        )
+      )
     }
 
     return retval

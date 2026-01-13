@@ -21,11 +21,41 @@ public enum DuctSizing {
 
   }
 
+  public struct SizeContainer: Codable, Equatable, Sendable {
+
+    public let designCFM: DesignCFM
+    public let roundSize: Double
+    public let finalSize: Int
+    public let velocity: Int
+    public let flexSize: Int
+    public let height: Int?
+    public let width: Int?
+
+    public init(
+      designCFM: DuctSizing.DesignCFM,
+      roundSize: Double,
+      finalSize: Int,
+      velocity: Int,
+      flexSize: Int,
+      height: Int? = nil,
+      width: Int? = nil
+    ) {
+      self.designCFM = designCFM
+      self.roundSize = roundSize
+      self.finalSize = finalSize
+      self.velocity = velocity
+      self.flexSize = flexSize
+      self.height = height
+      self.width = width
+    }
+  }
+
   public struct RoomContainer: Codable, Equatable, Sendable {
 
     public let registerID: String
     public let roomID: Room.ID
     public let roomName: String
+    public let roomRegister: Int
     public let heatingLoad: Double
     public let coolingLoad: Double
     public let heatingCFM: Double
@@ -42,6 +72,7 @@ public enum DuctSizing {
       registerID: String,
       roomID: Room.ID,
       roomName: String,
+      roomRegister: Int,
       heatingLoad: Double,
       coolingLoad: Double,
       heatingCFM: Double,
@@ -57,6 +88,7 @@ public enum DuctSizing {
       self.registerID = registerID
       self.roomID = roomID
       self.roomName = roomName
+      self.roomRegister = roomRegister
       self.heatingLoad = heatingLoad
       self.coolingLoad = coolingLoad
       self.heatingCFM = heatingCFM
@@ -93,6 +125,21 @@ public enum DuctSizing {
 }
 
 extension DuctSizing {
+
+  public struct TrunkContainer: Codable, Equatable, Identifiable, Sendable {
+    public var id: TrunkSize.ID { trunk.id }
+
+    public let trunk: TrunkSize
+    public let ductSize: SizeContainer
+
+    public init(
+      trunk: TrunkSize,
+      ductSize: SizeContainer
+    ) {
+      self.trunk = trunk
+      self.ductSize = ductSize
+    }
+  }
 
   public struct TrunkSize: Codable, Equatable, Identifiable, Sendable {
 
@@ -145,16 +192,18 @@ extension DuctSizing.TrunkSize {
 
     public var id: Room.ID { room.id }
     public let room: Room
-    public let registers: [Int]?
+    public let registers: [Int]
 
-    public init(room: Room, registers: [Int]? = nil) {
+    public init(room: Room, registers: [Int]) {
       self.room = room
       self.registers = registers
     }
   }
 
-  public enum TrunkType: String, Codable, Equatable, Sendable {
+  public enum TrunkType: String, CaseIterable, Codable, Equatable, Sendable {
     case `return`
     case supply
+
+    public static let allCases = [Self.supply, .return]
   }
 }

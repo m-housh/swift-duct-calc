@@ -33,7 +33,7 @@ struct EquipmentInfoForm: HTML, Sendable {
         equipmentInfo != nil
           ? .hx.patch(route)
           : .hx.post(route),
-        .hx.target("#equipmentInfo"),
+        .hx.target("body"),
         .hx.swap(.outerHTML)
       ) {
         input(.class("hidden"), .name("projectID"), .value("\(projectID)"))

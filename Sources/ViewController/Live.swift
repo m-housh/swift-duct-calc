@@ -542,6 +542,7 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
       return await ResultView {
         let room = try await database.rooms.deleteRectangularSize(roomID, rectangularSizeID)
         return try await database.calculateDuctSizes(projectID: projectID)
+          .rooms
           .filter({ $0.roomID == room.id })
           .first!
       } onSuccess: { container in
@@ -559,10 +560,29 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
           )
         )
         return try await database.calculateDuctSizes(projectID: projectID)
+          .rooms
           .filter({ $0.roomID == room.id })
           .first!
       } onSuccess: { container in
         DuctSizingView.RoomRow(projectID: projectID, room: container)
+      }
+
+    case .trunk(let route):
+      switch route {
+      case .delete(let id):
+        return await ResultView {
+          try await database.trunkSizes.delete(id)
+        }
+      case .submit(let form):
+        return await view(on: request, projectID: projectID) {
+          _ = try await database.trunkSizes.create(
+            form.toCreate(logger: request.logger)
+          )
+        }
+
+      case .update(let id, let form):
+        // FIX:
+        fatalError()
       }
     }
   }
@@ -581,9 +601,9 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
           try await database.projects.getCompletedSteps(projectID),
           try await database.calculateDuctSizes(projectID: projectID)
         )
-      } onSuccess: { (steps, rooms) in
+      } onSuccess: { (steps, ducts) in
         ProjectView(projectID: projectID, activeTab: .ductSizing, completedSteps: steps) {
-          DuctSizingView(rooms: rooms)
+          DuctSizingView(rooms: ducts.rooms, trunks: ducts.trunks)
         }
       }
     }

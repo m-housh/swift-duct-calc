@@ -34,10 +34,11 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
           let model = try TrunkRoomModel(
             trunkID: trunk.requireID(),
             roomID: room.requireID(),
-            registers: registers
+            registers: registers,
+            type: request.type
           )
           try await model.save(on: database)
-          try roomProxies.append(model.toDTO())
+          try await roomProxies.append(model.toDTO(on: database))
         }
 
         return try .init(
@@ -54,16 +55,33 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
         try await model.delete(on: database)
       },
       fetch: { projectID in
-        try await TrunkModel.query(on: database)
-          .with(\.$rooms)
+        let models = try await TrunkModel.query(on: database)
           .with(\.$project)
+          .with(\.$rooms)
           .filter(\.$project.$id == projectID)
           .all()
-          .map { try $0.toDTO() }
+
+        return try await withThrowingTaskGroup(of: DuctSizing.TrunkSize.self) { group in
+          for model in models {
+            group.addTask {
+              try await model.toDTO(on: database)
+            }
+          }
+
+          return try await group.reduce(into: [DuctSizing.TrunkSize]()) {
+            $0.append($1)
+          }
+        }
+
+        // return try await models.map {
+        //   try await $0.toDTO(on: database)
+        // }
       },
       get: { id in
-        try await TrunkModel.find(id, on: database)
-          .map { try $0.toDTO() }
+        guard let model = try await TrunkModel.find(id, on: database) else {
+          return nil
+        }
+        return try await model.toDTO(on: database)
       }
     )
   }
@@ -110,12 +128,14 @@ extension DuctSizing.TrunkSize {
       try await database.schema(TrunkRoomModel.schema)
         .id()
         .field("registers", .array(of: .int), .required)
+        .field("type", .string, .required)
         .field(
           "trunkID", .uuid, .required, .references(TrunkModel.schema, "id", onDelete: .cascade)
         )
         .field(
           "roomID", .uuid, .required, .references(RoomModel.schema, "id", onDelete: .cascade)
         )
+        .unique(on: "trunkID", "roomID", "type")
         .create()
     }
 
@@ -143,22 +163,30 @@ final class TrunkRoomModel: Model, @unchecked Sendable {
   @Field(key: "registers")
   var registers: [Int]
 
+  @Field(key: "type")
+  var type: String
+
   init() {}
 
   init(
     id: UUID? = nil,
     trunkID: TrunkModel.IDValue,
     roomID: RoomModel.IDValue,
-    registers: [Int]
+    registers: [Int],
+    type: DuctSizing.TrunkSize.TrunkType
   ) {
     self.id = id
     $trunk.id = trunkID
     $room.id = roomID
     self.registers = registers
+    self.type = type.rawValue
   }
 
-  func toDTO() throws -> DuctSizing.TrunkSize.RoomProxy {
-    .init(
+  func toDTO(on database: any Database) async throws -> DuctSizing.TrunkSize.RoomProxy {
+    guard let room = try await RoomModel.find($room.id, on: database) else {
+      throw NotFoundError()
+    }
+    return .init(
       room: try room.toDTO(),
       registers: registers
     )
@@ -199,12 +227,25 @@ final class TrunkModel: Model, @unchecked Sendable {
     self.type = type.rawValue
   }
 
-  func toDTO() throws -> DuctSizing.TrunkSize {
-    try .init(
+  func toDTO(on database: any Database) async throws -> DuctSizing.TrunkSize {
+    let rooms = try await withThrowingTaskGroup(of: DuctSizing.TrunkSize.RoomProxy.self) { group in
+      for room in self.rooms {
+        group.addTask {
+          try await room.toDTO(on: database)
+        }
+      }
+
+      return try await group.reduce(into: [DuctSizing.TrunkSize.RoomProxy]()) {
+        $0.append($1)
+      }
+
+    }
+
+    return try .init(
       id: requireID(),
       projectID: $project.id,
       type: .init(rawValue: type)!,
-      rooms: rooms.map { try $0.toDTO() },
+      rooms: rooms,
       height: height
     )
 

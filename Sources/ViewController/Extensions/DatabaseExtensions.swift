@@ -26,11 +26,14 @@ extension DatabaseClient.Projects {
 
 extension DatabaseClient {
 
-  func calculateDuctSizes(projectID: Project.ID) async throws -> [DuctSizing.RoomContainer] {
+  func calculateDuctSizes(
+    projectID: Project.ID
+  ) async throws -> (rooms: [DuctSizing.RoomContainer], trunks: [DuctSizing.TrunkContainer]) {
     @Dependency(\.manualD) var manualD
 
     return try await manualD.calculate(
       rooms: rooms.fetch(projectID),
+      trunks: trunkSizes.fetch(projectID),
       designFrictionRateResult: designFrictionRate(projectID: projectID),
       projectSHR: projects.getSensibleHeatRatio(projectID)
     )
