@@ -6,7 +6,7 @@ import Styleguide
 struct RectangularSizeForm: HTML, Sendable {
 
   static func id(_ roomID: Room.ID? = nil) -> String {
-    let base = "rectangularSizeForm"
+    let base = "rectangularSize"
     guard let roomID else { return base }
     return "\(base)_\(roomID.idString)"
   }
@@ -15,7 +15,9 @@ struct RectangularSizeForm: HTML, Sendable {
     return id(room.roomID)
   }
 
-  let projectID: Project.ID
+  @Environment(ProjectViewValue.$projectID) var projectID
+
+  let id: String
   let roomID: Room.ID
   let rectangularSizeID: DuctSizing.RectangularDuct.ID?
   let register: Int
@@ -23,14 +25,14 @@ struct RectangularSizeForm: HTML, Sendable {
   let dismiss: Bool
 
   init(
-    projectID: Project.ID,
+    id: String? = nil,
     roomID: Room.ID,
     rectangularSizeID: DuctSizing.RectangularDuct.ID? = nil,
     register: Int,
     height: Int? = nil,
     dismiss: Bool = true
   ) {
-    self.projectID = projectID
+    self.id = id ?? Self.id(roomID)
     self.roomID = roomID
     self.rectangularSizeID = rectangularSizeID
     self.register = register
@@ -39,7 +41,7 @@ struct RectangularSizeForm: HTML, Sendable {
   }
 
   init(
-    projectID: Project.ID,
+    id: String? = nil,
     room: DuctSizing.RoomContainer,
     dismiss: Bool = true
   ) {
@@ -48,7 +50,7 @@ struct RectangularSizeForm: HTML, Sendable {
       ?? (Int("\(room.roomName.last!)") ?? 1)
 
     self.init(
-      projectID: projectID,
+      id: id,
       roomID: room.roomID,
       rectangularSizeID: room.rectangularSize?.id,
       register: register,
@@ -66,8 +68,8 @@ struct RectangularSizeForm: HTML, Sendable {
 
   }
 
-  var body: some HTML {
-    ModalForm(id: Self.id(roomID), dismiss: dismiss) {
+  var body: some HTML<HTMLTag.dialog> {
+    ModalForm(id: id, dismiss: dismiss) {
 
       h1(.class("text-lg pb-6")) { "Rectangular Size" }
 

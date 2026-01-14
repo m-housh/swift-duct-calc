@@ -546,7 +546,7 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
           .filter({ $0.roomID == room.id })
           .first!
       } onSuccess: { container in
-        DuctSizingView.RoomRow(projectID: projectID, room: container)
+        DuctSizingView.RoomRow(room: container)
       }
 
     case .roomRectangularForm(let roomID, let form):
@@ -564,7 +564,7 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
           .filter({ $0.roomID == room.id })
           .first!
       } onSuccess: { container in
-        DuctSizingView.RoomRow(projectID: projectID, room: container)
+        DuctSizingView.RoomRow(room: container)
       }
 
     case .trunk(let route):

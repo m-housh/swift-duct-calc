@@ -19,7 +19,7 @@ public struct ModalForm<T: HTML>: HTML, Sendable where T: Sendable {
     self.inner = inner()
   }
 
-  public var body: some HTML {
+  public var body: some HTML<HTMLTag.dialog> {
     dialog(.id(id), .class("modal")) {
       div(.class("modal-box")) {
         if closeButton {
