@@ -13,6 +13,14 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute.TrunkSizeForm {
     )
   }
 
+  func toUpdate(logger: Logger? = nil) throws -> DuctSizing.TrunkSize.Update {
+    try .init(
+      type: type,
+      rooms: makeRooms(logger: logger),
+      height: height
+    )
+  }
+
   func makeRooms(logger: Logger?) throws -> [Room.ID: [Int]] {
     var retval = [Room.ID: [Int]]()
     for room in rooms {

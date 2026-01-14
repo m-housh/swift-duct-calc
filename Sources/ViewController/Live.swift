@@ -581,8 +581,9 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
         }
 
       case .update(let id, let form):
-        // FIX:
-        fatalError()
+        return await view(on: request, projectID: projectID) {
+          _ = try await database.trunkSizes.update(id, form.toUpdate())
+        }
       }
     }
   }

@@ -5,27 +5,47 @@ import Styleguide
 
 struct TrunkSizeForm: HTML, Sendable {
 
-  static func id() -> String {
-    "trunkSizeForm"
+  static func id(_ trunk: DuctSizing.TrunkContainer? = nil) -> String {
+    let base = "trunkSizeForm"
+    guard let trunk else { return base }
+    return "\(base)_\(trunk.id.idString)"
   }
 
   @Environment(ProjectViewValue.$projectID) var projectID
 
+  let container: DuctSizing.TrunkContainer?
   let rooms: [DuctSizing.RoomContainer]
   let dismiss: Bool
+
+  var trunk: DuctSizing.TrunkSize? {
+    container?.trunk
+  }
+
+  init(
+    trunk: DuctSizing.TrunkContainer? = nil,
+    rooms: [DuctSizing.RoomContainer],
+    dismiss: Bool = true
+  ) {
+    self.container = trunk
+    self.rooms = rooms
+    self.dismiss = dismiss
+  }
 
   var route: String {
     SiteRoute.View.router
       .path(for: .project(.detail(projectID, .ductSizing(.index))))
       .appendingPath(SiteRoute.View.ProjectRoute.DuctSizingRoute.TrunkRoute.rootPath)
+      .appendingPath(trunk?.id)
   }
 
   var body: some HTML {
-    ModalForm(id: Self.id(), dismiss: dismiss) {
+    ModalForm(id: Self.id(container), dismiss: dismiss) {
       h1(.class("text-lg font-bold mb-4")) { "Trunk Size" }
       form(
         .class("space-y-4"),
-        .hx.post(route),
+        trunk == nil
+          ? .hx.post(route)
+          : .hx.patch(route),
         .hx.target("body"),
         .hx.swap(.outerHTML)
       ) {
@@ -38,6 +58,7 @@ struct TrunkSizeForm: HTML, Sendable {
             select(.name("type")) {
               for type in DuctSizing.TrunkSize.TrunkType.allCases {
                 option(.value(type.rawValue)) { type.rawValue.capitalized }
+                  .attributes(.selected, when: trunk?.type == type)
               }
             }
           }
@@ -46,6 +67,7 @@ struct TrunkSizeForm: HTML, Sendable {
             "Height",
             .type(.text),
             .name("height"),
+            .value(trunk?.height),
             .placeholder("8 (Optional)"),
           )
         }
@@ -63,6 +85,10 @@ struct TrunkSizeForm: HTML, Sendable {
                   .name("rooms"),
                   .value("\(room.roomID)_\(room.roomRegister)")
                 )
+                .attributes(
+                  .checked,
+                  when: trunk == nil ? false : trunk!.rooms.hasRoom(room)
+                )
               }
             }
           }
@@ -74,4 +100,13 @@ struct TrunkSizeForm: HTML, Sendable {
     }
   }
 
+}
+
+extension Array where Element == DuctSizing.TrunkSize.RoomProxy {
+  func hasRoom(_ room: DuctSizing.RoomContainer) -> Bool {
+    first {
+      $0.id == room.roomID
+        && $0.registers.contains(room.roomRegister)
+    } != nil
+  }
 }

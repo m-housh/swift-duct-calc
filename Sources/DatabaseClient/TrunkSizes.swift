@@ -11,6 +11,9 @@ extension DatabaseClient {
     public var delete: @Sendable (DuctSizing.TrunkSize.ID) async throws -> Void
     public var fetch: @Sendable (Project.ID) async throws -> [DuctSizing.TrunkSize]
     public var get: @Sendable (DuctSizing.TrunkSize.ID) async throws -> DuctSizing.TrunkSize?
+    public var update:
+      @Sendable (DuctSizing.TrunkSize.ID, DuctSizing.TrunkSize.Update) async throws ->
+        DuctSizing.TrunkSize
   }
 }
 
@@ -82,6 +85,21 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
           return nil
         }
         return try await model.toDTO(on: database)
+      },
+      update: { id, updates in
+        guard
+          let model =
+            try await TrunkModel
+            .query(on: database)
+            .with(\.$rooms)
+            .filter(\.$id == id)
+            .first()
+        else {
+          throw NotFoundError()
+        }
+        try updates.validate()
+        try await model.applyUpdates(updates, on: database)
+        return try await model.toDTO(on: database)
       }
     )
   }
@@ -107,7 +125,21 @@ extension DuctSizing.TrunkSize.Create {
       height: height
     )
   }
+}
 
+extension DuctSizing.TrunkSize.Update {
+  func validate() throws(ValidationError) {
+    if let rooms {
+      guard rooms.count > 0 else {
+        throw ValidationError("Trunk size should have associated rooms / registers.")
+      }
+    }
+    if let height {
+      guard height > 0 else {
+        throw ValidationError("Trunk size height should be greater than 0.")
+      }
+    }
+  }
 }
 
 extension DuctSizing.TrunkSize {
@@ -248,6 +280,64 @@ final class TrunkModel: Model, @unchecked Sendable {
       rooms: rooms,
       height: height
     )
+
+  }
+
+  func applyUpdates(
+    _ updates: DuctSizing.TrunkSize.Update,
+    on database: any Database
+  ) async throws {
+    if let type = updates.type, type.rawValue != self.type {
+      self.type = type.rawValue
+    }
+    if let height = updates.height, height != self.height {
+      self.height = height
+    }
+    if hasChanges {
+      try await self.save(on: database)
+    }
+
+    guard let updateRooms = updates.rooms else {
+      return
+    }
+
+    // Update rooms.
+    let rooms = try await TrunkRoomModel.query(on: database)
+      .with(\.$room)
+      .filter(\.$trunk.$id == requireID())
+      .all()
+
+    for (roomID, registers) in updateRooms {
+      if let currRoom = rooms.first(where: { $0.$room.id == roomID }) {
+        database.logger.debug("CURRENT ROOM: \(currRoom.room.name)")
+        if registers != currRoom.registers {
+          database.logger.debug("Updating registers for: \(currRoom.room.name)")
+          currRoom.registers = registers
+        }
+        if currRoom.hasChanges {
+          try await currRoom.save(on: database)
+        }
+      } else {
+        database.logger.debug("CREATING NEW TrunkRoomModel")
+        let newModel = try TrunkRoomModel(
+          trunkID: requireID(),
+          roomID: roomID,
+          registers: registers,
+          type: .init(rawValue: type)!
+        )
+        try await newModel.save(on: database)
+      }
+    }
+
+    let roomsToDelete = rooms.filter {
+      !updateRooms.keys.contains($0.$room.id)
+    }
+
+    for room in roomsToDelete {
+      try await room.delete(on: database)
+    }
+
+    database.logger.debug("DONE WITH UPDATES")
 
   }
 }

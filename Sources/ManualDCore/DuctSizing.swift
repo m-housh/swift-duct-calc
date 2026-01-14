@@ -126,6 +126,8 @@ public enum DuctSizing {
 
 extension DuctSizing {
 
+  // Represents the database model that the duct sizes have been calculated
+  // for.
   public struct TrunkContainer: Codable, Equatable, Identifiable, Sendable {
     public var id: TrunkSize.ID { trunk.id }
 
@@ -141,6 +143,7 @@ extension DuctSizing {
     }
   }
 
+  // Represents the database model.
   public struct TrunkSize: Codable, Equatable, Identifiable, Sendable {
 
     public let id: UUID
@@ -181,6 +184,23 @@ extension DuctSizing.TrunkSize {
       height: Int? = nil
     ) {
       self.projectID = projectID
+      self.type = type
+      self.rooms = rooms
+      self.height = height
+    }
+  }
+
+  public struct Update: Codable, Equatable, Sendable {
+
+    public let type: TrunkType?
+    public let rooms: [Room.ID: [Int]]?
+    public let height: Int?
+
+    public init(
+      type: DuctSizing.TrunkSize.TrunkType? = nil,
+      rooms: [Room.ID: [Int]]? = nil,
+      height: Int? = nil
+    ) {
       self.type = type
       self.rooms = rooms
       self.height = height
