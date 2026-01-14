@@ -38,23 +38,7 @@ extension ManualDClient: DependencyKey {
     },
     equivalentRectangularDuct: { request in
       let width = (Double.pi * (pow(Double(request.roundSize) / 2.0, 2.0))) / Double(request.height)
-      // Round the width up or fail (really should never fail since we know the input is a number).
-      guard let widthStr = numberFormatter.string(for: width),
-        let widthInt = Int(widthStr)
-      else {
-        throw ManualDError(
-          message: "Failed to convert to to rectangular duct size, width: \(width)"
-        )
-      }
-      return .init(height: request.height, width: widthInt)
+      return .init(height: request.height, width: Int(width.rounded(.toNearestOrEven)))
     }
   )
 }
-
-private let numberFormatter: NumberFormatter = {
-  let formatter = NumberFormatter()
-  formatter.maximumFractionDigits = 0
-  formatter.minimumFractionDigits = 0
-  formatter.roundingMode = .ceiling
-  return formatter
-}()
