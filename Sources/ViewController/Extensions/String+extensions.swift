@@ -17,4 +17,8 @@ extension String {
   func appendingPath(_ id: UUID) -> Self {
     return appendingPath(id.uuidString)
   }
+
+  var idString: Self {
+    replacing("-", with: "")
+  }
 }

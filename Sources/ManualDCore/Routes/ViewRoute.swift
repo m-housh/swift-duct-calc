@@ -607,7 +607,7 @@ extension SiteRoute.View.ProjectRoute {
 
   public enum DuctSizingRoute: Equatable, Sendable {
     case index
-    case deleteRectangularSize(Room.ID, DuctSizing.RectangularDuct.ID)
+    case deleteRectangularSize(Room.ID, DeleteRectangularDuct)
     case roomRectangularForm(Room.ID, RoomRectangularForm)
     case trunk(TrunkRoute)
 
@@ -628,7 +628,9 @@ extension SiteRoute.View.ProjectRoute {
         Method.delete
         Query {
           Field("rectangularSize") { DuctSizing.RectangularDuct.ID.parser() }
+          Field("register") { Int.parser() }
         }
+        .map(.memberwise(DeleteRectangularDuct.init))
       }
       Route(.case(Self.roomRectangularForm)) {
         Path {
@@ -651,6 +653,17 @@ extension SiteRoute.View.ProjectRoute {
       Route(.case(Self.trunk)) {
         Path { rootPath }
         TrunkRoute.router
+      }
+    }
+
+    public struct DeleteRectangularDuct: Equatable, Sendable {
+
+      public let rectangularSizeID: DuctSizing.RectangularDuct.ID
+      public let register: Int
+
+      public init(rectangularSizeID: DuctSizing.RectangularDuct.ID, register: Int) {
+        self.rectangularSizeID = rectangularSizeID
+        self.register = register
       }
     }
 

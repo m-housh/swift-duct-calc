@@ -538,33 +538,29 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
     case .index:
       return await view(on: request, projectID: projectID)
 
-    case .deleteRectangularSize(let roomID, let rectangularSizeID):
+    case .deleteRectangularSize(let roomID, let request):
       return await ResultView {
-        let room = try await database.rooms.deleteRectangularSize(roomID, rectangularSizeID)
+        let room = try await database.rooms.deleteRectangularSize(roomID, request.rectangularSizeID)
         return try await database.calculateDuctSizes(projectID: projectID)
           .rooms
-          .filter({ $0.roomID == room.id })
+          .filter({ $0.roomID == room.id && $0.roomRegister == request.register })
           .first!
-      } onSuccess: { container in
-        DuctSizingView.RoomRow(room: container)
+      } onSuccess: { room in
+        DuctSizingView.RoomRow(room: room)
       }
 
     case .roomRectangularForm(let roomID, let form):
       return await ResultView {
-        let room = try await database.rooms.update(
+        let room = try await database.rooms.updateRectangularSize(
           roomID,
-          .init(
-            rectangularSizes: [
-              .init(id: form.id ?? .init(), register: form.register, height: form.height)
-            ]
-          )
+          .init(id: form.id ?? .init(), register: form.register, height: form.height)
         )
         return try await database.calculateDuctSizes(projectID: projectID)
           .rooms
-          .filter({ $0.roomID == room.id })
+          .filter({ $0.roomID == room.id && $0.roomRegister == form.register })
           .first!
-      } onSuccess: { container in
-        DuctSizingView.RoomRow(room: container)
+      } onSuccess: { room in
+        DuctSizingView.RoomRow(room: room)
       }
 
     case .trunk(let route):

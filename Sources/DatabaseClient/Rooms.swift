@@ -14,6 +14,8 @@ extension DatabaseClient {
     public var get: @Sendable (Room.ID) async throws -> Room?
     public var fetch: @Sendable (Project.ID) async throws -> [Room]
     public var update: @Sendable (Room.ID, Room.Update) async throws -> Room
+    public var updateRectangularSize:
+      @Sendable (Room.ID, DuctSizing.RectangularDuct) async throws -> Room
   }
 }
 
@@ -66,6 +68,19 @@ extension DatabaseClient.Rooms: TestDependencyKey {
         if model.hasChanges {
           try await model.save(on: database)
         }
+        return try model.toDTO()
+      },
+      updateRectangularSize: { id, size in
+        guard let model = try await RoomModel.find(id, on: database) else {
+          throw NotFoundError()
+        }
+        var rectangularSizes = model.rectangularSizes ?? []
+        rectangularSizes.removeAll {
+          $0.id == size.id
+        }
+        rectangularSizes.append(size)
+        model.rectangularSizes = rectangularSizes
+        try await model.save(on: database)
         return try model.toDTO()
       }
     )

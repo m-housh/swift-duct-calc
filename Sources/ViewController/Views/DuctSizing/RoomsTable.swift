@@ -21,10 +21,8 @@ extension DuctSizingView {
               th { "Name" }
               th { "BTU" }
               th { "CFM" }
-              th(.class("hidden 2xl:table-cell")) { "Round Size" }
               th { "Velocity" }
               th { "Size" }
-              th {}
             }
           }
           tbody {
@@ -39,6 +37,10 @@ extension DuctSizingView {
 
   struct RoomRow: HTML, Sendable {
 
+    static func id(_ room: DuctSizing.RoomContainer) -> String {
+      "roomRow_\(room.registerID.idString)"
+    }
+
     @Environment(ProjectViewValue.$projectID) var projectID
 
     let room: DuctSizing.RoomContainer
@@ -51,14 +53,20 @@ extension DuctSizingView {
         for: .project(
           .detail(
             projectID,
-            .ductSizing(.deleteRectangularSize(room.roomID, id))
+            .ductSizing(
+              .deleteRectangularSize(
+                room.roomID,
+                .init(rectangularSizeID: id, register: room.roomRegister)
+              ))
           )
         )
       )
     }
 
+    var rowID: String { Self.id(room) }
+
     var body: some HTML<HTMLTag.tr> {
-      tr(.class("text-lg items-baseline"), .id(room.roomID.idString)) {
+      tr(.class("text-lg items-baseline"), .id(rowID)) {
         td { room.registerID }
         td { room.roomName }
         td {
@@ -75,82 +83,87 @@ extension DuctSizingView {
           div(.class("grid grid-cols-2 gap-2")) {
 
             span(.class("label")) { "Design" }
-            Badge(number: room.designCFM.value, digits: 0)
+            div(.class("flex justify-center")) {
+              Badge(number: room.designCFM.value, digits: 0)
+            }
 
             span(.class("label")) { "Heating" }
-            Number(room.heatingCFM, digits: 0)
+            div(.class("flex justify-center")) {
+              Number(room.heatingCFM, digits: 0)
+            }
 
             span(.class("label")) { "Cooling" }
-            Number(room.coolingCFM, digits: 0)
+            div(.class("flex justify-center")) {
+              Number(room.coolingCFM, digits: 0)
+            }
 
           }
         }
 
-        td(.class("hidden 2xl:table-cell")) { Number(room.roundSize, digits: 1) }
         td { Number(room.velocity) }
 
         td {
-          div(.class("grid grid-cols-2 gap-2")) {
+          div(.class("grid grid-cols-3 gap-2")) {
 
-            span(.class("label")) { "Final" }
-            Badge(number: room.finalSize)
-              .attributes(.class("badge-secondary"))
+            div(.class("label")) { "Calculated" }
+            div(.class("flex justify-center")) {
+              Badge(number: room.roundSize, digits: 1)
+            }
+            div {}
 
-            span(.class("label")) { "Flex" }
-            Badge(number: room.flexSize)
-              .attributes(.class("badge-primary"))
+            div(.class("label")) { "Final" }
+            div(.class("flex justify-center")) {
+              Badge(number: room.finalSize)
+                .attributes(.class("badge-secondary"))
+            }
+            div {}
 
-            if let width = room.rectangularWidth,
-              let height = room.rectangularSize?.height
-            {
-              span(.class("label")) { "Rectangular" }
-              Badge {
-                span { "\(width) x \(height)" }
+            div(.class("label")) { "Flex" }
+            div(.class("flex justify-center")) {
+              Badge(number: room.flexSize)
+                .attributes(.class("badge-primary"))
+            }
+            div {}
+
+            div(.class("label")) { "Rectangular" }
+            div(.class("flex justify-center")) {
+              if let width = room.rectangularWidth,
+                let height = room.rectangularSize?.height
+              {
+                Badge {
+                  span { "\(width) x \(height)" }
+                }
+                .attributes(.class("badge-info"))
               }
             }
-          }
-        }
+            div(.class("flex justify-end")) {
+              div(.class("join")) {
+                if room.rectangularSize != nil {
+                  Tooltip("Delete Size", position: .bottom) {
+                    TrashButton()
+                      .attributes(.class("join-item btn-ghost"))
+                      .attributes(
+                        .hx.delete(deleteRoute),
+                        .hx.target("#\(rowID)"),
+                        .hx.swap(.outerHTML),
+                        when: room.rectangularSize != nil
+                      )
+                  }
+                }
 
-        td {
-          div(.class("flex justify-end space-x-4")) {
-            div(.class("join")) {
-              if room.rectangularSize != nil {
-                // FIX: Delete rectangular size from room.
-                TrashButton()
-                  .attributes(.class("join-item btn-ghost"))
-                  .attributes(
-                    .hx.delete(deleteRoute),
-                    .hx.target("closest tr"),
-                    .hx.swap(.outerHTML),
-                    when: room.rectangularSize != nil
-                  )
+                Tooltip("Edit Size", position: .bottom) {
+                  EditButton()
+                    .attributes(
+                      .class("join-item btn-ghost"),
+                      .showModal(id: RectangularSizeForm.id(room))
+                    )
+                }
+
               }
-
-              EditButton()
-                .attributes(
-                  .class("join-item btn-ghost"),
-                  .showModal(id: formID)
-                  // .showModal(id: RectangularSizeForm.id(room))
-                )
-
             }
+            RectangularSizeForm(room: room)
           }
-
-          // FakeForm(id: formID)
-          RectangularSizeForm(id: formID, room: room)
-          // .attributes(.class("modal-open"))
-
         }
-      }
-    }
-  }
-
-  struct FakeForm: HTML, Sendable {
-    let id: String
-
-    var body: some HTML<HTMLTag.dialog> {
-      ModalForm(id: id, dismiss: true) {
-        div { "Fake Form" }
       }
     }
   }

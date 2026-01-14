@@ -31,30 +31,30 @@ struct DuctSizingView: HTML, Sendable {
         RoomsTable(rooms: rooms)
       }
 
-      // Row {
-      //   h2(.class("text-2xl font-bold")) { "Trunk Sizes" }
-      //
-      //   PlusButton()
-      //     .attributes(
-      //       .class("me-6"),
-      //       .showModal(id: TrunkSizeForm.id())
-      //     )
-      // }
-      // .attributes(.class("mt-6"))
-      //
-      // div(.class("divider -mt-2")) {}
-      //
-      // if supplyTrunks.count > 0 {
-      //   h2(.class("text-lg font-bold text-info")) { "Supply Trunks" }
-      //   TrunkTable(trunks: supplyTrunks, rooms: rooms)
-      // }
-      //
-      // if returnTrunks.count > 0 {
-      //   h2(.class("text-lg font-bold text-error")) { "Return Trunks" }
-      //   TrunkTable(trunks: returnTrunks, rooms: rooms)
-      // }
-      //
-      // TrunkSizeForm(rooms: rooms, dismiss: true)
+      Row {
+        h2(.class("text-2xl font-bold")) { "Trunk Sizes" }
+
+        PlusButton()
+          .attributes(
+            .class("me-6"),
+            .showModal(id: TrunkSizeForm.id())
+          )
+      }
+      .attributes(.class("mt-6"))
+
+      div(.class("divider -mt-2")) {}
+
+      if supplyTrunks.count > 0 {
+        h2(.class("text-lg font-bold text-info")) { "Supply Trunks" }
+        TrunkTable(trunks: supplyTrunks, rooms: rooms)
+      }
+
+      if returnTrunks.count > 0 {
+        h2(.class("text-lg font-bold text-error")) { "Return Trunks" }
+        TrunkTable(trunks: returnTrunks, rooms: rooms)
+      }
+
+      TrunkSizeForm(rooms: rooms, dismiss: true)
     }
   }
 
