@@ -142,7 +142,10 @@ public struct ManualDClient: Sendable {
             roundSize: sizes.ductulatorSize,
             finalSize: sizes.finalSize,
             velocity: sizes.velocity,
-            flexSize: sizes.flexSize)
+            flexSize: sizes.flexSize,
+            height: trunk.height,
+            width: width
+          )
         )
       )
     }
