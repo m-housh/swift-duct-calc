@@ -1,4 +1,5 @@
-docker_image := "manuald"
+docker_image := "ductcalc"
+docker_tag := "latest"
 
 install-deps:
 	@curl -sL daisyui.com/fast | bash
@@ -9,8 +10,8 @@ run-css:
 run:
 	@swift run App serve --log debug
 
-build-docker:
-	@podman build -f docker/Dockerfile.dev -t {{docker_image}}:dev .
+build-docker file="docker/Dockerfile":
+	@podman build -f {{file}} -t {{docker_image}}:{{docker_tag}} .
 
-run-dev:
-	@podman run -it --rm -v $PWD:/app -p 8080:8080 {{docker_image}}:dev
+run-docker:
+	@podman run -it --rm -v $PWD:/app -p 8080:8080 {{docker_image}}:{{docker_tag}}

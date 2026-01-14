@@ -19,9 +19,25 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     self.inner = inner()
   }
 
+  private var summary: String {
+    """
+    Duct sizing based on ACCA, Manual-D.
+    """
+  }
+
   public var head: some HTML {
     meta(.charset(.utf8))
     meta(.name(.viewport), .content("width=device-width, initial-scale=1.0"))
+    meta(.content("ductcalc.com"), .name("og:site_name"))
+    meta(.content("Duct Calc"), .name("og:title"))
+    meta(.content(summary), .name("description"))
+    meta(.content(summary), .name("og:description"))
+    meta(.content("/images/mand_logo.png"), .name("og:image"))
+    meta(.content("/images/mand_logo.png"), .name("twitter:image"))
+    meta(.content("Duct Calc"), .name("twitter:image:alt"))
+    meta(.content("summary_large_image"), .name("twitter:card"))
+    meta(.content("1536"), .name("og:image:width"))
+    meta(.content("1024"), .name("og:image:height"))
     script(.src("https://unpkg.com/htmx.org@2.0.8")) {}
     script(.src("/js/main.js")) {}
     link(.rel(.stylesheet), .href("/css/output.css"))
