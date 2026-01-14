@@ -16,12 +16,22 @@ extension Room {
 
 extension DuctSizing.TrunkSize.RoomProxy {
 
+  // We need to make sure if registers got removed after a trunk
+  // was already made / saved that we do not include registers that
+  // no longer exist.
+  private var actualRegisterCount: Int {
+    guard registers.count <= room.registerCount else {
+      return room.registerCount
+    }
+    return registers.count
+  }
+
   var totalHeatingLoad: Double {
-    room.heatingLoadPerRegister * Double(registers.count)
+    room.heatingLoadPerRegister * Double(actualRegisterCount)
   }
 
   func totalCoolingSensible(projectSHR: Double) -> Double {
-    room.coolingSensiblePerRegister(projectSHR: projectSHR) * Double(registers.count)
+    room.coolingSensiblePerRegister(projectSHR: projectSHR) * Double(actualRegisterCount)
   }
 }
 
@@ -53,6 +63,8 @@ func roundSize(_ size: Double) throws -> Int {
   guard size <= 24 else {
     throw ManualDError(message: "Size should be less than 24.")
   }
+
+  // let size = size.rounded(.toNearestOrEven)
 
   switch size {
   case 0..<4:

@@ -25,7 +25,7 @@ struct EffectiveLengthsView: HTML, Sendable {
         PageTitle { "Equivalent Lengths" }
         PlusButton()
           .attributes(
-            .class("btn-ghost"),
+            .class("btn-ghost me-4"),
             .showModal(id: EffectiveLengthForm.id(nil))
           )
       }
@@ -33,30 +33,12 @@ struct EffectiveLengthsView: HTML, Sendable {
 
       EffectiveLengthForm(projectID: projectID, dismiss: true)
 
-      div {
-        h2(.class("text-xl font-bold pb-4")) { "Supplies" }
-          .attributes(.class("hidden"), when: supplies.count == 0)
-
-        div(.class("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4")) {
-          for row in supplies {
-            EffectiveLengthView(effectiveLength: row)
-          }
-        }
-      }
-
-      div {
-        h2(.class("text-xl font-bold pb-4")) { "Returns" }
-          .attributes(.class("hidden"), when: returns.count == 0)
-        div(.class("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-x-4 space-y-4")) {
-          for row in returns {
-            EffectiveLengthView(effectiveLength: row)
-          }
-        }
-      }
+      EffectiveLengthsTable(effectiveLengths: effectiveLengths)
 
     }
   }
 
+  // TODO: Remove if using table view.
   private struct EffectiveLengthView: HTML, Sendable {
 
     let effectiveLength: EffectiveLength

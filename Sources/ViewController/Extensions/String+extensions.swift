@@ -20,5 +20,6 @@ extension String {
 
   var idString: Self {
     replacing("-", with: "")
+      .replacing(" ", with: "")
   }
 }

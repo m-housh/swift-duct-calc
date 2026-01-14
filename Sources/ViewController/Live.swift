@@ -13,8 +13,16 @@ extension ViewController.Request {
 
     switch route {
     case .test:
+      let projectID = UUID(uuidString: "A9C20153-E2E5-4C65-B33F-4D8A29C63A7A")!
       return await view {
-        TestPage()
+        await ResultView {
+          return (
+            try await database.projects.getCompletedSteps(projectID),
+            try await database.calculateDuctSizes(projectID: projectID)
+          )
+        } onSuccess: { (_, result) in
+          TestPage(trunks: result.trunks, rooms: result.rooms)
+        }
       }
     case .login(let route):
       switch route {

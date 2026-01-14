@@ -200,6 +200,14 @@ struct EffectiveLengthForm: HTML, Sendable {
           }
         }
 
+        a(
+          .href("/files/ManD.Groups.pdf"),
+          .target(.blank),
+          .class("btn btn-link")
+        ) {
+          "Click here for Manual-D groups reference."
+        }
+
         div(.id("groups"), .class("space-y-4")) {
           if let effectiveLength {
             for group in effectiveLength.groups {
@@ -346,7 +354,7 @@ extension EffectiveLength.EffectiveLengthType {
     case .return:
       return [5, 6, 7, 8, 10, 11, 12]
     case .supply:
-      return [1, 2, 4, 8, 9, 11, 12]
+      return [1, 2, 3, 4, 8, 9, 11, 12]
     }
   }
 }

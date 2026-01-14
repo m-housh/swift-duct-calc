@@ -128,6 +128,7 @@ extension DuctSizing {
 
   // Represents the database model that the duct sizes have been calculated
   // for.
+  @dynamicMemberLookup
   public struct TrunkContainer: Codable, Equatable, Identifiable, Sendable {
     public var id: TrunkSize.ID { trunk.id }
 
@@ -140,6 +141,14 @@ extension DuctSizing {
     ) {
       self.trunk = trunk
       self.ductSize = ductSize
+    }
+
+    public subscript<T>(dynamicMember keyPath: KeyPath<DuctSizing.TrunkSize, T>) -> T {
+      trunk[keyPath: keyPath]
+    }
+
+    public subscript<T>(dynamicMember keyPath: KeyPath<DuctSizing.SizeContainer, T>) -> T {
+      ductSize[keyPath: keyPath]
     }
   }
 

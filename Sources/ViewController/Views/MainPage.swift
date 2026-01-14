@@ -55,7 +55,9 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
 
   public var body: some HTML {
     div(.class("h-screen w-full")) {
-      inner
+      div(.class("overflow-auto")) {
+        inner
+      }
     }
     .attributes(.data("theme", value: theme?.rawValue ?? "default"), when: theme != nil)
   }

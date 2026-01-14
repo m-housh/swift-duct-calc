@@ -31,24 +31,22 @@ struct ProjectsTable: HTML, Sendable {
         }
         .attributes(.class("pb-6"))
 
-        div(.class("overflow-x-auto")) {
-          table(.class("table table-zebra")) {
-            thead {
-              tr {
-                th { Label("Date") }
-                th { Label("Name") }
-                th { Label("Address") }
-                th {}
-              }
-            }
-            tbody {
-              Rows(projects: projects)
+        table(.class("table table-zebra")) {
+          thead {
+            tr {
+              th { Label("Date") }
+              th { Label("Name") }
+              th { Label("Address") }
+              th {}
             }
           }
+          tbody {
+            Rows(projects: projects)
+          }
         }
-
-        ProjectForm(dismiss: true)
       }
+
+      ProjectForm(dismiss: true)
     }
   }
 }

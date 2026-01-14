@@ -11,24 +11,22 @@ extension DuctSizingView {
 
     let rooms: [DuctSizing.RoomContainer]
 
-    var body: some HTML<HTMLTag.div> {
-      div(.class("overflow-x-auto")) {
+    var body: some HTML<HTMLTag.table> {
 
-        table(.class("table table-zebra")) {
-          thead {
-            tr(.class("text-xl text-gray-400 font-bold")) {
-              th { "ID" }
-              th { "Name" }
-              th { "BTU" }
-              th { "CFM" }
-              th { "Velocity" }
-              th { "Size" }
-            }
+      table(.class("table table-zebra text-lg")) {
+        thead {
+          tr(.class("text-lg")) {
+            th { "ID" }
+            th { "Name" }
+            th { "BTU" }
+            th { "CFM" }
+            th { "Velocity" }
+            th { "Size" }
           }
-          tbody {
-            for room in rooms {
-              RoomRow(room: room)
-            }
+        }
+        tbody {
+          for room in rooms {
+            RoomRow(room: room)
           }
         }
       }
@@ -66,7 +64,7 @@ extension DuctSizingView {
     var rowID: String { Self.id(room) }
 
     var body: some HTML<HTMLTag.tr> {
-      tr(.class("text-lg items-baseline"), .id(rowID)) {
+      tr(.class("text-lg"), .id(rowID)) {
         td { room.registerID }
         td { room.roomName }
         td {
@@ -107,7 +105,7 @@ extension DuctSizingView {
 
             div(.class("label")) { "Calculated" }
             div(.class("flex justify-center")) {
-              Badge(number: room.roundSize, digits: 1)
+              Badge(number: room.roundSize, digits: 2)
             }
             div {}
 
