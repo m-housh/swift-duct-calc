@@ -21,7 +21,7 @@ extension DuctSizingView {
             th { "BTU" }
             th { "CFM" }
             th { "Velocity" }
-            th { "Size" }
+            th(.class("w-[330px]")) { "Size" }
           }
         }
         tbody {
@@ -101,7 +101,7 @@ extension DuctSizingView {
         td { Number(room.velocity) }
 
         td {
-          div(.class("grid grid-cols-3 gap-2")) {
+          div(.class("grid grid-cols-3 gap-2 w-[330px]")) {
 
             div(.class("label")) { "Calculated" }
             div(.class("flex justify-center")) {

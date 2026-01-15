@@ -81,23 +81,25 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
   }
 
   public var body: some HTML {
-    div(.class("flex flex-col min-h-screen min-w-full")) {
-      main(.class("grow")) {
+    div(.class("flex flex-col min-h-screen min-w-full justify-between")) {
+      main(.class("flex flex-col min-h-screen min-w-full grow mb-auto")) {
         inner
       }
 
-      if displayFooter {
-        footer(
-          .class(
-            """
-            footer sm:footer-horizontal footer-center 
-            bg-base-300 text-base-content p-4
-            """
-          )
-        ) {
-          aside {
-            p {
-              "Copyright © \(Date().description.prefix(4)) - All rights reserved by Michael Housh"
+      div(.class("bottom-0 left-0 bg-error")) {
+        if displayFooter {
+          footer(
+            .class(
+              """
+              footer sm:footer-horizontal footer-center
+              bg-base-300 text-base-content p-4
+              """
+            )
+          ) {
+            aside {
+              p {
+                "Copyright © \(Date().description.prefix(4)) - All rights reserved by Michael Housh"
+              }
             }
           }
         }

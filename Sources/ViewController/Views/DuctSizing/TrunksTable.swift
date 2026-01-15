@@ -22,7 +22,7 @@ extension DuctSizingView {
             th { "Associated Supplies" }
             th { "Dsn CFM" }
             th { "Velocity" }
-            th { "Size" }
+            th(.class("w-[330px]")) { "Size" }
           }
         }
         tbody {
@@ -65,7 +65,7 @@ extension DuctSizingView {
           Number(trunk.velocity)
         }
         td {
-          div(.class("grid grid-cols-3 gap-4")) {
+          div(.class("grid grid-cols-3 gap-2 w-[330px]")) {
             div(.class("label")) { "Calculated" }
             div(.class("flex justify-center")) {
               Badge(number: trunk.roundSize, digits: 1)
@@ -97,15 +97,17 @@ extension DuctSizingView {
                 .attributes(.class("badge-info"))
               }
             }
-            div(.class("flex justify-end")) {
+            div(.class("flex justify-end items-end")) {
               div(.class("join")) {
-                TrashButton()
-                  .attributes(.class("join-item btn-ghost"))
-                  .attributes(
-                    .hx.delete(route: deleteRoute),
-                    .hx.target("closest tr"),
-                    .hx.swap(.outerHTML)
-                  )
+                if trunk.width != nil {
+                  TrashButton()
+                    .attributes(.class("join-item btn-ghost"))
+                    .attributes(
+                      .hx.delete(route: deleteRoute),
+                      .hx.target("closest tr"),
+                      .hx.swap(.outerHTML)
+                    )
+                }
 
                 EditButton()
                   .attributes(

@@ -31,25 +31,22 @@ struct ProjectView<Inner: HTML>: HTML, Sendable where Inner: Sendable {
   }
 
   var body: some HTML {
-    div(.class("h-screen w-full")) {
+    div(.class("drawer lg:drawer-open h-full")) {
+      input(.id("my-drawer-1"), .type(.checkbox), .class("drawer-toggle"))
 
-      div(.class("drawer lg:drawer-open")) {
-        input(.id("my-drawer-1"), .type(.checkbox), .class("drawer-toggle"))
-
-        div(.class("drawer-content")) {
-          Navbar(sidebarToggle: true)
-          div(.class("p-4")) {
-            inner
-              .environment(ProjectViewValue.$projectID, projectID)
-          }
+      div(.class("drawer-content overflow-auto")) {
+        Navbar(sidebarToggle: true)
+        div(.class("p-4")) {
+          inner
+            .environment(ProjectViewValue.$projectID, projectID)
         }
-
-        Sidebar(
-          active: activeTab,
-          projectID: projectID,
-          completedSteps: completedSteps
-        )
       }
+
+      Sidebar(
+        active: activeTab,
+        projectID: projectID,
+        completedSteps: completedSteps
+      )
     }
   }
 
@@ -65,7 +62,7 @@ extension ProjectView {
 
     var body: some HTML {
 
-      div(.class("drawer-side is-drawer-close:overflow-visible")) {
+      div(.class("drawer-side is-drawer-close:overflow-visible grow")) {
         label(
           .for("my-drawer-1"), .init(name: "aria-label", value: "close sidebar"),
           .class("drawer-overlay")
@@ -74,13 +71,13 @@ extension ProjectView {
         div(
           .class(
             """
-            flex min-h-full flex-col items-start bg-base-300 text-base-content
+            flex grow h-full flex-col items-start bg-base-300 text-base-content
             is-drawer-close:min-w-[80px] is-drawer-open:max-w-[300px]
             """
           )
         ) {
 
-          ul(.class("w-full")) {
+          ul(.class("w-full grow")) {
 
             li(.class("flex w-full")) {
               row(
