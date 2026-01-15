@@ -3,8 +3,6 @@ import ElementaryHTMX
 import ManualDCore
 import Styleguide
 
-// TODO: Add trunk size table.
-
 struct DuctSizingView: HTML, Sendable {
 
   @Environment(ProjectViewValue.$projectID) var projectID
@@ -14,32 +12,40 @@ struct DuctSizingView: HTML, Sendable {
 
   var body: some HTML {
     div(.class("space-y-4")) {
-      PageTitle { "Duct Sizes" }
+      PageTitleRow {
+        div(.class("space-y-4")) {
+          PageTitle("Duct Sizes")
 
-      if rooms.count == 0 {
-        p(.class("text-error italic")) {
-          "Must complete all the previous sections to display duct sizing calculations."
-        }
-      } else {
-        RoomsTable(rooms: rooms)
-        div(.class("divider mb-6")) {}
-      }
-
-      Row {
-        h2(.class("text-2xl font-bold")) {
-          "Trunk / Runout Sizes"
-        }
-
-        PlusButton()
-          .attributes(
-            .class("me-6"),
-            .showModal(id: TrunkSizeForm.id())
+          Alert(
+            """
+            Must complete all the previous sections to display duct sizing calculations.
+            """
           )
+          .hidden(when: rooms.count > 0)
+          .attributes(.class("text-error font-bold italic"))
+        }
       }
 
-      if trunks.count > 0 {
-        div(.class("divider -mt-2")) {}
-        TrunkTable(trunks: trunks, rooms: rooms)
+      if rooms.count != 0 {
+        RoomsTable(rooms: rooms)
+
+        PageTitleRow {
+          PageTitle {
+            "Trunk / Runout Sizes"
+          }
+
+          PlusButton()
+            .attributes(
+              .class("btn-primary"),
+              .showModal(id: TrunkSizeForm.id())
+            )
+            .tooltip("Add trunk / runout")
+        }
+
+        if trunks.count > 0 {
+          TrunkTable(trunks: trunks, rooms: rooms)
+        }
+
       }
 
       TrunkSizeForm(rooms: rooms, dismiss: true)

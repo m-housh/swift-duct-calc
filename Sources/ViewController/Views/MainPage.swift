@@ -82,7 +82,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
 
   public var body: some HTML {
     div(.class("flex flex-col min-h-screen min-w-full")) {
-      main(.class("overflow-auto grow")) {
+      main(.class("grow")) {
         inner
       }
 

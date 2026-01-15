@@ -29,6 +29,7 @@
     --text-3xl: 1.875rem;
     --text-3xl--line-height: calc(2.25 / 1.875);
     --font-weight-bold: 700;
+    --radius-sm: 0.25rem;
     --radius-md: 0.375rem;
     --radius-lg: 0.5rem;
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
@@ -5379,6 +5380,9 @@
   .my-6 {
     margin-block: calc(var(--spacing) * 6);
   }
+  .my-auto {
+    margin-block: auto;
+  }
   .label {
     @layer daisyui.l1.l2.l3 {
       display: inline-flex;
@@ -6893,6 +6897,12 @@
       margin-inline-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-x-reverse)));
     }
   }
+  .gap-y-4 {
+    row-gap: calc(var(--spacing) * 4);
+  }
+  .gap-y-6 {
+    row-gap: calc(var(--spacing) * 6);
+  }
   .overflow-auto {
     overflow: auto;
   }
@@ -7004,6 +7014,9 @@
   }
   .rounded-selector {
     border-radius: var(--radius-selector);
+  }
+  .rounded-sm {
+    border-radius: var(--radius-sm);
   }
   .rounded-t-box {
     border-top-left-radius: var(--radius-box);
@@ -7177,6 +7190,14 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
+  .border-2 {
+    border-style: var(--tw-border-style);
+    border-width: 2px;
+  }
+  .border-y {
+    border-block-style: var(--tw-border-style);
+    border-block-width: 1px;
+  }
   .border-t {
     border-top-style: var(--tw-border-style);
     border-top-width: 1px;
@@ -7306,6 +7327,12 @@
   }
   .border-gray-200 {
     border-color: var(--color-gray-200);
+  }
+  .border-primary {
+    border-color: var(--color-primary);
+  }
+  .border-secondary {
+    border-color: var(--color-secondary);
   }
   .menu-active {
     :where(:not(ul, details, .menu-title, .btn))& {
@@ -7467,8 +7494,14 @@
   .bg-base-300 {
     background-color: var(--color-base-300);
   }
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
   .bg-red-500 {
     background-color: var(--color-red-500);
+  }
+  .bg-secondary {
+    background-color: var(--color-secondary);
   }
   .bg-white {
     background-color: var(--color-white);
@@ -7760,6 +7793,9 @@
   }
   .p-4 {
     padding: calc(var(--spacing) * 4);
+  }
+  .p-6 {
+    padding: calc(var(--spacing) * 6);
   }
   .menu-title {
     @layer daisyui.l1.l2.l3 {
@@ -8553,6 +8589,12 @@
   }
   .text-primary {
     color: var(--color-primary);
+  }
+  .text-primary-content {
+    color: var(--color-primary-content);
+  }
+  .text-secondary-content {
+    color: var(--color-secondary-content);
   }
   .text-slate-900 {
     color: var(--color-slate-900);

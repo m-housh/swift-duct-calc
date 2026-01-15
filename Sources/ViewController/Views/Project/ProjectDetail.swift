@@ -8,13 +8,15 @@ struct ProjectDetail: HTML, Sendable {
 
   var body: some HTML {
     div {
-      Row {
-        h1(.class("text-3xl font-bold")) { "Project" }
+      PageTitleRow {
+        PageTitle { "Project" }
+
         EditButton()
           .attributes(
-            .class("btn-ghost"),
+            .class("btn-primary"),
             .on(.click, "projectForm.showModal()")
           )
+          .tooltip("Edit project", position: .left)
       }
 
       table(.class("table table-zebra text-lg")) {

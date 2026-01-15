@@ -45,4 +45,8 @@ extension HTML where Tag: HTMLTrait.Attributes.Global {
   public func badge() -> _AttributedElement<Self> {
     attributes(.class("badge badge-lg badge-outline font-bold"))
   }
+
+  public func hidden(when shouldHide: Bool) -> _AttributedElement<Self> {
+    attributes(.class("hidden"), when: shouldHide)
+  }
 }

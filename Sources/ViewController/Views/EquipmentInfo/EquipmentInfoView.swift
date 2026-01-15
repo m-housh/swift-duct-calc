@@ -12,16 +12,15 @@ struct EquipmentInfoView: HTML, Sendable {
       .id("equipmentInfo")
     ) {
 
-      Row {
-        PageTitle { "Equipment Info" }
+      PageTitleRow {
+        PageTitle { "Equipment Details" }
 
-        Tooltip("Edit equipment info") {
-          EditButton()
-            .attributes(
-              .class("btn-ghost"),
-              .showModal(id: EquipmentInfoForm.id)
-            )
-        }
+        EditButton()
+          .attributes(
+            .class("btn-primary"),
+            .showModal(id: EquipmentInfoForm.id)
+          )
+          .tooltip("Edit equipment details")
       }
 
       if let equipmentInfo {

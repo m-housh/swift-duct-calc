@@ -13,62 +13,57 @@ struct RoomsView: HTML, Sendable {
 
   var body: some HTML {
     div(.class("flex w-full flex-col")) {
-      Row {
-        PageTitle { "Room Loads" }
+      PageTitleRow {
+        div(.class("flex grid grid-cols-3 w-full gap-y-4")) {
 
-        div(.class("flex justify-end items-end -my-2")) {
-          Tooltip("Project wide sensible heat ratio", position: .left) {
-            button(
-              .class(
-                """
-                justify-end items-end p-4
-                hover:bg-neutral hover:text-white hover:rounded-lg
-                """
-              ),
-              .showModal(id: SHRForm.id)
-            ) {
-              LabeledContent {
-                div(.class("flex justify-end items-end space-x-4")) {
-                  Label {
+          div(.class("col-span-2")) {
+            PageTitle { "Room Loads" }
+          }
+
+          div(.class("flex justify-end grow")) {
+            Tooltip("Project wide sensible heat ratio", position: .left) {
+              button(
+                .class(
+                  """
+                  btn btn-primary text-lg font-bold py-2 
+                  """
+                ),
+                .showModal(id: SHRForm.id)
+              ) {
+                div(.class("flex grow justify-end items-end space-x-4")) {
+                  span {
                     "Sensible Heat Ratio"
                   }
-                  .attributes(.class("me-8"), when: sensibleHeatRatio == nil)
-                }
-              } content: {
-                if let sensibleHeatRatio {
-                  Badge(number: sensibleHeatRatio)
-                } else {
-                  SVG(.squarePen)
+                  if let sensibleHeatRatio {
+                    Badge(number: sensibleHeatRatio)
+                  } else {
+                    Badge { "set" }
+                  }
                 }
               }
+              .attributes(.class("border border-error"), when: sensibleHeatRatio == nil)
             }
-            .attributes(.class("border rounded-lg border-error"), when: sensibleHeatRatio == nil)
+          }
+
+          div(.class("flex items-end space-x-4 font-bold")) {
+            span(.class("text-lg")) { "Heating Total" }
+            Badge(number: rooms.heatingTotal, digits: 0)
+              .attributes(.class("badge-error"))
+          }
+
+          div(.class("flex justify-center items-end space-x-4 my-auto font-bold")) {
+            span(.class("text-lg")) { "Cooling Total" }
+            Badge(number: rooms.coolingTotal, digits: 0)
+              .attributes(.class("badge-success"))
+          }
+
+          div(.class("flex grow justify-end items-end space-x-4 me-4 my-auto font-bold")) {
+            span(.class("text-lg")) { "Cooling Sensible" }
+            Badge(number: rooms.coolingSensible(shr: sensibleHeatRatio), digits: 0)
+              .attributes(.class("badge-info"))
           }
         }
       }
-
-      div(.class("flex flex-wrap justify-between mt-6")) {
-        div(.class("flex items-end space-x-4")) {
-          Label { "Heating Total" }
-          Badge(number: rooms.heatingTotal, digits: 0)
-            .attributes(.class("badge-error"))
-        }
-
-        div(.class("flex items-end space-x-4")) {
-          Label { "Cooling Total" }
-          Badge(number: rooms.coolingTotal, digits: 0)
-            .attributes(.class("badge-success"))
-        }
-
-        div(.class("flex justify-end items-end space-x-4 me-4")) {
-          Label { "Cooling Sensible" }
-          Badge(number: rooms.coolingSensible(shr: sensibleHeatRatio), digits: 0)
-            .attributes(.class("badge-info"))
-        }
-      }
-      // .attributes(.class("mt-6 me-4"))
-
-      div(.class("divider")) {}
 
       SHRForm(projectID: projectID, sensibleHeatRatio: sensibleHeatRatio)
 
@@ -101,7 +96,7 @@ struct RoomsView: HTML, Sendable {
                 Tooltip("Add Room") {
                   PlusButton()
                     .attributes(
-                      .class("btn-ghost mx-auto"),
+                      .class("btn-primary mx-auto"),
                       .showModal(id: RoomForm.id())
                     )
                     .attributes(.class("tooltip-left"))

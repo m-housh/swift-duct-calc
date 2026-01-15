@@ -21,13 +21,14 @@ struct EffectiveLengthsView: HTML, Sendable {
 
   var body: some HTML {
     div(.class("space-y-4")) {
-      Row {
+      PageTitleRow {
         PageTitle { "Equivalent Lengths" }
         PlusButton()
           .attributes(
-            .class("btn-ghost me-4"),
+            .class("btn-primary"),
             .showModal(id: EffectiveLengthForm.id(nil))
           )
+          .tooltip("Add equivalent length")
       }
       .attributes(.class("pb-6"))
 

@@ -1,6 +1,18 @@
 import Elementary
 
-public struct Tooltip<Inner: HTML & Sendable>: HTML, Sendable {
+extension HTML {
+
+  public func tooltip(
+    _ tip: String,
+    position: TooltipPosition = .default
+  ) -> Tooltip<Self> {
+    Tooltip(tip, position: position) {
+      self
+    }
+  }
+}
+
+public struct Tooltip<Inner: HTML>: HTML {
 
   let tooltip: String
   let position: TooltipPosition
@@ -25,6 +37,8 @@ public struct Tooltip<Inner: HTML & Sendable>: HTML, Sendable {
     }
   }
 }
+
+extension Tooltip: Sendable where Inner: Sendable {}
 
 public enum TooltipPosition: String, CaseIterable, Sendable {
 

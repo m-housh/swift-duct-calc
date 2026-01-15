@@ -65,7 +65,7 @@ public struct EditButton: HTML, Sendable {
   }
 
   public var body: some HTML<HTMLTag.button> {
-    button(.class("btn hover:btn-success"), .type(type)) {
+    button(.class("btn"), .type(type)) {
       div(.class("flex")) {
         if let title {
           span(.class("pe-2")) { title }
@@ -83,7 +83,7 @@ public struct PlusButton: HTML, Sendable {
   public var body: some HTML<HTMLTag.button> {
     button(
       .type(.button),
-      .class("btn btn-primary btn-circle text-xl")
+      .class("btn")
     ) { SVG(.circlePlus) }
   }
 }

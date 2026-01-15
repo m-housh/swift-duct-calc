@@ -31,13 +31,12 @@ struct ComponentPressureLossesView: HTML, Sendable {
             th { "Value" }
             th {
               div(.class("flex justify-end mx-auto")) {
-                Tooltip("Add Component Loss") {
-                  PlusButton()
-                    .attributes(
-                      .class("btn-ghost text-2xl me-2"),
-                      .showModal(id: ComponentLossForm.id())
-                    )
-                }
+                PlusButton()
+                  .attributes(
+                    .class("btn-primary text-2xl me-2"),
+                    .showModal(id: ComponentLossForm.id())
+                  )
+                  .tooltip("Add component loss")
               }
             }
           }
