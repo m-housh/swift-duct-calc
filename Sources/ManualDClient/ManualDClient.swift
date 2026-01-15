@@ -44,7 +44,6 @@ public struct ManualDClient: Sendable {
     logger: Logger? = nil
   ) async throws -> [DuctSizing.RoomContainer] {
 
-    var registerIDCount = 1
     var retval: [DuctSizing.RoomContainer] = []
     let totalHeatingLoad = rooms.totalHeatingLoad
     let totalCoolingSensible = rooms.totalCoolingSensible(shr: projectSHR)
@@ -76,7 +75,6 @@ public struct ManualDClient: Sendable {
 
         retval.append(
           .init(
-            registerID: "SR-\(registerIDCount)",
             roomID: room.id,
             roomName: "\(room.name)-\(n)",
             roomRegister: n,
@@ -93,7 +91,6 @@ public struct ManualDClient: Sendable {
             rectangularWidth: rectangularWidth
           )
         )
-        registerIDCount += 1
       }
     }
 

@@ -19,12 +19,12 @@ struct ProjectsTable: HTML, Sendable {
     div {
       Navbar(sidebarToggle: false)
       div(.class("m-6")) {
-        Row {
+        PageTitleRow {
           PageTitle { "Projects" }
           Tooltip("Add project") {
             PlusButton()
               .attributes(
-                .class("btn-ghost"),
+                .class("btn-primary"),
                 .showModal(id: ProjectForm.id)
               )
           }

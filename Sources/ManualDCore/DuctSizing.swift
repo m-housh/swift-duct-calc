@@ -50,12 +50,10 @@ public enum DuctSizing {
     }
   }
 
-  // TODO: Remove registerID and just use the roomName
   // TODO: Uses SizeContainer
 
   public struct RoomContainer: Codable, Equatable, Sendable {
 
-    public let registerID: String
     public let roomID: Room.ID
     public let roomName: String
     public let roomRegister: Int
@@ -72,7 +70,6 @@ public enum DuctSizing {
     public let rectangularWidth: Int?
 
     public init(
-      registerID: String,
       roomID: Room.ID,
       roomName: String,
       roomRegister: Int,
@@ -88,7 +85,6 @@ public enum DuctSizing {
       rectangularSize: RectangularDuct? = nil,
       rectangularWidth: Int? = nil
     ) {
-      self.registerID = registerID
       self.roomID = roomID
       self.roomName = roomName
       self.roomRegister = roomRegister

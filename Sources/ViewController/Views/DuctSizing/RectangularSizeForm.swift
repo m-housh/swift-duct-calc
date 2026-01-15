@@ -7,7 +7,7 @@ struct RectangularSizeForm: HTML, Sendable {
 
   static func id(_ room: DuctSizing.RoomContainer) -> String {
     let base = "rectangularSize"
-    return "\(base)_\(room.registerID.idString)"
+    return "\(base)_\(room.roomName.idString)"
   }
 
   @Environment(ProjectViewValue.$projectID) var projectID

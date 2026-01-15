@@ -16,7 +16,6 @@ extension DuctSizingView {
       table(.class("table table-zebra text-lg")) {
         thead {
           tr(.class("text-lg")) {
-            th { "ID" }
             th { "Name" }
             th { "BTU" }
             th { "CFM" }
@@ -36,7 +35,7 @@ extension DuctSizingView {
   struct RoomRow: HTML, Sendable {
 
     static func id(_ room: DuctSizing.RoomContainer) -> String {
-      "roomRow_\(room.registerID.idString)"
+      "roomRow_\(room.roomName.idString)"
     }
 
     @Environment(ProjectViewValue.$projectID) var projectID
@@ -65,10 +64,9 @@ extension DuctSizingView {
 
     var body: some HTML<HTMLTag.tr> {
       tr(.class("text-lg"), .id(rowID)) {
-        td { room.registerID }
         td { room.roomName }
         td {
-          div(.class("grid grid-cols-2 gap-2")) {
+          div(.class("flex flex-wrap grid grid-cols-2 gap-2")) {
             span(.class("label")) { "Heating" }
             Number(room.heatingLoad, digits: 0)
 
@@ -78,7 +76,7 @@ extension DuctSizingView {
         }
 
         td {
-          div(.class("grid grid-cols-2 gap-2")) {
+          div(.class("flex flex-wrap grid grid-cols-2 gap-2")) {
 
             span(.class("label")) { "Design" }
             div(.class("flex justify-center")) {
