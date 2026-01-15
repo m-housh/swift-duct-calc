@@ -82,7 +82,6 @@ extension ProjectView {
 
           ul(.class("w-full")) {
 
-
             li(.class("flex w-full")) {
               row(
                 title: "Project",

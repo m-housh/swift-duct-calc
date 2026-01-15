@@ -26,7 +26,9 @@ struct DuctSizingView: HTML, Sendable {
       }
 
       Row {
-        h2(.class("text-2xl font-bold")) { "Trunk Sizes" }
+        h2(.class("text-2xl font-bold")) {
+          "Trunk / Runout Sizes"
+        }
 
         PlusButton()
           .attributes(

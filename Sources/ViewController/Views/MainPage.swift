@@ -1,5 +1,6 @@
 import Elementary
 import ElementaryHTMX
+import Foundation
 import ManualDCore
 import Styleguide
 
@@ -10,11 +11,14 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
 
   let inner: Inner
   let theme: Theme?
+  let displayFooter: Bool
 
   init(
+    displayFooter: Bool = true,
     theme: Theme? = nil,
     _ inner: () -> Inner
   ) {
+    self.displayFooter = displayFooter
     self.theme = theme
     self.inner = inner()
   }
@@ -22,6 +26,12 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
   private var summary: String {
     """
     Duct sizing based on ACCA, Manual-D.
+    """
+  }
+
+  private var keywords: String {
+    """
+    duct, hvac, duct-design, duct design, manual-d, manual d, design
     """
   }
 
@@ -38,6 +48,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     meta(.content("summary_large_image"), .name("twitter:card"))
     meta(.content("1536"), .name("og:image:width"))
     meta(.content("1024"), .name("og:image:height"))
+    meta(.content(keywords), .name(.keywords))
     script(.src("https://unpkg.com/htmx.org@2.0.8")) {}
     script(.src("/js/main.js")) {}
     link(.rel(.stylesheet), .href("/css/output.css"))
@@ -70,9 +81,26 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
   }
 
   public var body: some HTML {
-    div(.class("h-screen w-full")) {
-      div(.class("overflow-auto")) {
+    div(.class("flex flex-col min-h-screen min-w-full")) {
+      main(.class("overflow-auto grow")) {
         inner
+      }
+
+      if displayFooter {
+        footer(
+          .class(
+            """
+            footer sm:footer-horizontal footer-center 
+            bg-base-300 text-base-content p-4
+            """
+          )
+        ) {
+          aside {
+            p {
+              "Copyright © \(Date().description.prefix(4)) - All rights reserved by Michael Housh"
+            }
+          }
+        }
       }
     }
     .attributes(.data("theme", value: theme?.rawValue ?? "default"), when: theme != nil)

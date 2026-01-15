@@ -86,7 +86,7 @@ extension ViewController.Request {
     let inner = await inner()
     let theme = await self.theme
 
-    return MainPage(theme: theme) {
+    return MainPage(displayFooter: displayFooter, theme: theme) {
       inner
     }
   }
@@ -96,6 +96,15 @@ extension ViewController.Request {
       @Dependency(\.database) var database
       guard let user = try? currentUser() else { return nil }
       return try? await database.userProfile.fetch(user.id)?.theme
+    }
+  }
+
+  var displayFooter: Bool {
+    switch route {
+    case .login, .signup:
+      return false
+    default:
+      return true
     }
   }
 }

@@ -72,49 +72,47 @@ struct RoomsView: HTML, Sendable {
 
       SHRForm(projectID: projectID, sensibleHeatRatio: sensibleHeatRatio)
 
-      div(.class("overflow-x-auto")) {
-        table(.class("table table-zebra text-lg"), .id("roomsTable")) {
-          thead {
-            tr(.class("text-lg font-bold")) {
-              th { "Name" }
-              th {
-                div(.class("flex justify-center")) {
-                  "Heating Load"
-                }
+      table(.class("table table-zebra text-lg"), .id("roomsTable")) {
+        thead {
+          tr(.class("text-lg font-bold")) {
+            th { "Name" }
+            th {
+              div(.class("flex justify-center")) {
+                "Heating Load"
               }
-              th {
-                div(.class("flex justify-center")) {
-                  "Cooling Total"
-                }
+            }
+            th {
+              div(.class("flex justify-center")) {
+                "Cooling Total"
               }
-              th {
-                div(.class("flex justify-center")) {
-                  "Cooling Sensible"
-                }
+            }
+            th {
+              div(.class("flex justify-center")) {
+                "Cooling Sensible"
               }
-              th {
-                div(.class("flex justify-center")) {
-                  "Register Count"
-                }
+            }
+            th {
+              div(.class("flex justify-center")) {
+                "Register Count"
               }
-              th {
-                div(.class("flex justify-end me-2")) {
-                  Tooltip("Add Room") {
-                    PlusButton()
-                      .attributes(
-                        .class("btn-ghost mx-auto"),
-                        .showModal(id: RoomForm.id())
-                      )
-                      .attributes(.class("tooltip-left"))
-                  }
+            }
+            th {
+              div(.class("flex justify-end me-2")) {
+                Tooltip("Add Room") {
+                  PlusButton()
+                    .attributes(
+                      .class("btn-ghost mx-auto"),
+                      .showModal(id: RoomForm.id())
+                    )
+                    .attributes(.class("tooltip-left"))
                 }
               }
             }
           }
-          tbody {
-            for room in rooms {
-              RoomRow(room: room, shr: sensibleHeatRatio)
-            }
+        }
+        tbody {
+          for room in rooms {
+            RoomRow(room: room, shr: sensibleHeatRatio)
           }
         }
       }
