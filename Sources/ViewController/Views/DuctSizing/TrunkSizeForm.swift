@@ -77,10 +77,10 @@ struct TrunkSizeForm: HTML, Sendable {
           h2(.class("label font-bold col-span-5")) { "Associated Supply Runs" }
           for room in rooms {
             div(.class("flex justify-center items-center col-span-1")) {
-              div(.class("space-y-1")) {
-                p(.class("label block")) { room.registerID }
+              div(.class("grid grid-cols-1 justify-center items-center space-y-1")) {
+                p(.class("label block")) { room.roomName }
                 input(
-                  .class("checkbox"),
+                  .class("checkbox mx-auto"),
                   .type(.checkbox),
                   .name("rooms"),
                   .value("\(room.roomID)_\(room.roomRegister)")

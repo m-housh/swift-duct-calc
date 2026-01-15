@@ -50,6 +50,8 @@ public enum DuctSizing {
     }
   }
 
+  // TODO: Remove registerID and just use the roomName
+
   public struct RoomContainer: Codable, Equatable, Sendable {
 
     public let registerID: String
@@ -151,6 +153,8 @@ extension DuctSizing {
       ductSize[keyPath: keyPath]
     }
   }
+
+  // TODO: Add an optional label that the user can set.
 
   // Represents the database model.
   public struct TrunkSize: Codable, Equatable, Identifiable, Sendable {

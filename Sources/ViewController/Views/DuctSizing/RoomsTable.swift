@@ -5,7 +5,7 @@ import ManualDCore
 import Styleguide
 
 extension DuctSizingView {
-
+  // TODO: Remove register ID.
   struct RoomsTable: HTML, Sendable {
     @Environment(ProjectViewValue.$projectID) var projectID
 

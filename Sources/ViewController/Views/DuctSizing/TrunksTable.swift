@@ -51,9 +51,11 @@ extension DuctSizingView {
           .attributes(.class("badge-info"), when: trunk.type == .supply)
           .attributes(.class("badge-error"), when: trunk.type == .return)
         }
-        td(.class("space-x-2")) {
-          for id in registerIDS {
-            Badge { id }
+        td {
+          div(.class("flex flex-wrap space-x-2 space-y-2")) {
+            for id in registerIDS {
+              Badge { id }
+            }
           }
         }
         td {
@@ -129,7 +131,7 @@ extension DuctSizingView {
             rooms
             .first(where: { $0.roomID == room.id && $0.roomRegister == register })
           {
-            array.append(room.registerID)
+            array.append(room.roomName)
           }
         }
       }
