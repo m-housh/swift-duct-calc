@@ -33,7 +33,6 @@ struct Navbar: HTML, Sendable {
           }
           .navButton()
           .tooltip("Open sidebar", position: .right)
-
         }
 
         a(
