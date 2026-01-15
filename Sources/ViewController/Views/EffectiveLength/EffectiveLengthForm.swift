@@ -331,7 +331,7 @@ struct GroupTypeSelect: HTML, Sendable {
   let selected: EffectiveLength.EffectiveLengthType
 
   var body: some HTML<HTMLTag.label> {
-    label(.class("select")) {
+    label(.class("select w-full")) {
       span(.class("label")) { "Type" }
       select(.name("type"), .id("type")) {
         for value in EffectiveLength.EffectiveLengthType.allCases {

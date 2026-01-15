@@ -693,6 +693,10 @@ extension SiteRoute.View.ProjectRoute {
               Field("type") { DuctSizing.TrunkSize.TrunkType.parser() }
               Optionally {
                 Field("height") { Int.parser() }
+
+              }
+              Optionally {
+                Field("name", .string)
               }
               Many {
                 Field("rooms", .string)
@@ -714,6 +718,9 @@ extension SiteRoute.View.ProjectRoute {
               Optionally {
                 Field("height") { Int.parser() }
               }
+              Optionally {
+                Field("name", .string)
+              }
               Many {
                 Field("rooms", .string)
               }
@@ -734,6 +741,7 @@ extension SiteRoute.View.ProjectRoute {
       public let projectID: Project.ID
       public let type: DuctSizing.TrunkSize.TrunkType
       public let height: Int?
+      public let name: String?
       public let rooms: [String]
     }
   }

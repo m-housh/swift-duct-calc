@@ -105,7 +105,7 @@ struct EffectiveLengthsTable: HTML, Sendable {
           // Row {
           div(.class("flex justify-end mx-auto space-x-4")) {
             Badge(number: effectiveLength.totalEquivalentLength, digits: 0)
-              .attributes(.class("badge-primary text-xl pt-2"))
+              .attributes(.class("badge-primary badge-lg pt-2"))
 
             // Buttons
             div(.class("flex justify-end -mt-2")) {
@@ -118,11 +118,14 @@ struct EffectiveLengthsTable: HTML, Sendable {
                     .hx.target("#\(effectiveLength.id.idString)"),
                     .hx.swap(.outerHTML)
                   )
+                  .tooltip("Delete", position: .bottom)
+
                 EditButton()
                   .attributes(
                     .class("join-item btn-ghost"),
                     .showModal(id: EffectiveLengthForm.id(effectiveLength))
                   )
+                  .tooltip("Edit", position: .bottom)
               }
             }
           }

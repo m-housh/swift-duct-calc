@@ -3,8 +3,6 @@ import ManualDClient
 import ManualDCore
 import Styleguide
 
-// FIX: Need to update available static, etc. when equipment info is submitted.
-
 struct FrictionRateView: HTML, Sendable {
 
   @Environment(ProjectViewValue.$projectID) var projectID
@@ -13,16 +11,20 @@ struct FrictionRateView: HTML, Sendable {
   let equivalentLengths: EffectiveLength.MaxContainer
   let frictionRateResponse: ManualDClient.FrictionRateResponse?
 
-  var availableStaticPressure: Double? {
+  private var availableStaticPressure: Double? {
     frictionRateResponse?.availableStaticPressure
   }
 
-  var frictionRateDesignValue: Double? {
+  private var frictionRateDesignValue: Double? {
     frictionRateResponse?.frictionRate
   }
 
-  var badgeColor: String {
-    let base = "badge-primary"
+  private var shouldShowBadges: Bool {
+    frictionRateDesignValue != nil || availableStaticPressure != nil
+  }
+
+  private var badgeColor: String {
+    let base = "badge-info"
     guard let frictionRateDesignValue else { return base }
     if frictionRateDesignValue >= 0.18 || frictionRateDesignValue <= 0.02 {
       return "badge-error"
@@ -30,38 +32,68 @@ struct FrictionRateView: HTML, Sendable {
     return base
   }
 
-  var showHighErrors: Bool {
+  private var showHighErrors: Bool {
     guard let frictionRateDesignValue else { return false }
     return frictionRateDesignValue >= 0.18
   }
 
-  var showLowErrors: Bool {
+  private var showLowErrors: Bool {
     guard let frictionRateDesignValue else { return false }
     return frictionRateDesignValue <= 0.02
+  }
+
+  private var showNoComponentLossesError: Bool {
+    componentLosses.count == 0
+  }
+
+  private var showIncompleteSectionsError: Bool {
+    availableStaticPressure == nil || frictionRateDesignValue == nil
+  }
+
+  private var hasAlerts: Bool {
+    showLowErrors
+      || showHighErrors
+      || showNoComponentLossesError
+      || showIncompleteSectionsError
+
   }
 
   var body: some HTML {
     div(.class("space-y-6")) {
       PageTitleRow {
-        div(.class("grid grid-cols-2 px-4 gap-y-4")) {
+        div(.class("grid grid-cols-2 px-4 w-full")) {
 
           PageTitle { "Friction Rate" }
 
-          div(.class("space-y-4 justify-end")) {
+          div(.class("space-y-2 justify-end font-bold text-lg")) {
+            if shouldShowBadges {
 
-            if let frictionRateDesignValue {
-              LabeledContent("Friction Rate Design Value") {
-                Badge(number: frictionRateDesignValue, digits: 2)
-                  .attributes(.class("\(badgeColor)"))
+              if let frictionRateDesignValue {
+                LabeledContent {
+                  span { "Friction Rate Design Value" }
+                } content: {
+                  Badge(number: frictionRateDesignValue, digits: 2)
+                    .attributes(.class("\(badgeColor) badge-lg"))
+                    .bold()
+                }
+                .attributes(.class("justify-end mx-auto"))
               }
-              .attributes(.class("justify-end"))
-            }
 
-            if let availableStaticPressure {
-              LabeledContent("Available Static Pressure") {
-                Badge(number: availableStaticPressure, digits: 2)
+              if let availableStaticPressure {
+                LabeledContent {
+                  span { "Available Static Pressure" }
+                } content: {
+                  Badge(number: availableStaticPressure, digits: 2)
+                }
+                .attributes(.class("justify-end mx-auto"))
               }
-              .attributes(.class("justify-end"))
+
+              LabeledContent {
+                span { "Component Pressure Losses" }
+              } content: {
+                Badge(number: componentLosses.total, digits: 2)
+              }
+              .attributes(.class("justify-end mx-auto"))
             }
           }
 
@@ -71,16 +103,14 @@ struct FrictionRateView: HTML, Sendable {
                 "Must complete previous sections."
               }
             }
-            .hidden(
-              when: availableStaticPressure != nil && frictionRateDesignValue != nil
-            )
+            .hidden(when: !showIncompleteSectionsError)
 
             Alert {
               p {
                 "No component pressures losses"
               }
             }
-            .hidden(when: componentLosses.totalComponentPressureLoss > 0)
+            .hidden(when: !showNoComponentLossesError)
 
             Alert {
               p(.class("block")) {
@@ -107,7 +137,9 @@ struct FrictionRateView: HTML, Sendable {
               }
             }
             .hidden(when: !showHighErrors)
+
           }
+          .attributes(.class("mt-4"), when: hasAlerts)
         }
       }
 

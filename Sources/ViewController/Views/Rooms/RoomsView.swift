@@ -65,7 +65,10 @@ struct RoomsView: HTML, Sendable {
         }
       }
 
-      SHRForm(projectID: projectID, sensibleHeatRatio: sensibleHeatRatio)
+      SHRForm(
+        sensibleHeatRatio: sensibleHeatRatio,
+        dismiss: sensibleHeatRatio != nil
+      )
 
       table(.class("table table-zebra text-lg"), .id("roomsTable")) {
         thead {
@@ -194,8 +197,9 @@ struct RoomsView: HTML, Sendable {
   struct SHRForm: HTML, Sendable {
     static let id = "shrForm"
 
-    let projectID: Project.ID
+    @Environment(ProjectViewValue.$projectID) var projectID
     let sensibleHeatRatio: Double?
+    let dismiss: Bool
 
     var route: String {
       SiteRoute.View.router
@@ -204,7 +208,7 @@ struct RoomsView: HTML, Sendable {
     }
 
     var body: some HTML {
-      ModalForm(id: Self.id, dismiss: true) {
+      ModalForm(id: Self.id, dismiss: dismiss) {
         h1(.class("text-xl font-bold mb-6")) {
           "Sensible Heat Ratio"
         }

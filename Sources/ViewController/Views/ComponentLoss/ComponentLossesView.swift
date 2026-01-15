@@ -3,24 +3,31 @@ import ElementaryHTMX
 import ManualDCore
 import Styleguide
 
-// TODO: Load component losses when view appears??
-
 struct ComponentPressureLossesView: HTML, Sendable {
 
   let componentPressureLosses: [ComponentPressureLoss]
   let projectID: Project.ID
 
   private var total: Double {
-    componentPressureLosses.reduce(into: 0) { $0 += $1.value }
+    componentPressureLosses.total
+  }
+
+  private var sortedLosses: [ComponentPressureLoss] {
+    componentPressureLosses.sorted {
+      $0.value > $1.value
+    }
   }
 
   var body: some HTML {
     div(.class("space-y-4")) {
       Row {
         h1(.class("text-2xl font-bold")) { "Component Pressure Losses" }
-        LabeledContent("Total") {
-          Badge(number: total)
-        }
+        PlusButton()
+          .attributes(
+            .class("btn-primary text-2xl me-2"),
+            .showModal(id: ComponentLossForm.id())
+          )
+          .tooltip("Add component loss")
       }
       .attributes(.class("px-4"))
 
@@ -29,20 +36,11 @@ struct ComponentPressureLossesView: HTML, Sendable {
           tr(.class("text-xl font-bold")) {
             th { "Name" }
             th { "Value" }
-            th {
-              div(.class("flex justify-end mx-auto")) {
-                PlusButton()
-                  .attributes(
-                    .class("btn-primary text-2xl me-2"),
-                    .showModal(id: ComponentLossForm.id())
-                  )
-                  .tooltip("Add component loss")
-              }
-            }
+            th(.class("min-w-[200px]")) {}
           }
         }
         tbody {
-          for row in componentPressureLosses {
+          for row in sortedLosses {
             TableRow(row: row)
           }
         }

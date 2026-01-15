@@ -13,7 +13,7 @@ struct DuctSizingView: HTML, Sendable {
   var body: some HTML {
     div(.class("space-y-4")) {
       PageTitleRow {
-        div(.class("space-y-4")) {
+        div {
           PageTitle("Duct Sizes")
 
           Alert(
@@ -22,7 +22,7 @@ struct DuctSizingView: HTML, Sendable {
             """
           )
           .hidden(when: rooms.count > 0)
-          .attributes(.class("text-error font-bold italic"))
+          .attributes(.class("text-error font-bold italic mt-4"))
         }
       }
 

@@ -55,7 +55,8 @@ struct EquipmentInfoView: HTML, Sendable {
         }
       }
       EquipmentInfoForm(
-        dismiss: true, projectID: projectID, equipmentInfo: equipmentInfo
+        dismiss: equipmentInfo != nil,
+        equipmentInfo: equipmentInfo
       )
     }
   }

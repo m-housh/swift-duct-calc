@@ -51,6 +51,7 @@ public enum DuctSizing {
   }
 
   // TODO: Remove registerID and just use the roomName
+  // TODO: Uses SizeContainer
 
   public struct RoomContainer: Codable, Equatable, Sendable {
 
@@ -164,19 +165,22 @@ extension DuctSizing {
     public let type: TrunkType
     public let rooms: [RoomProxy]
     public let height: Int?
+    public let name: String?
 
     public init(
       id: UUID,
       projectID: Project.ID,
       type: DuctSizing.TrunkSize.TrunkType,
       rooms: [DuctSizing.TrunkSize.RoomProxy],
-      height: Int? = nil
+      height: Int? = nil,
+      name: String? = nil
     ) {
       self.id = id
       self.projectID = projectID
       self.type = type
       self.rooms = rooms
       self.height = height
+      self.name = name
     }
   }
 
@@ -189,17 +193,20 @@ extension DuctSizing.TrunkSize {
     public let type: TrunkType
     public let rooms: [Room.ID: [Int]]
     public let height: Int?
+    public let name: String?
 
     public init(
       projectID: Project.ID,
       type: DuctSizing.TrunkSize.TrunkType,
       rooms: [Room.ID: [Int]],
-      height: Int? = nil
+      height: Int? = nil,
+      name: String? = nil
     ) {
       self.projectID = projectID
       self.type = type
       self.rooms = rooms
       self.height = height
+      self.name = name
     }
   }
 
@@ -208,15 +215,18 @@ extension DuctSizing.TrunkSize {
     public let type: TrunkType?
     public let rooms: [Room.ID: [Int]]?
     public let height: Int?
+    public let name: String?
 
     public init(
       type: DuctSizing.TrunkSize.TrunkType? = nil,
       rooms: [Room.ID: [Int]]? = nil,
-      height: Int? = nil
+      height: Int? = nil,
+      name: String? = nil
     ) {
       self.type = type
       self.rooms = rooms
       self.height = height
+      self.name = name
     }
   }
 

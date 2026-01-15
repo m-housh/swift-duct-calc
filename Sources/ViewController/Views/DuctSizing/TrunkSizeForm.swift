@@ -40,7 +40,7 @@ struct TrunkSizeForm: HTML, Sendable {
 
   var body: some HTML {
     ModalForm(id: Self.id(container), dismiss: dismiss) {
-      h1(.class("text-lg font-bold mb-4")) { "Trunk Size" }
+      h1(.class("text-lg font-bold mb-4")) { "Trunk / Runout Size" }
       form(
         .class("space-y-4"),
         trunk == nil
@@ -72,30 +72,49 @@ struct TrunkSizeForm: HTML, Sendable {
           )
         }
 
-        // Add room select here.
-        div(.class("grid grid-cols-5 gap-6")) {
-          h2(.class("label font-bold col-span-5")) { "Associated Supply Runs" }
-          for room in rooms {
-            div(.class("flex justify-center items-center col-span-1")) {
-              div(.class("grid grid-cols-1 justify-center items-center space-y-1")) {
-                p(.class("label block")) { room.roomName }
-                input(
-                  .class("checkbox mx-auto"),
-                  .type(.checkbox),
-                  .name("rooms"),
-                  .value("\(room.roomID)_\(room.roomRegister)")
-                )
-                .attributes(
-                  .checked,
-                  when: trunk == nil ? false : trunk!.rooms.hasRoom(room)
-                )
+        LabeledInput(
+          "Name",
+          .type(.text),
+          .name("name"),
+          .value(trunk?.name),
+          .placeholder("Trunk-1 (Optional)")
+        )
+
+        div {
+          h2(.class("label font-bold col-span-3 mb-6")) { "Associated Supply Runs" }
+          div(
+            .class(
+              """
+              grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center gap-4
+              """
+            )
+          ) {
+            for room in rooms {
+              div(.class("block grow")) {
+                div(.class("grid grid-cols-1 space-y-1")) {
+                  div(.class("flex justify-center")) {
+                    p(.class("label")) { room.roomName }
+                  }
+                  div(.class("flex justify-center")) {
+                    input(
+                      .class("checkbox"),
+                      .type(.checkbox),
+                      .name("rooms"),
+                      .value("\(room.roomID)_\(room.roomRegister)")
+                    )
+                    .attributes(
+                      .checked,
+                      when: trunk == nil ? false : trunk!.rooms.hasRoom(room)
+                    )
+                  }
+                }
               }
             }
           }
         }
 
         SubmitButton()
-          .attributes(.class("btn-block"))
+          .attributes(.class("btn-block mt-6"))
       }
     }
   }

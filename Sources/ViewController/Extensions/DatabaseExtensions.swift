@@ -53,7 +53,7 @@ extension DatabaseClient {
     guard componentLosses.count > 0 else { return nil }
 
     let availableStaticPressure =
-      equipmentInfo.staticPressure - componentLosses.totalComponentPressureLoss
+      equipmentInfo.staticPressure - componentLosses.total
 
     let designFrictionRate = (availableStaticPressure * 100) / tel
 

@@ -140,21 +140,23 @@ extension SiteRoute.View.ProjectRoute {
       }
 
     case .create(let form):
-      return await ResultView {
-        let user = try request.currentUser()
-        let project = try await database.projects.create(user.id, form)
-        try await database.componentLoss.createDefaults(projectID: project.id)
-        let rooms = try await database.rooms.fetch(project.id)
-        let shr = try await database.projects.getSensibleHeatRatio(project.id)
-        let completedSteps = try await database.projects.getCompletedSteps(project.id)
-        return (project.id, rooms, shr, completedSteps)
-      } onSuccess: { (projectID, rooms, shr, completedSteps) in
-        ProjectView(
-          projectID: projectID,
-          activeTab: .rooms,
-          completedSteps: completedSteps
-        ) {
-          RoomsView(rooms: rooms, sensibleHeatRatio: shr)
+      return await request.view {
+        await ResultView {
+          let user = try request.currentUser()
+          let project = try await database.projects.create(user.id, form)
+          try await database.componentLoss.createDefaults(projectID: project.id)
+          let rooms = try await database.rooms.fetch(project.id)
+          let shr = try await database.projects.getSensibleHeatRatio(project.id)
+          let completedSteps = try await database.projects.getCompletedSteps(project.id)
+          return (project.id, rooms, shr, completedSteps)
+        } onSuccess: { (projectID, rooms, shr, completedSteps) in
+          ProjectView(
+            projectID: projectID,
+            activeTab: .rooms,
+            completedSteps: completedSteps
+          ) {
+            RoomsView(rooms: rooms, sensibleHeatRatio: shr)
+          }
         }
       }
 

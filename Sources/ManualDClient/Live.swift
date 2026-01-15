@@ -25,7 +25,7 @@ extension ManualDClient: DependencyKey {
         throw ManualDError(message: "Total Effective Length should be greater than 0.")
       }
 
-      let totalComponentLosses = request.componentPressureLosses.totalComponentPressureLoss
+      let totalComponentLosses = request.componentPressureLosses.total
       let availableStaticPressure = request.externalStaticPressure - totalComponentLosses
       let frictionRate = availableStaticPressure * 100.0 / Double(request.totalEffectiveLength)
       return .init(availableStaticPressure: availableStaticPressure, frictionRate: frictionRate)

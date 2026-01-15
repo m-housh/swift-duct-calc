@@ -7,8 +7,9 @@ struct EquipmentInfoForm: HTML, Sendable {
 
   static let id = "equipmentForm"
 
+  @Environment(ProjectViewValue.$projectID) var projectID
+
   let dismiss: Bool
-  let projectID: Project.ID
   let equipmentInfo: EquipmentInfo?
 
   var staticPressure: String {

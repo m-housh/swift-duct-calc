@@ -58,27 +58,12 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
         try await model.delete(on: database)
       },
       fetch: { projectID in
-        let models = try await TrunkModel.query(on: database)
+        try await TrunkModel.query(on: database)
           .with(\.$project)
           .with(\.$rooms)
           .filter(\.$project.$id == projectID)
           .all()
-
-        return try await withThrowingTaskGroup(of: DuctSizing.TrunkSize.self) { group in
-          for model in models {
-            group.addTask {
-              try await model.toDTO(on: database)
-            }
-          }
-
-          return try await group.reduce(into: [DuctSizing.TrunkSize]()) {
-            $0.append($1)
-          }
-        }
-
-        // return try await models.map {
-        //   try await $0.toDTO(on: database)
-        // }
+          .toDTO(on: database)
       },
       get: { id in
         guard let model = try await TrunkModel.find(id, on: database) else {
@@ -122,7 +107,8 @@ extension DuctSizing.TrunkSize.Create {
     .init(
       projectID: projectID,
       type: type,
-      height: height
+      height: height,
+      name: name
     )
   }
 }
@@ -151,6 +137,7 @@ extension DuctSizing.TrunkSize {
       try await database.schema(TrunkModel.schema)
         .id()
         .field("height", .int8)
+        .field("name", .string)
         .field("type", .string, .required)
         .field(
           "projectID", .uuid, .required, .references(ProjectModel.schema, "id", onDelete: .cascade)
@@ -236,11 +223,14 @@ final class TrunkModel: Model, @unchecked Sendable {
   @Parent(key: "projectID")
   var project: ProjectModel
 
-  @Field(key: "height")
+  @OptionalField(key: "height")
   var height: Int?
 
   @Field(key: "type")
   var type: String
+
+  @OptionalField(key: "name")
+  var name: String?
 
   @Children(for: \.$trunk)
   var rooms: [TrunkRoomModel]
@@ -252,11 +242,13 @@ final class TrunkModel: Model, @unchecked Sendable {
     projectID: Project.ID,
     type: DuctSizing.TrunkSize.TrunkType,
     height: Int? = nil,
+    name: String? = nil
   ) {
     self.id = id
     $project.id = projectID
     self.height = height
     self.type = type.rawValue
+    self.name = name
   }
 
   func toDTO(on database: any Database) async throws -> DuctSizing.TrunkSize {
@@ -278,7 +270,8 @@ final class TrunkModel: Model, @unchecked Sendable {
       projectID: $project.id,
       type: .init(rawValue: type)!,
       rooms: rooms,
-      height: height
+      height: height,
+      name: name
     )
 
   }
@@ -292,6 +285,9 @@ final class TrunkModel: Model, @unchecked Sendable {
     }
     if let height = updates.height, height != self.height {
       self.height = height
+    }
+    if let name = updates.name, name != self.name {
+      self.name = name
     }
     if hasChanges {
       try await self.save(on: database)
@@ -339,5 +335,22 @@ final class TrunkModel: Model, @unchecked Sendable {
 
     database.logger.debug("DONE WITH UPDATES")
 
+  }
+}
+
+extension Array where Element == TrunkModel {
+
+  func toDTO(on database: any Database) async throws -> [DuctSizing.TrunkSize] {
+    try await withThrowingTaskGroup(of: DuctSizing.TrunkSize.self) { group in
+      for model in self {
+        group.addTask {
+          try await model.toDTO(on: database)
+        }
+      }
+
+      return try await group.reduce(into: [DuctSizing.TrunkSize]()) {
+        $0.append($1)
+      }
+    }
   }
 }

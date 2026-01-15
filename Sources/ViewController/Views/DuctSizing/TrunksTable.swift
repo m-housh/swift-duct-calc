@@ -11,14 +11,16 @@ extension DuctSizingView {
     let rooms: [DuctSizing.RoomContainer]
 
     private var sortedTrunks: [DuctSizing.TrunkContainer] {
-      trunks.sorted(by: { $0.type.rawValue > $1.type.rawValue })
+      trunks
+        .sorted(by: { $0.designCFM.value > $1.designCFM.value })
+        .sorted(by: { $0.type.rawValue > $1.type.rawValue })
     }
 
     var body: some HTML {
       table(.class("table table-zebra text-lg")) {
         thead {
           tr(.class("text-lg")) {
-            th { "Type" }
+            th { "Name / Type" }
             th { "Associated Supplies" }
             th { "Dsn CFM" }
             th { "Velocity" }
@@ -45,11 +47,17 @@ extension DuctSizingView {
     var body: some HTML<HTMLTag.tr> {
       tr {
         td {
-          Badge {
-            trunk.trunk.type.rawValue
+          div(.class("grid grid-cols-1 space-y-2")) {
+            if let name = trunk.name {
+              p(.class("w-fit")) { name }
+            }
+
+            Badge {
+              trunk.trunk.type.rawValue
+            }
+            .attributes(.class("badge-info"), when: trunk.type == .supply)
+            .attributes(.class("badge-error"), when: trunk.type == .return)
           }
-          .attributes(.class("badge-info"), when: trunk.type == .supply)
-          .attributes(.class("badge-error"), when: trunk.type == .return)
         }
         td {
           div(.class("flex flex-wrap space-x-2 space-y-2")) {

@@ -43,10 +43,14 @@ extension HTMLAttribute where Tag == HTMLTag.button {
 
 extension HTML where Tag: HTMLTrait.Attributes.Global {
   public func badge() -> _AttributedElement<Self> {
-    attributes(.class("badge badge-lg badge-outline font-bold"))
+    attributes(.class("badge badge-lg badge-outline"))
   }
 
   public func hidden(when shouldHide: Bool) -> _AttributedElement<Self> {
     attributes(.class("hidden"), when: shouldHide)
+  }
+
+  public func bold(when shouldBeBold: Bool = true) -> _AttributedElement<Self> {
+    attributes(.class("font-bold"), when: shouldBeBold)
   }
 }

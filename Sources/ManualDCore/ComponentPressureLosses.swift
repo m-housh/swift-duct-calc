@@ -69,7 +69,7 @@ extension ComponentPressureLoss {
 }
 
 extension Array where Element == ComponentPressureLoss {
-  public var totalComponentPressureLoss: Double {
+  public var total: Double {
     reduce(into: 0) { $0 += $1.value }
   }
 }
