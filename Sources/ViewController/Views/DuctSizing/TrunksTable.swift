@@ -92,6 +92,7 @@ extension DuctSizingView {
                 Badge {
                   span { "\(width) x \(height)" }
                 }
+                .attributes(.class("badge-info"))
               }
             }
             div(.class("flex justify-end")) {
