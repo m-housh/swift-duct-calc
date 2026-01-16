@@ -74,7 +74,7 @@ extension DatabaseClient.Migrations: DependencyKey {
         EquipmentInfo.Migrate(),
         Room.Migrate(),
         EffectiveLength.Migrate(),
-        DuctSizing.TrunkSize.Migrate(),
+        TrunkSize.Migrate(),
       ]
     }
   )

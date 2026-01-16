@@ -16,7 +16,7 @@ extension ManualDClient {
 
   func calculateDuctSizes(
     rooms: [Room],
-    trunks: [DuctSizing.TrunkSize],
+    trunks: [TrunkSize],
     sharedRequest: DuctSizeSharedRequest,
     logger: Logger? = nil
   ) async throws -> ProjectClient.DuctSizeResponse {
@@ -93,7 +93,7 @@ extension ManualDClient {
 
   func calculateTrunkSizes(
     rooms: [Room],
-    trunks: [DuctSizing.TrunkSize],
+    trunks: [TrunkSize],
     sharedRequest: DuctSizeSharedRequest,
     logger: Logger? = nil
   ) async throws -> [DuctSizing.TrunkContainer] {
@@ -190,7 +190,7 @@ extension Room {
   }
 }
 
-extension DuctSizing.TrunkSize.RoomProxy {
+extension TrunkSize.RoomProxy {
 
   // We need to make sure if registers got removed after a trunk
   // was already made / saved that we do not include registers that
@@ -211,7 +211,7 @@ extension DuctSizing.TrunkSize.RoomProxy {
   }
 }
 
-extension DuctSizing.TrunkSize {
+extension TrunkSize {
 
   var totalHeatingLoad: Double {
     rooms.reduce(into: 0) { $0 += $1.totalHeatingLoad }

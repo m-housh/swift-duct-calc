@@ -7,13 +7,13 @@ import ManualDCore
 extension DatabaseClient {
   @DependencyClient
   public struct TrunkSizes: Sendable {
-    public var create: @Sendable (DuctSizing.TrunkSize.Create) async throws -> DuctSizing.TrunkSize
-    public var delete: @Sendable (DuctSizing.TrunkSize.ID) async throws -> Void
-    public var fetch: @Sendable (Project.ID) async throws -> [DuctSizing.TrunkSize]
-    public var get: @Sendable (DuctSizing.TrunkSize.ID) async throws -> DuctSizing.TrunkSize?
+    public var create: @Sendable (TrunkSize.Create) async throws -> TrunkSize
+    public var delete: @Sendable (TrunkSize.ID) async throws -> Void
+    public var fetch: @Sendable (Project.ID) async throws -> [TrunkSize]
+    public var get: @Sendable (TrunkSize.ID) async throws -> TrunkSize?
     public var update:
-      @Sendable (DuctSizing.TrunkSize.ID, DuctSizing.TrunkSize.Update) async throws ->
-        DuctSizing.TrunkSize
+      @Sendable (TrunkSize.ID, TrunkSize.Update) async throws ->
+        TrunkSize
   }
 }
 
@@ -26,7 +26,7 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
         try request.validate()
 
         let trunk = request.toModel()
-        var roomProxies = [DuctSizing.TrunkSize.RoomProxy]()
+        var roomProxies = [TrunkSize.RoomProxy]()
 
         try await trunk.save(on: database)
 
@@ -90,7 +90,7 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
   }
 }
 
-extension DuctSizing.TrunkSize.Create {
+extension TrunkSize.Create {
 
   func validate() throws(ValidationError) {
     guard rooms.count > 0 else {
@@ -113,7 +113,7 @@ extension DuctSizing.TrunkSize.Create {
   }
 }
 
-extension DuctSizing.TrunkSize.Update {
+extension TrunkSize.Update {
   func validate() throws(ValidationError) {
     if let rooms {
       guard rooms.count > 0 else {
@@ -128,7 +128,7 @@ extension DuctSizing.TrunkSize.Update {
   }
 }
 
-extension DuctSizing.TrunkSize {
+extension TrunkSize {
 
   struct Migrate: AsyncMigration {
     let name = "CreateTrunkSize"
@@ -192,7 +192,7 @@ final class TrunkRoomModel: Model, @unchecked Sendable {
     trunkID: TrunkModel.IDValue,
     roomID: RoomModel.IDValue,
     registers: [Int],
-    type: DuctSizing.TrunkSize.TrunkType
+    type: TrunkSize.TrunkType
   ) {
     self.id = id
     $trunk.id = trunkID
@@ -201,7 +201,7 @@ final class TrunkRoomModel: Model, @unchecked Sendable {
     self.type = type.rawValue
   }
 
-  func toDTO(on database: any Database) async throws -> DuctSizing.TrunkSize.RoomProxy {
+  func toDTO(on database: any Database) async throws -> TrunkSize.RoomProxy {
     guard let room = try await RoomModel.find($room.id, on: database) else {
       throw NotFoundError()
     }
@@ -240,7 +240,7 @@ final class TrunkModel: Model, @unchecked Sendable {
   init(
     id: UUID? = nil,
     projectID: Project.ID,
-    type: DuctSizing.TrunkSize.TrunkType,
+    type: TrunkSize.TrunkType,
     height: Int? = nil,
     name: String? = nil
   ) {
@@ -251,15 +251,15 @@ final class TrunkModel: Model, @unchecked Sendable {
     self.name = name
   }
 
-  func toDTO(on database: any Database) async throws -> DuctSizing.TrunkSize {
-    let rooms = try await withThrowingTaskGroup(of: DuctSizing.TrunkSize.RoomProxy.self) { group in
+  func toDTO(on database: any Database) async throws -> TrunkSize {
+    let rooms = try await withThrowingTaskGroup(of: TrunkSize.RoomProxy.self) { group in
       for room in self.rooms {
         group.addTask {
           try await room.toDTO(on: database)
         }
       }
 
-      return try await group.reduce(into: [DuctSizing.TrunkSize.RoomProxy]()) {
+      return try await group.reduce(into: [TrunkSize.RoomProxy]()) {
         $0.append($1)
       }
 
@@ -277,7 +277,7 @@ final class TrunkModel: Model, @unchecked Sendable {
   }
 
   func applyUpdates(
-    _ updates: DuctSizing.TrunkSize.Update,
+    _ updates: TrunkSize.Update,
     on database: any Database
   ) async throws {
     if let type = updates.type, type.rawValue != self.type {
@@ -340,15 +340,15 @@ final class TrunkModel: Model, @unchecked Sendable {
 
 extension Array where Element == TrunkModel {
 
-  func toDTO(on database: any Database) async throws -> [DuctSizing.TrunkSize] {
-    try await withThrowingTaskGroup(of: DuctSizing.TrunkSize.self) { group in
+  func toDTO(on database: any Database) async throws -> [TrunkSize] {
+    try await withThrowingTaskGroup(of: TrunkSize.self) { group in
       for model in self {
         group.addTask {
           try await model.toDTO(on: database)
         }
       }
 
-      return try await group.reduce(into: [DuctSizing.TrunkSize]()) {
+      return try await group.reduce(into: [TrunkSize]()) {
         $0.append($1)
       }
     }

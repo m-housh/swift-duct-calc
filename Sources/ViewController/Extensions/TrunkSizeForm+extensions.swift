@@ -4,7 +4,7 @@ import ManualDCore
 
 extension SiteRoute.View.ProjectRoute.DuctSizingRoute.TrunkSizeForm {
 
-  func toCreate(logger: Logger? = nil) throws -> DuctSizing.TrunkSize.Create {
+  func toCreate(logger: Logger? = nil) throws -> TrunkSize.Create {
     try .init(
       projectID: projectID,
       type: type,
@@ -14,7 +14,7 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute.TrunkSizeForm {
     )
   }
 
-  func toUpdate(logger: Logger? = nil) throws -> DuctSizing.TrunkSize.Update {
+  func toUpdate(logger: Logger? = nil) throws -> TrunkSize.Update {
     try .init(
       type: type,
       rooms: makeRooms(logger: logger),

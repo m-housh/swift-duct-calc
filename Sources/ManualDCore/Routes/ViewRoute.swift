@@ -668,9 +668,9 @@ extension SiteRoute.View.ProjectRoute {
     }
 
     public enum TrunkRoute: Equatable, Sendable {
-      case delete(DuctSizing.TrunkSize.ID)
+      case delete(TrunkSize.ID)
       case submit(TrunkSizeForm)
-      case update(DuctSizing.TrunkSize.ID, TrunkSizeForm)
+      case update(TrunkSize.ID, TrunkSizeForm)
 
       public static let rootPath = "trunk"
 
@@ -678,7 +678,7 @@ extension SiteRoute.View.ProjectRoute {
         Route(.case(Self.delete)) {
           Path {
             rootPath
-            DuctSizing.TrunkSize.ID.parser()
+            TrunkSize.ID.parser()
           }
           Method.delete
         }
@@ -690,7 +690,7 @@ extension SiteRoute.View.ProjectRoute {
           Body {
             FormData {
               Field("projectID") { Project.ID.parser() }
-              Field("type") { DuctSizing.TrunkSize.TrunkType.parser() }
+              Field("type") { TrunkSize.TrunkType.parser() }
               Optionally {
                 Field("height") { Int.parser() }
 
@@ -708,13 +708,13 @@ extension SiteRoute.View.ProjectRoute {
         Route(.case(Self.update)) {
           Path {
             rootPath
-            DuctSizing.TrunkSize.ID.parser()
+            TrunkSize.ID.parser()
           }
           Method.patch
           Body {
             FormData {
               Field("projectID") { Project.ID.parser() }
-              Field("type") { DuctSizing.TrunkSize.TrunkType.parser() }
+              Field("type") { TrunkSize.TrunkType.parser() }
               Optionally {
                 Field("height") { Int.parser() }
               }
@@ -732,17 +732,43 @@ extension SiteRoute.View.ProjectRoute {
     }
 
     public struct RoomRectangularForm: Equatable, Sendable {
+
       public let id: Room.RectangularSize.ID?
       public let register: Int
       public let height: Int
+
+      public init(
+        id: Room.RectangularSize.ID? = nil,
+        register: Int,
+        height: Int
+      ) {
+        self.id = id
+        self.register = register
+        self.height = height
+      }
     }
 
     public struct TrunkSizeForm: Equatable, Sendable {
+
       public let projectID: Project.ID
-      public let type: DuctSizing.TrunkSize.TrunkType
+      public let type: TrunkSize.TrunkType
       public let height: Int?
       public let name: String?
       public let rooms: [String]
+
+      public init(
+        projectID: Project.ID,
+        type: TrunkSize.TrunkType,
+        height: Int? = nil,
+        name: String? = nil,
+        rooms: [String]
+      ) {
+        self.projectID = projectID
+        self.type = type
+        self.height = height
+        self.name = name
+        self.rooms = rooms
+      }
     }
   }
 }

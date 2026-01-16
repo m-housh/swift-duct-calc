@@ -14,7 +14,7 @@ extension Room {
   }
 }
 
-extension DuctSizing.TrunkSize.RoomProxy {
+extension TrunkSize.RoomProxy {
 
   // We need to make sure if registers got removed after a trunk
   // was already made / saved that we do not include registers that
@@ -35,7 +35,7 @@ extension DuctSizing.TrunkSize.RoomProxy {
   }
 }
 
-extension DuctSizing.TrunkSize {
+extension TrunkSize {
 
   var totalHeatingLoad: Double {
     rooms.reduce(into: 0) { $0 += $1.totalHeatingLoad }

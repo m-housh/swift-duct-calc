@@ -17,7 +17,7 @@ struct TrunkSizeForm: HTML, Sendable {
   let rooms: [DuctSizing.RoomContainer]
   let dismiss: Bool
 
-  var trunk: DuctSizing.TrunkSize? {
+  var trunk: TrunkSize? {
     container?.trunk
   }
 
@@ -56,7 +56,7 @@ struct TrunkSizeForm: HTML, Sendable {
           label(.class("select w-full")) {
             span(.class("label")) { "Type" }
             select(.name("type")) {
-              for type in DuctSizing.TrunkSize.TrunkType.allCases {
+              for type in TrunkSize.TrunkType.allCases {
                 option(.value(type.rawValue)) { type.rawValue.capitalized }
                   .attributes(.selected, when: trunk?.type == type)
               }
@@ -121,7 +121,7 @@ struct TrunkSizeForm: HTML, Sendable {
 
 }
 
-extension Array where Element == DuctSizing.TrunkSize.RoomProxy {
+extension Array where Element == TrunkSize.RoomProxy {
   func hasRoom(_ room: DuctSizing.RoomContainer) -> Bool {
     first {
       $0.id == room.roomID
