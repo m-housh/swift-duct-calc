@@ -43,7 +43,7 @@ extension DatabaseClient {
   func sharedDuctRequest(_ projectID: Project.ID) async throws -> DuctSizeSharedRequest {
 
     guard let dfrResponse = try await designFrictionRate(projectID: projectID) else {
-      throw DuctCalcClientError("Project not complete.")
+      throw ProjectClientError("Project not complete.")
     }
 
     let ensuredTEL = try dfrResponse.ensureMaxContainer()
@@ -61,7 +61,7 @@ extension DatabaseClient {
   // Fetches the project sensible heat ratio or throws an error if it's nil.
   func ensuredSHR(_ projectID: Project.ID) async throws -> Double {
     guard let projectSHR = try await projects.getSensibleHeatRatio(projectID) else {
-      throw DuctCalcClientError("Project sensible heat ratio not set.")
+      throw ProjectClientError("Project sensible heat ratio not set.")
     }
     return projectSHR
   }
@@ -78,10 +78,10 @@ extension DatabaseClient {
     func ensureMaxContainer() throws -> EnsuredTEL {
 
       guard let maxSupplyLength = telMaxContainer.supply else {
-        throw DuctCalcClientError("Max supply TEL not found")
+        throw ProjectClientError("Max supply TEL not found")
       }
       guard let maxReturnLength = telMaxContainer.return else {
-        throw DuctCalcClientError("Max supply TEL not found")
+        throw ProjectClientError("Max supply TEL not found")
       }
 
       return (maxSupplyLength, maxReturnLength)

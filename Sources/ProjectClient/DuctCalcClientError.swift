@@ -1,6 +1,6 @@
 import Foundation
 
-public struct DuctCalcClientError: Error {
+public struct ProjectClientError: Error {
   public let reason: String
 
   public init(_ reason: String) {
