@@ -161,7 +161,7 @@ extension DuctSizing.SizeContainer {
   init(
     designCFM: DuctSizing.DesignCFM,
     sizes: ManualDClient.DuctSizeResponse,
-    rectangularSize: DuctSizing.RectangularDuct?,
+    rectangularSize: Room.RectangularSize?,
     width: Int?
   ) {
     self.init(

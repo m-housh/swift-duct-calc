@@ -627,7 +627,7 @@ extension SiteRoute.View.ProjectRoute {
         }
         Method.delete
         Query {
-          Field("rectangularSize") { DuctSizing.RectangularDuct.ID.parser() }
+          Field("rectangularSize") { Room.RectangularSize.ID.parser() }
           Field("register") { Int.parser() }
         }
         .map(.memberwise(DeleteRectangularDuct.init))
@@ -642,7 +642,7 @@ extension SiteRoute.View.ProjectRoute {
         Body {
           FormData {
             Optionally {
-              Field("id") { DuctSizing.RectangularDuct.ID.parser() }
+              Field("id") { Room.RectangularSize.ID.parser() }
             }
             Field("register") { Int.parser() }
             Field("height") { Int.parser() }
@@ -658,10 +658,10 @@ extension SiteRoute.View.ProjectRoute {
 
     public struct DeleteRectangularDuct: Equatable, Sendable {
 
-      public let rectangularSizeID: DuctSizing.RectangularDuct.ID
+      public let rectangularSizeID: Room.RectangularSize.ID
       public let register: Int
 
-      public init(rectangularSizeID: DuctSizing.RectangularDuct.ID, register: Int) {
+      public init(rectangularSizeID: Room.RectangularSize.ID, register: Int) {
         self.rectangularSizeID = rectangularSizeID
         self.register = register
       }
@@ -732,7 +732,7 @@ extension SiteRoute.View.ProjectRoute {
     }
 
     public struct RoomRectangularForm: Equatable, Sendable {
-      public let id: DuctSizing.RectangularDuct.ID?
+      public let id: Room.RectangularSize.ID?
       public let register: Int
       public let height: Int
     }

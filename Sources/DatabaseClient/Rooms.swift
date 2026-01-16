@@ -10,12 +10,11 @@ extension DatabaseClient {
     public var create: @Sendable (Room.Create) async throws -> Room
     public var delete: @Sendable (Room.ID) async throws -> Void
     public var deleteRectangularSize:
-      @Sendable (Room.ID, DuctSizing.RectangularDuct.ID) async throws -> Room
+      @Sendable (Room.ID, Room.RectangularSize.ID) async throws -> Room
     public var get: @Sendable (Room.ID) async throws -> Room?
     public var fetch: @Sendable (Project.ID) async throws -> [Room]
     public var update: @Sendable (Room.ID, Room.Update) async throws -> Room
-    public var updateRectangularSize:
-      @Sendable (Room.ID, DuctSizing.RectangularDuct) async throws -> Room
+    public var updateRectangularSize: @Sendable (Room.ID, Room.RectangularSize) async throws -> Room
   }
 }
 
@@ -204,7 +203,7 @@ final class RoomModel: Model, @unchecked Sendable {
   var registerCount: Int
 
   @Field(key: "rectangularSizes")
-  var rectangularSizes: [DuctSizing.RectangularDuct]?
+  var rectangularSizes: [Room.RectangularSize]?
 
   @Timestamp(key: "createdAt", on: .create, format: .iso8601)
   var createdAt: Date?
@@ -224,7 +223,7 @@ final class RoomModel: Model, @unchecked Sendable {
     coolingTotal: Double,
     coolingSensible: Double? = nil,
     registerCount: Int,
-    rectangularSizes: [DuctSizing.RectangularDuct]? = nil,
+    rectangularSizes: [Room.RectangularSize]? = nil,
     createdAt: Date? = nil,
     updatedAt: Date? = nil,
     projectID: Project.ID

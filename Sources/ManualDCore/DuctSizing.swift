@@ -3,27 +3,9 @@ import Foundation
 
 public enum DuctSizing {
 
-  public struct RectangularDuct: Codable, Equatable, Identifiable, Sendable {
-
-    public let id: UUID
-    public let register: Int?
-    public let height: Int
-
-    public init(
-      id: UUID = .init(),
-      register: Int? = nil,
-      height: Int,
-    ) {
-      self.id = id
-      self.register = register
-      self.height = height
-    }
-
-  }
-
   public struct SizeContainer: Codable, Equatable, Sendable {
 
-    public let rectangularID: RectangularDuct.ID?
+    public let rectangularID: Room.RectangularSize.ID?
     public let designCFM: DesignCFM
     public let roundSize: Double
     public let finalSize: Int
@@ -33,7 +15,7 @@ public enum DuctSizing {
     public let width: Int?
 
     public init(
-      rectangularID: RectangularDuct.ID? = nil,
+      rectangularID: Room.RectangularSize.ID? = nil,
       designCFM: DuctSizing.DesignCFM,
       roundSize: Double,
       finalSize: Int,
@@ -86,41 +68,6 @@ public enum DuctSizing {
       self.coolingCFM = coolingCFM
       self.ductSize = ductSize
     }
-
-    // public init(
-    //   roomID: Room.ID,
-    //   roomName: String,
-    //   roomRegister: Int,
-    //   heatingLoad: Double,
-    //   coolingLoad: Double,
-    //   heatingCFM: Double,
-    //   coolingCFM: Double,
-    //   designCFM: DesignCFM,
-    //   roundSize: Double,
-    //   finalSize: Int,
-    //   velocity: Int,
-    //   flexSize: Int,
-    //   rectangularSize: RectangularDuct? = nil,
-    //   rectangularWidth: Int? = nil
-    // ) {
-    //   self.roomID = roomID
-    //   self.roomName = roomName
-    //   self.roomRegister = roomRegister
-    //   self.heatingLoad = heatingLoad
-    //   self.coolingLoad = coolingLoad
-    //   self.heatingCFM = heatingCFM
-    //   self.coolingCFM = coolingCFM
-    //   self.ductSize = .init(
-    //     rectangularID: rectangularSize?.id,
-    //     designCFM: designCFM,
-    //     roundSize: roundSize,
-    //     finalSize: finalSize,
-    //     velocity: velocity,
-    //     flexSize: flexSize,
-    //     height: rectangularSize?.height,
-    //     width: rectangularWidth
-    //   )
-    // }
 
     public subscript<T>(dynamicMember keyPath: KeyPath<DuctSizing.SizeContainer, T>) -> T {
       ductSize[keyPath: keyPath]
