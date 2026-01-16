@@ -13,7 +13,7 @@ extension ManualDClient: DependencyKey {
       let finalSize = try roundSize(ductulatorSize)
       let flexSize = try flexSize(request)
       return .init(
-        ductulatorSize: ductulatorSize,
+        calculatedSize: ductulatorSize,
         finalSize: finalSize,
         flexSize: flexSize,
         velocity: velocity(cfm: request.designCFM, roundSize: finalSize)
@@ -30,13 +30,13 @@ extension ManualDClient: DependencyKey {
       let frictionRate = availableStaticPressure * 100.0 / Double(request.totalEffectiveLength)
       return .init(availableStaticPressure: availableStaticPressure, frictionRate: frictionRate)
     },
-    totalEffectiveLength: { request in
+    totalEquivalentLength: { request in
       let trunkLengths = request.trunkLengths.reduce(0) { $0 + $1 }
       let runoutLengths = request.runoutLengths.reduce(0) { $0 + $1 }
       let groupLengths = request.effectiveLengthGroups.totalEffectiveLength
       return trunkLengths + runoutLengths + groupLengths
     },
-    equivalentRectangularDuct: { request in
+    rectangularSize: { request in
       let width = (Double.pi * (pow(Double(request.roundSize) / 2.0, 2.0))) / Double(request.height)
       return .init(height: request.height, width: Int(width.rounded(.toNearestOrEven)))
     }

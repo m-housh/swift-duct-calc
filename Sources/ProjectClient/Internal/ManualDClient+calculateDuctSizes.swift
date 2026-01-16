@@ -62,7 +62,7 @@ extension ManualDClient {
           .first(where: { $0.register == nil || $0.register == n })
 
         if let rectangularSize {
-          let response = try await self.equivalentRectangularDuct(
+          let response = try await self.rectangularSize(
             .init(round: sizes.finalSize, height: rectangularSize.height)
           )
           rectangularWidth = response.width
@@ -115,7 +115,7 @@ extension ManualDClient {
       )
       var width: Int? = nil
       if let height = trunk.height {
-        let rectangularSize = try await self.equivalentRectangularDuct(
+        let rectangularSize = try await self.rectangularSize(
           .init(round: sizes.finalSize, height: height)
         )
         width = rectangularSize.width
@@ -149,7 +149,7 @@ extension DuctSizes.SizeContainer {
     self.init(
       rectangularID: nil,
       designCFM: designCFM,
-      roundSize: sizes.ductulatorSize,
+      roundSize: sizes.calculatedSize,
       finalSize: sizes.finalSize,
       velocity: sizes.velocity,
       flexSize: sizes.flexSize,
@@ -167,7 +167,7 @@ extension DuctSizes.SizeContainer {
     self.init(
       rectangularID: rectangularSize?.id,
       designCFM: designCFM,
-      roundSize: sizes.ductulatorSize,
+      roundSize: sizes.calculatedSize,
       finalSize: sizes.finalSize,
       velocity: sizes.velocity,
       flexSize: sizes.flexSize,

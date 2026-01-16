@@ -105,9 +105,6 @@ extension DuctSizes {
       }
     }
   }
-}
-
-extension DuctSizes {
 
   // Represents the database model that the duct sizes have been calculated
   // for.

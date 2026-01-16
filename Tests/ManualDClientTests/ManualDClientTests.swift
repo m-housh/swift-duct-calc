@@ -27,7 +27,7 @@ struct ManualDClientTests {
     let response = try await manualD.ductSize(
       .init(designCFM: 88, frictionRate: 0.06)
     )
-    #expect(numberFormatter.string(for: response.ductulatorSize) == "6.07")
+    #expect(numberFormatter.string(for: response.calculatedSize) == "6.07")
     #expect(response.finalSize == 7)
     #expect(response.flexSize == 7)
     #expect(response.velocity == 329)
@@ -61,7 +61,7 @@ struct ManualDClientTests {
 
   @Test
   func totalEffectiveLength() async throws {
-    let response = try await manualD.totalEffectiveLength(
+    let response = try await manualD.totalEquivalentLength(
       .init(
         trunkLengths: [25],
         runoutLengths: [10],
@@ -79,7 +79,7 @@ struct ManualDClientTests {
 
   @Test
   func equivalentRectangularDuct() async throws {
-    let response = try await manualD.equivalentRectangularDuct(.init(round: 7, height: 8))
+    let response = try await manualD.rectangularSize(.init(round: 7, height: 8))
     #expect(response.height == 8)
     #expect(response.width == 5)
   }
