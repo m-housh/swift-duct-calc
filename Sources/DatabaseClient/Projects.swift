@@ -73,10 +73,16 @@ extension DatabaseClient.Projects: TestDependencyKey {
         )
       },
       getSensibleHeatRatio: { id in
-        guard let model = try await ProjectModel.find(id, on: database) else {
+        guard
+          let shr = try await ProjectModel.query(on: database)
+            .field(\.$id)
+            .field(\.$sensibleHeatRatio)
+            .filter(\.$id == id)
+            .first()
+        else {
           throw NotFoundError()
         }
-        return model.sensibleHeatRatio
+        return shr.sensibleHeatRatio
       },
       fetch: { userID, request in
         try await ProjectModel.query(on: database)

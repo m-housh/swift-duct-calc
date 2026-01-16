@@ -8,6 +8,7 @@ let package = Package(
     .executable(name: "App", targets: ["App"]),
     .library(name: "ApiController", targets: ["ApiController"]),
     .library(name: "DatabaseClient", targets: ["DatabaseClient"]),
+    .library(name: "ProjectClient", targets: ["ProjectClient"]),
     .library(name: "ManualDCore", targets: ["ManualDCore"]),
     .library(name: "ManualDClient", targets: ["ManualDClient"]),
     .library(name: "Styleguide", targets: ["Styleguide"]),
@@ -64,6 +65,13 @@ let package = Package(
       ]
     ),
     .target(
+      name: "ProjectClient",
+      dependencies: [
+        .target(name: "DatabaseClient"),
+        .target(name: "ManualDClient"),
+      ]
+    ),
+    .target(
       name: "ManualDCore",
       dependencies: [
         .product(name: "Dependencies", package: "swift-dependencies"),
@@ -105,6 +113,7 @@ let package = Package(
       name: "ViewController",
       dependencies: [
         .target(name: "DatabaseClient"),
+        .target(name: "ProjectClient"),
         .target(name: "ManualDClient"),
         .target(name: "ManualDCore"),
         .target(name: "Styleguide"),

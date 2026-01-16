@@ -3,6 +3,7 @@ import Dependencies
 import Elementary
 import Foundation
 import ManualDCore
+import ProjectClient
 import Styleguide
 
 extension ViewController.Request {
@@ -10,6 +11,7 @@ extension ViewController.Request {
   func render() async -> AnySendableHTML {
 
     @Dependency(\.database) var database
+    @Dependency(\.projectClient) var projectClient
 
     switch route {
     case .test:
@@ -18,7 +20,7 @@ extension ViewController.Request {
         await ResultView {
           return (
             try await database.projects.getCompletedSteps(projectID),
-            try await database.calculateDuctSizes(projectID: projectID)
+            try await projectClient.calculateDuctSizes(projectID)
           )
         } onSuccess: { (_, result) in
           TestPage(trunks: result.trunks, rooms: result.rooms)
@@ -555,6 +557,7 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
   ) async -> AnySendableHTML {
     @Dependency(\.database) var database
     @Dependency(\.manualD) var manualD
+    @Dependency(\.projectClient) var projectClient
 
     switch self {
     case .index:
@@ -563,7 +566,7 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
     case .deleteRectangularSize(let roomID, let request):
       return await ResultView {
         let room = try await database.rooms.deleteRectangularSize(roomID, request.rectangularSizeID)
-        return try await database.calculateDuctSizes(projectID: projectID)
+        return try await projectClient.calculateDuctSizes(projectID)
           .rooms
           .filter({ $0.roomID == room.id && $0.roomRegister == request.register })
           .first!
@@ -577,7 +580,7 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
           roomID,
           .init(id: form.id ?? .init(), register: form.register, height: form.height)
         )
-        return try await database.calculateDuctSizes(projectID: projectID)
+        return try await projectClient.calculateDuctSizes(projectID)
           .rooms
           .filter({ $0.roomID == room.id && $0.roomRegister == form.register })
           .first!
@@ -612,13 +615,14 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
     catching: @escaping @Sendable () async throws -> Void = {}
   ) async -> AnySendableHTML {
     @Dependency(\.database) var database
+    @Dependency(\.projectClient) var project
 
     return await request.view {
       await ResultView {
         try await catching()
         return (
           try await database.projects.getCompletedSteps(projectID),
-          try await database.calculateDuctSizes(projectID: projectID)
+          try await project.calculateDuctSizes(projectID)
         )
       } onSuccess: { (steps, ducts) in
         ProjectView(projectID: projectID, activeTab: .ductSizing, completedSteps: steps) {

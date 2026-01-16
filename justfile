@@ -1,6 +1,9 @@
 docker_image := "ductcalc"
 docker_tag := "latest"
 
+clean:
+	rm -rf .build
+
 install-deps:
 	@curl -sL daisyui.com/fast | bash
 
