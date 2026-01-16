@@ -1,12 +1,13 @@
 import ApiController
+import AuthClient
 import DatabaseClient
 import Dependencies
+import ManualDCore
 import Vapor
 import ViewController
 
 // Taken from discussions page on `swift-dependencies`.
 
-// FIX: Use live view controller.
 struct DependenciesMiddleware: AsyncMiddleware {
 
   private let values: DependencyValues.Continuation
@@ -29,6 +30,7 @@ struct DependenciesMiddleware: AsyncMiddleware {
     try await values.yield {
       try await withDependencies {
         $0.apiController = apiController
+        $0.authClient = .live(on: request)
         $0.database = database
         // $0.dateFormatter = .liveValue
         $0.viewController = viewController

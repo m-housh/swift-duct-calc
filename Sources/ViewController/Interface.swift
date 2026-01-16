@@ -1,3 +1,4 @@
+import AuthClient
 import Dependencies
 import DependenciesMacros
 import Elementary
@@ -15,10 +16,6 @@ public typealias AnySendableHTML = (any HTML & Sendable)
 
 @DependencyClient
 public struct ViewController: Sendable {
-
-  public typealias AuthenticateHandler = @Sendable (User) -> Void
-  public typealias CurrentUserHandler = @Sendable () throws -> User
-
   public var view: @Sendable (Request) async throws -> AnySendableHTML
 }
 
@@ -29,21 +26,15 @@ extension ViewController {
     public let route: SiteRoute.View
     public let isHtmxRequest: Bool
     public let logger: Logger
-    public let authenticateUser: AuthenticateHandler
-    public let currentUser: CurrentUserHandler
 
     public init(
       route: SiteRoute.View,
       isHtmxRequest: Bool,
-      logger: Logger,
-      authenticateUser: @escaping AuthenticateHandler,
-      currentUser: @escaping CurrentUserHandler
+      logger: Logger
     ) {
       self.route = route
       self.isHtmxRequest = isHtmxRequest
       self.logger = logger
-      self.authenticateUser = authenticateUser
-      self.currentUser = currentUser
     }
 
   }
@@ -62,28 +53,23 @@ extension ViewController: DependencyKey {
 
 extension ViewController.Request {
 
+  func currentUser() throws -> User {
+    @Dependency(\.authClient.currentUser) var currentUser
+    return try currentUser()
+  }
+
   func authenticate(
     _ login: User.Login
   ) async throws -> User {
-    @Dependency(\.database.users) var users
-    let token = try await users.login(login)
-    let user = try await users.get(token.userID)!
-    authenticateUser(user)
-    logger.debug("Logged in user: \(user.id)")
-    return user
+    @Dependency(\.authClient) var auth
+    return try await auth.login(login)
   }
 
   @discardableResult
   func createAndAuthenticate(
     _ signup: User.Create
   ) async throws -> User {
-    @Dependency(\.database.users) var users
-    let user = try await users.create(signup)
-    let _ = try await users.login(
-      .init(email: signup.email, password: signup.password)
-    )
-    authenticateUser(user)
-    logger.debug("Created and logged in user: \(user.id)")
-    return user
+    @Dependency(\.authClient) var auth
+    return try await auth.createAndLogin(signup)
   }
 }

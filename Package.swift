@@ -7,6 +7,7 @@ let package = Package(
   products: [
     .executable(name: "App", targets: ["App"]),
     .library(name: "ApiController", targets: ["ApiController"]),
+    .library(name: "AuthClient", targets: ["AuthClient"]),
     .library(name: "DatabaseClient", targets: ["DatabaseClient"]),
     .library(name: "ProjectClient", targets: ["ProjectClient"]),
     .library(name: "ManualDCore", targets: ["ManualDCore"]),
@@ -32,6 +33,7 @@ let package = Package(
       name: "App",
       dependencies: [
         .target(name: "ApiController"),
+        .target(name: "AuthClient"),
         .target(name: "DatabaseClient"),
         .target(name: "ViewController"),
         .product(name: "Dependencies", package: "swift-dependencies"),
@@ -52,6 +54,15 @@ let package = Package(
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
         .product(name: "Vapor", package: "vapor"),
+      ]
+    ),
+    .target(
+      name: "AuthClient",
+      dependencies: [
+        .target(name: "DatabaseClient"),
+        .target(name: "ManualDCore"),
+        .product(name: "Dependencies", package: "swift-dependencies"),
+        .product(name: "DependenciesMacros", package: "swift-dependencies"),
       ]
     ),
     .target(
@@ -112,6 +123,7 @@ let package = Package(
     .target(
       name: "ViewController",
       dependencies: [
+        .target(name: "AuthClient"),
         .target(name: "DatabaseClient"),
         .target(name: "ProjectClient"),
         .target(name: "ManualDClient"),

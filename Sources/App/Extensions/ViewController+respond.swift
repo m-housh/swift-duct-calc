@@ -12,11 +12,7 @@ extension ViewController {
       .init(
         route: route,
         isHtmxRequest: request.isHtmxRequest,
-        logger: request.logger,
-        authenticateUser: { request.session.authenticate($0) },
-        currentUser: {
-          try request.auth.require(User.self)
-        }
+        logger: request.logger
       )
     )
     return AnyHTMLResponse(value: html)
