@@ -2,6 +2,14 @@ import Logging
 import ManualDClient
 import ManualDCore
 
+struct DuctSizeSharedRequest {
+  let equipmentInfo: EquipmentInfo
+  let maxSupplyLength: EffectiveLength
+  let maxReturnLenght: EffectiveLength
+  let designFrictionRate: Double
+  let projectSHR: Double
+}
+
 // TODO: Remove Logger and use depedency logger.
 
 extension ManualDClient {
@@ -9,58 +17,42 @@ extension ManualDClient {
   func calculateDuctSizes(
     rooms: [Room],
     trunks: [DuctSizing.TrunkSize],
-    equipmentInfo: EquipmentInfo,
-    maxSupplyLength: EffectiveLength,
-    maxReturnLength: EffectiveLength,
-    designFrictionRate: Double,
-    projectSHR: Double,
+    sharedRequest: DuctSizeSharedRequest,
     logger: Logger? = nil
-  ) async throws -> ProjectClient.ProjectResponse {
+  ) async throws -> ProjectClient.DuctSizeResponse {
     try await .init(
       rooms: calculateRoomSizes(
         rooms: rooms,
-        equipmentInfo: equipmentInfo,
-        maxSupplyLength: maxSupplyLength,
-        maxReturnLength: maxReturnLength,
-        designFrictionRate: designFrictionRate,
-        projectSHR: projectSHR
+        sharedRequest: sharedRequest
       ),
       trunks: calculateTrunkSizes(
         rooms: rooms,
         trunks: trunks,
-        equipmentInfo: equipmentInfo,
-        maxSupplyLength: maxSupplyLength,
-        maxReturnLength: maxReturnLength,
-        designFrictionRate: designFrictionRate,
-        projectSHR: projectSHR
+        sharedRequest: sharedRequest
       )
     )
   }
 
   func calculateRoomSizes(
     rooms: [Room],
-    equipmentInfo: EquipmentInfo,
-    maxSupplyLength: EffectiveLength,
-    maxReturnLength: EffectiveLength,
-    designFrictionRate: Double,
-    projectSHR: Double,
+    sharedRequest: DuctSizeSharedRequest,
     logger: Logger? = nil
   ) async throws -> [DuctSizing.RoomContainer] {
 
     var retval: [DuctSizing.RoomContainer] = []
     let totalHeatingLoad = rooms.totalHeatingLoad
-    let totalCoolingSensible = rooms.totalCoolingSensible(shr: projectSHR)
+    let totalCoolingSensible = rooms.totalCoolingSensible(shr: sharedRequest.projectSHR)
 
     for room in rooms {
       let heatingLoad = room.heatingLoadPerRegister
-      let coolingLoad = room.coolingSensiblePerRegister(projectSHR: projectSHR)
+      let coolingLoad = room.coolingSensiblePerRegister(projectSHR: sharedRequest.projectSHR)
       let heatingPercent = heatingLoad / totalHeatingLoad
       let coolingPercent = coolingLoad / totalCoolingSensible
-      let heatingCFM = heatingPercent * Double(equipmentInfo.heatingCFM)
-      let coolingCFM = coolingPercent * Double(equipmentInfo.coolingCFM)
+      let heatingCFM = heatingPercent * Double(sharedRequest.equipmentInfo.heatingCFM)
+      let coolingCFM = coolingPercent * Double(sharedRequest.equipmentInfo.coolingCFM)
       let designCFM = DuctSizing.DesignCFM(heating: heatingCFM, cooling: coolingCFM)
       let sizes = try await self.ductSize(
-        .init(designCFM: Int(designCFM.value), frictionRate: designFrictionRate)
+        .init(designCFM: Int(designCFM.value), frictionRate: sharedRequest.designFrictionRate)
       )
 
       for n in 1...room.registerCount {
@@ -103,28 +95,24 @@ extension ManualDClient {
   func calculateTrunkSizes(
     rooms: [Room],
     trunks: [DuctSizing.TrunkSize],
-    equipmentInfo: EquipmentInfo,
-    maxSupplyLength: EffectiveLength,
-    maxReturnLength: EffectiveLength,
-    designFrictionRate: Double,
-    projectSHR: Double,
+    sharedRequest: DuctSizeSharedRequest,
     logger: Logger? = nil
   ) async throws -> [DuctSizing.TrunkContainer] {
 
     var retval = [DuctSizing.TrunkContainer]()
     let totalHeatingLoad = rooms.totalHeatingLoad
-    let totalCoolingSensible = rooms.totalCoolingSensible(shr: projectSHR)
+    let totalCoolingSensible = rooms.totalCoolingSensible(shr: sharedRequest.projectSHR)
 
     for trunk in trunks {
       let heatingLoad = trunk.totalHeatingLoad
-      let coolingLoad = trunk.totalCoolingSensible(projectSHR: projectSHR)
+      let coolingLoad = trunk.totalCoolingSensible(projectSHR: sharedRequest.projectSHR)
       let heatingPercent = heatingLoad / totalHeatingLoad
       let coolingPercent = coolingLoad / totalCoolingSensible
-      let heatingCFM = heatingPercent * Double(equipmentInfo.heatingCFM)
-      let coolingCFM = coolingPercent * Double(equipmentInfo.coolingCFM)
+      let heatingCFM = heatingPercent * Double(sharedRequest.equipmentInfo.heatingCFM)
+      let coolingCFM = coolingPercent * Double(sharedRequest.equipmentInfo.coolingCFM)
       let designCFM = DuctSizing.DesignCFM(heating: heatingCFM, cooling: coolingCFM)
       let sizes = try await self.ductSize(
-        .init(designCFM: Int(designCFM.value), frictionRate: designFrictionRate)
+        .init(designCFM: Int(designCFM.value), frictionRate: sharedRequest.designFrictionRate)
       )
       var width: Int? = nil
       if let height = trunk.height {

@@ -21,7 +21,7 @@ struct RoomsView: HTML, Sendable {
           }
 
           div(.class("flex justify-end grow")) {
-            Tooltip("Project wide sensible heat ratio", position: .left) {
+            Tooltip("Set sensible heat ratio", position: .left) {
               button(
                 .class(
                   """
@@ -43,6 +43,7 @@ struct RoomsView: HTML, Sendable {
               }
               .attributes(.class("border border-error"), when: sensibleHeatRatio == nil)
             }
+            .attributes(.class("tooltip-open"), when: sensibleHeatRatio == nil)
           }
 
           div(.class("flex items-end space-x-4 font-bold")) {
@@ -67,7 +68,7 @@ struct RoomsView: HTML, Sendable {
 
       SHRForm(
         sensibleHeatRatio: sensibleHeatRatio,
-        dismiss: sensibleHeatRatio != nil
+        dismiss: true
       )
 
       table(.class("table table-zebra text-lg"), .id("roomsTable")) {

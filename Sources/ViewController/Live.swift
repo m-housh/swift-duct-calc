@@ -118,6 +118,7 @@ extension SiteRoute.View.ProjectRoute {
 
   func renderView(on request: ViewController.Request) async -> AnySendableHTML {
     @Dependency(\.database) var database
+    @Dependency(\.projectClient) var projectClient
 
     switch self {
     case .index:
@@ -126,7 +127,7 @@ extension SiteRoute.View.ProjectRoute {
           let user = try request.currentUser()
           return try await (
             user.id,
-            database.projects.fetchPage(userID: user.id)
+            database.projects.fetch(user.id, .first)
           )
 
         } onSuccess: { (userID, projects) in
@@ -148,19 +149,14 @@ extension SiteRoute.View.ProjectRoute {
       return await request.view {
         await ResultView {
           let user = try request.currentUser()
-          let project = try await database.projects.create(user.id, form)
-          try await database.componentLoss.createDefaults(projectID: project.id)
-          let rooms = try await database.rooms.fetch(project.id)
-          let shr = try await database.projects.getSensibleHeatRatio(project.id)
-          let completedSteps = try await database.projects.getCompletedSteps(project.id)
-          return (project.id, rooms, shr, completedSteps)
-        } onSuccess: { (projectID, rooms, shr, completedSteps) in
+          return try await projectClient.createProject(user.id, form)
+        } onSuccess: { response in
           ProjectView(
-            projectID: projectID,
+            projectID: response.projectID,
             activeTab: .rooms,
-            completedSteps: completedSteps
+            completedSteps: response.completedSteps
           ) {
-            RoomsView(rooms: rooms, sensibleHeatRatio: shr)
+            RoomsView(rooms: response.rooms, sensibleHeatRatio: response.sensibleHeatRatio)
           }
         }
       }
@@ -418,32 +414,21 @@ extension SiteRoute.View.ProjectRoute.ComponentLossRoute {
   ) async -> AnySendableHTML {
 
     @Dependency(\.database) var database
-    @Dependency(\.manualD) var manualD
+    @Dependency(\.projectClient) var projectClient
 
     return await request.view {
       await ResultView {
         try await catching()
-
-        let equipment = try await database.equipment.fetch(projectID)
-        let componentLosses = try await database.componentLoss.fetch(projectID)
-        let lengths = try await database.effectiveLength.fetchMax(projectID)
-
         return (
           try await database.projects.getCompletedSteps(projectID),
-          componentLosses,
-          lengths,
-          try await manualD.frictionRate(
-            equipmentInfo: equipment,
-            componentLosses: componentLosses,
-            effectiveLength: lengths
-          )
+          try await projectClient.frictionRate(projectID)
         )
-      } onSuccess: { (steps, losses, lengths, frictionRate) in
+      } onSuccess: { (steps, response) in
         ProjectView(projectID: projectID, activeTab: .frictionRate, completedSteps: steps) {
           FrictionRateView(
-            componentLosses: losses,
-            equivalentLengths: lengths,
-            frictionRateResponse: frictionRate
+            componentLosses: response.componentLosses,
+            equivalentLengths: response.equivalentLengths,
+            frictionRateResponse: response.frictionRate
           )
         }
 
@@ -566,8 +551,7 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
     case .deleteRectangularSize(let roomID, let request):
       return await ResultView {
         let room = try await database.rooms.deleteRectangularSize(roomID, request.rectangularSizeID)
-        return try await projectClient.calculateDuctSizes(projectID)
-          .rooms
+        return try await projectClient.calculateRoomDuctSizes(projectID)
           .filter({ $0.roomID == room.id && $0.roomRegister == request.register })
           .first!
       } onSuccess: { room in
@@ -580,8 +564,7 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
           roomID,
           .init(id: form.id ?? .init(), register: form.register, height: form.height)
         )
-        return try await projectClient.calculateDuctSizes(projectID)
-          .rooms
+        return try await projectClient.calculateRoomDuctSizes(projectID)
           .filter({ $0.roomID == room.id && $0.roomRegister == form.register })
           .first!
       } onSuccess: { room in

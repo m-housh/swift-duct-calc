@@ -7,8 +7,40 @@ extension DatabaseClient {
 
   func calculateDuctSizes(
     projectID: Project.ID
-  ) async throws -> ProjectClient.ProjectResponse {
+  ) async throws -> ProjectClient.DuctSizeResponse {
     @Dependency(\.manualD) var manualD
+
+    return try await manualD.calculateDuctSizes(
+      rooms: rooms.fetch(projectID),
+      trunks: trunkSizes.fetch(projectID),
+      sharedRequest: sharedDuctRequest(projectID)
+    )
+  }
+
+  func calculateRoomDuctSizes(
+    projectID: Project.ID
+  ) async throws -> [DuctSizing.RoomContainer] {
+    @Dependency(\.manualD) var manualD
+
+    return try await manualD.calculateRoomSizes(
+      rooms: rooms.fetch(projectID),
+      sharedRequest: sharedDuctRequest(projectID)
+    )
+  }
+
+  func calculateTrunkDuctSizes(
+    projectID: Project.ID
+  ) async throws -> [DuctSizing.TrunkContainer] {
+    @Dependency(\.manualD) var manualD
+
+    return try await manualD.calculateTrunkSizes(
+      rooms: rooms.fetch(projectID),
+      trunks: trunkSizes.fetch(projectID),
+      sharedRequest: sharedDuctRequest(projectID)
+    )
+  }
+
+  func sharedDuctRequest(_ projectID: Project.ID) async throws -> DuctSizeSharedRequest {
 
     guard let dfrResponse = try await designFrictionRate(projectID: projectID) else {
       throw DuctCalcClientError("Project not complete.")
@@ -16,15 +48,14 @@ extension DatabaseClient {
 
     let ensuredTEL = try dfrResponse.ensureMaxContainer()
 
-    return try await manualD.calculateDuctSizes(
-      rooms: rooms.fetch(projectID),
-      trunks: trunkSizes.fetch(projectID),
+    return try await .init(
       equipmentInfo: dfrResponse.equipmentInfo,
       maxSupplyLength: ensuredTEL.supply,
-      maxReturnLength: ensuredTEL.return,
+      maxReturnLenght: ensuredTEL.return,
       designFrictionRate: dfrResponse.designFrictionRate,
       projectSHR: ensuredSHR(projectID)
     )
+
   }
 
   // Fetches the project sensible heat ratio or throws an error if it's nil.
