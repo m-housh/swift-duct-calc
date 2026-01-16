@@ -65,10 +65,13 @@ extension ViewController.Request {
             // let user = try currentUser()
             return (
               userID,
-              try await database.projects.fetch(userID, .init(page: 1, per: 25))
+              try await database.projects.fetch(userID, .init(page: 1, per: 25)),
+              profile.theme
             )
-          } onSuccess: { (userID, projects) in
-            ProjectsTable(userID: userID, projects: projects)
+          } onSuccess: { (userID, projects, theme) in
+            MainPage(displayFooter: true, theme: theme) {
+              ProjectsTable(userID: userID, projects: projects)
+            }
           }
         }
       }
