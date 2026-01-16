@@ -44,7 +44,7 @@ extension DuctSizingView {
     let formID = UUID().idString
 
     var deleteRoute: String {
-      guard let id = room.rectangularSize?.id else { return "" }
+      guard let id = room.rectangularID else { return "" }
 
       return SiteRoute.View.router.path(
         for: .project(
@@ -80,7 +80,7 @@ extension DuctSizingView {
 
             span(.class("label")) { "Design" }
             div(.class("flex justify-center")) {
-              Badge(number: room.designCFM.value, digits: 0)
+              Badge(number: room.ductSize.designCFM.value, digits: 0)
             }
 
             span(.class("label")) { "Heating" }
@@ -103,28 +103,28 @@ extension DuctSizingView {
 
             div(.class("label")) { "Calculated" }
             div(.class("flex justify-center")) {
-              Badge(number: room.roundSize, digits: 2)
+              Badge(number: room.ductSize.roundSize, digits: 2)
             }
             div {}
 
             div(.class("label")) { "Final" }
             div(.class("flex justify-center")) {
-              Badge(number: room.finalSize)
+              Badge(number: room.ductSize.finalSize)
                 .attributes(.class("badge-secondary"))
             }
             div {}
 
             div(.class("label")) { "Flex" }
             div(.class("flex justify-center")) {
-              Badge(number: room.flexSize)
+              Badge(number: room.ductSize.flexSize)
                 .attributes(.class("badge-primary"))
             }
             div {}
 
             div(.class("label")) { "Rectangular" }
             div(.class("flex justify-center")) {
-              if let width = room.rectangularWidth,
-                let height = room.rectangularSize?.height
+              if let width = room.ductSize.width,
+                let height = room.ductSize.height
               {
                 Badge {
                   span { "\(width) x \(height)" }
@@ -134,7 +134,7 @@ extension DuctSizingView {
             }
             div(.class("flex justify-end")) {
               div(.class("join")) {
-                if room.rectangularSize != nil {
+                if room.ductSize.width != nil {
                   Tooltip("Delete Size", position: .bottom) {
                     TrashButton()
                       .attributes(.class("join-item btn-ghost"))
@@ -142,7 +142,7 @@ extension DuctSizingView {
                         .hx.delete(deleteRoute),
                         .hx.target("#\(rowID)"),
                         .hx.swap(.outerHTML),
-                        when: room.rectangularSize != nil
+                        when: room.ductSize.width != nil
                       )
                   }
                 }

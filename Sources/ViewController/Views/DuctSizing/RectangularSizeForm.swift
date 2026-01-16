@@ -40,7 +40,7 @@ struct RectangularSizeForm: HTML, Sendable {
   }
 
   var height: Int? {
-    room.rectangularSize?.height
+    room.ductSize.height
   }
 
   var body: some HTML<HTMLTag.dialog> {
@@ -54,7 +54,7 @@ struct RectangularSizeForm: HTML, Sendable {
         .hx.swap(.outerHTML)
       ) {
         input(.class("hidden"), .name("register"), .value(room.roomRegister))
-        input(.class("hidden"), .name("id"), .value(room.rectangularSize?.id))
+        input(.class("hidden"), .name("id"), .value(room.ductSize.rectangularID))
 
         LabeledInput(
           "Height",

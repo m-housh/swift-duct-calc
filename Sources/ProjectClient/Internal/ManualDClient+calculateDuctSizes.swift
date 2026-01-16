@@ -77,13 +77,12 @@ extension ManualDClient {
             coolingLoad: coolingLoad,
             heatingCFM: heatingCFM,
             coolingCFM: coolingCFM,
-            designCFM: designCFM,
-            roundSize: sizes.ductulatorSize,
-            finalSize: sizes.finalSize,
-            velocity: sizes.velocity,
-            flexSize: sizes.flexSize,
-            rectangularSize: rectangularSize,
-            rectangularWidth: rectangularWidth
+            ductSize: .init(
+              designCFM: designCFM,
+              sizes: sizes,
+              rectangularSize: rectangularSize,
+              width: rectangularWidth
+            )
           )
         )
       }
@@ -127,10 +126,7 @@ extension ManualDClient {
           trunk: trunk,
           ductSize: .init(
             designCFM: designCFM,
-            roundSize: sizes.ductulatorSize,
-            finalSize: sizes.finalSize,
-            velocity: sizes.velocity,
-            flexSize: sizes.flexSize,
+            sizes: sizes,
             height: trunk.height,
             width: width
           )
@@ -141,6 +137,44 @@ extension ManualDClient {
     return retval
   }
 
+}
+
+extension DuctSizing.SizeContainer {
+  init(
+    designCFM: DuctSizing.DesignCFM,
+    sizes: ManualDClient.DuctSizeResponse,
+    height: Int?,
+    width: Int?
+  ) {
+    self.init(
+      rectangularID: nil,
+      designCFM: designCFM,
+      roundSize: sizes.ductulatorSize,
+      finalSize: sizes.finalSize,
+      velocity: sizes.velocity,
+      flexSize: sizes.flexSize,
+      height: height,
+      width: width
+    )
+  }
+
+  init(
+    designCFM: DuctSizing.DesignCFM,
+    sizes: ManualDClient.DuctSizeResponse,
+    rectangularSize: DuctSizing.RectangularDuct?,
+    width: Int?
+  ) {
+    self.init(
+      rectangularID: rectangularSize?.id,
+      designCFM: designCFM,
+      roundSize: sizes.ductulatorSize,
+      finalSize: sizes.finalSize,
+      velocity: sizes.velocity,
+      flexSize: sizes.flexSize,
+      height: rectangularSize?.height,
+      width: width
+    )
+  }
 }
 
 extension Room {

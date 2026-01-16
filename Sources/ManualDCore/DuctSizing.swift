@@ -23,6 +23,7 @@ public enum DuctSizing {
 
   public struct SizeContainer: Codable, Equatable, Sendable {
 
+    public let rectangularID: RectangularDuct.ID?
     public let designCFM: DesignCFM
     public let roundSize: Double
     public let finalSize: Int
@@ -32,6 +33,7 @@ public enum DuctSizing {
     public let width: Int?
 
     public init(
+      rectangularID: RectangularDuct.ID? = nil,
       designCFM: DuctSizing.DesignCFM,
       roundSize: Double,
       finalSize: Int,
@@ -40,6 +42,7 @@ public enum DuctSizing {
       height: Int? = nil,
       width: Int? = nil
     ) {
+      self.rectangularID = rectangularID
       self.designCFM = designCFM
       self.roundSize = roundSize
       self.finalSize = finalSize
@@ -52,6 +55,7 @@ public enum DuctSizing {
 
   // TODO: Uses SizeContainer
 
+  @dynamicMemberLookup
   public struct RoomContainer: Codable, Equatable, Sendable {
 
     public let roomID: Room.ID
@@ -61,13 +65,7 @@ public enum DuctSizing {
     public let coolingLoad: Double
     public let heatingCFM: Double
     public let coolingCFM: Double
-    public let designCFM: DesignCFM
-    public let roundSize: Double
-    public let finalSize: Int
-    public let velocity: Int
-    public let flexSize: Int
-    public let rectangularSize: RectangularDuct?
-    public let rectangularWidth: Int?
+    public let ductSize: SizeContainer
 
     public init(
       roomID: Room.ID,
@@ -77,13 +75,7 @@ public enum DuctSizing {
       coolingLoad: Double,
       heatingCFM: Double,
       coolingCFM: Double,
-      designCFM: DesignCFM,
-      roundSize: Double,
-      finalSize: Int,
-      velocity: Int,
-      flexSize: Int,
-      rectangularSize: RectangularDuct? = nil,
-      rectangularWidth: Int? = nil
+      ductSize: SizeContainer
     ) {
       self.roomID = roomID
       self.roomName = roomName
@@ -92,13 +84,46 @@ public enum DuctSizing {
       self.coolingLoad = coolingLoad
       self.heatingCFM = heatingCFM
       self.coolingCFM = coolingCFM
-      self.designCFM = designCFM
-      self.roundSize = roundSize
-      self.finalSize = finalSize
-      self.velocity = velocity
-      self.flexSize = flexSize
-      self.rectangularSize = rectangularSize
-      self.rectangularWidth = rectangularWidth
+      self.ductSize = ductSize
+    }
+
+    // public init(
+    //   roomID: Room.ID,
+    //   roomName: String,
+    //   roomRegister: Int,
+    //   heatingLoad: Double,
+    //   coolingLoad: Double,
+    //   heatingCFM: Double,
+    //   coolingCFM: Double,
+    //   designCFM: DesignCFM,
+    //   roundSize: Double,
+    //   finalSize: Int,
+    //   velocity: Int,
+    //   flexSize: Int,
+    //   rectangularSize: RectangularDuct? = nil,
+    //   rectangularWidth: Int? = nil
+    // ) {
+    //   self.roomID = roomID
+    //   self.roomName = roomName
+    //   self.roomRegister = roomRegister
+    //   self.heatingLoad = heatingLoad
+    //   self.coolingLoad = coolingLoad
+    //   self.heatingCFM = heatingCFM
+    //   self.coolingCFM = coolingCFM
+    //   self.ductSize = .init(
+    //     rectangularID: rectangularSize?.id,
+    //     designCFM: designCFM,
+    //     roundSize: roundSize,
+    //     finalSize: finalSize,
+    //     velocity: velocity,
+    //     flexSize: flexSize,
+    //     height: rectangularSize?.height,
+    //     width: rectangularWidth
+    //   )
+    // }
+
+    public subscript<T>(dynamicMember keyPath: KeyPath<DuctSizing.SizeContainer, T>) -> T {
+      ductSize[keyPath: keyPath]
     }
   }
 
