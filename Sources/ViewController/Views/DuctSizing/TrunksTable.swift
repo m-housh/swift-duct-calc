@@ -7,11 +7,10 @@ extension DuctSizingView {
 
   struct TrunkTable: HTML, Sendable {
 
-    let trunks: [DuctSizing.TrunkContainer]
-    let rooms: [DuctSizing.RoomContainer]
+    let ductSizes: DuctSizes
 
-    private var sortedTrunks: [DuctSizing.TrunkContainer] {
-      trunks
+    private var sortedTrunks: [DuctSizes.TrunkContainer] {
+      ductSizes.trunks
         .sorted(by: { $0.designCFM.value > $1.designCFM.value })
         .sorted(by: { $0.type.rawValue > $1.type.rawValue })
     }
@@ -29,7 +28,7 @@ extension DuctSizingView {
         }
         tbody {
           for trunk in sortedTrunks {
-            TrunkRow(trunk: trunk, rooms: rooms)
+            TrunkRow(trunk: trunk, rooms: ductSizes.rooms)
           }
         }
       }
@@ -41,8 +40,8 @@ extension DuctSizingView {
 
     @Environment(ProjectViewValue.$projectID) var projectID
 
-    let trunk: DuctSizing.TrunkContainer
-    let rooms: [DuctSizing.RoomContainer]
+    let trunk: DuctSizes.TrunkContainer
+    let rooms: [DuctSizes.RoomContainer]
 
     var body: some HTML<HTMLTag.tr> {
       tr {

@@ -7,7 +7,7 @@ extension DatabaseClient {
 
   func calculateDuctSizes(
     projectID: Project.ID
-  ) async throws -> ProjectClient.DuctSizeResponse {
+  ) async throws -> DuctSizes {
     @Dependency(\.manualD) var manualD
 
     return try await manualD.calculateDuctSizes(
@@ -19,7 +19,7 @@ extension DatabaseClient {
 
   func calculateRoomDuctSizes(
     projectID: Project.ID
-  ) async throws -> [DuctSizing.RoomContainer] {
+  ) async throws -> [DuctSizes.RoomContainer] {
     @Dependency(\.manualD) var manualD
 
     return try await manualD.calculateRoomSizes(
@@ -30,7 +30,7 @@ extension DatabaseClient {
 
   func calculateTrunkDuctSizes(
     projectID: Project.ID
-  ) async throws -> [DuctSizing.TrunkContainer] {
+  ) async throws -> [DuctSizes.TrunkContainer] {
     @Dependency(\.manualD) var manualD
 
     return try await manualD.calculateTrunkSizes(

@@ -7,8 +7,7 @@ struct DuctSizingView: HTML, Sendable {
 
   @Environment(ProjectViewValue.$projectID) var projectID
 
-  let rooms: [DuctSizing.RoomContainer]
-  let trunks: [DuctSizing.TrunkContainer]
+  let ductSizes: DuctSizes
 
   var body: some HTML {
     div(.class("space-y-4")) {
@@ -21,13 +20,13 @@ struct DuctSizingView: HTML, Sendable {
             Must complete all the previous sections to display duct sizing calculations.
             """
           )
-          .hidden(when: rooms.count > 0)
+          .hidden(when: ductSizes.rooms.count > 0)
           .attributes(.class("text-error font-bold italic mt-4"))
         }
       }
 
-      if rooms.count != 0 {
-        RoomsTable(rooms: rooms)
+      if ductSizes.rooms.count != 0 {
+        RoomsTable(rooms: ductSizes.rooms)
 
         PageTitleRow {
           PageTitle {
@@ -42,13 +41,13 @@ struct DuctSizingView: HTML, Sendable {
             .tooltip("Add trunk / runout")
         }
 
-        if trunks.count > 0 {
-          TrunkTable(trunks: trunks, rooms: rooms)
+        if ductSizes.trunks.count > 0 {
+          TrunkTable(ductSizes: ductSizes)
         }
 
       }
 
-      TrunkSizeForm(rooms: rooms, dismiss: true)
+      TrunkSizeForm(rooms: ductSizes.rooms, dismiss: true)
     }
   }
 

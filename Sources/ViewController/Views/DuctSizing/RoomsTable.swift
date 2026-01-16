@@ -9,7 +9,7 @@ extension DuctSizingView {
   struct RoomsTable: HTML, Sendable {
     @Environment(ProjectViewValue.$projectID) var projectID
 
-    let rooms: [DuctSizing.RoomContainer]
+    let rooms: [DuctSizes.RoomContainer]
 
     var body: some HTML<HTMLTag.table> {
 
@@ -34,13 +34,13 @@ extension DuctSizingView {
 
   struct RoomRow: HTML, Sendable {
 
-    static func id(_ room: DuctSizing.RoomContainer) -> String {
+    static func id(_ room: DuctSizes.RoomContainer) -> String {
       "roomRow_\(room.roomName.idString)"
     }
 
     @Environment(ProjectViewValue.$projectID) var projectID
 
-    let room: DuctSizing.RoomContainer
+    let room: DuctSizes.RoomContainer
     let formID = UUID().idString
 
     var deleteRoute: String {

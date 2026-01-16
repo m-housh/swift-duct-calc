@@ -15,15 +15,17 @@ extension ViewController.Request {
 
     switch route {
     case .test:
-      let projectID = UUID(uuidString: "A9C20153-E2E5-4C65-B33F-4D8A29C63A7A")!
+      // let projectID = UUID(uuidString: "A9C20153-E2E5-4C65-B33F-4D8A29C63A7A")!
       return await view {
         await ResultView {
-          return (
-            try await database.projects.getCompletedSteps(projectID),
-            try await projectClient.calculateDuctSizes(projectID)
-          )
-        } onSuccess: { (_, result) in
-          TestPage(trunks: result.trunks, rooms: result.rooms)
+
+          // return (
+          //   try await database.projects.getCompletedSteps(projectID),
+          //   try await projectClient.calculateDuctSizes(projectID)
+          // )
+        } onSuccess: {
+          TestPage()
+          // TestPage(trunks: result.trunks, rooms: result.rooms)
         }
       }
     case .login(let route):
@@ -609,7 +611,7 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
         )
       } onSuccess: { (steps, ducts) in
         ProjectView(projectID: projectID, activeTab: .ductSizing, completedSteps: steps) {
-          DuctSizingView(rooms: ducts.rooms, trunks: ducts.trunks)
+          DuctSizingView(ductSizes: ducts)
         }
       }
     }

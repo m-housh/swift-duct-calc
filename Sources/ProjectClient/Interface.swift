@@ -16,11 +16,11 @@ extension DependencyValues {
 /// for the view controller client to render views.
 @DependencyClient
 public struct ProjectClient: Sendable {
-  public var calculateDuctSizes: @Sendable (Project.ID) async throws -> DuctSizeResponse
+  public var calculateDuctSizes: @Sendable (Project.ID) async throws -> DuctSizes
   public var calculateRoomDuctSizes:
-    @Sendable (Project.ID) async throws -> [DuctSizing.RoomContainer]
+    @Sendable (Project.ID) async throws -> [DuctSizes.RoomContainer]
   public var calculateTrunkDuctSizes:
-    @Sendable (Project.ID) async throws -> [DuctSizing.TrunkContainer]
+    @Sendable (Project.ID) async throws -> [DuctSizes.TrunkContainer]
 
   public var createProject:
     @Sendable (User.ID, Project.Create) async throws -> CreateProjectResponse
@@ -51,19 +51,6 @@ extension ProjectClient {
       self.rooms = rooms
       self.sensibleHeatRatio = sensibleHeatRatio
       self.completedSteps = completedSteps
-    }
-  }
-
-  public struct DuctSizeResponse: Codable, Equatable, Sendable {
-    public let rooms: [DuctSizing.RoomContainer]
-    public let trunks: [DuctSizing.TrunkContainer]
-
-    public init(
-      rooms: [DuctSizing.RoomContainer],
-      trunks: [DuctSizing.TrunkContainer]
-    ) {
-      self.rooms = rooms
-      self.trunks = trunks
     }
   }
 

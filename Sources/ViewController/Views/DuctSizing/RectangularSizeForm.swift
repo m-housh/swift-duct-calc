@@ -5,7 +5,7 @@ import Styleguide
 
 struct RectangularSizeForm: HTML, Sendable {
 
-  static func id(_ room: DuctSizing.RoomContainer) -> String {
+  static func id(_ room: DuctSizes.RoomContainer) -> String {
     let base = "rectangularSize"
     return "\(base)_\(room.roomName.idString)"
   }
@@ -13,12 +13,12 @@ struct RectangularSizeForm: HTML, Sendable {
   @Environment(ProjectViewValue.$projectID) var projectID
 
   let id: String
-  let room: DuctSizing.RoomContainer
+  let room: DuctSizes.RoomContainer
   let dismiss: Bool
 
   init(
     id: String? = nil,
-    room: DuctSizing.RoomContainer,
+    room: DuctSizes.RoomContainer,
     dismiss: Bool = true
   ) {
     self.id = Self.id(room)

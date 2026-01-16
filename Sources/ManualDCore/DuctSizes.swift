@@ -1,7 +1,21 @@
 import Dependencies
 import Foundation
 
-public enum DuctSizing {
+public struct DuctSizes: Codable, Equatable, Sendable {
+
+  public let rooms: [RoomContainer]
+  public let trunks: [TrunkContainer]
+
+  public init(
+    rooms: [DuctSizes.RoomContainer],
+    trunks: [DuctSizes.TrunkContainer]
+  ) {
+    self.rooms = rooms
+    self.trunks = trunks
+  }
+}
+
+extension DuctSizes {
 
   public struct SizeContainer: Codable, Equatable, Sendable {
 
@@ -16,7 +30,7 @@ public enum DuctSizing {
 
     public init(
       rectangularID: Room.RectangularSize.ID? = nil,
-      designCFM: DuctSizing.DesignCFM,
+      designCFM: DuctSizes.DesignCFM,
       roundSize: Double,
       finalSize: Int,
       velocity: Int,
@@ -34,8 +48,6 @@ public enum DuctSizing {
       self.width = width
     }
   }
-
-  // TODO: Uses SizeContainer
 
   @dynamicMemberLookup
   public struct RoomContainer: Codable, Equatable, Sendable {
@@ -69,7 +81,7 @@ public enum DuctSizing {
       self.ductSize = ductSize
     }
 
-    public subscript<T>(dynamicMember keyPath: KeyPath<DuctSizing.SizeContainer, T>) -> T {
+    public subscript<T>(dynamicMember keyPath: KeyPath<DuctSizes.SizeContainer, T>) -> T {
       ductSize[keyPath: keyPath]
     }
   }
@@ -95,7 +107,7 @@ public enum DuctSizing {
   }
 }
 
-extension DuctSizing {
+extension DuctSizes {
 
   // Represents the database model that the duct sizes have been calculated
   // for.
@@ -118,7 +130,7 @@ extension DuctSizing {
       trunk[keyPath: keyPath]
     }
 
-    public subscript<T>(dynamicMember keyPath: KeyPath<DuctSizing.SizeContainer, T>) -> T {
+    public subscript<T>(dynamicMember keyPath: KeyPath<DuctSizes.SizeContainer, T>) -> T {
       ductSize[keyPath: keyPath]
     }
   }

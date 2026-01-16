@@ -5,7 +5,7 @@ import Styleguide
 
 struct TrunkSizeForm: HTML, Sendable {
 
-  static func id(_ trunk: DuctSizing.TrunkContainer? = nil) -> String {
+  static func id(_ trunk: DuctSizes.TrunkContainer? = nil) -> String {
     let base = "trunkSizeForm"
     guard let trunk else { return base }
     return "\(base)_\(trunk.id.idString)"
@@ -13,8 +13,8 @@ struct TrunkSizeForm: HTML, Sendable {
 
   @Environment(ProjectViewValue.$projectID) var projectID
 
-  let container: DuctSizing.TrunkContainer?
-  let rooms: [DuctSizing.RoomContainer]
+  let container: DuctSizes.TrunkContainer?
+  let rooms: [DuctSizes.RoomContainer]
   let dismiss: Bool
 
   var trunk: TrunkSize? {
@@ -22,8 +22,8 @@ struct TrunkSizeForm: HTML, Sendable {
   }
 
   init(
-    trunk: DuctSizing.TrunkContainer? = nil,
-    rooms: [DuctSizing.RoomContainer],
+    trunk: DuctSizes.TrunkContainer? = nil,
+    rooms: [DuctSizes.RoomContainer],
     dismiss: Bool = true
   ) {
     self.container = trunk
@@ -122,7 +122,7 @@ struct TrunkSizeForm: HTML, Sendable {
 }
 
 extension Array where Element == TrunkSize.RoomProxy {
-  func hasRoom(_ room: DuctSizing.RoomContainer) -> Bool {
+  func hasRoom(_ room: DuctSizes.RoomContainer) -> Bool {
     first {
       $0.id == room.roomID
         && $0.registers.contains(room.roomRegister)
