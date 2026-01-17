@@ -1,0 +1,359 @@
+{
+  "trunks": [
+    {
+      "trunk": {
+        "projectID": "E796C96C-F527-4753-A00A-EBCF25630663",
+        "type": "supply",
+        "name": "West",
+        "id": "AFBC5264-8129-4383-97D8-F44CF5258A53",
+        "rooms": [
+          {
+            "room": {
+              "coolingTotal": 4567,
+              "id": "FA2F107F-5DF0-4D69-B231-DE3C6EF64134",
+              "registerCount": 3,
+              "heatingLoad": 9876,
+              "updatedAt": "2026-01-17T16:51:33Z",
+              "createdAt": "2026-01-17T16:51:33Z",
+              "projectID": "E796C96C-F527-4753-A00A-EBCF25630663",
+              "name": "Kitchen"
+            },
+            "registers": [1, 2, 3]
+          },
+          {
+            "room": {
+              "coolingTotal": 4567,
+              "id": "9A01CEE8-6A4B-4299-9353-58AFAD042903",
+              "registerCount": 3,
+              "heatingLoad": 9876,
+              "updatedAt": "2026-01-17T16:51:21Z",
+              "createdAt": "2026-01-17T16:51:21Z",
+              "name": "Master",
+              "projectID": "E796C96C-F527-4753-A00A-EBCF25630663"
+            },
+            "registers": [1, 2, 3]
+          }
+        ],
+        "height": 8
+      },
+      "ductSize": {
+        "height": 8,
+        "roundSize": 12.3660960368007,
+        "width": 19,
+        "velocity": 737,
+        "finalSize": 14,
+        "flexSize": 14,
+        "designCFM": {
+          "cooling": {
+            "_0": 787.278055507671
+          }
+        }
+      }
+    },
+    {
+      "trunk": {
+        "projectID": "E796C96C-F527-4753-A00A-EBCF25630663",
+        "name": "East",
+        "id": "C6A21594-0A28-4A20-BC15-628502010201",
+        "type": "supply",
+        "height": 8,
+        "rooms": [
+          {
+            "room": {
+              "coolingTotal": 1234,
+              "id": "2420F9C7-0FCA-4E92-BAC9-8A054CB3201B",
+              "registerCount": 1,
+              "heatingLoad": 4567,
+              "updatedAt": "2026-01-17T16:51:10Z",
+              "createdAt": "2026-01-17T16:51:10Z",
+              "name": "Entry",
+              "projectID": "E796C96C-F527-4753-A00A-EBCF25630663"
+            },
+            "registers": [1]
+          },
+          {
+            "room": {
+              "coolingTotal": 1234,
+              "id": "449FE324-2ACF-4C12-83A3-EB86FD45A991",
+              "registerCount": 2,
+              "heatingLoad": 4567,
+              "updatedAt": "2026-01-17T16:51:02Z",
+              "createdAt": "2026-01-17T16:51:02Z",
+              "projectID": "E796C96C-F527-4753-A00A-EBCF25630663",
+              "name": "Bed-1"
+            },
+            "registers": [1, 2]
+          }
+        ]
+      },
+      "ductSize": {
+        "height": 8,
+        "roundSize": 8.39504804369037,
+        "width": 8,
+        "velocity": 643,
+        "flexSize": 10,
+        "finalSize": 9,
+        "designCFM": {
+          "heating": {
+            "_0": 284.587689538185
+          }
+        }
+      }
+    },
+    {
+      "trunk": {
+        "name": "Main",
+        "projectID": "E796C96C-F527-4753-A00A-EBCF25630663",
+        "id": "C65863A0-D2EE-4D90-8C71-B1FD2454A8DF",
+        "type": "return",
+        "rooms": [
+          {
+            "registers": [1, 2, 3],
+            "room": {
+              "coolingTotal": 4567,
+              "id": "FA2F107F-5DF0-4D69-B231-DE3C6EF64134",
+              "registerCount": 3,
+              "heatingLoad": 9876,
+              "updatedAt": "2026-01-17T16:51:33Z",
+              "createdAt": "2026-01-17T16:51:33Z",
+              "name": "Kitchen",
+              "projectID": "E796C96C-F527-4753-A00A-EBCF25630663"
+            }
+          },
+          {
+            "registers": [1, 2, 3],
+            "room": {
+              "coolingTotal": 4567,
+              "id": "9A01CEE8-6A4B-4299-9353-58AFAD042903",
+              "registerCount": 3,
+              "heatingLoad": 9876,
+              "updatedAt": "2026-01-17T16:51:21Z",
+              "createdAt": "2026-01-17T16:51:21Z",
+              "name": "Master",
+              "projectID": "E796C96C-F527-4753-A00A-EBCF25630663"
+            }
+          },
+          {
+            "registers": [1],
+            "room": {
+              "coolingTotal": 1234,
+              "id": "2420F9C7-0FCA-4E92-BAC9-8A054CB3201B",
+              "registerCount": 1,
+              "heatingLoad": 4567,
+              "updatedAt": "2026-01-17T16:51:10Z",
+              "createdAt": "2026-01-17T16:51:10Z",
+              "name": "Entry",
+              "projectID": "E796C96C-F527-4753-A00A-EBCF25630663"
+            }
+          },
+          {
+            "registers": [1, 2],
+            "room": {
+              "coolingTotal": 1234,
+              "id": "449FE324-2ACF-4C12-83A3-EB86FD45A991",
+              "registerCount": 2,
+              "heatingLoad": 4567,
+              "updatedAt": "2026-01-17T16:51:02Z",
+              "createdAt": "2026-01-17T16:51:02Z",
+              "name": "Bed-1",
+              "projectID": "E796C96C-F527-4753-A00A-EBCF25630663"
+            }
+          }
+        ]
+      },
+      "ductSize": {
+        "designCFM": {
+          "cooling": {
+            "_0": 1000
+          }
+        },
+        "roundSize": 13.539327773393,
+        "velocity": 935,
+        "finalSize": 14,
+        "flexSize": 16
+      }
+    }
+  ],
+  "rooms": [
+    {
+      "ductSize": {
+        "velocity": 521,
+        "flexSize": 6,
+        "designCFM": {
+          "heating": {
+            "_0": 71.1469223845461
+          }
+        },
+        "roundSize": 4.95724506597333,
+        "finalSize": 5
+      },
+      "heatingCFM": 71.1469223845461,
+      "roomRegister": 1,
+      "heatingLoad": 2283.5,
+      "roomName": "Bed-1-1",
+      "roomID": "449FE324-2ACF-4C12-83A3-EB86FD45A991",
+      "coolingLoad": 512.11,
+      "coolingCFM": 53.1804861230822
+    },
+    {
+      "ductSize": {
+        "velocity": 521,
+        "flexSize": 6,
+        "designCFM": {
+          "heating": {
+            "_0": 71.1469223845461
+          }
+        },
+        "roundSize": 4.95724506597333,
+        "finalSize": 5
+      },
+      "heatingCFM": 71.1469223845461,
+      "roomRegister": 2,
+      "heatingLoad": 2283.5,
+      "roomName": "Bed-1-2",
+      "roomID": "449FE324-2ACF-4C12-83A3-EB86FD45A991",
+      "coolingLoad": 512.11,
+      "coolingCFM": 53.1804861230822
+    },
+    {
+      "ductSize": {
+        "velocity": 532,
+        "flexSize": 7,
+        "designCFM": {
+          "heating": {
+            "_0": 142.293844769092
+          }
+        },
+        "roundSize": 6.4510704920341,
+        "finalSize": 7
+      },
+      "heatingCFM": 142.293844769092,
+      "roomRegister": 1,
+      "heatingLoad": 4567,
+      "roomName": "Entry-1",
+      "roomID": "2420F9C7-0FCA-4E92-BAC9-8A054CB3201B",
+      "coolingLoad": 1024.22,
+      "coolingCFM": 106.360972246164
+    },
+    {
+      "ductSize": {
+        "velocity": 490,
+        "flexSize": 7,
+        "designCFM": {
+          "cooling": {
+            "_0": 131.213009251279
+          }
+        },
+        "roundSize": 6.25641154872314,
+        "finalSize": 7
+      },
+      "heatingCFM": 102.568718410303,
+      "roomRegister": 1,
+      "heatingLoad": 3292,
+      "roomName": "Kitchen-1",
+      "roomID": "FA2F107F-5DF0-4D69-B231-DE3C6EF64134",
+      "coolingLoad": 1263.53666666667,
+      "coolingCFM": 131.213009251279
+    },
+    {
+      "ductSize": {
+        "velocity": 490,
+        "flexSize": 7,
+        "designCFM": {
+          "cooling": {
+            "_0": 131.213009251279
+          }
+        },
+        "roundSize": 6.25641154872314,
+        "finalSize": 7
+      },
+      "heatingCFM": 102.568718410303,
+      "roomRegister": 2,
+      "heatingLoad": 3292,
+      "roomName": "Kitchen-2",
+      "roomID": "FA2F107F-5DF0-4D69-B231-DE3C6EF64134",
+      "coolingLoad": 1263.53666666667,
+      "coolingCFM": 131.213009251279
+    },
+    {
+      "ductSize": {
+        "velocity": 490,
+        "flexSize": 7,
+        "designCFM": {
+          "cooling": {
+            "_0": 131.213009251279
+          }
+        },
+        "roundSize": 6.25641154872314,
+        "finalSize": 7
+      },
+      "heatingCFM": 102.568718410303,
+      "roomRegister": 3,
+      "heatingLoad": 3292,
+      "roomName": "Kitchen-3",
+      "roomID": "FA2F107F-5DF0-4D69-B231-DE3C6EF64134",
+      "coolingLoad": 1263.53666666667,
+      "coolingCFM": 131.213009251279
+    },
+    {
+      "ductSize": {
+        "velocity": 490,
+        "flexSize": 7,
+        "designCFM": {
+          "cooling": {
+            "_0": 131.213009251279
+          }
+        },
+        "roundSize": 6.25641154872314,
+        "finalSize": 7
+      },
+      "heatingCFM": 102.568718410303,
+      "roomRegister": 1,
+      "heatingLoad": 3292,
+      "roomName": "Master-1",
+      "roomID": "9A01CEE8-6A4B-4299-9353-58AFAD042903",
+      "coolingLoad": 1263.53666666667,
+      "coolingCFM": 131.213009251279
+    },
+    {
+      "ductSize": {
+        "velocity": 490,
+        "flexSize": 7,
+        "designCFM": {
+          "cooling": {
+            "_0": 131.213009251279
+          }
+        },
+        "roundSize": 6.25641154872314,
+        "finalSize": 7
+      },
+      "heatingCFM": 102.568718410303,
+      "roomRegister": 2,
+      "heatingLoad": 3292,
+      "roomName": "Master-2",
+      "roomID": "9A01CEE8-6A4B-4299-9353-58AFAD042903",
+      "coolingLoad": 1263.53666666667,
+      "coolingCFM": 131.213009251279
+    },
+    {
+      "ductSize": {
+        "velocity": 490,
+        "flexSize": 7,
+        "designCFM": {
+          "cooling": {
+            "_0": 131.213009251279
+          }
+        },
+        "roundSize": 6.25641154872314,
+        "finalSize": 7
+      },
+      "heatingCFM": 102.568718410303,
+      "roomRegister": 3,
+      "heatingLoad": 3292,
+      "roomName": "Master-3",
+      "roomID": "9A01CEE8-6A4B-4299-9353-58AFAD042903",
+      "coolingLoad": 1263.53666666667,
+      "coolingCFM": 131.213009251279
+    }
+}
+  ]

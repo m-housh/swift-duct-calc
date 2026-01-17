@@ -9,37 +9,33 @@ struct FrictionRateView: HTML, Sendable {
 
   let componentLosses: [ComponentPressureLoss]
   let equivalentLengths: EffectiveLength.MaxContainer
-  let frictionRateResponse: ManualDClient.FrictionRateResponse?
+  let frictionRate: FrictionRate?
 
   private var availableStaticPressure: Double? {
-    frictionRateResponse?.availableStaticPressure
-  }
-
-  private var frictionRateDesignValue: Double? {
-    frictionRateResponse?.frictionRate
+    frictionRate?.availableStaticPressure
   }
 
   private var shouldShowBadges: Bool {
-    frictionRateDesignValue != nil || availableStaticPressure != nil
+    frictionRate != nil
   }
 
   private var badgeColor: String {
     let base = "badge-info"
-    guard let frictionRateDesignValue else { return base }
-    if frictionRateDesignValue >= 0.18 || frictionRateDesignValue <= 0.02 {
+    guard let frictionRate = frictionRate?.value else { return base }
+    if frictionRate >= 0.18 || frictionRate <= 0.02 {
       return "badge-error"
     }
     return base
   }
 
   private var showHighErrors: Bool {
-    guard let frictionRateDesignValue else { return false }
-    return frictionRateDesignValue >= 0.18
+    guard let frictionRate = frictionRate?.value else { return false }
+    return frictionRate >= 0.18
   }
 
   private var showLowErrors: Bool {
-    guard let frictionRateDesignValue else { return false }
-    return frictionRateDesignValue <= 0.02
+    guard let frictionRate = frictionRate?.value else { return false }
+    return frictionRate <= 0.02
   }
 
   private var showNoComponentLossesError: Bool {
@@ -47,7 +43,7 @@ struct FrictionRateView: HTML, Sendable {
   }
 
   private var showIncompleteSectionsError: Bool {
-    availableStaticPressure == nil || frictionRateDesignValue == nil
+    availableStaticPressure == nil || frictionRate?.value == nil
   }
 
   private var hasAlerts: Bool {
@@ -68,11 +64,11 @@ struct FrictionRateView: HTML, Sendable {
           div(.class("space-y-2 justify-end font-bold text-lg")) {
             if shouldShowBadges {
 
-              if let frictionRateDesignValue {
+              if let frictionRate = frictionRate?.value {
                 LabeledContent {
                   span { "Friction Rate Design Value" }
                 } content: {
-                  Badge(number: frictionRateDesignValue, digits: 2)
+                  Badge(number: frictionRate, digits: 2)
                     .attributes(.class("\(badgeColor) badge-lg"))
                     .bold()
                 }

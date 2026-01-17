@@ -9,3 +9,4 @@ DerivedData/
 .swift-version
 node_modules/
 tailwindcss
+.envrc

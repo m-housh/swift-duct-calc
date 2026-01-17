@@ -58,12 +58,12 @@ extension ProjectClient {
 
     public let componentLosses: [ComponentPressureLoss]
     public let equivalentLengths: EffectiveLength.MaxContainer
-    public let frictionRate: ManualDClient.FrictionRateResponse?
+    public let frictionRate: FrictionRate?
 
     public init(
       componentLosses: [ComponentPressureLoss],
       equivalentLengths: EffectiveLength.MaxContainer,
-      frictionRate: ManualDClient.FrictionRateResponse? = nil
+      frictionRate: FrictionRate? = nil
     ) {
       self.componentLosses = componentLosses
       self.equivalentLengths = equivalentLengths

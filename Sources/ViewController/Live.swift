@@ -15,7 +15,7 @@ extension ViewController.Request {
 
     switch route {
     case .test:
-      // let projectID = UUID(uuidString: "A9C20153-E2E5-4C65-B33F-4D8A29C63A7A")!
+      // let projectID = UUID(uuidString: "E796C96C-F527-4753-A00A-EBCF25630663")!
       return await view {
         await ResultView {
 
@@ -372,7 +372,7 @@ extension SiteRoute.View.ProjectRoute.FrictionRateRoute {
           FrictionRateView(
             componentLosses: losses,
             equivalentLengths: lengths,
-            frictionRateResponse: frictionRate
+            frictionRate: frictionRate
           )
         }
 
@@ -430,7 +430,7 @@ extension SiteRoute.View.ProjectRoute.ComponentLossRoute {
           FrictionRateView(
             componentLosses: response.componentLosses,
             equivalentLengths: response.equivalentLengths,
-            frictionRateResponse: response.frictionRate
+            frictionRate: response.frictionRate
           )
         }
 

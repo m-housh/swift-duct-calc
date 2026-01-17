@@ -28,7 +28,7 @@ extension ManualDClient: DependencyKey {
       let totalComponentLosses = request.componentPressureLosses.total
       let availableStaticPressure = request.externalStaticPressure - totalComponentLosses
       let frictionRate = availableStaticPressure * 100.0 / Double(request.totalEffectiveLength)
-      return .init(availableStaticPressure: availableStaticPressure, frictionRate: frictionRate)
+      return .init(availableStaticPressure: availableStaticPressure, value: frictionRate)
     },
     totalEquivalentLength: { request in
       let trunkLengths = request.trunkLengths.reduce(0) { $0 + $1 }

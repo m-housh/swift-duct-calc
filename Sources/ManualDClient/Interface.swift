@@ -16,7 +16,7 @@ extension DependencyValues {
 @DependencyClient
 public struct ManualDClient: Sendable {
   public var ductSize: @Sendable (DuctSizeRequest) async throws -> DuctSizeResponse
-  public var frictionRate: @Sendable (FrictionRateRequest) async throws -> FrictionRateResponse
+  public var frictionRate: @Sendable (FrictionRateRequest) async throws -> FrictionRate
   public var totalEquivalentLength: @Sendable (TotalEquivalentLengthRequest) async throws -> Int
   public var rectangularSize:
     @Sendable (RectangularSizeRequest) async throws -> RectangularSizeResponse

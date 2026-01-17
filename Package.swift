@@ -9,6 +9,7 @@ let package = Package(
     .library(name: "ApiController", targets: ["ApiController"]),
     .library(name: "AuthClient", targets: ["AuthClient"]),
     .library(name: "DatabaseClient", targets: ["DatabaseClient"]),
+    .library(name: "PdfClient", targets: ["PdfClient"]),
     .library(name: "ProjectClient", targets: ["ProjectClient"]),
     .library(name: "ManualDCore", targets: ["ManualDCore"]),
     .library(name: "ManualDClient", targets: ["ManualDClient"]),
@@ -73,6 +74,14 @@ let package = Package(
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
         .product(name: "Fluent", package: "fluent"),
         .product(name: "Vapor", package: "vapor"),
+      ]
+    ),
+    .target(
+      name: "PdfClient",
+      dependencies: [
+        .target(name: "ManualDCore"),
+        .product(name: "Dependencies", package: "swift-dependencies"),
+        .product(name: "DependenciesMacros", package: "swift-dependencies"),
       ]
     ),
     .target(

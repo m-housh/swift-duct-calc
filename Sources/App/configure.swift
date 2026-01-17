@@ -5,6 +5,7 @@ import Fluent
 import FluentSQLiteDriver
 import ManualDCore
 import NIOSSL
+import ProjectClient
 import Vapor
 import VaporElementary
 @preconcurrency import VaporRouting
@@ -111,6 +112,8 @@ extension SiteRoute {
   }
 }
 
+extension DuctSizes: Content {}
+
 @Sendable
 private func siteHandler(
   request: Request,
@@ -118,6 +121,7 @@ private func siteHandler(
 ) async throws -> any AsyncResponseEncodable {
   @Dependency(\.apiController) var apiController
   @Dependency(\.viewController) var viewController
+  @Dependency(\.projectClient) var projectClient
 
   switch route {
   case .api(let route):
@@ -125,6 +129,11 @@ private func siteHandler(
   case .health:
     return HTTPStatus.ok
   case .view(let route):
+    // FIX: Remove.
+    if route == .test {
+      let projectID = UUID(uuidString: "E796C96C-F527-4753-A00A-EBCF25630663")!
+      return try await projectClient.calculateDuctSizes(projectID)
+    }
     return try await viewController.respond(route: route, request: request)
   }
 }
