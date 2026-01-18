@@ -1,0 +1,103 @@
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  table td, table th {
+    -webkit-print-color-adjust: exact;
+  }
+}
+table {
+	border-collapse: collapse;
+  max-width: 100%;
+	margin: 10px auto;
+	border: none !important;
+	border-style: none;
+}
+th, td {
+  padding: 10px;
+	border: none;
+	border-style: none;
+}
+.table-bordered {
+  border: 1px solid #ccc;
+}
+.table-bordered th, td {
+  border: 1px solid #ccc;
+}
+.table-bordered tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.w-full {
+  width: 100%;
+}
+.w-half {
+  width: 50%;
+}
+.table-footer {
+  background-color: #75af4c;
+  color: white;
+  font-weight: bold;
+}
+.bg-green { 
+  background-color: #4CAF50;
+  color: white;
+}
+.heating {
+  color: red;
+}
+.coolingTotal {
+  color: blue;
+}
+.coolingSensible {
+  color: cyan;
+}
+.justify-end {
+  text-align: end;
+}
+.flex { 
+  display: flex; 
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+}
+.flex table {
+  width: 50%;
+  margin: 0;
+  flex: 1 1 calc(50% - 10px);
+}
+.container {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+.table-container {
+  flex: 1;
+  min-width: 0;
+}
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.customerTable {
+  width: 50%;
+}
+.section {
+  padding: 10px;
+}
+.label {
+  font-weight: bold;
+}
+.error {
+  color: red;
+  font-weight: bold;
+}
+.effectiveLengthGroupTable, .effectiveLengthGroupHeader {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+}
+.headline {
+  padding: 10px 0;
+}

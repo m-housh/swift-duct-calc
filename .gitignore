@@ -10,3 +10,4 @@ DerivedData/
 node_modules/
 tailwindcss
 .envrc
+*.pdf
