@@ -3,22 +3,24 @@ import Dependencies
 import Logging
 import ManualDClient
 import ManualDCore
+import PdfClient
 
 extension ProjectClient: DependencyKey {
 
   public static var liveValue: Self {
     @Dependency(\.database) var database
     @Dependency(\.manualD) var manualD
+    @Dependency(\.pdfClient) var pdfClient
 
     return .init(
       calculateDuctSizes: { projectID in
-        try await database.calculateDuctSizes(projectID: projectID)
+        try await database.calculateDuctSizes(projectID: projectID).0
       },
       calculateRoomDuctSizes: { projectID in
-        try await database.calculateRoomDuctSizes(projectID: projectID)
+        try await database.calculateRoomDuctSizes(projectID: projectID).0
       },
       calculateTrunkDuctSizes: { projectID in
-        try await database.calculateTrunkDuctSizes(projectID: projectID)
+        try await database.calculateTrunkDuctSizes(projectID: projectID).0
       },
       createProject: { userID, request in
         let project = try await database.projects.create(userID, request)
@@ -31,31 +33,43 @@ extension ProjectClient: DependencyKey {
         )
       },
       frictionRate: { projectID in
-
-        let componentLosses = try await database.componentLoss.fetch(projectID)
-        let lengths = try await database.effectiveLength.fetchMax(projectID)
-
-        let equipmentInfo = try await database.equipment.fetch(projectID)
-        guard let staticPressure = equipmentInfo?.staticPressure else {
-          return .init(componentLosses: componentLosses, equivalentLengths: lengths)
-        }
-
-        guard let totalEquivalentLength = lengths.total else {
-          return .init(componentLosses: componentLosses, equivalentLengths: lengths)
-        }
-
-        return try await .init(
-          componentLosses: componentLosses,
-          equivalentLengths: lengths,
-          frictionRate: manualD.frictionRate(
-            .init(
-              externalStaticPressure: staticPressure,
-              componentPressureLosses: database.componentLoss.fetch(projectID),
-              totalEffectiveLength: Int(totalEquivalentLength)
-            )
-          )
-        )
+        try await manualD.frictionRate(projectID: projectID)
+      },
+      toMarkdown: { projectID in
+        try await pdfClient.markdown(database.makePdfRequest(projectID))
+      },
+      toHTML: { projectID in
+        try await pdfClient.html(database.makePdfRequest(projectID))
       }
+    )
+  }
+
+}
+
+extension DatabaseClient {
+
+  fileprivate func makePdfRequest(_ projectID: Project.ID) async throws -> PdfClient.Request {
+    @Dependency(\.manualD) var manualD
+
+    guard let project = try await projects.get(projectID) else {
+      throw ProjectClientError("Project not found. id: \(projectID)")
+    }
+    let frictionRateResponse = try await manualD.frictionRate(projectID: projectID)
+    guard let frictionRate = frictionRateResponse.frictionRate else {
+      throw ProjectClientError("Friction rate not found. id: \(projectID)")
+    }
+    let (ductSizes, sharedInfo, rooms) = try await calculateDuctSizes(projectID: projectID)
+
+    return .init(
+      project: project,
+      rooms: rooms,
+      componentLosses: frictionRateResponse.componentLosses,
+      ductSizes: ductSizes,
+      equipmentInfo: sharedInfo.equipmentInfo,
+      maxSupplyTEL: sharedInfo.maxSupplyLength,
+      maxReturnTEL: sharedInfo.maxReturnLenght,
+      frictionRate: frictionRate,
+      projectSHR: sharedInfo.projectSHR
     )
   }
 

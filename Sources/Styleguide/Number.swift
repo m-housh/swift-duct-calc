@@ -1,16 +1,19 @@
 import Elementary
 import Foundation
+import ManualDCore
 
 public struct Number: HTML, Sendable {
   let fractionDigits: Int
   let value: Double
 
-  private var formatter: NumberFormatter {
-    let formatter = NumberFormatter()
-    formatter.maximumFractionDigits = fractionDigits
-    formatter.numberStyle = .decimal
-    return formatter
-  }
+  // private var formatter: NumberFormatter {
+  //   let formatter = NumberFormatter()
+  //   formatter.maximumFractionDigits = fractionDigits
+  //   formatter.numberStyle = .decimal
+  //   formatter.groupingSize = 3
+  //   formatter.groupingSeparator = ","
+  //   return formatter
+  // }
 
   public init(
     _ value: Double,
@@ -27,6 +30,6 @@ public struct Number: HTML, Sendable {
   }
 
   public var body: some HTML<HTMLTag.span> {
-    span { formatter.string(for: value) ?? "N/A" }
+    span { value.string(digits: fractionDigits) }
   }
 }

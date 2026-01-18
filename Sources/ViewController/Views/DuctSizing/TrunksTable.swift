@@ -134,17 +134,18 @@ extension DuctSizingView {
     }
 
     private var registerIDS: [String] {
-      trunk.rooms.reduce(into: []) { array, room in
-        array = room.registers.reduce(into: array) { array, register in
-          if let room =
-            rooms
-            .first(where: { $0.roomID == room.id && $0.roomRegister == register })
-          {
-            array.append(room.roomName)
-          }
-        }
-      }
-      .sorted()
+      trunk.registerIDS(rooms: rooms)
+      // trunk.rooms.reduce(into: []) { array, room in
+      //   array = room.registers.reduce(into: array) { array, register in
+      //     if let room =
+      //       rooms
+      //       .first(where: { $0.roomID == room.id && $0.roomRegister == register })
+      //     {
+      //       array.append(room.roomName)
+      //     }
+      //   }
+      // }
+      // .sorted()
     }
 
   }

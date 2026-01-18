@@ -132,7 +132,8 @@ private func siteHandler(
     // FIX: Remove.
     if route == .test {
       let projectID = UUID(uuidString: "E796C96C-F527-4753-A00A-EBCF25630663")!
-      return try await projectClient.calculateDuctSizes(projectID)
+      // return try await projectClient.toMarkdown(projectID)
+      return try await AnyHTMLResponse(value: projectClient.toHTML(projectID))
     }
     return try await viewController.respond(route: route, request: request)
   }

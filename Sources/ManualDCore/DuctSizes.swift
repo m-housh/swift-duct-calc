@@ -130,5 +130,19 @@ extension DuctSizes {
     public subscript<T>(dynamicMember keyPath: KeyPath<DuctSizes.SizeContainer, T>) -> T {
       ductSize[keyPath: keyPath]
     }
+
+    public func registerIDS(rooms: [RoomContainer]) -> [String] {
+      trunk.rooms.reduce(into: []) { array, room in
+        array = room.registers.reduce(into: array) { array, register in
+          if let room =
+            rooms
+            .first(where: { $0.roomID == room.id && $0.roomRegister == register })
+          {
+            array.append(room.roomName)
+          }
+        }
+      }
+      .sorted()
+    }
   }
 }

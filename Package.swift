@@ -82,6 +82,7 @@ let package = Package(
         .target(name: "ManualDCore"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
+        .product(name: "Elementary", package: "elementary"),
       ]
     ),
     .target(
@@ -89,6 +90,7 @@ let package = Package(
       dependencies: [
         .target(name: "DatabaseClient"),
         .target(name: "ManualDClient"),
+        .target(name: "PdfClient"),
       ]
     ),
     .target(

@@ -7,36 +7,53 @@ extension DatabaseClient {
 
   func calculateDuctSizes(
     projectID: Project.ID
-  ) async throws -> DuctSizes {
+  ) async throws -> (DuctSizes, DuctSizeSharedRequest, [Room]) {
     @Dependency(\.manualD) var manualD
 
-    return try await manualD.calculateDuctSizes(
-      rooms: rooms.fetch(projectID),
-      trunks: trunkSizes.fetch(projectID),
-      sharedRequest: sharedDuctRequest(projectID)
+    let shared = try await sharedDuctRequest(projectID)
+    let rooms = try await rooms.fetch(projectID)
+
+    return try await (
+      manualD.calculateDuctSizes(
+        rooms: rooms,
+        trunks: trunkSizes.fetch(projectID),
+        sharedRequest: shared
+      ),
+      shared,
+      rooms
     )
   }
 
   func calculateRoomDuctSizes(
     projectID: Project.ID
-  ) async throws -> [DuctSizes.RoomContainer] {
+  ) async throws -> ([DuctSizes.RoomContainer], DuctSizeSharedRequest) {
     @Dependency(\.manualD) var manualD
 
-    return try await manualD.calculateRoomSizes(
-      rooms: rooms.fetch(projectID),
-      sharedRequest: sharedDuctRequest(projectID)
+    let shared = try await sharedDuctRequest(projectID)
+
+    return try await (
+      manualD.calculateRoomSizes(
+        rooms: rooms.fetch(projectID),
+        sharedRequest: shared
+      ),
+      shared
     )
   }
 
   func calculateTrunkDuctSizes(
     projectID: Project.ID
-  ) async throws -> [DuctSizes.TrunkContainer] {
+  ) async throws -> ([DuctSizes.TrunkContainer], DuctSizeSharedRequest) {
     @Dependency(\.manualD) var manualD
 
-    return try await manualD.calculateTrunkSizes(
-      rooms: rooms.fetch(projectID),
-      trunks: trunkSizes.fetch(projectID),
-      sharedRequest: sharedDuctRequest(projectID)
+    let shared = try await sharedDuctRequest(projectID)
+
+    return try await (
+      manualD.calculateTrunkSizes(
+        rooms: rooms.fetch(projectID),
+        trunks: trunkSizes.fetch(projectID),
+        sharedRequest: shared
+      ),
+      shared
     )
   }
 

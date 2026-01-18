@@ -1,5 +1,6 @@
 import Dependencies
 import DependenciesMacros
+import Elementary
 import ManualDClient
 import ManualDCore
 
@@ -26,6 +27,10 @@ public struct ProjectClient: Sendable {
     @Sendable (User.ID, Project.Create) async throws -> CreateProjectResponse
 
   public var frictionRate: @Sendable (Project.ID) async throws -> FrictionRateResponse
+
+  // FIX: Name to something to do with generating a pdf, just experimenting now.
+  public var toMarkdown: @Sendable (Project.ID) async throws -> String
+  public var toHTML: @Sendable (Project.ID) async throws -> (any HTML & Sendable)
 }
 
 extension ProjectClient: TestDependencyKey {
