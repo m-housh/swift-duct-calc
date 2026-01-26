@@ -84,6 +84,32 @@ extension Project {
     }
   }
 
+  public struct Detail: Codable, Equatable, Sendable {
+
+    public let project: Project
+    public let componentLosses: [ComponentPressureLoss]
+    public let equipmentInfo: EquipmentInfo
+    public let equivalentLengths: [EffectiveLength]
+    public let rooms: [Room]
+    public let trunks: [TrunkSize]
+
+    public init(
+      project: Project,
+      componentLosses: [ComponentPressureLoss],
+      equipmentInfo: EquipmentInfo,
+      equivalentLengths: [EffectiveLength],
+      rooms: [Room],
+      trunks: [TrunkSize]
+    ) {
+      self.project = project
+      self.componentLosses = componentLosses
+      self.equipmentInfo = equipmentInfo
+      self.equivalentLengths = equivalentLengths
+      self.rooms = rooms
+      self.trunks = trunks
+    }
+  }
+
   public struct Update: Codable, Equatable, Sendable {
 
     public let name: String?

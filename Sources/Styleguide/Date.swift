@@ -6,7 +6,7 @@ public struct DateView: HTML, Sendable {
 
   var formatter: DateFormatter {
     let formatter = DateFormatter()
-    formatter.dateStyle = .short
+    formatter.dateFormat = "MM/dd/yyyy"
     return formatter
   }
 

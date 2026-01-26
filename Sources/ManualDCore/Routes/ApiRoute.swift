@@ -88,11 +88,16 @@ extension SiteRoute.Api {
 
 extension SiteRoute.Api.ProjectRoute {
   public enum DetailRoute: Equatable, Sendable {
+    case index
     case completedSteps
 
     static let rootPath = "details"
 
     static let router = OneOf {
+      Route(.case(Self.index)) {
+        Path { rootPath }
+        Method.get
+      }
       Route(.case(Self.completedSteps)) {
         Path {
           rootPath

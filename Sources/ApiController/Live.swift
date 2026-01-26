@@ -33,6 +33,8 @@ extension SiteRoute.Api.ProjectRoute {
       return nil
     case .detail(let id, let route):
       switch route {
+      case .index:
+        return try await database.projects.detail(id)
       case .completedSteps:
         // FIX:
         fatalError()

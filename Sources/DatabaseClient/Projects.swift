@@ -9,6 +9,7 @@ extension DatabaseClient {
   public struct Projects: Sendable {
     public var create: @Sendable (User.ID, Project.Create) async throws -> Project
     public var delete: @Sendable (Project.ID) async throws -> Void
+    public var detail: @Sendable (Project.ID) async throws -> Project.Detail?
     public var get: @Sendable (Project.ID) async throws -> Project?
     public var getCompletedSteps: @Sendable (Project.ID) async throws -> Project.CompletedSteps
     public var getSensibleHeatRatio: @Sendable (Project.ID) async throws -> Double?
@@ -32,6 +33,34 @@ extension DatabaseClient.Projects: TestDependencyKey {
           throw NotFoundError()
         }
         try await model.delete(on: database)
+      },
+      detail: { id in
+        guard
+          let model = try await ProjectModel.query(on: database)
+            .with(\.$componentLosses)
+            .with(\.$equipment)
+            .with(\.$equivalentLengths)
+            .with(\.$rooms)
+            .with(\.$trunks, { $0.with(\.$rooms) })
+            .filter(\.$id == id)
+            .first()
+        else {
+          throw NotFoundError()
+        }
+
+        // TODO: Different error ??
+        guard let equipmentInfo = model.equipment else { return nil }
+
+        let trunks = try await model.trunks.toDTO(on: database)
+
+        return try .init(
+          project: model.toDTO(),
+          componentLosses: model.componentLosses.map { try $0.toDTO() },
+          equipmentInfo: equipmentInfo.toDTO(),
+          equivalentLengths: model.equivalentLengths.map { try $0.toDTO() },
+          rooms: model.rooms.map { try $0.toDTO() },
+          trunks: trunks
+        )
       },
       get: { id in
         try await ProjectModel.find(id, on: database).map { try $0.toDTO() }
@@ -247,6 +276,18 @@ final class ProjectModel: Model, @unchecked Sendable {
 
   @Children(for: \.$project)
   var componentLosses: [ComponentLossModel]
+
+  @OptionalChild(for: \.$project)
+  var equipment: EquipmentModel?
+
+  @Children(for: \.$project)
+  var equivalentLengths: [EffectiveLengthModel]
+
+  @Children(for: \.$project)
+  var rooms: [RoomModel]
+
+  @Children(for: \.$project)
+  var trunks: [TrunkModel]
 
   @Parent(key: "userID")
   var user: UserModel

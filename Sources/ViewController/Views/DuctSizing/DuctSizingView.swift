@@ -23,6 +23,14 @@ struct DuctSizingView: HTML, Sendable {
           .hidden(when: ductSizes.rooms.count > 0)
           .attributes(.class("text-error font-bold italic mt-4"))
         }
+
+        a(
+          .class("btn btn-primary"),
+          .href(route: .project(.detail(projectID, .pdf)))
+        ) {
+          "PDF"
+        }
+
       }
 
       if ductSizes.rooms.count != 0 {

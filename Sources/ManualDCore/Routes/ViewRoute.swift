@@ -146,6 +146,7 @@ extension SiteRoute.View.ProjectRoute {
     case equipment(EquipmentInfoRoute)
     case equivalentLength(EquivalentLengthRoute)
     case frictionRate(FrictionRateRoute)
+    case pdf
     case rooms(RoomRoute)
 
     static let router = OneOf {
@@ -166,6 +167,10 @@ extension SiteRoute.View.ProjectRoute {
       }
       Route(.case(Self.frictionRate)) {
         FrictionRateRoute.router
+      }
+      Route(.case(Self.pdf)) {
+        Path { "pdf" }
+        Method.get
       }
       Route(.case(Self.rooms)) {
         RoomRoute.router

@@ -192,6 +192,11 @@ extension SiteRoute.View.ProjectRoute {
         return await route.renderView(on: request, projectID: projectID)
       case .frictionRate(let route):
         return await route.renderView(on: request, projectID: projectID)
+      case .pdf:
+        return await ResultView {
+          try await projectClient.toHTML(projectID)
+        }
+      // fatalError()
       case .rooms(let route):
         return await route.renderView(on: request, projectID: projectID)
       }
