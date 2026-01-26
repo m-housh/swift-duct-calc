@@ -66,7 +66,7 @@ private func setupDatabase(
   let databaseClient = makeDatabaseClient(app.db)
 
   if app.environment != .testing {
-    try await app.migrations.add(databaseClient.migrations.run())
+    try await app.migrations.add(databaseClient.migrations())
   }
 
   return databaseClient

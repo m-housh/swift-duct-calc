@@ -55,6 +55,10 @@ extension DatabaseClient {
   @DependencyClient
   public struct Migrations: Sendable {
     public var run: @Sendable () async throws -> [any AsyncMigration]
+
+    public func callAsFunction() async throws -> [any AsyncMigration] {
+      try await self.run()
+    }
   }
 }
 
