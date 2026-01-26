@@ -136,6 +136,7 @@ let package = Package(
       dependencies: [
         .target(name: "AuthClient"),
         .target(name: "DatabaseClient"),
+        .target(name: "PdfClient"),
         .target(name: "ProjectClient"),
         .target(name: "ManualDClient"),
         .target(name: "ManualDCore"),

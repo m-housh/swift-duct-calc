@@ -49,3 +49,9 @@ public struct FrictionRateError: Error, Equatable, Sendable {
     self.resolutions = resolutions
   }
 }
+
+#if DEBUG
+  extension FrictionRate {
+    public static let mock = Self(availableStaticPressure: 0.21, value: 0.11)
+  }
+#endif

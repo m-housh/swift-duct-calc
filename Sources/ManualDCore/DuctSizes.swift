@@ -146,3 +146,111 @@ extension DuctSizes {
     }
   }
 }
+
+#if DEBUG
+  extension DuctSizes {
+    public static func mock(
+      equipmentInfo: EquipmentInfo,
+      rooms: [Room],
+      trunks: [TrunkSize]
+    ) -> Self {
+
+      let totalHeatingLoad = rooms.totalHeatingLoad
+      let totalCoolingLoad = rooms.totalCoolingLoad
+
+      let roomContainers = rooms.reduce(into: [RoomContainer]()) { array, room in
+        array += RoomContainer.mock(
+          room: room,
+          totalHeatingLoad: totalHeatingLoad,
+          totalCoolingLoad: totalCoolingLoad,
+          totalHeatingCFM: Double(equipmentInfo.heatingCFM),
+          totalCoolingCFM: Double(equipmentInfo.coolingCFM)
+        )
+      }
+
+      return .init(
+        rooms: roomContainers,
+        trunks: TrunkContainer.mock(
+          trunks: trunks,
+          totalHeatingLoad: totalHeatingLoad,
+          totalCoolingLoad: totalCoolingLoad,
+          totalHeatingCFM: Double(equipmentInfo.heatingCFM),
+          totalCoolingCFM: Double(equipmentInfo.coolingCFM)
+        )
+      )
+    }
+  }
+
+  extension DuctSizes.RoomContainer {
+    public static func mock(
+      room: Room,
+      totalHeatingLoad: Double,
+      totalCoolingLoad: Double,
+      totalHeatingCFM: Double,
+      totalCoolingCFM: Double
+    ) -> [Self] {
+      var retval = [DuctSizes.RoomContainer]()
+      let heatingLoad = room.heatingLoad / Double(room.registerCount)
+      let heatingFraction = heatingLoad / totalHeatingLoad
+      let heatingCFM = totalHeatingCFM * heatingFraction
+      // Not really accurate, but works for mocks.
+      let coolingLoad = room.coolingTotal / Double(room.registerCount)
+      let coolingFraction = coolingLoad / totalCoolingLoad
+      let coolingCFM = totalCoolingCFM * coolingFraction
+
+      for n in 1...room.registerCount {
+
+        retval.append(
+          .init(
+            roomID: room.id,
+            roomName: room.name,
+            roomRegister: n,
+            heatingLoad: heatingLoad,
+            coolingLoad: coolingLoad,
+            heatingCFM: heatingCFM,
+            coolingCFM: coolingCFM,
+            ductSize: .init(
+              rectangularID: nil,
+              designCFM: .init(heating: heatingCFM, cooling: coolingCFM),
+              roundSize: 7,
+              finalSize: 8,
+              velocity: 489,
+              flexSize: 8,
+              height: nil,
+              width: nil
+            )
+          )
+        )
+      }
+      return retval
+    }
+
+  }
+
+  extension DuctSizes.TrunkContainer {
+
+    public static func mock(
+      trunks: [TrunkSize],
+      totalHeatingLoad: Double,
+      totalCoolingLoad: Double,
+      totalHeatingCFM: Double,
+      totalCoolingCFM: Double
+    ) -> [Self] {
+      trunks.reduce(into: []) { array, trunk in
+        array.append(
+          .init(
+            trunk: trunk,
+            ductSize: .init(
+              designCFM: .init(heating: totalHeatingCFM, cooling: totalCoolingCFM),
+              roundSize: 18,
+              finalSize: 20,
+              velocity: 987,
+              flexSize: 20
+            )
+          )
+        )
+      }
+    }
+  }
+
+#endif

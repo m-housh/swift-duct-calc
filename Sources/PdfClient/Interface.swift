@@ -67,3 +67,27 @@ extension PdfClient {
     }
   }
 }
+
+#if DEBUG
+  extension PdfClient.Request {
+    public static func mock(project: Project = .mock) -> Self {
+      let rooms = Room.mock(projectID: project.id)
+      let trunks = TrunkSize.mock(projectID: project.id, rooms: rooms)
+      let equipmentInfo = EquipmentInfo.mock(projectID: project.id)
+      let equivalentLengths = EffectiveLength.mock(projectID: project.id)
+
+      return .init(
+        project: project,
+        rooms: rooms,
+        componentLosses: ComponentPressureLoss.mock(projectID: project.id),
+        ductSizes: .mock(equipmentInfo: equipmentInfo, rooms: rooms, trunks: trunks),
+        equipmentInfo: equipmentInfo,
+        maxSupplyTEL: equivalentLengths.first { $0.type == .supply }!,
+        maxReturnTEL: equivalentLengths.first { $0.type == .return }!,
+        frictionRate: .mock,
+        projectSHR: 0.83
+      )
+
+    }
+  }
+#endif

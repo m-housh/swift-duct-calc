@@ -1,3 +1,4 @@
+import Dependencies
 import Foundation
 
 // Represents the database model.
@@ -71,7 +72,6 @@ extension TrunkSize {
     }
   }
 
-  // TODO: Make registers non-optional
   public struct RoomProxy: Codable, Equatable, Identifiable, Sendable {
 
     public var id: Room.ID { room.id }
@@ -91,3 +91,24 @@ extension TrunkSize {
     public static let allCases = [Self.supply, .return]
   }
 }
+
+#if DEBUG
+  extension TrunkSize {
+    public static func mock(projectID: Project.ID, rooms: [Room]) -> [Self] {
+      @Dependency(\.uuid) var uuid
+
+      let allRooms = rooms.reduce(into: [TrunkSize.RoomProxy]()) { array, room in
+        var registers = [Int]()
+        for n in 1...room.registerCount {
+          registers.append(n)
+        }
+        array.append(.init(room: room, registers: registers))
+      }
+
+      return [
+        .init(id: uuid(), projectID: projectID, type: .supply, rooms: allRooms),
+        .init(id: uuid(), projectID: projectID, type: .return, rooms: allRooms),
+      ]
+    }
+  }
+#endif

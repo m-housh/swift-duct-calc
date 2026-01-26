@@ -171,6 +171,86 @@ extension Array where Element == Room {
         updatedAt: Date()
       ),
     ]
+
+    public static func mock(projectID: Project.ID) -> [Self] {
+      @Dependency(\.uuid) var uuid
+      @Dependency(\.date.now) var now
+
+      return [
+        .init(
+          id: uuid(),
+          projectID: projectID,
+          name: "Bed-1",
+          heatingLoad: 3913,
+          coolingTotal: 2472,
+          coolingSensible: nil,
+          registerCount: 1,
+          rectangularSizes: nil,
+          createdAt: now,
+          updatedAt: now
+        ),
+        .init(
+          id: uuid(),
+          projectID: projectID,
+          name: "Entry",
+          heatingLoad: 8284,
+          coolingTotal: 2916,
+          coolingSensible: nil,
+          registerCount: 2,
+          rectangularSizes: nil,
+          createdAt: now,
+          updatedAt: now
+        ),
+        .init(
+          id: uuid(),
+          projectID: projectID,
+          name: "Family Room",
+          heatingLoad: 9785,
+          coolingTotal: 7446,
+          coolingSensible: nil,
+          registerCount: 3,
+          rectangularSizes: nil,
+          createdAt: now,
+          updatedAt: now
+        ),
+        .init(
+          id: uuid(),
+          projectID: projectID,
+          name: "Kitchen",
+          heatingLoad: 4518,
+          coolingTotal: 5096,
+          coolingSensible: nil,
+          registerCount: 2,
+          rectangularSizes: nil,
+          createdAt: now,
+          updatedAt: now
+        ),
+        .init(
+          id: uuid(),
+          projectID: projectID,
+          name: "Living Room",
+          heatingLoad: 7553,
+          coolingTotal: 6829,
+          coolingSensible: nil,
+          registerCount: 2,
+          rectangularSizes: nil,
+          createdAt: now,
+          updatedAt: now
+        ),
+        .init(
+          id: uuid(),
+          projectID: projectID,
+          name: "Master",
+          heatingLoad: 8202,
+          coolingTotal: 2076,
+          coolingSensible: nil,
+          registerCount: 2,
+          rectangularSizes: nil,
+          createdAt: now,
+          updatedAt: now
+        ),
+      ]
+    }
   }
 
 #endif

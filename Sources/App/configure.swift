@@ -129,12 +129,6 @@ private func siteHandler(
   case .health:
     return HTTPStatus.ok
   case .view(let route):
-    // FIX: Remove.
-    if route == .test {
-      let projectID = UUID(uuidString: "E796C96C-F527-4753-A00A-EBCF25630663")!
-      // return try await projectClient.toMarkdown(projectID)
-      return try await AnyHTMLResponse(value: projectClient.toHTML(projectID))
-    }
     return try await viewController.respond(route: route, request: request)
   }
 }

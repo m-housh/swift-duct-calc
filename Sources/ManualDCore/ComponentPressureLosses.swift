@@ -1,3 +1,4 @@
+import Dependencies
 import Foundation
 
 public struct ComponentPressureLoss: Codable, Equatable, Identifiable, Sendable {
@@ -89,7 +90,61 @@ public typealias ComponentPressureLosses = [String: Double]
     }
   }
 
+  extension Array where Element == ComponentPressureLoss {
+    public static func mock(projectID: Project.ID) -> Self {
+      ComponentPressureLoss.mock(projectID: projectID)
+    }
+  }
+
   extension ComponentPressureLoss {
+    public static func mock(projectID: Project.ID) -> [Self] {
+      @Dependency(\.uuid) var uuid
+      @Dependency(\.date.now) var now
+
+      return [
+        .init(
+          id: uuid(),
+          projectID: projectID,
+          name: "evaporator-coil",
+          value: 0.2,
+          createdAt: now,
+          updatedAt: now
+        ),
+        .init(
+          id: uuid(),
+          projectID: projectID,
+          name: "filter",
+          value: 0.1,
+          createdAt: now,
+          updatedAt: now
+        ),
+        .init(
+          id: uuid(),
+          projectID: projectID,
+          name: "supply-outlet",
+          value: 0.03,
+          createdAt: now,
+          updatedAt: now
+        ),
+        .init(
+          id: uuid(),
+          projectID: projectID,
+          name: "return-grille",
+          value: 0.03,
+          createdAt: now,
+          updatedAt: now
+        ),
+        .init(
+          id: uuid(),
+          projectID: projectID,
+          name: "balancing-damper",
+          value: 0.03,
+          createdAt: now,
+          updatedAt: now
+        ),
+      ]
+    }
+
     public static var mock: [Self] {
       [
         .init(

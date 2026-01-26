@@ -70,6 +70,21 @@ extension EquipmentInfo {
 
 #if DEBUG
   extension EquipmentInfo {
+
+    public static func mock(projectID: Project.ID) -> Self {
+      @Dependency(\.uuid) var uuid
+      @Dependency(\.date.now) var now
+
+      return .init(
+        id: uuid(),
+        projectID: projectID,
+        heatingCFM: 900,
+        coolingCFM: 1000,
+        createdAt: now,
+        updatedAt: now
+      )
+    }
+
     public static let mock = Self(
       id: UUID(0),
       projectID: UUID(0),
