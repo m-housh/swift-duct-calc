@@ -41,8 +41,9 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
             type: request.type
           )
           try await model.save(on: database)
-          // TODO: This `model.toDTO()` may not work now, need to check.
-          try await roomProxies.append(model.toDTO())
+          roomProxies.append(
+            .init(room: try room.toDTO(), registers: registers)
+          )
         }
 
         return try .init(
@@ -77,7 +78,7 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
         else {
           return nil
         }
-        return try await model.toDTO()
+        return try model.toDTO()
       },
       update: { id, updates in
         guard

@@ -1,102 +1,76 @@
 import Elementary
 import Foundation
 
-public struct ResultView<
-  V: Sendable,
-  E: Error,
-  ValueView: HTML,
-  ErrorView: HTML
->: HTML {
+public struct ResultView<ValueView, ErrorView>: HTML where ValueView: HTML, ErrorView: HTML {
 
-  let onSuccess: @Sendable (V) -> ValueView
-  let onError: @Sendable (E) -> ErrorView
-  let result: Result<V, E>
+  let result: Result<ValueView, any Error>
+  let errorView: @Sendable (any Error) -> ErrorView
 
   public init(
-    result: Result<V, E>,
-    @HTMLBuilder onSuccess: @escaping @Sendable (V) -> ValueView,
-    @HTMLBuilder onError: @escaping @Sendable (E) -> ErrorView
-  ) {
-    self.result = result
-    self.onError = onError
-    self.onSuccess = onSuccess
+    _ content: @escaping @Sendable () async throws -> ValueView,
+    onError: @escaping @Sendable (any Error) -> ErrorView
+  ) async {
+    self.result = await Result(catching: content)
+    self.errorView = onError
   }
 
   public var body: some HTML {
     switch result {
-    case .success(let value):
-      onSuccess(value)
+    case .success(let view):
+      view
     case .failure(let error):
-      onError(error)
+      errorView(error)
     }
   }
 }
 
-extension ResultView {
+extension ResultView where ErrorView == Styleguide.ErrorView {
 
   public init(
-    result: Result<V, E>,
-    @HTMLBuilder onSuccess: @escaping @Sendable (V) -> ValueView
-  ) where ErrorView == Styleguide.ErrorView<E> {
-    self.init(result: result, onSuccess: onSuccess) { error in
-      Styleguide.ErrorView(error: error)
-    }
+    _ content: @escaping @Sendable () async throws -> ValueView
+  ) async {
+    await self.init(
+      content,
+      onError: { Styleguide.ErrorView(error: $0) }
+    )
+  }
+
+  public init<V: Sendable>(
+    catching: @escaping @Sendable () async throws -> V,
+    onSuccess content: @escaping @Sendable (V) -> ValueView
+  ) async where ValueView: Sendable {
+    await self.init(
+      {
+        try await content(catching())
+      }
+    )
   }
 
   public init(
-    catching: @escaping @Sendable () async throws(E) -> V,
-    @HTMLBuilder onSuccess: @escaping @Sendable (V) -> ValueView
-  ) async where ErrorView == Styleguide.ErrorView<E> {
+    catching: @escaping @Sendable () async throws -> Void
+  ) async where ValueView == EmptyHTML {
     await self.init(
-      result: .init(catching: catching),
-      onSuccess: onSuccess
-    ) { error in
-      Styleguide.ErrorView(error: error)
-    }
-  }
-
-  public init(
-    catching: @escaping @Sendable () async throws(E) -> V,
-  ) async where ErrorView == Styleguide.ErrorView<E>, V == Void, ValueView == EmptyHTML {
-    await self.init(
-      result: .init(catching: catching),
+      catching: catching,
       onSuccess: { EmptyHTML() }
-    ) { error in
-      Styleguide.ErrorView(error: error)
-    }
+    )
   }
 }
 
-extension ResultView where V == ValueView {
+extension ResultView: Sendable where ValueView: Sendable, ErrorView: Sendable {}
 
-  public init(
-    catching: @escaping @Sendable () async throws(E) -> V
-  ) async where ErrorView == Styleguide.ErrorView<E> {
-    await self.init(result: .init(catching: catching)) {
-      $0
-    } onError: { error in
-      Styleguide.ErrorView(error: error)
-    }
-  }
-}
+public struct ErrorView: HTML, Sendable {
+  let error: any Error
 
-extension ResultView: Sendable where Error: Sendable, ValueView: Sendable, ErrorView: Sendable {}
-
-public struct ErrorView<E: Error>: HTML, Sendable where Error: Sendable {
-
-  let error: E
-
-  public init(error: E) {
+  public init(error: any Error) {
     self.error = error
   }
 
   public var body: some HTML<HTMLTag.div> {
     div {
-      h1(.class("text-2xl font-bold text-error")) { "Oops: Error" }
+      h1(.class("text-xl font-bold text-error")) { "Oops: Error" }
       p {
         "\(error)"
       }
     }
   }
-
 }
