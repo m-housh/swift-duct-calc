@@ -41,7 +41,17 @@ extension DatabaseClient.Projects: TestDependencyKey {
             .with(\.$equipment)
             .with(\.$equivalentLengths)
             .with(\.$rooms)
-            .with(\.$trunks, { $0.with(\.$rooms) })
+            .with(
+              \.$trunks,
+              { trunk in
+                trunk.with(
+                  \.$rooms,
+                  { 
+                    $0.with(\.$room)
+                  }
+                )
+              }
+            )
             .filter(\.$id == id)
             .first()
         else {
@@ -51,7 +61,7 @@ extension DatabaseClient.Projects: TestDependencyKey {
         // TODO: Different error ??
         guard let equipmentInfo = model.equipment else { return nil }
 
-        let trunks = try await model.trunks.toDTO(on: database)
+        let trunks = try model.trunks.toDTO()
 
         return try .init(
           project: model.toDTO(),

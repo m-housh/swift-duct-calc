@@ -6,6 +6,14 @@ import ManualDCore
 extension DatabaseClient {
 
   func calculateDuctSizes(
+    details: Project.Detail
+  ) async throws -> (DuctSizes, DuctSizeSharedRequest) {
+    let (rooms, shared) = try await calculateRoomDuctSizes(details: details)
+    let (trunks, _) = try await calculateTrunkDuctSizes(details: details)
+    return (.init(rooms: rooms, trunks: trunks), shared)
+  }
+
+  func calculateDuctSizes(
     projectID: Project.ID
   ) async throws -> (DuctSizes, DuctSizeSharedRequest, [Room]) {
     @Dependency(\.manualD) var manualD
@@ -25,6 +33,16 @@ extension DatabaseClient {
   }
 
   func calculateRoomDuctSizes(
+    details: Project.Detail
+  ) async throws -> ([DuctSizes.RoomContainer], DuctSizeSharedRequest) {
+    @Dependency(\.manualD) var manualD
+
+    let shared = try sharedDuctRequest(details: details)
+    let rooms = try await manualD.calculateRoomSizes(rooms: details.rooms, sharedRequest: shared)
+    return (rooms, shared)
+  }
+
+  func calculateRoomDuctSizes(
     projectID: Project.ID
   ) async throws -> ([DuctSizes.RoomContainer], DuctSizeSharedRequest) {
     @Dependency(\.manualD) var manualD
@@ -41,6 +59,20 @@ extension DatabaseClient {
   }
 
   func calculateTrunkDuctSizes(
+    details: Project.Detail
+  ) async throws -> ([DuctSizes.TrunkContainer], DuctSizeSharedRequest) {
+    @Dependency(\.manualD) var manualD
+
+    let shared = try sharedDuctRequest(details: details)
+    let trunks = try await manualD.calculateTrunkSizes(
+      rooms: details.rooms,
+      trunks: details.trunks,
+      sharedRequest: shared
+    )
+    return (trunks, shared)
+  }
+
+  func calculateTrunkDuctSizes(
     projectID: Project.ID
   ) async throws -> ([DuctSizes.TrunkContainer], DuctSizeSharedRequest) {
     @Dependency(\.manualD) var manualD
@@ -54,6 +86,32 @@ extension DatabaseClient {
         sharedRequest: shared
       ),
       shared
+    )
+  }
+
+  func sharedDuctRequest(details: Project.Detail) throws -> DuctSizeSharedRequest {
+    guard
+      let dfrResponse = designFrictionRate(
+        componentLosses: details.componentLosses,
+        equipmentInfo: details.equipmentInfo,
+        equivalentLengths: details.maxContainer
+      )
+    else {
+      throw ProjectClientError("Project not complete.")
+    }
+
+    guard let projectSHR = details.project.sensibleHeatRatio else {
+      throw ProjectClientError("Project sensible heat ratio not set.")
+    }
+
+    let ensuredTEL = try dfrResponse.ensureMaxContainer()
+
+    return .init(
+      equipmentInfo: dfrResponse.equipmentInfo,
+      maxSupplyLength: ensuredTEL.supply,
+      maxReturnLenght: ensuredTEL.return,
+      designFrictionRate: dfrResponse.designFrictionRate,
+      projectSHR: projectSHR
     )
   }
 
@@ -107,25 +165,36 @@ extension DatabaseClient {
   }
 
   func designFrictionRate(
-    projectID: Project.ID
-  ) async throws -> DesignFrictionRateResponse? {
-    guard let equipmentInfo = try await equipment.fetch(projectID) else {
-      return nil
-    }
+    componentLosses: [ComponentPressureLoss],
+    equipmentInfo: EquipmentInfo,
+    equivalentLengths: EffectiveLength.MaxContainer
+  ) -> DesignFrictionRateResponse? {
+    guard let tel = equivalentLengths.total,
+      componentLosses.count > 0
+    else { return nil }
 
-    let equivalentLengths = try await effectiveLength.fetchMax(projectID)
-    guard let tel = equivalentLengths.total else { return nil }
-
-    let componentLosses = try await componentLoss.fetch(projectID)
-    guard componentLosses.count > 0 else { return nil }
-
-    let availableStaticPressure =
-      equipmentInfo.staticPressure - componentLosses.total
+    let availableStaticPressure = equipmentInfo.staticPressure - componentLosses.total
 
     return .init(
       designFrictionRate: (availableStaticPressure * 100) / tel,
       equipmentInfo: equipmentInfo,
       telMaxContainer: equivalentLengths
+    )
+
+  }
+
+  func designFrictionRate(
+    projectID: Project.ID
+  ) async throws -> DesignFrictionRateResponse? {
+
+    guard let equipmentInfo = try await equipment.fetch(projectID) else {
+      return nil
+    }
+
+    return try await designFrictionRate(
+      componentLosses: componentLoss.fetch(projectID),
+      equipmentInfo: equipmentInfo,
+      equivalentLengths: effectiveLength.fetchMax(projectID)
     )
   }
 }

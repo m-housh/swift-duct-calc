@@ -48,29 +48,72 @@ extension ProjectClient: DependencyKey {
 
 extension DatabaseClient {
 
+  // fileprivate func makePdfRequest(_ projectID: Project.ID) async throws -> PdfClient.Request {
+  //   @Dependency(\.manualD) var manualD
+  //
+  //   guard let project = try await projects.get(projectID) else {
+  //     throw ProjectClientError("Project not found. id: \(projectID)")
+  //   }
+  //   let frictionRateResponse = try await manualD.frictionRate(projectID: projectID)
+  //   guard let frictionRate = frictionRateResponse.frictionRate else {
+  //     throw ProjectClientError("Friction rate not found. id: \(projectID)")
+  //   }
+  //   let (ductSizes, sharedInfo, rooms) = try await calculateDuctSizes(projectID: projectID)
+  //
+  //   return .init(
+  //     project: project,
+  //     rooms: rooms,
+  //     componentLosses: frictionRateResponse.componentLosses,
+  //     ductSizes: ductSizes,
+  //     equipmentInfo: sharedInfo.equipmentInfo,
+  //     maxSupplyTEL: sharedInfo.maxSupplyLength,
+  //     maxReturnTEL: sharedInfo.maxReturnLenght,
+  //     frictionRate: frictionRate,
+  //     projectSHR: sharedInfo.projectSHR
+  //   )
+  // }
+
   fileprivate func makePdfRequest(_ projectID: Project.ID) async throws -> PdfClient.Request {
     @Dependency(\.manualD) var manualD
 
-    guard let project = try await projects.get(projectID) else {
+    guard let projectDetails = try await projects.detail(projectID) else {
       throw ProjectClientError("Project not found. id: \(projectID)")
     }
-    let frictionRateResponse = try await manualD.frictionRate(projectID: projectID)
+
+    let (ductSizes, shared) = try await calculateDuctSizes(details: projectDetails)
+
+    let frictionRateResponse = try await manualD.frictionRate(details: projectDetails)
     guard let frictionRate = frictionRateResponse.frictionRate else {
       throw ProjectClientError("Friction rate not found. id: \(projectID)")
     }
-    let (ductSizes, sharedInfo, rooms) = try await calculateDuctSizes(projectID: projectID)
 
     return .init(
-      project: project,
-      rooms: rooms,
-      componentLosses: frictionRateResponse.componentLosses,
+      details: projectDetails,
       ductSizes: ductSizes,
-      equipmentInfo: sharedInfo.equipmentInfo,
-      maxSupplyTEL: sharedInfo.maxSupplyLength,
-      maxReturnTEL: sharedInfo.maxReturnLenght,
-      frictionRate: frictionRate,
-      projectSHR: sharedInfo.projectSHR
+      shared: shared,
+      frictionRate: frictionRate
     )
   }
 
+}
+
+extension PdfClient.Request {
+  init(
+    details: Project.Detail,
+    ductSizes: DuctSizes,
+    shared: DuctSizeSharedRequest,
+    frictionRate: FrictionRate
+  ) {
+    self.init(
+      project: details.project,
+      rooms: details.rooms,
+      componentLosses: details.componentLosses,
+      ductSizes: ductSizes,
+      equipmentInfo: details.equipmentInfo,
+      maxSupplyTEL: shared.maxSupplyLength,
+      maxReturnTEL: shared.maxReturnLenght,
+      frictionRate: frictionRate,
+      projectSHR: shared.projectSHR
+    )
+  }
 }
