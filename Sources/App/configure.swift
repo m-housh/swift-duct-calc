@@ -120,7 +120,7 @@ func handlePdf(_ projectID: Project.ID, on request: Request) async throws -> Res
 
   let html = try await projectClient.toHTML(projectID)
   let url = "/tmp/\(projectID)"
-  try await request.fileio.writeFile(.init(string: html.renderFormatted()), at: "\(url).html")
+  try await request.fileio.writeFile(.init(string: html.render()), at: "\(url).html")
 
   let process = Process()
   let standardInput = Pipe()
@@ -129,21 +129,24 @@ func handlePdf(_ projectID: Project.ID, on request: Request) async throws -> Res
   process.standardOutput = standardOutput
   process.executableURL = URL(fileURLWithPath: "/bin/pandoc")
   process.arguments = [
-    "\(url).html", "--pdf-engine=weasyprint", "-f", "html",
+    "\(url).html",
+    "--pdf-engine=weasyprint",
+    "--from=html",
     "--css=Public/css/pdf.css",
     "-o", "\(url).pdf",
   ]
   try process.run()
   process.waitUntilExit()
 
-  var headers = HTTPHeaders()
-  headers.add(name: .contentType, value: "application/octet-stream")
-  headers.add(name: .contentDisposition, value: "attachment")
-
-  let response = try await request.fileio.asyncStreamFile(at: "\(url).pdf", mediaType: .pdf)
+  let response = try await request.fileio.asyncStreamFile(at: "\(url).pdf", mediaType: .pdf) { _ in
+    // Remove files here.
+    try FileManager.default.removeItem(atPath: "\(url).pdf")
+    try FileManager.default.removeItem(atPath: "\(url).html")
+  }
   response.headers.replaceOrAdd(name: .contentType, value: "application/octet-stream")
   response.headers.replaceOrAdd(
-    name: .contentDisposition, value: "attachment; filename=Duct-Calc.pdf")
+    name: .contentDisposition, value: "attachment; filename=Duct-Calc.pdf"
+  )
   return response
 }
 

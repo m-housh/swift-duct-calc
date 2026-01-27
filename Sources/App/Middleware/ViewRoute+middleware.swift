@@ -14,8 +14,7 @@ private let viewRouteMiddleware: [any Middleware] = [
 extension SiteRoute.View {
   var middleware: [any Middleware]? {
     switch self {
-    // TODO: Should pdf require authentication, just here now for testing.
-    case .project(.detail(_, .pdf)), .login, .signup, .test:
+    case .login, .signup, .test:
       return nil
     case .project, .user:
       return viewRouteMiddleware
