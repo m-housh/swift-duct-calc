@@ -69,7 +69,7 @@ public struct ErrorView: HTML, Sendable {
     div {
       h1(.class("text-xl font-bold text-error")) { "Oops: Error" }
       p {
-        "\(error)"
+        "\(error.localizedDescription)"
       }
     }
   }

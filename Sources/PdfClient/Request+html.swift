@@ -20,7 +20,7 @@ struct PdfDocument: HTMLDocument {
 
   var body: some HTML {
     div {
-      h1(.class("headline")) { "Duct Calc" }
+      // h1(.class("headline")) { "Duct Calc" }
 
       h2 { "Project" }
 

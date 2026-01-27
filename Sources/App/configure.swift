@@ -114,6 +114,39 @@ extension SiteRoute {
 
 extension DuctSizes: Content {}
 
+// FIX: Move
+func handlePdf(_ projectID: Project.ID, on request: Request) async throws -> Response {
+  @Dependency(\.projectClient) var projectClient
+
+  let html = try await projectClient.toHTML(projectID)
+  let url = "/tmp/\(projectID)"
+  try await request.fileio.writeFile(.init(string: html.renderFormatted()), at: "\(url).html")
+
+  let process = Process()
+  let standardInput = Pipe()
+  let standardOutput = Pipe()
+  process.standardInput = standardInput
+  process.standardOutput = standardOutput
+  process.executableURL = URL(fileURLWithPath: "/bin/pandoc")
+  process.arguments = [
+    "\(url).html", "--pdf-engine=weasyprint", "-f", "html",
+    "--css=Public/css/pdf.css",
+    "-o", "\(url).pdf",
+  ]
+  try process.run()
+  process.waitUntilExit()
+
+  var headers = HTTPHeaders()
+  headers.add(name: .contentType, value: "application/octet-stream")
+  headers.add(name: .contentDisposition, value: "attachment")
+
+  let response = try await request.fileio.asyncStreamFile(at: "\(url).pdf", mediaType: .pdf)
+  response.headers.replaceOrAdd(name: .contentType, value: "application/octet-stream")
+  response.headers.replaceOrAdd(
+    name: .contentDisposition, value: "attachment; filename=Duct-Calc.pdf")
+  return response
+}
+
 @Sendable
 private func siteHandler(
   request: Request,
@@ -128,6 +161,9 @@ private func siteHandler(
     return try await apiController.respond(route, request: request)
   case .health:
     return HTTPStatus.ok
+  // FIX: Move
+  case .view(.project(.detail(let projectID, .pdf))):
+    return try await handlePdf(projectID, on: request)
   case .view(let route):
     return try await viewController.respond(route: route, request: request)
   }
