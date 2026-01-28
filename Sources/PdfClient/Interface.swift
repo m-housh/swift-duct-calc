@@ -1,6 +1,9 @@
 import Dependencies
 import DependenciesMacros
 import Elementary
+import EnvClient
+import FileClient
+import Foundation
 import ManualDCore
 
 extension DependencyValues {
@@ -14,6 +17,13 @@ extension DependencyValues {
 @DependencyClient
 public struct PdfClient: Sendable {
   public var html: @Sendable (Request) async throws -> (any HTML & Sendable)
+  public var generatePdf: @Sendable (Project.ID, any HTML & Sendable) async throws -> Response
+
+  public func generatePdf(request: Request) async throws -> Response {
+    let html = try await self.html(request)
+    return try await self.generatePdf(request.project.id, html)
+  }
+
 }
 
 extension PdfClient: DependencyKey {
@@ -22,6 +32,33 @@ extension PdfClient: DependencyKey {
   public static let liveValue = Self(
     html: { request in
       request.toHTML()
+    },
+    generatePdf: { projectID, html in
+      @Dependency(\.fileClient) var fileClient
+      @Dependency(\.env) var env
+
+      let envVars = try env()
+      let baseUrl = "/tmp/\(projectID)"
+      try await fileClient.writeFile(html.render(), "\(baseUrl).html")
+
+      let process = Process()
+      let standardInput = Pipe()
+      let standardOutput = Pipe()
+      process.standardInput = standardInput
+      process.standardOutput = standardOutput
+      process.executableURL = URL(fileURLWithPath: envVars.pandocPath)
+      process.arguments = [
+        "\(baseUrl).html",
+        "--pdf-engine=\(envVars.pdfEngine)",
+        "--from=html",
+        "--css=Public/css/pdf.css",
+        "--output=\(baseUrl).pdf",
+      ]
+      try process.run()
+      process.waitUntilExit()
+
+      return .init(htmlPath: "\(baseUrl).html", pdfPath: "\(baseUrl).pdf")
+
     }
   )
 }
@@ -39,6 +76,10 @@ extension PdfClient {
     public let maxReturnTEL: EffectiveLength
     public let frictionRate: FrictionRate
     public let projectSHR: Double
+
+    var totalEquivalentLength: Double {
+      maxReturnTEL.totalEquivalentLength + maxSupplyTEL.totalEquivalentLength
+    }
 
     public init(
       project: Project,
@@ -60,6 +101,17 @@ extension PdfClient {
       self.maxReturnTEL = maxReturnTEL
       self.frictionRate = frictionRate
       self.projectSHR = projectSHR
+    }
+  }
+
+  public struct Response: Equatable, Sendable {
+
+    public let htmlPath: String
+    public let pdfPath: String
+
+    public init(htmlPath: String, pdfPath: String) {
+      self.htmlPath = htmlPath
+      self.pdfPath = pdfPath
     }
   }
 }

@@ -105,6 +105,8 @@ let package = Package(
     .target(
       name: "PdfClient",
       dependencies: [
+        .target(name: "EnvClient"),
+        .target(name: "FileClient"),
         .target(name: "ManualDCore"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
@@ -117,6 +119,7 @@ let package = Package(
         .target(name: "DatabaseClient"),
         .target(name: "ManualDClient"),
         .target(name: "PdfClient"),
+        .product(name: "Vapor", package: "vapor"),
       ]
     ),
     .target(

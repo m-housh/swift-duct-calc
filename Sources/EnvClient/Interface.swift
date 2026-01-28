@@ -16,13 +16,19 @@ extension DependencyValues {
 
 @DependencyClient
 struct EnvClient: Sendable {
-
   public var env: @Sendable () throws -> EnvVars
 }
 
+/// Holds values defined in the process environment that are needed.
+///
+/// These are generally loaded from a `.env` file, but also have default values,
+/// if not found.
 public struct EnvVars: Codable, Equatable, Sendable {
 
+  /// The path to the pandoc executable on the system, used to generate pdf's.
   public let pandocPath: String
+
+  /// The pdf engine to use with pandoc when creating pdf's.
   public let pdfEngine: String
 
   public init(
@@ -42,6 +48,7 @@ public struct EnvVars: Codable, Equatable, Sendable {
 
 extension EnvClient: DependencyKey {
   static let testValue = Self()
+
   static let liveValue = Self(env: {
     // Convert default values into a dictionary.
     let defaults =

@@ -1,5 +1,6 @@
 import DatabaseClient
 import Dependencies
+import FileClient
 import Logging
 import ManualDClient
 import ManualDCore
@@ -11,6 +12,7 @@ extension ProjectClient: DependencyKey {
     @Dependency(\.database) var database
     @Dependency(\.manualD) var manualD
     @Dependency(\.pdfClient) var pdfClient
+    @Dependency(\.fileClient) var fileClient
 
     return .init(
       calculateDuctSizes: { projectID in
@@ -35,11 +37,21 @@ extension ProjectClient: DependencyKey {
       frictionRate: { projectID in
         try await manualD.frictionRate(projectID: projectID)
       },
-      toMarkdown: { projectID in
-        try await pdfClient.markdown(database.makePdfRequest(projectID))
-      },
-      toHTML: { projectID in
-        try await pdfClient.html(database.makePdfRequest(projectID))
+      generatePdf: { projectID, fileIO in
+        let pdfResponse = try await pdfClient.generatePdf(
+          request: database.makePdfRequest(projectID))
+
+        let response = try await fileIO.asyncStreamFile(at: pdfResponse.pdfPath) { _ in
+          try await fileClient.removeFile(pdfResponse.htmlPath)
+          try await fileClient.removeFile(pdfResponse.pdfPath)
+        }
+
+        response.headers.replaceOrAdd(name: .contentType, value: "application/octet-stream")
+        response.headers.replaceOrAdd(
+          name: .contentDisposition, value: "attachment; filename=Duct-Calc.pdf"
+        )
+
+        return response
       }
     )
   }
@@ -47,31 +59,6 @@ extension ProjectClient: DependencyKey {
 }
 
 extension DatabaseClient {
-
-  // fileprivate func makePdfRequest(_ projectID: Project.ID) async throws -> PdfClient.Request {
-  //   @Dependency(\.manualD) var manualD
-  //
-  //   guard let project = try await projects.get(projectID) else {
-  //     throw ProjectClientError("Project not found. id: \(projectID)")
-  //   }
-  //   let frictionRateResponse = try await manualD.frictionRate(projectID: projectID)
-  //   guard let frictionRate = frictionRateResponse.frictionRate else {
-  //     throw ProjectClientError("Friction rate not found. id: \(projectID)")
-  //   }
-  //   let (ductSizes, sharedInfo, rooms) = try await calculateDuctSizes(projectID: projectID)
-  //
-  //   return .init(
-  //     project: project,
-  //     rooms: rooms,
-  //     componentLosses: frictionRateResponse.componentLosses,
-  //     ductSizes: ductSizes,
-  //     equipmentInfo: sharedInfo.equipmentInfo,
-  //     maxSupplyTEL: sharedInfo.maxSupplyLength,
-  //     maxReturnTEL: sharedInfo.maxReturnLenght,
-  //     frictionRate: frictionRate,
-  //     projectSHR: sharedInfo.projectSHR
-  //   )
-  // }
 
   fileprivate func makePdfRequest(_ projectID: Project.ID) async throws -> PdfClient.Request {
     @Dependency(\.manualD) var manualD

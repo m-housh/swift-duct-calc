@@ -3,6 +3,7 @@ import DependenciesMacros
 import Elementary
 import ManualDClient
 import ManualDCore
+import Vapor
 
 extension DependencyValues {
   public var projectClient: ProjectClient {
@@ -29,8 +30,10 @@ public struct ProjectClient: Sendable {
   public var frictionRate: @Sendable (Project.ID) async throws -> FrictionRateResponse
 
   // FIX: Name to something to do with generating a pdf, just experimenting now.
-  public var toMarkdown: @Sendable (Project.ID) async throws -> String
-  public var toHTML: @Sendable (Project.ID) async throws -> (any HTML & Sendable)
+  // public var toMarkdown: @Sendable (Project.ID) async throws -> String
+  // public var toHTML: @Sendable (Project.ID) async throws -> (any HTML & Sendable)
+
+  public var generatePdf: @Sendable (Project.ID, FileIO) async throws -> Response
 }
 
 extension ProjectClient: TestDependencyKey {

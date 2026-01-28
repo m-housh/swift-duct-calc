@@ -24,11 +24,20 @@ struct DuctSizingView: HTML, Sendable {
           .attributes(.class("text-error font-bold italic mt-4"))
         }
 
-        a(
-          .class("btn btn-primary"),
-          .href(route: .project(.detail(projectID, .pdf)))
-        ) {
-          "PDF"
+        div {
+          button(
+            .class("btn btn-primary"),
+            .hx.get(route: .project(.detail(projectID, .pdf))),
+            .hx.ext("htmx-download"),
+            .hx.swap(.none),
+            .hx.indicator()
+          ) {
+            span { "PDF" }
+            Indicator()
+          }
+          // div {
+          //   Indicator()
+          // }
         }
 
       }

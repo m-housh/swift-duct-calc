@@ -195,7 +195,9 @@ extension SiteRoute.View.ProjectRoute {
       case .pdf:
         // FIX: This should return a pdf to download or be wrapped in a
         //      result view.
-        return try! await projectClient.toHTML(projectID)
+        // return try! await projectClient.toHTML(projectID)
+        // This get's handled elsewhere because it returns a response, not a view.
+        fatalError()
       case .rooms(let route):
         return await route.renderView(on: request, projectID: projectID)
       }

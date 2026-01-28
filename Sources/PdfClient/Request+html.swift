@@ -63,7 +63,6 @@ struct PdfDocument: HTMLDocument {
           }
         }
       }
-
       div(.class("section")) {
         h2 { "Duct Sizes" }
         DuctSizesTable(rooms: request.ductSizes.rooms)
