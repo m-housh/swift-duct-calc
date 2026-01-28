@@ -65,3 +65,15 @@ extension User {
     }
   }
 }
+
+#if DEBUG
+
+  extension User {
+    public static var mock: Self {
+      @Dependency(\.uuid) var uuid
+      @Dependency(\.date.now) var now
+      return .init(id: uuid(), email: "testy@example.com", createdAt: now, updatedAt: now)
+    }
+  }
+
+#endif

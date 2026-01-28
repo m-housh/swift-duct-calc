@@ -140,16 +140,22 @@ extension Project {
 #if DEBUG
 
   extension Project {
-    public static let mock = Self(
-      id: UUID(0),
-      name: "Testy McTestface",
-      streetAddress: "1234 Sesame Street",
-      city: "Monroe",
-      state: "OH",
-      zipCode: "55555",
-      createdAt: Date(),
-      updatedAt: Date()
-    )
+
+    public static var mock: Self {
+      @Dependency(\.uuid) var uuid
+      @Dependency(\.date.now) var now
+
+      return .init(
+        id: uuid(),
+        name: "Testy McTestface",
+        streetAddress: "1234 Sesame Street",
+        city: "Monroe",
+        state: "OH",
+        zipCode: "55555",
+        createdAt: now,
+        updatedAt: now
+      )
+    }
   }
 
 #endif

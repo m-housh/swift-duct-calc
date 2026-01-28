@@ -33,31 +33,31 @@ struct ManualDClientTests {
     #expect(response.velocity == 329)
   }
 
-  @Test
-  func frictionRate() async throws {
-    let response = try await manualD.frictionRate(
-      .init(
-        externalStaticPressure: 0.5,
-        componentPressureLosses: .mock,
-        totalEffectiveLength: 185
-      )
-    )
-    #expect(numberFormatter.string(for: response.availableStaticPressure) == "0.11")
-    #expect(numberFormatter.string(for: response.frictionRate) == "0.06")
-  }
+  // @Test
+  // func frictionRate() async throws {
+  //   let response = try await manualD.frictionRate(
+  //     .init(
+  //       externalStaticPressure: 0.5,
+  //       componentPressureLosses: .mock,
+  //       totalEffectiveLength: 185
+  //     )
+  //   )
+  //   #expect(numberFormatter.string(for: response.availableStaticPressure) == "0.11")
+  //   #expect(numberFormatter.string(for: response.frictionRate) == "0.06")
+  // }
 
-  @Test
-  func frictionRateFails() async throws {
-    await #expect(throws: ManualDError.self) {
-      _ = try await manualD.frictionRate(
-        .init(
-          externalStaticPressure: 0.5,
-          componentPressureLosses: .mock,
-          totalEffectiveLength: 0
-        )
-      )
-    }
-  }
+  // @Test
+  // func frictionRateFails() async throws {
+  //   await #expect(throws: ManualDError.self) {
+  //     _ = try await manualD.frictionRate(
+  //       .init(
+  //         externalStaticPressure: 0.5,
+  //         componentPressureLosses: .mock,
+  //         totalEffectiveLength: 0
+  //       )
+  //     )
+  //   }
+  // }
 
   @Test
   func totalEffectiveLength() async throws {

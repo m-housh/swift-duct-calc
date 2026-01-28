@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Duct Calc</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="ductcalc.com" name="og:site_name">
+    <meta content="Duct Calc" name="og:title">
+    <meta content="Duct sizing based on ACCA, Manual-D." name="description">
+    <meta content="Duct sizing based on ACCA, Manual-D." name="og:description">
+    <meta content="/images/mand_logo.png" name="og:image">
+    <meta content="/images/mand_logo.png" name="twitter:image">
+    <meta content="Duct Calc" name="twitter:image:alt">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="1536" name="og:image:width">
+    <meta content="1024" name="og:image:height">
+    <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
+    <script src="https://unpkg.com/htmx.org@2.0.8"></script>
+    <script src="/js/main.js"></script>
+    <link rel="stylesheet" href="/css/output.css">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
+    <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <script src="https://unpkg.com/htmx-remove@latest" crossorigin="anonymous" integrity="sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT"></script>
+  </head>
+  <body>
+    <div class="flex flex-col min-h-screen min-w-full justify-between">
+      <main class="flex flex-col min-h-screen min-w-full grow mb-auto">
+        <div class="drawer lg:drawer-open h-full">
+          <input id="my-drawer-1" type="checkbox" class="drawer-toggle">
+          <div class="drawer-content overflow-auto">
+            <nav class="navbar w-full bg-base-300 text-base-content shadow-sm mb-4">
+              <div class="flex flex-1 space-x-4 items-center">
+                <div class="tooltip tooltip-right" data-tip="Open sidebar"><label for="my-drawer-1" class="size-7 btn btn-square btn-ghost hover:bg-neutral hover:text-white" aria-label="open sidebar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor" class="my-1.5 inline-block"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg></label></div>
+                <div class="tooltip tooltip-right" data-tip="Home">
+                  <a class="flex w-fit h-fit text-xl items-end px-4 py-2 btn btn-square btn-ghost hover:bg-neutral hover:text-white" href="/projects">
+                  <img src="/images/mand_logo_sm.webp">
+                  Duct Calc<span></span></a>
+                </div>
+              </div>
+              <div class="flex-none">
+                <div class="tooltip tooltip-left" data-tip="Profile"><a href="/profile" class="btn btn-square btn-ghost hover:bg-neutral hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg></a></div>
+              </div>
+            </nav>
+            <div class="p-4">
+              <div class="space-y-4">
+                <div class="flex justify-between bg-secondary border-2 border-primary rounded-sm shadow-sm 
+p-6 w-full">
+                  <div>
+                    <h1 class="text-3xl font-bold">Duct Sizes</h1>
+                    <div class="flex space-x-2 hidden text-error font-bold italic mt-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                      <p>Must complete all the previous sections to display duct sizing calculations.</p>
+                    </div>
+                  </div>
+                  PDF<a class="btn btn-primary" href="/projects/00000000-0000-0000-0000-000000000000/pdf"></a>
+                </div>
+                <table class="table table-zebra text-lg">
+                  <thead>
+                    <tr class="text-lg">
+                      <th>Name</th>
+                      <th>BTU</th>
+                      <th>CFM</th>
+                      <th>Velocity</th>
+                      <th class="w-[330px]">Size</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="text-lg" id="roomRow_Bed1">
+                      <td>Bed-1</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,913</span><span class="label">Cooling</span><span>2,472</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>92</span></div>
+                          </div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>83</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>92</span></div>
+                        </div>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_Bed1.showModal()">
+                                  <div class="flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <dialog id="rectangularSize_Bed1" class="modal">
+                            <div class="modal-box">
+                              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="rectangularSize_Bed1.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <h1 class="text-lg pb-6">Rectangular Size</h1>
+                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000001" hx-target="#roomRow_Bed1" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="1">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_Entry">
+                      <td>Entry</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,142</span><span class="label">Cooling</span><span>1,458</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>88</span></div>
+                          </div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>88</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>54</span></div>
+                        </div>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_Entry.showModal()">
+                                  <div class="flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <dialog id="rectangularSize_Entry" class="modal">
+                            <div class="modal-box">
+                              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="rectangularSize_Entry.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <h1 class="text-lg pb-6">Rectangular Size</h1>
+                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000002" hx-target="#roomRow_Entry" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="1">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_Entry">
+                      <td>Entry</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,142</span><span class="label">Cooling</span><span>1,458</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>88</span></div>
+                          </div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>88</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>54</span></div>
+                        </div>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_Entry.showModal()">
+                                  <div class="flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <dialog id="rectangularSize_Entry" class="modal">
+                            <div class="modal-box">
+                              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="rectangularSize_Entry.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <h1 class="text-lg pb-6">Rectangular Size</h1>
+                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000002" hx-target="#roomRow_Entry" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="2">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_FamilyRoom">
+                      <td>Family Room</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,262</span><span class="label">Cooling</span><span>2,482</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>92</span></div>
+                          </div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>69</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>92</span></div>
+                        </div>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_FamilyRoom.showModal()">
+                                  <div class="flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <dialog id="rectangularSize_FamilyRoom" class="modal">
+                            <div class="modal-box">
+                              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="rectangularSize_FamilyRoom.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <h1 class="text-lg pb-6">Rectangular Size</h1>
+                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000003" hx-target="#roomRow_FamilyRoom" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="1">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_FamilyRoom">
+                      <td>Family Room</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,262</span><span class="label">Cooling</span><span>2,482</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>92</span></div>
+                          </div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>69</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>92</span></div>
+                        </div>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_FamilyRoom.showModal()">
+                                  <div class="flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <dialog id="rectangularSize_FamilyRoom" class="modal">
+                            <div class="modal-box">
+                              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="rectangularSize_FamilyRoom.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <h1 class="text-lg pb-6">Rectangular Size</h1>
+                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000003" hx-target="#roomRow_FamilyRoom" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="2">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_FamilyRoom">
+                      <td>Family Room</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,262</span><span class="label">Cooling</span><span>2,482</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>92</span></div>
+                          </div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>69</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>92</span></div>
+                        </div>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_FamilyRoom.showModal()">
+                                  <div class="flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <dialog id="rectangularSize_FamilyRoom" class="modal">
+                            <div class="modal-box">
+                              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="rectangularSize_FamilyRoom.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <h1 class="text-lg pb-6">Rectangular Size</h1>
+                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000003" hx-target="#roomRow_FamilyRoom" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="3">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_Kitchen">
+                      <td>Kitchen</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>2,259</span><span class="label">Cooling</span><span>2,548</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>95</span></div>
+                          </div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>48</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>95</span></div>
+                        </div>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_Kitchen.showModal()">
+                                  <div class="flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <dialog id="rectangularSize_Kitchen" class="modal">
+                            <div class="modal-box">
+                              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="rectangularSize_Kitchen.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <h1 class="text-lg pb-6">Rectangular Size</h1>
+                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000004" hx-target="#roomRow_Kitchen" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="1">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_Kitchen">
+                      <td>Kitchen</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>2,259</span><span class="label">Cooling</span><span>2,548</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>95</span></div>
+                          </div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>48</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>95</span></div>
+                        </div>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_Kitchen.showModal()">
+                                  <div class="flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <dialog id="rectangularSize_Kitchen" class="modal">
+                            <div class="modal-box">
+                              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="rectangularSize_Kitchen.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <h1 class="text-lg pb-6">Rectangular Size</h1>
+                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000004" hx-target="#roomRow_Kitchen" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="2">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_LivingRoom">
+                      <td>Living Room</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,776</span><span class="label">Cooling</span><span>3,414</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>127</span></div>
+                          </div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>80</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>127</span></div>
+                        </div>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_LivingRoom.showModal()">
+                                  <div class="flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <dialog id="rectangularSize_LivingRoom" class="modal">
+                            <div class="modal-box">
+                              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="rectangularSize_LivingRoom.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <h1 class="text-lg pb-6">Rectangular Size</h1>
+                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000005" hx-target="#roomRow_LivingRoom" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="1">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_LivingRoom">
+                      <td>Living Room</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,776</span><span class="label">Cooling</span><span>3,414</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>127</span></div>
+                          </div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>80</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>127</span></div>
+                        </div>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_LivingRoom.showModal()">
+                                  <div class="flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <dialog id="rectangularSize_LivingRoom" class="modal">
+                            <div class="modal-box">
+                              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="rectangularSize_LivingRoom.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <h1 class="text-lg pb-6">Rectangular Size</h1>
+                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000005" hx-target="#roomRow_LivingRoom" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="2">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_Master">
+                      <td>Master</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,101</span><span class="label">Cooling</span><span>1,038</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>87</span></div>
+                          </div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>87</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>39</span></div>
+                        </div>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_Master.showModal()">
+                                  <div class="flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <dialog id="rectangularSize_Master" class="modal">
+                            <div class="modal-box">
+                              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="rectangularSize_Master.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <h1 class="text-lg pb-6">Rectangular Size</h1>
+                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000006" hx-target="#roomRow_Master" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="1">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_Master">
+                      <td>Master</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,101</span><span class="label">Cooling</span><span>1,038</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>87</span></div>
+                          </div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>87</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>39</span></div>
+                        </div>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_Master.showModal()">
+                                  <div class="flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <dialog id="rectangularSize_Master" class="modal">
+                            <div class="modal-box">
+                              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="rectangularSize_Master.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <h1 class="text-lg pb-6">Rectangular Size</h1>
+                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000006" hx-target="#roomRow_Master" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="2">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="flex justify-between bg-secondary border-2 border-primary rounded-sm shadow-sm 
+p-6 w-full">
+                  <h1 class="text-3xl font-bold">Trunk / Runout Sizes</h1>
+                  <div class="tooltip tooltip-left" data-tip="Add trunk / runout">
+                    <button type="button" class="btn btn-primary" onclick="trunkSizeForm.showModal()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></button>
+                  </div>
+                </div>
+                <table class="table table-zebra text-lg">
+                  <thead>
+                    <tr class="text-lg">
+                      <th>Name / Type</th>
+                      <th>Associated Supplies</th>
+                      <th>Dsn CFM</th>
+                      <th>Velocity</th>
+                      <th class="w-[330px]">Size</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="grid grid-cols-1 space-y-2">
+                          <div class="badge badge-lg badge-outline badge-info">supply</div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap space-x-2 space-y-2">
+                          <div class="badge badge-lg badge-outline">Bed-1</div>
+                          <div class="badge badge-lg badge-outline">Entry</div>
+                          <div class="badge badge-lg badge-outline">Entry</div>
+                          <div class="badge badge-lg badge-outline">Family Room</div>
+                          <div class="badge badge-lg badge-outline">Family Room</div>
+                          <div class="badge badge-lg badge-outline">Family Room</div>
+                          <div class="badge badge-lg badge-outline">Kitchen</div>
+                          <div class="badge badge-lg badge-outline">Kitchen</div>
+                          <div class="badge badge-lg badge-outline">Living Room</div>
+                          <div class="badge badge-lg badge-outline">Living Room</div>
+                          <div class="badge badge-lg badge-outline">Master</div>
+                          <div class="badge badge-lg badge-outline">Master</div>
+                        </div>
+                      </td>
+                      <td><span>1,000</span></td>
+                      <td><span>987</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>18</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-secondary"><span>20</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-primary"><span>20</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end items-end">
+                            <div class="join">
+                              <button class="btn join-item btn-ghost" type="button" onclick="trunkSizeForm_0000000000000000000000000000000F.showModal()">
+                                <div class="flex">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                  
+                                </div>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <dialog id="trunkSizeForm_0000000000000000000000000000000F" class="modal">
+                          <div class="modal-box">
+                            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="trunkSizeForm_0000000000000000000000000000000F.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                            <h1 class="text-lg font-bold mb-4">Trunk / Runout Size</h1>
+                            <form class="space-y-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk/00000000-0000-0000-0000-00000000000F" hx-target="body" hx-swap="outerHTML">
+                              <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <label class="select w-full"><span class="label">Type</span>
+                                <select name="type">
+                                  <option value="supply" selected>Supply</option>
+                                  <option value="return">Return</option>
+                                </select>
+                                Height</label><label class="input w-full"><span class="label"></span>
+                                <input type="text" name="height" value="" placeholder="8 (Optional)"></label>
+                              </div>
+                              Name<label class="input w-full"><span class="label"></span>
+                              <input type="text" name="name" value="" placeholder="Trunk-1 (Optional)"></label>
+                              <div>
+                                <h2 class="label font-bold col-span-3 mb-6">Associated Supply Runs</h2>
+                                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center gap-4">
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Bed-1</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000001_1" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Entry</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_1" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Entry</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_2" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Family Room</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_1" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Family Room</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_2" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Family Room</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_3" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Kitchen</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_1" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Kitchen</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_2" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Living Room</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_1" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Living Room</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_2" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Master</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_1" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Master</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_2" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
+                            </form>
+                          </div>
+                        </dialog>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="grid grid-cols-1 space-y-2">
+                          <div class="badge badge-lg badge-outline badge-error">return</div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap space-x-2 space-y-2">
+                          <div class="badge badge-lg badge-outline">Bed-1</div>
+                          <div class="badge badge-lg badge-outline">Entry</div>
+                          <div class="badge badge-lg badge-outline">Entry</div>
+                          <div class="badge badge-lg badge-outline">Family Room</div>
+                          <div class="badge badge-lg badge-outline">Family Room</div>
+                          <div class="badge badge-lg badge-outline">Family Room</div>
+                          <div class="badge badge-lg badge-outline">Kitchen</div>
+                          <div class="badge badge-lg badge-outline">Kitchen</div>
+                          <div class="badge badge-lg badge-outline">Living Room</div>
+                          <div class="badge badge-lg badge-outline">Living Room</div>
+                          <div class="badge badge-lg badge-outline">Master</div>
+                          <div class="badge badge-lg badge-outline">Master</div>
+                        </div>
+                      </td>
+                      <td><span>1,000</span></td>
+                      <td><span>987</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline"><span>18</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-secondary"><span>20</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-outline badge-primary"><span>20</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end items-end">
+                            <div class="join">
+                              <button class="btn join-item btn-ghost" type="button" onclick="trunkSizeForm_00000000000000000000000000000010.showModal()">
+                                <div class="flex">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                  
+                                </div>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <dialog id="trunkSizeForm_00000000000000000000000000000010" class="modal">
+                          <div class="modal-box">
+                            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="trunkSizeForm_00000000000000000000000000000010.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                            <h1 class="text-lg font-bold mb-4">Trunk / Runout Size</h1>
+                            <form class="space-y-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk/00000000-0000-0000-0000-000000000010" hx-target="body" hx-swap="outerHTML">
+                              <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <label class="select w-full"><span class="label">Type</span>
+                                <select name="type">
+                                  <option value="supply">Supply</option>
+                                  <option value="return" selected>Return</option>
+                                </select>
+                                Height</label><label class="input w-full"><span class="label"></span>
+                                <input type="text" name="height" value="" placeholder="8 (Optional)"></label>
+                              </div>
+                              Name<label class="input w-full"><span class="label"></span>
+                              <input type="text" name="name" value="" placeholder="Trunk-1 (Optional)"></label>
+                              <div>
+                                <h2 class="label font-bold col-span-3 mb-6">Associated Supply Runs</h2>
+                                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center gap-4">
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Bed-1</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000001_1" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Entry</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_1" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Entry</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_2" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Family Room</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_1" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Family Room</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_2" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Family Room</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_3" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Kitchen</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_1" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Kitchen</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_2" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Living Room</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_1" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Living Room</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_2" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Master</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_1" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="block grow">
+                                    <div class="grid grid-cols-1 space-y-1">
+                                      <div class="flex justify-center">
+                                        <p class="label">Master</p>
+                                      </div>
+                                      <div class="flex justify-center">
+                                        <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_2" checked>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
+                            </form>
+                          </div>
+                        </dialog>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <dialog id="trunkSizeForm" class="modal">
+                  <div class="modal-box">
+                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="trunkSizeForm.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                    <h1 class="text-lg font-bold mb-4">Trunk / Runout Size</h1>
+                    <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk" hx-target="body" hx-swap="outerHTML">
+                      <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <label class="select w-full"><span class="label">Type</span>
+                        <select name="type">
+                          <option value="supply">Supply</option>
+                          <option value="return">Return</option>
+                        </select>
+                        Height</label><label class="input w-full"><span class="label"></span>
+                        <input type="text" name="height" value="" placeholder="8 (Optional)"></label>
+                      </div>
+                      Name<label class="input w-full"><span class="label"></span>
+                      <input type="text" name="name" value="" placeholder="Trunk-1 (Optional)"></label>
+                      <div>
+                        <h2 class="label font-bold col-span-3 mb-6">Associated Supply Runs</h2>
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center gap-4">
+                          <div class="block grow">
+                            <div class="grid grid-cols-1 space-y-1">
+                              <div class="flex justify-center">
+                                <p class="label">Bed-1</p>
+                              </div>
+                              <div class="flex justify-center">
+                                <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000001_1">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="block grow">
+                            <div class="grid grid-cols-1 space-y-1">
+                              <div class="flex justify-center">
+                                <p class="label">Entry</p>
+                              </div>
+                              <div class="flex justify-center">
+                                <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_1">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="block grow">
+                            <div class="grid grid-cols-1 space-y-1">
+                              <div class="flex justify-center">
+                                <p class="label">Entry</p>
+                              </div>
+                              <div class="flex justify-center">
+                                <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_2">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="block grow">
+                            <div class="grid grid-cols-1 space-y-1">
+                              <div class="flex justify-center">
+                                <p class="label">Family Room</p>
+                              </div>
+                              <div class="flex justify-center">
+                                <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_1">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="block grow">
+                            <div class="grid grid-cols-1 space-y-1">
+                              <div class="flex justify-center">
+                                <p class="label">Family Room</p>
+                              </div>
+                              <div class="flex justify-center">
+                                <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_2">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="block grow">
+                            <div class="grid grid-cols-1 space-y-1">
+                              <div class="flex justify-center">
+                                <p class="label">Family Room</p>
+                              </div>
+                              <div class="flex justify-center">
+                                <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_3">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="block grow">
+                            <div class="grid grid-cols-1 space-y-1">
+                              <div class="flex justify-center">
+                                <p class="label">Kitchen</p>
+                              </div>
+                              <div class="flex justify-center">
+                                <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_1">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="block grow">
+                            <div class="grid grid-cols-1 space-y-1">
+                              <div class="flex justify-center">
+                                <p class="label">Kitchen</p>
+                              </div>
+                              <div class="flex justify-center">
+                                <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_2">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="block grow">
+                            <div class="grid grid-cols-1 space-y-1">
+                              <div class="flex justify-center">
+                                <p class="label">Living Room</p>
+                              </div>
+                              <div class="flex justify-center">
+                                <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_1">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="block grow">
+                            <div class="grid grid-cols-1 space-y-1">
+                              <div class="flex justify-center">
+                                <p class="label">Living Room</p>
+                              </div>
+                              <div class="flex justify-center">
+                                <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_2">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="block grow">
+                            <div class="grid grid-cols-1 space-y-1">
+                              <div class="flex justify-center">
+                                <p class="label">Master</p>
+                              </div>
+                              <div class="flex justify-center">
+                                <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_1">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="block grow">
+                            <div class="grid grid-cols-1 space-y-1">
+                              <div class="flex justify-center">
+                                <p class="label">Master</p>
+                              </div>
+                              <div class="flex justify-center">
+                                <input class="checkbox" type="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_2">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
+                    </form>
+                  </div>
+                </dialog>
+              </div>
+            </div>
+          </div>
+          <div class="drawer-side is-drawer-close:overflow-visible grow">
+            <label for="my-drawer-1" aria-label="close sidebar" class="drawer-overlay"></label>
+            <div class="flex grow h-full flex-col items-start bg-base-300 text-base-content
+is-drawer-close:min-w-[80px] is-drawer-open:max-w-[300px]">
+              <ul class="w-full grow">
+                <li class="flex w-full">
+                  <button class="w-full gap-1 py-2 border-b-1 border-gray-200
+hover:bg-neutral data-active:bg-neutral
+hover:text-white data-active:text-white
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
+                    <div class="w-full p-2 gap-1
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1">
+                      <div class="items-center
+is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
+                        <div class="flex items-center justify-center is-drawer-close:text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></div>
+                        <div class="flex items-center justify-center"><span>Project</span></div>
+                      </div>
+                      <div class="flex grow justify-end items-end is-drawer-close:hidden text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                    </div>
+                  </button>
+                </li>
+                <li class="w-full">
+                  <button class="w-full gap-1 py-2 border-b-1 border-gray-200
+hover:bg-neutral data-active:bg-neutral
+hover:text-white data-active:text-white
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/rooms" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
+                    <div class="w-full p-2 gap-1
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1">
+                      <div class="items-center
+is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
+                        <div class="flex items-center justify-center is-drawer-close:text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-door-closed-icon lucide-door-closed"><path d="M10 12h.01"/><path d="M18 20V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14"/><path d="M2 20h20"/></svg></div>
+                        <div class="flex items-center justify-center"><span>Rooms</span></div>
+                      </div>
+                      <div class="flex grow justify-end items-end is-drawer-close:hidden text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                    </div>
+                  </button>
+                </li>
+                <li class="flex w-full">
+                  <button class="w-full gap-1 py-2 border-b-1 border-gray-200
+hover:bg-neutral data-active:bg-neutral
+hover:text-white data-active:text-white
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/equipment" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
+                    <div class="w-full p-2 gap-1
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1">
+                      <div class="items-center
+is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
+                        <div class="flex items-center justify-center is-drawer-close:text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fan-icon lucide-fan"><path d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.002l5.412 1.45a6.082 6.082 0 0 1 7.002-8.618l-1.45 5.412a6.082 6.082 0 0 1 8.618 7.002l-5.412-1.45a6.082 6.082 0 0 1-7.002 8.618l1.45-5.412Z"/><path d="M12 12v.01"/></svg></div>
+                        <div class="flex items-center justify-center"><span>Equipment</span></div>
+                      </div>
+                      <div class="flex grow justify-end items-end is-drawer-close:hidden text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                    </div>
+                  </button>
+                </li>
+                <li class="w-full">
+                  <button class="w-full gap-1 py-2 border-b-1 border-gray-200
+hover:bg-neutral data-active:bg-neutral
+hover:text-white data-active:text-white
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/effective-lengths" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
+                    <div class="w-full p-2 gap-1
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1">
+                      <div class="items-center
+is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
+                        <div class="flex items-center justify-center is-drawer-close:text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ruler-dimension-line-icon lucide-ruler-dimension-line"><path d="M10 15v-3"/><path d="M14 15v-3"/><path d="M18 15v-3"/><path d="M2 8V4"/><path d="M22 6H2"/><path d="M22 8V4"/><path d="M6 15v-3"/><rect x="2" y="12" width="20" height="8" rx="2"/></svg></div>
+                        <div class="flex items-center justify-center"><span>T.E.L.</span></div>
+                      </div>
+                      <div class="flex grow justify-end items-end is-drawer-close:hidden text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                    </div>
+                  </button>
+                </li>
+                <li class="w-full">
+                  <button class="w-full gap-1 py-2 border-b-1 border-gray-200
+hover:bg-neutral data-active:bg-neutral
+hover:text-white data-active:text-white
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/friction-rate" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
+                    <div class="w-full p-2 gap-1
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1">
+                      <div class="items-center
+is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
+                        <div class="flex items-center justify-center is-drawer-close:text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-function-icon lucide-square-function"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M9 17c2 0 2.8-1 2.8-2.8V10c0-2 1-3.3 3.2-3"/><path d="M9 11.2h5.7"/></svg></div>
+                        <div class="flex items-center justify-center"><span>Friction Rate</span></div>
+                      </div>
+                      <div class="flex grow justify-end items-end is-drawer-close:hidden text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                    </div>
+                  </button>
+                </li>
+                <li class="w-full">
+                  <button class="w-full gap-1 py-2 border-b-1 border-gray-200
+hover:bg-neutral data-active:bg-neutral
+hover:text-white data-active:text-white
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/duct-sizing" hx-push-url="true" hx-target="body" hx-swap="outerHTML" data-active="true">
+                    <div class="w-full p-2 gap-1
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1">
+                      <div class="items-center
+is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
+                        <div class="flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg></div>
+                        <div class="flex items-center justify-center"><span>Duct Sizes</span></div>
+                      </div>
+                    </div>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </main>
+      <div class="bottom-0 left-0 bg-error">
+        <footer class="footer sm:footer-horizontal footer-center
+bg-base-300 text-base-content p-4">
+          <aside>
+            <p>Copyright © 2026 - All rights reserved by Michael Housh</p>
+          </aside>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

@@ -46,7 +46,7 @@ extension DatabaseClient.Projects: TestDependencyKey {
               { trunk in
                 trunk.with(
                   \.$rooms,
-                  { 
+                  {
                     $0.with(\.$room)
                   }
                 )
