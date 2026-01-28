@@ -32,7 +32,8 @@ extension ViewController.Request {
       //     // TestPage(trunks: result.trunks, rooms: result.rooms)
       //   }
       // }
-      return try! await pdfClient.html(.mock())
+      // return try! await pdfClient.html(.mock())
+      return EmptyHTML()
     case .login(let route):
       switch route {
       case .index(let next):

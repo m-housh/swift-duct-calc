@@ -32,7 +32,7 @@ public struct EnvVars: Codable, Equatable, Sendable {
   public let pdfEngine: String
 
   public init(
-    pandocPath: String = "/bin/pandoc",
+    pandocPath: String = "/usr/bin/pandoc",
     pdfEngine: String = "weasyprint"
   ) {
     self.pandocPath = pandocPath

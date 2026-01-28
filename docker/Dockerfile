@@ -66,6 +66,8 @@ RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
       # libxml2 \
       sqlite3 \
       curl \
+			pandoc \
+			weasyprint \
     && rm -r /var/lib/apt/lists/*
 
 # Create a vapor user and group with /app as its home directory
