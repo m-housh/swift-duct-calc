@@ -14,7 +14,6 @@ extension DependencyValues {
 @DependencyClient
 public struct PdfClient: Sendable {
   public var html: @Sendable (Request) async throws -> (any HTML & Sendable)
-  public var markdown: @Sendable (Request) async throws -> String
 }
 
 extension PdfClient: DependencyKey {
@@ -23,9 +22,6 @@ extension PdfClient: DependencyKey {
   public static let liveValue = Self(
     html: { request in
       request.toHTML()
-    },
-    markdown: { request in
-      request.toMarkdown()
     }
   )
 }
