@@ -15,8 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup just
-      shell: bash
-      run: sudo apt update && apt install -y just
+      uses: extractions/setup-just@v3
     - name: Setup QEMU
       uses: docker/setup-qemu-action@v3
     - name: Setup buildx
