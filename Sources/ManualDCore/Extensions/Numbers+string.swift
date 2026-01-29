@@ -1,4 +1,17 @@
 import Foundation
+import Tagged
+
+extension Tagged where RawValue == Double {
+  public func string(digits: Int = 2) -> String {
+    rawValue.string(digits: digits)
+  }
+}
+
+extension Tagged where RawValue == Int {
+  public func string() -> String {
+    rawValue.string()
+  }
+}
 
 extension Double {
 

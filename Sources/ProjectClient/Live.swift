@@ -42,13 +42,10 @@ extension ProjectClient: DependencyKey {
           request: database.makePdfRequest(projectID)
         )
 
-        let response = try await fileClient.streamFile(
-          pdfResponse.pdfPath,
-          {
-            try await fileClient.removeFile(pdfResponse.htmlPath)
-            try await fileClient.removeFile(pdfResponse.pdfPath)
-          }
-        )
+        let response = try await fileClient.streamFile(at: pdfResponse.pdfPath) {
+          try await fileClient.removeFile(pdfResponse.htmlPath)
+          try await fileClient.removeFile(pdfResponse.pdfPath)
+        }
 
         response.headers.replaceOrAdd(name: .contentType, value: "application/octet-stream")
         response.headers.replaceOrAdd(

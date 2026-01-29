@@ -54,14 +54,14 @@ extension ViewController: DependencyKey {
 extension ViewController.Request {
 
   func currentUser() throws -> User {
-    @Dependency(\.authClient.currentUser) var currentUser
+    @Dependency(\.auth.currentUser) var currentUser
     return try currentUser()
   }
 
   func authenticate(
     _ login: User.Login
   ) async throws -> User {
-    @Dependency(\.authClient) var auth
+    @Dependency(\.auth) var auth
     return try await auth.login(login)
   }
 
@@ -69,7 +69,7 @@ extension ViewController.Request {
   func createAndAuthenticate(
     _ signup: User.Create
   ) async throws -> User {
-    @Dependency(\.authClient) var auth
+    @Dependency(\.auth) var auth
     return try await auth.createAndLogin(signup)
   }
 }

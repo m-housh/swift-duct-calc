@@ -97,16 +97,16 @@ func roundSize(_ size: Double) throws -> Int {
   }
 }
 
-func velocity(cfm: Int, roundSize: Int) -> Int {
-  let cfm = Double(cfm)
+func velocity(cfm: CFM, roundSize: Int) -> Int {
+  let cfm = Double(cfm.rawValue)
   let roundSize = Double(roundSize)
   let velocity = cfm / (pow(roundSize / 24, 2) * 3.14)
   return Int(round(velocity))
 }
 
-func flexSize(_ request: ManualDClient.DuctSizeRequest) throws -> Int {
-  let cfm = pow(Double(request.designCFM), 0.4)
-  let fr = pow(request.frictionRate / 1.76, 0.2)
+func flexSize(_ cfm: CFM, _ frictionRate: DesignFrictionRate) throws -> Int {
+  let cfm = pow(Double(cfm.rawValue), 0.4)
+  let fr = pow(frictionRate.rawValue / 1.76, 0.2)
   let size = 0.55 * (cfm / fr)
   return try roundSize(size)
 }

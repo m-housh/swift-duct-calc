@@ -31,7 +31,7 @@ struct DependenciesMiddleware: AsyncMiddleware {
     try await values.yield {
       try await withDependencies {
         $0.apiController = apiController
-        $0.authClient = .live(on: request)
+        $0.auth = .live(on: request)
         $0.database = database
         // $0.dateFormatter = .liveValue
         $0.viewController = viewController

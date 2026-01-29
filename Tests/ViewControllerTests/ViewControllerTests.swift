@@ -18,7 +18,7 @@ struct ViewControllerTests {
   func login() async throws {
     try await withDependencies {
       $0.viewController = .liveValue
-      $0.authClient = .failing
+      $0.auth = .failing
     } operation: {
       @Dependency(\.viewController) var viewController
 
@@ -31,7 +31,7 @@ struct ViewControllerTests {
   func signup() async throws {
     try await withDependencies {
       $0.viewController = .liveValue
-      $0.authClient = .failing
+      $0.auth = .failing
     } operation: {
       @Dependency(\.viewController) var viewController
 
@@ -163,7 +163,7 @@ struct ViewControllerTests {
 
     return try await withDependencies {
       $0.viewController = .liveValue
-      $0.authClient.currentUser = { user }
+      $0.auth.currentUser = { user }
       $0.database.userProfiles.fetch = { _ in profile }
       $0.manualD = .liveValue
       try await updateDependencies(&$0)

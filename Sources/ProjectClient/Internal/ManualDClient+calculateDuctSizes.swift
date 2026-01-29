@@ -52,7 +52,8 @@ extension ManualDClient {
       let coolingCFM = coolingPercent * Double(sharedRequest.equipmentInfo.coolingCFM)
       let designCFM = DuctSizes.DesignCFM(heating: heatingCFM, cooling: coolingCFM)
       let sizes = try await self.ductSize(
-        .init(designCFM: Int(designCFM.value), frictionRate: sharedRequest.designFrictionRate)
+        cfm: designCFM.value,
+        frictionRate: sharedRequest.designFrictionRate
       )
 
       for n in 1...room.registerCount {
@@ -111,7 +112,8 @@ extension ManualDClient {
       let coolingCFM = coolingPercent * Double(sharedRequest.equipmentInfo.coolingCFM)
       let designCFM = DuctSizes.DesignCFM(heating: heatingCFM, cooling: coolingCFM)
       let sizes = try await self.ductSize(
-        .init(designCFM: Int(designCFM.value), frictionRate: sharedRequest.designFrictionRate)
+        cfm: designCFM.value,
+        frictionRate: sharedRequest.designFrictionRate
       )
       var width: Int? = nil
       if let height = trunk.height {

@@ -4,6 +4,7 @@ import Logging
 import ManualDCore
 
 extension DependencyValues {
+  /// Dependency that performs manual-d duct sizing calculations.
   public var manualD: ManualDClient {
     get { self[ManualDClient.self] }
     set { self[ManualDClient.self] = newValue }
@@ -15,12 +16,24 @@ extension DependencyValues {
 ///
 @DependencyClient
 public struct ManualDClient: Sendable {
-  public var ductSize: @Sendable (DuctSizeRequest) async throws -> DuctSizeResponse
+  public var ductSize: @Sendable (CFM, DesignFrictionRate) async throws -> DuctSizeResponse
   public var frictionRate: @Sendable (FrictionRateRequest) async throws -> FrictionRate
-  public var totalEquivalentLength: @Sendable (TotalEquivalentLengthRequest) async throws -> Int
   public var rectangularSize:
     @Sendable (RectangularSizeRequest) async throws -> RectangularSizeResponse
 
+  public func ductSize(
+    cfm designCFM: Int,
+    frictionRate designFrictionRate: Double
+  ) async throws -> DuctSizeResponse {
+    try await ductSize(.init(rawValue: designCFM), .init(rawValue: designFrictionRate))
+  }
+
+  public func ductSize(
+    cfm designCFM: Double,
+    frictionRate designFrictionRate: Double
+  ) async throws -> DuctSizeResponse {
+    try await ductSize(.init(rawValue: Int(designCFM)), .init(rawValue: designFrictionRate))
+  }
 }
 
 extension ManualDClient: TestDependencyKey {
@@ -28,19 +41,6 @@ extension ManualDClient: TestDependencyKey {
 }
 
 extension ManualDClient {
-
-  public struct DuctSizeRequest: Codable, Equatable, Sendable {
-    public let designCFM: Int
-    public let frictionRate: Double
-
-    public init(
-      designCFM: Int,
-      frictionRate: Double
-    ) {
-      self.designCFM = designCFM
-      self.frictionRate = frictionRate
-    }
-  }
 
   public struct DuctSizeResponse: Codable, Equatable, Sendable {
 
@@ -82,28 +82,11 @@ extension ManualDClient {
   public struct FrictionRateResponse: Codable, Equatable, Sendable {
 
     public let availableStaticPressure: Double
-    public let frictionRate: Double
+    public let frictionRate: DesignFrictionRate
 
-    public init(availableStaticPressure: Double, frictionRate: Double) {
+    public init(availableStaticPressure: Double, frictionRate: DesignFrictionRate) {
       self.availableStaticPressure = availableStaticPressure
       self.frictionRate = frictionRate
-    }
-  }
-
-  public struct TotalEquivalentLengthRequest: Codable, Equatable, Sendable {
-
-    public let trunkLengths: [Int]
-    public let runoutLengths: [Int]
-    public let effectiveLengthGroups: [EffectiveLengthGroup]
-
-    public init(
-      trunkLengths: [Int],
-      runoutLengths: [Int],
-      effectiveLengthGroups: [EffectiveLengthGroup]
-    ) {
-      self.trunkLengths = trunkLengths
-      self.runoutLengths = runoutLengths
-      self.effectiveLengthGroups = effectiveLengthGroups
     }
   }
 

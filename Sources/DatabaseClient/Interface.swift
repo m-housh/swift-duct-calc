@@ -4,22 +4,33 @@ import FluentKit
 import ManualDCore
 
 extension DependencyValues {
+  /// The database dependency.
   public var database: DatabaseClient {
     get { self[DatabaseClient.self] }
     set { self[DatabaseClient.self] = newValue }
   }
 }
 
+/// Represents the database interactions used by the application.
 @DependencyClient
 public struct DatabaseClient: Sendable {
+  /// Database migrations.
   public var migrations: Migrations
+  /// Interactions with the projects table.
   public var projects: Projects
+  /// Interactions with the rooms table.
   public var rooms: Rooms
+  /// Interactions with the equipment table.
   public var equipment: Equipment
+  /// Interactions with the component losses table.
   public var componentLosses: ComponentLosses
+  /// Interactions with the equivalent lengths table.
   public var equivalentLengths: EquivalentLengths
+  /// Interactions with the users table.
   public var users: Users
+  /// Interactions with the user profiles table.
   public var userProfiles: UserProfiles
+  /// Interactions with the trunk sizes table.
   public var trunkSizes: TrunkSizes
 
   @DependencyClient
@@ -146,24 +157,4 @@ extension DatabaseClient: TestDependencyKey {
       trunkSizes: .live(database: database)
     )
   }
-}
-
-extension DatabaseClient.Migrations: DependencyKey {
-  public static let testValue = Self()
-
-  public static let liveValue = Self(
-    all: {
-      [
-        Project.Migrate(),
-        User.Migrate(),
-        User.Token.Migrate(),
-        User.Profile.Migrate(),
-        ComponentPressureLoss.Migrate(),
-        EquipmentInfo.Migrate(),
-        Room.Migrate(),
-        EquivalentLength.Migrate(),
-        TrunkSize.Migrate(),
-      ]
-    }
-  )
 }

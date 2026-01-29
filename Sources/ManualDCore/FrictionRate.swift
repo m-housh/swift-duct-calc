@@ -7,13 +7,13 @@ public struct FrictionRate: Codable, Equatable, Sendable {
   /// minus the ``ComponentPressureLoss``es for the project.
   public let availableStaticPressure: Double
   /// The calculated design friction rate value.
-  public let value: Double
+  public let value: DesignFrictionRate
   /// Whether the design friction rate is within a valid range.
   public var hasErrors: Bool { error != nil }
 
   public init(
     availableStaticPressure: Double,
-    value: Double
+    value: DesignFrictionRate
   ) {
     self.availableStaticPressure = availableStaticPressure
     self.value = value

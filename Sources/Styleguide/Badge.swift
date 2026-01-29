@@ -1,4 +1,5 @@
 import Elementary
+import Tagged
 
 public struct Badge<Inner: HTML>: HTML, Sendable where Inner: Sendable {
 
@@ -24,5 +25,13 @@ extension Badge where Inner == Number {
 
   public init(number: Double, digits: Int = 2) {
     self.inner = Number(number, digits: digits)
+  }
+
+  public init<T>(number: Tagged<T, Int>) {
+    self.inner = Number(number.rawValue)
+  }
+
+  public init<T>(number: Tagged<T, Double>, digits: Int = 2) {
+    self.inner = Number(number.rawValue, digits: digits)
   }
 }

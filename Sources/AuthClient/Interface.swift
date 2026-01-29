@@ -5,17 +5,23 @@ import ManualDCore
 import Vapor
 
 extension DependencyValues {
-  public var authClient: AuthClient {
+  /// Authentication dependency, for handling authentication tasks.
+  public var auth: AuthClient {
     get { self[AuthClient.self] }
     set { self[AuthClient.self] = newValue }
   }
 }
 
+/// Represents authentication tasks that are used in the application.
 @DependencyClient
 public struct AuthClient: Sendable {
+  /// Create a new user and log them in.
   public var createAndLogin: @Sendable (User.Create) async throws -> User
+  /// Get the current user.
   public var currentUser: @Sendable () throws -> User
+  /// Login a user.
   public var login: @Sendable (User.Login) async throws -> User
+  /// Logout a user.
   public var logout: @Sendable () throws -> Void
 }
 

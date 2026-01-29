@@ -26,6 +26,7 @@ let package = Package(
     .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
     .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.0.0"),
     .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.12.0"),
+    .package(url: "https://github.com/pointfreeco/swift-tagged", from: "0.6.0"),
     .package(url: "https://github.com/pointfreeco/swift-url-routing.git", from: "0.6.2"),
     .package(url: "https://github.com/pointfreeco/vapor-routing.git", from: "0.1.3"),
     .package(url: "https://github.com/pointfreeco/swift-case-paths.git", from: "1.6.0"),
@@ -59,6 +60,12 @@ let package = Package(
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
         .product(name: "Vapor", package: "vapor"),
+      ]
+    ),
+    .testTarget(
+      name: "ApiRouteTests",
+      dependencies: [
+        .target(name: "ManualDCore")
       ]
     ),
     .target(
@@ -137,22 +144,17 @@ let package = Package(
     .target(
       name: "ManualDCore",
       dependencies: [
+        .product(name: "CasePaths", package: "swift-case-paths"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "Fluent", package: "fluent"),
+        .product(name: "Tagged", package: "swift-tagged"),
         .product(name: "URLRouting", package: "swift-url-routing"),
-        .product(name: "CasePaths", package: "swift-case-paths"),
-      ]
-    ),
-    .testTarget(
-      name: "ApiRouteTests",
-      dependencies: [
-        .target(name: "ManualDCore")
       ]
     ),
     .target(
       name: "ManualDClient",
       dependencies: [
-        "ManualDCore",
+        .target(name: "ManualDCore"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
       ]
