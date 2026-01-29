@@ -4,25 +4,11 @@ import Fluent
 import Foundation
 import ManualDCore
 
-extension DatabaseClient {
-  @DependencyClient
-  public struct ComponentLoss: Sendable {
-    public var create:
-      @Sendable (ComponentPressureLoss.Create) async throws -> ComponentPressureLoss
-    public var delete: @Sendable (ComponentPressureLoss.ID) async throws -> Void
-    public var fetch: @Sendable (Project.ID) async throws -> [ComponentPressureLoss]
-    public var get: @Sendable (ComponentPressureLoss.ID) async throws -> ComponentPressureLoss?
-    public var update:
-      @Sendable (ComponentPressureLoss.ID, ComponentPressureLoss.Update) async throws ->
-        ComponentPressureLoss
-  }
-}
-
-extension DatabaseClient.ComponentLoss: TestDependencyKey {
+extension DatabaseClient.ComponentLosses: TestDependencyKey {
   public static let testValue = Self()
 }
 
-extension DatabaseClient.ComponentLoss {
+extension DatabaseClient.ComponentLosses {
   public static func live(database: any Database) -> Self {
     .init(
       create: { request in

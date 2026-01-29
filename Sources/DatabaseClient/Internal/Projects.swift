@@ -4,20 +4,6 @@ import Fluent
 import Foundation
 import ManualDCore
 
-extension DatabaseClient {
-  @DependencyClient
-  public struct Projects: Sendable {
-    public var create: @Sendable (User.ID, Project.Create) async throws -> Project
-    public var delete: @Sendable (Project.ID) async throws -> Void
-    public var detail: @Sendable (Project.ID) async throws -> Project.Detail?
-    public var get: @Sendable (Project.ID) async throws -> Project?
-    public var getCompletedSteps: @Sendable (Project.ID) async throws -> Project.CompletedSteps
-    public var getSensibleHeatRatio: @Sendable (Project.ID) async throws -> Double?
-    public var fetch: @Sendable (User.ID, PageRequest) async throws -> Page<Project>
-    public var update: @Sendable (Project.ID, Project.Update) async throws -> Project
-  }
-}
-
 extension DatabaseClient.Projects: TestDependencyKey {
   public static let testValue = Self()
 

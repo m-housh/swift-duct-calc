@@ -16,11 +16,108 @@ public struct DatabaseClient: Sendable {
   public var projects: Projects
   public var rooms: Rooms
   public var equipment: Equipment
-  public var componentLoss: ComponentLoss
-  public var effectiveLength: EffectiveLengthClient
+  public var componentLosses: ComponentLosses
+  public var equivalentLengths: EquivalentLengths
   public var users: Users
-  public var userProfile: UserProfile
+  public var userProfiles: UserProfiles
   public var trunkSizes: TrunkSizes
+
+  @DependencyClient
+  public struct ComponentLosses: Sendable {
+    public var create:
+      @Sendable (ComponentPressureLoss.Create) async throws -> ComponentPressureLoss
+    public var delete: @Sendable (ComponentPressureLoss.ID) async throws -> Void
+    public var fetch: @Sendable (Project.ID) async throws -> [ComponentPressureLoss]
+    public var get: @Sendable (ComponentPressureLoss.ID) async throws -> ComponentPressureLoss?
+    public var update:
+      @Sendable (ComponentPressureLoss.ID, ComponentPressureLoss.Update) async throws ->
+        ComponentPressureLoss
+  }
+
+  @DependencyClient
+  public struct EquivalentLengths: Sendable {
+    public var create: @Sendable (EquivalentLength.Create) async throws -> EquivalentLength
+    public var delete: @Sendable (EquivalentLength.ID) async throws -> Void
+    public var fetch: @Sendable (Project.ID) async throws -> [EquivalentLength]
+    public var fetchMax: @Sendable (Project.ID) async throws -> EquivalentLength.MaxContainer
+    public var get: @Sendable (EquivalentLength.ID) async throws -> EquivalentLength?
+    public var update:
+      @Sendable (EquivalentLength.ID, EquivalentLength.Update) async throws -> EquivalentLength
+  }
+
+  @DependencyClient
+  public struct Equipment: Sendable {
+    public var create: @Sendable (EquipmentInfo.Create) async throws -> EquipmentInfo
+    public var delete: @Sendable (EquipmentInfo.ID) async throws -> Void
+    public var fetch: @Sendable (Project.ID) async throws -> EquipmentInfo?
+    public var get: @Sendable (EquipmentInfo.ID) async throws -> EquipmentInfo?
+    public var update:
+      @Sendable (EquipmentInfo.ID, EquipmentInfo.Update) async throws -> EquipmentInfo
+  }
+
+  @DependencyClient
+  public struct Migrations: Sendable {
+    public var all: @Sendable () async throws -> [any AsyncMigration]
+
+    public func callAsFunction() async throws -> [any AsyncMigration] {
+      try await self.all()
+    }
+  }
+
+  @DependencyClient
+  public struct Projects: Sendable {
+    public var create: @Sendable (User.ID, Project.Create) async throws -> Project
+    public var delete: @Sendable (Project.ID) async throws -> Void
+    public var detail: @Sendable (Project.ID) async throws -> Project.Detail?
+    public var get: @Sendable (Project.ID) async throws -> Project?
+    public var getCompletedSteps: @Sendable (Project.ID) async throws -> Project.CompletedSteps
+    public var getSensibleHeatRatio: @Sendable (Project.ID) async throws -> Double?
+    public var fetch: @Sendable (User.ID, PageRequest) async throws -> Page<Project>
+    public var update: @Sendable (Project.ID, Project.Update) async throws -> Project
+  }
+
+  @DependencyClient
+  public struct Rooms: Sendable {
+    public var create: @Sendable (Room.Create) async throws -> Room
+    public var delete: @Sendable (Room.ID) async throws -> Void
+    public var deleteRectangularSize:
+      @Sendable (Room.ID, Room.RectangularSize.ID) async throws -> Room
+    public var get: @Sendable (Room.ID) async throws -> Room?
+    public var fetch: @Sendable (Project.ID) async throws -> [Room]
+    public var update: @Sendable (Room.ID, Room.Update) async throws -> Room
+    public var updateRectangularSize: @Sendable (Room.ID, Room.RectangularSize) async throws -> Room
+  }
+
+  @DependencyClient
+  public struct TrunkSizes: Sendable {
+    public var create: @Sendable (TrunkSize.Create) async throws -> TrunkSize
+    public var delete: @Sendable (TrunkSize.ID) async throws -> Void
+    public var fetch: @Sendable (Project.ID) async throws -> [TrunkSize]
+    public var get: @Sendable (TrunkSize.ID) async throws -> TrunkSize?
+    public var update:
+      @Sendable (TrunkSize.ID, TrunkSize.Update) async throws ->
+        TrunkSize
+  }
+
+  @DependencyClient
+  public struct UserProfiles: Sendable {
+    public var create: @Sendable (User.Profile.Create) async throws -> User.Profile
+    public var delete: @Sendable (User.Profile.ID) async throws -> Void
+    public var fetch: @Sendable (User.ID) async throws -> User.Profile?
+    public var get: @Sendable (User.Profile.ID) async throws -> User.Profile?
+    public var update: @Sendable (User.Profile.ID, User.Profile.Update) async throws -> User.Profile
+  }
+
+  @DependencyClient
+  public struct Users: Sendable {
+    public var create: @Sendable (User.Create) async throws -> User
+    public var delete: @Sendable (User.ID) async throws -> Void
+    public var get: @Sendable (User.ID) async throws -> User?
+    public var login: @Sendable (User.Login) async throws -> User.Token
+    public var logout: @Sendable (User.Token.ID) async throws -> Void
+    // public var token: @Sendable (User.ID) async throws -> User.Token
+  }
+
 }
 
 extension DatabaseClient: TestDependencyKey {
@@ -29,10 +126,10 @@ extension DatabaseClient: TestDependencyKey {
     projects: .testValue,
     rooms: .testValue,
     equipment: .testValue,
-    componentLoss: .testValue,
-    effectiveLength: .testValue,
+    componentLosses: .testValue,
+    equivalentLengths: .testValue,
     users: .testValue,
-    userProfile: .testValue,
+    userProfiles: .testValue,
     trunkSizes: .testValue
   )
 
@@ -42,33 +139,20 @@ extension DatabaseClient: TestDependencyKey {
       projects: .live(database: database),
       rooms: .live(database: database),
       equipment: .live(database: database),
-      componentLoss: .live(database: database),
-      effectiveLength: .live(database: database),
+      componentLosses: .live(database: database),
+      equivalentLengths: .live(database: database),
       users: .live(database: database),
-      userProfile: .live(database: database),
+      userProfiles: .live(database: database),
       trunkSizes: .live(database: database)
     )
   }
 }
 
-extension DatabaseClient {
-  @DependencyClient
-  public struct Migrations: Sendable {
-    public var run: @Sendable () async throws -> [any AsyncMigration]
-
-    public func callAsFunction() async throws -> [any AsyncMigration] {
-      try await self.run()
-    }
-  }
-}
-
-extension DatabaseClient.Migrations: TestDependencyKey {
-  public static let testValue = Self()
-}
-
 extension DatabaseClient.Migrations: DependencyKey {
+  public static let testValue = Self()
+
   public static let liveValue = Self(
-    run: {
+    all: {
       [
         Project.Migrate(),
         User.Migrate(),

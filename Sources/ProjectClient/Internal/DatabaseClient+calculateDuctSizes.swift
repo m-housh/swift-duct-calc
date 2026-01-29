@@ -192,9 +192,9 @@ extension DatabaseClient {
     }
 
     return try await designFrictionRate(
-      componentLosses: componentLoss.fetch(projectID),
+      componentLosses: componentLosses.fetch(projectID),
       equipmentInfo: equipmentInfo,
-      equivalentLengths: effectiveLength.fetchMax(projectID)
+      equivalentLengths: equivalentLengths.fetchMax(projectID)
     )
   }
 }

@@ -4,23 +4,9 @@ import Fluent
 import Foundation
 import ManualDCore
 
-extension DatabaseClient {
-  @DependencyClient
-  public struct Equipment: Sendable {
-    public var create: @Sendable (EquipmentInfo.Create) async throws -> EquipmentInfo
-    public var delete: @Sendable (EquipmentInfo.ID) async throws -> Void
-    public var fetch: @Sendable (Project.ID) async throws -> EquipmentInfo?
-    public var get: @Sendable (EquipmentInfo.ID) async throws -> EquipmentInfo?
-    public var update:
-      @Sendable (EquipmentInfo.ID, EquipmentInfo.Update) async throws -> EquipmentInfo
-  }
-}
-
 extension DatabaseClient.Equipment: TestDependencyKey {
   public static let testValue = Self()
-}
 
-extension DatabaseClient.Equipment {
   public static func live(database: any Database) -> Self {
     .init(
       create: { request in

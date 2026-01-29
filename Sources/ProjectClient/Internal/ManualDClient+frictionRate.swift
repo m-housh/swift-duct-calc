@@ -28,8 +28,8 @@ extension ManualDClient {
   func frictionRate(projectID: Project.ID) async throws -> ProjectClient.FrictionRateResponse {
     @Dependency(\.database) var database
 
-    let componentLosses = try await database.componentLoss.fetch(projectID)
-    let lengths = try await database.effectiveLength.fetchMax(projectID)
+    let componentLosses = try await database.componentLosses.fetch(projectID)
+    let lengths = try await database.equivalentLengths.fetchMax(projectID)
 
     let equipmentInfo = try await database.equipment.fetch(projectID)
     guard let staticPressure = equipmentInfo?.staticPressure else {
@@ -46,7 +46,7 @@ extension ManualDClient {
       frictionRate: frictionRate(
         .init(
           externalStaticPressure: staticPressure,
-          componentPressureLosses: database.componentLoss.fetch(projectID),
+          componentPressureLosses: componentLosses,
           totalEffectiveLength: Int(totalEquivalentLength)
         )
       )

@@ -4,20 +4,7 @@ import Fluent
 import Foundation
 import ManualDCore
 
-extension DatabaseClient {
-  @DependencyClient
-  public struct EffectiveLengthClient: Sendable {
-    public var create: @Sendable (EquivalentLength.Create) async throws -> EquivalentLength
-    public var delete: @Sendable (EquivalentLength.ID) async throws -> Void
-    public var fetch: @Sendable (Project.ID) async throws -> [EquivalentLength]
-    public var fetchMax: @Sendable (Project.ID) async throws -> EquivalentLength.MaxContainer
-    public var get: @Sendable (EquivalentLength.ID) async throws -> EquivalentLength?
-    public var update:
-      @Sendable (EquivalentLength.ID, EquivalentLength.Update) async throws -> EquivalentLength
-  }
-}
-
-extension DatabaseClient.EffectiveLengthClient: TestDependencyKey {
+extension DatabaseClient.EquivalentLengths: TestDependencyKey {
   public static let testValue = Self()
 
   public static func live(database: any Database) -> Self {

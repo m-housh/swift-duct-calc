@@ -4,19 +4,6 @@ import Fluent
 import Foundation
 import ManualDCore
 
-extension DatabaseClient {
-  @DependencyClient
-  public struct TrunkSizes: Sendable {
-    public var create: @Sendable (TrunkSize.Create) async throws -> TrunkSize
-    public var delete: @Sendable (TrunkSize.ID) async throws -> Void
-    public var fetch: @Sendable (Project.ID) async throws -> [TrunkSize]
-    public var get: @Sendable (TrunkSize.ID) async throws -> TrunkSize?
-    public var update:
-      @Sendable (TrunkSize.ID, TrunkSize.Update) async throws ->
-        TrunkSize
-  }
-}
-
 extension DatabaseClient.TrunkSizes: TestDependencyKey {
   public static let testValue = Self()
 

@@ -104,14 +104,14 @@ extension SiteRoute.Api.ComponentLossRoute {
 
     switch self {
     case .create(let request):
-      return try await database.componentLoss.create(request)
+      return try await database.componentLosses.create(request)
     case .delete(let id):
-      try await database.componentLoss.delete(id)
+      try await database.componentLosses.delete(id)
       return nil
     case .fetch(let projectID):
-      return try await database.componentLoss.fetch(projectID)
+      return try await database.componentLosses.fetch(projectID)
     case .get(let id):
-      guard let room = try await database.componentLoss.get(id) else {
+      guard let room = try await database.componentLosses.get(id) else {
         logger.error("Component loss not found for id: \(id)")
         throw ApiError("Component loss not found.")
       }

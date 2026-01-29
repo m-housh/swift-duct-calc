@@ -4,20 +4,6 @@ import Fluent
 import Foundation
 import ManualDCore
 
-extension DatabaseClient {
-  @DependencyClient
-  public struct Rooms: Sendable {
-    public var create: @Sendable (Room.Create) async throws -> Room
-    public var delete: @Sendable (Room.ID) async throws -> Void
-    public var deleteRectangularSize:
-      @Sendable (Room.ID, Room.RectangularSize.ID) async throws -> Room
-    public var get: @Sendable (Room.ID) async throws -> Room?
-    public var fetch: @Sendable (Project.ID) async throws -> [Room]
-    public var update: @Sendable (Room.ID, Room.Update) async throws -> Room
-    public var updateRectangularSize: @Sendable (Room.ID, Room.RectangularSize) async throws -> Room
-  }
-}
-
 extension DatabaseClient.Rooms: TestDependencyKey {
   public static let testValue = Self()
 

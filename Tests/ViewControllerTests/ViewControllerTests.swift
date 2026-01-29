@@ -108,11 +108,11 @@ struct ViewControllerTests {
       $0.database.projects.getSensibleHeatRatio = { _ in 0.83 }
       $0.database.rooms.fetch = { _ in rooms }
       $0.database.equipment.fetch = { _ in equipment }
-      $0.database.effectiveLength.fetch = { _ in tels }
-      $0.database.effectiveLength.fetchMax = { _ in
+      $0.database.equivalentLengths.fetch = { _ in tels }
+      $0.database.equivalentLengths.fetchMax = { _ in
         .init(supply: tels.first, return: tels.last)
       }
-      $0.database.componentLoss.fetch = { _ in componentLosses }
+      $0.database.componentLosses.fetch = { _ in componentLosses }
       $0.projectClient.calculateDuctSizes = { _ in
         .mock(equipmentInfo: equipment, rooms: rooms, trunks: trunks)
       }
@@ -164,7 +164,7 @@ struct ViewControllerTests {
     return try await withDependencies {
       $0.viewController = .liveValue
       $0.authClient.currentUser = { user }
-      $0.database.userProfile.fetch = { _ in profile }
+      $0.database.userProfiles.fetch = { _ in profile }
       $0.manualD = .liveValue
       try await updateDependencies(&$0)
     } operation: {

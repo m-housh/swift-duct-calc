@@ -70,7 +70,7 @@ extension ViewController.Request {
       case .submitProfile(let profile):
         return await view {
           await ResultView {
-            _ = try await database.userProfile.create(profile)
+            _ = try await database.userProfiles.create(profile)
             let userID = profile.userID
             // let user = try currentUser()
             return (
@@ -108,7 +108,7 @@ extension ViewController.Request {
     get async {
       @Dependency(\.database) var database
       guard let user = try? currentUser() else { return nil }
-      return try? await database.userProfile.fetch(user.id)?.theme
+      return try? await database.userProfiles.fetch(user.id)?.theme
     }
   }
 
@@ -366,8 +366,8 @@ extension SiteRoute.View.ProjectRoute.FrictionRateRoute {
     return await request.view {
       await ResultView {
         let equipment = try await database.equipment.fetch(projectID)
-        let componentLosses = try await database.componentLoss.fetch(projectID)
-        let lengths = try await database.effectiveLength.fetchMax(projectID)
+        let componentLosses = try await database.componentLosses.fetch(projectID)
+        let lengths = try await database.equivalentLengths.fetchMax(projectID)
 
         return (
           try await database.projects.getCompletedSteps(projectID),
@@ -407,16 +407,16 @@ extension SiteRoute.View.ProjectRoute.ComponentLossRoute {
       return EmptyHTML()
     case .delete(let id):
       return await view(on: request, projectID: projectID) {
-        _ = try await database.componentLoss.delete(id)
+        _ = try await database.componentLosses.delete(id)
       }
     case .submit(let form):
       return await view(on: request, projectID: projectID) {
-        _ = try await database.componentLoss.create(form)
+        _ = try await database.componentLosses.create(form)
       }
 
     case .update(let id, let form):
       return await view(on: request, projectID: projectID) {
-        _ = try await database.componentLoss.update(id, form)
+        _ = try await database.componentLosses.update(id, form)
       }
     }
   }
@@ -464,7 +464,7 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
 
     case .delete(let id):
       return await ResultView {
-        try await database.effectiveLength.delete(id)
+        try await database.equivalentLengths.delete(id)
       }
 
     case .index:
@@ -481,7 +481,7 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
 
     case .update(let id, let form):
       return await view(on: request, projectID: projectID) {
-        _ = try await database.effectiveLength.update(id, .init(form: form, projectID: projectID))
+        _ = try await database.equivalentLengths.update(id, .init(form: form, projectID: projectID))
       }
 
     case .submit(let step):
@@ -490,7 +490,7 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
         return await ResultView {
           var effectiveLength: EquivalentLength? = nil
           if let id = stepOne.id {
-            effectiveLength = try await database.effectiveLength.get(id)
+            effectiveLength = try await database.equivalentLengths.get(id)
           }
           return effectiveLength
         } onSuccess: { effectiveLength in
@@ -505,7 +505,7 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
           request.logger.debug("ViewController: Got step two...")
           var effectiveLength: EquivalentLength? = nil
           if let id = stepTwo.id {
-            effectiveLength = try await database.effectiveLength.get(id)
+            effectiveLength = try await database.equivalentLengths.get(id)
           }
           return effectiveLength
         } onSuccess: { effectiveLength in
@@ -515,7 +515,7 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
         }
       case .three(let stepThree):
         return await view(on: request, projectID: projectID) {
-          _ = try await database.effectiveLength.create(
+          _ = try await database.equivalentLengths.create(
             .init(form: stepThree, projectID: projectID)
           )
         }
@@ -536,7 +536,7 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
         try await catching()
         return (
           try await database.projects.getCompletedSteps(projectID),
-          try await database.effectiveLength.fetch(projectID)
+          try await database.equivalentLengths.fetch(projectID)
         )
       } onSuccess: { (steps, equivalentLengths) in
         ProjectView(projectID: projectID, activeTab: .equivalentLength, completedSteps: steps) {
@@ -652,11 +652,11 @@ extension SiteRoute.View.UserRoute.Profile {
       return await view(on: request)
     case .submit(let form):
       return await view(on: request) {
-        _ = try await database.userProfile.create(form)
+        _ = try await database.userProfiles.create(form)
       }
     case .update(let id, let updates):
       return await view(on: request) {
-        _ = try await database.userProfile.update(id, updates)
+        _ = try await database.userProfiles.update(id, updates)
       }
     }
   }
@@ -673,7 +673,7 @@ extension SiteRoute.View.UserRoute.Profile {
         let user = try request.currentUser()
         return (
           user,
-          try await database.userProfile.fetch(user.id)
+          try await database.userProfiles.fetch(user.id)
         )
       } onSuccess: { (user, profile) in
         UserView(user: user, profile: profile)

@@ -4,19 +4,6 @@ import Fluent
 import ManualDCore
 import Vapor
 
-extension DatabaseClient {
-  @DependencyClient
-  public struct Users: Sendable {
-    public var create: @Sendable (User.Create) async throws -> User
-    public var delete: @Sendable (User.ID) async throws -> Void
-    public var get: @Sendable (User.ID) async throws -> User?
-    public var login: @Sendable (User.Login) async throws -> User.Token
-    public var logout: @Sendable (User.Token.ID) async throws -> Void
-    // public var token: @Sendable (User.ID) async throws -> User.Token
-  }
-
-}
-
 extension DatabaseClient.Users: TestDependencyKey {
   public static let testValue = Self()
 
