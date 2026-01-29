@@ -1,16 +1,37 @@
 import Dependencies
 import Foundation
 
+/// Represents a room in a project.
+///
+/// This contains data such as the heating and cooling load for the
+/// room, the number of registers in the room, and any rectangular
+/// duct size calculations stored for the room.
 public struct Room: Codable, Equatable, Identifiable, Sendable {
+  /// The unique id of the room.
   public let id: UUID
+  /// The project this room is associated with.
   public let projectID: Project.ID
+  /// A unique name for the room in the project.
   public let name: String
+  /// The heating load required for the room (from Manual-J).
   public let heatingLoad: Double
+  /// The total cooling load required for the room (from Manual-J).
   public let coolingTotal: Double
+  /// An optional sensible cooling load for the room.
+  ///
+  /// **NOTE:** This is generally not set, but calculated from the project wide
+  ///           sensible heat ratio.
   public let coolingSensible: Double?
+  /// The number of registers for the room.
   public let registerCount: Int
+  /// The rectangular duct size calculations for a room.
+  ///
+  /// **NOTE:** These are optionally set after the round sizes have been calculate
+  ///           for a room.
   public let rectangularSizes: [RectangularSize]?
+  /// When the room was created in the database.
   public let createdAt: Date
+  /// When the room was updated in the database.
   public let updatedAt: Date
 
   public init(
@@ -39,13 +60,19 @@ public struct Room: Codable, Equatable, Identifiable, Sendable {
 }
 
 extension Room {
-
+  /// Represents the data required to create a new room for a project.
   public struct Create: Codable, Equatable, Sendable {
+    /// The project this room is associated with.
     public let projectID: Project.ID
+    /// A unique name for the room in the project.
     public let name: String
+    /// The heating load required for the room (from Manual-J).
     public let heatingLoad: Double
+    /// The total cooling load required for the room (from Manual-J).
     public let coolingTotal: Double
+    /// An optional sensible cooling load for the room.
     public let coolingSensible: Double?
+    /// The number of registers for the room.
     public let registerCount: Int
 
     public init(
@@ -65,10 +92,17 @@ extension Room {
     }
   }
 
+  /// Represents a rectangular size calculation that is stored in the
+  /// database for a given room.
+  ///
+  /// These are done after the round duct sizes have been calculated and
+  /// can be used to calculate the equivalent rectangular size for a given run.
   public struct RectangularSize: Codable, Equatable, Identifiable, Sendable {
-
+    /// The unique id of the rectangular size.
     public let id: UUID
+    /// The register the rectangular size is associated with.
     public let register: Int?
+    /// The height of the rectangular size, the width gets calculated.
     public let height: Int
 
     public init(
@@ -82,12 +116,21 @@ extension Room {
     }
   }
 
+  /// Represents field that can be updated on a room after it's been created in the database.
+  ///
+  /// Only fields that are supplied get updated.
   public struct Update: Codable, Equatable, Sendable {
+    /// A unique name for the room in the project.
     public let name: String?
+    /// The heating load required for the room (from Manual-J).
     public let heatingLoad: Double?
+    /// The total cooling load required for the room (from Manual-J).
     public let coolingTotal: Double?
+    /// An optional sensible cooling load for the room.
     public let coolingSensible: Double?
+    /// The number of registers for the room.
     public let registerCount: Int?
+    /// The rectangular duct size calculations for a room.
     public let rectangularSizes: [RectangularSize]?
 
     public init(
@@ -120,14 +163,20 @@ extension Room {
 
 extension Array where Element == Room {
 
+  /// The sum of heating loads for an array of rooms.
   public var totalHeatingLoad: Double {
     reduce(into: 0) { $0 += $1.heatingLoad }
   }
 
+  /// The sum of total cooling loads for an array of rooms.
   public var totalCoolingLoad: Double {
     reduce(into: 0) { $0 += $1.coolingTotal }
   }
 
+  /// The sum of sensible cooling loads for an array of rooms.
+  ///
+  /// - Parameters:
+  ///   - shr: The project wide sensible heat ratio.
   public func totalCoolingSensible(shr: Double) -> Double {
     reduce(into: 0) {
       let sensible = $1.coolingSensible ?? ($1.coolingTotal * shr)
@@ -139,38 +188,6 @@ extension Array where Element == Room {
 #if DEBUG
 
   extension Room {
-    public static let mocks = [
-      Room(
-        id: UUID(0),
-        projectID: UUID(0),
-        name: "Kitchen",
-        heatingLoad: 12345,
-        coolingTotal: 1234,
-        registerCount: 2,
-        createdAt: Date(),
-        updatedAt: Date()
-      ),
-      Room(
-        id: UUID(1),
-        projectID: UUID(1),
-        name: "Bedroom - 1",
-        heatingLoad: 12345,
-        coolingTotal: 1456,
-        registerCount: 1,
-        createdAt: Date(),
-        updatedAt: Date()
-      ),
-      Room(
-        id: UUID(2),
-        projectID: UUID(2),
-        name: "Family Room",
-        heatingLoad: 12345,
-        coolingTotal: 1673,
-        registerCount: 3,
-        createdAt: Date(),
-        updatedAt: Date()
-      ),
-    ]
 
     public static func mock(projectID: Project.ID) -> [Self] {
       @Dependency(\.uuid) var uuid

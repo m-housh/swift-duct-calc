@@ -238,7 +238,7 @@ extension ManualDClient {
     guard let staticPressure = equipmentInfo?.staticPressure else {
       return nil
     }
-    guard let totalEquivalentLength = effectiveLength.total else {
+    guard let totalEquivalentLength = effectiveLength.totalEquivalentLength else {
       return nil
     }
     return try await self.frictionRate(

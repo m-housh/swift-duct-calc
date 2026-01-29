@@ -12,8 +12,8 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute.StepThree {
     }
   }
 
-  var groups: [EquivalentLength.Group] {
-    var groups = [EquivalentLength.Group]()
+  var groups: [EquivalentLength.FittingGroup] {
+    var groups = [EquivalentLength.FittingGroup]()
     for (n, group) in groupGroups.enumerated() {
       groups.append(
         .init(

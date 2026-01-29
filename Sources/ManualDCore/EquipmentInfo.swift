@@ -1,6 +1,10 @@
 import Dependencies
 import Foundation
 
+/// Represents the equipment information for a project.
+///
+/// This is used in the friction rate worksheet and sizing ducts. It holds on to items
+/// such as the target static pressure, cooling CFM, and heating CFM for the project.
 public struct EquipmentInfo: Codable, Equatable, Identifiable, Sendable {
   public let id: UUID
   public let projectID: Project.ID

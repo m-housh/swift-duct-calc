@@ -1,5 +1,7 @@
 import Foundation
 
+// TODO: These are not used, should they be removed??
+
 // TODO: Add other description / label for items that have same group & letter, but
 //       different effective length.
 public struct EffectiveLengthGroup: Codable, Equatable, Sendable {

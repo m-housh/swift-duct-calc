@@ -1,6 +1,10 @@
 import Dependencies
 import Foundation
 
+/// Represents component pressure losses used in the friction rate worksheet.
+///
+/// These are items such as filter, evaporator-coils, balance-dampers, etc. that
+/// need to be overcome by the system fan.
 public struct ComponentPressureLoss: Codable, Equatable, Identifiable, Sendable {
 
   public let id: UUID
@@ -44,7 +48,7 @@ extension ComponentPressureLoss {
       self.value = value
     }
 
-    // Return's commonly used default component pressure losses.
+    /// Commonly used default component pressure losses.
     public static func `default`(projectID: Project.ID) -> [Self] {
       [
         .init(projectID: projectID, name: "supply-outlet", value: 0.03),
@@ -75,20 +79,7 @@ extension Array where Element == ComponentPressureLoss {
   }
 }
 
-public typealias ComponentPressureLosses = [String: Double]
-
 #if DEBUG
-  extension ComponentPressureLosses {
-    public static var mock: Self {
-      [
-        "evaporator-coil": 0.2,
-        "filter": 0.1,
-        "supply-outlet": 0.03,
-        "return-grille": 0.03,
-        "balancing-damper": 0.03,
-      ]
-    }
-  }
 
   extension Array where Element == ComponentPressureLoss {
     public static func mock(projectID: Project.ID) -> Self {

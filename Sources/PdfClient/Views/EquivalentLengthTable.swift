@@ -41,7 +41,7 @@ struct EffectiveLengthsTable: HTML, Sendable {
 }
 
 struct EffectiveLengthGroupTable: HTML, Sendable {
-  let groups: [EquivalentLength.Group]
+  let groups: [EquivalentLength.FittingGroup]
 
   var body: some HTML<HTMLTag.table> {
     table {

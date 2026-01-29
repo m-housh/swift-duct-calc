@@ -1,18 +1,36 @@
 import Dependencies
 import Foundation
 
-// TODO: Not sure how to model effective length groups in the database.
-//       thinking perhaps just have a 'data' field that encoded / decodes
-//       to swift types??
+/// Represents the equivalent length of a single duct path.
+///
+/// These consist of both straight lengths of duct / trunks, as well as the
+/// equivalent length of duct fittings.  They are used to determine the worst
+/// case total equivalent length of duct that the system fan has to move air
+/// through.
+///
+/// There can be many equivalent lengths saved for a project, however the only
+/// ones that matter in most calculations are the longest supply path and the
+/// the longest return path.
+///
+/// It is required that project has at least one equivalent length saved for
+/// the supply and one saved for return, otherwise duct sizes can not be calculated.
 public struct EquivalentLength: Codable, Equatable, Identifiable, Sendable {
 
+  /// The id of the equivalent length.
   public let id: UUID
+  /// The project that this equivalent length is associated with.
   public let projectID: Project.ID
+  /// A unique name / label for this equivalent length.
   public let name: String
+  /// The type (supply or return) of the equivalent length.
   public let type: EffectiveLengthType
+  /// The straight lengths of duct for this equivalent length.
   public let straightLengths: [Int]
-  public let groups: [Group]
+  /// The fitting groups associated with this equivalent length.
+  public let groups: [FittingGroup]
+  /// When this equivalent length was created in the database.
   public let createdAt: Date
+  /// When this equivalent length was updated in the database.
   public let updatedAt: Date
 
   public init(
@@ -21,7 +39,7 @@ public struct EquivalentLength: Codable, Equatable, Identifiable, Sendable {
     name: String,
     type: EquivalentLength.EffectiveLengthType,
     straightLengths: [Int],
-    groups: [EquivalentLength.Group],
+    groups: [EquivalentLength.FittingGroup],
     createdAt: Date,
     updatedAt: Date
   ) {
@@ -38,20 +56,26 @@ public struct EquivalentLength: Codable, Equatable, Identifiable, Sendable {
 
 extension EquivalentLength {
 
+  /// Represents the data needed to create a new ``EquivalentLength`` in the database.
   public struct Create: Codable, Equatable, Sendable {
 
+    /// The project that this equivalent length is associated with.
     public let projectID: Project.ID
+    /// A unique name / label for this equivalent length.
     public let name: String
+    /// The type (supply or return) of the equivalent length.
     public let type: EffectiveLengthType
+    /// The straight lengths of duct for this equivalent length.
     public let straightLengths: [Int]
-    public let groups: [Group]
+    /// The fitting groups associated with this equivalent length.
+    public let groups: [FittingGroup]
 
     public init(
       projectID: Project.ID,
       name: String,
       type: EquivalentLength.EffectiveLengthType,
       straightLengths: [Int],
-      groups: [EquivalentLength.Group]
+      groups: [EquivalentLength.FittingGroup]
     ) {
       self.projectID = projectID
       self.name = name
@@ -61,18 +85,25 @@ extension EquivalentLength {
     }
   }
 
+  /// Represents the data needed to update an ``EquivalentLength`` in the database.
+  ///
+  /// Only the supplied fields are updated.
   public struct Update: Codable, Equatable, Sendable {
 
+    /// A unique name / label for this equivalent length.
     public let name: String?
+    /// The type (supply or return) of the equivalent length.
     public let type: EffectiveLengthType?
+    /// The straight lengths of duct for this equivalent length.
     public let straightLengths: [Int]?
-    public let groups: [Group]?
+    /// The fitting groups associated with this equivalent length.
+    public let groups: [FittingGroup]?
 
     public init(
       name: String? = nil,
       type: EquivalentLength.EffectiveLengthType? = nil,
       straightLengths: [Int]? = nil,
-      groups: [EquivalentLength.Group]? = nil
+      groups: [EquivalentLength.FittingGroup]? = nil
     ) {
       self.name = name
       self.type = type
@@ -81,16 +112,24 @@ extension EquivalentLength {
     }
   }
 
+  /// Represents the type of equivalent length, either supply or return.
   public enum EffectiveLengthType: String, CaseIterable, Codable, Sendable {
     case `return`
     case supply
   }
 
-  public struct Group: Codable, Equatable, Sendable {
-
+  /// Represents a Manual-D fitting group.
+  ///
+  /// These are defined by Manual-D and convert different types of fittings into
+  /// an equivalent length of straight duct.
+  public struct FittingGroup: Codable, Equatable, Sendable {
+    /// The fitting group number.
     public let group: Int
+    /// The fitting group letter.
     public let letter: String
+    /// The equivalent length of the fitting.
     public let value: Double
+    /// The quantity of the fittings in the path.
     public let quantity: Int
 
     public init(
@@ -106,11 +145,22 @@ extension EquivalentLength {
     }
   }
 
+  // TODO: Should these not be optional and we just throw an error or return nil from
+  //       a database query.
+
+  /// Represents the max ``EquivalentLength``'s for a project.
+  ///
+  /// Calculating the duct sizes for a project requires there to be a max supply
+  /// and a max return equivalent length, so this container represents those values
+  /// when they exist in the database.
   public struct MaxContainer: Codable, Equatable, Sendable {
+
+    /// The longest supply equivalent length.
     public let supply: EquivalentLength?
+    /// The longest return equivalent length.
     public let `return`: EquivalentLength?
 
-    public var total: Double? {
+    public var totalEquivalentLength: Double? {
       guard let supply else { return nil }
       guard let `return` else { return nil }
       return supply.totalEquivalentLength + `return`.totalEquivalentLength
@@ -124,14 +174,19 @@ extension EquivalentLength {
 }
 
 extension EquivalentLength {
+
+  /// The calculated total equivalent length.
+  ///
+  /// This is the sum of all the straigth lengths and fitting groups (with quantities).
   public var totalEquivalentLength: Double {
     straightLengths.reduce(into: 0.0) { $0 += Double($1) }
       + groups.totalEquivalentLength
   }
 }
 
-extension Array where Element == EquivalentLength.Group {
+extension Array where Element == EquivalentLength.FittingGroup {
 
+  /// The calculated total equivalent length for the fitting groups.
   public var totalEquivalentLength: Double {
     reduce(into: 0.0) {
       $0 += ($1.value * Double($1.quantity))
@@ -179,37 +234,6 @@ extension Array where Element == EquivalentLength.Group {
         ),
       ]
     }
-
-    public static let mocks: [Self] = [
-      .init(
-        id: UUID(0),
-        projectID: UUID(0),
-        name: "Test Supply - 1",
-        type: .supply,
-        straightLengths: [10, 20, 25],
-        groups: [
-          .init(group: 1, letter: "a", value: 20),
-          .init(group: 2, letter: "b", value: 15, quantity: 2),
-          .init(group: 3, letter: "c", value: 10, quantity: 1),
-        ],
-        createdAt: Date(),
-        updatedAt: Date()
-      ),
-      .init(
-        id: UUID(1),
-        projectID: UUID(0),
-        name: "Test Return - 1",
-        type: .return,
-        straightLengths: [10, 20, 25],
-        groups: [
-          .init(group: 1, letter: "a", value: 20),
-          .init(group: 2, letter: "b", value: 15, quantity: 2),
-          .init(group: 3, letter: "c", value: 10, quantity: 1),
-        ],
-        createdAt: Date(),
-        updatedAt: Date()
-      ),
-    ]
   }
 
 #endif

@@ -169,7 +169,7 @@ extension DatabaseClient {
     equipmentInfo: EquipmentInfo,
     equivalentLengths: EquivalentLength.MaxContainer
   ) -> DesignFrictionRateResponse? {
-    guard let tel = equivalentLengths.total,
+    guard let tel = equivalentLengths.totalEquivalentLength,
       componentLosses.count > 0
     else { return nil }
 

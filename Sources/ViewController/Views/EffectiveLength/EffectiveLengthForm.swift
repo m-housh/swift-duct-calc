@@ -255,9 +255,9 @@ struct StraightLengthField: HTML, Sendable {
 struct GroupField: HTML, Sendable {
 
   let style: EquivalentLength.EffectiveLengthType
-  let group: EquivalentLength.Group?
+  let group: EquivalentLength.FittingGroup?
 
-  init(style: EquivalentLength.EffectiveLengthType, group: EquivalentLength.Group? = nil) {
+  init(style: EquivalentLength.EffectiveLengthType, group: EquivalentLength.FittingGroup? = nil) {
     self.style = style
     self.group = group
   }

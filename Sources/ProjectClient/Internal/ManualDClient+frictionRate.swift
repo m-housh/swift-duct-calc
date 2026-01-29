@@ -8,7 +8,7 @@ extension ManualDClient {
   func frictionRate(details: Project.Detail) async throws -> ProjectClient.FrictionRateResponse {
 
     let maxContainer = details.maxContainer
-    guard let totalEquivalentLength = maxContainer.total else {
+    guard let totalEquivalentLength = maxContainer.totalEquivalentLength else {
       return .init(componentLosses: details.componentLosses, equivalentLengths: maxContainer)
     }
 
@@ -36,7 +36,7 @@ extension ManualDClient {
       return .init(componentLosses: componentLosses, equivalentLengths: lengths)
     }
 
-    guard let totalEquivalentLength = lengths.total else {
+    guard let totalEquivalentLength = lengths.totalEquivalentLength else {
       return .init(componentLosses: componentLosses, equivalentLengths: lengths)
     }
 

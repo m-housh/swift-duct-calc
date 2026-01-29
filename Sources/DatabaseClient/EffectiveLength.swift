@@ -180,7 +180,7 @@ final class EffectiveLengthModel: Model, @unchecked Sendable {
       name: name,
       type: .init(rawValue: type)!,
       straightLengths: straightLengths,
-      groups: JSONDecoder().decode([EquivalentLength.Group].self, from: groups),
+      groups: JSONDecoder().decode([EquivalentLength.FittingGroup].self, from: groups),
       createdAt: createdAt!,
       updatedAt: updatedAt!
     )
