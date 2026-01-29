@@ -60,12 +60,12 @@ extension ProjectClient {
   public struct FrictionRateResponse: Codable, Equatable, Sendable {
 
     public let componentLosses: [ComponentPressureLoss]
-    public let equivalentLengths: EffectiveLength.MaxContainer
+    public let equivalentLengths: EquivalentLength.MaxContainer
     public let frictionRate: FrictionRate?
 
     public init(
       componentLosses: [ComponentPressureLoss],
-      equivalentLengths: EffectiveLength.MaxContainer,
+      equivalentLengths: EquivalentLength.MaxContainer,
       frictionRate: FrictionRate? = nil
     ) {
       self.componentLosses = componentLosses

@@ -1,7 +1,7 @@
 # TODO's
 
 - [x] Fix theme not working when selected upon signup.
-- [ ] Pdf generation
+- [x] Pdf generation
 - [ ] Add postgres / mysql support
 - [ ] Opensource / license ??
 - [ ] Figure out domain to host (currently thinking ductcalc.pro)

@@ -84,8 +84,8 @@ extension PdfClient {
     public let componentLosses: [ComponentPressureLoss]
     public let ductSizes: DuctSizes
     public let equipmentInfo: EquipmentInfo
-    public let maxSupplyTEL: EffectiveLength
-    public let maxReturnTEL: EffectiveLength
+    public let maxSupplyTEL: EquivalentLength
+    public let maxReturnTEL: EquivalentLength
     public let frictionRate: FrictionRate
     public let projectSHR: Double
 
@@ -99,8 +99,8 @@ extension PdfClient {
       componentLosses: [ComponentPressureLoss],
       ductSizes: DuctSizes,
       equipmentInfo: EquipmentInfo,
-      maxSupplyTEL: EffectiveLength,
-      maxReturnTEL: EffectiveLength,
+      maxSupplyTEL: EquivalentLength,
+      maxReturnTEL: EquivalentLength,
       frictionRate: FrictionRate,
       projectSHR: Double
     ) {
@@ -134,7 +134,7 @@ extension PdfClient {
       let rooms = Room.mock(projectID: project.id)
       let trunks = TrunkSize.mock(projectID: project.id, rooms: rooms)
       let equipmentInfo = EquipmentInfo.mock(projectID: project.id)
-      let equivalentLengths = EffectiveLength.mock(projectID: project.id)
+      let equivalentLengths = EquivalentLength.mock(projectID: project.id)
 
       return .init(
         project: project,

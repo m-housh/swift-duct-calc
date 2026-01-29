@@ -78,10 +78,10 @@ struct ProjectRouteTests {
     let p = Body {
       FormData {
         Optionally {
-          Field("id", default: nil) { EffectiveLength.ID.parser() }
+          Field("id", default: nil) { EquivalentLength.ID.parser() }
         }
         Field("name", .string)
-        Field("type") { EffectiveLength.EffectiveLengthType.parser() }
+        Field("type") { EquivalentLength.EffectiveLengthType.parser() }
         Many {
           Field("straightLengths") {
             Int.parser()

@@ -8,7 +8,7 @@ struct FrictionRateView: HTML, Sendable {
   @Environment(ProjectViewValue.$projectID) var projectID
 
   let componentLosses: [ComponentPressureLoss]
-  let equivalentLengths: EffectiveLength.MaxContainer
+  let equivalentLengths: EquivalentLength.MaxContainer
   let frictionRate: FrictionRate?
 
   private var availableStaticPressure: Double? {

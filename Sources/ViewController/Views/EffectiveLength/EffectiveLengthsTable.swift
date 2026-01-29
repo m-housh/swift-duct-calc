@@ -5,9 +5,9 @@ import Styleguide
 
 struct EffectiveLengthsTable: HTML, Sendable {
 
-  let effectiveLengths: [EffectiveLength]
+  let effectiveLengths: [EquivalentLength]
 
-  private var sortedLengths: [EffectiveLength] {
+  private var sortedLengths: [EquivalentLength] {
     effectiveLengths.sorted {
       $0.totalEquivalentLength > $1.totalEquivalentLength
     }
@@ -55,7 +55,7 @@ struct EffectiveLengthsTable: HTML, Sendable {
 
   struct EffectiveLenghtRow: HTML, Sendable {
 
-    let effectiveLength: EffectiveLength
+    let effectiveLength: EquivalentLength
 
     private var deleteRoute: SiteRoute.View {
       .project(

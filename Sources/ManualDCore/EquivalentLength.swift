@@ -4,7 +4,7 @@ import Foundation
 // TODO: Not sure how to model effective length groups in the database.
 //       thinking perhaps just have a 'data' field that encoded / decodes
 //       to swift types??
-public struct EffectiveLength: Codable, Equatable, Identifiable, Sendable {
+public struct EquivalentLength: Codable, Equatable, Identifiable, Sendable {
 
   public let id: UUID
   public let projectID: Project.ID
@@ -19,9 +19,9 @@ public struct EffectiveLength: Codable, Equatable, Identifiable, Sendable {
     id: UUID,
     projectID: Project.ID,
     name: String,
-    type: EffectiveLength.EffectiveLengthType,
+    type: EquivalentLength.EffectiveLengthType,
     straightLengths: [Int],
-    groups: [EffectiveLength.Group],
+    groups: [EquivalentLength.Group],
     createdAt: Date,
     updatedAt: Date
   ) {
@@ -36,7 +36,7 @@ public struct EffectiveLength: Codable, Equatable, Identifiable, Sendable {
   }
 }
 
-extension EffectiveLength {
+extension EquivalentLength {
 
   public struct Create: Codable, Equatable, Sendable {
 
@@ -49,9 +49,9 @@ extension EffectiveLength {
     public init(
       projectID: Project.ID,
       name: String,
-      type: EffectiveLength.EffectiveLengthType,
+      type: EquivalentLength.EffectiveLengthType,
       straightLengths: [Int],
-      groups: [EffectiveLength.Group]
+      groups: [EquivalentLength.Group]
     ) {
       self.projectID = projectID
       self.name = name
@@ -70,9 +70,9 @@ extension EffectiveLength {
 
     public init(
       name: String? = nil,
-      type: EffectiveLength.EffectiveLengthType? = nil,
+      type: EquivalentLength.EffectiveLengthType? = nil,
       straightLengths: [Int]? = nil,
-      groups: [EffectiveLength.Group]? = nil
+      groups: [EquivalentLength.Group]? = nil
     ) {
       self.name = name
       self.type = type
@@ -107,8 +107,8 @@ extension EffectiveLength {
   }
 
   public struct MaxContainer: Codable, Equatable, Sendable {
-    public let supply: EffectiveLength?
-    public let `return`: EffectiveLength?
+    public let supply: EquivalentLength?
+    public let `return`: EquivalentLength?
 
     public var total: Double? {
       guard let supply else { return nil }
@@ -116,21 +116,21 @@ extension EffectiveLength {
       return supply.totalEquivalentLength + `return`.totalEquivalentLength
     }
 
-    public init(supply: EffectiveLength? = nil, return: EffectiveLength? = nil) {
+    public init(supply: EquivalentLength? = nil, return: EquivalentLength? = nil) {
       self.supply = supply
       self.return = `return`
     }
   }
 }
 
-extension EffectiveLength {
+extension EquivalentLength {
   public var totalEquivalentLength: Double {
     straightLengths.reduce(into: 0.0) { $0 += Double($1) }
       + groups.totalEquivalentLength
   }
 }
 
-extension Array where Element == EffectiveLength.Group {
+extension Array where Element == EquivalentLength.Group {
 
   public var totalEquivalentLength: Double {
     reduce(into: 0.0) {
@@ -141,7 +141,7 @@ extension Array where Element == EffectiveLength.Group {
 
 #if DEBUG
 
-  extension EffectiveLength {
+  extension EquivalentLength {
 
     public static func mock(projectID: Project.ID) -> [Self] {
       @Dependency(\.uuid) var uuid

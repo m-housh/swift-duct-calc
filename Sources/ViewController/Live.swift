@@ -488,7 +488,7 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
       switch step {
       case .one(let stepOne):
         return await ResultView {
-          var effectiveLength: EffectiveLength? = nil
+          var effectiveLength: EquivalentLength? = nil
           if let id = stepOne.id {
             effectiveLength = try await database.effectiveLength.get(id)
           }
@@ -503,7 +503,7 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
       case .two(let stepTwo):
         return await ResultView {
           request.logger.debug("ViewController: Got step two...")
-          var effectiveLength: EffectiveLength? = nil
+          var effectiveLength: EquivalentLength? = nil
           if let id = stepTwo.id {
             effectiveLength = try await database.effectiveLength.get(id)
           }

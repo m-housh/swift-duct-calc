@@ -226,10 +226,10 @@ extension SiteRoute.Api {
 
 extension SiteRoute.Api {
   public enum EffectiveLengthRoute: Equatable, Sendable {
-    case create(EffectiveLength.Create)
-    case delete(id: EffectiveLength.ID)
+    case create(EquivalentLength.Create)
+    case delete(id: EquivalentLength.ID)
     case fetch(projectID: Project.ID)
-    case get(id: EffectiveLength.ID)
+    case get(id: EquivalentLength.ID)
 
     static let rootPath = "effectiveLength"
 
@@ -240,12 +240,12 @@ extension SiteRoute.Api {
           "create"
         }
         Method.post
-        Body(.json(EffectiveLength.Create.self))
+        Body(.json(EquivalentLength.Create.self))
       }
       Route(.case(Self.delete(id:))) {
         Path {
           rootPath
-          EffectiveLength.ID.parser()
+          EquivalentLength.ID.parser()
         }
         Method.delete
       }
@@ -261,7 +261,7 @@ extension SiteRoute.Api {
       Route(.case(Self.get(id:))) {
         Path {
           rootPath
-          EffectiveLength.ID.parser()
+          EquivalentLength.ID.parser()
         }
         Method.get
       }

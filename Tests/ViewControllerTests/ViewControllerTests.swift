@@ -86,7 +86,7 @@ struct ViewControllerTests {
       let project = Project.mock
       let rooms = Room.mock(projectID: project.id)
       let equipment = EquipmentInfo.mock(projectID: project.id)
-      let tels = EffectiveLength.mock(projectID: project.id)
+      let tels = EquivalentLength.mock(projectID: project.id)
       let componentLosses = ComponentPressureLoss.mock(projectID: project.id)
       let trunks = TrunkSize.mock(projectID: project.id, rooms: rooms)
 

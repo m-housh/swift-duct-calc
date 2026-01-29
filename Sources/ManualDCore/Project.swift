@@ -89,7 +89,7 @@ extension Project {
     public let project: Project
     public let componentLosses: [ComponentPressureLoss]
     public let equipmentInfo: EquipmentInfo
-    public let equivalentLengths: [EffectiveLength]
+    public let equivalentLengths: [EquivalentLength]
     public let rooms: [Room]
     public let trunks: [TrunkSize]
 
@@ -97,7 +97,7 @@ extension Project {
       project: Project,
       componentLosses: [ComponentPressureLoss],
       equipmentInfo: EquipmentInfo,
-      equivalentLengths: [EffectiveLength],
+      equivalentLengths: [EquivalentLength],
       rooms: [Room],
       trunks: [TrunkSize]
     ) {

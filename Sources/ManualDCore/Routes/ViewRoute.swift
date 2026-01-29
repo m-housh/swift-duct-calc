@@ -394,11 +394,11 @@ extension SiteRoute.View.ProjectRoute {
   }
 
   public enum EquivalentLengthRoute: Equatable, Sendable {
-    case delete(id: EffectiveLength.ID)
-    case field(FieldType, style: EffectiveLength.EffectiveLengthType? = nil)
+    case delete(id: EquivalentLength.ID)
+    case field(FieldType, style: EquivalentLength.EffectiveLengthType? = nil)
     case index
     case submit(FormStep)
-    case update(EffectiveLength.ID, StepThree)
+    case update(EquivalentLength.ID, StepThree)
 
     static let rootPath = "effective-lengths"
 
@@ -406,7 +406,7 @@ extension SiteRoute.View.ProjectRoute {
       Route(.case(Self.delete(id:))) {
         Path {
           rootPath
-          EffectiveLength.ID.parser()
+          EquivalentLength.ID.parser()
         }
         Method.delete
       }
@@ -424,7 +424,7 @@ extension SiteRoute.View.ProjectRoute {
           Field("type") { FieldType.parser() }
           Optionally {
             Field("style", default: nil) {
-              EffectiveLength.EffectiveLengthType.parser()
+              EquivalentLength.EffectiveLengthType.parser()
             }
           }
         }
@@ -437,16 +437,16 @@ extension SiteRoute.View.ProjectRoute {
       Route(.case(Self.update)) {
         Path {
           rootPath
-          EffectiveLength.ID.parser()
+          EquivalentLength.ID.parser()
         }
         Method.patch
         Body {
           FormData {
             Optionally {
-              Field("id", default: nil) { EffectiveLength.ID.parser() }
+              Field("id", default: nil) { EquivalentLength.ID.parser() }
             }
             Field("name", .string)
-            Field("type") { EffectiveLength.EffectiveLengthType.parser() }
+            Field("type") { EquivalentLength.EffectiveLengthType.parser() }
             Many {
               Field("straightLengths") {
                 Int.parser()
@@ -490,10 +490,10 @@ extension SiteRoute.View.ProjectRoute {
           Body {
             FormData {
               Optionally {
-                Field("id", default: nil) { EffectiveLength.ID.parser() }
+                Field("id", default: nil) { EquivalentLength.ID.parser() }
               }
               Field("name", .string)
-              Field("type") { EffectiveLength.EffectiveLengthType.parser() }
+              Field("type") { EquivalentLength.EffectiveLengthType.parser() }
             }
             .map(.memberwise(StepOne.init))
           }
@@ -505,10 +505,10 @@ extension SiteRoute.View.ProjectRoute {
           Body {
             FormData {
               Optionally {
-                Field("id", default: nil) { EffectiveLength.ID.parser() }
+                Field("id", default: nil) { EquivalentLength.ID.parser() }
               }
               Field("name", .string)
-              Field("type") { EffectiveLength.EffectiveLengthType.parser() }
+              Field("type") { EquivalentLength.EffectiveLengthType.parser() }
               Many {
                 Field("straightLengths") {
                   Int.parser()
@@ -525,10 +525,10 @@ extension SiteRoute.View.ProjectRoute {
           Body {
             FormData {
               Optionally {
-                Field("id", default: nil) { EffectiveLength.ID.parser() }
+                Field("id", default: nil) { EquivalentLength.ID.parser() }
               }
               Field("name", .string)
-              Field("type") { EffectiveLength.EffectiveLengthType.parser() }
+              Field("type") { EquivalentLength.EffectiveLengthType.parser() }
               Many {
                 Field("straightLengths") {
                   Int.parser()
@@ -567,22 +567,22 @@ extension SiteRoute.View.ProjectRoute {
     }
 
     public struct StepOne: Codable, Equatable, Sendable {
-      public let id: EffectiveLength.ID?
+      public let id: EquivalentLength.ID?
       public let name: String
-      public let type: EffectiveLength.EffectiveLengthType
+      public let type: EquivalentLength.EffectiveLengthType
     }
 
     public struct StepTwo: Codable, Equatable, Sendable {
 
-      public let id: EffectiveLength.ID?
+      public let id: EquivalentLength.ID?
       public let name: String
-      public let type: EffectiveLength.EffectiveLengthType
+      public let type: EquivalentLength.EffectiveLengthType
       public let straightLengths: [Int]
 
       public init(
-        id: EffectiveLength.ID? = nil,
+        id: EquivalentLength.ID? = nil,
         name: String,
-        type: EffectiveLength.EffectiveLengthType,
+        type: EquivalentLength.EffectiveLengthType,
         straightLengths: [Int]
       ) {
         self.id = id
@@ -593,9 +593,9 @@ extension SiteRoute.View.ProjectRoute {
     }
 
     public struct StepThree: Codable, Equatable, Sendable {
-      public let id: EffectiveLength.ID?
+      public let id: EquivalentLength.ID?
       public let name: String
-      public let type: EffectiveLength.EffectiveLengthType
+      public let type: EquivalentLength.EffectiveLengthType
       public let straightLengths: [Int]
       public let groupGroups: [Int]
       public let groupLetters: [String]

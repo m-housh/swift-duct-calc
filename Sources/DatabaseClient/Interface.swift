@@ -77,7 +77,7 @@ extension DatabaseClient.Migrations: DependencyKey {
         ComponentPressureLoss.Migrate(),
         EquipmentInfo.Migrate(),
         Room.Migrate(),
-        EffectiveLength.Migrate(),
+        EquivalentLength.Migrate(),
         TrunkSize.Migrate(),
       ]
     }

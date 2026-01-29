@@ -4,8 +4,8 @@ import ManualDCore
 
 struct DuctSizeSharedRequest {
   let equipmentInfo: EquipmentInfo
-  let maxSupplyLength: EffectiveLength
-  let maxReturnLenght: EffectiveLength
+  let maxSupplyLength: EquivalentLength
+  let maxReturnLenght: EquivalentLength
   let designFrictionRate: Double
   let projectSHR: Double
 }

@@ -233,7 +233,7 @@ extension ManualDClient {
   func frictionRate(
     equipmentInfo: EquipmentInfo?,
     componentLosses: [ComponentPressureLoss],
-    effectiveLength: EffectiveLength.MaxContainer
+    effectiveLength: EquivalentLength.MaxContainer
   ) async throws -> FrictionRate? {
     guard let staticPressure = equipmentInfo?.staticPressure else {
       return nil

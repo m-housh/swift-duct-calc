@@ -7,13 +7,13 @@ import ManualDCore
 extension DatabaseClient {
   @DependencyClient
   public struct EffectiveLengthClient: Sendable {
-    public var create: @Sendable (EffectiveLength.Create) async throws -> EffectiveLength
-    public var delete: @Sendable (EffectiveLength.ID) async throws -> Void
-    public var fetch: @Sendable (Project.ID) async throws -> [EffectiveLength]
-    public var fetchMax: @Sendable (Project.ID) async throws -> EffectiveLength.MaxContainer
-    public var get: @Sendable (EffectiveLength.ID) async throws -> EffectiveLength?
+    public var create: @Sendable (EquivalentLength.Create) async throws -> EquivalentLength
+    public var delete: @Sendable (EquivalentLength.ID) async throws -> Void
+    public var fetch: @Sendable (Project.ID) async throws -> [EquivalentLength]
+    public var fetchMax: @Sendable (Project.ID) async throws -> EquivalentLength.MaxContainer
+    public var get: @Sendable (EquivalentLength.ID) async throws -> EquivalentLength?
     public var update:
-      @Sendable (EffectiveLength.ID, EffectiveLength.Update) async throws -> EffectiveLength
+      @Sendable (EquivalentLength.ID, EquivalentLength.Update) async throws -> EquivalentLength
   }
 }
 
@@ -74,7 +74,7 @@ extension DatabaseClient.EffectiveLengthClient: TestDependencyKey {
   }
 }
 
-extension EffectiveLength.Create {
+extension EquivalentLength.Create {
 
   func toModel() throws -> EffectiveLengthModel {
     try validate()
@@ -94,7 +94,7 @@ extension EffectiveLength.Create {
   }
 }
 
-extension EffectiveLength {
+extension EquivalentLength {
 
   struct Migrate: AsyncMigration {
     let name = "CreateEffectiveLength"
@@ -173,20 +173,20 @@ final class EffectiveLengthModel: Model, @unchecked Sendable {
     $project.id = projectID
   }
 
-  func toDTO() throws -> EffectiveLength {
+  func toDTO() throws -> EquivalentLength {
     try .init(
       id: requireID(),
       projectID: $project.id,
       name: name,
       type: .init(rawValue: type)!,
       straightLengths: straightLengths,
-      groups: JSONDecoder().decode([EffectiveLength.Group].self, from: groups),
+      groups: JSONDecoder().decode([EquivalentLength.Group].self, from: groups),
       createdAt: createdAt!,
       updatedAt: updatedAt!
     )
   }
 
-  func applyUpdates(_ updates: EffectiveLength.Update) throws {
+  func applyUpdates(_ updates: EquivalentLength.Update) throws {
     if let name = updates.name, name != self.name {
       self.name = name
     }

@@ -12,8 +12,8 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute.StepThree {
     }
   }
 
-  var groups: [EffectiveLength.Group] {
-    var groups = [EffectiveLength.Group]()
+  var groups: [EquivalentLength.Group] {
+    var groups = [EquivalentLength.Group]()
     for (n, group) in groupGroups.enumerated() {
       groups.append(
         .init(
@@ -29,7 +29,7 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute.StepThree {
   }
 }
 
-extension EffectiveLength.Create {
+extension EquivalentLength.Create {
 
   init(
     form: SiteRoute.View.ProjectRoute.EquivalentLengthRoute.StepThree,
@@ -45,7 +45,7 @@ extension EffectiveLength.Create {
   }
 }
 
-extension EffectiveLength.Update {
+extension EquivalentLength.Update {
   init(
     form: SiteRoute.View.ProjectRoute.EquivalentLengthRoute.StepThree,
     projectID: Project.ID

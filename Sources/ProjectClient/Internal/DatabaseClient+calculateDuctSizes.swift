@@ -144,11 +144,11 @@ extension DatabaseClient {
   // Internal container.
   struct DesignFrictionRateResponse: Equatable, Sendable {
 
-    typealias EnsuredTEL = (supply: EffectiveLength, return: EffectiveLength)
+    typealias EnsuredTEL = (supply: EquivalentLength, return: EquivalentLength)
 
     let designFrictionRate: Double
     let equipmentInfo: EquipmentInfo
-    let telMaxContainer: EffectiveLength.MaxContainer
+    let telMaxContainer: EquivalentLength.MaxContainer
 
     func ensureMaxContainer() throws -> EnsuredTEL {
 
@@ -167,7 +167,7 @@ extension DatabaseClient {
   func designFrictionRate(
     componentLosses: [ComponentPressureLoss],
     equipmentInfo: EquipmentInfo,
-    equivalentLengths: EffectiveLength.MaxContainer
+    equivalentLengths: EquivalentLength.MaxContainer
   ) -> DesignFrictionRateResponse? {
     guard let tel = equivalentLengths.total,
       componentLosses.count > 0
