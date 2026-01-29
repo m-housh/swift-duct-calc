@@ -15,7 +15,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup just
-      uses: https://git.housh.dev/actions/setup-just.git@v1
+      shell: bash
+      run: sudo apt update && apt install -y just
     - name: Setup QEMU
       uses: docker/setup-qemu-action@v3
     - name: Setup buildx
