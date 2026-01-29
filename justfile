@@ -14,7 +14,10 @@ run:
 	@swift run App serve --log debug
 
 build-docker file="docker/Dockerfile":
-	@podman build -f {{file}} -t {{docker_image}}:{{docker_tag}} .
+	@docker build -f {{file}} -t {{docker_image}}:{{docker_tag}} .
 
 run-docker:
-	@podman run -it --rm -v $PWD:/app -p 8080:8080 {{docker_image}}:{{docker_tag}}
+	@docker run -it --rm -v $PWD:/app -p 8080:8080 {{docker_image}}:{{docker_tag}}
+
+test-docker: (build-docker "docker/Dockerfile.test")
+	@docker run --rm {{docker_image}}:{{docker_tag}} swift test

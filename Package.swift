@@ -120,11 +120,10 @@ let package = Package(
         .target(name: "HTMLSnapshotTesting"),
         .target(name: "PdfClient"),
         .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
+      ],
+      resources: [
+        .copy("__Snapshots__")
       ]
-      // ,
-      // resources: [
-      //   .copy("__Snapshots__")
-      // ]
     ),
     .target(
       name: "ProjectClient",
