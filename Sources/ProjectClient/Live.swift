@@ -37,14 +37,18 @@ extension ProjectClient: DependencyKey {
       frictionRate: { projectID in
         try await manualD.frictionRate(projectID: projectID)
       },
-      generatePdf: { projectID, fileIO in
+      generatePdf: { projectID in
         let pdfResponse = try await pdfClient.generatePdf(
-          request: database.makePdfRequest(projectID))
+          request: database.makePdfRequest(projectID)
+        )
 
-        let response = try await fileIO.asyncStreamFile(at: pdfResponse.pdfPath) { _ in
-          try await fileClient.removeFile(pdfResponse.htmlPath)
-          try await fileClient.removeFile(pdfResponse.pdfPath)
-        }
+        let response = try await fileClient.streamFile(
+          pdfResponse.pdfPath,
+          {
+            try await fileClient.removeFile(pdfResponse.htmlPath)
+            try await fileClient.removeFile(pdfResponse.pdfPath)
+          }
+        )
 
         response.headers.replaceOrAdd(name: .contentType, value: "application/octet-stream")
         response.headers.replaceOrAdd(

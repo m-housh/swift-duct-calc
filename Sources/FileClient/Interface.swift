@@ -1,6 +1,7 @@
 import Dependencies
 import DependenciesMacros
 import Foundation
+import Vapor
 
 extension DependencyValues {
   public var fileClient: FileClient {
@@ -11,19 +12,29 @@ extension DependencyValues {
 
 @DependencyClient
 public struct FileClient: Sendable {
+  public typealias OnCompleteHandler = @Sendable () async throws -> Void
+
   public var writeFile: @Sendable (String, String) async throws -> Void
   public var removeFile: @Sendable (String) async throws -> Void
+  public var streamFile: @Sendable (String, @escaping OnCompleteHandler) async throws -> Response
 }
 
-extension FileClient: DependencyKey {
+extension FileClient: TestDependencyKey {
   public static let testValue = Self()
 
-  public static let liveValue = Self(
-    writeFile: { contents, path in
-      try contents.write(to: URL(fileURLWithPath: path), atomically: true, encoding: .utf8)
-    },
-    removeFile: { path in
-      try FileManager.default.removeItem(atPath: path)
-    }
-  )
+  public static func live(fileIO: FileIO) -> Self {
+    .init(
+      writeFile: { contents, path in
+        try await fileIO.writeFile(ByteBuffer(string: contents), at: path)
+      },
+      removeFile: { path in
+        try FileManager.default.removeItem(atPath: path)
+      },
+      streamFile: { path, onComplete in
+        try await fileIO.asyncStreamFile(at: path) { _ in
+          try await onComplete()
+        }
+      }
+    )
+  }
 }

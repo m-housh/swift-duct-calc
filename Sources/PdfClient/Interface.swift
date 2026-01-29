@@ -8,6 +8,8 @@ import ManualDCore
 
 extension DependencyValues {
 
+  /// Access the pdf client dependency that can be used to generate pdf's for
+  /// a project.
   public var pdfClient: PdfClient {
     get { self[PdfClient.self] }
     set { self[PdfClient.self] = newValue }
@@ -16,9 +18,19 @@ extension DependencyValues {
 
 @DependencyClient
 public struct PdfClient: Sendable {
+  /// Generate the html used to convert to pdf for a project.
   public var html: @Sendable (Request) async throws -> (any HTML & Sendable)
+
+  /// Converts the generated html to a pdf.
+  ///
+  /// **NOTE:** This is generally not used directly, instead use the overload that accepts a request,
+  ///           which generates the html and does the conversion all in one step.
   public var generatePdf: @Sendable (Project.ID, any HTML & Sendable) async throws -> Response
 
+  /// Generate a pdf for the given project request.
+  ///
+  /// - Parameters:
+  ///   - request: The project data used to generate the pdf.
   public func generatePdf(request: Request) async throws -> Response {
     let html = try await self.html(request)
     return try await self.generatePdf(request.project.id, html)
@@ -64,7 +76,7 @@ extension PdfClient: DependencyKey {
 }
 
 extension PdfClient {
-
+  /// Container for the data required to generate a pdf for a given project.
   public struct Request: Codable, Equatable, Sendable {
 
     public let project: Project

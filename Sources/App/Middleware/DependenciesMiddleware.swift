@@ -36,6 +36,7 @@ struct DependenciesMiddleware: AsyncMiddleware {
         // $0.dateFormatter = .liveValue
         $0.viewController = viewController
         $0.pdfClient = .liveValue
+        $0.fileClient = .live(fileIO: request.fileio)
       } operation: {
         try await next.respond(to: request)
       }

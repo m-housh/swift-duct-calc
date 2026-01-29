@@ -11,7 +11,7 @@ import SnapshotTesting
 import Testing
 import ViewController
 
-@Suite(.snapshots(record: .missing))
+@Suite(.snapshots(record: .failed))
 struct ViewControllerTests {
 
   @Test

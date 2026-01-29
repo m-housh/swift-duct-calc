@@ -16,8 +16,10 @@
     <meta content="1024" name="og:image:height">
     <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
+    <script src="/js/htmx-download.js"></script>
     <script src="/js/main.js"></script>
     <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="/css/htmx.css">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
     <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
@@ -55,7 +57,9 @@ p-6 w-full">
                       <p>Must complete all the previous sections to display duct sizing calculations.</p>
                     </div>
                   </div>
-                  PDF<a class="btn btn-primary" href="/projects/00000000-0000-0000-0000-000000000000/pdf"></a>
+                  <div>
+                    <button class="btn btn-primary" hx-get="/projects/00000000-0000-0000-0000-000000000000/pdf" hx-ext="htmx-download" hx-swap="none" hx-indicator=".htmx-indicator"><span>PDF</span><span class="loading loading-spinner loading-lg htmx-indicator"></span></button>
+                  </div>
                 </div>
                 <table class="table table-zebra text-lg">
                   <thead>

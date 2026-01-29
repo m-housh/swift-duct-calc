@@ -93,6 +93,7 @@ let package = Package(
       dependencies: [
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
+        .product(name: "Vapor", package: "vapor"),
       ]
     ),
     .target(
@@ -112,6 +113,18 @@ let package = Package(
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
         .product(name: "Elementary", package: "elementary"),
       ]
+    ),
+    .testTarget(
+      name: "PdfClientTests",
+      dependencies: [
+        .target(name: "HTMLSnapshotTesting"),
+        .target(name: "PdfClient"),
+        .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
+      ]
+      // ,
+      // resources: [
+      //   .copy("__Snapshots__")
+      // ]
     ),
     .target(
       name: "ProjectClient",

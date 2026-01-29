@@ -28,12 +28,7 @@ public struct ProjectClient: Sendable {
     @Sendable (User.ID, Project.Create) async throws -> CreateProjectResponse
 
   public var frictionRate: @Sendable (Project.ID) async throws -> FrictionRateResponse
-
-  // FIX: Name to something to do with generating a pdf, just experimenting now.
-  // public var toMarkdown: @Sendable (Project.ID) async throws -> String
-  // public var toHTML: @Sendable (Project.ID) async throws -> (any HTML & Sendable)
-
-  public var generatePdf: @Sendable (Project.ID, FileIO) async throws -> Response
+  public var generatePdf: @Sendable (Project.ID) async throws -> Response
 }
 
 extension ProjectClient: TestDependencyKey {
