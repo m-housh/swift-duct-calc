@@ -23,6 +23,23 @@ struct DuctSizingView: HTML, Sendable {
           .hidden(when: ductSizes.rooms.count > 0)
           .attributes(.class("text-error font-bold italic mt-4"))
         }
+
+        div {
+          button(
+            .class("btn btn-primary"),
+            .hx.get(route: .project(.detail(projectID, .pdf))),
+            .hx.ext("htmx-download"),
+            .hx.swap(.none),
+            .hx.indicator()
+          ) {
+            span { "PDF" }
+            Indicator()
+          }
+          // div {
+          //   Indicator()
+          // }
+        }
+
       }
 
       if ductSizes.rooms.count != 0 {

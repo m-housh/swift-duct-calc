@@ -1,3 +1,4 @@
+import Dependencies
 import Foundation
 
 extension User {
@@ -113,3 +114,27 @@ extension User.Profile {
     }
   }
 }
+
+#if DEBUG
+  extension User.Profile {
+    public static func mock(userID: User.ID) -> Self {
+      @Dependency(\.uuid) var uuid
+      @Dependency(\.date.now) var now
+
+      return .init(
+        id: uuid(),
+        userID: userID,
+        firstName: "Testy",
+        lastName: "McTestface",
+        companyName: "Acme Co.",
+        streetAddress: "1234 Sesame St",
+        city: "Monroe",
+        state: "OH",
+        zipCode: "55555",
+        createdAt: now,
+        updatedAt: now
+      )
+
+    }
+  }
+#endif

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Duct Calc</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="ductcalc.com" name="og:site_name">
+    <meta content="Duct Calc" name="og:title">
+    <meta content="Duct sizing based on ACCA, Manual-D." name="description">
+    <meta content="Duct sizing based on ACCA, Manual-D." name="og:description">
+    <meta content="/images/mand_logo.png" name="og:image">
+    <meta content="/images/mand_logo.png" name="twitter:image">
+    <meta content="Duct Calc" name="twitter:image:alt">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="1536" name="og:image:width">
+    <meta content="1024" name="og:image:height">
+    <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
+    <script src="https://unpkg.com/htmx.org@2.0.8"></script>
+    <script src="/js/htmx-download.js"></script>
+    <script src="/js/main.js"></script>
+    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="/css/htmx.css">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
+    <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <script src="https://unpkg.com/htmx-remove@latest" crossorigin="anonymous" integrity="sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT"></script>
+  </head>
+  <body>
+    <div class="flex flex-col min-h-screen min-w-full justify-between">
+      <main class="flex flex-col min-h-screen min-w-full grow mb-auto">
+        <div class="drawer lg:drawer-open h-full">
+          <input id="my-drawer-1" type="checkbox" class="drawer-toggle">
+          <div class="drawer-content overflow-auto">
+            <nav class="navbar w-full bg-base-300 text-base-content shadow-sm mb-4">
+              <div class="flex flex-1 space-x-4 items-center">
+                <div class="tooltip tooltip-right" data-tip="Open sidebar"><label for="my-drawer-1" class="size-7 btn btn-square btn-ghost hover:bg-neutral hover:text-white" aria-label="open sidebar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor" class="my-1.5 inline-block"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg></label></div>
+                <div class="tooltip tooltip-right" data-tip="Home">
+                  <a class="flex w-fit h-fit text-xl items-end px-4 py-2 btn btn-square btn-ghost hover:bg-neutral hover:text-white" href="/projects">
+                  <img src="/images/mand_logo_sm.webp">
+                  Duct Calc<span></span></a>
+                </div>
+              </div>
+              <div class="flex-none">
+                <div class="tooltip tooltip-left" data-tip="Profile"><a href="/profile" class="btn btn-square btn-ghost hover:bg-neutral hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg></a></div>
+              </div>
+            </nav>
+            <div class="p-4">
+              <div class="space-y-4">
+                <div class="flex justify-between bg-secondary border-2 border-primary rounded-sm shadow-sm 
+p-6 w-full pb-6">
+                  <h1 class="text-3xl font-bold">Equivalent Lengths</h1>
+                  <div class="tooltip tooltip-left" data-tip="Add equivalent length">
+                    <button type="button" class="btn btn-primary" onclick="equivalentLengthForm.showModal()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></button>
+                  </div>
+                </div>
+                <dialog id="equivalentLengthForm" class="modal">
+                  <div class="modal-box">
+                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="equivalentLengthForm.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                    <h1 class="text-2xl font-bold">Effective Length</h1>
+                    <div id="formStep_equivalentLengthForm" class="mt-4">
+                      <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/stepOne" hx-target="#formStep_equivalentLengthForm" hx-swap="innerHTML">
+                        <label class="input w-full"><span class="label">Name</span>
+                        <input name="name" type="text" value="" required autofocus>
+                        Type</label><label class="select w-full"><span class="label"></span>
+                        <select name="type" id="type">
+                          <option value="return">Return</option>
+                          <option value="supply" selected>Supply</option>
+                        </select></label>
+                        <div class="flex justify-between">
+                          <div></div>
+                          <button class="btn btn-secondary" type="submit">Next</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </dialog>
+                <table class="table table-zebra text-lg">
+                  <thead>
+                    <tr class="text-lg">
+                      <th>Type</th>
+                      <th>Name</th>
+                      <th>Straight Lengths</th>
+                      <th>
+                        <div class="grid grid-cols-3 gap-2 min-w-[220px]">
+                          <div class="flex justify-center col-span-3">Groups</div>
+                          <div>Group</div>
+                          <div class="flex justify-center">T.E.L.</div>
+                          <div class="flex justify-end">Quantity</div>
+                        </div>
+                      </th>
+                      <th>
+                        <div class="flex justify-end me-[140px]">T.E.L.</div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr id="00000000000000000000000000000008">
+                      <td>
+                        <div class="badge badge-lg badge-outline badge-info"><span>supply</span></div>
+                      </td>
+                      <td>Supply - 1</td>
+                      <td>
+                        <div class="grid grid-cols-1 gap-2"><span>10</span><span>25</span></div>
+                      </td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 min-w-[220px]">
+                          <span>1-a</span>
+                          <div class="flex justify-center"><span>20</span></div>
+                          <div class="flex justify-end"><span>1</span></div>
+                          2-b<span></span>
+                          <div class="flex justify-center"><span>30</span></div>
+                          <div class="flex justify-end"><span>1</span></div>
+                          3-a<span></span>
+                          <div class="flex justify-center"><span>10</span></div>
+                          <div class="flex justify-end"><span>1</span></div>
+                          12-a<span></span>
+                          <div class="flex justify-center"><span>10</span></div>
+                          <div class="flex justify-end"><span>1</span></div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="flex justify-end mx-auto space-x-4">
+                          <div class="badge badge-lg badge-outline badge-primary badge-lg pt-2"><span>105</span></div>
+                          <div class="flex justify-end -mt-2">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Delete">
+                                <button type="button" class="btn btn-error join-item btn-ghost" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000008" hx-confirm="Are you sure?" hx-target="#00000000000000000000000000000008" hx-swap="outerHTML"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                              </div>
+                              <div class="tooltip tooltip-bottom" data-tip="Edit">
+                                <button class="btn join-item btn-ghost" type="button" onclick="equivalentLengthForm_00000000000000000000000000000008.showModal()">
+                                  <div class="flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <dialog id="equivalentLengthForm_00000000000000000000000000000008" class="modal">
+                          <div class="modal-box">
+                            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="equivalentLengthForm_00000000000000000000000000000008.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                            <h1 class="text-2xl font-bold">Effective Length</h1>
+                            <div id="formStep_equivalentLengthForm_00000000000000000000000000000008" class="mt-4">
+                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/stepOne" hx-target="#formStep_equivalentLengthForm_00000000000000000000000000000008" hx-swap="innerHTML">
+                                <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000008">
+                                Name<label class="input w-full"><span class="label"></span>
+                                <input name="name" type="text" value="Supply - 1" required autofocus>
+                                Type</label><label class="select w-full"><span class="label"></span>
+                                <select name="type" id="type">
+                                  <option value="return">Return</option>
+                                  <option value="supply" selected>Supply</option>
+                                </select></label>
+                                <div class="flex justify-between">
+                                  <div></div>
+                                  <button class="btn btn-secondary" type="submit">Next</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </dialog>
+                      </td>
+                    </tr>
+                    <tr id="00000000000000000000000000000009">
+                      <td>
+                        <div class="badge badge-lg badge-outline badge-error"><span>return</span></div>
+                      </td>
+                      <td>Return - 1</td>
+                      <td>
+                        <div class="grid grid-cols-1 gap-2"><span>10</span><span>20</span><span>5</span></div>
+                      </td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 min-w-[220px]">
+                          <span>5-a</span>
+                          <div class="flex justify-center"><span>10</span></div>
+                          <div class="flex justify-end"><span>1</span></div>
+                          6-a<span></span>
+                          <div class="flex justify-center"><span>15</span></div>
+                          <div class="flex justify-end"><span>1</span></div>
+                          7-a<span></span>
+                          <div class="flex justify-center"><span>20</span></div>
+                          <div class="flex justify-end"><span>1</span></div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="flex justify-end mx-auto space-x-4">
+                          <div class="badge badge-lg badge-outline badge-primary badge-lg pt-2"><span>80</span></div>
+                          <div class="flex justify-end -mt-2">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Delete">
+                                <button type="button" class="btn btn-error join-item btn-ghost" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000009" hx-confirm="Are you sure?" hx-target="#00000000000000000000000000000009" hx-swap="outerHTML"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                              </div>
+                              <div class="tooltip tooltip-bottom" data-tip="Edit">
+                                <button class="btn join-item btn-ghost" type="button" onclick="equivalentLengthForm_00000000000000000000000000000009.showModal()">
+                                  <div class="flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <dialog id="equivalentLengthForm_00000000000000000000000000000009" class="modal">
+                          <div class="modal-box">
+                            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="equivalentLengthForm_00000000000000000000000000000009.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                            <h1 class="text-2xl font-bold">Effective Length</h1>
+                            <div id="formStep_equivalentLengthForm_00000000000000000000000000000009" class="mt-4">
+                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/stepOne" hx-target="#formStep_equivalentLengthForm_00000000000000000000000000000009" hx-swap="innerHTML">
+                                <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000009">
+                                Name<label class="input w-full"><span class="label"></span>
+                                <input name="name" type="text" value="Return - 1" required autofocus>
+                                Type</label><label class="select w-full"><span class="label"></span>
+                                <select name="type" id="type">
+                                  <option value="return" selected>Return</option>
+                                  <option value="supply">Supply</option>
+                                </select></label>
+                                <div class="flex justify-between">
+                                  <div></div>
+                                  <button class="btn btn-secondary" type="submit">Next</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </dialog>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="drawer-side is-drawer-close:overflow-visible grow">
+            <label for="my-drawer-1" aria-label="close sidebar" class="drawer-overlay"></label>
+            <div class="flex grow h-full flex-col items-start bg-base-300 text-base-content
+is-drawer-close:min-w-[80px] is-drawer-open:max-w-[300px]">
+              <ul class="w-full grow">
+                <li class="flex w-full">
+                  <button class="w-full gap-1 py-2 border-b-1 border-gray-200
+hover:bg-neutral data-active:bg-neutral
+hover:text-white data-active:text-white
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
+                    <div class="w-full p-2 gap-1
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1">
+                      <div class="items-center
+is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
+                        <div class="flex items-center justify-center is-drawer-close:text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></div>
+                        <div class="flex items-center justify-center"><span>Project</span></div>
+                      </div>
+                      <div class="flex grow justify-end items-end is-drawer-close:hidden text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                    </div>
+                  </button>
+                </li>
+                <li class="w-full">
+                  <button class="w-full gap-1 py-2 border-b-1 border-gray-200
+hover:bg-neutral data-active:bg-neutral
+hover:text-white data-active:text-white
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/rooms" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
+                    <div class="w-full p-2 gap-1
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1">
+                      <div class="items-center
+is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
+                        <div class="flex items-center justify-center is-drawer-close:text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-door-closed-icon lucide-door-closed"><path d="M10 12h.01"/><path d="M18 20V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14"/><path d="M2 20h20"/></svg></div>
+                        <div class="flex items-center justify-center"><span>Rooms</span></div>
+                      </div>
+                      <div class="flex grow justify-end items-end is-drawer-close:hidden text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                    </div>
+                  </button>
+                </li>
+                <li class="flex w-full">
+                  <button class="w-full gap-1 py-2 border-b-1 border-gray-200
+hover:bg-neutral data-active:bg-neutral
+hover:text-white data-active:text-white
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/equipment" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
+                    <div class="w-full p-2 gap-1
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1">
+                      <div class="items-center
+is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
+                        <div class="flex items-center justify-center is-drawer-close:text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fan-icon lucide-fan"><path d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.002l5.412 1.45a6.082 6.082 0 0 1 7.002-8.618l-1.45 5.412a6.082 6.082 0 0 1 8.618 7.002l-5.412-1.45a6.082 6.082 0 0 1-7.002 8.618l1.45-5.412Z"/><path d="M12 12v.01"/></svg></div>
+                        <div class="flex items-center justify-center"><span>Equipment</span></div>
+                      </div>
+                      <div class="flex grow justify-end items-end is-drawer-close:hidden text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                    </div>
+                  </button>
+                </li>
+                <li class="w-full">
+                  <button class="w-full gap-1 py-2 border-b-1 border-gray-200
+hover:bg-neutral data-active:bg-neutral
+hover:text-white data-active:text-white
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/effective-lengths" hx-push-url="true" hx-target="body" hx-swap="outerHTML" data-active="true">
+                    <div class="w-full p-2 gap-1
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1">
+                      <div class="items-center
+is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
+                        <div class="flex items-center justify-center is-drawer-close:text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ruler-dimension-line-icon lucide-ruler-dimension-line"><path d="M10 15v-3"/><path d="M14 15v-3"/><path d="M18 15v-3"/><path d="M2 8V4"/><path d="M22 6H2"/><path d="M22 8V4"/><path d="M6 15v-3"/><rect x="2" y="12" width="20" height="8" rx="2"/></svg></div>
+                        <div class="flex items-center justify-center"><span>T.E.L.</span></div>
+                      </div>
+                      <div class="flex grow justify-end items-end is-drawer-close:hidden text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                    </div>
+                  </button>
+                </li>
+                <li class="w-full">
+                  <button class="w-full gap-1 py-2 border-b-1 border-gray-200
+hover:bg-neutral data-active:bg-neutral
+hover:text-white data-active:text-white
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/friction-rate" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
+                    <div class="w-full p-2 gap-1
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1">
+                      <div class="items-center
+is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
+                        <div class="flex items-center justify-center is-drawer-close:text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-function-icon lucide-square-function"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M9 17c2 0 2.8-1 2.8-2.8V10c0-2 1-3.3 3.2-3"/><path d="M9 11.2h5.7"/></svg></div>
+                        <div class="flex items-center justify-center"><span>Friction Rate</span></div>
+                      </div>
+                      <div class="flex grow justify-end items-end is-drawer-close:hidden text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                    </div>
+                  </button>
+                </li>
+                <li class="w-full">
+                  <button class="w-full gap-1 py-2 border-b-1 border-gray-200
+hover:bg-neutral data-active:bg-neutral
+hover:text-white data-active:text-white
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/duct-sizing" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
+                    <div class="w-full p-2 gap-1
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1">
+                      <div class="items-center
+is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
+                        <div class="flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg></div>
+                        <div class="flex items-center justify-center"><span>Duct Sizes</span></div>
+                      </div>
+                    </div>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </main>
+      <div class="bottom-0 left-0 bg-error">
+        <footer class="footer sm:footer-horizontal footer-center
+bg-base-300 text-base-content p-4">
+          <aside>
+            <p>Copyright © 2026 - All rights reserved by Michael Housh</p>
+          </aside>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

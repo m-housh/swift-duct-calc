@@ -84,6 +84,32 @@ extension Project {
     }
   }
 
+  public struct Detail: Codable, Equatable, Sendable {
+
+    public let project: Project
+    public let componentLosses: [ComponentPressureLoss]
+    public let equipmentInfo: EquipmentInfo
+    public let equivalentLengths: [EffectiveLength]
+    public let rooms: [Room]
+    public let trunks: [TrunkSize]
+
+    public init(
+      project: Project,
+      componentLosses: [ComponentPressureLoss],
+      equipmentInfo: EquipmentInfo,
+      equivalentLengths: [EffectiveLength],
+      rooms: [Room],
+      trunks: [TrunkSize]
+    ) {
+      self.project = project
+      self.componentLosses = componentLosses
+      self.equipmentInfo = equipmentInfo
+      self.equivalentLengths = equivalentLengths
+      self.rooms = rooms
+      self.trunks = trunks
+    }
+  }
+
   public struct Update: Codable, Equatable, Sendable {
 
     public let name: String?
@@ -114,16 +140,22 @@ extension Project {
 #if DEBUG
 
   extension Project {
-    public static let mock = Self(
-      id: UUID(0),
-      name: "Testy McTestface",
-      streetAddress: "1234 Sesame Street",
-      city: "Monroe",
-      state: "OH",
-      zipCode: "55555",
-      createdAt: Date(),
-      updatedAt: Date()
-    )
+
+    public static var mock: Self {
+      @Dependency(\.uuid) var uuid
+      @Dependency(\.date.now) var now
+
+      return .init(
+        id: uuid(),
+        name: "Testy McTestface",
+        streetAddress: "1234 Sesame Street",
+        city: "Monroe",
+        state: "OH",
+        zipCode: "55555",
+        createdAt: now,
+        updatedAt: now
+      )
+    }
   }
 
 #endif

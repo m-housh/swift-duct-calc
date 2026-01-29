@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Duct Calc</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="ductcalc.com" name="og:site_name">
+    <meta content="Duct Calc" name="og:title">
+    <meta content="Duct sizing based on ACCA, Manual-D." name="description">
+    <meta content="Duct sizing based on ACCA, Manual-D." name="og:description">
+    <meta content="/images/mand_logo.png" name="og:image">
+    <meta content="/images/mand_logo.png" name="twitter:image">
+    <meta content="Duct Calc" name="twitter:image:alt">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="1536" name="og:image:width">
+    <meta content="1024" name="og:image:height">
+    <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
+    <script src="https://unpkg.com/htmx.org@2.0.8"></script>
+    <script src="/js/htmx-download.js"></script>
+    <script src="/js/main.js"></script>
+    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="/css/htmx.css">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
+    <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <script src="https://unpkg.com/htmx-remove@latest" crossorigin="anonymous" integrity="sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT"></script>
+  </head>
+  <body>
+    <div class="flex flex-col min-h-screen min-w-full justify-between">
+      <main class="flex flex-col min-h-screen min-w-full grow mb-auto">
+        <div>
+          <nav class="navbar w-full bg-base-300 text-base-content shadow-sm mb-4">
+            <div class="flex flex-1 space-x-4 items-center">
+              <div class="tooltip tooltip-right" data-tip="Home">
+                <a class="flex w-fit h-fit text-xl items-end px-4 py-2 btn btn-square btn-ghost hover:bg-neutral hover:text-white" href="/projects">
+                <img src="/images/mand_logo_sm.webp">
+                Duct Calc<span></span></a>
+              </div>
+            </div>
+            <div class="flex-none">
+              <div class="tooltip tooltip-left" data-tip="Profile"><a href="/profile" class="btn btn-square btn-ghost hover:bg-neutral hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg></a></div>
+            </div>
+          </nav>
+          <div class="m-6">
+            <div class="flex justify-between bg-secondary border-2 border-primary rounded-sm shadow-sm 
+p-6 w-full pb-6">
+              <h1 class="text-3xl font-bold">Projects</h1>
+              <div class="tooltip tooltip-left" data-tip="Add project">
+                <button type="button" class="btn btn-primary" onclick="projectForm.showModal()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></button>
+              </div>
+            </div>
+            <table class="table table-zebra">
+              <thead>
+                <tr>
+                  <th><span class="text-lg label font-bold">Date</span></th>
+                  <th><span class="text-lg label font-bold">Name</span></th>
+                  <th><span class="text-lg label font-bold">Address</span></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="00000000-0000-0000-0000-000000000000">
+                  <td><span>02/13/2009</span></td>
+                  <td>Testy McTestface</td>
+                  <td>1234 Sesame Street</td>
+                  <td>
+                    <div class="flex justify-end space-x-6">
+                      <div class="join">
+                        <div class="tooltip tooltip-left" data-tip="Delete project">
+                          <button type="button" class="btn btn-error join-item btn-ghost" hx-delete="/projects/00000000-0000-0000-0000-000000000000" hx-confirm="Are you sure?" hx-target="closest tr"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                        </div>
+                        <div class="tooltip tooltip-left" data-tip="View project"><a class="join-item btn btn-success btn-ghost" href="/projects/00000000-0000-0000-0000-000000000000/rooms"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg></a></div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <dialog id="projectForm" class="modal">
+            <div class="modal-box">
+              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="projectForm.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+              <h1 class="text-3xl font-bold pb-6 ps-2">Project</h1>
+              <form class="grid grid-cols-1 gap-4" hx-post="/projects" hx-target="body" hx-swap="outerHTML">
+                <label class="input w-full"><span class="label">Name</span>
+                <input name="name" type="text" value="" placeholder="Project Name" required autofocus>
+                Address</label><label class="input w-full"><span class="label"></span>
+                <input name="streetAddress" type="text" value="" placeholder="Street Address" required>
+                City</label><label class="input w-full"><span class="label"></span>
+                <input name="city" type="text" value="" placeholder="City" required>
+                State</label><label class="input w-full"><span class="label"></span>
+                <input name="state" type="text" value="" placeholder="State" required>
+                Zip</label><label class="input w-full"><span class="label"></span>
+                <input name="zipCode" type="text" value="" placeholder="Zip Code" required></label>
+                <button class="btn btn-secondary btn-block my-6" type="submit">Submit</button>
+              </form>
+            </div>
+          </dialog>
+        </div>
+      </main>
+      <div class="bottom-0 left-0 bg-error">
+        <footer class="footer sm:footer-horizontal footer-center
+bg-base-300 text-base-content p-4">
+          <aside>
+            <p>Copyright © 2026 - All rights reserved by Michael Housh</p>
+          </aside>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

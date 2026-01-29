@@ -41,7 +41,9 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
             type: request.type
           )
           try await model.save(on: database)
-          try await roomProxies.append(model.toDTO(on: database))
+          roomProxies.append(
+            .init(room: try room.toDTO(), registers: registers)
+          )
         }
 
         return try .init(
@@ -60,23 +62,30 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
       fetch: { projectID in
         try await TrunkModel.query(on: database)
           .with(\.$project)
-          .with(\.$rooms)
+          .with(\.$rooms, { $0.with(\.$room) })
           .filter(\.$project.$id == projectID)
           .all()
-          .toDTO(on: database)
+          .toDTO()
       },
       get: { id in
-        guard let model = try await TrunkModel.find(id, on: database) else {
+        guard
+          let model =
+            try await TrunkModel
+            .query(on: database)
+            .with(\.$rooms, { $0.with(\.$room) })
+            .filter(\.$id == id)
+            .first()
+        else {
           return nil
         }
-        return try await model.toDTO(on: database)
+        return try model.toDTO()
       },
       update: { id, updates in
         guard
           let model =
             try await TrunkModel
             .query(on: database)
-            .with(\.$rooms)
+            .with(\.$rooms, { $0.with(\.$room) })
             .filter(\.$id == id)
             .first()
         else {
@@ -84,7 +93,7 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
         }
         try updates.validate()
         try await model.applyUpdates(updates, on: database)
-        return try await model.toDTO(on: database)
+        return try model.toDTO()
       }
     )
   }
@@ -201,10 +210,10 @@ final class TrunkRoomModel: Model, @unchecked Sendable {
     self.type = type.rawValue
   }
 
-  func toDTO(on database: any Database) async throws -> TrunkSize.RoomProxy {
-    guard let room = try await RoomModel.find($room.id, on: database) else {
-      throw NotFoundError()
-    }
+  func toDTO() throws -> TrunkSize.RoomProxy {
+    // guard let room = try await RoomModel.find($room.id, on: database) else {
+    //   throw NotFoundError()
+    // }
     return .init(
       room: try room.toDTO(),
       registers: registers
@@ -251,18 +260,22 @@ final class TrunkModel: Model, @unchecked Sendable {
     self.name = name
   }
 
-  func toDTO(on database: any Database) async throws -> TrunkSize {
-    let rooms = try await withThrowingTaskGroup(of: TrunkSize.RoomProxy.self) { group in
-      for room in self.rooms {
-        group.addTask {
-          try await room.toDTO(on: database)
-        }
-      }
+  func toDTO() throws -> TrunkSize {
+    // let rooms = try await withThrowingTaskGroup(of: TrunkSize.RoomProxy.self) { group in
+    //   for room in self.rooms {
+    //     group.addTask {
+    //       try await room.toDTO(on: database)
+    //     }
+    //   }
+    //
+    //   return try await group.reduce(into: [TrunkSize.RoomProxy]()) {
+    //     $0.append($1)
+    //   }
+    //
+    // }
 
-      return try await group.reduce(into: [TrunkSize.RoomProxy]()) {
-        $0.append($1)
-      }
-
+    let rooms = try rooms.reduce(into: [TrunkSize.RoomProxy]()) {
+      $0.append(try $1.toDTO())
     }
 
     return try .init(
@@ -340,17 +353,17 @@ final class TrunkModel: Model, @unchecked Sendable {
 
 extension Array where Element == TrunkModel {
 
-  func toDTO(on database: any Database) async throws -> [TrunkSize] {
-    try await withThrowingTaskGroup(of: TrunkSize.self) { group in
-      for model in self {
-        group.addTask {
-          try await model.toDTO(on: database)
-        }
-      }
+  func toDTO() throws -> [TrunkSize] {
+    // try await withThrowingTaskGroup(of: TrunkSize.self) { group in
+    //   for model in self {
+    //     group.addTask {
+    //       try await model.toDTO(on: database)
+    //     }
+    //   }
 
-      return try await group.reduce(into: [TrunkSize]()) {
-        $0.append($1)
-      }
+    return try reduce(into: [TrunkSize]()) {
+      $0.append(try $1.toDTO())
     }
   }
+  // }
 }

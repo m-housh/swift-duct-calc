@@ -1,7 +1,9 @@
 import Dependencies
 import DependenciesMacros
+import Elementary
 import ManualDClient
 import ManualDCore
+import Vapor
 
 extension DependencyValues {
   public var projectClient: ProjectClient {
@@ -26,6 +28,7 @@ public struct ProjectClient: Sendable {
     @Sendable (User.ID, Project.Create) async throws -> CreateProjectResponse
 
   public var frictionRate: @Sendable (Project.ID) async throws -> FrictionRateResponse
+  public var generatePdf: @Sendable (Project.ID) async throws -> Response
 }
 
 extension ProjectClient: TestDependencyKey {

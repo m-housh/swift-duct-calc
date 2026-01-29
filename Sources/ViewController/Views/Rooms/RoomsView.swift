@@ -48,19 +48,19 @@ struct RoomsView: HTML, Sendable {
 
           div(.class("flex items-end space-x-4 font-bold")) {
             span(.class("text-lg")) { "Heating Total" }
-            Badge(number: rooms.heatingTotal, digits: 0)
+            Badge(number: rooms.totalHeatingLoad, digits: 0)
               .attributes(.class("badge-error"))
           }
 
           div(.class("flex justify-center items-end space-x-4 my-auto font-bold")) {
             span(.class("text-lg")) { "Cooling Total" }
-            Badge(number: rooms.coolingTotal, digits: 0)
+            Badge(number: rooms.totalCoolingLoad, digits: 0)
               .attributes(.class("badge-success"))
           }
 
           div(.class("flex grow justify-end items-end space-x-4 me-4 my-auto font-bold")) {
             span(.class("text-lg")) { "Cooling Sensible" }
-            Badge(number: rooms.coolingSensible(shr: sensibleHeatRatio), digits: 0)
+            Badge(number: rooms.totalCoolingSensible(shr: sensibleHeatRatio ?? 1.0), digits: 0)
               .attributes(.class("badge-info"))
           }
         }
@@ -235,25 +235,6 @@ struct RoomsView: HTML, Sendable {
             .attributes(.class("btn-block my-6"))
         }
       }
-    }
-  }
-}
-
-extension Array where Element == Room {
-  var heatingTotal: Double {
-    reduce(into: 0) { $0 += $1.heatingLoad }
-  }
-
-  var coolingTotal: Double {
-    reduce(into: 0) { $0 += $1.coolingTotal }
-  }
-
-  func coolingSensible(shr: Double?) -> Double {
-    let shr = shr ?? 1.0
-
-    return reduce(into: 0) {
-      let sensible = $1.coolingSensible ?? ($1.coolingTotal * shr)
-      $0 += sensible
     }
   }
 }

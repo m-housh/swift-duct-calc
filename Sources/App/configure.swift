@@ -128,12 +128,11 @@ private func siteHandler(
     return try await apiController.respond(route, request: request)
   case .health:
     return HTTPStatus.ok
+  // Generating a pdf return's a `Response` instead of `HTML` like other views, so we
+  // need to handle it seperately.
+  case .view(.project(.detail(let projectID, .pdf))):
+    return try await projectClient.generatePdf(projectID)
   case .view(let route):
-    // FIX: Remove.
-    if route == .test {
-      let projectID = UUID(uuidString: "E796C96C-F527-4753-A00A-EBCF25630663")!
-      return try await projectClient.calculateDuctSizes(projectID)
-    }
     return try await viewController.respond(route: route, request: request)
   }
 }

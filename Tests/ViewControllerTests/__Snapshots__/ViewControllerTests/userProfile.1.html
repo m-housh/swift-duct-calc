@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Duct Calc</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="ductcalc.com" name="og:site_name">
+    <meta content="Duct Calc" name="og:title">
+    <meta content="Duct sizing based on ACCA, Manual-D." name="description">
+    <meta content="Duct sizing based on ACCA, Manual-D." name="og:description">
+    <meta content="/images/mand_logo.png" name="og:image">
+    <meta content="/images/mand_logo.png" name="twitter:image">
+    <meta content="Duct Calc" name="twitter:image:alt">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="1536" name="og:image:width">
+    <meta content="1024" name="og:image:height">
+    <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
+    <script src="https://unpkg.com/htmx.org@2.0.8"></script>
+    <script src="/js/htmx-download.js"></script>
+    <script src="/js/main.js"></script>
+    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="/css/htmx.css">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
+    <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <script src="https://unpkg.com/htmx-remove@latest" crossorigin="anonymous" integrity="sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT"></script>
+  </head>
+  <body>
+    <div class="flex flex-col min-h-screen min-w-full justify-between">
+      <main class="flex flex-col min-h-screen min-w-full grow mb-auto">
+        <div>
+          <nav class="navbar w-full bg-base-300 text-base-content shadow-sm mb-4">
+            <div class="flex flex-1 space-x-4 items-center">
+              <div class="tooltip tooltip-right" data-tip="Home">
+                <a class="flex w-fit h-fit text-xl items-end px-4 py-2 btn btn-square btn-ghost hover:bg-neutral hover:text-white" href="/projects">
+                <img src="/images/mand_logo_sm.webp">
+                Duct Calc<span></span></a>
+              </div>
+            </div>
+          </nav>
+          <div class="p-4">
+            <div class="flex justify-between">
+              <h1 class="text-2xl font-bold">Account</h1>
+              <button class="btn" type="button" onclick="userProfileForm_00000000000000000000000000000001.showModal()">
+                <div class="flex">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                  
+                </div>
+              </button>
+            </div>
+            <table class="table table-zebra border rounded-lg">
+              <tr>
+                <td><span class="text-lg label font-bold">Name</span></td>
+                <td>Testy McTestface</td>
+              </tr>
+              <tr>
+                <td><span class="text-lg label font-bold">Company</span></td>
+                <td>Acme Co.</td>
+              </tr>
+              <tr>
+                <td><span class="text-lg label font-bold">Street Address</span></td>
+                <td>1234 Sesame St</td>
+              </tr>
+              <tr>
+                <td><span class="text-lg label font-bold">City</span></td>
+                <td>Monroe</td>
+              </tr>
+              <tr>
+                <td><span class="text-lg label font-bold">State</span></td>
+                <td>OH</td>
+              </tr>
+              <tr>
+                <td><span class="text-lg label font-bold">Zip Code</span></td>
+                <td>55555</td>
+              </tr>
+              <tr>
+                <td><span class="text-lg label font-bold">Theme</span></td>
+                <td></td>
+              </tr>
+            </table>
+            <dialog id="userProfileForm_00000000000000000000000000000001" class="modal">
+              <div class="modal-box">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="userProfileForm_00000000000000000000000000000001.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                <h1 class="text-xl font-bold pb-6">Profile</h1>
+                <form class="grid grid-cols-1 gap-4 p-4" hx-patch="/profile/00000000-0000-0000-0000-000000000001" hx-target="body" hx-swap="outerHTML">
+                  <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000001">
+                  <input class="hidden" name="userID" value="00000000-0000-0000-0000-000000000000">
+                  First Name<label class="input w-full"><span class="label"></span>
+                  <input name="firstName" value="Testy" required autofocus>
+                  Last Name</label><label class="input w-full"><span class="label"></span>
+                  <input name="lastName" value="McTestface" required>
+                  Company</label><label class="input w-full"><span class="label"></span>
+                  <input name="companyName" value="Acme Co." required>
+                  Address</label><label class="input w-full"><span class="label"></span>
+                  <input name="streetAddress" value="1234 Sesame St" required>
+                  City</label><label class="input w-full"><span class="label"></span>
+                  <input name="city" value="Monroe" required>
+                  State</label><label class="input w-full"><span class="label"></span>
+                  <input name="state" value="OH" required>
+                  Zip</label><label class="input w-full"><span class="label"></span>
+                  <input name="zipCode" value="55555" required></label>
+                  <div class="dropdown dropdown-top">
+                    <div class="input btn m-1 w-full" tabindex="0" role="button">Theme<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg></div>
+                    <ul tabindex="-1" class="dropdown-content bg-base-300 rounded-box z-1 p-2 shadow-2xl">
+                      <li>
+                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Default" value="default">
+                      </li>
+                      <li><span class="text-sm font-bold text-gray-400">Light</span></li>
+                      <li>
+                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Cupcake" value="cupcake">
+                      </li>
+                      <li>
+                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Light" value="light">
+                      </li>
+                      <li>
+                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Nord" value="nord">
+                      </li>
+                      <li>
+                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Retro" value="retro">
+                      </li>
+                      <li><span class="text-sm font-bold text-gray-400">Dark</span></li>
+                      <li>
+                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Aqua" value="aqua">
+                      </li>
+                      <li>
+                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Cyberpunk" value="cyberpunk">
+                      </li>
+                      <li>
+                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Dark" value="dark">
+                      </li>
+                      <li>
+                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Dracula" value="dracula">
+                      </li>
+                      <li>
+                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Night" value="night">
+                      </li>
+                      <li>
+                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Synthwave" value="synthwave">
+                      </li>
+                    </ul>
+                  </div>
+                  <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                </form>
+              </div>
+            </dialog>
+          </div>
+        </div>
+      </main>
+      <div class="bottom-0 left-0 bg-error">
+        <footer class="footer sm:footer-horizontal footer-center
+bg-base-300 text-base-content p-4">
+          <aside>
+            <p>Copyright © 2026 - All rights reserved by Michael Housh</p>
+          </aside>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

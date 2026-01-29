@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Duct Calc</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="ductcalc.com" name="og:site_name">
+    <meta content="Duct Calc" name="og:title">
+    <meta content="Duct sizing based on ACCA, Manual-D." name="description">
+    <meta content="Duct sizing based on ACCA, Manual-D." name="og:description">
+    <meta content="/images/mand_logo.png" name="og:image">
+    <meta content="/images/mand_logo.png" name="twitter:image">
+    <meta content="Duct Calc" name="twitter:image:alt">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="1536" name="og:image:width">
+    <meta content="1024" name="og:image:height">
+    <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
+    <script src="https://unpkg.com/htmx.org@2.0.8"></script>
+    <script src="/js/htmx-download.js"></script>
+    <script src="/js/main.js"></script>
+    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="/css/htmx.css">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
+    <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <script src="https://unpkg.com/htmx-remove@latest" crossorigin="anonymous" integrity="sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT"></script>
+  </head>
+  <body>
+    <div class="flex flex-col min-h-screen min-w-full justify-between">
+      <main class="flex flex-col min-h-screen min-w-full grow mb-auto">
+        <div class="drawer lg:drawer-open h-full">
+          <input id="my-drawer-1" type="checkbox" class="drawer-toggle">
+          <div class="drawer-content overflow-auto">
+            <nav class="navbar w-full bg-base-300 text-base-content shadow-sm mb-4">
+              <div class="flex flex-1 space-x-4 items-center">
+                <div class="tooltip tooltip-right" data-tip="Open sidebar"><label for="my-drawer-1" class="size-7 btn btn-square btn-ghost hover:bg-neutral hover:text-white" aria-label="open sidebar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor" class="my-1.5 inline-block"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg></label></div>
+                <div class="tooltip tooltip-right" data-tip="Home">
+                  <a class="flex w-fit h-fit text-xl items-end px-4 py-2 btn btn-square btn-ghost hover:bg-neutral hover:text-white" href="/projects">
+                  <img src="/images/mand_logo_sm.webp">
+                  Duct Calc<span></span></a>
+                </div>
+              </div>
+              <div class="flex-none">
+                <div class="tooltip tooltip-left" data-tip="Profile"><a href="/profile" class="btn btn-square btn-ghost hover:bg-neutral hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg></a></div>
+              </div>
+            </nav>
+            <div class="p-4">
+              <div class="space-y-6">
+                <div class="flex justify-between bg-secondary border-2 border-primary rounded-sm shadow-sm 
+p-6 w-full">
+                  <div class="grid grid-cols-2 px-4 w-full">
+                    <h1 class="text-3xl font-bold">Friction Rate</h1>
+                    <div class="space-y-2 justify-end font-bold text-lg">
+                      <div class="flex space-x-4 justify-end mx-auto">
+                        <span>Friction Rate Design Value</span>
+                        <div class="badge badge-lg badge-outline badge-info badge-lg font-bold"><span>0.06</span></div>
+                      </div>
+                      <div class="flex space-x-4 justify-end mx-auto">
+                        <span>Available Static Pressure</span>
+                        <div class="badge badge-lg badge-outline"><span>0.11</span></div>
+                      </div>
+                      <div class="flex space-x-4 justify-end mx-auto">
+                        <span>Component Pressure Losses</span>
+                        <div class="badge badge-lg badge-outline"><span>0.39</span></div>
+                      </div>
+                    </div>
+                    <div class="text-error font-bold italic col-span-2">
+                      <div class="flex space-x-2 hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                        <p>Must complete previous sections.</p>
+                      </div>
+                      <div class="flex space-x-2 hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                        <p>No component pressures losses</p>
+                      </div>
+                      <div class="flex space-x-2 hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                        <p class="block">
+                          Calculated friction rate is below 0.02. The fan may not deliver the required CFM.
+                          <br>
+                           * Increase the blower speed
+                          <br>
+                           * Increase the blower size
+                          <br>
+                           * Decrease the Total Effective Length (TEL)
+                        </p>
+                      </div>
+                      <div class="flex space-x-2 hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                        <p class="block">
+                          Calculated friction rate is above 0.18. The fan may deliver too many CFM.
+                          <br>
+                           * Decrease the blower speed
+                          <br>
+                           * Decreae the blower size
+                          <br>
+                           * Increase the Total Effective Length (TEL)
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="space-y-4">
+                  <div class="flex justify-between px-4">
+                    <h1 class="text-2xl font-bold">Component Pressure Losses</h1>
+                    <div class="tooltip tooltip-left" data-tip="Add component loss">
+                      <button type="button" class="btn btn-primary text-2xl me-2" onclick="componentLossForm.showModal()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></button>
+                    </div>
+                  </div>
+                  <table class="table table-zebra">
+                    <thead>
+                      <tr class="text-xl font-bold">
+                        <th>Name</th>
+                        <th>Value</th>
+                        <th class="min-w-[200px]"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="text-lg">
+                        <td>evaporator-coil</td>
+                        <td><span>0.2</span></td>
+                        <td>
+                          <div class="flex join items-end justify-end mx-auto">
+                            <div class="tooltip tooltip-bottom" data-tip="Delete">
+                              <button type="button" class="btn btn-error join-item btn-ghost" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000A" hx-target="body" hx-swap="outerHTML" hx-confirm="Are your sure?"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                            </div>
+                            <div class="tooltip tooltip-bottom" data-tip="Edit">
+                              <button class="btn join-item btn-ghost" type="button" onclick="componentLossForm_0000000000000000000000000000000A.showModal()">
+                                <div class="flex">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                  
+                                </div>
+                              </button>
+                            </div>
+                          </div>
+                          <dialog id="componentLossForm_0000000000000000000000000000000A" class="modal">
+                            <div class="modal-box">
+                              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="componentLossForm_0000000000000000000000000000000A.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <h1 class="text-2xl font-bold">Component Loss</h1>
+                              <form class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000A" hx-target="body" hx-swap="outerHTML">
+                                <input class="hidden" name="id" value="00000000-0000-0000-0000-00000000000A">
+                                <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                                Name<label class="input w-full"><span class="label"></span>
+                                <input name="name" type="text" value="evaporator-coil" placeholder="Name" required autofocus>
+                                Value</label><label class="input w-full"><span class="label"></span>
+                                <input name="value" type="number" value="0.2" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
+                        </td>
+                      </tr>
+                      <tr class="text-lg">
+                        <td>filter</td>
+                        <td><span>0.1</span></td>
+                        <td>
+                          <div class="flex join items-end justify-end mx-auto">
+                            <div class="tooltip tooltip-bottom" data-tip="Delete">
+                              <button type="button" class="btn btn-error join-item btn-ghost" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000B" hx-target="body" hx-swap="outerHTML" hx-confirm="Are your sure?"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                            </div>
+                            <div class="tooltip tooltip-bottom" data-tip="Edit">
+                              <button class="btn join-item btn-ghost" type="button" onclick="componentLossForm_0000000000000000000000000000000B.showModal()">
+                                <div class="flex">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                  
+                                </div>
+                              </button>
+                            </div>
+                          </div>
+                          <dialog id="componentLossForm_0000000000000000000000000000000B" class="modal">
+                            <div class="modal-box">
+                              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="componentLossForm_0000000000000000000000000000000B.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <h1 class="text-2xl font-bold">Component Loss</h1>
+                              <form class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000B" hx-target="body" hx-swap="outerHTML">
+                                <input class="hidden" name="id" value="00000000-0000-0000-0000-00000000000B">
+                                <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                                Name<label class="input w-full"><span class="label"></span>
+                                <input name="name" type="text" value="filter" placeholder="Name" required autofocus>
+                                Value</label><label class="input w-full"><span class="label"></span>
+                                <input name="value" type="number" value="0.1" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
+                        </td>
+                      </tr>
+                      <tr class="text-lg">
+                        <td>supply-outlet</td>
+                        <td><span>0.03</span></td>
+                        <td>
+                          <div class="flex join items-end justify-end mx-auto">
+                            <div class="tooltip tooltip-bottom" data-tip="Delete">
+                              <button type="button" class="btn btn-error join-item btn-ghost" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000C" hx-target="body" hx-swap="outerHTML" hx-confirm="Are your sure?"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                            </div>
+                            <div class="tooltip tooltip-bottom" data-tip="Edit">
+                              <button class="btn join-item btn-ghost" type="button" onclick="componentLossForm_0000000000000000000000000000000C.showModal()">
+                                <div class="flex">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                  
+                                </div>
+                              </button>
+                            </div>
+                          </div>
+                          <dialog id="componentLossForm_0000000000000000000000000000000C" class="modal">
+                            <div class="modal-box">
+                              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="componentLossForm_0000000000000000000000000000000C.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <h1 class="text-2xl font-bold">Component Loss</h1>
+                              <form class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000C" hx-target="body" hx-swap="outerHTML">
+                                <input class="hidden" name="id" value="00000000-0000-0000-0000-00000000000C">
+                                <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                                Name<label class="input w-full"><span class="label"></span>
+                                <input name="name" type="text" value="supply-outlet" placeholder="Name" required autofocus>
+                                Value</label><label class="input w-full"><span class="label"></span>
+                                <input name="value" type="number" value="0.03" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
+                        </td>
+                      </tr>
+                      <tr class="text-lg">
+                        <td>return-grille</td>
+                        <td><span>0.03</span></td>
+                        <td>
+                          <div class="flex join items-end justify-end mx-auto">
+                            <div class="tooltip tooltip-bottom" data-tip="Delete">
+                              <button type="button" class="btn btn-error join-item btn-ghost" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000D" hx-target="body" hx-swap="outerHTML" hx-confirm="Are your sure?"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                            </div>
+                            <div class="tooltip tooltip-bottom" data-tip="Edit">
+                              <button class="btn join-item btn-ghost" type="button" onclick="componentLossForm_0000000000000000000000000000000D.showModal()">
+                                <div class="flex">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                  
+                                </div>
+                              </button>
+                            </div>
+                          </div>
+                          <dialog id="componentLossForm_0000000000000000000000000000000D" class="modal">
+                            <div class="modal-box">
+                              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="componentLossForm_0000000000000000000000000000000D.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <h1 class="text-2xl font-bold">Component Loss</h1>
+                              <form class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000D" hx-target="body" hx-swap="outerHTML">
+                                <input class="hidden" name="id" value="00000000-0000-0000-0000-00000000000D">
+                                <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                                Name<label class="input w-full"><span class="label"></span>
+                                <input name="name" type="text" value="return-grille" placeholder="Name" required autofocus>
+                                Value</label><label class="input w-full"><span class="label"></span>
+                                <input name="value" type="number" value="0.03" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
+                        </td>
+                      </tr>
+                      <tr class="text-lg">
+                        <td>balancing-damper</td>
+                        <td><span>0.03</span></td>
+                        <td>
+                          <div class="flex join items-end justify-end mx-auto">
+                            <div class="tooltip tooltip-bottom" data-tip="Delete">
+                              <button type="button" class="btn btn-error join-item btn-ghost" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000E" hx-target="body" hx-swap="outerHTML" hx-confirm="Are your sure?"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                            </div>
+                            <div class="tooltip tooltip-bottom" data-tip="Edit">
+                              <button class="btn join-item btn-ghost" type="button" onclick="componentLossForm_0000000000000000000000000000000E.showModal()">
+                                <div class="flex">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                  
+                                </div>
+                              </button>
+                            </div>
+                          </div>
+                          <dialog id="componentLossForm_0000000000000000000000000000000E" class="modal">
+                            <div class="modal-box">
+                              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="componentLossForm_0000000000000000000000000000000E.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <h1 class="text-2xl font-bold">Component Loss</h1>
+                              <form class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000E" hx-target="body" hx-swap="outerHTML">
+                                <input class="hidden" name="id" value="00000000-0000-0000-0000-00000000000E">
+                                <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                                Name<label class="input w-full"><span class="label"></span>
+                                <input name="name" type="text" value="balancing-damper" placeholder="Name" required autofocus>
+                                Value</label><label class="input w-full"><span class="label"></span>
+                                <input name="value" type="number" value="0.03" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <dialog id="componentLossForm" class="modal">
+                  <div class="modal-box">
+                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="componentLossForm.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                    <h1 class="text-2xl font-bold">Component Loss</h1>
+                    <form class="space-y-4 p-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/component-loss" hx-target="body" hx-swap="outerHTML">
+                      <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                      Name<label class="input w-full"><span class="label"></span>
+                      <input name="name" type="text" value="" placeholder="Name" required autofocus>
+                      Value</label><label class="input w-full"><span class="label"></span>
+                      <input name="value" type="number" value="" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
+                      <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                    </form>
+                  </div>
+                </dialog>
+              </div>
+            </div>
+          </div>
+          <div class="drawer-side is-drawer-close:overflow-visible grow">
+            <label for="my-drawer-1" aria-label="close sidebar" class="drawer-overlay"></label>
+            <div class="flex grow h-full flex-col items-start bg-base-300 text-base-content
+is-drawer-close:min-w-[80px] is-drawer-open:max-w-[300px]">
+              <ul class="w-full grow">
+                <li class="flex w-full">
+                  <button class="w-full gap-1 py-2 border-b-1 border-gray-200
+hover:bg-neutral data-active:bg-neutral
+hover:text-white data-active:text-white
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
+                    <div class="w-full p-2 gap-1
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1">
+                      <div class="items-center
+is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
+                        <div class="flex items-center justify-center is-drawer-close:text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></div>
+                        <div class="flex items-center justify-center"><span>Project</span></div>
+                      </div>
+                      <div class="flex grow justify-end items-end is-drawer-close:hidden text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                    </div>
+                  </button>
+                </li>
+                <li class="w-full">
+                  <button class="w-full gap-1 py-2 border-b-1 border-gray-200
+hover:bg-neutral data-active:bg-neutral
+hover:text-white data-active:text-white
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/rooms" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
+                    <div class="w-full p-2 gap-1
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1">
+                      <div class="items-center
+is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
+                        <div class="flex items-center justify-center is-drawer-close:text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-door-closed-icon lucide-door-closed"><path d="M10 12h.01"/><path d="M18 20V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14"/><path d="M2 20h20"/></svg></div>
+                        <div class="flex items-center justify-center"><span>Rooms</span></div>
+                      </div>
+                      <div class="flex grow justify-end items-end is-drawer-close:hidden text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                    </div>
+                  </button>
+                </li>
+                <li class="flex w-full">
+                  <button class="w-full gap-1 py-2 border-b-1 border-gray-200
+hover:bg-neutral data-active:bg-neutral
+hover:text-white data-active:text-white
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/equipment" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
+                    <div class="w-full p-2 gap-1
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1">
+                      <div class="items-center
+is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
+                        <div class="flex items-center justify-center is-drawer-close:text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fan-icon lucide-fan"><path d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.002l5.412 1.45a6.082 6.082 0 0 1 7.002-8.618l-1.45 5.412a6.082 6.082 0 0 1 8.618 7.002l-5.412-1.45a6.082 6.082 0 0 1-7.002 8.618l1.45-5.412Z"/><path d="M12 12v.01"/></svg></div>
+                        <div class="flex items-center justify-center"><span>Equipment</span></div>
+                      </div>
+                      <div class="flex grow justify-end items-end is-drawer-close:hidden text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                    </div>
+                  </button>
+                </li>
+                <li class="w-full">
+                  <button class="w-full gap-1 py-2 border-b-1 border-gray-200
+hover:bg-neutral data-active:bg-neutral
+hover:text-white data-active:text-white
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/effective-lengths" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
+                    <div class="w-full p-2 gap-1
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1">
+                      <div class="items-center
+is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
+                        <div class="flex items-center justify-center is-drawer-close:text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ruler-dimension-line-icon lucide-ruler-dimension-line"><path d="M10 15v-3"/><path d="M14 15v-3"/><path d="M18 15v-3"/><path d="M2 8V4"/><path d="M22 6H2"/><path d="M22 8V4"/><path d="M6 15v-3"/><rect x="2" y="12" width="20" height="8" rx="2"/></svg></div>
+                        <div class="flex items-center justify-center"><span>T.E.L.</span></div>
+                      </div>
+                      <div class="flex grow justify-end items-end is-drawer-close:hidden text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                    </div>
+                  </button>
+                </li>
+                <li class="w-full">
+                  <button class="w-full gap-1 py-2 border-b-1 border-gray-200
+hover:bg-neutral data-active:bg-neutral
+hover:text-white data-active:text-white
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/friction-rate" hx-push-url="true" hx-target="body" hx-swap="outerHTML" data-active="true">
+                    <div class="w-full p-2 gap-1
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1">
+                      <div class="items-center
+is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
+                        <div class="flex items-center justify-center is-drawer-close:text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-function-icon lucide-square-function"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M9 17c2 0 2.8-1 2.8-2.8V10c0-2 1-3.3 3.2-3"/><path d="M9 11.2h5.7"/></svg></div>
+                        <div class="flex items-center justify-center"><span>Friction Rate</span></div>
+                      </div>
+                      <div class="flex grow justify-end items-end is-drawer-close:hidden text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                    </div>
+                  </button>
+                </li>
+                <li class="w-full">
+                  <button class="w-full gap-1 py-2 border-b-1 border-gray-200
+hover:bg-neutral data-active:bg-neutral
+hover:text-white data-active:text-white
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/duct-sizing" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
+                    <div class="w-full p-2 gap-1
+is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:grid-cols-1">
+                      <div class="items-center
+is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
+is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
+                        <div class="flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg></div>
+                        <div class="flex items-center justify-center"><span>Duct Sizes</span></div>
+                      </div>
+                    </div>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </main>
+      <div class="bottom-0 left-0 bg-error">
+        <footer class="footer sm:footer-horizontal footer-center
+bg-base-300 text-base-content p-4">
+          <aside>
+            <p>Copyright © 2026 - All rights reserved by Michael Housh</p>
+          </aside>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

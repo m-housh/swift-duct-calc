@@ -3,6 +3,7 @@ import Dependencies
 import Elementary
 import Foundation
 import ManualDCore
+import PdfClient
 import ProjectClient
 import Styleguide
 
@@ -12,22 +13,27 @@ extension ViewController.Request {
 
     @Dependency(\.database) var database
     @Dependency(\.projectClient) var projectClient
+    @Dependency(\.pdfClient) var pdfClient
 
     switch route {
     case .test:
       // let projectID = UUID(uuidString: "E796C96C-F527-4753-A00A-EBCF25630663")!
-      return await view {
-        await ResultView {
-
-          // return (
-          //   try await database.projects.getCompletedSteps(projectID),
-          //   try await projectClient.calculateDuctSizes(projectID)
-          // )
-        } onSuccess: {
-          TestPage()
-          // TestPage(trunks: result.trunks, rooms: result.rooms)
-        }
-      }
+      // return await view {
+      //   await ResultView {
+      //
+      //     // return (
+      //     //   try await database.projects.getCompletedSteps(projectID),
+      //     //   try await projectClient.calculateDuctSizes(projectID)
+      //     // )
+      //     return try await pdfClient.html(.mock())
+      //   } onSuccess: {
+      //     $0
+      //     // TestPage()
+      //     // TestPage(trunks: result.trunks, rooms: result.rooms)
+      //   }
+      // }
+      // return try! await pdfClient.html(.mock())
+      return EmptyHTML()
     case .login(let route):
       switch route {
       case .index(let next):
@@ -187,6 +193,12 @@ extension SiteRoute.View.ProjectRoute {
         return await route.renderView(on: request, projectID: projectID)
       case .frictionRate(let route):
         return await route.renderView(on: request, projectID: projectID)
+      case .pdf:
+        // FIX: This should return a pdf to download or be wrapped in a
+        //      result view.
+        // return try! await projectClient.toHTML(projectID)
+        // This get's handled elsewhere because it returns a response, not a view.
+        fatalError()
       case .rooms(let route):
         return await route.renderView(on: request, projectID: projectID)
       }

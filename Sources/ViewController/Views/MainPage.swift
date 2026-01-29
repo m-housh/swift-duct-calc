@@ -50,8 +50,10 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     meta(.content("1024"), .name("og:image:height"))
     meta(.content(keywords), .name(.keywords))
     script(.src("https://unpkg.com/htmx.org@2.0.8")) {}
+    script(.src("/js/htmx-download.js")) {}
     script(.src("/js/main.js")) {}
     link(.rel(.stylesheet), .href("/css/output.css"))
+    link(.rel(.stylesheet), .href("/css/htmx.css"))
     link(
       .rel(.icon),
       .href("/images/favicon.ico"),

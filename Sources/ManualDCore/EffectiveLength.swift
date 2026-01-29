@@ -142,6 +142,44 @@ extension Array where Element == EffectiveLength.Group {
 #if DEBUG
 
   extension EffectiveLength {
+
+    public static func mock(projectID: Project.ID) -> [Self] {
+      @Dependency(\.uuid) var uuid
+      @Dependency(\.date.now) var now
+
+      return [
+        .init(
+          id: uuid(),
+          projectID: projectID,
+          name: "Supply - 1",
+          type: .supply,
+          straightLengths: [10, 25],
+          groups: [
+            .init(group: 1, letter: "a", value: 20),
+            .init(group: 2, letter: "b", value: 30, quantity: 1),
+            .init(group: 3, letter: "a", value: 10, quantity: 1),
+            .init(group: 12, letter: "a", value: 10, quantity: 1),
+          ],
+          createdAt: now,
+          updatedAt: now
+        ),
+        .init(
+          id: uuid(),
+          projectID: projectID,
+          name: "Return - 1",
+          type: .return,
+          straightLengths: [10, 20, 5],
+          groups: [
+            .init(group: 5, letter: "a", value: 10),
+            .init(group: 6, letter: "a", value: 15, quantity: 1),
+            .init(group: 7, letter: "a", value: 20, quantity: 1),
+          ],
+          createdAt: now,
+          updatedAt: now
+        ),
+      ]
+    }
+
     public static let mocks: [Self] = [
       .init(
         id: UUID(0),
