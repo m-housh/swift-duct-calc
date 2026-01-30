@@ -11,12 +11,12 @@ extension Snapshotting where Value == (any HTML), Format == String {
   }
 }
 
-extension Snapshotting where Value == String, Format == String {
-  public static var html: Snapshotting {
-    var snapshotting = SimplySnapshotting.lines
-      .pullback { $0 }
-
-    snapshotting.pathExtension = "html"
-    return snapshotting
-  }
-}
+// extension Snapshotting where Value == String, Format == String {
+//   public static var html: Snapshotting {
+//     var snapshotting = SimplySnapshotting.lines
+//       .pullback { $0 }
+//
+//     snapshotting.pathExtension = "html"
+//     return snapshotting
+//   }
+// }

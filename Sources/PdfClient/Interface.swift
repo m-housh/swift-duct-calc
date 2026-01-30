@@ -32,8 +32,7 @@ public struct PdfClient: Sendable {
   /// - Parameters:
   ///   - request: The project data used to generate the pdf.
   public func generatePdf(request: Request) async throws -> Response {
-    let html = try await self.html(request)
-    return try await self.generatePdf(request.project.id, html)
+    try await self.generatePdf(request.project.id, html(request))
   }
 
 }
@@ -76,17 +75,26 @@ extension PdfClient: DependencyKey {
 }
 
 extension PdfClient {
-  /// Container for the data required to generate a pdf for a given project.
+  /// Represents the data required to generate a pdf for a given project.
   public struct Request: Codable, Equatable, Sendable {
 
+    /// The project we're generating a pdf for.
     public let project: Project
+    /// The rooms in the project.
     public let rooms: [Room]
+    /// The component pressure losses for the project.
     public let componentLosses: [ComponentPressureLoss]
+    /// The calculated duct sizes for the project.
     public let ductSizes: DuctSizes
+    /// The equipment information for the project.
     public let equipmentInfo: EquipmentInfo
+    /// The max supply equivalent length for the project.
     public let maxSupplyTEL: EquivalentLength
+    /// The max return equivalent length for the project.
     public let maxReturnTEL: EquivalentLength
+    /// The calculated design friction rate for the project.
     public let frictionRate: FrictionRate
+    /// The project wide sensible heat ratio.
     public let projectSHR: Double
 
     var totalEquivalentLength: Double {
@@ -116,9 +124,12 @@ extension PdfClient {
     }
   }
 
+  /// Represents the response after generating a pdf.
   public struct Response: Equatable, Sendable {
 
+    /// The path to the html file used to generate the pdf from.
     public let htmlPath: String
+    /// The path to the pdf file.
     public let pdfPath: String
 
     public init(htmlPath: String, pdfPath: String) {

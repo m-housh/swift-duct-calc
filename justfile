@@ -21,3 +21,13 @@ run-docker:
 
 test-docker: (build-docker "docker/Dockerfile.test")
 	@docker run --rm {{docker_image}}:{{docker_tag}} swift test
+
+code-coverage:
+	@llvm-cov report \
+		"$(find $(swift build --show-bin-path) -name '*.xctest')" \
+		-instr-profile=.build/debug/codecov/default.profdata \
+		-ignore-filename-regex=".build|Tests" \
+		-use-color
+
+test:
+	@swift test --enable-code-coverage

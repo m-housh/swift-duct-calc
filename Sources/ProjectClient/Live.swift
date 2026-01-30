@@ -15,14 +15,17 @@ extension ProjectClient: DependencyKey {
     @Dependency(\.fileClient) var fileClient
 
     return .init(
-      calculateDuctSizes: { projectID in
-        try await database.calculateDuctSizes(projectID: projectID).0
-      },
       calculateRoomDuctSizes: { projectID in
-        try await database.calculateRoomDuctSizes(projectID: projectID).0
+        guard let details = try await database.projects.detail(projectID) else {
+          throw ProjectClientError.notFound(.project(projectID))
+        }
+        return try await database.calculateRoomDuctSizes(details: details).rooms
       },
       calculateTrunkDuctSizes: { projectID in
-        try await database.calculateTrunkDuctSizes(projectID: projectID).0
+        guard let details = try await database.projects.detail(projectID) else {
+          throw ProjectClientError.notFound(.project(projectID))
+        }
+        return try await database.calculateTrunkDuctSizes(details: details)
       },
       createProject: { userID, request in
         let project = try await database.projects.create(userID, request)
@@ -57,51 +60,4 @@ extension ProjectClient: DependencyKey {
     )
   }
 
-}
-
-extension DatabaseClient {
-
-  fileprivate func makePdfRequest(_ projectID: Project.ID) async throws -> PdfClient.Request {
-    @Dependency(\.manualD) var manualD
-
-    guard let projectDetails = try await projects.detail(projectID) else {
-      throw ProjectClientError("Project not found. id: \(projectID)")
-    }
-
-    let (ductSizes, shared) = try await calculateDuctSizes(details: projectDetails)
-
-    let frictionRateResponse = try await manualD.frictionRate(details: projectDetails)
-    guard let frictionRate = frictionRateResponse.frictionRate else {
-      throw ProjectClientError("Friction rate not found. id: \(projectID)")
-    }
-
-    return .init(
-      details: projectDetails,
-      ductSizes: ductSizes,
-      shared: shared,
-      frictionRate: frictionRate
-    )
-  }
-
-}
-
-extension PdfClient.Request {
-  init(
-    details: Project.Detail,
-    ductSizes: DuctSizes,
-    shared: DuctSizeSharedRequest,
-    frictionRate: FrictionRate
-  ) {
-    self.init(
-      project: details.project,
-      rooms: details.rooms,
-      componentLosses: details.componentLosses,
-      ductSizes: ductSizes,
-      equipmentInfo: details.equipmentInfo,
-      maxSupplyTEL: shared.maxSupplyLength,
-      maxReturnTEL: shared.maxReturnLenght,
-      frictionRate: frictionRate,
-      projectSHR: shared.projectSHR
-    )
-  }
 }

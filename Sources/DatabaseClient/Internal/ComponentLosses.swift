@@ -3,6 +3,7 @@ import DependenciesMacros
 import Fluent
 import Foundation
 import ManualDCore
+import SQLKit
 
 extension DatabaseClient.ComponentLosses: TestDependencyKey {
   public static let testValue = Self()

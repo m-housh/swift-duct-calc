@@ -87,7 +87,15 @@ let package = Package(
         .product(name: "Vapor", package: "vapor"),
       ]
     ),
-
+    .testTarget(
+      name: "DatabaseClientTests",
+      dependencies: [
+        .target(name: "App"),
+        .target(name: "DatabaseClient"),
+        .product(name: "DependenciesTestSupport", package: "swift-dependencies"),
+        .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
+      ]
+    ),
     .target(
       name: "EnvClient",
       dependencies: [

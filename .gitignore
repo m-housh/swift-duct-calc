@@ -13,3 +13,4 @@ tailwindcss
 *.pdf
 .env
 .env*
+default.profraw

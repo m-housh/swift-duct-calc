@@ -18,9 +18,12 @@ extension DependencyValues {
 /// for the view controller to render views.
 @DependencyClient
 public struct ProjectClient: Sendable {
-  public var calculateDuctSizes: @Sendable (Project.ID) async throws -> DuctSizes
+
+  /// Calculates the room duct sizes for the given project.
   public var calculateRoomDuctSizes:
     @Sendable (Project.ID) async throws -> [DuctSizes.RoomContainer]
+
+  /// Calculates the trunk duct sizes for the given project.
   public var calculateTrunkDuctSizes:
     @Sendable (Project.ID) async throws -> [DuctSizes.TrunkContainer]
 
@@ -28,6 +31,14 @@ public struct ProjectClient: Sendable {
     @Sendable (User.ID, Project.Create) async throws -> CreateProjectResponse
 
   public var frictionRate: @Sendable (Project.ID) async throws -> FrictionRateResponse
+  public var generatePdf: @Sendable (Project.ID) async throws -> Response
+
+  public func calculateDuctSizes(_ projectID: Project.ID) async throws -> DuctSizes {
+    .init(
+      rooms: try await calculateRoomDuctSizes(projectID),
+      trunks: try await calculateTrunkDuctSizes(projectID)
+    )
+  }
 }
 
 extension ProjectClient: TestDependencyKey {

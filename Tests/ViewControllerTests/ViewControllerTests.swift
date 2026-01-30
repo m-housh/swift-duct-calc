@@ -100,6 +100,12 @@ struct ViewControllerTests {
       )
     }
 
+    let mockDuctSizes = DuctSizes.mock(
+      equipmentInfo: equipment,
+      rooms: rooms,
+      trunks: trunks
+    )
+
     try await withDefaultDependencies {
       $0.database.projects.get = { _ in project }
       $0.database.projects.getCompletedSteps = { _ in
@@ -113,8 +119,11 @@ struct ViewControllerTests {
         .init(supply: tels.first, return: tels.last)
       }
       $0.database.componentLosses.fetch = { _ in componentLosses }
-      $0.projectClient.calculateDuctSizes = { _ in
-        .mock(equipmentInfo: equipment, rooms: rooms, trunks: trunks)
+      $0.projectClient.calculateRoomDuctSizes = { _ in
+        mockDuctSizes.rooms
+      }
+      $0.projectClient.calculateTrunkDuctSizes = { _ in
+        mockDuctSizes.trunks
       }
     } operation: {
       @Dependency(\.viewController) var viewController
