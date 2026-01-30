@@ -9,10 +9,10 @@ struct ComponentLossTests {
 
   @Test
   func happyPaths() async throws {
-    try await withTestUser { user in
+    try await withTestUserAndProject { user, project in
       @Dependency(\.database) var database
 
-      let project = try await database.projects.create(user.id, .mock)
+      // let project = try await database.projects.create(user.id, .mock)
 
       let componentLoss = try await database.componentLosses.create(
         .init(projectID: project.id, name: "Test", value: 0.2)

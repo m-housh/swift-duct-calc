@@ -54,6 +54,22 @@ func withTestUser(
   }
 }
 
+/// Set's up the database and a test user for running tests that require a
+/// a user.
+func withTestUserAndProject(
+  setupDependencies: (inout DependencyValues) -> Void = { _ in },
+  operation: (User, Project) async throws -> Void
+) async throws {
+  try await withDatabase(setupDependencies: setupDependencies) {
+    @Dependency(\.database) var database
+    let user = try await database.users.create(
+      .init(email: "testy@example.com", password: "super-secret", confirmPassword: "super-secret")
+    )
+    let project = try await database.projects.create(user.id, .mock)
+    try await operation(user, project)
+  }
+}
+
 extension Project.Create {
 
   static let mock = Self(
