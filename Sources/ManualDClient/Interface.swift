@@ -2,6 +2,7 @@ import Dependencies
 import DependenciesMacros
 import Logging
 import ManualDCore
+import Tagged
 
 extension DependencyValues {
   /// Dependency that performs manual-d duct sizing calculations.
@@ -16,38 +17,61 @@ extension DependencyValues {
 ///
 @DependencyClient
 public struct ManualDClient: Sendable {
-  public var ductSize: @Sendable (CFM, DesignFrictionRate) async throws -> DuctSizeResponse
-  public var frictionRate: @Sendable (FrictionRateRequest) async throws -> FrictionRate
-  public var rectangularSize: @Sendable (RoundSize, Height) async throws -> RectangularSizeResponse
 
+  /// Calculates the duct size for the given cfm and friction rate.
+  public var ductSize: @Sendable (CFM, DesignFrictionRate) async throws -> DuctSize
+  /// Calculates the design friction rate for the given request.
+  public var frictionRate: @Sendable (FrictionRateRequest) async throws -> FrictionRate
+  /// Calculates the equivalent rectangular size for the given round duct and rectangular height.
+  public var rectangularSize: @Sendable (RoundSize, Height) async throws -> RectangularSize
+
+  /// Calculates the duct size for the given cfm and friction rate.
+  ///
+  /// - Paramaters:
+  ///   - designCFM: The design cfm for the duct.
+  ///   - designFrictionRate: The design friction rate for the system.
   public func ductSize(
     cfm designCFM: Int,
     frictionRate designFrictionRate: Double
-  ) async throws -> DuctSizeResponse {
+  ) async throws -> DuctSize {
     try await ductSize(.init(rawValue: designCFM), .init(rawValue: designFrictionRate))
   }
 
+  /// Calculates the duct size for the given cfm and friction rate.
+  ///
+  /// - Paramaters:
+  ///   - designCFM: The design cfm for the duct.
+  ///   - designFrictionRate: The design friction rate for the system.
   public func ductSize(
     cfm designCFM: Double,
     frictionRate designFrictionRate: Double
-  ) async throws -> DuctSizeResponse {
+  ) async throws -> DuctSize {
     try await ductSize(.init(rawValue: Int(designCFM)), .init(rawValue: designFrictionRate))
   }
 
+  /// Calculates the equivalent rectangular size for the given round duct and rectangular height.
+  ///
+  /// - Paramaters:
+  ///   - roundSize: The round duct size.
+  ///   - height: The rectangular height of the duct.
   public func rectangularSize(
     round roundSize: RoundSize,
     height: Height
-  ) async throws -> RectangularSizeResponse {
+  ) async throws -> RectangularSize {
     try await rectangularSize(roundSize, height)
   }
 
+  /// Calculates the equivalent rectangular size for the given round duct and rectangular height.
+  ///
+  /// - Paramaters:
+  ///   - roundSize: The round duct size.
+  ///   - height: The rectangular height of the duct.
   public func rectangularSize(
     round roundSize: Int,
     height: Int
-  ) async throws -> RectangularSizeResponse {
+  ) async throws -> RectangularSize {
     try await rectangularSize(.init(rawValue: roundSize), .init(rawValue: height))
   }
-
 }
 
 extension ManualDClient: TestDependencyKey {
@@ -55,8 +79,20 @@ extension ManualDClient: TestDependencyKey {
 }
 
 extension ManualDClient {
+  /// A name space for tags used by the ManualDClient.
+  public enum Tag {
+    public enum CFM {}
+    public enum DesignFrictionRate {}
+    public enum Height {}
+    public enum Round {}
+  }
 
-  public struct DuctSizeResponse: Codable, Equatable, Sendable {
+  public typealias CFM = Tagged<Tag.CFM, Int>
+  public typealias DesignFrictionRate = Tagged<Tag.DesignFrictionRate, Double>
+  public typealias Height = Tagged<Tag.Height, Int>
+  public typealias RoundSize = Tagged<Tag.Round, Int>
+
+  public struct DuctSize: Codable, Equatable, Sendable {
 
     public let calculatedSize: Double
     public let finalSize: Int
@@ -80,55 +116,26 @@ extension ManualDClient {
 
     public let externalStaticPressure: Double
     public let componentPressureLosses: [ComponentPressureLoss]
-    public let totalEffectiveLength: Int
+    public let totalEquivalentLength: Int
 
     public init(
       externalStaticPressure: Double,
       componentPressureLosses: [ComponentPressureLoss],
-      totalEffectiveLength: Int
+      totalEquivalentLength: Int
     ) {
       self.externalStaticPressure = externalStaticPressure
       self.componentPressureLosses = componentPressureLosses
-      self.totalEffectiveLength = totalEffectiveLength
+      self.totalEquivalentLength = totalEquivalentLength
     }
   }
 
-  public struct FrictionRateResponse: Codable, Equatable, Sendable {
-
-    public let availableStaticPressure: Double
-    public let frictionRate: DesignFrictionRate
-
-    public init(availableStaticPressure: Double, frictionRate: DesignFrictionRate) {
-      self.availableStaticPressure = availableStaticPressure
-      self.frictionRate = frictionRate
-    }
-  }
-
-  // public struct RectangularSizeRequest: Codable, Equatable, Sendable {
-  //   public let roundSize: RoundSize
-  //   public let height: Height
-  //
-  //   public init(round roundSize: RoundSize, height: Height) {
-  //     self.roundSize = roundSize
-  //     self.height = height
-  //   }
-  //
-  //   public init(round roundSize: Int, height: Int) {
-  //     self.init(round: .init(rawValue: roundSize), height: .init(rawValue: height))
-  //   }
-  // }
-
-  public struct RectangularSizeResponse: Codable, Equatable, Sendable {
-    public let height: Height
-    public let width: Width
-
-    public init(height: Height, width: Width) {
-      self.height = height
-      self.width = width
-    }
+  public struct RectangularSize: Codable, Equatable, Sendable {
+    public let height: Int
+    public let width: Int
 
     public init(height: Int, width: Int) {
-      self.init(height: .init(rawValue: height), width: .init(rawValue: width))
+      self.height = height
+      self.width = width
     }
   }
 }

@@ -147,7 +147,6 @@ let package = Package(
         .product(name: "CasePaths", package: "swift-case-paths"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "Fluent", package: "fluent"),
-        .product(name: "Tagged", package: "swift-tagged"),
         .product(name: "URLRouting", package: "swift-url-routing"),
       ]
     ),
@@ -157,6 +156,7 @@ let package = Package(
         .target(name: "ManualDCore"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
+        .product(name: "Tagged", package: "swift-tagged"),
       ]
     ),
     .target(

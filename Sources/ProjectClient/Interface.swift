@@ -15,7 +15,7 @@ extension DependencyValues {
 /// Useful helper utilities for project's.
 ///
 /// This is primarily used for implementing logic required to get the needed data
-/// for the view controller client to render views.
+/// for the view controller to render views.
 @DependencyClient
 public struct ProjectClient: Sendable {
   public var calculateDuctSizes: @Sendable (Project.ID) async throws -> DuctSizes
@@ -28,7 +28,6 @@ public struct ProjectClient: Sendable {
     @Sendable (User.ID, Project.Create) async throws -> CreateProjectResponse
 
   public var frictionRate: @Sendable (Project.ID) async throws -> FrictionRateResponse
-  public var generatePdf: @Sendable (Project.ID) async throws -> Response
 }
 
 extension ProjectClient: TestDependencyKey {

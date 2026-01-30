@@ -245,7 +245,7 @@ extension ManualDClient {
       .init(
         externalStaticPressure: staticPressure,
         componentPressureLosses: componentLosses,
-        totalEffectiveLength: Int(totalEquivalentLength)
+        totalEquivalentLength: Int(totalEquivalentLength)
       )
     )
   }
