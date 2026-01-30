@@ -37,7 +37,9 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
           id: trunk.requireID(),
           projectID: trunk.$project.id,
           type: .init(rawValue: trunk.type)!,
-          rooms: roomProxies
+          rooms: roomProxies,
+          height: trunk.height,
+          name: trunk.name
         )
       },
       delete: { id in
@@ -198,9 +200,6 @@ final class TrunkRoomModel: Model, @unchecked Sendable {
   }
 
   func toDTO() throws -> TrunkSize.RoomProxy {
-    // guard let room = try await RoomModel.find($room.id, on: database) else {
-    //   throw NotFoundError()
-    // }
     return .init(
       room: try room.toDTO(),
       registers: registers
@@ -248,19 +247,6 @@ final class TrunkModel: Model, @unchecked Sendable {
   }
 
   func toDTO() throws -> TrunkSize {
-    // let rooms = try await withThrowingTaskGroup(of: TrunkSize.RoomProxy.self) { group in
-    //   for room in self.rooms {
-    //     group.addTask {
-    //       try await room.toDTO(on: database)
-    //     }
-    //   }
-    //
-    //   return try await group.reduce(into: [TrunkSize.RoomProxy]()) {
-    //     $0.append($1)
-    //   }
-    //
-    // }
-
     let rooms = try rooms.reduce(into: [TrunkSize.RoomProxy]()) {
       $0.append(try $1.toDTO())
     }
@@ -341,16 +327,9 @@ final class TrunkModel: Model, @unchecked Sendable {
 extension Array where Element == TrunkModel {
 
   func toDTO() throws -> [TrunkSize] {
-    // try await withThrowingTaskGroup(of: TrunkSize.self) { group in
-    //   for model in self {
-    //     group.addTask {
-    //       try await model.toDTO(on: database)
-    //     }
-    //   }
 
     return try reduce(into: [TrunkSize]()) {
       $0.append(try $1.toDTO())
     }
   }
-  // }
 }
