@@ -9,7 +9,7 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute.TrunkSizeForm {
       projectID: projectID,
       type: type,
       rooms: makeRooms(logger: logger),
-      height: height,
+      height: height.map { .init(rawValue: $0) },
       name: name
     )
   }
@@ -18,7 +18,7 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute.TrunkSizeForm {
     try .init(
       type: type,
       rooms: makeRooms(logger: logger),
-      height: height,
+      height: height.map { .init(rawValue: $0) },
       name: name
     )
   }

@@ -39,9 +39,12 @@ extension ManualDClient: DependencyKey {
     //   let groupLengths = request.effectiveLengthGroups.totalEffectiveLength
     //   return trunkLengths + runoutLengths + groupLengths
     // },
-    rectangularSize: { request in
-      let width = (Double.pi * (pow(Double(request.roundSize) / 2.0, 2.0))) / Double(request.height)
-      return .init(height: request.height, width: Int(width.rounded(.toNearestOrEven)))
+    rectangularSize: { round, height in
+      let width = (Double.pi * (pow(Double(round.rawValue) / 2.0, 2.0))) / Double(height.rawValue)
+      return .init(
+        height: height,
+        width: .init(rawValue: Int(width.rounded(.toNearestOrEven)))
+      )
     }
   )
 }

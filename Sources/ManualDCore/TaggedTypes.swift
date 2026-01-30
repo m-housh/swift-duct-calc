@@ -1,7 +1,16 @@
 import Tagged
 
-public enum CFMTag {}
-public typealias CFM = Tagged<CFMTag, Int>
+/// A name space for general tag types.
+public enum Tag {
+  public enum CFM {}
+  public enum DesignFrictionRate {}
+  public enum Height {}
+  public enum Round {}
+  public enum Width {}
+}
 
-public enum DesignFrictionRateTag {}
-public typealias DesignFrictionRate = Tagged<DesignFrictionRateTag, Double>
+public typealias CFM = Tagged<Tag.CFM, Int>
+public typealias DesignFrictionRate = Tagged<Tag.DesignFrictionRate, Double>
+public typealias Height = Tagged<Tag.Height, Int>
+public typealias RoundSize = Tagged<Tag.Round, Int>
+public typealias Width = Tagged<Tag.Width, Int>

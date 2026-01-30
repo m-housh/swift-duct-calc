@@ -33,7 +33,7 @@ struct ManualDClientTests {
 
   @Test
   func equivalentRectangularDuct() async throws {
-    let response = try await manualD.rectangularSize(.init(round: 7, height: 8))
+    let response = try await manualD.rectangularSize(round: 7, height: 8)
     #expect(response.height == 8)
     #expect(response.width == 5)
   }

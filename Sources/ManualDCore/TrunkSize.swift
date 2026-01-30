@@ -16,7 +16,7 @@ public struct TrunkSize: Codable, Equatable, Identifiable, Sendable {
   public let rooms: [RoomProxy]
   /// An optional rectangular height used to calculate the equivalent
   /// rectangular size of the trunk.
-  public let height: Int?
+  public let height: Height?
   /// An optional name / label used for identifying the trunk.
   public let name: String?
 
@@ -25,7 +25,7 @@ public struct TrunkSize: Codable, Equatable, Identifiable, Sendable {
     projectID: Project.ID,
     type: TrunkType,
     rooms: [RoomProxy],
-    height: Int? = nil,
+    height: Height? = nil,
     name: String? = nil
   ) {
     self.id = id
@@ -49,7 +49,7 @@ extension TrunkSize {
     public let rooms: [Room.ID: [Int]]
     /// An optional rectangular height used to calculate the equivalent
     /// rectangular size of the trunk.
-    public let height: Int?
+    public let height: Height?
     /// An optional name / label used for identifying the trunk.
     public let name: String?
 
@@ -57,7 +57,7 @@ extension TrunkSize {
       projectID: Project.ID,
       type: TrunkType,
       rooms: [Room.ID: [Int]],
-      height: Int? = nil,
+      height: Height? = nil,
       name: String? = nil
     ) {
       self.projectID = projectID
@@ -79,14 +79,14 @@ extension TrunkSize {
     public let rooms: [Room.ID: [Int]]?
     /// An optional rectangular height used to calculate the equivalent
     /// rectangular size of the trunk.
-    public let height: Int?
+    public let height: Height?
     /// An optional name / label used for identifying the trunk.
     public let name: String?
 
     public init(
       type: TrunkType? = nil,
       rooms: [Room.ID: [Int]]? = nil,
-      height: Int? = nil,
+      height: Height? = nil,
       name: String? = nil
     ) {
       self.type = type

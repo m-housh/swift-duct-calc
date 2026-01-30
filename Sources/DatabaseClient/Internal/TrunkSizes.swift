@@ -103,7 +103,7 @@ extension TrunkSize.Create {
     .init(
       projectID: projectID,
       type: type,
-      height: height,
+      height: height?.rawValue,
       name: name
     )
   }
@@ -270,7 +270,7 @@ final class TrunkModel: Model, @unchecked Sendable {
       projectID: $project.id,
       type: .init(rawValue: type)!,
       rooms: rooms,
-      height: height,
+      height: height.map { .init(rawValue: $0) },
       name: name
     )
 
@@ -283,7 +283,7 @@ final class TrunkModel: Model, @unchecked Sendable {
     if let type = updates.type, type.rawValue != self.type {
       self.type = type.rawValue
     }
-    if let height = updates.height, height != self.height {
+    if let height = updates.height?.rawValue, height != self.height {
       self.height = height
     }
     if let name = updates.name, name != self.name {

@@ -67,7 +67,7 @@ struct TrunkSizeForm: HTML, Sendable {
             "Height",
             .type(.text),
             .name("height"),
-            .value(trunk?.height),
+            .value(trunk?.height?.rawValue),
             .placeholder("8 (Optional)"),
           )
         }

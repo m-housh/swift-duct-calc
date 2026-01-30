@@ -18,8 +18,7 @@ extension DependencyValues {
 public struct ManualDClient: Sendable {
   public var ductSize: @Sendable (CFM, DesignFrictionRate) async throws -> DuctSizeResponse
   public var frictionRate: @Sendable (FrictionRateRequest) async throws -> FrictionRate
-  public var rectangularSize:
-    @Sendable (RectangularSizeRequest) async throws -> RectangularSizeResponse
+  public var rectangularSize: @Sendable (RoundSize, Height) async throws -> RectangularSizeResponse
 
   public func ductSize(
     cfm designCFM: Int,
@@ -34,6 +33,21 @@ public struct ManualDClient: Sendable {
   ) async throws -> DuctSizeResponse {
     try await ductSize(.init(rawValue: Int(designCFM)), .init(rawValue: designFrictionRate))
   }
+
+  public func rectangularSize(
+    round roundSize: RoundSize,
+    height: Height
+  ) async throws -> RectangularSizeResponse {
+    try await rectangularSize(roundSize, height)
+  }
+
+  public func rectangularSize(
+    round roundSize: Int,
+    height: Int
+  ) async throws -> RectangularSizeResponse {
+    try await rectangularSize(.init(rawValue: roundSize), .init(rawValue: height))
+  }
+
 }
 
 extension ManualDClient: TestDependencyKey {
@@ -90,23 +104,31 @@ extension ManualDClient {
     }
   }
 
-  public struct RectangularSizeRequest: Codable, Equatable, Sendable {
-    public let roundSize: Int
-    public let height: Int
-
-    public init(round roundSize: Int, height: Int) {
-      self.roundSize = roundSize
-      self.height = height
-    }
-  }
+  // public struct RectangularSizeRequest: Codable, Equatable, Sendable {
+  //   public let roundSize: RoundSize
+  //   public let height: Height
+  //
+  //   public init(round roundSize: RoundSize, height: Height) {
+  //     self.roundSize = roundSize
+  //     self.height = height
+  //   }
+  //
+  //   public init(round roundSize: Int, height: Int) {
+  //     self.init(round: .init(rawValue: roundSize), height: .init(rawValue: height))
+  //   }
+  // }
 
   public struct RectangularSizeResponse: Codable, Equatable, Sendable {
-    public let height: Int
-    public let width: Int
+    public let height: Height
+    public let width: Width
 
-    public init(height: Int, width: Int) {
+    public init(height: Height, width: Width) {
       self.height = height
       self.width = width
+    }
+
+    public init(height: Int, width: Int) {
+      self.init(height: .init(rawValue: height), width: .init(rawValue: width))
     }
   }
 }

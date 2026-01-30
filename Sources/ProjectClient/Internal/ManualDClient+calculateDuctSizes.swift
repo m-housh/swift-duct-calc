@@ -64,9 +64,10 @@ extension ManualDClient {
 
         if let rectangularSize {
           let response = try await self.rectangularSize(
-            .init(round: sizes.finalSize, height: rectangularSize.height)
+            round: sizes.finalSize,
+            height: rectangularSize.height
           )
-          rectangularWidth = response.width
+          rectangularWidth = response.width.rawValue
         }
 
         retval.append(
@@ -118,9 +119,10 @@ extension ManualDClient {
       var width: Int? = nil
       if let height = trunk.height {
         let rectangularSize = try await self.rectangularSize(
-          .init(round: sizes.finalSize, height: height)
+          round: .init(rawValue: sizes.finalSize),
+          height: height
         )
-        width = rectangularSize.width
+        width = rectangularSize.width.rawValue
       }
 
       retval.append(
@@ -129,7 +131,7 @@ extension ManualDClient {
           ductSize: .init(
             designCFM: designCFM,
             sizes: sizes,
-            height: trunk.height,
+            height: trunk.height?.rawValue,
             width: width
           )
         )
