@@ -100,8 +100,6 @@ extension SiteRoute {
 
   fileprivate func middleware() -> [any Middleware]? {
     switch self {
-    case .api:
-      return nil
     case .health:
       return nil
     case .view(let route):
@@ -117,13 +115,10 @@ private func siteHandler(
   request: Request,
   route: SiteRoute
 ) async throws -> any AsyncResponseEncodable {
-  @Dependency(\.apiController) var apiController
   @Dependency(\.viewController) var viewController
   @Dependency(\.projectClient) var projectClient
 
   switch route {
-  case .api(let route):
-    return try await apiController.respond(route, request: request)
   case .health:
     return HTTPStatus.ok
   // Generating a pdf return's a `Response` instead of `HTML` like other views, so we

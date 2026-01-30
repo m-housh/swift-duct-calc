@@ -9,13 +9,6 @@ extension HTMLAttribute where Tag: HTMLTrait.Attributes.href {
   }
 }
 
-extension HTMLAttribute where Tag == HTMLTag.form {
-
-  public static func action(route: SiteRoute.View) -> Self {
-    action(SiteRoute.View.router.path(for: route))
-  }
-}
-
 extension HTMLAttribute where Tag == HTMLTag.input {
 
   public static func value(_ string: String?) -> Self {
@@ -42,9 +35,6 @@ extension HTMLAttribute where Tag == HTMLTag.button {
 }
 
 extension HTML where Tag: HTMLTrait.Attributes.Global {
-  public func badge() -> _AttributedElement<Self> {
-    attributes(.class("badge badge-lg badge-outline"))
-  }
 
   public func hidden(when shouldHide: Bool) -> _AttributedElement<Self> {
     attributes(.class("hidden"), when: shouldHide)

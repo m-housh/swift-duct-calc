@@ -6,7 +6,6 @@ let package = Package(
   name: "swift-manual-d",
   products: [
     .executable(name: "App", targets: ["App"]),
-    .library(name: "ApiController", targets: ["ApiController"]),
     .library(name: "AuthClient", targets: ["AuthClient"]),
     .library(name: "DatabaseClient", targets: ["DatabaseClient"]),
     .library(name: "EnvClient", targets: ["EnvClient"]),
@@ -38,7 +37,6 @@ let package = Package(
     .executableTarget(
       name: "App",
       dependencies: [
-        .target(name: "ApiController"),
         .target(name: "AuthClient"),
         .target(name: "DatabaseClient"),
         .target(name: "ViewController"),
@@ -50,22 +48,6 @@ let package = Package(
         .product(name: "NIOPosix", package: "swift-nio"),
         .product(name: "VaporElementary", package: "vapor-elementary"),
         .product(name: "VaporRouting", package: "vapor-routing"),
-      ]
-    ),
-    .target(
-      name: "ApiController",
-      dependencies: [
-        .target(name: "DatabaseClient"),
-        .target(name: "ManualDCore"),
-        .product(name: "Dependencies", package: "swift-dependencies"),
-        .product(name: "DependenciesMacros", package: "swift-dependencies"),
-        .product(name: "Vapor", package: "vapor"),
-      ]
-    ),
-    .testTarget(
-      name: "ApiRouteTests",
-      dependencies: [
-        .target(name: "ManualDCore")
       ]
     ),
     .target(

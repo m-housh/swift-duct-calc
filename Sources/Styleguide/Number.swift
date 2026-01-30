@@ -6,15 +6,6 @@ public struct Number: HTML, Sendable {
   let fractionDigits: Int
   let value: Double
 
-  // private var formatter: NumberFormatter {
-  //   let formatter = NumberFormatter()
-  //   formatter.maximumFractionDigits = fractionDigits
-  //   formatter.numberStyle = .decimal
-  //   formatter.groupingSize = 3
-  //   formatter.groupingSeparator = ","
-  //   return formatter
-  // }
-
   public init(
     _ value: Double,
     digits fractionDigits: Int = 2

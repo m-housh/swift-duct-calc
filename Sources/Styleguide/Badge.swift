@@ -27,11 +27,4 @@ extension Badge where Inner == Number {
     self.inner = Number(number, digits: digits)
   }
 
-  public init<T>(number: Tagged<T, Int>) {
-    self.inner = Number(number.rawValue)
-  }
-
-  public init<T>(number: Tagged<T, Double>, digits: Int = 2) {
-    self.inner = Number(number.rawValue, digits: digits)
-  }
 }
