@@ -21,28 +21,7 @@ extension DatabaseClient.Projects: TestDependencyKey {
         try await model.delete(on: database)
       },
       detail: { id in
-        guard
-          let model = try await ProjectModel.query(on: database)
-            .with(\.$componentLosses)
-            .with(\.$equipment)
-            .with(\.$equivalentLengths)
-            .with(\.$rooms)
-            .with(
-              \.$trunks,
-              { trunk in
-                trunk.with(
-                  \.$rooms,
-                  {
-                    $0.with(\.$room)
-                  }
-                )
-              }
-            )
-            .filter(\.$id == id)
-            .first()
-        else {
-          throw NotFoundError()
-        }
+        let model = try await ProjectModel.fetchDetail(for: id, on: database)
 
         // TODO: Different error ??
         guard let equipmentInfo = model.equipment else { return nil }
@@ -62,44 +41,25 @@ extension DatabaseClient.Projects: TestDependencyKey {
         try await ProjectModel.find(id, on: database).map { try $0.toDTO() }
       },
       getCompletedSteps: { id in
-        let roomsCount = try await RoomModel.query(on: database)
-          .with(\.$project)
-          .filter(\.$project.$id == id)
-          .count()
-
-        let equivalentLengths = try await EffectiveLengthModel.query(on: database)
-          .with(\.$project)
-          .filter(\.$project.$id == id)
-          .all()
-
+        let model = try await ProjectModel.fetchDetail(for: id, on: database)
         var equivalentLengthsCompleted = false
 
-        if equivalentLengths.filter({ $0.type == "supply" }).first != nil,
-          equivalentLengths.filter({ $0.type == "return" }).first != nil
+        if model.equivalentLengths.filter({ $0.type == "supply" }).first != nil,
+          model.equivalentLengths.filter({ $0.type == "return" }).first != nil
         {
           equivalentLengthsCompleted = true
         }
 
-        let componentLosses = try await ComponentLossModel.query(on: database)
-          .with(\.$project)
-          .filter(\.$project.$id == id)
-          .count()
-
-        let equipmentInfo = try await EquipmentModel.query(on: database)
-          .with(\.$project)
-          .filter(\.$project.$id == id)
-          .first()
-
         return .init(
-          equipmentInfo: equipmentInfo != nil,
-          rooms: roomsCount > 0,
+          equipmentInfo: model.equipment != nil,
+          rooms: model.rooms.count > 0,
           equivalentLength: equivalentLengthsCompleted,
-          frictionRate: componentLosses > 0
+          frictionRate: model.componentLosses.count > 0
         )
       },
       getSensibleHeatRatio: { id in
         guard
-          let shr = try await ProjectModel.query(on: database)
+          let model = try await ProjectModel.query(on: database)
             .field(\.$id)
             .field(\.$sensibleHeatRatio)
             .filter(\.$id == id)
@@ -107,7 +67,7 @@ extension DatabaseClient.Projects: TestDependencyKey {
         else {
           throw NotFoundError()
         }
-        return shr.sensibleHeatRatio
+        return model.sensibleHeatRatio
       },
       fetch: { userID, request in
         try await ProjectModel.query(on: database)
@@ -227,7 +187,7 @@ extension Project {
         .field("sensibleHeatRatio", .double)
         .field("createdAt", .datetime)
         .field("updatedAt", .datetime)
-        .field("userID", .uuid, .required, .references(UserModel.schema, "id"))
+        .field("userID", .uuid, .required, .references(UserModel.schema, "id", onDelete: .cascade))
         .unique(on: "userID", "name")
         .create()
     }
@@ -349,5 +309,36 @@ final class ProjectModel: Model, @unchecked Sendable {
     {
       self.sensibleHeatRatio = sensibleHeatRatio
     }
+  }
+
+  /// Returns a ``ProjectModel`` with all the relations eagerly loaded.
+  static func fetchDetail(
+    for projectID: Project.ID,
+    on database: any Database
+  ) async throws -> ProjectModel {
+    guard
+      let model =
+        try await ProjectModel.query(on: database)
+        .with(\.$componentLosses)
+        .with(\.$equipment)
+        .with(\.$equivalentLengths)
+        .with(\.$rooms)
+        .with(
+          \.$trunks,
+          { trunk in
+            trunk.with(
+              \.$rooms,
+              {
+                $0.with(\.$room)
+              }
+            )
+          }
+        )
+        .filter(\.$id == projectID)
+        .first()
+    else {
+      throw NotFoundError()
+    }
+    return model
   }
 }

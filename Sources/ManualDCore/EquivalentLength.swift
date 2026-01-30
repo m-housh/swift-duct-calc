@@ -160,15 +160,15 @@ extension EquivalentLength {
     /// The longest return equivalent length.
     public let `return`: EquivalentLength?
 
+    public init(supply: EquivalentLength? = nil, return: EquivalentLength? = nil) {
+      self.supply = supply
+      self.return = `return`
+    }
+
     public var totalEquivalentLength: Double? {
       guard let supply else { return nil }
       guard let `return` else { return nil }
       return supply.totalEquivalentLength + `return`.totalEquivalentLength
-    }
-
-    public init(supply: EquivalentLength? = nil, return: EquivalentLength? = nil) {
-      self.supply = supply
-      self.return = `return`
     }
   }
 }

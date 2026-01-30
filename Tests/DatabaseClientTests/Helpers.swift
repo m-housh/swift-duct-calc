@@ -4,10 +4,11 @@ import Dependencies
 import Fluent
 import FluentSQLiteDriver
 import Foundation
+import ManualDCore
 import NIO
 import Vapor
 
-// Helper to create an in-memory database for testing.
+// Helper to create an in-memory database used for testing.
 func withDatabase(
   setupDependencies: (inout DependencyValues) -> Void = { _ in },
   operation: () async throws -> Void
@@ -36,4 +37,19 @@ func withDatabase(
     throw error
   }
 
+}
+
+/// Set's up the database and a test user for running tests that require a
+/// a user.
+func withTestUser(
+  setupDependencies: (inout DependencyValues) -> Void = { _ in },
+  operation: (User) async throws -> Void
+) async throws {
+  try await withDatabase(setupDependencies: setupDependencies) {
+    @Dependency(\.database.users) var users
+    let user = try await users.create(
+      .init(email: "testy@example.com", password: "super-secret", confirmPassword: "super-secret")
+    )
+    try await operation(user)
+  }
 }

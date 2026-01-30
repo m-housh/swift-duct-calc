@@ -29,5 +29,5 @@ code-coverage:
 		-ignore-filename-regex=".build|Tests" \
 		-use-color
 
-test:
-	@swift test --enable-code-coverage
+test *ARGS:
+	@swift test --enable-code-coverage {{ARGS}}

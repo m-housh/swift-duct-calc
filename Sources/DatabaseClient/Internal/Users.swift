@@ -33,6 +33,11 @@ extension DatabaseClient.Users: TestDependencyKey {
           throw NotFoundError()
         }
 
+        // Verify the password matches the user's hashed password.
+        guard try user.verifyPassword(request.password) else {
+          throw Abort(.unauthorized)
+        }
+
         let token: User.Token
 
         // Check if there's a user token
