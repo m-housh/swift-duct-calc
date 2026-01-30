@@ -152,15 +152,3 @@ struct ProjectTests {
   }
 
 }
-
-extension Project.Create {
-
-  static let mock = Self(
-    name: "Testy McTestface",
-    streetAddress: "1234 Sesame St",
-    city: "Nowhere",
-    state: "MN",
-    zipCode: "55555",
-    sensibleHeatRatio: 0.83
-  )
-}
