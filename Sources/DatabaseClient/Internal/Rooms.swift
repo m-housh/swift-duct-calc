@@ -27,6 +27,9 @@ extension DatabaseClient.Rooms: TestDependencyKey {
         model.rectangularSizes?.removeAll {
           $0.id == rectangularDuctID
         }
+        if model.rectangularSizes?.count == 0 {
+          model.rectangularSizes = nil
+        }
         if model.hasChanges {
           try await model.save(on: database)
         }
