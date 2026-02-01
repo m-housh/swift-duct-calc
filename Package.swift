@@ -32,6 +32,7 @@ let package = Package(
     .package(url: "https://github.com/elementary-swift/elementary.git", from: "0.6.0"),
     .package(url: "https://github.com/elementary-swift/elementary-htmx.git", from: "0.5.0"),
     .package(url: "https://github.com/vapor-community/vapor-elementary.git", from: "0.1.0"),
+    .package(url: "https://github.com/m-housh/swift-validations.git", from: "0.1.0"),
   ],
   targets: [
     .executableTarget(
@@ -67,6 +68,7 @@ let package = Package(
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
         .product(name: "Fluent", package: "fluent"),
         .product(name: "Vapor", package: "vapor"),
+        .product(name: "Validations", package: "swift-validations"),
       ]
     ),
     .testTarget(

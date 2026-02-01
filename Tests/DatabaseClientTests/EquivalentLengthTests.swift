@@ -1,8 +1,9 @@
-import DatabaseClient
 import Dependencies
 import Foundation
 import ManualDCore
 import Testing
+
+@testable import DatabaseClient
 
 @Suite
 struct EquivalentLengthTests {
@@ -74,6 +75,49 @@ struct EquivalentLengthTests {
       await #expect(throws: NotFoundError.self) {
         try await equivalentLengths.update(UUID(0), .init())
       }
+    }
+  }
+
+  @Test(
+    arguments: [
+      EquivalentLength.Create(
+        projectID: UUID(0), name: "", type: .return, straightLengths: [], groups: []
+      ),
+      EquivalentLength.Create(
+        projectID: UUID(0), name: "Testy", type: .return, straightLengths: [-1, 1], groups: []
+      ),
+      EquivalentLength.Create(
+        projectID: UUID(0), name: "Testy", type: .return, straightLengths: [1, -1], groups: []
+      ),
+      EquivalentLength.Create(
+        projectID: UUID(0), name: "Testy", type: .return, straightLengths: [1, 1],
+        groups: [
+          .init(group: -1, letter: "a", value: 1.0, quantity: 1)
+        ]
+      ),
+      EquivalentLength.Create(
+        projectID: UUID(0), name: "Testy", type: .return, straightLengths: [1, 1],
+        groups: [
+          .init(group: 1, letter: "1", value: 1.0, quantity: 1)
+        ]
+      ),
+      EquivalentLength.Create(
+        projectID: UUID(0), name: "Testy", type: .return, straightLengths: [1, 1],
+        groups: [
+          .init(group: 1, letter: "a", value: -1.0, quantity: 1)
+        ]
+      ),
+      EquivalentLength.Create(
+        projectID: UUID(0), name: "Testy", type: .return, straightLengths: [1, 1],
+        groups: [
+          .init(group: 1, letter: "a", value: 1.0, quantity: -1)
+        ]
+      ),
+    ]
+  )
+  func validations(model: EquivalentLength.Create) {
+    #expect(throws: (any Error).self) {
+      try model.toModel().validate()
     }
   }
 }

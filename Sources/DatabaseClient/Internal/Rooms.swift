@@ -3,6 +3,7 @@ import DependenciesMacros
 import Fluent
 import Foundation
 import ManualDCore
+import Validations
 
 extension DatabaseClient.Rooms: TestDependencyKey {
   public static let testValue = Self()
@@ -11,7 +12,7 @@ extension DatabaseClient.Rooms: TestDependencyKey {
     .init(
       create: { request in
         let model = try request.toModel()
-        try await model.save(on: database)
+        try await model.validateAndSave(on: database)
         return try model.toDTO()
       },
       delete: { id in
@@ -31,7 +32,7 @@ extension DatabaseClient.Rooms: TestDependencyKey {
           model.rectangularSizes = nil
         }
         if model.hasChanges {
-          try await model.save(on: database)
+          try await model.validateAndSave(on: database)
         }
         return try model.toDTO()
       },
@@ -50,11 +51,9 @@ extension DatabaseClient.Rooms: TestDependencyKey {
         guard let model = try await RoomModel.find(id, on: database) else {
           throw NotFoundError()
         }
-
-        try updates.validate()
         model.applyUpdates(updates)
         if model.hasChanges {
-          try await model.save(on: database)
+          try await model.validateAndSave(on: database)
         }
         return try model.toDTO()
       },
@@ -77,8 +76,7 @@ extension DatabaseClient.Rooms: TestDependencyKey {
 
 extension Room.Create {
 
-  func toModel() throws(ValidationError) -> RoomModel {
-    try validate()
+  func toModel() throws -> RoomModel {
     return .init(
       name: name,
       heatingLoad: heatingLoad,
@@ -87,57 +85,6 @@ extension Room.Create {
       registerCount: registerCount,
       projectID: projectID
     )
-  }
-
-  func validate() throws(ValidationError) {
-    guard !name.isEmpty else {
-      throw ValidationError("Room name should not be empty.")
-    }
-    guard heatingLoad >= 0 else {
-      throw ValidationError("Room heating load should not be less than 0.")
-    }
-    guard coolingTotal >= 0 else {
-      throw ValidationError("Room cooling total should not be less than 0.")
-    }
-    if let coolingSensible {
-      guard coolingSensible >= 0 else {
-        throw ValidationError("Room cooling sensible should not be less than 0.")
-      }
-    }
-    guard registerCount >= 1 else {
-      throw ValidationError("Room cooling sensible should not be less than 1.")
-    }
-  }
-}
-
-extension Room.Update {
-
-  func validate() throws(ValidationError) {
-    if let name {
-      guard !name.isEmpty else {
-        throw ValidationError("Room name should not be empty.")
-      }
-    }
-    if let heatingLoad {
-      guard heatingLoad >= 0 else {
-        throw ValidationError("Room heating load should not be less than 0.")
-      }
-    }
-    if let coolingTotal {
-      guard coolingTotal >= 0 else {
-        throw ValidationError("Room cooling total should not be less than 0.")
-      }
-    }
-    if let coolingSensible {
-      guard coolingSensible >= 0 else {
-        throw ValidationError("Room cooling sensible should not be less than 0.")
-      }
-    }
-    if let registerCount {
-      guard registerCount >= 1 else {
-        throw ValidationError("Room cooling sensible should not be less than 1.")
-      }
-    }
   }
 }
 
@@ -169,7 +116,7 @@ extension Room {
   }
 }
 
-final class RoomModel: Model, @unchecked Sendable {
+final class RoomModel: Model, @unchecked Sendable, Validatable {
 
   static let schema = "room"
 
@@ -267,4 +214,38 @@ final class RoomModel: Model, @unchecked Sendable {
 
   }
 
+  var body: some Validation<RoomModel> {
+    Validator.accumulating {
+      Validator.validate(\.name, with: .notEmpty())
+        .errorLabel("Name", inline: true)
+
+      Validator.validate(\.heatingLoad, with: .greaterThanOrEquals(0))
+        .errorLabel("Heating Load", inline: true)
+
+      Validator.validate(\.coolingTotal, with: .greaterThanOrEquals(0))
+        .errorLabel("Cooling Total", inline: true)
+
+      Validator.validate(\.coolingSensible, with: Double.greaterThanOrEquals(0).optional())
+        .errorLabel("Cooling Sensible", inline: true)
+
+      Validator.validate(\.registerCount, with: .greaterThanOrEquals(1))
+        .errorLabel("Register Count", inline: true)
+
+      Validator.validate(\.rectangularSizes)
+
+    }
+  }
+}
+
+extension Room.RectangularSize: Validatable {
+
+  public var body: some Validation<Self> {
+    Validator.accumulating {
+      Validator.validate(\.register, with: Int.greaterThanOrEquals(1).optional())
+        .errorLabel("Register", inline: true)
+
+      Validator.validate(\.height, with: Int.greaterThanOrEquals(1))
+        .errorLabel("Height", inline: true)
+    }
+  }
 }

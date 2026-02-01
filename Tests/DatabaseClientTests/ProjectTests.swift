@@ -1,5 +1,4 @@
 import Dependencies
-import DependenciesTestSupport
 import Fluent
 import FluentSQLiteDriver
 import ManualDCore
@@ -151,4 +150,55 @@ struct ProjectTests {
     }
   }
 
+  @Test(
+    arguments: [
+      ProjectModel(
+        name: "", streetAddress: "1234 Sesame St", city: "Nowhere", state: "OH", zipCode: "55555",
+        sensibleHeatRatio: nil, userID: UUID(0)
+      ),
+      ProjectModel(
+        name: "Testy", streetAddress: "", city: "Nowhere", state: "OH", zipCode: "55555",
+        sensibleHeatRatio: nil, userID: UUID(0)
+      ),
+      ProjectModel(
+        name: "Testy", streetAddress: "1234 Sesame St", city: "", state: "OH", zipCode: "55555",
+        sensibleHeatRatio: nil, userID: UUID(0)
+      ),
+      ProjectModel(
+        name: "Testy", streetAddress: "1234 Sesame St", city: "Nowhere", state: "",
+        zipCode: "55555",
+        sensibleHeatRatio: nil, userID: UUID(0)
+      ),
+      ProjectModel(
+        name: "Testy", streetAddress: "1234 Sesame St", city: "Nowhere", state: "OH",
+        zipCode: "",
+        sensibleHeatRatio: nil, userID: UUID(0)
+      ),
+      ProjectModel(
+        name: "Testy", streetAddress: "1234 Sesame St", city: "Nowhere", state: "OH",
+        zipCode: "55555",
+        sensibleHeatRatio: -1, userID: UUID(0)
+      ),
+      ProjectModel(
+        name: "Testy", streetAddress: "1234 Sesame St", city: "Nowhere", state: "OH",
+        zipCode: "55555",
+        sensibleHeatRatio: 1.1, userID: UUID(0)
+      ),
+    ]
+  )
+  func validations(model: ProjectModel) {
+    var errors = [String]()
+
+    #expect(throws: (any Error).self) {
+      do {
+        try model.validate()
+      } catch {
+        // Just checking to make sure I'm not testing the same error over and over /
+        // making sure I've reset to good values / only testing one property at a time.
+        #expect(!errors.contains("\(error)"))
+        errors.append("\(error)")
+        throw error
+      }
+    }
+  }
 }

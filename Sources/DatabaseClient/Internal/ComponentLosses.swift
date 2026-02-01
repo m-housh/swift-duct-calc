@@ -4,6 +4,7 @@ import Fluent
 import Foundation
 import ManualDCore
 import SQLKit
+import Validations
 
 extension DatabaseClient.ComponentLosses: TestDependencyKey {
   public static let testValue = Self()
@@ -13,8 +14,8 @@ extension DatabaseClient.ComponentLosses {
   public static func live(database: any Database) -> Self {
     .init(
       create: { request in
-        let model = try request.toModel()
-        try await model.save(on: database)
+        let model = request.toModel()
+        try await model.validateAndSave(on: database)
         return try model.toDTO()
       },
       delete: { id in
@@ -35,13 +36,13 @@ extension DatabaseClient.ComponentLosses {
         try await ComponentLossModel.find(id, on: database).map { try $0.toDTO() }
       },
       update: { id, updates in
-        try updates.validate()
+        // try updates.validate()
         guard let model = try await ComponentLossModel.find(id, on: database) else {
           throw NotFoundError()
         }
         model.applyUpdates(updates)
         if model.hasChanges {
-          try await model.save(on: database)
+          try await model.validateAndSave(on: database)
         }
         return try model.toDTO()
       }
@@ -51,39 +52,8 @@ extension DatabaseClient.ComponentLosses {
 
 extension ComponentPressureLoss.Create {
 
-  func toModel() throws(ValidationError) -> ComponentLossModel {
-    try validate()
+  func toModel() -> ComponentLossModel {
     return .init(name: name, value: value, projectID: projectID)
-  }
-
-  func validate() throws(ValidationError) {
-    guard !name.isEmpty else {
-      throw ValidationError("Component loss name should not be empty.")
-    }
-    guard value > 0 else {
-      throw ValidationError("Component loss value should be greater than 0.")
-    }
-    guard value < 1.0 else {
-      throw ValidationError("Component loss value should be less than 1.0.")
-    }
-  }
-}
-
-extension ComponentPressureLoss.Update {
-  func validate() throws(ValidationError) {
-    if let name {
-      guard !name.isEmpty else {
-        throw ValidationError("Component loss name should not be empty.")
-      }
-    }
-    if let value {
-      guard value > 0 else {
-        throw ValidationError("Component loss value should be greater than 0.")
-      }
-      guard value < 1.0 else {
-        throw ValidationError("Component loss value should be less than 1.0.")
-      }
-    }
   }
 }
 
@@ -168,6 +138,22 @@ final class ComponentLossModel: Model, @unchecked Sendable {
     }
     if let value = updates.value, value != self.value {
       self.value = value
+    }
+  }
+}
+
+extension ComponentLossModel: Validatable {
+
+  var body: some Validation<ComponentLossModel> {
+    Validator.accumulating {
+      Validator.validate(\.name, with: .notEmpty())
+        .errorLabel("Name", inline: true)
+
+      Validator.validate(\.value) {
+        Double.greaterThan(0.0)
+        Double.lessThanOrEquals(1.0)
+      }
+      .errorLabel("Value", inline: true)
     }
   }
 }

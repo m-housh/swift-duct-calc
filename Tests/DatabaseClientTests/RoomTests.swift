@@ -1,8 +1,10 @@
-import DatabaseClient
 import Dependencies
 import Foundation
 import ManualDCore
 import Testing
+import Validations
+
+@testable import DatabaseClient
 
 @Suite
 struct RoomTests {
@@ -63,4 +65,124 @@ struct RoomTests {
       }
     }
   }
+
+  @Test(
+    arguments: [
+      Room.Create(
+        projectID: UUID(0),
+        name: "",
+        heatingLoad: 12345,
+        coolingTotal: 12344,
+        coolingSensible: nil,
+        registerCount: 1
+      ),
+      Room.Create(
+        projectID: UUID(0),
+        name: "Test",
+        heatingLoad: -12345,
+        coolingTotal: 12344,
+        coolingSensible: nil,
+        registerCount: 1
+      ),
+      Room.Create(
+        projectID: UUID(0),
+        name: "Test",
+        heatingLoad: 12345,
+        coolingTotal: -12344,
+        coolingSensible: nil,
+        registerCount: 1
+      ),
+      Room.Create(
+        projectID: UUID(0),
+        name: "Test",
+        heatingLoad: 12345,
+        coolingTotal: 12344,
+        coolingSensible: -123,
+        registerCount: 1
+      ),
+      Room.Create(
+        projectID: UUID(0),
+        name: "Test",
+        heatingLoad: 12345,
+        coolingTotal: 12344,
+        coolingSensible: nil,
+        registerCount: -1
+      ),
+      Room.Create(
+        projectID: UUID(0),
+        name: "",
+        heatingLoad: -12345,
+        coolingTotal: -12344,
+        coolingSensible: -1,
+        registerCount: -1
+      ),
+    ]
+  )
+  func validations(room: Room.Create) throws {
+    #expect(throws: (any Error).self) {
+      // do {
+      try room.toModel().validate()
+      // } catch {
+      //   print("\(error)")
+      //   throw error
+      // }
+    }
+  }
+
+  // @Test(
+  //   arguments: [
+  //     Room.Update(
+  //       name: "",
+  //       heatingLoad: 12345,
+  //       coolingTotal: 12344,
+  //       coolingSensible: nil,
+  //       registerCount: 1
+  //     ),
+  //     Room.Update(
+  //       name: "Test",
+  //       heatingLoad: -12345,
+  //       coolingTotal: 12344,
+  //       coolingSensible: nil,
+  //       registerCount: 1
+  //     ),
+  //     Room.Update(
+  //       name: "Test",
+  //       heatingLoad: 12345,
+  //       coolingTotal: -12344,
+  //       coolingSensible: nil,
+  //       registerCount: 1
+  //     ),
+  //     Room.Update(
+  //       name: "Test",
+  //       heatingLoad: 12345,
+  //       coolingTotal: 12344,
+  //       coolingSensible: -123,
+  //       registerCount: 1
+  //     ),
+  //     Room.Update(
+  //       name: "Test",
+  //       heatingLoad: 12345,
+  //       coolingTotal: 12344,
+  //       coolingSensible: nil,
+  //       registerCount: -1
+  //     ),
+  //     Room.Update(
+  //       name: "",
+  //       heatingLoad: -12345,
+  //       coolingTotal: -12344,
+  //       coolingSensible: -1,
+  //       registerCount: -1
+  //     ),
+  //   ]
+  // )
+  // func updateValidations(room: Room.Update) throws {
+  //   #expect(throws: (any Error).self) {
+  //     // do {
+  //     try room.validate()
+  //     // } catch {
+  //     //   print("\(error)")
+  //     //   throw error
+  //     // }
+  //   }
+  // }
 }

@@ -1,8 +1,9 @@
-import DatabaseClient
 import Dependencies
 import Foundation
 import ManualDCore
 import Testing
+
+@testable import DatabaseClient
 
 @Suite
 struct ComponentLossTests {
@@ -48,6 +49,20 @@ struct ComponentLossTests {
       await #expect(throws: NotFoundError.self) {
         try await componentLosses.update(UUID(0), .init(name: "Updated"))
       }
+    }
+  }
+
+  @Test(
+    arguments: [
+      ComponentLossModel(name: "", value: 0.2, projectID: UUID(0)),
+      ComponentLossModel(name: "Foo", value: -0.2, projectID: UUID(0)),
+      ComponentLossModel(name: "Foo", value: 1.2, projectID: UUID(0)),
+      ComponentLossModel(name: "", value: -0.2, projectID: UUID(0)),
+    ]
+  )
+  func validations(model: ComponentLossModel) {
+    #expect(throws: (any Error).self) {
+      try model.validate()
     }
   }
 }

@@ -1,8 +1,9 @@
-import DatabaseClient
 import Dependencies
 import Foundation
 import ManualDCore
 import Testing
+
+@testable import DatabaseClient
 
 @Suite
 struct TrunkSizeTests {
@@ -62,6 +63,31 @@ struct TrunkSizeTests {
       await #expect(throws: NotFoundError.self) {
         try await trunks.update(UUID(0), .init(type: .return))
       }
+    }
+  }
+
+  @Test(
+    arguments: [
+      TrunkModel(projectID: UUID(0), type: .return, height: 8, name: ""),
+      TrunkModel(projectID: UUID(0), type: .return, height: -8, name: "Test"),
+    ]
+  )
+  func validations(model: TrunkModel) {
+    #expect(throws: (any Error).self) {
+      try model.validate()
+    }
+  }
+
+  @Test(
+    arguments: [
+      TrunkRoomModel(trunkID: UUID(0), roomID: UUID(0), registers: [-1, 1], type: .return),
+      TrunkRoomModel(trunkID: UUID(0), roomID: UUID(0), registers: [1, -1], type: .return),
+      TrunkRoomModel(trunkID: UUID(0), roomID: UUID(0), registers: [], type: .return),
+    ]
+  )
+  func trunkRoomModelValidations(model: TrunkRoomModel) {
+    #expect(throws: (any Error).self) {
+      try model.validate()
     }
   }
 }

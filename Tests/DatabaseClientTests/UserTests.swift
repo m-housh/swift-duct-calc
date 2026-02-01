@@ -1,4 +1,3 @@
-import DatabaseClient
 import Dependencies
 import Foundation
 import ManualDCore
@@ -38,26 +37,6 @@ struct UserDatabaseTests {
 
       let shouldBeNilUser = try await users.get(user.id)
       #expect(shouldBeNilUser == nil)
-    }
-  }
-
-  @Test
-  func createUserFails() async throws {
-    try await withDatabase {
-      @Dependency(\.database.users) var users
-
-      await #expect(throws: ValidationError.self) {
-        try await users.create(.init(email: "", password: "", confirmPassword: ""))
-      }
-
-      await #expect(throws: ValidationError.self) {
-        try await users.create(.init(email: "testy@example.com", password: "", confirmPassword: ""))
-      }
-
-      await #expect(throws: ValidationError.self) {
-        try await users.create(
-          .init(email: "testy@example.com", password: "super-secret", confirmPassword: ""))
-      }
     }
   }
 
@@ -148,4 +127,64 @@ struct UserDatabaseTests {
     }
   }
 
+  @Test(
+    arguments: [
+      UserProfileModel(
+        userID: UUID(0), firstName: "", lastName: "McTestface", companyName: "Acme Co.",
+        streetAddress: "1234 Sesame St", city: "Nowhere", state: "CA", zipCode: "55555"
+      ),
+      UserProfileModel(
+        userID: UUID(0), firstName: "Testy", lastName: "", companyName: "Acme Co.",
+        streetAddress: "1234 Sesame St", city: "Nowhere", state: "CA", zipCode: "55555"
+      ),
+      UserProfileModel(
+        userID: UUID(0), firstName: "Testy", lastName: "McTestface", companyName: "",
+        streetAddress: "1234 Sesame St", city: "Nowhere", state: "CA", zipCode: "55555"
+      ),
+      UserProfileModel(
+        userID: UUID(0), firstName: "Testy", lastName: "McTestface", companyName: "Acme Co.",
+        streetAddress: "", city: "Nowhere", state: "CA", zipCode: "55555"
+      ),
+      UserProfileModel(
+        userID: UUID(0), firstName: "Testy", lastName: "McTestface", companyName: "Acme Co.",
+        streetAddress: "1234 Sesame St", city: "", state: "CA", zipCode: "55555"
+      ),
+      UserProfileModel(
+        userID: UUID(0), firstName: "Testy", lastName: "McTestface", companyName: "Acme Co.",
+        streetAddress: "1234 Sesame St", city: "Nowhere", state: "", zipCode: "55555"
+      ),
+      UserProfileModel(
+        userID: UUID(0), firstName: "Testy", lastName: "McTestface", companyName: "Acme Co.",
+        streetAddress: "1234 Sesame St", city: "Nowhere", state: "CA", zipCode: ""
+      ),
+    ]
+  )
+  func profileValidations(model: UserProfileModel) {
+    var errors = [String]()
+    #expect(throws: (any Error).self) {
+      do {
+        try model.validate()
+      } catch {
+        // Just checking to make sure I'm not testing the same error over and over /
+        // making sure I've reset to good values / only testing one property at a time.
+        #expect(!errors.contains("\(error)"))
+        errors.append("\(error)")
+        throw error
+      }
+    }
+  }
+
+  @Test(
+    arguments: [
+      User.Create(email: "", password: "super-secret", confirmPassword: "super-secret"),
+      User.Create(email: "testy@example.com", password: "", confirmPassword: "super-secret"),
+      User.Create(email: "testy@example.com", password: "super-secret", confirmPassword: ""),
+      User.Create(email: "testy@example.com", password: "super", confirmPassword: "super"),
+    ]
+  )
+  func userValidations(model: User.Create) {
+    #expect(throws: (any Error).self) {
+      try model.validate()
+    }
+  }
 }

@@ -3,6 +3,7 @@ import DependenciesMacros
 import Fluent
 import Foundation
 import ManualDCore
+import Validations
 
 extension DatabaseClient.TrunkSizes: TestDependencyKey {
   public static let testValue = Self()
@@ -10,12 +11,12 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
   public static func live(database: any Database) -> Self {
     .init(
       create: { request in
-        try request.validate()
+        // try request.validate()
 
         let trunk = request.toModel()
         var roomProxies = [TrunkSize.RoomProxy]()
 
-        try await trunk.save(on: database)
+        try await trunk.validateAndSave(on: database)
 
         for (roomID, registers) in request.rooms {
           guard let room = try await RoomModel.find(roomID, on: database) else {
@@ -27,7 +28,7 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
             registers: registers,
             type: request.type
           )
-          try await model.save(on: database)
+          try await model.validateAndSave(on: database)
           roomProxies.append(
             .init(room: try room.toDTO(), registers: registers)
           )
@@ -80,7 +81,7 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
         else {
           throw NotFoundError()
         }
-        try updates.validate()
+        // try updates.validate()
         try await model.applyUpdates(updates, on: database)
         return try model.toDTO()
       }
@@ -90,17 +91,6 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
 
 extension TrunkSize.Create {
 
-  func validate() throws(ValidationError) {
-    guard rooms.count > 0 else {
-      throw ValidationError("Trunk size should have associated rooms / registers.")
-    }
-    if let height {
-      guard height > 0 else {
-        throw ValidationError("Trunk size height should be greater than 0.")
-      }
-    }
-  }
-
   func toModel() -> TrunkModel {
     .init(
       projectID: projectID,
@@ -108,21 +98,6 @@ extension TrunkSize.Create {
       height: height,
       name: name
     )
-  }
-}
-
-extension TrunkSize.Update {
-  func validate() throws(ValidationError) {
-    if let rooms {
-      guard rooms.count > 0 else {
-        throw ValidationError("Trunk size should have associated rooms / registers.")
-      }
-    }
-    if let height {
-      guard height > 0 else {
-        throw ValidationError("Trunk size height should be greater than 0.")
-      }
-    }
   }
 }
 
@@ -205,7 +180,17 @@ final class TrunkRoomModel: Model, @unchecked Sendable {
       registers: registers
     )
   }
+}
 
+extension TrunkRoomModel: Validatable {
+  var body: some Validation<TrunkRoomModel> {
+    Validator.validate(\.registers) {
+      [Int].notEmpty()
+      ForEachValidator {
+        Int.greaterThanOrEquals(1)
+      }
+    }
+  }
 }
 
 final class TrunkModel: Model, @unchecked Sendable {
@@ -276,7 +261,7 @@ final class TrunkModel: Model, @unchecked Sendable {
       self.name = name
     }
     if hasChanges {
-      try await self.save(on: database)
+      try await self.validateAndSave(on: database)
     }
 
     guard let updateRooms = updates.rooms else {
@@ -297,7 +282,7 @@ final class TrunkModel: Model, @unchecked Sendable {
           currRoom.registers = registers
         }
         if currRoom.hasChanges {
-          try await currRoom.save(on: database)
+          try await currRoom.validateAndSave(on: database)
         }
       } else {
         database.logger.debug("CREATING NEW TrunkRoomModel")
@@ -321,6 +306,21 @@ final class TrunkModel: Model, @unchecked Sendable {
 
     database.logger.debug("DONE WITH UPDATES")
 
+  }
+}
+
+extension TrunkModel: Validatable {
+
+  var body: some Validation<TrunkModel> {
+    Validator.accumulating {
+
+      Validator.validate(\.height, with: Int.greaterThan(0).optional())
+        .errorLabel("Height", inline: true)
+
+      Validator.validate(\.name, with: String.notEmpty().optional())
+        .errorLabel("Name", inline: true)
+
+    }
   }
 }
 

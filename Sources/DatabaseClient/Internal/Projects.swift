@@ -3,6 +3,7 @@ import DependenciesMacros
 import Fluent
 import Foundation
 import ManualDCore
+import Validations
 
 extension DatabaseClient.Projects: TestDependencyKey {
   public static let testValue = Self()
@@ -10,8 +11,8 @@ extension DatabaseClient.Projects: TestDependencyKey {
   public static func live(database: any Database) -> Self {
     .init(
       create: { userID, request in
-        let model = try request.toModel(userID: userID)
-        try await model.save(on: database)
+        let model = request.toModel(userID: userID)
+        try await model.validateAndSave(on: database)
         return try model.toDTO()
       },
       delete: { id in
@@ -81,10 +82,9 @@ extension DatabaseClient.Projects: TestDependencyKey {
         guard let model = try await ProjectModel.find(id, on: database) else {
           throw NotFoundError()
         }
-        try updates.validate()
         model.applyUpdates(updates)
         if model.hasChanges {
-          try await model.save(on: database)
+          try await model.validateAndSave(on: database)
         }
         return try model.toDTO()
       }
@@ -94,8 +94,7 @@ extension DatabaseClient.Projects: TestDependencyKey {
 
 extension Project.Create {
 
-  func toModel(userID: User.ID) throws -> ProjectModel {
-    try validate()
+  func toModel(userID: User.ID) -> ProjectModel {
     return .init(
       name: name,
       streetAddress: streetAddress,
@@ -106,70 +105,6 @@ extension Project.Create {
     )
   }
 
-  func validate() throws(ValidationError) {
-    guard !name.isEmpty else {
-      throw ValidationError("Project name should not be empty.")
-    }
-    guard !streetAddress.isEmpty else {
-      throw ValidationError("Project street address should not be empty.")
-    }
-    guard !city.isEmpty else {
-      throw ValidationError("Project city should not be empty.")
-    }
-    guard !state.isEmpty else {
-      throw ValidationError("Project state should not be empty.")
-    }
-    guard !zipCode.isEmpty else {
-      throw ValidationError("Project zipCode should not be empty.")
-    }
-    if let sensibleHeatRatio {
-      guard sensibleHeatRatio >= 0 else {
-        throw ValidationError("Project sensible heat ratio should be greater than 0.")
-      }
-      guard sensibleHeatRatio <= 1 else {
-        throw ValidationError("Project sensible heat ratio should be less than 1.")
-      }
-    }
-  }
-}
-
-extension Project.Update {
-
-  func validate() throws(ValidationError) {
-    if let name {
-      guard !name.isEmpty else {
-        throw ValidationError("Project name should not be empty.")
-      }
-    }
-    if let streetAddress {
-      guard !streetAddress.isEmpty else {
-        throw ValidationError("Project street address should not be empty.")
-      }
-    }
-    if let city {
-      guard !city.isEmpty else {
-        throw ValidationError("Project city should not be empty.")
-      }
-    }
-    if let state {
-      guard !state.isEmpty else {
-        throw ValidationError("Project state should not be empty.")
-      }
-    }
-    if let zipCode {
-      guard !zipCode.isEmpty else {
-        throw ValidationError("Project zipCode should not be empty.")
-      }
-    }
-    if let sensibleHeatRatio {
-      guard sensibleHeatRatio >= 0 else {
-        throw ValidationError("Project sensible heat ratio should be greater than 0.")
-      }
-      guard sensibleHeatRatio <= 1 else {
-        throw ValidationError("Project sensible heat ratio should be less than 1.")
-      }
-    }
-  }
 }
 
 extension Project {
@@ -340,5 +275,37 @@ final class ProjectModel: Model, @unchecked Sendable {
       throw NotFoundError()
     }
     return model
+  }
+}
+
+extension ProjectModel: Validatable {
+
+  var body: some Validation<ProjectModel> {
+    Validator.accumulating {
+      Validator.validate(\.name, with: .notEmpty())
+        .errorLabel("Name", inline: true)
+
+      Validator.validate(\.streetAddress, with: .notEmpty())
+        .errorLabel("Address", inline: true)
+
+      Validator.validate(\.city, with: .notEmpty())
+        .errorLabel("City", inline: true)
+
+      Validator.validate(\.state, with: .notEmpty())
+        .errorLabel("State", inline: true)
+
+      Validator.validate(\.zipCode, with: .notEmpty())
+        .errorLabel("Zip", inline: true)
+
+      Validator.validate(\.sensibleHeatRatio) {
+        Validator {
+          Double.greaterThan(0)
+          Double.lessThanOrEquals(1.0)
+        }
+        .optional()
+      }
+      .errorLabel("Sensible Heat Ratio", inline: true)
+
+    }
   }
 }

@@ -1,8 +1,9 @@
 import Dependencies
 import DependenciesMacros
 import Fluent
+import Foundation
 import ManualDCore
-import Vapor
+import Validations
 
 extension DatabaseClient.UserProfiles: TestDependencyKey {
 
@@ -11,9 +12,8 @@ extension DatabaseClient.UserProfiles: TestDependencyKey {
   public static func live(database: any Database) -> Self {
     .init(
       create: { profile in
-        try profile.validate()
         let model = profile.toModel()
-        try await model.save(on: database)
+        try await model.validateAndSave(on: database)
         return try model.toDTO()
       },
       delete: { id in
@@ -37,10 +37,9 @@ extension DatabaseClient.UserProfiles: TestDependencyKey {
         guard let model = try await UserProfileModel.find(id, on: database) else {
           throw NotFoundError()
         }
-        try updates.validate()
         model.applyUpdates(updates)
         if model.hasChanges {
-          try await model.save(on: database)
+          try await model.validateAndSave(on: database)
         }
         return try model.toDTO()
       }
@@ -49,30 +48,6 @@ extension DatabaseClient.UserProfiles: TestDependencyKey {
 }
 
 extension User.Profile.Create {
-
-  func validate() throws(ValidationError) {
-    guard !firstName.isEmpty else {
-      throw ValidationError("User first name should not be empty.")
-    }
-    guard !lastName.isEmpty else {
-      throw ValidationError("User last name should not be empty.")
-    }
-    guard !companyName.isEmpty else {
-      throw ValidationError("User company name should not be empty.")
-    }
-    guard !streetAddress.isEmpty else {
-      throw ValidationError("User street address should not be empty.")
-    }
-    guard !city.isEmpty else {
-      throw ValidationError("User city should not be empty.")
-    }
-    guard !state.isEmpty else {
-      throw ValidationError("User state should not be empty.")
-    }
-    guard !zipCode.isEmpty else {
-      throw ValidationError("User zip code should not be empty.")
-    }
-  }
 
   func toModel() -> UserProfileModel {
     .init(
@@ -86,47 +61,6 @@ extension User.Profile.Create {
       zipCode: zipCode,
       theme: theme
     )
-  }
-}
-
-extension User.Profile.Update {
-
-  func validate() throws(ValidationError) {
-    if let firstName {
-      guard !firstName.isEmpty else {
-        throw ValidationError("User first name should not be empty.")
-      }
-    }
-    if let lastName {
-      guard !lastName.isEmpty else {
-        throw ValidationError("User last name should not be empty.")
-      }
-    }
-    if let companyName {
-      guard !companyName.isEmpty else {
-        throw ValidationError("User company name should not be empty.")
-      }
-    }
-    if let streetAddress {
-      guard !streetAddress.isEmpty else {
-        throw ValidationError("User street address should not be empty.")
-      }
-    }
-    if let city {
-      guard !city.isEmpty else {
-        throw ValidationError("User city should not be empty.")
-      }
-    }
-    if let state {
-      guard !state.isEmpty else {
-        throw ValidationError("User state should not be empty.")
-      }
-    }
-    if let zipCode {
-      guard !zipCode.isEmpty else {
-        throw ValidationError("User zip code should not be empty.")
-      }
-    }
   }
 }
 
@@ -269,4 +203,32 @@ final class UserProfileModel: Model, @unchecked Sendable {
     }
   }
 
+}
+
+extension UserProfileModel: Validatable {
+
+  var body: some Validation<UserProfileModel> {
+    Validator.accumulating {
+      Validator.validate(\.firstName, with: .notEmpty())
+        .errorLabel("First Name", inline: true)
+
+      Validator.validate(\.lastName, with: .notEmpty())
+        .errorLabel("Last Name", inline: true)
+
+      Validator.validate(\.companyName, with: .notEmpty())
+        .errorLabel("Company", inline: true)
+
+      Validator.validate(\.streetAddress, with: .notEmpty())
+        .errorLabel("Address", inline: true)
+
+      Validator.validate(\.city, with: .notEmpty())
+        .errorLabel("City", inline: true)
+
+      Validator.validate(\.state, with: .notEmpty())
+        .errorLabel("State", inline: true)
+
+      Validator.validate(\.zipCode, with: .notEmpty())
+        .errorLabel("Zip", inline: true)
+    }
+  }
 }

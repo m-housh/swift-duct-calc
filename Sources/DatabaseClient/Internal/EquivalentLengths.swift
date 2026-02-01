@@ -3,6 +3,7 @@ import DependenciesMacros
 import Fluent
 import Foundation
 import ManualDCore
+import Validations
 
 extension DatabaseClient.EquivalentLengths: TestDependencyKey {
   public static let testValue = Self()
@@ -11,7 +12,7 @@ extension DatabaseClient.EquivalentLengths: TestDependencyKey {
     .init(
       create: { request in
         let model = try request.toModel()
-        try await model.save(on: database)
+        try await model.validateAndSave(on: database)
         return try model.toDTO()
       },
       delete: { id in
@@ -53,7 +54,7 @@ extension DatabaseClient.EquivalentLengths: TestDependencyKey {
         }
         try model.applyUpdates(updates)
         if model.hasChanges {
-          try await model.save(on: database)
+          try await model.validateAndSave(on: database)
         }
         return try model.toDTO()
       }
@@ -64,7 +65,9 @@ extension DatabaseClient.EquivalentLengths: TestDependencyKey {
 extension EquivalentLength.Create {
 
   func toModel() throws -> EffectiveLengthModel {
-    try validate()
+    if groups.count > 0 {
+      try [EquivalentLength.FittingGroup].validator().validate(groups)
+    }
     return try .init(
       name: name,
       type: type.rawValue,
@@ -72,12 +75,6 @@ extension EquivalentLength.Create {
       groups: JSONEncoder().encode(groups),
       projectID: projectID
     )
-  }
-
-  func validate() throws(ValidationError) {
-    guard !name.isEmpty else {
-      throw ValidationError("Effective length name can not be empty.")
-    }
   }
 }
 
@@ -184,7 +181,51 @@ final class EffectiveLengthModel: Model, @unchecked Sendable {
       self.straightLengths = straightLengths
     }
     if let groups = updates.groups {
+      if groups.count > 0 {
+        try [EquivalentLength.FittingGroup].validator().validate(groups)
+      }
       self.groups = try JSONEncoder().encode(groups)
+    }
+  }
+}
+
+extension EffectiveLengthModel: Validatable {
+
+  var body: some Validation<EffectiveLengthModel> {
+    Validator.accumulating {
+      Validator.validate(\.name, with: .notEmpty())
+        .errorLabel("Name", inline: true)
+
+      Validator.validate(
+        \.straightLengths,
+        with: [Int].empty().or(
+          ForEachValidator {
+            Int.greaterThan(0)
+          })
+      )
+      .errorLabel("Straight Lengths", inline: true)
+    }
+  }
+}
+
+extension EquivalentLength.FittingGroup: Validatable {
+
+  public var body: some Validation<Self> {
+    Validator.accumulating {
+      Validator.validate(\.group) {
+        Int.greaterThanOrEquals(1)
+        Int.lessThanOrEquals(12)
+      }
+      .errorLabel("Group", inline: true)
+
+      Validator.validate(\.letter, with: .regex(matching: "[a-zA-Z]"))
+        .errorLabel("Letter", inline: true)
+
+      Validator.validate(\.value, with: .greaterThan(0))
+        .errorLabel("Value", inline: true)
+
+      Validator.validate(\.quantity, with: .greaterThanOrEquals(1))
+        .errorLabel("Quantity", inline: true)
     }
   }
 }

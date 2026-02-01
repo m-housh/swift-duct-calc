@@ -1,8 +1,9 @@
-import DatabaseClient
 import Dependencies
 import Foundation
 import ManualDCore
 import Testing
+
+@testable import DatabaseClient
 
 @Suite
 struct EquipmentTests {
@@ -48,6 +49,20 @@ struct EquipmentTests {
       await #expect(throws: NotFoundError.self) {
         try await equipment.update(UUID(0), .init(staticPressure: 0.3))
       }
+    }
+  }
+
+  @Test(
+    arguments: [
+      EquipmentModel(staticPressure: -1, heatingCFM: 1000, coolingCFM: 1000, projectID: UUID(0)),
+      EquipmentModel(staticPressure: 0.5, heatingCFM: -1, coolingCFM: 1000, projectID: UUID(0)),
+      EquipmentModel(staticPressure: 0.5, heatingCFM: 1000, coolingCFM: -1000, projectID: UUID(0)),
+      EquipmentModel(staticPressure: 1.1, heatingCFM: 1000, coolingCFM: -1000, projectID: UUID(0)),
+    ]
+  )
+  func validations(model: EquipmentModel) {
+    #expect(throws: (any Error).self) {
+      try model.validate()
     }
   }
 

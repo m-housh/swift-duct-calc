@@ -1,6 +1,7 @@
 import Dependencies
 import DependenciesMacros
 import Fluent
+import Foundation
 import ManualDCore
 import Vapor
 
@@ -10,6 +11,7 @@ extension DatabaseClient.Users: TestDependencyKey {
   public static func live(database: any Database) -> Self {
     .init(
       create: { request in
+        try request.validate()
         let model = try request.toModel()
         try await model.save(on: database)
         return try model.toDTO()
@@ -118,20 +120,7 @@ extension User {
 extension User.Create {
 
   func toModel() throws -> UserModel {
-    try validate()
     return try .init(email: email, passwordHash: User.hashPassword(password))
-  }
-
-  func validate() throws {
-    guard !email.isEmpty else {
-      throw ValidationError("Email should not be empty")
-    }
-    guard password.count > 8 else {
-      throw ValidationError("Password should be more than 8 characters long.")
-    }
-    guard password == confirmPassword else {
-      throw ValidationError("Passwords do not match.")
-    }
   }
 }
 

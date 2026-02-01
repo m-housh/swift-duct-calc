@@ -3,6 +3,7 @@ import DependenciesMacros
 import Fluent
 import Foundation
 import ManualDCore
+import Validations
 
 extension DatabaseClient.Equipment: TestDependencyKey {
   public static let testValue = Self()
@@ -10,8 +11,8 @@ extension DatabaseClient.Equipment: TestDependencyKey {
   public static func live(database: any Database) -> Self {
     .init(
       create: { request in
-        let model = try request.toModel()
-        try await model.save(on: database)
+        let model = request.toModel()
+        try await model.validateAndSave(on: database)
         return try model.toDTO()
       },
       delete: { id in
@@ -37,10 +38,9 @@ extension DatabaseClient.Equipment: TestDependencyKey {
         guard let model = try await EquipmentModel.find(id, on: database) else {
           throw NotFoundError()
         }
-        try updates.validate()
         model.applyUpdates(updates)
         if model.hasChanges {
-          try await model.save(on: database)
+          try await model.validateAndSave(on: database)
         }
         return try model.toDTO()
       }
@@ -50,8 +50,7 @@ extension DatabaseClient.Equipment: TestDependencyKey {
 
 extension EquipmentInfo.Create {
 
-  func toModel() throws(ValidationError) -> EquipmentModel {
-    try validate()
+  func toModel() -> EquipmentModel {
     return .init(
       staticPressure: staticPressure,
       heatingCFM: heatingCFM,
@@ -60,44 +59,6 @@ extension EquipmentInfo.Create {
     )
   }
 
-  func validate() throws(ValidationError) {
-    guard staticPressure >= 0 else {
-      throw ValidationError("Equipment info static pressure should be greater than 0.")
-    }
-    guard staticPressure <= 1.0 else {
-      throw ValidationError("Equipment info static pressure should be less than 1.0.")
-    }
-    guard heatingCFM >= 0 else {
-      throw ValidationError("Equipment info heating CFM should be greater than 0.")
-    }
-    guard coolingCFM >= 0 else {
-      throw ValidationError("Equipment info heating CFM should be greater than 0.")
-    }
-  }
-}
-
-extension EquipmentInfo.Update {
-  var hasUpdates: Bool {
-    staticPressure != nil || heatingCFM != nil || coolingCFM != nil
-  }
-
-  func validate() throws(ValidationError) {
-    if let staticPressure {
-      guard staticPressure >= 0 else {
-        throw ValidationError("Equipment info static pressure should be greater than 0.")
-      }
-    }
-    if let heatingCFM {
-      guard heatingCFM >= 0 else {
-        throw ValidationError("Equipment info heating CFM should be greater than 0.")
-      }
-    }
-    if let coolingCFM {
-      guard coolingCFM >= 0 else {
-        throw ValidationError("Equipment info heating CFM should be greater than 0.")
-      }
-    }
-  }
 }
 
 extension EquipmentInfo {
@@ -194,6 +155,25 @@ final class EquipmentModel: Model, @unchecked Sendable {
     }
     if let coolingCFM = updates.coolingCFM {
       self.coolingCFM = coolingCFM
+    }
+  }
+}
+
+extension EquipmentModel: Validatable {
+
+  var body: some Validation<EquipmentModel> {
+    Validator.accumulating {
+      Validator.validate(\.staticPressure) {
+        Double.greaterThan(0.0)
+        Double.lessThan(1.0)
+      }
+      .errorLabel("Static Pressure", inline: true)
+
+      Validator.validate(\.heatingCFM, with: .greaterThan(0))
+        .errorLabel("Heating CFM", inline: true)
+
+      Validator.validate(\.coolingCFM, with: .greaterThan(0))
+        .errorLabel("Cooling CFM", inline: true)
     }
   }
 }
