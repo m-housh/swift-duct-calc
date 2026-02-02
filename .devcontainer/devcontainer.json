@@ -1,0 +1,28 @@
+{
+	"name": "swift-manual-d-dev",
+	"image": "git.housh.dev/michael/swift-dev-container:latest",
+	"features": {
+		"ghcr.io/devcontainers/features/sshd:1": {},
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "os-provided",
+      "ppa": "false"
+    },
+	  "ghcr.io/swift-server-community/swift-devcontainer-features/jemalloc:1": { },
+    "ghcr.io/swift-server-community/swift-devcontainer-features/swift-format:0": { },
+		"ghcr.io/swift-server-community/swift-devcontainer-features/foundationnetworking:1": {},
+		"ghcr.io/jsburckhardt/devcontainer-features/just:1": {},
+		"ghcr.io/rocker-org/devcontainer-features/pandoc:1": {},
+		//"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+		"ghcr.io/wxw-matt/devcontainer-features/apt:latest": {
+			"packages": "weasyprint gnupg2"
+    }
+	},
+	"runArgs": [
+    "--cap-add=SYS_PTRACE",
+    "--security-opt",
+    "seccomp=unconfined"
+  ],
+  "remoteUser": "swift",
+	"forwardPorts": [8080],
+}
+	
