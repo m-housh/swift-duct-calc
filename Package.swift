@@ -8,7 +8,7 @@ let package = Package(
     .executable(name: "App", targets: ["App"]),
     .library(name: "AuthClient", targets: ["AuthClient"]),
     .library(name: "DatabaseClient", targets: ["DatabaseClient"]),
-    .library(name: "EnvClient", targets: ["EnvClient"]),
+    .library(name: "EnvVars", targets: ["EnvVars"]),
     .library(name: "FileClient", targets: ["FileClient"]),
     .library(name: "HTMLSnapshotTesting", targets: ["HTMLSnapshotTesting"]),
     .library(name: "PdfClient", targets: ["PdfClient"]),
@@ -22,6 +22,7 @@ let package = Package(
     .package(url: "https://github.com/vapor/vapor.git", from: "4.110.1"),
     .package(url: "https://github.com/vapor/fluent.git", from: "4.9.0"),
     .package(url: "https://github.com/vapor/fluent-sqlite-driver.git", from: "4.6.0"),
+    .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
     .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
     .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.0.0"),
     .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.12.0"),
@@ -44,6 +45,7 @@ let package = Package(
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "Fluent", package: "fluent"),
         .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
+        .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver"),
         .product(name: "Vapor", package: "vapor"),
         .product(name: "NIOCore", package: "swift-nio"),
         .product(name: "NIOPosix", package: "swift-nio"),
@@ -81,7 +83,7 @@ let package = Package(
       ]
     ),
     .target(
-      name: "EnvClient",
+      name: "EnvVars",
       dependencies: [
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
@@ -105,7 +107,7 @@ let package = Package(
     .target(
       name: "PdfClient",
       dependencies: [
-        .target(name: "EnvClient"),
+        .target(name: "EnvVars"),
         .target(name: "FileClient"),
         .target(name: "ManualDCore"),
         .product(name: "Dependencies", package: "swift-dependencies"),

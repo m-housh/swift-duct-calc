@@ -2,6 +2,7 @@
 import AuthClient
 import DatabaseClient
 import Dependencies
+import EnvVars
 import ManualDCore
 import PdfClient
 import Vapor
@@ -14,16 +15,19 @@ struct DependenciesMiddleware: AsyncMiddleware {
   private let values: DependencyValues.Continuation
   // private let apiController: ApiController
   private let database: DatabaseClient
+  private let environment: EnvVars
   private let viewController: ViewController
 
   init(
     database: DatabaseClient,
+    environment: EnvVars,
     // apiController: ApiController = .liveValue,
     viewController: ViewController = .liveValue
   ) {
     self.values = withEscapedDependencies { $0 }
     // self.apiController = apiController
     self.database = database
+    self.environment = environment
     self.viewController = viewController
   }
 
@@ -33,6 +37,7 @@ struct DependenciesMiddleware: AsyncMiddleware {
         // $0.apiController = apiController
         $0.auth = .live(on: request)
         $0.database = database
+        $0.environment = environment
         // $0.dateFormatter = .liveValue
         $0.viewController = viewController
         $0.pdfClient = .liveValue

@@ -1,7 +1,7 @@
 import Dependencies
 import DependenciesMacros
 import Elementary
-import EnvClient
+import EnvVars
 import FileClient
 import Foundation
 import ManualDCore
@@ -46,9 +46,8 @@ extension PdfClient: DependencyKey {
     },
     generatePdf: { projectID, html in
       @Dependency(\.fileClient) var fileClient
-      @Dependency(\.env) var env
+      @Dependency(\.environment) var environment
 
-      let envVars = try env()
       let baseUrl = "/tmp/\(projectID)"
       try await fileClient.writeFile(html.render(), "\(baseUrl).html")
 
@@ -57,10 +56,10 @@ extension PdfClient: DependencyKey {
       let standardOutput = Pipe()
       process.standardInput = standardInput
       process.standardOutput = standardOutput
-      process.executableURL = URL(fileURLWithPath: envVars.pandocPath)
+      process.executableURL = URL(fileURLWithPath: environment.pandocPath)
       process.arguments = [
         "\(baseUrl).html",
-        "--pdf-engine=\(envVars.pdfEngine)",
+        "--pdf-engine=\(environment.pdfEngine)",
         "--from=html",
         "--css=Public/css/pdf.css",
         "--output=\(baseUrl).pdf",

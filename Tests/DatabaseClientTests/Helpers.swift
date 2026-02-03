@@ -15,7 +15,7 @@ func withDatabase(
 ) async throws {
   let app = try await Application.make(.testing)
   do {
-    try await configure(app)
+    try await configure(app, in: .live())
     let database = app.db
     try await app.autoMigrate()
 
