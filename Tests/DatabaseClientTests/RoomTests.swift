@@ -44,6 +44,22 @@ struct RoomTests {
   }
 
   @Test
+  func createMany() async throws {
+    try await withTestUserAndProject { _, project in
+      @Dependency(\.database.rooms) var rooms
+
+      let created = try await rooms.createMany([
+        .init(projectID: project.id, name: "Test 1", heatingLoad: 1234, coolingTotal: 1234),
+        .init(projectID: project.id, name: "Test 2", heatingLoad: 1234, coolingTotal: 1234),
+      ])
+
+      #expect(created.count == 2)
+      #expect(created[0].name == "Test 1")
+      #expect(created[1].name == "Test 2")
+    }
+  }
+
+  @Test
   func notFound() async throws {
     try await withDatabase {
       @Dependency(\.database.rooms) var rooms
@@ -128,61 +144,4 @@ struct RoomTests {
       // }
     }
   }
-
-  // @Test(
-  //   arguments: [
-  //     Room.Update(
-  //       name: "",
-  //       heatingLoad: 12345,
-  //       coolingTotal: 12344,
-  //       coolingSensible: nil,
-  //       registerCount: 1
-  //     ),
-  //     Room.Update(
-  //       name: "Test",
-  //       heatingLoad: -12345,
-  //       coolingTotal: 12344,
-  //       coolingSensible: nil,
-  //       registerCount: 1
-  //     ),
-  //     Room.Update(
-  //       name: "Test",
-  //       heatingLoad: 12345,
-  //       coolingTotal: -12344,
-  //       coolingSensible: nil,
-  //       registerCount: 1
-  //     ),
-  //     Room.Update(
-  //       name: "Test",
-  //       heatingLoad: 12345,
-  //       coolingTotal: 12344,
-  //       coolingSensible: -123,
-  //       registerCount: 1
-  //     ),
-  //     Room.Update(
-  //       name: "Test",
-  //       heatingLoad: 12345,
-  //       coolingTotal: 12344,
-  //       coolingSensible: nil,
-  //       registerCount: -1
-  //     ),
-  //     Room.Update(
-  //       name: "",
-  //       heatingLoad: -12345,
-  //       coolingTotal: -12344,
-  //       coolingSensible: -1,
-  //       registerCount: -1
-  //     ),
-  //   ]
-  // )
-  // func updateValidations(room: Room.Update) throws {
-  //   #expect(throws: (any Error).self) {
-  //     // do {
-  //     try room.validate()
-  //     // } catch {
-  //     //   print("\(error)")
-  //     //   throw error
-  //     // }
-  //   }
-  // }
 }

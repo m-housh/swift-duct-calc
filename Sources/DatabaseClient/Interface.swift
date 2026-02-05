@@ -90,6 +90,7 @@ public struct DatabaseClient: Sendable {
   @DependencyClient
   public struct Rooms: Sendable {
     public var create: @Sendable (Room.Create) async throws -> Room
+    public var createMany: @Sendable ([Room.Create]) async throws -> [Room]
     public var delete: @Sendable (Room.ID) async throws -> Void
     public var deleteRectangularSize:
       @Sendable (Room.ID, Room.RectangularSize.ID) async throws -> Room

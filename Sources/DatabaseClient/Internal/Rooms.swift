@@ -15,6 +15,13 @@ extension DatabaseClient.Rooms: TestDependencyKey {
         try await model.validateAndSave(on: database)
         return try model.toDTO()
       },
+      createMany: { rooms in
+        try await rooms.asyncMap { request in
+          let model = try request.toModel()
+          try await model.validateAndSave(on: database)
+          return try model.toDTO()
+        }
+      },
       delete: { id in
         guard let model = try await RoomModel.find(id, on: database) else {
           throw NotFoundError()
