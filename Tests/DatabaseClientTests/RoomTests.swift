@@ -1,8 +1,8 @@
 import Dependencies
 import Foundation
 import ManualDCore
+import Parsing
 import Testing
-import Validations
 
 @testable import DatabaseClient
 
@@ -145,11 +145,79 @@ struct RoomTests {
   func validations(room: Room.Create) throws {
     #expect(throws: (any Error).self) {
       // do {
-        try room.toModel().validate()
+      try room.toModel().validate()
       // } catch {
       //   print("\(error)")
       //   throw error
       // }
     }
+  }
+
+  @Test
+  func csvParsing() throws {
+    let input = """
+      Name,Heating Load,Cooling Total,Cooling Sensible, Register Count
+      Bed-1,12345,12345,,2
+      Bed-2,1223,,1123,1
+      """[...].utf8
+
+    let rowParser = ParsePrint {
+      Prefix { $0 != UInt8(ascii: ",") }.map(.string)
+      ",".utf8
+      Double.parser()
+      ",".utf8
+      Optionally {
+        Double.parser()
+      }
+      ",".utf8
+      Optionally {
+        Double.parser()
+      }
+      ",".utf8
+      Int.parser()
+    }
+    .map(.memberwise(Row.init))
+
+    let csvRowParser = OneOf {
+      rowParser.map { CSVRowType.row($0) }
+      Prefix { $0 != UInt8(ascii: "\n") }.map(.string).map { CSVRowType.header($0) }
+    }
+
+    let rowsParser = Many {
+      csvRowParser
+    } separator: {
+      "\n".utf8
+    }
+
+    let rows = try rowsParser.parse(input)
+    print("rows: \(rows)")
+    #expect(rows.count == 3)
+    #expect(rows.rows.count == 2)
+
+    print(String(try rowParser.print(rows.rows.first!))!)
+  }
+}
+
+enum CSVRowType {
+  case header(String)
+  case row(Row)
+}
+
+struct Row {
+  let name: String
+  let heatingLoad: Double
+  let coolingTotal: Double?
+  let coolingSensible: Double?
+  let registerCount: Int
+}
+
+extension Array where Element == CSVRowType {
+  var rows: [Row] {
+    reduce(into: [Row]()) {
+      if case .row(let row) = $1 {
+        $0.append(row)
+      }
+    }
+
   }
 }
