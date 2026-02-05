@@ -87,8 +87,7 @@ extension Room.Create {
     return .init(
       name: name,
       heatingLoad: heatingLoad,
-      coolingTotal: coolingTotal,
-      coolingSensible: coolingSensible,
+      coolingLoad: coolingLoad,
       registerCount: registerCount,
       projectID: projectID
     )
@@ -104,8 +103,7 @@ extension Room {
         .id()
         .field("name", .string, .required)
         .field("heatingLoad", .double, .required)
-        .field("coolingTotal", .double, .required)
-        .field("coolingSensible", .double)
+        .field("coolingLoad", .dictionary, .required)
         .field("registerCount", .int8, .required)
         .field("rectangularSizes", .array)
         .field("createdAt", .datetime)
@@ -136,11 +134,8 @@ final class RoomModel: Model, @unchecked Sendable, Validatable {
   @Field(key: "heatingLoad")
   var heatingLoad: Double
 
-  @Field(key: "coolingTotal")
-  var coolingTotal: Double
-
-  @Field(key: "coolingSensible")
-  var coolingSensible: Double?
+  @Field(key: "coolingLoad")
+  var coolingLoad: Room.CoolingLoad
 
   @Field(key: "registerCount")
   var registerCount: Int
@@ -163,8 +158,7 @@ final class RoomModel: Model, @unchecked Sendable, Validatable {
     id: UUID? = nil,
     name: String,
     heatingLoad: Double,
-    coolingTotal: Double,
-    coolingSensible: Double? = nil,
+    coolingLoad: Room.CoolingLoad,
     registerCount: Int,
     rectangularSizes: [Room.RectangularSize]? = nil,
     createdAt: Date? = nil,
@@ -174,8 +168,7 @@ final class RoomModel: Model, @unchecked Sendable, Validatable {
     self.id = id
     self.name = name
     self.heatingLoad = heatingLoad
-    self.coolingTotal = coolingTotal
-    self.coolingSensible = coolingSensible
+    self.coolingLoad = coolingLoad
     self.registerCount = registerCount
     self.rectangularSizes = rectangularSizes
     self.createdAt = createdAt
@@ -189,8 +182,7 @@ final class RoomModel: Model, @unchecked Sendable, Validatable {
       projectID: $project.id,
       name: name,
       heatingLoad: heatingLoad,
-      coolingTotal: coolingTotal,
-      coolingSensible: coolingSensible,
+      coolingLoad: coolingLoad,
       registerCount: registerCount,
       rectangularSizes: rectangularSizes,
       createdAt: createdAt!,
@@ -206,11 +198,8 @@ final class RoomModel: Model, @unchecked Sendable, Validatable {
     if let heatingLoad = updates.heatingLoad, heatingLoad != self.heatingLoad {
       self.heatingLoad = heatingLoad
     }
-    if let coolingTotal = updates.coolingTotal, coolingTotal != self.coolingTotal {
-      self.coolingTotal = coolingTotal
-    }
-    if let coolingSensible = updates.coolingSensible, coolingSensible != self.coolingSensible {
-      self.coolingSensible = coolingSensible
+    if let coolingLoad = updates.coolingLoad, coolingLoad != self.coolingLoad {
+      self.coolingLoad = coolingLoad
     }
     if let registerCount = updates.registerCount, registerCount != self.registerCount {
       self.registerCount = registerCount
@@ -229,11 +218,8 @@ final class RoomModel: Model, @unchecked Sendable, Validatable {
       Validator.validate(\.heatingLoad, with: .greaterThanOrEquals(0))
         .errorLabel("Heating Load", inline: true)
 
-      Validator.validate(\.coolingTotal, with: .greaterThanOrEquals(0))
-        .errorLabel("Cooling Total", inline: true)
-
-      Validator.validate(\.coolingSensible, with: Double.greaterThanOrEquals(0).optional())
-        .errorLabel("Cooling Sensible", inline: true)
+      Validator.validate(\.coolingLoad)
+        .errorLabel("Cooling Load", inline: true)
 
       Validator.validate(\.registerCount, with: .greaterThanOrEquals(1))
         .errorLabel("Register Count", inline: true)
@@ -242,6 +228,25 @@ final class RoomModel: Model, @unchecked Sendable, Validatable {
 
     }
   }
+}
+
+extension Room.CoolingLoad: Validatable {
+
+  public var body: some Validation<Self> {
+    Validator.accumulating {
+      // Ensure that at least one of the values is not nil.
+      Validator.oneOf {
+        Validator.validate(\.total, with: .notNil())
+          .errorLabel("Total or Sensible", inline: true)
+        Validator.validate(\.sensible, with: .notNil())
+          .errorLabel("Total or Sensible", inline: true)
+      }
+
+      Validator.validate(\.total, with: Double.greaterThan(0).optional())
+      Validator.validate(\.sensible, with: Double.greaterThan(0).optional())
+    }
+  }
+
 }
 
 extension Room.RectangularSize: Validatable {

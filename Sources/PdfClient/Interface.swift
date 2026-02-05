@@ -150,7 +150,12 @@ extension PdfClient {
         project: project,
         rooms: rooms,
         componentLosses: ComponentPressureLoss.mock(projectID: project.id),
-        ductSizes: .mock(equipmentInfo: equipmentInfo, rooms: rooms, trunks: trunks),
+        ductSizes: .mock(
+          equipmentInfo: equipmentInfo,
+          rooms: rooms,
+          trunks: trunks,
+          shr: project.sensibleHeatRatio ?? 0.83
+        ),
         equipmentInfo: equipmentInfo,
         maxSupplyTEL: equivalentLengths.first { $0.type == .supply }!,
         maxReturnTEL: equivalentLengths.first { $0.type == .return }!,

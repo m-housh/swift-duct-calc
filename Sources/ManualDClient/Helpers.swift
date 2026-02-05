@@ -3,13 +3,12 @@ import ManualDCore
 
 extension Room {
 
-  var heatingLoadPerRegister: Double {
-
+  public var heatingLoadPerRegister: Double {
     heatingLoad / Double(registerCount)
   }
 
-  func coolingSensiblePerRegister(projectSHR: Double) -> Double {
-    let sensible = coolingSensible ?? (coolingTotal * projectSHR)
+  public func coolingSensiblePerRegister(projectSHR: Double) throws -> Double {
+    let sensible = try coolingLoad.ensured(shr: projectSHR).sensible
     return sensible / Double(registerCount)
   }
 }
@@ -30,8 +29,8 @@ extension TrunkSize.RoomProxy {
     room.heatingLoadPerRegister * Double(actualRegisterCount)
   }
 
-  func totalCoolingSensible(projectSHR: Double) -> Double {
-    room.coolingSensiblePerRegister(projectSHR: projectSHR) * Double(actualRegisterCount)
+  func totalCoolingSensible(projectSHR: Double) throws -> Double {
+    try room.coolingSensiblePerRegister(projectSHR: projectSHR) * Double(actualRegisterCount)
   }
 }
 
@@ -41,8 +40,8 @@ extension TrunkSize {
     rooms.reduce(into: 0) { $0 += $1.totalHeatingLoad }
   }
 
-  func totalCoolingSensible(projectSHR: Double) -> Double {
-    rooms.reduce(into: 0) { $0 += $1.totalCoolingSensible(projectSHR: projectSHR) }
+  func totalCoolingSensible(projectSHR: Double) throws -> Double {
+    try rooms.reduce(into: 0) { $0 += try $1.totalCoolingSensible(projectSHR: projectSHR) }
   }
 }
 

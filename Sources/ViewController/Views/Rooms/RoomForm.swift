@@ -73,14 +73,15 @@ struct RoomForm: HTML, Sendable {
           .value(room?.heatingLoad)
         )
 
+        // TODO: Add description that only one is required (cooling total or sensible)
+
         LabeledInput(
           "Cooling Total",
           .name("coolingTotal"),
           .type(.number),
-          .placeholder("1234"),
-          .required,
+          .placeholder("1234 (Optional)"),
           .min("0"),
-          .value(room?.coolingTotal)
+          .value(room?.coolingLoad.total)
         )
 
         LabeledInput(
@@ -89,7 +90,7 @@ struct RoomForm: HTML, Sendable {
           .type(.number),
           .placeholder("1234 (Optional)"),
           .min("0"),
-          .value(room?.coolingSensible)
+          .value(room?.coolingLoad.sensible)
         )
 
         LabeledInput(

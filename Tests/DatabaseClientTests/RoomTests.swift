@@ -132,12 +132,20 @@ struct RoomTests {
         coolingSensible: -1,
         registerCount: -1
       ),
+      Room.Create(
+        projectID: UUID(0),
+        name: "Test",
+        heatingLoad: 12345,
+        coolingTotal: nil,
+        coolingSensible: nil,
+        registerCount: 1
+      ),
     ]
   )
   func validations(room: Room.Create) throws {
     #expect(throws: (any Error).self) {
       // do {
-      try room.toModel().validate()
+        try room.toModel().validate()
       // } catch {
       //   print("\(error)")
       //   throw error

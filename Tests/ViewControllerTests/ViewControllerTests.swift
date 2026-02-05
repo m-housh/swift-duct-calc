@@ -103,7 +103,8 @@ struct ViewControllerTests {
     let mockDuctSizes = DuctSizes.mock(
       equipmentInfo: equipment,
       rooms: rooms,
-      trunks: trunks
+      trunks: trunks,
+      shr: project.sensibleHeatRatio ?? 0.83
     )
 
     try await withDefaultDependencies {

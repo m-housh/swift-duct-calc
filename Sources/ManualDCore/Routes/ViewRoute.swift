@@ -218,9 +218,11 @@ extension SiteRoute.View.ProjectRoute {
             Field("projectID") { Project.ID.parser() }
             Field("name", .string)
             Field("heatingLoad") { Double.parser() }
-            Field("coolingTotal") { Double.parser() }
             Optionally {
-              Field("coolingSensible", default: nil) { Double.parser() }
+              Field("coolingTotal") { Double.parser() }
+            }
+            Optionally {
+              Field("coolingSensible") { Double.parser() }
             }
             Field("registerCount") { Digits() }
           }

@@ -41,11 +41,11 @@ extension ManualDClient {
 
     var retval: [DuctSizes.RoomContainer] = []
     let totalHeatingLoad = rooms.totalHeatingLoad
-    let totalCoolingSensible = rooms.totalCoolingSensible(shr: sharedRequest.projectSHR)
+    let totalCoolingSensible = try rooms.totalCoolingSensible(shr: sharedRequest.projectSHR)
 
     for room in rooms {
       let heatingLoad = room.heatingLoadPerRegister
-      let coolingLoad = room.coolingSensiblePerRegister(projectSHR: sharedRequest.projectSHR)
+      let coolingLoad = try room.coolingSensiblePerRegister(projectSHR: sharedRequest.projectSHR)
       let heatingPercent = heatingLoad / totalHeatingLoad
       let coolingPercent = coolingLoad / totalCoolingSensible
       let heatingCFM = heatingPercent * Double(sharedRequest.equipmentInfo.heatingCFM)
@@ -102,11 +102,11 @@ extension ManualDClient {
 
     var retval = [DuctSizes.TrunkContainer]()
     let totalHeatingLoad = rooms.totalHeatingLoad
-    let totalCoolingSensible = rooms.totalCoolingSensible(shr: sharedRequest.projectSHR)
+    let totalCoolingSensible = try rooms.totalCoolingSensible(shr: sharedRequest.projectSHR)
 
     for trunk in trunks {
       let heatingLoad = trunk.totalHeatingLoad
-      let coolingLoad = trunk.totalCoolingSensible(projectSHR: sharedRequest.projectSHR)
+      let coolingLoad = try trunk.totalCoolingSensible(projectSHR: sharedRequest.projectSHR)
       let heatingPercent = heatingLoad / totalHeatingLoad
       let coolingPercent = coolingLoad / totalCoolingSensible
       let heatingCFM = heatingPercent * Double(sharedRequest.equipmentInfo.heatingCFM)
@@ -181,18 +181,18 @@ extension DuctSizes.SizeContainer {
   }
 }
 
-extension Room {
-
-  var heatingLoadPerRegister: Double {
-
-    heatingLoad / Double(registerCount)
-  }
-
-  func coolingSensiblePerRegister(projectSHR: Double) -> Double {
-    let sensible = coolingSensible ?? (coolingTotal * projectSHR)
-    return sensible / Double(registerCount)
-  }
-}
+// extension Room {
+//
+//   var heatingLoadPerRegister: Double {
+//
+//     heatingLoad / Double(registerCount)
+//   }
+//
+//   func coolingSensiblePerRegister(projectSHR: Double) -> Double {
+//     let sensible = coolingSensible ?? (coolingTotal * projectSHR)
+//     return sensible / Double(registerCount)
+//   }
+// }
 
 extension TrunkSize.RoomProxy {
 
@@ -210,8 +210,8 @@ extension TrunkSize.RoomProxy {
     room.heatingLoadPerRegister * Double(actualRegisterCount)
   }
 
-  func totalCoolingSensible(projectSHR: Double) -> Double {
-    room.coolingSensiblePerRegister(projectSHR: projectSHR) * Double(actualRegisterCount)
+  func totalCoolingSensible(projectSHR: Double) throws -> Double {
+    try room.coolingSensiblePerRegister(projectSHR: projectSHR) * Double(actualRegisterCount)
   }
 }
 
@@ -221,7 +221,7 @@ extension TrunkSize {
     rooms.reduce(into: 0) { $0 += $1.totalHeatingLoad }
   }
 
-  func totalCoolingSensible(projectSHR: Double) -> Double {
-    rooms.reduce(into: 0) { $0 += $1.totalCoolingSensible(projectSHR: projectSHR) }
+  func totalCoolingSensible(projectSHR: Double) throws -> Double {
+    try rooms.reduce(into: 0) { $0 += try $1.totalCoolingSensible(projectSHR: projectSHR) }
   }
 }

@@ -54,13 +54,15 @@ struct RoomsView: HTML, Sendable {
 
           div(.class("flex justify-center items-end space-x-4 my-auto font-bold")) {
             span(.class("text-lg")) { "Cooling Total" }
-            Badge(number: rooms.totalCoolingLoad, digits: 0)
+            // TODO: ResultView ??
+            Badge(number: try! rooms.totalCoolingLoad(shr: sensibleHeatRatio ?? 1.0), digits: 0)
               .attributes(.class("badge-success"))
           }
 
           div(.class("flex grow justify-end items-end space-x-4 me-4 my-auto font-bold")) {
             span(.class("text-lg")) { "Cooling Sensible" }
-            Badge(number: rooms.totalCoolingSensible(shr: sensibleHeatRatio ?? 1.0), digits: 0)
+            // TODO: ResultView ??
+            Badge(number: try! rooms.totalCoolingSensible(shr: sensibleHeatRatio ?? 1.0), digits: 0)
               .attributes(.class("badge-info"))
           }
         }
@@ -125,10 +127,11 @@ struct RoomsView: HTML, Sendable {
     let shr: Double
 
     var coolingSensible: Double {
-      guard let value = room.coolingSensible else {
-        return room.coolingTotal * shr
-      }
-      return value
+      try! room.coolingLoad.ensured(shr: shr).sensible
+      // guard let value = room.coolingSensible else {
+      //   return room.coolingTotal * shr
+      // }
+      // return value
     }
 
     init(room: Room, shr: Double?) {
@@ -147,7 +150,7 @@ struct RoomsView: HTML, Sendable {
         }
         td {
           div(.class("flex justify-center")) {
-            Number(room.coolingTotal, digits: 0)
+            Number(try! room.coolingLoad.ensured(shr: shr).total, digits: 0)
             // .attributes(.class("text-success"))
           }
         }
