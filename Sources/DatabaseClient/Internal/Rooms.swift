@@ -10,14 +10,14 @@ extension DatabaseClient.Rooms: TestDependencyKey {
 
   public static func live(database: any Database) -> Self {
     .init(
-      create: { request in
-        let model = try request.toModel()
+      create: { projectID, request in
+        let model = try request.toModel(projectID: projectID)
         try await model.validateAndSave(on: database)
         return try model.toDTO()
       },
-      createMany: { rooms in
+      createMany: { projectID, rooms in
         try await rooms.asyncMap { request in
-          let model = try request.toModel()
+          let model = try request.toModel(projectID: projectID)
           try await model.validateAndSave(on: database)
           return try model.toDTO()
         }
@@ -83,7 +83,7 @@ extension DatabaseClient.Rooms: TestDependencyKey {
 
 extension Room.Create {
 
-  func toModel() throws -> RoomModel {
+  func toModel(projectID: Project.ID) throws -> RoomModel {
     return .init(
       name: name,
       heatingLoad: heatingLoad,

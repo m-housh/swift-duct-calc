@@ -7,6 +7,7 @@ let package = Package(
   products: [
     .executable(name: "App", targets: ["App"]),
     .library(name: "AuthClient", targets: ["AuthClient"]),
+    .library(name: "CSVParser", targets: ["CSVParser"]),
     .library(name: "DatabaseClient", targets: ["DatabaseClient"]),
     .library(name: "EnvVars", targets: ["EnvVars"]),
     .library(name: "FileClient", targets: ["FileClient"]),
@@ -60,6 +61,20 @@ let package = Package(
         .target(name: "ManualDCore"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
+      ]
+    ),
+    .target(
+      name: "CSVParser",
+      dependencies: [
+        .target(name: "ManualDCore"),
+        .product(name: "Dependencies", package: "swift-dependencies"),
+        .product(name: "DependenciesMacros", package: "swift-dependencies"),
+      ]
+    ),
+    .testTarget(
+      name: "CSVParsingTests",
+      dependencies: [
+        .target(name: "CSVParser")
       ]
     ),
     .target(
@@ -172,6 +187,7 @@ let package = Package(
       name: "ViewController",
       dependencies: [
         .target(name: "AuthClient"),
+        .target(name: "CSVParser"),
         .target(name: "DatabaseClient"),
         .target(name: "PdfClient"),
         .target(name: "ProjectClient"),

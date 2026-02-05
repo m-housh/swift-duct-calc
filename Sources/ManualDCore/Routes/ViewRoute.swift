@@ -188,6 +188,7 @@ extension SiteRoute.View.ProjectRoute {
   }
 
   public enum RoomRoute: Equatable, Sendable {
+    case csv(Room.CSV)
     case delete(id: Room.ID)
     case index
     case submit(Room.Create)
@@ -197,6 +198,23 @@ extension SiteRoute.View.ProjectRoute {
     static let rootPath = "rooms"
 
     public static let router = OneOf {
+      Route(.case(Self.csv)) {
+        Path {
+          rootPath
+          "csv"
+        }
+        Headers {
+          Field("Content-Type") { "multipart/form-data" }
+        }
+        Method.post
+        Body().map(.memberwise(Room.CSV.init))
+        // Body {
+        //   FormData {
+        //
+        //   }
+        //   .map(.memberwise(Room.CSV.init))
+        // }
+      }
       Route(.case(Self.delete)) {
         Path {
           rootPath
@@ -215,7 +233,7 @@ extension SiteRoute.View.ProjectRoute {
         Method.post
         Body {
           FormData {
-            Field("projectID") { Project.ID.parser() }
+            // Field("projectID") { Project.ID.parser() }
             Field("name", .string)
             Field("heatingLoad") { Double.parser() }
             Optionally {

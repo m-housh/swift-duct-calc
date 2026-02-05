@@ -14,3 +14,4 @@ tailwindcss
 .env
 .env*
 default.profraw
+rooms.csv

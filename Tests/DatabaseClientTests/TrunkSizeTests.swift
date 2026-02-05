@@ -14,9 +14,11 @@ struct TrunkSizeTests {
       @Dependency(\.database) var database
 
       let room = try await database.rooms.create(
+        project.id,
         .init(
-          projectID: project.id, name: "Test", heatingLoad: 12345, coolingTotal: 12345,
-          coolingSensible: nil, registerCount: 5)
+          name: "Test", heatingLoad: 12345, coolingTotal: 12345,
+          coolingSensible: nil, registerCount: 5
+        )
       )
 
       let trunk = try await database.trunkSizes.create(

@@ -63,6 +63,12 @@ p-6 w-full">
                           </div>
                         </button>
                       </div>
+                      <div class="tooltip tooltip-left" data-tip="Upload csv file">
+                        <form hx-post="/projects/00000000-0000-0000-0000-000000000000/rooms/csv" hx-target="body" hx-swap="outerHTML" enctype="multipart/form-data">
+                          <input type="file" name="file" accept=".csv">
+                          <button class="btn btn-secondary" type="submit">Submit</button>
+                        </form>
+                      </div>
                     </div>
                     <div class="flex items-end space-x-4 font-bold">
                       <span class="text-lg">Heating Total</span>
@@ -151,7 +157,6 @@ p-6 w-full">
                             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="roomForm_00000000000000000000000000000001.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
                             <h1 class="text-3xl font-bold pb-6">Room</h1>
                             <form class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000001" hx-target="body" hx-swap="outerHTML">
-                              <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
                               <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000001">
                               Name<label class="input w-full"><span class="label"></span>
                               <input name="name" type="text" placeholder="Name" required autofocus value="Bed-1">
@@ -204,7 +209,6 @@ p-6 w-full">
                             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="roomForm_00000000000000000000000000000002.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
                             <h1 class="text-3xl font-bold pb-6">Room</h1>
                             <form class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000002" hx-target="body" hx-swap="outerHTML">
-                              <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
                               <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000002">
                               Name<label class="input w-full"><span class="label"></span>
                               <input name="name" type="text" placeholder="Name" required autofocus value="Entry">
@@ -257,7 +261,6 @@ p-6 w-full">
                             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="roomForm_00000000000000000000000000000003.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
                             <h1 class="text-3xl font-bold pb-6">Room</h1>
                             <form class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000003" hx-target="body" hx-swap="outerHTML">
-                              <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
                               <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000003">
                               Name<label class="input w-full"><span class="label"></span>
                               <input name="name" type="text" placeholder="Name" required autofocus value="Family Room">
@@ -310,7 +313,6 @@ p-6 w-full">
                             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="roomForm_00000000000000000000000000000004.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
                             <h1 class="text-3xl font-bold pb-6">Room</h1>
                             <form class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000004" hx-target="body" hx-swap="outerHTML">
-                              <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
                               <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000004">
                               Name<label class="input w-full"><span class="label"></span>
                               <input name="name" type="text" placeholder="Name" required autofocus value="Kitchen">
@@ -363,7 +365,6 @@ p-6 w-full">
                             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="roomForm_00000000000000000000000000000005.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
                             <h1 class="text-3xl font-bold pb-6">Room</h1>
                             <form class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000005" hx-target="body" hx-swap="outerHTML">
-                              <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
                               <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000005">
                               Name<label class="input w-full"><span class="label"></span>
                               <input name="name" type="text" placeholder="Name" required autofocus value="Living Room">
@@ -416,7 +417,6 @@ p-6 w-full">
                             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="roomForm_00000000000000000000000000000006.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
                             <h1 class="text-3xl font-bold pb-6">Room</h1>
                             <form class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000006" hx-target="body" hx-swap="outerHTML">
-                              <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
                               <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000006">
                               Name<label class="input w-full"><span class="label"></span>
                               <input name="name" type="text" placeholder="Name" required autofocus value="Master">
@@ -441,8 +441,7 @@ p-6 w-full">
                     <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="roomForm.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
                     <h1 class="text-3xl font-bold pb-6">Room</h1>
                     <form class="grid grid-cols-1 gap-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/rooms" hx-target="body" hx-swap="outerHTML">
-                      <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
-                      Name<label class="input w-full"><span class="label"></span>
+                      <label class="input w-full"><span class="label">Name</span>
                       <input name="name" type="text" placeholder="Name" required autofocus value="">
                       Heating Load</label><label class="input w-full"><span class="label"></span>
                       <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="">

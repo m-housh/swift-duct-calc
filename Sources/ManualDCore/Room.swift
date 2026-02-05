@@ -96,8 +96,6 @@ public struct Room: Codable, Equatable, Identifiable, Sendable {
 extension Room {
   /// Represents the data required to create a new room for a project.
   public struct Create: Codable, Equatable, Sendable {
-    /// The project this room is associated with.
-    public let projectID: Project.ID
     /// A unique name for the room in the project.
     public let name: String
     /// The heating load required for the room (from Manual-J).
@@ -114,19 +112,25 @@ extension Room {
     }
 
     public init(
-      projectID: Project.ID,
       name: String,
       heatingLoad: Double,
       coolingTotal: Double? = nil,
       coolingSensible: Double? = nil,
       registerCount: Int = 1
     ) {
-      self.projectID = projectID
       self.name = name
       self.heatingLoad = heatingLoad
       self.coolingTotal = coolingTotal
       self.coolingSensible = coolingSensible
       self.registerCount = registerCount
+    }
+  }
+
+  public struct CSV: Equatable, Sendable {
+    public let file: Data
+
+    public init(file: Data) {
+      self.file = file
     }
   }
 

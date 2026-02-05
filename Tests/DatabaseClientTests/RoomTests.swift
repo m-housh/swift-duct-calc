@@ -15,7 +15,8 @@ struct RoomTests {
       @Dependency(\.database.rooms) var rooms
 
       let room = try await rooms.create(
-        .init(projectID: project.id, name: "Test", heatingLoad: 1234, coolingTotal: 1234)
+        project.id,
+        .init(name: "Test", heatingLoad: 1234, coolingTotal: 1234)
       )
 
       let fetched = try await rooms.fetch(project.id)
@@ -48,10 +49,13 @@ struct RoomTests {
     try await withTestUserAndProject { _, project in
       @Dependency(\.database.rooms) var rooms
 
-      let created = try await rooms.createMany([
-        .init(projectID: project.id, name: "Test 1", heatingLoad: 1234, coolingTotal: 1234),
-        .init(projectID: project.id, name: "Test 2", heatingLoad: 1234, coolingTotal: 1234),
-      ])
+      let created = try await rooms.createMany(
+        project.id,
+        [
+          .init(name: "Test 1", heatingLoad: 1234, coolingTotal: 1234),
+          .init(name: "Test 2", heatingLoad: 1234, coolingTotal: 1234),
+        ]
+      )
 
       #expect(created.count == 2)
       #expect(created[0].name == "Test 1")
@@ -85,7 +89,7 @@ struct RoomTests {
   @Test(
     arguments: [
       Room.Create(
-        projectID: UUID(0),
+        // projectID: UUID(0),
         name: "",
         heatingLoad: 12345,
         coolingTotal: 12344,
@@ -93,7 +97,7 @@ struct RoomTests {
         registerCount: 1
       ),
       Room.Create(
-        projectID: UUID(0),
+        // projectID: UUID(0),
         name: "Test",
         heatingLoad: -12345,
         coolingTotal: 12344,
@@ -101,7 +105,7 @@ struct RoomTests {
         registerCount: 1
       ),
       Room.Create(
-        projectID: UUID(0),
+        // projectID: UUID(0),
         name: "Test",
         heatingLoad: 12345,
         coolingTotal: -12344,
@@ -109,7 +113,7 @@ struct RoomTests {
         registerCount: 1
       ),
       Room.Create(
-        projectID: UUID(0),
+        // projectID: UUID(0),
         name: "Test",
         heatingLoad: 12345,
         coolingTotal: 12344,
@@ -117,7 +121,7 @@ struct RoomTests {
         registerCount: 1
       ),
       Room.Create(
-        projectID: UUID(0),
+        // projectID: UUID(0),
         name: "Test",
         heatingLoad: 12345,
         coolingTotal: 12344,
@@ -125,7 +129,7 @@ struct RoomTests {
         registerCount: -1
       ),
       Room.Create(
-        projectID: UUID(0),
+        // projectID: UUID(0),
         name: "",
         heatingLoad: -12345,
         coolingTotal: -12344,
@@ -133,7 +137,7 @@ struct RoomTests {
         registerCount: -1
       ),
       Room.Create(
-        projectID: UUID(0),
+        // projectID: UUID(0),
         name: "Test",
         heatingLoad: 12345,
         coolingTotal: nil,
@@ -145,89 +149,12 @@ struct RoomTests {
   func validations(room: Room.Create) throws {
     #expect(throws: (any Error).self) {
       // do {
-      try room.toModel().validate()
+      try room.toModel(projectID: UUID(0)).validate()
       // } catch {
       //   print("\(error)")
       //   throw error
       // }
     }
   }
-
-  @Test
-  func csvParsing() throws {
-    let input = """
-      Name,Heating Load,Cooling Total,Cooling Sensible,Register Count
-      Bed-1,12345,12345,,2
-      Bed-2,1223,,1123,1
-      """[...].utf8
-
-    let commaSeparator = ParsePrint {
-      OneOf {
-        ",".utf8
-        ", ".utf8
-      }
-    }
-
-    let rowParser = ParsePrint {
-      Prefix { $0 != UInt8(ascii: ",") }.map(.string)
-      ",".utf8
-      Double.parser()
-      Skip { commaSeparator }
-      // ",".utf8
-      Optionally {
-        Double.parser()
-      }
-      Skip { commaSeparator }
-      // ",".utf8
-      Optionally {
-        Double.parser()
-      }
-      Skip { commaSeparator }
-      // ",".utf8
-      Int.parser()
-    }
-    .map(.memberwise(Row.init))
-
-    let csvRowParser = OneOf {
-      rowParser.map { CSVRowType.row($0) }
-      Prefix { $0 != UInt8(ascii: "\n") }.map(.string).map { CSVRowType.header($0) }
-    }
-
-    let rowsParser = Many {
-      csvRowParser
-    } separator: {
-      "\n".utf8
-    }
-
-    let rows = try rowsParser.parse(input)
-    print("rows: \(rows)")
-    #expect(rows.count == 3)
-    #expect(rows.rows.count == 2)
-
-    print(String(try rowParser.print(rows.rows.first!))!)
-  }
 }
 
-enum CSVRowType {
-  case header(String)
-  case row(Row)
-}
-
-struct Row {
-  let name: String
-  let heatingLoad: Double
-  let coolingTotal: Double?
-  let coolingSensible: Double?
-  let registerCount: Int
-}
-
-extension Array where Element == CSVRowType {
-  var rows: [Row] {
-    reduce(into: [Row]()) {
-      if case .row(let row) = $1 {
-        $0.append(row)
-      }
-    }
-
-  }
-}

@@ -47,8 +47,6 @@ struct RoomForm: HTML, Sendable {
         .hx.swap(.outerHTML)
       ) {
 
-        input(.class("hidden"), .name("projectID"), .value("\(projectID)"))
-
         if let id = room?.id {
           input(.class("hidden"), .name("id"), .value("\(id)"))
         }

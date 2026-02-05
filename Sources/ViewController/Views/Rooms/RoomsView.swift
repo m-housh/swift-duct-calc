@@ -11,6 +11,11 @@ struct RoomsView: HTML, Sendable {
   let rooms: [Room]
   let sensibleHeatRatio: Double?
 
+  private var csvRoute: String {
+    SiteRoute.router.path(for: .view(.project(.detail(projectID, .rooms(.index)))))
+      .appendingPath("csv")
+  }
+
   var body: some HTML {
     div(.class("flex w-full flex-col")) {
       PageTitleRow {
@@ -44,6 +49,18 @@ struct RoomsView: HTML, Sendable {
               .attributes(.class("border border-error"), when: sensibleHeatRatio == nil)
             }
             .attributes(.class("tooltip-open"), when: sensibleHeatRatio == nil)
+
+            Tooltip("Upload csv file", position: .left) {
+              form(
+                .hx.post(csvRoute),
+                .hx.target("body"),
+                .hx.swap(.outerHTML),
+                .custom(name: "enctype", value: "multipart/form-data")
+              ) {
+                input(.type(.file), .name("file"), .accept(".csv"))
+                SubmitButton()
+              }
+            }
           }
 
           div(.class("flex items-end space-x-4 font-bold")) {

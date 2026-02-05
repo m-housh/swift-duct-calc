@@ -1,3 +1,4 @@
+import CSVParser
 import DatabaseClient
 import Dependencies
 import Elementary
@@ -284,9 +285,17 @@ extension SiteRoute.View.ProjectRoute.RoomRoute {
     on request: ViewController.Request,
     projectID: Project.ID
   ) async -> AnySendableHTML {
+    @Dependency(\.csvParser) var csvParser
     @Dependency(\.database) var database
 
     switch self {
+
+    case .csv(let csv):
+      return await roomsView(on: request, projectID: projectID) {
+        let rooms = try await csvParser.parseRooms(csv)
+        _ = try await database.rooms.createMany(projectID, rooms)
+      }
+    // return EmptyHTML()
 
     case .delete(let id):
       return await ResultView {
@@ -298,7 +307,7 @@ extension SiteRoute.View.ProjectRoute.RoomRoute {
 
     case .submit(let form):
       return await roomsView(on: request, projectID: projectID) {
-        _ = try await database.rooms.create(form)
+        _ = try await database.rooms.create(projectID, form)
       }
 
     case .update(let id, let form):

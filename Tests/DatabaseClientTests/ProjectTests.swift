@@ -85,7 +85,8 @@ struct ProjectTests {
       #expect(completed.frictionRate == true)
 
       _ = try await database.rooms.create(
-        .init(projectID: project.id, name: "Test", heatingLoad: 12345, coolingTotal: 12345)
+        project.id,
+        .init(name: "Test", heatingLoad: 12345, coolingTotal: 12345)
       )
       completed = try await database.projects.getCompletedSteps(project.id)
       #expect(completed.rooms == true)
@@ -130,7 +131,8 @@ struct ProjectTests {
         .init(projectID: project.id, name: "Test", value: 0.2)
       )
       let room = try await database.rooms.create(
-        .init(projectID: project.id, name: "Test", heatingLoad: 12345, coolingTotal: 12345)
+        project.id,
+        .init(name: "Test", heatingLoad: 12345, coolingTotal: 12345)
       )
       let supplyLength = try await database.equivalentLengths.create(
         .init(
