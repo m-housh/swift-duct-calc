@@ -156,24 +156,34 @@ struct RoomTests {
   @Test
   func csvParsing() throws {
     let input = """
-      Name,Heating Load,Cooling Total,Cooling Sensible, Register Count
+      Name,Heating Load,Cooling Total,Cooling Sensible,Register Count
       Bed-1,12345,12345,,2
       Bed-2,1223,,1123,1
       """[...].utf8
+
+    let commaSeparator = ParsePrint {
+      OneOf {
+        ",".utf8
+        ", ".utf8
+      }
+    }
 
     let rowParser = ParsePrint {
       Prefix { $0 != UInt8(ascii: ",") }.map(.string)
       ",".utf8
       Double.parser()
-      ",".utf8
+      Skip { commaSeparator }
+      // ",".utf8
       Optionally {
         Double.parser()
       }
-      ",".utf8
+      Skip { commaSeparator }
+      // ",".utf8
       Optionally {
         Double.parser()
       }
-      ",".utf8
+      Skip { commaSeparator }
+      // ",".utf8
       Int.parser()
     }
     .map(.memberwise(Row.init))
