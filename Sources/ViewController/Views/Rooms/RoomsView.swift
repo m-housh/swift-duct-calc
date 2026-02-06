@@ -7,7 +7,6 @@ import Styleguide
 
 struct RoomsView: HTML, Sendable {
   @Environment(ProjectViewValue.$projectID) var projectID
-  // let projectID: Project.ID
   let rooms: [Room]
   let sensibleHeatRatio: Double?
 
@@ -25,7 +24,7 @@ struct RoomsView: HTML, Sendable {
             PageTitle { "Room Loads" }
           }
 
-          div(.class("flex justify-end grow")) {
+          div(.class("flex justify-end grow space-x-4")) {
             Tooltip("Set sensible heat ratio", position: .left) {
               button(
                 .class(
@@ -50,17 +49,6 @@ struct RoomsView: HTML, Sendable {
             }
             .attributes(.class("tooltip-open"), when: sensibleHeatRatio == nil)
 
-            Tooltip("Upload csv file", position: .left) {
-              form(
-                .hx.post(csvRoute),
-                .hx.target("body"),
-                .hx.swap(.outerHTML),
-                .custom(name: "enctype", value: "multipart/form-data")
-              ) {
-                input(.type(.file), .name("file"), .accept(".csv"))
-                SubmitButton()
-              }
-            }
           }
 
           div(.class("flex items-end space-x-4 font-bold")) {
@@ -115,7 +103,17 @@ struct RoomsView: HTML, Sendable {
               }
             }
             th {
-              div(.class("flex justify-end me-2")) {
+              div(.class("flex justify-end me-2 space-x-4")) {
+
+                Tooltip("Upload CSV", position: .left) {
+                  button(
+                    .class("btn btn-secondary"),
+                    .showModal(id: UploadCSVForm.id)
+                  ) {
+                    SVG(.filePlusCorner)
+                  }
+                }
+
                 Tooltip("Add Room") {
                   PlusButton()
                     .attributes(
@@ -124,6 +122,7 @@ struct RoomsView: HTML, Sendable {
                     )
                     .attributes(.class("tooltip-left"))
                 }
+
               }
             }
           }
@@ -135,6 +134,7 @@ struct RoomsView: HTML, Sendable {
         }
       }
       RoomForm(dismiss: true, projectID: projectID, room: nil)
+      UploadCSVForm(dismiss: true)
     }
   }
 
@@ -256,5 +256,40 @@ struct RoomsView: HTML, Sendable {
         }
       }
     }
+  }
+
+  struct UploadCSVForm: HTML {
+    static let id = "uploadCSV"
+
+    @Environment(ProjectViewValue.$projectID) var projectID
+    let dismiss: Bool
+
+    private var route: String {
+      SiteRoute.router.path(for: .view(.project(.detail(projectID, .rooms(.index)))))
+        .appendingPath("csv")
+    }
+
+    var body: some HTML {
+      ModalForm(id: Self.id, dismiss: dismiss) {
+        div(.class("pb-6 space-y-3")) {
+          h1(.class("text-3xl font-bold")) { "Upload CSV" }
+          p(.class("text-sm italic")) {
+            "Drag and drop, or click to upload"
+          }
+        }
+        form(
+          .hx.post(route),
+          .hx.target("body"),
+          .hx.swap(.outerHTML),
+          .custom(name: "enctype", value: "multipart/form-data")
+        ) {
+          input(.type(.file), .name("file"), .accept(".csv"))
+
+          SubmitButton()
+            .attributes(.class("btn-block mt-6"))
+        }
+      }
+    }
+
   }
 }
