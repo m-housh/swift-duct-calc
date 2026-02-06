@@ -248,12 +248,24 @@ final class RoomModel: Model, @unchecked Sendable, Validatable {
   func validateAndSave(on database: Database) async throws {
     try self.validate()
     if let delegateTo = $room.id {
-      guard let parent = try await RoomModel.find(delegateTo, on: database) else {
+      guard
+        let parent =
+          try await RoomModel
+          .query(on: database)
+          .with(\.$room)
+          .filter(\.$id == delegateTo)
+          .first()
+      else {
         throw ValidationError("Can not find room: \(delegateTo), to delegate airflow to.")
       }
       guard parent.$room.id == nil else {
         throw ValidationError(
-          "Can not delegate airflow to a room that also delegates it's own airflow."
+          """
+          Attempting to delegate to: \(parent.name), that delegates to: \(parent.$room.name)
+
+          Unable to delegate airflow to a room that already delegates it's airflow.
+          """
+
         )
       }
     }
