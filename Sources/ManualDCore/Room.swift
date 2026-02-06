@@ -7,6 +7,7 @@ import Foundation
 /// room, the number of registers in the room, and any rectangular
 /// duct size calculations stored for the room.
 public struct Room: Codable, Equatable, Identifiable, Sendable {
+
   /// The unique id of the room.
   public let id: UUID
 
@@ -24,6 +25,10 @@ public struct Room: Codable, Equatable, Identifiable, Sendable {
 
   /// The number of registers for the room.
   public let registerCount: Int
+
+  /// An optional room that the airflow is delegated to.
+  public let delegatedTo: Room.ID?
+
   /// The rectangular duct size calculations for a room.
   ///
   /// **NOTE:** These are optionally set after the round sizes have been calculate
@@ -43,6 +48,7 @@ public struct Room: Codable, Equatable, Identifiable, Sendable {
     heatingLoad: Double,
     coolingLoad: CoolingLoad,
     registerCount: Int = 1,
+    delegatedTo: Room.ID? = nil,
     rectangularSizes: [RectangularSize]? = nil,
     createdAt: Date,
     updatedAt: Date
@@ -53,6 +59,7 @@ public struct Room: Codable, Equatable, Identifiable, Sendable {
     self.heatingLoad = heatingLoad
     self.coolingLoad = coolingLoad
     self.registerCount = registerCount
+    self.delegatedTo = delegatedTo
     self.rectangularSizes = rectangularSizes
     self.createdAt = createdAt
     self.updatedAt = updatedAt
@@ -98,14 +105,21 @@ extension Room {
   public struct Create: Codable, Equatable, Sendable {
     /// A unique name for the room in the project.
     public let name: String
+
     /// The heating load required for the room (from Manual-J).
     public let heatingLoad: Double
+
     /// The total cooling load required for the room (from Manual-J).
     public let coolingTotal: Double?
+
     /// An optional sensible cooling load for the room.
     public let coolingSensible: Double?
+
     /// The number of registers for the room.
     public let registerCount: Int
+
+    /// An optional room that this room delegates it's airflow to.
+    public let delegatedTo: Room.ID?
 
     public var coolingLoad: Room.CoolingLoad {
       .init(total: coolingTotal, sensible: coolingSensible)
@@ -116,13 +130,15 @@ extension Room {
       heatingLoad: Double,
       coolingTotal: Double? = nil,
       coolingSensible: Double? = nil,
-      registerCount: Int = 1
+      registerCount: Int = 1,
+      delegatedTo: Room.ID? = nil
     ) {
       self.name = name
       self.heatingLoad = heatingLoad
       self.coolingTotal = coolingTotal
       self.coolingSensible = coolingSensible
       self.registerCount = registerCount
+      self.delegatedTo = delegatedTo
     }
   }
 

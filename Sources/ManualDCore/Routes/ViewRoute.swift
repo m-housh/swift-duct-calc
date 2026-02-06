@@ -233,7 +233,6 @@ extension SiteRoute.View.ProjectRoute {
         Method.post
         Body {
           FormData {
-            // Field("projectID") { Project.ID.parser() }
             Field("name", .string)
             Field("heatingLoad") { Double.parser() }
             Optionally {
@@ -243,6 +242,9 @@ extension SiteRoute.View.ProjectRoute {
               Field("coolingSensible") { Double.parser() }
             }
             Field("registerCount") { Digits() }
+            Optionally {
+              Field("delegatedTo") { Room.ID.parser() }
+            }
           }
           .map(.memberwise(Room.Create.init))
         }

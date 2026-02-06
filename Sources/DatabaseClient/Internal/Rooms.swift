@@ -89,6 +89,7 @@ extension Room.Create {
       heatingLoad: heatingLoad,
       coolingLoad: coolingLoad,
       registerCount: registerCount,
+      delegetedToID: delegatedTo,
       projectID: projectID
     )
   }
@@ -105,6 +106,7 @@ extension Room {
         .field("heatingLoad", .double, .required)
         .field("coolingLoad", .dictionary, .required)
         .field("registerCount", .int8, .required)
+        .field("delegatedToID", .uuid, .references(RoomModel.schema, "id"))
         .field("rectangularSizes", .array)
         .field("createdAt", .datetime)
         .field("updatedAt", .datetime)
@@ -140,6 +142,9 @@ final class RoomModel: Model, @unchecked Sendable, Validatable {
   @Field(key: "registerCount")
   var registerCount: Int
 
+  @OptionalParent(key: "delegatedToID")
+  var room: RoomModel?
+
   @Field(key: "rectangularSizes")
   var rectangularSizes: [Room.RectangularSize]?
 
@@ -160,6 +165,7 @@ final class RoomModel: Model, @unchecked Sendable, Validatable {
     heatingLoad: Double,
     coolingLoad: Room.CoolingLoad,
     registerCount: Int,
+    delegetedToID: UUID? = nil,
     rectangularSizes: [Room.RectangularSize]? = nil,
     createdAt: Date? = nil,
     updatedAt: Date? = nil,
@@ -170,6 +176,7 @@ final class RoomModel: Model, @unchecked Sendable, Validatable {
     self.heatingLoad = heatingLoad
     self.coolingLoad = coolingLoad
     self.registerCount = registerCount
+    $room.id = delegetedToID
     self.rectangularSizes = rectangularSizes
     self.createdAt = createdAt
     self.updatedAt = updatedAt
@@ -184,6 +191,7 @@ final class RoomModel: Model, @unchecked Sendable, Validatable {
       heatingLoad: heatingLoad,
       coolingLoad: coolingLoad,
       registerCount: registerCount,
+      delegatedTo: $room.id,
       rectangularSizes: rectangularSizes,
       createdAt: createdAt!,
       updatedAt: updatedAt!

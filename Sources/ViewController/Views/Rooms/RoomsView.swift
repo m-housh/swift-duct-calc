@@ -17,6 +17,11 @@ struct RoomsView: HTML, Sendable {
 
   var body: some HTML {
     div(.class("flex w-full flex-col")) {
+      input(.type(.checkbox), .name("delegateToCheckbox"), .on(.click, "showElement('simple');"))
+      div(.style("display: none;"), .id("simple"), .class("hidden")) {
+        "This is hidden"
+      }
+
       PageTitleRow {
         div(.class("flex grid grid-cols-3 w-full gap-y-4")) {
 
@@ -129,17 +134,18 @@ struct RoomsView: HTML, Sendable {
         }
         tbody {
           for room in rooms {
-            RoomRow(room: room, shr: sensibleHeatRatio)
+            RoomRow(room: room, shr: sensibleHeatRatio, rooms: rooms)
           }
         }
       }
-      RoomForm(dismiss: true, projectID: projectID, room: nil)
+      RoomForm(dismiss: true, projectID: projectID, rooms: rooms, room: nil)
       UploadCSVForm(dismiss: true)
     }
   }
 
   public struct RoomRow: HTML, Sendable {
 
+    let rooms: [Room]
     let room: Room
     let shr: Double
 
@@ -151,9 +157,10 @@ struct RoomsView: HTML, Sendable {
       // return value
     }
 
-    init(room: Room, shr: Double?) {
+    init(room: Room, shr: Double?, rooms: [Room]) {
       self.room = room
       self.shr = shr ?? 1.0
+      self.rooms = rooms
     }
 
     public var body: some HTML {
@@ -208,6 +215,7 @@ struct RoomsView: HTML, Sendable {
           RoomForm(
             dismiss: true,
             projectID: room.projectID,
+            rooms: rooms,
             room: room
           )
         }

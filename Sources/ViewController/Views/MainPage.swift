@@ -108,6 +108,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
       }
     }
     .attributes(.data("theme", value: theme?.rawValue ?? "default"), when: theme != nil)
+
   }
 }
 

@@ -5,7 +5,6 @@ import Foundation
 import ManualDCore
 import Styleguide
 
-// TODO: Need to hold the project ID in hidden input field.
 struct RoomForm: HTML, Sendable {
 
   static func id(_ room: Room? = nil) -> String {
@@ -17,14 +16,17 @@ struct RoomForm: HTML, Sendable {
   let dismiss: Bool
   let projectID: Project.ID
   let room: Room?
+  let rooms: [Room]
 
   init(
     dismiss: Bool,
     projectID: Project.ID,
+    rooms: [Room],
     room: Room? = nil
   ) {
     self.dismiss = dismiss
     self.projectID = projectID
+    self.rooms = rooms
     self.room = room
   }
 
@@ -38,6 +40,7 @@ struct RoomForm: HTML, Sendable {
   var body: some HTML {
     ModalForm(id: Self.id(room), dismiss: dismiss) {
       h1(.class("text-3xl font-bold pb-6")) { "Room" }
+
       form(
         .class("grid grid-cols-1 gap-4"),
         room == nil
@@ -97,12 +100,32 @@ struct RoomForm: HTML, Sendable {
           .type(.number),
           .min("1"),
           .required,
-          .value(room?.registerCount ?? 1)
+          .value(room?.registerCount ?? 1),
+          .id("registerCount")
         )
 
+        label(.class("select w-full"), .id("delegateToSelect")) {
+          span(.class("label")) { "Room" }
+          Select(rooms, placeholder: "Delegate Airflow") {
+            $0.name
+          }
+          .attributes(.name("delegatedTo"))
+        }
         SubmitButton()
           .attributes(.class("btn-block"))
       }
+    }
+
+    script {
+      """
+      function myClick() {
+        console.log('clicked');
+        const simple = document.getElementById('simple');
+        console.log(simple.style.display);
+        simple.style.display = 'block';
+        console.log(simple.style.display);
+      }
+      """
     }
   }
 }

@@ -30,6 +30,10 @@ enum RoomRowType {
 
 struct RoomCreateParser: ParserPrinter {
 
+  // FIX: The delegated to field won't work here, as we potentially have not created
+  //    the room yet, so we will need an intermediate representation for the csv data
+  //    that uses a room's name or disregard and require user to delegate airflow in
+  //    the ui.
   var body: some ParserPrinter<Substring.UTF8View, Room.Create> {
     ParsePrint {
       Prefix { $0 != UInt8(ascii: ",") }.map(.string)
@@ -45,6 +49,10 @@ struct RoomCreateParser: ParserPrinter {
       }
       ",".utf8
       Int.parser()
+      ",".utf8
+      Optionally {
+        Room.ID.parser()
+      }
     }
     .map(.memberwise(Room.Create.init))
   }
