@@ -59,3 +59,24 @@ extension Select where Element: Identifiable, Element.ID == UUID, Element: Senda
   }
 
 }
+
+extension Select
+where Element: Identifiable, Element.ID == UUID, Element: Sendable, Label == HTMLText {
+
+  public init(
+    _ items: [Element],
+    label keyPath: KeyPath<Element, String>,
+    placeholder: String? = nil,
+    selected: @escaping @Sendable (Element) -> Bool = { _ in false }
+  ) {
+    self.init(
+      items,
+      placeholder: placeholder,
+      value: { $0.id.uuidString },
+      selected: selected,
+      label: { HTMLText($0[keyPath: keyPath]) }
+    )
+
+  }
+
+}

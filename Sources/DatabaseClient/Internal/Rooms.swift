@@ -84,6 +84,14 @@ extension DatabaseClient.Rooms: TestDependencyKey {
 extension Room.Create {
 
   func toModel(projectID: Project.ID) throws -> RoomModel {
+    var registerCount = registerCount
+    // Set register count appropriately when delegatedTo is set / changes.
+    if delegatedTo != nil {
+      registerCount = 0
+    } else if registerCount == 0 {
+      registerCount = 1
+    }
+
     return .init(
       name: name,
       heatingLoad: heatingLoad,
@@ -229,12 +237,27 @@ final class RoomModel: Model, @unchecked Sendable, Validatable {
       Validator.validate(\.coolingLoad)
         .errorLabel("Cooling Load", inline: true)
 
-      Validator.validate(\.registerCount, with: .greaterThanOrEquals(1))
+      Validator.validate(\.registerCount, with: .greaterThanOrEquals($room.id == nil ? 1 : 0))
         .errorLabel("Register Count", inline: true)
 
       Validator.validate(\.rectangularSizes)
 
     }
+  }
+
+  func validateAndSave(on database: Database) async throws {
+    try self.validate()
+    if let delegateTo = $room.id {
+      guard let parent = try await RoomModel.find(delegateTo, on: database) else {
+        throw ValidationError("Can not find room: \(delegateTo), to delegate airflow to.")
+      }
+      guard parent.$room.id == nil else {
+        throw ValidationError(
+          "Can not delegate airflow to a room that also delegates it's own airflow."
+        )
+      }
+    }
+    try await save(on: database)
   }
 }
 

@@ -17,11 +17,6 @@ struct RoomsView: HTML, Sendable {
 
   var body: some HTML {
     div(.class("flex w-full flex-col")) {
-      input(.type(.checkbox), .name("delegateToCheckbox"), .on(.click, "showElement('simple');"))
-      div(.style("display: none;"), .id("simple"), .class("hidden")) {
-        "This is hidden"
-      }
-
       PageTitleRow {
         div(.class("flex grid grid-cols-3 w-full gap-y-4")) {
 
@@ -108,6 +103,11 @@ struct RoomsView: HTML, Sendable {
               }
             }
             th {
+              div(.class("flex justify-center")) {
+                "Delegated To"
+              }
+            }
+            th {
               div(.class("flex justify-end me-2 space-x-4")) {
 
                 Tooltip("Upload CSV", position: .left) {
@@ -151,10 +151,11 @@ struct RoomsView: HTML, Sendable {
 
     var coolingSensible: Double {
       try! room.coolingLoad.ensured(shr: shr).sensible
-      // guard let value = room.coolingSensible else {
-      //   return room.coolingTotal * shr
-      // }
-      // return value
+    }
+
+    var delegatedToRoomName: String? {
+      guard let delegatedToID = room.delegatedTo else { return nil }
+      return rooms.first(where: { $0.id == delegatedToID })?.name
     }
 
     init(room: Room, shr: Double?, rooms: [Room]) {
@@ -186,7 +187,14 @@ struct RoomsView: HTML, Sendable {
         }
         td {
           div(.class("flex justify-center")) {
-            Number(room.registerCount)
+            Number(delegatedToRoomName != nil ? 0 : room.registerCount)
+          }
+        }
+        td {
+          if let name = delegatedToRoomName {
+            div(.class("flex justify-center")) {
+              name
+            }
           }
         }
         td {

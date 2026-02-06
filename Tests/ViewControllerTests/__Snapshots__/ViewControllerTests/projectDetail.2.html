@@ -54,7 +54,7 @@ p-6 w-full">
                     <div class="col-span-2">
                       <h1 class="text-3xl font-bold">Room Loads</h1>
                     </div>
-                    <div class="flex justify-end grow">
+                    <div class="flex justify-end grow space-x-4">
                       <div class="tooltip tooltip-left" data-tip="Set sensible heat ratio">
                         <button class="btn btn-primary text-lg font-bold py-2 " onclick="shrForm.showModal()">
                           <div class="flex grow justify-end items-end space-x-4">
@@ -62,12 +62,6 @@ p-6 w-full">
                             <div class="badge badge-lg badge-outline"><span>0.83</span></div>
                           </div>
                         </button>
-                      </div>
-                      <div class="tooltip tooltip-left" data-tip="Upload csv file">
-                        <form hx-post="/projects/00000000-0000-0000-0000-000000000000/rooms/csv" hx-target="body" hx-swap="outerHTML" enctype="multipart/form-data">
-                          <input type="file" name="file" accept=".csv">
-                          <button class="btn btn-secondary" type="submit">Submit</button>
-                        </form>
                       </div>
                     </div>
                     <div class="flex items-end space-x-4 font-bold">
@@ -113,7 +107,13 @@ p-6 w-full">
                         <div class="flex justify-center">Register Count</div>
                       </th>
                       <th>
-                        <div class="flex justify-end me-2">
+                        <div class="flex justify-center">Delegated To</div>
+                      </th>
+                      <th>
+                        <div class="flex justify-end me-2 space-x-4">
+                          <div class="tooltip tooltip-left" data-tip="Upload CSV">
+                            <button class="btn btn-secondary" onclick="uploadCSV.showModal()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-plus-corner-icon lucide-file-plus-corner"><path d="M11.35 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v5.35"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M14 19h6"/><path d="M17 16v6"/></svg></button>
+                          </div>
                           <div class="tooltip tooltip-left" data-tip="Add Room">
                             <button type="button" class="btn btn-primary mx-auto tooltip-left" onclick="roomForm.showModal()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></button>
                           </div>
@@ -136,6 +136,7 @@ p-6 w-full">
                       <td>
                         <div class="flex justify-center"><span>1</span></div>
                       </td>
+                      <td></td>
                       <td>
                         <div class="flex justify-end">
                           <div class="join">
@@ -167,7 +168,17 @@ p-6 w-full">
                               Cooling Sensible</label><label class="input w-full"><span class="label"></span>
                               <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value="">
                               Registers</label><label class="input w-full"><span class="label"></span>
-                              <input name="registerCount" type="number" min="1" required value="1"></label>
+                              <input name="registerCount" type="number" min="1" required value="1" id="registerCount">
+                              Room</label><label class="select w-full"><span class="label"></span>
+                              <select name="delegatedTo">
+                                <option selected disabled>Delegate Airflow</option>
+                                <option value="00000000-0000-0000-0000-000000000001">Bed-1</option>
+                                <option value="00000000-0000-0000-0000-000000000002">Entry</option>
+                                <option value="00000000-0000-0000-0000-000000000003">Family Room</option>
+                                <option value="00000000-0000-0000-0000-000000000004">Kitchen</option>
+                                <option value="00000000-0000-0000-0000-000000000005">Living Room</option>
+                                <option value="00000000-0000-0000-0000-000000000006">Master</option>
+                              </select></label>
                               <button class="btn btn-secondary btn-block" type="submit">Submit</button>
                             </form>
                           </div>
@@ -188,6 +199,7 @@ p-6 w-full">
                       <td>
                         <div class="flex justify-center"><span>2</span></div>
                       </td>
+                      <td></td>
                       <td>
                         <div class="flex justify-end">
                           <div class="join">
@@ -219,7 +231,17 @@ p-6 w-full">
                               Cooling Sensible</label><label class="input w-full"><span class="label"></span>
                               <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value="">
                               Registers</label><label class="input w-full"><span class="label"></span>
-                              <input name="registerCount" type="number" min="1" required value="2"></label>
+                              <input name="registerCount" type="number" min="1" required value="2" id="registerCount">
+                              Room</label><label class="select w-full"><span class="label"></span>
+                              <select name="delegatedTo">
+                                <option selected disabled>Delegate Airflow</option>
+                                <option value="00000000-0000-0000-0000-000000000001">Bed-1</option>
+                                <option value="00000000-0000-0000-0000-000000000002">Entry</option>
+                                <option value="00000000-0000-0000-0000-000000000003">Family Room</option>
+                                <option value="00000000-0000-0000-0000-000000000004">Kitchen</option>
+                                <option value="00000000-0000-0000-0000-000000000005">Living Room</option>
+                                <option value="00000000-0000-0000-0000-000000000006">Master</option>
+                              </select></label>
                               <button class="btn btn-secondary btn-block" type="submit">Submit</button>
                             </form>
                           </div>
@@ -240,6 +262,7 @@ p-6 w-full">
                       <td>
                         <div class="flex justify-center"><span>3</span></div>
                       </td>
+                      <td></td>
                       <td>
                         <div class="flex justify-end">
                           <div class="join">
@@ -271,7 +294,17 @@ p-6 w-full">
                               Cooling Sensible</label><label class="input w-full"><span class="label"></span>
                               <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value="">
                               Registers</label><label class="input w-full"><span class="label"></span>
-                              <input name="registerCount" type="number" min="1" required value="3"></label>
+                              <input name="registerCount" type="number" min="1" required value="3" id="registerCount">
+                              Room</label><label class="select w-full"><span class="label"></span>
+                              <select name="delegatedTo">
+                                <option selected disabled>Delegate Airflow</option>
+                                <option value="00000000-0000-0000-0000-000000000001">Bed-1</option>
+                                <option value="00000000-0000-0000-0000-000000000002">Entry</option>
+                                <option value="00000000-0000-0000-0000-000000000003">Family Room</option>
+                                <option value="00000000-0000-0000-0000-000000000004">Kitchen</option>
+                                <option value="00000000-0000-0000-0000-000000000005">Living Room</option>
+                                <option value="00000000-0000-0000-0000-000000000006">Master</option>
+                              </select></label>
                               <button class="btn btn-secondary btn-block" type="submit">Submit</button>
                             </form>
                           </div>
@@ -292,6 +325,7 @@ p-6 w-full">
                       <td>
                         <div class="flex justify-center"><span>2</span></div>
                       </td>
+                      <td></td>
                       <td>
                         <div class="flex justify-end">
                           <div class="join">
@@ -323,7 +357,17 @@ p-6 w-full">
                               Cooling Sensible</label><label class="input w-full"><span class="label"></span>
                               <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value="">
                               Registers</label><label class="input w-full"><span class="label"></span>
-                              <input name="registerCount" type="number" min="1" required value="2"></label>
+                              <input name="registerCount" type="number" min="1" required value="2" id="registerCount">
+                              Room</label><label class="select w-full"><span class="label"></span>
+                              <select name="delegatedTo">
+                                <option selected disabled>Delegate Airflow</option>
+                                <option value="00000000-0000-0000-0000-000000000001">Bed-1</option>
+                                <option value="00000000-0000-0000-0000-000000000002">Entry</option>
+                                <option value="00000000-0000-0000-0000-000000000003">Family Room</option>
+                                <option value="00000000-0000-0000-0000-000000000004">Kitchen</option>
+                                <option value="00000000-0000-0000-0000-000000000005">Living Room</option>
+                                <option value="00000000-0000-0000-0000-000000000006">Master</option>
+                              </select></label>
                               <button class="btn btn-secondary btn-block" type="submit">Submit</button>
                             </form>
                           </div>
@@ -344,6 +388,7 @@ p-6 w-full">
                       <td>
                         <div class="flex justify-center"><span>2</span></div>
                       </td>
+                      <td></td>
                       <td>
                         <div class="flex justify-end">
                           <div class="join">
@@ -375,7 +420,17 @@ p-6 w-full">
                               Cooling Sensible</label><label class="input w-full"><span class="label"></span>
                               <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value="">
                               Registers</label><label class="input w-full"><span class="label"></span>
-                              <input name="registerCount" type="number" min="1" required value="2"></label>
+                              <input name="registerCount" type="number" min="1" required value="2" id="registerCount">
+                              Room</label><label class="select w-full"><span class="label"></span>
+                              <select name="delegatedTo">
+                                <option selected disabled>Delegate Airflow</option>
+                                <option value="00000000-0000-0000-0000-000000000001">Bed-1</option>
+                                <option value="00000000-0000-0000-0000-000000000002">Entry</option>
+                                <option value="00000000-0000-0000-0000-000000000003">Family Room</option>
+                                <option value="00000000-0000-0000-0000-000000000004">Kitchen</option>
+                                <option value="00000000-0000-0000-0000-000000000005">Living Room</option>
+                                <option value="00000000-0000-0000-0000-000000000006">Master</option>
+                              </select></label>
                               <button class="btn btn-secondary btn-block" type="submit">Submit</button>
                             </form>
                           </div>
@@ -396,6 +451,7 @@ p-6 w-full">
                       <td>
                         <div class="flex justify-center"><span>2</span></div>
                       </td>
+                      <td></td>
                       <td>
                         <div class="flex justify-end">
                           <div class="join">
@@ -427,7 +483,17 @@ p-6 w-full">
                               Cooling Sensible</label><label class="input w-full"><span class="label"></span>
                               <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value="">
                               Registers</label><label class="input w-full"><span class="label"></span>
-                              <input name="registerCount" type="number" min="1" required value="2"></label>
+                              <input name="registerCount" type="number" min="1" required value="2" id="registerCount">
+                              Room</label><label class="select w-full"><span class="label"></span>
+                              <select name="delegatedTo">
+                                <option selected disabled>Delegate Airflow</option>
+                                <option value="00000000-0000-0000-0000-000000000001">Bed-1</option>
+                                <option value="00000000-0000-0000-0000-000000000002">Entry</option>
+                                <option value="00000000-0000-0000-0000-000000000003">Family Room</option>
+                                <option value="00000000-0000-0000-0000-000000000004">Kitchen</option>
+                                <option value="00000000-0000-0000-0000-000000000005">Living Room</option>
+                                <option value="00000000-0000-0000-0000-000000000006">Master</option>
+                              </select></label>
                               <button class="btn btn-secondary btn-block" type="submit">Submit</button>
                             </form>
                           </div>
@@ -450,8 +516,31 @@ p-6 w-full">
                       Cooling Sensible</label><label class="input w-full"><span class="label"></span>
                       <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value="">
                       Registers</label><label class="input w-full"><span class="label"></span>
-                      <input name="registerCount" type="number" min="1" required value="1"></label>
+                      <input name="registerCount" type="number" min="1" required value="1" id="registerCount">
+                      Room</label><label class="select w-full"><span class="label"></span>
+                      <select name="delegatedTo">
+                        <option selected disabled>Delegate Airflow</option>
+                        <option value="00000000-0000-0000-0000-000000000001">Bed-1</option>
+                        <option value="00000000-0000-0000-0000-000000000002">Entry</option>
+                        <option value="00000000-0000-0000-0000-000000000003">Family Room</option>
+                        <option value="00000000-0000-0000-0000-000000000004">Kitchen</option>
+                        <option value="00000000-0000-0000-0000-000000000005">Living Room</option>
+                        <option value="00000000-0000-0000-0000-000000000006">Master</option>
+                      </select></label>
                       <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                    </form>
+                  </div>
+                </dialog>
+                <dialog id="uploadCSV" class="modal">
+                  <div class="modal-box">
+                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="uploadCSV.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                    <div class="pb-6 space-y-3">
+                      <h1 class="text-3xl font-bold">Upload CSV</h1>
+                      <p class="text-sm italic">Drag and drop, or click to upload</p>
+                    </div>
+                    <form hx-post="/projects/00000000-0000-0000-0000-000000000000/rooms/csv" hx-target="body" hx-swap="outerHTML" enctype="multipart/form-data">
+                      <input type="file" name="file" accept=".csv">
+                      <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
                     </form>
                   </div>
                 </dialog>

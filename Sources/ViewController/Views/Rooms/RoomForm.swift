@@ -30,11 +30,15 @@ struct RoomForm: HTML, Sendable {
     self.room = room
   }
 
-  var route: String {
+  private var route: String {
     SiteRoute.View.router.path(
       for: .project(.detail(projectID, .rooms(.index)))
     )
     .appendingPath(room?.id)
+  }
+
+  private var selectableRooms: [Room] {
+    rooms.filter { $0.delegatedTo == nil }
   }
 
   var body: some HTML {
@@ -104,28 +108,15 @@ struct RoomForm: HTML, Sendable {
           .id("registerCount")
         )
 
-        label(.class("select w-full"), .id("delegateToSelect")) {
+        label(.class("select w-full")) {
           span(.class("label")) { "Room" }
-          Select(rooms, placeholder: "Delegate Airflow") {
-            $0.name
-          }
-          .attributes(.name("delegatedTo"))
+          Select(selectableRooms, label: \.name, placeholder: "Delegate Airflow")
+            .attributes(.name("delegatedTo"))
         }
+
         SubmitButton()
           .attributes(.class("btn-block"))
       }
-    }
-
-    script {
-      """
-      function myClick() {
-        console.log('clicked');
-        const simple = document.getElementById('simple');
-        console.log(simple.style.display);
-        simple.style.display = 'block';
-        console.log(simple.style.display);
-      }
-      """
     }
   }
 }
