@@ -1,0 +1,6 @@
+
+Name,Heating Load,Cooling Total,Cooling Sensible,Register Count,Delegated To
+Bed-1,12345,1234,1321,1,
+Entry,3456,2345,1234,1,
+Kitchen,7654,3456,2453,2,
+Bath-1,890,345,,1,Kitchen
