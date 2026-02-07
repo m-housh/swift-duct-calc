@@ -95,6 +95,9 @@ let package = Package(
         .target(name: "DatabaseClient"),
         .product(name: "DependenciesTestSupport", package: "swift-dependencies"),
         .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
+      ],
+      resources: [
+        .copy("Resources")
       ]
     ),
     .target(

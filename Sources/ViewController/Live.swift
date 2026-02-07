@@ -293,7 +293,7 @@ extension SiteRoute.View.ProjectRoute.RoomRoute {
     case .csv(let csv):
       return await roomsView(on: request, projectID: projectID) {
         let rooms = try await csvParser.parseRooms(csv)
-        _ = try await database.rooms.createMany(projectID, rooms)
+        _ = try await database.rooms.createFromCSV(projectID, rooms)
       }
     // return EmptyHTML()
 

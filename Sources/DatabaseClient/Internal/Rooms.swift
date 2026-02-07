@@ -16,11 +16,59 @@ extension DatabaseClient.Rooms: TestDependencyKey {
         return try model.toDTO()
       },
       createMany: { projectID, rooms in
-        try await rooms.asyncMap { request in
-          let model = try request.toModel(projectID: projectID)
-          try await model.validateAndSave(on: database)
-          return try model.toDTO()
+        try await RoomModel.createMany(projectID: projectID, rooms: rooms, on: database)
+      },
+      createFromCSV: { projectID, rows in
+
+        database.logger.debug("\nCreate From CSV rows: \(rows)\n")
+
+        // Filter out rows that delegate their airflow / load to another room,
+        // these need to be created last.
+        let rowsThatDelegate = rows.filter({
+          $0.delegatedToName != nil && $0.delegatedToName != ""
+        })
+
+        let initialRooms = rows.filter({
+          $0.delegatedToName == nil || $0.delegatedToName == ""
+        })
+        .map(\.createModel)
+
+        database.logger.debug("\nInitial rows: \(initialRooms)\n")
+
+        let initialCreated = try await RoomModel.createMany(
+          projectID: projectID,
+          rooms: initialRooms,
+          on: database
+        )
+        database.logger.debug("\nInitially created rows: \(initialCreated)\n")
+
+        let roomsThatDelegateModels = try rowsThatDelegate.reduce(into: [Room.Create]()) {
+          array, row in
+          database.logger.debug("\n\(row.name), delegating to: \(row.delegatedToName!)\n")
+          guard let created = initialCreated.first(where: { $0.name == row.delegatedToName }) else {
+            database.logger.debug(
+              "\nUnable to find created room with name: \(row.delegatedToName!)\n"
+            )
+            throw NotFoundError()
+          }
+          array.append(
+            Room.Create.init(
+              name: row.name,
+              heatingLoad: row.heatingLoad,
+              coolingTotal: row.coolingTotal,
+              coolingSensible: row.coolingSensible,
+              registerCount: 0,
+              delegatedTo: created.id
+            )
+          )
         }
+
+        return try await RoomModel.createMany(
+          projectID: projectID,
+          rooms: roomsThatDelegateModels,
+          on: database
+        ) + initialCreated
+
       },
       delete: { id in
         guard let model = try await RoomModel.find(id, on: database) else {
@@ -78,6 +126,34 @@ extension DatabaseClient.Rooms: TestDependencyKey {
         return try model.toDTO()
       }
     )
+  }
+}
+
+extension Room.CSV.Row {
+  fileprivate var createModel: Room.Create {
+    assert(delegatedToName == nil || delegatedToName == "")
+    return .init(
+      name: name,
+      heatingLoad: heatingLoad,
+      coolingTotal: coolingTotal,
+      coolingSensible: coolingSensible,
+      registerCount: registerCount,
+      delegatedTo: nil
+    )
+  }
+}
+
+extension RoomModel {
+  fileprivate static func createMany(
+    projectID: Project.ID,
+    rooms: [Room.Create],
+    on database: any Database
+  ) async throws -> [Room] {
+    try await rooms.asyncMap { request in
+      let model = try request.toModel(projectID: projectID)
+      try await model.validateAndSave(on: database)
+      return try model.toDTO()
+    }
   }
 }
 

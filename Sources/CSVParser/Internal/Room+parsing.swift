@@ -25,7 +25,7 @@ struct RoomRowParser: Parser {
 
 enum RoomRowType {
   case header(String)
-  case room(Room.Create)
+  case room(Room.CSV.Row)
 }
 
 struct RoomCreateParser: ParserPrinter {
@@ -34,7 +34,7 @@ struct RoomCreateParser: ParserPrinter {
   //    the room yet, so we will need an intermediate representation for the csv data
   //    that uses a room's name or disregard and require user to delegate airflow in
   //    the ui.
-  var body: some ParserPrinter<Substring.UTF8View, Room.Create> {
+  var body: some ParserPrinter<Substring.UTF8View, Room.CSV.Row> {
     ParsePrint {
       Prefix { $0 != UInt8(ascii: ",") }.map(.string)
       ",".utf8
@@ -51,9 +51,9 @@ struct RoomCreateParser: ParserPrinter {
       Int.parser()
       ",".utf8
       Optionally {
-        Room.ID.parser()
+        Prefix { $0 != UInt8(ascii: "\n") }.map(.string)
       }
     }
-    .map(.memberwise(Room.Create.init))
+    .map(.memberwise(Room.CSV.Row.init))
   }
 }

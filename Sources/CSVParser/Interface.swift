@@ -12,7 +12,7 @@ extension DependencyValues {
 
 @DependencyClient
 public struct CSVParser: Sendable {
-  public var parseRooms: @Sendable (Room.CSV) async throws -> [Room.Create]
+  public var parseRooms: @Sendable (Room.CSV) async throws -> [Room.CSV.Row]
 }
 
 extension CSVParser: DependencyKey {
@@ -24,12 +24,11 @@ extension CSVParser: DependencyKey {
         throw CSVParsingError("Unreadable file data")
       }
       let rows = try RoomCSVParser().parse(string[...].utf8)
-      let rooms = rows.reduce(into: [Room.Create]()) {
+      return rows.reduce(into: [Room.CSV.Row]()) {
         if case .room(let room) = $1 {
           $0.append(room)
         }
       }
-      return rooms
     }
   )
 }

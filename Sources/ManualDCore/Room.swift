@@ -148,6 +148,50 @@ extension Room {
     public init(file: Data) {
       self.file = file
     }
+
+    /// Represents a row in a CSV file.
+    ///
+    /// This is similar to ``Room.Create``, but since the rooms are not yet
+    /// created, delegating to another room is done via the room's name
+    /// instead of id.
+    ///
+    public struct Row: Codable, Equatable, Sendable {
+
+      /// A unique name for the room in the project.
+      public let name: String
+
+      /// The heating load required for the room (from Manual-J).
+      public let heatingLoad: Double
+
+      /// The total cooling load required for the room (from Manual-J).
+      public let coolingTotal: Double?
+
+      /// An optional sensible cooling load for the room.
+      public let coolingSensible: Double?
+
+      /// The number of registers for the room.
+      public let registerCount: Int
+
+      /// An optional room that this room delegates it's airflow to.
+      public let delegatedToName: String?
+
+      public init(
+        name: String,
+        heatingLoad: Double,
+        coolingTotal: Double? = nil,
+        coolingSensible: Double? = nil,
+        registerCount: Int,
+        delegatedToName: String? = nil
+      ) {
+        self.name = name
+        self.heatingLoad = heatingLoad
+        self.coolingTotal = coolingTotal
+        self.coolingSensible = coolingSensible
+        self.registerCount = registerCount
+        self.delegatedToName = delegatedToName
+      }
+    }
+
   }
 
   /// Represents a rectangular size calculation that is stored in the

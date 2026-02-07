@@ -1,4 +1,6 @@
+import CSVParser
 import Dependencies
+import FileClient
 import Foundation
 import ManualDCore
 import Parsing
@@ -60,6 +62,31 @@ struct RoomTests {
       #expect(created.count == 2)
       #expect(created[0].name == "Test 1")
       #expect(created[1].name == "Test 2")
+    }
+  }
+
+  @Test
+  func createFromCSV() async throws {
+    try await withTestUserAndProject {
+      $0.csvParser = .liveValue
+    } operation: { _, project in
+      @Dependency(\.csvParser) var csvParser
+      @Dependency(\.database) var database
+      @Dependency(\.fileClient) var fileClient
+
+      let csvPath = Bundle.module.path(forResource: "rooms", ofType: "csv")
+      let csvFile = Room.CSV(file: try Data(contentsOf: URL(filePath: csvPath!)))
+      let rows = try await csvParser.parseRooms(csvFile)
+      print()
+      print("ROWS: \(rows)")
+      print()
+
+      let created = try await database.rooms.createFromCSV(project.id, rows)
+
+      print()
+      print("CREATED: \(created)")
+      print()
+      #expect(created.count == rows.count)
     }
   }
 
@@ -157,4 +184,3 @@ struct RoomTests {
     }
   }
 }
-
