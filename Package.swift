@@ -6,6 +6,7 @@ let package = Package(
   name: "swift-manual-d",
   products: [
     .executable(name: "App", targets: ["App"]),
+    .executable(name: "ductcalc", targets: ["CLI"]),
     .library(name: "AuthClient", targets: ["AuthClient"]),
     .library(name: "CSVParser", targets: ["CSVParser"]),
     .library(name: "DatabaseClient", targets: ["DatabaseClient"]),
@@ -20,6 +21,7 @@ let package = Package(
     .library(name: "ViewController", targets: ["ViewController"]),
   ],
   dependencies: [
+    .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.7.0"),
     .package(url: "https://github.com/vapor/vapor.git", from: "4.110.1"),
     .package(url: "https://github.com/vapor/fluent.git", from: "4.9.0"),
     .package(url: "https://github.com/vapor/fluent-sqlite-driver.git", from: "4.6.0"),
@@ -52,6 +54,13 @@ let package = Package(
         .product(name: "NIOPosix", package: "swift-nio"),
         .product(name: "VaporElementary", package: "vapor-elementary"),
         .product(name: "VaporRouting", package: "vapor-routing"),
+      ]
+    ),
+    .executableTarget(
+      name: "CLI",
+      dependencies: [
+        .target(name: "ManualDClient"),
+        .product(name: "ArgumentParser", package: "swift-argument-parser"),
       ]
     ),
     .target(
