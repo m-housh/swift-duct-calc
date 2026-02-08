@@ -102,6 +102,13 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
               p {
                 "Copyright © \(Date().description.prefix(4)) - All rights reserved by Michael Housh"
               }
+              a(
+                .class("btn btn-ghost"),
+                .href("https://git.housh.dev/michael/swift-manual-d/src/branch/main/LICENSE"),
+                .target(.blank)
+              ) {
+                "Openly licensed via CC-BY-NC-SA 4.0"
+              }
             }
           }
         }

@@ -17,6 +17,10 @@ extension ViewController.Request {
     @Dependency(\.pdfClient) var pdfClient
 
     switch route {
+      case .home:
+      return await view {
+        HomeView()
+      }
     case .test:
       // let projectID = UUID(uuidString: "E796C96C-F527-4753-A00A-EBCF25630663")!
       // return await view {

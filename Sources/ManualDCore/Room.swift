@@ -188,7 +188,9 @@ extension Room {
         self.coolingTotal = coolingTotal
         self.coolingSensible = coolingSensible
         self.registerCount = registerCount
-        self.delegatedToName = delegatedToName
+        // Treat empty strings as nil, as they are often empty
+        // when left blank in a CSV file.
+        self.delegatedToName = delegatedToName == "" ? nil : delegatedToName
       }
     }
 

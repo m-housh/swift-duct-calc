@@ -8,6 +8,7 @@ extension SiteRoute {
   ///
   /// The routes return html.
   public enum View: Equatable, Sendable {
+    case home
     case login(LoginRoute)
     case signup(SignupRoute)
     case project(ProjectRoute)
@@ -18,6 +19,9 @@ extension SiteRoute {
     public static let router = OneOf {
       Route(.case(Self.test)) {
         Path { "test" }
+        Method.get
+      }
+      Route(.case(Self.home)) {
         Method.get
       }
       Route(.case(Self.login)) {
