@@ -38,6 +38,7 @@ extension AuthClient: TestDependencyKey {
           .init(email: createForm.email, password: createForm.password)
         )
         request.auth.login(user)
+        request.session.authenticate(user)
         request.logger.debug("LOGGED IN: \(user.id)")
         return user
       },
