@@ -15,6 +15,19 @@ import ViewController
 struct ViewControllerTests {
 
   @Test
+  func home() async throws {
+    try await withDependencies {
+      $0.viewController = .liveValue
+      $0.auth = .failing
+    } operation: {
+      @Dependency(\.viewController) var viewController
+
+      let home = try await viewController.view(.test(.home))
+      assertSnapshot(of: home, as: .html)
+    }
+  }
+
+  @Test
   func login() async throws {
     try await withDependencies {
       $0.viewController = .liveValue

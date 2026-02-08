@@ -4,6 +4,16 @@ import ElementaryHTMX
 struct HomeView: HTML, Sendable {
 
   var body: some HTML {
+    div(.class("flex justify-end me-4")) {
+      button(
+        .class("btn btn-ghost btn-secondary text-lg"),
+        .hx.get(route: .login(.index())),
+        .hx.target("body"),
+        .hx.swap(.outerHTML)
+      ) {
+        "Login"
+      }
+    }
     div(.class("hero min-h-screen")) {
       div(
         .class(

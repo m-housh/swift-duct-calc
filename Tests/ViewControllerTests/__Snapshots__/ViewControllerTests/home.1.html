@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Duct Calc</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="ductcalc.com" name="og:site_name">
+    <meta content="Duct Calc" name="og:title">
+    <meta content="Duct sizing based on ACCA, Manual-D." name="description">
+    <meta content="Duct sizing based on ACCA, Manual-D." name="og:description">
+    <meta content="/images/mand_logo.png" name="og:image">
+    <meta content="/images/mand_logo.png" name="twitter:image">
+    <meta content="Duct Calc" name="twitter:image:alt">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="1536" name="og:image:width">
+    <meta content="1024" name="og:image:height">
+    <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
+    <script src="https://unpkg.com/htmx.org@2.0.8"></script>
+    <script src="/js/htmx-download.js"></script>
+    <script src="/js/main.js"></script>
+    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="/css/htmx.css">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
+    <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <script src="https://unpkg.com/htmx-remove@latest" crossorigin="anonymous" integrity="sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT"></script>
+  </head>
+  <body>
+    <div class="flex flex-col min-h-screen min-w-full justify-between">
+      <main class="flex flex-col min-h-screen min-w-full grow mb-auto">
+        <div class="flex justify-end me-4">
+          <button class="btn btn-ghost btn-secondary text-lg" hx-get="/login" hx-target="body" hx-swap="outerHTML">Login</button>
+        </div>
+        <div class="hero min-h-screen">
+          <div class="hero-content text-center bg-base-200 dark:bg-base-300
+min-w-[80%] min-h-[400px] rounded-3xl shadow-3xl">
+            <div>
+              <div class="flex justify-center items-center">
+                <div class="flex border-b-8 border-sky-600 
+text-8xl font-bold my-auto space-2">
+                  <h1 class="me-2">Duct Calc</h1>
+                  <div class="">
+                    <span class="bg-violet-600 rounded-md
+                    text-5xl rotate-180 p-2" style="writing-mode: vertical-rl">Pro</span>
+                  </div>
+                </div>
+              </div>
+              Open source residential duct design program<a class="btn btn-ghost text-md italic" href="https://git.housh.dev/michael/swift-manual-d" target="_blank"></a>
+              <p class="text-xl py-6">Manual-D™ speed sheet, but on the web!</p>
+              <button class="btn btn-xl bg-violet-600 mt-6" hx-get="/signup" hx-target="body" hx-swap="outerHTML">Get Started</button>
+              <p class="text-xs italic mt-8">
+                Manual-D™ is a trademark of Air Conditioning Contractors of America (ACCA).
+                
+                This site is not designed by or affiliated with ACCA.
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+      <div class="bottom-0 left-0 bg-error">
+        <footer class="footer sm:footer-horizontal footer-center
+bg-base-300 text-base-content p-4">
+          <aside>
+            <p>Copyright © 2026 - All rights reserved by Michael Housh</p>
+            Openly licensed via CC-BY-NC-SA 4.0<a class="btn btn-ghost" href="https://git.housh.dev/michael/swift-manual-d/src/branch/main/LICENSE" target="_blank"></a>
+          </aside>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
