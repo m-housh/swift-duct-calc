@@ -1,4 +1,6 @@
 import Elementary
+import ElementaryHTMX
+import ManualDCore
 
 public struct SubmitButton: HTML, Sendable {
   let title: String
@@ -71,6 +73,20 @@ public struct TrashButton: HTML, Sendable {
       .class("btn btn-error")
     ) {
       SVG(.trash)
+    }
+  }
+}
+
+public struct DuctulatorButton: HTML, Sendable {
+  public init() {}
+
+  public var body: some HTML<HTMLTag.a> {
+    a(
+      .class("btn"),
+      .href(route: .ductulator(.index)),
+      .target(.blank)
+    ) {
+      "Ductulator"
     }
   }
 }

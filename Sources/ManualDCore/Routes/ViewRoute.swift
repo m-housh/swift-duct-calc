@@ -12,7 +12,7 @@ extension SiteRoute {
     case login(LoginRoute)
     case signup(SignupRoute)
     case project(ProjectRoute)
-    case quickCalc(QuickCalcRoute)
+    case ductulator(DuctulatorRoute)
     case user(UserRoute)
     //FIX: Remove.
     case test
@@ -34,8 +34,8 @@ extension SiteRoute {
       Route(.case(Self.project)) {
         SiteRoute.View.ProjectRoute.router
       }
-      Route(.case(Self.quickCalc)) {
-        SiteRoute.View.QuickCalcRoute.router
+      Route(.case(Self.ductulator)) {
+        SiteRoute.View.DuctulatorRoute.router
       }
       Route(.case(Self.user)) {
         SiteRoute.View.UserRoute.router
@@ -991,7 +991,7 @@ extension SiteRoute.View.UserRoute {
 }
 
 extension SiteRoute.View {
-  public enum QuickCalcRoute: Equatable, Sendable {
+  public enum DuctulatorRoute: Equatable, Sendable {
     case index
     case submit(Form)
 

@@ -6,7 +6,7 @@ import ManualDClient
 import ManualDCore
 import Styleguide
 
-struct QuickCalcView: HTML, Sendable {
+struct DuctulatorView: HTML, Sendable {
 
   let isLoggedIn: Bool
 
@@ -32,7 +32,7 @@ struct QuickCalcView: HTML, Sendable {
           div(.class("flex space-x-6 items-center text-4xl")) {
             SVG(.calculator)
             h1(.class("text-4xl font-bold me-10")) {
-              "Duct Size"
+              "Ductulator"
             }
           }
 
@@ -42,7 +42,7 @@ struct QuickCalcView: HTML, Sendable {
 
           form(
             .class("space-y-4 mt-6"),
-            .hx.post(route: .quickCalc(.index)),
+            .hx.post(route: .ductulator(.index)),
             .hx.target("#\(Result.id)"),
             .hx.swap(.outerHTML)
           ) {
@@ -103,7 +103,7 @@ struct QuickCalcView: HTML, Sendable {
           h2(.class("text-3xl font-bold")) { "Result" }
           button(
             .class("btn btn-primary"),
-            .hx.get(route: .quickCalc(.index)),
+            .hx.get(route: .ductulator(.index)),
             .hx.target("body"),
             .hx.swap(.outerHTML)
           ) {

@@ -32,67 +32,68 @@
     <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
       <main class="flex flex-col min-h-screen min-w-full grow mb-auto">
         <div>
-          <div class="flex justify-end m-4">
+          <div class="flex justify-end space-x-4 m-4">
+            <div class="tooltip tooltip-left" data-tip="Duct size calculator"><a class="btn btn-ghost btn-accent text-lg" href="/duct-size" target="_blank">Ductulator</a></div>
             <button class="btn btn-ghost btn-secondary text-lg" hx-get="/login" hx-target="body" hx-swap="outerHTML" hx-push-url="true">Login</button>
           </div>
-          <div class="hero">
-            <div class="relative hero-content text-center bg-base-300
-w-full min-h-[400px] rounded-3xl shadow-3xl overflow-hidden">
+          <div class="mx-10 lg:mx-20">
+            <div class="relative text-center bg-base-300
+rounded-3xl shadow-3xl overflow-hidden">
               <div class="bg-secondary text-xl font-bold 
 absolute top-10 -left-15
 px-6 py-2 w-[250px] -rotate-45">BETA</div>
               <div>
-                <div class="flex justify-center items-center">
-                  <div class="flex border-b-6 border-accent
+                <div class="flex justify-center mt-30 md:mt-15 lg:mt-6">
+                  <div class="flex items-end border-b-6 border-accent
 text-8xl font-bold my-auto space-2">
                     <h1 class="me-2">Duct Calc</h1>
-                    <div class="">
+                    <div>
                       <span class="bg-secondary rounded-md
-                      text-5xl rotate-180 p-2" style="writing-mode: vertical-rl">Pro</span>
+                      text-5xl rotate-180 p-2 -mx-2" style="writing-mode: vertical-rl">Pro</span>
                     </div>
                   </div>
                 </div>
                 Open source residential duct design program<a class="btn btn-ghost text-md text-primary font-bold italic" href="https://git.housh.dev/michael/swift-duct-calc" target="_blank"></a>
                 <p class="text-3xl py-6">Manual-D™ speed sheet, but on the web!</p>
                 <button class="btn btn-xl btn-primary mt-6" hx-get="/signup" hx-target="body" hx-swap="outerHTML">Get Started</button>
-                <p class="text-xs italic mt-8">
+                <p class="text-xs italic my-6">
                   Manual-D™ is a trademark of Air Conditioning Contractors of America (ACCA).
                   
                   This site is not designed by or affiliated with ACCA.
                 </p>
               </div>
             </div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mx-20 my-6">
-            <div class="border-3 border-accent rounded-lg shadow-lg p-4">
-              <div class="flex items-center space-x-4">
-                <div class="text-5xl text-primary font-bold">Features</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+              <div class="border-3 border-accent rounded-lg shadow-lg p-4">
+                <div class="flex items-center space-x-4">
+                  <div class="text-5xl text-primary font-bold">Features</div>
+                </div>
+                <div class="text-xl ms-10 mt-10">
+                  <ul class="list-disc">
+                    <li>
+                      <div class="font-bold italic bg-secondary rounded-lg shadow-lg px-4 w-fit">Built by humans</div>
+                    </li>
+                    <li>Fully open source.</li>
+                    <li>Great replacement for speed sheet users.</li>
+                    <li>Great for classrooms.</li>
+                    <li>Store your projects in one place.</li>
+                    <li>Export final project to pdf.</li>
+                    <li>Import room loads via CSV file.</li>
+                    <li>Web based.</li>
+                    <li>Self host (run on your own infrastructure).</li>
+                  </ul>
+                </div>
               </div>
-              <div class="text-xl ms-10 mt-10">
-                <ul class="list-disc">
-                  <li>
-                    <div class="font-bold italic bg-secondary rounded-lg shadow-lg px-4 w-fit">Built by humans</div>
-                  </li>
-                  <li>Fully open source.</li>
-                  <li>Great replacement for speed sheet users.</li>
-                  <li>Great for classrooms.</li>
-                  <li>Store your projects in one place.</li>
-                  <li>Export final project to pdf.</li>
-                  <li>Import room loads via CSV file.</li>
-                  <li>Web based.</li>
-                  <li>Self host (run on your own infrastructure).</li>
-                </ul>
-              </div>
-            </div>
-            <div class="border-3 border-accent rounded-lg shadow-lg p-4">
-              <div class="text-5xl text-primary font-bold">Coming Soon</div>
-              <div class="text-xl ms-10 mt-10">
-                <ul class="list-disc">
-                  <li>API integration.</li>
-                  <li>Command line interface.</li>
-                  <li>Fitting selection tool.</li>
-                  <li>Room load import from PDF.</li>
-                </ul>
+              <div class="border-3 border-accent rounded-lg shadow-lg p-4">
+                <div class="text-5xl text-primary font-bold">Coming Soon</div>
+                <div class="text-xl ms-10 mt-10">
+                  <ul class="list-disc">
+                    <li>API integration.</li>
+                    <li>Command line interface.</li>
+                    <li>Fitting selection tool.</li>
+                    <li>Room load import from PDF.</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>

@@ -1,15 +1,19 @@
 import Elementary
 import ElementaryHTMX
+import Styleguide
 
 struct HomeView: HTML, Sendable {
 
   var body: some HTML {
     div(  // Uncomment to test different theme's.
     // .data("theme", value: "cyberpunk")
-    // NOTE: Footer background color will follow system theme, it will actually be the
-    //      same as the `hero` background in reality.
+    // NOTE: Footer background color will follow system theme.
     ) {
-      div(.class("flex justify-end m-4")) {
+      div(.class("flex justify-end space-x-4 m-4")) {
+        DuctulatorButton()
+          .attributes(.class("btn-ghost btn-accent text-lg"))
+          .tooltip("Duct size calculator", position: .left)
+
         button(
           .class("btn btn-ghost btn-secondary text-lg"),
           .hx.get(route: .login(.index())),
@@ -20,12 +24,13 @@ struct HomeView: HTML, Sendable {
           "Login"
         }
       }
-      div(.class("hero")) {
+
+      div(.class("mx-10 lg:mx-20")) {
         div(
           .class(
             """
-            relative hero-content text-center bg-base-300
-            w-full min-h-[400px] rounded-3xl shadow-3xl overflow-hidden
+            relative text-center bg-base-300
+            rounded-3xl shadow-3xl overflow-hidden
             """
           )
         ) {
@@ -62,7 +67,7 @@ struct HomeView: HTML, Sendable {
             ) {
               "Get Started"
             }
-            p(.class("text-xs italic mt-8")) {
+            p(.class("text-xs italic my-6")) {
               """
               Manual-D™ is a trademark of Air Conditioning Contractors of America (ACCA).
 
@@ -72,46 +77,45 @@ struct HomeView: HTML, Sendable {
           }
         }
 
-      }
-
-      div(.class("grid grid-cols-1 md:grid-cols-2 gap-4 mx-20 my-6")) {
-        div(.class("border-3 border-accent rounded-lg shadow-lg p-4")) {
-          div(.class("flex items-center space-x-4")) {
-            div(.class("text-5xl text-primary font-bold")) {
-              "Features"
-            }
-          }
-          div(.class("text-xl ms-10 mt-10")) {
-            ul(.class("list-disc")) {
-              li {
-                div(
-                  .class("font-bold italic bg-secondary rounded-lg shadow-lg px-4 w-fit")
-                ) {
-                  "Built by humans"
-                }
+        div(.class("grid grid-cols-1 md:grid-cols-2 gap-4 my-6")) {
+          div(.class("border-3 border-accent rounded-lg shadow-lg p-4")) {
+            div(.class("flex items-center space-x-4")) {
+              div(.class("text-5xl text-primary font-bold")) {
+                "Features"
               }
-              li { "Fully open source." }
-              li { "Great replacement for speed sheet users." }
-              li { "Great for classrooms." }
-              li { "Store your projects in one place." }
-              li { "Export final project to pdf." }
-              li { "Import room loads via CSV file." }
-              li { "Web based." }
-              li { "Self host (run on your own infrastructure)." }
+            }
+            div(.class("text-xl ms-10 mt-10")) {
+              ul(.class("list-disc")) {
+                li {
+                  div(
+                    .class("font-bold italic bg-secondary rounded-lg shadow-lg px-4 w-fit")
+                  ) {
+                    "Built by humans"
+                  }
+                }
+                li { "Fully open source." }
+                li { "Great replacement for speed sheet users." }
+                li { "Great for classrooms." }
+                li { "Store your projects in one place." }
+                li { "Export final project to pdf." }
+                li { "Import room loads via CSV file." }
+                li { "Web based." }
+                li { "Self host (run on your own infrastructure)." }
+              }
             }
           }
-        }
 
-        div(.class("border-3 border-accent rounded-lg shadow-lg p-4")) {
-          div(.class("text-5xl text-primary font-bold")) {
-            "Coming Soon"
-          }
-          div(.class("text-xl ms-10 mt-10")) {
-            ul(.class("list-disc")) {
-              li { "API integration." }
-              li { "Command line interface." }
-              li { "Fitting selection tool." }
-              li { "Room load import from PDF." }
+          div(.class("border-3 border-accent rounded-lg shadow-lg p-4")) {
+            div(.class("text-5xl text-primary font-bold")) {
+              "Coming Soon"
+            }
+            div(.class("text-xl ms-10 mt-10")) {
+              ul(.class("list-disc")) {
+                li { "API integration." }
+                li { "Command line interface." }
+                li { "Fitting selection tool." }
+                li { "Room load import from PDF." }
+              }
             }
           }
         }
@@ -119,23 +123,24 @@ struct HomeView: HTML, Sendable {
     }
   }
 
+  // TODO: When beta flag is gone, then remove the responsive margin of the header.
   var header: some HTML<HTMLTag.div> {
-    div(.class("flex justify-center items-center")) {
+    div(.class("flex justify-center mt-30 md:mt-15 lg:mt-6")) {
       div(
         .class(
           """
-          flex border-b-6 border-accent
+          flex items-end border-b-6 border-accent
           text-8xl font-bold my-auto space-2
           """
         )
       ) {
         h1(.class("me-2")) { "Duct Calc" }
-        div(.class("")) {
+        div {
           span(
             .class(
               """
               bg-secondary rounded-md
-              text-5xl rotate-180 p-2
+              text-5xl rotate-180 p-2 -mx-2
               """
             ),
             .style("writing-mode: vertical-rl")

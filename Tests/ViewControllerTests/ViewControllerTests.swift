@@ -28,13 +28,13 @@ struct ViewControllerTests {
   }
 
   @Test
-  func quickCalc() async throws {
+  func ductulator() async throws {
     try await withDependencies {
       $0.viewController = .liveValue
       $0.auth = .failing
     } operation: {
       @Dependency(\.viewController) var viewController
-      let view = try await viewController.view(.test(.quickCalc(.index)))
+      let view = try await viewController.view(.test(.ductulator(.index)))
       assertSnapshot(of: view, as: .html)
     }
   }

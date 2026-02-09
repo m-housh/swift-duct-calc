@@ -96,7 +96,7 @@ extension ViewController.Request {
     case .project(let route):
       return await route.renderView(on: self)
 
-    case .quickCalc(let route):
+    case .ductulator(let route):
       return await route.renderView(on: self)
 
     case .user(let route):
@@ -712,7 +712,7 @@ extension SiteRoute.View.UserRoute.Profile {
   }
 }
 
-extension SiteRoute.View.QuickCalcRoute {
+extension SiteRoute.View.DuctulatorRoute {
 
   func renderView(
     on request: ViewController.Request
@@ -722,7 +722,7 @@ extension SiteRoute.View.QuickCalcRoute {
     switch self {
     case .index:
       return await request.view {
-        QuickCalcView(
+        DuctulatorView(
           isLoggedIn: request.isLoggedIn
         )
       }
@@ -736,7 +736,7 @@ extension SiteRoute.View.QuickCalcRoute {
         }
         return (ductSize, rectangularSize)
       } onSuccess: { (ductSize, rectangularSize) in
-        QuickCalcView.Result(ductSize: ductSize, rectangularSize: rectangularSize)
+        DuctulatorView.Result(ductSize: ductSize, rectangularSize: rectangularSize)
       }
     }
   }
