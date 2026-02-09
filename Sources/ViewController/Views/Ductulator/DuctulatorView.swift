@@ -17,8 +17,8 @@ struct DuctulatorView: HTML, Sendable {
   var body: some HTML {
     div {
       Navbar(
-        sidebarToggle: false,
-        userProfile: isLoggedIn
+        showSidebarToggle: false,
+        isLoggedIn: isLoggedIn
       )
       div(.class("flex justify-center items-center px-10")) {
         div(

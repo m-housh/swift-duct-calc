@@ -8,7 +8,7 @@ struct UserView: HTML, Sendable {
 
   var body: some HTML {
     div {
-      Navbar(sidebarToggle: false, userProfile: false)
+      Navbar(showSidebarToggle: false, isLoggedIn: false)
 
       div(.class("p-4")) {
         Row {

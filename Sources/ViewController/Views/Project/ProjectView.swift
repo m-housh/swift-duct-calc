@@ -35,7 +35,7 @@ struct ProjectView<Inner: HTML>: HTML, Sendable where Inner: Sendable {
       input(.id("my-drawer-1"), .type(.checkbox), .class("drawer-toggle"))
 
       div(.class("drawer-content overflow-auto")) {
-        Navbar(sidebarToggle: true)
+        Navbar(showSidebarToggle: true)
         div(.class("p-4")) {
           inner
             .environment(ProjectViewValue.$projectID, projectID)

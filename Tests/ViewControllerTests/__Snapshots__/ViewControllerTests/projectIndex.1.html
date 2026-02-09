@@ -34,18 +34,23 @@
         <div>
           <nav class="navbar w-full bg-base-300 text-base-content shadow-sm mb-4">
             <div class="flex flex-1 space-x-4 items-center">
-              <div class="tooltip tooltip-right" data-tip="Home">
-                <a class="flex w-fit h-fit text-xl items-end px-4 py-2 btn btn-square btn-ghost hover:bg-neutral hover:text-white" href="/projects">
+              <div class="tooltip tooltip-right" data-tip="Projects">
+                <a class="flex w-fit h-fit text-2xl items-end px-4 py-2 btn btn-square btn-ghost hover:bg-neutral hover:text-white" href="/projects">
                 <img src="/images/mand_logo_sm.webp">
                 Duct Calc<span></span></a>
               </div>
             </div>
-            <div class="flex-none dropdown dropdown-end dropdown-hover">
-              <div class="btn m-1 btn btn-square btn-ghost hover:bg-neutral hover:text-white" tabindex="0" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg></div>
-              <ul tabindex="-1" class="dropdown-content menu bg-base-200 rounded-box z-1 w-52 py-2 shadow-sm">
-                <li><a href="/profile">Profile</a></li>
-                <li><a href="/logout">Logout</a></li>
-              </ul>
+            <div class="flex-none">
+              <div class="flex items-end space-x-4">
+                <div class="tooltip tooltip-left" data-tip="Duct size calculator"><a class="btn btn-ghost btn-primary text-lg" href="/duct-size" target="_blank">Ductulator</a></div>
+                <div class="dropdown dropdown-end dropdown-hover">
+                  <div class="btn m-1 btn btn-square btn-ghost hover:bg-neutral hover:text-white" tabindex="0" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg></div>
+                  <ul tabindex="-1" class="dropdown-content menu bg-base-200 rounded-box z-1 w-52 py-2 shadow-sm">
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </nav>
           <div class="m-6">

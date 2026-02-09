@@ -17,7 +17,7 @@ struct ProjectsTable: HTML, Sendable {
 
   var body: some HTML {
     div {
-      Navbar(sidebarToggle: false)
+      Navbar(showSidebarToggle: false)
       div(.class("m-6")) {
         PageTitleRow {
           PageTitle { "Projects" }
