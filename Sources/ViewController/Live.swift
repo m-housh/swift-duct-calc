@@ -17,7 +17,7 @@ extension ViewController.Request {
     @Dependency(\.pdfClient) var pdfClient
 
     switch route {
-      case .home:
+    case .home:
       return await view {
         HomeView()
       }
@@ -104,7 +104,7 @@ extension ViewController.Request {
     let inner = await inner()
     let theme = await self.theme
 
-    return MainPage(displayFooter: displayFooter, theme: theme) {
+    return MainPage(displayFooter: displayFooter, theme: theme ?? .default) {
       inner
     }
   }
@@ -605,6 +605,7 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
           try await database.trunkSizes.delete(id)
         }
       case .submit(let form):
+        request.logger.debug("Trunk Form: \(form)")
         return await view(on: request, projectID: projectID) {
           _ = try await database.trunkSizes.create(
             form.toCreate(logger: request.logger)

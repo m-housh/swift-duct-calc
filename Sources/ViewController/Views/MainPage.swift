@@ -52,6 +52,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     script(.src("https://unpkg.com/htmx.org@2.0.8")) {}
     script(.src("/js/htmx-download.js")) {}
     script(.src("/js/main.js")) {}
+    script(.src("https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4")) {}
     link(.rel(.stylesheet), .href("/css/output.css"))
     link(.rel(.stylesheet), .href("/css/htmx.css"))
     link(
@@ -104,7 +105,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
               }
               a(
                 .class("btn btn-ghost"),
-                .href("https://git.housh.dev/michael/swift-manual-d/src/branch/main/LICENSE"),
+                .href("https://git.housh.dev/michael/swift-duct-calc/src/branch/main/LICENSE"),
                 .target(.blank)
               ) {
                 "Openly licensed via CC-BY-NC-SA 4.0"

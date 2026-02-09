@@ -190,25 +190,25 @@ extension ProjectView {
             div(.class("flex items-center justify-center")) {
               SVG(icon)
             }
-            .attributes(.class("is-drawer-close:text-green-400"), when: isComplete)
-            .attributes(.class("is-drawer-close:text-error"), when: !isComplete && !hideIsComplete)
+            .attributes(.class("text-green-400"), when: isComplete)
+            .attributes(.class("text-error"), when: !isComplete && !hideIsComplete)
 
             div(.class("flex items-center justify-center")) {
               span { title }
             }
           }
 
-          if !hideIsComplete {
-            div(.class("flex grow justify-end items-end is-drawer-close:hidden")) {
-              if isComplete {
-                SVG(.badgeCheck)
-              } else {
-                SVG(.ban)
-              }
-            }
-            .attributes(.class("text-green-400"), when: isComplete)
-            .attributes(.class("text-error"), when: !isComplete)
-          }
+          // if !hideIsComplete {
+          //   div(.class("flex grow justify-end items-end is-drawer-close:hidden")) {
+          //     if isComplete {
+          //       SVG(.badgeCheck)
+          //     } else {
+          //       SVG(.ban)
+          //     }
+          //   }
+          //   .attributes(.class("text-green-400"), when: isComplete)
+          //   .attributes(.class("text-error"), when: !isComplete)
+          // }
         }
       }
     }

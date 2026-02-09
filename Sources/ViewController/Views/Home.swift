@@ -43,7 +43,7 @@ struct HomeView: HTML, Sendable {
             header
             a(
               .class("btn btn-ghost text-md text-primary font-bold italic"),
-              .href("https://git.housh.dev/michael/swift-manual-d"),
+              .href("https://git.housh.dev/michael/swift-duct-calc"),
               .target(.blank)
             ) {
               "Open source residential duct design program"
@@ -70,6 +70,7 @@ struct HomeView: HTML, Sendable {
             }
           }
         }
+
       }
 
       div(.class("grid grid-cols-1 md:grid-cols-2 gap-4 mx-20 my-6")) {
