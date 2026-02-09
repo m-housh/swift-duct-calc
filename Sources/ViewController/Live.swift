@@ -647,7 +647,17 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
 extension SiteRoute.View.UserRoute {
 
   func renderView(on request: ViewController.Request) async -> AnySendableHTML {
+    @Dependency(\.auth) var auth
+
     switch self {
+    case .logout:
+      return await request.view {
+        await ResultView {
+          try auth.logout()
+        } onSuccess: {
+          LoginForm(next: nil)
+        }
+      }
     case .profile(let route):
       return await route.renderView(on: request)
     }

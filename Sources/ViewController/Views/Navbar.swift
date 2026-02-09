@@ -49,14 +49,21 @@ struct Navbar: HTML, Sendable {
       }
       if userProfile {
         // TODO: Make dropdown
-        div(.class("flex-none")) {
-          a(
-            .href(route: .user(.profile(.index))),
-          ) {
+        div(.class("flex-none dropdown dropdown-end dropdown-hover")) {
+          div(.class("btn m-1"), .tabindex(0), .role("button")) {
             SVG(.circleUser)
           }
-          .navButton()
-          .tooltip("Profile")
+          ul(
+            .tabindex(-1),
+            .class("dropdown-content menu bg-base-200 rounded-box z-1 w-52 py-2 shadow-sm")
+          ) {
+            li {
+              a(.href(route: .user(.profile(.index)))) { "Profile" }
+            }
+            li {
+              a(.href(route: .user(.logout))) { "Logout" }
+            }
+          }
         }
       }
     }

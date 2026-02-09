@@ -14,7 +14,8 @@ struct HomeView: HTML, Sendable {
           .class("btn btn-ghost btn-secondary text-lg"),
           .hx.get(route: .login(.index())),
           .hx.target("body"),
-          .hx.swap(.outerHTML)
+          .hx.swap(.outerHTML),
+          .hx.pushURL(true)
         ) {
           "Login"
         }

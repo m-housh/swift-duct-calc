@@ -899,10 +899,15 @@ extension SiteRoute.View {
 extension SiteRoute.View {
   public enum UserRoute: Equatable, Sendable {
     case profile(Profile)
+    case logout
 
     static let router = OneOf {
       Route(.case(Self.profile)) {
         Profile.router
+      }
+      Route(.case(Self.logout)) {
+        Path { "logout" }
+        Method.get
       }
     }
   }
