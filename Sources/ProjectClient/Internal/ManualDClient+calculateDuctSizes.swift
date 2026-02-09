@@ -33,6 +33,7 @@ extension ManualDClient {
     )
   }
 
+  // FIX: Need to add the loads for rooms that get delegated to other rooms here.
   func calculateRoomSizes(
     rooms: [Room],
     sharedRequest: DuctSizeSharedRequest,
@@ -42,10 +43,15 @@ extension ManualDClient {
     var retval: [DuctSizes.RoomContainer] = []
     let totalHeatingLoad = rooms.totalHeatingLoad
     let totalCoolingSensible = try rooms.totalCoolingSensible(shr: sharedRequest.projectSHR)
+    let nonDelegatedRooms = rooms.filter { $0.delegatedTo == nil }
 
-    for room in rooms {
-      let heatingLoad = room.heatingLoadPerRegister
+    for room in nonDelegatedRooms {
+      // Get all the rooms that delegate their loads to this room.
+      let delegatedRooms = rooms.filter { $0.delegatedTo == room.id }
+
+      let heatingLoad = room.heatingLoadPerRegister(delegatedRooms: delegatedRooms)
       let coolingLoad = try room.coolingSensiblePerRegister(projectSHR: sharedRequest.projectSHR)
+
       let heatingPercent = heatingLoad / totalHeatingLoad
       let coolingPercent = coolingLoad / totalCoolingSensible
       let heatingCFM = heatingPercent * Double(sharedRequest.equipmentInfo.heatingCFM)
@@ -181,47 +187,34 @@ extension DuctSizes.SizeContainer {
   }
 }
 
-// extension Room {
+// extension TrunkSize.RoomProxy {
 //
-//   var heatingLoadPerRegister: Double {
-//
-//     heatingLoad / Double(registerCount)
+//   // We need to make sure if registers got removed after a trunk
+//   // was already made / saved that we do not include registers that
+//   // no longer exist.
+//   private var actualRegisterCount: Int {
+//     guard registers.count <= room.registerCount else {
+//       return room.registerCount
+//     }
+//     return registers.count
 //   }
 //
-//   func coolingSensiblePerRegister(projectSHR: Double) -> Double {
-//     let sensible = coolingSensible ?? (coolingTotal * projectSHR)
-//     return sensible / Double(registerCount)
+//   var totalHeatingLoad: Double {
+//     room.heatingLoadPerRegister() * Double(actualRegisterCount)
+//   }
+//
+//   func totalCoolingSensible(projectSHR: Double) throws -> Double {
+//     try room.coolingSensiblePerRegister(projectSHR: projectSHR) * Double(actualRegisterCount)
 //   }
 // }
 
-extension TrunkSize.RoomProxy {
-
-  // We need to make sure if registers got removed after a trunk
-  // was already made / saved that we do not include registers that
-  // no longer exist.
-  private var actualRegisterCount: Int {
-    guard registers.count <= room.registerCount else {
-      return room.registerCount
-    }
-    return registers.count
-  }
-
-  var totalHeatingLoad: Double {
-    room.heatingLoadPerRegister * Double(actualRegisterCount)
-  }
-
-  func totalCoolingSensible(projectSHR: Double) throws -> Double {
-    try room.coolingSensiblePerRegister(projectSHR: projectSHR) * Double(actualRegisterCount)
-  }
-}
-
-extension TrunkSize {
-
-  var totalHeatingLoad: Double {
-    rooms.reduce(into: 0) { $0 += $1.totalHeatingLoad }
-  }
-
-  func totalCoolingSensible(projectSHR: Double) throws -> Double {
-    try rooms.reduce(into: 0) { $0 += try $1.totalCoolingSensible(projectSHR: projectSHR) }
-  }
-}
+// extension TrunkSize {
+//
+//   var totalHeatingLoad: Double {
+//     rooms.reduce(into: 0) { $0 += $1.totalHeatingLoad }
+//   }
+//
+//   func totalCoolingSensible(projectSHR: Double) throws -> Double {
+//     try rooms.reduce(into: 0) { $0 += try $1.totalCoolingSensible(projectSHR: projectSHR) }
+//   }
+// }

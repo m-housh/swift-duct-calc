@@ -1,50 +1,6 @@
 import Foundation
 import ManualDCore
 
-extension Room {
-
-  public var heatingLoadPerRegister: Double {
-    heatingLoad / Double(registerCount)
-  }
-
-  public func coolingSensiblePerRegister(projectSHR: Double) throws -> Double {
-    let sensible = try coolingLoad.ensured(shr: projectSHR).sensible
-    return sensible / Double(registerCount)
-  }
-}
-
-extension TrunkSize.RoomProxy {
-
-  // We need to make sure if registers got removed after a trunk
-  // was already made / saved that we do not include registers that
-  // no longer exist.
-  private var actualRegisterCount: Int {
-    guard registers.count <= room.registerCount else {
-      return room.registerCount
-    }
-    return registers.count
-  }
-
-  var totalHeatingLoad: Double {
-    room.heatingLoadPerRegister * Double(actualRegisterCount)
-  }
-
-  func totalCoolingSensible(projectSHR: Double) throws -> Double {
-    try room.coolingSensiblePerRegister(projectSHR: projectSHR) * Double(actualRegisterCount)
-  }
-}
-
-extension TrunkSize {
-
-  var totalHeatingLoad: Double {
-    rooms.reduce(into: 0) { $0 += $1.totalHeatingLoad }
-  }
-
-  func totalCoolingSensible(projectSHR: Double) throws -> Double {
-    try rooms.reduce(into: 0) { $0 += try $1.totalCoolingSensible(projectSHR: projectSHR) }
-  }
-}
-
 extension Array where Element == EffectiveLengthGroup {
   var totalEffectiveLength: Int {
     reduce(0) { $0 + $1.effectiveLength }

@@ -77,16 +77,13 @@ struct RoomTests {
       let csvPath = Bundle.module.path(forResource: "rooms", ofType: "csv")
       let csvFile = Room.CSV(file: try Data(contentsOf: URL(filePath: csvPath!)))
       let rows = try await csvParser.parseRooms(csvFile)
-      print()
-      print("ROWS: \(rows)")
-      print()
-
       let created = try await database.rooms.createFromCSV(project.id, rows)
-
-      print()
-      print("CREATED: \(created)")
-      print()
       #expect(created.count == rows.count)
+
+      // Check that delegating to another room works properly.
+      let bath = created.first(where: { $0.name == "Bath-1" })!
+      let kitchen = created.first(where: { $0.name == "Kitchen" })!
+      #expect(bath.delegatedTo == kitchen.id)
     }
   }
 
