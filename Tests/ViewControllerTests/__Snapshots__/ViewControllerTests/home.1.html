@@ -18,6 +18,7 @@
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
     <script src="/js/htmx-download.js"></script>
     <script src="/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="/css/output.css">
     <link rel="stylesheet" href="/css/htmx.css">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
@@ -28,11 +29,11 @@
     <script src="https://unpkg.com/htmx-remove@latest" crossorigin="anonymous" integrity="sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT"></script>
   </head>
   <body>
-    <div class="flex flex-col min-h-screen min-w-full justify-between">
+    <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
       <main class="flex flex-col min-h-screen min-w-full grow mb-auto">
         <div>
           <div class="flex justify-end m-4">
-            <button class="btn btn-ghost btn-secondary text-lg" hx-get="/login" hx-target="body" hx-swap="outerHTML">Login</button>
+            <button class="btn btn-ghost btn-secondary text-lg" hx-get="/login" hx-target="body" hx-swap="outerHTML" hx-push-url="true">Login</button>
           </div>
           <div class="hero">
             <div class="relative hero-content text-center bg-base-300
@@ -51,7 +52,7 @@ text-8xl font-bold my-auto space-2">
                     </div>
                   </div>
                 </div>
-                Open source residential duct design program<a class="btn btn-ghost text-md text-primary font-bold italic" href="https://git.housh.dev/michael/swift-manual-d" target="_blank"></a>
+                Open source residential duct design program<a class="btn btn-ghost text-md text-primary font-bold italic" href="https://git.housh.dev/michael/swift-duct-calc" target="_blank"></a>
                 <p class="text-3xl py-6">Manual-D™ speed sheet, but on the web!</p>
                 <button class="btn btn-xl btn-primary mt-6" hx-get="/signup" hx-target="body" hx-swap="outerHTML">Get Started</button>
                 <p class="text-xs italic mt-8">
@@ -102,7 +103,7 @@ text-8xl font-bold my-auto space-2">
 bg-base-300 text-base-content p-4">
           <aside>
             <p>Copyright © 2026 - All rights reserved by Michael Housh</p>
-            Openly licensed via CC-BY-NC-SA 4.0<a class="btn btn-ghost" href="https://git.housh.dev/michael/swift-manual-d/src/branch/main/LICENSE" target="_blank"></a>
+            Openly licensed via CC-BY-NC-SA 4.0<a class="btn btn-ghost" href="https://git.housh.dev/michael/swift-duct-calc/src/branch/main/LICENSE" target="_blank"></a>
           </aside>
         </footer>
       </div>

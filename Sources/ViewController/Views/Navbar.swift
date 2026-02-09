@@ -14,6 +14,13 @@ struct Navbar: HTML, Sendable {
     self.userProfile = userProfile
   }
 
+  var homeRoute: SiteRoute.View {
+    if userProfile {
+      return .project(.index)
+    }
+    return .home
+  }
+
   var body: some HTML<HTMLTag.nav> {
     nav(
       .class(
@@ -37,7 +44,7 @@ struct Navbar: HTML, Sendable {
 
         a(
           .class("flex w-fit h-fit text-xl items-end px-4 py-2"),
-          .href(route: .project(.index))
+          .href(route: homeRoute)
         ) {
           img(
             .src("/images/mand_logo_sm.webp"),
@@ -48,11 +55,11 @@ struct Navbar: HTML, Sendable {
         .tooltip("Home", position: .right)
       }
       if userProfile {
-        // TODO: Make dropdown
         div(.class("flex-none dropdown dropdown-end dropdown-hover")) {
           div(.class("btn m-1"), .tabindex(0), .role("button")) {
             SVG(.circleUser)
           }
+          .navButton()
           ul(
             .tabindex(-1),
             .class("dropdown-content menu bg-base-200 rounded-box z-1 w-52 py-2 shadow-sm")

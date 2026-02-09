@@ -53,6 +53,13 @@ extension ViewController: DependencyKey {
 
 extension ViewController.Request {
 
+  var isLoggedIn: Bool {
+    if (try? currentUser()) != nil {
+      return true
+    }
+    return false
+  }
+
   func currentUser() throws -> User {
     @Dependency(\.auth.currentUser) var currentUser
     return try currentUser()

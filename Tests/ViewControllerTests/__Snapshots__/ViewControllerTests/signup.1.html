@@ -18,6 +18,7 @@
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
     <script src="/js/htmx-download.js"></script>
     <script src="/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="/css/output.css">
     <link rel="stylesheet" href="/css/htmx.css">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
@@ -28,7 +29,7 @@
     <script src="https://unpkg.com/htmx-remove@latest" crossorigin="anonymous" integrity="sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT"></script>
   </head>
   <body>
-    <div class="flex flex-col min-h-screen min-w-full justify-between">
+    <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
       <main class="flex flex-col min-h-screen min-w-full grow mb-auto">
         <dialog id="loginForm" class="modal modal-open">
           <div class="modal-box">

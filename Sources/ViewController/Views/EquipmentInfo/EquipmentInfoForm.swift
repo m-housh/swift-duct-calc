@@ -2,7 +2,6 @@ import Elementary
 import ManualDCore
 import Styleguide
 
-// TODO: Have form hold onto equipment info model to edit.
 struct EquipmentInfoForm: HTML, Sendable {
 
   static let id = "equipmentForm"

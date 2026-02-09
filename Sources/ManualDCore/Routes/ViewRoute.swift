@@ -12,6 +12,7 @@ extension SiteRoute {
     case login(LoginRoute)
     case signup(SignupRoute)
     case project(ProjectRoute)
+    case quickCalc(QuickCalcRoute)
     case user(UserRoute)
     //FIX: Remove.
     case test
@@ -32,6 +33,9 @@ extension SiteRoute {
       }
       Route(.case(Self.project)) {
         SiteRoute.View.ProjectRoute.router
+      }
+      Route(.case(Self.quickCalc)) {
+        SiteRoute.View.QuickCalcRoute.router
       }
       Route(.case(Self.user)) {
         SiteRoute.View.UserRoute.router
@@ -981,6 +985,49 @@ extension SiteRoute.View.UserRoute {
           }
           .map(.memberwise(User.Profile.Update.init))
         }
+      }
+    }
+  }
+}
+
+extension SiteRoute.View {
+  public enum QuickCalcRoute: Equatable, Sendable {
+    case index
+    case submit(Form)
+
+    public static let rootPath = "duct-size"
+
+    static let router = OneOf {
+      Route(.case(Self.index)) {
+        Path { rootPath }
+        Method.get
+      }
+      Route(.case(Self.submit)) {
+        Path { rootPath }
+        Method.post
+        Body {
+          FormData {
+            Field("cfm") { Int.parser() }
+            Field("frictionRate") { Double.parser() }
+            Optionally {
+              Field("height") { Int.parser() }
+            }
+          }
+          .map(.memberwise(Form.init))
+        }
+      }
+    }
+
+    public struct Form: Equatable, Sendable {
+
+      public let cfm: Int
+      public let frictionRate: Double
+      public let height: Int?
+
+      public init(cfm: Int, frictionRate: Double, height: Int? = nil) {
+        self.cfm = cfm
+        self.frictionRate = frictionRate
+        self.height = height
       }
     }
   }

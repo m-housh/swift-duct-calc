@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Duct Calc</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="ductcalc.com" name="og:site_name">
+    <meta content="Duct Calc" name="og:title">
+    <meta content="Duct sizing based on ACCA, Manual-D." name="description">
+    <meta content="Duct sizing based on ACCA, Manual-D." name="og:description">
+    <meta content="/images/mand_logo.png" name="og:image">
+    <meta content="/images/mand_logo.png" name="twitter:image">
+    <meta content="Duct Calc" name="twitter:image:alt">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="1536" name="og:image:width">
+    <meta content="1024" name="og:image:height">
+    <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
+    <script src="https://unpkg.com/htmx.org@2.0.8"></script>
+    <script src="/js/htmx-download.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="/css/htmx.css">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
+    <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <script src="https://unpkg.com/htmx-remove@latest" crossorigin="anonymous" integrity="sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT"></script>
+  </head>
+  <body>
+    <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
+      <main class="flex flex-col min-h-screen min-w-full grow mb-auto">
+        <div>
+          <nav class="navbar w-full bg-base-300 text-base-content shadow-sm mb-4">
+            <div class="flex flex-1 space-x-4 items-center">
+              <div class="tooltip tooltip-right" data-tip="Home">
+                <a class="flex w-fit h-fit text-xl items-end px-4 py-2 btn btn-square btn-ghost hover:bg-neutral hover:text-white" href="/">
+                <img src="/images/mand_logo_sm.webp">
+                Duct Calc<span></span></a>
+              </div>
+            </div>
+          </nav>
+          <div class="flex justify-center items-center px-10">
+            <div class="bg-base-300 rounded-3xl shadow-3xl
+p-6 w-full">
+              <div class="flex space-x-6 items-center text-4xl">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calculator-icon lucide-calculator"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+                <h1 class="text-4xl font-bold me-10">Duct Size</h1>
+              </div>
+              <p class="text-primary font-bold italic">Calculate duct size for the given parameters</p>
+              <form class="space-y-4 mt-6" hx-post="/duct-size" hx-target="#resultView" hx-swap="outerHTML">
+                <label class="input w-full"><span class="label">CFM</span>
+                <input name="cfm" type="number" placeholder="1000" required autofocus>
+                Friction Rate</label><label class="input w-full"><span class="label"></span>
+                <input name="frictionRate" value="0.06" required type="number" min="0.01" step="0.01">
+                Height</label><label class="input w-full"><span class="label"></span>
+                <input name="height" type="number" placeholder="Height (Optional)"></label>
+                <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
+              </form>
+              <div id="resultView"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <div class="bottom-0 left-0 bg-error">
+        <footer class="footer sm:footer-horizontal footer-center
+bg-base-300 text-base-content p-4">
+          <aside>
+            <p>Copyright © 2026 - All rights reserved by Michael Housh</p>
+            Openly licensed via CC-BY-NC-SA 4.0<a class="btn btn-ghost" href="https://git.housh.dev/michael/swift-duct-calc/src/branch/main/LICENSE" target="_blank"></a>
+          </aside>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

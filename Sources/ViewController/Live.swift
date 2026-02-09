@@ -3,6 +3,7 @@ import DatabaseClient
 import Dependencies
 import Elementary
 import Foundation
+import ManualDClient
 import ManualDCore
 import PdfClient
 import ProjectClient
@@ -38,7 +39,9 @@ extension ViewController.Request {
       //   }
       // }
       // return try! await pdfClient.html(.mock())
-      return EmptyHTML()
+      return await view {
+        TestPage()
+      }
     case .login(let route):
       switch route {
       case .index(let next):
@@ -91,6 +94,9 @@ extension ViewController.Request {
         }
       }
     case .project(let route):
+      return await route.renderView(on: self)
+
+    case .quickCalc(let route):
       return await route.renderView(on: self)
 
     case .user(let route):
@@ -701,6 +707,36 @@ extension SiteRoute.View.UserRoute.Profile {
         )
       } onSuccess: { (user, profile) in
         UserView(user: user, profile: profile)
+      }
+    }
+  }
+}
+
+extension SiteRoute.View.QuickCalcRoute {
+
+  func renderView(
+    on request: ViewController.Request
+  ) async -> AnySendableHTML {
+    @Dependency(\.manualD) var manualD
+
+    switch self {
+    case .index:
+      return await request.view {
+        QuickCalcView(
+          isLoggedIn: request.isLoggedIn
+        )
+      }
+    case .submit(let form):
+      return await ResultView {
+        let ductSize = try await manualD.ductSize(cfm: form.cfm, frictionRate: form.frictionRate)
+        var rectangularSize: ManualDClient.RectangularSize? = nil
+        if let height = form.height {
+          rectangularSize = try await manualD.rectangularSize(
+            round: ductSize.finalSize, height: height)
+        }
+        return (ductSize, rectangularSize)
+      } onSuccess: { (ductSize, rectangularSize) in
+        QuickCalcView.Result(ductSize: ductSize, rectangularSize: rectangularSize)
       }
     }
   }
