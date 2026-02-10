@@ -21,7 +21,6 @@ struct ViewControllerTests {
       $0.auth = .failing
     } operation: {
       @Dependency(\.viewController) var viewController
-
       let home = try await viewController.view(.test(.home))
       assertSnapshot(of: home, as: .html)
     }
@@ -35,6 +34,18 @@ struct ViewControllerTests {
     } operation: {
       @Dependency(\.viewController) var viewController
       let view = try await viewController.view(.test(.ductulator(.index)))
+      assertSnapshot(of: view, as: .html)
+    }
+  }
+
+  @Test
+  func privacyPolicy() async throws {
+    try await withDependencies {
+      $0.viewController = .liveValue
+      $0.auth = .failing
+    } operation: {
+      @Dependency(\.viewController) var viewController
+      let view = try await viewController.view(.test(.privacyPolicy))
       assertSnapshot(of: view, as: .html)
     }
   }

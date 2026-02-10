@@ -9,6 +9,7 @@ extension SiteRoute {
   /// The routes return html.
   public enum View: Equatable, Sendable {
     case home
+    case privacyPolicy
     case login(LoginRoute)
     case signup(SignupRoute)
     case project(ProjectRoute)
@@ -23,6 +24,10 @@ extension SiteRoute {
         Method.get
       }
       Route(.case(Self.home)) {
+        Method.get
+      }
+      Route(.case(Self.privacyPolicy)) {
+        Path { "privacy-policy" }
         Method.get
       }
       Route(.case(Self.login)) {

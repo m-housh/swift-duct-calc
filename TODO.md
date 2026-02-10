@@ -20,3 +20,6 @@
 - [x] Update urls to point to public mirror of repository
 - [x] Add email to footer
 - [x] Validation errors, if they occur are vague in ResultView
+- [x] Privacy policy
+- [ ] Update README
+- [ ] Self hosting documentation

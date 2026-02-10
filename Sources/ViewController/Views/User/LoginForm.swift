@@ -22,7 +22,16 @@ struct LoginForm: HTML, Sendable {
 
   var body: some HTML {
     ModalForm(id: "loginForm", closeButton: false, dismiss: false) {
-      h1(.class("text-2xl font-bold mb-6")) { style.title }
+      Row {
+        h1(.class("text-2xl font-bold mb-6")) { style.title }
+        a(
+          .class("btn btn-link"),
+          .href(route: .privacyPolicy),
+          .target(.blank)
+        ) {
+          "Privacy Policy"
+        }
+      }
 
       form(
         .method(.post),
@@ -78,6 +87,7 @@ struct LoginForm: HTML, Sendable {
               "At least one uppercase letter"
             }
           }
+
         }
 
         div(.class("flex")) {
