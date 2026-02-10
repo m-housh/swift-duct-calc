@@ -63,9 +63,9 @@ public struct EnvVars: Codable, Equatable, Sendable {
     case pandocPath = "PANDOC_PATH"
     case pdfEngine = "PDF_ENGINE"
     case postgresHostname = "POSTGRES_HOSTNAME"
-    case postgresUsername = "POSTGRES_USERNAME"
+    case postgresUsername = "POSTGRES_USER"
     case postgresPassword = "POSTGRES_PASSWORD"
-    case postgresDatabase = "POSTGRES_DATABASE"
+    case postgresDatabase = "POSTGRES_DB"
     case sqlitePath = "SQLITE_PATH"
   }
 
