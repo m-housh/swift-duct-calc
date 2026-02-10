@@ -69,6 +69,21 @@ struct RoomForm: HTML, Sendable {
         )
 
         LabeledInput(
+          "Level",
+          .name("level"),
+          .type(.number),
+          .placeholder("1 (Optional)"),
+          .value(room?.level?.rawValue),
+          .min("-1"),
+          .step("1")
+        )
+        div(.class("text-sm italic -mt-2")) {
+          span(.class("text-primary")) {
+            "Use -1 or 0 for a basement"
+          }
+        }
+
+        LabeledInput(
           "Heating Load",
           .name("heatingLoad"),
           .type(.number),
@@ -77,8 +92,6 @@ struct RoomForm: HTML, Sendable {
           .min("0"),
           .value(room?.heatingLoad)
         )
-
-        // TODO: Add description that only one is required (cooling total or sensible)
 
         LabeledInput(
           "Cooling Total",
@@ -97,6 +110,14 @@ struct RoomForm: HTML, Sendable {
           .min("0"),
           .value(room?.coolingLoad.sensible)
         )
+        div(.class("text-primary text-sm italic -mt-2")) {
+          p {
+            "Should enter at least one of the cooling loads."
+          }
+          p {
+            "Both are also acceptable."
+          }
+        }
 
         LabeledInput(
           "Registers",

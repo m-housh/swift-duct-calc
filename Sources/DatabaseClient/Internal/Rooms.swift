@@ -28,6 +28,7 @@ extension DatabaseClient.Rooms: TestDependencyKey {
           $0.delegatedToName != nil && $0.delegatedToName != ""
         })
 
+        // Filter out the rest of the rooms that don't delegate their airflow / loads.
         let initialRooms = rows.filter({
           $0.delegatedToName == nil || $0.delegatedToName == ""
         })
@@ -54,6 +55,7 @@ extension DatabaseClient.Rooms: TestDependencyKey {
           array.append(
             Room.Create.init(
               name: row.name,
+              level: row.level,
               heatingLoad: row.heatingLoad,
               coolingTotal: row.coolingTotal,
               coolingSensible: row.coolingSensible,
@@ -134,6 +136,7 @@ extension Room.CSV.Row {
     assert(delegatedToName == nil || delegatedToName == "")
     return .init(
       name: name,
+      level: level,
       heatingLoad: heatingLoad,
       coolingTotal: coolingTotal,
       coolingSensible: coolingSensible,
@@ -170,6 +173,7 @@ extension Room.Create {
 
     return .init(
       name: name,
+      level: level?.rawValue,
       heatingLoad: heatingLoad,
       coolingLoad: coolingLoad,
       registerCount: registerCount,
@@ -187,6 +191,7 @@ extension Room {
       try await database.schema(RoomModel.schema)
         .id()
         .field("name", .string, .required)
+        .field("level", .int8)
         .field("heatingLoad", .double, .required)
         .field("coolingLoad", .dictionary, .required)
         .field("registerCount", .int8, .required)
@@ -217,6 +222,9 @@ final class RoomModel: Model, @unchecked Sendable, Validatable {
   @Field(key: "name")
   var name: String
 
+  @Field(key: "level")
+  var level: Int?
+
   @Field(key: "heatingLoad")
   var heatingLoad: Double
 
@@ -246,6 +254,7 @@ final class RoomModel: Model, @unchecked Sendable, Validatable {
   init(
     id: UUID? = nil,
     name: String,
+    level: Int? = nil,
     heatingLoad: Double,
     coolingLoad: Room.CoolingLoad,
     registerCount: Int,
@@ -257,6 +266,7 @@ final class RoomModel: Model, @unchecked Sendable, Validatable {
   ) {
     self.id = id
     self.name = name
+    self.level = level
     self.heatingLoad = heatingLoad
     self.coolingLoad = coolingLoad
     self.registerCount = registerCount
@@ -272,6 +282,7 @@ final class RoomModel: Model, @unchecked Sendable, Validatable {
       id: requireID(),
       projectID: $project.id,
       name: name,
+      level: level.map(Room.Level.init(rawValue:)),
       heatingLoad: heatingLoad,
       coolingLoad: coolingLoad,
       registerCount: registerCount,
@@ -286,6 +297,9 @@ final class RoomModel: Model, @unchecked Sendable, Validatable {
 
     if let name = updates.name, name != self.name {
       self.name = name
+    }
+    if let level = updates.level?.rawValue, level != self.level {
+      self.level = level
     }
     if let heatingLoad = updates.heatingLoad, heatingLoad != self.heatingLoad {
       self.heatingLoad = heatingLoad

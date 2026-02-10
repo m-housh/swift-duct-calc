@@ -216,12 +216,6 @@ extension SiteRoute.View.ProjectRoute {
         }
         Method.post
         Body().map(.memberwise(Room.CSV.init))
-        // Body {
-        //   FormData {
-        //
-        //   }
-        //   .map(.memberwise(Room.CSV.init))
-        // }
       }
       Route(.case(Self.delete)) {
         Path {
@@ -242,6 +236,12 @@ extension SiteRoute.View.ProjectRoute {
         Body {
           FormData {
             Field("name", .string)
+            Optionally {
+              Field("level") {
+                Int.parser()
+              }
+              .map(.memberwise(Room.Level.init(rawValue:)))
+            }
             Field("heatingLoad") { Double.parser() }
             Optionally {
               Field("coolingTotal") { Double.parser() }
@@ -267,6 +267,12 @@ extension SiteRoute.View.ProjectRoute {
           FormData {
             Optionally {
               Field("name", .string)
+            }
+            Optionally {
+              Field("level") {
+                Int.parser()
+              }
+              .map(.memberwise(Room.Level.init(rawValue:)))
             }
             Optionally {
               Field("heatingLoad") { Double.parser() }

@@ -15,6 +15,14 @@ struct RoomsView: HTML, Sendable {
       .appendingPath("csv")
   }
 
+  // Sort the rooms based on level, they should already be sorted by name,
+  // so this puts lower level rooms towards the top in alphabetical order.
+  //
+  // If rooms do not have a level we shove those all the way to the bottom.
+  private var sortedRooms: [Room] {
+    rooms.sorted { ($0.level?.rawValue ?? 20) < ($1.level?.rawValue ?? 20) }
+  }
+
   var body: some HTML {
     div(.class("flex w-full flex-col")) {
       PageTitleRow {
@@ -133,7 +141,7 @@ struct RoomsView: HTML, Sendable {
           }
         }
         tbody {
-          for room in rooms {
+          for room in sortedRooms {
             RoomRow(room: room, shr: sensibleHeatRatio, rooms: rooms)
           }
         }
@@ -166,7 +174,13 @@ struct RoomsView: HTML, Sendable {
 
     public var body: some HTML {
       tr(.id("roomRow_\(room.id.idString)")) {
-        td { room.name }
+        td {
+          if let level = room.level {
+            "\(level.label) - \(room.name)"
+          } else {
+            room.name
+          }
+        }
         td {
           div(.class("flex justify-center")) {
             Number(room.heatingLoad, digits: 0)

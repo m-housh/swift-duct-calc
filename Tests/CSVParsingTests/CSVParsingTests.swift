@@ -11,12 +11,15 @@ struct CSVParsingTests {
     let parser = CSVParser.liveValue
 
     let input = """
-      Name,Heating Load,Cooling Total,Cooling Sensible,Register Count,Delegated To
-      Bed-1,12345,12345,,2,
-      Bed-2,1223,,1123,1,
+      Name,Level,Heating Load,Cooling Total,Cooling Sensible,Register Count,Delegated To
+      Bed-1,2,12345,2345,2345,2,
+      Entry,1,3456,1234,990,1,
+      Kitchen,1,6789,3456,,2,
+      Bath-1,1,890,,345,0,Kitchen
       """
     let rooms = try await parser.parseRooms(.init(file: Data(input.utf8)))
 
-    #expect(rooms.count == 2)
+    #expect(rooms.count == 4)
+    #expect(rooms.first!.level == 2)
   }
 }

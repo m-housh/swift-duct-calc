@@ -34,12 +34,12 @@ struct Navbar: HTML, Sendable {
           label(
             .for("my-drawer-1"),
             .class("size-7"),
-            .init(name: "aria-label", value: "open sidebar")
+            .init(name: "aria-label", value: "open / close sidebar")
           ) {
             SVG(.sidebarToggle)
           }
           .navButton()
-          .tooltip("Open sidebar", position: .right)
+          .tooltip("Open / close sidebar", position: .right)
         }
 
         a(

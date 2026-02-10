@@ -1,5 +1,6 @@
 import Dependencies
 import Foundation
+import Tagged
 
 /// Represents a room in a project.
 ///
@@ -16,6 +17,9 @@ public struct Room: Codable, Equatable, Identifiable, Sendable {
 
   /// A unique name for the room in the project.
   public let name: String
+
+  /// The level of the home the room is on.
+  public let level: Level?
 
   /// The heating load required for the room (from Manual-J).
   public let heatingLoad: Double
@@ -45,6 +49,7 @@ public struct Room: Codable, Equatable, Identifiable, Sendable {
     id: UUID,
     projectID: Project.ID,
     name: String,
+    level: Level? = nil,
     heatingLoad: Double,
     coolingLoad: CoolingLoad,
     registerCount: Int = 1,
@@ -56,6 +61,7 @@ public struct Room: Codable, Equatable, Identifiable, Sendable {
     self.id = id
     self.projectID = projectID
     self.name = name
+    self.level = level
     self.heatingLoad = heatingLoad
     self.coolingLoad = coolingLoad
     self.registerCount = registerCount
@@ -98,6 +104,11 @@ public struct Room: Codable, Equatable, Identifiable, Sendable {
 
     }
   }
+
+  public enum LevelTag {}
+
+  public typealias Level = Tagged<LevelTag, Int>
+
 }
 
 extension Room {
@@ -105,6 +116,9 @@ extension Room {
   public struct Create: Codable, Equatable, Sendable {
     /// A unique name for the room in the project.
     public let name: String
+
+    /// An optional level of the home the room is on.
+    public let level: Room.Level?
 
     /// The heating load required for the room (from Manual-J).
     public let heatingLoad: Double
@@ -127,6 +141,7 @@ extension Room {
 
     public init(
       name: String,
+      level: Room.Level? = nil,
       heatingLoad: Double,
       coolingTotal: Double? = nil,
       coolingSensible: Double? = nil,
@@ -134,6 +149,7 @@ extension Room {
       delegatedTo: Room.ID? = nil
     ) {
       self.name = name
+      self.level = level
       self.heatingLoad = heatingLoad
       self.coolingTotal = coolingTotal
       self.coolingSensible = coolingSensible
@@ -160,6 +176,9 @@ extension Room {
       /// A unique name for the room in the project.
       public let name: String
 
+      /// An optional level of the home the room is on.
+      public let level: Room.Level?
+
       /// The heating load required for the room (from Manual-J).
       public let heatingLoad: Double
 
@@ -177,6 +196,7 @@ extension Room {
 
       public init(
         name: String,
+        level: Room.Level? = nil,
         heatingLoad: Double,
         coolingTotal: Double? = nil,
         coolingSensible: Double? = nil,
@@ -184,6 +204,7 @@ extension Room {
         delegatedToName: String? = nil
       ) {
         self.name = name
+        self.level = level
         self.heatingLoad = heatingLoad
         self.coolingTotal = coolingTotal
         self.coolingSensible = coolingSensible
@@ -226,6 +247,10 @@ extension Room {
   public struct Update: Codable, Equatable, Sendable {
     /// A unique name for the room in the project.
     public let name: String?
+
+    /// An optional level of the home the room is on.
+    public let level: Room.Level?
+
     /// The heating load required for the room (from Manual-J).
     public let heatingLoad: Double?
     /// The total cooling load required for the room (from Manual-J).
@@ -246,12 +271,14 @@ extension Room {
 
     public init(
       name: String? = nil,
+      level: Room.Level? = nil,
       heatingLoad: Double? = nil,
       coolingTotal: Double? = nil,
       coolingSensible: Double? = nil,
       registerCount: Int? = nil
     ) {
       self.name = name
+      self.level = level
       self.heatingLoad = heatingLoad
       self.coolingTotal = coolingTotal
       self.coolingSensible = coolingSensible
@@ -263,6 +290,7 @@ extension Room {
       rectangularSizes: [RectangularSize]
     ) {
       self.name = nil
+      self.level = nil
       self.heatingLoad = nil
       self.coolingTotal = nil
       self.coolingSensible = nil
@@ -301,6 +329,16 @@ public struct CoolingLoadError: Error, Equatable, Sendable {
 
   public init(_ reason: String) {
     self.reason = reason
+  }
+}
+
+extension Room.Level {
+  /// The label for the level, i.e. 'Basement' or 'Level-1', etc.
+  public var label: String {
+    if rawValue <= 0 {
+      return "Basement"
+    }
+    return "Level-\(rawValue)"
   }
 }
 

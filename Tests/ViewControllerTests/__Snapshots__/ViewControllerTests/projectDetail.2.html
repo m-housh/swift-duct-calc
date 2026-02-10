@@ -36,7 +36,7 @@
           <div class="drawer-content overflow-auto">
             <nav class="navbar w-full bg-base-300 text-base-content shadow-sm mb-4">
               <div class="flex flex-1 space-x-4 items-center">
-                <div class="tooltip tooltip-right" data-tip="Open sidebar"><label for="my-drawer-1" class="size-7 btn btn-square btn-ghost hover:bg-neutral hover:text-white" aria-label="open sidebar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor" class="my-1.5 inline-block"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg></label></div>
+                <div class="tooltip tooltip-right" data-tip="Open / close sidebar"><label for="my-drawer-1" class="size-7 btn btn-square btn-ghost hover:bg-neutral hover:text-white" aria-label="open / close sidebar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor" class="my-1.5 inline-block"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg></label></div>
                 <div class="tooltip tooltip-right" data-tip="Projects">
                   <a class="flex w-fit h-fit text-2xl items-end px-4 py-2 btn btn-square btn-ghost hover:bg-neutral hover:text-white" href="/projects">
                   <img src="/images/mand_logo_sm.webp">
@@ -171,13 +171,20 @@ p-6 w-full">
                               <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000001">
                               Name<label class="input w-full"><span class="label"></span>
                               <input name="name" type="text" placeholder="Name" required autofocus value="Bed-1">
-                              Heating Load</label><label class="input w-full"><span class="label"></span>
+                              Level</label><label class="input w-full"><span class="label"></span>
+                              <input name="level" type="number" placeholder="1 (Optional)" value="" min="-1" step="1"></label>
+                              <div class="text-sm italic -mt-2"><span class="text-primary">Use -1 or 0 for a basement</span></div>
+                              Heating Load<label class="input w-full"><span class="label"></span>
                               <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="3913.0">
                               Cooling Total</label><label class="input w-full"><span class="label"></span>
                               <input name="coolingTotal" type="number" placeholder="1234 (Optional)" min="0" value="2472.0">
                               Cooling Sensible</label><label class="input w-full"><span class="label"></span>
-                              <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value="">
-                              Registers</label><label class="input w-full"><span class="label"></span>
+                              <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value=""></label>
+                              <div class="text-primary text-sm italic -mt-2">
+                                <p>Should enter at least one of the cooling loads.</p>
+                                <p>Both are also acceptable.</p>
+                              </div>
+                              Registers<label class="input w-full"><span class="label"></span>
                               <input name="registerCount" type="number" min="1" required value="1" id="registerCount">
                               Room</label><label class="select w-full"><span class="label"></span>
                               <select name="delegatedTo">
@@ -234,13 +241,20 @@ p-6 w-full">
                               <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000002">
                               Name<label class="input w-full"><span class="label"></span>
                               <input name="name" type="text" placeholder="Name" required autofocus value="Entry">
-                              Heating Load</label><label class="input w-full"><span class="label"></span>
+                              Level</label><label class="input w-full"><span class="label"></span>
+                              <input name="level" type="number" placeholder="1 (Optional)" value="" min="-1" step="1"></label>
+                              <div class="text-sm italic -mt-2"><span class="text-primary">Use -1 or 0 for a basement</span></div>
+                              Heating Load<label class="input w-full"><span class="label"></span>
                               <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="8284.0">
                               Cooling Total</label><label class="input w-full"><span class="label"></span>
                               <input name="coolingTotal" type="number" placeholder="1234 (Optional)" min="0" value="2916.0">
                               Cooling Sensible</label><label class="input w-full"><span class="label"></span>
-                              <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value="">
-                              Registers</label><label class="input w-full"><span class="label"></span>
+                              <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value=""></label>
+                              <div class="text-primary text-sm italic -mt-2">
+                                <p>Should enter at least one of the cooling loads.</p>
+                                <p>Both are also acceptable.</p>
+                              </div>
+                              Registers<label class="input w-full"><span class="label"></span>
                               <input name="registerCount" type="number" min="1" required value="2" id="registerCount">
                               Room</label><label class="select w-full"><span class="label"></span>
                               <select name="delegatedTo">
@@ -297,13 +311,20 @@ p-6 w-full">
                               <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000003">
                               Name<label class="input w-full"><span class="label"></span>
                               <input name="name" type="text" placeholder="Name" required autofocus value="Family Room">
-                              Heating Load</label><label class="input w-full"><span class="label"></span>
+                              Level</label><label class="input w-full"><span class="label"></span>
+                              <input name="level" type="number" placeholder="1 (Optional)" value="" min="-1" step="1"></label>
+                              <div class="text-sm italic -mt-2"><span class="text-primary">Use -1 or 0 for a basement</span></div>
+                              Heating Load<label class="input w-full"><span class="label"></span>
                               <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="9785.0">
                               Cooling Total</label><label class="input w-full"><span class="label"></span>
                               <input name="coolingTotal" type="number" placeholder="1234 (Optional)" min="0" value="7446.0">
                               Cooling Sensible</label><label class="input w-full"><span class="label"></span>
-                              <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value="">
-                              Registers</label><label class="input w-full"><span class="label"></span>
+                              <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value=""></label>
+                              <div class="text-primary text-sm italic -mt-2">
+                                <p>Should enter at least one of the cooling loads.</p>
+                                <p>Both are also acceptable.</p>
+                              </div>
+                              Registers<label class="input w-full"><span class="label"></span>
                               <input name="registerCount" type="number" min="1" required value="3" id="registerCount">
                               Room</label><label class="select w-full"><span class="label"></span>
                               <select name="delegatedTo">
@@ -360,13 +381,20 @@ p-6 w-full">
                               <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000004">
                               Name<label class="input w-full"><span class="label"></span>
                               <input name="name" type="text" placeholder="Name" required autofocus value="Kitchen">
-                              Heating Load</label><label class="input w-full"><span class="label"></span>
+                              Level</label><label class="input w-full"><span class="label"></span>
+                              <input name="level" type="number" placeholder="1 (Optional)" value="" min="-1" step="1"></label>
+                              <div class="text-sm italic -mt-2"><span class="text-primary">Use -1 or 0 for a basement</span></div>
+                              Heating Load<label class="input w-full"><span class="label"></span>
                               <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="4518.0">
                               Cooling Total</label><label class="input w-full"><span class="label"></span>
                               <input name="coolingTotal" type="number" placeholder="1234 (Optional)" min="0" value="5096.0">
                               Cooling Sensible</label><label class="input w-full"><span class="label"></span>
-                              <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value="">
-                              Registers</label><label class="input w-full"><span class="label"></span>
+                              <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value=""></label>
+                              <div class="text-primary text-sm italic -mt-2">
+                                <p>Should enter at least one of the cooling loads.</p>
+                                <p>Both are also acceptable.</p>
+                              </div>
+                              Registers<label class="input w-full"><span class="label"></span>
                               <input name="registerCount" type="number" min="1" required value="2" id="registerCount">
                               Room</label><label class="select w-full"><span class="label"></span>
                               <select name="delegatedTo">
@@ -423,13 +451,20 @@ p-6 w-full">
                               <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000005">
                               Name<label class="input w-full"><span class="label"></span>
                               <input name="name" type="text" placeholder="Name" required autofocus value="Living Room">
-                              Heating Load</label><label class="input w-full"><span class="label"></span>
+                              Level</label><label class="input w-full"><span class="label"></span>
+                              <input name="level" type="number" placeholder="1 (Optional)" value="" min="-1" step="1"></label>
+                              <div class="text-sm italic -mt-2"><span class="text-primary">Use -1 or 0 for a basement</span></div>
+                              Heating Load<label class="input w-full"><span class="label"></span>
                               <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="7553.0">
                               Cooling Total</label><label class="input w-full"><span class="label"></span>
                               <input name="coolingTotal" type="number" placeholder="1234 (Optional)" min="0" value="6829.0">
                               Cooling Sensible</label><label class="input w-full"><span class="label"></span>
-                              <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value="">
-                              Registers</label><label class="input w-full"><span class="label"></span>
+                              <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value=""></label>
+                              <div class="text-primary text-sm italic -mt-2">
+                                <p>Should enter at least one of the cooling loads.</p>
+                                <p>Both are also acceptable.</p>
+                              </div>
+                              Registers<label class="input w-full"><span class="label"></span>
                               <input name="registerCount" type="number" min="1" required value="2" id="registerCount">
                               Room</label><label class="select w-full"><span class="label"></span>
                               <select name="delegatedTo">
@@ -486,13 +521,20 @@ p-6 w-full">
                               <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000006">
                               Name<label class="input w-full"><span class="label"></span>
                               <input name="name" type="text" placeholder="Name" required autofocus value="Master">
-                              Heating Load</label><label class="input w-full"><span class="label"></span>
+                              Level</label><label class="input w-full"><span class="label"></span>
+                              <input name="level" type="number" placeholder="1 (Optional)" value="" min="-1" step="1"></label>
+                              <div class="text-sm italic -mt-2"><span class="text-primary">Use -1 or 0 for a basement</span></div>
+                              Heating Load<label class="input w-full"><span class="label"></span>
                               <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="8202.0">
                               Cooling Total</label><label class="input w-full"><span class="label"></span>
                               <input name="coolingTotal" type="number" placeholder="1234 (Optional)" min="0" value="2076.0">
                               Cooling Sensible</label><label class="input w-full"><span class="label"></span>
-                              <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value="">
-                              Registers</label><label class="input w-full"><span class="label"></span>
+                              <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value=""></label>
+                              <div class="text-primary text-sm italic -mt-2">
+                                <p>Should enter at least one of the cooling loads.</p>
+                                <p>Both are also acceptable.</p>
+                              </div>
+                              Registers<label class="input w-full"><span class="label"></span>
                               <input name="registerCount" type="number" min="1" required value="2" id="registerCount">
                               Room</label><label class="select w-full"><span class="label"></span>
                               <select name="delegatedTo">
@@ -519,13 +561,20 @@ p-6 w-full">
                     <form class="grid grid-cols-1 gap-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/rooms" hx-target="body" hx-swap="outerHTML">
                       <label class="input w-full"><span class="label">Name</span>
                       <input name="name" type="text" placeholder="Name" required autofocus value="">
-                      Heating Load</label><label class="input w-full"><span class="label"></span>
+                      Level</label><label class="input w-full"><span class="label"></span>
+                      <input name="level" type="number" placeholder="1 (Optional)" value="" min="-1" step="1"></label>
+                      <div class="text-sm italic -mt-2"><span class="text-primary">Use -1 or 0 for a basement</span></div>
+                      Heating Load<label class="input w-full"><span class="label"></span>
                       <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="">
                       Cooling Total</label><label class="input w-full"><span class="label"></span>
                       <input name="coolingTotal" type="number" placeholder="1234 (Optional)" min="0" value="">
                       Cooling Sensible</label><label class="input w-full"><span class="label"></span>
-                      <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value="">
-                      Registers</label><label class="input w-full"><span class="label"></span>
+                      <input name="coolingSensible" type="number" placeholder="1234 (Optional)" min="0" value=""></label>
+                      <div class="text-primary text-sm italic -mt-2">
+                        <p>Should enter at least one of the cooling loads.</p>
+                        <p>Both are also acceptable.</p>
+                      </div>
+                      Registers<label class="input w-full"><span class="label"></span>
                       <input name="registerCount" type="number" min="1" required value="1" id="registerCount">
                       Room</label><label class="select w-full"><span class="label"></span>
                       <select name="delegatedTo">
@@ -676,11 +725,25 @@ is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2
         </div>
       </main>
       <div class="bottom-0 left-0 bg-error">
-        <footer class="footer sm:footer-horizontal footer-center
+        <footer class="footer footer-horizontal footer-center
 bg-base-300 text-base-content p-4">
-          <aside>
-            <p>Copyright © 2026 - All rights reserved by Michael Housh</p>
-            Openly licensed via CC-BY-NC-SA 4.0<a class="btn btn-ghost" href="https://git.housh.dev/michael/swift-duct-calc/src/branch/main/LICENSE" target="_blank"></a>
+          <aside class="grid-flow-row items-center">
+            <div class="flex mx-auto">
+              <a class="btn btn-ghost" href="mailto:support@ductcalc.pro">  <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <g
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke-width="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                </g>
+              </svg><span>support@ductcalc.pro</span></a>
+            </div>
+            Openly licensed via CC-BY-NC-SA 4.0<a class="btn btn-ghost mx-auto" href="https://github.com/m-housh/swift-duct-calc/src/branch/main/LICENSE" target="_blank"></a>
+            <p class="">Copyright © 2026 - All rights reserved by Michael Housh</p>
           </aside>
         </footer>
       </div>

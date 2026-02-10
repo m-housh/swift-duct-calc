@@ -38,6 +38,11 @@ struct RoomCreateParser: ParserPrinter {
     ParsePrint {
       Prefix { $0 != UInt8(ascii: ",") }.map(.string)
       ",".utf8
+      Optionally {
+        Int.parser()
+          .map(.memberwise(Room.Level.init(rawValue:)))
+      }
+      ",".utf8
       Double.parser()
       ",".utf8
       Optionally {

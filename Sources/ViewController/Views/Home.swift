@@ -49,7 +49,7 @@ struct HomeView: HTML, Sendable {
             header
             a(
               .class("btn btn-ghost text-md text-primary font-bold italic"),
-              .href("https://git.housh.dev/michael/swift-duct-calc"),
+              .href("https://github.com/m-housh/swift-duct-calc"),
               .target(.blank)
             ) {
               "Open source residential duct design program"

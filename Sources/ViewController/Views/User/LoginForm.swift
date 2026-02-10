@@ -1,5 +1,6 @@
 import Elementary
 import ElementaryHTMX
+import ManualDCore
 import Styleguide
 
 struct LoginForm: HTML, Sendable {
@@ -10,6 +11,13 @@ struct LoginForm: HTML, Sendable {
   init(style: Style = .login, next: String? = nil) {
     self.style = style
     self.next = next
+  }
+
+  private var route: SiteRoute.View {
+    if style == .login {
+      return .login(.index(next: next))
+    }
+    return .signup(.index)
   }
 
   var body: some HTML {
