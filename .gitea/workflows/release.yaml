@@ -38,7 +38,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=ref,event=branch
             type=semver,pattern={{version}}
@@ -56,6 +56,6 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=registry,ref=${{ env.USERNAME }}/${{ env.IMAGE_NAME }}:build
-          cache-to: mode=max,image-manifest=true,oci-mediatypes=true,type=registry,ref=${{ env.USERNAME }}/${{ env.IMAGE_NAME }}:build
+          cache-from: type=registry,ref=${{ env.IMAGE_NAME }}:build
+          cache-to: mode=min,image-manifest=true,oci-mediatypes=true,type=inline,ref=${{ env.IMAGE_NAME }}:build
 
