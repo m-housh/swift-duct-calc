@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  ubuntu:
+    name: Linux Tests
+    runs-on: ubuntu:latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup QEMU
+      uses: docker/setup-qemu-action@v3
+    - name: Setup buildx
+      uses: docker/setup-buildx-action@v3 
+    - name: Build test image
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        file: docker/Dockerfile.test
+        push: false
+        load: true
+        tags: ${{ github.repository_owner }}/ductcalc:test
+    - name: Run Tests
+      run: |
+        docker run --rm ${{ github.repository_owner }}/ductcalc:test swift test
