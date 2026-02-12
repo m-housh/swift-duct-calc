@@ -13,7 +13,7 @@ on:
 #   USERNAME: m-housh
 
 env:
-  REGISTRY_IMAGE: m-housh/ductcalc
+  REGISTRY_IMAGE: ${{ github.repository }}
 
 jobs:
   build:
