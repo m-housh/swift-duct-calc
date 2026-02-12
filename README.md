@@ -1,5 +1,7 @@
 # swift-duct-calc
 
+[![CI](https://github.com/m-housh/swift-duct-calc/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/m-housh/swift-duct-calc/actions/workflows/ci.yaml)
+
 Residential duct design software.
 
 ## Overview
