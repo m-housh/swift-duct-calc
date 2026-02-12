@@ -23,3 +23,7 @@
 - [x] Privacy policy
 - [ ] Update README
 - [ ] Self hosting documentation
+- [x] Heating load total on rooms page is hard to view when using default dark color scheme, perhaps
+  invert the colors or make the background red and text white.
+- [x] Errors on friction rate page are hard to see with default dark scheme.
+- [x] Support 'POSTGRES_PASSWORD_FILE' so that docker secrets can be used.

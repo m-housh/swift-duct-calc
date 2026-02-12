@@ -90,8 +90,8 @@ extension EquivalentLength {
         .field("type", .string, .required)
         .field("straightLengths", .array(of: .int))
         .field("groups", .data)
-        .field("createdAt", .datetime)
-        .field("updatedAt", .datetime)
+        .field("createdAt", .string)
+        .field("updatedAt", .string)
         .field(
           "projectID", .uuid, .required, .references(ProjectModel.schema, "id", onDelete: .cascade)
         )

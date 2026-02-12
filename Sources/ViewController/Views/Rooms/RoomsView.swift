@@ -48,8 +48,10 @@ struct RoomsView: HTML, Sendable {
                   }
                   if let sensibleHeatRatio {
                     Badge(number: sensibleHeatRatio)
+                    // .attributes("badge-outline")
                   } else {
                     Badge { "set" }
+                    // .attributes("badge-outline")
                   }
                 }
               }

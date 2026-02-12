@@ -109,7 +109,7 @@ extension TrunkSize {
     func prepare(on database: any Database) async throws {
       try await database.schema(TrunkModel.schema)
         .id()
-        .field("height", .int8)
+        .field("height", .int64)
         .field("name", .string)
         .field("type", .string, .required)
         .field(

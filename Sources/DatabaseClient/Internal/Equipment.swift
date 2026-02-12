@@ -73,8 +73,8 @@ extension EquipmentInfo {
         .field("staticPressure", .double, .required)
         .field("heatingCFM", .int16, .required)
         .field("coolingCFM", .int16, .required)
-        .field("createdAt", .datetime)
-        .field("updatedAt", .datetime)
+        .field("createdAt", .string)
+        .field("updatedAt", .string)
         .field(
           "projectID", .uuid, .required, .references(ProjectModel.schema, "id", onDelete: .cascade)
         )

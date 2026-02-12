@@ -12,6 +12,10 @@ public struct ProjectClientError: Error {
     .init(notFound.reason)
   }
 
+  public var localizedDescription: String {
+    reason
+  }
+
   enum NotFound {
     case project(Project.ID)
     case frictionRate(Project.ID)

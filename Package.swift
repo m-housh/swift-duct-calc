@@ -112,8 +112,18 @@ let package = Package(
     .target(
       name: "EnvVars",
       dependencies: [
+        .target(name: "FileClient"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
+      ]
+    ),
+    .testTarget(
+      name: "EnvVarsTests",
+      dependencies: [
+        .target(name: "EnvVars")
+      ],
+      resources: [
+        .copy("Resources")
       ]
     ),
     .target(

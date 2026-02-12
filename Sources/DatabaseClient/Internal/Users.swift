@@ -76,8 +76,8 @@ extension User {
         .id()
         .field("email", .string, .required)
         .field("password_hash", .string, .required)
-        .field("createdAt", .datetime)
-        .field("updatedAt", .datetime)
+        .field("createdAt", .string)
+        .field("updatedAt", .string)
         .unique(on: "email")
         .create()
     }
@@ -97,8 +97,8 @@ extension User.Token {
         .id()
         .field("value", .string, .required)
         .field("user_id", .uuid, .required, .references(UserModel.schema, "id"))
-        .field("createdAt", .datetime)
-        .field("updatedAt", .datetime)
+        .field("createdAt", .string)
+        .field("updatedAt", .string)
         .unique(on: "value")
         .create()
     }

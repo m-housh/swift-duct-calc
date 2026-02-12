@@ -1,5 +1,6 @@
 import Dependencies
 import DependenciesMacros
+import FileClient
 import Foundation
 
 extension DependencyValues {
@@ -69,7 +70,9 @@ public struct EnvVars: Codable, Equatable, Sendable {
     case sqlitePath = "SQLITE_PATH"
   }
 
-  public static func live(_ env: [String: String] = ProcessInfo.processInfo.environment) -> Self {
+  public static func live(
+    _ env: [String: String] = ProcessInfo.processInfo.environment
+  ) async throws -> Self {
 
     // Convert default values into a dictionary.
     let defaults =
@@ -78,13 +81,39 @@ public struct EnvVars: Codable, Equatable, Sendable {
       ?? [:]
 
     // Merge the default values with values found in process environment.
-    let assigned = defaults.merging(env, uniquingKeysWith: { $1 })
+    var assigned = defaults.merging(env, uniquingKeysWith: { $1 })
+
+    // Merge with file(s), used with docker secrets.
+    try await mergeWithFileData(&assigned)
 
     return (try? JSONSerialization.data(withJSONObject: assigned))
       .flatMap { try? decoder.decode(EnvVars.self, from: $0) }
       ?? .init()
   }
 
+}
+
+private func mergeWithFileData(_ dict: inout [String: String]) async throws {
+
+  // Helper that reads contents of file, and set's the value into the
+  // dictionary.
+  func mergeFromFile(
+    _ key: EnvVars.CodingKeys
+  ) async throws {
+    @Dependency(\.fileClient) var fileClient
+    if let filePath = dict["\(key.stringValue)_FILE"] {
+      let data = try await fileClient.readFile(filePath)
+      if let value = String(data: data, encoding: .utf8)?.trimmingCharacters(
+        in: .whitespacesAndNewlines
+      ) {
+        dict[key.stringValue] = value
+      }
+    }
+  }
+
+  try await mergeFromFile(.postgresPassword)
+  try await mergeFromFile(.postgresDatabase)
+  try await mergeFromFile(.postgresUsername)
 }
 
 extension EnvVars: TestDependencyKey {

@@ -19,6 +19,10 @@ public struct FileClient: Sendable {
   ///
   /// > Warning: This will overwrite a file if it exists.
   public var writeFile: @Sendable (_ contents: String, _ path: String) async throws -> Void
+
+  /// Read contents of file.
+  public var readFile: @Sendable (_ path: String) async throws -> Data
+
   /// Remove a file.
   public var removeFile: @Sendable (_ path: String) async throws -> Void
   /// Stream a file.
@@ -45,6 +49,10 @@ extension FileClient: TestDependencyKey {
     .init(
       writeFile: { contents, path in
         try await fileIO.writeFile(ByteBuffer(string: contents), at: path)
+      },
+      readFile: { path in
+        let bytes = try await fileIO.collectFile(at: path)
+        return Data(buffer: bytes)
       },
       removeFile: { path in
         try FileManager.default.removeItem(atPath: path)

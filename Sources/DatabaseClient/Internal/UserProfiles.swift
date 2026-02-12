@@ -81,8 +81,8 @@ extension User.Profile {
         .field("zipCode", .string, .required)
         .field("theme", .string)
         .field("userID", .uuid, .references(UserModel.schema, "id", onDelete: .cascade))
-        .field("createdAt", .datetime)
-        .field("updatedAt", .datetime)
+        .field("createdAt", .string)
+        .field("updatedAt", .string)
         .unique(on: "userID")
         .create()
     }

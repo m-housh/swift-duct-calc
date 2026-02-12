@@ -12,7 +12,7 @@ public struct Badge<Inner: HTML>: HTML, Sendable where Inner: Sendable {
   }
 
   public var body: some HTML<HTMLTag.div> {
-    div(.class("badge badge-lg badge-outline")) {
+    div(.class("badge badge-lg")) {
       inner
     }
   }
