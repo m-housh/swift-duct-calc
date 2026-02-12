@@ -55,6 +55,7 @@ jobs:
         id: build
         uses: docker/build-push-action@v6
         with:
+          file: docker/Dockerfile
           platforms: ${{ matrix.platform }}
           labels: ${{ steps.meta.outputs.labels }}
           tags: ghcr.io/${{ env.REGISTRY_IMAGE }}
