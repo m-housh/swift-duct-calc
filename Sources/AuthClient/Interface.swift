@@ -52,7 +52,13 @@ extension AuthClient: TestDependencyKey {
         request.logger.debug("LOGGED IN: \(user.id)")
         return user
       },
-      logout: { request.auth.logout(User.self) }
+      logout: {
+        request.logger.debug(
+          "Logged Out: \((try? request.auth.require(User.self).id.uuidString) ?? "N/A")"
+        )
+        request.session.destroy()
+        request.auth.logout(User.self)
+      }
     )
   }
 }
