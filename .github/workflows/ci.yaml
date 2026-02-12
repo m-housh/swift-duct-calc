@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - dev
   pull_request:
   workflow_dispatch:
 
@@ -26,6 +25,8 @@ jobs:
         push: false
         load: true
         tags: ${{ github.repository_owner }}/ductcalc:test
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
     - name: Run Tests
       run: |
         docker run --rm ${{ github.repository_owner }}/ductcalc:test swift test

@@ -65,18 +65,18 @@ p-6 w-full">
                     <div class="space-y-2 justify-end font-bold text-lg">
                       <div class="flex space-x-4 justify-end mx-auto">
                         <span>Friction Rate Design Value</span>
-                        <div class="badge badge-lg badge-outline badge-info badge-lg font-bold"><span>0.06</span></div>
+                        <div class="badge badge-lg badge-info badge-lg font-bold"><span>0.06</span></div>
                       </div>
                       <div class="flex space-x-4 justify-end mx-auto">
                         <span>Available Static Pressure</span>
-                        <div class="badge badge-lg badge-outline"><span>0.11</span></div>
+                        <div class="badge badge-lg"><span>0.11</span></div>
                       </div>
                       <div class="flex space-x-4 justify-end mx-auto">
                         <span>Component Pressure Losses</span>
-                        <div class="badge badge-lg badge-outline"><span>0.39</span></div>
+                        <div class="badge badge-lg"><span>0.39</span></div>
                       </div>
                     </div>
-                    <div class="text-error font-bold italic col-span-2">
+                    <div class="border border-red-800 bg-error rounded-lg shadow-lg font-bold italic col-span-2 p-4">
                       <div class="flex space-x-2 hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
                         <p>Must complete previous sections.</p>
@@ -101,6 +101,8 @@ p-6 w-full">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
                         <p class="block">
                           Calculated friction rate is above 0.18. The fan may deliver too many CFM.
+                          <br>
+                           * Make sure all component pressure losses are accounted for
                           <br>
                            * Decrease the blower speed
                           <br>
