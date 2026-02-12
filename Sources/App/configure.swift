@@ -56,7 +56,12 @@ private func addMiddleware(
   app.middleware.use(cors, at: .beginning)
 
   app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
+
+  // Sessions.
+  app.sessions.use(.fluent)
+  app.migrations.add(SessionRecord.migration)
   app.middleware.use(app.sessions.middleware)
+
   app.middleware.use(DependenciesMiddleware(database: databaseClient, environment: environment))
 }
 
