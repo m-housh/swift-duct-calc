@@ -8,7 +8,7 @@ struct FrictionRateView: HTML, Sendable {
   @Environment(ProjectViewValue.$projectID) var projectID
 
   let componentLosses: [ComponentPressureLoss]
-  let equivalentLengths: EffectiveLength.MaxContainer
+  let equivalentLengths: EquivalentLength.MaxContainer
   let frictionRate: FrictionRate?
 
   private var availableStaticPressure: Double? {
@@ -93,7 +93,13 @@ struct FrictionRateView: HTML, Sendable {
             }
           }
 
-          div(.class("text-error font-bold italic col-span-2")) {
+          div(
+            .class(
+              """
+              border border-red-800 bg-error rounded-lg shadow-lg font-bold italic col-span-2 p-4
+              """
+            )
+          ) {
             Alert {
               p {
                 "Must complete previous sections."
@@ -124,6 +130,8 @@ struct FrictionRateView: HTML, Sendable {
             Alert {
               p(.class("block")) {
                 "Calculated friction rate is above 0.18. The fan may deliver too many CFM."
+                br()
+                " * Make sure all component pressure losses are accounted for"
                 br()
                 " * Decrease the blower speed"
                 br()

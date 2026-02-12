@@ -13,3 +13,6 @@ tailwindcss
 *.pdf
 .env
 .env*
+default.profraw
+/rooms.csv
+postgres/

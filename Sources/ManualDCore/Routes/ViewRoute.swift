@@ -8,9 +8,12 @@ extension SiteRoute {
   ///
   /// The routes return html.
   public enum View: Equatable, Sendable {
+    case home
+    case privacyPolicy
     case login(LoginRoute)
     case signup(SignupRoute)
     case project(ProjectRoute)
+    case ductulator(DuctulatorRoute)
     case user(UserRoute)
     //FIX: Remove.
     case test
@@ -18,6 +21,13 @@ extension SiteRoute {
     public static let router = OneOf {
       Route(.case(Self.test)) {
         Path { "test" }
+        Method.get
+      }
+      Route(.case(Self.home)) {
+        Method.get
+      }
+      Route(.case(Self.privacyPolicy)) {
+        Path { "privacy-policy" }
         Method.get
       }
       Route(.case(Self.login)) {
@@ -28,6 +38,9 @@ extension SiteRoute {
       }
       Route(.case(Self.project)) {
         SiteRoute.View.ProjectRoute.router
+      }
+      Route(.case(Self.ductulator)) {
+        SiteRoute.View.DuctulatorRoute.router
       }
       Route(.case(Self.user)) {
         SiteRoute.View.UserRoute.router
@@ -188,6 +201,7 @@ extension SiteRoute.View.ProjectRoute {
   }
 
   public enum RoomRoute: Equatable, Sendable {
+    case csv(Room.CSV)
     case delete(id: Room.ID)
     case index
     case submit(Room.Create)
@@ -197,6 +211,17 @@ extension SiteRoute.View.ProjectRoute {
     static let rootPath = "rooms"
 
     public static let router = OneOf {
+      Route(.case(Self.csv)) {
+        Path {
+          rootPath
+          "csv"
+        }
+        Headers {
+          Field("Content-Type") { "multipart/form-data" }
+        }
+        Method.post
+        Body().map(.memberwise(Room.CSV.init))
+      }
       Route(.case(Self.delete)) {
         Path {
           rootPath
@@ -215,14 +240,24 @@ extension SiteRoute.View.ProjectRoute {
         Method.post
         Body {
           FormData {
-            Field("projectID") { Project.ID.parser() }
             Field("name", .string)
-            Field("heatingLoad") { Double.parser() }
-            Field("coolingTotal") { Double.parser() }
             Optionally {
-              Field("coolingSensible", default: nil) { Double.parser() }
+              Field("level") {
+                Int.parser()
+              }
+              .map(.memberwise(Room.Level.init(rawValue:)))
+            }
+            Field("heatingLoad") { Double.parser() }
+            Optionally {
+              Field("coolingTotal") { Double.parser() }
+            }
+            Optionally {
+              Field("coolingSensible") { Double.parser() }
             }
             Field("registerCount") { Digits() }
+            Optionally {
+              Field("delegatedTo") { Room.ID.parser() }
+            }
           }
           .map(.memberwise(Room.Create.init))
         }
@@ -237,6 +272,12 @@ extension SiteRoute.View.ProjectRoute {
           FormData {
             Optionally {
               Field("name", .string)
+            }
+            Optionally {
+              Field("level") {
+                Int.parser()
+              }
+              .map(.memberwise(Room.Level.init(rawValue:)))
             }
             Optionally {
               Field("heatingLoad") { Double.parser() }
@@ -394,11 +435,11 @@ extension SiteRoute.View.ProjectRoute {
   }
 
   public enum EquivalentLengthRoute: Equatable, Sendable {
-    case delete(id: EffectiveLength.ID)
-    case field(FieldType, style: EffectiveLength.EffectiveLengthType? = nil)
+    case delete(id: EquivalentLength.ID)
+    case field(FieldType, style: EquivalentLength.EffectiveLengthType? = nil)
     case index
     case submit(FormStep)
-    case update(EffectiveLength.ID, StepThree)
+    case update(EquivalentLength.ID, StepThree)
 
     static let rootPath = "effective-lengths"
 
@@ -406,7 +447,7 @@ extension SiteRoute.View.ProjectRoute {
       Route(.case(Self.delete(id:))) {
         Path {
           rootPath
-          EffectiveLength.ID.parser()
+          EquivalentLength.ID.parser()
         }
         Method.delete
       }
@@ -424,7 +465,7 @@ extension SiteRoute.View.ProjectRoute {
           Field("type") { FieldType.parser() }
           Optionally {
             Field("style", default: nil) {
-              EffectiveLength.EffectiveLengthType.parser()
+              EquivalentLength.EffectiveLengthType.parser()
             }
           }
         }
@@ -437,16 +478,16 @@ extension SiteRoute.View.ProjectRoute {
       Route(.case(Self.update)) {
         Path {
           rootPath
-          EffectiveLength.ID.parser()
+          EquivalentLength.ID.parser()
         }
         Method.patch
         Body {
           FormData {
             Optionally {
-              Field("id", default: nil) { EffectiveLength.ID.parser() }
+              Field("id", default: nil) { EquivalentLength.ID.parser() }
             }
             Field("name", .string)
-            Field("type") { EffectiveLength.EffectiveLengthType.parser() }
+            Field("type") { EquivalentLength.EffectiveLengthType.parser() }
             Many {
               Field("straightLengths") {
                 Int.parser()
@@ -490,10 +531,10 @@ extension SiteRoute.View.ProjectRoute {
           Body {
             FormData {
               Optionally {
-                Field("id", default: nil) { EffectiveLength.ID.parser() }
+                Field("id", default: nil) { EquivalentLength.ID.parser() }
               }
               Field("name", .string)
-              Field("type") { EffectiveLength.EffectiveLengthType.parser() }
+              Field("type") { EquivalentLength.EffectiveLengthType.parser() }
             }
             .map(.memberwise(StepOne.init))
           }
@@ -505,10 +546,10 @@ extension SiteRoute.View.ProjectRoute {
           Body {
             FormData {
               Optionally {
-                Field("id", default: nil) { EffectiveLength.ID.parser() }
+                Field("id", default: nil) { EquivalentLength.ID.parser() }
               }
               Field("name", .string)
-              Field("type") { EffectiveLength.EffectiveLengthType.parser() }
+              Field("type") { EquivalentLength.EffectiveLengthType.parser() }
               Many {
                 Field("straightLengths") {
                   Int.parser()
@@ -525,10 +566,10 @@ extension SiteRoute.View.ProjectRoute {
           Body {
             FormData {
               Optionally {
-                Field("id", default: nil) { EffectiveLength.ID.parser() }
+                Field("id", default: nil) { EquivalentLength.ID.parser() }
               }
               Field("name", .string)
-              Field("type") { EffectiveLength.EffectiveLengthType.parser() }
+              Field("type") { EquivalentLength.EffectiveLengthType.parser() }
               Many {
                 Field("straightLengths") {
                   Int.parser()
@@ -567,22 +608,22 @@ extension SiteRoute.View.ProjectRoute {
     }
 
     public struct StepOne: Codable, Equatable, Sendable {
-      public let id: EffectiveLength.ID?
+      public let id: EquivalentLength.ID?
       public let name: String
-      public let type: EffectiveLength.EffectiveLengthType
+      public let type: EquivalentLength.EffectiveLengthType
     }
 
     public struct StepTwo: Codable, Equatable, Sendable {
 
-      public let id: EffectiveLength.ID?
+      public let id: EquivalentLength.ID?
       public let name: String
-      public let type: EffectiveLength.EffectiveLengthType
+      public let type: EquivalentLength.EffectiveLengthType
       public let straightLengths: [Int]
 
       public init(
-        id: EffectiveLength.ID? = nil,
+        id: EquivalentLength.ID? = nil,
         name: String,
-        type: EffectiveLength.EffectiveLengthType,
+        type: EquivalentLength.EffectiveLengthType,
         straightLengths: [Int]
       ) {
         self.id = id
@@ -593,9 +634,9 @@ extension SiteRoute.View.ProjectRoute {
     }
 
     public struct StepThree: Codable, Equatable, Sendable {
-      public let id: EffectiveLength.ID?
+      public let id: EquivalentLength.ID?
       public let name: String
-      public let type: EffectiveLength.EffectiveLengthType
+      public let type: EquivalentLength.EffectiveLengthType
       public let straightLengths: [Int]
       public let groupGroups: [Int]
       public let groupLetters: [String]
@@ -873,10 +914,15 @@ extension SiteRoute.View {
 extension SiteRoute.View {
   public enum UserRoute: Equatable, Sendable {
     case profile(Profile)
+    case logout
 
     static let router = OneOf {
       Route(.case(Self.profile)) {
         Profile.router
+      }
+      Route(.case(Self.logout)) {
+        Path { "logout" }
+        Method.get
       }
     }
   }
@@ -950,6 +996,49 @@ extension SiteRoute.View.UserRoute {
           }
           .map(.memberwise(User.Profile.Update.init))
         }
+      }
+    }
+  }
+}
+
+extension SiteRoute.View {
+  public enum DuctulatorRoute: Equatable, Sendable {
+    case index
+    case submit(Form)
+
+    public static let rootPath = "duct-size"
+
+    static let router = OneOf {
+      Route(.case(Self.index)) {
+        Path { rootPath }
+        Method.get
+      }
+      Route(.case(Self.submit)) {
+        Path { rootPath }
+        Method.post
+        Body {
+          FormData {
+            Field("cfm") { Int.parser() }
+            Field("frictionRate") { Double.parser() }
+            Optionally {
+              Field("height") { Int.parser() }
+            }
+          }
+          .map(.memberwise(Form.init))
+        }
+      }
+    }
+
+    public struct Form: Equatable, Sendable {
+
+      public let cfm: Int
+      public let frictionRate: Double
+      public let height: Int?
+
+      public init(cfm: Int, frictionRate: Double, height: Int? = nil) {
+        self.cfm = cfm
+        self.frictionRate = frictionRate
+        self.height = height
       }
     }
   }

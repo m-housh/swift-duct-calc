@@ -1,0 +1,40 @@
+{
+	"name": "swift-manual-d-dev",
+	"image": "git.housh.dev/michael/swift-dev-container:latest",
+	"features": {
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "os-provided",
+      "ppa": "false"
+    },
+		"ghcr.io/jsburckhardt/devcontainer-features/just:1": {},
+		"ghcr.io/rocker-org/devcontainer-features/pandoc:1": {},
+		//"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+		"ghcr.io/wxw-matt/devcontainer-features/apt:latest": {
+			"packages": "weasyprint gnupg2 tmux"
+    },
+	  "ghcr.io/swift-server-community/swift-devcontainer-features/jemalloc:1": { },
+
+	},
+	"runArgs": [
+    "--cap-add=SYS_PTRACE",
+    "--security-opt",
+    "seccomp=unconfined"
+  ],
+	"remoteEnv": {
+		// Set TERM, prevents problems when "xterm-ghostty" get's passed from host,
+		// which causes weird typing and display problems.
+		"TERM": "xterm-256color",
+		// Less backtrace error warnings from swift.
+		"SWIFT_BACKTRACE": "enable=no"
+	},
+  "remoteUser": "swift",
+	"forwardPorts": [8080],
+	"mounts": [
+		{
+			"type": "bind", 
+			"source": "${localEnv:HOME}/.local/share/nvim",
+			"target": "/home/swift/.local/share/nvim"
+		}
+	]
+}
+	

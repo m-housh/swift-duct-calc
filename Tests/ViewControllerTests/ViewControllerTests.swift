@@ -15,10 +15,46 @@ import ViewController
 struct ViewControllerTests {
 
   @Test
+  func home() async throws {
+    try await withDependencies {
+      $0.viewController = .liveValue
+      $0.auth = .failing
+    } operation: {
+      @Dependency(\.viewController) var viewController
+      let home = try await viewController.view(.test(.home))
+      assertSnapshot(of: home, as: .html)
+    }
+  }
+
+  @Test
+  func ductulator() async throws {
+    try await withDependencies {
+      $0.viewController = .liveValue
+      $0.auth = .failing
+    } operation: {
+      @Dependency(\.viewController) var viewController
+      let view = try await viewController.view(.test(.ductulator(.index)))
+      assertSnapshot(of: view, as: .html)
+    }
+  }
+
+  @Test
+  func privacyPolicy() async throws {
+    try await withDependencies {
+      $0.viewController = .liveValue
+      $0.auth = .failing
+    } operation: {
+      @Dependency(\.viewController) var viewController
+      let view = try await viewController.view(.test(.privacyPolicy))
+      assertSnapshot(of: view, as: .html)
+    }
+  }
+
+  @Test
   func login() async throws {
     try await withDependencies {
       $0.viewController = .liveValue
-      $0.authClient = .failing
+      $0.auth = .failing
     } operation: {
       @Dependency(\.viewController) var viewController
 
@@ -31,7 +67,7 @@ struct ViewControllerTests {
   func signup() async throws {
     try await withDependencies {
       $0.viewController = .liveValue
-      $0.authClient = .failing
+      $0.auth = .failing
     } operation: {
       @Dependency(\.viewController) var viewController
 
@@ -86,7 +122,7 @@ struct ViewControllerTests {
       let project = Project.mock
       let rooms = Room.mock(projectID: project.id)
       let equipment = EquipmentInfo.mock(projectID: project.id)
-      let tels = EffectiveLength.mock(projectID: project.id)
+      let tels = EquivalentLength.mock(projectID: project.id)
       let componentLosses = ComponentPressureLoss.mock(projectID: project.id)
       let trunks = TrunkSize.mock(projectID: project.id, rooms: rooms)
 
@@ -100,6 +136,13 @@ struct ViewControllerTests {
       )
     }
 
+    let mockDuctSizes = DuctSizes.mock(
+      equipmentInfo: equipment,
+      rooms: rooms,
+      trunks: trunks,
+      shr: project.sensibleHeatRatio ?? 0.83
+    )
+
     try await withDefaultDependencies {
       $0.database.projects.get = { _ in project }
       $0.database.projects.getCompletedSteps = { _ in
@@ -108,13 +151,16 @@ struct ViewControllerTests {
       $0.database.projects.getSensibleHeatRatio = { _ in 0.83 }
       $0.database.rooms.fetch = { _ in rooms }
       $0.database.equipment.fetch = { _ in equipment }
-      $0.database.effectiveLength.fetch = { _ in tels }
-      $0.database.effectiveLength.fetchMax = { _ in
+      $0.database.equivalentLengths.fetch = { _ in tels }
+      $0.database.equivalentLengths.fetchMax = { _ in
         .init(supply: tels.first, return: tels.last)
       }
-      $0.database.componentLoss.fetch = { _ in componentLosses }
-      $0.projectClient.calculateDuctSizes = { _ in
-        .mock(equipmentInfo: equipment, rooms: rooms, trunks: trunks)
+      $0.database.componentLosses.fetch = { _ in componentLosses }
+      $0.projectClient.calculateRoomDuctSizes = { _ in
+        mockDuctSizes.rooms
+      }
+      $0.projectClient.calculateTrunkDuctSizes = { _ in
+        mockDuctSizes.trunks
       }
     } operation: {
       @Dependency(\.viewController) var viewController
@@ -163,8 +209,8 @@ struct ViewControllerTests {
 
     return try await withDependencies {
       $0.viewController = .liveValue
-      $0.authClient.currentUser = { user }
-      $0.database.userProfile.fetch = { _ in profile }
+      $0.auth.currentUser = { user }
+      $0.database.userProfiles.fetch = { _ in profile }
       $0.manualD = .liveValue
       try await updateDependencies(&$0)
     } operation: {

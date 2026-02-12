@@ -7,14 +7,14 @@ struct EffectiveLengthsView: HTML, Sendable {
 
   @Environment(ProjectViewValue.$projectID) var projectID
 
-  let effectiveLengths: [EffectiveLength]
+  let effectiveLengths: [EquivalentLength]
 
-  var supplies: [EffectiveLength] {
+  var supplies: [EquivalentLength] {
     effectiveLengths.filter({ $0.type == .supply })
       .sorted { $0.totalEquivalentLength > $1.totalEquivalentLength }
   }
 
-  var returns: [EffectiveLength] {
+  var returns: [EquivalentLength] {
     effectiveLengths.filter({ $0.type == .return })
       .sorted { $0.totalEquivalentLength > $1.totalEquivalentLength }
   }

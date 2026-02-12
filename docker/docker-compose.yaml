@@ -1,0 +1,30 @@
+services:
+  db:
+    image: docker.io/postgres:18
+    container_name: postgres
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./data:/var/lib/postgresql
+    healthcheck:
+      # Assumes POSTGRES_USER is set to 'ductcalc' in the environment, change if needed.
+      test: ["CMD-SHELL", "pg_isready -U ductcalc"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  ductcalc:
+    image: ghcr.io/m-housh/ductcalc:latest
+    container_name: ductcalc
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      db:
+        condition: healthy
+    ports:
+      - 8080:8080
+    healthcheck:
+      test: curl --fail --silent http://0.0.0.0:8080/health || exit 1
+      interval: 1m
+      timeout: 10s
+      retries: 3

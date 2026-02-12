@@ -7,6 +7,8 @@ public struct ValidationError: Error {
   public init(_ message: String) {
     self.message = message
   }
+
+  public var localizedDescription: String { message }
 }
 
 public struct NotFoundError: Error {

@@ -1,7 +1,9 @@
 import DatabaseClient
 import Dependencies
 import Elementary
+import EnvVars
 import Fluent
+import FluentPostgresDriver
 import FluentSQLiteDriver
 import ManualDCore
 import NIOSSL
@@ -14,12 +16,15 @@ import ViewController
 // configures your application
 public func configure(
   _ app: Application,
+  in environment: EnvVars,
   makeDatabaseClient: @escaping (any Database) -> DatabaseClient = { .live(database: $0) }
 ) async throws {
   // Setup the database client.
-  let databaseClient = try await setupDatabase(on: app, factory: makeDatabaseClient)
+  let databaseClient = try await setupDatabase(
+    on: app, environment: environment, factory: makeDatabaseClient
+  )
   // Add the global middlewares.
-  addMiddleware(to: app, database: databaseClient)
+  addMiddleware(to: app, database: databaseClient, environment: environment)
   #if DEBUG
     // Live reload of the application for development when launched with the `./swift-dev` command
     // app.lifecycle.use(BrowserSyncHandler())
@@ -33,7 +38,11 @@ public func configure(
   addCommands(to: app)
 }
 
-private func addMiddleware(to app: Application, database databaseClient: DatabaseClient) {
+private func addMiddleware(
+  to app: Application,
+  database databaseClient: DatabaseClient,
+  environment: EnvVars
+) {
   // cors middleware should come before default error middleware using `at: .beginning`
   let corsConfiguration = CORSMiddleware.Configuration(
     allowedOrigin: .all,
@@ -48,16 +57,20 @@ private func addMiddleware(to app: Application, database databaseClient: Databas
 
   app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
   app.middleware.use(app.sessions.middleware)
-  app.middleware.use(DependenciesMiddleware(database: databaseClient))
+  app.middleware.use(DependenciesMiddleware(database: databaseClient, environment: environment))
 }
 
 private func setupDatabase(
   on app: Application,
+  environment: EnvVars,
   factory makeDatabaseClient: @escaping (any Database) -> DatabaseClient
 ) async throws -> DatabaseClient {
   switch app.environment {
-  case .production, .development:
-    let dbFileName = Environment.get("SQLITE_FILENAME") ?? "db.sqlite"
+  case .production:
+    let configuration = try environment.postgresConfiguration()
+    app.databases.use(.postgres(configuration: configuration), as: .psql)
+  case .development:
+    let dbFileName = environment.sqlitePath ?? "db.sqlite"
     app.databases.use(DatabaseConfigurationFactory.sqlite(.file(dbFileName)), as: .sqlite)
   default:
     app.databases.use(DatabaseConfigurationFactory.sqlite(.memory), as: .sqlite)
@@ -65,9 +78,7 @@ private func setupDatabase(
 
   let databaseClient = makeDatabaseClient(app.db)
 
-  if app.environment != .testing {
-    try await app.migrations.add(databaseClient.migrations())
-  }
+  try await app.migrations.add(databaseClient.migrations())
 
   return databaseClient
 }
@@ -102,8 +113,6 @@ extension SiteRoute {
 
   fileprivate func middleware() -> [any Middleware]? {
     switch self {
-    case .api:
-      return nil
     case .health:
       return nil
     case .view(let route):
@@ -119,13 +128,10 @@ private func siteHandler(
   request: Request,
   route: SiteRoute
 ) async throws -> any AsyncResponseEncodable {
-  @Dependency(\.apiController) var apiController
   @Dependency(\.viewController) var viewController
   @Dependency(\.projectClient) var projectClient
 
   switch route {
-  case .api(let route):
-    return try await apiController.respond(route, request: request)
   case .health:
     return HTTPStatus.ok
   // Generating a pdf return's a `Response` instead of `HTML` like other views, so we
@@ -134,5 +140,32 @@ private func siteHandler(
     return try await projectClient.generatePdf(projectID)
   case .view(let route):
     return try await viewController.respond(route: route, request: request)
+  }
+}
+
+extension EnvVars {
+  func postgresConfiguration() throws -> SQLPostgresConfiguration {
+    guard let hostname = postgresHostname,
+      let username = postgresUsername,
+      let password = postgresPassword,
+      let database = postgresDatabase
+    else {
+      throw EnvError("Missing environment variables for postgres connection.")
+    }
+    return .init(
+      hostname: hostname,
+      username: username,
+      password: password,
+      database: database,
+      tls: .disable
+    )
+  }
+}
+
+struct EnvError: Error {
+  let reason: String
+
+  init(_ reason: String) {
+    self.reason = reason
   }
 }

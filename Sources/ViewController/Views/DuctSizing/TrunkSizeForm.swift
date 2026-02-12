@@ -39,6 +39,7 @@ struct TrunkSizeForm: HTML, Sendable {
   }
 
   var body: some HTML {
+    script(.src("/js/daisy-multiselect.js")) {}
     ModalForm(id: Self.id(container), dismiss: dismiss) {
       h1(.class("text-lg font-bold mb-4")) { "Trunk / Runout Size" }
       form(
@@ -77,40 +78,33 @@ struct TrunkSizeForm: HTML, Sendable {
           .type(.text),
           .name("name"),
           .value(trunk?.name),
-          .placeholder("Trunk-1 (Optional)")
+          .placeholder("Trunk-1"),
+          .required
         )
 
         div {
           h2(.class("label font-bold col-span-3 mb-6")) { "Associated Supply Runs" }
-          div(
-            .class(
-              """
-              grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center items-center gap-4
-              """
-            )
+          daisyMultiSelect(
+            .class("z-50 bg-base-200"),
+            .placeholder("Select rooms"),
+            .name("rooms"),
+            .chipStyle,
+            .showSelectAll,
+            .showClear,
+            .required,
+            .virtualScroll
           ) {
             for room in rooms {
-              div(.class("block grow")) {
-                div(.class("grid grid-cols-1 space-y-1")) {
-                  div(.class("flex justify-center")) {
-                    p(.class("label")) { room.roomName }
-                  }
-                  div(.class("flex justify-center")) {
-                    input(
-                      .class("checkbox"),
-                      .type(.checkbox),
-                      .name("rooms"),
-                      .value("\(room.roomID)_\(room.roomRegister)")
-                    )
-                    .attributes(
-                      .checked,
-                      when: trunk == nil ? false : trunk!.rooms.hasRoom(room)
-                    )
-                  }
-                }
+              option(.value("\(room.roomID)_\(room.roomRegister)")) {
+                room.roomName
               }
+              .attributes(
+                .selected,
+                when: trunk == nil ? false : trunk!.rooms.hasRoom(room)
+              )
             }
           }
+
         }
 
         SubmitButton()

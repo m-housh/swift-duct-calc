@@ -1,5 +1,6 @@
 import Elementary
 import Foundation
+import Validations
 
 public struct ResultView<ValueView, ErrorView>: HTML where ValueView: HTML, ErrorView: HTML {
 
@@ -69,7 +70,11 @@ public struct ErrorView: HTML, Sendable {
     div {
       h1(.class("text-xl font-bold text-error")) { "Oops: Error" }
       p {
-        "\(error.localizedDescription)"
+        if let validationError = (error as? ValidationError) {
+          "\(validationError.debugDescription)"
+        } else {
+          "\(error.localizedDescription)"
+        }
       }
     }
   }

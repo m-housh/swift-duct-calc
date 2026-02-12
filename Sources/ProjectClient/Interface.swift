@@ -15,12 +15,15 @@ extension DependencyValues {
 /// Useful helper utilities for project's.
 ///
 /// This is primarily used for implementing logic required to get the needed data
-/// for the view controller client to render views.
+/// for the view controller to render views.
 @DependencyClient
 public struct ProjectClient: Sendable {
-  public var calculateDuctSizes: @Sendable (Project.ID) async throws -> DuctSizes
+
+  /// Calculates the room duct sizes for the given project.
   public var calculateRoomDuctSizes:
     @Sendable (Project.ID) async throws -> [DuctSizes.RoomContainer]
+
+  /// Calculates the trunk duct sizes for the given project.
   public var calculateTrunkDuctSizes:
     @Sendable (Project.ID) async throws -> [DuctSizes.TrunkContainer]
 
@@ -29,6 +32,13 @@ public struct ProjectClient: Sendable {
 
   public var frictionRate: @Sendable (Project.ID) async throws -> FrictionRateResponse
   public var generatePdf: @Sendable (Project.ID) async throws -> Response
+
+  public func calculateDuctSizes(_ projectID: Project.ID) async throws -> DuctSizes {
+    .init(
+      rooms: try await calculateRoomDuctSizes(projectID),
+      trunks: try await calculateTrunkDuctSizes(projectID)
+    )
+  }
 }
 
 extension ProjectClient: TestDependencyKey {
@@ -60,12 +70,12 @@ extension ProjectClient {
   public struct FrictionRateResponse: Codable, Equatable, Sendable {
 
     public let componentLosses: [ComponentPressureLoss]
-    public let equivalentLengths: EffectiveLength.MaxContainer
+    public let equivalentLengths: EquivalentLength.MaxContainer
     public let frictionRate: FrictionRate?
 
     public init(
       componentLosses: [ComponentPressureLoss],
-      equivalentLengths: EffectiveLength.MaxContainer,
+      equivalentLengths: EquivalentLength.MaxContainer,
       frictionRate: FrictionRate? = nil
     ) {
       self.componentLosses = componentLosses

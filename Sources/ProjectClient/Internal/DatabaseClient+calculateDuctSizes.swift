@@ -9,32 +9,18 @@ extension DatabaseClient {
     details: Project.Detail
   ) async throws -> (DuctSizes, DuctSizeSharedRequest) {
     let (rooms, shared) = try await calculateRoomDuctSizes(details: details)
-    let (trunks, _) = try await calculateTrunkDuctSizes(details: details)
-    return (.init(rooms: rooms, trunks: trunks), shared)
-  }
-
-  func calculateDuctSizes(
-    projectID: Project.ID
-  ) async throws -> (DuctSizes, DuctSizeSharedRequest, [Room]) {
-    @Dependency(\.manualD) var manualD
-
-    let shared = try await sharedDuctRequest(projectID)
-    let rooms = try await rooms.fetch(projectID)
-
     return try await (
-      manualD.calculateDuctSizes(
+      .init(
         rooms: rooms,
-        trunks: trunkSizes.fetch(projectID),
-        sharedRequest: shared
+        trunks: calculateTrunkDuctSizes(details: details, shared: shared)
       ),
-      shared,
-      rooms
+      shared
     )
   }
 
   func calculateRoomDuctSizes(
     details: Project.Detail
-  ) async throws -> ([DuctSizes.RoomContainer], DuctSizeSharedRequest) {
+  ) async throws -> (rooms: [DuctSizes.RoomContainer], shared: DuctSizeSharedRequest) {
     @Dependency(\.manualD) var manualD
 
     let shared = try sharedDuctRequest(details: details)
@@ -42,54 +28,29 @@ extension DatabaseClient {
     return (rooms, shared)
   }
 
-  func calculateRoomDuctSizes(
-    projectID: Project.ID
-  ) async throws -> ([DuctSizes.RoomContainer], DuctSizeSharedRequest) {
-    @Dependency(\.manualD) var manualD
-
-    let shared = try await sharedDuctRequest(projectID)
-
-    return try await (
-      manualD.calculateRoomSizes(
-        rooms: rooms.fetch(projectID),
-        sharedRequest: shared
-      ),
-      shared
-    )
-  }
-
   func calculateTrunkDuctSizes(
-    details: Project.Detail
-  ) async throws -> ([DuctSizes.TrunkContainer], DuctSizeSharedRequest) {
+    details: Project.Detail,
+    shared: DuctSizeSharedRequest? = nil
+  ) async throws -> [DuctSizes.TrunkContainer] {
     @Dependency(\.manualD) var manualD
 
-    let shared = try sharedDuctRequest(details: details)
-    let trunks = try await manualD.calculateTrunkSizes(
+    let sharedRequest: DuctSizeSharedRequest
+    if let shared {
+      sharedRequest = shared
+    } else {
+      sharedRequest = try sharedDuctRequest(details: details)
+    }
+
+    return try await manualD.calculateTrunkSizes(
       rooms: details.rooms,
       trunks: details.trunks,
-      sharedRequest: shared
-    )
-    return (trunks, shared)
-  }
-
-  func calculateTrunkDuctSizes(
-    projectID: Project.ID
-  ) async throws -> ([DuctSizes.TrunkContainer], DuctSizeSharedRequest) {
-    @Dependency(\.manualD) var manualD
-
-    let shared = try await sharedDuctRequest(projectID)
-
-    return try await (
-      manualD.calculateTrunkSizes(
-        rooms: rooms.fetch(projectID),
-        trunks: trunkSizes.fetch(projectID),
-        sharedRequest: shared
-      ),
-      shared
+      sharedRequest: sharedRequest
     )
   }
 
   func sharedDuctRequest(details: Project.Detail) throws -> DuctSizeSharedRequest {
+    let projectSHR = try details.project.ensuredSHR()
+
     guard
       let dfrResponse = designFrictionRate(
         componentLosses: details.componentLosses,
@@ -98,10 +59,6 @@ extension DatabaseClient {
       )
     else {
       throw ProjectClientError("Project not complete.")
-    }
-
-    guard let projectSHR = details.project.sensibleHeatRatio else {
-      throw ProjectClientError("Project sensible heat ratio not set.")
     }
 
     let ensuredTEL = try dfrResponse.ensureMaxContainer()
@@ -115,40 +72,14 @@ extension DatabaseClient {
     )
   }
 
-  func sharedDuctRequest(_ projectID: Project.ID) async throws -> DuctSizeSharedRequest {
-
-    guard let dfrResponse = try await designFrictionRate(projectID: projectID) else {
-      throw ProjectClientError("Project not complete.")
-    }
-
-    let ensuredTEL = try dfrResponse.ensureMaxContainer()
-
-    return try await .init(
-      equipmentInfo: dfrResponse.equipmentInfo,
-      maxSupplyLength: ensuredTEL.supply,
-      maxReturnLenght: ensuredTEL.return,
-      designFrictionRate: dfrResponse.designFrictionRate,
-      projectSHR: ensuredSHR(projectID)
-    )
-
-  }
-
-  // Fetches the project sensible heat ratio or throws an error if it's nil.
-  func ensuredSHR(_ projectID: Project.ID) async throws -> Double {
-    guard let projectSHR = try await projects.getSensibleHeatRatio(projectID) else {
-      throw ProjectClientError("Project sensible heat ratio not set.")
-    }
-    return projectSHR
-  }
-
   // Internal container.
   struct DesignFrictionRateResponse: Equatable, Sendable {
 
-    typealias EnsuredTEL = (supply: EffectiveLength, return: EffectiveLength)
+    typealias EnsuredTEL = (supply: EquivalentLength, return: EquivalentLength)
 
     let designFrictionRate: Double
     let equipmentInfo: EquipmentInfo
-    let telMaxContainer: EffectiveLength.MaxContainer
+    let telMaxContainer: EquivalentLength.MaxContainer
 
     func ensureMaxContainer() throws -> EnsuredTEL {
 
@@ -167,9 +98,9 @@ extension DatabaseClient {
   func designFrictionRate(
     componentLosses: [ComponentPressureLoss],
     equipmentInfo: EquipmentInfo,
-    equivalentLengths: EffectiveLength.MaxContainer
+    equivalentLengths: EquivalentLength.MaxContainer
   ) -> DesignFrictionRateResponse? {
-    guard let tel = equivalentLengths.total,
+    guard let tel = equivalentLengths.totalEquivalentLength,
       componentLosses.count > 0
     else { return nil }
 
@@ -183,18 +114,13 @@ extension DatabaseClient {
 
   }
 
-  func designFrictionRate(
-    projectID: Project.ID
-  ) async throws -> DesignFrictionRateResponse? {
+}
 
-    guard let equipmentInfo = try await equipment.fetch(projectID) else {
-      return nil
+extension Project {
+  func ensuredSHR() throws -> Double {
+    guard let shr = sensibleHeatRatio else {
+      throw ProjectClientError("Sensible heat ratio not set on project id: \(id)")
     }
-
-    return try await designFrictionRate(
-      componentLosses: componentLoss.fetch(projectID),
-      equipmentInfo: equipmentInfo,
-      equivalentLengths: effectiveLength.fetchMax(projectID)
-    )
+    return shr
   }
 }

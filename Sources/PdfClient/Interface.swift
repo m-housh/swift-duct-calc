@@ -1,7 +1,7 @@
 import Dependencies
 import DependenciesMacros
 import Elementary
-import EnvClient
+import EnvVars
 import FileClient
 import Foundation
 import ManualDCore
@@ -32,8 +32,7 @@ public struct PdfClient: Sendable {
   /// - Parameters:
   ///   - request: The project data used to generate the pdf.
   public func generatePdf(request: Request) async throws -> Response {
-    let html = try await self.html(request)
-    return try await self.generatePdf(request.project.id, html)
+    try await self.generatePdf(request.project.id, html(request))
   }
 
 }
@@ -47,9 +46,8 @@ extension PdfClient: DependencyKey {
     },
     generatePdf: { projectID, html in
       @Dependency(\.fileClient) var fileClient
-      @Dependency(\.env) var env
+      @Dependency(\.environment) var environment
 
-      let envVars = try env()
       let baseUrl = "/tmp/\(projectID)"
       try await fileClient.writeFile(html.render(), "\(baseUrl).html")
 
@@ -58,10 +56,10 @@ extension PdfClient: DependencyKey {
       let standardOutput = Pipe()
       process.standardInput = standardInput
       process.standardOutput = standardOutput
-      process.executableURL = URL(fileURLWithPath: envVars.pandocPath)
+      process.executableURL = URL(fileURLWithPath: environment.pandocPath)
       process.arguments = [
         "\(baseUrl).html",
-        "--pdf-engine=\(envVars.pdfEngine)",
+        "--pdf-engine=\(environment.pdfEngine)",
         "--from=html",
         "--css=Public/css/pdf.css",
         "--output=\(baseUrl).pdf",
@@ -76,17 +74,26 @@ extension PdfClient: DependencyKey {
 }
 
 extension PdfClient {
-  /// Container for the data required to generate a pdf for a given project.
+  /// Represents the data required to generate a pdf for a given project.
   public struct Request: Codable, Equatable, Sendable {
 
+    /// The project we're generating a pdf for.
     public let project: Project
+    /// The rooms in the project.
     public let rooms: [Room]
+    /// The component pressure losses for the project.
     public let componentLosses: [ComponentPressureLoss]
+    /// The calculated duct sizes for the project.
     public let ductSizes: DuctSizes
+    /// The equipment information for the project.
     public let equipmentInfo: EquipmentInfo
-    public let maxSupplyTEL: EffectiveLength
-    public let maxReturnTEL: EffectiveLength
+    /// The max supply equivalent length for the project.
+    public let maxSupplyTEL: EquivalentLength
+    /// The max return equivalent length for the project.
+    public let maxReturnTEL: EquivalentLength
+    /// The calculated design friction rate for the project.
     public let frictionRate: FrictionRate
+    /// The project wide sensible heat ratio.
     public let projectSHR: Double
 
     var totalEquivalentLength: Double {
@@ -99,8 +106,8 @@ extension PdfClient {
       componentLosses: [ComponentPressureLoss],
       ductSizes: DuctSizes,
       equipmentInfo: EquipmentInfo,
-      maxSupplyTEL: EffectiveLength,
-      maxReturnTEL: EffectiveLength,
+      maxSupplyTEL: EquivalentLength,
+      maxReturnTEL: EquivalentLength,
       frictionRate: FrictionRate,
       projectSHR: Double
     ) {
@@ -116,9 +123,12 @@ extension PdfClient {
     }
   }
 
+  /// Represents the response after generating a pdf.
   public struct Response: Equatable, Sendable {
 
+    /// The path to the html file used to generate the pdf from.
     public let htmlPath: String
+    /// The path to the pdf file.
     public let pdfPath: String
 
     public init(htmlPath: String, pdfPath: String) {
@@ -134,13 +144,18 @@ extension PdfClient {
       let rooms = Room.mock(projectID: project.id)
       let trunks = TrunkSize.mock(projectID: project.id, rooms: rooms)
       let equipmentInfo = EquipmentInfo.mock(projectID: project.id)
-      let equivalentLengths = EffectiveLength.mock(projectID: project.id)
+      let equivalentLengths = EquivalentLength.mock(projectID: project.id)
 
       return .init(
         project: project,
         rooms: rooms,
         componentLosses: ComponentPressureLoss.mock(projectID: project.id),
-        ductSizes: .mock(equipmentInfo: equipmentInfo, rooms: rooms, trunks: trunks),
+        ductSizes: .mock(
+          equipmentInfo: equipmentInfo,
+          rooms: rooms,
+          trunks: trunks,
+          shr: project.sensibleHeatRatio ?? 0.83
+        ),
         equipmentInfo: equipmentInfo,
         maxSupplyTEL: equivalentLengths.first { $0.type == .supply }!,
         maxReturnTEL: equivalentLengths.first { $0.type == .return }!,

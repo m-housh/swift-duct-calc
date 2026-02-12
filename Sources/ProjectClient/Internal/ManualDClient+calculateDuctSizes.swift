@@ -4,8 +4,8 @@ import ManualDCore
 
 struct DuctSizeSharedRequest {
   let equipmentInfo: EquipmentInfo
-  let maxSupplyLength: EffectiveLength
-  let maxReturnLenght: EffectiveLength
+  let maxSupplyLength: EquivalentLength
+  let maxReturnLenght: EquivalentLength
   let designFrictionRate: Double
   let projectSHR: Double
 }
@@ -33,6 +33,7 @@ extension ManualDClient {
     )
   }
 
+  // FIX: Need to add the loads for rooms that get delegated to other rooms here.
   func calculateRoomSizes(
     rooms: [Room],
     sharedRequest: DuctSizeSharedRequest,
@@ -41,18 +42,24 @@ extension ManualDClient {
 
     var retval: [DuctSizes.RoomContainer] = []
     let totalHeatingLoad = rooms.totalHeatingLoad
-    let totalCoolingSensible = rooms.totalCoolingSensible(shr: sharedRequest.projectSHR)
+    let totalCoolingSensible = try rooms.totalCoolingSensible(shr: sharedRequest.projectSHR)
+    let nonDelegatedRooms = rooms.filter { $0.delegatedTo == nil }
 
-    for room in rooms {
-      let heatingLoad = room.heatingLoadPerRegister
-      let coolingLoad = room.coolingSensiblePerRegister(projectSHR: sharedRequest.projectSHR)
+    for room in nonDelegatedRooms {
+      // Get all the rooms that delegate their loads to this room.
+      let delegatedRooms = rooms.filter { $0.delegatedTo == room.id }
+
+      let heatingLoad = room.heatingLoadPerRegister(delegatedRooms: delegatedRooms)
+      let coolingLoad = try room.coolingSensiblePerRegister(projectSHR: sharedRequest.projectSHR)
+
       let heatingPercent = heatingLoad / totalHeatingLoad
       let coolingPercent = coolingLoad / totalCoolingSensible
       let heatingCFM = heatingPercent * Double(sharedRequest.equipmentInfo.heatingCFM)
       let coolingCFM = coolingPercent * Double(sharedRequest.equipmentInfo.coolingCFM)
       let designCFM = DuctSizes.DesignCFM(heating: heatingCFM, cooling: coolingCFM)
       let sizes = try await self.ductSize(
-        .init(designCFM: Int(designCFM.value), frictionRate: sharedRequest.designFrictionRate)
+        cfm: designCFM.value,
+        frictionRate: sharedRequest.designFrictionRate
       )
 
       for n in 1...room.registerCount {
@@ -63,7 +70,8 @@ extension ManualDClient {
 
         if let rectangularSize {
           let response = try await self.rectangularSize(
-            .init(round: sizes.finalSize, height: rectangularSize.height)
+            round: sizes.finalSize,
+            height: rectangularSize.height
           )
           rectangularWidth = response.width
         }
@@ -100,23 +108,25 @@ extension ManualDClient {
 
     var retval = [DuctSizes.TrunkContainer]()
     let totalHeatingLoad = rooms.totalHeatingLoad
-    let totalCoolingSensible = rooms.totalCoolingSensible(shr: sharedRequest.projectSHR)
+    let totalCoolingSensible = try rooms.totalCoolingSensible(shr: sharedRequest.projectSHR)
 
     for trunk in trunks {
       let heatingLoad = trunk.totalHeatingLoad
-      let coolingLoad = trunk.totalCoolingSensible(projectSHR: sharedRequest.projectSHR)
+      let coolingLoad = try trunk.totalCoolingSensible(projectSHR: sharedRequest.projectSHR)
       let heatingPercent = heatingLoad / totalHeatingLoad
       let coolingPercent = coolingLoad / totalCoolingSensible
       let heatingCFM = heatingPercent * Double(sharedRequest.equipmentInfo.heatingCFM)
       let coolingCFM = coolingPercent * Double(sharedRequest.equipmentInfo.coolingCFM)
       let designCFM = DuctSizes.DesignCFM(heating: heatingCFM, cooling: coolingCFM)
       let sizes = try await self.ductSize(
-        .init(designCFM: Int(designCFM.value), frictionRate: sharedRequest.designFrictionRate)
+        cfm: designCFM.value,
+        frictionRate: sharedRequest.designFrictionRate
       )
       var width: Int? = nil
       if let height = trunk.height {
         let rectangularSize = try await self.rectangularSize(
-          .init(round: sizes.finalSize, height: height)
+          round: sizes.finalSize,
+          height: height
         )
         width = rectangularSize.width
       }
@@ -142,7 +152,7 @@ extension ManualDClient {
 extension DuctSizes.SizeContainer {
   init(
     designCFM: DuctSizes.DesignCFM,
-    sizes: ManualDClient.DuctSizeResponse,
+    sizes: ManualDClient.DuctSize,
     height: Int?,
     width: Int?
   ) {
@@ -160,7 +170,7 @@ extension DuctSizes.SizeContainer {
 
   init(
     designCFM: DuctSizes.DesignCFM,
-    sizes: ManualDClient.DuctSizeResponse,
+    sizes: ManualDClient.DuctSize,
     rectangularSize: Room.RectangularSize?,
     width: Int?
   ) {
@@ -177,47 +187,34 @@ extension DuctSizes.SizeContainer {
   }
 }
 
-extension Room {
+// extension TrunkSize.RoomProxy {
+//
+//   // We need to make sure if registers got removed after a trunk
+//   // was already made / saved that we do not include registers that
+//   // no longer exist.
+//   private var actualRegisterCount: Int {
+//     guard registers.count <= room.registerCount else {
+//       return room.registerCount
+//     }
+//     return registers.count
+//   }
+//
+//   var totalHeatingLoad: Double {
+//     room.heatingLoadPerRegister() * Double(actualRegisterCount)
+//   }
+//
+//   func totalCoolingSensible(projectSHR: Double) throws -> Double {
+//     try room.coolingSensiblePerRegister(projectSHR: projectSHR) * Double(actualRegisterCount)
+//   }
+// }
 
-  var heatingLoadPerRegister: Double {
-
-    heatingLoad / Double(registerCount)
-  }
-
-  func coolingSensiblePerRegister(projectSHR: Double) -> Double {
-    let sensible = coolingSensible ?? (coolingTotal * projectSHR)
-    return sensible / Double(registerCount)
-  }
-}
-
-extension TrunkSize.RoomProxy {
-
-  // We need to make sure if registers got removed after a trunk
-  // was already made / saved that we do not include registers that
-  // no longer exist.
-  private var actualRegisterCount: Int {
-    guard registers.count <= room.registerCount else {
-      return room.registerCount
-    }
-    return registers.count
-  }
-
-  var totalHeatingLoad: Double {
-    room.heatingLoadPerRegister * Double(actualRegisterCount)
-  }
-
-  func totalCoolingSensible(projectSHR: Double) -> Double {
-    room.coolingSensiblePerRegister(projectSHR: projectSHR) * Double(actualRegisterCount)
-  }
-}
-
-extension TrunkSize {
-
-  var totalHeatingLoad: Double {
-    rooms.reduce(into: 0) { $0 += $1.totalHeatingLoad }
-  }
-
-  func totalCoolingSensible(projectSHR: Double) -> Double {
-    rooms.reduce(into: 0) { $0 += $1.totalCoolingSensible(projectSHR: projectSHR) }
-  }
-}
+// extension TrunkSize {
+//
+//   var totalHeatingLoad: Double {
+//     rooms.reduce(into: 0) { $0 += $1.totalHeatingLoad }
+//   }
+//
+//   func totalCoolingSensible(projectSHR: Double) throws -> Double {
+//     try rooms.reduce(into: 0) { $0 += try $1.totalCoolingSensible(projectSHR: projectSHR) }
+//   }
+// }

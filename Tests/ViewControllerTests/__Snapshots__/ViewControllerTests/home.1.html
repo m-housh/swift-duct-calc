@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Duct Calc</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="ductcalc.com" name="og:site_name">
+    <meta content="Duct Calc" name="og:title">
+    <meta content="Duct sizing based on ACCA, Manual-D." name="description">
+    <meta content="Duct sizing based on ACCA, Manual-D." name="og:description">
+    <meta content="/images/mand_logo.png" name="og:image">
+    <meta content="/images/mand_logo.png" name="twitter:image">
+    <meta content="Duct Calc" name="twitter:image:alt">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="1536" name="og:image:width">
+    <meta content="1024" name="og:image:height">
+    <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
+    <script src="https://unpkg.com/htmx.org@2.0.8"></script>
+    <script src="/js/htmx-download.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="/css/htmx.css">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
+    <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <script src="https://unpkg.com/htmx-remove@latest" crossorigin="anonymous" integrity="sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT"></script>
+  </head>
+  <body>
+    <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
+      <main class="flex flex-col min-h-screen min-w-full grow mb-auto">
+        <div>
+          <div class="flex justify-end space-x-4 m-4">
+            <div class="tooltip tooltip-left" data-tip="Duct size calculator"><a class="btn btn-ghost btn-accent text-lg" href="/duct-size" target="_blank">Ductulator</a></div>
+            <button class="btn btn-ghost btn-secondary text-lg" hx-get="/login" hx-target="body" hx-swap="outerHTML" hx-push-url="true">Login</button>
+          </div>
+          <div class="mx-10 lg:mx-20">
+            <div class="relative text-center bg-base-300
+rounded-3xl shadow-3xl overflow-hidden">
+              <div class="bg-secondary text-xl font-bold 
+absolute top-10 -left-15
+px-6 py-2 w-[250px] -rotate-45">BETA</div>
+              <div>
+                <div class="flex justify-center mt-30 md:mt-15 lg:mt-6">
+                  <div class="flex items-end border-b-6 border-accent
+text-8xl font-bold my-auto space-2">
+                    <h1 class="me-2">Duct Calc</h1>
+                    <div>
+                      <span class="bg-secondary rounded-md
+                      text-5xl rotate-180 p-2 -mx-2" style="writing-mode: vertical-rl">Pro</span>
+                    </div>
+                  </div>
+                </div>
+                Open source residential duct design program<a class="btn btn-ghost text-md text-primary font-bold italic" href="https://github.com/m-housh/swift-duct-calc" target="_blank"></a>
+                <p class="text-3xl py-6">Manual-D™ speed sheet, but on the web!</p>
+                <button class="btn btn-xl btn-primary mt-6" hx-get="/signup" hx-target="body" hx-swap="outerHTML">Get Started</button>
+                <p class="text-xs italic my-6">
+                  Manual-D™ is a trademark of Air Conditioning Contractors of America (ACCA).
+                  
+                  This site is not designed by or affiliated with ACCA.
+                </p>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+              <div class="border-3 border-accent rounded-lg shadow-lg p-4">
+                <div class="flex items-center space-x-4">
+                  <div class="text-5xl text-primary font-bold">Features</div>
+                </div>
+                <div class="text-xl ms-10 mt-10">
+                  <ul class="list-disc">
+                    <li>
+                      <div class="font-bold italic bg-secondary rounded-lg shadow-lg px-4 w-fit">Built by humans</div>
+                    </li>
+                    <li>Fully open source.</li>
+                    <li>Great replacement for speed sheet users.</li>
+                    <li>Great for classrooms.</li>
+                    <li>Store your projects in one place.</li>
+                    <li>Export final project to pdf.</li>
+                    <li>Import room loads via CSV file.</li>
+                    <li>Web based.</li>
+                    <li>Self host (run on your own infrastructure).</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="border-3 border-accent rounded-lg shadow-lg p-4">
+                <div class="text-5xl text-primary font-bold">Coming Soon</div>
+                <div class="text-xl ms-10 mt-10">
+                  <ul class="list-disc">
+                    <li>API integration.</li>
+                    <li>Command line interface.</li>
+                    <li>Fitting selection tool.</li>
+                    <li>Room load import from PDF.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <div class="bottom-0 left-0 bg-error">
+        <footer class="footer footer-horizontal footer-center
+bg-base-300 text-base-content p-4">
+          <aside class="grid-flow-row items-center">
+            <div class="flex mx-auto">
+              <a class="btn btn-ghost" href="mailto:support@ductcalc.pro">  <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <g
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke-width="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                </g>
+              </svg><span>support@ductcalc.pro</span></a>
+            </div>
+            Openly licensed via CC-BY-NC-SA 4.0<a class="btn btn-ghost mx-auto" href="https://github.com/m-housh/swift-duct-calc/src/branch/main/LICENSE" target="_blank"></a>
+            <p class="">Copyright © 2026 - All rights reserved by Michael Housh</p>
+          </aside>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

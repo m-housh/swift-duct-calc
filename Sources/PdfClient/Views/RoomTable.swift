@@ -21,10 +21,9 @@ struct RoomsTable: HTML, Sendable {
           tr {
             td { room.name }
             td { room.heatingLoad.string(digits: 0) }
-            td { room.coolingTotal.string(digits: 0) }
+            td { try! room.coolingLoad.ensured(shr: projectSHR).total.string(digits: 0) }
             td {
-              (room.coolingSensible
-                ?? (room.coolingTotal * projectSHR)).string(digits: 0)
+              try! room.coolingLoad.ensured(shr: projectSHR).sensible.string(digits: 0)
             }
             td { room.registerCount.string() }
           }
@@ -37,10 +36,10 @@ struct RoomsTable: HTML, Sendable {
             rooms.totalHeatingLoad.string(digits: 0)
           }
           td(.class("coolingTotal label")) {
-            rooms.totalCoolingLoad.string(digits: 0)
+            try! rooms.totalCoolingLoad(shr: projectSHR).string(digits: 0)
           }
           td(.class("coolingSensible label")) {
-            rooms.totalCoolingSensible(shr: projectSHR).string(digits: 0)
+            try! rooms.totalCoolingSensible(shr: projectSHR).string(digits: 0)
           }
           td {}
         }

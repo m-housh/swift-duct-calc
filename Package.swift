@@ -6,10 +6,11 @@ let package = Package(
   name: "swift-manual-d",
   products: [
     .executable(name: "App", targets: ["App"]),
-    .library(name: "ApiController", targets: ["ApiController"]),
+    .executable(name: "ductcalc", targets: ["CLI"]),
     .library(name: "AuthClient", targets: ["AuthClient"]),
+    .library(name: "CSVParser", targets: ["CSVParser"]),
     .library(name: "DatabaseClient", targets: ["DatabaseClient"]),
-    .library(name: "EnvClient", targets: ["EnvClient"]),
+    .library(name: "EnvVars", targets: ["EnvVars"]),
     .library(name: "FileClient", targets: ["FileClient"]),
     .library(name: "HTMLSnapshotTesting", targets: ["HTMLSnapshotTesting"]),
     .library(name: "PdfClient", targets: ["PdfClient"]),
@@ -20,30 +21,34 @@ let package = Package(
     .library(name: "ViewController", targets: ["ViewController"]),
   ],
   dependencies: [
+    .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.7.0"),
     .package(url: "https://github.com/vapor/vapor.git", from: "4.110.1"),
     .package(url: "https://github.com/vapor/fluent.git", from: "4.9.0"),
     .package(url: "https://github.com/vapor/fluent-sqlite-driver.git", from: "4.6.0"),
+    .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
     .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
     .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.0.0"),
     .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.12.0"),
+    .package(url: "https://github.com/pointfreeco/swift-tagged", from: "0.6.0"),
     .package(url: "https://github.com/pointfreeco/swift-url-routing.git", from: "0.6.2"),
     .package(url: "https://github.com/pointfreeco/vapor-routing.git", from: "0.1.3"),
     .package(url: "https://github.com/pointfreeco/swift-case-paths.git", from: "1.6.0"),
     .package(url: "https://github.com/elementary-swift/elementary.git", from: "0.6.0"),
     .package(url: "https://github.com/elementary-swift/elementary-htmx.git", from: "0.5.0"),
     .package(url: "https://github.com/vapor-community/vapor-elementary.git", from: "0.1.0"),
+    .package(url: "https://github.com/m-housh/swift-validations.git", from: "0.3.5"),
   ],
   targets: [
     .executableTarget(
       name: "App",
       dependencies: [
-        .target(name: "ApiController"),
         .target(name: "AuthClient"),
         .target(name: "DatabaseClient"),
         .target(name: "ViewController"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "Fluent", package: "fluent"),
         .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
+        .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver"),
         .product(name: "Vapor", package: "vapor"),
         .product(name: "NIOCore", package: "swift-nio"),
         .product(name: "NIOPosix", package: "swift-nio"),
@@ -51,14 +56,11 @@ let package = Package(
         .product(name: "VaporRouting", package: "vapor-routing"),
       ]
     ),
-    .target(
-      name: "ApiController",
+    .executableTarget(
+      name: "CLI",
       dependencies: [
-        .target(name: "DatabaseClient"),
-        .target(name: "ManualDCore"),
-        .product(name: "Dependencies", package: "swift-dependencies"),
-        .product(name: "DependenciesMacros", package: "swift-dependencies"),
-        .product(name: "Vapor", package: "vapor"),
+        .target(name: "ManualDClient"),
+        .product(name: "ArgumentParser", package: "swift-argument-parser"),
       ]
     ),
     .target(
@@ -71,6 +73,20 @@ let package = Package(
       ]
     ),
     .target(
+      name: "CSVParser",
+      dependencies: [
+        .target(name: "ManualDCore"),
+        .product(name: "Dependencies", package: "swift-dependencies"),
+        .product(name: "DependenciesMacros", package: "swift-dependencies"),
+      ]
+    ),
+    .testTarget(
+      name: "CSVParsingTests",
+      dependencies: [
+        .target(name: "CSVParser")
+      ]
+    ),
+    .target(
       name: "DatabaseClient",
       dependencies: [
         .target(name: "ManualDCore"),
@@ -78,14 +94,36 @@ let package = Package(
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
         .product(name: "Fluent", package: "fluent"),
         .product(name: "Vapor", package: "vapor"),
+        .product(name: "Validations", package: "swift-validations"),
       ]
     ),
-
-    .target(
-      name: "EnvClient",
+    .testTarget(
+      name: "DatabaseClientTests",
       dependencies: [
+        .target(name: "App"),
+        .target(name: "DatabaseClient"),
+        .product(name: "DependenciesTestSupport", package: "swift-dependencies"),
+        .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
+      ],
+      resources: [
+        .copy("Resources")
+      ]
+    ),
+    .target(
+      name: "EnvVars",
+      dependencies: [
+        .target(name: "FileClient"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
+      ]
+    ),
+    .testTarget(
+      name: "EnvVarsTests",
+      dependencies: [
+        .target(name: "EnvVars")
+      ],
+      resources: [
+        .copy("Resources")
       ]
     ),
     .target(
@@ -106,7 +144,7 @@ let package = Package(
     .target(
       name: "PdfClient",
       dependencies: [
-        .target(name: "EnvClient"),
+        .target(name: "EnvVars"),
         .target(name: "FileClient"),
         .target(name: "ManualDCore"),
         .product(name: "Dependencies", package: "swift-dependencies"),
@@ -120,11 +158,10 @@ let package = Package(
         .target(name: "HTMLSnapshotTesting"),
         .target(name: "PdfClient"),
         .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
+      ],
+      resources: [
+        .copy("__Snapshots__")
       ]
-      // ,
-      // resources: [
-      //   .copy("__Snapshots__")
-      // ]
     ),
     .target(
       name: "ProjectClient",
@@ -138,24 +175,20 @@ let package = Package(
     .target(
       name: "ManualDCore",
       dependencies: [
+        .product(name: "CasePaths", package: "swift-case-paths"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "Fluent", package: "fluent"),
+        .product(name: "Tagged", package: "swift-tagged"),
         .product(name: "URLRouting", package: "swift-url-routing"),
-        .product(name: "CasePaths", package: "swift-case-paths"),
-      ]
-    ),
-    .testTarget(
-      name: "ApiRouteTests",
-      dependencies: [
-        .target(name: "ManualDCore")
       ]
     ),
     .target(
       name: "ManualDClient",
       dependencies: [
-        "ManualDCore",
+        .target(name: "ManualDCore"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
+        .product(name: "Tagged", package: "swift-tagged"),
       ]
     ),
     .target(
@@ -177,6 +210,7 @@ let package = Package(
       name: "ViewController",
       dependencies: [
         .target(name: "AuthClient"),
+        .target(name: "CSVParser"),
         .target(name: "DatabaseClient"),
         .target(name: "PdfClient"),
         .target(name: "ProjectClient"),

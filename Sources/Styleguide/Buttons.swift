@@ -1,4 +1,6 @@
 import Elementary
+import ElementaryHTMX
+import ManualDCore
 
 public struct SubmitButton: HTML, Sendable {
   let title: String
@@ -17,32 +19,6 @@ public struct SubmitButton: HTML, Sendable {
       .class(
         """
         btn btn-secondary
-        """
-      ),
-      .type(type)
-    ) {
-      title
-    }
-  }
-}
-
-public struct CancelButton: HTML, Sendable {
-  let title: String
-  let type: HTMLAttribute<HTMLTag.button>.ButtonType
-
-  public init(
-    title: String = "Cancel",
-    type: HTMLAttribute<HTMLTag.button>.ButtonType = .button
-  ) {
-    self.title = title
-    self.type = type
-  }
-
-  public var body: some HTML<HTMLTag.button> {
-    button(
-      .class(
-        """
-        text-white font-bold text-xl bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg shadow-lg
         """
       ),
       .type(type)
@@ -97,6 +73,20 @@ public struct TrashButton: HTML, Sendable {
       .class("btn btn-error")
     ) {
       SVG(.trash)
+    }
+  }
+}
+
+public struct DuctulatorButton: HTML, Sendable {
+  public init() {}
+
+  public var body: some HTML<HTMLTag.a> {
+    a(
+      .class("btn"),
+      .href(route: .ductulator(.index)),
+      .target(.blank)
+    ) {
+      "Ductulator"
     }
   }
 }

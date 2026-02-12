@@ -1,9 +1,31 @@
 # TODO's
 
 - [x] Fix theme not working when selected upon signup.
-- [ ] Pdf generation
-- [ ] Add postgres / mysql support
-- [ ] Opensource / license ??
-- [ ] Figure out domain to host (currently thinking ductcalc.pro)
-    - [ ] Logo / navbar name may have to change if it's not duct-calc.
-    - [ ] MainPage meta items will have to change also
+- [x] Pdf generation
+- [x] Add postgres / mysql support
+- [x] Opensource / license
+- [x] Figure out domain to host
+- [x] Add ability for either sensible or total load while specifying a room load.
+  - CoolCalc current version specifies the sensible cooling for a room break down,
+    and currently we require the total load and calculate sensible based on project
+    shr.
+- [x] Add ability to associate room load / airflow with another room.
+- [x] Trunk size form, room / register selection is wonky when labels are long.
+  - They will overlap each other making it difficult to read / decipher which checkbox belongs
+    to which label.
+- [x] Add select all rooms for trunks, useful for sizing main supply or return trunks.
+- [x] Add optional level to room model.
+- [ ] Add way to sponsor the project.
+- [x] Need to push url after signup.
+- [x] Update urls to point to public mirror of repository
+- [x] Add email to footer
+- [x] Validation errors, if they occur are vague in ResultView
+- [x] Privacy policy
+- [ ] Update README
+- [ ] Self hosting documentation
+- [x] Heating load total on rooms page is hard to view when using default dark color scheme, perhaps
+  invert the colors or make the background red and text white.
+- [x] Errors on friction rate page are hard to see with default dark scheme.
+- [x] Support 'POSTGRES_PASSWORD_FILE' so that docker secrets can be used.
+- [ ] Pdf import
+- [ ] Fitting selection tool.

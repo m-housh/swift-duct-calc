@@ -2,7 +2,7 @@ import Elementary
 import ManualDCore
 
 struct EffectiveLengthsTable: HTML, Sendable {
-  let effectiveLengths: [EffectiveLength]
+  let effectiveLengths: [EquivalentLength]
 
   var body: some HTML<HTMLTag.table> {
     table {
@@ -41,7 +41,7 @@ struct EffectiveLengthsTable: HTML, Sendable {
 }
 
 struct EffectiveLengthGroupTable: HTML, Sendable {
-  let groups: [EffectiveLength.Group]
+  let groups: [EquivalentLength.FittingGroup]
 
   var body: some HTML<HTMLTag.table> {
     table {

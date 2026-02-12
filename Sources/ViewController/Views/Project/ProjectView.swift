@@ -35,7 +35,7 @@ struct ProjectView<Inner: HTML>: HTML, Sendable where Inner: Sendable {
       input(.id("my-drawer-1"), .type(.checkbox), .class("drawer-toggle"))
 
       div(.class("drawer-content overflow-auto")) {
-        Navbar(sidebarToggle: true)
+        Navbar(showSidebarToggle: true)
         div(.class("p-4")) {
           inner
             .environment(ProjectViewValue.$projectID, projectID)
@@ -190,25 +190,25 @@ extension ProjectView {
             div(.class("flex items-center justify-center")) {
               SVG(icon)
             }
-            .attributes(.class("is-drawer-close:text-green-400"), when: isComplete)
-            .attributes(.class("is-drawer-close:text-error"), when: !isComplete && !hideIsComplete)
+            .attributes(.class("text-green-400"), when: isComplete)
+            .attributes(.class("text-error"), when: !isComplete && !hideIsComplete)
 
             div(.class("flex items-center justify-center")) {
               span { title }
             }
           }
 
-          if !hideIsComplete {
-            div(.class("flex grow justify-end items-end is-drawer-close:hidden")) {
-              if isComplete {
-                SVG(.badgeCheck)
-              } else {
-                SVG(.ban)
-              }
-            }
-            .attributes(.class("text-green-400"), when: isComplete)
-            .attributes(.class("text-error"), when: !isComplete)
-          }
+          // if !hideIsComplete {
+          //   div(.class("flex grow justify-end items-end is-drawer-close:hidden")) {
+          //     if isComplete {
+          //       SVG(.badgeCheck)
+          //     } else {
+          //       SVG(.ban)
+          //     }
+          //   }
+          //   .attributes(.class("text-green-400"), when: isComplete)
+          //   .attributes(.class("text-error"), when: !isComplete)
+          // }
         }
       }
     }
@@ -233,19 +233,19 @@ extension ManualDClient {
   func frictionRate(
     equipmentInfo: EquipmentInfo?,
     componentLosses: [ComponentPressureLoss],
-    effectiveLength: EffectiveLength.MaxContainer
+    effectiveLength: EquivalentLength.MaxContainer
   ) async throws -> FrictionRate? {
     guard let staticPressure = equipmentInfo?.staticPressure else {
       return nil
     }
-    guard let totalEquivalentLength = effectiveLength.total else {
+    guard let totalEquivalentLength = effectiveLength.totalEquivalentLength else {
       return nil
     }
     return try await self.frictionRate(
       .init(
         externalStaticPressure: staticPressure,
         componentPressureLosses: componentLosses,
-        totalEffectiveLength: Int(totalEquivalentLength)
+        totalEquivalentLength: Int(totalEquivalentLength)
       )
     )
   }

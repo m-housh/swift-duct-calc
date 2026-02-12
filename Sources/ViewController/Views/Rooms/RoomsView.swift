@@ -7,9 +7,21 @@ import Styleguide
 
 struct RoomsView: HTML, Sendable {
   @Environment(ProjectViewValue.$projectID) var projectID
-  // let projectID: Project.ID
   let rooms: [Room]
   let sensibleHeatRatio: Double?
+
+  private var csvRoute: String {
+    SiteRoute.router.path(for: .view(.project(.detail(projectID, .rooms(.index)))))
+      .appendingPath("csv")
+  }
+
+  // Sort the rooms based on level, they should already be sorted by name,
+  // so this puts lower level rooms towards the top in alphabetical order.
+  //
+  // If rooms do not have a level we shove those all the way to the bottom.
+  private var sortedRooms: [Room] {
+    rooms.sorted { ($0.level?.rawValue ?? 20) < ($1.level?.rawValue ?? 20) }
+  }
 
   var body: some HTML {
     div(.class("flex w-full flex-col")) {
@@ -20,7 +32,7 @@ struct RoomsView: HTML, Sendable {
             PageTitle { "Room Loads" }
           }
 
-          div(.class("flex justify-end grow")) {
+          div(.class("flex justify-end grow space-x-4")) {
             Tooltip("Set sensible heat ratio", position: .left) {
               button(
                 .class(
@@ -36,14 +48,17 @@ struct RoomsView: HTML, Sendable {
                   }
                   if let sensibleHeatRatio {
                     Badge(number: sensibleHeatRatio)
+                    // .attributes("badge-outline")
                   } else {
                     Badge { "set" }
+                    // .attributes("badge-outline")
                   }
                 }
               }
               .attributes(.class("border border-error"), when: sensibleHeatRatio == nil)
             }
             .attributes(.class("tooltip-open"), when: sensibleHeatRatio == nil)
+
           }
 
           div(.class("flex items-end space-x-4 font-bold")) {
@@ -54,13 +69,15 @@ struct RoomsView: HTML, Sendable {
 
           div(.class("flex justify-center items-end space-x-4 my-auto font-bold")) {
             span(.class("text-lg")) { "Cooling Total" }
-            Badge(number: rooms.totalCoolingLoad, digits: 0)
+            // TODO: ResultView ??
+            Badge(number: try! rooms.totalCoolingLoad(shr: sensibleHeatRatio ?? 1.0), digits: 0)
               .attributes(.class("badge-success"))
           }
 
           div(.class("flex grow justify-end items-end space-x-4 me-4 my-auto font-bold")) {
             span(.class("text-lg")) { "Cooling Sensible" }
-            Badge(number: rooms.totalCoolingSensible(shr: sensibleHeatRatio ?? 1.0), digits: 0)
+            // TODO: ResultView ??
+            Badge(number: try! rooms.totalCoolingSensible(shr: sensibleHeatRatio ?? 1.0), digits: 0)
               .attributes(.class("badge-info"))
           }
         }
@@ -96,7 +113,22 @@ struct RoomsView: HTML, Sendable {
               }
             }
             th {
-              div(.class("flex justify-end me-2")) {
+              div(.class("flex justify-center")) {
+                "Delegated To"
+              }
+            }
+            th {
+              div(.class("flex justify-end me-2 space-x-4")) {
+
+                Tooltip("Upload CSV", position: .left) {
+                  button(
+                    .class("btn btn-secondary"),
+                    .showModal(id: UploadCSVForm.id)
+                  ) {
+                    SVG(.filePlusCorner)
+                  }
+                }
+
                 Tooltip("Add Room") {
                   PlusButton()
                     .attributes(
@@ -105,40 +137,52 @@ struct RoomsView: HTML, Sendable {
                     )
                     .attributes(.class("tooltip-left"))
                 }
+
               }
             }
           }
         }
         tbody {
-          for room in rooms {
-            RoomRow(room: room, shr: sensibleHeatRatio)
+          for room in sortedRooms {
+            RoomRow(room: room, shr: sensibleHeatRatio, rooms: rooms)
           }
         }
       }
-      RoomForm(dismiss: true, projectID: projectID, room: nil)
+      RoomForm(dismiss: true, projectID: projectID, rooms: rooms, room: nil)
+      UploadCSVForm(dismiss: true)
     }
   }
 
   public struct RoomRow: HTML, Sendable {
 
+    let rooms: [Room]
     let room: Room
     let shr: Double
 
     var coolingSensible: Double {
-      guard let value = room.coolingSensible else {
-        return room.coolingTotal * shr
-      }
-      return value
+      try! room.coolingLoad.ensured(shr: shr).sensible
     }
 
-    init(room: Room, shr: Double?) {
+    var delegatedToRoomName: String? {
+      guard let delegatedToID = room.delegatedTo else { return nil }
+      return rooms.first(where: { $0.id == delegatedToID })?.name
+    }
+
+    init(room: Room, shr: Double?, rooms: [Room]) {
       self.room = room
       self.shr = shr ?? 1.0
+      self.rooms = rooms
     }
 
     public var body: some HTML {
       tr(.id("roomRow_\(room.id.idString)")) {
-        td { room.name }
+        td {
+          if let level = room.level {
+            "\(level.label) - \(room.name)"
+          } else {
+            room.name
+          }
+        }
         td {
           div(.class("flex justify-center")) {
             Number(room.heatingLoad, digits: 0)
@@ -147,7 +191,7 @@ struct RoomsView: HTML, Sendable {
         }
         td {
           div(.class("flex justify-center")) {
-            Number(room.coolingTotal, digits: 0)
+            Number(try! room.coolingLoad.ensured(shr: shr).total, digits: 0)
             // .attributes(.class("text-success"))
           }
         }
@@ -159,7 +203,14 @@ struct RoomsView: HTML, Sendable {
         }
         td {
           div(.class("flex justify-center")) {
-            Number(room.registerCount)
+            Number(delegatedToRoomName != nil ? 0 : room.registerCount)
+          }
+        }
+        td {
+          if let name = delegatedToRoomName {
+            div(.class("flex justify-center")) {
+              name
+            }
           }
         }
         td {
@@ -188,6 +239,7 @@ struct RoomsView: HTML, Sendable {
           RoomForm(
             dismiss: true,
             projectID: room.projectID,
+            rooms: rooms,
             room: room
           )
         }
@@ -236,5 +288,40 @@ struct RoomsView: HTML, Sendable {
         }
       }
     }
+  }
+
+  struct UploadCSVForm: HTML {
+    static let id = "uploadCSV"
+
+    @Environment(ProjectViewValue.$projectID) var projectID
+    let dismiss: Bool
+
+    private var route: String {
+      SiteRoute.router.path(for: .view(.project(.detail(projectID, .rooms(.index)))))
+        .appendingPath("csv")
+    }
+
+    var body: some HTML {
+      ModalForm(id: Self.id, dismiss: dismiss) {
+        div(.class("pb-6 space-y-3")) {
+          h1(.class("text-3xl font-bold")) { "Upload CSV" }
+          p(.class("text-sm italic")) {
+            "Drag and drop, or click to upload"
+          }
+        }
+        form(
+          .hx.post(route),
+          .hx.target("body"),
+          .hx.swap(.outerHTML),
+          .custom(name: "enctype", value: "multipart/form-data")
+        ) {
+          input(.type(.file), .name("file"), .accept(".csv"))
+
+          SubmitButton()
+            .attributes(.class("btn-block mt-6"))
+        }
+      }
+    }
+
   }
 }

@@ -150,6 +150,10 @@ struct UserProfileForm: HTML, Sendable {
           .attributes(.class("btn-block"))
 
       }
+      .attributes(
+        .hx.pushURL("/projects"),
+        when: signup == true
+      )
     }
   }
 }

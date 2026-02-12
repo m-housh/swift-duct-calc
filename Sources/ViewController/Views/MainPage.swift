@@ -52,6 +52,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     script(.src("https://unpkg.com/htmx.org@2.0.8")) {}
     script(.src("/js/htmx-download.js")) {}
     script(.src("/js/main.js")) {}
+    script(.src("https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4")) {}
     link(.rel(.stylesheet), .href("/css/output.css"))
     link(.rel(.stylesheet), .href("/css/htmx.css"))
     link(
@@ -93,13 +94,34 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
           footer(
             .class(
               """
-              footer sm:footer-horizontal footer-center
+              footer footer-horizontal footer-center
               bg-base-300 text-base-content p-4
               """
             )
           ) {
-            aside {
-              p {
+            aside(
+              .class("grid-flow-row items-center")
+            ) {
+
+              div(.class("flex mx-auto")) {
+                a(
+                  .class("btn btn-ghost"),
+                  .href("mailto:support@ductcalc.pro")
+                ) {
+                  SVG(.email)
+                  span { "support@ductcalc.pro" }
+                }
+              }
+
+              a(
+                .class("btn btn-ghost mx-auto"),
+                .href("https://github.com/m-housh/swift-duct-calc/src/branch/main/LICENSE"),
+                .target(.blank)
+              ) {
+                "Openly licensed via CC-BY-NC-SA 4.0"
+              }
+
+              p(.class("")) {
                 "Copyright © \(Date().description.prefix(4)) - All rights reserved by Michael Housh"
               }
             }
@@ -108,6 +130,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
       }
     }
     .attributes(.data("theme", value: theme?.rawValue ?? "default"), when: theme != nil)
+
   }
 }
 

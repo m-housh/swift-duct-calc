@@ -152,11 +152,12 @@ extension DuctSizes {
     public static func mock(
       equipmentInfo: EquipmentInfo,
       rooms: [Room],
-      trunks: [TrunkSize]
+      trunks: [TrunkSize],
+      shr: Double
     ) -> Self {
 
       let totalHeatingLoad = rooms.totalHeatingLoad
-      let totalCoolingLoad = rooms.totalCoolingLoad
+      let totalCoolingLoad = try! rooms.totalCoolingLoad(shr: shr)
 
       let roomContainers = rooms.reduce(into: [RoomContainer]()) { array, room in
         array += RoomContainer.mock(
@@ -164,7 +165,8 @@ extension DuctSizes {
           totalHeatingLoad: totalHeatingLoad,
           totalCoolingLoad: totalCoolingLoad,
           totalHeatingCFM: Double(equipmentInfo.heatingCFM),
-          totalCoolingCFM: Double(equipmentInfo.coolingCFM)
+          totalCoolingCFM: Double(equipmentInfo.coolingCFM),
+          shr: shr
         )
       }
 
@@ -187,14 +189,15 @@ extension DuctSizes {
       totalHeatingLoad: Double,
       totalCoolingLoad: Double,
       totalHeatingCFM: Double,
-      totalCoolingCFM: Double
+      totalCoolingCFM: Double,
+      shr: Double
     ) -> [Self] {
       var retval = [DuctSizes.RoomContainer]()
       let heatingLoad = room.heatingLoad / Double(room.registerCount)
       let heatingFraction = heatingLoad / totalHeatingLoad
       let heatingCFM = totalHeatingCFM * heatingFraction
       // Not really accurate, but works for mocks.
-      let coolingLoad = room.coolingTotal / Double(room.registerCount)
+      let coolingLoad = (try! room.coolingLoad.ensured(shr: shr).total) / Double(room.registerCount)
       let coolingFraction = coolingLoad / totalCoolingLoad
       let coolingCFM = totalCoolingCFM * coolingFraction
 

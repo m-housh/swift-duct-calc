@@ -1,5 +1,6 @@
 import Foundation
 
+/// Represents supported color themes for the website.
 public enum Theme: String, CaseIterable, Codable, Equatable, Sendable {
   case aqua
   case cupcake
@@ -13,6 +14,7 @@ public enum Theme: String, CaseIterable, Codable, Equatable, Sendable {
   case retro
   case synthwave
 
+  /// Represents dark color themes.
   public static let darkThemes = [
     Self.aqua,
     Self.cyberpunk,
@@ -22,6 +24,7 @@ public enum Theme: String, CaseIterable, Codable, Equatable, Sendable {
     Self.synthwave,
   ]
 
+  /// Represents light color themes.
   public static let lightThemes = [
     Self.cupcake,
     Self.light,

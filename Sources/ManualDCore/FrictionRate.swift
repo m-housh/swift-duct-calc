@@ -1,8 +1,14 @@
 /// Holds onto values returned when calculating the design
 /// friction rate for a project.
+///
+/// **NOTE:** This is not stored in the database, it is calculated on the fly.
 public struct FrictionRate: Codable, Equatable, Sendable {
+  /// The available static pressure is the equipment's design static pressure
+  /// minus the ``ComponentPressureLoss``es for the project.
   public let availableStaticPressure: Double
+  /// The calculated design friction rate value.
   public let value: Double
+  /// Whether the design friction rate is within a valid range.
   public var hasErrors: Bool { error != nil }
 
   public init(
@@ -13,6 +19,7 @@ public struct FrictionRate: Codable, Equatable, Sendable {
     self.value = value
   }
 
+  /// The error if the design friction rate is out of a valid range.
   public var error: FrictionRateError? {
     if value >= 0.18 {
       return .init(
@@ -37,8 +44,13 @@ public struct FrictionRate: Codable, Equatable, Sendable {
   }
 }
 
+/// Represents an error when the ``FrictionRate`` is out of a valid range.
+///
+/// This holds onto the reason for the error as well as possible resolutions.
 public struct FrictionRateError: Error, Equatable, Sendable {
+  /// The reason for the error.
   public let reason: String
+  /// The possible resolutions to the error.
   public let resolutions: [String]
 
   public init(

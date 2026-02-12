@@ -7,7 +7,7 @@ import Styleguide
 
 struct EffectiveLengthForm: HTML, Sendable {
 
-  static func id(_ equivalentLength: EffectiveLength?) -> String {
+  static func id(_ equivalentLength: EquivalentLength?) -> String {
     let base = "equivalentLengthForm"
     guard let equivalentLength else { return base }
     return "\(base)_\(equivalentLength.id.uuidString.replacing("-", with: ""))"
@@ -15,15 +15,15 @@ struct EffectiveLengthForm: HTML, Sendable {
 
   let projectID: Project.ID
   let dismiss: Bool
-  let type: EffectiveLength.EffectiveLengthType
-  let effectiveLength: EffectiveLength?
+  let type: EquivalentLength.EffectiveLengthType
+  let effectiveLength: EquivalentLength?
 
   var id: String { Self.id(effectiveLength) }
 
   init(
     projectID: Project.ID,
     dismiss: Bool,
-    type: EffectiveLength.EffectiveLengthType = .supply
+    type: EquivalentLength.EffectiveLengthType = .supply
   ) {
     self.projectID = projectID
     self.dismiss = dismiss
@@ -32,7 +32,7 @@ struct EffectiveLengthForm: HTML, Sendable {
   }
 
   init(
-    effectiveLength: EffectiveLength
+    effectiveLength: EquivalentLength
   ) {
     self.dismiss = true
     self.type = effectiveLength.type
@@ -55,7 +55,7 @@ struct EffectiveLengthForm: HTML, Sendable {
 
   struct StepOne: HTML, Sendable {
     let projectID: Project.ID
-    let effectiveLength: EffectiveLength?
+    let effectiveLength: EquivalentLength?
 
     var route: String {
       let baseRoute = SiteRoute.View.router.path(
@@ -97,7 +97,7 @@ struct EffectiveLengthForm: HTML, Sendable {
   struct StepTwo: HTML, Sendable {
     let projectID: Project.ID
     let stepOne: SiteRoute.View.ProjectRoute.EquivalentLengthRoute.StepOne
-    let effectiveLength: EffectiveLength?
+    let effectiveLength: EquivalentLength?
 
     var route: String {
       let baseRoute = SiteRoute.View.router.path(
@@ -152,7 +152,7 @@ struct EffectiveLengthForm: HTML, Sendable {
 
   struct StepThree: HTML, Sendable {
     let projectID: Project.ID
-    let effectiveLength: EffectiveLength?
+    let effectiveLength: EquivalentLength?
     let stepTwo: SiteRoute.View.ProjectRoute.EquivalentLengthRoute.StepTwo
 
     var route: String {
@@ -254,10 +254,10 @@ struct StraightLengthField: HTML, Sendable {
 
 struct GroupField: HTML, Sendable {
 
-  let style: EffectiveLength.EffectiveLengthType
-  let group: EffectiveLength.Group?
+  let style: EquivalentLength.EffectiveLengthType
+  let group: EquivalentLength.FittingGroup?
 
-  init(style: EffectiveLength.EffectiveLengthType, group: EffectiveLength.Group? = nil) {
+  init(style: EquivalentLength.EffectiveLengthType, group: EquivalentLength.FittingGroup? = nil) {
     self.style = style
     self.group = group
   }
@@ -307,7 +307,7 @@ struct GroupField: HTML, Sendable {
 
 struct GroupSelect: HTML, Sendable {
 
-  let style: EffectiveLength.EffectiveLengthType
+  let style: EquivalentLength.EffectiveLengthType
 
   var body: some HTML {
     label(.class("select")) {
@@ -328,13 +328,13 @@ struct GroupSelect: HTML, Sendable {
 struct GroupTypeSelect: HTML, Sendable {
 
   let projectID: Project.ID
-  let selected: EffectiveLength.EffectiveLengthType
+  let selected: EquivalentLength.EffectiveLengthType
 
   var body: some HTML<HTMLTag.label> {
     label(.class("select w-full")) {
       span(.class("label")) { "Type" }
       select(.name("type"), .id("type")) {
-        for value in EffectiveLength.EffectiveLengthType.allCases {
+        for value in EquivalentLength.EffectiveLengthType.allCases {
           option(
             .value("\(value.rawValue)"),
           ) { value.title }
@@ -345,7 +345,7 @@ struct GroupTypeSelect: HTML, Sendable {
   }
 }
 
-extension EffectiveLength.EffectiveLengthType {
+extension EquivalentLength.EffectiveLengthType {
 
   var title: String { rawValue.capitalized }
 

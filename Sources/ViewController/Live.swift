@@ -1,7 +1,9 @@
+import CSVParser
 import DatabaseClient
 import Dependencies
 import Elementary
 import Foundation
+import ManualDClient
 import ManualDCore
 import PdfClient
 import ProjectClient
@@ -16,6 +18,14 @@ extension ViewController.Request {
     @Dependency(\.pdfClient) var pdfClient
 
     switch route {
+    case .home:
+      return await view {
+        HomeView()
+      }
+    case .privacyPolicy:
+      return await view {
+        PrivacyPolicyView()
+      }
     case .test:
       // let projectID = UUID(uuidString: "E796C96C-F527-4753-A00A-EBCF25630663")!
       // return await view {
@@ -33,7 +43,9 @@ extension ViewController.Request {
       //   }
       // }
       // return try! await pdfClient.html(.mock())
-      return EmptyHTML()
+      return await view {
+        TestPage()
+      }
     case .login(let route):
       switch route {
       case .index(let next):
@@ -70,7 +82,7 @@ extension ViewController.Request {
       case .submitProfile(let profile):
         return await view {
           await ResultView {
-            _ = try await database.userProfile.create(profile)
+            _ = try await database.userProfiles.create(profile)
             let userID = profile.userID
             // let user = try currentUser()
             return (
@@ -88,6 +100,9 @@ extension ViewController.Request {
     case .project(let route):
       return await route.renderView(on: self)
 
+    case .ductulator(let route):
+      return await route.renderView(on: self)
+
     case .user(let route):
       return await route.renderView(on: self)
     }
@@ -99,7 +114,7 @@ extension ViewController.Request {
     let inner = await inner()
     let theme = await self.theme
 
-    return MainPage(displayFooter: displayFooter, theme: theme) {
+    return MainPage(displayFooter: displayFooter, theme: theme ?? .default) {
       inner
     }
   }
@@ -108,7 +123,7 @@ extension ViewController.Request {
     get async {
       @Dependency(\.database) var database
       guard let user = try? currentUser() else { return nil }
-      return try? await database.userProfile.fetch(user.id)?.theme
+      return try? await database.userProfiles.fetch(user.id)?.theme
     }
   }
 
@@ -284,9 +299,17 @@ extension SiteRoute.View.ProjectRoute.RoomRoute {
     on request: ViewController.Request,
     projectID: Project.ID
   ) async -> AnySendableHTML {
+    @Dependency(\.csvParser) var csvParser
     @Dependency(\.database) var database
 
     switch self {
+
+    case .csv(let csv):
+      return await roomsView(on: request, projectID: projectID) {
+        let rooms = try await csvParser.parseRooms(csv)
+        _ = try await database.rooms.createFromCSV(projectID, rooms)
+      }
+    // return EmptyHTML()
 
     case .delete(let id):
       return await ResultView {
@@ -298,7 +321,7 @@ extension SiteRoute.View.ProjectRoute.RoomRoute {
 
     case .submit(let form):
       return await roomsView(on: request, projectID: projectID) {
-        _ = try await database.rooms.create(form)
+        _ = try await database.rooms.create(projectID, form)
       }
 
     case .update(let id, let form):
@@ -366,8 +389,8 @@ extension SiteRoute.View.ProjectRoute.FrictionRateRoute {
     return await request.view {
       await ResultView {
         let equipment = try await database.equipment.fetch(projectID)
-        let componentLosses = try await database.componentLoss.fetch(projectID)
-        let lengths = try await database.effectiveLength.fetchMax(projectID)
+        let componentLosses = try await database.componentLosses.fetch(projectID)
+        let lengths = try await database.equivalentLengths.fetchMax(projectID)
 
         return (
           try await database.projects.getCompletedSteps(projectID),
@@ -407,16 +430,16 @@ extension SiteRoute.View.ProjectRoute.ComponentLossRoute {
       return EmptyHTML()
     case .delete(let id):
       return await view(on: request, projectID: projectID) {
-        _ = try await database.componentLoss.delete(id)
+        _ = try await database.componentLosses.delete(id)
       }
     case .submit(let form):
       return await view(on: request, projectID: projectID) {
-        _ = try await database.componentLoss.create(form)
+        _ = try await database.componentLosses.create(form)
       }
 
     case .update(let id, let form):
       return await view(on: request, projectID: projectID) {
-        _ = try await database.componentLoss.update(id, form)
+        _ = try await database.componentLosses.update(id, form)
       }
     }
   }
@@ -464,7 +487,7 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
 
     case .delete(let id):
       return await ResultView {
-        try await database.effectiveLength.delete(id)
+        try await database.equivalentLengths.delete(id)
       }
 
     case .index:
@@ -481,16 +504,16 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
 
     case .update(let id, let form):
       return await view(on: request, projectID: projectID) {
-        _ = try await database.effectiveLength.update(id, .init(form: form, projectID: projectID))
+        _ = try await database.equivalentLengths.update(id, .init(form: form, projectID: projectID))
       }
 
     case .submit(let step):
       switch step {
       case .one(let stepOne):
         return await ResultView {
-          var effectiveLength: EffectiveLength? = nil
+          var effectiveLength: EquivalentLength? = nil
           if let id = stepOne.id {
-            effectiveLength = try await database.effectiveLength.get(id)
+            effectiveLength = try await database.equivalentLengths.get(id)
           }
           return effectiveLength
         } onSuccess: { effectiveLength in
@@ -503,9 +526,9 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
       case .two(let stepTwo):
         return await ResultView {
           request.logger.debug("ViewController: Got step two...")
-          var effectiveLength: EffectiveLength? = nil
+          var effectiveLength: EquivalentLength? = nil
           if let id = stepTwo.id {
-            effectiveLength = try await database.effectiveLength.get(id)
+            effectiveLength = try await database.equivalentLengths.get(id)
           }
           return effectiveLength
         } onSuccess: { effectiveLength in
@@ -515,7 +538,7 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
         }
       case .three(let stepThree):
         return await view(on: request, projectID: projectID) {
-          _ = try await database.effectiveLength.create(
+          _ = try await database.equivalentLengths.create(
             .init(form: stepThree, projectID: projectID)
           )
         }
@@ -536,7 +559,7 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
         try await catching()
         return (
           try await database.projects.getCompletedSteps(projectID),
-          try await database.effectiveLength.fetch(projectID)
+          try await database.equivalentLengths.fetch(projectID)
         )
       } onSuccess: { (steps, equivalentLengths) in
         ProjectView(projectID: projectID, activeTab: .equivalentLength, completedSteps: steps) {
@@ -592,6 +615,7 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
           try await database.trunkSizes.delete(id)
         }
       case .submit(let form):
+        request.logger.debug("Trunk Form: \(form)")
         return await view(on: request, projectID: projectID) {
           _ = try await database.trunkSizes.create(
             form.toCreate(logger: request.logger)
@@ -633,7 +657,17 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
 extension SiteRoute.View.UserRoute {
 
   func renderView(on request: ViewController.Request) async -> AnySendableHTML {
+    @Dependency(\.auth) var auth
+
     switch self {
+    case .logout:
+      return await request.view {
+        await ResultView {
+          try auth.logout()
+        } onSuccess: {
+          LoginForm(next: nil)
+        }
+      }
     case .profile(let route):
       return await route.renderView(on: request)
     }
@@ -652,11 +686,11 @@ extension SiteRoute.View.UserRoute.Profile {
       return await view(on: request)
     case .submit(let form):
       return await view(on: request) {
-        _ = try await database.userProfile.create(form)
+        _ = try await database.userProfiles.create(form)
       }
     case .update(let id, let updates):
       return await view(on: request) {
-        _ = try await database.userProfile.update(id, updates)
+        _ = try await database.userProfiles.update(id, updates)
       }
     }
   }
@@ -673,10 +707,40 @@ extension SiteRoute.View.UserRoute.Profile {
         let user = try request.currentUser()
         return (
           user,
-          try await database.userProfile.fetch(user.id)
+          try await database.userProfiles.fetch(user.id)
         )
       } onSuccess: { (user, profile) in
         UserView(user: user, profile: profile)
+      }
+    }
+  }
+}
+
+extension SiteRoute.View.DuctulatorRoute {
+
+  func renderView(
+    on request: ViewController.Request
+  ) async -> AnySendableHTML {
+    @Dependency(\.manualD) var manualD
+
+    switch self {
+    case .index:
+      return await request.view {
+        DuctulatorView(
+          isLoggedIn: request.isLoggedIn
+        )
+      }
+    case .submit(let form):
+      return await ResultView {
+        let ductSize = try await manualD.ductSize(cfm: form.cfm, frictionRate: form.frictionRate)
+        var rectangularSize: ManualDClient.RectangularSize? = nil
+        if let height = form.height {
+          rectangularSize = try await manualD.rectangularSize(
+            round: ductSize.finalSize, height: height)
+        }
+        return (ductSize, rectangularSize)
+      } onSuccess: { (ductSize, rectangularSize) in
+        DuctulatorView.Result(ductSize: ductSize, rectangularSize: rectangularSize)
       }
     }
   }

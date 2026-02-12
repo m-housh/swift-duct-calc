@@ -1,26 +1,59 @@
 import Dependencies
 import Foundation
+import Tagged
 
+/// Represents a room in a project.
+///
+/// This contains data such as the heating and cooling load for the
+/// room, the number of registers in the room, and any rectangular
+/// duct size calculations stored for the room.
 public struct Room: Codable, Equatable, Identifiable, Sendable {
+
+  /// The unique id of the room.
   public let id: UUID
+
+  /// The project this room is associated with.
   public let projectID: Project.ID
+
+  /// A unique name for the room in the project.
   public let name: String
+
+  /// The level of the home the room is on.
+  public let level: Level?
+
+  /// The heating load required for the room (from Manual-J).
   public let heatingLoad: Double
-  public let coolingTotal: Double
-  public let coolingSensible: Double?
+
+  /// The cooling load required for the room (from Manual-J).
+  public let coolingLoad: CoolingLoad
+
+  /// The number of registers for the room.
   public let registerCount: Int
+
+  /// An optional room that the airflow is delegated to.
+  public let delegatedTo: Room.ID?
+
+  /// The rectangular duct size calculations for a room.
+  ///
+  /// **NOTE:** These are optionally set after the round sizes have been calculate
+  ///           for a room.
   public let rectangularSizes: [RectangularSize]?
+
+  /// When the room was created in the database.
   public let createdAt: Date
+
+  /// When the room was updated in the database.
   public let updatedAt: Date
 
   public init(
     id: UUID,
     projectID: Project.ID,
     name: String,
+    level: Level? = nil,
     heatingLoad: Double,
-    coolingTotal: Double,
-    coolingSensible: Double? = nil,
+    coolingLoad: CoolingLoad,
     registerCount: Int = 1,
+    delegatedTo: Room.ID? = nil,
     rectangularSizes: [RectangularSize]? = nil,
     createdAt: Date,
     updatedAt: Date
@@ -28,47 +61,173 @@ public struct Room: Codable, Equatable, Identifiable, Sendable {
     self.id = id
     self.projectID = projectID
     self.name = name
+    self.level = level
     self.heatingLoad = heatingLoad
-    self.coolingTotal = coolingTotal
-    self.coolingSensible = coolingSensible
+    self.coolingLoad = coolingLoad
     self.registerCount = registerCount
+    self.delegatedTo = delegatedTo
     self.rectangularSizes = rectangularSizes
     self.createdAt = createdAt
     self.updatedAt = updatedAt
   }
+
+  /// Represents the cooling load of a room.
+  ///
+  /// Generally only one of the values is provided by a Manual-J room x room
+  /// calculation.
+  ///
+  public struct CoolingLoad: Codable, Equatable, Sendable {
+
+    public let total: Double?
+    public let sensible: Double?
+
+    public init(total: Double? = nil, sensible: Double? = nil) {
+      self.total = total
+      self.sensible = sensible
+    }
+
+    /// Calculates the cooling load based on the shr.
+    ///
+    /// Generally Manual-J room x room loads provide either the total load or the
+    /// sensible load, so this allows us to calculate whichever is not provided.
+    public func ensured(shr: Double) throws -> (total: Double, sensible: Double) {
+      switch (total, sensible) {
+      case (.none, .none):
+        throw CoolingLoadError("Both the total and sensible loads are nil.")
+      case (.some(let total), .some(let sensible)):
+        return (total, sensible)
+      case (.some(let total), .none):
+        return (total, total * shr)
+      case (.none, .some(let sensible)):
+        return (sensible / shr, sensible)
+      }
+
+    }
+  }
+
+  public enum LevelTag {}
+
+  public typealias Level = Tagged<LevelTag, Int>
+
 }
 
 extension Room {
-
+  /// Represents the data required to create a new room for a project.
   public struct Create: Codable, Equatable, Sendable {
-    public let projectID: Project.ID
+    /// A unique name for the room in the project.
     public let name: String
+
+    /// An optional level of the home the room is on.
+    public let level: Room.Level?
+
+    /// The heating load required for the room (from Manual-J).
     public let heatingLoad: Double
-    public let coolingTotal: Double
+
+    /// The total cooling load required for the room (from Manual-J).
+    public let coolingTotal: Double?
+
+    /// An optional sensible cooling load for the room.
     public let coolingSensible: Double?
+
+    /// The number of registers for the room.
     public let registerCount: Int
 
+    /// An optional room that this room delegates it's airflow to.
+    public let delegatedTo: Room.ID?
+
+    public var coolingLoad: Room.CoolingLoad {
+      .init(total: coolingTotal, sensible: coolingSensible)
+    }
+
     public init(
-      projectID: Project.ID,
       name: String,
+      level: Room.Level? = nil,
       heatingLoad: Double,
-      coolingTotal: Double,
+      coolingTotal: Double? = nil,
       coolingSensible: Double? = nil,
-      registerCount: Int = 1
+      registerCount: Int = 1,
+      delegatedTo: Room.ID? = nil
     ) {
-      self.projectID = projectID
       self.name = name
+      self.level = level
       self.heatingLoad = heatingLoad
       self.coolingTotal = coolingTotal
       self.coolingSensible = coolingSensible
       self.registerCount = registerCount
+      self.delegatedTo = delegatedTo
     }
   }
 
-  public struct RectangularSize: Codable, Equatable, Identifiable, Sendable {
+  public struct CSV: Equatable, Sendable {
+    public let file: Data
 
+    public init(file: Data) {
+      self.file = file
+    }
+
+    /// Represents a row in a CSV file.
+    ///
+    /// This is similar to ``Room.Create``, but since the rooms are not yet
+    /// created, delegating to another room is done via the room's name
+    /// instead of id.
+    ///
+    public struct Row: Codable, Equatable, Sendable {
+
+      /// A unique name for the room in the project.
+      public let name: String
+
+      /// An optional level of the home the room is on.
+      public let level: Room.Level?
+
+      /// The heating load required for the room (from Manual-J).
+      public let heatingLoad: Double
+
+      /// The total cooling load required for the room (from Manual-J).
+      public let coolingTotal: Double?
+
+      /// An optional sensible cooling load for the room.
+      public let coolingSensible: Double?
+
+      /// The number of registers for the room.
+      public let registerCount: Int
+
+      /// An optional room that this room delegates it's airflow to.
+      public let delegatedToName: String?
+
+      public init(
+        name: String,
+        level: Room.Level? = nil,
+        heatingLoad: Double,
+        coolingTotal: Double? = nil,
+        coolingSensible: Double? = nil,
+        registerCount: Int,
+        delegatedToName: String? = nil
+      ) {
+        self.name = name
+        self.level = level
+        self.heatingLoad = heatingLoad
+        self.coolingTotal = coolingTotal
+        self.coolingSensible = coolingSensible
+        self.registerCount = registerCount
+        // Treat empty strings as nil, as they are often empty
+        // when left blank in a CSV file.
+        self.delegatedToName = delegatedToName == "" ? nil : delegatedToName
+      }
+    }
+
+  }
+
+  /// Represents a rectangular size calculation that is stored in the
+  /// database for a given room.
+  ///
+  /// These are done after the round duct sizes have been calculated and
+  /// can be used to calculate the equivalent rectangular size for a given run.
+  public struct RectangularSize: Codable, Equatable, Identifiable, Sendable {
+    /// The unique id of the rectangular size.
     public let id: UUID
+    /// The register the rectangular size is associated with.
     public let register: Int?
+    /// The height of the rectangular size, the width gets calculated.
     public let height: Int
 
     public init(
@@ -82,22 +241,44 @@ extension Room {
     }
   }
 
+  /// Represents field that can be updated on a room after it's been created in the database.
+  ///
+  /// Onlly fields that are supplied get updated.
   public struct Update: Codable, Equatable, Sendable {
+    /// A unique name for the room in the project.
     public let name: String?
+
+    /// An optional level of the home the room is on.
+    public let level: Room.Level?
+
+    /// The heating load required for the room (from Manual-J).
     public let heatingLoad: Double?
+    /// The total cooling load required for the room (from Manual-J).
     public let coolingTotal: Double?
+    /// An optional sensible cooling load for the room.
     public let coolingSensible: Double?
+    /// The number of registers for the room.
     public let registerCount: Int?
+    /// The rectangular duct size calculations for a room.
     public let rectangularSizes: [RectangularSize]?
+
+    public var coolingLoad: CoolingLoad? {
+      guard coolingTotal != nil || coolingSensible != nil else {
+        return nil
+      }
+      return .init(total: coolingTotal, sensible: coolingSensible)
+    }
 
     public init(
       name: String? = nil,
+      level: Room.Level? = nil,
       heatingLoad: Double? = nil,
       coolingTotal: Double? = nil,
       coolingSensible: Double? = nil,
       registerCount: Int? = nil
     ) {
       self.name = name
+      self.level = level
       self.heatingLoad = heatingLoad
       self.coolingTotal = coolingTotal
       self.coolingSensible = coolingSensible
@@ -109,6 +290,7 @@ extension Room {
       rectangularSizes: [RectangularSize]
     ) {
       self.name = nil
+      self.level = nil
       self.heatingLoad = nil
       self.coolingTotal = nil
       self.coolingSensible = nil
@@ -120,57 +302,49 @@ extension Room {
 
 extension Array where Element == Room {
 
+  /// The sum of heating loads for an array of rooms.
   public var totalHeatingLoad: Double {
     reduce(into: 0) { $0 += $1.heatingLoad }
   }
 
-  public var totalCoolingLoad: Double {
-    reduce(into: 0) { $0 += $1.coolingTotal }
+  /// The sum of total cooling loads for an array of rooms.
+  public func totalCoolingLoad(shr: Double) throws -> Double {
+    try reduce(into: 0) { $0 += try $1.coolingLoad.ensured(shr: shr).total }
   }
 
-  public func totalCoolingSensible(shr: Double) -> Double {
-    reduce(into: 0) {
-      let sensible = $1.coolingSensible ?? ($1.coolingTotal * shr)
-      $0 += sensible
+  /// The sum of sensible cooling loads for an array of rooms.
+  ///
+  /// - Parameters:
+  ///   - shr: The project wide sensible heat ratio.
+  public func totalCoolingSensible(shr: Double) throws -> Double {
+    try reduce(into: 0) {
+      // let sensible = $1.coolingSensible ?? ($1.coolingTotal * shr)
+      $0 += try $1.coolingLoad.ensured(shr: shr).sensible
     }
+  }
+}
+
+public struct CoolingLoadError: Error, Equatable, Sendable {
+  public let reason: String
+
+  public init(_ reason: String) {
+    self.reason = reason
+  }
+}
+
+extension Room.Level {
+  /// The label for the level, i.e. 'Basement' or 'Level-1', etc.
+  public var label: String {
+    if rawValue <= 0 {
+      return "Basement"
+    }
+    return "Level-\(rawValue)"
   }
 }
 
 #if DEBUG
 
   extension Room {
-    public static let mocks = [
-      Room(
-        id: UUID(0),
-        projectID: UUID(0),
-        name: "Kitchen",
-        heatingLoad: 12345,
-        coolingTotal: 1234,
-        registerCount: 2,
-        createdAt: Date(),
-        updatedAt: Date()
-      ),
-      Room(
-        id: UUID(1),
-        projectID: UUID(1),
-        name: "Bedroom - 1",
-        heatingLoad: 12345,
-        coolingTotal: 1456,
-        registerCount: 1,
-        createdAt: Date(),
-        updatedAt: Date()
-      ),
-      Room(
-        id: UUID(2),
-        projectID: UUID(2),
-        name: "Family Room",
-        heatingLoad: 12345,
-        coolingTotal: 1673,
-        registerCount: 3,
-        createdAt: Date(),
-        updatedAt: Date()
-      ),
-    ]
 
     public static func mock(projectID: Project.ID) -> [Self] {
       @Dependency(\.uuid) var uuid
@@ -182,8 +356,8 @@ extension Array where Element == Room {
           projectID: projectID,
           name: "Bed-1",
           heatingLoad: 3913,
-          coolingTotal: 2472,
-          coolingSensible: nil,
+          coolingLoad: .init(total: 2472),
+          // coolingSensible: nil,
           registerCount: 1,
           rectangularSizes: nil,
           createdAt: now,
@@ -194,8 +368,8 @@ extension Array where Element == Room {
           projectID: projectID,
           name: "Entry",
           heatingLoad: 8284,
-          coolingTotal: 2916,
-          coolingSensible: nil,
+          coolingLoad: .init(total: 2916),
+          // coolingSensible: nil,
           registerCount: 2,
           rectangularSizes: nil,
           createdAt: now,
@@ -206,8 +380,8 @@ extension Array where Element == Room {
           projectID: projectID,
           name: "Family Room",
           heatingLoad: 9785,
-          coolingTotal: 7446,
-          coolingSensible: nil,
+          coolingLoad: .init(total: 7446),
+          // coolingSensible: nil,
           registerCount: 3,
           rectangularSizes: nil,
           createdAt: now,
@@ -218,8 +392,8 @@ extension Array where Element == Room {
           projectID: projectID,
           name: "Kitchen",
           heatingLoad: 4518,
-          coolingTotal: 5096,
-          coolingSensible: nil,
+          coolingLoad: .init(total: 5096),
+          // coolingSensible: nil,
           registerCount: 2,
           rectangularSizes: nil,
           createdAt: now,
@@ -230,8 +404,8 @@ extension Array where Element == Room {
           projectID: projectID,
           name: "Living Room",
           heatingLoad: 7553,
-          coolingTotal: 6829,
-          coolingSensible: nil,
+          coolingLoad: .init(total: 6829),
+          // coolingSensible: nil,
           registerCount: 2,
           rectangularSizes: nil,
           createdAt: now,
@@ -242,8 +416,8 @@ extension Array where Element == Room {
           projectID: projectID,
           name: "Master",
           heatingLoad: 8202,
-          coolingTotal: 2076,
-          coolingSensible: nil,
+          coolingLoad: .init(total: 2076),
+          // coolingSensible: nil,
           registerCount: 2,
           rectangularSizes: nil,
           createdAt: now,

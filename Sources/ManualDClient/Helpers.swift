@@ -1,55 +1,6 @@
 import Foundation
 import ManualDCore
 
-extension Room {
-
-  var heatingLoadPerRegister: Double {
-
-    heatingLoad / Double(registerCount)
-  }
-
-  func coolingSensiblePerRegister(projectSHR: Double) -> Double {
-    let sensible = coolingSensible ?? (coolingTotal * projectSHR)
-    return sensible / Double(registerCount)
-  }
-}
-
-extension TrunkSize.RoomProxy {
-
-  // We need to make sure if registers got removed after a trunk
-  // was already made / saved that we do not include registers that
-  // no longer exist.
-  private var actualRegisterCount: Int {
-    guard registers.count <= room.registerCount else {
-      return room.registerCount
-    }
-    return registers.count
-  }
-
-  var totalHeatingLoad: Double {
-    room.heatingLoadPerRegister * Double(actualRegisterCount)
-  }
-
-  func totalCoolingSensible(projectSHR: Double) -> Double {
-    room.coolingSensiblePerRegister(projectSHR: projectSHR) * Double(actualRegisterCount)
-  }
-}
-
-extension TrunkSize {
-
-  var totalHeatingLoad: Double {
-    rooms.reduce(into: 0) { $0 += $1.totalHeatingLoad }
-  }
-
-  func totalCoolingSensible(projectSHR: Double) -> Double {
-    rooms.reduce(into: 0) { $0 += $1.totalCoolingSensible(projectSHR: projectSHR) }
-  }
-}
-
-extension ComponentPressureLosses {
-  var totalLosses: Double { values.reduce(0) { $0 + $1 } }
-}
-
 extension Array where Element == EffectiveLengthGroup {
   var totalEffectiveLength: Int {
     reduce(0) { $0 + $1.effectiveLength }
@@ -101,16 +52,16 @@ func roundSize(_ size: Double) throws -> Int {
   }
 }
 
-func velocity(cfm: Int, roundSize: Int) -> Int {
-  let cfm = Double(cfm)
+func velocity(cfm: ManualDClient.CFM, roundSize: Int) -> Int {
+  let cfm = Double(cfm.rawValue)
   let roundSize = Double(roundSize)
   let velocity = cfm / (pow(roundSize / 24, 2) * 3.14)
   return Int(round(velocity))
 }
 
-func flexSize(_ request: ManualDClient.DuctSizeRequest) throws -> Int {
-  let cfm = pow(Double(request.designCFM), 0.4)
-  let fr = pow(request.frictionRate / 1.76, 0.2)
+func flexSize(_ cfm: ManualDClient.CFM, _ frictionRate: Double) throws -> Int {
+  let cfm = pow(Double(cfm.rawValue), 0.4)
+  let fr = pow(frictionRate / 1.76, 0.2)
   let size = 0.55 * (cfm / fr)
   return try roundSize(size)
 }
