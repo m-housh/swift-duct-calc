@@ -63,7 +63,8 @@ struct HomeView: HTML, Sendable {
               .class("btn btn-xl btn-primary mt-6"),
               .hx.get(route: .signup(.index)),
               .hx.target("body"),
-              .hx.swap(.outerHTML)
+              .hx.swap(.outerHTML),
+              .hx.pushURL(true)
             ) {
               "Get Started"
             }
