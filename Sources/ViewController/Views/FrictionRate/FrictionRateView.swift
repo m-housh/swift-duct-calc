@@ -96,7 +96,7 @@ struct FrictionRateView: HTML, Sendable {
           div(
             .class(
               """
-              border border-red-800 bg-error rounded-lg shadow-lg font-bold italic col-span-2 p-4
+              font-bold italic col-span-2 p-4
               """
             )
           ) {
@@ -143,7 +143,10 @@ struct FrictionRateView: HTML, Sendable {
             .hidden(when: !showHighErrors)
 
           }
-          .attributes(.class("mt-4"), when: hasAlerts)
+          .attributes(
+            .class("border border-red-800 bg-error rounded-lg shadow-lg mt-4"),
+            when: hasAlerts
+          )
         }
       }
 
