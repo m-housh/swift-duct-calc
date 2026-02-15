@@ -41,9 +41,7 @@
               </div>
             </div>
             <div class="flex-none">
-              <div class="flex items-end space-x-4">
-                <div class="tooltip tooltip-left" data-tip="Duct size calculator"><a class="btn btn-ghost btn-primary text-lg" href="/duct-size" target="_blank">Ductulator</a></div>
-              </div>
+              <div class="flex items-end space-x-4"></div>
             </div>
           </nav>
           <div class="flex justify-center items-center px-10">
@@ -54,12 +52,17 @@ p-6 w-full">
                 <h1 class="text-4xl font-bold me-10">Ductulator</h1>
               </div>
               <p class="text-primary font-bold italic">Calculate duct size for the given parameters</p>
-              <form class="space-y-4 mt-6" hx-post="/duct-size" hx-target="#resultView" hx-swap="outerHTML">
+              <form class="space-y-4 mt-6" hx-post="/ductulator" hx-target="#resultView" hx-swap="outerHTML">
                 <label class="input w-full"><span class="label">CFM</span>
-                <input name="cfm" type="number" placeholder="1000" required autofocus>
-                Friction Rate</label><label class="input w-full"><span class="label"></span>
-                <input name="frictionRate" value="0.06" required type="number" min="0.01" step="0.01">
-                Height</label><label class="input w-full"><span class="label"></span>
+                <input name="cfm" type="number" placeholder="1000" required autofocus></label>
+                <fieldset class="fieldset bg-base-200 border-base-300 rounded-box border-p-4 mt-2">
+                  <legend class="fieldset-legend">Friction Rate</legend>
+                  Value<label class="input w-full"><span class="label"></span>
+                  <input name="frictionRate" value="0.06" required type="number" min="0.01" step="0.01" id="frictionRateInput" onchange="syncInputs('frictionRateSlider', 'frictionRateInput');"></label>
+                  <input class="range range-sm range-accent w-full mt-3" type="range" min="0.00" max="0.2" step="0.01" value="0.06" id="frictionRateSlider" onchange="syncInputs('frictionRateInput', 'frictionRateSlider');">
+                  <div class="flex justify-between px-2.5 text-xs"><span>0.00</span><span>0.05</span><span>0.10</span><span>0.15</span><span>0.20</span></div>
+                </fieldset>
+                Height<label class="input w-full"><span class="label"></span>
                 <input name="height" type="number" placeholder="Height (Optional)"></label>
                 <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
               </form>

@@ -3,13 +3,16 @@ import ManualDCore
 import Styleguide
 
 struct Navbar: HTML, Sendable {
+  let showDuctulatorButton: Bool
   let showSidebarToggle: Bool
   let isLoggedIn: Bool
 
   init(
+    showDuctulatorButton: Bool = true,
     showSidebarToggle: Bool,
     isLoggedIn: Bool = true
   ) {
+    self.showDuctulatorButton = showDuctulatorButton
     self.showSidebarToggle = showSidebarToggle
     self.isLoggedIn = isLoggedIn
   }
@@ -58,9 +61,11 @@ struct Navbar: HTML, Sendable {
       div(.class("flex-none")) {
         div(.class("flex items-end space-x-4")) {
 
-          DuctulatorButton()
-            .attributes(.class("btn-ghost btn-primary text-lg"))
-            .tooltip("Duct size calculator", position: .left)
+          if showDuctulatorButton {
+            DuctulatorButton()
+              .attributes(.class("btn-ghost btn-primary text-lg"))
+              .tooltip("Duct size calculator", position: .left)
+          }
 
           if isLoggedIn {
             div(.class("dropdown dropdown-end dropdown-hover")) {

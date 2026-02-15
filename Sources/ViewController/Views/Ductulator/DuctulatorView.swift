@@ -17,6 +17,7 @@ struct DuctulatorView: HTML, Sendable {
   var body: some HTML {
     div {
       Navbar(
+        showDuctulatorButton: false,
         showSidebarToggle: false,
         isLoggedIn: isLoggedIn
       )
@@ -55,15 +56,43 @@ struct DuctulatorView: HTML, Sendable {
               .autofocus
             )
 
-            LabeledInput(
-              "Friction Rate",
-              .name("frictionRate"),
-              .value("0.06"),
-              .required,
-              .type(.number),
-              .min("0.01"),
-              .step("0.01")
-            )
+            fieldset(
+              .class("fieldset bg-base-200 border-base-300 rounded-box border-p-4 mt-2")
+            ) {
+              legend(.class("fieldset-legend")) { "Friction Rate" }
+
+              LabeledInput(
+                "Value",
+                // .class("input input-md w-full"),
+                .name("frictionRate"),
+                .value("0.06"),
+                .required,
+                .type(.number),
+                .min("0.01"),
+                .step("0.01"),
+                .id("frictionRateInput"),
+                .on(.change, "syncInputs('frictionRateSlider', 'frictionRateInput');")
+              )
+
+              input(
+                .class("range range-sm range-accent w-full mt-3"),
+                .type(.range),
+                .min("0.00"),
+                .max("0.2"),
+                .step("0.01"),
+                .value("0.06"),
+                .id("frictionRateSlider"),
+                .on(.change, "syncInputs('frictionRateInput', 'frictionRateSlider');")
+              )
+
+              div(.class("flex justify-between px-2.5 text-xs")) {
+                span { "0.00" }
+                span { "0.05" }
+                span { "0.10" }
+                span { "0.15" }
+                span { "0.20" }
+              }
+            }
 
             LabeledInput(
               "Height",
@@ -78,6 +107,7 @@ struct DuctulatorView: HTML, Sendable {
 
           // Populate when submitted
           div(.id(Result.id)) {}
+
         }
       }
     }
