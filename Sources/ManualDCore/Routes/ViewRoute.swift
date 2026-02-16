@@ -1006,7 +1006,7 @@ extension SiteRoute.View {
     case index
     case submit(Form)
 
-    public static let rootPath = "duct-size"
+    public static let rootPath = "ductulator"
 
     static let router = OneOf {
       Route(.case(Self.index)) {
