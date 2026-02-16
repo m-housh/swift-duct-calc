@@ -64,7 +64,9 @@ extension DuctSizingView {
 
     var body: some HTML<HTMLTag.tr> {
       tr(.class("text-lg"), .id(rowID)) {
-        td { room.roomName }
+        td {
+          room.label
+        }
         td {
           div(.class("flex flex-wrap grid grid-cols-2 gap-2")) {
             span(.class("label")) { "Heating" }

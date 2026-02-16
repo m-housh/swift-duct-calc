@@ -264,7 +264,7 @@ struct GroupField: HTML, Sendable {
 
   var body: some HTML {
     div(.class("grid grid-cols-3 gap-2 p-2 border rounded-lg shadow-sm")) {
-      GroupSelect(style: style)
+      GroupSelect(style: style, group: group)
 
       LabeledInput(
         "Letter",
@@ -308,6 +308,7 @@ struct GroupField: HTML, Sendable {
 struct GroupSelect: HTML, Sendable {
 
   let style: EquivalentLength.EffectiveLengthType
+  let group: EquivalentLength.FittingGroup?
 
   var body: some HTML {
     label(.class("select")) {
@@ -318,6 +319,7 @@ struct GroupSelect: HTML, Sendable {
       ) {
         for value in style.selectOptions {
           option(.value("\(value)")) { "\(value)" }
+            .attributes(.selected, when: group?.group == value)
         }
       }
     }

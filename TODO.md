@@ -21,11 +21,19 @@
 - [x] Add email to footer
 - [x] Validation errors, if they occur are vague in ResultView
 - [x] Privacy policy
-- [ ] Update README
-- [ ] Self hosting documentation
 - [x] Heating load total on rooms page is hard to view when using default dark color scheme, perhaps
   invert the colors or make the background red and text white.
 - [x] Errors on friction rate page are hard to see with default dark scheme.
 - [x] Support 'POSTGRES_PASSWORD_FILE' so that docker secrets can be used.
+- [x] Need to push url after logout / on login.
+- [x] Multi-select background has reverted to being transparent.
+- [x] Add level to multi-select for trunk.
+- [x] Add level to duct-size tab, sort runs by level.
+- [x] TEL step 3 is not setting group number appropriately.
+- [x] Deleting a TEL is not working.
+- [x] Add velocity to ductulator results.
+- [ ] Share project ?
+- [ ] Update README
+- [ ] Self hosting documentation
 - [ ] Pdf import
 - [ ] Fitting selection tool.

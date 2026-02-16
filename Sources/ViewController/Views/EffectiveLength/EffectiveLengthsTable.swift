@@ -115,7 +115,7 @@ struct EffectiveLengthsTable: HTML, Sendable {
                     .class("join-item btn-ghost"),
                     .hx.delete(route: deleteRoute),
                     .hx.confirm("Are you sure?"),
-                    .hx.target("#\(effectiveLength.id.idString)"),
+                    .hx.target("closest tr"),
                     .hx.swap(.outerHTML)
                   )
                   .tooltip("Delete", position: .bottom)

@@ -78,10 +78,25 @@ struct Navbar: HTML, Sendable {
                 .class("dropdown-content menu bg-base-200 rounded-box z-1 w-52 py-2 shadow-sm")
               ) {
                 li {
-                  a(.href(route: .user(.profile(.index)))) { "Profile" }
+                  a(
+                    .href(route: .user(.profile(.index)))
+                  ) { "Profile" }
                 }
                 li {
-                  a(.href(route: .user(.logout))) { "Logout" }
+                  a(
+                    .hx.get(route: .project(.index)),
+                    .hx.pushURL(true),
+                    .hx.target("body"),
+                    .hx.swap(.outerHTML)
+                  ) { "Projects" }
+                }
+                li {
+                  a(
+                    .hx.get(route: .user(.logout)),
+                    .hx.pushURL("/login"),
+                    .hx.target("body"),
+                    .hx.swap(.outerHTML)
+                  ) { "Logout" }
                 }
               }
             }
