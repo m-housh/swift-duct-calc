@@ -9,6 +9,10 @@ struct DuctSizingView: HTML, Sendable {
 
   let ductSizes: DuctSizes
 
+  var sortedRooms: [DuctSizes.RoomContainer] {
+    ductSizes.rooms.sorted { $0.label < $1.label }
+  }
+
   var body: some HTML {
     div(.class("space-y-4")) {
       PageTitleRow {
@@ -43,7 +47,7 @@ struct DuctSizingView: HTML, Sendable {
       }
 
       if ductSizes.rooms.count != 0 {
-        RoomsTable(rooms: ductSizes.rooms)
+        RoomsTable(rooms: sortedRooms)
 
         PageTitleRow {
           PageTitle {
@@ -64,7 +68,7 @@ struct DuctSizingView: HTML, Sendable {
 
       }
 
-      TrunkSizeForm(rooms: ductSizes.rooms, dismiss: true)
+      TrunkSizeForm(rooms: sortedRooms, dismiss: true)
     }
   }
 

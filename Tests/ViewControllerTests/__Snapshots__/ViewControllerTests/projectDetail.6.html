@@ -50,7 +50,8 @@
                     <div class="btn m-1 btn btn-square btn-ghost hover:bg-neutral hover:text-white" tabindex="0" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg></div>
                     <ul tabindex="-1" class="dropdown-content menu bg-base-200 rounded-box z-1 w-52 py-2 shadow-sm">
                       <li><a href="/profile">Profile</a></li>
-                      <li><a href="/logout">Logout</a></li>
+                      <li><a hx-get="/projects" hx-push-url="true" hx-target="body" hx-swap="outerHTML">Projects</a></li>
+                      <li><a hx-get="/logout" hx-push-url="/login" hx-target="body" hx-swap="outerHTML">Logout</a></li>
                     </ul>
                   </div>
                 </div>
@@ -83,7 +84,7 @@ p-6 w-full">
                   </thead>
                   <tbody>
                     <tr class="text-lg" id="roomRow_Bed1">
-                      <td>Bed-1</td>
+                      <td>Bed-1 - SR.1</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,913</span><span class="label">Cooling</span><span>2,472</span></div>
                       </td>
@@ -148,7 +149,7 @@ p-6 w-full">
                       </td>
                     </tr>
                     <tr class="text-lg" id="roomRow_Entry">
-                      <td>Entry</td>
+                      <td>Entry - SR.1</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,142</span><span class="label">Cooling</span><span>1,458</span></div>
                       </td>
@@ -213,7 +214,7 @@ p-6 w-full">
                       </td>
                     </tr>
                     <tr class="text-lg" id="roomRow_Entry">
-                      <td>Entry</td>
+                      <td>Entry - SR.2</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,142</span><span class="label">Cooling</span><span>1,458</span></div>
                       </td>
@@ -278,7 +279,7 @@ p-6 w-full">
                       </td>
                     </tr>
                     <tr class="text-lg" id="roomRow_FamilyRoom">
-                      <td>Family Room</td>
+                      <td>Family Room - SR.1</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,262</span><span class="label">Cooling</span><span>2,482</span></div>
                       </td>
@@ -343,7 +344,7 @@ p-6 w-full">
                       </td>
                     </tr>
                     <tr class="text-lg" id="roomRow_FamilyRoom">
-                      <td>Family Room</td>
+                      <td>Family Room - SR.2</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,262</span><span class="label">Cooling</span><span>2,482</span></div>
                       </td>
@@ -408,7 +409,7 @@ p-6 w-full">
                       </td>
                     </tr>
                     <tr class="text-lg" id="roomRow_FamilyRoom">
-                      <td>Family Room</td>
+                      <td>Family Room - SR.3</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,262</span><span class="label">Cooling</span><span>2,482</span></div>
                       </td>
@@ -473,7 +474,7 @@ p-6 w-full">
                       </td>
                     </tr>
                     <tr class="text-lg" id="roomRow_Kitchen">
-                      <td>Kitchen</td>
+                      <td>Kitchen - SR.1</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>2,259</span><span class="label">Cooling</span><span>2,548</span></div>
                       </td>
@@ -538,7 +539,7 @@ p-6 w-full">
                       </td>
                     </tr>
                     <tr class="text-lg" id="roomRow_Kitchen">
-                      <td>Kitchen</td>
+                      <td>Kitchen - SR.2</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>2,259</span><span class="label">Cooling</span><span>2,548</span></div>
                       </td>
@@ -603,7 +604,7 @@ p-6 w-full">
                       </td>
                     </tr>
                     <tr class="text-lg" id="roomRow_LivingRoom">
-                      <td>Living Room</td>
+                      <td>Living Room - SR.1</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,776</span><span class="label">Cooling</span><span>3,414</span></div>
                       </td>
@@ -668,7 +669,7 @@ p-6 w-full">
                       </td>
                     </tr>
                     <tr class="text-lg" id="roomRow_LivingRoom">
-                      <td>Living Room</td>
+                      <td>Living Room - SR.2</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,776</span><span class="label">Cooling</span><span>3,414</span></div>
                       </td>
@@ -733,7 +734,7 @@ p-6 w-full">
                       </td>
                     </tr>
                     <tr class="text-lg" id="roomRow_Master">
-                      <td>Master</td>
+                      <td>Master - SR.1</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,101</span><span class="label">Cooling</span><span>1,038</span></div>
                       </td>
@@ -798,7 +799,7 @@ p-6 w-full">
                       </td>
                     </tr>
                     <tr class="text-lg" id="roomRow_Master">
-                      <td>Master</td>
+                      <td>Master - SR.2</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,101</span><span class="label">Cooling</span><span>1,038</span></div>
                       </td>
@@ -957,18 +958,18 @@ p-6 w-full">
                               <div>
                                 <h2 class="label font-bold col-span-3 mb-6">Associated Supply Runs</h2>
                                 <daisy-multiselect class="z-50 bg-base-200" placeholder="Select rooms" name="rooms" chip-style show-select-all show-clear required virtual-scroll>
-                                  <option value="00000000-0000-0000-0000-000000000001_1" selected>Bed-1</option>
-                                  <option value="00000000-0000-0000-0000-000000000002_1" selected>Entry</option>
-                                  <option value="00000000-0000-0000-0000-000000000002_2" selected>Entry</option>
-                                  <option value="00000000-0000-0000-0000-000000000003_1" selected>Family Room</option>
-                                  <option value="00000000-0000-0000-0000-000000000003_2" selected>Family Room</option>
-                                  <option value="00000000-0000-0000-0000-000000000003_3" selected>Family Room</option>
-                                  <option value="00000000-0000-0000-0000-000000000004_1" selected>Kitchen</option>
-                                  <option value="00000000-0000-0000-0000-000000000004_2" selected>Kitchen</option>
-                                  <option value="00000000-0000-0000-0000-000000000005_1" selected>Living Room</option>
-                                  <option value="00000000-0000-0000-0000-000000000005_2" selected>Living Room</option>
-                                  <option value="00000000-0000-0000-0000-000000000006_1" selected>Master</option>
-                                  <option value="00000000-0000-0000-0000-000000000006_2" selected>Master</option>
+                                  <option value="00000000-0000-0000-0000-000000000001_1" selected>Bed-1 - SR.1</option>
+                                  <option value="00000000-0000-0000-0000-000000000002_1" selected>Entry - SR.1</option>
+                                  <option value="00000000-0000-0000-0000-000000000002_2" selected>Entry - SR.2</option>
+                                  <option value="00000000-0000-0000-0000-000000000003_1" selected>Family Room - SR.1</option>
+                                  <option value="00000000-0000-0000-0000-000000000003_2" selected>Family Room - SR.2</option>
+                                  <option value="00000000-0000-0000-0000-000000000003_3" selected>Family Room - SR.3</option>
+                                  <option value="00000000-0000-0000-0000-000000000004_1" selected>Kitchen - SR.1</option>
+                                  <option value="00000000-0000-0000-0000-000000000004_2" selected>Kitchen - SR.2</option>
+                                  <option value="00000000-0000-0000-0000-000000000005_1" selected>Living Room - SR.1</option>
+                                  <option value="00000000-0000-0000-0000-000000000005_2" selected>Living Room - SR.2</option>
+                                  <option value="00000000-0000-0000-0000-000000000006_1" selected>Master - SR.1</option>
+                                  <option value="00000000-0000-0000-0000-000000000006_2" selected>Master - SR.2</option>
                                 </daisy-multiselect>
                               </div>
                               <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
@@ -1052,18 +1053,18 @@ p-6 w-full">
                               <div>
                                 <h2 class="label font-bold col-span-3 mb-6">Associated Supply Runs</h2>
                                 <daisy-multiselect class="z-50 bg-base-200" placeholder="Select rooms" name="rooms" chip-style show-select-all show-clear required virtual-scroll>
-                                  <option value="00000000-0000-0000-0000-000000000001_1" selected>Bed-1</option>
-                                  <option value="00000000-0000-0000-0000-000000000002_1" selected>Entry</option>
-                                  <option value="00000000-0000-0000-0000-000000000002_2" selected>Entry</option>
-                                  <option value="00000000-0000-0000-0000-000000000003_1" selected>Family Room</option>
-                                  <option value="00000000-0000-0000-0000-000000000003_2" selected>Family Room</option>
-                                  <option value="00000000-0000-0000-0000-000000000003_3" selected>Family Room</option>
-                                  <option value="00000000-0000-0000-0000-000000000004_1" selected>Kitchen</option>
-                                  <option value="00000000-0000-0000-0000-000000000004_2" selected>Kitchen</option>
-                                  <option value="00000000-0000-0000-0000-000000000005_1" selected>Living Room</option>
-                                  <option value="00000000-0000-0000-0000-000000000005_2" selected>Living Room</option>
-                                  <option value="00000000-0000-0000-0000-000000000006_1" selected>Master</option>
-                                  <option value="00000000-0000-0000-0000-000000000006_2" selected>Master</option>
+                                  <option value="00000000-0000-0000-0000-000000000001_1" selected>Bed-1 - SR.1</option>
+                                  <option value="00000000-0000-0000-0000-000000000002_1" selected>Entry - SR.1</option>
+                                  <option value="00000000-0000-0000-0000-000000000002_2" selected>Entry - SR.2</option>
+                                  <option value="00000000-0000-0000-0000-000000000003_1" selected>Family Room - SR.1</option>
+                                  <option value="00000000-0000-0000-0000-000000000003_2" selected>Family Room - SR.2</option>
+                                  <option value="00000000-0000-0000-0000-000000000003_3" selected>Family Room - SR.3</option>
+                                  <option value="00000000-0000-0000-0000-000000000004_1" selected>Kitchen - SR.1</option>
+                                  <option value="00000000-0000-0000-0000-000000000004_2" selected>Kitchen - SR.2</option>
+                                  <option value="00000000-0000-0000-0000-000000000005_1" selected>Living Room - SR.1</option>
+                                  <option value="00000000-0000-0000-0000-000000000005_2" selected>Living Room - SR.2</option>
+                                  <option value="00000000-0000-0000-0000-000000000006_1" selected>Master - SR.1</option>
+                                  <option value="00000000-0000-0000-0000-000000000006_2" selected>Master - SR.2</option>
                                 </daisy-multiselect>
                               </div>
                               <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
@@ -1095,18 +1096,18 @@ p-6 w-full">
                       <div>
                         <h2 class="label font-bold col-span-3 mb-6">Associated Supply Runs</h2>
                         <daisy-multiselect class="z-50 bg-base-200" placeholder="Select rooms" name="rooms" chip-style show-select-all show-clear required virtual-scroll>
-                          <option value="00000000-0000-0000-0000-000000000001_1">Bed-1</option>
-                          <option value="00000000-0000-0000-0000-000000000002_1">Entry</option>
-                          <option value="00000000-0000-0000-0000-000000000002_2">Entry</option>
-                          <option value="00000000-0000-0000-0000-000000000003_1">Family Room</option>
-                          <option value="00000000-0000-0000-0000-000000000003_2">Family Room</option>
-                          <option value="00000000-0000-0000-0000-000000000003_3">Family Room</option>
-                          <option value="00000000-0000-0000-0000-000000000004_1">Kitchen</option>
-                          <option value="00000000-0000-0000-0000-000000000004_2">Kitchen</option>
-                          <option value="00000000-0000-0000-0000-000000000005_1">Living Room</option>
-                          <option value="00000000-0000-0000-0000-000000000005_2">Living Room</option>
-                          <option value="00000000-0000-0000-0000-000000000006_1">Master</option>
-                          <option value="00000000-0000-0000-0000-000000000006_2">Master</option>
+                          <option value="00000000-0000-0000-0000-000000000001_1">Bed-1 - SR.1</option>
+                          <option value="00000000-0000-0000-0000-000000000002_1">Entry - SR.1</option>
+                          <option value="00000000-0000-0000-0000-000000000002_2">Entry - SR.2</option>
+                          <option value="00000000-0000-0000-0000-000000000003_1">Family Room - SR.1</option>
+                          <option value="00000000-0000-0000-0000-000000000003_2">Family Room - SR.2</option>
+                          <option value="00000000-0000-0000-0000-000000000003_3">Family Room - SR.3</option>
+                          <option value="00000000-0000-0000-0000-000000000004_1">Kitchen - SR.1</option>
+                          <option value="00000000-0000-0000-0000-000000000004_2">Kitchen - SR.2</option>
+                          <option value="00000000-0000-0000-0000-000000000005_1">Living Room - SR.1</option>
+                          <option value="00000000-0000-0000-0000-000000000005_2">Living Room - SR.2</option>
+                          <option value="00000000-0000-0000-0000-000000000006_1">Master - SR.1</option>
+                          <option value="00000000-0000-0000-0000-000000000006_2">Master - SR.2</option>
                         </daisy-multiselect>
                       </div>
                       <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>

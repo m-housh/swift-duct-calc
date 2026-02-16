@@ -162,6 +162,10 @@ struct DuctulatorView: HTML, Sendable {
                 td { "\(rectangularSize.width) x \(rectangularSize.height)" }
               }
             }
+            tr {
+              td { Label("Velocity") }
+              td { Number(ductSize.velocity) }
+            }
           }
         }
 

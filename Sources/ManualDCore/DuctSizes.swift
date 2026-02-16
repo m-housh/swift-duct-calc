@@ -54,6 +54,7 @@ extension DuctSizes {
 
     public let roomID: Room.ID
     public let roomName: String
+    public let roomLevel: Room.Level?
     public let roomRegister: Int
     public let heatingLoad: Double
     public let coolingLoad: Double
@@ -61,9 +62,18 @@ extension DuctSizes {
     public let coolingCFM: Double
     public let ductSize: SizeContainer
 
+    public var label: String {
+      let base = "\(roomName) - SR.\(roomRegister)"
+      if let roomLevel {
+        return "\(roomLevel.label) - \(base)"
+      }
+      return base
+    }
+
     public init(
       roomID: Room.ID,
       roomName: String,
+      roomLevel: Room.Level?,
       roomRegister: Int,
       heatingLoad: Double,
       coolingLoad: Double,
@@ -73,6 +83,7 @@ extension DuctSizes {
     ) {
       self.roomID = roomID
       self.roomName = roomName
+      self.roomLevel = roomLevel
       self.roomRegister = roomRegister
       self.heatingLoad = heatingLoad
       self.coolingLoad = coolingLoad
@@ -207,6 +218,7 @@ extension DuctSizes {
           .init(
             roomID: room.id,
             roomName: room.name,
+            roomLevel: room.level,
             roomRegister: n,
             heatingLoad: heatingLoad,
             coolingLoad: coolingLoad,

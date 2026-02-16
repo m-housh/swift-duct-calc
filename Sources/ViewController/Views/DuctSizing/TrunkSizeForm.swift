@@ -96,7 +96,7 @@ struct TrunkSizeForm: HTML, Sendable {
           ) {
             for room in rooms {
               option(.value("\(room.roomID)_\(room.roomRegister)")) {
-                room.roomName
+                room.label
               }
               .attributes(
                 .selected,

@@ -79,7 +79,8 @@ extension ManualDClient {
         retval.append(
           .init(
             roomID: room.id,
-            roomName: "\(room.name)-\(n)",
+            roomName: "\(room.name)",
+            roomLevel: room.level,
             roomRegister: n,
             heatingLoad: heatingLoad,
             coolingLoad: coolingLoad,

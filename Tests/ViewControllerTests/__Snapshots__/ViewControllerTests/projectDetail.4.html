@@ -50,7 +50,8 @@
                     <div class="btn m-1 btn btn-square btn-ghost hover:bg-neutral hover:text-white" tabindex="0" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg></div>
                     <ul tabindex="-1" class="dropdown-content menu bg-base-200 rounded-box z-1 w-52 py-2 shadow-sm">
                       <li><a href="/profile">Profile</a></li>
-                      <li><a href="/logout">Logout</a></li>
+                      <li><a hx-get="/projects" hx-push-url="true" hx-target="body" hx-swap="outerHTML">Projects</a></li>
+                      <li><a hx-get="/logout" hx-push-url="/login" hx-target="body" hx-swap="outerHTML">Logout</a></li>
                     </ul>
                   </div>
                 </div>
@@ -136,7 +137,7 @@ p-6 w-full pb-6">
                           <div class="flex justify-end -mt-2">
                             <div class="join">
                               <div class="tooltip tooltip-bottom" data-tip="Delete">
-                                <button type="button" class="btn btn-error join-item btn-ghost" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000008" hx-confirm="Are you sure?" hx-target="#00000000000000000000000000000008" hx-swap="outerHTML"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                                <button type="button" class="btn btn-error join-item btn-ghost" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000008" hx-confirm="Are you sure?" hx-target="closest tr" hx-swap="outerHTML"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
                               </div>
                               <div class="tooltip tooltip-bottom" data-tip="Edit">
                                 <button class="btn join-item btn-ghost" type="button" onclick="equivalentLengthForm_00000000000000000000000000000008.showModal()">
@@ -200,7 +201,7 @@ p-6 w-full pb-6">
                           <div class="flex justify-end -mt-2">
                             <div class="join">
                               <div class="tooltip tooltip-bottom" data-tip="Delete">
-                                <button type="button" class="btn btn-error join-item btn-ghost" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000009" hx-confirm="Are you sure?" hx-target="#00000000000000000000000000000009" hx-swap="outerHTML"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                                <button type="button" class="btn btn-error join-item btn-ghost" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000009" hx-confirm="Are you sure?" hx-target="closest tr" hx-swap="outerHTML"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
                               </div>
                               <div class="tooltip tooltip-bottom" data-tip="Edit">
                                 <button class="btn join-item btn-ghost" type="button" onclick="equivalentLengthForm_00000000000000000000000000000009.showModal()">
