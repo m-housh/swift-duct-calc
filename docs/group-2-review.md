@@ -1,8 +1,14 @@
 # Complete Group 2 drawing batch
 
 The review page contains **all 17 Group 2 fittings, 2A–2Q**. The accepted 2B,
-2K and 2N assets and reference images are unchanged. Fourteen new source-traced
-SVGs await review. Group 1 remains complete and approved.
+2K and 2N assets and reference images were included in the first pass. Fourteen
+additional source-traced SVGs completed it. Group 1 remains approved.
+
+The first full-group review accepted 2P and 2Q and requested revisions to the
+other 15 drawings. The correction pass adds their missing supply-trunk context.
+It also extends 2J's duct sides into its fitting, shortens 2K's trapezoid at the
+round transition, adds a junction seam to 2N, and lowers 2O's elbow into the
+round trunk. The 2P and 2Q revisions remain unchanged and approved.
 
 | Printed page | Fittings | Distinctions retained |
 | --- | --- | --- |

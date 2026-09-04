@@ -4,7 +4,8 @@
 numbers in 22 visually approved drawings.
 
 **Current batch:** [Group 2 review](group-2-review.md), with all 17 fittings
-drawn. Fourteen new drawings await review.
+drawn. Its correction pass adds trunk context to the 15 drawings flagged in
+the first full-group review; 2P and 2Q remain approved.
 
 **Updated review:** [2B and 3T source comparisons](fitting-trace-review.md).
 These two assets now use manual source-contour traces; other drawings below

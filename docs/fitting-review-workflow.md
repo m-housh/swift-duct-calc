@@ -38,8 +38,9 @@ pass are complete; proceed with all 17 Group 2 fittings, followed by Group 3.
 After each batch, revise the checked drawings and repeat the comparison.
 
 The page currently contains the [complete Group 2 batch](group-2-review.md):
-17 drawings covering 2A–2Q, including three previously accepted drawings.
-Group 1 is complete and approved; Group 3 still has only pilot drawings.
+17 drawings covering 2A–2Q. The correction pass revises the 15 drawings
+flagged in the first review; 2P and 2Q remain approved and unchanged. Group 1
+is complete and approved; Group 3 still has only pilot drawings.
 
 ## Regeneration
 

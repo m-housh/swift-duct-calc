@@ -7,12 +7,12 @@ from xml.sax.saxutils import escape
 
 # Image index, first PDF page containing it, printed page, reference crop x/y/w/h.
 SOURCES={
- 'A':(14,5,163,(108,310,120,120)), 'C':(14,5,163,(232,317,128,123)),
- 'D':(14,5,163,(296,321,150,135)), 'E':(14,5,163,(399,329,147,140)),
- 'F':(14,5,163,(496,332,151,147)), 'G':(14,5,163,(584,339,152,148)),
- 'H':(14,5,163,(676,345,153,147)), 'I':(18,6,164,(144,248,164,174)),
- 'J':(18,6,164,(251,256,177,184)), 'L':(18,6,164,(489,283,192,184)),
- 'M':(18,6,164,(655,298,197,185)), 'O':(24,8,165,(338,302,123,126)),
+ 'A':(14,5,163,(70,230,210,270)), 'C':(14,5,163,(195,240,215,265)),
+ 'D':(14,5,163,(265,245,225,265)), 'E':(14,5,163,(365,250,230,265)),
+ 'F':(14,5,163,(455,255,230,265)), 'G':(14,5,163,(545,260,235,265)),
+ 'H':(14,5,163,(635,265,235,265)), 'I':(18,6,164,(60,245,245,285)),
+ 'J':(18,6,164,(190,250,245,285)), 'L':(18,6,164,(450,275,245,285)),
+ 'M':(18,6,164,(620,290,250,285)), 'O':(24,8,165,(330,290,145,150)),
  'P':(24,8,165,(515,365,125,102)), 'Q':(24,8,165,(692,424,135,105)),
 }
 VALUES={
@@ -51,19 +51,35 @@ def ellipse(cx,cy,rx,ry):
     return f'<ellipse cx="{cx}" cy="{cy}" rx="{rx}" ry="{ry}" fill="white"/>'
 
 
+def rectangular_trunk(letter):
+    """Local source-perspective trunk patch behind a selected branch."""
+    centers={'A':190,'C':300,'D':390,'E':490,'F':585,'G':675,'H':765,
+             'I':175,'J':300,'L':575,'M':750}
+    center=centers[letter]; left=center-115; right=center+115
+    if letter in 'ACDEFGH':
+        far=lambda x:298+.073*x
+        near=lambda x:347+.073*x
+    else:
+        far=lambda x:350+.09*x
+        near=lambda x:400+.09*x
+    return (p(f'M{left} {far(left):.2f}L{right} {far(right):.2f}L{right} {near(right):.2f}L{left} {near(left):.2f}Z',fill='#f1f5f9')+
+            p(f'M{left} {near(left):.2f}L{right} {near(right):.2f}V{near(right)+44:.2f}L{left} {near(left)+44:.2f}Z',fill='#e2e8f0'))
+
+
 def art(letter):
+    context=rectangular_trunk(letter) if letter in 'ACDEFGHIJLM' else ''
     if letter=='A':
-        return p('M120 400L192 323Q201 314 211 320Q220 326 215 334L134 415Z',fill='white')+ellipse(127,408,10,10)
+        return context+p('M120 400L192 323Q201 314 211 320Q220 326 215 334L134 415Z',fill='white')+ellipse(127,408,10,10)
     if letter=='C':
-        return p('M318 338L331 325Q339 321 346 328Q352 334 347 340L337 350',stroke_dasharray='3 2',stroke_width=1.1)+p('M244 415L316 340Q324 331 334 336Q342 341 338 348L257 430Z',fill='white')+ellipse(250,422,10,11)
+        return context+p('M318 338L331 325Q339 321 346 328Q352 334 347 340L337 350',stroke_dasharray='3 2',stroke_width=1.1)+p('M244 415L316 340Q324 331 334 336Q342 341 338 348L257 430Z',fill='white')+ellipse(250,422,10,11)
     if letter=='D':
-        return p('M306 422L394 330L435 334V353L347 444L306 440Z')+p('M306 422L347 426L435 334M347 426V444M306 440L322 424')
+        return context+p('M306 422L394 330L435 334V353L347 444L306 440Z',fill='white')+p('M306 422L347 426L435 334M347 426V444M306 440L322 424')
     if letter=='E':
-        return p('M477 338L537 344L449 436L409 433L487 352Z')+p('M537 344V365L449 455L409 452V433M449 436V455M409 452L425 434M477 338V354L481 358')
+        return context+p('M477 338L537 344L449 436L409 433L487 352Z',fill='white')+p('M537 344V365L449 455L409 452V433M449 436V455M409 452L425 434M477 338V354L481 358')
     if letter=='F':
-        return p('M597 350V338L635 355',stroke_dasharray='4 2',stroke_width=1.1)+p('M575 348L635 355L547 446L506 442L585 362Z')+p('M635 355V376L547 466L506 462V442M547 446V466M506 462L522 444M575 348V364L579 369')
+        return context+p('M597 350V338L635 355',stroke_dasharray='4 2',stroke_width=1.1)+p('M575 348L635 355L547 446L506 442L585 362Z',fill='white')+p('M635 355V376L547 466L506 462V442M547 446V466M506 462L522 444M575 348V364L579 369')
     if letter=='G':
-        return p('M691 358V350L724 363',stroke_dasharray='4 2',stroke_width=1.1)+p('M594 452L683 357L724 363V384L634 475L594 472Z')+p('M594 452L634 456L724 363M634 456V475M594 472L610 454')
+        return context+p('M691 358V350L724 363',stroke_dasharray='4 2',stroke_width=1.1)+p('M594 452L683 357L724 363V384L634 475L594 472Z',fill='white')+p('M594 452L634 456L724 363M634 456V475M594 472L610 454')
     if letter=='H':
         # Dashed verticals are the source's hidden raised-entry detail, not
         # an invented set of internal turning vanes.
@@ -71,20 +87,20 @@ def art(letter):
         for x in range(780,814,5):
             top=368-(x-774)*.25; bottom=368+(x-774)*.1
             hidden+=p(f'M{x} {top}V{bottom}',stroke_dasharray='2 1',stroke_width=1)
-        return hidden+p('M686 461L774 368L814 372V391L725 481L686 479Z')+p('M686 461L725 465L814 372M725 465V481M686 479L702 463')
+        return context+hidden+p('M686 461L774 368L814 372V391L725 481L686 479Z',fill='white')+p('M686 461L725 465L814 372M725 465V481M686 479L702 463')
     if letter=='I':
-        return p('M156 383L277 260Q283 255 290 259Q296 262 297 269L183 391',fill='white')+p('M156 383Q166 371 180 383L185 389V404Q170 418 156 404Z',fill='white')+p('M156 383Q163 379 173 383Q181 386 185 391M156 385Q168 397 183 390')
+        return context+p('M156 383L277 260Q283 255 290 259Q296 262 297 269L183 391',fill='white')+p('M156 383Q166 371 180 383L185 389V404Q170 418 156 404Z',fill='white')+p('M156 383Q163 379 173 383Q181 386 185 391M156 385Q168 397 183 390')
     if letter=='J':
-        return p('M276 379L393 270Q400 264 408 269Q414 272 416 277L311 388Z',fill='white')+p('M263 411L268 393Q274 381 288 381Q306 382 311 398V414Q300 429 285 427Q271 426 263 411Z',fill='white')+p('M268 393Q281 384 295 391Q307 398 311 414M276 379Q294 373 311 388V402')
+        return context+p('M276 379L393 270Q400 264 408 269Q414 272 416 277L311 388Z',fill='white')+p('M263 411L268 393Q274 381 288 381Q306 382 311 398V414Q300 429 285 427Q271 426 263 411Z',fill='white')+p('M268 393Q281 384 295 391Q307 398 311 414M276 379L311 388V414')
     if letter=='L':
-        return p('M500 451Q493 431 510 409L532 383L620 293L672 298V319L586 411V429L553 455Z')+p('M532 383L585 388L672 298M585 388Q549 421 553 455M585 388V411')
+        return context+p('M500 451Q493 431 510 409L532 383L620 293L672 298V319L586 411V429L553 455Z',fill='white')+p('M532 383L585 388L672 298M585 388Q549 421 553 455M585 388V411')
     if letter=='M':
-        return p('M666 456L674 425L694 399L786 309L839 315V336L754 420V442L721 470L666 466Z')+p('M694 399L753 404L839 315M674 425L727 430L753 404V420M666 456L721 460L727 430M721 460V470')
+        return context+p('M666 456L674 425L694 399L786 309L839 315V336L754 420V442L721 470L666 466Z',fill='white')+p('M694 399L753 404L839 315M674 425L727 430L753 404V420M666 456L721 460L727 430M721 460V470')
     if letter=='O':
         trunk=p('M338 339L461 379M338 389L459 424M369 349C350 344 340 384 356 394M451 376C432 371 422 408 438 418')
         elbow=p('M389 333L402 316Q412 310 420 317Q426 324 426 331Q425 336 417 340L403 347Z',fill='white')+p('M402 316Q416 316 419 335')
         neck=p('M388 337V358Q390 367 402 367Q415 367 417 359V337Z',fill='white')+p('M388 348Q403 361 417 348')+ellipse(402.5,337,14.5,10)
-        return trunk+elbow+neck
+        return trunk+'<g transform="translate(0 9)">'+elbow+neck+'</g>'
     if letter=='P':
         trunk=p('M515 387L639 423M515 432L637 467M550 397C531 392 521 428 537 438M616 416C597 411 587 447 603 457')
         return trunk+p('M564 386V405Q564 415 578 415Q593 415 593 405V386Z',fill='white')+p('M564 396Q578 409 593 396')+ellipse(578.5,386,14.5,10)

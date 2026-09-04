@@ -4,7 +4,7 @@
 <rect width="640" height="520" rx="16" fill="white"/>
 <text x="32" y="44" font-size="28" font-weight="700">2I</text><text x="96" y="43" font-size="18">Round elbow takeoff</text>
 <text x="32" y="76" font-size="13">GROUP 2 · SUPPLY AIR · SOURCE PERSPECTIVE</text>
-<g transform="translate(169.1954 105) scale(1.839080) translate(-144 -248)" fill="none" stroke="#243b53" stroke-width="1.2"><path d="M156 383L277 260Q283 255 290 259Q296 262 297 269L183 391" fill="white"/><path d="M156 383Q166 371 180 383L185 389V404Q170 418 156 404Z" fill="white"/><path d="M156 383Q163 379 173 383Q181 386 185 391M156 385Q168 397 183 390" /></g>
+<g transform="translate(182.4561 105) scale(1.122807) translate(-60 -245)" fill="none" stroke="#243b53" stroke-width="1.2"><path d="M60 355.40L290 376.10L290 426.10L60 405.40Z" fill="#f1f5f9"/><path d="M60 405.40L290 426.10V470.10L60 449.40Z" fill="#e2e8f0"/><path d="M156 383L277 260Q283 255 290 259Q296 262 297 269L183 391" fill="white"/><path d="M156 383Q166 371 180 383L185 389V404Q170 418 156 404Z" fill="white"/><path d="M156 383Q163 379 173 383Q181 386 185 391M156 385Q168 397 183 390" /></g>
 <text x="32" y="448" font-size="13">Connection contours follow the source perspective.</text>
 <text x="32" y="473" font-size="13">Reference EL varies with downstream branch count.</text>
 <text x="32" y="499" font-size="12">REVIEW DRAWING · NOT TO SCALE · Source: PDF p. 6 / printed p. 164</text>

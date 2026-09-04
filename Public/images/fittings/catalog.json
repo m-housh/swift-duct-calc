@@ -1007,10 +1007,10 @@
         "referenceImage": "/images/fittings/references/2A.png",
         "embeddedImageIndex": 14,
         "cropPixels": [
-          108,
-          310,
-          120,
-          120
+          70,
+          230,
+          210,
+          270
         ]
       }
     },
@@ -1023,7 +1023,7 @@
       "system": "supply",
       "variant": null,
       "image": "/images/fittings/2B.svg",
-      "status": "visually-approved",
+      "status": "source-trace-needs-review",
       "referenceConditions": {
         "velocityFpm": 900,
         "frictionRateIwcPer100Feet": 0.08
@@ -1076,14 +1076,7 @@
       ],
       "notes": [
         "Count downstream branches to trunk end or next reducer; restart count after a reducer."
-      ],
-      "visualReview": {
-        "revision": "a8c0702fcf497dd190a772f581bc9641de980576eaa59ecad819c83547ca54ea",
-        "completedAt": "2026-09-04T17:13:51.561Z",
-        "batchId": "pilot-01",
-        "note": "",
-        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
-      }
+      ]
     },
     {
       "id": "2C",
@@ -1143,10 +1136,10 @@
         "referenceImage": "/images/fittings/references/2C.png",
         "embeddedImageIndex": 14,
         "cropPixels": [
-          232,
-          317,
-          128,
-          123
+          195,
+          240,
+          215,
+          265
         ]
       }
     },
@@ -1208,10 +1201,10 @@
         "referenceImage": "/images/fittings/references/2D.png",
         "embeddedImageIndex": 14,
         "cropPixels": [
-          296,
-          321,
-          150,
-          135
+          265,
+          245,
+          225,
+          265
         ]
       }
     },
@@ -1273,10 +1266,10 @@
         "referenceImage": "/images/fittings/references/2E.png",
         "embeddedImageIndex": 14,
         "cropPixels": [
-          399,
-          329,
-          147,
-          140
+          365,
+          250,
+          230,
+          265
         ]
       }
     },
@@ -1338,10 +1331,10 @@
         "referenceImage": "/images/fittings/references/2F.png",
         "embeddedImageIndex": 14,
         "cropPixels": [
-          496,
-          332,
-          151,
-          147
+          455,
+          255,
+          230,
+          265
         ]
       }
     },
@@ -1403,10 +1396,10 @@
         "referenceImage": "/images/fittings/references/2G.png",
         "embeddedImageIndex": 14,
         "cropPixels": [
-          584,
-          339,
-          152,
-          148
+          545,
+          260,
+          235,
+          265
         ]
       }
     },
@@ -1468,10 +1461,10 @@
         "referenceImage": "/images/fittings/references/2H.png",
         "embeddedImageIndex": 14,
         "cropPixels": [
-          676,
-          345,
-          153,
-          147
+          635,
+          265,
+          235,
+          265
         ]
       }
     },
@@ -1533,10 +1526,10 @@
         "referenceImage": "/images/fittings/references/2I.png",
         "embeddedImageIndex": 18,
         "cropPixels": [
-          144,
-          248,
-          164,
-          174
+          60,
+          245,
+          245,
+          285
         ]
       }
     },
@@ -1598,10 +1591,10 @@
         "referenceImage": "/images/fittings/references/2J.png",
         "embeddedImageIndex": 18,
         "cropPixels": [
-          251,
-          256,
-          177,
-          184
+          190,
+          250,
+          245,
+          285
         ]
       }
     },
@@ -1614,7 +1607,7 @@
       "system": "supply",
       "variant": null,
       "image": "/images/fittings/2K.svg",
-      "status": "visually-approved",
+      "status": "schematic-pilot-needs-review",
       "referenceConditions": {
         "velocityFpm": 900,
         "frictionRateIwcPer100Feet": 0.08
@@ -1658,14 +1651,7 @@
       ],
       "notes": [
         "Count downstream branches to trunk end or next reducer; restart count after a reducer."
-      ],
-      "visualReview": {
-        "revision": "42c82c5fcfa31bbd99883740e67d8c78da4c3f7a863dd14451a74e642bbbc7e8",
-        "completedAt": "2026-09-04T17:13:51.561Z",
-        "batchId": "pilot-01",
-        "note": "",
-        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
-      }
+      ]
     },
     {
       "id": "2L",
@@ -1725,10 +1711,10 @@
         "referenceImage": "/images/fittings/references/2L.png",
         "embeddedImageIndex": 18,
         "cropPixels": [
-          489,
-          283,
-          192,
-          184
+          450,
+          275,
+          245,
+          285
         ]
       }
     },
@@ -1790,10 +1776,10 @@
         "referenceImage": "/images/fittings/references/2M.png",
         "embeddedImageIndex": 18,
         "cropPixels": [
-          655,
-          298,
-          197,
-          185
+          620,
+          290,
+          250,
+          285
         ]
       }
     },
@@ -1806,7 +1792,7 @@
       "system": "supply",
       "variant": null,
       "image": "/images/fittings/2N.svg",
-      "status": "visually-approved",
+      "status": "schematic-pilot-needs-review",
       "referenceConditions": {
         "velocityFpm": 900,
         "frictionRateIwcPer100Feet": 0.08
@@ -1850,14 +1836,7 @@
       ],
       "notes": [
         "Count downstream branches to trunk end or next reducer; restart count after a reducer."
-      ],
-      "visualReview": {
-        "revision": "568f33b1a1c4a5946aed0705ac3868273db924f2c51081e3657d989125b58e4c",
-        "completedAt": "2026-09-04T17:13:51.561Z",
-        "batchId": "pilot-01",
-        "note": "",
-        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
-      }
+      ]
     },
     {
       "id": "2O",
@@ -1917,10 +1896,10 @@
         "referenceImage": "/images/fittings/references/2O.png",
         "embeddedImageIndex": 24,
         "cropPixels": [
-          338,
-          302,
-          123,
-          126
+          330,
+          290,
+          145,
+          150
         ]
       }
     },
@@ -1933,7 +1912,7 @@
       "name": "Straight collar on round trunk",
       "system": "supply",
       "image": "/images/fittings/2P.svg",
-      "status": "source-trace-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
       "referenceConditions": {
         "velocityFpm": 900,
@@ -1987,6 +1966,13 @@
           125,
           102
         ]
+      },
+      "visualReview": {
+        "revision": "192fe566b3af9394bc3de47349318b65d224452c3a20f2cfc0380442400c1409",
+        "completedAt": "2026-09-04T18:06:38.427Z",
+        "batchId": "group-2",
+        "note": "",
+        "record": "docs/fitting-reviews/review-39eeefe406058506.json"
       }
     },
     {
@@ -1998,7 +1984,7 @@
       "name": "Tapered collar on round trunk",
       "system": "supply",
       "image": "/images/fittings/2Q.svg",
-      "status": "source-trace-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
       "referenceConditions": {
         "velocityFpm": 900,
@@ -2052,6 +2038,13 @@
           135,
           105
         ]
+      },
+      "visualReview": {
+        "revision": "e1f6ca86678a142eeb18a5ef977df448741a5af6e980ade4e955365de498f4e7",
+        "completedAt": "2026-09-04T18:06:38.427Z",
+        "batchId": "group-2",
+        "note": "",
+        "record": "docs/fitting-reviews/review-39eeefe406058506.json"
       }
     },
     {

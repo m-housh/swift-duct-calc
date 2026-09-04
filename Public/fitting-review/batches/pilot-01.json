@@ -72,8 +72,8 @@
       "reference": "../images/fittings/references/2B.png",
       "sourcePage": 163,
       "sourcePDF": "../files/ManD.Groups.pdf#page=5",
-      "priorApproval": true,
-      "revision": "a8c0702fcf497dd190a772f581bc9641de980576eaa59ecad819c83547ca54ea"
+      "priorApproval": false,
+      "revision": "ce1e54ef915b894b1d90c553290dc0ebfacb56868d2dbfded68016d2cf3ffd6a"
     },
     {
       "id": "2K",
@@ -84,8 +84,8 @@
       "reference": "../images/fittings/references/2K.png",
       "sourcePage": 164,
       "sourcePDF": "../files/ManD.Groups.pdf#page=6",
-      "priorApproval": true,
-      "revision": "42c82c5fcfa31bbd99883740e67d8c78da4c3f7a863dd14451a74e642bbbc7e8"
+      "priorApproval": false,
+      "revision": "4f4e1521bcadecf3dc2a7d1094b99947243b6aa2c5f26038b5587c55f2530a01"
     },
     {
       "id": "2N",
@@ -96,8 +96,8 @@
       "reference": "../images/fittings/references/2N.png",
       "sourcePage": 165,
       "sourcePDF": "../files/ManD.Groups.pdf#page=8",
-      "priorApproval": true,
-      "revision": "568f33b1a1c4a5946aed0705ac3868273db924f2c51081e3657d989125b58e4c"
+      "priorApproval": false,
+      "revision": "846721bcc4350d868fa5e70b427d0c8fbf07239b39a6efd7d038ed41ea7dbbd9"
     },
     {
       "id": "3A",

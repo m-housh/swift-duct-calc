@@ -32,9 +32,9 @@ def shape(key):
     if key in TRACES:
         return geometry(key)
     if key == '2K':
-        return rect_trunk() + path('M246 225L306 186L382 200L322 245Z') + path('M253 220L285 164L320 172L322 236Z') + path('M322 236L320 172L350 151L374 202Z', '#f1f5f9') + path('M285 164L393 99M320 172L416 125', 'none') + '<ellipse cx="405" cy="112" rx="12" ry="18" transform="rotate(-35 405 112)" fill="white"/>' + text(100, 408, 'Rectangular base transitions to an angled round outlet')
+        return rect_trunk() + path('M246 225L306 186L382 200L322 245Z') + path('M253 220L285 164L320 172L322 236Z') + path('M285 164L393 99M320 172L416 125', 'none') + '<ellipse cx="405" cy="112" rx="12" ry="18" transform="rotate(-35 405 112)" fill="white"/>' + text(100, 408, 'Rectangular base transitions to an angled round outlet')
     if key == '2N':
-        return path('M151 208L496 276Q529 280 530 309Q531 340 502 340L145 272Q116 266 117 238Q118 209 151 208Z', '#f1f5f9') + '<ellipse cx="509" cy="308" rx="22" ry="32" fill="white"/>' + path('M274 244Q257 223 269 205L358 142L383 169L296 233Q290 247 299 259Z', 'white') + '<ellipse cx="371" cy="155" rx="13" ry="19" transform="rotate(-35 371 155)" fill="white"/>' + text(113, 408, 'Angled round branch on a round trunk')
+        return path('M151 208L496 276Q529 280 530 309Q531 340 502 340L145 272Q116 266 117 238Q118 209 151 208Z', '#f1f5f9') + '<ellipse cx="509" cy="308" rx="22" ry="32" fill="white"/>' + path('M274 244Q257 223 269 205L358 142L383 169L296 233Q290 247 299 259Z', 'white') + path('M274 244Q284 254 299 259', 'none') + '<ellipse cx="371" cy="155" rx="13" ry="19" transform="rotate(-35 371 155)" fill="white"/>' + text(113, 408, 'Angled round branch on a round trunk')
     if key == '3A':
         # Plan outline extruded to an axonometric sheet-metal fitting.
         return extrude([('M',130,120),('L',460,120),('L',460,185),('L',355,185),('C',355,210,385,225,430,225),('L',465,225),('L',465,295),('L',420,295),('C',335,295,280,240,280,205),('L',130,205),('Z',)]) + text(120, 410, 'Full-radius branch at a reducing trunk')

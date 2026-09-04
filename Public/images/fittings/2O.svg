@@ -4,7 +4,7 @@
 <rect width="640" height="520" rx="16" fill="white"/>
 <text x="32" y="44" font-size="28" font-weight="700">2O</text><text x="96" y="43" font-size="18">Elbow branch on round trunk</text>
 <text x="32" y="76" font-size="13">GROUP 2 · SUPPLY AIR · SOURCE PERSPECTIVE</text>
-<g transform="translate(163.8095 105) scale(2.539683) translate(-338 -302)" fill="none" stroke="#243b53" stroke-width="1.2"><path d="M338 339L461 379M338 389L459 424M369 349C350 344 340 384 356 394M451 376C432 371 422 408 438 418" /><path d="M389 333L402 316Q412 310 420 317Q426 324 426 331Q425 336 417 340L403 347Z" fill="white"/><path d="M402 316Q416 316 419 335" /><path d="M388 337V358Q390 367 402 367Q415 367 417 359V337Z" fill="white"/><path d="M388 348Q403 361 417 348" /><ellipse cx="402.5" cy="337" rx="14.5" ry="10" fill="white"/></g>
+<g transform="translate(165.3333 105) scale(2.133333) translate(-330 -290)" fill="none" stroke="#243b53" stroke-width="1.2"><path d="M338 339L461 379M338 389L459 424M369 349C350 344 340 384 356 394M451 376C432 371 422 408 438 418" /><g transform="translate(0 9)"><path d="M389 333L402 316Q412 310 420 317Q426 324 426 331Q425 336 417 340L403 347Z" fill="white"/><path d="M402 316Q416 316 419 335" /><path d="M388 337V358Q390 367 402 367Q415 367 417 359V337Z" fill="white"/><path d="M388 348Q403 361 417 348" /><ellipse cx="402.5" cy="337" rx="14.5" ry="10" fill="white"/></g></g>
 <text x="32" y="448" font-size="13">Round trunk section retained to show the elbow connection.</text>
 <text x="32" y="473" font-size="13">Reference EL varies with downstream branch count.</text>
 <text x="32" y="499" font-size="12">REVIEW DRAWING · NOT TO SCALE · Source: PDF p. 8 / printed p. 165</text>

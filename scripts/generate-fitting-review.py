@@ -32,7 +32,7 @@ def main(batch='group-2'):
                         description='Completed review: all 22 drawings accepted, including 1M and 1S vane variants. The source skips 1J.',
                         items=[i for i in items if i['group']==1]),
         'group-2': dict(id='group-2', title='Group 2 · 17 drawings',
-                        description='All 17 supply trunk branch takeoffs, 2A–2Q. Includes the previously accepted 2B, 2K and 2N. Check only the drawings that need more work.',
+                        description='Correction pass for all 17 supply trunk branch takeoffs, 2A–2Q. The first full-group review accepted 2P and 2Q; the other 15 have revised drawings. Check only those still needing work.',
                         items=[i for i in items if i['group']==2]),
     }
     folder=PUBLIC/'fitting-review/batches'

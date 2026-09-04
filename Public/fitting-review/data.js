@@ -1,7 +1,7 @@
 window.FITTING_REVIEW = {
   "id": "group-2",
   "title": "Group 2 \u00b7 17 drawings",
-  "description": "All 17 supply trunk branch takeoffs, 2A\u20132Q. Includes the previously accepted 2B, 2K and 2N. Check only the drawings that need more work.",
+  "description": "Correction pass for all 17 supply trunk branch takeoffs, 2A\u20132Q. The first full-group review accepted 2P and 2Q; the other 15 have revised drawings. Check only those still needing work.",
   "items": [
     {
       "id": "2A",
@@ -13,7 +13,7 @@ window.FITTING_REVIEW = {
       "sourcePage": 163,
       "sourcePDF": "../files/ManD.Groups.pdf#page=5",
       "priorApproval": false,
-      "revision": "841b1944c97080f8ba761d3be83facf3e2856ecc453ee717bbb65d68f4ab4452"
+      "revision": "df77677ad64e47b02582c7ff7a0b4226eebcb655f2d948d1cb42bb80e80109eb"
     },
     {
       "id": "2B",
@@ -24,8 +24,8 @@ window.FITTING_REVIEW = {
       "reference": "../images/fittings/references/2B.png",
       "sourcePage": 163,
       "sourcePDF": "../files/ManD.Groups.pdf#page=5",
-      "priorApproval": true,
-      "revision": "a8c0702fcf497dd190a772f581bc9641de980576eaa59ecad819c83547ca54ea"
+      "priorApproval": false,
+      "revision": "ce1e54ef915b894b1d90c553290dc0ebfacb56868d2dbfded68016d2cf3ffd6a"
     },
     {
       "id": "2C",
@@ -37,7 +37,7 @@ window.FITTING_REVIEW = {
       "sourcePage": 163,
       "sourcePDF": "../files/ManD.Groups.pdf#page=5",
       "priorApproval": false,
-      "revision": "11cd98dfaaa97e77561016195ddb8c3a800a780968a441f8677f4050fdf0e0a3"
+      "revision": "bc78acd96ad7682079c2de99aa3c44560c47fa98ee2ee090ec88c621fbdf8e6e"
     },
     {
       "id": "2D",
@@ -49,7 +49,7 @@ window.FITTING_REVIEW = {
       "sourcePage": 163,
       "sourcePDF": "../files/ManD.Groups.pdf#page=5",
       "priorApproval": false,
-      "revision": "e47b30dcefe4b21659d11d245df9102f26d3bfb5c2b007cd5e00103938c7a19d"
+      "revision": "c5f30161bfc64a73773402568904d61178392a22facc46f1a86bc8c7bf5b2ef1"
     },
     {
       "id": "2E",
@@ -61,7 +61,7 @@ window.FITTING_REVIEW = {
       "sourcePage": 163,
       "sourcePDF": "../files/ManD.Groups.pdf#page=5",
       "priorApproval": false,
-      "revision": "5aef95781087b2fc30e3b06a4a3edb3c4733621b9faf9e13dc380350fb0e1a46"
+      "revision": "9b3e73c72b67fa0afbf39ef5593e3d7a7f41e84d03703641caf7f388ec0ff91e"
     },
     {
       "id": "2F",
@@ -73,7 +73,7 @@ window.FITTING_REVIEW = {
       "sourcePage": 163,
       "sourcePDF": "../files/ManD.Groups.pdf#page=5",
       "priorApproval": false,
-      "revision": "9457ef9703731c157f238de3a1e0db354381d26acd4b53ee34f5f7c858a5957c"
+      "revision": "e87701b49f81f5ef55e471c57c578db6ccbe80a165195df921a4e365a388afbc"
     },
     {
       "id": "2G",
@@ -85,7 +85,7 @@ window.FITTING_REVIEW = {
       "sourcePage": 163,
       "sourcePDF": "../files/ManD.Groups.pdf#page=5",
       "priorApproval": false,
-      "revision": "97d5239c8f4f86a4ee3b5b787103145d2fe57c2965fc41bc4f1bb1865df9fb8c"
+      "revision": "b470d75e8d51299327511b3c6bf081f87d076b8da02f7046130c7c70c236388d"
     },
     {
       "id": "2H",
@@ -97,7 +97,7 @@ window.FITTING_REVIEW = {
       "sourcePage": 163,
       "sourcePDF": "../files/ManD.Groups.pdf#page=5",
       "priorApproval": false,
-      "revision": "c484eb87f374cc1faa79484ff17c6030153f004bedeb41bfc43ded24260a8fb2"
+      "revision": "cca8722cb3f9e39b771add1e39cd32709e7e7bb081111bebd7bd4387b0a502c5"
     },
     {
       "id": "2I",
@@ -109,7 +109,7 @@ window.FITTING_REVIEW = {
       "sourcePage": 164,
       "sourcePDF": "../files/ManD.Groups.pdf#page=6",
       "priorApproval": false,
-      "revision": "dbf2ba6eb66e2bafc7a80003efd82fe84fc62c4893c3741df627973fe09324a8"
+      "revision": "f1cf7b9ce9289a2672993d12edc75586c66bb5dd568d16ced2f9f909db0b72e9"
     },
     {
       "id": "2J",
@@ -121,7 +121,7 @@ window.FITTING_REVIEW = {
       "sourcePage": 164,
       "sourcePDF": "../files/ManD.Groups.pdf#page=6",
       "priorApproval": false,
-      "revision": "b5868355b3afe2ebdddc2d2efdd94dceaa3c8b95ddb15430701dea6fbdd6a38d"
+      "revision": "45b3e493b8a6c7eb83216f2533d2f146e99e59e9f27e541fb3d23ed78ea052b7"
     },
     {
       "id": "2K",
@@ -132,8 +132,8 @@ window.FITTING_REVIEW = {
       "reference": "../images/fittings/references/2K.png",
       "sourcePage": 164,
       "sourcePDF": "../files/ManD.Groups.pdf#page=6",
-      "priorApproval": true,
-      "revision": "42c82c5fcfa31bbd99883740e67d8c78da4c3f7a863dd14451a74e642bbbc7e8"
+      "priorApproval": false,
+      "revision": "4f4e1521bcadecf3dc2a7d1094b99947243b6aa2c5f26038b5587c55f2530a01"
     },
     {
       "id": "2L",
@@ -145,7 +145,7 @@ window.FITTING_REVIEW = {
       "sourcePage": 164,
       "sourcePDF": "../files/ManD.Groups.pdf#page=6",
       "priorApproval": false,
-      "revision": "f5781a5a1b96451d5dbc2eecbb458ce8fb3fb6f664a7c67912c89fd21e45720f"
+      "revision": "65e75dda9212119bf48d9fb2a03243d7176ea35f9bb82dc147b187ca8d095888"
     },
     {
       "id": "2M",
@@ -157,7 +157,7 @@ window.FITTING_REVIEW = {
       "sourcePage": 164,
       "sourcePDF": "../files/ManD.Groups.pdf#page=6",
       "priorApproval": false,
-      "revision": "5ebf7fc8267e31f7d33b55d8c20788acdaef3500c26afb7bb88018f2e782f993"
+      "revision": "d598c32970e2f3061bb95072cdfed03b46ba16de99fe520fb5e8994875456c9c"
     },
     {
       "id": "2N",
@@ -168,8 +168,8 @@ window.FITTING_REVIEW = {
       "reference": "../images/fittings/references/2N.png",
       "sourcePage": 165,
       "sourcePDF": "../files/ManD.Groups.pdf#page=8",
-      "priorApproval": true,
-      "revision": "568f33b1a1c4a5946aed0705ac3868273db924f2c51081e3657d989125b58e4c"
+      "priorApproval": false,
+      "revision": "846721bcc4350d868fa5e70b427d0c8fbf07239b39a6efd7d038ed41ea7dbbd9"
     },
     {
       "id": "2O",
@@ -181,7 +181,7 @@ window.FITTING_REVIEW = {
       "sourcePage": 165,
       "sourcePDF": "../files/ManD.Groups.pdf#page=8",
       "priorApproval": false,
-      "revision": "8ec584ae09dcd0d60b04d1458738f578a88f772714be1d0a242e20210219a474"
+      "revision": "9d17bd6213e3a1129a18130ff7764780f67f408b1cfc3756831cfae10bc4bab6"
     },
     {
       "id": "2P",
@@ -192,7 +192,7 @@ window.FITTING_REVIEW = {
       "reference": "../images/fittings/references/2P.png",
       "sourcePage": 165,
       "sourcePDF": "../files/ManD.Groups.pdf#page=8",
-      "priorApproval": false,
+      "priorApproval": true,
       "revision": "192fe566b3af9394bc3de47349318b65d224452c3a20f2cfc0380442400c1409"
     },
     {
@@ -204,7 +204,7 @@ window.FITTING_REVIEW = {
       "reference": "../images/fittings/references/2Q.png",
       "sourcePage": 165,
       "sourcePDF": "../files/ManD.Groups.pdf#page=8",
-      "priorApproval": false,
+      "priorApproval": true,
       "revision": "e1f6ca86678a142eeb18a5ef977df448741a5af6e980ade4e955365de498f4e7"
     }
   ]

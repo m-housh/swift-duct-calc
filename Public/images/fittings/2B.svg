@@ -5,6 +5,8 @@
 <rect width="640" height="520" rx="16" fill="white"/>
 <text x="32" y="44" font-size="28">2B</text><text x="96" y="43" font-size="18">Round tapered branch takeoff</text><text x="32" y="76" font-size="13">GROUP 2 · SUPPLY AIR · SOURCE-CONTOUR TRACE</text>
 <g stroke="#243b53" stroke-width="2.3" fill="none"><g transform="translate(143.2000 105) scale(0.650000)" fill="none" stroke="#243b53" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M0 48L544 88L544 276L0 236Z" fill="#f1f5f9"/>
+<path d="M0 236L544 276V452L0 412Z" fill="#e2e8f0"/>
 <path d="M324 28L490 40V151L324 136Z"/>
 <path d="M324 28L375 76M490 40L375 76M490 151L415 112"/>
 <path d="M28 401L339 88C357 70 379 68 398 79C411 87 417 101 416 114Q416 123 409 130L90 463Z" fill="white"/>
