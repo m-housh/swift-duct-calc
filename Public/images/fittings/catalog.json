@@ -1,0 +1,518 @@
+{
+  "schemaVersion": 2,
+  "scope": "Review pilots: 1A\u20131E, 2B, 2K, 2N, 3A, three 3S corner variants, and 3T. Not a complete fitting catalog.",
+  "fittings": [
+    {
+      "id": "1A",
+      "group": 1,
+      "letter": "A",
+      "name": "Round straight takeoff",
+      "system": "supply",
+      "image": "/images/fittings/1A.svg",
+      "status": "visually-approved",
+      "referenceEquivalentLengthFeet": 35,
+      "notes": [
+        "Round duct connects directly to the plenum.",
+        "Plenum size is large compared with duct size."
+      ],
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 1,
+        "printedPage": 159
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "fittingNumber": "1A",
+      "variant": null,
+      "visualReview": {
+        "revision": "fe1c369d58cedabcb42fd3a0491b7f18211ae0297a9e339f6c156e78c343dbe4",
+        "completedAt": "2026-09-04T17:13:51.561Z",
+        "batchId": "pilot-01",
+        "note": "",
+        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+      }
+    },
+    {
+      "id": "1B",
+      "group": 1,
+      "letter": "B",
+      "name": "Round tapered takeoff",
+      "system": "supply",
+      "image": "/images/fittings/1B.svg",
+      "status": "visually-approved",
+      "referenceEquivalentLengthFeet": 10,
+      "notes": [
+        "Round duct connects through a tapered entry.",
+        "Plenum size is large compared with duct size."
+      ],
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 1,
+        "printedPage": 159
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "fittingNumber": "1B",
+      "variant": null,
+      "visualReview": {
+        "revision": "1e952a9b7ee8edef8a58df1e8d308de7b3af1c39911898d428251f0053083677",
+        "completedAt": "2026-09-04T17:13:51.561Z",
+        "batchId": "pilot-01",
+        "note": "",
+        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+      }
+    },
+    {
+      "id": "1C",
+      "group": 1,
+      "letter": "C",
+      "name": "Rectangular straight takeoff",
+      "system": "supply",
+      "image": "/images/fittings/1C.svg",
+      "status": "visually-approved",
+      "referenceEquivalentLengthFeet": 35,
+      "notes": [
+        "Maintain the illustrated 10-inch minimum clearance.",
+        "Plenum size is large compared with duct size."
+      ],
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 1,
+        "printedPage": 159
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "fittingNumber": "1C",
+      "variant": null,
+      "visualReview": {
+        "revision": "674ecd31d74d87af283063524a97c3f8029954d3551474738b10dc9d56b1a211",
+        "completedAt": "2026-09-04T17:13:51.561Z",
+        "batchId": "pilot-01",
+        "note": "",
+        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+      }
+    },
+    {
+      "id": "1D",
+      "group": 1,
+      "letter": "D",
+      "name": "Rectangular 45-degree entry",
+      "system": "supply",
+      "image": "/images/fittings/1D.svg",
+      "status": "visually-approved",
+      "referenceEquivalentLengthFeet": 10,
+      "notes": [
+        "Entry extends H/2 at 45 degrees; 10-inch minimum clearance.",
+        "Plenum size is large compared with duct size."
+      ],
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 1,
+        "printedPage": 159
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "fittingNumber": "1D",
+      "variant": null,
+      "visualReview": {
+        "revision": "589c36a45d3e1bc273adca6b03328fd400008c76155e5d2edc814bfc9f0a2ed0",
+        "completedAt": "2026-09-04T17:13:51.561Z",
+        "batchId": "pilot-01",
+        "note": "",
+        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+      }
+    },
+    {
+      "id": "1E",
+      "group": 1,
+      "letter": "E",
+      "name": "Rectangular angled takeoff",
+      "system": "supply",
+      "image": "/images/fittings/1E.svg",
+      "status": "visually-approved",
+      "referenceEquivalentLengthFeet": 10,
+      "notes": [
+        "Upper transition: 30 degrees. Lower transition: 45 degrees.",
+        "Plenum size is large compared with duct size."
+      ],
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 1,
+        "printedPage": 159
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "fittingNumber": "1E",
+      "variant": null,
+      "visualReview": {
+        "revision": "e3027fc6ca9720954d00ce7890e1f00a03c61f6bd00cbe7d9aef7ada94541521",
+        "completedAt": "2026-09-04T17:13:51.561Z",
+        "batchId": "pilot-01",
+        "note": "",
+        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+      }
+    },
+    {
+      "id": "2B",
+      "fittingNumber": "2B",
+      "group": 2,
+      "letter": "B",
+      "name": "Round tapered branch takeoff",
+      "system": "supply",
+      "variant": null,
+      "image": "/images/fittings/2B.svg",
+      "status": "visually-approved",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 5,
+        "printedPage": 163,
+        "referenceImage": "/images/fittings/references/2B.png",
+        "cropPixels": [
+          176,
+          307,
+          136,
+          125
+        ],
+        "embeddedImageIndex": 14
+      },
+      "drawingMethod": "Manual contour trace; source perspective retained.",
+      "referenceEquivalentLengthByDownstreamBranches": [
+        {
+          "branchCountMin": 0,
+          "branchCountMax": 0,
+          "feet": 20
+        },
+        {
+          "branchCountMin": 1,
+          "branchCountMax": 1,
+          "feet": 30
+        },
+        {
+          "branchCountMin": 2,
+          "branchCountMax": 2,
+          "feet": 35
+        },
+        {
+          "branchCountMin": 3,
+          "branchCountMax": 3,
+          "feet": 40
+        },
+        {
+          "branchCountMin": 4,
+          "branchCountMax": 4,
+          "feet": 45
+        },
+        {
+          "branchCountMin": 5,
+          "branchCountMax": null,
+          "feet": 50
+        }
+      ],
+      "notes": [
+        "Count downstream branches to trunk end or next reducer; restart count after a reducer."
+      ],
+      "visualReview": {
+        "revision": "a8c0702fcf497dd190a772f581bc9641de980576eaa59ecad819c83547ca54ea",
+        "completedAt": "2026-09-04T17:13:51.561Z",
+        "batchId": "pilot-01",
+        "note": "",
+        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+      }
+    },
+    {
+      "id": "2K",
+      "fittingNumber": "2K",
+      "group": 2,
+      "letter": "K",
+      "name": "Angled round takeoff on rectangular base",
+      "system": "supply",
+      "variant": null,
+      "image": "/images/fittings/2K.svg",
+      "status": "visually-approved",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 6,
+        "printedPage": 164
+      },
+      "referenceEquivalentLengthByDownstreamBranches": [
+        {
+          "branchCountMin": 0,
+          "branchCountMax": 0,
+          "feet": 50
+        },
+        {
+          "branchCountMin": 1,
+          "branchCountMax": 1,
+          "feet": 60
+        },
+        {
+          "branchCountMin": 2,
+          "branchCountMax": 2,
+          "feet": 65
+        },
+        {
+          "branchCountMin": 3,
+          "branchCountMax": 3,
+          "feet": 70
+        },
+        {
+          "branchCountMin": 4,
+          "branchCountMax": 4,
+          "feet": 75
+        },
+        {
+          "branchCountMin": 5,
+          "branchCountMax": null,
+          "feet": 80
+        }
+      ],
+      "notes": [
+        "Count downstream branches to trunk end or next reducer; restart count after a reducer."
+      ],
+      "visualReview": {
+        "revision": "42c82c5fcfa31bbd99883740e67d8c78da4c3f7a863dd14451a74e642bbbc7e8",
+        "completedAt": "2026-09-04T17:13:51.561Z",
+        "batchId": "pilot-01",
+        "note": "",
+        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+      }
+    },
+    {
+      "id": "2N",
+      "fittingNumber": "2N",
+      "group": 2,
+      "letter": "N",
+      "name": "Angled branch on round trunk",
+      "system": "supply",
+      "variant": null,
+      "image": "/images/fittings/2N.svg",
+      "status": "visually-approved",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 8,
+        "printedPage": 165
+      },
+      "referenceEquivalentLengthByDownstreamBranches": [
+        {
+          "branchCountMin": 0,
+          "branchCountMax": 0,
+          "feet": 35
+        },
+        {
+          "branchCountMin": 1,
+          "branchCountMax": 1,
+          "feet": 35
+        },
+        {
+          "branchCountMin": 2,
+          "branchCountMax": 2,
+          "feet": 40
+        },
+        {
+          "branchCountMin": 3,
+          "branchCountMax": 3,
+          "feet": 40
+        },
+        {
+          "branchCountMin": 4,
+          "branchCountMax": 4,
+          "feet": 40
+        },
+        {
+          "branchCountMin": 5,
+          "branchCountMax": null,
+          "feet": 40
+        }
+      ],
+      "notes": [
+        "Count downstream branches to trunk end or next reducer; restart count after a reducer."
+      ],
+      "visualReview": {
+        "revision": "568f33b1a1c4a5946aed0705ac3868273db924f2c51081e3657d989125b58e4c",
+        "completedAt": "2026-09-04T17:13:51.561Z",
+        "batchId": "pilot-01",
+        "note": "",
+        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+      }
+    },
+    {
+      "id": "3A",
+      "fittingNumber": "3A",
+      "group": 3,
+      "letter": "A",
+      "name": "Full-radius takeoff",
+      "system": "supply",
+      "variant": null,
+      "image": "/images/fittings/3A.svg",
+      "status": "visually-approved",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 10,
+        "printedPage": 166
+      },
+      "referenceEquivalentLengthFeet": 15,
+      "visualReview": {
+        "revision": "f0866063db1098aa61ddcef7f1dd0fc855177440a4196900a3c73860a896d7e1",
+        "completedAt": "2026-09-04T17:13:51.561Z",
+        "batchId": "pilot-01",
+        "note": "",
+        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+      }
+    },
+    {
+      "id": "3S-full",
+      "fittingNumber": "3S",
+      "group": 3,
+      "letter": "S",
+      "name": "Hard-bend takeoff \u00b7 full radius",
+      "system": "supply",
+      "variant": "full",
+      "image": "/images/fittings/3S-full.svg",
+      "status": "visually-approved",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 11,
+        "printedPage": 167
+      },
+      "referenceEquivalentLengthFeet": 15,
+      "visualReview": {
+        "revision": "eb8fb37b946ee3f17e24f56291a8bac3f810ca07de4427a219275efe84e9ff3c",
+        "completedAt": "2026-09-04T17:13:51.561Z",
+        "batchId": "pilot-01",
+        "note": "",
+        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+      }
+    },
+    {
+      "id": "3S-tight",
+      "fittingNumber": "3S",
+      "group": 3,
+      "letter": "S",
+      "name": "Hard-bend takeoff \u00b7 tight radius",
+      "system": "supply",
+      "variant": "tight",
+      "image": "/images/fittings/3S-tight.svg",
+      "status": "visually-approved",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 11,
+        "printedPage": 167
+      },
+      "referenceEquivalentLengthFeet": 35,
+      "visualReview": {
+        "revision": "0433518c7f477d3557622cda83a53a4d83795f288ed5b1e2c6428ad53e789e52",
+        "completedAt": "2026-09-04T17:13:51.561Z",
+        "batchId": "pilot-01",
+        "note": "",
+        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+      }
+    },
+    {
+      "id": "3S-mitered",
+      "fittingNumber": "3S",
+      "group": 3,
+      "letter": "S",
+      "name": "Hard-bend takeoff \u00b7 mitered corner",
+      "system": "supply",
+      "variant": "mitered",
+      "image": "/images/fittings/3S-mitered.svg",
+      "status": "visually-approved",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 11,
+        "printedPage": 167
+      },
+      "referenceEquivalentLengthFeet": 90,
+      "visualReview": {
+        "revision": "1cff51bbbc30ce4fbc4c641a855833e70949e8f6cc8945727421c5f4150af84f",
+        "completedAt": "2026-09-04T17:13:51.561Z",
+        "batchId": "pilot-01",
+        "note": "",
+        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+      }
+    },
+    {
+      "id": "3T",
+      "fittingNumber": "3T",
+      "group": 3,
+      "letter": "T",
+      "name": "In-line eased takeoff",
+      "system": "supply",
+      "variant": null,
+      "image": "/images/fittings/3T.svg",
+      "status": "visually-approved",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 11,
+        "printedPage": 167,
+        "referenceImage": "/images/fittings/references/3T.png",
+        "cropPixels": [
+          574,
+          737,
+          112,
+          151
+        ],
+        "embeddedImageIndex": 32
+      },
+      "drawingMethod": "Manual contour trace; source perspective retained.",
+      "referenceEquivalentLengthFeet": 10,
+      "visualReview": {
+        "revision": "2d5235517347d48b86863974ff92177cbc3f497f9b3aea7f35087d169bb0a43b",
+        "completedAt": "2026-09-04T17:13:51.561Z",
+        "batchId": "pilot-01",
+        "note": "",
+        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+      }
+    }
+  ],
+  "sourceIssues": [
+    {
+      "fittingNumber": "3U",
+      "overviewPdfPage": 10,
+      "detailPdfPage": 11,
+      "description": "Overview groups 3S/3U at 15/35/90 feet by inside radius. Detail labels a mitered 3U at 10 feet with vanes and 80 without. Unresolved; no automatic value or 3U asset supplied."
+    }
+  ]
+}

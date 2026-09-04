@@ -16,3 +16,5 @@ tailwindcss
 default.profraw
 /rooms.csv
 postgres/
+__pycache__/
+*.pyc

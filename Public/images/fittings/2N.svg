@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="0 0 640 520" role="img" aria-labelledby="title desc">
+<title id="title">2N — Angled branch on round trunk</title><desc id="desc">Angled branch on round trunk. EL varies with downstream branch count. Source PDF page 8, printed page 165. Schematic, not to scale.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0 0L8 3L0 6Z" fill="#64748b"/></marker></defs>
+<style>text{font-family:Arial,sans-serif;fill:#243b53;stroke:none}path,ellipse{stroke-linejoin:round;stroke-linecap:round}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<text x="32" y="44" font-size="28">2N</text><text x="96" y="43" font-size="18">Angled branch on round trunk</text><text x="32" y="76" font-size="13">GROUP 2 · SUPPLY AIR · PERSPECTIVE SCHEMATIC</text>
+<g stroke="#243b53" stroke-width="2.3" fill="none"><path d="M151 208L496 276Q529 280 530 309Q531 340 502 340L145 272Q116 266 117 238Q118 209 151 208Z" fill="#f1f5f9" /><ellipse cx="509" cy="308" rx="22" ry="32" fill="white"/><path d="M274 244Q257 223 269 205L358 142L383 169L296 233Q290 247 299 259Z" fill="white" /><ellipse cx="371" cy="155" rx="13" ry="19" transform="rotate(-35 371 155)" fill="white"/><text x="113" y="408" font-size="15">Angled round branch on a round trunk</text></g>
+<text x="32" y="465" font-size="14">EL varies with downstream branch count.</text><text x="32" y="493" font-size="12">REVIEW PILOT · NOT TO SCALE · Source: PDF p. 8 / printed p. 165</text>
+</svg>
