@@ -1,4 +1,4 @@
-window.FITTING_REVIEW = {
+{
   "id": "fitting-4Y-registered",
   "title": "Source-registered SVG pilot \u00b7 4Y",
   "description": "One SVG drawn in the original source-cell coordinate system and checked with a registered overlay. Check it only if it still needs work.",
@@ -16,4 +16,4 @@ window.FITTING_REVIEW = {
       "priorApproval": false
     }
   ]
-};
+}
