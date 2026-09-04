@@ -1,0 +1,2045 @@
+{
+  "schemaVersion": 1,
+  "group": 4,
+  "title": "Supply Air Boot and Stack Head Fittings",
+  "source": {
+    "pdf": "/files/ManD.Groups.pdf",
+    "pdfPages": [
+      18,
+      19
+    ],
+    "printedPage": 168
+  },
+  "referenceConditions": {
+    "velocityFpm": 900,
+    "frictionRateIwcPer100Feet": 0.08
+  },
+  "drawingCount": 44,
+  "status": "source-trace-needs-review",
+  "items": [
+    {
+      "id": "4A",
+      "fittingNumber": "4A",
+      "group": 4,
+      "name": "Radius boot with rectangular outlet",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4A.svg",
+      "referenceImage": "/images/fittings/references/group-4/4A.png",
+      "comparison": "/images/fittings/references/group-4/4A-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 30,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          115,
+          230,
+          195,
+          310
+        ],
+        "sourceCellCropPixels": [
+          110,
+          225,
+          235,
+          333
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "d6d948bcbc232d2d"
+    },
+    {
+      "id": "4B",
+      "fittingNumber": "4B",
+      "group": 4,
+      "name": "Radius boot with extended top transition",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4B.svg",
+      "referenceImage": "/images/fittings/references/group-4/4B.png",
+      "comparison": "/images/fittings/references/group-4/4B-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 35,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          245,
+          232,
+          335,
+          310
+        ],
+        "sourceCellCropPixels": [
+          235,
+          225,
+          370,
+          333
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "da24d55a4832e63d"
+    },
+    {
+      "id": "4C",
+      "fittingNumber": "4C",
+      "group": 4,
+      "name": "Low-profile radius boot with top collar",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4C.svg",
+      "referenceImage": "/images/fittings/references/group-4/4C.png",
+      "comparison": "/images/fittings/references/group-4/4C-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 60,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          385,
+          236,
+          480,
+          310
+        ],
+        "sourceCellCropPixels": [
+          370,
+          225,
+          510,
+          333
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "45f23fb4357fcd97"
+    },
+    {
+      "id": "4D",
+      "fittingNumber": "4D",
+      "group": 4,
+      "name": "Horizontal boot with round throat transition",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4D.svg",
+      "referenceImage": "/images/fittings/references/group-4/4D.png",
+      "comparison": "/images/fittings/references/group-4/4D-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 55,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          520,
+          238,
+          635,
+          308
+        ],
+        "sourceCellCropPixels": [
+          510,
+          225,
+          665,
+          333
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "1db38f1d38bcba5a"
+    },
+    {
+      "id": "4E",
+      "fittingNumber": "4E",
+      "group": 4,
+      "name": "Horizontal boot with tapered throat",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4E.svg",
+      "referenceImage": "/images/fittings/references/group-4/4E.png",
+      "comparison": "/images/fittings/references/group-4/4E-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 70,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          675,
+          236,
+          780,
+          308
+        ],
+        "sourceCellCropPixels": [
+          665,
+          225,
+          820,
+          333
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "7e701ca50720454a"
+    },
+    {
+      "id": "4F",
+      "fittingNumber": "4F",
+      "group": 4,
+      "name": "Radius boot with side extension",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4F.svg",
+      "referenceImage": "/images/fittings/references/group-4/4F.png",
+      "comparison": "/images/fittings/references/group-4/4F-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 45,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          115,
+          332,
+          210,
+          408
+        ],
+        "sourceCellCropPixels": [
+          110,
+          330,
+          250,
+          428
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "72cbdfb0276c4610"
+    },
+    {
+      "id": "4G",
+      "fittingNumber": "4G",
+      "group": 4,
+      "name": "Angled boot to round outlet",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4G.svg",
+      "referenceImage": "/images/fittings/references/group-4/4G.png",
+      "comparison": "/images/fittings/references/group-4/4G-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 80,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          275,
+          330,
+          350,
+          410
+        ],
+        "sourceCellCropPixels": [
+          250,
+          330,
+          390,
+          428
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "ea57bd8ec1f02798"
+    },
+    {
+      "id": "4H",
+      "fittingNumber": "4H",
+      "group": 4,
+      "name": "Tapered boot to round outlet",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4H.svg",
+      "referenceImage": "/images/fittings/references/group-4/4H.png",
+      "comparison": "/images/fittings/references/group-4/4H-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 50,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          405,
+          338,
+          490,
+          408
+        ],
+        "sourceCellCropPixels": [
+          390,
+          330,
+          525,
+          428
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "e0fb2517b9a9bf6a"
+    },
+    {
+      "id": "4I",
+      "fittingNumber": "4I",
+      "group": 4,
+      "name": "Compact round-to-rectangular transition",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4I.svg",
+      "referenceImage": "/images/fittings/references/group-4/4I.png",
+      "comparison": "/images/fittings/references/group-4/4I-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 10,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          555,
+          338,
+          620,
+          408
+        ],
+        "sourceCellCropPixels": [
+          525,
+          330,
+          675,
+          428
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "830a9d92880ea592"
+    },
+    {
+      "id": "4J",
+      "fittingNumber": "4J",
+      "group": 4,
+      "name": "Angled boot to round outlet with smooth throat",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4J.svg",
+      "referenceImage": "/images/fittings/references/group-4/4J.png",
+      "comparison": "/images/fittings/references/group-4/4J-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 30,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          690,
+          330,
+          790,
+          410
+        ],
+        "sourceCellCropPixels": [
+          675,
+          330,
+          820,
+          428
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "f7313b5c9831227e"
+    },
+    {
+      "id": "4K",
+      "fittingNumber": "4K",
+      "group": 4,
+      "name": "Angled boot to round outlet with lined throat",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4K.svg",
+      "referenceImage": "/images/fittings/references/group-4/4K.png",
+      "comparison": "/images/fittings/references/group-4/4K-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 30,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          115,
+          434,
+          205,
+          508
+        ],
+        "sourceCellCropPixels": [
+          110,
+          425,
+          235,
+          530
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "90fbc051d8cb0c48"
+    },
+    {
+      "id": "4L",
+      "fittingNumber": "4L",
+      "group": 4,
+      "name": "Deep angled boot to round outlet with lined throat",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4L.svg",
+      "referenceImage": "/images/fittings/references/group-4/4L.png",
+      "comparison": "/images/fittings/references/group-4/4L-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 80,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          240,
+          434,
+          330,
+          508
+        ],
+        "sourceCellCropPixels": [
+          235,
+          425,
+          350,
+          530
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "f309508053c3a859"
+    },
+    {
+      "id": "4M",
+      "fittingNumber": "4M",
+      "group": 4,
+      "name": "Long rectangular offset transition",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4M.svg",
+      "referenceImage": "/images/fittings/references/group-4/4M.png",
+      "comparison": "/images/fittings/references/group-4/4M-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 20,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          355,
+          434,
+          440,
+          508
+        ],
+        "sourceCellCropPixels": [
+          350,
+          425,
+          470,
+          530
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "4368e8aed920c28c"
+    },
+    {
+      "id": "4N",
+      "fittingNumber": "4N",
+      "group": 4,
+      "name": "Rectangular offset with inset throat",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4N.svg",
+      "referenceImage": "/images/fittings/references/group-4/4N.png",
+      "comparison": "/images/fittings/references/group-4/4N-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 45,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          480,
+          434,
+          545,
+          508
+        ],
+        "sourceCellCropPixels": [
+          470,
+          425,
+          575,
+          530
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "b3a180dc937df66c"
+    },
+    {
+      "id": "4O",
+      "fittingNumber": "4O",
+      "group": 4,
+      "name": "Pitched rectangular boot",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4O.svg",
+      "referenceImage": "/images/fittings/references/group-4/4O.png",
+      "comparison": "/images/fittings/references/group-4/4O-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 20,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          585,
+          434,
+          660,
+          508
+        ],
+        "sourceCellCropPixels": [
+          575,
+          425,
+          695,
+          530
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "601c3837631652c5"
+    },
+    {
+      "id": "4P",
+      "fittingNumber": "4P",
+      "group": 4,
+      "name": "Tapered rectangular boot",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4P.svg",
+      "referenceImage": "/images/fittings/references/group-4/4P.png",
+      "comparison": "/images/fittings/references/group-4/4P-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 10,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          710,
+          434,
+          785,
+          508
+        ],
+        "sourceCellCropPixels": [
+          695,
+          425,
+          820,
+          530
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "9d608393747f7c05"
+    },
+    {
+      "id": "4Q",
+      "fittingNumber": "4Q",
+      "group": 4,
+      "name": "Rectangular-to-round side transition",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4Q.svg",
+      "referenceImage": "/images/fittings/references/group-4/4Q.png",
+      "comparison": "/images/fittings/references/group-4/4Q-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 50,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          115,
+          535,
+          200,
+          612
+        ],
+        "sourceCellCropPixels": [
+          110,
+          532,
+          230,
+          640
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "ccdcc6a2b5f6225f"
+    },
+    {
+      "id": "4R",
+      "fittingNumber": "4R",
+      "group": 4,
+      "name": "Rectangular-to-round vertical transition",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4R.svg",
+      "referenceImage": "/images/fittings/references/group-4/4R.png",
+      "comparison": "/images/fittings/references/group-4/4R-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 20,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          240,
+          535,
+          310,
+          612
+        ],
+        "sourceCellCropPixels": [
+          230,
+          532,
+          350,
+          640
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "a20399ec873eb7e9"
+    },
+    {
+      "id": "4S",
+      "fittingNumber": "4S",
+      "group": 4,
+      "name": "Rectangular-to-round tapered transition",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4S.svg",
+      "referenceImage": "/images/fittings/references/group-4/4S.png",
+      "comparison": "/images/fittings/references/group-4/4S-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 20,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          360,
+          535,
+          435,
+          612
+        ],
+        "sourceCellCropPixels": [
+          350,
+          532,
+          465,
+          640
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "7ae9b87c1ca7eb7a"
+    },
+    {
+      "id": "4T",
+      "fittingNumber": "4T",
+      "group": 4,
+      "name": "Elongated rectangular-to-round boot",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4T.svg",
+      "referenceImage": "/images/fittings/references/group-4/4T.png",
+      "comparison": "/images/fittings/references/group-4/4T-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 20,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          475,
+          528,
+          540,
+          615
+        ],
+        "sourceCellCropPixels": [
+          465,
+          532,
+          575,
+          640
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "ac8e23fb2b9a50a5"
+    },
+    {
+      "id": "4U",
+      "fittingNumber": "4U",
+      "group": 4,
+      "name": "Offset rectangular-to-round boot",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4U.svg",
+      "referenceImage": "/images/fittings/references/group-4/4U.png",
+      "comparison": "/images/fittings/references/group-4/4U-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 20,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          590,
+          528,
+          660,
+          615
+        ],
+        "sourceCellCropPixels": [
+          575,
+          532,
+          690,
+          640
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "e566546237df7f53"
+    },
+    {
+      "id": "4V",
+      "fittingNumber": "4V",
+      "group": 4,
+      "name": "Rectangular collar on round duct",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4V.svg",
+      "referenceImage": "/images/fittings/references/group-4/4V.png",
+      "comparison": "/images/fittings/references/group-4/4V-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 60,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          710,
+          540,
+          805,
+          608
+        ],
+        "sourceCellCropPixels": [
+          690,
+          532,
+          820,
+          640
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "735ca0f8f63b27e8"
+    },
+    {
+      "id": "4W",
+      "fittingNumber": "4W",
+      "group": 4,
+      "name": "Ceiling boot with bell-mouth collar",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4W.svg",
+      "referenceImage": "/images/fittings/references/group-4/4W.png",
+      "comparison": "/images/fittings/references/group-4/4W-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 35,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          120,
+          642,
+          205,
+          712
+        ],
+        "sourceCellCropPixels": [
+          110,
+          638,
+          230,
+          745
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "9ca18e32ae07a58d"
+    },
+    {
+      "id": "4X",
+      "fittingNumber": "4X",
+      "group": 4,
+      "name": "Ceiling boot with straight collar",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4X.svg",
+      "referenceImage": "/images/fittings/references/group-4/4X.png",
+      "comparison": "/images/fittings/references/group-4/4X-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 35,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          240,
+          642,
+          320,
+          712
+        ],
+        "sourceCellCropPixels": [
+          230,
+          638,
+          345,
+          745
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "5a04420e40311e8f"
+    },
+    {
+      "id": "4Y",
+      "fittingNumber": "4Y",
+      "group": 4,
+      "name": "Rectangular ceiling register boot",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4Y.svg",
+      "referenceImage": "/images/fittings/references/group-4/4Y.png",
+      "comparison": "/images/fittings/references/group-4/4Y-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 35,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          355,
+          642,
+          440,
+          715
+        ],
+        "sourceCellCropPixels": [
+          345,
+          638,
+          465,
+          745
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "4d7f4f86b64fc38d"
+    },
+    {
+      "id": "4Z",
+      "fittingNumber": "4Z",
+      "group": 4,
+      "name": "Square grille boot to round branch",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4Z.svg",
+      "referenceImage": "/images/fittings/references/group-4/4Z.png",
+      "comparison": "/images/fittings/references/group-4/4Z-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 60,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          470,
+          638,
+          540,
+          715
+        ],
+        "sourceCellCropPixels": [
+          465,
+          638,
+          575,
+          745
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "f7c2e25faaf85f67"
+    },
+    {
+      "id": "4AA",
+      "fittingNumber": "4AA",
+      "group": 4,
+      "name": "Tapered square ceiling boot",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4AA.svg",
+      "referenceImage": "/images/fittings/references/group-4/4AA.png",
+      "comparison": "/images/fittings/references/group-4/4AA-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 35,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          585,
+          642,
+          660,
+          715
+        ],
+        "sourceCellCropPixels": [
+          575,
+          638,
+          690,
+          745
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "e7068a658204bbce"
+    },
+    {
+      "id": "4AB",
+      "fittingNumber": "4AB",
+      "group": 4,
+      "name": "Angled square boot with round branch",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4AB.svg",
+      "referenceImage": "/images/fittings/references/group-4/4AB.png",
+      "comparison": "/images/fittings/references/group-4/4AB-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 90,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          710,
+          638,
+          790,
+          718
+        ],
+        "sourceCellCropPixels": [
+          690,
+          638,
+          820,
+          745
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "9d29b10f0e8ee881"
+    },
+    {
+      "id": "4AC",
+      "fittingNumber": "4AC",
+      "group": 4,
+      "name": "Stack head with curved side outlet",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4AC.svg",
+      "referenceImage": "/images/fittings/references/group-4/4AC.png",
+      "comparison": "/images/fittings/references/group-4/4AC-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 100,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          125,
+          748,
+          200,
+          825
+        ],
+        "sourceCellCropPixels": [
+          110,
+          742,
+          235,
+          855
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "ef5402f949feb9d5"
+    },
+    {
+      "id": "4AD",
+      "fittingNumber": "4AD",
+      "group": 4,
+      "name": "Segmented elbow on rectangular stack",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4AD.svg",
+      "referenceImage": "/images/fittings/references/group-4/4AD.png",
+      "comparison": "/images/fittings/references/group-4/4AD-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 60,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          250,
+          742,
+          315,
+          825
+        ],
+        "sourceCellCropPixels": [
+          235,
+          742,
+          350,
+          855
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "193b600fcd834148"
+    },
+    {
+      "id": "4AE",
+      "fittingNumber": "4AE",
+      "group": 4,
+      "name": "Segmented elbow on flange",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4AE.svg",
+      "referenceImage": "/images/fittings/references/group-4/4AE.png",
+      "comparison": "/images/fittings/references/group-4/4AE-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 55,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          365,
+          742,
+          435,
+          825
+        ],
+        "sourceCellCropPixels": [
+          350,
+          742,
+          465,
+          855
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "d9e6092ceff56f64"
+    },
+    {
+      "id": "4AF",
+      "fittingNumber": "4AF",
+      "group": 4,
+      "name": "Rectangular register boot with side outlet",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4AF.svg",
+      "referenceImage": "/images/fittings/references/group-4/4AF.png",
+      "comparison": "/images/fittings/references/group-4/4AF-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 50,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          475,
+          748,
+          550,
+          820
+        ],
+        "sourceCellCropPixels": [
+          465,
+          742,
+          575,
+          855
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "3d58af3936471126"
+    },
+    {
+      "id": "4AG",
+      "fittingNumber": "4AG",
+      "group": 4,
+      "name": "Split transition with round branches",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4AG.svg",
+      "referenceImage": "/images/fittings/references/group-4/4AG.png",
+      "comparison": "/images/fittings/references/group-4/4AG-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 60,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          590,
+          748,
+          680,
+          822
+        ],
+        "sourceCellCropPixels": [
+          575,
+          742,
+          700,
+          855
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "de00de3e7eca6ea5"
+    },
+    {
+      "id": "4AH",
+      "fittingNumber": "4AH",
+      "group": 4,
+      "name": "Rectangular stack head with grille face",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4AH.svg",
+      "referenceImage": "/images/fittings/references/group-4/4AH.png",
+      "comparison": "/images/fittings/references/group-4/4AH-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 60,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          710,
+          748,
+          805,
+          822
+        ],
+        "sourceCellCropPixels": [
+          700,
+          742,
+          820,
+          855
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "d772916755958107"
+    },
+    {
+      "id": "4AI",
+      "fittingNumber": "4AI",
+      "group": 4,
+      "name": "Rectangular stack head with framed face",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4AI.svg",
+      "referenceImage": "/images/fittings/references/group-4/4AI.png",
+      "comparison": "/images/fittings/references/group-4/4AI-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 20,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          120,
+          858,
+          205,
+          935
+        ],
+        "sourceCellCropPixels": [
+          110,
+          852,
+          235,
+          960
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "f61736d48ca60ffa"
+    },
+    {
+      "id": "4AJ",
+      "fittingNumber": "4AJ",
+      "group": 4,
+      "name": "Boot with flexible round branch",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4AJ.svg",
+      "referenceImage": "/images/fittings/references/group-4/4AJ.png",
+      "comparison": "/images/fittings/references/group-4/4AJ-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 25,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          240,
+          855,
+          330,
+          938
+        ],
+        "sourceCellCropPixels": [
+          235,
+          852,
+          350,
+          960
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "c8b6ede3e85ab880"
+    },
+    {
+      "id": "4AK",
+      "fittingNumber": "4AK",
+      "group": 4,
+      "name": "Low rectangular stack head with round branch",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4AK.svg",
+      "referenceImage": "/images/fittings/references/group-4/4AK.png",
+      "comparison": "/images/fittings/references/group-4/4AK-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 55,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          355,
+          858,
+          445,
+          930
+        ],
+        "sourceCellCropPixels": [
+          350,
+          852,
+          465,
+          960
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "b3eb77ba79d32fa0"
+    },
+    {
+      "id": "4AL",
+      "fittingNumber": "4AL",
+      "group": 4,
+      "name": "Angled stack head with inset opening",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4AL.svg",
+      "referenceImage": "/images/fittings/references/group-4/4AL.png",
+      "comparison": "/images/fittings/references/group-4/4AL-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 70,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          470,
+          852,
+          565,
+          938
+        ],
+        "sourceCellCropPixels": [
+          465,
+          852,
+          575,
+          960
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "f03e55574df8ea30"
+    },
+    {
+      "id": "4AM",
+      "fittingNumber": "4AM",
+      "group": 4,
+      "name": "Tapered stack head with front opening",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4AM.svg",
+      "referenceImage": "/images/fittings/references/group-4/4AM.png",
+      "comparison": "/images/fittings/references/group-4/4AM-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 70,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          585,
+          858,
+          675,
+          935
+        ],
+        "sourceCellCropPixels": [
+          575,
+          852,
+          700,
+          960
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "b3e8cc9f7cea1ce8"
+    },
+    {
+      "id": "4AN",
+      "fittingNumber": "4AN",
+      "group": 4,
+      "name": "Tapered stack head with stepped opening",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4AN.svg",
+      "referenceImage": "/images/fittings/references/group-4/4AN.png",
+      "comparison": "/images/fittings/references/group-4/4AN-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 70,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          705,
+          852,
+          790,
+          935
+        ],
+        "sourceCellCropPixels": [
+          700,
+          852,
+          820,
+          960
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "67db8b69a66826ad"
+    },
+    {
+      "id": "4AO",
+      "fittingNumber": "4AO",
+      "group": 4,
+      "name": "Straight wall stack offset",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4AO.svg",
+      "referenceImage": "/images/fittings/references/group-4/4AO.png",
+      "comparison": "/images/fittings/references/group-4/4AO-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 40,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          135,
+          958,
+          190,
+          1052
+        ],
+        "sourceCellCropPixels": [
+          110,
+          955,
+          230,
+          1070
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "1b2337364ac4ec9c"
+    },
+    {
+      "id": "4AP",
+      "fittingNumber": "4AP",
+      "group": 4,
+      "name": "Stepped wall stack offset",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4AP.svg",
+      "referenceImage": "/images/fittings/references/group-4/4AP.png",
+      "comparison": "/images/fittings/references/group-4/4AP-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 40,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          245,
+          958,
+          305,
+          1052
+        ],
+        "sourceCellCropPixels": [
+          230,
+          955,
+          345,
+          1070
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "7a61b5434c9574a3"
+    },
+    {
+      "id": "4AQ",
+      "fittingNumber": "4AQ",
+      "group": 4,
+      "name": "Plain rectangular stack-head turn",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4AQ.svg",
+      "referenceImage": "/images/fittings/references/group-4/4AQ.png",
+      "comparison": "/images/fittings/references/group-4/4AQ-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 10,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          350,
+          958,
+          445,
+          1048
+        ],
+        "sourceCellCropPixels": [
+          345,
+          955,
+          460,
+          1070
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "54f16abedd4b91c8"
+    },
+    {
+      "id": "4AR",
+      "fittingNumber": "4AR",
+      "group": 4,
+      "name": "Rectangular stack-head turn with raised collar",
+      "nameSource": "descriptive inference from source geometry; the PDF supplies only the fitting number",
+      "system": "supply",
+      "category": "boot-and-stack-head",
+      "svg": "/images/fittings/group-4/4AR.svg",
+      "referenceImage": "/images/fittings/references/group-4/4AR.png",
+      "comparison": "/images/fittings/references/group-4/4AR-comparison.svg",
+      "status": "source-trace-needs-review",
+      "referenceEquivalentLengthFeet": 70,
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          18,
+          19
+        ],
+        "printedPage": 168,
+        "embeddedImageIndex": 48,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          465,
+          958,
+          555,
+          1048
+        ],
+        "sourceCellCropPixels": [
+          460,
+          955,
+          575,
+          1070
+        ]
+      },
+      "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+      "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
+      "revision": "17cbb6f45d789199"
+    }
+  ]
+}

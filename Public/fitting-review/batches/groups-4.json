@@ -1,4 +1,4 @@
-window.FITTING_REVIEW = {
+{
   "id": "groups-4",
   "title": "Group 4 \u00b7 44 drawings",
   "description": "Large-batch review of completed group-local drawings. Check only drawings that need more work; accepted decisions are tied to the exact SVG and reference revisions.",
@@ -532,4 +532,4 @@ window.FITTING_REVIEW = {
       "priorApproval": false
     }
   ]
-};
+}

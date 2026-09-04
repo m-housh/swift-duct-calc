@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="700" viewBox="0 0 1280 700" role="img" aria-label="4Y source and SVG comparison">
+<rect width="1280" height="700" fill="#f8fafc"/>
+<text x="40" y="54" font-family="Arial,sans-serif" font-size="30" font-weight="700" fill="#243b53">4Y · Rectangular ceiling register boot</text>
+<text x="40" y="100" font-family="Arial,sans-serif" font-size="20" fill="#243b53">Original source crop</text>
+<text x="660" y="100" font-family="Arial,sans-serif" font-size="20" fill="#243b53">Source-traced SVG</text>
+<rect x="40" y="120" width="580" height="520" rx="12" fill="white" stroke="#cbd5e1"/>
+<rect x="660" y="120" width="580" height="520" rx="12" fill="white" stroke="#cbd5e1"/>
+<image href="4Y.png" x="60" y="140" width="540" height="480" preserveAspectRatio="xMidYMid meet"/>
+<svg x="660" y="120" width="580" height="520" viewBox="0 0 640 520" preserveAspectRatio="xMidYMid meet"><title id="title">4Y — Rectangular ceiling register boot</title>
+<desc id="desc">Source-traced Group 4 fitting. Reference equivalent length 35 feet at 900 FPM and 0.08 IWC per 100 feet. Drawing not to scale.</desc>
+<style>text{font-family:Arial,sans-serif;fill:#243b53}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<text x="32" y="44" font-size="28" font-weight="700">4Y</text>
+<text x="112" y="43" font-size="17">Rectangular ceiling register boot</text>
+<text x="32" y="76" font-size="13">GROUP 4 · SUPPLY AIR BOOT AND STACK HEAD FITTINGS</text>
+<svg x="55" y="104" width="530" height="295" viewBox="0 0 284.963473 209.516517" preserveAspectRatio="xMidYMid meet"><g transform="translate(-8.036527,209.516517) scale(0.100000,-0.100000)"
+fill="#243b53" stroke="none">
+<path d="M1435 2089 c-120 -10 -201 -36 -248 -78 l-29 -26 4 -110 3 -109 -30
+-7 c-16 -4 -47 -14 -67 -23 -21 -9 -49 -16 -63 -16 -14 0 -36 -6 -48 -14 -12
+-8 -44 -18 -72 -22 -27 -4 -59 -13 -70 -19 -11 -7 -42 -16 -70 -19 -27 -4 -72
+-15 -100 -26 -27 -10 -70 -23 -95 -29 -25 -7 -65 -17 -90 -24 l-45 -12 0 -90
+c0 -50 -4 -96 -8 -103 -7 -10 -36 -12 -113 -10 -57 1 -108 -2 -113 -7 -27 -29
+-13 -47 116 -152 271 -221 339 -278 393 -327 30 -27 67 -56 81 -65 28 -17 101
+-75 131 -104 50 -47 41 -47 1042 -47 836 0 944 2 964 16 31 22 28 34 -23 84
+-44 43 -45 46 -45 107 0 76 -6 83 -195 252 -71 64 -152 139 -180 166 -27 28
+-62 58 -77 68 -39 25 -411 375 -425 401 -8 13 -12 60 -11 131 1 77 -2 116 -12
+131 -44 69 -258 104 -505 83z m334 -73 c16 -9 40 -16 51 -16 12 0 30 -5 41
+-10 17 -10 19 -23 19 -160 l0 -150 -32 0 c-18 0 -40 4 -48 10 -9 5 -19 5 -27
+-2 -18 -14 -16 -48 2 -48 8 0 33 -7 55 -16 31 -13 40 -22 40 -40 l0 -24 -530
+2 -530 1 0 21 c0 25 46 41 147 52 32 4 68 13 80 20 12 8 48 17 80 20 41 5 68
+15 93 34 l35 28 3 123 c2 68 4 125 6 126 6 7 113 35 161 43 80 14 318 4 354
+-14z m226 -586 l0 -75 -739 -3 c-537 -1 -743 1 -752 9 -18 15 -19 135 -1 142
+6 3 345 5 752 4 l740 -2 0 -75z m137 -7 c10 -9 18 -27 18 -40 0 -22 -4 -24
+-37 -21 -36 3 -38 5 -41 41 -3 33 -1 37 19 37 12 0 31 -7 41 -17z m-1714 -170
+c-3 -24 -8 -28 -33 -28 -25 0 -30 4 -33 28 -3 25 -1 27 33 27 34 0 36 -2 33
+-27z m267 -77 c6 -6 48 -43 95 -81 47 -37 92 -75 101 -84 9 -9 33 -29 53 -45
+30 -25 36 -36 36 -68 0 -33 -3 -38 -24 -38 -13 0 -30 7 -37 16 -7 9 -47 43
+-89 77 -41 33 -79 65 -85 71 -23 26 -127 105 -145 111 -14 5 -20 15 -20 37 l0
+30 53 -7 c28 -4 57 -12 62 -19z m1446 -21 c24 -22 70 -60 102 -85 45 -35 57
+-51 57 -72 l0 -28 -628 0 c-716 0 -652 -8 -762 93 -30 28 -70 59 -87 70 -23
+13 -33 27 -33 43 l0 24 654 -3 653 -2 44 -40z m338 -276 c36 -29 51 -48 51
+-65 l0 -24 -721 0 c-477 0 -727 3 -740 10 -23 13 -28 105 -6 113 6 3 316 6
+688 6 l676 1 52 -41z m291 -134 c0 -20 -5 -25 -25 -25 -20 0 -25 5 -25 25 0
+20 5 25 25 25 20 0 25 -5 25 -25z M92 578 c-19 -19 -14 -55 11 -71 13 -8 48
+-38 78 -67 30 -28 97 -86 149 -128 52 -42 135 -111 185 -154 49 -43 94 -78
+100 -78 15 0 65 -53 65 -68 0 -9 259 -12 1125 -12 713 0 1125 4 1125 10 0 5
+-6 14 -12 20 -7 6 -60 49 -118 96 -58 47 -114 96 -125 109 -11 13 -42 40 -70
+61 -27 20 -79 63 -115 94 -36 32 -75 63 -87 69 -12 6 -48 33 -80 59 -32 26
+-71 53 -86 60 -40 17 -2127 18 -2145 0z m2098 -73 l0 -25 -910 0 c-897 0 -910
+0 -930 -20 -11 -11 -29 -20 -41 -20 -35 0 -79 32 -79 57 0 30 -34 29 1053 31
+l907 2 0 -25z m420 -440 l0 -25 -900 0 -900 0 0 25 0 25 900 0 900 0 0 -25z"/>
+</g></svg>
+<text x="32" y="446" font-size="15">Reference equivalent length: 35 ft</text>
+<text x="32" y="474" font-size="12">900 FPM · 0.08 IWC per 100 ft</text>
+<text x="32" y="500" font-size="12">SOURCE TRACE · NOT TO SCALE · PDF pp. 18–19 / printed p. 168</text>
+</svg>
+</svg>

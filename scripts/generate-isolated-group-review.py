@@ -83,7 +83,8 @@ def main(groups, activate=False):
             items.append(item)
     items.sort(key=lambda item: (item['group'], natural(item['id'])))
     suffix = '-'.join(map(str, groups)); batch_id = f'groups-{suffix}'
-    title = f"Groups {', '.join(map(str, groups))} · {len(items)} drawings"
+    label = f'Group {groups[0]}' if len(groups) == 1 else f"Groups {', '.join(map(str, groups))}"
+    title = f"{label} · {len(items)} drawings"
     batch = dict(id=batch_id, title=title,
                  description='Large-batch review of completed group-local drawings. Check only drawings that need more work; accepted decisions are tied to the exact SVG and reference revisions.',
                  items=items)
