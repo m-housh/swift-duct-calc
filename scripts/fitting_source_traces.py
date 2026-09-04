@@ -12,10 +12,9 @@ TRACES = {
         size=(544, 500), crop=[176, 307, 136, 125], sourceImage=14,
         printedPage=163,
         contours='''
-<path d="M0 48L544 88L544 276L0 236Z" fill="#f1f5f9"/>
-<path d="M0 236L544 276V452L0 412Z" fill="#e2e8f0"/>
-<path d="M324 28L490 40V151L324 136Z"/>
-<path d="M324 28L375 76M490 40L375 76M490 151L415 112"/>
+<path d="M0 48L544 88L544 276L0 236Z" fill="#e2e8f0"/>
+<path d="M324 28L490 40V151L324 136Z" fill="white"/>
+<path d="M324 28L369 73M490 40L421 79M490 151L421 116M324 136L369 110"/>
 <path d="M28 401L339 88C357 70 379 68 398 79C411 87 417 101 416 114Q416 123 409 130L90 463Z" fill="white"/>
 <ellipse cx="59" cy="432" rx="44" ry="43" fill="white"/>
 '''),

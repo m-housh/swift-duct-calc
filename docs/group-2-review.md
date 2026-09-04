@@ -5,10 +5,20 @@ The review page contains **all 17 Group 2 fittings, 2A–2Q**. The accepted 2B,
 additional source-traced SVGs completed it. Group 1 remains approved.
 
 The first full-group review accepted 2P and 2Q and requested revisions to the
-other 15 drawings. The correction pass adds their missing supply-trunk context.
-It also extends 2J's duct sides into its fitting, shortens 2K's trapezoid at the
-round transition, adds a junction seam to 2N, and lowers 2O's elbow into the
-round trunk. The 2P and 2Q revisions remain unchanged and approved.
+other 15 drawings. An initial correction represented the trunk with only two
+parallel surfaces, causing branches to read as coming from its top. That pass
+was superseded by a three-edge trunk with a light upper surface and a darker
+side surface. The next review accepted 2A, 2C, 2G, 2H and 2O, while retaining
+the approvals for 2P and 2Q.
+
+The current focused pass redraws the ten remaining fittings individually. 2D
+enters near the center of the side face. The solid side faces on 2E and 2F
+occlude the trunk behind them. 2I, 2J, 2L and 2M now attach to the upper trunk
+surface, matching their source row. 2B uses a clean four-sided transition
+collar around the round branch. 2K has a square-to-round transition, elbow and
+angled outlet on a local top surface. 2N has a clean saddle connection between
+its angled branch and round trunk. The seven accepted revisions remain
+unchanged and approved.
 
 | Printed page | Fittings | Distinctions retained |
 | --- | --- | --- |
@@ -25,9 +35,11 @@ labels; the fitting numbers remain the authoritative identifiers.
 
 ## Review
 
-Refresh `/fitting-review/`. The active batch is now `group-2`. Check only the
-drawings that need more work, add notes, finish the review and download its JSON
-file. Share it in this task to import decisions and begin any correction pass.
+Refresh `/fitting-review/`. The active batch is now `group-2`. The page retains
+the seven accepted current revisions and resets the ten changed revisions for
+review. Check only drawings that still need more work, add notes, finish the
+review and download its JSON file. Share it in this task to import decisions
+and begin any correction pass.
 
 Group 1 and pilot review files and browser state remain separate. All batch
 manifests remain available under `Public/fitting-review/batches`; importing an

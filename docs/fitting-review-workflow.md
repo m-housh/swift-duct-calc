@@ -21,11 +21,12 @@ other browsers. Download before clearing browser storage or moving devices.
 If browser storage is unavailable, the page reports this and still allows a
 download. Missing images block finishing a review.
 
-Changing a checkbox or note reopens a finished review. Adding, removing or
-changing a drawing/reference also reopens it on reload. Existing rejection
-flags and notes are retained. Exports include the exact revision of each
-drawing/reference pair, so approval cannot be mistaken for approval of a
-later redraw.
+Changing a checkbox or note reopens a finished review. Adding or removing a
+drawing also reopens the batch. When a drawing/reference revision changes, its
+checkbox and current note reset: the reviewer marks only problems that remain
+in the correction. Earlier feedback remains in its archived review export.
+Exports include exact drawing/reference revisions, so approval cannot be
+mistaken for approval of a later redraw.
 
 ## Batch size
 

@@ -1,7 +1,7 @@
 {
   "id": "group-2",
   "title": "Group 2 \u00b7 17 drawings",
-  "description": "Correction pass for all 17 supply trunk branch takeoffs, 2A\u20132Q. The first full-group review accepted 2P and 2Q; the other 15 have revised drawings. Check only those still needing work.",
+  "description": "Focused correction pass for ten Group 2 drawings. The current revisions of 2A, 2C, 2G, 2H, and 2O\u20132Q are already accepted. Check only revised drawings that still need work.",
   "items": [
     {
       "id": "2A",
@@ -12,8 +12,8 @@
       "reference": "../images/fittings/references/2A.png",
       "sourcePage": 163,
       "sourcePDF": "../files/ManD.Groups.pdf#page=5",
-      "priorApproval": false,
-      "revision": "df77677ad64e47b02582c7ff7a0b4226eebcb655f2d948d1cb42bb80e80109eb"
+      "priorApproval": true,
+      "revision": "dc446917fe9daa3d51d0380bc2aeb7b1669d94d91701b106f214286c93e61836"
     },
     {
       "id": "2B",
@@ -25,7 +25,7 @@
       "sourcePage": 163,
       "sourcePDF": "../files/ManD.Groups.pdf#page=5",
       "priorApproval": false,
-      "revision": "ce1e54ef915b894b1d90c553290dc0ebfacb56868d2dbfded68016d2cf3ffd6a"
+      "revision": "ea328d354aba199044cb9d85b941427a1d9e03ec11e9c24a0cd16aaca60d68c4"
     },
     {
       "id": "2C",
@@ -36,8 +36,8 @@
       "reference": "../images/fittings/references/2C.png",
       "sourcePage": 163,
       "sourcePDF": "../files/ManD.Groups.pdf#page=5",
-      "priorApproval": false,
-      "revision": "bc78acd96ad7682079c2de99aa3c44560c47fa98ee2ee090ec88c621fbdf8e6e"
+      "priorApproval": true,
+      "revision": "6afb6abb118e233dc828ad7210a2ea0f00b4aa15432496f2fd6571b289938110"
     },
     {
       "id": "2D",
@@ -49,7 +49,7 @@
       "sourcePage": 163,
       "sourcePDF": "../files/ManD.Groups.pdf#page=5",
       "priorApproval": false,
-      "revision": "c5f30161bfc64a73773402568904d61178392a22facc46f1a86bc8c7bf5b2ef1"
+      "revision": "740720d9038ec399444a7523277c4ab185ac9903969c5eec9312bd2b808af864"
     },
     {
       "id": "2E",
@@ -61,7 +61,7 @@
       "sourcePage": 163,
       "sourcePDF": "../files/ManD.Groups.pdf#page=5",
       "priorApproval": false,
-      "revision": "9b3e73c72b67fa0afbf39ef5593e3d7a7f41e84d03703641caf7f388ec0ff91e"
+      "revision": "68d43ad50dc950363841b1e9daa3d9679321d26ed19e8e6ca8d82449676c256f"
     },
     {
       "id": "2F",
@@ -73,7 +73,7 @@
       "sourcePage": 163,
       "sourcePDF": "../files/ManD.Groups.pdf#page=5",
       "priorApproval": false,
-      "revision": "e87701b49f81f5ef55e471c57c578db6ccbe80a165195df921a4e365a388afbc"
+      "revision": "bfca96e727a3fe9310e0ae2bb567fc8df1fb8b2e50b69743a8fb0d16a8f6d97a"
     },
     {
       "id": "2G",
@@ -84,8 +84,8 @@
       "reference": "../images/fittings/references/2G.png",
       "sourcePage": 163,
       "sourcePDF": "../files/ManD.Groups.pdf#page=5",
-      "priorApproval": false,
-      "revision": "b470d75e8d51299327511b3c6bf081f87d076b8da02f7046130c7c70c236388d"
+      "priorApproval": true,
+      "revision": "b320ac7d4d1450b47ad0773379bb1b74897a4b9fa040f9f765d236d1dfa84618"
     },
     {
       "id": "2H",
@@ -96,8 +96,8 @@
       "reference": "../images/fittings/references/2H.png",
       "sourcePage": 163,
       "sourcePDF": "../files/ManD.Groups.pdf#page=5",
-      "priorApproval": false,
-      "revision": "cca8722cb3f9e39b771add1e39cd32709e7e7bb081111bebd7bd4387b0a502c5"
+      "priorApproval": true,
+      "revision": "fc16e556d45809b3e29b16e59a1e6d9e825e454b8af0c0d73f492df03ffe94ed"
     },
     {
       "id": "2I",
@@ -109,7 +109,7 @@
       "sourcePage": 164,
       "sourcePDF": "../files/ManD.Groups.pdf#page=6",
       "priorApproval": false,
-      "revision": "f1cf7b9ce9289a2672993d12edc75586c66bb5dd568d16ced2f9f909db0b72e9"
+      "revision": "73f84308b9f9f3f34435156347ee1c9890c22c56e109969085a935028161845a"
     },
     {
       "id": "2J",
@@ -121,7 +121,7 @@
       "sourcePage": 164,
       "sourcePDF": "../files/ManD.Groups.pdf#page=6",
       "priorApproval": false,
-      "revision": "45b3e493b8a6c7eb83216f2533d2f146e99e59e9f27e541fb3d23ed78ea052b7"
+      "revision": "74511f240d42ff53d8c7507a19fc29dc625fab72bbc57720c00c6616c6bea8ca"
     },
     {
       "id": "2K",
@@ -133,7 +133,7 @@
       "sourcePage": 164,
       "sourcePDF": "../files/ManD.Groups.pdf#page=6",
       "priorApproval": false,
-      "revision": "4f4e1521bcadecf3dc2a7d1094b99947243b6aa2c5f26038b5587c55f2530a01"
+      "revision": "2ae4862ef449fb80859995abadf23050af4117f4cd1606213a922c4af18c7723"
     },
     {
       "id": "2L",
@@ -145,7 +145,7 @@
       "sourcePage": 164,
       "sourcePDF": "../files/ManD.Groups.pdf#page=6",
       "priorApproval": false,
-      "revision": "65e75dda9212119bf48d9fb2a03243d7176ea35f9bb82dc147b187ca8d095888"
+      "revision": "44b7156fb78cd9a665df88db22753164bc49cace91fdeb9a31dab7238630315d"
     },
     {
       "id": "2M",
@@ -157,7 +157,7 @@
       "sourcePage": 164,
       "sourcePDF": "../files/ManD.Groups.pdf#page=6",
       "priorApproval": false,
-      "revision": "d598c32970e2f3061bb95072cdfed03b46ba16de99fe520fb5e8994875456c9c"
+      "revision": "d48a9ba1122ba1b67995d8794028c7564eb9f1c7c79266e67a0b2de282dfdf85"
     },
     {
       "id": "2N",
@@ -169,7 +169,7 @@
       "sourcePage": 165,
       "sourcePDF": "../files/ManD.Groups.pdf#page=8",
       "priorApproval": false,
-      "revision": "846721bcc4350d868fa5e70b427d0c8fbf07239b39a6efd7d038ed41ea7dbbd9"
+      "revision": "09310013efbb1ff4ddec72f09ed772bafeeb99ea4e5e6f9c150c91af45a1f1f8"
     },
     {
       "id": "2O",
@@ -180,7 +180,7 @@
       "reference": "../images/fittings/references/2O.png",
       "sourcePage": 165,
       "sourcePDF": "../files/ManD.Groups.pdf#page=8",
-      "priorApproval": false,
+      "priorApproval": true,
       "revision": "9d17bd6213e3a1129a18130ff7764780f67f408b1cfc3756831cfae10bc4bab6"
     },
     {

@@ -5,7 +5,7 @@
     for(const item of batch.items){
       const old=saved?.decisions?.[item.id];
       if(old?.revision===item.revision){decisions[item.id]={revision:item.revision,needsWork:old.needsWork===true,note:typeof old.note==='string'?old.note:''};}
-      else{decisions[item.id]={revision:item.revision,needsWork:old?.needsWork===true,note:typeof old?.note==='string'?old.note:''};changed=true;}
+      else{decisions[item.id]={revision:item.revision,needsWork:false,note:''};changed=true;}
     }
     if(Object.keys(saved?.decisions||{}).length!==batch.items.length)changed=true;
     return {schemaVersion:1,batchId:batch.id,completedAt:!changed&&typeof saved?.completedAt==='string'?saved.completedAt:null,decisions};

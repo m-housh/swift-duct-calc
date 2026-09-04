@@ -4,7 +4,7 @@
 <rect width="640" height="520" rx="16" fill="white"/>
 <text x="32" y="44" font-size="28" font-weight="700">2E</text><text x="96" y="43" font-size="18">Rectangular takeoff with flared entry</text>
 <text x="32" y="76" font-size="13">GROUP 2 · SUPPLY AIR · SOURCE PERSPECTIVE</text>
-<g transform="translate(181.1321 105) scale(1.207547) translate(-365 -250)" fill="none" stroke="#243b53" stroke-width="1.2"><path d="M375 325.38L605 342.17L605 391.17L375 374.38Z" fill="#f1f5f9"/><path d="M375 374.38L605 391.17V435.17L375 418.38Z" fill="#e2e8f0"/><path d="M477 338L537 344L449 436L409 433L487 352Z" fill="white"/><path d="M537 344V365L449 455L409 452V433M449 436V455M409 452L425 434M477 338V354L481 358" /></g>
+<g transform="translate(181.1321 105) scale(1.207547) translate(-365 -250)" fill="none" stroke="#243b53" stroke-width="1.2"><path d="M375 277.38L605 294.17L605 342.17L375 325.38Z" fill="#f8fafc"/><path d="M375 325.38L605 342.17L605 391.17L375 374.38Z" fill="#e2e8f0"/><path d="M477 338L537 344L449 436L409 433L487 352Z" fill="white"/><path d="M537 344V365L449 455V436Z" fill="white"/><path d="M449 436V455L409 452V433Z" fill="white"/><path d="M537 344V365L449 455L409 452V433M449 436V455M409 452L425 434M477 338V354L481 358" /></g>
 <text x="32" y="448" font-size="13">Connection contours follow the source perspective.</text>
 <text x="32" y="473" font-size="13">Reference EL varies with downstream branch count.</text>
 <text x="32" y="499" font-size="12">REVIEW DRAWING · NOT TO SCALE · Source: PDF p. 5 / printed p. 163</text>

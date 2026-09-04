@@ -62,8 +62,11 @@ def rectangular_trunk(letter):
     else:
         far=lambda x:350+.09*x
         near=lambda x:400+.09*x
-    return (p(f'M{left} {far(left):.2f}L{right} {far(right):.2f}L{right} {near(right):.2f}L{left} {near(left):.2f}Z',fill='#f1f5f9')+
-            p(f'M{left} {near(left):.2f}L{right} {near(right):.2f}V{near(right)+44:.2f}L{left} {near(left)+44:.2f}Z',fill='#e2e8f0'))
+    # Three traced, parallel edges define two visible surfaces. The selected
+    # fitting intersects the darker side surface between far() and near().
+    top=lambda x:far(x)-48
+    return (p(f'M{left} {top(left):.2f}L{right} {top(right):.2f}L{right} {far(right):.2f}L{left} {far(left):.2f}Z',fill='#f8fafc')+
+            p(f'M{left} {far(left):.2f}L{right} {far(right):.2f}L{right} {near(right):.2f}L{left} {near(left):.2f}Z',fill='#e2e8f0'))
 
 
 def art(letter):
@@ -73,11 +76,15 @@ def art(letter):
     if letter=='C':
         return context+p('M318 338L331 325Q339 321 346 328Q352 334 347 340L337 350',stroke_dasharray='3 2',stroke_width=1.1)+p('M244 415L316 340Q324 331 334 336Q342 341 338 348L257 430Z',fill='white')+ellipse(250,422,10,11)
     if letter=='D':
-        return context+p('M306 422L394 330L435 334V353L347 444L306 440Z',fill='white')+p('M306 422L347 426L435 334M347 426V444M306 440L322 424')
+        return context+'<g transform="translate(0 10)">'+p('M306 422L394 330L435 334V353L347 444L306 440Z',fill='white')+p('M306 422L347 426L435 334M347 426V444M306 440L322 424')+'</g>'
     if letter=='E':
-        return context+p('M477 338L537 344L449 436L409 433L487 352Z',fill='white')+p('M537 344V365L449 455L409 452V433M449 436V455M409 452L425 434M477 338V354L481 358')
+        top=p('M477 338L537 344L449 436L409 433L487 352Z',fill='white')
+        side=p('M537 344V365L449 455V436Z',fill='white')+p('M449 436V455L409 452V433Z',fill='white')
+        return context+top+side+p('M537 344V365L449 455L409 452V433M449 436V455M409 452L425 434M477 338V354L481 358')
     if letter=='F':
-        return context+p('M597 350V338L635 355',stroke_dasharray='4 2',stroke_width=1.1)+p('M575 348L635 355L547 446L506 442L585 362Z',fill='white')+p('M635 355V376L547 466L506 462V442M547 446V466M506 462L522 444M575 348V364L579 369')
+        top=p('M575 348L635 355L547 446L506 442L585 362Z',fill='white')
+        side=p('M635 355V376L547 466V446Z',fill='white')+p('M547 446V466L506 462V442Z',fill='white')
+        return context+p('M597 350V338L635 355',stroke_dasharray='4 2',stroke_width=1.1)+top+side+p('M635 355V376L547 466L506 462V442M547 446V466M506 462L522 444M575 348V364L579 369')
     if letter=='G':
         return context+p('M691 358V350L724 363',stroke_dasharray='4 2',stroke_width=1.1)+p('M594 452L683 357L724 363V384L634 475L594 472Z',fill='white')+p('M594 452L634 456L724 363M634 456V475M594 472L610 454')
     if letter=='H':
@@ -89,13 +96,13 @@ def art(letter):
             hidden+=p(f'M{x} {top}V{bottom}',stroke_dasharray='2 1',stroke_width=1)
         return context+hidden+p('M686 461L774 368L814 372V391L725 481L686 479Z',fill='white')+p('M686 461L725 465L814 372M725 465V481M686 479L702 463')
     if letter=='I':
-        return context+p('M156 383L277 260Q283 255 290 259Q296 262 297 269L183 391',fill='white')+p('M156 383Q166 371 180 383L185 389V404Q170 418 156 404Z',fill='white')+p('M156 383Q163 379 173 383Q181 386 185 391M156 385Q168 397 183 390')
+        return context+'<g transform="translate(0 -55)">'+p('M156 383L277 260Q283 255 290 259Q296 262 297 269L183 391',fill='white')+p('M156 383Q166 371 180 383L185 389V404Q170 418 156 404Z',fill='white')+p('M156 383Q163 379 173 383Q181 386 185 391M156 385Q168 397 183 390')+'</g>'
     if letter=='J':
-        return context+p('M276 379L393 270Q400 264 408 269Q414 272 416 277L311 388Z',fill='white')+p('M263 411L268 393Q274 381 288 381Q306 382 311 398V414Q300 429 285 427Q271 426 263 411Z',fill='white')+p('M268 393Q281 384 295 391Q307 398 311 414M276 379L311 388V414')
+        return context+'<g transform="translate(0 -54)">'+p('M276 379L393 270Q400 264 408 269Q414 272 416 277L311 388Z',fill='white')+p('M263 411L268 393Q274 381 288 381Q306 382 311 398V414Q300 429 285 427Q271 426 263 411Z',fill='white')+p('M268 393Q281 384 295 391Q307 398 311 414M276 379L311 388V414')+'</g>'
     if letter=='L':
-        return context+p('M500 451Q493 431 510 409L532 383L620 293L672 298V319L586 411V429L553 455Z',fill='white')+p('M532 383L585 388L672 298M585 388Q549 421 553 455M585 388V411')
+        return context+'<g transform="translate(0 -55)">'+p('M500 451Q493 431 510 409L532 383L620 293L672 298V319L586 411V429L553 455Z',fill='white')+p('M532 383L585 388L672 298M585 388Q549 421 553 455M585 388V411')+'</g>'
     if letter=='M':
-        return context+p('M666 456L674 425L694 399L786 309L839 315V336L754 420V442L721 470L666 466Z',fill='white')+p('M694 399L753 404L839 315M674 425L727 430L753 404V420M666 456L721 460L727 430M721 460V470')
+        return context+'<g transform="translate(0 -55)">'+p('M666 456L674 425L694 399L786 309L839 315V336L754 420V442L721 470L666 466Z',fill='white')+p('M694 399L753 404L839 315M674 425L727 430L753 404V420M666 456L721 460L727 430M721 460V470')+'</g>'
     if letter=='O':
         trunk=p('M338 339L461 379M338 389L459 424M369 349C350 344 340 384 356 394M451 376C432 371 422 408 438 418')
         elbow=p('M389 333L402 316Q412 310 420 317Q426 324 426 331Q425 336 417 340L403 347Z',fill='white')+p('M402 316Q416 316 419 335')

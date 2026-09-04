@@ -958,7 +958,7 @@
       "name": "Straight round branch takeoff",
       "system": "supply",
       "image": "/images/fittings/2A.svg",
-      "status": "source-trace-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
       "referenceConditions": {
         "velocityFpm": 900,
@@ -1012,6 +1012,13 @@
           210,
           270
         ]
+      },
+      "visualReview": {
+        "revision": "dc446917fe9daa3d51d0380bc2aeb7b1669d94d91701b106f214286c93e61836",
+        "completedAt": "2026-09-04T18:20:02.236Z",
+        "batchId": "group-2",
+        "note": "Needs the duct representation that it attaches to. This is likely due to how the original was cropped.",
+        "record": "docs/fitting-reviews/review-5825467c4b57c018.json"
       }
     },
     {
@@ -1087,7 +1094,7 @@
       "name": "Round takeoff with projecting entry",
       "system": "supply",
       "image": "/images/fittings/2C.svg",
-      "status": "source-trace-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
       "referenceConditions": {
         "velocityFpm": 900,
@@ -1141,6 +1148,13 @@
           215,
           265
         ]
+      },
+      "visualReview": {
+        "revision": "6afb6abb118e233dc828ad7210a2ea0f00b4aa15432496f2fd6571b289938110",
+        "completedAt": "2026-09-04T18:20:02.236Z",
+        "batchId": "group-2",
+        "note": "Needs the duct representation that it attaches to. This is likely due to how the original was cropped.",
+        "record": "docs/fitting-reviews/review-5825467c4b57c018.json"
       }
     },
     {
@@ -1347,7 +1361,7 @@
       "name": "Rectangular takeoff with projecting tab",
       "system": "supply",
       "image": "/images/fittings/2G.svg",
-      "status": "source-trace-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
       "referenceConditions": {
         "velocityFpm": 900,
@@ -1401,6 +1415,13 @@
           235,
           265
         ]
+      },
+      "visualReview": {
+        "revision": "b320ac7d4d1450b47ad0773379bb1b74897a4b9fa040f9f765d236d1dfa84618",
+        "completedAt": "2026-09-04T18:20:02.236Z",
+        "batchId": "group-2",
+        "note": "Needs the duct representation that it attaches to. This is likely due to how the original was cropped.",
+        "record": "docs/fitting-reviews/review-5825467c4b57c018.json"
       }
     },
     {
@@ -1412,7 +1433,7 @@
       "name": "Rectangular takeoff with raised entry edge",
       "system": "supply",
       "image": "/images/fittings/2H.svg",
-      "status": "source-trace-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
       "referenceConditions": {
         "velocityFpm": 900,
@@ -1466,6 +1487,13 @@
           235,
           265
         ]
+      },
+      "visualReview": {
+        "revision": "fc16e556d45809b3e29b16e59a1e6d9e825e454b8af0c0d73f492df03ffe94ed",
+        "completedAt": "2026-09-04T18:20:02.236Z",
+        "batchId": "group-2",
+        "note": "Needs the duct representation that it attaches to. This is likely due to how the original was cropped.",
+        "record": "docs/fitting-reviews/review-5825467c4b57c018.json"
       }
     },
     {
@@ -1847,7 +1875,7 @@
       "name": "Elbow branch on round trunk",
       "system": "supply",
       "image": "/images/fittings/2O.svg",
-      "status": "source-trace-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
       "referenceConditions": {
         "velocityFpm": 900,
@@ -1901,6 +1929,13 @@
           145,
           150
         ]
+      },
+      "visualReview": {
+        "revision": "9d17bd6213e3a1129a18130ff7764780f67f408b1cfc3756831cfae10bc4bab6",
+        "completedAt": "2026-09-04T18:20:02.236Z",
+        "batchId": "group-2",
+        "note": "The elbow doesn't quite look like it's coming off the primary duct (the whole elbow needs to go down a bit).",
+        "record": "docs/fitting-reviews/review-5825467c4b57c018.json"
       }
     },
     {
@@ -1969,10 +2004,10 @@
       },
       "visualReview": {
         "revision": "192fe566b3af9394bc3de47349318b65d224452c3a20f2cfc0380442400c1409",
-        "completedAt": "2026-09-04T18:06:38.427Z",
+        "completedAt": "2026-09-04T18:20:02.236Z",
         "batchId": "group-2",
         "note": "",
-        "record": "docs/fitting-reviews/review-39eeefe406058506.json"
+        "record": "docs/fitting-reviews/review-5825467c4b57c018.json"
       }
     },
     {
@@ -2041,10 +2076,10 @@
       },
       "visualReview": {
         "revision": "e1f6ca86678a142eeb18a5ef977df448741a5af6e980ade4e955365de498f4e7",
-        "completedAt": "2026-09-04T18:06:38.427Z",
+        "completedAt": "2026-09-04T18:20:02.236Z",
         "batchId": "group-2",
         "note": "",
-        "record": "docs/fitting-reviews/review-39eeefe406058506.json"
+        "record": "docs/fitting-reviews/review-5825467c4b57c018.json"
       }
     },
     {
