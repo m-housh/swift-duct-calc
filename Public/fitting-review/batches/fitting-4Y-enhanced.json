@@ -1,4 +1,4 @@
-window.FITTING_REVIEW = {
+{
   "id": "fitting-4Y-enhanced",
   "title": "High-resolution restoration pilot \u00b7 4Y",
   "description": "A sharper restoration beside the exact low-resolution source. Check it if its geometry differs too much or still needs work.",
@@ -16,4 +16,4 @@ window.FITTING_REVIEW = {
       "priorApproval": false
     }
   ]
-};
+}

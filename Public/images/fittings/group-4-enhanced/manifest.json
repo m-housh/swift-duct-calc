@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "group": 4,
+  "title": "High-resolution fitting restoration pilot",
+  "drawingCount": 1,
+  "status": "needs-review",
+  "items": [
+    {
+      "id": "4Y",
+      "name": "Rectangular ceiling register boot",
+      "referenceEquivalentLengthFeet": 35,
+      "svg": "/images/fittings/group-4-enhanced/4Y.svg",
+      "restoredArt": "/images/fittings/group-4-enhanced/4Y-restored-art.png",
+      "referenceImage": "/images/fittings/references/group-4/4Y.png",
+      "revision": "0e662dd96836be8117666aeb52aa3c05ad7571ac0008072f5a9aa67e042baab9",
+      "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
+      "embeddedRasterSize": [
+        1321,
+        974
+      ]
+    }
+  ]
+}
