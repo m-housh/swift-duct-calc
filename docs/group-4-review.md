@@ -4,7 +4,7 @@ Group 4 contains **44 source fitting numbers**: 4A, 4B, 4C, 4D, 4E, 4F, 4G, 4H, 
 
 The PDF identifies these as “Supply Air Boot and Stack Head Fittings” at 900 FPM and 0.08 IWC per 100 feet. The underlying 948 × 1231 source image is placed across PDF pages 18–19 and is printed page 168. The generator extracts that image directly, so fittings near the visual PDF page boundary are complete.
 
-Each fitting SVG is a pure-vector trace of its own source crop. Reference PNGs isolate the original black source art and re-typeset the fitting number and equivalent-length value underneath, avoiding fragments from the tightly packed neighboring cells. Comparison SVGs place that prepared reference and generated SVG side by side for a later large-batch review.
+Each fitting SVG uses thin stroked vector centerlines extracted from its own source crop. The dense register faces on 4Y and 4Z are recreated with explicit clipped egg-crate grids so they remain open and legible instead of becoming solid traced shapes. Reference PNGs isolate the original black source art and re-typeset the fitting number and equivalent-length value underneath, avoiding fragments from the tightly packed neighboring cells. Comparison SVGs place that prepared reference and generated SVG side by side for a later large-batch review.
 
 The descriptive names are inferred from visible geometry because the PDF supplies fitting numbers and equivalent lengths but no individual names. Reviewers should treat the drawing, fitting number, and equivalent length as authoritative; names can be revised without changing the traced geometry.
 

@@ -47,8 +47,9 @@ def normalize(group, entry):
         source = entry['source']; pdf_page = source.get('pdfPage', source.get('pdfPages', [group])[0])
         printed = source.get('printedPage', source.get('printedPages', ['?'])[-1])
     rev = item_revision(image, reference)
+    review_image = '../' + image.lstrip('/') + f'?revision={rev[:12]}'
     return dict(id=key, number=entry.get('fittingNumber', key), name=entry['name'], group=group,
-                image='../' + image.lstrip('/'), reference='../' + reference.lstrip('/'),
+                image=review_image, reference='../' + reference.lstrip('/'),
                 sourcePage=printed, sourcePDF=f'../files/ManD.Groups.pdf#page={pdf_page}',
                 revision=rev)
 

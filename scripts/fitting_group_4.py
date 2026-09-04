@@ -11,13 +11,12 @@ from __future__ import annotations
 
 import hashlib
 import json
-import re
 import subprocess
 import tempfile
 from pathlib import Path
 from xml.sax.saxutils import escape
 
-from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
+from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -93,6 +92,14 @@ REFERENCE_BOXES = {
     for index, key in enumerate(keys)
 }
 
+# Dense register faces merge into a solid patch in the scan. Mask those areas
+# before centerline extraction and recreate their visible egg-crate grids as
+# explicit thin vector strokes. Coordinates are in the 4x tracing space.
+GRILLE_POLYGONS = {
+    "4Y": [(27, 244), (219, 244), (261, 276), (43, 276)],
+    "4Z": [(92, 96), (137, 120), (85, 154), (40, 129)],
+}
+
 
 def run(*args: str) -> None:
     subprocess.run(args, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
@@ -116,6 +123,29 @@ def extract_source(work: Path) -> Image.Image:
     return image
 
 
+def grille_overlay(key: str) -> str:
+    points = GRILLE_POLYGONS.get(key)
+    if not points:
+        return ""
+    point_text = " ".join(f"{x},{y}" for x, y in points)
+    min_x = min(x for x, _ in points) - 60
+    max_x = max(x for x, _ in points) + 60
+    min_y = min(y for _, y in points) - 10
+    max_y = max(y for _, y in points) + 10
+    lines = []
+    for x in range(min_x, max_x + 1, 8):
+        lines.append(f"M{x} {min_y}L{x + 70} {max_y}")
+        lines.append(f"M{x} {min_y}L{x - 70} {max_y}")
+    path = "".join(lines)
+    return (
+        f'<defs><clipPath id="grille-{key}"><polygon points="{point_text}"/></clipPath></defs>'
+        f'<path d="{path}" fill="none" stroke="#243b53" stroke-width="1" '
+        f'clip-path="url(#grille-{key})"/>'
+        f'<polygon points="{point_text}" fill="none" stroke="#243b53" stroke-width="1.5" '
+        'stroke-linejoin="round"/>'
+    )
+
+
 def trace_crop(source: Image.Image, box: tuple[int, int, int, int], work: Path, key: str) -> tuple[str, str]:
     crop = source.crop(box).convert("RGB")
     # The original scan is small. Trace at 4x so a one-pixel cleanup reduces
@@ -123,25 +153,78 @@ def trace_crop(source: Image.Image, box: tuple[int, int, int, int], work: Path, 
     # lines or changing their geometry.
     crop = crop.resize((crop.width * 4, crop.height * 4), Image.Resampling.LANCZOS)
     # Source art is neutral black/gray while IDs and EL labels are blue. Keep
-    # neutral pixels, then close one-pixel scan holes before thinning the ink.
+    # neutral pixels, then reduce the scanned ink to its centerlines. Potrace
+    # can then turn those one-pixel centerlines into thin continuous paths
+    # instead of outlining the full width of the photocopied strokes.
     bitmap = Image.new("1", crop.size, 1)
     bitmap.putdata([
         0 if max(red, green, blue) - min(red, green, blue) <= 12 and (red + green + blue) / 3 < 230 else 1
         for red, green, blue in crop.get_flattened_data()
     ])
-    bitmap = bitmap.convert("L").filter(ImageFilter.MinFilter(3)).filter(ImageFilter.MaxFilter(5)).point(
-        lambda value: 0 if value < 128 else 255
-    ).convert("1")
+    if key in GRILLE_POLYGONS:
+        ImageDraw.Draw(bitmap).polygon(GRILLE_POLYGONS[key], fill=1)
+    raw_pbm = work / f"{key}-raw.pbm"
     pbm = work / f"{key}.pbm"
-    traced = work / f"{key}.svg"
-    bitmap.save(pbm)
-    run("potrace", str(pbm), "--svg", "--flat", "--tight", "--opttolerance", "0.25", "-o", str(traced))
-    text = traced.read_text()
-    view_box = re.search(r'viewBox="([^"]+)"', text)
-    group = re.search(r'(<g transform=.*?</g>)', text, flags=re.DOTALL)
-    if not view_box or not group:
-        raise RuntimeError(f"could not parse potrace output for {key}")
-    return view_box.group(1), group.group(1).replace('fill="#000000"', 'fill="#243b53"')
+    bitmap.save(raw_pbm)
+    run(
+        "magick",
+        str(raw_pbm),
+        "-negate",
+        "-morphology",
+        "Thinning:-1",
+        "Skeleton",
+        "-negate",
+        str(pbm),
+    )
+    skeleton = Image.open(pbm).convert("L")
+    width, height = skeleton.size
+    foreground = {
+        (index % width, index // width)
+        for index, value in enumerate(skeleton.get_flattened_data())
+        if value < 128
+    }
+
+    # Remove isolated scan dust while retaining disconnected construction lines.
+    retained: set[tuple[int, int]] = set()
+    unseen = set(foreground)
+    neighbors = [
+        (-1, -1), (0, -1), (1, -1),
+        (-1, 0),           (1, 0),
+        (-1, 1),  (0, 1),  (1, 1),
+    ]
+    while unseen:
+        seed = unseen.pop()
+        component = {seed}
+        pending = [seed]
+        while pending:
+            x, y = pending.pop()
+            for dx, dy in neighbors:
+                point = (x + dx, y + dy)
+                if point in unseen:
+                    unseen.remove(point)
+                    component.add(point)
+                    pending.append(point)
+        if len(component) >= 12:
+            retained.update(component)
+
+    segments = []
+    for x, y in sorted(retained, key=lambda point: (point[1], point[0])):
+        for dx, dy in ((1, 0), (0, 1), (1, 1), (-1, 1)):
+            target = (x + dx, y + dy)
+            if target not in retained:
+                continue
+            if dx and dy and ((x + dx, y) in retained or (x, y + dy) in retained):
+                continue
+            segments.append(f"M{x} {y}L{target[0]} {target[1]}")
+    if not segments:
+        raise RuntimeError(f"empty centerline trace for {key}")
+    path = "".join(segments)
+    group = (
+        f'<path d="{path}" fill="none" stroke="#243b53" stroke-width="1.4" '
+        'stroke-linecap="round" stroke-linejoin="round"/>'
+        f'{grille_overlay(key)}'
+    )
+    return f"0 0 {width} {height}", group
 
 
 def write_reference(source: Image.Image, key: str, feet: int, art_box: tuple[int, int, int, int], path: Path) -> None:
@@ -252,7 +335,7 @@ def generate() -> list[dict]:
                     "artCropPixels": list(art_box),
                     "sourceCellCropPixels": list(source_cell_box),
                 },
-                "drawingMethod": "Pure vector path traced from a 4x supersampled fitting-specific source crop with light ink-weight cleanup; no raster image is embedded in the fitting SVG.",
+                "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
                 "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
                 "revision": hashlib.sha256(svg_text.encode()).hexdigest()[:16],
             })
@@ -285,7 +368,7 @@ Group 4 contains **{len(entries)} source fitting numbers**: {ids}.
 
 The PDF identifies these as “Supply Air Boot and Stack Head Fittings” at 900 FPM and 0.08 IWC per 100 feet. The underlying 948 × 1231 source image is placed across PDF pages 18–19 and is printed page 168. The generator extracts that image directly, so fittings near the visual PDF page boundary are complete.
 
-Each fitting SVG is a pure-vector trace of its own source crop. Reference PNGs isolate the original black source art and re-typeset the fitting number and equivalent-length value underneath, avoiding fragments from the tightly packed neighboring cells. Comparison SVGs place that prepared reference and generated SVG side by side for a later large-batch review.
+Each fitting SVG uses thin stroked vector centerlines extracted from its own source crop. The dense register faces on 4Y and 4Z are recreated with explicit clipped egg-crate grids so they remain open and legible instead of becoming solid traced shapes. Reference PNGs isolate the original black source art and re-typeset the fitting number and equivalent-length value underneath, avoiding fragments from the tightly packed neighboring cells. Comparison SVGs place that prepared reference and generated SVG side by side for a later large-batch review.
 
 The descriptive names are inferred from visible geometry because the PDF supplies fitting numbers and equivalent lengths but no individual names. Reviewers should treat the drawing, fitting number, and equivalent length as authoritative; names can be revised without changing the traced geometry.
 
