@@ -1,4 +1,4 @@
-window.FITTING_REVIEW = {
+{
   "id": "group-4-enhanced",
   "title": "Group 4 \u00b7 high-resolution restorations",
   "description": "Sharp restored drawings beside the exact low-resolution source. Check only drawings whose geometry still needs work.",
@@ -532,4 +532,4 @@ window.FITTING_REVIEW = {
       "priorApproval": false
     }
   ]
-};
+}
