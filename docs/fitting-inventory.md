@@ -1,7 +1,7 @@
 # Fitting inventory and complex drawing pilot
 
-**Current batch:** [Complete Group 1 review](group-1-review.md), covering all
-19 source fitting numbers in 22 drawings. Review Group 1 before continuing Group 2.
+**Completed:** [Group 1 review](group-1-review.md), covering all 19 source fitting
+numbers in 22 visually approved drawings. Group 2 is the next drawing batch.
 
 **Updated review:** [2B and 3T source comparisons](fitting-trace-review.md).
 These two assets now use manual source-contour traces; other drawings below

@@ -33,8 +33,8 @@ The completed pilot review accepted all 13 drawings, with no revision requests.
 The original export is archived under `docs/fitting-reviews/`, and the catalog
 records the reviewed revision and completion time for each drawing.
 
-Use complete groups rather than 4–6 drawing batches. Complete Group 1 review
-and corrections first, then all 17 Group 2 fittings, followed by Group 3.
+Use complete groups rather than 4–6 drawing batches. Group 1 and its correction
+pass are complete; proceed with all 17 Group 2 fittings, followed by Group 3.
 After each batch, revise the checked drawings and repeat the comparison.
 
 The page currently contains the [complete Group 1 batch](group-1-review.md):

@@ -192,7 +192,7 @@
       "reference": "../images/fittings/references/1P.png",
       "sourcePage": 162,
       "sourcePDF": "../files/ManD.Groups.pdf#page=3",
-      "priorApproval": false,
+      "priorApproval": true,
       "revision": "12cf0706943ef70034caf21efbe06ab44fe0b06b83ed0abdf87d5c2b9364320b"
     },
     {
@@ -204,7 +204,7 @@
       "reference": "../images/fittings/references/1Q.png",
       "sourcePage": 162,
       "sourcePDF": "../files/ManD.Groups.pdf#page=3",
-      "priorApproval": false,
+      "priorApproval": true,
       "revision": "83e2d4c06d7a46dea74f7c5642fd6aa575b34e2872183eac0911d489b2ce6199"
     },
     {

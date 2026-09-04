@@ -6,10 +6,10 @@ coverage, not visual approval.
 
 The five accepted 1A–1E SVGs are unchanged. Seventeen new drawings cover the
 remaining 14 numbers, including separate vane-count variants for 1M and 1S.
-The completed Group 1 review accepted 20 drawings and requested vane-orientation
-corrections on 1P and 1Q. Those corrections are now drawn and await re-review;
-the 20 accepted SVGs remain unchanged. The original review is archived under
-`docs/fitting-reviews/`.
+The first Group 1 review accepted 20 drawings and requested vane-orientation
+corrections on 1P and 1Q. The follow-up review accepted both corrected drawings.
+All 22 Group 1 drawing revisions are now visually approved. Both reviews are
+archived under `docs/fitting-reviews/`.
 
 | Printed page | Fittings | New variants / conditions |
 | --- | --- | --- |
@@ -37,10 +37,10 @@ finish the batch and download its review. The new batch ID is `group-1`; prior
 `pilot-01` browser decisions and the imported pilot review remain preserved.
 Previously accepted 1A–1E are included for context and marked accordingly.
 
-For the correction pass, refresh the review page and revisit 1P and 1Q. The
-left-hand vanes of 1P and the vanes of 1Q now curve toward their leftward flow.
-Existing checkboxes and notes remain in browser storage. Uncheck them if the
-corrections are acceptable, then finish and download the updated review.
+The left-hand vanes of 1P and the vanes of 1Q now curve toward their leftward
+flow. The follow-up export retained the earlier issue text as review history;
+its accepted status and corrected revision hashes record that the concerns are
+resolved.
 
 Finish Group 1 review and revisions before proceeding to Group 2. Keep commits
 at coherent checkpoints: generated batch ready for review, imported decisions,
