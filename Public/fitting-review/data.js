@@ -1,55 +1,6 @@
 window.FITTING_REVIEW = {
-  "id": "group-4-manual-pilot",
-  "title": "Group 4 manual SVG pilot \u00b7 4 drawings",
-  "description": "Four clean SVGs drawn manually from the workbook source. Check only drawings that need more work.",
-  "items": [
-    {
-      "id": "4AD",
-      "number": "4AD",
-      "name": "Segmented elbow on rectangular stack",
-      "group": 4,
-      "image": "../images/fittings/group-4-manual/4AD.svg?revision=06f7cebb9dba",
-      "reference": "../images/fittings/references/group-4/4AD.png",
-      "sourcePage": 168,
-      "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "06f7cebb9dba18238740704aa9ce1c81197bda121da1256057d03fde028598dc",
-      "priorApproval": false
-    },
-    {
-      "id": "4AE",
-      "number": "4AE",
-      "name": "Segmented elbow on flange",
-      "group": 4,
-      "image": "../images/fittings/group-4-manual/4AE.svg?revision=8e5fb6231492",
-      "reference": "../images/fittings/references/group-4/4AE.png",
-      "sourcePage": 168,
-      "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "8e5fb623149248d4761250b023ab028121b7b3521e27f7b3e7361bb4b4b94c1f",
-      "priorApproval": false
-    },
-    {
-      "id": "4Y",
-      "number": "4Y",
-      "name": "Rectangular ceiling register boot",
-      "group": 4,
-      "image": "../images/fittings/group-4-manual/4Y.svg?revision=2f613dbd05e5",
-      "reference": "../images/fittings/references/group-4/4Y.png",
-      "sourcePage": 168,
-      "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "2f613dbd05e5ba267c6d870b1f281b744de48559460cbb9de3fbc828763d38ac",
-      "priorApproval": false
-    },
-    {
-      "id": "4Z",
-      "number": "4Z",
-      "name": "Square grille boot to round branch",
-      "group": 4,
-      "image": "../images/fittings/group-4-manual/4Z.svg?revision=d37bfa61366d",
-      "reference": "../images/fittings/references/group-4/4Z.png",
-      "sourcePage": 168,
-      "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "d37bfa61366d99369f72a7c53fbfdafdf34518aaa55c22861e25e592d4d07b0a",
-      "priorApproval": false
-    }
-  ]
+  "id": "qa-hold",
+  "title": "Visual QA in progress",
+  "description": "No fitting group is currently ready for review. New batches remain hidden until their rendered source/SVG comparison sheets pass an internal visual inspection.",
+  "items": []
 };
