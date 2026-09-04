@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "group": 4,
+  "title": "Source facsimile fitting pilot",
+  "drawingCount": 1,
+  "status": "needs-review",
+  "items": [
+    {
+      "id": "4Y",
+      "name": "Rectangular ceiling register boot",
+      "referenceEquivalentLengthFeet": 35,
+      "svg": "/images/fittings/group-4-facsimile/4Y.svg",
+      "sourceArt": "/images/fittings/group-4-facsimile/4Y-source-art.png",
+      "referenceImage": "/images/fittings/references/group-4/4Y.png",
+      "revision": "1d95d473f7073b59368678d749f3bc825549b42e451b279cb90aac942e8e7fc3",
+      "drawingMethod": "Self-contained SVG wrapper with the exact isolated source raster embedded as a PNG data URI.",
+      "embeddedRasterSize": [
+        82,
+        64
+      ]
+    }
+  ]
+}

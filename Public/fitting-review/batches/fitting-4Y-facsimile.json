@@ -1,4 +1,4 @@
-window.FITTING_REVIEW = {
+{
   "id": "fitting-4Y-facsimile",
   "title": "Source facsimile SVG pilot \u00b7 4Y",
   "description": "One self-contained SVG preserving the exact source drawing. Check it only if this representation is still unsuitable.",
@@ -16,4 +16,4 @@ window.FITTING_REVIEW = {
       "priorApproval": false
     }
   ]
-};
+}
