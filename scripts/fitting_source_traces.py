@@ -13,10 +13,12 @@ TRACES = {
         printedPage=163,
         contours='''
 <path d="M0 48L544 88L544 276L0 236Z" fill="#e2e8f0"/>
+<g transform="translate(0 36)">
 <path d="M324 28L490 40V151L324 136Z" fill="white"/>
 <path d="M324 28L369 73M490 40L421 79M490 151L421 116M324 136L369 110"/>
 <path d="M28 401L339 88C357 70 379 68 398 79C411 87 417 101 416 114Q416 123 409 130L90 463Z" fill="white"/>
 <ellipse cx="59" cy="432" rx="44" ry="43" fill="white"/>
+</g>
 '''),
     '3T': dict(
         size=(448, 604), crop=[574, 737, 112, 151], sourceImage=32,

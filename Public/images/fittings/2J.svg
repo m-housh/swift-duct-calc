@@ -4,7 +4,7 @@
 <rect width="640" height="520" rx="16" fill="white"/>
 <text x="32" y="44" font-size="28" font-weight="700">2J</text><text x="96" y="43" font-size="18">Eased round elbow takeoff</text>
 <text x="32" y="76" font-size="13">GROUP 2 · SUPPLY AIR · SOURCE PERSPECTIVE</text>
-<g transform="translate(182.4561 105) scale(1.122807) translate(-190 -250)" fill="none" stroke="#243b53" stroke-width="1.2"><path d="M185 318.65L415 339.35L415 387.35L185 366.65Z" fill="#f8fafc"/><path d="M185 366.65L415 387.35L415 437.35L185 416.65Z" fill="#e2e8f0"/><g transform="translate(0 -54)"><path d="M276 379L393 270Q400 264 408 269Q414 272 416 277L311 388Z" fill="white"/><path d="M263 411L268 393Q274 381 288 381Q306 382 311 398V414Q300 429 285 427Q271 426 263 411Z" fill="white"/><path d="M268 393Q281 384 295 391Q307 398 311 414M276 379L311 388V414" /></g></g>
+<g transform="translate(182.4561 105) scale(1.122807) translate(-190 -250)" fill="none" stroke="#243b53" stroke-width="1.2"><path d="M185 318.65L415 339.35L415 387.35L185 366.65Z" fill="#f8fafc"/><path d="M185 366.65L415 387.35L415 437.35L185 416.65Z" fill="#e2e8f0"/><g transform="translate(0 -45)"><path d="M266 386L393 270Q400 264 408 269Q414 272 416 277L310 385Q317 394 315 405Q313 419 302 426Q286 434 272 424Q259 415 260 400Q260 392 266 386Z" fill="white"/><path d="M260 400Q270 387 285 389Q305 391 315 405M260 400Q271 417 288 418Q306 419 315 405" /><path d="M266 386Q279 376 294 382Q305 385 310 395" /></g></g>
 <text x="32" y="448" font-size="13">Connection contours follow the source perspective.</text>
 <text x="32" y="473" font-size="13">Reference EL varies with downstream branch count.</text>
 <text x="32" y="499" font-size="12">REVIEW DRAWING · NOT TO SCALE · Source: PDF p. 6 / printed p. 164</text>

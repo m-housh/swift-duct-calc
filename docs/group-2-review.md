@@ -20,6 +20,13 @@ angled outlet on a local top surface. 2N has a clean saddle connection between
 its angled branch and round trunk. The seven accepted revisions remain
 unchanged and approved.
 
+The next review accepted 2D, 2E, 2F and 2I, bringing Group 2 to eleven accepted
+current revisions. Its six remaining corrections move 2B's collar and branch
+down into alignment, make 2J's tube and elbow a continuous contour, and redraw
+2K as one continuous hood-to-round-outlet silhouette. The 2L and 2M heels now
+meet the near edge between the trunk's top and side surfaces. The 2N branch
+uses a rounded saddle seam without the previous pointed notch.
+
 | Printed page | Fittings | Distinctions retained |
 | --- | --- | --- |
 | 163 | 2A–2H | Round and rectangular branches; tapered/flared entries; projecting entry details |
@@ -36,7 +43,7 @@ labels; the fitting numbers remain the authoritative identifiers.
 ## Review
 
 Refresh `/fitting-review/`. The active batch is now `group-2`. The page retains
-the seven accepted current revisions and resets the ten changed revisions for
+the eleven accepted current revisions and resets the six changed revisions for
 review. Check only drawings that still need more work, add notes, finish the
 review and download its JSON file. Share it in this task to import decisions
 and begin any correction pass.

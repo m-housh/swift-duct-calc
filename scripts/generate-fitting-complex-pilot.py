@@ -32,16 +32,15 @@ def shape(key):
     if key in TRACES:
         return geometry(key)
     if key == '2K':
-        surface = path('M104 304L191 247L548 306L462 365Z', '#f1f5f9')
-        plate = path('M224 301L285 262L384 278L323 320Z', 'white') + path('M224 301V310L323 329L384 287V278', 'white')
-        transition = path('M244 292Q258 241 286 211L326 219Q345 246 353 283L323 310Z', 'white')
-        elbow = path('M286 211Q301 191 321 202Q332 208 331 219L326 226L353 232L368 220', 'white')
-        pipe = path('M317 205L451 99Q459 93 467 100Q475 107 471 116L337 222Z', 'white') + '<ellipse cx="461" cy="107" rx="11" ry="17" transform="rotate(-39 461 107)" fill="white"/>'
-        return surface+plate+transition+elbow+pipe+text(100, 408, 'Rectangular base transitions through an elbow to a round outlet')
+        surface = path('M104 326L194 270L548 325L459 384Z', '#f1f5f9')
+        pipe = path('M267 215L431 84Q440 78 448 86L456 94Q462 102 454 109L294 234Z', 'white') + '<ellipse cx="444" cy="96" rx="11" ry="17" transform="rotate(-39 444 96)" fill="white"/>'
+        plate = path('M190 330L250 292L360 310L300 350Z', 'white') + path('M190 330V339L300 359L360 319V310', 'white')
+        transition = path('M210 324Q221 271 249 231Q257 219 267 215Q282 211 294 234Q324 265 340 317L300 341Z', 'white')
+        return surface+pipe+plate+transition+text(100, 408, 'Rectangular base transitions continuously to an angled round outlet')
     if key == '2N':
         trunk = path('M138 225L505 291Q530 296 529 326Q528 354 501 354L135 286Q111 280 112 253Q113 226 138 225Z', '#f1f5f9') + '<ellipse cx="510" cy="323" rx="19" ry="31" transform="rotate(-8 510 323)" fill="white"/>'
-        branch = path('M280 253Q272 235 284 217L384 143Q394 137 403 146Q411 155 406 165L307 244Q300 257 304 266Z', 'white') + '<ellipse cx="395" cy="153" rx="12" ry="18" transform="rotate(-36 395 153)" fill="white"/>'
-        joint = path('M280 253Q289 265 304 266', 'none')
+        branch = path('M276 252Q267 241 273 224L383 142Q394 135 403 144Q412 154 406 165L309 245Q298 254 302 265Q287 263 276 252Z', 'white') + '<ellipse cx="395" cy="153" rx="12" ry="18" transform="rotate(-36 395 153)" fill="white"/>'
+        joint = path('M276 252Q287 263 302 265', 'none')
         return trunk+branch+joint+text(113, 408, 'Angled round branch joins the crown of a round trunk')
     if key == '3A':
         # Plan outline extruded to an axonometric sheet-metal fitting.
