@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+from urllib.parse import urlsplit
 from fitting_review_decisions import apply_saved_reviews, revision
 
 
@@ -38,8 +39,8 @@ def validate_manifest_review(report, manifest, public):
         if decision.get('status') not in {'accepted', 'needs-work'} or not isinstance(decision.get('note'), str):
             raise ValueError(f"Incomplete or invalid decision for {decision.get('id')}.")
         item = items[decision['id']]
-        drawing = public / item['image'].removeprefix('../')
-        reference = public / item['reference'].removeprefix('../')
+        drawing = public / urlsplit(item['image']).path.removeprefix('../')
+        reference = public / urlsplit(item['reference']).path.removeprefix('../')
         current = hashlib.sha256(drawing.read_bytes() + reference.read_bytes()).hexdigest()
         if decision.get('revision') != item.get('revision') or decision['revision'] != current:
             raise ValueError(f"{decision['id']} changed since this review. Review the current drawing before importing.")

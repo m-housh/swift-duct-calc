@@ -1,0 +1,14 @@
+{
+  "batchId": "group-4-enhanced-followup",
+  "checkedAt": "2026-09-04",
+  "status": "passed-for-user-review",
+  "checkedIds": [
+    "4AG"
+  ],
+  "revision": "acec282bfa72296772323f610e565c26147f482b98408f336ed2d9f5941cecc0",
+  "change": "Completed the existing inward airflow shaft with a vector arrowhead; embedded raster unchanged.",
+  "visualCheck": "Inspected enlarged original reference and 1280x1040 corrected card; arrowhead joins the shaft and matches source direction.",
+  "approvalCheck": "43 accepted SVG/reference hashes unchanged and approvals retained; changed 4AG requires review.",
+  "browserCheck": "One checkbox and both source/drawing images loaded.",
+  "importCheck": "Revision query parameters resolve correctly; stale review rejected."
+}

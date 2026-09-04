@@ -28,12 +28,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4A-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4A.png",
       "revision": "e17c555098f02a45daeb39fc163cda5c5fda4c04172433b519bf2b15b6821385",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "e17c555098f02a45daeb39fc163cda5c5fda4c04172433b519bf2b15b6821385",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4B",
@@ -45,12 +52,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4B-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4B.png",
       "revision": "472647f6810eb8901c7872e7860b65f50b1958133434d98f205707874f19e6bf",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "472647f6810eb8901c7872e7860b65f50b1958133434d98f205707874f19e6bf",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4C",
@@ -62,12 +76,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4C-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4C.png",
       "revision": "9e79814703075541e59d17c3b0851f2e97dadba201c4a6705137f79a70ceb1fa",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "9e79814703075541e59d17c3b0851f2e97dadba201c4a6705137f79a70ceb1fa",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4D",
@@ -79,12 +100,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4D-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4D.png",
       "revision": "9e084e4976892e0eb96a00ffdeb32f14d71c543f99c75cfce415a5730ac06718",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "9e084e4976892e0eb96a00ffdeb32f14d71c543f99c75cfce415a5730ac06718",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4E",
@@ -96,12 +124,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4E-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4E.png",
       "revision": "8a79f9c15d47e59fa3c60ffac4f3dd9891407d15a9587cb3ba4924a08569d715",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "8a79f9c15d47e59fa3c60ffac4f3dd9891407d15a9587cb3ba4924a08569d715",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4F",
@@ -113,12 +148,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4F-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4F.png",
       "revision": "1fcc3d97448e522ebedcf1dd90b92427220990751ac2c506ce4c6361b2e5b744",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "1fcc3d97448e522ebedcf1dd90b92427220990751ac2c506ce4c6361b2e5b744",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4G",
@@ -130,12 +172,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4G-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4G.png",
       "revision": "c1f0312ebe510a26d6bafd92fa284abe37a623ad430b10ea4471660271f9ec11",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "c1f0312ebe510a26d6bafd92fa284abe37a623ad430b10ea4471660271f9ec11",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4H",
@@ -147,12 +196,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4H-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4H.png",
       "revision": "0b6fa9365cf72b95c6c99f4986b0032d17dcc6b3cda73cd9931b8763e37231de",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "0b6fa9365cf72b95c6c99f4986b0032d17dcc6b3cda73cd9931b8763e37231de",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4I",
@@ -164,12 +220,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4I-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4I.png",
       "revision": "aa6e2cd307ff5ef3592410ea57adf6f2eb914cc77bb56c3ea469ac9e2d0e1847",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "aa6e2cd307ff5ef3592410ea57adf6f2eb914cc77bb56c3ea469ac9e2d0e1847",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4J",
@@ -181,12 +244,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4J-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4J.png",
       "revision": "23290062561a683c22a73aa46eca49b2ec9d82133cc8a1ef7b872452970941d2",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "23290062561a683c22a73aa46eca49b2ec9d82133cc8a1ef7b872452970941d2",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4K",
@@ -198,12 +268,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4K-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4K.png",
       "revision": "51770a207d3dfe6e51893228d349a7b610ac33a904b16a66da6d179deaa7bc94",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "51770a207d3dfe6e51893228d349a7b610ac33a904b16a66da6d179deaa7bc94",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4L",
@@ -215,12 +292,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4L-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4L.png",
       "revision": "3f248c74b3ea8cc9204fa17c76a218d61824b183d1f2dbc4a6010a90b723fd9d",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "3f248c74b3ea8cc9204fa17c76a218d61824b183d1f2dbc4a6010a90b723fd9d",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4M",
@@ -232,12 +316,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4M-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4M.png",
       "revision": "d41bef0db3a1ff9ed42d012246119f009e4333afc29b74b7f0b141ecf8fb1d22",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "d41bef0db3a1ff9ed42d012246119f009e4333afc29b74b7f0b141ecf8fb1d22",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4N",
@@ -249,12 +340,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4N-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4N.png",
       "revision": "76eb4786a2fa5cc8218de5d6c38d827f7fe22645682e1fb4434c01796c5030f3",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "76eb4786a2fa5cc8218de5d6c38d827f7fe22645682e1fb4434c01796c5030f3",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4O",
@@ -266,12 +364,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4O-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4O.png",
       "revision": "122823705351bad3d3504ba359c30a95796c5f73b6873c21593dc3f86036e1cc",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "122823705351bad3d3504ba359c30a95796c5f73b6873c21593dc3f86036e1cc",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4P",
@@ -283,12 +388,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4P-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4P.png",
       "revision": "175ef8a06d48d83cfa086d8d2fd3a9c62a83e254e8be58fb59561cf64b47b7c2",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "175ef8a06d48d83cfa086d8d2fd3a9c62a83e254e8be58fb59561cf64b47b7c2",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4Q",
@@ -300,12 +412,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4Q-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4Q.png",
       "revision": "73ba894533447a229e1dca355a7b83d62d766c5d8f42980cffc27321c6a9165b",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "73ba894533447a229e1dca355a7b83d62d766c5d8f42980cffc27321c6a9165b",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4R",
@@ -317,12 +436,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4R-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4R.png",
       "revision": "5a60d7640ba67862a632fd20af449e4f0574b095f787a5b2d0cdf69a00f5d28f",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "5a60d7640ba67862a632fd20af449e4f0574b095f787a5b2d0cdf69a00f5d28f",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4S",
@@ -334,12 +460,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4S-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4S.png",
       "revision": "80778e2f67983e87a24669907fcc3ddc66aa16da15e31d8d7034deaa3f4ae48e",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "80778e2f67983e87a24669907fcc3ddc66aa16da15e31d8d7034deaa3f4ae48e",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4T",
@@ -351,12 +484,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4T-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4T.png",
       "revision": "5ef44ec35496add6f8d41ced90cde127d86dd259caf4e423a9349e072b886179",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "5ef44ec35496add6f8d41ced90cde127d86dd259caf4e423a9349e072b886179",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4U",
@@ -368,12 +508,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4U-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4U.png",
       "revision": "24608a6f8179f5220813fcead03519f3f3f8aed34f9e149eb656318b287a0e55",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "24608a6f8179f5220813fcead03519f3f3f8aed34f9e149eb656318b287a0e55",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4V",
@@ -385,12 +532,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4V-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4V.png",
       "revision": "746e72603d96c59de41e9e5ebd3cec2c542450ef6feadc13ee206ecb6b09c0ef",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "746e72603d96c59de41e9e5ebd3cec2c542450ef6feadc13ee206ecb6b09c0ef",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4W",
@@ -402,12 +556,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4W-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4W.png",
       "revision": "ed3d54a7bd850b98e13e38d6530f25f4edd2c4dc2a86f09bfcdb3fa904c83f6b",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "ed3d54a7bd850b98e13e38d6530f25f4edd2c4dc2a86f09bfcdb3fa904c83f6b",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4X",
@@ -419,12 +580,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4X-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4X.png",
       "revision": "0aff7b47f973889ecbcf8b9526c7220a56e7f470e7f131215c7bf13630e511ca",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "0aff7b47f973889ecbcf8b9526c7220a56e7f470e7f131215c7bf13630e511ca",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4Y",
@@ -436,12 +604,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4Y-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4Y.png",
       "revision": "a1fe6b3ce862618dbe8dfdf9691cedea5e12ca0b41f98e8fc182c65ae4353ec7",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1321,
         974
-      ]
+      ],
+      "visualReview": {
+        "revision": "a1fe6b3ce862618dbe8dfdf9691cedea5e12ca0b41f98e8fc182c65ae4353ec7",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4Z",
@@ -453,12 +628,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4Z-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4Z.png",
       "revision": "9b6d8dd87779b0ce117fe574770af5736d1d3819a8699d568ab590fb87c95dc6",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "9b6d8dd87779b0ce117fe574770af5736d1d3819a8699d568ab590fb87c95dc6",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4AA",
@@ -470,12 +652,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4AA-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4AA.png",
       "revision": "0a6e881a77be4eba9445b2dc15057e514a08cad647d13bdb3803d34bff0fd23f",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "0a6e881a77be4eba9445b2dc15057e514a08cad647d13bdb3803d34bff0fd23f",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4AB",
@@ -487,12 +676,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4AB-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4AB.png",
       "revision": "d05262e4b517f82f8a3ae3145c6a4570505187f401b3fde63a16e7ea6ff774d6",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "d05262e4b517f82f8a3ae3145c6a4570505187f401b3fde63a16e7ea6ff774d6",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4AC",
@@ -504,12 +700,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4AC-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4AC.png",
       "revision": "ef9190135c3bb21c71d873f5a88e9a5e6b29ac1bff17c81db21214bbc3461b57",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "ef9190135c3bb21c71d873f5a88e9a5e6b29ac1bff17c81db21214bbc3461b57",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4AD",
@@ -521,12 +724,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4AD-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4AD.png",
       "revision": "c3e8403dcd6f2a0e8bbb2c291840a217fc1a80be3a4083f4241572cb4aff683b",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "c3e8403dcd6f2a0e8bbb2c291840a217fc1a80be3a4083f4241572cb4aff683b",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4AE",
@@ -538,12 +748,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4AE-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4AE.png",
       "revision": "50fa92ae08ef79ba14eaf3c5b195bf058bbe6c9f6e01000af284a266c68e4bec",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "50fa92ae08ef79ba14eaf3c5b195bf058bbe6c9f6e01000af284a266c68e4bec",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4AF",
@@ -555,12 +772,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4AF-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4AF.png",
       "revision": "aafd8bf4dabb2c02be7d0cb00f1ccc2f6eb0ec152f3135c989b1fce961c3a79a",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1415,
         1111
-      ]
+      ],
+      "visualReview": {
+        "revision": "aafd8bf4dabb2c02be7d0cb00f1ccc2f6eb0ec152f3135c989b1fce961c3a79a",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4AG",
@@ -571,7 +795,7 @@
       "svg": "/images/fittings/group-4-enhanced/4AG.svg",
       "restoredArt": "/images/fittings/group-4-enhanced/4AG-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4AG.png",
-      "revision": "c14e8a9b08590a1f9996177b4189d2a6c4e23ea1ba58122c1bf4b89d5870a0c7",
+      "revision": "acec282bfa72296772323f610e565c26147f482b98408f336ed2d9f5941cecc0",
       "status": "restoration-needs-review",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
@@ -589,12 +813,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4AH-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4AH.png",
       "revision": "7932bceb41e2e232239bc19e8f1b5b838039f50e7a50c7edb6e7e347d077b64a",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1402,
         1122
-      ]
+      ],
+      "visualReview": {
+        "revision": "7932bceb41e2e232239bc19e8f1b5b838039f50e7a50c7edb6e7e347d077b64a",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4AI",
@@ -606,12 +837,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4AI-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4AI.png",
       "revision": "fb4332e27b268d38a35b6b3baa7e187aed12f61148c868ba7a961597e15acca5",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1380,
         1140
-      ]
+      ],
+      "visualReview": {
+        "revision": "fb4332e27b268d38a35b6b3baa7e187aed12f61148c868ba7a961597e15acca5",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4AJ",
@@ -623,12 +861,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4AJ-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4AJ.png",
       "revision": "868880ed03b582706ec196be18d55556ea9deef2ca364df824846eb28e4c3426",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "868880ed03b582706ec196be18d55556ea9deef2ca364df824846eb28e4c3426",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4AK",
@@ -640,12 +885,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4AK-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4AK.png",
       "revision": "f5475d021c39a5aa030de2c524d9b76be657fd445fa3e52ddaa851a37a9095ff",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1439,
         1093
-      ]
+      ],
+      "visualReview": {
+        "revision": "f5475d021c39a5aa030de2c524d9b76be657fd445fa3e52ddaa851a37a9095ff",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4AL",
@@ -657,12 +909,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4AL-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4AL.png",
       "revision": "b9abe1ad41d63fa19b6924d878a18f892ec51657104936c2de11851687fd59f2",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1276,
         1233
-      ]
+      ],
+      "visualReview": {
+        "revision": "b9abe1ad41d63fa19b6924d878a18f892ec51657104936c2de11851687fd59f2",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4AM",
@@ -674,12 +933,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4AM-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4AM.png",
       "revision": "ea7fcaf0bc735fb2b65853e93506d4ec6ce23693e45047a973a52fff851fe40a",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1408,
         1117
-      ]
+      ],
+      "visualReview": {
+        "revision": "ea7fcaf0bc735fb2b65853e93506d4ec6ce23693e45047a973a52fff851fe40a",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4AN",
@@ -691,12 +957,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4AN-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4AN.png",
       "revision": "69f712e66a2f2d7b296707f1fe7952e16af3597fa7b542bf3e1829d2ace55fa6",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1396,
         1127
-      ]
+      ],
+      "visualReview": {
+        "revision": "69f712e66a2f2d7b296707f1fe7952e16af3597fa7b542bf3e1829d2ace55fa6",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4AO",
@@ -708,12 +981,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4AO-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4AO.png",
       "revision": "860e5165dcae2d93ec15fa1797a132fcd53d06b7e43aad456c952c12a599fc1f",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1163,
         1353
-      ]
+      ],
+      "visualReview": {
+        "revision": "860e5165dcae2d93ec15fa1797a132fcd53d06b7e43aad456c952c12a599fc1f",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4AP",
@@ -725,12 +1005,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4AP-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4AP.png",
       "revision": "13295289992c387632757ebbe48016f3edae2ba2b2643255ab8e6f621ad6dddd",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1185,
         1327
-      ]
+      ],
+      "visualReview": {
+        "revision": "13295289992c387632757ebbe48016f3edae2ba2b2643255ab8e6f621ad6dddd",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4AQ",
@@ -742,12 +1029,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4AQ-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4AQ.png",
       "revision": "8ec8ec3124a4a7f1c37e425451e40ecba360497a43c312f866da5769b1579c2a",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1351,
         1164
-      ]
+      ],
+      "visualReview": {
+        "revision": "8ec8ec3124a4a7f1c37e425451e40ecba360497a43c312f866da5769b1579c2a",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     },
     {
       "id": "4AR",
@@ -759,12 +1053,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4AR-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4AR.png",
       "revision": "c324cdfa4c0825026a7c50e59d7b589d6bf88eace2c00a5d75790598c92c49b6",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1254,
         1254
-      ]
+      ],
+      "visualReview": {
+        "revision": "c324cdfa4c0825026a7c50e59d7b589d6bf88eace2c00a5d75790598c92c49b6",
+        "completedAt": "2026-09-04T20:37:43.150Z",
+        "batchId": "group-4-enhanced",
+        "note": "",
+        "record": "docs/fitting-reviews/review-82206d6c4b4d1a75.json"
+      }
     }
   ]
 }
