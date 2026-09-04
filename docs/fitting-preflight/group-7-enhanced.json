@@ -1,0 +1,17 @@
+{
+  "group": 7,
+  "status": "passed-for-user-review",
+  "drawingCount": 5,
+  "checkedAt": "2026-09-04",
+  "method": "Inspected every original/restored pair on contact sheets; checked assembly connections, source orientation, branches, cutaways, grille detail and arrowheads.",
+  "sheets": [
+    "docs/fitting-preflight/group-7-restoration-qa-1.png"
+  ],
+  "userApproval": "pending",
+  "checks": [
+    "All generated SVGs XML-valid.",
+    "Every reference and restored image exists.",
+    "All artwork/reference revision hashes verified.",
+    "Source values, conditions and shared-assembly metadata retained."
+  ]
+}
