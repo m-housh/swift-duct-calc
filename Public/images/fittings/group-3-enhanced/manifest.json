@@ -5,7 +5,7 @@
   "drawingCount": 32,
   "expectedDrawingCount": 32,
   "withheldIds": [],
-  "status": "restoration-needs-review",
+  "status": "visually-approved",
   "referenceConditions": {
     "velocityFpm": 900,
     "frictionRateIwcPer100Feet": 0.08
@@ -56,9 +56,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3A.svg",
       "revision": "fedd8a4455bd9b0195355750740072184c3b428d0f0aed046bc8ef8de94e72a6",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "fedd8a4455bd9b0195355750740072184c3b428d0f0aed046bc8ef8de94e72a6",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3B",
@@ -108,9 +115,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3B.svg",
       "revision": "97c19ce37a93dc0c743066a7a82922c2d4873346d33c43343acfecd20466e11e",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "97c19ce37a93dc0c743066a7a82922c2d4873346d33c43343acfecd20466e11e",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3C",
@@ -160,9 +174,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3C.svg",
       "revision": "a79921f0a93a5abb5a64368407be8e9d03cae150cb55d98a33a857630a37a3e5",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "a79921f0a93a5abb5a64368407be8e9d03cae150cb55d98a33a857630a37a3e5",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3D-full",
@@ -213,9 +234,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3D-full.svg",
       "revision": "dd35ae9be011aeca070e430582e78644a51d81ea6f994c56ed4c3df93fef9f68",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "dd35ae9be011aeca070e430582e78644a51d81ea6f994c56ed4c3df93fef9f68",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3D-tight",
@@ -266,9 +294,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3D-tight.svg",
       "revision": "60da779a8119016e020de5f64009ab8d826b7015a9e9172a384a8fd887068f91",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "60da779a8119016e020de5f64009ab8d826b7015a9e9172a384a8fd887068f91",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3D-mitered",
@@ -319,9 +354,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3D-mitered.svg",
       "revision": "aae707c0edaa5cc824af06533beb9e1ffbaa8552da33e116b3b2f5d535e8fd89",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "aae707c0edaa5cc824af06533beb9e1ffbaa8552da33e116b3b2f5d535e8fd89",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3E",
@@ -372,9 +414,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3E.svg",
       "revision": "6c478b971bb7282b9a1b2385fa32b98d1d5380791885a8222c838e5655840134",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "6c478b971bb7282b9a1b2385fa32b98d1d5380791885a8222c838e5655840134",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3F-full",
@@ -426,9 +475,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3F-full.svg",
       "revision": "a844a112789e38d368467997c69001dcd80446454ccd89f4a138705aa04e5574",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "a844a112789e38d368467997c69001dcd80446454ccd89f4a138705aa04e5574",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3F-tight",
@@ -480,9 +536,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3F-tight.svg",
       "revision": "d5cd623120839686abf3cb97d500998fcae3b89b84cc3d45d82927a05031b4b5",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "d5cd623120839686abf3cb97d500998fcae3b89b84cc3d45d82927a05031b4b5",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3F-mitered",
@@ -534,9 +597,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3F-mitered.svg",
       "revision": "765247fa2556dd6f5ddd72db599d3b6e6a60dbbaee5b143f5e682f3720a7bab1",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "765247fa2556dd6f5ddd72db599d3b6e6a60dbbaee5b143f5e682f3720a7bab1",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3G",
@@ -587,9 +657,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3G.svg",
       "revision": "cad333710a489bf0131697b6a5cf1fb2fec11ad49c09445b20546e7ec0413e80",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "cad333710a489bf0131697b6a5cf1fb2fec11ad49c09445b20546e7ec0413e80",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3H",
@@ -640,9 +717,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3H.svg",
       "revision": "6bec772092ee7639ab4d0f3d82bf373cc438f5c8697c3f5f36fe8e7627164286",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "6bec772092ee7639ab4d0f3d82bf373cc438f5c8697c3f5f36fe8e7627164286",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3I",
@@ -689,9 +773,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3I.svg",
       "revision": "34fad8cace1fcb0e626aac3ab7109549287be42cb9aaf45a9cf20e983979d57f",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "34fad8cace1fcb0e626aac3ab7109549287be42cb9aaf45a9cf20e983979d57f",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3J-full",
@@ -742,9 +833,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3J-full.svg",
       "revision": "8477bee02590d51dcd1867cf2a8539275975c7502e69624a70947b573d8a27ab",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "8477bee02590d51dcd1867cf2a8539275975c7502e69624a70947b573d8a27ab",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3J-tight",
@@ -795,9 +893,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3J-tight.svg",
       "revision": "70362a2406a5b7da8b4239e6dface8f80611d71ce153b2a08a3f7129d8621f2d",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "70362a2406a5b7da8b4239e6dface8f80611d71ce153b2a08a3f7129d8621f2d",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3J-mitered",
@@ -848,9 +953,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3J-mitered.svg",
       "revision": "70e047ab661a0eac6a5ee74f0df5afc31fccf8a4dae0c1bbbd989290498e6700",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "70e047ab661a0eac6a5ee74f0df5afc31fccf8a4dae0c1bbbd989290498e6700",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3K",
@@ -900,9 +1012,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3K.svg",
       "revision": "f3388df6b53652cb2ecec57f0d9094c8a3c595acff3ab5645598e8a1bb9e9bb1",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "f3388df6b53652cb2ecec57f0d9094c8a3c595acff3ab5645598e8a1bb9e9bb1",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3L",
@@ -952,9 +1071,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3L.svg",
       "revision": "87bd0a6a4b72f92c84fa9f639b5d1901b5b8ccc2703268dd9bca1d4e736a4c96",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "87bd0a6a4b72f92c84fa9f639b5d1901b5b8ccc2703268dd9bca1d4e736a4c96",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3M",
@@ -1001,9 +1127,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3M.svg",
       "revision": "d822d8cb8eb98aa3b689ae2dcae58a679f01284dbc3c8164cc44bb0634c7669d",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "d822d8cb8eb98aa3b689ae2dcae58a679f01284dbc3c8164cc44bb0634c7669d",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3N",
@@ -1050,9 +1183,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3N.svg",
       "revision": "50c494d43546ced67aac97f74c8c097bad9ccf83f79284d9b5eb39ab63ea45d3",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "50c494d43546ced67aac97f74c8c097bad9ccf83f79284d9b5eb39ab63ea45d3",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3O",
@@ -1101,9 +1241,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3O.svg",
       "revision": "4da8e2fa1f8dd2729c3209c4b93521d3c7de8e30d54f35f6ddcbf09005db0a84",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "4da8e2fa1f8dd2729c3209c4b93521d3c7de8e30d54f35f6ddcbf09005db0a84",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3P",
@@ -1152,9 +1299,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3P.svg",
       "revision": "5de532860865c5ce27330952cc71c3bb615de75dc89ff901483854a928dd916d",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "5de532860865c5ce27330952cc71c3bb615de75dc89ff901483854a928dd916d",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3Q",
@@ -1203,9 +1357,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3Q.svg",
       "revision": "d2f52228ea6109d73aaf1279d2e2d98ad7ddff89f11d5a7f5e10ff164347e819",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "d2f52228ea6109d73aaf1279d2e2d98ad7ddff89f11d5a7f5e10ff164347e819",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3R",
@@ -1251,9 +1412,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3R.svg",
       "revision": "37b1bbdfd7e9c508ba7a3d6783539a468ea310a34e7e32aa4a088858c9d52be8",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "37b1bbdfd7e9c508ba7a3d6783539a468ea310a34e7e32aa4a088858c9d52be8",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3S-full",
@@ -1303,9 +1471,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3S-full.svg",
       "revision": "e4aea4c3baaa3bf0110a51cc8b25f8ef727a57816684101b37d22c4402f4952d",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "e4aea4c3baaa3bf0110a51cc8b25f8ef727a57816684101b37d22c4402f4952d",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3S-tight",
@@ -1355,9 +1530,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3S-tight.svg",
       "revision": "153931c1325d0bfd338e3ad5b4cb17afe97170828c1a97996ad216db356060f7",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "153931c1325d0bfd338e3ad5b4cb17afe97170828c1a97996ad216db356060f7",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3S-mitered",
@@ -1407,9 +1589,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3S-mitered.svg",
       "revision": "fd8e61964e6c717862dad38d2a0692d6a62aa4e041872f57183adcf801b4e0ac",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "fd8e61964e6c717862dad38d2a0692d6a62aa4e041872f57183adcf801b4e0ac",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3T",
@@ -1455,9 +1644,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3T.svg",
       "revision": "2fefb6a1ca794d5727244b34dd303002d10fa1adb8ea4f3d6912728e5ccb6c3e",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "2fefb6a1ca794d5727244b34dd303002d10fa1adb8ea4f3d6912728e5ccb6c3e",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3U-mitered-vanes",
@@ -1507,9 +1703,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3U-mitered-vanes.svg",
       "revision": "4924aa5cca021b7e13ca3c700779ef29e4c820ed963cd7fbbf3551c9c556f1b1",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "4924aa5cca021b7e13ca3c700779ef29e4c820ed963cd7fbbf3551c9c556f1b1",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3U-mitered-no-vanes",
@@ -1559,9 +1762,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3U-mitered-no-vanes.svg",
       "revision": "d49aec3f059c0e3fcd8b13f92be85941279b5b9658e817dfd94ed5716ea5ba90",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "d49aec3f059c0e3fcd8b13f92be85941279b5b9658e817dfd94ed5716ea5ba90",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3V",
@@ -1605,9 +1815,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3V.svg",
       "revision": "03421dfbb1be1b47d617ffa8c1d79779f8bb232143c9be8719229fdfec23a66d",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "03421dfbb1be1b47d617ffa8c1d79779f8bb232143c9be8719229fdfec23a66d",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     },
     {
       "id": "3W",
@@ -1651,9 +1868,16 @@
       ],
       "svg": "/images/fittings/group-3-enhanced/3W.svg",
       "revision": "83727126d5677e564fecbb68525cdc35a0dfcf03e357b1b61f8f1e75d1abac23",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-3-enhanced-agent.json",
+      "visualReview": {
+        "revision": "83727126d5677e564fecbb68525cdc35a0dfcf03e357b1b61f8f1e75d1abac23",
+        "completedAt": "2026-09-04T21:13:44.271Z",
+        "batchId": "group-3-enhanced",
+        "note": "Approved as reference artwork. Preserve full assemblies; create individual fitting versions with a small portion of the preceding fitting.",
+        "record": "docs/fitting-reviews/review-8e027f91a8358697.json"
+      }
     }
   ]
 }

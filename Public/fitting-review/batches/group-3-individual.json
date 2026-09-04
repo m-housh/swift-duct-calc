@@ -1,4 +1,4 @@
-window.FITTING_REVIEW = {
+{
   "id": "group-3-individual",
   "title": "Group 3 \u00b7 individual fittings",
   "description": "Standalone drawings retain their original geometry. Fittings separated from shared assemblies retain a short piece of their existing connection. Open the full reference from any card. Corner and vane variants still share generic source artwork; their differences are recorded in the fitting metadata.",
@@ -577,4 +577,4 @@ window.FITTING_REVIEW = {
       "priorApproval": false
     }
   ]
-};
+}

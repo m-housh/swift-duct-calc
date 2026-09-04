@@ -1,0 +1,1734 @@
+{
+  "schemaVersion": 1,
+  "group": 3,
+  "title": "Group 3 individual fittings",
+  "status": "individual-needs-review",
+  "drawingCount": 32,
+  "expectedDrawingCount": 32,
+  "withheldIds": [],
+  "withheld": [],
+  "upstreamContextRule": "Keep a small piece of the existing connecting neighbor only when separating shared assembly artwork. Leave original standalone fittings unchanged.",
+  "referenceManifest": "/images/fittings/group-3-context/manifest.json",
+  "items": [
+    {
+      "id": "3A",
+      "fittingNumber": "3A",
+      "name": "Full-radius takeoff",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 15,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10,
+          12
+        ],
+        "printedPages": [
+          166,
+          167
+        ],
+        "referenceCropPdfPage": 12,
+        "cropPixelsAt200Dpi": [
+          300,
+          155,
+          950,
+          650
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3A.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3A.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-enhanced/3A-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3A.png",
+      "sharedArtworkIds": [
+        "3A",
+        "3I"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-standalone.json",
+      "contextId": "reference-3A",
+      "contextArt": "/images/fittings/group-3-enhanced/3A-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3A.svg",
+      "unchangedStandalone": true,
+      "restorationNotes": [
+        "Existing standalone drawing retained without adding upstream geometry, per user clarification."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3A.svg",
+      "revision": "6c10e9f563e6d4c5bcf6423b2ec21adea47acd558937c5c74b61b4ec37ba8ea8",
+      "embeddedRasterSize": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "id": "3B",
+      "fittingNumber": "3B",
+      "name": "Full-radius takeoff with offset transition",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 30,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          255,
+          495,
+          750,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3B-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "sharedArtworkIds": [
+        "3B"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "contextId": "reference-3B",
+      "contextArt": "/images/fittings/group-3-enhanced/3B-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3B.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Prepared from a tight approved-source crop after full-assembly attempts changed the geometry.",
+        "Offset transition, distinct tall curved takeoff neck, and outlet rim compared visually against the source crop.",
+        "Upstream context is represented by two short parent side-wall strips as a cutaway, rather than a fully closed trunk volume."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3B.svg",
+      "revision": "bd470025e5744fd091aae7f238eb0bd6b019a35ded6f7d726ac2c62796d3f649",
+      "embeddedRasterSize": [
+        1422,
+        1106
+      ]
+    },
+    {
+      "id": "3C",
+      "fittingNumber": "3C",
+      "name": "Full-radius takeoff with straight transition",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 20,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          255,
+          495,
+          750,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3C-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "sharedArtworkIds": [
+        "3C"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "contextId": "reference-3B",
+      "contextArt": "/images/fittings/group-3-enhanced/3B-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3B.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Short attachment fragment retained at the inlet; straight-aspect transition, curved takeoff, outlet rim and original far-side orientation visually checked against approved assembly."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3C.svg",
+      "revision": "f8e81d28e5e8ff8ecc3e90a35ac86e6983c076b6cb3919dab23970620fdcc785",
+      "embeddedRasterSize": [
+        1466,
+        1073
+      ]
+    },
+    {
+      "id": "3D-full",
+      "fittingNumber": "3D",
+      "name": "Takeoff elbow with easy-bend elbow",
+      "variant": "full",
+      "referenceEquivalentLengthFeet": 35,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          255,
+          495,
+          750,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3D-full-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "sharedArtworkIds": [
+        "3D-full",
+        "3D-tight",
+        "3D-mitered"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "contextId": "reference-3B",
+      "contextArt": "/images/fittings/group-3-enhanced/3B-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3B.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Prepared from a tight approved-source crop after full-assembly attempts changed the geometry.",
+        "Compound elbow, inner and outer bends, seam and shallow rectangular outlet visually match the source crop.",
+        "Retains a short schematic parent duct fragment below the far-side branch; parent ends are completed boundaries.",
+        "Generic source artwork shared across corner variants; artwork does not distinguish full, tight and mitered configuration."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3D-full.svg",
+      "revision": "2d769199e5138f7690bd24b3c8a7752cf898d2d58dc81c1e6031fb864245222c",
+      "embeddedRasterSize": [
+        1470,
+        1070
+      ]
+    },
+    {
+      "id": "3D-tight",
+      "fittingNumber": "3D",
+      "name": "Takeoff elbow with easy-bend elbow",
+      "variant": "tight",
+      "referenceEquivalentLengthFeet": 55,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          255,
+          495,
+          750,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3D-tight-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "sharedArtworkIds": [
+        "3D-full",
+        "3D-tight",
+        "3D-mitered"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "contextId": "reference-3B",
+      "contextArt": "/images/fittings/group-3-enhanced/3B-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3B.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Prepared from a tight approved-source crop after full-assembly attempts changed the geometry.",
+        "Compound elbow, inner and outer bends, seam and shallow rectangular outlet visually match the source crop.",
+        "Retains a short schematic parent duct fragment below the far-side branch; parent ends are completed boundaries.",
+        "Generic source artwork shared across corner variants; artwork does not distinguish full, tight and mitered configuration."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3D-tight.svg",
+      "revision": "bb985c60c65805fd327d7eef5d6c85912d9ee0e7155188ccddc5f8a1f52cc778",
+      "embeddedRasterSize": [
+        1470,
+        1070
+      ]
+    },
+    {
+      "id": "3D-mitered",
+      "fittingNumber": "3D",
+      "name": "Takeoff elbow with easy-bend elbow",
+      "variant": "mitered",
+      "referenceEquivalentLengthFeet": 110,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          255,
+          495,
+          750,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3D-mitered-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "sharedArtworkIds": [
+        "3D-full",
+        "3D-tight",
+        "3D-mitered"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "contextId": "reference-3B",
+      "contextArt": "/images/fittings/group-3-enhanced/3B-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3B.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Prepared from a tight approved-source crop after full-assembly attempts changed the geometry.",
+        "Compound elbow, inner and outer bends, seam and shallow rectangular outlet visually match the source crop.",
+        "Retains a short schematic parent duct fragment below the far-side branch; parent ends are completed boundaries.",
+        "Generic source artwork shared across corner variants; artwork does not distinguish full, tight and mitered configuration."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3D-mitered.svg",
+      "revision": "f3caa2331794a5561a754e09b27c85b2a51fd1668cffd5d28231e3ee5286bd09",
+      "embeddedRasterSize": [
+        1470,
+        1070
+      ]
+    },
+    {
+      "id": "3E",
+      "fittingNumber": "3E",
+      "name": "Transition-wall takeoff",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 30,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          690,
+          495,
+          1160,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3E-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "sharedArtworkIds": [
+        "3E"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "contextId": "reference-3E",
+      "contextArt": "/images/fittings/group-3-enhanced/3E-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3E.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Short parent duct segment retained behind the side takeoff; square outlet and full curved throat visually checked against approved assembly."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3E.svg",
+      "revision": "9f60601a06a2968a4402cd9f49f2c9bab02c8e4c06e25ea53da590019b81a35e",
+      "embeddedRasterSize": [
+        1426,
+        1103
+      ]
+    },
+    {
+      "id": "3F-full",
+      "fittingNumber": "3F",
+      "name": "Transition-wall takeoff elbow with easy-bend elbow",
+      "variant": "full",
+      "referenceEquivalentLengthFeet": 50,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          690,
+          495,
+          1160,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3F-full-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "sharedArtworkIds": [
+        "3F-full",
+        "3F-tight",
+        "3F-mitered"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "contextId": "reference-3E",
+      "contextArt": "/images/fittings/group-3-enhanced/3E-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3E.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Short parent duct segment retained; complete compound takeoff/easy-bend elbow and broad shallow rectangular outlet visually checked against approved assembly.",
+        "Source uses generic artwork for these variants; differences in corner configuration remain metadata, and this drawing does not distinguish them."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3F-full.svg",
+      "revision": "ed7d72c657878386773e1dafe81c1038249f523727422d8105b401ad261e0822",
+      "embeddedRasterSize": [
+        1447,
+        1087
+      ]
+    },
+    {
+      "id": "3F-tight",
+      "fittingNumber": "3F",
+      "name": "Transition-wall takeoff elbow with easy-bend elbow",
+      "variant": "tight",
+      "referenceEquivalentLengthFeet": 70,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          690,
+          495,
+          1160,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3F-tight-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "sharedArtworkIds": [
+        "3F-full",
+        "3F-tight",
+        "3F-mitered"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "contextId": "reference-3E",
+      "contextArt": "/images/fittings/group-3-enhanced/3E-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3E.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Short parent duct segment retained; complete compound takeoff/easy-bend elbow and broad shallow rectangular outlet visually checked against approved assembly.",
+        "Source uses generic artwork for these variants; differences in corner configuration remain metadata, and this drawing does not distinguish them."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3F-tight.svg",
+      "revision": "a99b5f47247acdb910b0068a4a1d62d827c59a8e180f6787b7b1d7b8b78e969c",
+      "embeddedRasterSize": [
+        1447,
+        1087
+      ]
+    },
+    {
+      "id": "3F-mitered",
+      "fittingNumber": "3F",
+      "name": "Transition-wall takeoff elbow with easy-bend elbow",
+      "variant": "mitered",
+      "referenceEquivalentLengthFeet": 125,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          690,
+          495,
+          1160,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3F-mitered-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "sharedArtworkIds": [
+        "3F-full",
+        "3F-tight",
+        "3F-mitered"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "contextId": "reference-3E",
+      "contextArt": "/images/fittings/group-3-enhanced/3E-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3E.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Short parent duct segment retained; complete compound takeoff/easy-bend elbow and broad shallow rectangular outlet visually checked against approved assembly.",
+        "Source uses generic artwork for these variants; differences in corner configuration remain metadata, and this drawing does not distinguish them."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3F-mitered.svg",
+      "revision": "f88f574dce03d97f3b487e44673096674e87292473a89104f64df0ffd4308184",
+      "embeddedRasterSize": [
+        1447,
+        1087
+      ]
+    },
+    {
+      "id": "3G",
+      "fittingNumber": "3G",
+      "name": "Transition-wall takeoff with straight-aspect transition",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 35,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          690,
+          495,
+          1160,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3G-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "sharedArtworkIds": [
+        "3G"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "contextId": "reference-3E",
+      "contextArt": "/images/fittings/group-3-enhanced/3E-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3E.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Minimal local upstream transition fragment retained; curved inlet and straight-aspect transition seams visually checked against approved assembly."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3G.svg",
+      "revision": "cf126b0491e250aeb26efab234d58506274b78583f1347b3046ff86c5efcc4ba",
+      "embeddedRasterSize": [
+        1404,
+        1120
+      ]
+    },
+    {
+      "id": "3H",
+      "fittingNumber": "3H",
+      "name": "Transition-wall takeoff with offset-aspect transition",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 35,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          690,
+          495,
+          1160,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3H-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "sharedArtworkIds": [
+        "3H"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "contextId": "reference-3E",
+      "contextArt": "/images/fittings/group-3-enhanced/3E-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3E.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Prepared from a tight approved-source crop after full-assembly attempts changed the geometry.",
+        "Offset transition, seams, and original curved side-wall attachment visually match source crop.",
+        "Retains only a small tapered parent fragment at the original side attachment, with schematic boundary completion."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3H.svg",
+      "revision": "589cc936c7ea82141a627c4d6e00399fe135a584719143f9ea4ebed1f0266f0c",
+      "embeddedRasterSize": [
+        1385,
+        1136
+      ]
+    },
+    {
+      "id": "3I",
+      "fittingNumber": "3I",
+      "name": "Full-radius takeoff",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 15,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10,
+          12
+        ],
+        "printedPages": [
+          166,
+          167
+        ],
+        "referenceCropPdfPage": 12,
+        "cropPixelsAt200Dpi": [
+          300,
+          155,
+          950,
+          650
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3A.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3A.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-enhanced/3I-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3A.png",
+      "sharedArtworkIds": [
+        "3A",
+        "3I"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-standalone.json",
+      "contextId": "reference-3A",
+      "contextArt": "/images/fittings/group-3-enhanced/3A-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3A.svg",
+      "unchangedStandalone": true,
+      "restorationNotes": [
+        "Existing standalone drawing retained without adding upstream geometry, per user clarification."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3I.svg",
+      "revision": "08fa9e6414e98f35893fb89486d670daf392b893dc0c37a96eac7176c5d3178d",
+      "embeddedRasterSize": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "id": "3J-full",
+      "fittingNumber": "3J",
+      "name": "Takeoff elbow with easy-bend elbow",
+      "variant": "full",
+      "referenceEquivalentLengthFeet": 35,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          1110,
+          495,
+          1590,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3J-full-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "sharedArtworkIds": [
+        "3J-full",
+        "3J-tight",
+        "3J-mitered"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-j-n.json",
+      "contextId": "reference-3J-full",
+      "contextArt": "/images/fittings/group-3-enhanced/3J-full-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3J-full.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Two curved rectangular elbow portions and wide flat outlet retained. A short parent-duct stub shows the original side attachment.",
+        "A stray arc on the first isolation was removed in a targeted correction.",
+        "Source gives one generic illustration for full, tight and mitered 3J variants. Shared artwork does not depict different radius or vanes configurations; use variant metadata."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3J-full.svg",
+      "revision": "eb38cefc23ac35ba1c13532e00e92337ffa2c4619f05f7f84e27df15139f303b",
+      "embeddedRasterSize": [
+        1609,
+        977
+      ]
+    },
+    {
+      "id": "3J-tight",
+      "fittingNumber": "3J",
+      "name": "Takeoff elbow with easy-bend elbow",
+      "variant": "tight",
+      "referenceEquivalentLengthFeet": 55,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          1110,
+          495,
+          1590,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3J-tight-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "sharedArtworkIds": [
+        "3J-full",
+        "3J-tight",
+        "3J-mitered"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-j-n.json",
+      "contextId": "reference-3J-full",
+      "contextArt": "/images/fittings/group-3-enhanced/3J-full-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3J-full.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Two curved rectangular elbow portions and wide flat outlet retained. A short parent-duct stub shows the original side attachment.",
+        "A stray arc on the first isolation was removed in a targeted correction.",
+        "Source gives one generic illustration for full, tight and mitered 3J variants. Shared artwork does not depict different radius or vanes configurations; use variant metadata."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3J-tight.svg",
+      "revision": "84d52dc20c7b39bddd004576304080f0abb58d7d7d5418c11f46eccb00865aa0",
+      "embeddedRasterSize": [
+        1609,
+        977
+      ]
+    },
+    {
+      "id": "3J-mitered",
+      "fittingNumber": "3J",
+      "name": "Takeoff elbow with easy-bend elbow",
+      "variant": "mitered",
+      "referenceEquivalentLengthFeet": 110,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          1110,
+          495,
+          1590,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3J-mitered-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "sharedArtworkIds": [
+        "3J-full",
+        "3J-tight",
+        "3J-mitered"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-j-n.json",
+      "contextId": "reference-3J-full",
+      "contextArt": "/images/fittings/group-3-enhanced/3J-full-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3J-full.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Two curved rectangular elbow portions and wide flat outlet retained. A short parent-duct stub shows the original side attachment.",
+        "A stray arc on the first isolation was removed in a targeted correction.",
+        "Source gives one generic illustration for full, tight and mitered 3J variants. Shared artwork does not depict different radius or vanes configurations; use variant metadata."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3J-mitered.svg",
+      "revision": "7de9b5ac04ec3599003a44f005f7683ac50bbb42d68a61fee6fcd1382a593d3a",
+      "embeddedRasterSize": [
+        1609,
+        977
+      ]
+    },
+    {
+      "id": "3K",
+      "fittingNumber": "3K",
+      "name": "Full-radius takeoff with straight transition",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 20,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          1110,
+          495,
+          1590,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3K-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "sharedArtworkIds": [],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-j-n.json",
+      "contextId": "reference-3J-full",
+      "contextArt": "/images/fittings/group-3-enhanced/3J-full-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3J-full.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Original full-radius rectangular takeoff and straight tapered transition retained; short upstream duct section shows side connection."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3K.svg",
+      "revision": "397a033bd1355ef34cc620e49aaa9920288253d43a68de2f57082bf3279bbe81",
+      "embeddedRasterSize": [
+        1641,
+        958
+      ]
+    },
+    {
+      "id": "3L",
+      "fittingNumber": "3L",
+      "name": "Full-radius takeoff with offset transition",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 30,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          1110,
+          495,
+          1590,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3L-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "sharedArtworkIds": [],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-j-n.json",
+      "contextId": "reference-3J-full",
+      "contextArt": "/images/fittings/group-3-enhanced/3J-full-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3J-full.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Original full-radius rectangular takeoff and offset tapered transition retained; short upstream duct section shows side connection."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3L.svg",
+      "revision": "b75035929c0c15aee53f4d5f6854012039c64075052b276dcafd1ec6eba97f2d",
+      "embeddedRasterSize": [
+        1479,
+        1064
+      ]
+    },
+    {
+      "id": "3M",
+      "fittingNumber": "3M",
+      "name": "In-line eased takeoff with one elbow",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 25,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          300,
+          790,
+          790,
+          1115
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3M.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3M.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3M-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3M.png",
+      "sharedArtworkIds": [],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-j-n.json",
+      "contextId": "reference-3M",
+      "contextArt": "/images/fittings/group-3-enhanced/3M-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3M.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Complete eased takeoff base, one segmented elbow and round outlet retained. Short parent duct preserves source side attachment."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3M.svg",
+      "revision": "9a7237647a5ac876051f4549b6f2086db91e7e0bf8abc55d541001d0d2ca9e48",
+      "embeddedRasterSize": [
+        1561,
+        1008
+      ]
+    },
+    {
+      "id": "3N",
+      "fittingNumber": "3N",
+      "name": "In-line eased takeoff with two elbows",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 40,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          300,
+          790,
+          790,
+          1115
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3M.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3M.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3N-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3M.png",
+      "sharedArtworkIds": [],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-j-n.json",
+      "contextId": "reference-3M",
+      "contextArt": "/images/fittings/group-3-enhanced/3M-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3M.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Complete eased takeoff base, two segmented elbows and round outlet retained. Short parent duct preserves source side attachment."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3N.svg",
+      "revision": "0cb246b8baa31438866dddc0ee2da6c82595035d7ad35db0a0d99d7e31dcde72",
+      "embeddedRasterSize": [
+        1561,
+        1008
+      ]
+    },
+    {
+      "id": "3O",
+      "fittingNumber": "3O",
+      "name": "Transition-wall eased takeoff",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 20,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          700,
+          790,
+          1175,
+          1115
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3O-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png",
+      "sharedArtworkIds": [],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-o-r.json",
+      "contextId": "reference-3O",
+      "contextArt": "/images/fittings/group-3-enhanced/3O-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3O.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Retains a short rectangular parent duct with cut marks and the original faceted sidewall transition and straight round outlet."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3O.svg",
+      "revision": "fa112209a17d9b2300744811e59e4b4ad07b3d9febe1051be50449724e0aea38",
+      "embeddedRasterSize": [
+        1404,
+        1120
+      ]
+    },
+    {
+      "id": "3P",
+      "fittingNumber": "3P",
+      "name": "Transition-wall eased takeoff with two elbows",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 50,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          700,
+          790,
+          1175,
+          1115
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3P-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png",
+      "sharedArtworkIds": [],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-o-r.json",
+      "contextId": "reference-3O",
+      "contextArt": "/images/fittings/group-3-enhanced/3O-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3O.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Retains the short parent duct behind the sidewall transition, both segmented elbows, vertical section and up-right round outlet.",
+        "Two targeted cleanup passes corrected the parent duct outline and joined transition crease endpoints."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3P.svg",
+      "revision": "30c167938c6b4b1ea0818e1d6062ba2196d2392b02241c399a398d7cc3d43189",
+      "embeddedRasterSize": [
+        1423,
+        1105
+      ]
+    },
+    {
+      "id": "3Q",
+      "fittingNumber": "3Q",
+      "name": "Transition-wall eased takeoff with one elbow",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 35,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          700,
+          790,
+          1175,
+          1115
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3Q-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png",
+      "sharedArtworkIds": [],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-o-r.json",
+      "contextId": "reference-3O",
+      "contextArt": "/images/fittings/group-3-enhanced/3O-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3O.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Retains a short open-ended parent duct and the sidewall collar, one segmented elbow and down-left round outlet."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3Q.svg",
+      "revision": "9fe65399c3ea3a7932a14c6bc23212f33a229a905f8874eee76b0170e4c85094",
+      "embeddedRasterSize": [
+        1396,
+        1127
+      ]
+    },
+    {
+      "id": "3R",
+      "fittingNumber": "3R",
+      "name": "Transition-wall eased takeoff",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 20,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          1060,
+          775,
+          1640,
+          1115
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3R-3U.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/context-3R-3U.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3R-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3R-3U.png",
+      "sharedArtworkIds": [],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-o-r.json",
+      "contextId": "reference-3R",
+      "contextArt": "/images/fittings/group-3-enhanced/3R-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3R.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Retains the wide asymmetric sidewall transition, nearly face-on round outlet and short upstream rectangular duct context."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3R.svg",
+      "revision": "6a5c73b19f4c46c048acf277e14f0e58dc247615d04c82c51b99519ed0934512",
+      "embeddedRasterSize": [
+        1483,
+        1061
+      ]
+    },
+    {
+      "id": "3S-full",
+      "fittingNumber": "3S",
+      "name": "Hard-bend takeoff elbow",
+      "variant": "full",
+      "referenceEquivalentLengthFeet": 15,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10,
+          12
+        ],
+        "printedPages": [
+          166,
+          167
+        ],
+        "referenceCropPdfPage": 12,
+        "cropPixelsAt200Dpi": [
+          1440,
+          1170,
+          2050,
+          1690
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-enhanced/3S-full-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png",
+      "sharedArtworkIds": [
+        "3S-full",
+        "3S-tight",
+        "3S-mitered"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-standalone.json",
+      "contextId": "reference-3S-full",
+      "contextArt": "/images/fittings/group-3-enhanced/3S-full-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3S-full.svg",
+      "unchangedStandalone": true,
+      "restorationNotes": [
+        "Existing standalone drawing retained without adding upstream geometry, per user clarification.",
+        "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3S-full.svg",
+      "revision": "4b503398e97a37dd53edc497c0e39f70683d8bd25efd0e8e01db57463f822729",
+      "embeddedRasterSize": [
+        1199,
+        1312
+      ]
+    },
+    {
+      "id": "3S-tight",
+      "fittingNumber": "3S",
+      "name": "Hard-bend takeoff elbow",
+      "variant": "tight",
+      "referenceEquivalentLengthFeet": 35,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10,
+          12
+        ],
+        "printedPages": [
+          166,
+          167
+        ],
+        "referenceCropPdfPage": 12,
+        "cropPixelsAt200Dpi": [
+          1440,
+          1170,
+          2050,
+          1690
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-enhanced/3S-tight-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png",
+      "sharedArtworkIds": [
+        "3S-full",
+        "3S-tight",
+        "3S-mitered"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-standalone.json",
+      "contextId": "reference-3S-full",
+      "contextArt": "/images/fittings/group-3-enhanced/3S-full-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3S-full.svg",
+      "unchangedStandalone": true,
+      "restorationNotes": [
+        "Existing standalone drawing retained without adding upstream geometry, per user clarification.",
+        "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3S-tight.svg",
+      "revision": "fb1e6c53e6e5f31c1385ba7bc9dc107bdb8120cc7a2c78c9114f647aaabd3c9b",
+      "embeddedRasterSize": [
+        1199,
+        1312
+      ]
+    },
+    {
+      "id": "3S-mitered",
+      "fittingNumber": "3S",
+      "name": "Hard-bend takeoff elbow",
+      "variant": "mitered",
+      "referenceEquivalentLengthFeet": 90,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10,
+          12
+        ],
+        "printedPages": [
+          166,
+          167
+        ],
+        "referenceCropPdfPage": 12,
+        "cropPixelsAt200Dpi": [
+          1440,
+          1170,
+          2050,
+          1690
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-enhanced/3S-mitered-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png",
+      "sharedArtworkIds": [
+        "3S-full",
+        "3S-tight",
+        "3S-mitered"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-standalone.json",
+      "contextId": "reference-3S-full",
+      "contextArt": "/images/fittings/group-3-enhanced/3S-full-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3S-full.svg",
+      "unchangedStandalone": true,
+      "restorationNotes": [
+        "Existing standalone drawing retained without adding upstream geometry, per user clarification.",
+        "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3S-mitered.svg",
+      "revision": "b318ba18447b4a63f4449f581466a563f108c2efc4e5f0c12a666d1b95d57714",
+      "embeddedRasterSize": [
+        1199,
+        1312
+      ]
+    },
+    {
+      "id": "3T",
+      "fittingNumber": "3T",
+      "name": "In-line eased takeoff",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 10,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10,
+          12
+        ],
+        "printedPages": [
+          166,
+          167
+        ],
+        "referenceCropPdfPage": 12,
+        "cropPixelsAt200Dpi": [
+          1270,
+          920,
+          1950,
+          1450
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3T.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3T.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-enhanced/3T-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3T.png",
+      "sharedArtworkIds": [
+        "3T"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-standalone.json",
+      "contextId": "reference-3T",
+      "contextArt": "/images/fittings/group-3-enhanced/3T-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3T.svg",
+      "unchangedStandalone": true,
+      "restorationNotes": [
+        "Existing standalone drawing retained without adding upstream geometry, per user clarification."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3T.svg",
+      "revision": "2ed5676e315b3e9c4477e5958e0acba3ebad3d21c57bc466384d767bf108b78a",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "3U-mitered-vanes",
+      "fittingNumber": "3U",
+      "name": "Mitered takeoff elbow",
+      "variant": "mitered-vanes",
+      "referenceEquivalentLengthFeet": 10,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10,
+          12
+        ],
+        "printedPages": [
+          166,
+          167
+        ],
+        "referenceCropPdfPage": 12,
+        "cropPixelsAt200Dpi": [
+          1190,
+          150,
+          1850,
+          650
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3U-mitered-vanes.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3U-mitered-vanes.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-enhanced/3U-mitered-vanes-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3U-mitered-vanes.png",
+      "sharedArtworkIds": [
+        "3U-mitered-vanes",
+        "3U-mitered-no-vanes"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-standalone.json",
+      "contextId": "reference-3U-mitered-vanes",
+      "contextArt": "/images/fittings/group-3-enhanced/3U-mitered-vanes-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3U-mitered-vanes.svg",
+      "unchangedStandalone": true,
+      "restorationNotes": [
+        "Existing standalone drawing retained without adding upstream geometry, per user clarification.",
+        "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3U-mitered-vanes.svg",
+      "revision": "068a9760f7e836f458b5afbf575e5501b0e7dab81957e0fa67c306e2e441c6c7",
+      "embeddedRasterSize": [
+        1538,
+        1022
+      ]
+    },
+    {
+      "id": "3U-mitered-no-vanes",
+      "fittingNumber": "3U",
+      "name": "Mitered takeoff elbow",
+      "variant": "mitered-no-vanes",
+      "referenceEquivalentLengthFeet": 80,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10,
+          12
+        ],
+        "printedPages": [
+          166,
+          167
+        ],
+        "referenceCropPdfPage": 12,
+        "cropPixelsAt200Dpi": [
+          1190,
+          150,
+          1850,
+          650
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3U-mitered-vanes.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3U-mitered-vanes.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-enhanced/3U-mitered-no-vanes-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3U-mitered-vanes.png",
+      "sharedArtworkIds": [
+        "3U-mitered-vanes",
+        "3U-mitered-no-vanes"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-standalone.json",
+      "contextId": "reference-3U-mitered-vanes",
+      "contextArt": "/images/fittings/group-3-enhanced/3U-mitered-vanes-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3U-mitered-vanes.svg",
+      "unchangedStandalone": true,
+      "restorationNotes": [
+        "Existing standalone drawing retained without adding upstream geometry, per user clarification.",
+        "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3U-mitered-no-vanes.svg",
+      "revision": "736696476fb5741de1a7dba3d134ed43ead54cea5d8602c769f96bd455beb42c",
+      "embeddedRasterSize": [
+        1538,
+        1022
+      ]
+    },
+    {
+      "id": "3V",
+      "fittingNumber": "3V",
+      "name": "Round-to-rectangular transition",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 30,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          12
+        ],
+        "printedPages": [
+          167
+        ],
+        "referenceCropPdfPage": 12,
+        "cropPixelsAt200Dpi": [
+          1250,
+          550,
+          2060,
+          1070
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3V.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3V.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-individual/3V-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3V.png",
+      "sharedArtworkIds": [
+        "3V"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-standalone.json",
+      "contextId": "reference-3V",
+      "contextArt": "/images/fittings/group-3-enhanced/3V-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3V.svg",
+      "unchangedStandalone": false,
+      "restorationNotes": [
+        "Left transition isolated from the mirrored pair; no upstream geometry added. Visually checked full collar, panel creases and rectangular end against the accepted reference."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3V.svg",
+      "revision": "bc52b9681808975825d22eaf35dfaaf684ef562f277578a41d5b005c601e0917",
+      "embeddedRasterSize": [
+        1188,
+        1324
+      ]
+    },
+    {
+      "id": "3W",
+      "fittingNumber": "3W",
+      "name": "Offset hard-bend transition",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 30,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          13
+        ],
+        "printedPages": [
+          167
+        ],
+        "referenceCropPdfPage": 13,
+        "cropPixelsAt200Dpi": [
+          500,
+          0,
+          1320,
+          590
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3W.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3W.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-3-enhanced/3W-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3W.png",
+      "sharedArtworkIds": [
+        "3W"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-individual-standalone.json",
+      "contextId": "reference-3W",
+      "contextArt": "/images/fittings/group-3-enhanced/3W-restored-art.png",
+      "contextSVG": "/images/fittings/group-3-context/reference-3W.svg",
+      "unchangedStandalone": true,
+      "restorationNotes": [
+        "Existing standalone drawing retained without adding upstream geometry, per user clarification."
+      ],
+      "status": "individual-needs-review",
+      "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
+      "svg": "/images/fittings/group-3-individual/3W.svg",
+      "revision": "155e07368338cb995ab9b103498dad61790cab99a1f12de058161889e30ba448",
+      "embeddedRasterSize": [
+        1374,
+        1145
+      ]
+    }
+  ]
+}

@@ -23,6 +23,10 @@
   function el(tag,cls,content){const node=document.createElement(tag);if(cls)node.className=cls;if(content)node.textContent=content;return node;}
   document.getElementById('batch-title').textContent=batch.title;
   document.getElementById('batch-description').textContent=batch.description;
+  if(batch.referenceGallery){
+    const link=el('a',null,'Browse full group references');link.href=batch.referenceGallery;link.target='_blank';link.rel='noopener';
+    document.getElementById('batch-description').append(document.createTextNode(' '),link);
+  }
   const list=document.getElementById('drawings');
   for(const item of batch.items){
     const decision=state.decisions[item.id];
@@ -42,6 +46,11 @@
       panel.append(top,img);comparison.append(panel);
     }
     card.append(comparison);
+    if(item.contextURL){
+      const context=el('div','notes');const link=el('a',null,'Open full reference drawing');link.href=item.contextURL;link.target='_blank';link.rel='noopener';context.append(link);
+      if(item.reviewNote)context.append(el('p','muted',item.reviewNote));
+      card.append(context);
+    }
     const notes=el('div','notes');notes.hidden=!decision.needsWork;
     const noteLabel=el('label',null,'What needs changing? (optional)');const textarea=el('textarea');textarea.id='note-'+item.id;noteLabel.htmlFor=textarea.id;textarea.value=decision.note;notes.append(noteLabel,textarea);card.append(notes);
     checkbox.addEventListener('change',()=>{decision.needsWork=checkbox.checked;state.completedAt=null;card.classList.toggle('flagged',checkbox.checked);notes.hidden=!checkbox.checked;save();});
