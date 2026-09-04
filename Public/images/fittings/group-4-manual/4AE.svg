@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="0 0 640 520" role="img" aria-labelledby="title desc">
+<title id="title">4AE — Segmented elbow on flange</title>
+<desc id="desc">Clean manually reconstructed Group 4 fitting. Reference equivalent length 55 feet. Drawing not to scale.</desc>
+<style>
+  text{font-family:Arial,sans-serif;fill:#243b53}
+  .part{fill:none;stroke:#243b53;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<text x="32" y="44" font-size="28" font-weight="700">4AE</text>
+<text x="122" y="43" font-size="17">Segmented elbow on flange</text>
+<text x="32" y="76" font-size="13">GROUP 4 · MANUAL VECTOR PILOT</text>
+<svg x="48" y="92" width="544" height="330" viewBox="70 35 450 410" preserveAspectRatio="xMidYMid meet">
+
+<g class="part">
+  <path d="M118 365L285 310L451 354L280 414Z" fill="#f8fafc"/>
+  <path d="M139 365L284 321L426 356L280 401Z"/>
+  <path d="M229 318V286C229 270 254 258 284 258S339 270 339 286V318" fill="#fff"/>
+  <path d="M229 286C229 302 254 314 284 314S339 302 339 286"/>
+  <path d="M234 282C220 241 226 196 252 157C282 113 331 89 400 78"/>
+  <path d="M301 287C283 250 287 217 308 188C332 156 365 143 419 137"/>
+  <path d="M234 282C254 296 282 299 301 287"/>
+  <path d="M224 244C248 259 278 263 298 251"/>
+  <path d="M225 207C250 223 279 228 304 216"/>
+  <path d="M238 171C262 188 289 192 316 181"/>
+  <path d="M261 137C285 153 311 157 338 148"/>
+  <path d="M295 106C318 121 343 126 371 117"/>
+  <path d="M400 78L431 73M419 137L450 131"/>
+</g>
+</svg>
+<text x="32" y="458" font-size="15">Reference equivalent length: 55 ft</text>
+<text x="32" y="486" font-size="12">CLEAN MANUAL SVG · NOT TO SCALE · WORKBOOK/PDF PRINTED PAGE 168</text>
+</svg>

@@ -1,4 +1,4 @@
-window.FITTING_REVIEW = {
+{
   "id": "group-4-manual-pilot",
   "title": "Group 4 manual SVG pilot \u00b7 4 drawings",
   "description": "Four clean SVGs drawn manually from the workbook source. Check only drawings that need more work.",
@@ -52,4 +52,4 @@ window.FITTING_REVIEW = {
       "priorApproval": false
     }
   ]
-};
+}

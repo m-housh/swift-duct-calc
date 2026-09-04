@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="0 0 640 520" role="img" aria-labelledby="title desc">
+<title id="title">4Y — Rectangular ceiling register boot</title>
+<desc id="desc">Clean manually reconstructed Group 4 fitting. Reference equivalent length 35 feet. Drawing not to scale.</desc>
+<style>
+  text{font-family:Arial,sans-serif;fill:#243b53}
+  .part{fill:none;stroke:#243b53;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<text x="32" y="44" font-size="28" font-weight="700">4Y</text>
+<text x="122" y="43" font-size="17">Rectangular ceiling register boot</text>
+<text x="32" y="76" font-size="13">GROUP 4 · MANUAL VECTOR PILOT</text>
+<svg x="48" y="92" width="544" height="330" viewBox="70 35 450 410" preserveAspectRatio="xMidYMid meet">
+
+<defs>
+  <clipPath id="grid-4Y"><polygon points="139,350 397,350 471,393 211,393"/></clipPath>
+</defs>
+<g class="part">
+  <path d="M274 98V73C274 62 287 54 304 54H336C353 54 366 62 366 73V98"/>
+  <path d="M224 151L274 98H366L417 151" fill="#f8fafc"/>
+  <path d="M184 151H417L473 185H239Z" fill="#fff"/>
+  <path d="M204 170H410L443 189H237Z"/>
+  <path d="M168 211H432L492 247H229Z" fill="#f8fafc"/>
+  <path d="M183 226H424L461 248H221Z"/>
+  <path d="M168 211L184 151M432 211L473 185"/>
+  <polygon points="139,350 397,350 471,393 211,393" fill="#fff"/>
+  <polygon points="153,360 391,360 450,384 214,384" fill="#f8fafc"/>
+  <g clip-path="url(#grid-4Y)" stroke-width="1.25">
+    <path d="M80 337L190 410M100 337L210 410M120 337L230 410M140 337L250 410M160 337L270 410M180 337L290 410M200 337L310 410M220 337L330 410M240 337L350 410M260 337L370 410M280 337L390 410M300 337L410 410M320 337L430 410M340 337L450 410M360 337L470 410M380 337L490 410"/>
+    <path d="M170 337L70 410M190 337L90 410M210 337L110 410M230 337L130 410M250 337L150 410M270 337L170 410M290 337L190 410M310 337L210 410M330 337L230 410M350 337L250 410M370 337L270 410M390 337L290 410M410 337L310 410M430 337L330 410M450 337L350 410M470 337L370 410M490 337L390 410"/>
+  </g>
+</g>
+</svg>
+<text x="32" y="458" font-size="15">Reference equivalent length: 35 ft</text>
+<text x="32" y="486" font-size="12">CLEAN MANUAL SVG · NOT TO SCALE · WORKBOOK/PDF PRINTED PAGE 168</text>
+</svg>
