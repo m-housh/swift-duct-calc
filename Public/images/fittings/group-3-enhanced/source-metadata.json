@@ -1,0 +1,1029 @@
+{
+  "group": 3,
+  "title": "Reducing Trunk Takeoff Fittings",
+  "items": [
+    {
+      "id": "3A",
+      "fittingNumber": "3A",
+      "name": "Full-radius takeoff",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 15,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10,
+          12
+        ],
+        "printedPages": [
+          166,
+          167
+        ],
+        "referenceCropPdfPage": 12,
+        "cropPixelsAt200Dpi": [
+          300,
+          155,
+          950,
+          650
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3A.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3A.png",
+      "notes": []
+    },
+    {
+      "id": "3B",
+      "fittingNumber": "3B",
+      "name": "Full-radius takeoff with offset transition",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 30,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          255,
+          495,
+          750,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "notes": []
+    },
+    {
+      "id": "3C",
+      "fittingNumber": "3C",
+      "name": "Full-radius takeoff with straight transition",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 20,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          255,
+          495,
+          750,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "notes": []
+    },
+    {
+      "id": "3D-full",
+      "fittingNumber": "3D",
+      "name": "Takeoff elbow with easy-bend elbow",
+      "variant": "full",
+      "referenceEquivalentLengthFeet": 35,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          255,
+          495,
+          750,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "notes": []
+    },
+    {
+      "id": "3D-tight",
+      "fittingNumber": "3D",
+      "name": "Takeoff elbow with easy-bend elbow",
+      "variant": "tight",
+      "referenceEquivalentLengthFeet": 55,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          255,
+          495,
+          750,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "notes": []
+    },
+    {
+      "id": "3D-mitered",
+      "fittingNumber": "3D",
+      "name": "Takeoff elbow with easy-bend elbow",
+      "variant": "mitered",
+      "referenceEquivalentLengthFeet": 110,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          255,
+          495,
+          750,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "notes": []
+    },
+    {
+      "id": "3E",
+      "fittingNumber": "3E",
+      "name": "Transition-wall takeoff",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 30,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          690,
+          495,
+          1160,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "notes": []
+    },
+    {
+      "id": "3F-full",
+      "fittingNumber": "3F",
+      "name": "Transition-wall takeoff elbow with easy-bend elbow",
+      "variant": "full",
+      "referenceEquivalentLengthFeet": 50,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          690,
+          495,
+          1160,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "notes": []
+    },
+    {
+      "id": "3F-tight",
+      "fittingNumber": "3F",
+      "name": "Transition-wall takeoff elbow with easy-bend elbow",
+      "variant": "tight",
+      "referenceEquivalentLengthFeet": 70,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          690,
+          495,
+          1160,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "notes": []
+    },
+    {
+      "id": "3F-mitered",
+      "fittingNumber": "3F",
+      "name": "Transition-wall takeoff elbow with easy-bend elbow",
+      "variant": "mitered",
+      "referenceEquivalentLengthFeet": 125,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          690,
+          495,
+          1160,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "notes": []
+    },
+    {
+      "id": "3G",
+      "fittingNumber": "3G",
+      "name": "Transition-wall takeoff with straight-aspect transition",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 35,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          690,
+          495,
+          1160,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "notes": []
+    },
+    {
+      "id": "3H",
+      "fittingNumber": "3H",
+      "name": "Transition-wall takeoff with offset-aspect transition",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 35,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          690,
+          495,
+          1160,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "notes": []
+    },
+    {
+      "id": "3I",
+      "fittingNumber": "3I",
+      "name": "Full-radius takeoff",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 15,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10,
+          12
+        ],
+        "printedPages": [
+          166,
+          167
+        ],
+        "referenceCropPdfPage": 12,
+        "cropPixelsAt200Dpi": [
+          300,
+          155,
+          950,
+          650
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3A.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3A.png",
+      "notes": []
+    },
+    {
+      "id": "3J-full",
+      "fittingNumber": "3J",
+      "name": "Takeoff elbow with easy-bend elbow",
+      "variant": "full",
+      "referenceEquivalentLengthFeet": 35,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          1110,
+          495,
+          1590,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "notes": []
+    },
+    {
+      "id": "3J-tight",
+      "fittingNumber": "3J",
+      "name": "Takeoff elbow with easy-bend elbow",
+      "variant": "tight",
+      "referenceEquivalentLengthFeet": 55,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          1110,
+          495,
+          1590,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "notes": []
+    },
+    {
+      "id": "3J-mitered",
+      "fittingNumber": "3J",
+      "name": "Takeoff elbow with easy-bend elbow",
+      "variant": "mitered",
+      "referenceEquivalentLengthFeet": 110,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          1110,
+          495,
+          1590,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "notes": []
+    },
+    {
+      "id": "3K",
+      "fittingNumber": "3K",
+      "name": "Full-radius takeoff with straight transition",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 20,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          1110,
+          495,
+          1590,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "notes": []
+    },
+    {
+      "id": "3L",
+      "fittingNumber": "3L",
+      "name": "Full-radius takeoff with offset transition",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 30,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          1110,
+          495,
+          1590,
+          820
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "notes": []
+    },
+    {
+      "id": "3M",
+      "fittingNumber": "3M",
+      "name": "In-line eased takeoff with one elbow",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 25,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          300,
+          790,
+          790,
+          1115
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3M.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3M.png",
+      "notes": []
+    },
+    {
+      "id": "3N",
+      "fittingNumber": "3N",
+      "name": "In-line eased takeoff with two elbows",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 40,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          300,
+          790,
+          790,
+          1115
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3M.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3M.png",
+      "notes": []
+    },
+    {
+      "id": "3O",
+      "fittingNumber": "3O",
+      "name": "Transition-wall eased takeoff",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 20,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          700,
+          790,
+          1175,
+          1115
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png",
+      "notes": []
+    },
+    {
+      "id": "3P",
+      "fittingNumber": "3P",
+      "name": "Transition-wall eased takeoff with two elbows",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 50,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          700,
+          790,
+          1175,
+          1115
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png",
+      "notes": []
+    },
+    {
+      "id": "3Q",
+      "fittingNumber": "3Q",
+      "name": "Transition-wall eased takeoff with one elbow",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 35,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          700,
+          790,
+          1175,
+          1115
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png",
+      "notes": []
+    },
+    {
+      "id": "3R",
+      "fittingNumber": "3R",
+      "name": "Transition-wall eased takeoff",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 20,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10
+        ],
+        "printedPages": [
+          166
+        ],
+        "referenceCropPdfPage": 10,
+        "cropPixelsAt200Dpi": [
+          1060,
+          775,
+          1640,
+          1115
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3R-3U.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/context-3R-3U.png",
+      "notes": []
+    },
+    {
+      "id": "3S-full",
+      "fittingNumber": "3S",
+      "name": "Hard-bend takeoff elbow",
+      "variant": "full",
+      "referenceEquivalentLengthFeet": 15,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10,
+          12
+        ],
+        "printedPages": [
+          166,
+          167
+        ],
+        "referenceCropPdfPage": 12,
+        "cropPixelsAt200Dpi": [
+          1440,
+          1170,
+          2050,
+          1690
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png",
+      "notes": []
+    },
+    {
+      "id": "3S-tight",
+      "fittingNumber": "3S",
+      "name": "Hard-bend takeoff elbow",
+      "variant": "tight",
+      "referenceEquivalentLengthFeet": 35,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10,
+          12
+        ],
+        "printedPages": [
+          166,
+          167
+        ],
+        "referenceCropPdfPage": 12,
+        "cropPixelsAt200Dpi": [
+          1440,
+          1170,
+          2050,
+          1690
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png",
+      "notes": []
+    },
+    {
+      "id": "3S-mitered",
+      "fittingNumber": "3S",
+      "name": "Hard-bend takeoff elbow",
+      "variant": "mitered",
+      "referenceEquivalentLengthFeet": 90,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10,
+          12
+        ],
+        "printedPages": [
+          166,
+          167
+        ],
+        "referenceCropPdfPage": 12,
+        "cropPixelsAt200Dpi": [
+          1440,
+          1170,
+          2050,
+          1690
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png",
+      "notes": []
+    },
+    {
+      "id": "3T",
+      "fittingNumber": "3T",
+      "name": "In-line eased takeoff",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 10,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10,
+          12
+        ],
+        "printedPages": [
+          166,
+          167
+        ],
+        "referenceCropPdfPage": 12,
+        "cropPixelsAt200Dpi": [
+          1270,
+          920,
+          1950,
+          1450
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3T.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3T.png",
+      "notes": []
+    },
+    {
+      "id": "3U-mitered-vanes",
+      "fittingNumber": "3U",
+      "name": "Mitered takeoff elbow",
+      "variant": "mitered-vanes",
+      "referenceEquivalentLengthFeet": 10,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10,
+          12
+        ],
+        "printedPages": [
+          166,
+          167
+        ],
+        "referenceCropPdfPage": 12,
+        "cropPixelsAt200Dpi": [
+          1190,
+          150,
+          1850,
+          650
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3U-mitered-vanes.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3U-mitered-vanes.png",
+      "notes": []
+    },
+    {
+      "id": "3U-mitered-no-vanes",
+      "fittingNumber": "3U",
+      "name": "Mitered takeoff elbow",
+      "variant": "mitered-no-vanes",
+      "referenceEquivalentLengthFeet": 80,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          10,
+          12
+        ],
+        "printedPages": [
+          166,
+          167
+        ],
+        "referenceCropPdfPage": 12,
+        "cropPixelsAt200Dpi": [
+          1190,
+          150,
+          1850,
+          650
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3U-mitered-vanes.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3U-mitered-vanes.png",
+      "notes": []
+    },
+    {
+      "id": "3V",
+      "fittingNumber": "3V",
+      "name": "Round-to-rectangular transition",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 30,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          12
+        ],
+        "printedPages": [
+          167
+        ],
+        "referenceCropPdfPage": 12,
+        "cropPixelsAt200Dpi": [
+          1250,
+          550,
+          2060,
+          1070
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3V.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3V.png",
+      "notes": []
+    },
+    {
+      "id": "3W",
+      "fittingNumber": "3W",
+      "name": "Offset hard-bend transition",
+      "variant": null,
+      "referenceEquivalentLengthFeet": 30,
+      "referenceValues": {},
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          13
+        ],
+        "printedPages": [
+          167
+        ],
+        "referenceCropPdfPage": 13,
+        "cropPixelsAt200Dpi": [
+          500,
+          0,
+          1320,
+          590
+        ],
+        "referenceImage": "/images/fittings/group-3-enhanced/source-art/3W.png"
+      },
+      "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3W.png",
+      "notes": []
+    }
+  ],
+  "source": {
+    "pdf": "/files/ManD.Groups.pdf",
+    "overviewPdfPage": 10,
+    "overviewPrintedPage": 166,
+    "detailPdfPages": [
+      12,
+      13
+    ],
+    "detailPrintedPage": 167
+  },
+  "printedPages": [],
+  "referenceConditions": {
+    "velocityFpm": 900,
+    "frictionRateIwcPer100Feet": 0.08
+  }
+}

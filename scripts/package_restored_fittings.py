@@ -99,6 +99,10 @@ def package(group, activate=False):
         src = item['source']
         printed = src.get('printedPage') or (src.get('printedPages') or source.get('printedPages') or [None])[0]
         page = src.get('referenceCropPdfPage') or src.get('pdfPage') or (src.get('pdfPages') or [1])[0]
+        # Group 3's legacy entries list both overview/detail printed pages;
+        # the comparison's actual source page determines the displayed label.
+        if group == 3:
+            printed = 167 if page >= 12 else 166
         svg = out / f'{fitting_id}.svg'
         svg.write_text(card(item, png, group, printed))
         revision = hashlib.sha256(svg.read_bytes() + reference.read_bytes()).hexdigest()
@@ -127,7 +131,7 @@ def package(group, activate=False):
     if any(item.get('sharedArtworkIds') for item in items):
         description += ' Some fittings share an original assembly illustration; their individual IDs and values are retained.'
     if group == 3:
-        description += ' The source does not separately illustrate every corner variant; shared artwork does not depict those differences.'
+        description += ' The source does not separately illustrate every corner or vane variant; shared artwork does not depict those differences.'
     if missing:
         description += ' Withheld pending corrections: ' + ', '.join(missing) + '.'
     batch = {'id': f'group-{group}-enhanced', 'title': f'Group {group} · high-resolution restorations',

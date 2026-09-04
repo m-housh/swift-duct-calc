@@ -1,0 +1,1913 @@
+{
+  "schemaVersion": 1,
+  "group": 3,
+  "workflow": "AI restoration of original workbook raster art; embedded raster artwork intended for self-contained SVG packaging",
+  "status": "ready-for-review",
+  "readyCount": 32,
+  "withheldCount": 0,
+  "items": [
+    {
+      "id": "3A",
+      "fittingNumber": "3A",
+      "restoredArt": "/images/fittings/group-3-enhanced/3A-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3A.png",
+      "status": "ready-for-review",
+      "notes": [],
+      "sharedArtworkIds": [
+        "3A",
+        "3I"
+      ],
+      "artworkKind": "standalone-source-detail",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image10.png",
+        "printedPage": 167,
+        "cropPixels": [
+          145,
+          245,
+          415,
+          405
+        ],
+        "referenceMetadata": {
+          "width": 270,
+          "height": 160,
+          "mode": "RGB",
+          "sha256": "d2107bb2a69032b43a8a7cca3fd5044e3b0d0d67c1047e7b84dcf6db044bc69f"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-68e65fa4-f4a7-4541-8c18-770914a75b09.png",
+        "editInput": "source-art/3A.png",
+        "outputMetadata": {
+          "width": 1536,
+          "height": 1024,
+          "mode": "RGB",
+          "sha256": "dc53007cd3d181d79d0499aa88dc07f8d3d678338f5134434a9471748e55d6e5"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3B",
+      "fittingNumber": "3B",
+      "restoredArt": "/images/fittings/group-3-enhanced/3B-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ],
+      "sharedArtworkIds": [
+        "3B",
+        "3C",
+        "3D-full",
+        "3D-tight",
+        "3D-mitered"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          75,
+          224,
+          324,
+          377
+        ],
+        "referenceMetadata": {
+          "width": 249,
+          "height": 153,
+          "mode": "RGB",
+          "sha256": "2de0d924e1077eb3bb676ac48f3735c04faf673f3d5ebc64abe0d5b1251afb79"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-a94851f0-f7fe-48d6-b68c-a83b474561b7.png",
+        "editInput": "source-art/3B.png",
+        "outputMetadata": {
+          "width": 1600,
+          "height": 983,
+          "mode": "RGB",
+          "sha256": "8a2fd5fadfa538e2d33ba99c040db0f81b2752db7d1e346ebf7178e12dd8d465"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3C",
+      "fittingNumber": "3C",
+      "restoredArt": "/images/fittings/group-3-enhanced/3C-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ],
+      "sharedArtworkIds": [
+        "3B",
+        "3C",
+        "3D-full",
+        "3D-tight",
+        "3D-mitered"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          75,
+          224,
+          324,
+          377
+        ],
+        "referenceMetadata": {
+          "width": 249,
+          "height": 153,
+          "mode": "RGB",
+          "sha256": "2de0d924e1077eb3bb676ac48f3735c04faf673f3d5ebc64abe0d5b1251afb79"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-a94851f0-f7fe-48d6-b68c-a83b474561b7.png",
+        "editInput": "source-art/3B.png",
+        "outputMetadata": {
+          "width": 1600,
+          "height": 983,
+          "mode": "RGB",
+          "sha256": "8a2fd5fadfa538e2d33ba99c040db0f81b2752db7d1e346ebf7178e12dd8d465"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3D-full",
+      "fittingNumber": "3D",
+      "restoredArt": "/images/fittings/group-3-enhanced/3D-full-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ],
+      "sharedArtworkIds": [
+        "3B",
+        "3C",
+        "3D-full",
+        "3D-tight",
+        "3D-mitered"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          75,
+          224,
+          324,
+          377
+        ],
+        "referenceMetadata": {
+          "width": 249,
+          "height": 153,
+          "mode": "RGB",
+          "sha256": "2de0d924e1077eb3bb676ac48f3735c04faf673f3d5ebc64abe0d5b1251afb79"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-a94851f0-f7fe-48d6-b68c-a83b474561b7.png",
+        "editInput": "source-art/3B.png",
+        "outputMetadata": {
+          "width": 1600,
+          "height": 983,
+          "mode": "RGB",
+          "sha256": "8a2fd5fadfa538e2d33ba99c040db0f81b2752db7d1e346ebf7178e12dd8d465"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3D-tight",
+      "fittingNumber": "3D",
+      "restoredArt": "/images/fittings/group-3-enhanced/3D-tight-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ],
+      "sharedArtworkIds": [
+        "3B",
+        "3C",
+        "3D-full",
+        "3D-tight",
+        "3D-mitered"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          75,
+          224,
+          324,
+          377
+        ],
+        "referenceMetadata": {
+          "width": 249,
+          "height": 153,
+          "mode": "RGB",
+          "sha256": "2de0d924e1077eb3bb676ac48f3735c04faf673f3d5ebc64abe0d5b1251afb79"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-a94851f0-f7fe-48d6-b68c-a83b474561b7.png",
+        "editInput": "source-art/3B.png",
+        "outputMetadata": {
+          "width": 1600,
+          "height": 983,
+          "mode": "RGB",
+          "sha256": "8a2fd5fadfa538e2d33ba99c040db0f81b2752db7d1e346ebf7178e12dd8d465"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3D-mitered",
+      "fittingNumber": "3D",
+      "restoredArt": "/images/fittings/group-3-enhanced/3D-mitered-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ],
+      "sharedArtworkIds": [
+        "3B",
+        "3C",
+        "3D-full",
+        "3D-tight",
+        "3D-mitered"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          75,
+          224,
+          324,
+          377
+        ],
+        "referenceMetadata": {
+          "width": 249,
+          "height": 153,
+          "mode": "RGB",
+          "sha256": "2de0d924e1077eb3bb676ac48f3735c04faf673f3d5ebc64abe0d5b1251afb79"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-a94851f0-f7fe-48d6-b68c-a83b474561b7.png",
+        "editInput": "source-art/3B.png",
+        "outputMetadata": {
+          "width": 1600,
+          "height": 983,
+          "mode": "RGB",
+          "sha256": "8a2fd5fadfa538e2d33ba99c040db0f81b2752db7d1e346ebf7178e12dd8d465"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3E",
+      "fittingNumber": "3E",
+      "restoredArt": "/images/fittings/group-3-enhanced/3E-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ],
+      "sharedArtworkIds": [
+        "3E",
+        "3F-full",
+        "3F-tight",
+        "3F-mitered",
+        "3G",
+        "3H"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          328,
+          224,
+          579,
+          382
+        ],
+        "referenceMetadata": {
+          "width": 251,
+          "height": 158,
+          "mode": "RGB",
+          "sha256": "5e398449154f95ae25184325c91762191195223d691545b76c87aa2f99b862f2"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-ee6ce00f-671d-4ab2-bfab-9c7a2c34fc04.png",
+        "editInput": "source-art/3E.png",
+        "outputMetadata": {
+          "width": 1581,
+          "height": 995,
+          "mode": "RGB",
+          "sha256": "22cc136f34fef72e1c164d3d2761484d37d5c70fe18910995c4ae7efc02f6af3"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3F-full",
+      "fittingNumber": "3F",
+      "restoredArt": "/images/fittings/group-3-enhanced/3F-full-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ],
+      "sharedArtworkIds": [
+        "3E",
+        "3F-full",
+        "3F-tight",
+        "3F-mitered",
+        "3G",
+        "3H"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          328,
+          224,
+          579,
+          382
+        ],
+        "referenceMetadata": {
+          "width": 251,
+          "height": 158,
+          "mode": "RGB",
+          "sha256": "5e398449154f95ae25184325c91762191195223d691545b76c87aa2f99b862f2"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-ee6ce00f-671d-4ab2-bfab-9c7a2c34fc04.png",
+        "editInput": "source-art/3E.png",
+        "outputMetadata": {
+          "width": 1581,
+          "height": 995,
+          "mode": "RGB",
+          "sha256": "22cc136f34fef72e1c164d3d2761484d37d5c70fe18910995c4ae7efc02f6af3"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3F-tight",
+      "fittingNumber": "3F",
+      "restoredArt": "/images/fittings/group-3-enhanced/3F-tight-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ],
+      "sharedArtworkIds": [
+        "3E",
+        "3F-full",
+        "3F-tight",
+        "3F-mitered",
+        "3G",
+        "3H"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          328,
+          224,
+          579,
+          382
+        ],
+        "referenceMetadata": {
+          "width": 251,
+          "height": 158,
+          "mode": "RGB",
+          "sha256": "5e398449154f95ae25184325c91762191195223d691545b76c87aa2f99b862f2"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-ee6ce00f-671d-4ab2-bfab-9c7a2c34fc04.png",
+        "editInput": "source-art/3E.png",
+        "outputMetadata": {
+          "width": 1581,
+          "height": 995,
+          "mode": "RGB",
+          "sha256": "22cc136f34fef72e1c164d3d2761484d37d5c70fe18910995c4ae7efc02f6af3"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3F-mitered",
+      "fittingNumber": "3F",
+      "restoredArt": "/images/fittings/group-3-enhanced/3F-mitered-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ],
+      "sharedArtworkIds": [
+        "3E",
+        "3F-full",
+        "3F-tight",
+        "3F-mitered",
+        "3G",
+        "3H"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          328,
+          224,
+          579,
+          382
+        ],
+        "referenceMetadata": {
+          "width": 251,
+          "height": 158,
+          "mode": "RGB",
+          "sha256": "5e398449154f95ae25184325c91762191195223d691545b76c87aa2f99b862f2"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-ee6ce00f-671d-4ab2-bfab-9c7a2c34fc04.png",
+        "editInput": "source-art/3E.png",
+        "outputMetadata": {
+          "width": 1581,
+          "height": 995,
+          "mode": "RGB",
+          "sha256": "22cc136f34fef72e1c164d3d2761484d37d5c70fe18910995c4ae7efc02f6af3"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3G",
+      "fittingNumber": "3G",
+      "restoredArt": "/images/fittings/group-3-enhanced/3G-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ],
+      "sharedArtworkIds": [
+        "3E",
+        "3F-full",
+        "3F-tight",
+        "3F-mitered",
+        "3G",
+        "3H"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          328,
+          224,
+          579,
+          382
+        ],
+        "referenceMetadata": {
+          "width": 251,
+          "height": 158,
+          "mode": "RGB",
+          "sha256": "5e398449154f95ae25184325c91762191195223d691545b76c87aa2f99b862f2"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-ee6ce00f-671d-4ab2-bfab-9c7a2c34fc04.png",
+        "editInput": "source-art/3E.png",
+        "outputMetadata": {
+          "width": 1581,
+          "height": 995,
+          "mode": "RGB",
+          "sha256": "22cc136f34fef72e1c164d3d2761484d37d5c70fe18910995c4ae7efc02f6af3"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3H",
+      "fittingNumber": "3H",
+      "restoredArt": "/images/fittings/group-3-enhanced/3H-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ],
+      "sharedArtworkIds": [
+        "3E",
+        "3F-full",
+        "3F-tight",
+        "3F-mitered",
+        "3G",
+        "3H"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          328,
+          224,
+          579,
+          382
+        ],
+        "referenceMetadata": {
+          "width": 251,
+          "height": 158,
+          "mode": "RGB",
+          "sha256": "5e398449154f95ae25184325c91762191195223d691545b76c87aa2f99b862f2"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-ee6ce00f-671d-4ab2-bfab-9c7a2c34fc04.png",
+        "editInput": "source-art/3E.png",
+        "outputMetadata": {
+          "width": 1581,
+          "height": 995,
+          "mode": "RGB",
+          "sha256": "22cc136f34fef72e1c164d3d2761484d37d5c70fe18910995c4ae7efc02f6af3"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3I",
+      "fittingNumber": "3I",
+      "restoredArt": "/images/fittings/group-3-enhanced/3I-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3A.png",
+      "status": "ready-for-review",
+      "notes": [],
+      "sharedArtworkIds": [
+        "3A",
+        "3I"
+      ],
+      "artworkKind": "standalone-source-detail",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image10.png",
+        "printedPage": 167,
+        "cropPixels": [
+          145,
+          245,
+          415,
+          405
+        ],
+        "referenceMetadata": {
+          "width": 270,
+          "height": 160,
+          "mode": "RGB",
+          "sha256": "d2107bb2a69032b43a8a7cca3fd5044e3b0d0d67c1047e7b84dcf6db044bc69f"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-68e65fa4-f4a7-4541-8c18-770914a75b09.png",
+        "editInput": "source-art/3A.png",
+        "outputMetadata": {
+          "width": 1536,
+          "height": 1024,
+          "mode": "RGB",
+          "sha256": "dc53007cd3d181d79d0499aa88dc07f8d3d678338f5134434a9471748e55d6e5"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3J-full",
+      "fittingNumber": "3J",
+      "restoredArt": "/images/fittings/group-3-enhanced/3J-full-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ],
+      "sharedArtworkIds": [
+        "3J-full",
+        "3J-tight",
+        "3J-mitered",
+        "3K",
+        "3L"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          581,
+          225,
+          825,
+          361
+        ],
+        "referenceMetadata": {
+          "width": 244,
+          "height": 136,
+          "mode": "RGB",
+          "sha256": "4c32bf791c712f93872fc71325257838dc3959dc1c82a36859ae18a42578397c"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-14ff3ddc-6669-4410-a3b8-4f9b98092ed5.png",
+        "editInput": "source-art/context-3I-3L.png",
+        "outputMetadata": {
+          "width": 1641,
+          "height": 958,
+          "mode": "RGB",
+          "sha256": "f4b6585c7ccf086ab343a47dc48289e35e5686d5244f2e1efe64af06052727ac"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3J-tight",
+      "fittingNumber": "3J",
+      "restoredArt": "/images/fittings/group-3-enhanced/3J-tight-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ],
+      "sharedArtworkIds": [
+        "3J-full",
+        "3J-tight",
+        "3J-mitered",
+        "3K",
+        "3L"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          581,
+          225,
+          825,
+          361
+        ],
+        "referenceMetadata": {
+          "width": 244,
+          "height": 136,
+          "mode": "RGB",
+          "sha256": "4c32bf791c712f93872fc71325257838dc3959dc1c82a36859ae18a42578397c"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-14ff3ddc-6669-4410-a3b8-4f9b98092ed5.png",
+        "editInput": "source-art/context-3I-3L.png",
+        "outputMetadata": {
+          "width": 1641,
+          "height": 958,
+          "mode": "RGB",
+          "sha256": "f4b6585c7ccf086ab343a47dc48289e35e5686d5244f2e1efe64af06052727ac"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3J-mitered",
+      "fittingNumber": "3J",
+      "restoredArt": "/images/fittings/group-3-enhanced/3J-mitered-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ],
+      "sharedArtworkIds": [
+        "3J-full",
+        "3J-tight",
+        "3J-mitered",
+        "3K",
+        "3L"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          581,
+          225,
+          825,
+          361
+        ],
+        "referenceMetadata": {
+          "width": 244,
+          "height": 136,
+          "mode": "RGB",
+          "sha256": "4c32bf791c712f93872fc71325257838dc3959dc1c82a36859ae18a42578397c"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-14ff3ddc-6669-4410-a3b8-4f9b98092ed5.png",
+        "editInput": "source-art/context-3I-3L.png",
+        "outputMetadata": {
+          "width": 1641,
+          "height": 958,
+          "mode": "RGB",
+          "sha256": "f4b6585c7ccf086ab343a47dc48289e35e5686d5244f2e1efe64af06052727ac"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3K",
+      "fittingNumber": "3K",
+      "restoredArt": "/images/fittings/group-3-enhanced/3K-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ],
+      "sharedArtworkIds": [
+        "3J-full",
+        "3J-tight",
+        "3J-mitered",
+        "3K",
+        "3L"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          581,
+          225,
+          825,
+          361
+        ],
+        "referenceMetadata": {
+          "width": 244,
+          "height": 136,
+          "mode": "RGB",
+          "sha256": "4c32bf791c712f93872fc71325257838dc3959dc1c82a36859ae18a42578397c"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-14ff3ddc-6669-4410-a3b8-4f9b98092ed5.png",
+        "editInput": "source-art/context-3I-3L.png",
+        "outputMetadata": {
+          "width": 1641,
+          "height": 958,
+          "mode": "RGB",
+          "sha256": "f4b6585c7ccf086ab343a47dc48289e35e5686d5244f2e1efe64af06052727ac"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3L",
+      "fittingNumber": "3L",
+      "restoredArt": "/images/fittings/group-3-enhanced/3L-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ],
+      "sharedArtworkIds": [
+        "3J-full",
+        "3J-tight",
+        "3J-mitered",
+        "3K",
+        "3L"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          581,
+          225,
+          825,
+          361
+        ],
+        "referenceMetadata": {
+          "width": 244,
+          "height": 136,
+          "mode": "RGB",
+          "sha256": "4c32bf791c712f93872fc71325257838dc3959dc1c82a36859ae18a42578397c"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-14ff3ddc-6669-4410-a3b8-4f9b98092ed5.png",
+        "editInput": "source-art/context-3I-3L.png",
+        "outputMetadata": {
+          "width": 1641,
+          "height": 958,
+          "mode": "RGB",
+          "sha256": "f4b6585c7ccf086ab343a47dc48289e35e5686d5244f2e1efe64af06052727ac"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3M",
+      "fittingNumber": "3M",
+      "restoredArt": "/images/fittings/group-3-enhanced/3M-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3M.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ],
+      "sharedArtworkIds": [
+        "3M",
+        "3N"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          104,
+          393,
+          324,
+          535
+        ],
+        "referenceMetadata": {
+          "width": 220,
+          "height": 142,
+          "mode": "RGB",
+          "sha256": "4ec6f1922d6f9c7fb9ddf2c87ca2021798fa717d50d93cc88bf36acfeed69371"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-6db59aa0-2799-4f86-9f68-113f675d9e31.png",
+        "editInput": "source-art/3M.png",
+        "outputMetadata": {
+          "width": 1561,
+          "height": 1008,
+          "mode": "RGB",
+          "sha256": "dec7f5dab7962d7effca3dbdf98f5927f2bd408dff26cf7c4fdd230ff80d026c"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3N",
+      "fittingNumber": "3N",
+      "restoredArt": "/images/fittings/group-3-enhanced/3N-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3M.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ],
+      "sharedArtworkIds": [
+        "3M",
+        "3N"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          104,
+          393,
+          324,
+          535
+        ],
+        "referenceMetadata": {
+          "width": 220,
+          "height": 142,
+          "mode": "RGB",
+          "sha256": "4ec6f1922d6f9c7fb9ddf2c87ca2021798fa717d50d93cc88bf36acfeed69371"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-6db59aa0-2799-4f86-9f68-113f675d9e31.png",
+        "editInput": "source-art/3M.png",
+        "outputMetadata": {
+          "width": 1561,
+          "height": 1008,
+          "mode": "RGB",
+          "sha256": "dec7f5dab7962d7effca3dbdf98f5927f2bd408dff26cf7c4fdd230ff80d026c"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3O",
+      "fittingNumber": "3O",
+      "restoredArt": "/images/fittings/group-3-enhanced/3O-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "Second restoration retained 3Q ribbed elbow; first attempt incorrectly replaced it with a bolted straight collar and is excluded."
+      ],
+      "sharedArtworkIds": [
+        "3O",
+        "3P",
+        "3Q"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          330,
+          382,
+          545,
+          549
+        ],
+        "referenceMetadata": {
+          "width": 215,
+          "height": 167,
+          "mode": "RGB",
+          "sha256": "fb5d48332b0eda5278d0bdd487cc6b636f10b45bc2ddd0728522c32b9eccf618"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-e1c1a7aa-804a-4802-9037-c77e4bc3e1cc.png",
+        "editInput": "source-art/3O.png",
+        "outputMetadata": {
+          "width": 1424,
+          "height": 1105,
+          "mode": "RGB",
+          "sha256": "ec18ee3071477e4c3fa4285e685dba190381486de2f6a8fcca7876d5dbe72a7d"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3P",
+      "fittingNumber": "3P",
+      "restoredArt": "/images/fittings/group-3-enhanced/3P-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "Second restoration retained 3Q ribbed elbow; first attempt incorrectly replaced it with a bolted straight collar and is excluded."
+      ],
+      "sharedArtworkIds": [
+        "3O",
+        "3P",
+        "3Q"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          330,
+          382,
+          545,
+          549
+        ],
+        "referenceMetadata": {
+          "width": 215,
+          "height": 167,
+          "mode": "RGB",
+          "sha256": "fb5d48332b0eda5278d0bdd487cc6b636f10b45bc2ddd0728522c32b9eccf618"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-e1c1a7aa-804a-4802-9037-c77e4bc3e1cc.png",
+        "editInput": "source-art/3O.png",
+        "outputMetadata": {
+          "width": 1424,
+          "height": 1105,
+          "mode": "RGB",
+          "sha256": "ec18ee3071477e4c3fa4285e685dba190381486de2f6a8fcca7876d5dbe72a7d"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3Q",
+      "fittingNumber": "3Q",
+      "restoredArt": "/images/fittings/group-3-enhanced/3Q-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "Second restoration retained 3Q ribbed elbow; first attempt incorrectly replaced it with a bolted straight collar and is excluded."
+      ],
+      "sharedArtworkIds": [
+        "3O",
+        "3P",
+        "3Q"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          330,
+          382,
+          545,
+          549
+        ],
+        "referenceMetadata": {
+          "width": 215,
+          "height": 167,
+          "mode": "RGB",
+          "sha256": "fb5d48332b0eda5278d0bdd487cc6b636f10b45bc2ddd0728522c32b9eccf618"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-e1c1a7aa-804a-4802-9037-c77e4bc3e1cc.png",
+        "editInput": "source-art/3O.png",
+        "outputMetadata": {
+          "width": 1424,
+          "height": 1105,
+          "mode": "RGB",
+          "sha256": "ec18ee3071477e4c3fa4285e685dba190381486de2f6a8fcca7876d5dbe72a7d"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3R",
+      "fittingNumber": "3R",
+      "restoredArt": "/images/fittings/group-3-enhanced/3R-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3R-3U.png",
+      "status": "ready-for-review",
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ],
+      "sharedArtworkIds": [
+        "3R"
+      ],
+      "artworkKind": "shared-source-assembly",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image9.png",
+        "printedPage": 166,
+        "cropPixels": [
+          526,
+          382,
+          829,
+          540
+        ],
+        "referenceMetadata": {
+          "width": 303,
+          "height": 158,
+          "mode": "RGB",
+          "sha256": "32fcfa0a3b04d1405202d41939b49131b57b57020022bbc1b52f9700147abfec"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-a69f3791-32cf-4987-a94c-cfe5c1106e3d.png",
+        "editInput": "source-art/context-3R-3U.png",
+        "outputMetadata": {
+          "width": 1660,
+          "height": 948,
+          "mode": "RGB",
+          "sha256": "7055b7456450753c50894f6c1109e230094a9a82c238822bcdb0b18e8b7cdde6"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3S-full",
+      "fittingNumber": "3S",
+      "restoredArt": "/images/fittings/group-3-enhanced/3S-full-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png",
+      "status": "ready-for-review",
+      "notes": [
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ],
+      "sharedArtworkIds": [
+        "3S-full",
+        "3S-tight",
+        "3S-mitered"
+      ],
+      "artworkKind": "standalone-source-detail",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image10.png",
+        "printedPage": 167,
+        "cropPixels": [
+          631,
+          872,
+          755,
+          1005
+        ],
+        "referenceMetadata": {
+          "width": 124,
+          "height": 133,
+          "mode": "RGB",
+          "sha256": "879d288f7debd0425e56b83e824ce6b30bcaea087734f41e6a970d733a589f49"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-50e96acf-ba4a-492f-85d5-c7325ae79fd3.png",
+        "editInput": "source-art/3S-full.png",
+        "outputMetadata": {
+          "width": 1199,
+          "height": 1312,
+          "mode": "RGB",
+          "sha256": "e33adac61c200193428b3e0219c06afaec366129495e1d43757552c47e8ade28"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3S-tight",
+      "fittingNumber": "3S",
+      "restoredArt": "/images/fittings/group-3-enhanced/3S-tight-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png",
+      "status": "ready-for-review",
+      "notes": [
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ],
+      "sharedArtworkIds": [
+        "3S-full",
+        "3S-tight",
+        "3S-mitered"
+      ],
+      "artworkKind": "standalone-source-detail",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image10.png",
+        "printedPage": 167,
+        "cropPixels": [
+          631,
+          872,
+          755,
+          1005
+        ],
+        "referenceMetadata": {
+          "width": 124,
+          "height": 133,
+          "mode": "RGB",
+          "sha256": "879d288f7debd0425e56b83e824ce6b30bcaea087734f41e6a970d733a589f49"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-50e96acf-ba4a-492f-85d5-c7325ae79fd3.png",
+        "editInput": "source-art/3S-full.png",
+        "outputMetadata": {
+          "width": 1199,
+          "height": 1312,
+          "mode": "RGB",
+          "sha256": "e33adac61c200193428b3e0219c06afaec366129495e1d43757552c47e8ade28"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3S-mitered",
+      "fittingNumber": "3S",
+      "restoredArt": "/images/fittings/group-3-enhanced/3S-mitered-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png",
+      "status": "ready-for-review",
+      "notes": [
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ],
+      "sharedArtworkIds": [
+        "3S-full",
+        "3S-tight",
+        "3S-mitered"
+      ],
+      "artworkKind": "standalone-source-detail",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image10.png",
+        "printedPage": 167,
+        "cropPixels": [
+          631,
+          872,
+          755,
+          1005
+        ],
+        "referenceMetadata": {
+          "width": 124,
+          "height": 133,
+          "mode": "RGB",
+          "sha256": "879d288f7debd0425e56b83e824ce6b30bcaea087734f41e6a970d733a589f49"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-50e96acf-ba4a-492f-85d5-c7325ae79fd3.png",
+        "editInput": "source-art/3S-full.png",
+        "outputMetadata": {
+          "width": 1199,
+          "height": 1312,
+          "mode": "RGB",
+          "sha256": "e33adac61c200193428b3e0219c06afaec366129495e1d43757552c47e8ade28"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3T",
+      "fittingNumber": "3T",
+      "restoredArt": "/images/fittings/group-3-enhanced/3T-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3T.png",
+      "status": "ready-for-review",
+      "notes": [],
+      "sharedArtworkIds": [
+        "3T"
+      ],
+      "artworkKind": "standalone-source-detail",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image10.png",
+        "printedPage": 167,
+        "cropPixels": [
+          576,
+          744,
+          688,
+          880
+        ],
+        "referenceMetadata": {
+          "width": 112,
+          "height": 136,
+          "mode": "RGB",
+          "sha256": "3d5c8401bbd559ccbb501228c4319e2d840bd50e2d66fac9d1fc73844812de6d"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-66ed8470-0ae2-4dd1-af6f-17d867449380.png",
+        "editInput": "source-art/3T.png",
+        "outputMetadata": {
+          "width": 1254,
+          "height": 1254,
+          "mode": "RGB",
+          "sha256": "79c09cb9c51cd74dcdf7b5eaa1ff0826a9fc7f9f7d60ac1ca4593aa60cbde409"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3U-mitered-vanes",
+      "fittingNumber": "3U",
+      "restoredArt": "/images/fittings/group-3-enhanced/3U-mitered-vanes-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3U-mitered-vanes.png",
+      "status": "ready-for-review",
+      "notes": [
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction.",
+        "Generic source illustration retains the source vane/chevron marks for both with-vanes and without-vanes records."
+      ],
+      "sharedArtworkIds": [
+        "3U-mitered-vanes",
+        "3U-mitered-no-vanes"
+      ],
+      "artworkKind": "standalone-source-detail",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image10.png",
+        "printedPage": 167,
+        "cropPixels": [
+          568,
+          246,
+          797,
+          405
+        ],
+        "referenceMetadata": {
+          "width": 229,
+          "height": 159,
+          "mode": "RGB",
+          "sha256": "6fa5c3be6e3bee36b1cc01103cb1e8c2322e98d36b6d6817a5fbf5179a01d99e"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-d5044e04-7d0b-4937-af8e-495641e36c89.png",
+        "editInput": "source-art/3U-mitered-vanes.png",
+        "outputMetadata": {
+          "width": 1538,
+          "height": 1022,
+          "mode": "RGB",
+          "sha256": "8a6a7130d4ba421da8ae7bd080cd6f0cee6c6240d230802acf3e7d149e355e27"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3U-mitered-no-vanes",
+      "fittingNumber": "3U",
+      "restoredArt": "/images/fittings/group-3-enhanced/3U-mitered-no-vanes-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3U-mitered-vanes.png",
+      "status": "ready-for-review",
+      "notes": [
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction.",
+        "Generic source illustration retains the source vane/chevron marks for both with-vanes and without-vanes records."
+      ],
+      "sharedArtworkIds": [
+        "3U-mitered-vanes",
+        "3U-mitered-no-vanes"
+      ],
+      "artworkKind": "standalone-source-detail",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image10.png",
+        "printedPage": 167,
+        "cropPixels": [
+          568,
+          246,
+          797,
+          405
+        ],
+        "referenceMetadata": {
+          "width": 229,
+          "height": 159,
+          "mode": "RGB",
+          "sha256": "6fa5c3be6e3bee36b1cc01103cb1e8c2322e98d36b6d6817a5fbf5179a01d99e"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-d5044e04-7d0b-4937-af8e-495641e36c89.png",
+        "editInput": "source-art/3U-mitered-vanes.png",
+        "outputMetadata": {
+          "width": 1538,
+          "height": 1022,
+          "mode": "RGB",
+          "sha256": "8a6a7130d4ba421da8ae7bd080cd6f0cee6c6240d230802acf3e7d149e355e27"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3V",
+      "fittingNumber": "3V",
+      "restoredArt": "/images/fittings/group-3-enhanced/3V-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3V.png",
+      "status": "ready-for-review",
+      "notes": [],
+      "sharedArtworkIds": [
+        "3V"
+      ],
+      "artworkKind": "standalone-source-detail",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image10.png",
+        "printedPage": 167,
+        "cropPixels": [
+          575,
+          551,
+          878,
+          697
+        ],
+        "referenceMetadata": {
+          "width": 303,
+          "height": 146,
+          "mode": "RGB",
+          "sha256": "63d7e9b70da640fe702d0d09976d6563a271fdb5b8dc1daa5144629719c9ef75"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-a1d8f0f3-3d0b-4ec9-bafd-c5db33cc35a3.png",
+        "editInput": "source-art/3V.png",
+        "outputMetadata": {
+          "width": 1676,
+          "height": 938,
+          "mode": "RGB",
+          "sha256": "13e9c7b94df093ead75d42d7105a3e3eeb5716f6d4ee79fbdded83ebab3fc5ed"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    },
+    {
+      "id": "3W",
+      "fittingNumber": "3W",
+      "restoredArt": "/images/fittings/group-3-enhanced/3W-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3W.png",
+      "status": "ready-for-review",
+      "notes": [],
+      "sharedArtworkIds": [
+        "3W"
+      ],
+      "artworkKind": "standalone-source-detail",
+      "userApproved": false,
+      "source": {
+        "workbook": "/home/michael/Downloads/manuald 080217.xls",
+        "extractedWorkbookRaster": "image10.png",
+        "printedPage": 167,
+        "cropPixels": [
+          370,
+          990,
+          514,
+          1110
+        ],
+        "referenceMetadata": {
+          "width": 144,
+          "height": 120,
+          "mode": "RGB",
+          "sha256": "e0a0a0982cf89acd67c2d4fbbd810caf10c95c63060912277027bb8063e70097"
+        }
+      },
+      "generation": {
+        "tool": "built-in image_gen",
+        "selectedOutput": "/home/michael/.codex/generated_images/01a06e30-e11e-7f50-9887-b950283394fd/exec-c46e4271-0312-4a6f-9bfb-cd52f797f086.png",
+        "editInput": "source-art/3W.png",
+        "outputMetadata": {
+          "width": 1374,
+          "height": 1145,
+          "mode": "RGB",
+          "sha256": "0ca8f7abb932c6bd7c10bcb4a5c5bc3e7d9a6ac95335b45cedf30c129208e3c7"
+        }
+      },
+      "visualQa": {
+        "reviewedOriginalAndRestoration": true,
+        "checks": [
+          "Complete source geometry and visible openings",
+          "Attachment side and branch orientation",
+          "Relative proportions and perspective",
+          "Straight lines, smooth curves and thin strokes",
+          "Source labels preserved on context images"
+        ],
+        "result": "Suitable for user review; not user-approved"
+      }
+    }
+  ],
+  "limitations": [
+    "22 catalog assets require shared source assembly artwork with blue fitting labels; they are not isolated fitting drawings.",
+    "Full/tight/mitered and vane variants use generic source art and must not be interpreted as distinct illustrated geometry.",
+    "Original legacy manifest reference crops were incomplete; all review references in this report use recovered complete original XLS raster crops."
+  ],
+  "excludedExperiments": [
+    {
+      "files": [
+        "3B-detail-restored-art.png",
+        "3C-detail-restored-art.png",
+        "3D-detail-restored-art.png"
+      ],
+      "reason": "Isolated redraw attempts changed neck proportions, inferred junctions, or lost an opening; superseded by complete faithful source context."
+    },
+    {
+      "files": [
+        "context-3O-3Q-restored-art.png"
+      ],
+      "reason": "Lost Q elbow and introduced bolted collar."
+    },
+    {
+      "files": [
+        "context-3R-3U-restored-art.png"
+      ],
+      "reason": "Retained excess scan speckles; superseded by cleaner second restoration."
+    }
+  ],
+  "promptSet": {
+    "common": "Use case: precise-object-edit. Faithfully restore exact source HVAC technical drawing to high-resolution crisp thin uniform black lines on pure white. Preserve geometry, topology, perspective, proportions, all visible openings, seams and side attachment surfaces. Straighten straight edges and smooth curves; no shading or redesign. Complete framing with white margin.",
+    "standalone": "Remove source blue fitting labels and unrelated leaders only; preserve meaningful source vane marks and both mirror-image views for V.",
+    "sharedContext": "Restore COMPLETE original reducing trunk and all branches exactly, retain original blue fitting labels. Do not isolate or move branches. Remove only clipped unrelated diagram fragments.",
+    "targetedCorrections": {
+      "context-3O-3Q-v2": "Retain Q one ribbed elbow, P two ribbed elbows; no bolted collars.",
+      "context-3R-3U-v2": "Remove all scan speckles and jagged doubled stray marks while preserving seams/opening rims."
+    }
+  },
+  "safeToCommit": [
+    "Public/images/fittings/group-3-enhanced/3A-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3B-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3C-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3D-full-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3D-mitered-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3D-tight-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3E-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3F-full-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3F-mitered-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3F-tight-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3G-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3H-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3I-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3J-full-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3J-mitered-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3J-tight-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3K-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3L-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3M-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3N-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3O-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3P-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3Q-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3R-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3S-full-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3S-mitered-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3S-tight-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3T-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3U-mitered-no-vanes-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3U-mitered-vanes-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3V-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/3W-restored-art.png",
+    "Public/images/fittings/group-3-enhanced/source-art/3A.png",
+    "Public/images/fittings/group-3-enhanced/source-art/3B.png",
+    "Public/images/fittings/group-3-enhanced/source-art/3E.png",
+    "Public/images/fittings/group-3-enhanced/source-art/3M.png",
+    "Public/images/fittings/group-3-enhanced/source-art/3O.png",
+    "Public/images/fittings/group-3-enhanced/source-art/3S-full.png",
+    "Public/images/fittings/group-3-enhanced/source-art/3T.png",
+    "Public/images/fittings/group-3-enhanced/source-art/3U-mitered-vanes.png",
+    "Public/images/fittings/group-3-enhanced/source-art/3V.png",
+    "Public/images/fittings/group-3-enhanced/source-art/3W.png",
+    "Public/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+    "Public/images/fittings/group-3-enhanced/source-art/context-3R-3U.png",
+    "docs/fitting-preflight/group-3-enhanced-agent.json"
+  ]
+}

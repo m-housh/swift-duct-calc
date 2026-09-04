@@ -1,4 +1,4 @@
-window.FITTING_REVIEW = {
+{
   "id": "group-3-enhanced",
   "title": "Group 3 \u00b7 high-resolution restorations",
   "description": "Compare the restored artwork with its original. Check only drawings that still need work. Some fittings share an original assembly illustration; their individual IDs and values are retained. The source does not separately illustrate every corner or vane variant; shared artwork does not depict those differences.",
@@ -488,4 +488,4 @@ window.FITTING_REVIEW = {
       "notes": []
     }
   ]
-};
+}
