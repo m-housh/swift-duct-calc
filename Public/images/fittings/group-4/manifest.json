@@ -47,6 +47,12 @@
           1231
         ],
         "artCropPixels": [
+          110,
+          225,
+          235,
+          333
+        ],
+        "originalPilotCropPixels": [
           115,
           230,
           195,
@@ -59,9 +65,9 @@
           333
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "0597441e318897af"
+      "revision": "d136bad6477d1e6f"
     },
     {
       "id": "4B",
@@ -93,6 +99,12 @@
           1231
         ],
         "artCropPixels": [
+          235,
+          225,
+          370,
+          333
+        ],
+        "originalPilotCropPixels": [
           245,
           232,
           335,
@@ -105,9 +117,9 @@
           333
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "7f7e2785b0a6f891"
+      "revision": "69350a15339a4b92"
     },
     {
       "id": "4C",
@@ -139,6 +151,12 @@
           1231
         ],
         "artCropPixels": [
+          370,
+          225,
+          510,
+          333
+        ],
+        "originalPilotCropPixels": [
           385,
           236,
           480,
@@ -151,9 +169,9 @@
           333
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "42e57266b28a8c30"
+      "revision": "4d77f0681cdaaab8"
     },
     {
       "id": "4D",
@@ -185,6 +203,12 @@
           1231
         ],
         "artCropPixels": [
+          510,
+          225,
+          665,
+          333
+        ],
+        "originalPilotCropPixels": [
           520,
           238,
           635,
@@ -197,9 +221,9 @@
           333
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "7479e1a8e70d807c"
+      "revision": "a66be0f5e2ee4032"
     },
     {
       "id": "4E",
@@ -231,6 +255,12 @@
           1231
         ],
         "artCropPixels": [
+          665,
+          225,
+          820,
+          333
+        ],
+        "originalPilotCropPixels": [
           675,
           236,
           780,
@@ -243,9 +273,9 @@
           333
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "5d9f2e8980fb2448"
+      "revision": "626169c034e77b5f"
     },
     {
       "id": "4F",
@@ -277,6 +307,12 @@
           1231
         ],
         "artCropPixels": [
+          110,
+          330,
+          250,
+          428
+        ],
+        "originalPilotCropPixels": [
           115,
           332,
           210,
@@ -289,9 +325,9 @@
           428
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "8aa38d9b8be98730"
+      "revision": "88fd623d85e1e597"
     },
     {
       "id": "4G",
@@ -323,6 +359,12 @@
           1231
         ],
         "artCropPixels": [
+          250,
+          330,
+          390,
+          428
+        ],
+        "originalPilotCropPixels": [
           275,
           330,
           350,
@@ -335,9 +377,9 @@
           428
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "48a884a6f3e5cd0c"
+      "revision": "4255a554ffa51990"
     },
     {
       "id": "4H",
@@ -369,6 +411,12 @@
           1231
         ],
         "artCropPixels": [
+          390,
+          330,
+          525,
+          428
+        ],
+        "originalPilotCropPixels": [
           405,
           338,
           490,
@@ -381,9 +429,9 @@
           428
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "09e5b2847386a4ff"
+      "revision": "16cb03ac2f3c5e1f"
     },
     {
       "id": "4I",
@@ -415,6 +463,12 @@
           1231
         ],
         "artCropPixels": [
+          525,
+          330,
+          675,
+          428
+        ],
+        "originalPilotCropPixels": [
           555,
           338,
           620,
@@ -427,9 +481,9 @@
           428
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "8bca1d6b9bd68684"
+      "revision": "449899f468ae4a4b"
     },
     {
       "id": "4J",
@@ -461,6 +515,12 @@
           1231
         ],
         "artCropPixels": [
+          675,
+          330,
+          820,
+          428
+        ],
+        "originalPilotCropPixels": [
           690,
           330,
           790,
@@ -473,9 +533,9 @@
           428
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "95af4f82a60dcc53"
+      "revision": "ed3fb731fd2d4b3f"
     },
     {
       "id": "4K",
@@ -507,6 +567,12 @@
           1231
         ],
         "artCropPixels": [
+          110,
+          425,
+          235,
+          530
+        ],
+        "originalPilotCropPixels": [
           115,
           434,
           205,
@@ -519,9 +585,9 @@
           530
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "4687865ec33f8118"
+      "revision": "e1682033d952f31b"
     },
     {
       "id": "4L",
@@ -553,6 +619,12 @@
           1231
         ],
         "artCropPixels": [
+          235,
+          425,
+          350,
+          530
+        ],
+        "originalPilotCropPixels": [
           240,
           434,
           330,
@@ -565,9 +637,9 @@
           530
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "693763415681c817"
+      "revision": "a619559beca01fe7"
     },
     {
       "id": "4M",
@@ -599,6 +671,12 @@
           1231
         ],
         "artCropPixels": [
+          350,
+          425,
+          470,
+          530
+        ],
+        "originalPilotCropPixels": [
           355,
           434,
           440,
@@ -611,9 +689,9 @@
           530
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "71b6894fa976f4e6"
+      "revision": "c51ccd199f525bbf"
     },
     {
       "id": "4N",
@@ -645,6 +723,12 @@
           1231
         ],
         "artCropPixels": [
+          470,
+          425,
+          575,
+          530
+        ],
+        "originalPilotCropPixels": [
           480,
           434,
           545,
@@ -657,9 +741,9 @@
           530
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "1a86597aac760b22"
+      "revision": "185a2c5c6a3942d0"
     },
     {
       "id": "4O",
@@ -691,6 +775,12 @@
           1231
         ],
         "artCropPixels": [
+          575,
+          425,
+          695,
+          530
+        ],
+        "originalPilotCropPixels": [
           585,
           434,
           660,
@@ -703,9 +793,9 @@
           530
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "3916f05718590f23"
+      "revision": "64d1f5f1794ac9ac"
     },
     {
       "id": "4P",
@@ -737,6 +827,12 @@
           1231
         ],
         "artCropPixels": [
+          695,
+          425,
+          820,
+          530
+        ],
+        "originalPilotCropPixels": [
           710,
           434,
           785,
@@ -749,9 +845,9 @@
           530
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "30c3e5269de8d5fb"
+      "revision": "7010b7317d8c3f08"
     },
     {
       "id": "4Q",
@@ -783,6 +879,12 @@
           1231
         ],
         "artCropPixels": [
+          110,
+          532,
+          230,
+          640
+        ],
+        "originalPilotCropPixels": [
           115,
           535,
           200,
@@ -795,9 +897,9 @@
           640
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "bf3c2d21ae712ff0"
+      "revision": "9f54ba354a6184b6"
     },
     {
       "id": "4R",
@@ -829,6 +931,12 @@
           1231
         ],
         "artCropPixels": [
+          230,
+          532,
+          350,
+          640
+        ],
+        "originalPilotCropPixels": [
           240,
           535,
           310,
@@ -841,9 +949,9 @@
           640
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "cf79b41f1cacfc96"
+      "revision": "21af3bd12716a2f1"
     },
     {
       "id": "4S",
@@ -875,6 +983,12 @@
           1231
         ],
         "artCropPixels": [
+          350,
+          532,
+          465,
+          640
+        ],
+        "originalPilotCropPixels": [
           360,
           535,
           435,
@@ -887,9 +1001,9 @@
           640
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "e881d8d1ea8f74b6"
+      "revision": "e2c39f386c3db243"
     },
     {
       "id": "4T",
@@ -921,6 +1035,12 @@
           1231
         ],
         "artCropPixels": [
+          465,
+          532,
+          575,
+          640
+        ],
+        "originalPilotCropPixels": [
           475,
           528,
           540,
@@ -933,9 +1053,9 @@
           640
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "263d115eccd37a4e"
+      "revision": "7fd9bfa08554ab3f"
     },
     {
       "id": "4U",
@@ -967,6 +1087,12 @@
           1231
         ],
         "artCropPixels": [
+          575,
+          532,
+          690,
+          640
+        ],
+        "originalPilotCropPixels": [
           590,
           528,
           660,
@@ -979,9 +1105,9 @@
           640
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "2122a1d59f62bd64"
+      "revision": "ea3bf8040a953b1c"
     },
     {
       "id": "4V",
@@ -1013,6 +1139,12 @@
           1231
         ],
         "artCropPixels": [
+          690,
+          532,
+          820,
+          640
+        ],
+        "originalPilotCropPixels": [
           710,
           540,
           805,
@@ -1025,9 +1157,9 @@
           640
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "5aa747a18628fa81"
+      "revision": "a71d1cb97da9c066"
     },
     {
       "id": "4W",
@@ -1059,6 +1191,12 @@
           1231
         ],
         "artCropPixels": [
+          110,
+          638,
+          230,
+          745
+        ],
+        "originalPilotCropPixels": [
           120,
           642,
           205,
@@ -1071,9 +1209,9 @@
           745
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "53fa2d16f2541b66"
+      "revision": "a1b9c5bc9349e667"
     },
     {
       "id": "4X",
@@ -1105,6 +1243,12 @@
           1231
         ],
         "artCropPixels": [
+          230,
+          638,
+          345,
+          745
+        ],
+        "originalPilotCropPixels": [
           240,
           642,
           320,
@@ -1117,9 +1261,9 @@
           745
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "130c2edd8d0d64f1"
+      "revision": "949a605dccfdaeaa"
     },
     {
       "id": "4Y",
@@ -1151,6 +1295,12 @@
           1231
         ],
         "artCropPixels": [
+          345,
+          638,
+          465,
+          745
+        ],
+        "originalPilotCropPixels": [
           355,
           642,
           440,
@@ -1163,9 +1313,9 @@
           745
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "c7063cb16330cf11"
+      "revision": "81eacaae44220c0b"
     },
     {
       "id": "4Z",
@@ -1197,6 +1347,12 @@
           1231
         ],
         "artCropPixels": [
+          465,
+          638,
+          575,
+          745
+        ],
+        "originalPilotCropPixels": [
           470,
           638,
           540,
@@ -1209,9 +1365,9 @@
           745
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "3ed0b95b5a53b5bd"
+      "revision": "488f0a5500d02cfc"
     },
     {
       "id": "4AA",
@@ -1243,6 +1399,12 @@
           1231
         ],
         "artCropPixels": [
+          575,
+          638,
+          690,
+          745
+        ],
+        "originalPilotCropPixels": [
           585,
           642,
           660,
@@ -1255,9 +1417,9 @@
           745
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "03594f5cf94f00e9"
+      "revision": "8396c75f763cee01"
     },
     {
       "id": "4AB",
@@ -1289,6 +1451,12 @@
           1231
         ],
         "artCropPixels": [
+          690,
+          638,
+          820,
+          745
+        ],
+        "originalPilotCropPixels": [
           710,
           638,
           790,
@@ -1301,9 +1469,9 @@
           745
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "21095ee80652eae2"
+      "revision": "c6e5ead315184786"
     },
     {
       "id": "4AC",
@@ -1335,6 +1503,12 @@
           1231
         ],
         "artCropPixels": [
+          110,
+          742,
+          235,
+          855
+        ],
+        "originalPilotCropPixels": [
           125,
           748,
           200,
@@ -1347,9 +1521,9 @@
           855
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "6ae2cee3b0badba5"
+      "revision": "d9a49f3b99252858"
     },
     {
       "id": "4AD",
@@ -1381,6 +1555,12 @@
           1231
         ],
         "artCropPixels": [
+          235,
+          742,
+          350,
+          855
+        ],
+        "originalPilotCropPixels": [
           250,
           742,
           315,
@@ -1393,9 +1573,9 @@
           855
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "a7aa5634ed57a628"
+      "revision": "502561b1df083618"
     },
     {
       "id": "4AE",
@@ -1427,6 +1607,12 @@
           1231
         ],
         "artCropPixels": [
+          350,
+          742,
+          465,
+          855
+        ],
+        "originalPilotCropPixels": [
           365,
           742,
           435,
@@ -1439,9 +1625,9 @@
           855
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "550e5942b5a99529"
+      "revision": "2aa628657df5fa8d"
     },
     {
       "id": "4AF",
@@ -1473,6 +1659,12 @@
           1231
         ],
         "artCropPixels": [
+          465,
+          742,
+          575,
+          855
+        ],
+        "originalPilotCropPixels": [
           475,
           748,
           550,
@@ -1485,9 +1677,9 @@
           855
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "47358e04f97efa53"
+      "revision": "36369e246208040a"
     },
     {
       "id": "4AG",
@@ -1519,6 +1711,12 @@
           1231
         ],
         "artCropPixels": [
+          575,
+          742,
+          700,
+          855
+        ],
+        "originalPilotCropPixels": [
           590,
           748,
           680,
@@ -1531,9 +1729,9 @@
           855
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "0c1b9c11d4d636ed"
+      "revision": "49b547f7d3cfebf1"
     },
     {
       "id": "4AH",
@@ -1565,6 +1763,12 @@
           1231
         ],
         "artCropPixels": [
+          700,
+          742,
+          820,
+          855
+        ],
+        "originalPilotCropPixels": [
           710,
           748,
           805,
@@ -1577,9 +1781,9 @@
           855
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "e61e69f35a74f7ad"
+      "revision": "99acb1443ef4b408"
     },
     {
       "id": "4AI",
@@ -1611,6 +1815,12 @@
           1231
         ],
         "artCropPixels": [
+          110,
+          852,
+          235,
+          960
+        ],
+        "originalPilotCropPixels": [
           120,
           858,
           205,
@@ -1623,9 +1833,9 @@
           960
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "34eb777c1b4bb9bc"
+      "revision": "9dd8673092fbd988"
     },
     {
       "id": "4AJ",
@@ -1657,6 +1867,12 @@
           1231
         ],
         "artCropPixels": [
+          235,
+          852,
+          350,
+          960
+        ],
+        "originalPilotCropPixels": [
           240,
           855,
           330,
@@ -1669,9 +1885,9 @@
           960
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "04639df01abff0d3"
+      "revision": "ffc5950ad885516a"
     },
     {
       "id": "4AK",
@@ -1703,6 +1919,12 @@
           1231
         ],
         "artCropPixels": [
+          350,
+          852,
+          465,
+          960
+        ],
+        "originalPilotCropPixels": [
           355,
           858,
           445,
@@ -1715,9 +1937,9 @@
           960
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "436ceb4552d8cef5"
+      "revision": "f7c927644a825d8c"
     },
     {
       "id": "4AL",
@@ -1749,6 +1971,12 @@
           1231
         ],
         "artCropPixels": [
+          465,
+          852,
+          575,
+          960
+        ],
+        "originalPilotCropPixels": [
           470,
           852,
           565,
@@ -1761,9 +1989,9 @@
           960
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "f9f9ee1b3cf017c2"
+      "revision": "fc23903e9e44068d"
     },
     {
       "id": "4AM",
@@ -1795,6 +2023,12 @@
           1231
         ],
         "artCropPixels": [
+          575,
+          852,
+          700,
+          960
+        ],
+        "originalPilotCropPixels": [
           585,
           858,
           675,
@@ -1807,9 +2041,9 @@
           960
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "d7e23e9cbfe78188"
+      "revision": "40ff08d7149659c0"
     },
     {
       "id": "4AN",
@@ -1841,6 +2075,12 @@
           1231
         ],
         "artCropPixels": [
+          700,
+          852,
+          820,
+          960
+        ],
+        "originalPilotCropPixels": [
           705,
           852,
           790,
@@ -1853,9 +2093,9 @@
           960
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "47e11697f7ae4c5e"
+      "revision": "cdb1670858321590"
     },
     {
       "id": "4AO",
@@ -1887,6 +2127,12 @@
           1231
         ],
         "artCropPixels": [
+          110,
+          955,
+          230,
+          1070
+        ],
+        "originalPilotCropPixels": [
           135,
           958,
           190,
@@ -1899,9 +2145,9 @@
           1070
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "5d9676cb49cde5f4"
+      "revision": "01f9e169f425700d"
     },
     {
       "id": "4AP",
@@ -1933,6 +2179,12 @@
           1231
         ],
         "artCropPixels": [
+          230,
+          955,
+          345,
+          1070
+        ],
+        "originalPilotCropPixels": [
           245,
           958,
           305,
@@ -1945,9 +2197,9 @@
           1070
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "f77dd76813f4153b"
+      "revision": "5640f286f800d0c9"
     },
     {
       "id": "4AQ",
@@ -1979,6 +2231,12 @@
           1231
         ],
         "artCropPixels": [
+          345,
+          955,
+          460,
+          1070
+        ],
+        "originalPilotCropPixels": [
           350,
           958,
           445,
@@ -1991,9 +2249,9 @@
           1070
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "c34d9828b29151fa"
+      "revision": "35ddf74ac8c8bc6d"
     },
     {
       "id": "4AR",
@@ -2025,6 +2283,12 @@
           1231
         ],
         "artCropPixels": [
+          460,
+          955,
+          575,
+          1070
+        ],
+        "originalPilotCropPixels": [
           465,
           958,
           555,
@@ -2037,9 +2301,9 @@
           1070
         ]
       },
-      "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+      "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
       "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
-      "revision": "0915a348eedecef1"
+      "revision": "ebbc0ecb552da06f"
     }
   ]
 }

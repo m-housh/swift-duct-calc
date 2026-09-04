@@ -96,8 +96,8 @@ REFERENCE_BOXES = {
 # before centerline extraction and recreate their visible egg-crate grids as
 # explicit thin vector strokes. Coordinates are in the 4x tracing space.
 GRILLE_POLYGONS = {
-    "4Y": [(27, 244), (219, 244), (261, 276), (43, 276)],
-    "4Z": [(92, 96), (137, 120), (85, 154), (40, 129)],
+    "4Y": [(67, 260), (259, 260), (301, 292), (83, 292)],
+    "4Z": [(112, 96), (157, 120), (105, 154), (60, 129)],
 }
 
 
@@ -144,6 +144,123 @@ def grille_overlay(key: str) -> str:
         f'<polygon points="{point_text}" fill="none" stroke="#243b53" stroke-width="1.5" '
         'stroke-linejoin="round"/>'
     )
+
+
+def point_segment_distance(point: tuple[int, int], start: tuple[int, int], end: tuple[int, int]) -> float:
+    px, py = point
+    x1, y1 = start
+    x2, y2 = end
+    dx, dy = x2 - x1, y2 - y1
+    if dx == 0 and dy == 0:
+        return ((px - x1) ** 2 + (py - y1) ** 2) ** 0.5
+    position = max(0.0, min(1.0, ((px - x1) * dx + (py - y1) * dy) / (dx * dx + dy * dy)))
+    nearest_x, nearest_y = x1 + position * dx, y1 + position * dy
+    return ((px - nearest_x) ** 2 + (py - nearest_y) ** 2) ** 0.5
+
+
+def simplify_path(points: list[tuple[int, int]], tolerance: float = 3.0) -> list[tuple[int, int]]:
+    if len(points) <= 2:
+        return points
+    start, end = points[0], points[-1]
+    distances = [point_segment_distance(point, start, end) for point in points[1:-1]]
+    if not distances or max(distances) <= tolerance:
+        return [start, end]
+    split = distances.index(max(distances)) + 1
+    return simplify_path(points[:split + 1], tolerance)[:-1] + simplify_path(points[split:], tolerance)
+
+
+def simplify_closed_path(points: list[tuple[int, int]]) -> list[tuple[int, int]]:
+    cycle = points[:-1]
+    if len(cycle) < 4:
+        return points
+    start_index = min(range(len(cycle)), key=lambda index: (cycle[index][1], cycle[index][0]))
+    cycle = cycle[start_index:] + cycle[:start_index]
+    start = cycle[0]
+    split = max(
+        range(1, len(cycle)),
+        key=lambda index: (cycle[index][0] - start[0]) ** 2 + (cycle[index][1] - start[1]) ** 2,
+    )
+    first = simplify_path(cycle[:split + 1])
+    second = simplify_path(cycle[split:] + [start])
+    return first + second[1:]
+
+
+def centerline_paths(points: set[tuple[int, int]]) -> list[tuple[list[tuple[int, int]], bool]]:
+    def connected(point: tuple[int, int]) -> set[tuple[int, int]]:
+        x, y = point
+        result = set()
+        for dx, dy in ((-1, -1), (0, -1), (1, -1), (-1, 0), (1, 0), (-1, 1), (0, 1), (1, 1)):
+            target = (x + dx, y + dy)
+            if target not in points:
+                continue
+            if dx and dy and ((x + dx, y) in points or (x, y + dy) in points):
+                continue
+            result.add(target)
+        return result
+
+    graph = {point: connected(point) for point in points}
+
+    # Remove tiny terminal hairs introduced where the scan's thick strokes
+    # meet. Meaningful detached marks remain because they form longer paths.
+    changed = True
+    while changed:
+        changed = False
+        for leaf in sorted((point for point, links in graph.items() if len(links) == 1), key=lambda p: (p[1], p[0])):
+            if leaf not in graph or len(graph[leaf]) != 1:
+                continue
+            branch = [leaf]
+            previous = None
+            current = leaf
+            while len(graph[current]) <= 2:
+                next_points = [point for point in graph[current] if point != previous]
+                if not next_points:
+                    break
+                following = next_points[0]
+                branch.append(following)
+                previous, current = current, following
+                if len(graph[current]) != 2:
+                    break
+            if len(branch) - 1 <= 7 and len(graph.get(current, ())) >= 3:
+                for point in branch[:-1]:
+                    for linked in list(graph.get(point, ())):
+                        graph[linked].discard(point)
+                    graph.pop(point, None)
+                changed = True
+
+    visited: set[frozenset[tuple[int, int]]] = set()
+    paths: list[tuple[list[tuple[int, int]], bool]] = []
+
+    def walk(start: tuple[int, int], following: tuple[int, int]) -> tuple[list[tuple[int, int]], bool]:
+        path = [start, following]
+        previous, current = start, following
+        visited.add(frozenset((start, following)))
+        while current in graph and len(graph[current]) == 2:
+            candidates = [point for point in graph[current] if point != previous]
+            if not candidates:
+                break
+            target = candidates[0]
+            edge = frozenset((current, target))
+            if edge in visited:
+                break
+            visited.add(edge)
+            path.append(target)
+            previous, current = current, target
+        return path, path[-1] == path[0]
+
+    nodes = sorted((point for point, links in graph.items() if len(links) != 2), key=lambda p: (p[1], p[0]))
+    for node in nodes:
+        for linked in sorted(graph[node], key=lambda p: (p[1], p[0])):
+            if frozenset((node, linked)) not in visited:
+                paths.append(walk(node, linked))
+
+    for node in sorted(graph, key=lambda p: (p[1], p[0])):
+        for linked in sorted(graph[node], key=lambda p: (p[1], p[0])):
+            if frozenset((node, linked)) not in visited:
+                path, _ = walk(node, linked)
+                if path[-1] != path[0] and path[-1] in graph and node in graph[path[-1]]:
+                    path.append(node)
+                paths.append((path, path[-1] == path[0]))
+    return paths
 
 
 def trace_crop(source: Image.Image, box: tuple[int, int, int, int], work: Path, key: str) -> tuple[str, str]:
@@ -207,24 +324,29 @@ def trace_crop(source: Image.Image, box: tuple[int, int, int, int], work: Path, 
         if len(component) >= 12:
             retained.update(component)
 
-    segments = []
-    for x, y in sorted(retained, key=lambda point: (point[1], point[0])):
-        for dx, dy in ((1, 0), (0, 1), (1, 1), (-1, 1)):
-            target = (x + dx, y + dy)
-            if target not in retained:
-                continue
-            if dx and dy and ((x + dx, y) in retained or (x, y + dy) in retained):
-                continue
-            segments.append(f"M{x} {y}L{target[0]} {target[1]}")
-    if not segments:
+    traced_paths = centerline_paths(retained)
+    vector_paths = []
+    for points, closed in traced_paths:
+        points = simplify_closed_path(points) if closed else simplify_path(points)
+        if len(points) < 2:
+            continue
+        commands = f"M{points[0][0]} {points[0][1]}" + "".join(f"L{x} {y}" for x, y in points[1:])
+        vector_paths.append(commands + ("Z" if closed else ""))
+    if not vector_paths:
         raise RuntimeError(f"empty centerline trace for {key}")
-    path = "".join(segments)
+    path = "".join(vector_paths)
     group = (
         f'<path d="{path}" fill="none" stroke="#243b53" stroke-width="1.4" '
         'stroke-linecap="round" stroke-linejoin="round"/>'
         f'{grille_overlay(key)}'
     )
-    return f"0 0 {width} {height}", group
+    extent = set(retained)
+    extent.update(GRILLE_POLYGONS.get(key, []))
+    min_x = min(x for x, _ in extent) - 8
+    min_y = min(y for _, y in extent) - 8
+    max_x = max(x for x, _ in extent) + 8
+    max_y = max(y for _, y in extent) + 8
+    return f"{min_x} {min_y} {max_x - min_x} {max_y - min_y}", group
 
 
 def write_reference(source: Image.Image, key: str, feet: int, art_box: tuple[int, int, int, int], path: Path) -> None:
@@ -303,8 +425,11 @@ def generate() -> list[dict]:
     with tempfile.TemporaryDirectory(prefix="fitting-group-4-") as temp:
         work = Path(temp)
         source = extract_source(work)
-        for key, feet, name, art_box in ITEMS:
+        for key, feet, name, original_art_box in ITEMS:
             source_cell_box = REFERENCE_BOXES[key]
+            # Trace the complete non-overlapping source cell. Earlier manual
+            # art boxes clipped several long fittings, including 4AD and 4AE.
+            art_box = source_cell_box
             write_reference(source, key, feet, art_box, REFS / f"{key}.png")
             view_box, group = trace_crop(source, art_box, work, key)
             svg_text = fitting_svg(key, name, feet, view_box, group)
@@ -333,9 +458,10 @@ def generate() -> list[dict]:
                     "embeddedImageIndex": 48,
                     "embeddedImageSize": [948, 1231],
                     "artCropPixels": list(art_box),
+                    "originalPilotCropPixels": list(original_art_box),
                     "sourceCellCropPixels": list(source_cell_box),
                 },
-                "drawingMethod": "Pure vector centerline path traced from a 4x supersampled fitting-specific source crop; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
+                "drawingMethod": "Pure vector centerline path extracted from a 4x supersampled complete source cell and simplified into clean line segments; 4Y and 4Z include explicit vector egg-crate grille lines; no raster image is embedded in the fitting SVG.",
                 "referenceImageTreatment": "Original black source art isolated from its crop; fitting ID and equivalent length re-typeset below from the source values.",
                 "revision": hashlib.sha256(svg_text.encode()).hexdigest()[:16],
             })
@@ -368,7 +494,7 @@ Group 4 contains **{len(entries)} source fitting numbers**: {ids}.
 
 The PDF identifies these as “Supply Air Boot and Stack Head Fittings” at 900 FPM and 0.08 IWC per 100 feet. The underlying 948 × 1231 source image is placed across PDF pages 18–19 and is printed page 168. The generator extracts that image directly, so fittings near the visual PDF page boundary are complete.
 
-Each fitting SVG uses thin stroked vector centerlines extracted from its own source crop. The dense register faces on 4Y and 4Z are recreated with explicit clipped egg-crate grids so they remain open and legible instead of becoming solid traced shapes. Reference PNGs isolate the original black source art and re-typeset the fitting number and equivalent-length value underneath, avoiding fragments from the tightly packed neighboring cells. Comparison SVGs place that prepared reference and generated SVG side by side for a later large-batch review.
+Each fitting SVG uses thin stroked vector centerlines extracted from its complete non-overlapping source cell and simplified into clean line segments. Using the complete cell prevents long elbows, bases, and branch lines from being clipped. The dense register faces on 4Y and 4Z are recreated with explicit clipped egg-crate grids so they remain open and legible instead of becoming solid traced shapes. Reference PNGs isolate the original black source art and re-typeset the fitting number and equivalent-length value underneath. Comparison SVGs place that prepared reference and generated SVG side by side for a later large-batch review.
 
 The descriptive names are inferred from visible geometry because the PDF supplies fitting numbers and equivalent lengths but no individual names. Reviewers should treat the drawing, fitting number, and equivalent length as authoritative; names can be revised without changing the traced geometry.
 

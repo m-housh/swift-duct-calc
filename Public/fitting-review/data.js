@@ -8,11 +8,11 @@ window.FITTING_REVIEW = {
       "number": "4A",
       "name": "Radius boot with rectangular outlet",
       "group": 4,
-      "image": "../images/fittings/group-4/4A.svg?revision=63b9bba2af81",
+      "image": "../images/fittings/group-4/4A.svg?revision=17f639a35321",
       "reference": "../images/fittings/references/group-4/4A.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "63b9bba2af81b3c1cf37ae76a656fe75b0a8e2262fa8c081fa7fe35c0f23d593",
+      "revision": "17f639a35321abd2faf82061377269290c3240c58bbffbc07a0934e24b4deca9",
       "priorApproval": false
     },
     {
@@ -20,11 +20,11 @@ window.FITTING_REVIEW = {
       "number": "4AA",
       "name": "Tapered square ceiling boot",
       "group": 4,
-      "image": "../images/fittings/group-4/4AA.svg?revision=795a7ebb124a",
+      "image": "../images/fittings/group-4/4AA.svg?revision=c00ffcec6526",
       "reference": "../images/fittings/references/group-4/4AA.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "795a7ebb124a85b0f09b8ad9d1396cc4b44805e0efbb20652e1699bb5729226c",
+      "revision": "c00ffcec6526c1137eddf8e54e6de88e7348cee3d5c4f9f5f2e6eaf534f7bae2",
       "priorApproval": false
     },
     {
@@ -32,11 +32,11 @@ window.FITTING_REVIEW = {
       "number": "4AB",
       "name": "Angled square boot with round branch",
       "group": 4,
-      "image": "../images/fittings/group-4/4AB.svg?revision=e815972924cf",
+      "image": "../images/fittings/group-4/4AB.svg?revision=b2e5b009920a",
       "reference": "../images/fittings/references/group-4/4AB.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "e815972924cf49ae88f4dee36d1d27202967e983d604c55c3a1cd5c0b74b2525",
+      "revision": "b2e5b009920a042415a1f1b7bb585a617eb9470c866a138614fe2132c24d3afd",
       "priorApproval": false
     },
     {
@@ -44,11 +44,11 @@ window.FITTING_REVIEW = {
       "number": "4AC",
       "name": "Stack head with curved side outlet",
       "group": 4,
-      "image": "../images/fittings/group-4/4AC.svg?revision=9c45a4dad1e1",
+      "image": "../images/fittings/group-4/4AC.svg?revision=646e8e6992bd",
       "reference": "../images/fittings/references/group-4/4AC.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "9c45a4dad1e166c9118f75c80378e0bcef3e1c2203602d14da4cde7aa83e7abe",
+      "revision": "646e8e6992bdd2ae3376ffa441a18eaab7104dd0497471221624840eb8215fba",
       "priorApproval": false
     },
     {
@@ -56,11 +56,11 @@ window.FITTING_REVIEW = {
       "number": "4AD",
       "name": "Segmented elbow on rectangular stack",
       "group": 4,
-      "image": "../images/fittings/group-4/4AD.svg?revision=4548b36ab766",
+      "image": "../images/fittings/group-4/4AD.svg?revision=224907ec0a10",
       "reference": "../images/fittings/references/group-4/4AD.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "4548b36ab766aebff2d167e1b6cb46f7aefffcd59de59e5ae2c929f2abb53515",
+      "revision": "224907ec0a10abd8df971dfb41305a0b99066ea2e7a9760c945f2f5604515186",
       "priorApproval": false
     },
     {
@@ -68,11 +68,11 @@ window.FITTING_REVIEW = {
       "number": "4AE",
       "name": "Segmented elbow on flange",
       "group": 4,
-      "image": "../images/fittings/group-4/4AE.svg?revision=8bb86415b152",
+      "image": "../images/fittings/group-4/4AE.svg?revision=ef83e3926dc0",
       "reference": "../images/fittings/references/group-4/4AE.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "8bb86415b152d159744083b9b2724ee72f3093f048d2a40866ffebe9bbc09687",
+      "revision": "ef83e3926dc0f727c00dcf75bf7013d6452d6f8c127465ea9133fa475a43c1dc",
       "priorApproval": false
     },
     {
@@ -80,11 +80,11 @@ window.FITTING_REVIEW = {
       "number": "4AF",
       "name": "Rectangular register boot with side outlet",
       "group": 4,
-      "image": "../images/fittings/group-4/4AF.svg?revision=e9320ffba507",
+      "image": "../images/fittings/group-4/4AF.svg?revision=c94be6895374",
       "reference": "../images/fittings/references/group-4/4AF.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "e9320ffba507d994f7fccd80e65d717e1fede8473447a159df0aa4e435a8309b",
+      "revision": "c94be689537470ea2b752653a9d20b401bc317909650bf49fa88a18eb121a8b1",
       "priorApproval": false
     },
     {
@@ -92,11 +92,11 @@ window.FITTING_REVIEW = {
       "number": "4AG",
       "name": "Split transition with round branches",
       "group": 4,
-      "image": "../images/fittings/group-4/4AG.svg?revision=8719ccc44dfc",
+      "image": "../images/fittings/group-4/4AG.svg?revision=ace861dfa0bb",
       "reference": "../images/fittings/references/group-4/4AG.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "8719ccc44dfcea27a067cef8964d8e7f1223414ba1d1ca0c89d81429aeda57b7",
+      "revision": "ace861dfa0bbac3aacbf0d5ceeccb3a4e91a2c66899ff6ec49c761e6bb86abcd",
       "priorApproval": false
     },
     {
@@ -104,11 +104,11 @@ window.FITTING_REVIEW = {
       "number": "4AH",
       "name": "Rectangular stack head with grille face",
       "group": 4,
-      "image": "../images/fittings/group-4/4AH.svg?revision=21e8939bc92e",
+      "image": "../images/fittings/group-4/4AH.svg?revision=bed831c1f9b1",
       "reference": "../images/fittings/references/group-4/4AH.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "21e8939bc92ecc98d75016d7121c0b5b991021add91ba66a24777345c0accb96",
+      "revision": "bed831c1f9b159d88f4f4d5f08c26d16576820f4b645ae9943b6418941abd4a0",
       "priorApproval": false
     },
     {
@@ -116,11 +116,11 @@ window.FITTING_REVIEW = {
       "number": "4AI",
       "name": "Rectangular stack head with framed face",
       "group": 4,
-      "image": "../images/fittings/group-4/4AI.svg?revision=a3036e2660cc",
+      "image": "../images/fittings/group-4/4AI.svg?revision=1ac372fc7f99",
       "reference": "../images/fittings/references/group-4/4AI.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "a3036e2660cc47aced21b53e5a94b6a0ff878591a50b3fe96585d1d6a0ad287a",
+      "revision": "1ac372fc7f997192560b073dbe1866cb06770d61eccb06e7d217c6e42eddc526",
       "priorApproval": false
     },
     {
@@ -128,11 +128,11 @@ window.FITTING_REVIEW = {
       "number": "4AJ",
       "name": "Boot with flexible round branch",
       "group": 4,
-      "image": "../images/fittings/group-4/4AJ.svg?revision=e86576907ff6",
+      "image": "../images/fittings/group-4/4AJ.svg?revision=30b3f8f51d0c",
       "reference": "../images/fittings/references/group-4/4AJ.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "e86576907ff698ac46e67d4d41a73e51c4ad643aeb51b8ef37e7428e4c009041",
+      "revision": "30b3f8f51d0cdcf87f44c9daccf1acc8f535d3395b602af2cbebd6aa2a744b13",
       "priorApproval": false
     },
     {
@@ -140,11 +140,11 @@ window.FITTING_REVIEW = {
       "number": "4AK",
       "name": "Low rectangular stack head with round branch",
       "group": 4,
-      "image": "../images/fittings/group-4/4AK.svg?revision=768ecdb0c85a",
+      "image": "../images/fittings/group-4/4AK.svg?revision=9e7f180d87da",
       "reference": "../images/fittings/references/group-4/4AK.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "768ecdb0c85a578b3797b6f72c037e6db32f5c0223e96e093936f9421d76ea0b",
+      "revision": "9e7f180d87da0aff6f30123ec0030d462781b278aebe18afd76a63a78c4c000d",
       "priorApproval": false
     },
     {
@@ -152,11 +152,11 @@ window.FITTING_REVIEW = {
       "number": "4AL",
       "name": "Angled stack head with inset opening",
       "group": 4,
-      "image": "../images/fittings/group-4/4AL.svg?revision=722e2964c9cd",
+      "image": "../images/fittings/group-4/4AL.svg?revision=8fae00763dc8",
       "reference": "../images/fittings/references/group-4/4AL.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "722e2964c9cd52a03e2947c1422f2720622e06b55ac6a7e0e016b109f7eb6405",
+      "revision": "8fae00763dc88bdefcad20a2f3cd4b581b541a71dc1465d5008ed0d54294eaff",
       "priorApproval": false
     },
     {
@@ -164,11 +164,11 @@ window.FITTING_REVIEW = {
       "number": "4AM",
       "name": "Tapered stack head with front opening",
       "group": 4,
-      "image": "../images/fittings/group-4/4AM.svg?revision=15b85dd680ba",
+      "image": "../images/fittings/group-4/4AM.svg?revision=173a11901089",
       "reference": "../images/fittings/references/group-4/4AM.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "15b85dd680bad084bb6d22a4e0d138929716eee2022448f265085d83470e6163",
+      "revision": "173a11901089ca84cc1605e25ee1d60f2af161f1cdd197d63db322ec9708b573",
       "priorApproval": false
     },
     {
@@ -176,11 +176,11 @@ window.FITTING_REVIEW = {
       "number": "4AN",
       "name": "Tapered stack head with stepped opening",
       "group": 4,
-      "image": "../images/fittings/group-4/4AN.svg?revision=513d349b9c64",
+      "image": "../images/fittings/group-4/4AN.svg?revision=207826668c3f",
       "reference": "../images/fittings/references/group-4/4AN.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "513d349b9c6433e978e1967d6486b1dd3e4ee2e81f18b2152a88513dfd8adc7c",
+      "revision": "207826668c3fd83b7dd953c490fe1cab44c8ce0ae963e7637d01d4b61ea02de9",
       "priorApproval": false
     },
     {
@@ -188,11 +188,11 @@ window.FITTING_REVIEW = {
       "number": "4AO",
       "name": "Straight wall stack offset",
       "group": 4,
-      "image": "../images/fittings/group-4/4AO.svg?revision=a527eb9c7bd2",
+      "image": "../images/fittings/group-4/4AO.svg?revision=83a46d737f17",
       "reference": "../images/fittings/references/group-4/4AO.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "a527eb9c7bd266f718060bd4a871cc13bc6471e803d28030910ff337da4a9cb2",
+      "revision": "83a46d737f1738596e7218408251b73aa363ff4a8dbace5b6159cb827f62c846",
       "priorApproval": false
     },
     {
@@ -200,11 +200,11 @@ window.FITTING_REVIEW = {
       "number": "4AP",
       "name": "Stepped wall stack offset",
       "group": 4,
-      "image": "../images/fittings/group-4/4AP.svg?revision=7749bbf0f0f7",
+      "image": "../images/fittings/group-4/4AP.svg?revision=84ba4b461101",
       "reference": "../images/fittings/references/group-4/4AP.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "7749bbf0f0f7ed7f9ff11d214ead9fe07f3facbce490e88f9634459f07f3e4eb",
+      "revision": "84ba4b4611019b7bc750fa2b5c51054dd220f7cc5b267e483bcb2a3c4b77794a",
       "priorApproval": false
     },
     {
@@ -212,11 +212,11 @@ window.FITTING_REVIEW = {
       "number": "4AQ",
       "name": "Plain rectangular stack-head turn",
       "group": 4,
-      "image": "../images/fittings/group-4/4AQ.svg?revision=61fa1a851ae0",
+      "image": "../images/fittings/group-4/4AQ.svg?revision=bb45e517b2db",
       "reference": "../images/fittings/references/group-4/4AQ.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "61fa1a851ae082c10fda841f4f2602440b628a2347cd5409c4828acae88e17dc",
+      "revision": "bb45e517b2dbd31d2c6b9d10854616fd0dfa75958a55f64a6a8a266cc3ad34de",
       "priorApproval": false
     },
     {
@@ -224,11 +224,11 @@ window.FITTING_REVIEW = {
       "number": "4AR",
       "name": "Rectangular stack-head turn with raised collar",
       "group": 4,
-      "image": "../images/fittings/group-4/4AR.svg?revision=7db793c1951b",
+      "image": "../images/fittings/group-4/4AR.svg?revision=7f2e2c6d88ce",
       "reference": "../images/fittings/references/group-4/4AR.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "7db793c1951bef4dd2df6955b81e2c7ef8e56849e01aa2e29c6921c4218b02a4",
+      "revision": "7f2e2c6d88ce05916c4f1c02dae361a9ba4350361209f5ce1003d6502253dbad",
       "priorApproval": false
     },
     {
@@ -236,11 +236,11 @@ window.FITTING_REVIEW = {
       "number": "4B",
       "name": "Radius boot with extended top transition",
       "group": 4,
-      "image": "../images/fittings/group-4/4B.svg?revision=a2abf91b3b3b",
+      "image": "../images/fittings/group-4/4B.svg?revision=388bb4b01693",
       "reference": "../images/fittings/references/group-4/4B.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "a2abf91b3b3b9007e331cf65a24e42c6610c60de14c81b4b43b6ffa8c303fe29",
+      "revision": "388bb4b0169382457ecafdd082c382a2d59d1b34279eb6a3506eaa5f4a09d76b",
       "priorApproval": false
     },
     {
@@ -248,11 +248,11 @@ window.FITTING_REVIEW = {
       "number": "4C",
       "name": "Low-profile radius boot with top collar",
       "group": 4,
-      "image": "../images/fittings/group-4/4C.svg?revision=fcc2d09d276a",
+      "image": "../images/fittings/group-4/4C.svg?revision=ad02fc075143",
       "reference": "../images/fittings/references/group-4/4C.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "fcc2d09d276a50068199ea1afc0c92469fc5b5cb2ac16c082f503f43d1aa23b0",
+      "revision": "ad02fc075143ad23e1c151dbcfc047d568073e941138a3a14a7e0669fef1abc5",
       "priorApproval": false
     },
     {
@@ -260,11 +260,11 @@ window.FITTING_REVIEW = {
       "number": "4D",
       "name": "Horizontal boot with round throat transition",
       "group": 4,
-      "image": "../images/fittings/group-4/4D.svg?revision=f142e3de8c98",
+      "image": "../images/fittings/group-4/4D.svg?revision=cff4b9673933",
       "reference": "../images/fittings/references/group-4/4D.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "f142e3de8c984de7a277459905f2f82057244acad63f8bec9aea4b50f29af429",
+      "revision": "cff4b9673933cb05668af08a78adcf60a9ae58f2082ca7254daed86b0b650977",
       "priorApproval": false
     },
     {
@@ -272,11 +272,11 @@ window.FITTING_REVIEW = {
       "number": "4E",
       "name": "Horizontal boot with tapered throat",
       "group": 4,
-      "image": "../images/fittings/group-4/4E.svg?revision=5f167ee3c0a7",
+      "image": "../images/fittings/group-4/4E.svg?revision=716837abf074",
       "reference": "../images/fittings/references/group-4/4E.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "5f167ee3c0a766c51cce6ea10a79d72c19b0cc7db754262395608d13c2dced82",
+      "revision": "716837abf074b2e7c80761d38d88815a75c68eb2a0a32bdba3afe89554ee86b9",
       "priorApproval": false
     },
     {
@@ -284,11 +284,11 @@ window.FITTING_REVIEW = {
       "number": "4F",
       "name": "Radius boot with side extension",
       "group": 4,
-      "image": "../images/fittings/group-4/4F.svg?revision=83de721e3cf4",
+      "image": "../images/fittings/group-4/4F.svg?revision=5ee79a3700bb",
       "reference": "../images/fittings/references/group-4/4F.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "83de721e3cf4959d65730e07fc39bd08164231014d200704cc5bdd5b1ab469f8",
+      "revision": "5ee79a3700bbb24e19eba9bd629b08ec371f327cea74f596b56175020311489b",
       "priorApproval": false
     },
     {
@@ -296,11 +296,11 @@ window.FITTING_REVIEW = {
       "number": "4G",
       "name": "Angled boot to round outlet",
       "group": 4,
-      "image": "../images/fittings/group-4/4G.svg?revision=f99b14c2a6d0",
+      "image": "../images/fittings/group-4/4G.svg?revision=a839ce46b0d0",
       "reference": "../images/fittings/references/group-4/4G.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "f99b14c2a6d0e7f467f12af93f6b5fb35ad5d88736521be4e13317da2f08e035",
+      "revision": "a839ce46b0d079d67efe9e009f5e875df70a71de70c308040e8380c885989b3e",
       "priorApproval": false
     },
     {
@@ -308,11 +308,11 @@ window.FITTING_REVIEW = {
       "number": "4H",
       "name": "Tapered boot to round outlet",
       "group": 4,
-      "image": "../images/fittings/group-4/4H.svg?revision=fbe03990f7b0",
+      "image": "../images/fittings/group-4/4H.svg?revision=9fc75b2e9fd1",
       "reference": "../images/fittings/references/group-4/4H.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "fbe03990f7b0302a13ced202f10650da191934a155935ec0f9de1ce6f0e18659",
+      "revision": "9fc75b2e9fd1fda4a39ca58d5afa2c9099db25a167b4049a0493c267ee1d9f19",
       "priorApproval": false
     },
     {
@@ -320,11 +320,11 @@ window.FITTING_REVIEW = {
       "number": "4I",
       "name": "Compact round-to-rectangular transition",
       "group": 4,
-      "image": "../images/fittings/group-4/4I.svg?revision=d832f189924d",
+      "image": "../images/fittings/group-4/4I.svg?revision=eb29a69c422a",
       "reference": "../images/fittings/references/group-4/4I.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "d832f189924d5359eee05fc1f7adea57114243501fb0a17dd7db279c0e9cd799",
+      "revision": "eb29a69c422a8263c8034d8104af89466eb77ce5a1ff5e5ffaf21ef3ae5421d9",
       "priorApproval": false
     },
     {
@@ -332,11 +332,11 @@ window.FITTING_REVIEW = {
       "number": "4J",
       "name": "Angled boot to round outlet with smooth throat",
       "group": 4,
-      "image": "../images/fittings/group-4/4J.svg?revision=2a76bb32402a",
+      "image": "../images/fittings/group-4/4J.svg?revision=2e20bb0093f8",
       "reference": "../images/fittings/references/group-4/4J.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "2a76bb32402a4cacddbbd2d6996d2636766f1bf29d27d7588fe8fd96403e1153",
+      "revision": "2e20bb0093f8929f792e634b6d3b2af900424cc61199d64d43351ecd233d12d8",
       "priorApproval": false
     },
     {
@@ -344,11 +344,11 @@ window.FITTING_REVIEW = {
       "number": "4K",
       "name": "Angled boot to round outlet with lined throat",
       "group": 4,
-      "image": "../images/fittings/group-4/4K.svg?revision=e37bdbca96c0",
+      "image": "../images/fittings/group-4/4K.svg?revision=d17d9c0b7fa1",
       "reference": "../images/fittings/references/group-4/4K.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "e37bdbca96c038a61ad02f583fe3ffe7c3d75c9c97da6267f8021361637265e7",
+      "revision": "d17d9c0b7fa1684c4dfe1f1efc3c8cdb400514f4521cc6bfb72f8b04c0b961c4",
       "priorApproval": false
     },
     {
@@ -356,11 +356,11 @@ window.FITTING_REVIEW = {
       "number": "4L",
       "name": "Deep angled boot to round outlet with lined throat",
       "group": 4,
-      "image": "../images/fittings/group-4/4L.svg?revision=8ff60281c197",
+      "image": "../images/fittings/group-4/4L.svg?revision=cfd3f1c2ffb5",
       "reference": "../images/fittings/references/group-4/4L.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "8ff60281c197842381531ee9eec2b55c7c49f30baef1d08146a56baea398568e",
+      "revision": "cfd3f1c2ffb5af95f0ab3ab266c6afa1cbebd00bc071ac08a6b7cdffb929c409",
       "priorApproval": false
     },
     {
@@ -368,11 +368,11 @@ window.FITTING_REVIEW = {
       "number": "4M",
       "name": "Long rectangular offset transition",
       "group": 4,
-      "image": "../images/fittings/group-4/4M.svg?revision=eb1c67b8225a",
+      "image": "../images/fittings/group-4/4M.svg?revision=a01f487e1121",
       "reference": "../images/fittings/references/group-4/4M.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "eb1c67b8225aee9bf4a3dddaea4fc27da1d989df562dc1d8460759d851201bdd",
+      "revision": "a01f487e1121181d617c14747caa605f887bddc4bbb3ac2f644d3c3ac0d20f5f",
       "priorApproval": false
     },
     {
@@ -380,11 +380,11 @@ window.FITTING_REVIEW = {
       "number": "4N",
       "name": "Rectangular offset with inset throat",
       "group": 4,
-      "image": "../images/fittings/group-4/4N.svg?revision=3170a78bbbe8",
+      "image": "../images/fittings/group-4/4N.svg?revision=7d86668306b3",
       "reference": "../images/fittings/references/group-4/4N.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "3170a78bbbe8463da47025bf2c8bb6e96036fe2980fb02d35342f4ba465b49fe",
+      "revision": "7d86668306b3d645e23094e0c4867f46521312f1afac0282d5928d984e6a2b6a",
       "priorApproval": false
     },
     {
@@ -392,11 +392,11 @@ window.FITTING_REVIEW = {
       "number": "4O",
       "name": "Pitched rectangular boot",
       "group": 4,
-      "image": "../images/fittings/group-4/4O.svg?revision=d12589329599",
+      "image": "../images/fittings/group-4/4O.svg?revision=8b6976af22a3",
       "reference": "../images/fittings/references/group-4/4O.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "d1258932959947d587fd832d075be83dbd1fc812a7e295d32d5e840e231a9646",
+      "revision": "8b6976af22a367ae9d4e1cf791500354b5b8a1888b884d7c94fd2c7630e20039",
       "priorApproval": false
     },
     {
@@ -404,11 +404,11 @@ window.FITTING_REVIEW = {
       "number": "4P",
       "name": "Tapered rectangular boot",
       "group": 4,
-      "image": "../images/fittings/group-4/4P.svg?revision=cfb0db39d32b",
+      "image": "../images/fittings/group-4/4P.svg?revision=fa5e3d314ab8",
       "reference": "../images/fittings/references/group-4/4P.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "cfb0db39d32b906e1c568b33d06a92bfb633d00495c305be3bdea628e8c52316",
+      "revision": "fa5e3d314ab817b93885a6678a127a9f1ddef5a01429de6e042f9335bb0492d9",
       "priorApproval": false
     },
     {
@@ -416,11 +416,11 @@ window.FITTING_REVIEW = {
       "number": "4Q",
       "name": "Rectangular-to-round side transition",
       "group": 4,
-      "image": "../images/fittings/group-4/4Q.svg?revision=441c43dd213f",
+      "image": "../images/fittings/group-4/4Q.svg?revision=fbf505835628",
       "reference": "../images/fittings/references/group-4/4Q.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "441c43dd213fd3a1fea01e1c45661214e0c20daf841b7228a56e21bc797fea10",
+      "revision": "fbf50583562812b4413f03e23f5dd89404218e456ee0ca83ba7f65e999345869",
       "priorApproval": false
     },
     {
@@ -428,11 +428,11 @@ window.FITTING_REVIEW = {
       "number": "4R",
       "name": "Rectangular-to-round vertical transition",
       "group": 4,
-      "image": "../images/fittings/group-4/4R.svg?revision=78453cfedd88",
+      "image": "../images/fittings/group-4/4R.svg?revision=4d819280c6a2",
       "reference": "../images/fittings/references/group-4/4R.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "78453cfedd8861abbdb90318fc590a3c56cb8350bdd9f3d13ccdabc67adedd3b",
+      "revision": "4d819280c6a2565a4b20f8f331d89f49929730a9db9644c241a41ecdc490449e",
       "priorApproval": false
     },
     {
@@ -440,11 +440,11 @@ window.FITTING_REVIEW = {
       "number": "4S",
       "name": "Rectangular-to-round tapered transition",
       "group": 4,
-      "image": "../images/fittings/group-4/4S.svg?revision=d1000f102169",
+      "image": "../images/fittings/group-4/4S.svg?revision=6d89ffcf5aa6",
       "reference": "../images/fittings/references/group-4/4S.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "d1000f1021695cd07e0093f40b50a855352046b39bdd5e26d08013dc397ec613",
+      "revision": "6d89ffcf5aa6eff3fb0adbf873507927502004eef7fe6ce701483170ad1592ad",
       "priorApproval": false
     },
     {
@@ -452,11 +452,11 @@ window.FITTING_REVIEW = {
       "number": "4T",
       "name": "Elongated rectangular-to-round boot",
       "group": 4,
-      "image": "../images/fittings/group-4/4T.svg?revision=48396589063b",
+      "image": "../images/fittings/group-4/4T.svg?revision=3d12a224b2fc",
       "reference": "../images/fittings/references/group-4/4T.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "48396589063bbb577e4e78ac7509c30257ecef85744935c56b82fe0aa160be48",
+      "revision": "3d12a224b2fc6e88b1d5f6b7898a40213b0fdc1a893eba2706f5d5d3dc85d8cc",
       "priorApproval": false
     },
     {
@@ -464,11 +464,11 @@ window.FITTING_REVIEW = {
       "number": "4U",
       "name": "Offset rectangular-to-round boot",
       "group": 4,
-      "image": "../images/fittings/group-4/4U.svg?revision=d9e71b141b96",
+      "image": "../images/fittings/group-4/4U.svg?revision=d164545932aa",
       "reference": "../images/fittings/references/group-4/4U.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "d9e71b141b96575943ea9f322e8e9eb25ee7f11328e6606ac9d38f8aa0c4079a",
+      "revision": "d164545932aa5a472d726c2dcb4c09b45eb1a130bcc930aae99312e681a92d30",
       "priorApproval": false
     },
     {
@@ -476,11 +476,11 @@ window.FITTING_REVIEW = {
       "number": "4V",
       "name": "Rectangular collar on round duct",
       "group": 4,
-      "image": "../images/fittings/group-4/4V.svg?revision=2a7a5634e039",
+      "image": "../images/fittings/group-4/4V.svg?revision=a33e1964aaa3",
       "reference": "../images/fittings/references/group-4/4V.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "2a7a5634e0397099cd064c982a4097e0fbec6828e48e05e2b4bb3729e080cc38",
+      "revision": "a33e1964aaa38f7c483487dfac284063fac197a52762be3836f09e21d8e0f5b7",
       "priorApproval": false
     },
     {
@@ -488,11 +488,11 @@ window.FITTING_REVIEW = {
       "number": "4W",
       "name": "Ceiling boot with bell-mouth collar",
       "group": 4,
-      "image": "../images/fittings/group-4/4W.svg?revision=74e614b9caed",
+      "image": "../images/fittings/group-4/4W.svg?revision=931e89ce0e65",
       "reference": "../images/fittings/references/group-4/4W.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "74e614b9caedfb5bd30eb28a1c0185a1da9809031130b0d07b5be9ede56c9fce",
+      "revision": "931e89ce0e65455b645f8a00e39f0374370c2c377f77cc51e12f6f29ed35b69a",
       "priorApproval": false
     },
     {
@@ -500,11 +500,11 @@ window.FITTING_REVIEW = {
       "number": "4X",
       "name": "Ceiling boot with straight collar",
       "group": 4,
-      "image": "../images/fittings/group-4/4X.svg?revision=86290af56e35",
+      "image": "../images/fittings/group-4/4X.svg?revision=0ee14d6440cf",
       "reference": "../images/fittings/references/group-4/4X.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "86290af56e35557c67715b56cb82370886a4be574832ee49e707db7c4f2b2169",
+      "revision": "0ee14d6440cff08ebffe051781ff4bb85c649a970a8433e6eb788a8c15d7f7c6",
       "priorApproval": false
     },
     {
@@ -512,11 +512,11 @@ window.FITTING_REVIEW = {
       "number": "4Y",
       "name": "Rectangular ceiling register boot",
       "group": 4,
-      "image": "../images/fittings/group-4/4Y.svg?revision=cad8ffc6bbcc",
+      "image": "../images/fittings/group-4/4Y.svg?revision=3557877d9ac2",
       "reference": "../images/fittings/references/group-4/4Y.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "cad8ffc6bbcc2a2fc61fef69e0448cd87caf4ab65104e45135738514ddaad374",
+      "revision": "3557877d9ac25bc8a5f5f4106dee10a096af3ab48bb3b471419f2b0f45bde772",
       "priorApproval": false
     },
     {
@@ -524,11 +524,11 @@ window.FITTING_REVIEW = {
       "number": "4Z",
       "name": "Square grille boot to round branch",
       "group": 4,
-      "image": "../images/fittings/group-4/4Z.svg?revision=af40b43a1771",
+      "image": "../images/fittings/group-4/4Z.svg?revision=880b0f3fe597",
       "reference": "../images/fittings/references/group-4/4Z.png",
       "sourcePage": 168,
       "sourcePDF": "../files/ManD.Groups.pdf#page=18",
-      "revision": "af40b43a1771d16896e12e90c686df5f7123747c6d840178996e661fbb3dfa6f",
+      "revision": "880b0f3fe597689de8d06f64b42b83a2d2fe50b1072877da09b26f51a3b9e829",
       "priorApproval": false
     }
   ]
