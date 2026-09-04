@@ -33,13 +33,13 @@ The completed pilot review accepted all 13 drawings, with no revision requests.
 The original export is archived under `docs/fitting-reviews/`, and the catalog
 records the reviewed revision and completion time for each drawing.
 
-Use complete groups rather than 4–6 drawing batches. The next production batch
-is all 17 Group 2 fittings, followed by Group 3 with its necessary variants.
+Use complete groups rather than 4–6 drawing batches. Complete Group 1 review
+and corrections first, then all 17 Group 2 fittings, followed by Group 3.
 After each batch, revise the checked drawings and repeat the comparison.
 
-The page currently contains the 13 existing pilot drawings, including the
-accepted 2B and 3T. It is a working review interface, not a claim that Groups
-1–3 are complete.
+The page currently contains the [complete Group 1 batch](group-1-review.md):
+22 drawings covering 19 fitting numbers. The accepted 13-drawing pilot is
+preserved separately. Groups 2 and 3 remain incomplete.
 
 ## Regeneration
 
@@ -49,8 +49,7 @@ checks the batch, completeness and current asset hashes before changing any
 files. Archived decisions are reapplied during combined regeneration only
 when the SVG and reference still match the reviewed revision.
 
-Run `python3 scripts/generate-fitting-complex-pilot.py`, then
-`python3 scripts/generate-fitting-review.py`. The second command creates
+Run `python3 scripts/generate-fittings.py`. This creates
 `Public/fitting-review/data.js` with asset paths and revision hashes; it does
 not overwrite browser decisions. No frontend dependency installation or CSS
 build is required for this standalone review surface.

@@ -32,8 +32,10 @@ def main():
     public = root / 'Public'
     raw = args.review.read_bytes()
     report = json.loads(raw)
-    manifest = json.loads((public / 'fitting-review/data.js').read_text()
-                          .removeprefix('window.FITTING_REVIEW = ').removesuffix(';\n'))
+    batch_id = report.get('batchId')
+    if batch_id not in {'pilot-01', 'group-1'}:
+        raise ValueError('Unknown review batch.')
+    manifest = json.loads((public / 'fitting-review/batches' / f'{batch_id}.json').read_text())
     catalog_path = public / 'images/fittings/catalog.json'
     catalog = json.loads(catalog_path.read_text())
     validate(report, manifest, catalog, public)

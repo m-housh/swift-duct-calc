@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="0 0 640 520" role="img" aria-labelledby="title desc">
+<title id="title">1N — Outlet transition</title><desc id="desc">Add transition EL to the upstream elbow or tee EL. Side elevation traced from printed page 161. Review drawing, not to scale.</desc>
+<defs><marker id="flow" viewBox="0 0 8 5" markerWidth="6" markerHeight="4" refX="7" refY="2.5" orient="auto"><path d="M0 0L8 2.5L0 5Z" fill="#243b53"/></marker></defs>
+<style>text{font-family:Arial,sans-serif}path{stroke-linejoin:round;stroke-linecap:round}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<g fill="#243b53"><text x="32" y="44" font-size="28" font-weight="700">1N</text><text x="96" y="43" font-size="18">Outlet transition</text><text x="32" y="76" font-size="13">GROUP 1 · SUPPLY AIR · SOURCE SIDE ELEVATION</text></g>
+<g transform="translate(55.0000 105) scale(1.630769) translate(-280 -950)" fill="none" stroke="#243b53" stroke-width="1.6"><path d="M295 960H572L562 972L579 978L568 984L585 991L563 998L575 1009H432V1022H295Z" /><path d="M433 960V1009M523 960V1009M295 1022V1029M428 1022V1029" /><path d="M289 1029h144v82l-25.919999999999998 -9.84l-25.919999999999998 16.400000000000002l-23.04 -8.200000000000001l-34.56 22.14v-22.14l-34.56 14.76Z" /><path d="M361.0 1088.04V1051.96" marker-end="url(#flow)" stroke-width="1.4"/><path d="M448 995H514" marker-end="url(#flow)" stroke-width="1.4"/><path d="M574 984H598" marker-end="url(#flow)" stroke-width="1.4"/><text x="442" y="1042" font-size="11" stroke="none" fill="#243b53">Transition</text></g>
+<text x="32" y="459" fill="#243b53" font-size="14">Add transition EL to the upstream elbow or tee EL.</text>
+<text x="32" y="490" fill="#4b6274" font-size="12">REVIEW DRAWING · NOT TO SCALE · Source: PDF p. 2 / printed p. 161</text>
+</svg>

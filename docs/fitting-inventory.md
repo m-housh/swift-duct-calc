@@ -1,5 +1,8 @@
 # Fitting inventory and complex drawing pilot
 
+**Current batch:** [Complete Group 1 review](group-1-review.md), covering all
+19 source fitting numbers in 22 drawings. Review Group 1 before continuing Group 2.
+
 **Updated review:** [2B and 3T source comparisons](fitting-trace-review.md).
 These two assets now use manual source-contour traces; other drawings below
 remain the earlier schematic interpretations.
@@ -12,7 +15,7 @@ remaining fittings listed below still need drawings.
 The 50 PDF pages contain 29 embedded source-page images. Some source pages
 span PDF page breaks, and Group 3 appears twice. PDF page numbers below are
 one-based navigation ranges, not the printed book page numbers. This is a
-group-level visual inventory; only Groups 2 and 3 have a fitting-level inventory
+group-level visual inventory; Groups 1, 2 and 3 now have a fitting-level inventory
 in this pass.
 
 | Group | Subject | PDF pages | Drawing / data considerations |

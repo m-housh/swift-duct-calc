@@ -1,4 +1,4 @@
-window.FITTING_REVIEW = {
+{
   "id": "group-1",
   "title": "Group 1 \u00b7 22 drawings",
   "description": "All 19 fitting numbers in the source, with separate 1M and 1S vane variants. Includes five previously accepted drawings. The source skips 1J.",
@@ -268,4 +268,4 @@ window.FITTING_REVIEW = {
       "revision": "0bfe7a3c826ff51d0be0e0b597a730905420f41f745f18d039a61d74a3cd3260"
     }
   ]
-};
+}

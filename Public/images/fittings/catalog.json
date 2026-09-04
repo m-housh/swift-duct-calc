@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "scope": "Review pilots: 1A\u20131E, 2B, 2K, 2N, 3A, three 3S corner variants, and 3T. Not a complete fitting catalog.",
+  "scope": "Complete Group 1 drawing batch: 19 source fitting numbers, 22 drawings including vane variants. Also retains eight Group 2\u20133 pilot drawings. New Group 1 drawings await review.",
   "fittings": [
     {
       "id": "1A",
@@ -28,10 +28,10 @@
       "variant": null,
       "visualReview": {
         "revision": "fe1c369d58cedabcb42fd3a0491b7f18211ae0297a9e339f6c156e78c343dbe4",
-        "completedAt": "2026-09-04T17:13:51.561Z",
-        "batchId": "pilot-01",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
         "note": "",
-        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
       }
     },
     {
@@ -60,10 +60,10 @@
       "variant": null,
       "visualReview": {
         "revision": "1e952a9b7ee8edef8a58df1e8d308de7b3af1c39911898d428251f0053083677",
-        "completedAt": "2026-09-04T17:13:51.561Z",
-        "batchId": "pilot-01",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
         "note": "",
-        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
       }
     },
     {
@@ -92,10 +92,10 @@
       "variant": null,
       "visualReview": {
         "revision": "674ecd31d74d87af283063524a97c3f8029954d3551474738b10dc9d56b1a211",
-        "completedAt": "2026-09-04T17:13:51.561Z",
-        "batchId": "pilot-01",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
         "note": "",
-        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
       }
     },
     {
@@ -124,10 +124,10 @@
       "variant": null,
       "visualReview": {
         "revision": "589c36a45d3e1bc273adca6b03328fd400008c76155e5d2edc814bfc9f0a2ed0",
-        "completedAt": "2026-09-04T17:13:51.561Z",
-        "batchId": "pilot-01",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
         "note": "",
-        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
       }
     },
     {
@@ -156,10 +156,783 @@
       "variant": null,
       "visualReview": {
         "revision": "e3027fc6ca9720954d00ce7890e1f00a03c61f6bd00cbe7d9aef7ada94541521",
-        "completedAt": "2026-09-04T17:13:51.561Z",
-        "batchId": "pilot-01",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
         "note": "",
-        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
+      }
+    },
+    {
+      "id": "1F",
+      "fittingNumber": "1F",
+      "group": 1,
+      "letter": "F",
+      "variant": null,
+      "name": "Bull-head outlet",
+      "system": "supply",
+      "image": "/images/fittings/1F.svg",
+      "status": "visually-approved",
+      "notes": [
+        "Maintain 10\u2033 minimum clearance."
+      ],
+      "drawingMethod": "Side-elevation contours traced in source scan coordinates; selected connection isolated for paired drawings.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 1,
+        "printedPage": 160,
+        "referenceImage": "/images/fittings/references/1F.png",
+        "embeddedImageIndex": 2,
+        "cropPixels": [
+          75,
+          225,
+          790,
+          205
+        ]
+      },
+      "referenceEquivalentLengthTable": {
+        "parameter": "H/W",
+        "rows": [
+          {
+            "ratio": 0.5,
+            "feet": 120
+          },
+          {
+            "ratio": 1,
+            "feet": 85
+          }
+        ]
+      },
+      "visualReview": {
+        "revision": "5b18b93b2f0484c811a6671075f398b8321213b75e25bf08af7db8350e1086a2",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
+        "note": "",
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
+      }
+    },
+    {
+      "id": "1G",
+      "fittingNumber": "1G",
+      "group": 1,
+      "letter": "G",
+      "variant": null,
+      "name": "Tapered-head outlet",
+      "system": "supply",
+      "image": "/images/fittings/1G.svg",
+      "status": "visually-approved",
+      "notes": [
+        "45\u00b0 tapered entry."
+      ],
+      "drawingMethod": "Side-elevation contours traced in source scan coordinates; selected connection isolated for paired drawings.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 1,
+        "printedPage": 160,
+        "referenceImage": "/images/fittings/references/1G.png",
+        "embeddedImageIndex": 2,
+        "cropPixels": [
+          45,
+          460,
+          820,
+          215
+        ]
+      },
+      "referenceEquivalentLengthTable": {
+        "parameter": "H/W",
+        "rows": [
+          {
+            "ratio": 0.5,
+            "feet": 35
+          },
+          {
+            "ratio": 1,
+            "feet": 25
+          }
+        ]
+      },
+      "visualReview": {
+        "revision": "016eb078fb427c5fb1942edb2ff81f410e26d9a2f414ce9bd3bb287f9a4004bb",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
+        "note": "",
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
+      }
+    },
+    {
+      "id": "1H",
+      "fittingNumber": "1H",
+      "group": 1,
+      "letter": "H",
+      "variant": null,
+      "name": "Square elbow without vanes",
+      "system": "supply",
+      "image": "/images/fittings/1H.svg",
+      "status": "visually-approved",
+      "notes": [
+        "No turning vanes."
+      ],
+      "drawingMethod": "Side-elevation contours traced in source scan coordinates; selected connection isolated for paired drawings.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 1,
+        "printedPage": 160,
+        "referenceImage": "/images/fittings/references/1H.png",
+        "embeddedImageIndex": 2,
+        "cropPixels": [
+          80,
+          720,
+          520,
+          215
+        ]
+      },
+      "referenceEquivalentLengthTable": {
+        "parameter": "H/W",
+        "rows": [
+          {
+            "ratio": 0.5,
+            "feet": 120
+          },
+          {
+            "ratio": 1,
+            "feet": 85
+          }
+        ]
+      },
+      "visualReview": {
+        "revision": "451e0f8e6005dbe52b92c288ef2307c7ac727336d887a732a3b2d0636ccb372f",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
+        "note": "",
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
+      }
+    },
+    {
+      "id": "1I",
+      "fittingNumber": "1I",
+      "group": 1,
+      "letter": "I",
+      "variant": null,
+      "name": "Square elbow with vanes",
+      "system": "supply",
+      "image": "/images/fittings/1I.svg",
+      "status": "visually-approved",
+      "notes": [
+        "Turning vanes follow the diagonal shown in the source."
+      ],
+      "drawingMethod": "Side-elevation contours traced in source scan coordinates; selected connection isolated for paired drawings.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 1,
+        "printedPage": 160,
+        "referenceImage": "/images/fittings/references/1I.png",
+        "embeddedImageIndex": 2,
+        "cropPixels": [
+          80,
+          945,
+          525,
+          195
+        ]
+      },
+      "referenceEquivalentLengthFeet": 20,
+      "visualReview": {
+        "revision": "0c4d81b5bc2f2f4f77f0147359da17d8111685fdac0ad773eef500c22226f2fc",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
+        "note": "",
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
+      }
+    },
+    {
+      "id": "1K",
+      "fittingNumber": "1K",
+      "group": 1,
+      "letter": "K",
+      "variant": null,
+      "name": "Radius elbow with mitered inside corner",
+      "system": "supply",
+      "image": "/images/fittings/1K.svg",
+      "status": "visually-approved",
+      "notes": [
+        "Mitered inside corner; curved outer wall."
+      ],
+      "drawingMethod": "Side-elevation contours traced in source scan coordinates; selected connection isolated for paired drawings.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 2,
+        "printedPage": 161,
+        "referenceImage": "/images/fittings/references/1K.png",
+        "embeddedImageIndex": 6,
+        "cropPixels": [
+          105,
+          225,
+          550,
+          210
+        ]
+      },
+      "referenceEquivalentLengthFeet": 85,
+      "visualReview": {
+        "revision": "0abb3adf0dc39419ac29d661688fd478822bbdb00816533828606e40c10cf96a",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
+        "note": "",
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
+      }
+    },
+    {
+      "id": "1L",
+      "fittingNumber": "1L",
+      "group": 1,
+      "letter": "L",
+      "variant": null,
+      "name": "Radius elbow without vanes",
+      "system": "supply",
+      "image": "/images/fittings/1L.svg",
+      "status": "visually-approved",
+      "notes": [
+        "Radius varies with R/W."
+      ],
+      "drawingMethod": "Side-elevation contours traced in source scan coordinates; selected connection isolated for paired drawings.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 2,
+        "printedPage": 161,
+        "referenceImage": "/images/fittings/references/1L.png",
+        "embeddedImageIndex": 6,
+        "cropPixels": [
+          110,
+          460,
+          790,
+          215
+        ]
+      },
+      "referenceEquivalentLengthTable": {
+        "parameter": "R/W",
+        "rows": [
+          {
+            "ratio": 0.25,
+            "feet": 40
+          },
+          {
+            "ratio": 0.5,
+            "feet": 20
+          },
+          {
+            "ratio": 1,
+            "feet": 10
+          }
+        ]
+      },
+      "visualReview": {
+        "revision": "eb2f8af84fe0b3e9424f347e4b84448d04ac8d595ad3916def082b19a248f35e",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
+        "note": "",
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
+      }
+    },
+    {
+      "id": "1M-1-vane",
+      "fittingNumber": "1M",
+      "group": 1,
+      "letter": "M",
+      "variant": "1-vane",
+      "name": "Radius elbow \u00b7 one vane",
+      "system": "supply",
+      "image": "/images/fittings/1M-1-vane.svg",
+      "status": "visually-approved",
+      "notes": [
+        "One internal turning vane."
+      ],
+      "drawingMethod": "Side-elevation contours traced in source scan coordinates; selected connection isolated for paired drawings.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 2,
+        "printedPage": 161,
+        "referenceImage": "/images/fittings/references/1M.png",
+        "embeddedImageIndex": 6,
+        "cropPixels": [
+          135,
+          700,
+          590,
+          210
+        ]
+      },
+      "referenceEquivalentLengthTable": {
+        "parameter": "R/W",
+        "rows": [
+          {
+            "ratio": 0.05,
+            "feet": 30,
+            "vaneCount": 1
+          },
+          {
+            "ratio": 0.25,
+            "feet": 20,
+            "vaneCount": 1
+          },
+          {
+            "ratio": 0.5,
+            "feet": 10,
+            "vaneCount": 1
+          }
+        ]
+      },
+      "vaneCount": 1,
+      "visualReview": {
+        "revision": "231cd2d6c4bb6592af4de732361c1ce97ed7e156b8f1c8e2b8465c2017b42896",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
+        "note": "",
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
+      }
+    },
+    {
+      "id": "1M-2-vanes",
+      "fittingNumber": "1M",
+      "group": 1,
+      "letter": "M",
+      "variant": "2-vanes",
+      "name": "Radius elbow \u00b7 two vanes",
+      "system": "supply",
+      "image": "/images/fittings/1M-2-vanes.svg",
+      "status": "visually-approved",
+      "notes": [
+        "Two internal turning vanes."
+      ],
+      "drawingMethod": "Side-elevation contours traced in source scan coordinates; selected connection isolated for paired drawings.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 2,
+        "printedPage": 161,
+        "referenceImage": "/images/fittings/references/1M.png",
+        "embeddedImageIndex": 6,
+        "cropPixels": [
+          135,
+          700,
+          590,
+          210
+        ]
+      },
+      "referenceEquivalentLengthTable": {
+        "parameter": "R/W",
+        "rows": [
+          {
+            "ratio": 0.05,
+            "feet": 20,
+            "vaneCount": 2
+          },
+          {
+            "ratio": 0.25,
+            "feet": 10,
+            "vaneCount": 2
+          },
+          {
+            "ratio": 0.5,
+            "feet": 10,
+            "vaneCount": 2
+          }
+        ]
+      },
+      "vaneCount": 2,
+      "visualReview": {
+        "revision": "78594412ec34f6c1e36728af0272b07eb872eebe2265154c567738eecf214ff6",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
+        "note": "",
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
+      }
+    },
+    {
+      "id": "1N",
+      "fittingNumber": "1N",
+      "group": 1,
+      "letter": "N",
+      "variant": null,
+      "name": "Outlet transition",
+      "system": "supply",
+      "image": "/images/fittings/1N.svg",
+      "status": "visually-approved",
+      "notes": [
+        "Add transition EL to the upstream elbow or tee EL."
+      ],
+      "drawingMethod": "Side-elevation contours traced in source scan coordinates; selected connection isolated for paired drawings.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 2,
+        "printedPage": 161,
+        "referenceImage": "/images/fittings/references/1N.png",
+        "embeddedImageIndex": 6,
+        "cropPixels": [
+          80,
+          935,
+          535,
+          210
+        ]
+      },
+      "referenceEquivalentLengthFeet": 15,
+      "visualReview": {
+        "revision": "a5d6201151a6887d960597e739fd36d349029f92effb51a8dd958221628f2dde",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
+        "note": "",
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
+      }
+    },
+    {
+      "id": "1O",
+      "fittingNumber": "1O",
+      "group": 1,
+      "letter": "O",
+      "variant": null,
+      "name": "Bull-head tee without vanes",
+      "system": "supply",
+      "image": "/images/fittings/1O.svg",
+      "status": "visually-approved",
+      "notes": [
+        "Two outlets; no turning vanes."
+      ],
+      "drawingMethod": "Side-elevation contours traced in source scan coordinates; selected connection isolated for paired drawings.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 3,
+        "printedPage": 162,
+        "referenceImage": "/images/fittings/references/1O.png",
+        "embeddedImageIndex": 10,
+        "cropPixels": [
+          45,
+          230,
+          565,
+          185
+        ]
+      },
+      "referenceEquivalentLengthTable": {
+        "parameter": "H/W",
+        "rows": [
+          {
+            "ratio": 0.5,
+            "feet": 120
+          },
+          {
+            "ratio": 1,
+            "feet": 85
+          }
+        ]
+      },
+      "visualReview": {
+        "revision": "c19306a61aca6dfa5da0340ee1cb80ddb2057127368fce2741e8cff9b3a286f7",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
+        "note": "",
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
+      }
+    },
+    {
+      "id": "1P",
+      "fittingNumber": "1P",
+      "group": 1,
+      "letter": "P",
+      "variant": null,
+      "name": "Vaned tee",
+      "system": "supply",
+      "image": "/images/fittings/1P.svg",
+      "status": "source-trace-needs-review",
+      "notes": [
+        "Turning vanes divide flow between the two outlets."
+      ],
+      "drawingMethod": "Side-elevation contours traced in source scan coordinates; selected connection isolated for paired drawings.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 3,
+        "printedPage": 162,
+        "referenceImage": "/images/fittings/references/1P.png",
+        "embeddedImageIndex": 10,
+        "cropPixels": [
+          45,
+          455,
+          565,
+          190
+        ]
+      },
+      "referenceEquivalentLengthFeet": 20
+    },
+    {
+      "id": "1Q",
+      "fittingNumber": "1Q",
+      "group": 1,
+      "letter": "Q",
+      "variant": null,
+      "name": "Vaned elbow at plenum",
+      "system": "supply",
+      "image": "/images/fittings/1Q.svg",
+      "status": "source-trace-needs-review",
+      "notes": [
+        "Maintain 10\u2033 minimum clearance."
+      ],
+      "drawingMethod": "Side-elevation contours traced in source scan coordinates; selected connection isolated for paired drawings.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 3,
+        "printedPage": 162,
+        "referenceImage": "/images/fittings/references/1Q.png",
+        "embeddedImageIndex": 10,
+        "cropPixels": [
+          530,
+          640,
+          325,
+          225
+        ]
+      },
+      "referenceEquivalentLengthFeet": 50
+    },
+    {
+      "id": "1R",
+      "fittingNumber": "1R",
+      "group": 1,
+      "letter": "R",
+      "variant": null,
+      "name": "Square elbow at plenum",
+      "system": "supply",
+      "image": "/images/fittings/1R.svg",
+      "status": "visually-approved",
+      "notes": [
+        "Maintain 10\u2033 minimum clearance."
+      ],
+      "drawingMethod": "Side-elevation contours traced in source scan coordinates; selected connection isolated for paired drawings.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 3,
+        "printedPage": 162,
+        "referenceImage": "/images/fittings/references/1R.png",
+        "embeddedImageIndex": 10,
+        "cropPixels": [
+          530,
+          640,
+          325,
+          225
+        ]
+      },
+      "referenceEquivalentLengthFeet": 120,
+      "visualReview": {
+        "revision": "3a346864c2dc5a833225cb56f3b0cca62b1289b040363ce595bcd1559c599d97",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
+        "note": "",
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
+      }
+    },
+    {
+      "id": "1S-0-vanes",
+      "fittingNumber": "1S",
+      "group": 1,
+      "letter": "S",
+      "variant": "0-vanes",
+      "name": "Radius elbow at plenum \u00b7 no vanes",
+      "system": "supply",
+      "image": "/images/fittings/1S-0-vanes.svg",
+      "status": "visually-approved",
+      "notes": [
+        "Maintain 10\u2033 minimum clearance."
+      ],
+      "drawingMethod": "Side-elevation contours traced in source scan coordinates; selected connection isolated for paired drawings.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 3,
+        "printedPage": 162,
+        "referenceImage": "/images/fittings/references/1S.png",
+        "embeddedImageIndex": 10,
+        "cropPixels": [
+          45,
+          805,
+          340,
+          350
+        ]
+      },
+      "referenceEquivalentLengthFeet": 60,
+      "vaneCount": 0,
+      "visualReview": {
+        "revision": "b0da2ed7c7804b01e6e206daecda9fd694f287409c34b192c72746f8f959a05e",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
+        "note": "",
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
+      }
+    },
+    {
+      "id": "1S-1-vane",
+      "fittingNumber": "1S",
+      "group": 1,
+      "letter": "S",
+      "variant": "1-vane",
+      "name": "Radius elbow at plenum \u00b7 one vane",
+      "system": "supply",
+      "image": "/images/fittings/1S-1-vane.svg",
+      "status": "visually-approved",
+      "notes": [
+        "Maintain 10\u2033 minimum clearance."
+      ],
+      "drawingMethod": "Side-elevation contours traced in source scan coordinates; selected connection isolated for paired drawings.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 3,
+        "printedPage": 162,
+        "referenceImage": "/images/fittings/references/1S.png",
+        "embeddedImageIndex": 10,
+        "cropPixels": [
+          45,
+          805,
+          340,
+          350
+        ]
+      },
+      "referenceEquivalentLengthFeet": 40,
+      "vaneCount": 1,
+      "visualReview": {
+        "revision": "0fa6bfb18b578ef863e0d9032927b9be44d82aa8d0e3f2bcbd9fe4af0c4b6c78",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
+        "note": "",
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
+      }
+    },
+    {
+      "id": "1S-2-vanes",
+      "fittingNumber": "1S",
+      "group": 1,
+      "letter": "S",
+      "variant": "2-vanes",
+      "name": "Radius elbow at plenum \u00b7 two vanes",
+      "system": "supply",
+      "image": "/images/fittings/1S-2-vanes.svg",
+      "status": "visually-approved",
+      "notes": [
+        "Maintain 10\u2033 minimum clearance."
+      ],
+      "drawingMethod": "Side-elevation contours traced in source scan coordinates; selected connection isolated for paired drawings.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 3,
+        "printedPage": 162,
+        "referenceImage": "/images/fittings/references/1S.png",
+        "embeddedImageIndex": 10,
+        "cropPixels": [
+          45,
+          805,
+          340,
+          350
+        ]
+      },
+      "referenceEquivalentLengthFeet": 30,
+      "vaneCount": 2,
+      "visualReview": {
+        "revision": "325447889d86f1527eb2d84b18d7789f37af10049a3781952ffa0fc282cae175",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
+        "note": "",
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
+      }
+    },
+    {
+      "id": "1T",
+      "fittingNumber": "1T",
+      "group": 1,
+      "letter": "T",
+      "variant": null,
+      "name": "Elbow with angled inside corner",
+      "system": "supply",
+      "image": "/images/fittings/1T.svg",
+      "status": "visually-approved",
+      "notes": [
+        "Angled inside corner as illustrated in the source."
+      ],
+      "drawingMethod": "Side-elevation contours traced in source scan coordinates; selected connection isolated for paired drawings.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 3,
+        "printedPage": 162,
+        "referenceImage": "/images/fittings/references/1T.png",
+        "embeddedImageIndex": 10,
+        "cropPixels": [
+          45,
+          950,
+          340,
+          205
+        ]
+      },
+      "referenceEquivalentLengthFeet": 60,
+      "visualReview": {
+        "revision": "0bfe7a3c826ff51d0be0e0b597a730905420f41f745f18d039a61d74a3cd3260",
+        "completedAt": "2026-09-04T17:28:52.383Z",
+        "batchId": "group-1",
+        "note": "",
+        "record": "docs/fitting-reviews/review-e7ad2d0fde730ca5.json"
       }
     },
     {
@@ -505,6 +1278,37 @@
         "note": "",
         "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
       }
+    }
+  ],
+  "groupCoverage": [
+    {
+      "group": 1,
+      "sourceFittingNumbers": [
+        "1A",
+        "1B",
+        "1C",
+        "1D",
+        "1E",
+        "1F",
+        "1G",
+        "1H",
+        "1I",
+        "1K",
+        "1L",
+        "1M",
+        "1N",
+        "1O",
+        "1P",
+        "1Q",
+        "1R",
+        "1S",
+        "1T"
+      ],
+      "drawingCount": 22,
+      "omittedSourceLetters": [
+        "J"
+      ],
+      "status": "all-source-numbers-drawn"
     }
   ],
   "sourceIssues": [

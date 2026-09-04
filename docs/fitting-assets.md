@@ -1,5 +1,8 @@
 # Individual fitting drawings — pilot
 
+**Current:** [Complete Group 1 batch](group-1-review.md). Regenerate everything
+with `python3 scripts/generate-fittings.py`.
+
 See the latest [2B and 3T source-trace review](fitting-trace-review.md) for
 side-by-side comparisons of the revised difficult fittings.
 

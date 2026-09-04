@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="0 0 640 520" role="img" aria-labelledby="title desc">
+<title id="title">1G — Tapered-head outlet</title><desc id="desc">45° tapered entry. Side elevation traced from printed page 160. Review drawing, not to scale.</desc>
+<defs><marker id="flow" viewBox="0 0 8 5" markerWidth="6" markerHeight="4" refX="7" refY="2.5" orient="auto"><path d="M0 0L8 2.5L0 5Z" fill="#243b53"/></marker></defs>
+<style>text{font-family:Arial,sans-serif}path{stroke-linejoin:round;stroke-linecap:round}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<g fill="#243b53"><text x="32" y="44" font-size="28" font-weight="700">1G</text><text x="96" y="43" font-size="18">Tapered-head outlet</text><text x="32" y="76" font-size="13">GROUP 1 · SUPPLY AIR · SOURCE SIDE ELEVATION</text></g>
+<g transform="translate(102.5000 105) scale(1.500000) translate(-280 -465)" fill="none" stroke="#243b53" stroke-width="1.6"><path d="M301 478H529L520 490L535 496L525 503L541 511L522 516L529 523H301Z" /><path d="M301 523L330 552H444L473 523M330 552V563M444 552V563" /><path d="M318 563h138v82l-24.84 -9.84l-24.84 16.400000000000002l-22.080000000000002 -8.200000000000001l-33.12 22.14v-22.14l-33.12 14.76Z" /><path d="M387.0 622.04V585.96" marker-end="url(#flow)" stroke-width="1.4"/><path d="M422 501H459" marker-end="url(#flow)" stroke-width="1.4"/><path d="M330 541L444 541" stroke="#8192a2" stroke-width="0.8"/><text x="377" y="548" font-size="11" stroke="none" fill="#243b53">W</text><path d="M496 482L496 520" stroke="#8192a2" stroke-width="0.8"/><text x="492" y="506" font-size="11" stroke="none" fill="#243b53">H</text><text x="487" y="556" font-size="11" stroke="none" fill="#243b53">45°</text></g>
+<text x="32" y="459" fill="#243b53" font-size="14">45° tapered entry.</text>
+<text x="32" y="490" fill="#4b6274" font-size="12">REVIEW DRAWING · NOT TO SCALE · Source: PDF p. 1 / printed p. 160</text>
+</svg>
