@@ -1,6 +1,6 @@
-window.FITTING_REVIEW = {
+{
   "id": "qa-hold",
   "title": "Visual QA in progress",
   "description": "No fitting group is currently ready for review. New batches remain hidden until their rendered source/SVG comparison sheets pass an internal visual inspection.",
   "items": []
-};
+}

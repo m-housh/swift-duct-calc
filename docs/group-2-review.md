@@ -1,5 +1,11 @@
 # Complete Group 2 drawing batch
 
+> **Paused after the 2026-09-04 review.** Eleven current revisions are
+> approved. The six unresolved drawings are 2B, 2J, 2K, 2L, 2M and 2N. Keep
+> their current SVGs and archived review records as a checkpoint; resume this
+> group only when a fresh tracing approach or better source interpretation is
+> available.
+
 The review page contains **all 17 Group 2 fittings, 2A–2Q**. The accepted 2B,
 2K and 2N assets and reference images were included in the first pass. Fourteen
 additional source-traced SVGs completed it. Group 1 remains approved.

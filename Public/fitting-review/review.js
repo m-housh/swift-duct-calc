@@ -6,13 +6,15 @@
   const state=ReviewState.reconcile(batch,saved);
   const summary=document.getElementById('summary');
   const finish=document.getElementById('finish');
+  const exportButton=document.getElementById('export');
   const brokenImages=new Set();
   let pendingImages=batch.items.length*2;
   function refresh(){
     const count=Object.values(state.decisions).filter(d=>d.needsWork).length;
-    summary.textContent=state.completedAt?`Review finished · ${count} need work · ${batch.items.length-count} accepted`:`${batch.items.length} drawings · ${count} marked for more work · review in progress`;
+    summary.textContent=batch.items.length===0?'No group is ready for review.':state.completedAt?`Review finished · ${count} need work · ${batch.items.length-count} accepted`:`${batch.items.length} drawings · ${count} marked for more work · review in progress`;
     finish.textContent=state.completedAt?'Review finished':'Finish review';
-    finish.disabled=Boolean(state.completedAt)||brokenImages.size>0||pendingImages>0;
+    finish.disabled=batch.items.length===0||Boolean(state.completedAt)||brokenImages.size>0||pendingImages>0;
+    exportButton.disabled=batch.items.length===0;
     if(pendingImages)summary.textContent+=' · Loading comparisons…';
     if(brokenImages.size)summary.textContent+=' · Some images could not load; reload before finishing.';
     if(!storageOK)document.getElementById('storage').textContent='Browser saving is unavailable. Download your review before closing this page.';
@@ -47,7 +49,7 @@
     list.append(card);
   }
   finish.addEventListener('click',()=>{state.completedAt=new Date().toISOString();save();});
-  document.getElementById('export').addEventListener('click',()=>{
+  exportButton.addEventListener('click',()=>{
     const blob=new Blob([JSON.stringify(ReviewState.report(batch,state),null,2)+'\n'],{type:'application/json'});
     const url=URL.createObjectURL(blob);const a=el('a');a.href=url;a.download=`fitting-review-${batch.id}.json`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
   });
