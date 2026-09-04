@@ -50,6 +50,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--activate", action="store_true", help="Make this the active browser review batch")
     parser.add_argument("--pending-only", action="store_true", help="Create a follow-up batch excluding drawings approved at their current revision")
+    parser.add_argument("--manifest-only", action="store_true", help="Refresh approval metadata without replacing review batches")
     args = parser.parse_args()
 
     source = json.loads(SOURCE_MANIFEST.read_text())
@@ -109,10 +110,13 @@ def main() -> None:
         "referenceConditions": source["referenceConditions"],
         "drawingCount": len(packaged),
         "expectedDrawingCount": len(source["items"]),
-        "status": "restoration-needs-review",
+        "status": "visually-approved" if len(packaged) == len(source["items"]) and all(item["status"] == "visually-approved" for item in packaged) else "restoration-needs-review",
         "items": packaged,
     }
     (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    if args.manifest_only:
+        print(f"Updated Group 4 manifest: {manifest['status']}")
+        return
 
     batch = {
         "id": "group-4-enhanced-followup" if args.pending_only else "group-4-enhanced",

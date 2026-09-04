@@ -16,7 +16,7 @@
   },
   "drawingCount": 44,
   "expectedDrawingCount": 44,
-  "status": "restoration-needs-review",
+  "status": "visually-approved",
   "items": [
     {
       "id": "4A",
@@ -796,12 +796,19 @@
       "restoredArt": "/images/fittings/group-4-enhanced/4AG-restored-art.png",
       "referenceImage": "/images/fittings/references/group-4/4AG.png",
       "revision": "acec282bfa72296772323f610e565c26147f482b98408f336ed2d9f5941cecc0",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted high-resolution line-art restoration embedded in a self-contained SVG; source geometry remains the review authority.",
       "embeddedRasterSize": [
         1402,
         1122
-      ]
+      ],
+      "visualReview": {
+        "revision": "acec282bfa72296772323f610e565c26147f482b98408f336ed2d9f5941cecc0",
+        "completedAt": "2026-09-04T20:49:34.990Z",
+        "batchId": "group-4-enhanced-followup",
+        "note": "User confirmed in conversation: That one's good. Don't wanna download the review file process.",
+        "record": "docs/fitting-reviews/review-70531355a9b825a9.json"
+      }
     },
     {
       "id": "4AH",
