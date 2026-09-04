@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "scope": "Complete Group 1 drawing batch: 19 source fitting numbers, 22 drawings including vane variants. Also retains eight Group 2\u20133 pilot drawings. New Group 1 drawings await review.",
+  "scope": "Complete Group 1 and Group 2 drawing coverage: 22 Group 1 drawings and 17 Group 2 drawings. Also retains five Group 3 pilot drawings. New Group 2 drawings await review.",
   "fittings": [
     {
       "id": "1A",
@@ -950,6 +950,71 @@
       }
     },
     {
+      "id": "2A",
+      "fittingNumber": "2A",
+      "group": 2,
+      "letter": "A",
+      "variant": null,
+      "name": "Straight round branch takeoff",
+      "system": "supply",
+      "image": "/images/fittings/2A.svg",
+      "status": "source-trace-needs-review",
+      "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "referenceEquivalentLengthByDownstreamBranches": [
+        {
+          "branchCountMin": 0,
+          "branchCountMax": 0,
+          "feet": 35
+        },
+        {
+          "branchCountMin": 1,
+          "branchCountMax": 1,
+          "feet": 45
+        },
+        {
+          "branchCountMin": 2,
+          "branchCountMax": 2,
+          "feet": 55
+        },
+        {
+          "branchCountMin": 3,
+          "branchCountMax": 3,
+          "feet": 65
+        },
+        {
+          "branchCountMin": 4,
+          "branchCountMax": 4,
+          "feet": 70
+        },
+        {
+          "branchCountMin": 5,
+          "branchCountMax": null,
+          "feet": 80
+        }
+      ],
+      "notes": [
+        "Connection contours follow the source perspective.",
+        "Count downstream branches to trunk end or next reducer; restart count after a reducer."
+      ],
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 5,
+        "printedPage": 163,
+        "referenceImage": "/images/fittings/references/2A.png",
+        "embeddedImageIndex": 14,
+        "cropPixels": [
+          108,
+          310,
+          120,
+          120
+        ]
+      }
+    },
+    {
       "id": "2B",
       "fittingNumber": "2B",
       "group": 2,
@@ -1021,6 +1086,526 @@
       }
     },
     {
+      "id": "2C",
+      "fittingNumber": "2C",
+      "group": 2,
+      "letter": "C",
+      "variant": null,
+      "name": "Round takeoff with projecting entry",
+      "system": "supply",
+      "image": "/images/fittings/2C.svg",
+      "status": "source-trace-needs-review",
+      "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "referenceEquivalentLengthByDownstreamBranches": [
+        {
+          "branchCountMin": 0,
+          "branchCountMax": 0,
+          "feet": 65
+        },
+        {
+          "branchCountMin": 1,
+          "branchCountMax": 1,
+          "feet": 65
+        },
+        {
+          "branchCountMin": 2,
+          "branchCountMax": 2,
+          "feet": 65
+        },
+        {
+          "branchCountMin": 3,
+          "branchCountMax": 3,
+          "feet": 65
+        },
+        {
+          "branchCountMin": 4,
+          "branchCountMax": 4,
+          "feet": 70
+        },
+        {
+          "branchCountMin": 5,
+          "branchCountMax": null,
+          "feet": 80
+        }
+      ],
+      "notes": [
+        "Dashed lines retain the projecting entry shown in the source.",
+        "Count downstream branches to trunk end or next reducer; restart count after a reducer."
+      ],
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 5,
+        "printedPage": 163,
+        "referenceImage": "/images/fittings/references/2C.png",
+        "embeddedImageIndex": 14,
+        "cropPixels": [
+          232,
+          317,
+          128,
+          123
+        ]
+      }
+    },
+    {
+      "id": "2D",
+      "fittingNumber": "2D",
+      "group": 2,
+      "letter": "D",
+      "variant": null,
+      "name": "Straight rectangular branch takeoff",
+      "system": "supply",
+      "image": "/images/fittings/2D.svg",
+      "status": "source-trace-needs-review",
+      "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "referenceEquivalentLengthByDownstreamBranches": [
+        {
+          "branchCountMin": 0,
+          "branchCountMax": 0,
+          "feet": 40
+        },
+        {
+          "branchCountMin": 1,
+          "branchCountMax": 1,
+          "feet": 50
+        },
+        {
+          "branchCountMin": 2,
+          "branchCountMax": 2,
+          "feet": 60
+        },
+        {
+          "branchCountMin": 3,
+          "branchCountMax": 3,
+          "feet": 65
+        },
+        {
+          "branchCountMin": 4,
+          "branchCountMax": 4,
+          "feet": 75
+        },
+        {
+          "branchCountMin": 5,
+          "branchCountMax": null,
+          "feet": 85
+        }
+      ],
+      "notes": [
+        "Connection contours follow the source perspective.",
+        "Count downstream branches to trunk end or next reducer; restart count after a reducer."
+      ],
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 5,
+        "printedPage": 163,
+        "referenceImage": "/images/fittings/references/2D.png",
+        "embeddedImageIndex": 14,
+        "cropPixels": [
+          296,
+          321,
+          150,
+          135
+        ]
+      }
+    },
+    {
+      "id": "2E",
+      "fittingNumber": "2E",
+      "group": 2,
+      "letter": "E",
+      "variant": null,
+      "name": "Rectangular takeoff with flared entry",
+      "system": "supply",
+      "image": "/images/fittings/2E.svg",
+      "status": "source-trace-needs-review",
+      "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "referenceEquivalentLengthByDownstreamBranches": [
+        {
+          "branchCountMin": 0,
+          "branchCountMax": 0,
+          "feet": 25
+        },
+        {
+          "branchCountMin": 1,
+          "branchCountMax": 1,
+          "feet": 30
+        },
+        {
+          "branchCountMin": 2,
+          "branchCountMax": 2,
+          "feet": 35
+        },
+        {
+          "branchCountMin": 3,
+          "branchCountMax": 3,
+          "feet": 40
+        },
+        {
+          "branchCountMin": 4,
+          "branchCountMax": 4,
+          "feet": 45
+        },
+        {
+          "branchCountMin": 5,
+          "branchCountMax": null,
+          "feet": 50
+        }
+      ],
+      "notes": [
+        "Connection contours follow the source perspective.",
+        "Count downstream branches to trunk end or next reducer; restart count after a reducer."
+      ],
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 5,
+        "printedPage": 163,
+        "referenceImage": "/images/fittings/references/2E.png",
+        "embeddedImageIndex": 14,
+        "cropPixels": [
+          399,
+          329,
+          147,
+          140
+        ]
+      }
+    },
+    {
+      "id": "2F",
+      "fittingNumber": "2F",
+      "group": 2,
+      "letter": "F",
+      "variant": null,
+      "name": "Flared takeoff with projecting entry",
+      "system": "supply",
+      "image": "/images/fittings/2F.svg",
+      "status": "source-trace-needs-review",
+      "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "referenceEquivalentLengthByDownstreamBranches": [
+        {
+          "branchCountMin": 0,
+          "branchCountMax": 0,
+          "feet": 20
+        },
+        {
+          "branchCountMin": 1,
+          "branchCountMax": 1,
+          "feet": 20
+        },
+        {
+          "branchCountMin": 2,
+          "branchCountMax": 2,
+          "feet": 20
+        },
+        {
+          "branchCountMin": 3,
+          "branchCountMax": 3,
+          "feet": 20
+        },
+        {
+          "branchCountMin": 4,
+          "branchCountMax": 4,
+          "feet": 25
+        },
+        {
+          "branchCountMin": 5,
+          "branchCountMax": null,
+          "feet": 25
+        }
+      ],
+      "notes": [
+        "Dashed lines retain the projecting entry shown in the source.",
+        "Count downstream branches to trunk end or next reducer; restart count after a reducer."
+      ],
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 5,
+        "printedPage": 163,
+        "referenceImage": "/images/fittings/references/2F.png",
+        "embeddedImageIndex": 14,
+        "cropPixels": [
+          496,
+          332,
+          151,
+          147
+        ]
+      }
+    },
+    {
+      "id": "2G",
+      "fittingNumber": "2G",
+      "group": 2,
+      "letter": "G",
+      "variant": null,
+      "name": "Rectangular takeoff with projecting tab",
+      "system": "supply",
+      "image": "/images/fittings/2G.svg",
+      "status": "source-trace-needs-review",
+      "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "referenceEquivalentLengthByDownstreamBranches": [
+        {
+          "branchCountMin": 0,
+          "branchCountMax": 0,
+          "feet": 65
+        },
+        {
+          "branchCountMin": 1,
+          "branchCountMax": 1,
+          "feet": 65
+        },
+        {
+          "branchCountMin": 2,
+          "branchCountMax": 2,
+          "feet": 65
+        },
+        {
+          "branchCountMin": 3,
+          "branchCountMax": 3,
+          "feet": 70
+        },
+        {
+          "branchCountMin": 4,
+          "branchCountMax": 4,
+          "feet": 80
+        },
+        {
+          "branchCountMin": 5,
+          "branchCountMax": null,
+          "feet": 90
+        }
+      ],
+      "notes": [
+        "Dashed lines retain the projecting tab shown in the source.",
+        "Count downstream branches to trunk end or next reducer; restart count after a reducer."
+      ],
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 5,
+        "printedPage": 163,
+        "referenceImage": "/images/fittings/references/2G.png",
+        "embeddedImageIndex": 14,
+        "cropPixels": [
+          584,
+          339,
+          152,
+          148
+        ]
+      }
+    },
+    {
+      "id": "2H",
+      "fittingNumber": "2H",
+      "group": 2,
+      "letter": "H",
+      "variant": null,
+      "name": "Rectangular takeoff with raised entry edge",
+      "system": "supply",
+      "image": "/images/fittings/2H.svg",
+      "status": "source-trace-needs-review",
+      "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "referenceEquivalentLengthByDownstreamBranches": [
+        {
+          "branchCountMin": 0,
+          "branchCountMax": 0,
+          "feet": 70
+        },
+        {
+          "branchCountMin": 1,
+          "branchCountMax": 1,
+          "feet": 70
+        },
+        {
+          "branchCountMin": 2,
+          "branchCountMax": 2,
+          "feet": 70
+        },
+        {
+          "branchCountMin": 3,
+          "branchCountMax": 3,
+          "feet": 75
+        },
+        {
+          "branchCountMin": 4,
+          "branchCountMax": 4,
+          "feet": 85
+        },
+        {
+          "branchCountMin": 5,
+          "branchCountMax": null,
+          "feet": 95
+        }
+      ],
+      "notes": [
+        "Raised entry-edge detail follows the source drawing.",
+        "Count downstream branches to trunk end or next reducer; restart count after a reducer."
+      ],
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 5,
+        "printedPage": 163,
+        "referenceImage": "/images/fittings/references/2H.png",
+        "embeddedImageIndex": 14,
+        "cropPixels": [
+          676,
+          345,
+          153,
+          147
+        ]
+      }
+    },
+    {
+      "id": "2I",
+      "fittingNumber": "2I",
+      "group": 2,
+      "letter": "I",
+      "variant": null,
+      "name": "Round elbow takeoff",
+      "system": "supply",
+      "image": "/images/fittings/2I.svg",
+      "status": "source-trace-needs-review",
+      "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "referenceEquivalentLengthByDownstreamBranches": [
+        {
+          "branchCountMin": 0,
+          "branchCountMax": 0,
+          "feet": 65
+        },
+        {
+          "branchCountMin": 1,
+          "branchCountMax": 1,
+          "feet": 75
+        },
+        {
+          "branchCountMin": 2,
+          "branchCountMax": 2,
+          "feet": 85
+        },
+        {
+          "branchCountMin": 3,
+          "branchCountMax": 3,
+          "feet": 95
+        },
+        {
+          "branchCountMin": 4,
+          "branchCountMax": 4,
+          "feet": 100
+        },
+        {
+          "branchCountMin": 5,
+          "branchCountMax": null,
+          "feet": 110
+        }
+      ],
+      "notes": [
+        "Connection contours follow the source perspective.",
+        "Count downstream branches to trunk end or next reducer; restart count after a reducer."
+      ],
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 6,
+        "printedPage": 164,
+        "referenceImage": "/images/fittings/references/2I.png",
+        "embeddedImageIndex": 18,
+        "cropPixels": [
+          144,
+          248,
+          164,
+          174
+        ]
+      }
+    },
+    {
+      "id": "2J",
+      "fittingNumber": "2J",
+      "group": 2,
+      "letter": "J",
+      "variant": null,
+      "name": "Eased round elbow takeoff",
+      "system": "supply",
+      "image": "/images/fittings/2J.svg",
+      "status": "source-trace-needs-review",
+      "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "referenceEquivalentLengthByDownstreamBranches": [
+        {
+          "branchCountMin": 0,
+          "branchCountMax": 0,
+          "feet": 50
+        },
+        {
+          "branchCountMin": 1,
+          "branchCountMax": 1,
+          "feet": 60
+        },
+        {
+          "branchCountMin": 2,
+          "branchCountMax": 2,
+          "feet": 65
+        },
+        {
+          "branchCountMin": 3,
+          "branchCountMax": 3,
+          "feet": 70
+        },
+        {
+          "branchCountMin": 4,
+          "branchCountMax": 4,
+          "feet": 75
+        },
+        {
+          "branchCountMin": 5,
+          "branchCountMax": null,
+          "feet": 80
+        }
+      ],
+      "notes": [
+        "Connection contours follow the source perspective.",
+        "Count downstream branches to trunk end or next reducer; restart count after a reducer."
+      ],
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 6,
+        "printedPage": 164,
+        "referenceImage": "/images/fittings/references/2J.png",
+        "embeddedImageIndex": 18,
+        "cropPixels": [
+          251,
+          256,
+          177,
+          184
+        ]
+      }
+    },
+    {
       "id": "2K",
       "fittingNumber": "2K",
       "group": 2,
@@ -1080,6 +1665,136 @@
         "batchId": "pilot-01",
         "note": "",
         "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+      }
+    },
+    {
+      "id": "2L",
+      "fittingNumber": "2L",
+      "group": 2,
+      "letter": "L",
+      "variant": null,
+      "name": "Rectangular takeoff with curved heel",
+      "system": "supply",
+      "image": "/images/fittings/2L.svg",
+      "status": "source-trace-needs-review",
+      "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "referenceEquivalentLengthByDownstreamBranches": [
+        {
+          "branchCountMin": 0,
+          "branchCountMax": 0,
+          "feet": 70
+        },
+        {
+          "branchCountMin": 1,
+          "branchCountMax": 1,
+          "feet": 80
+        },
+        {
+          "branchCountMin": 2,
+          "branchCountMax": 2,
+          "feet": 90
+        },
+        {
+          "branchCountMin": 3,
+          "branchCountMax": 3,
+          "feet": 95
+        },
+        {
+          "branchCountMin": 4,
+          "branchCountMax": 4,
+          "feet": 105
+        },
+        {
+          "branchCountMin": 5,
+          "branchCountMax": null,
+          "feet": 115
+        }
+      ],
+      "notes": [
+        "Connection contours follow the source perspective.",
+        "Count downstream branches to trunk end or next reducer; restart count after a reducer."
+      ],
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 6,
+        "printedPage": 164,
+        "referenceImage": "/images/fittings/references/2L.png",
+        "embeddedImageIndex": 18,
+        "cropPixels": [
+          489,
+          283,
+          192,
+          184
+        ]
+      }
+    },
+    {
+      "id": "2M",
+      "fittingNumber": "2M",
+      "group": 2,
+      "letter": "M",
+      "variant": null,
+      "name": "Rectangular takeoff with square heel",
+      "system": "supply",
+      "image": "/images/fittings/2M.svg",
+      "status": "source-trace-needs-review",
+      "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "referenceEquivalentLengthByDownstreamBranches": [
+        {
+          "branchCountMin": 0,
+          "branchCountMax": 0,
+          "feet": 70
+        },
+        {
+          "branchCountMin": 1,
+          "branchCountMax": 1,
+          "feet": 80
+        },
+        {
+          "branchCountMin": 2,
+          "branchCountMax": 2,
+          "feet": 90
+        },
+        {
+          "branchCountMin": 3,
+          "branchCountMax": 3,
+          "feet": 95
+        },
+        {
+          "branchCountMin": 4,
+          "branchCountMax": 4,
+          "feet": 105
+        },
+        {
+          "branchCountMin": 5,
+          "branchCountMax": null,
+          "feet": 115
+        }
+      ],
+      "notes": [
+        "Connection contours follow the source perspective.",
+        "Count downstream branches to trunk end or next reducer; restart count after a reducer."
+      ],
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 6,
+        "printedPage": 164,
+        "referenceImage": "/images/fittings/references/2M.png",
+        "embeddedImageIndex": 18,
+        "cropPixels": [
+          655,
+          298,
+          197,
+          185
+        ]
       }
     },
     {
@@ -1145,6 +1860,201 @@
       }
     },
     {
+      "id": "2O",
+      "fittingNumber": "2O",
+      "group": 2,
+      "letter": "O",
+      "variant": null,
+      "name": "Elbow branch on round trunk",
+      "system": "supply",
+      "image": "/images/fittings/2O.svg",
+      "status": "source-trace-needs-review",
+      "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "referenceEquivalentLengthByDownstreamBranches": [
+        {
+          "branchCountMin": 0,
+          "branchCountMax": 0,
+          "feet": 55
+        },
+        {
+          "branchCountMin": 1,
+          "branchCountMax": 1,
+          "feet": 65
+        },
+        {
+          "branchCountMin": 2,
+          "branchCountMax": 2,
+          "feet": 75
+        },
+        {
+          "branchCountMin": 3,
+          "branchCountMax": 3,
+          "feet": 85
+        },
+        {
+          "branchCountMin": 4,
+          "branchCountMax": 4,
+          "feet": 90
+        },
+        {
+          "branchCountMin": 5,
+          "branchCountMax": null,
+          "feet": 100
+        }
+      ],
+      "notes": [
+        "Round trunk section retained to show the elbow connection.",
+        "Count downstream branches to trunk end or next reducer; restart count after a reducer."
+      ],
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 8,
+        "printedPage": 165,
+        "referenceImage": "/images/fittings/references/2O.png",
+        "embeddedImageIndex": 24,
+        "cropPixels": [
+          338,
+          302,
+          123,
+          126
+        ]
+      }
+    },
+    {
+      "id": "2P",
+      "fittingNumber": "2P",
+      "group": 2,
+      "letter": "P",
+      "variant": null,
+      "name": "Straight collar on round trunk",
+      "system": "supply",
+      "image": "/images/fittings/2P.svg",
+      "status": "source-trace-needs-review",
+      "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "referenceEquivalentLengthByDownstreamBranches": [
+        {
+          "branchCountMin": 0,
+          "branchCountMax": 0,
+          "feet": 50
+        },
+        {
+          "branchCountMin": 1,
+          "branchCountMax": 1,
+          "feet": 55
+        },
+        {
+          "branchCountMin": 2,
+          "branchCountMax": 2,
+          "feet": 60
+        },
+        {
+          "branchCountMin": 3,
+          "branchCountMax": 3,
+          "feet": 65
+        },
+        {
+          "branchCountMin": 4,
+          "branchCountMax": 4,
+          "feet": 70
+        },
+        {
+          "branchCountMin": 5,
+          "branchCountMax": null,
+          "feet": 75
+        }
+      ],
+      "notes": [
+        "Round trunk section retained to show the straight collar.",
+        "Count downstream branches to trunk end or next reducer; restart count after a reducer."
+      ],
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 8,
+        "printedPage": 165,
+        "referenceImage": "/images/fittings/references/2P.png",
+        "embeddedImageIndex": 24,
+        "cropPixels": [
+          515,
+          365,
+          125,
+          102
+        ]
+      }
+    },
+    {
+      "id": "2Q",
+      "fittingNumber": "2Q",
+      "group": 2,
+      "letter": "Q",
+      "variant": null,
+      "name": "Tapered collar on round trunk",
+      "system": "supply",
+      "image": "/images/fittings/2Q.svg",
+      "status": "source-trace-needs-review",
+      "drawingMethod": "Source-perspective contours in scan coordinates; adjacent branches omitted.",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "referenceEquivalentLengthByDownstreamBranches": [
+        {
+          "branchCountMin": 0,
+          "branchCountMax": 0,
+          "feet": 10
+        },
+        {
+          "branchCountMin": 1,
+          "branchCountMax": 1,
+          "feet": 10
+        },
+        {
+          "branchCountMin": 2,
+          "branchCountMax": 2,
+          "feet": 15
+        },
+        {
+          "branchCountMin": 3,
+          "branchCountMax": 3,
+          "feet": 20
+        },
+        {
+          "branchCountMin": 4,
+          "branchCountMax": 4,
+          "feet": 20
+        },
+        {
+          "branchCountMin": 5,
+          "branchCountMax": null,
+          "feet": 25
+        }
+      ],
+      "notes": [
+        "Round trunk section retained to show the tapered collar.",
+        "Count downstream branches to trunk end or next reducer; restart count after a reducer."
+      ],
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 8,
+        "printedPage": 165,
+        "referenceImage": "/images/fittings/references/2Q.png",
+        "embeddedImageIndex": 24,
+        "cropPixels": [
+          692,
+          424,
+          135,
+          105
+        ]
+      }
+    },
+    {
       "id": "3A",
       "fittingNumber": "3A",
       "group": 3,
@@ -1201,34 +2111,6 @@
       }
     },
     {
-      "id": "3S-tight",
-      "fittingNumber": "3S",
-      "group": 3,
-      "letter": "S",
-      "name": "Hard-bend takeoff \u00b7 tight radius",
-      "system": "supply",
-      "variant": "tight",
-      "image": "/images/fittings/3S-tight.svg",
-      "status": "visually-approved",
-      "referenceConditions": {
-        "velocityFpm": 900,
-        "frictionRateIwcPer100Feet": 0.08
-      },
-      "source": {
-        "pdf": "/files/ManD.Groups.pdf",
-        "pdfPage": 11,
-        "printedPage": 167
-      },
-      "referenceEquivalentLengthFeet": 35,
-      "visualReview": {
-        "revision": "0433518c7f477d3557622cda83a53a4d83795f288ed5b1e2c6428ad53e789e52",
-        "completedAt": "2026-09-04T17:13:51.561Z",
-        "batchId": "pilot-01",
-        "note": "",
-        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
-      }
-    },
-    {
       "id": "3S-mitered",
       "fittingNumber": "3S",
       "group": 3,
@@ -1250,6 +2132,34 @@
       "referenceEquivalentLengthFeet": 90,
       "visualReview": {
         "revision": "1cff51bbbc30ce4fbc4c641a855833e70949e8f6cc8945727421c5f4150af84f",
+        "completedAt": "2026-09-04T17:13:51.561Z",
+        "batchId": "pilot-01",
+        "note": "",
+        "record": "docs/fitting-reviews/review-0c0b2a413a2163cb.json"
+      }
+    },
+    {
+      "id": "3S-tight",
+      "fittingNumber": "3S",
+      "group": 3,
+      "letter": "S",
+      "name": "Hard-bend takeoff \u00b7 tight radius",
+      "system": "supply",
+      "variant": "tight",
+      "image": "/images/fittings/3S-tight.svg",
+      "status": "visually-approved",
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 11,
+        "printedPage": 167
+      },
+      "referenceEquivalentLengthFeet": 35,
+      "visualReview": {
+        "revision": "0433518c7f477d3557622cda83a53a4d83795f288ed5b1e2c6428ad53e789e52",
         "completedAt": "2026-09-04T17:13:51.561Z",
         "batchId": "pilot-01",
         "note": "",
@@ -1322,6 +2232,30 @@
       "omittedSourceLetters": [
         "J"
       ],
+      "status": "all-source-numbers-drawn"
+    },
+    {
+      "group": 2,
+      "sourceFittingNumbers": [
+        "2A",
+        "2B",
+        "2C",
+        "2D",
+        "2E",
+        "2F",
+        "2G",
+        "2H",
+        "2I",
+        "2J",
+        "2K",
+        "2L",
+        "2M",
+        "2N",
+        "2O",
+        "2P",
+        "2Q"
+      ],
+      "drawingCount": 17,
       "status": "all-source-numbers-drawn"
     }
   ],

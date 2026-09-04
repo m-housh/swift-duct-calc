@@ -10,7 +10,7 @@ PUBLIC = ROOT / 'Public'
 PILOT_IDS = {'1A','1B','1C','1D','1E','2B','2K','2N','3A','3S-full','3S-tight','3S-mitered','3T'}
 
 
-def main(batch='group-1'):
+def main(batch='group-2'):
     items = []
     for fitting in json.loads((PUBLIC / 'images/fittings/catalog.json').read_text())['fittings']:
         key = fitting['id']
@@ -29,8 +29,11 @@ def main(batch='group-1'):
                          description='Archived pilot batch; all 13 drawings accepted in the completed review.',
                          items=[i for i in items if i['id'] in PILOT_IDS]),
         'group-1': dict(id='group-1', title='Group 1 · 22 drawings',
-                        description='All 19 fitting numbers in the source, with separate 1M and 1S vane variants. Includes five previously accepted drawings. The source skips 1J.',
+                        description='Completed review: all 22 drawings accepted, including 1M and 1S vane variants. The source skips 1J.',
                         items=[i for i in items if i['group']==1]),
+        'group-2': dict(id='group-2', title='Group 2 · 17 drawings',
+                        description='All 17 supply trunk branch takeoffs, 2A–2Q. Includes the previously accepted 2B, 2K and 2N. Check only the drawings that need more work.',
+                        items=[i for i in items if i['group']==2]),
     }
     folder=PUBLIC/'fitting-review/batches'
     folder.mkdir(exist_ok=True)
@@ -41,5 +44,5 @@ def main(batch='group-1'):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--batch',choices=['group-1','pilot-01'],default='group-1')
+    parser.add_argument('--batch',choices=['group-2','group-1','pilot-01'],default='group-2')
     main(parser.parse_args().batch)

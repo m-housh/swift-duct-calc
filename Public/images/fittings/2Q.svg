@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="0 0 640 520" role="img" aria-labelledby="title desc">
+<title id="title">2Q — Tapered collar on round trunk</title><desc id="desc">Round trunk section retained to show the tapered collar. Source printed page 165. Reference equivalent length depends on downstream branch count. Review drawing, not to scale.</desc>
+<style>text{font-family:Arial,sans-serif;fill:#243b53}path,ellipse{stroke-linecap:round;stroke-linejoin:round}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<text x="32" y="44" font-size="28" font-weight="700">2Q</text><text x="96" y="43" font-size="18">Tapered collar on round trunk</text>
+<text x="32" y="76" font-size="13">GROUP 2 · SUPPLY AIR · SOURCE PERSPECTIVE</text>
+<g transform="translate(114.2857 105) scale(3.047619) translate(-692 -424)" fill="none" stroke="#243b53" stroke-width="1.2"><path d="M692 436L827 473M692 480L826 517M729 446C710 441 700 477 716 487M799 465C780 460 770 496 786 506" /><path d="M733 458V464Q734 469 747 469Q761 469 762 463V458Z" fill="white"/><path d="M737 447L733 458Q747 470 762 458L757 447Z" fill="white"/><path d="M737 440V448Q745 457 757 448V440Z" fill="white"/><ellipse cx="747" cy="440" rx="10" ry="6" fill="white"/></g>
+<text x="32" y="448" font-size="13">Round trunk section retained to show the tapered collar.</text>
+<text x="32" y="473" font-size="13">Reference EL varies with downstream branch count.</text>
+<text x="32" y="499" font-size="12">REVIEW DRAWING · NOT TO SCALE · Source: PDF p. 8 / printed p. 165</text>
+</svg>

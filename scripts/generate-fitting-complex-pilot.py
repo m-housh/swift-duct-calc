@@ -7,6 +7,7 @@ from xml.sax.saxutils import escape
 from fitting_source_traces import TRACES, geometry, write_comparisons
 from fitting_review_decisions import apply_saved_reviews
 from fitting_group_one import generate as generate_group_one
+from fitting_group_two import generate as generate_group_two
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'Public/images/fittings'
@@ -112,10 +113,13 @@ def main():
         else:
             entry['referenceEquivalentLengthFeet']=value
         catalog['fittings'].append(entry)
+    catalog['fittings'].extend(generate_group_two(OUT))
+    catalog['fittings'].sort(key=lambda item: (item['group'], item['letter'], item['id']))
     write_comparisons(OUT)
     catalog['schemaVersion']=2
-    catalog['scope']='Complete Group 1 drawing batch: 19 source fitting numbers, 22 drawings including vane variants. Also retains eight Group 2–3 pilot drawings. New Group 1 drawings await review.'
+    catalog['scope']='Complete Group 1 and Group 2 drawing coverage: 22 Group 1 drawings and 17 Group 2 drawings. Also retains five Group 3 pilot drawings. New Group 2 drawings await review.'
     catalog['groupCoverage']=[dict(group=1,sourceFittingNumbers=['1'+letter for letter in 'ABCDEFGHIKLMNOPQRST'],drawingCount=22,omittedSourceLetters=['J'],status='all-source-numbers-drawn')]
+    catalog['groupCoverage'].append(dict(group=2,sourceFittingNumbers=['2'+letter for letter in 'ABCDEFGHIJKLMNOPQ'],drawingCount=17,status='all-source-numbers-drawn'))
     catalog['sourceIssues']=[dict(fittingNumber='3U',overviewPdfPage=10,detailPdfPage=11,description='Overview groups 3S/3U at 15/35/90 feet by inside radius. Detail labels a mitered 3U at 10 feet with vanes and 80 without. Unresolved; no automatic value or 3U asset supplied.')]
     apply_saved_reviews(ROOT, catalog)
     (OUT/'catalog.json').write_text(json.dumps(catalog,indent=2)+'\n')

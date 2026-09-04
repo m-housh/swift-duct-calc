@@ -124,18 +124,6 @@
       "revision": "eb8fb37b946ee3f17e24f56291a8bac3f810ca07de4427a219275efe84e9ff3c"
     },
     {
-      "id": "3S-tight",
-      "number": "3S",
-      "name": "Hard-bend takeoff \u00b7 tight radius",
-      "group": 3,
-      "image": "../images/fittings/3S-tight.svg",
-      "reference": "../images/fittings/references/3S.png",
-      "sourcePage": 167,
-      "sourcePDF": "../files/ManD.Groups.pdf#page=11",
-      "priorApproval": true,
-      "revision": "0433518c7f477d3557622cda83a53a4d83795f288ed5b1e2c6428ad53e789e52"
-    },
-    {
       "id": "3S-mitered",
       "number": "3S",
       "name": "Hard-bend takeoff \u00b7 mitered corner",
@@ -146,6 +134,18 @@
       "sourcePDF": "../files/ManD.Groups.pdf#page=11",
       "priorApproval": true,
       "revision": "1cff51bbbc30ce4fbc4c641a855833e70949e8f6cc8945727421c5f4150af84f"
+    },
+    {
+      "id": "3S-tight",
+      "number": "3S",
+      "name": "Hard-bend takeoff \u00b7 tight radius",
+      "group": 3,
+      "image": "../images/fittings/3S-tight.svg",
+      "reference": "../images/fittings/references/3S.png",
+      "sourcePage": 167,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=11",
+      "priorApproval": true,
+      "revision": "0433518c7f477d3557622cda83a53a4d83795f288ed5b1e2c6428ad53e789e52"
     },
     {
       "id": "3T",

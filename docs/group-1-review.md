@@ -32,7 +32,9 @@ transcriptions and have not been connected to calculations.
 
 ## Review and checkpoints
 
-Refresh `/fitting-review/`. Check only drawings needing more work, add notes,
+The default review page has advanced to Group 2. To reopen Group 1, run
+`python3 scripts/generate-fitting-review.py --batch group-1` and refresh
+`/fitting-review/`. Check only drawings needing more work, add notes,
 finish the batch and download its review. The new batch ID is `group-1`; prior
 `pilot-01` browser decisions and the imported pilot review remain preserved.
 Previously accepted 1A–1E are included for context and marked accordingly.
@@ -50,7 +52,7 @@ and completed correction passes. A commit does not itself mark drawings accepted
 
 `python3 scripts/generate-fittings.py` regenerates the complete catalog,
 reapplies approvals only to exact reviewed revisions, and rebuilds the active
-Group 1 review batch. It maintains the archived pilot batch manifest so earlier
+Group 2 review batch. It maintains the archived Group 1 and pilot manifests so earlier
 exports remain importable. No package installation is required.
 
 Reference crops are committed. To recreate the 14 new crops from the PDF, run

@@ -37,9 +37,9 @@ Use complete groups rather than 4–6 drawing batches. Group 1 and its correctio
 pass are complete; proceed with all 17 Group 2 fittings, followed by Group 3.
 After each batch, revise the checked drawings and repeat the comparison.
 
-The page currently contains the [complete Group 1 batch](group-1-review.md):
-22 drawings covering 19 fitting numbers. The accepted 13-drawing pilot is
-preserved separately. Groups 2 and 3 remain incomplete.
+The page currently contains the [complete Group 2 batch](group-2-review.md):
+17 drawings covering 2A–2Q, including three previously accepted drawings.
+Group 1 is complete and approved; Group 3 still has only pilot drawings.
 
 ## Regeneration
 

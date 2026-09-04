@@ -33,7 +33,7 @@ def main():
     raw = args.review.read_bytes()
     report = json.loads(raw)
     batch_id = report.get('batchId')
-    if batch_id not in {'pilot-01', 'group-1'}:
+    if batch_id not in {'pilot-01', 'group-1', 'group-2'}:
         raise ValueError('Unknown review batch.')
     manifest = json.loads((public / 'fitting-review/batches' / f'{batch_id}.json').read_text())
     catalog_path = public / 'images/fittings/catalog.json'

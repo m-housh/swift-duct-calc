@@ -1,6 +1,7 @@
 # Individual fitting drawings — pilot
 
-**Current:** [Complete Group 1 batch](group-1-review.md). Regenerate everything
+**Current:** [Complete Group 2 batch](group-2-review.md). Group 1 is approved.
+Regenerate everything
 with `python3 scripts/generate-fittings.py`.
 
 See the latest [2B and 3T source-trace review](fitting-trace-review.md) for

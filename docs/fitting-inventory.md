@@ -1,7 +1,10 @@
 # Fitting inventory and complex drawing pilot
 
 **Completed:** [Group 1 review](group-1-review.md), covering all 19 source fitting
-numbers in 22 visually approved drawings. Group 2 is the next drawing batch.
+numbers in 22 visually approved drawings.
+
+**Current batch:** [Group 2 review](group-2-review.md), with all 17 fittings
+drawn. Fourteen new drawings await review.
 
 **Updated review:** [2B and 3T source comparisons](fitting-trace-review.md).
 These two assets now use manual source-contour traces; other drawings below
@@ -38,9 +41,9 @@ in this pass.
 
 | Source printed page | Fitting numbers | Status |
 | --- | --- | --- |
-| 163 | 2A, 2B, 2C, 2D, 2E, 2F, 2G, 2H | 2B drawn; remaining drawings pending |
-| 164 | 2I, 2J, 2K, 2L, 2M | 2K drawn; remaining drawings pending |
-| 165 | 2N, 2O, 2P, 2Q | 2N drawn; remaining drawings pending |
+| 163 | 2A, 2B, 2C, 2D, 2E, 2F, 2G, 2H | All eight drawn; 2B previously accepted |
+| 164 | 2I, 2J, 2K, 2L, 2M | All five drawn; 2K previously accepted |
+| 165 | 2N, 2O, 2P, 2Q | All four drawn; 2N previously accepted |
 
 Each fitting has six reference EL values: downstream branch counts 0, 1, 2, 3,
 4, and 5 or more. Count to the end of the trunk or the next reducer; begin a new
