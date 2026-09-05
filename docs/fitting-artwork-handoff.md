@@ -37,7 +37,7 @@ from `/home/michael/dev/swift-duct-calc/docs/fitting-artwork-handoff.md` for con
 This guide is tracked alongside the accepted Group 3 artwork and review records.
 
 The fresh task should verify its host, directory, and Git branch, then serve the
-existing Group 3 individual review without regenerating images. If the task starts
+active review without regenerating images. If the task starts
 from another Git state, inspect it and preserve existing work before arranging a
 checkout/worktree based on `codex/fitting-artwork`.
 
@@ -77,7 +77,10 @@ Open `http://127.0.0.1:8766/fitting-review/` locally. Port 8766 avoids the exist
 - 3Q correction is active as `3Q-clean-upstream-v6.png`: upstream widened on the near/front side; round takeoff emerges within the sloping reducing wall leading into the smaller downstream duct, repositioned toward the center per `3q_2.png`; the extra diagonal seam in the upstream top face was then removed per follow-up feedback. Visually inspected and now accepted.
 - 3L reopened by user markup `3l.png`: downstream far/back boundary moved inward to narrow the downstream duct. Active `3L-narrow-downstream-v3.png` is visually inspected and now accepted; archived acceptance remains attached only to the previous revision.
 - 3O v4 was rejected: removing the original triangular tapers into the round collar was wrong, and the reducer was too long. Active candidate `3O-short-faceted-reducer-v5.png` restores faceted taper panels and confines reduction to one short fitting bay before two straight downstream bays. Compared with source and pre-edit artwork; now accepted. Preserve these original transition details in future edits.
-- Next: Group 5 has 15 prepared review entries, followed by Group 6 (16) and Group 7 (5). These are prepared restorations, not accepted artwork. Keep Group 2 paused. Preserve the Group 3 lessons about connecting duct context, reducing sections, and original fitting details.
+- Earlier Group 5 individual batch: 15 distinct entries 5A–5O. User rejected repeated full-assembly restorations as individual fitting drawings. 5A–5G are now separated, retaining both source views for the selected connection only, plus plenum/equipment context. 5H–5O already depict single fittings and retain their original views. Full Group 5 restorations remain untouched and linked from every card. This earlier batch is superseded by the accepted shape review. QA: `docs/fitting-preflight/group-5-individual.json`; manifest: `Public/images/fittings/group-5-individual/manifest.json`.
+- **Group 5 by duct shape is accepted**, 16 artwork variants in 12 families. User requested round/rectangular artwork selection for the future picker. Current grouping: 5A/5B → family 5A, 5C/5D → family 5C, 5F/5G → family 5F; 5E has both shapes with a new rectangular adaptation. 5H–5O remain rectangular-only pending direction about round adaptations. Naming and coverage were presented as assumptions while clarification questions were pending; revise them if the user directs otherwise. Source IDs and values remain intact. See `docs/fitting-shape-artwork.md` and `docs/fitting-preflight/group-5-shape-variants.json`.
+- Rebuild/activate the shape review with `python3 scripts/package_group_5_shapes.py --activate`. Use the same review URL. Other group packagers change the active batch, so run them only when intended.
+- After Group 5: Group 6 (16 entries) and Group 7 (5) have prepared restorations, not accepted individual drawings. Inspect and separate shared assemblies before presenting each group. Keep Group 2 paused. Preserve connecting duct context, reducing sections and original fitting details.
 - Retain the original standalone drawings. Updated user clarification (2026-09-04): separated assembly fittings must show the full original main-duct cross-section and substantial upstream/downstream sections, preserving original direction and taper. The user confirmed the expanded `3C-context-v2.png` example as the amount to use throughout. Do not append new upstream geometry to standalone originals.
 - Preserve the accepted full illustrations for reference. Each individual review card links to its full reference.
 - Review one group at a time. The user can give feedback in chat; do not require downloading review files.
@@ -96,4 +99,10 @@ The packager now imports archived Group 3 decisions only when the fitting ID and
 
 For a new remote conversation if handoff is unavailable, use:
 
-> Read docs/fitting-artwork-handoff.md and the Group 3 individual manifest and final QA record. Continue the existing fitting artwork workflow on codex/fitting-artwork. Group 3 individual drawings are accepted; keep Group 2 paused and preserve accepted standalone and full reference artwork.
+> Read docs/fitting-artwork-handoff.md and the Group 3 individual manifest and final QA record. Continue the existing fitting artwork workflow on codex/fitting-artwork. Group 3 individual drawings are accepted; Group 5 shape variants are accepted; continue with Group 6. Keep Group 2 paused and preserve accepted standalone and full reference artwork.
+
+Latest Group 5 correction: 5C rectangular side view has a straight top edge and short bottom-only taper, matching the source. Active override `5C-rectangular-prominent-taper-v3.png` deepens the side-view bottom taper per `5c.png` while preserving the perspective flare. Round 5C is unchanged.
+
+Latest Group 5 correction: 5F round (source 5G) now uses `5F-round-equipment-top-v2.png`. User top view clarifies smaller plenum centered on a larger equipment footprint. Removed the projecting band, widened the cabinet/top and retained round inlet/arrow in both views. Other variants are unchanged.
+
+Group 5 final acceptance: user approved all 16 shape variants in conversation on 2026-09-05. Exact current SVG/reference revisions are archived in the Group 5 shapes review record; rebuilding retains approval. Group 6 is next: all 16 source/restoration pairs were inspected and already depict individual fittings. No assembly separation is needed.

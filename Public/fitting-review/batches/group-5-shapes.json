@@ -1,4 +1,4 @@
-window.FITTING_REVIEW = {
+{
   "id": "group-5-shapes",
   "title": "Group 5 \u00b7 round and rectangular fittings",
   "description": "Choose artwork by fitting family and return-duct shape. Paired source IDs (5A/5B, 5C/5D, 5F/5G) share a family; each variant retains its original source ID and values. 5H\u20135O currently have rectangular artwork only.",
@@ -325,4 +325,4 @@ window.FITTING_REVIEW = {
       "priorApproval": true
     }
   ]
-};
+}

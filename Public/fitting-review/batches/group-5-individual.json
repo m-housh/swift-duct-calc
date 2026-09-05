@@ -1,0 +1,286 @@
+{
+  "id": "group-5-individual",
+  "title": "Group 5 \u00b7 individual fittings",
+  "description": "Each entry shows its own fitting. 5A\u20135G are separated from shared assemblies; 5H\u20135O retain their original standalone views. Full source illustrations remain available for comparison.",
+  "referenceGallery": "group-5-references.html",
+  "items": [
+    {
+      "id": "5A",
+      "number": "5A",
+      "name": "Rectangular return to oversized plenum",
+      "group": 5,
+      "image": "../images/fittings/group-5-individual/5A.svg?revision=7c06aeaf8a8a",
+      "reference": "../images/fittings/group-5-enhanced/source-art/5A.png",
+      "sourcePage": 169,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=20",
+      "revision": "7c06aeaf8a8a8a4e3c8b5a9d8069a5bcf57233cf69c7c4e9d73c3b9de6f0c11e",
+      "contextURL": "group-5-references.html#reference-5A",
+      "notes": [
+        "Rectangular left entry only; square untapered connection, oversized plenum, equipment context and incoming arrow retained.",
+        "Elevation and isometric views show the same individual fitting; shared assembly retained separately for reference."
+      ],
+      "reviewNote": "Only this fitting connection is shown. Original plenum and equipment context retained in both views.",
+      "priorApproval": false
+    },
+    {
+      "id": "5B",
+      "number": "5B",
+      "name": "Round return to oversized plenum",
+      "group": 5,
+      "image": "../images/fittings/group-5-individual/5B.svg?revision=738ecaf33810",
+      "reference": "../images/fittings/group-5-enhanced/source-art/5B.png",
+      "sourcePage": 169,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=20",
+      "revision": "738ecaf33810bd51ac4399fc9f417bda52686de23158d25ca737f8b39fca6aaa",
+      "contextURL": "group-5-references.html#reference-5A",
+      "notes": [
+        "Round right entry only; untapered pipe, oversized plenum and leftward incoming arrow retained; elevation pipe-break symbol restored.",
+        "Elevation and isometric views show the same individual fitting; shared assembly retained separately for reference."
+      ],
+      "reviewNote": "Only this fitting connection is shown. Original plenum and equipment context retained in both views.",
+      "priorApproval": false
+    },
+    {
+      "id": "5C",
+      "number": "5C",
+      "name": "Rectangular return with tapered plenum entry",
+      "group": 5,
+      "image": "../images/fittings/group-5-individual/5C.svg?revision=c325c0472b52",
+      "reference": "../images/fittings/group-5-enhanced/source-art/5C.png",
+      "sourcePage": 169,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=20",
+      "revision": "c325c0472b52af58374f7eb4634a9b1cefd246a3023840058534cbe6eb7a1c1b",
+      "contextURL": "group-5-references.html#reference-5C",
+      "notes": [
+        "Rectangular left entry only; flared entry surfaces retained in both views, plus oversized plenum and incoming arrow.",
+        "Elevation and isometric views show the same individual fitting; shared assembly retained separately for reference."
+      ],
+      "reviewNote": "Only this fitting connection is shown. Original plenum and equipment context retained in both views.",
+      "priorApproval": false
+    },
+    {
+      "id": "5D",
+      "number": "5D",
+      "name": "Round return with tapered plenum entry",
+      "group": 5,
+      "image": "../images/fittings/group-5-individual/5D.svg?revision=09995d259e2c",
+      "reference": "../images/fittings/group-5-enhanced/source-art/5D.png",
+      "sourcePage": 169,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=20",
+      "revision": "09995d259e2c5834a02b8052f1618254a134ad1fe2895aea6193c551e35fef48",
+      "contextURL": "group-5-references.html#reference-5C",
+      "notes": [
+        "Round right entry only; conical widening into oversized plenum retained in both views, plus inward arrow and pipe break.",
+        "Elevation and isometric views show the same individual fitting; shared assembly retained separately for reference."
+      ],
+      "reviewNote": "Only this fitting connection is shown. Original plenum and equipment context retained in both views.",
+      "priorApproval": false
+    },
+    {
+      "id": "5E",
+      "number": "5E",
+      "name": "Top return into compact plenum",
+      "group": 5,
+      "image": "../images/fittings/group-5-individual/5E.svg?revision=42676300ca2a",
+      "reference": "../images/fittings/group-5-enhanced/source-art/5E.png",
+      "sourcePage": 169,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=20",
+      "revision": "42676300ca2aa40832107cbefe7473abb7ed5fded419c98c05608e3eb9cc65cf",
+      "contextURL": "group-5-references.html#reference-5E",
+      "notes": [
+        "Top round entry only; compact plenum, downward arrow and round pipe break retained. Both side branches removed.",
+        "Elevation and isometric views show the same individual fitting; shared assembly retained separately for reference."
+      ],
+      "reviewNote": "Only this fitting connection is shown. Original plenum and equipment context retained in both views.",
+      "priorApproval": false
+    },
+    {
+      "id": "5F",
+      "number": "5F",
+      "name": "Rectangular side return into compact plenum",
+      "group": 5,
+      "image": "../images/fittings/group-5-individual/5F.svg?revision=5f666896ad80",
+      "reference": "../images/fittings/group-5-enhanced/source-art/5F.png",
+      "sourcePage": 169,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=20",
+      "revision": "5f666896ad80af63687e65d99359cc52444ad357398c85993f5f046dc17cefde",
+      "contextURL": "group-5-references.html#reference-5E",
+      "notes": [
+        "Rectangular side entry only; compact plenum, incoming arrow and rectangular duct opening retained. Top and right round branches removed.",
+        "Elevation and isometric views show the same individual fitting; shared assembly retained separately for reference."
+      ],
+      "reviewNote": "Only this fitting connection is shown. Original plenum and equipment context retained in both views.",
+      "priorApproval": false
+    },
+    {
+      "id": "5G",
+      "number": "5G",
+      "name": "Round side return into compact plenum",
+      "group": 5,
+      "image": "../images/fittings/group-5-individual/5G.svg?revision=4b5529bf6be0",
+      "reference": "../images/fittings/group-5-enhanced/source-art/5G.png",
+      "sourcePage": 169,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=20",
+      "revision": "4b5529bf6be0a2bf8e3bed81a3d1f9006824b5b5be312cf726cc475fa21ba96e",
+      "contextURL": "group-5-references.html#reference-5E",
+      "notes": [
+        "Round side entry only; compact plenum, pipe breaks and inward arrow retained. Top and rectangular side branches removed.",
+        "Elevation and isometric views show the same individual fitting; shared assembly retained separately for reference."
+      ],
+      "reviewNote": "Only this fitting connection is shown. Original plenum and equipment context retained in both views.",
+      "priorApproval": false
+    },
+    {
+      "id": "5H",
+      "number": "5H",
+      "name": "Square elbow at air handler",
+      "group": 5,
+      "image": "../images/fittings/group-5-individual/5H.svg?revision=65ffb9323db5",
+      "reference": "../images/fittings/group-5-enhanced/source-art/5H.png",
+      "sourcePage": 170,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=21",
+      "revision": "65ffb9323db59ce304865a5e1953f1a5d2981c3cdcdaf34b4e7e58bcdc756e83",
+      "contextURL": "group-5-references.html#reference-5H",
+      "notes": [
+        "Original standalone fitting artwork retained without changes.",
+        "Square inside/outside corners, both section and perspective views, W/H dimensions and downward arrow checked.",
+        "Explanatory wording and EL tables removed from artwork; original values remain in manifest metadata."
+      ],
+      "reviewNote": "Original standalone fitting views retained.",
+      "priorApproval": false
+    },
+    {
+      "id": "5I",
+      "number": "5I",
+      "name": "Elbow with mitered inside corner at air handler",
+      "group": 5,
+      "image": "../images/fittings/group-5-individual/5I.svg?revision=6f87f6ed4a1e",
+      "reference": "../images/fittings/group-5-enhanced/source-art/5I.png",
+      "sourcePage": 170,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=21",
+      "revision": "6f87f6ed4a1e00e0c575483c3da99e82cc315160e05d524b7e9a112704615374",
+      "contextURL": "group-5-references.html#reference-5I",
+      "notes": [
+        "Original standalone fitting artwork retained without changes.",
+        "Used complete original PDF page to avoid clipped perspective outlet. Curved outside and sharp inside corners, W/H dimensions, arrow and both views checked.",
+        "Explanatory wording and EL tables removed from artwork; original values remain in manifest metadata."
+      ],
+      "reviewNote": "Original standalone fitting views retained.",
+      "priorApproval": false
+    },
+    {
+      "id": "5J",
+      "number": "5J",
+      "name": "Radius elbow at air handler",
+      "group": 5,
+      "image": "../images/fittings/group-5-individual/5J.svg?revision=1764116de413",
+      "reference": "../images/fittings/group-5-enhanced/source-art/5J.png",
+      "sourcePage": 170,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=21",
+      "revision": "1764116de4131636d51c188f65adcc992875b0540c22ea38c1886affe7fff76d",
+      "contextURL": "group-5-references.html#reference-5J",
+      "notes": [
+        "Original standalone fitting artwork retained without changes.",
+        "Both rounded inside/outside corners, R dimension and arrow retained; section and perspective checked. Source-style blue labels remain; artwork is black.",
+        "Explanatory wording and EL tables removed from artwork; original values remain in manifest metadata."
+      ],
+      "reviewNote": "Original standalone fitting views retained.",
+      "priorApproval": false
+    },
+    {
+      "id": "5K",
+      "number": "5K",
+      "name": "Square elbow with turning vanes at air handler",
+      "group": 5,
+      "image": "../images/fittings/group-5-individual/5K.svg?revision=40d922177030",
+      "reference": "../images/fittings/group-5-enhanced/source-art/5K.png",
+      "sourcePage": 170,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=21",
+      "revision": "40d922177030ae8e7be2d51e3be8ce634726a3cc00084f2f97d129c2d4faadd3",
+      "contextURL": "group-5-references.html#reference-5K",
+      "notes": [
+        "Original standalone fitting artwork retained without changes.",
+        "Square elbows and diagonal turning-vane bank retained in section and two visible perspective positions; arrow and complete geometry checked. Source-style blue ID remains.",
+        "Explanatory wording and EL tables removed from artwork; original values remain in manifest metadata."
+      ],
+      "reviewNote": "Original standalone fitting views retained.",
+      "priorApproval": false
+    },
+    {
+      "id": "5L",
+      "number": "5L",
+      "name": "Opposed returns into bull-head plenum",
+      "group": 5,
+      "image": "../images/fittings/group-5-individual/5L.svg?revision=045177fa668a",
+      "reference": "../images/fittings/group-5-enhanced/source-art/5L.png",
+      "sourcePage": 171,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=23",
+      "revision": "045177fa668a267475187777e2648ae7e5a794b92ce8a91e0e506cd3bbe2fd18",
+      "contextURL": "group-5-references.html#reference-5L",
+      "notes": [
+        "Original standalone fitting artwork retained without changes.",
+        "Used original full page to recover complete trunk endpoints. Both opposing arrows and downward arrow, unvaned junction, stepped neck and perspective checked.",
+        "Explanatory wording and EL tables removed from artwork; original values remain in manifest metadata."
+      ],
+      "reviewNote": "Original standalone fitting views retained.",
+      "priorApproval": false
+    },
+    {
+      "id": "5M",
+      "number": "5M",
+      "name": "Opposed returns into vaned plenum",
+      "group": 5,
+      "image": "../images/fittings/group-5-individual/5M.svg?revision=05741a239671",
+      "reference": "../images/fittings/group-5-enhanced/source-art/5M.png",
+      "sourcePage": 171,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=23",
+      "revision": "05741a239671651c272ab4a151f443697401f7219fce89b4c0a8f68b3a52ba48",
+      "contextURL": "group-5-references.html#reference-5M",
+      "notes": [
+        "Original standalone fitting artwork retained without changes.",
+        "Used full original page to recover complete lower break; both peaked vane banks, inward arrows and downward arrow checked. Source offers one unique section illustration for 5M.",
+        "Explanatory wording and EL tables removed from artwork; original values remain in manifest metadata."
+      ],
+      "reviewNote": "Original standalone fitting views retained.",
+      "priorApproval": false
+    },
+    {
+      "id": "5N",
+      "number": "5N",
+      "name": "Offset ceiling return into air handler",
+      "group": 5,
+      "image": "../images/fittings/group-5-individual/5N.svg?revision=b91d1b875830",
+      "reference": "../images/fittings/group-5-enhanced/source-art/5N.png",
+      "sourcePage": 171,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=23",
+      "revision": "b91d1b8758309e85e060985cf4bfcaff44c593e4f2a9e4db268cc43d55b0f616",
+      "contextURL": "group-5-references.html#reference-5N",
+      "notes": [
+        "Original standalone fitting artwork retained without changes.",
+        "Offset under ceiling duct preserved, all connected faces, zigzag breaks and two arrowheads checked.",
+        "Explanatory wording and EL tables removed from artwork; original values remain in manifest metadata."
+      ],
+      "reviewNote": "Original standalone fitting views retained.",
+      "priorApproval": false
+    },
+    {
+      "id": "5O",
+      "number": "5O",
+      "name": "Direct ceiling return into air handler",
+      "group": 5,
+      "image": "../images/fittings/group-5-individual/5O.svg?revision=3f43ddf7bf0b",
+      "reference": "../images/fittings/group-5-enhanced/source-art/5O.png",
+      "sourcePage": 171,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=23",
+      "revision": "3f43ddf7bf0b8a2a22aae05273c6aaa07a17210ba54b8aec0dd12dda79b62bbe",
+      "contextURL": "group-5-references.html#reference-5O",
+      "notes": [
+        "Original standalone fitting artwork retained without changes.",
+        "Direct shallow transition under ceiling duct preserved, distinct from 5N; connected faces, broken ends and both arrowheads checked. Source-style blue ID remains.",
+        "Explanatory wording and EL tables removed from artwork; original values remain in manifest metadata."
+      ],
+      "reviewNote": "Original standalone fitting views retained.",
+      "priorApproval": false
+    }
+  ]
+}
