@@ -1,4 +1,4 @@
-window.FITTING_REVIEW = {
+{
   "id": "group-12",
   "title": "Group 12 \u00b7 transitions and plenums",
   "description": "Individual fittings 12A\u201312X: expanding/reducing transitions, oval adapters, large plenum and abrupt squeeze. Full source tables remain linked.",
@@ -413,4 +413,4 @@ window.FITTING_REVIEW = {
       "priorApproval": true
     }
   ]
-};
+}

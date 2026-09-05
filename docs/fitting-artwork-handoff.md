@@ -4,7 +4,32 @@ The portable branch is `codex/fitting-artwork` in
 `https://github.com/m-housh/swift-duct-calc.git`.
 The current worktree is `/home/michael/dev/swift-duct-calc`.
 
-## Latest state — Group 10 approved; Group 11 guidance review
+## Latest state — Group 12 approved; Group 13 excluded
+
+Group 10 is committed as `4b848b3`. Group 11 guidance has been read; the proposed
+two-family picker and artwork plan is in `docs/group-11-picker-plan.md`.
+No Group 11 artwork or calculator changes have been made. The supplied page's
+box values predate revisions reported by ACCA; establish the calculation edition
+before implementing automatic values. The user then requested Group 12 review,
+deferring Group 11. Group 2 also remains paused.
+
+Group 12 has 24 approved individual source drawings, **12A–12X**, on printed pages
+182–184 / PDF pages 44–48. 12A–12I expand; 12J–12R reduce. 12S–12V are oval/round
+and rectangular/round adapters. 12W is the large-plenum schematic and 12X the
+abrupt-squeeze schematic; their table-related labels are retained.
+Each source ID has its own drawing and linked full source tables. Slope and area
+ratio remain table inputs, rather than creating a duplicate card for every value.
+Rebuild/activate using `python3 scripts/package_group_12.py --activate`.
+Source metadata/picker mappings: `Public/images/fittings/group-12/`.
+Prompts and visual checks: `docs/fitting-preflight/group-12.json`.
+Exact accepted revisions are archived in `docs/fitting-reviews/review-820a88307ae0985a.json`.
+12A–12V's 86 table values match the existing
+Swift lookup; 12W/12X are additional source cases. Calculator code is unchanged.
+Group 13 (Manual Balancing Dampers, 13A–13D), printed page 185 / PDF pages
+49–50, is excluded from the fitting picker by explicit user direction. Skip SVG
+generation and review for that group. This reaches the end of the source PDF;
+only deferred Group 11 and paused Group 2 remain unresolved. Keep the accepted
+Group 12 review active; do not automatically resume either deferred group.
 
 Group 7's nine individual/assembly options are approved and committed as
 `62599b7`. Group 8, **Elbows and Offsets**, is approved and committed as `4cc7dd0`: 25 drawings
@@ -30,10 +55,10 @@ reversed and visually checked; fitting geometry and the other six items are unch
 Rebuild/activate using `python3 scripts/package_group_10.py --activate`.
 Source metadata and picker mappings are in `Public/images/fittings/group-10/`;
 prompts and visual checks are in `docs/fitting-preflight/group-10.json`.
-The next source group is Group 11, Flexible Duct Junction Boxes and Radius Bends,
+The deferred source group is Group 11, Flexible Duct Junction Boxes and Radius Bends,
 on printed page 181 / PDF pages 42–43. The user requested reading its guidance
-and deciding its picker representation before preparing artwork. Keep the accepted
-Group 10 review active while this design is discussed.
+and deciding its picker representation before preparing artwork, then requested
+Group 12 review first.
 Reference values remain artwork metadata; calculator code is unchanged.
 The historical progress
 entries below describe earlier review states.

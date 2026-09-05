@@ -1,0 +1,1235 @@
+{
+  "schemaVersion": 1,
+  "group": 12,
+  "title": "Transitions, Oval Adapters, Plenums and Abrupt Squeezes",
+  "sourcePages": [
+    182,
+    183,
+    184
+  ],
+  "items": [
+    {
+      "id": "12A",
+      "fittingId": "12A",
+      "name": "Round tapered expansion",
+      "ductShape": "round",
+      "variant": null,
+      "flowCase": "diverging",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 44,
+        "printedPage": 182,
+        "cropPixels": [
+          50,
+          245,
+          222,
+          328
+        ],
+        "referenceSha256": "c6e351e1908b9c2225479a14e90ce9db90b86e8c433d80d382aad7afadd0ed3c"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12A.png",
+      "referenceValues": {
+        "slopes": [
+          "1:1",
+          "2:1",
+          "4:1"
+        ],
+        "largerToSmallerAreaRatios": [
+          2,
+          4
+        ],
+        "equivalentLengthFeet": [
+          [
+            20,
+            40
+          ],
+          [
+            20,
+            40
+          ],
+          [
+            20,
+            30
+          ]
+        ],
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "inlet": "round",
+        "outlet": "round"
+      }
+    },
+    {
+      "id": "12B",
+      "fittingId": "12B",
+      "name": "Round abrupt expansion",
+      "ductShape": "round",
+      "variant": null,
+      "flowCase": "diverging",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 44,
+        "printedPage": 182,
+        "cropPixels": [
+          67,
+          449,
+          219,
+          541
+        ],
+        "referenceSha256": "11bc4965a49b49c88a73efe4355193010f876473699cf1dd10daa4c256fb6548"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12B.png",
+      "referenceValues": {
+        "slope": "abrupt",
+        "largerToSmallerAreaRatios": [
+          2,
+          4
+        ],
+        "equivalentLengthFeet": [
+          20,
+          40
+        ],
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "inlet": "round",
+        "outlet": "round"
+      }
+    },
+    {
+      "id": "12C",
+      "fittingId": "12C",
+      "name": "Round-to-rectangular tapered expansion",
+      "ductShape": "mixed",
+      "variant": null,
+      "flowCase": "diverging",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 44,
+        "printedPage": 182,
+        "cropPixels": [
+          68,
+          655,
+          220,
+          745
+        ],
+        "referenceSha256": "4833dd025dc02c413dc1e69cdb1fb8a88f0d3789bf4f6f326d281980c5f6b80f"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12C.png",
+      "referenceValues": {
+        "slopes": [
+          "1:1",
+          "2:1",
+          "4:1"
+        ],
+        "largerToSmallerAreaRatios": [
+          2,
+          4
+        ],
+        "equivalentLengthFeet": [
+          [
+            20,
+            40
+          ],
+          [
+            20,
+            40
+          ],
+          [
+            20,
+            30
+          ]
+        ],
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "inlet": "round",
+        "outlet": "rectangular"
+      }
+    },
+    {
+      "id": "12D",
+      "fittingId": "12D",
+      "name": "Rectangular-to-round tapered expansion",
+      "ductShape": "mixed",
+      "variant": null,
+      "flowCase": "diverging",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 44,
+        "printedPage": 182,
+        "cropPixels": [
+          66,
+          855,
+          220,
+          944
+        ],
+        "referenceSha256": "5d1afe96d729a6c91e475eb9fc14c897c81575507dc362855098555ec7119c1b"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12D.png",
+      "referenceValues": {
+        "slopes": [
+          "1:1",
+          "2:1",
+          "4:1"
+        ],
+        "largerToSmallerAreaRatios": [
+          2,
+          4
+        ],
+        "equivalentLengthFeet": [
+          [
+            20,
+            40
+          ],
+          [
+            20,
+            40
+          ],
+          [
+            20,
+            30
+          ]
+        ],
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "inlet": "rectangular",
+        "outlet": "round"
+      }
+    },
+    {
+      "id": "12E",
+      "fittingId": "12E",
+      "name": "Round-to-flat-rectangular tapered expansion",
+      "ductShape": "mixed",
+      "variant": null,
+      "flowCase": "diverging",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 44,
+        "printedPage": 182,
+        "cropPixels": [
+          50,
+          1045,
+          219,
+          1130
+        ],
+        "referenceSha256": "239f59996933a2bcf4cc7a53689e582139ba4a8eb9c5a605288e26c2ddda7f8f"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12E.png",
+      "referenceValues": {
+        "equivalentLengthFeet": 25,
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "inlet": "round",
+        "outlet": "rectangular"
+      }
+    },
+    {
+      "id": "12F",
+      "fittingId": "12F",
+      "name": "Rectangular tapered expansion",
+      "ductShape": "rectangular",
+      "variant": null,
+      "flowCase": "diverging",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 44,
+        "printedPage": 182,
+        "cropPixels": [
+          473,
+          247,
+          640,
+          341
+        ],
+        "referenceSha256": "fa03895b2039e5c7b7dcdd82616d96ec12fb6fcfdf96ab81b7685dd2592f03a4"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12F.png",
+      "referenceValues": {
+        "slopes": [
+          "1:1",
+          "2:1",
+          "4:1"
+        ],
+        "largerToSmallerAreaRatios": [
+          2,
+          4
+        ],
+        "equivalentLengthFeet": [
+          [
+            20,
+            40
+          ],
+          [
+            20,
+            40
+          ],
+          [
+            15,
+            30
+          ]
+        ],
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "inlet": "rectangular",
+        "outlet": "rectangular"
+      }
+    },
+    {
+      "id": "12G",
+      "fittingId": "12G",
+      "name": "Rectangular abrupt expansion",
+      "ductShape": "rectangular",
+      "variant": null,
+      "flowCase": "diverging",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 44,
+        "printedPage": 182,
+        "cropPixels": [
+          483,
+          445,
+          640,
+          551
+        ],
+        "referenceSha256": "3cc9b2b3fb309c5e5274bf54481775ec51c901ff0a3f8354b5886c8538c35ef1"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12G.png",
+      "referenceValues": {
+        "slope": "abrupt",
+        "largerToSmallerAreaRatios": [
+          2,
+          4
+        ],
+        "equivalentLengthFeet": [
+          20,
+          40
+        ],
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "inlet": "rectangular",
+        "outlet": "rectangular"
+      }
+    },
+    {
+      "id": "12H",
+      "fittingId": "12H",
+      "name": "Rectangular one-sided tapered expansion",
+      "ductShape": "rectangular",
+      "variant": null,
+      "flowCase": "diverging",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 44,
+        "printedPage": 182,
+        "cropPixels": [
+          489,
+          651,
+          640,
+          741
+        ],
+        "referenceSha256": "76843bd51fe387c3d37755f01da802d88b7f78c8c3c472bc3b1dc2e35db36ad8"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12H.png",
+      "referenceValues": {
+        "slopes": [
+          "1:1",
+          "2:1",
+          "4:1"
+        ],
+        "largerToSmallerAreaRatios": [
+          2,
+          4
+        ],
+        "equivalentLengthFeet": [
+          [
+            20,
+            40
+          ],
+          [
+            20,
+            40
+          ],
+          [
+            15,
+            25
+          ]
+        ],
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "inlet": "rectangular",
+        "outlet": "rectangular"
+      }
+    },
+    {
+      "id": "12I",
+      "fittingId": "12I",
+      "name": "Rectangular side-offset tapered expansion",
+      "ductShape": "rectangular",
+      "variant": null,
+      "flowCase": "diverging",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 44,
+        "printedPage": 182,
+        "cropPixels": [
+          489,
+          860,
+          640,
+          944
+        ],
+        "referenceSha256": "a7ce0b5d1a8825843c907ef45f3bd11bf8d4dbfd31682cb61e899439ccd67a24"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12I.png",
+      "referenceValues": {
+        "slopes": [
+          "1:1",
+          "2:1",
+          "4:1"
+        ],
+        "largerToSmallerAreaRatios": [
+          2,
+          4
+        ],
+        "equivalentLengthFeet": [
+          [
+            20,
+            35
+          ],
+          [
+            15,
+            25
+          ],
+          [
+            10,
+            10
+          ]
+        ],
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "inlet": "rectangular",
+        "outlet": "rectangular"
+      }
+    },
+    {
+      "id": "12J",
+      "fittingId": "12J",
+      "name": "Round tapered reduction",
+      "ductShape": "round",
+      "variant": null,
+      "flowCase": "converging",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 46,
+        "printedPage": 183,
+        "cropPixels": [
+          105,
+          245,
+          261,
+          325
+        ],
+        "referenceSha256": "4a2cb48a028020220929114755b37de3c7d713c8b6fc0a8ae8d641bab6db9fe5"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12J.png",
+      "referenceValues": {
+        "slopes": [
+          "1:1",
+          "2:1",
+          "4:1"
+        ],
+        "largerToSmallerAreaRatios": [
+          2,
+          4
+        ],
+        "equivalentLengthFeet": [
+          [
+            10,
+            10
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "inlet": "round",
+        "outlet": "round"
+      }
+    },
+    {
+      "id": "12K",
+      "fittingId": "12K",
+      "name": "Round abrupt reduction",
+      "ductShape": "round",
+      "variant": null,
+      "flowCase": "converging",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 46,
+        "printedPage": 183,
+        "cropPixels": [
+          92,
+          427,
+          246,
+          516
+        ],
+        "referenceSha256": "4b547eddc7b1b0d58de5e20df1dda5831c9bd125d6ba3dc81881abdb6fd6892c"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12K.png",
+      "referenceValues": {
+        "slope": "abrupt",
+        "largerToSmallerAreaRatios": [
+          2,
+          4
+        ],
+        "equivalentLengthFeet": [
+          25,
+          25
+        ],
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "inlet": "round",
+        "outlet": "round"
+      }
+    },
+    {
+      "id": "12L",
+      "fittingId": "12L",
+      "name": "Rectangular-to-round tapered reduction",
+      "ductShape": "mixed",
+      "variant": null,
+      "flowCase": "converging",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 46,
+        "printedPage": 183,
+        "cropPixels": [
+          92,
+          619,
+          246,
+          708
+        ],
+        "referenceSha256": "923c74f2b01080f009de99ae46ab004a79324ec7079c2aea8ae02dbc2a0119d2"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12L.png",
+      "referenceValues": {
+        "slopes": [
+          "1:1",
+          "2:1",
+          "4:1"
+        ],
+        "largerToSmallerAreaRatios": [
+          2,
+          4
+        ],
+        "equivalentLengthFeet": [
+          [
+            10,
+            10
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "inlet": "rectangular",
+        "outlet": "round"
+      }
+    },
+    {
+      "id": "12M",
+      "fittingId": "12M",
+      "name": "Round-to-rectangular tapered reduction",
+      "ductShape": "mixed",
+      "variant": null,
+      "flowCase": "converging",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 46,
+        "printedPage": 183,
+        "cropPixels": [
+          91,
+          835,
+          247,
+          929
+        ],
+        "referenceSha256": "4161e3c9c39327355f2bea2955bf1e3b2e183092b9db299c95071573209e215c"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12M.png",
+      "referenceValues": {
+        "slopes": [
+          "1:1",
+          "2:1",
+          "4:1"
+        ],
+        "largerToSmallerAreaRatios": [
+          2,
+          4
+        ],
+        "equivalentLengthFeet": [
+          [
+            10,
+            10
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "inlet": "round",
+        "outlet": "rectangular"
+      }
+    },
+    {
+      "id": "12N",
+      "fittingId": "12N",
+      "name": "Flat-rectangular-to-round tapered reduction",
+      "ductShape": "mixed",
+      "variant": null,
+      "flowCase": "converging",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 46,
+        "printedPage": 183,
+        "cropPixels": [
+          88,
+          1024,
+          247,
+          1117
+        ],
+        "referenceSha256": "4725ff0d4bd9ffb54fbd30dca3d2fe6e6f7b5bab1923cbe9572006531dc025a4"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12N.png",
+      "referenceValues": {
+        "equivalentLengthFeet": 10,
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "inlet": "rectangular",
+        "outlet": "round"
+      }
+    },
+    {
+      "id": "12O",
+      "fittingId": "12O",
+      "name": "Rectangular tapered reduction",
+      "ductShape": "rectangular",
+      "variant": null,
+      "flowCase": "converging",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 46,
+        "printedPage": 183,
+        "cropPixels": [
+          508,
+          244,
+          671,
+          333
+        ],
+        "referenceSha256": "48ac7399d92a8b19a7de60346cf25e8125c79b68c10cb612e721d3309d28d6cb"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12O.png",
+      "referenceValues": {
+        "slopes": [
+          "1:1",
+          "2:1",
+          "4:1"
+        ],
+        "largerToSmallerAreaRatios": [
+          2,
+          4
+        ],
+        "equivalentLengthFeet": [
+          [
+            10,
+            10
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "inlet": "rectangular",
+        "outlet": "rectangular"
+      }
+    },
+    {
+      "id": "12P",
+      "fittingId": "12P",
+      "name": "Rectangular abrupt reduction",
+      "ductShape": "rectangular",
+      "variant": null,
+      "flowCase": "converging",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 46,
+        "printedPage": 183,
+        "cropPixels": [
+          508,
+          426,
+          672,
+          533
+        ],
+        "referenceSha256": "bd77050fb1802565271dc5d1f26a261176fa84624b2d51b59122df4eb81972eb"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12P.png",
+      "referenceValues": {
+        "slope": "abrupt",
+        "largerToSmallerAreaRatios": [
+          2,
+          4
+        ],
+        "equivalentLengthFeet": [
+          30,
+          30
+        ],
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "inlet": "rectangular",
+        "outlet": "rectangular"
+      }
+    },
+    {
+      "id": "12Q",
+      "fittingId": "12Q",
+      "name": "Rectangular one-sided tapered reduction",
+      "ductShape": "rectangular",
+      "variant": null,
+      "flowCase": "converging",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 46,
+        "printedPage": 183,
+        "cropPixels": [
+          508,
+          617,
+          673,
+          709
+        ],
+        "referenceSha256": "afe9cc6bdaf6e85c4d120ca5c95fdb5f6d01d58f851931dccfd4d4e5ec271747"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12Q.png",
+      "referenceValues": {
+        "slopes": [
+          "1:1",
+          "2:1",
+          "4:1"
+        ],
+        "largerToSmallerAreaRatios": [
+          2,
+          4
+        ],
+        "equivalentLengthFeet": [
+          [
+            10,
+            10
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "inlet": "rectangular",
+        "outlet": "rectangular"
+      }
+    },
+    {
+      "id": "12R",
+      "fittingId": "12R",
+      "name": "Rectangular side-offset tapered reduction",
+      "ductShape": "rectangular",
+      "variant": null,
+      "flowCase": "converging",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 46,
+        "printedPage": 183,
+        "cropPixels": [
+          508,
+          840,
+          673,
+          924
+        ],
+        "referenceSha256": "1dff10f31d8dfa5c0ec5695dbb380592795193d97310d3035ba4439a2fc8c910"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12R.png",
+      "referenceValues": {
+        "slopes": [
+          "1:1",
+          "2:1",
+          "4:1"
+        ],
+        "largerToSmallerAreaRatios": [
+          2,
+          4
+        ],
+        "equivalentLengthFeet": [
+          [
+            5,
+            5
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "inlet": "rectangular",
+        "outlet": "rectangular"
+      }
+    },
+    {
+      "id": "12S",
+      "fittingId": "12S",
+      "name": "Oval-to-round angled adapter",
+      "ductShape": "mixed",
+      "variant": null,
+      "flowCase": "source-specific",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 48,
+        "printedPage": 184,
+        "cropPixels": [
+          98,
+          230,
+          247,
+          386
+        ],
+        "referenceSha256": "55f59e6fe4d9549955d1f6d4b04c0aaa681b4897a5490f2a012039fd1c3e422e"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12S.png",
+      "referenceValues": {
+        "equivalentLengthFeet": 30,
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "endOne": "oval",
+        "endTwo": "round",
+        "flowDirection": "Not indicated in source"
+      }
+    },
+    {
+      "id": "12T",
+      "fittingId": "12T",
+      "name": "Oval-to-round angled adapter \u2014 opposite orientation",
+      "ductShape": "mixed",
+      "variant": null,
+      "flowCase": "source-specific",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 48,
+        "printedPage": 184,
+        "cropPixels": [
+          501,
+          230,
+          702,
+          387
+        ],
+        "referenceSha256": "54dd2e616057914d334eb49968152da23470d674d392290d7f770961a2370582"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12T.png",
+      "referenceValues": {
+        "equivalentLengthFeet": 30,
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "endOne": "oval",
+        "endTwo": "round",
+        "flowDirection": "Not indicated in source"
+      }
+    },
+    {
+      "id": "12U",
+      "fittingId": "12U",
+      "name": "Oval-to-round straight adapter",
+      "ductShape": "mixed",
+      "variant": null,
+      "flowCase": "source-specific",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 48,
+        "printedPage": 184,
+        "cropPixels": [
+          254,
+          438,
+          419,
+          585
+        ],
+        "referenceSha256": "8338180cb73d1e6e8c290425494de25a31c4f48ac855b29a2af9e06090598d42"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12U.png",
+      "referenceValues": {
+        "equivalentLengthFeet": 25,
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "endOne": "oval",
+        "endTwo": "round",
+        "flowDirection": "Not indicated in source"
+      }
+    },
+    {
+      "id": "12V",
+      "fittingId": "12V",
+      "name": "Rectangular-to-round angled adapter",
+      "ductShape": "mixed",
+      "variant": null,
+      "flowCase": "source-specific",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 48,
+        "printedPage": 184,
+        "cropPixels": [
+          654,
+          422,
+          840,
+          610
+        ],
+        "referenceSha256": "3ee63becad4038bd5a6863408ad5fa4d0ab5e5bbd08dd0d41dca349d4137ab79"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12V.png",
+      "referenceValues": {
+        "equivalentLengthFeet": 30,
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "endOne": "rectangular",
+        "endTwo": "round",
+        "flowDirection": "Not indicated in source"
+      }
+    },
+    {
+      "id": "12W",
+      "fittingId": "12W",
+      "name": "Flow through a large plenum",
+      "ductShape": "schematic",
+      "variant": null,
+      "flowCase": "source-specific",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 48,
+        "printedPage": 184,
+        "cropPixels": [
+          52,
+          650,
+          440,
+          805
+        ],
+        "referenceSha256": "1b833a2659754fe04d0dc36aef3dc0b6c8f8ecd465776cbc56558ffb0795e8a4"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12W.png",
+      "referenceValues": {
+        "inletVelocityFpm": [
+          600,
+          700,
+          800,
+          900
+        ],
+        "outletVelocityFpm": [
+          600,
+          700,
+          800,
+          900
+        ],
+        "equivalentLengthFeetByOutletThenInlet": [
+          [
+            40,
+            40,
+            35,
+            35
+          ],
+          [
+            55,
+            55,
+            50,
+            50
+          ],
+          [
+            70,
+            70,
+            70,
+            65
+          ],
+          [
+            90,
+            90,
+            90,
+            85
+          ]
+        ],
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": "As indicated in table",
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "crossSection": "Not specified by schematic"
+      },
+      "sourceCoverageNote": "Source case is absent from the existing fixed Swift fitting lookup. Artwork/source metadata only; no calculator change."
+    },
+    {
+      "id": "12X",
+      "fittingId": "12X",
+      "name": "Abrupt squeeze",
+      "ductShape": "schematic",
+      "variant": null,
+      "flowCase": "source-specific",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 48,
+        "printedPage": 184,
+        "cropPixels": [
+          474,
+          671,
+          865,
+          800
+        ],
+        "referenceSha256": "a5a0eb95db3c65593bbe46471a8ba49c82caafc404a16e19b694cf5bc6584544"
+      },
+      "referenceImage": "/images/fittings/group-12/source-art/12X.png",
+      "referenceValues": {
+        "velocityFpm": [
+          600,
+          700,
+          800,
+          900
+        ],
+        "largerToSmallerAreaRatios": [
+          2,
+          4
+        ],
+        "equivalentLengthFeet": [
+          [
+            65,
+            245
+          ],
+          [
+            90,
+            330
+          ],
+          [
+            115,
+            430
+          ],
+          [
+            145,
+            545
+          ]
+        ],
+        "minimumUpstreamStaticPressureIwc": [
+          [
+            0.12,
+            0.52
+          ],
+          [
+            0.16,
+            0.71
+          ],
+          [
+            0.2,
+            0.92
+          ],
+          [
+            0.26,
+            1.17
+          ]
+        ],
+        "staticPressureNote": "Minimum upstream static pressure for positive static pressure at A2; air velocity doubles or quadruples at A2.",
+        "units": "feet unless field explicitly specifies other units"
+      },
+      "referenceConditions": {
+        "velocityFpm": "As indicated in table",
+        "frictionRateIwcPer100Feet": 0.08,
+        "areaRatioDefinition": "A1/A2 = larger area / smaller area",
+        "slopeDefinition": "X/Y, as shown on original source diagram"
+      },
+      "connectionShapes": {
+        "crossSection": "Not specified by schematic"
+      },
+      "sourceCoverageNote": "Source case is absent from the existing fixed Swift fitting lookup. Artwork/source metadata only; no calculator change."
+    }
+  ]
+}

@@ -90,3 +90,31 @@ Source equivalent lengths are 75, 10, 10, 25, 25, 35 and 75 ft, respectively,
 at the source reference velocity of 700 fpm and friction rate of 0.08 IWC/100 ft.
 These describe two return trunks merging; the source directs branch-return
 values to Group 6. They remain artwork metadata, with no calculator changes.
+
+## Group 12 transitions and special cases
+
+Group 12 has 24 approved source-specific items, 12A–12X.
+12A–12I expand and 12J–12R reduce. Opposite flow cases retain their own IDs,
+arrows and equivalent-length tables. Slope/area-ratio selections are table inputs;
+the source gives one representative drawing per fitting, not a separate drawing
+for every numeric table cell.
+
+`connectionShapes` records inlet/outlet cross-sections on the directed transitions.
+Round-to-rectangular transitions use `mixed`; a shape lookup must not lose the
+opposite end's shape. 12S–12U join oval and round ends; 12V joins rectangular
+and round ends. Those source drawings do not specify airflow direction.
+12W/12X use `schematic`, since the cross-sectional outlines do not establish a
+specific duct shape. Their labels remain visible because the source tables refer
+to them.
+
+Full source pages 182–184 preserve the slope/area definitions, velocity-dependent
+plenum table and squeeze static-pressure table. The 86 source values for 12A–12V
+were cross-checked against the existing Swift lookup; 12W/12X are additional
+source cases absent from that lookup. No calculator code was changed.
+Group 11 remains deferred under `docs/group-11-picker-plan.md`.
+
+## Group 13 excluded
+
+The user explicitly excluded Group 13 (Manual Balancing Dampers, 13A–13D)
+from the fitting picker. Do not generate SVGs or picker entries for this group.
+The original reference PDF remains available.
