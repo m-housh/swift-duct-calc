@@ -1,5 +1,13 @@
 # Complete Group 2 drawing batch
 
+> **Fresh restorations approved after 2F and 2O corrections.** After approving Group 12, the user
+> requested retrying all of Group 2 with the improved workflow. The new review is
+> `group-2-restored`, with assets in `Public/images/fittings/group-2-restored/`
+> and QA in `docs/fitting-preflight/group-2-restored.json`. It preserves full trunk
+> context and each fitting's attachment face and entry details. All 17 current
+> revisions are approved. The original `group-2` batch, SVGs and approvals remain an
+> unchanged historical checkpoint; the instructions below describe that old pass.
+
 > **Paused after the 2026-09-04 review.** Eleven current revisions are
 > approved. The six unresolved drawings are 2B, 2J, 2K, 2L, 2M and 2N. Keep
 > their current SVGs and archived review records as a checkpoint; resume this

@@ -4,14 +4,46 @@ The portable branch is `codex/fitting-artwork` in
 `https://github.com/m-housh/swift-duct-calc.git`.
 The current worktree is `/home/michael/dev/swift-duct-calc`.
 
-## Latest state — Group 12 approved; Group 13 excluded
+## Latest state — Group 2 restored artwork approved
+
+Group 12 is approved and committed as `51a4784`. The user explicitly requested
+retrying Group 2 after the later groups improved the workflow. The new review
+batch is `group-2-restored`, with 17 fresh individual restorations, **2A–2Q**,
+all approved after the 2F and 2O corrections. Exact revisions are archived in
+`docs/fitting-reviews/review-4f0c85e84f390b34.json`. This supersedes the old pause instructions below.
+Original `group-2` SVGs, references, catalog entries and archived approvals remain
+unchanged as a checkpoint; new approvals must apply to the new exact revisions.
+
+Each new fitting keeps a full main-trunk section upstream and downstream.
+2A–2H attach to the rectangular trunk's front side; 2I–2M attach to its top;
+2N–2Q attach to the round trunk. Preserve entry projections, flares, curved/square
+heels, rectangular-to-round hood connections and round saddle seams. Avoid
+transparent branch faces, disconnected elbows and inset/doubled outlines.
+Full source assemblies and printed pages 163–165 (PDF pages 5–9) are linked.
+All 102 downstream-branch-count values remain source metadata; no calculator
+code changed. Rebuild with `python3 scripts/package_group_2_restored.py --activate`.
+Assets/mappings: `Public/images/fittings/group-2-restored/`; prompts and QA:
+`docs/fitting-preflight/group-2-restored.json`. Import approval against the new
+batch, not legacy `group-2`, for any future review.
+
+Latest user corrections: `2F-restored-v3.png` replaces the incorrect boxed
+hidden extension with a single angled triangular dashed diverter at the branch
+entry. `2O-restored-v2.png` shows a completed 90-degree elbow from the upright
+neck to a level right-facing outlet, replacing the earlier 45-degree-looking
+turn. Both were visually checked and are approved; the other
+15 renewed-review revisions are unchanged and approved.
+
+Group 11 remains deferred under `docs/group-11-picker-plan.md`. Group 13 is
+excluded from the picker by user direction; do not generate its SVGs.
+
+## Previous completed pass
 
 Group 10 is committed as `4b848b3`. Group 11 guidance has been read; the proposed
 two-family picker and artwork plan is in `docs/group-11-picker-plan.md`.
 No Group 11 artwork or calculator changes have been made. The supplied page's
 box values predate revisions reported by ACCA; establish the calculation edition
 before implementing automatic values. The user then requested Group 12 review,
-deferring Group 11. Group 2 also remains paused.
+deferring Group 11. Group 2 has since been reopened as described above.
 
 Group 12 has 24 approved individual source drawings, **12A–12X**, on printed pages
 182–184 / PDF pages 44–48. 12A–12I expand; 12J–12R reduce. 12S–12V are oval/round
@@ -28,8 +60,7 @@ Swift lookup; 12W/12X are additional source cases. Calculator code is unchanged.
 Group 13 (Manual Balancing Dampers, 13A–13D), printed page 185 / PDF pages
 49–50, is excluded from the fitting picker by explicit user direction. Skip SVG
 generation and review for that group. This reaches the end of the source PDF;
-only deferred Group 11 and paused Group 2 remain unresolved. Keep the accepted
-Group 12 review active; do not automatically resume either deferred group.
+only deferred Group 11 remains unresolved; Group 2 has since been approved.
 
 Group 7's nine individual/assembly options are approved and committed as
 `62599b7`. Group 8, **Elbows and Offsets**, is approved and committed as `4cc7dd0`: 25 drawings
@@ -80,7 +111,8 @@ Reference tables are recorded as source metadata, not calculator changes.
 
 After approval, record exact image revisions, commit that group, and prepare the
 next source group automatically. No additional commit confirmation is needed.
-Keep Group 2 paused and unrelated `Public/prototypes/` work out of artwork commits.
+Group 2's pause is superseded by the explicit retry request. Keep unrelated
+`Public/prototypes/` work out of artwork commits.
 
 Latest Group 8 correction: bottom-up seam numbering starts with the lowest outline
 as 1. `8A-4-or-5-piece` seams 2/4, `8A-3-piece` seam 2, and `8A-easy-bend`

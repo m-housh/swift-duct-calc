@@ -1,5 +1,27 @@
 # Fitting artwork by duct shape
 
+## Group 2 renewed review
+
+Group 2 is reopened as `group-2-restored`, with 17 fresh source restorations,
+2A–2Q, now approved after the 2F and 2O corrections. Each retains a full main-trunk section on both sides of
+the branch. 2A–2H connect to the side of a rectangular trunk; 2I–2M connect to
+its top; 2N–2Q connect to a round trunk. The old `group-2` catalog entries, traced
+SVGs and approval records remain an unchanged checkpoint.
+
+The new manifest has per-family default and shape lookups. `mixed` denotes a
+rectangular main with a round branch; `connectionShapes` records both separately.
+The original entry geometry remains part of the fitting identity: plain versus
+flared or projecting entry, round versus rectangular hood, curved versus square
+heel, and straight versus tapered collar. Do not substitute among those cases
+merely to match a shape.
+
+All 102 equivalent-length entries remain attached to their source fitting and
+downstream branch-count ranges (0, 1, 2, 3, 4, 5+). Count to the trunk end or next
+reducer and restart after each reducer, as the original table states. These
+records support later picker work; no calculator code changed in the retry.
+
+## Group 5 shape variants
+
 Group 5 artwork is indexed by fitting family and return-duct cross-section in
 `Public/images/fittings/group-5-shapes/manifest.json`. Shape describes the return
 duct; the equipment and plenum may remain rectangular.

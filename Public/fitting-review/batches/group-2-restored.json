@@ -1,4 +1,4 @@
-window.FITTING_REVIEW = {
+{
   "id": "group-2-restored",
   "title": "Group 2 \u00b7 branch takeoffs \u00b7 renewed review",
   "description": "Fresh individual restorations 2A\u20132Q with full main-trunk context. Original entry details retained; full source tables remain linked.",
@@ -294,4 +294,4 @@ window.FITTING_REVIEW = {
       "priorApproval": true
     }
   ]
-};
+}
