@@ -1,4 +1,4 @@
-window.FITTING_REVIEW = {
+{
   "id": "group-10",
   "title": "Group 10 \u00b7 return trunk junctions",
   "description": "Individual return trunk junction fittings 10A\u201310G. Original junction geometry, internal deflectors/vanes and flow arrows retained. Full source tables remain linked.",
@@ -124,4 +124,4 @@ window.FITTING_REVIEW = {
       "priorApproval": true
     }
   ]
-};
+}

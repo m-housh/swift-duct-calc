@@ -4,23 +4,36 @@ The portable branch is `codex/fitting-artwork` in
 `https://github.com/m-housh/swift-duct-calc.git`.
 The current worktree is `/home/michael/dev/swift-duct-calc`.
 
-## Latest state — Group 9 approved; Group 10 next
+## Latest state — Group 10 approved; Group 11 guidance review
 
 Group 7's nine individual/assembly options are approved and committed as
 `62599b7`. Group 8, **Elbows and Offsets**, is approved and committed as `4cc7dd0`: 25 drawings
 covering fitting IDs 8A–8P. Exact current revisions are archived from the user's
 approval after the four 8A seam corrections. Group 9, **Supply Trunk Junction
-Fittings**, is approved with 18 individual drawings, 9A–9R. Exact revisions are
-archived from the user's explicit approval. Group 10, Return Trunk Junction
-Fittings (10A–10G), is next, on printed page 180 / PDF pages 40–41.
+Fittings**, is approved and committed as `f6601f2` with 18 individual drawings,
+9A–9R. Exact revisions are archived in
+`docs/fitting-reviews/review-712d58a8c5beb272.json` from explicit user approval.
 Its source drawings/tables are printed pages 178–179, PDF pages 36–38.
-Rebuild/activate using `python3 scripts/package_group_9.py --activate`.
-Source metadata and picker mappings are in `Public/images/fittings/group-9/`;
-prompts and visual checks are in `docs/fitting-preflight/group-9.json`.
-Each fitting is separate and preserves the original connecting duct sections,
-source flow arrows, and its branch entry/deflector/vane construction.
-9A is a rectangular main with a round branch (`mixed` shape); other items retain
-their source shape. Full source pages, including the branch/main tables, are linked.
+
+Group 10, **Return Trunk Junction Fittings**, is approved: seven separate
+drawings, 10A–10G, on printed page 180 / PDF pages 40–41. All seven were visually
+compared with their source. Exact current revisions, including corrected 10F, are
+archived from explicit user approval in
+`docs/fitting-reviews/review-c5c5545c447f9794.json`. 10A–10D reuse the
+approved rectangular geometry from 9K–9N with reversed return-flow arrows;
+10E–10G restore the three round source drawings. The original Group 9 assets remain
+unchanged. Each card links to its source crop and the full source page/table.
+Latest correction: 10F uses `10F-restored-v2.png`. The user clarified that all
+three arrows point toward the right: upper and left branches enter, right branch
+exits. The initial flow interpretation was wrong. The two lower arrows are now
+reversed and visually checked; fitting geometry and the other six items are unchanged.
+Rebuild/activate using `python3 scripts/package_group_10.py --activate`.
+Source metadata and picker mappings are in `Public/images/fittings/group-10/`;
+prompts and visual checks are in `docs/fitting-preflight/group-10.json`.
+The next source group is Group 11, Flexible Duct Junction Boxes and Radius Bends,
+on printed page 181 / PDF pages 42–43. The user requested reading its guidance
+and deciding its picker representation before preparing artwork. Keep the accepted
+Group 10 review active while this design is discussed.
 Reference values remain artwork metadata; calculator code is unchanged.
 The historical progress
 entries below describe earlier review states.

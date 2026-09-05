@@ -74,5 +74,19 @@ another source junction merely to satisfy a different shape selection.
 9A–9J retain separate branch/main equivalent lengths; 9K–9R retain the single
 value printed for their case. Applicability is supply trunk junction flow,
 with a substantial secondary-trunk share of primary flow, as stated in the source.
-All 18 Group 9 drawings are approved. Exact SVG/reference revisions are archived
+All 18 Group 9 drawings are approved and committed as `f6601f2`. Exact SVG/reference revisions are archived
 from the user's explicit approval.
+
+## Group 10 return junction shapes
+
+Group 10 provides seven approved individual drawings, 10A–10G. 10A–10D
+are rectangular; 10E–10G are round. Each family has a default variant and a
+shape lookup. Rectangular geometry derives from approved 9K–9N, with airflow
+reversed for merging returns; `geometryBasedOn` records the source revision.
+Original Group 9 artwork is preserved. The three round entries retain their own
+source construction and flow arrows.
+
+Source equivalent lengths are 75, 10, 10, 25, 25, 35 and 75 ft, respectively,
+at the source reference velocity of 700 fpm and friction rate of 0.08 IWC/100 ft.
+These describe two return trunks merging; the source directs branch-return
+values to Group 6. They remain artwork metadata, with no calculator changes.
