@@ -5,7 +5,7 @@
   "drawingCount": 16,
   "expectedDrawingCount": 16,
   "withheldIds": [],
-  "status": "restoration-needs-review",
+  "status": "visually-approved",
   "referenceConditions": {
     "velocityFpm": 700,
     "frictionRateIwcPer100Feet": 0.08
@@ -99,9 +99,16 @@
       ],
       "svg": "/images/fittings/group-6-enhanced/6A.svg",
       "revision": "2c085413bef55216506647d0456763e5ed6229ba08c908cc723e52f57dcb4cec",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "2c085413bef55216506647d0456763e5ed6229ba08c908cc723e52f57dcb4cec",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
     },
     {
       "id": "6B",
@@ -189,9 +196,16 @@
       ],
       "svg": "/images/fittings/group-6-enhanced/6B.svg",
       "revision": "69ceabc90613168132462eaf4f8d98f144bcd475ea3679cdad21dcbdac1d2969",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "69ceabc90613168132462eaf4f8d98f144bcd475ea3679cdad21dcbdac1d2969",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
     },
     {
       "id": "6C",
@@ -279,9 +293,16 @@
       ],
       "svg": "/images/fittings/group-6-enhanced/6C.svg",
       "revision": "ece7ef433c7a21bf1890cac10813b85d4e1f8c8501829aff7d2aafd4d8342fb7",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "ece7ef433c7a21bf1890cac10813b85d4e1f8c8501829aff7d2aafd4d8342fb7",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
     },
     {
       "id": "6D",
@@ -375,9 +396,16 @@
       ],
       "svg": "/images/fittings/group-6-enhanced/6D.svg",
       "revision": "f12584ea67e283c50c53d6c4c5686ab20fad833fd4a03f2661eba2f72aedde5f",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "f12584ea67e283c50c53d6c4c5686ab20fad833fd4a03f2661eba2f72aedde5f",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
     },
     {
       "id": "6E",
@@ -471,9 +499,16 @@
       ],
       "svg": "/images/fittings/group-6-enhanced/6E.svg",
       "revision": "cbf2d2947a86d7c462048670b7d3c5d07804b71265d7fb0bfba0f6a2b3a48c02",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "cbf2d2947a86d7c462048670b7d3c5d07804b71265d7fb0bfba0f6a2b3a48c02",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
     },
     {
       "id": "6F",
@@ -516,22 +551,29 @@
       },
       "originalReferenceImage": "/images/fittings/references/group-6/6F.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-6-enhanced/6F-restored-art.png",
+      "restoredArt": "/images/fittings/group-6-enhanced/6F-restored-edges-v2.png",
       "referenceImage": "/images/fittings/references/group-6/6F.png",
       "sharedArtworkIds": [],
       "restorationNotes": [
-        "Checked open flanged rectangular boot, interior seam, side step and two uncapped duct extensions.",
-        "Targeted correction removed invented third outgoing edge and extra short vertical seam."
+        "Restored the original short vertical seam at the step and the outgoing near top edge of the rectangular branch, following user markup 6f.png.",
+        "Compared with the source: open flange, interior seam, step and three uncapped outgoing edges retained."
       ],
       "embeddedRasterSize": [
         1254,
         1254
       ],
       "svg": "/images/fittings/group-6-enhanced/6F.svg",
-      "revision": "74bb38552d52dc4dafda083878df2541c34e3df74fbb7642275b296c7dd64219",
-      "status": "restoration-needs-review",
+      "revision": "80c2d382b9c2275d9740c641ca17cd4d17aed3442cadb2e85fce2357d2fe7272",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "80c2d382b9c2275d9740c641ca17cd4d17aed3442cadb2e85fce2357d2fe7272",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
     },
     {
       "id": "6G",
@@ -587,9 +629,16 @@
       ],
       "svg": "/images/fittings/group-6-enhanced/6G.svg",
       "revision": "4167330858bbc10d1fcb869efe3913ac388ed72aab8adf72d5d0711b086e329d",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "4167330858bbc10d1fcb869efe3913ac388ed72aab8adf72d5d0711b086e329d",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
     },
     {
       "id": "6H",
@@ -644,9 +693,16 @@
       ],
       "svg": "/images/fittings/group-6-enhanced/6H.svg",
       "revision": "d7258f4a8307d426ff0a7e950c53c2b4f6d68fef1dca742b26deb8ce615edcff",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "d7258f4a8307d426ff0a7e950c53c2b4f6d68fef1dca742b26deb8ce615edcff",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
     },
     {
       "id": "6I",
@@ -701,9 +757,16 @@
       ],
       "svg": "/images/fittings/group-6-enhanced/6I.svg",
       "revision": "005f5389ba8590231726d38186856e85adab45958e817139e9eb4d02375bd600",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "005f5389ba8590231726d38186856e85adab45958e817139e9eb4d02375bd600",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
     },
     {
       "id": "6J",
@@ -758,9 +821,16 @@
       ],
       "svg": "/images/fittings/group-6-enhanced/6J.svg",
       "revision": "5cda8cdd2f8768917e04642714256e9001dcf72066de8c1f72c8d5c1665775ed",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "5cda8cdd2f8768917e04642714256e9001dcf72066de8c1f72c8d5c1665775ed",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
     },
     {
       "id": "6K",
@@ -815,9 +885,16 @@
       ],
       "svg": "/images/fittings/group-6-enhanced/6K.svg",
       "revision": "d42f3fcfa0bcaeb7645a76235ec6ddb799ac2ab7c6b36ed8304a94dd3df678b1",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "d42f3fcfa0bcaeb7645a76235ec6ddb799ac2ab7c6b36ed8304a94dd3df678b1",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
     },
     {
       "id": "6L",
@@ -872,9 +949,16 @@
       ],
       "svg": "/images/fittings/group-6-enhanced/6L.svg",
       "revision": "bdf386639f3b00a354e642abb5158bc55a4241ea23abbb80f2eefef55a84fd56",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "bdf386639f3b00a354e642abb5158bc55a4241ea23abbb80f2eefef55a84fd56",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
     },
     {
       "id": "6M",
@@ -929,9 +1013,16 @@
       ],
       "svg": "/images/fittings/group-6-enhanced/6M.svg",
       "revision": "7d838b27b929d2616b3b819d569a337e5b5df9cb87bb10e6e9c6a01f88ffdcd8",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "7d838b27b929d2616b3b819d569a337e5b5df9cb87bb10e6e9c6a01f88ffdcd8",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
     },
     {
       "id": "6N",
@@ -986,9 +1077,16 @@
       ],
       "svg": "/images/fittings/group-6-enhanced/6N.svg",
       "revision": "b7871e4cc79cbbbbf1563014f9e8cd6ec08edea7f06b6400f03b1c219d27cdab",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "b7871e4cc79cbbbbf1563014f9e8cd6ec08edea7f06b6400f03b1c219d27cdab",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
     },
     {
       "id": "6O",
@@ -1043,9 +1141,16 @@
       ],
       "svg": "/images/fittings/group-6-enhanced/6O.svg",
       "revision": "936cff5594ef3b8c03db61ac316f6f55f0a5df1217d7013e71f64e58fbaf4a5b",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "936cff5594ef3b8c03db61ac316f6f55f0a5df1217d7013e71f64e58fbaf4a5b",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
     },
     {
       "id": "6P",
@@ -1100,9 +1205,16 @@
       ],
       "svg": "/images/fittings/group-6-enhanced/6P.svg",
       "revision": "12a1614a833f9b934ecc05bab06aecb2ed011736d683fcf19dbec81254f1cdbd",
-      "status": "restoration-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
-      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json"
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "12a1614a833f9b934ecc05bab06aecb2ed011736d683fcf19dbec81254f1cdbd",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
     }
   ]
 }

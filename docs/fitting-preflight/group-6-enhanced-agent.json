@@ -246,22 +246,22 @@
     },
     {
       "id": "6F",
-      "restoredArt": "/images/fittings/group-6-enhanced/6F-restored-art.png",
+      "restoredArt": "/images/fittings/group-6-enhanced/6F-restored-edges-v2.png",
       "referenceImage": "/images/fittings/references/group-6/6F.png",
       "status": "ready-for-review",
       "notes": [
-        "Checked open flanged rectangular boot, interior seam, side step and two uncapped duct extensions.",
-        "Targeted correction removed invented third outgoing edge and extra short vertical seam."
+        "Restored the original short vertical seam at the step and the outgoing near top edge of the rectangular branch, following user markup 6f.png.",
+        "Compared with the source: open flange, interior seam, step and three uncapped outgoing edges retained."
       ],
       "sharedArtworkIds": [],
-      "generationSource": "/home/michael/.codex/generated_images/01a06e31-3447-70d2-928c-65d252330d1f/exec-3559aa79-30a9-4e56-9532-246a33676483.png",
+      "generationSource": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-b79178e9-5197-4f65-9d6f-5c3b75836519.png",
       "prompt": "Use case: precise-object-edit. Restore the ORIGINAL low-resolution technical duct fitting line drawing in the attached edit target into crisp high-resolution black thin consistent monochrome line art on pure white. This is faithful restoration, no redesign. Remove ALL text labels, fitting numbers, table lines, table cells, values, stray marks, and other drawings. Isolate one requested fitting only, fill about 80 percent of a square 1024px canvas with adequate margins. Preserve exact source geometry, topology, proportions, perspective, edge visibility, connections and component count. Straighten source straight edges, smooth source curves without inventing geometry. No gray shading, thick strokes, shadows, decorative effects, photorealism. All source arrows if present must be clear and complete. Arrows must preserve SOURCE FLOW DIRECTION, not guessed direction. For 6A, 6B, 6C, TOP LEFT arrow points OUTWARD upper-left; RIGHT END arrow points INWARD upper-left; BRANCH lower-left arrow points INWARD upper-right. These are RETURN AIR mixing fittings. Preserve open rectangular flanged register boot, interior visible, stepped rear-right side connection joining rectangular duct extending lower-right with original uncapped extension edges. Keep straight edges and exactly same perspective.",
-      "correctionPrompt": "Edit image 1 to match original image 2 more faithfully: REMOVE the extraneous third long lower-right extension edge, the one from the middle front boot step corner to far lower-right (approximately x575,y795 to 920,940). The original only has TWO uncapped outgoing duct edges, upper edge and the lower-left outline continuation. Remove also little added vertical line at that step join (approximately x575,y795 to575,865). Keep every other line exactly, geometry unchanged, pure white.",
+      "correctionPrompt": "Precise-object-edit: add exactly ONE straight black line to this image, preserving all existing drawing lines exactly. At the THREE-WAY corner at (577,803) in this 1254x1254 image, where the diagonal up-right edge and short vertical downward seam meet, draw a NEW line from (577,803) toward lower-right ending at (790,895). This new line slopes downward to the right, parallel to the existing bottom outline, and is 213px horizontally long and 92px vertically. It is the TOP near edge of the outgoing rectangular side duct, essential to show side-wall depth. The short vertical line down from this corner was just restored and MUST remain. The new line is separate from and ABOVE the lowest outline. Extend beyond that lowest outline's right endpoint. Match existing black stroke thickness. Do not omit this additional outgoing edge. No other edits, no text, no endpoint cap, pure white background, identical canvas. The result must visibly have three outgoing open edges: upper-right long edge, the NEW middle-right short edge, and existing lowest edge.",
       "imageSize": [
         1254,
         1254
       ],
-      "sha256": "6dd4a3552002faf8f07f7b1424f5de3a809f830e14791b1d98fb4c919ab6e602",
+      "sha256": "ae8ae46ecf8d13705a30d53931bd4fce8843a935464687d100d95a12d73f5a14",
       "source": {
         "pdf": "/files/ManD.Groups.pdf",
         "pdfPages": [
@@ -287,6 +287,25 @@
           405
         ],
         "referenceSha256": "beeaa430260e4724ecced5b69f1e2c55428768917005c6aaa657f0d9f73ef967"
+      },
+      "previousRestoration": {
+        "restoredArt": "/images/fittings/group-6-enhanced/6F-restored-art.png",
+        "generationSource": "/home/michael/.codex/generated_images/01a06e31-3447-70d2-928c-65d252330d1f/exec-3559aa79-30a9-4e56-9532-246a33676483.png",
+        "correctionPrompt": "Edit image 1 to match original image 2 more faithfully: REMOVE the extraneous third long lower-right extension edge, the one from the middle front boot step corner to far lower-right (approximately x575,y795 to 920,940). The original only has TWO uncapped outgoing duct edges, upper edge and the lower-left outline continuation. Remove also little added vertical line at that step join (approximately x575,y795 to575,865). Keep every other line exactly, geometry unchanged, pure white.",
+        "notes": [
+          "Checked open flanged rectangular boot, interior seam, side step and two uncapped duct extensions.",
+          "Targeted correction removed invented third outgoing edge and extra short vertical seam."
+        ],
+        "sha256": "6dd4a3552002faf8f07f7b1424f5de3a809f830e14791b1d98fb4c919ab6e602"
+      },
+      "correctionPrompts": [
+        "Edit the FIRST image, the clean monochrome technical HVAC drawing, making ONLY TWO added straight black line segments matching the existing stroke weight. The SECOND image is the original source for comparison. Restore the missing lower side branch detail: in image 1 coordinates (1254 by 1254), the step's front corner at approximately (577,803) needs (1) a short VERTICAL line downward to (577,868), joining the existing lower outline; (2) a straight line extending from (577,803) diagonally right and downward to approximately (790,895), parallel to the existing lower outline from (200,707) to (685,916). This produces the missing top edge of the outgoing rectangular duct's visible side wall, with the short vertical seam connecting its top and bottom boundaries. The original source image clearly shows these two lines, and the user's correction requests their restoration. Do not erase or relocate ANY existing lines. Preserve the open flanged boot, interior seam, diagonal step and far branch edge, perspective, framing, white background, dimensions. Do not close the far open duct extensions. No labels, text, colors, shading, extra parts. Output the corrected clean first drawing only.",
+        "Precise-object-edit: add exactly ONE straight black line to this image, preserving all existing drawing lines exactly. At the THREE-WAY corner at (577,803) in this 1254x1254 image, where the diagonal up-right edge and short vertical downward seam meet, draw a NEW line from (577,803) toward lower-right ending at (790,895). This new line slopes downward to the right, parallel to the existing bottom outline, and is 213px horizontally long and 92px vertically. It is the TOP near edge of the outgoing rectangular side duct, essential to show side-wall depth. The short vertical line down from this corner was just restored and MUST remain. The new line is separate from and ABOVE the lowest outline. Extend beyond that lowest outline's right endpoint. Match existing black stroke thickness. Do not omit this additional outgoing edge. No other edits, no text, no endpoint cap, pure white background, identical canvas. The result must visibly have three outgoing open edges: upper-right long edge, the NEW middle-right short edge, and existing lowest edge."
+      ],
+      "visualReview": {
+        "checked": true,
+        "comparison": "Both missing edges are present, with the source connection topology restored. Outgoing lower edges extend slightly farther than the previous drawing.",
+        "rejectedAttempt": "First correction restored only the vertical seam; a second edit added the missing outgoing edge."
       }
     },
     {

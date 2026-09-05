@@ -106,3 +106,9 @@ Latest Group 5 correction: 5C rectangular side view has a straight top edge and 
 Latest Group 5 correction: 5F round (source 5G) now uses `5F-round-equipment-top-v2.png`. User top view clarifies smaller plenum centered on a larger equipment footprint. Removed the projecting band, widened the cabinet/top and retained round inlet/arrow in both views. Other variants are unchanged.
 
 Group 5 final acceptance: user approved all 16 shape variants in conversation on 2026-09-05. Exact current SVG/reference revisions are archived in the Group 5 shapes review record; rebuilding retains approval. Group 6 is next: all 16 source/restoration pairs were inspected and already depict individual fittings. No assembly separation is needed.
+
+Active review is now Group 6 (6A–6P), all pending user review. Group 5 acceptance and artwork committed as `4f202b7`. Activate Group 6 with `python3 scripts/package_restored_fittings.py --group 6 --activate`. Its existing drawings already show separate fittings; source/restoration comparison sheets `docs/fitting-preflight/group-6-final-qa-{1,2,3}.png` were inspected before activation. Group 6 includes rectangular and round connections as depicted in its source; 6N currently shows the round outlet of the source’s round-or-square option.
+
+Group 6 correction: 6F uses `6F-restored-edges-v2.png`, restoring the short vertical step seam and outgoing near top edge from source/user markup `6f.png`. The earlier cleanup incorrectly removed those lines. Compared with the original; pending user review. Prompts and selection are recorded in `docs/fitting-preflight/group-6-enhanced-agent.json`.
+
+Group 6 final acceptance: all 16 current fittings, including corrected 6F, approved in conversation. Exact SVG/reference revisions are archived in the Group 6 review record. Group 7 is next; 7A–7C currently repeat one assembly and must be separated before review. 7D and 7E already depict individual fittings.

@@ -13,7 +13,7 @@
       "sourcePage": 172,
       "sourcePDF": "../files/ManD.Groups.pdf#page=25",
       "revision": "2c085413bef55216506647d0456763e5ed6229ba08c908cc723e52f57dcb4cec",
-      "priorApproval": false,
+      "priorApproval": true,
       "notes": [
         "Checked rectangular trunk with side branch and enlarged throat; three complete arrows retain return-air directions.",
         "Rejected first attempt for reversed trunk arrows; rejected second attempt for invented cylinder; targeted correction removed cylinder.",
@@ -31,7 +31,7 @@
       "sourcePage": 172,
       "sourcePDF": "../files/ManD.Groups.pdf#page=25",
       "revision": "69ceabc90613168132462eaf4f8d98f144bcd475ea3679cdad21dcbdac1d2969",
-      "priorApproval": false,
+      "priorApproval": true,
       "notes": [
         "Checked straight rectangular branch on side face of trunk; three complete return-air arrows.",
         "Review reference isolates the original drawing; full sizing table remains in the linked source PDF and metadata."
@@ -47,7 +47,7 @@
       "sourcePage": 172,
       "sourcePDF": "../files/ManD.Groups.pdf#page=25",
       "revision": "ece7ef433c7a21bf1890cac10813b85d4e1f8c8501829aff7d2aafd4d8342fb7",
-      "priorApproval": false,
+      "priorApproval": true,
       "notes": [
         "Checked circular side branch and ellipse end, three complete return-air arrows.",
         "Review reference isolates the original drawing; full sizing table remains in the linked source PDF and metadata."
@@ -63,7 +63,7 @@
       "sourcePage": 173,
       "sourcePDF": "../files/ManD.Groups.pdf#page=26",
       "revision": "f12584ea67e283c50c53d6c4c5686ab20fad833fd4a03f2661eba2f72aedde5f",
-      "priorApproval": false,
+      "priorApproval": true,
       "notes": [
         "Checked diagonal underside round branch, source schematic break ends, rightward trunk and inward branch arrows.",
         "Review reference isolates the original drawing; full sizing table remains in the linked source PDF and metadata."
@@ -79,7 +79,7 @@
       "sourcePage": 173,
       "sourcePDF": "../files/ManD.Groups.pdf#page=26",
       "revision": "cbf2d2947a86d7c462048670b7d3c5d07804b71265d7fb0bfba0f6a2b3a48c02",
-      "priorApproval": false,
+      "priorApproval": true,
       "notes": [
         "Checked vertical underside round branch, source schematic break ends, rightward trunk and upward branch arrows.",
         "Review reference isolates the original drawing; full sizing table remains in the linked source PDF and metadata."
@@ -90,15 +90,15 @@
       "number": "6F",
       "name": "Rectangular register boot with rectangular side branch",
       "group": 6,
-      "image": "../images/fittings/group-6-enhanced/6F.svg?revision=74bb38552d52",
+      "image": "../images/fittings/group-6-enhanced/6F.svg?revision=80c2d382b9c2",
       "reference": "../images/fittings/references/group-6/6F.png",
       "sourcePage": 174,
       "sourcePDF": "../files/ManD.Groups.pdf#page=28",
-      "revision": "74bb38552d52dc4dafda083878df2541c34e3df74fbb7642275b296c7dd64219",
-      "priorApproval": false,
+      "revision": "80c2d382b9c2275d9740c641ca17cd4d17aed3442cadb2e85fce2357d2fe7272",
+      "priorApproval": true,
       "notes": [
-        "Checked open flanged rectangular boot, interior seam, side step and two uncapped duct extensions.",
-        "Targeted correction removed invented third outgoing edge and extra short vertical seam."
+        "Restored the original short vertical seam at the step and the outgoing near top edge of the rectangular branch, following user markup 6f.png.",
+        "Compared with the source: open flange, interior seam, step and three uncapped outgoing edges retained."
       ]
     },
     {
@@ -111,7 +111,7 @@
       "sourcePage": 174,
       "sourcePDF": "../files/ManD.Groups.pdf#page=28",
       "revision": "4167330858bbc10d1fcb869efe3913ac388ed72aab8adf72d5d0711b086e329d",
-      "priorApproval": false,
+      "priorApproval": true,
       "notes": [
         "Checked open grille grid, cubic boot, side round branch and downward inlet arrow.",
         "Targeted correction removed pale mesh scribbles and straightened lattice."
@@ -127,7 +127,7 @@
       "sourcePage": 174,
       "sourcePDF": "../files/ManD.Groups.pdf#page=28",
       "revision": "d7258f4a8307d426ff0a7e950c53c2b4f6d68fef1dca742b26deb8ce615edcff",
-      "priorApproval": false,
+      "priorApproval": true,
       "notes": [
         "Checked narrow top lips, tall wall boot and curved lower contours; leftward arrow retained."
       ]
@@ -142,7 +142,7 @@
       "sourcePage": 174,
       "sourcePDF": "../files/ManD.Groups.pdf#page=28",
       "revision": "005f5389ba8590231726d38186856e85adab45958e817139e9eb4d02375bd600",
-      "priorApproval": false,
+      "priorApproval": true,
       "notes": [
         "Checked open flanged boot, rectangular side extension, tapered transition, round outlet and facet lines."
       ]
@@ -157,7 +157,7 @@
       "sourcePage": 174,
       "sourcePDF": "../files/ManD.Groups.pdf#page=28",
       "revision": "5cda8cdd2f8768917e04642714256e9001dcf72066de8c1f72c8d5c1665775ed",
-      "priorApproval": false,
+      "priorApproval": true,
       "notes": [
         "Checked raised open boot, stepped offset transition to lower right round branch and original seam layout."
       ]
@@ -172,7 +172,7 @@
       "sourcePage": 174,
       "sourcePDF": "../files/ManD.Groups.pdf#page=28",
       "revision": "d42f3fcfa0bcaeb7645a76235ec6ddb799ac2ab7c6b36ed8304a94dd3df678b1",
-      "priorApproval": false,
+      "priorApproval": true,
       "notes": [
         "Checked straight offset stack edges and two leftward arrows."
       ]
@@ -187,7 +187,7 @@
       "sourcePage": 174,
       "sourcePDF": "../files/ManD.Groups.pdf#page=28",
       "revision": "bdf386639f3b00a354e642abb5158bc55a4241ea23abbb80f2eefef55a84fd56",
-      "priorApproval": false,
+      "priorApproval": true,
       "notes": [
         "Checked flat base with opposed flanges, segmented elbow and open extension; no clipping."
       ]
@@ -202,7 +202,7 @@
       "sourcePage": 174,
       "sourcePDF": "../files/ManD.Groups.pdf#page=28",
       "revision": "7d838b27b929d2616b3b819d569a337e5b5df9cb87bb10e6e9c6a01f88ffdcd8",
-      "priorApproval": false,
+      "priorApproval": true,
       "notes": [
         "Checked tapered rectangular boot housing, flanged base, segmented elbow and open extension."
       ]
@@ -217,7 +217,7 @@
       "sourcePage": 174,
       "sourcePDF": "../files/ManD.Groups.pdf#page=28",
       "revision": "b7871e4cc79cbbbbf1563014f9e8cd6ec08edea7f06b6400f03b1c219d27cdab",
-      "priorApproval": false,
+      "priorApproval": true,
       "notes": [
         "Checked rectangular open mouth, tapered boot, short round collar; removed clipped descriptive label and external leader."
       ]
@@ -232,7 +232,7 @@
       "sourcePage": 174,
       "sourcePDF": "../files/ManD.Groups.pdf#page=28",
       "revision": "936cff5594ef3b8c03db61ac316f6f55f0a5df1217d7013e71f64e58fbaf4a5b",
-      "priorApproval": false,
+      "priorApproval": true,
       "notes": [
         "Checked ceiling plane, underside oval opening, tapered neck and both upward arrows."
       ]
@@ -247,7 +247,7 @@
       "sourcePage": 174,
       "sourcePDF": "../files/ManD.Groups.pdf#page=28",
       "revision": "12a1614a833f9b934ecc05bab06aecb2ed011736d683fcf19dbec81254f1cdbd",
-      "priorApproval": false,
+      "priorApproval": true,
       "notes": [
         "Checked ceiling plane, underside oval opening, straight collar and both upward arrows."
       ]
