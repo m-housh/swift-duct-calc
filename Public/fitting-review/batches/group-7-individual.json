@@ -1,7 +1,7 @@
-window.FITTING_REVIEW = {
-  "id": "group-7-options",
-  "title": "Group 7 \u00b7 individual and assembly options",
-  "description": "Individual drawings are retained. Additional 7A\u20137C assembly views emphasize the selected fitting with bold blue airflow arrows.",
+{
+  "id": "group-7-individual",
+  "title": "Group 7 \u00b7 individual fittings",
+  "description": "Each entry shows its own fitting. 7A\u20137C are separated from their shared assembly; 7D\u20137E retain their original standalone views. Full source illustrations remain available for comparison.",
   "referenceGallery": "group-7-references.html",
   "items": [
     {
@@ -19,23 +19,6 @@ window.FITTING_REVIEW = {
         "Isolated vertical panned stud-space return, retaining the framing, panning and downward airflow."
       ],
       "reviewNote": "Only this fitting connection is shown. Original stud/joist construction and connecting context retained.",
-      "priorApproval": true
-    },
-    {
-      "id": "7A-assembly",
-      "number": "7A \u00b7 Assembly",
-      "name": "Panned stud-space return",
-      "group": 7,
-      "image": "../images/fittings/group-7-options/7A-assembly.svg?revision=5b0ed2ba4d8f",
-      "reference": "../images/fittings/group-7-enhanced/source-art/7ABC.png",
-      "sourcePage": 175,
-      "sourcePDF": "../files/ManD.Groups.pdf#page=30",
-      "revision": "5b0ed2ba4d8f883272b948a10c56b71fa6937e331a6ec17bbb41d33b26520e3e",
-      "contextURL": "group-7-references.html#reference-7A",
-      "notes": [
-        "Full assembly with bold blue downward arrows emphasizing the 7A wall stud-space run."
-      ],
-      "reviewNote": "Full assembly with bold blue downward arrows emphasizing the 7A wall stud-space run.",
       "priorApproval": true
     },
     {
@@ -57,23 +40,6 @@ window.FITTING_REVIEW = {
       "priorApproval": true
     },
     {
-      "id": "7B-assembly",
-      "number": "7B \u00b7 Assembly",
-      "name": "Stud-space to single-joist return turn",
-      "group": 7,
-      "image": "../images/fittings/group-7-options/7B-assembly.svg?revision=8ee9bc2b0e92",
-      "reference": "../images/fittings/group-7-enhanced/source-art/7ABC.png",
-      "sourcePage": 175,
-      "sourcePDF": "../files/ManD.Groups.pdf#page=30",
-      "revision": "8ee9bc2b0e92e5f55e4b00317c9cf7bde1c09d93060f94158153930069aa026e",
-      "contextURL": "group-7-references.html#reference-7A",
-      "notes": [
-        "Full assembly with a bold blue curved arrow emphasizing the 7B wall-to-floor turn."
-      ],
-      "reviewNote": "Full assembly with a bold blue curved arrow emphasizing the 7B wall-to-floor turn.",
-      "priorApproval": true
-    },
-    {
       "id": "7C",
       "number": "7C",
       "name": "Panned single-joist return",
@@ -88,40 +54,6 @@ window.FITTING_REVIEW = {
         "Isolated straight single-joist return bay with panning and arrows pointing toward the lower-left outlet."
       ],
       "reviewNote": "Only this fitting connection is shown. Original stud/joist construction and connecting context retained.",
-      "priorApproval": true
-    },
-    {
-      "id": "7C-assembly",
-      "number": "7C \u00b7 Assembly",
-      "name": "Panned single-joist return",
-      "group": 7,
-      "image": "../images/fittings/group-7-options/7C-assembly.svg?revision=f10fbdc48309",
-      "reference": "../images/fittings/group-7-enhanced/source-art/7ABC.png",
-      "sourcePage": 175,
-      "sourcePDF": "../files/ManD.Groups.pdf#page=30",
-      "revision": "f10fbdc483098f5c4b1a44bc8afe3434d0e0af5b6d19aecf232f41aa041439d7",
-      "contextURL": "group-7-references.html#reference-7A",
-      "notes": [
-        "Full assembly with bold blue arrows emphasizing 7C floor joist flow; opposing flows in the far-right bay retain their source directions."
-      ],
-      "reviewNote": "Full assembly with bold blue arrows emphasizing 7C floor joist flow; opposing flows in the far-right bay retain their source directions.",
-      "priorApproval": true
-    },
-    {
-      "id": "7C-assembly-merging",
-      "number": "7C \u00b7 Assembly \u00b7 Merging",
-      "name": "Panned single-joist return",
-      "group": 7,
-      "image": "../images/fittings/group-7-options/7C-assembly-merging.svg?revision=8ba310c168e5",
-      "reference": "../images/fittings/group-7-enhanced/source-art/7ABC.png",
-      "sourcePage": 175,
-      "sourcePDF": "../files/ManD.Groups.pdf#page=30",
-      "revision": "8ba310c168e558c75be3a952c3bdf877b47e8f02fda1ef2f22866570996a201e",
-      "contextURL": "group-7-references.html#reference-7A",
-      "notes": [
-        "Full assembly with bold blue arrows emphasizing upstream return flow, the merge and combined downstream flow. Floor-joist arrows are small and black. Merging flow adds 40 ft equivalent length to the airflow-based 7C value."
-      ],
-      "reviewNote": "Full assembly with bold blue arrows emphasizing upstream return flow, the merge and combined downstream flow. Floor-joist arrows are small and black. Merging flow adds 40 ft equivalent length to the airflow-based 7C value.",
       "priorApproval": true
     },
     {
@@ -159,4 +91,4 @@ window.FITTING_REVIEW = {
       "priorApproval": true
     }
   ]
-};
+}

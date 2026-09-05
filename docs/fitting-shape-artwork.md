@@ -47,3 +47,11 @@ python3 scripts/package_group_5_shapes.py --activate
 ```
 
 Full source restorations and the earlier individual batch remain available.
+
+## Group 7 individual and assembly views
+
+`Public/images/fittings/group-7-options/manifest.json` provides `families[].artworkByView` for display choices independently of duct shape. For 7A–7C, choose `individual` or `assembly`; 7D–7E currently provide `individual`. Each lookup returns `itemId` and `image`. The assembly options keep the full illustration and emphasize the selected fitting using bold blue arrows. Existing individual artwork remains unchanged and accepted. All options retain their original fitting IDs and calculation metadata. All current assembly variants are approved.
+
+7C also provides `artworkByView["assembly-merging"]` for an upstream return joining the joist return. Its item records `artworkCondition.upstreamReturn` and `mergingFlow`, plus an additive 40 ft `equivalentLengthAdjustment` sourced from `referenceValues.mergingFlowEquivalentLengthFeet`. The airflow-based table remains unchanged; the 40 ft is an addition, not a replacement total. The existing `assembly` view remains separate. The eight preceding options are now approved; the merging variant is approved. These fields prepare artwork selection and do not implement calculator behavior.
+
+All nine current Group 7 artwork options are approved, including the revised merging view with subdued joist arrows. Approval is bound to each exact SVG/reference revision.

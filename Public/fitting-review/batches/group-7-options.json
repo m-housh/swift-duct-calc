@@ -1,4 +1,4 @@
-window.FITTING_REVIEW = {
+{
   "id": "group-7-options",
   "title": "Group 7 \u00b7 individual and assembly options",
   "description": "Individual drawings are retained. Additional 7A\u20137C assembly views emphasize the selected fitting with bold blue airflow arrows.",
@@ -159,4 +159,4 @@ window.FITTING_REVIEW = {
       "priorApproval": true
     }
   ]
-};
+}

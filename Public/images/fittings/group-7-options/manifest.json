@@ -1,0 +1,794 @@
+{
+  "schemaVersion": 1,
+  "group": 7,
+  "drawingCount": 9,
+  "familyCount": 5,
+  "families": [
+    {
+      "id": "7A",
+      "name": "Panned stud-space return",
+      "artworkByView": {
+        "individual": {
+          "itemId": "7A",
+          "image": "/images/fittings/group-7-individual/7A.svg"
+        },
+        "assembly": {
+          "itemId": "7A-assembly",
+          "image": "/images/fittings/group-7-options/7A-assembly.svg"
+        }
+      }
+    },
+    {
+      "id": "7B",
+      "name": "Stud-space to single-joist return turn",
+      "artworkByView": {
+        "individual": {
+          "itemId": "7B",
+          "image": "/images/fittings/group-7-individual/7B.svg"
+        },
+        "assembly": {
+          "itemId": "7B-assembly",
+          "image": "/images/fittings/group-7-options/7B-assembly.svg"
+        }
+      }
+    },
+    {
+      "id": "7C",
+      "name": "Panned single-joist return",
+      "artworkByView": {
+        "individual": {
+          "itemId": "7C",
+          "image": "/images/fittings/group-7-individual/7C.svg"
+        },
+        "assembly": {
+          "itemId": "7C-assembly",
+          "image": "/images/fittings/group-7-options/7C-assembly.svg"
+        },
+        "assembly-merging": {
+          "itemId": "7C-assembly-merging",
+          "image": "/images/fittings/group-7-options/7C-assembly-merging.svg"
+        }
+      }
+    },
+    {
+      "id": "7D",
+      "name": "Panned stud-to-joist double turn",
+      "artworkByView": {
+        "individual": {
+          "itemId": "7D",
+          "image": "/images/fittings/group-7-individual/7D.svg"
+        }
+      }
+    },
+    {
+      "id": "7E",
+      "name": "Panned double-joist return",
+      "artworkByView": {
+        "individual": {
+          "itemId": "7E",
+          "image": "/images/fittings/group-7-individual/7E.svg"
+        }
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "7A",
+      "fittingNumber": "7A",
+      "name": "Panned stud-space return",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "maximumCfm": 200,
+        "equivalentLengthByCfm": [
+          {
+            "cfm": 100,
+            "feet": 25
+          },
+          {
+            "cfm": 150,
+            "feet": 25
+          },
+          {
+            "cfm": 200,
+            "feet": 25
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 30,
+        "printedPage": 175,
+        "embeddedImageIndex": 80,
+        "cropPixels": [
+          55,
+          210,
+          480,
+          235
+        ],
+        "referenceSha256": "f66a49f8dcc4c56107867989e5b6d6106c77e66ec2cd0ab5b5b015003dc2e45c"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-7/7A.png",
+      "notes": [
+        "Vertical return path within one panned stud space; source limit is 200 CFM in the stud space."
+      ],
+      "restoredArt": "/images/fittings/group-7-individual/7A-individual-v1.png",
+      "referenceImage": "/images/fittings/group-7-enhanced/source-art/7ABC.png",
+      "sharedArtworkIds": [
+        "7A"
+      ],
+      "restorationNotes": [
+        "Isolated vertical panned stud-space return, retaining the framing, panning and downward airflow."
+      ],
+      "embeddedRasterSize": [
+        936,
+        1681
+      ],
+      "svg": "/images/fittings/group-7-individual/7A.svg",
+      "revision": "2cf1bd8630e99e7d0a70cdc64a25fa9ea0969a176ad43ddd726c3bf37f2cbba6",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-7-individual.json",
+      "unchangedStandalone": false,
+      "contextArt": "/images/fittings/group-7-enhanced/7A-restored-art.png",
+      "contextSVG": "/images/fittings/group-7-enhanced/7A.svg",
+      "visualReview": {
+        "id": "7A",
+        "revision": "2cf1bd8630e99e7d0a70cdc64a25fa9ea0969a176ad43ddd726c3bf37f2cbba6",
+        "status": "accepted",
+        "note": "User accepted existing individual drawings and requested additional assembly options while preserving these.",
+        "completedAt": "2026-09-05T18:08:09.964Z",
+        "record": "docs/fitting-reviews/review-c011d1a31fac5f3c.json"
+      },
+      "contextId": "reference-7A",
+      "fittingId": "7A",
+      "artworkView": "individual"
+    },
+    {
+      "id": "7A-assembly",
+      "fittingNumber": "7A",
+      "name": "Panned stud-space return",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "maximumCfm": 200,
+        "equivalentLengthByCfm": [
+          {
+            "cfm": 100,
+            "feet": 25
+          },
+          {
+            "cfm": 150,
+            "feet": 25
+          },
+          {
+            "cfm": 200,
+            "feet": 25
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 30,
+        "printedPage": 175,
+        "embeddedImageIndex": 80,
+        "cropPixels": [
+          55,
+          210,
+          480,
+          235
+        ],
+        "referenceSha256": "f66a49f8dcc4c56107867989e5b6d6106c77e66ec2cd0ab5b5b015003dc2e45c"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-7/7A.png",
+      "notes": [
+        "Vertical return path within one panned stud space; source limit is 200 CFM in the stud space."
+      ],
+      "restoredArt": "/images/fittings/group-7-options/7A-assembly-emphasis-v1.png",
+      "referenceImage": "/images/fittings/group-7-enhanced/source-art/7ABC.png",
+      "sharedArtworkIds": [
+        "7A-assembly"
+      ],
+      "restorationNotes": [
+        "Full assembly with bold blue downward arrows emphasizing the 7A wall stud-space run."
+      ],
+      "embeddedRasterSize": [
+        1156,
+        1360
+      ],
+      "svg": "/images/fittings/group-7-options/7A-assembly.svg",
+      "revision": "5b0ed2ba4d8f883272b948a10c56b71fa6937e331a6ec17bbb41d33b26520e3e",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-7-assemblies.json",
+      "unchangedStandalone": false,
+      "contextArt": "/images/fittings/group-7-enhanced/7A-restored-art.png",
+      "contextSVG": "/images/fittings/group-7-enhanced/7A.svg",
+      "contextId": "reference-7A",
+      "fittingId": "7A",
+      "artworkView": "assembly",
+      "visualReview": {
+        "id": "7A-assembly",
+        "revision": "5b0ed2ba4d8f883272b948a10c56b71fa6937e331a6ec17bbb41d33b26520e3e",
+        "status": "accepted",
+        "note": "User approved all nine Group 7 individual and assembly options after the merging-arrow correction.",
+        "completedAt": "2026-09-05T18:39:50.972Z",
+        "record": "docs/fitting-reviews/review-bd1b1a6643f53d6f.json"
+      }
+    },
+    {
+      "id": "7B",
+      "fittingNumber": "7B",
+      "name": "Stud-space to single-joist return turn",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthByCfm": [
+          {
+            "cfm": 100,
+            "feet": 10
+          },
+          {
+            "cfm": 150,
+            "feet": 15
+          },
+          {
+            "cfm": 200,
+            "feet": 25
+          }
+        ],
+        "sourceCrossReference": "See 7D for double turn."
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 30,
+        "printedPage": 175,
+        "embeddedImageIndex": 80,
+        "cropPixels": [
+          50,
+          235,
+          495,
+          475
+        ],
+        "referenceSha256": "80037bac2f3676e77233f3d9932bf2cd15508b5bfead35013223330a2472730b"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-7/7B.png",
+      "notes": [
+        "One turn connects a panned stud space to a single panned joist space."
+      ],
+      "restoredArt": "/images/fittings/group-7-individual/7B-transition-arrow-v4.png",
+      "referenceImage": "/images/fittings/group-7-enhanced/source-art/7ABC.png",
+      "sharedArtworkIds": [
+        "7B"
+      ],
+      "restorationNotes": [
+        "Isolated stud-space-to-single-joist turn, with the horizontal passage aligned directly with the wall cavity between the two studs.",
+        "A prominent curved arrow highlights the wall-to-floor change of direction; the two straight wall arrows are removed and the downstream floor arrow retained."
+      ],
+      "embeddedRasterSize": [
+        1351,
+        1164
+      ],
+      "svg": "/images/fittings/group-7-individual/7B.svg",
+      "revision": "42e925e451d38817b8ee05220a1c7edb860cc2724e26869b66065656361c7493",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-7-individual.json",
+      "unchangedStandalone": false,
+      "contextArt": "/images/fittings/group-7-enhanced/7B-restored-art.png",
+      "contextSVG": "/images/fittings/group-7-enhanced/7B.svg",
+      "visualReview": {
+        "id": "7B",
+        "revision": "42e925e451d38817b8ee05220a1c7edb860cc2724e26869b66065656361c7493",
+        "status": "accepted",
+        "note": "User accepted existing individual drawings and requested additional assembly options while preserving these.",
+        "completedAt": "2026-09-05T18:08:09.964Z",
+        "record": "docs/fitting-reviews/review-c011d1a31fac5f3c.json"
+      },
+      "contextId": "reference-7A",
+      "fittingId": "7B",
+      "artworkView": "individual"
+    },
+    {
+      "id": "7B-assembly",
+      "fittingNumber": "7B",
+      "name": "Stud-space to single-joist return turn",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthByCfm": [
+          {
+            "cfm": 100,
+            "feet": 10
+          },
+          {
+            "cfm": 150,
+            "feet": 15
+          },
+          {
+            "cfm": 200,
+            "feet": 25
+          }
+        ],
+        "sourceCrossReference": "See 7D for double turn."
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 30,
+        "printedPage": 175,
+        "embeddedImageIndex": 80,
+        "cropPixels": [
+          50,
+          235,
+          495,
+          475
+        ],
+        "referenceSha256": "80037bac2f3676e77233f3d9932bf2cd15508b5bfead35013223330a2472730b"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-7/7B.png",
+      "notes": [
+        "One turn connects a panned stud space to a single panned joist space."
+      ],
+      "restoredArt": "/images/fittings/group-7-options/7B-assembly-emphasis-v1.png",
+      "referenceImage": "/images/fittings/group-7-enhanced/source-art/7ABC.png",
+      "sharedArtworkIds": [
+        "7B-assembly"
+      ],
+      "restorationNotes": [
+        "Full assembly with a bold blue curved arrow emphasizing the 7B wall-to-floor turn."
+      ],
+      "embeddedRasterSize": [
+        1157,
+        1359
+      ],
+      "svg": "/images/fittings/group-7-options/7B-assembly.svg",
+      "revision": "8ee9bc2b0e92e5f55e4b00317c9cf7bde1c09d93060f94158153930069aa026e",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-7-assemblies.json",
+      "unchangedStandalone": false,
+      "contextArt": "/images/fittings/group-7-enhanced/7B-restored-art.png",
+      "contextSVG": "/images/fittings/group-7-enhanced/7B.svg",
+      "contextId": "reference-7A",
+      "fittingId": "7B",
+      "artworkView": "assembly",
+      "visualReview": {
+        "id": "7B-assembly",
+        "revision": "8ee9bc2b0e92e5f55e4b00317c9cf7bde1c09d93060f94158153930069aa026e",
+        "status": "accepted",
+        "note": "User approved all nine Group 7 individual and assembly options after the merging-arrow correction.",
+        "completedAt": "2026-09-05T18:39:50.972Z",
+        "record": "docs/fitting-reviews/review-bd1b1a6643f53d6f.json"
+      }
+    },
+    {
+      "id": "7C",
+      "fittingNumber": "7C",
+      "name": "Panned single-joist return",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "maximumCfm": 400,
+        "equivalentLengthByCfm": [
+          {
+            "cfm": 100,
+            "feet": 10
+          },
+          {
+            "cfm": 200,
+            "feet": 30
+          },
+          {
+            "cfm": 300,
+            "feet": 60
+          },
+          {
+            "cfm": 400,
+            "feet": 110
+          }
+        ],
+        "mergingFlowEquivalentLengthFeet": 40,
+        "sourceCrossReference": "See 7E for double joist."
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 30,
+        "printedPage": 175,
+        "embeddedImageIndex": 80,
+        "cropPixels": [
+          255,
+          220,
+          510,
+          485
+        ],
+        "referenceSha256": "bb9a51d2c79dfc6cc57c6c93eb6e1d8c267cd44e34899cf38f62180ff498368c"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-7/7C.png",
+      "notes": [
+        "Return path runs in one panned joist space; source limit is 400 CFM and merging flow adds 40 feet."
+      ],
+      "restoredArt": "/images/fittings/group-7-individual/7C-individual-v1.png",
+      "referenceImage": "/images/fittings/group-7-enhanced/source-art/7ABC.png",
+      "sharedArtworkIds": [
+        "7C"
+      ],
+      "restorationNotes": [
+        "Isolated straight single-joist return bay with panning and arrows pointing toward the lower-left outlet."
+      ],
+      "embeddedRasterSize": [
+        1792,
+        878
+      ],
+      "svg": "/images/fittings/group-7-individual/7C.svg",
+      "revision": "8d81fc94e26581d03c7de2ed57801266ea001493c9ba7212c4511efc9b090404",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-7-individual.json",
+      "unchangedStandalone": false,
+      "contextArt": "/images/fittings/group-7-enhanced/7C-restored-art.png",
+      "contextSVG": "/images/fittings/group-7-enhanced/7C.svg",
+      "visualReview": {
+        "id": "7C",
+        "revision": "8d81fc94e26581d03c7de2ed57801266ea001493c9ba7212c4511efc9b090404",
+        "status": "accepted",
+        "note": "User accepted existing individual drawings and requested additional assembly options while preserving these.",
+        "completedAt": "2026-09-05T18:08:09.964Z",
+        "record": "docs/fitting-reviews/review-c011d1a31fac5f3c.json"
+      },
+      "contextId": "reference-7A",
+      "fittingId": "7C",
+      "artworkView": "individual"
+    },
+    {
+      "id": "7C-assembly",
+      "fittingNumber": "7C",
+      "name": "Panned single-joist return",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "maximumCfm": 400,
+        "equivalentLengthByCfm": [
+          {
+            "cfm": 100,
+            "feet": 10
+          },
+          {
+            "cfm": 200,
+            "feet": 30
+          },
+          {
+            "cfm": 300,
+            "feet": 60
+          },
+          {
+            "cfm": 400,
+            "feet": 110
+          }
+        ],
+        "mergingFlowEquivalentLengthFeet": 40,
+        "sourceCrossReference": "See 7E for double joist."
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 30,
+        "printedPage": 175,
+        "embeddedImageIndex": 80,
+        "cropPixels": [
+          255,
+          220,
+          510,
+          485
+        ],
+        "referenceSha256": "bb9a51d2c79dfc6cc57c6c93eb6e1d8c267cd44e34899cf38f62180ff498368c"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-7/7C.png",
+      "notes": [
+        "Return path runs in one panned joist space; source limit is 400 CFM and merging flow adds 40 feet."
+      ],
+      "restoredArt": "/images/fittings/group-7-options/7C-assembly-emphasis-v2.png",
+      "referenceImage": "/images/fittings/group-7-enhanced/source-art/7ABC.png",
+      "sharedArtworkIds": [
+        "7C-assembly"
+      ],
+      "restorationNotes": [
+        "Full assembly with bold blue arrows emphasizing 7C floor joist flow; opposing flows in the far-right bay retain their source directions."
+      ],
+      "embeddedRasterSize": [
+        1158,
+        1358
+      ],
+      "svg": "/images/fittings/group-7-options/7C-assembly.svg",
+      "revision": "f10fbdc483098f5c4b1a44bc8afe3434d0e0af5b6d19aecf232f41aa041439d7",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-7-assemblies.json",
+      "unchangedStandalone": false,
+      "contextArt": "/images/fittings/group-7-enhanced/7C-restored-art.png",
+      "contextSVG": "/images/fittings/group-7-enhanced/7C.svg",
+      "contextId": "reference-7A",
+      "fittingId": "7C",
+      "artworkView": "assembly",
+      "visualReview": {
+        "id": "7C-assembly",
+        "revision": "f10fbdc483098f5c4b1a44bc8afe3434d0e0af5b6d19aecf232f41aa041439d7",
+        "status": "accepted",
+        "note": "User approved all nine Group 7 individual and assembly options after the merging-arrow correction.",
+        "completedAt": "2026-09-05T18:39:50.972Z",
+        "record": "docs/fitting-reviews/review-bd1b1a6643f53d6f.json"
+      }
+    },
+    {
+      "id": "7C-assembly-merging",
+      "fittingNumber": "7C",
+      "name": "Panned single-joist return",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "maximumCfm": 400,
+        "equivalentLengthByCfm": [
+          {
+            "cfm": 100,
+            "feet": 10
+          },
+          {
+            "cfm": 200,
+            "feet": 30
+          },
+          {
+            "cfm": 300,
+            "feet": 60
+          },
+          {
+            "cfm": 400,
+            "feet": 110
+          }
+        ],
+        "mergingFlowEquivalentLengthFeet": 40,
+        "sourceCrossReference": "See 7E for double joist."
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 30,
+        "printedPage": 175,
+        "embeddedImageIndex": 80,
+        "cropPixels": [
+          255,
+          220,
+          510,
+          485
+        ],
+        "referenceSha256": "bb9a51d2c79dfc6cc57c6c93eb6e1d8c267cd44e34899cf38f62180ff498368c"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-7/7C.png",
+      "notes": [
+        "Return path runs in one panned joist space; source limit is 400 CFM and merging flow adds 40 feet."
+      ],
+      "restoredArt": "/images/fittings/group-7-options/7C-assembly-merging-muted-joists-v2.png",
+      "referenceImage": "/images/fittings/group-7-enhanced/source-art/7ABC.png",
+      "sharedArtworkIds": [
+        "7C-assembly-merging"
+      ],
+      "restorationNotes": [
+        "Full assembly with bold blue arrows emphasizing upstream return flow, the merge and combined downstream flow. Floor-joist arrows are small and black. Merging flow adds 40 ft equivalent length to the airflow-based 7C value."
+      ],
+      "embeddedRasterSize": [
+        1160,
+        1356
+      ],
+      "svg": "/images/fittings/group-7-options/7C-assembly-merging.svg",
+      "revision": "8ba310c168e558c75be3a952c3bdf877b47e8f02fda1ef2f22866570996a201e",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-7-assemblies.json",
+      "unchangedStandalone": false,
+      "contextArt": "/images/fittings/group-7-enhanced/7C-restored-art.png",
+      "contextSVG": "/images/fittings/group-7-enhanced/7C.svg",
+      "contextId": "reference-7A",
+      "fittingId": "7C",
+      "artworkView": "assembly-merging",
+      "artworkCondition": {
+        "upstreamReturn": true,
+        "mergingFlow": true
+      },
+      "equivalentLengthAdjustment": {
+        "operation": "add",
+        "feet": 40,
+        "sourceValueKey": "referenceValues.mergingFlowEquivalentLengthFeet",
+        "condition": "Upstream return flow merges with the joist return."
+      },
+      "visualReview": {
+        "id": "7C-assembly-merging",
+        "revision": "8ba310c168e558c75be3a952c3bdf877b47e8f02fda1ef2f22866570996a201e",
+        "status": "accepted",
+        "note": "User approved all nine Group 7 individual and assembly options after the merging-arrow correction.",
+        "completedAt": "2026-09-05T18:39:50.972Z",
+        "record": "docs/fitting-reviews/review-bd1b1a6643f53d6f.json"
+      }
+    },
+    {
+      "id": "7D",
+      "fittingNumber": "7D",
+      "name": "Panned stud-to-joist double turn",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "maximumCfm": 200,
+        "equivalentLengthByCfm": [
+          {
+            "cfm": 100,
+            "feet": 20
+          },
+          {
+            "cfm": 150,
+            "feet": 50
+          },
+          {
+            "cfm": 200,
+            "feet": 90
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 31,
+        "printedPage": 175,
+        "embeddedImageIndex": 82,
+        "cropPixels": [
+          45,
+          690,
+          585,
+          430
+        ],
+        "referenceSha256": "55f135334e2ee9eab59e0400e46fdad599b4ce9b45d144edb35e4e45d6a008ed"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-7/7D.png",
+      "notes": [
+        "Two turns carry return air between the panned stud and joist paths."
+      ],
+      "restoredArt": "/images/fittings/group-7-enhanced/7D-restored-art.png",
+      "referenceImage": "/images/fittings/group-7-enhanced/source-art/7D.png",
+      "sharedArtworkIds": [
+        "7D"
+      ],
+      "restorationNotes": [
+        "Original standalone double-turn illustration retained."
+      ],
+      "embeddedRasterSize": [
+        1505,
+        1045
+      ],
+      "svg": "/images/fittings/group-7-individual/7D.svg",
+      "revision": "8f009d3d9d3913020961f28be810270deeba8f95729ba7d0c626c6fce1116ec5",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-7-individual.json",
+      "unchangedStandalone": true,
+      "contextArt": "/images/fittings/group-7-enhanced/7D-restored-art.png",
+      "contextSVG": "/images/fittings/group-7-enhanced/7D.svg",
+      "visualReview": {
+        "id": "7D",
+        "revision": "8f009d3d9d3913020961f28be810270deeba8f95729ba7d0c626c6fce1116ec5",
+        "status": "accepted",
+        "note": "User accepted existing individual drawings and requested additional assembly options while preserving these.",
+        "completedAt": "2026-09-05T18:08:09.964Z",
+        "record": "docs/fitting-reviews/review-c011d1a31fac5f3c.json"
+      },
+      "contextId": "reference-7D",
+      "fittingId": "7D",
+      "artworkView": "individual"
+    },
+    {
+      "id": "7E",
+      "fittingNumber": "7E",
+      "name": "Panned double-joist return",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "maximumCfm": 800,
+        "equivalentLengthByCfm": [
+          {
+            "cfm": 200,
+            "feet": 10
+          },
+          {
+            "cfm": 400,
+            "feet": 30
+          },
+          {
+            "cfm": 600,
+            "feet": 60
+          },
+          {
+            "cfm": 800,
+            "feet": 110
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 31,
+        "printedPage": 175,
+        "embeddedImageIndex": 82,
+        "cropPixels": [
+          440,
+          690,
+          490,
+          430
+        ],
+        "referenceSha256": "3d647e547f5678ab483e43c028e22572304a69729299909bec20516e43be4c49"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-7/7E.png",
+      "notes": [
+        "A floor grille feeds two adjacent panned joist spaces; source limit is 800 CFM in the double space."
+      ],
+      "restoredArt": "/images/fittings/group-7-enhanced/7E-restored-art.png",
+      "referenceImage": "/images/fittings/group-7-enhanced/source-art/7E.png",
+      "sharedArtworkIds": [
+        "7E"
+      ],
+      "restorationNotes": [
+        "Original standalone double-joist illustration retained."
+      ],
+      "embeddedRasterSize": [
+        1496,
+        1051
+      ],
+      "svg": "/images/fittings/group-7-individual/7E.svg",
+      "revision": "ded62f025e1a48ef6ff75b63dff88b499db7d7eae8b3f56e8d70105370f1867a",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-7-individual.json",
+      "unchangedStandalone": true,
+      "contextArt": "/images/fittings/group-7-enhanced/7E-restored-art.png",
+      "contextSVG": "/images/fittings/group-7-enhanced/7E.svg",
+      "visualReview": {
+        "id": "7E",
+        "revision": "ded62f025e1a48ef6ff75b63dff88b499db7d7eae8b3f56e8d70105370f1867a",
+        "status": "accepted",
+        "note": "User accepted existing individual drawings and requested additional assembly options while preserving these.",
+        "completedAt": "2026-09-05T18:08:09.964Z",
+        "record": "docs/fitting-reviews/review-c011d1a31fac5f3c.json"
+      },
+      "contextId": "reference-7E",
+      "fittingId": "7E",
+      "artworkView": "individual"
+    }
+  ],
+  "status": "visually-approved"
+}
