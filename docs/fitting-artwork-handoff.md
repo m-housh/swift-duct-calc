@@ -4,13 +4,25 @@ The portable branch is `codex/fitting-artwork` in
 `https://github.com/m-housh/swift-duct-calc.git`.
 The current worktree is `/home/michael/dev/swift-duct-calc`.
 
-## Latest state — Group 8 approved; Group 9 next
+## Latest state — Group 9 approved; Group 10 next
 
 Group 7's nine individual/assembly options are approved and committed as
-`62599b7`. Group 8, **Elbows and Offsets**, is approved: 25 drawings
+`62599b7`. Group 8, **Elbows and Offsets**, is approved and committed as `4cc7dd0`: 25 drawings
 covering fitting IDs 8A–8P. Exact current revisions are archived from the user's
-approval after the four 8A seam corrections. Group 9, Supply Trunk Junction
-Fittings, starts on PDF page 36 (printed page 178) and is next. The historical progress
+approval after the four 8A seam corrections. Group 9, **Supply Trunk Junction
+Fittings**, is approved with 18 individual drawings, 9A–9R. Exact revisions are
+archived from the user's explicit approval. Group 10, Return Trunk Junction
+Fittings (10A–10G), is next, on printed page 180 / PDF pages 40–41.
+Its source drawings/tables are printed pages 178–179, PDF pages 36–38.
+Rebuild/activate using `python3 scripts/package_group_9.py --activate`.
+Source metadata and picker mappings are in `Public/images/fittings/group-9/`;
+prompts and visual checks are in `docs/fitting-preflight/group-9.json`.
+Each fitting is separate and preserves the original connecting duct sections,
+source flow arrows, and its branch entry/deflector/vane construction.
+9A is a rectangular main with a round branch (`mixed` shape); other items retain
+their source shape. Full source pages, including the branch/main tables, are linked.
+Reference values remain artwork metadata; calculator code is unchanged.
+The historical progress
 entries below describe earlier review states.
 
 Group 8 separates eight 8A construction styles and both round/rectangular options

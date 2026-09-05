@@ -55,3 +55,24 @@ Full source restorations and the earlier individual batch remain available.
 7C also provides `artworkByView["assembly-merging"]` for an upstream return joining the joist return. Its item records `artworkCondition.upstreamReturn` and `mergingFlow`, plus an additive 40 ft `equivalentLengthAdjustment` sourced from `referenceValues.mergingFlowEquivalentLengthFeet`. The airflow-based table remains unchanged; the 40 ft is an addition, not a replacement total. The existing `assembly` view remains separate. The eight preceding options are now approved; the merging variant is approved. These fields prepare artwork selection and do not implement calculator behavior.
 
 All nine current Group 7 artwork options are approved, including the revised merging view with subdued joist arrows. Approval is bound to each exact SVG/reference revision.
+
+## Group 8 construction and shape options
+
+Group 8 is approved and committed as `4cc7dd0`. Its manifest provides 25 artwork
+items across 8A–8P. Eight 8A construction styles have distinct
+`artworkByVariant` keys; 8L and 8M each have round/rectangular
+`artworkByShape` alternatives. The source tables and conditions remain attached
+to each item. These drawings do not implement the equivalent-length calculations.
+
+## Group 9 junction shapes
+
+Group 9 provides one source-specific drawing for each of 9A–9R. Its manifest's
+`families[].artworkByShape` maps the depicted shape to its item and image.
+9A uses `mixed` because it joins a rectangular main to a round branch;
+`connectionShapes` records the main and branch separately. Do not substitute
+another source junction merely to satisfy a different shape selection.
+9A–9J retain separate branch/main equivalent lengths; 9K–9R retain the single
+value printed for their case. Applicability is supply trunk junction flow,
+with a substantial secondary-trunk share of primary flow, as stated in the source.
+All 18 Group 9 drawings are approved. Exact SVG/reference revisions are archived
+from the user's explicit approval.
