@@ -1,4 +1,4 @@
-window.FITTING_REVIEW = {
+{
   "id": "group-8",
   "title": "Group 8 \u00b7 elbows and offsets",
   "description": "Individual source fittings 8A\u20138P. 8A construction styles and the round/rectangular 8L\u20138M alternatives have separate artwork. Full source tables remain linked.",
@@ -430,4 +430,4 @@ window.FITTING_REVIEW = {
       "priorApproval": true
     }
   ]
-};
+}

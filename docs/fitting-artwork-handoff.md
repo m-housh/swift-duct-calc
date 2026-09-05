@@ -4,6 +4,43 @@ The portable branch is `codex/fitting-artwork` in
 `https://github.com/m-housh/swift-duct-calc.git`.
 The current worktree is `/home/michael/dev/swift-duct-calc`.
 
+## Latest state — Group 8 approved; Group 9 next
+
+Group 7's nine individual/assembly options are approved and committed as
+`62599b7`. Group 8, **Elbows and Offsets**, is approved: 25 drawings
+covering fitting IDs 8A–8P. Exact current revisions are archived from the user's
+approval after the four 8A seam corrections. Group 9, Supply Trunk Junction
+Fittings, starts on PDF page 36 (printed page 178) and is next. The historical progress
+entries below describe earlier review states.
+
+Group 8 separates eight 8A construction styles and both round/rectangular options
+for 8L and 8M. Other fittings retain the shape and construction in the source.
+The source PDF continues beyond Group 7 (50 PDF pages total); Group 8 occupies
+PDF pages 32–35, printed pages 176–177. Original page images and tables are linked
+from each review card. Do not assume Group 7 is the end of the source.
+
+Rebuild/activate with `python3 scripts/package_group_8.py --activate`.
+Source metadata and picker mappings are in `Public/images/fittings/group-8/`;
+prompts and visual checks are in `docs/fitting-preflight/group-8.json`.
+All selected images were compared with their source crops before presentation.
+Raster restorations remain embedded in self-contained SVGs. The source's 8A
+angle-adjustment heading says less than 90 degrees while also listing larger
+angles; preserve that source inconsistency for later calculation review.
+Reference tables are recorded as source metadata, not calculator changes.
+
+After approval, record exact image revisions, commit that group, and prepare the
+next source group automatically. No additional commit confirmation is needed.
+Keep Group 2 paused and unrelated `Public/prototypes/` work out of artwork commits.
+
+Latest Group 8 correction: bottom-up seam numbering starts with the lowest outline
+as 1. `8A-4-or-5-piece` seams 2/4, `8A-3-piece` seam 2, and `8A-easy-bend`
+seams 2/3 are now single lines. `8A-hard-bend` seam 2 is removed entirely;
+seams 3/4/5 and its outlet boundary are single lines. Active files end in
+`-single-seams-v3.png`. All four were visually checked; a first four/five-piece
+candidate accidentally removed seam 3 and was corrected before selection.
+The other 21 drawings are unchanged. All 25 drawings, including these corrections,
+are now approved by the user.
+
 ## Clone on maia
 
 Run these in a terminal on the current computer, then in the SSH session:
@@ -125,6 +162,6 @@ Latest Group 7: user accepted the three assembly options and requested an additi
 
 Latest 7C assembly-merging correction: user markup `7c.png` requests quieter floor-joist arrows. Active `7C-assembly-merging-muted-joists-v2.png` makes those five arrows small black while retaining bold blue upstream, merge and downstream arrows. The +40 ft condition is unchanged; other eight options remain approved and unchanged.
 
-Group 7 final acceptance: user explicitly approved all nine current individual/assembly options after the muted merging-arrow correction. All exact revisions are archived in the final `group-7-options` review record; active manifest and review badges are approved. Group 7 is ready to commit following the user’s approval; the established workflow is to commit approved groups and advance automatically. Group 2 remains paused.
+Group 7 final acceptance: user explicitly approved all nine current individual/assembly options after the muted merging-arrow correction. All exact revisions are archived in the final `group-7-options` review record; its manifest and review badges are approved. Group 7 is committed as `62599b7`; Group 8 is now active. The established workflow is to commit approved groups and advance automatically. Group 2 remains paused.
 
 Workflow clarification: user expects group approval to include committing that group and opening the next review without a separate commit request. Preserve unrelated work when staging.
