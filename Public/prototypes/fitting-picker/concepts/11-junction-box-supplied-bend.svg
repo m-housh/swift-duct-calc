@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" role="img" aria-labelledby="title desc">
+<title id="title">90° radius bend supplying a flex junction box — concept plan view</title><desc id="desc">Air enters a 90° radius bend from below, turns left through a straight inlet section, and supplies the junction box and its side-wall outlets. Subtle blue flow lines branch from the inlet to all four outlets; no outlet is selected. L measures spacing from the inlet wall to the first outlet nearest the entrance; the source calls for at least two duct diameters.</desc>
+<defs><marker id="arrow" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0 1L7 4L0 7" fill="none" stroke="#7d9eb2" stroke-width="1.5"/></marker></defs>
+<rect width="880" height="460" rx="12" fill="white"/>
+<g stroke="#8495a4" stroke-width="3" fill="#f4f7fa"><path d="M120 128h370v170H120z"/><path d="M490 181h110v64H490"/><path d="M153 128V47h57v81M300 128V47h57v81M153 298v61h57v-61M300 298v61h57v-61" fill="white"/></g>
+<g stroke="#7d9eb2" stroke-width="2" stroke-linecap="round" fill="none">
+<path d="M575 212H402"/>
+<path d="M402 212C318 212 182 205 182 145V65" marker-end="url(#arrow)"/>
+<path d="M402 212C356 212 329 181 329 145V65" marker-end="url(#arrow)"/>
+<path d="M402 212C318 212 182 219 182 279V342" marker-end="url(#arrow)"/>
+<path d="M402 212C356 212 329 243 329 279V342" marker-end="url(#arrow)"/>
+</g>
+<g stroke="#8495a4" stroke-width="3" fill="#f4f7fa">
+<path d="M600 181H660A152 152 0 0 1 812 333V375H748V333A88 88 0 0 0 660 245H600"/>
+</g>
+<g stroke="#9cadba" stroke-width="1.5" fill="none">
+<path d="M622 181v64M641 181v64M674 182l-6 63M701 187l-17 61M726 197l-28 57M751 212l-39 51M773 233l-48 42M791 256l-56 31M803 283l-62 19M810 311l-63 7M748 344h64M748 362h64"/>
+</g>
+<path d="M780 361V333A120 120 0 0 0 660 213H565" stroke="#7d9eb2" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+<g font-family="system-ui,sans-serif" fill="#516776" text-anchor="middle"><text x="642" y="335" font-size="16">90° radius bend</text></g>
+<g stroke="#65798a" stroke-width="1.5" fill="none"><path d="M329 113v-16M490 170V97M329 105H490M324 100l10 10M485 100l10 10M748 383v18M812 383v18M748 394H812M743 389l10 10M807 389l10 10"/></g>
+<g font-family="system-ui,sans-serif" text-anchor="middle"><text x="410" y="30" font-size="19" fill="#254b65">L ≥ 2 × D</text><text x="780" y="421" font-size="19" fill="#254b65">D</text><text x="555" y="279" font-size="15" fill="#516776">Inlet</text><text x="440" y="445" font-size="14" fill="#677986">Reference concept · 90° bend supplying junction box · plan view</text></g></svg>

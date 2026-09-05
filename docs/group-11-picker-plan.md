@@ -1,9 +1,54 @@
 # Group 11 picker proposal
 
-Status: deferred at the user's request to review Group 12 next. Guidance reviewed;
-proposed representation, not implemented or approved.
-Group 10 is approved and committed as `4b848b3`, including corrected 10F arrows.
-Group 12 review takes priority; resume this proposal when the user returns to it.
+Status: active UI exploration. The user requested integration of the completed
+artwork and a Group 11 visual-picker proposal on 2026-09-05.
+
+## Current prototype
+
+Open `/prototypes/fitting-picker/path-catalog.html?group=11` on the static preview
+server. Group 11 now starts with **Flex junction box**, per the user's correction.
+A **Supplied with a 90° radius bend** toggle includes one bend with the box.
+There is no separate bend choice. The box diagram shows subdued flow lines branching to all outlets, without
+selecting an outlet; enabling the
+toggle reveals a supporting bend diagram, bend velocity and R/D category.
+The main reference switches to a separate combined drawing when the toggle is
+on: the 90° bend feeds the box inlet, with flow continuing to all outlets. The
+standalone bend arrow also points toward its box connection. Added path rows
+retain the matching combined drawing. The angle is fixed at 90°. These are prototype-only SVG diagrams, not approved
+extracted artwork.
+
+New drafts default box and optional bend velocities to 700 FPM and bend R/D
+to 1.0. All remain editable. The sole
+construction selector is **Entrance or exits: Sidewall / Top or bottom**, with
+Sidewall selected. Straight approach and spacing no longer require dropdowns;
+the source assumptions are stated beside the result, and L ≥ 2D remains visible
+on the drawing. The bend toggle does not establish bend proximity. Top/bottom
+openings leave the automatic value unresolved under the supplied table.
+
+The toggle defaults off. Box-only entries use the box table; enabled entries
+require both box and bend inputs and show a box + bend breakdown. One combined
+row is added with quantity 1. Editing preserves the toggle and inputs, and row
+quantity multiplies the combined value. Turning the toggle off excludes the bend
+while retaining its draft inputs for toggling back on.
+
+The source's straight-run, side-wall and spacing conditions still apply, even
+though straight-run and spacing are now guidance rather than form inputs. Adding
+bend EL is not an invented correction for a nearby turn that invalidates those
+conditions. Box and bend velocities are separate inputs pending clarification of
+the controlling duct for the box table. This combined representation is a UX
+proposal, not a completed production applicability rule.
+
+PDF pages 42–43 were visually checked during this pass. Table values below are
+used only for the prototype; choosing the controlling duct's velocity for a box
+and production applicability still need clarification. The interface labels this
+as a reference-table preview. Source edition remains the supplied PDF for now,
+per the user's instruction; identifying another edition is not a prerequisite for
+continuing the UX exploration.
+
+The earlier manual-override proposal below is superseded by the implementation
+plan: visual selection does not accept arbitrary EL. A separate quick/reference
+entry flow will accept supplied code/EL/optional quantity with provenance. This
+prototype pass does not implement CSV import or change production calculations.
 
 ## What the supplied source contains
 
