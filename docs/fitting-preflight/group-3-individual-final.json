@@ -2,6 +2,8 @@
   "schemaVersion": 1,
   "batchId": "group-3-individual",
   "status": "ready-for-user-review",
+  "historicalRecord": true,
+  "supersededForSeparatedAssembliesBy": "docs/fitting-preflight/group-3-expanded-context.json",
   "drawingCount": 32,
   "uniqueArtworkCount": 22,
   "fullReferenceCount": 12,

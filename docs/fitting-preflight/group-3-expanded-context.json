@@ -1,0 +1,619 @@
+{
+  "schemaVersion": 1,
+  "group": 3,
+  "date": "2026-09-04",
+  "status": "ready-for-user-review",
+  "scope": "Expanded original upstream/downstream connection context for all 16 separated main-duct assemblies (22 fitting IDs).",
+  "userDecision": {
+    "example": "3C-context-v2.png",
+    "answer": "Yes, use this amount",
+    "scope": "Amount of surrounding duct for the other separated fittings; not blanket final acceptance."
+  },
+  "drawingCount": 22,
+  "uniqueArtworkCount": 16,
+  "approvedFullArtworkModified": false,
+  "standaloneArtworkModified": false,
+  "limitations": [
+    "Raster restorations embedded in self-contained SVGs, not path-based vectors.",
+    "Cut-end completion and removed neighboring-branch boundaries are illustrative; images are not dimensioned fabrication drawings.",
+    "Generic corner variants share source artwork and retain distinct IDs and values."
+  ],
+  "items": [
+    {
+      "id": "3C",
+      "restoredArt": "/images/fittings/group-3-individual/3C-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Full-radius side takeoff, straight transition, seams and shallow outlet retained with the user-confirmed main-duct extent.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example."
+      ],
+      "sharedArtworkIds": [
+        "3C"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3B-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-31e88fe8-38b9-41df-9a5c-adfb2ae8f274.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      },
+      "prompt": "Use case: precise-object-edit. Image 1 is the user's annotated original showing a red dotted boundary around the expected fitting 3C. Image 2 is the accepted high-resolution full source and is the edit target. Extract precisely the portion of Image 2 corresponding to inside the red boundary in Image 1: preserve the full 3C far-side curved takeoff and straight transition to the upper-right shallow rectangular outlet, PLUS the full-width main rectangular duct body underneath, with substantial original upstream and downstream main duct on both sides of its attachment. Main duct must span the original central bay between neighboring 3A and 3B connections, not shrink to wall strips or a tiny stub. Preserve original isometric perspective, source lines, takeoff curves, transition proportions, seams and outlet rim. Remove other branches 3A, 3B, 3D and all labels. Complete the two cut ends of the retained main duct as straight rectangular boundaries, maintain its original cross-section. Do not turn the branch into a top-mounted takeoff. Thin crisp black technical outlines on white. Center the complete main-duct segment plus 3C with white margin. No red boundary, no text, no shading. The main duct should be a substantial recognizable volume matching the user's marked extent."
+    },
+    {
+      "id": "3B",
+      "restoredArt": "/images/fittings/group-3-individual/3B-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Full curved takeoff neck, offset transition and shallow outlet retained; complete main duct replaces cutaway wall strips.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example."
+      ],
+      "sharedArtworkIds": [
+        "3B"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3B-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-ca2afd2e-da83-4f3f-a5ab-9f021fd79552.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      },
+      "prompt": "Use case: precise-object-edit. Image 1 is the authoritative full source to edit. Image 2 is the user-confirmed 3C example showing HOW MUCH surrounding main duct to keep; it is only a context-extent guide, not target geometry. Extract the near-side middle branch labeled 3B: the full rounded takeoff neck, offset transition widening to the shallow rectangular outlet pointing lower-left. Keep the distinct tall curved neck between transition and trunk. Retain a substantial full-width main-duct section extending upstream AND downstream of the branch, comparable to Image 2: include the original main duct's whole cross-section, top and side faces, at least a clear section beyond either side of the connection. Preserve any original main-duct taper, its diagonal upper-left to lower-right direction and original proportions. Remove all other branches and blue labels, complete main-duct cut ends with simple straight rectangular boundaries. Preserve this target's exact source silhouette, curves, seams, outlet proportions and original SIDE attachment, never top-mounted or inline. Do not substitute the shape of 3C for the target. Black technical line art on white, same perspective, centered with ample margin, no text, no shading."
+    },
+    {
+      "id": "3D-full",
+      "restoredArt": "/images/fittings/group-3-individual/3D-full-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Compound takeoff/easy-bend elbow and shallow outlet retained; full-width main duct replaces schematic stub. A spurious upstream side-wall slot was removed.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example.",
+        "Generic source artwork is shared across full, tight and mitered variants; variant differences remain in metadata."
+      ],
+      "sharedArtworkIds": [
+        "3D-full",
+        "3D-tight",
+        "3D-mitered"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3B-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-56df5b6a-f769-4d49-8a41-d20eb71e5084.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      },
+      "prompt": "Use case: precise-object-edit. Image 1 is the authoritative full source to edit. Image 2 is the user-confirmed 3C example showing HOW MUCH surrounding main duct to keep; it is only a context-extent guide, not target geometry. Extract the far-side lower-right branch labeled 3D: the full compound takeoff elbow and easy-bend elbow with shallow rectangular outlet pointing upper-right. Preserve the lower takeoff throat and both inner and outer bend contours. Retain a substantial full-width main-duct section extending upstream AND downstream of the branch, comparable to Image 2: include the original main duct's whole cross-section, top and side faces, at least a clear section beyond either side of the connection. Preserve any original main-duct taper, its diagonal upper-left to lower-right direction and original proportions. Remove all other branches and blue labels, complete main-duct cut ends with simple straight rectangular boundaries. Preserve this target's exact source silhouette, curves, seams, outlet proportions and original SIDE attachment, never top-mounted or inline. Do not substitute the shape of 3C for the target. Black technical line art on white, same perspective, centered with ample margin, no text, no shading.",
+      "correctionPrompt": "Use case: precise-object-edit. Fix a single small artifact in this otherwise finished technical line drawing. At the far LEFT end of the long rectangular main duct there is an incorrect narrow outlined slot/window with a diagonal inside it drawn on the NEAR SIDE wall. Remove that narrow slot/window and its diagonal, leaving a continuous flat white side wall bounded by the existing outer left vertical edge, top diagonal edge and bottom diagonal edge. Preserve EVERYTHING ELSE exactly: full main duct extent, central seam, downstream rectangular rim, entire upper-right compound elbow with curves, takeoff and rim, all perspective, scale and framing. Do not add anything. Thin black technical outlines on white."
+    },
+    {
+      "id": "3D-tight",
+      "restoredArt": "/images/fittings/group-3-individual/3D-full-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Compound takeoff/easy-bend elbow and shallow outlet retained; full-width main duct replaces schematic stub. A spurious upstream side-wall slot was removed.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example.",
+        "Generic source artwork is shared across full, tight and mitered variants; variant differences remain in metadata."
+      ],
+      "sharedArtworkIds": [
+        "3D-full",
+        "3D-tight",
+        "3D-mitered"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3B-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-56df5b6a-f769-4d49-8a41-d20eb71e5084.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      }
+    },
+    {
+      "id": "3D-mitered",
+      "restoredArt": "/images/fittings/group-3-individual/3D-full-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Compound takeoff/easy-bend elbow and shallow outlet retained; full-width main duct replaces schematic stub. A spurious upstream side-wall slot was removed.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example.",
+        "Generic source artwork is shared across full, tight and mitered variants; variant differences remain in metadata."
+      ],
+      "sharedArtworkIds": [
+        "3D-full",
+        "3D-tight",
+        "3D-mitered"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3B-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-56df5b6a-f769-4d49-8a41-d20eb71e5084.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      }
+    },
+    {
+      "id": "3E",
+      "restoredArt": "/images/fittings/group-3-individual/3E-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Original tall narrow outlet and long curved takeoff neck retained with the local main-duct reduction. A fresh source extraction replaced two trials that broadened the branch.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example."
+      ],
+      "sharedArtworkIds": [
+        "3E"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3E-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-9de5b0eb-64bd-43a3-9485-c986ed78875a.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      },
+      "prompt": "Use case: precise-object-edit. Image 1 is the authoritative full source to edit. Image 2 is the user-confirmed 3C example showing HOW MUCH surrounding main duct to keep; it is only a context-extent guide, not target geometry. Extract the near-side left branch labeled 3E: complete curved takeoff and tall rectangular outlet pointing lower-left. Preserve the sloping/tapering main duct wall at this attachment. Retain a substantial full-width main-duct section extending upstream AND downstream of the branch, comparable to Image 2: include the original main duct's whole cross-section, top and side faces, at least a clear section beyond either side of the connection. Preserve any original main-duct taper, its diagonal upper-left to lower-right direction and original proportions. Remove all other branches and blue labels, complete main-duct cut ends with simple straight rectangular boundaries. Preserve this target's exact source silhouette, curves, seams, outlet proportions and original SIDE attachment, never top-mounted or inline. Do not substitute the shape of 3C for the target. Black technical line art on white, same perspective, centered with ample margin, no text, no shading.",
+      "correctionPrompt": "Use case: precise-object-edit. Image 1 authoritative full original. Image 2 failed isolation attempt for correction. Correct only geometry drift in Image 2 to match fitting 3E at LEFT of Image 1: the original main duct REDUCES in width locally where 3E connects, with the near wall sloping diagonally inward between two straight sections. Preserve that main-duct reducing section and its seams, wider upstream and narrower downstream. The original 3E outlet is TALL and NARROW and its full-radius takeoff curves tightly around at the RIGHT side of its neck. In the failed Image 2, the outlet became much too wide, the curved neck flared broadly across the main wall and the local trunk reduction vanished. Restore the exact thin tall outlet proportions, narrow neck and original tight curved contours of Image 1's 3E. Preserve the substantial main duct upstream/downstream extent from Image 2. Remove labels and other branches. Original black technical outlines on white, same viewpoint. No new flared boot, no generic tee, no top-mounted connection. Match target geometry from Image 1 closely.",
+      "finalExtractionPrompt": "Use case: precise-object-edit. This is a STRICT source extraction, NOT a redraw or redesign. Keep the entire LEFT END of this source assembly including ONLY fitting 3E. Preserve those original pixels/lines as closely as possible. Source image is 1581x995. Retain the original upstream main duct beginning at top-left opening (52,203)-(401,39), the main duct's near-wall reduction around 3E between (178,274) and (323,307), the entire tall narrow 3E outlet and neck at approximately x110..325 y306..602. Most important: preserve the original long nearly vertical curved RIGHT contour of 3E's neck and the straight-top narrow branch outlet, do not substitute a wide flared tee. Keep original main duct as far downstream as the cross seam running (724,258) to (488,397), down to (488,516). End the main duct at that seam and complete only that cut end as a rectangular opening continuing to the far side. Erase everything to the right/below that main-duct cutoff except the retained 3E branch. Remove 3F,3G,3H completely. Remove blue 3E label and all other text. Retain original upstream extent and full original main duct width; that is already the desired amount of context. Do not straighten the original main-duct taper. Do not reshape any of 3E. Center resulting source portion with white margin; clean thin black linework on white, same original perspective. No other geometry changes."
+    },
+    {
+      "id": "3F-full",
+      "restoredArt": "/images/fittings/group-3-individual/3F-full-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Compound curved elbow, seam/collar and wide shallow outlet retained with full-width main duct.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example.",
+        "Generic source artwork is shared across full, tight and mitered variants; variant differences remain in metadata."
+      ],
+      "sharedArtworkIds": [
+        "3F-full",
+        "3F-tight",
+        "3F-mitered"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3E-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-0d7fa221-5136-4651-935d-40e9234f3d53.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      },
+      "prompt": "Use case: precise-object-edit. Image 1 is the authoritative full source to edit. Image 2 is the user-confirmed 3C example showing HOW MUCH surrounding main duct to keep; it is only a context-extent guide, not target geometry. Extract the near-side middle branch labeled 3F: compound rounded takeoff/easy-bend elbow with wide shallow rectangular outlet pointing upper-left across the front. Preserve the curved U-shaped outer and inner elbow, seams and collars. Retain a substantial full-width main-duct section extending upstream AND downstream of the branch, comparable to Image 2: include the original main duct's whole cross-section, top and side faces, at least a clear section beyond either side of the connection. Preserve any original main-duct taper, its diagonal upper-left to lower-right direction and original proportions. Remove all other branches and blue labels, complete main-duct cut ends with simple straight rectangular boundaries. Preserve this target's exact source silhouette, curves, seams, outlet proportions and original SIDE attachment, never top-mounted or inline. Do not substitute the shape of 3C for the target. Black technical line art on white, same perspective, centered with ample margin, no text, no shading."
+    },
+    {
+      "id": "3F-tight",
+      "restoredArt": "/images/fittings/group-3-individual/3F-full-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Compound curved elbow, seam/collar and wide shallow outlet retained with full-width main duct.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example.",
+        "Generic source artwork is shared across full, tight and mitered variants; variant differences remain in metadata."
+      ],
+      "sharedArtworkIds": [
+        "3F-full",
+        "3F-tight",
+        "3F-mitered"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3E-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-0d7fa221-5136-4651-935d-40e9234f3d53.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      }
+    },
+    {
+      "id": "3F-mitered",
+      "restoredArt": "/images/fittings/group-3-individual/3F-full-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Compound curved elbow, seam/collar and wide shallow outlet retained with full-width main duct.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example.",
+        "Generic source artwork is shared across full, tight and mitered variants; variant differences remain in metadata."
+      ],
+      "sharedArtworkIds": [
+        "3F-full",
+        "3F-tight",
+        "3F-mitered"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3E-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-0d7fa221-5136-4651-935d-40e9234f3d53.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      }
+    },
+    {
+      "id": "3G",
+      "restoredArt": "/images/fittings/group-3-individual/3G-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Curved far-side takeoff, local sloping connection, transition seams and straight-aspect transition retained.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example."
+      ],
+      "sharedArtworkIds": [
+        "3G"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3E-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-aaf843b6-b73e-4667-8d1b-ec55998fdf6a.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      },
+      "prompt": "Use case: precise-object-edit. Image 1 is the authoritative full source to edit. Image 2 is the user-confirmed 3C example showing HOW MUCH surrounding main duct to keep; it is only a context-extent guide, not target geometry. Extract the far-side upper branch labeled 3G: small curved takeoff with seams, straight-aspect transition widening to the shallow rectangular upper-right outlet. Preserve the tapered main-duct wall at attachment. Retain a substantial full-width main-duct section extending upstream AND downstream of the branch, comparable to Image 2: include the original main duct's whole cross-section, top and side faces, at least a clear section beyond either side of the connection. Preserve any original main-duct taper, its diagonal upper-left to lower-right direction and original proportions. Remove all other branches and blue labels, complete main-duct cut ends with simple straight rectangular boundaries. Preserve this target's exact source silhouette, curves, seams, outlet proportions and original SIDE attachment, never top-mounted or inline. Do not substitute the shape of 3C for the target. Black technical line art on white, same perspective, centered with ample margin, no text, no shading."
+    },
+    {
+      "id": "3H",
+      "restoredArt": "/images/fittings/group-3-individual/3H-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Curved far-side takeoff, local sloping connection, collar seams and offset transition retained.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example."
+      ],
+      "sharedArtworkIds": [
+        "3H"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3E-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-2f23ee0b-95a6-42e1-8b88-2a28bfefb5e0.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      },
+      "prompt": "Use case: precise-object-edit. Image 1 is the authoritative full source to edit. Image 2 is the user-confirmed 3C example showing HOW MUCH surrounding main duct to keep; it is only a context-extent guide, not target geometry. Extract the far-side rightmost branch labeled 3H: small curved takeoff with seams, long OFFSET rectangular transition widening to the shallow upper-right outlet. Preserve offset, long sloping panels and tapered main-duct wall. Retain a substantial full-width main-duct section extending upstream AND downstream of the branch, comparable to Image 2: include the original main duct's whole cross-section, top and side faces, at least a clear section beyond either side of the connection. Preserve any original main-duct taper, its diagonal upper-left to lower-right direction and original proportions. Remove all other branches and blue labels, complete main-duct cut ends with simple straight rectangular boundaries. Preserve this target's exact source silhouette, curves, seams, outlet proportions and original SIDE attachment, never top-mounted or inline. Do not substitute the shape of 3C for the target. Black technical line art on white, same perspective, centered with ample margin, no text, no shading."
+    },
+    {
+      "id": "3J-full",
+      "restoredArt": "/images/fittings/group-3-individual/3J-full-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Compound elbow, inner/outer curved contours, bend seam and shallow outlet retained.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example.",
+        "Generic source artwork is shared across full, tight and mitered variants; variant differences remain in metadata."
+      ],
+      "sharedArtworkIds": [
+        "3J-full",
+        "3J-tight",
+        "3J-mitered"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3J-full-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-7df9e055-cd51-4dfd-a725-246d54ea9474.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      },
+      "prompt": "Use case: precise-object-edit. Image 1 is the authoritative full source to edit. Image 2 is the user-confirmed 3C example showing HOW MUCH surrounding main duct to keep; it is only a context-extent guide, not target geometry. Extract the near-side middle branch labeled 3J: full rounded takeoff/easy-bend compound elbow, with wide shallow rectangular outlet pointing upper-left across the front. Preserve the inner/outer bends and mid-bend seam. Retain a substantial full-width main-duct section extending upstream AND downstream of the branch, comparable to Image 2: include the original main duct's whole cross-section, top and side faces, at least a clear section beyond either side of the connection. Preserve any original main-duct taper, its diagonal upper-left to lower-right direction and original proportions. Remove all other branches and blue labels, complete main-duct cut ends with simple straight rectangular boundaries. Preserve this target's exact source silhouette, curves, seams, outlet proportions and original SIDE attachment, never top-mounted or inline. Do not substitute the shape of 3C for the target. Black technical line art on white, same perspective, centered with ample margin, no text, no shading."
+    },
+    {
+      "id": "3J-tight",
+      "restoredArt": "/images/fittings/group-3-individual/3J-full-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Compound elbow, inner/outer curved contours, bend seam and shallow outlet retained.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example.",
+        "Generic source artwork is shared across full, tight and mitered variants; variant differences remain in metadata."
+      ],
+      "sharedArtworkIds": [
+        "3J-full",
+        "3J-tight",
+        "3J-mitered"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3J-full-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-7df9e055-cd51-4dfd-a725-246d54ea9474.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      }
+    },
+    {
+      "id": "3J-mitered",
+      "restoredArt": "/images/fittings/group-3-individual/3J-full-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Compound elbow, inner/outer curved contours, bend seam and shallow outlet retained.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example.",
+        "Generic source artwork is shared across full, tight and mitered variants; variant differences remain in metadata."
+      ],
+      "sharedArtworkIds": [
+        "3J-full",
+        "3J-tight",
+        "3J-mitered"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3J-full-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-7df9e055-cd51-4dfd-a725-246d54ea9474.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      }
+    },
+    {
+      "id": "3K",
+      "restoredArt": "/images/fittings/group-3-individual/3K-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Far-side curved takeoff, local main-duct shoulder, straight-aspect transition and outlet retained.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example."
+      ],
+      "sharedArtworkIds": [
+        "3K"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3J-full-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-4adb8b91-bbb8-4699-b43f-33f3421e4b08.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      },
+      "prompt": "Use case: precise-object-edit. Image 1 is the authoritative full source to edit. Image 2 is the user-confirmed 3C example showing HOW MUCH surrounding main duct to keep; it is only a context-extent guide, not target geometry. Extract the far-side upper branch labeled 3K: small curved takeoff with inner and outer curved contours, straight-aspect transition widening to the shallow rectangular upper-right outlet. Preserve the original angled/tapered main duct wall at attachment. Retain a substantial full-width main-duct section extending upstream AND downstream of the branch, comparable to Image 2: include the original main duct's whole cross-section, top and side faces, at least a clear section beyond either side of the connection. Preserve any original main-duct taper, its diagonal upper-left to lower-right direction and original proportions. Remove all other branches and blue labels, complete main-duct cut ends with simple straight rectangular boundaries. Preserve this target's exact source silhouette, curves, seams, outlet proportions and original SIDE attachment, never top-mounted or inline. Do not substitute the shape of 3C for the target. Black technical line art on white, same perspective, centered with ample margin, no text, no shading."
+    },
+    {
+      "id": "3L",
+      "restoredArt": "/images/fittings/group-3-individual/3L-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Far-side curved takeoff, offset transition, collar and shallow outlet retained.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example."
+      ],
+      "sharedArtworkIds": [
+        "3L"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3J-full-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-fafdb617-4bc8-49d3-83d6-6f5af90ffd3e.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      },
+      "prompt": "Use case: precise-object-edit. Image 1 is the authoritative full source to edit. Image 2 is the user-confirmed 3C example showing HOW MUCH surrounding main duct to keep; only a context-extent guide, not target geometry. Extract the far-side rightmost branch labeled 3L: complete curved takeoff and OFFSET rectangular transition widening to upper-right outlet, with collar seam. Preserve the far-side main-duct taper at this connection. Retain a substantial full-width main-duct section extending upstream AND downstream of the branch, comparable to Image 2: whole original main-duct cross-section, top and side faces and a clear section beyond either side of connection. Preserve original main-duct taper and reductions, diagonal upper-left to lower-right direction and proportions. Remove all other branches and blue labels. Complete main-duct cut ends with simple straight rectangular boundaries. Preserve target silhouette, curves, seams, outlet proportions and original SIDE attachment, never top-mounted or inline. Do not substitute 3C geometry. Black technical lines on white, same perspective, centered with ample margin, no text or shading."
+    },
+    {
+      "id": "3M",
+      "restoredArt": "/images/fittings/group-3-individual/3M-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Rectangular-to-round boot, collars and straight pipe retained on reducing near-side wall; upstream/downstream main-duct reductions remain visible.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example."
+      ],
+      "sharedArtworkIds": [
+        "3M"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3M-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-2880dfba-28d2-4083-a80b-de33628bdfce.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      },
+      "prompt": "Use case: precise-object-edit. Image 1 is the authoritative full source to edit. Image 2 is the user-confirmed 3C example showing HOW MUCH surrounding main duct to keep; only a context-extent guide, not target geometry. Extract the left branch labeled 3M: straight round pipe pointing lower-left, round collars and triangular rectangular-to-round boot attached to the near sloping side of the main duct. Preserve the ORIGINAL LOCAL MAIN-DUCT REDUCTION with its sloping near wall just at this fitting, and full larger-width upstream and smaller-width downstream duct. The boot must stay on the sloped reducing side wall. Retain a substantial full-width main-duct section extending upstream AND downstream of the branch, comparable to Image 2: whole original main-duct cross-section, top and side faces and a clear section beyond either side of connection. Preserve original main-duct taper and reductions, diagonal upper-left to lower-right direction and proportions. Remove all other branches and blue labels. Complete main-duct cut ends with simple straight rectangular boundaries. Preserve target silhouette, curves, seams, outlet proportions and original SIDE attachment, never top-mounted or inline. Do not substitute 3C geometry. Black technical lines on white, same perspective, centered with ample margin, no text or shading."
+    },
+    {
+      "id": "3N",
+      "restoredArt": "/images/fittings/group-3-individual/3N-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Boot and complete segmented round elbow/pipe retained on reducing near-side wall, with full main-duct sections.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example."
+      ],
+      "sharedArtworkIds": [
+        "3N"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3M-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-d8948d55-241b-48b2-ae5b-e24f59109dd6.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      },
+      "prompt": "Use case: precise-object-edit. Image 1 is the authoritative full source to edit. Image 2 is the user-confirmed 3C example showing HOW MUCH surrounding main duct to keep; only a context-extent guide, not target geometry. Extract the right branch labeled 3N: triangular rectangular-to-round boot on the near sloping side of the main duct and full round multi-gore compound elbow with pipe extending upper-right. Preserve the ORIGINAL LOCAL MAIN-DUCT REDUCTION with sloping near wall at this fitting, larger-width upstream and smaller-width downstream duct. Preserve all round elbow segments and their source orientation. Retain a substantial full-width main-duct section extending upstream AND downstream of the branch, comparable to Image 2: whole original main-duct cross-section, top and side faces and a clear section beyond either side of connection. Preserve original main-duct taper and reductions, diagonal upper-left to lower-right direction and proportions. Remove all other branches and blue labels. Complete main-duct cut ends with simple straight rectangular boundaries. Preserve target silhouette, curves, seams, outlet proportions and original SIDE attachment, never top-mounted or inline. Do not substitute 3C geometry. Black technical lines on white, same perspective, centered with ample margin, no text or shading."
+    },
+    {
+      "id": "3O",
+      "restoredArt": "/images/fittings/group-3-individual/3O-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Triangular boot, round collar and straight pipe retained on the straight main-duct side wall.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example."
+      ],
+      "sharedArtworkIds": [
+        "3O"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3O-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-215cb715-b353-4869-8790-f97df3cc7234.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      },
+      "prompt": "Use case: precise-object-edit. Image 1 is the authoritative full source to edit. Image 2 is the user-confirmed 3C example showing HOW MUCH surrounding main duct to keep; only a context-extent guide, not target geometry. Extract the left branch labeled 3O: straight round outlet pointing lower-left, round collar and triangular rectangular-to-round boot on the straight near SIDE of the main duct. Preserve the triangular face folds. Retain a substantial full-width main-duct section extending upstream AND downstream of the branch, comparable to Image 2: whole original main-duct cross-section, top and side faces and a clear section beyond either side of connection. Preserve original main-duct taper and reductions, diagonal upper-left to lower-right direction and proportions. Remove all other branches and blue labels. Complete main-duct cut ends with simple straight rectangular boundaries. Preserve target silhouette, curves, seams, outlet proportions and original SIDE attachment, never top-mounted or inline. Do not substitute 3C geometry. Black technical lines on white, same perspective, centered with ample margin, no text or shading."
+    },
+    {
+      "id": "3P",
+      "restoredArt": "/images/fittings/group-3-individual/3P-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Triangular boot, two elbows, upright connecting segment and long outlet retained on straight main-duct side wall.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example."
+      ],
+      "sharedArtworkIds": [
+        "3P"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3O-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-73c53144-117c-4251-906f-f18dc1a365f1.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      },
+      "prompt": "Use case: precise-object-edit. Image 1 is the authoritative full source. Image 2 is the confirmed 3C amount-of-context guide, not target geometry. Isolate middle branch 3P: triangular rectangular-to-round boot on near straight SIDE wall, full two round elbows joined by the short upright cylindrical section and long round outlet pointing upper-right. Keep all collars, gore seams and triangular boot creases. Keep a substantial full-width original main-duct section both upstream and downstream of attachment, comparable to Image 2. Preserve full cross-section, original upper-left to lower-right main-duct direction, widths, local tapers and reductions. Keep a clear main-duct bay on both sides of connection. Remove unrelated branches and all labels; terminate retained trunk with straight rectangular cut ends. Preserve EXACT source target geometry, SIDE attachment, all curves, proportions, seams and original perspective. No inline or top-mounted conversion. Black technical line art on white with clear margins, no text, no shading."
+    },
+    {
+      "id": "3Q",
+      "restoredArt": "/images/fittings/group-3-individual/3Q-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Direct round side takeoff, collars and straight pipe retained; no triangular boot added.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example."
+      ],
+      "sharedArtworkIds": [
+        "3Q"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3O-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-53c546e9-2ba7-4f3e-86da-7eead8ff4a4c.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      },
+      "prompt": "Use case: precise-object-edit. Image 1 is the authoritative full source. Image 2 is the confirmed 3C amount-of-context guide, not target geometry. Isolate rightmost branch 3Q: straight round pipe pointing lower-left with its concentric round collars entering the straight near SIDE wall directly. No rectangular-to-round triangular boot for this one. Keep a substantial full-width original main-duct section both upstream and downstream of attachment, comparable to Image 2. Preserve full cross-section, original upper-left to lower-right main-duct direction, widths, local tapers and reductions. Keep a clear main-duct bay on both sides of connection. Remove unrelated branches and all labels; terminate retained trunk with straight rectangular cut ends. Preserve EXACT source target geometry, SIDE attachment, all curves, proportions, seams and original perspective. No inline or top-mounted conversion. Black technical line art on white with clear margins, no text, no shading."
+    },
+    {
+      "id": "3R",
+      "restoredArt": "/images/fittings/group-3-individual/3R-context-v2.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "notes": [
+        "Triangular short round takeoff retained on the original reducing main-duct section.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example."
+      ],
+      "sharedArtworkIds": [
+        "3R"
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-enhanced/3R-restored-art.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-aab07b29-60f7-4041-a34c-e46d2e6722f6.png",
+      "visualReview": {
+        "checked": true,
+        "checks": [
+          "Compared selected image with accepted full source illustration.",
+          "Checked target branch identity, orientation, curves, transitions, seams and outlet.",
+          "Checked full-width parent duct, upstream/downstream context, source taper where present, complete boundaries and absence of unrelated branches."
+        ],
+        "result": "Ready for user review; final artwork acceptance pending."
+      },
+      "prompt": "Use case: precise-object-edit. Image 1 is the authoritative full source. Image 2 is the confirmed 3C amount-of-context guide, not target geometry. Isolate leftmost branch 3R: triangular rectangular-to-round boot with short round opening, no long pipe, on the original sloping near SIDE of the reducing main duct. Preserve the local main-duct reduction around this boot, wider upstream duct and narrower downstream duct, triangular face creases and the short circular outlet. Keep a substantial full-width original main-duct section both upstream and downstream of attachment, comparable to Image 2. Preserve full cross-section, original upper-left to lower-right main-duct direction, widths, local tapers and reductions. Keep a clear main-duct bay on both sides of connection. Remove unrelated branches and all labels; terminate retained trunk with straight rectangular cut ends. Preserve EXACT source target geometry, SIDE attachment, all curves, proportions, seams and original perspective. No inline or top-mounted conversion. Black technical line art on white with clear margins, no text, no shading."
+    }
+  ]
+}

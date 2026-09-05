@@ -34,6 +34,17 @@ def package(activate=False):
     OUT.mkdir(exist_ok=True)
     CONTEXT.mkdir(exist_ok=True)
     original = json.loads((PUBLIC / 'images/fittings/group-3-enhanced/manifest.json').read_text())
+    saved_decisions = {}
+    reports = []
+    for path in (ROOT / 'docs/fitting-reviews').glob('*.json'):
+        report = json.loads(path.read_text())
+        if report.get('batchId') == 'group-3-individual' and report.get('completedAt'):
+            reports.append((report, path))
+    for report, path in sorted(reports, key=lambda pair: pair[0]['completedAt']):
+        for decision in report['drawings']:
+            saved_decisions[(decision['id'], decision['revision'])] = {
+                **decision, 'completedAt': report['completedAt'],
+                'record': str(path.relative_to(ROOT))}
     checks = {}
     for suffix in ['b-h', 'j-n', 'o-r', 'standalone']:
         path = ROOT / f'docs/fitting-preflight/group-3-individual-{suffix}.json'
@@ -42,6 +53,26 @@ def package(activate=False):
                 raise ValueError(f'Duplicate QA entry: {item["id"]}')
             checks[item['id']] = dict(item, qaRecord=str(path.relative_to(ROOT)))
     assert set(checks) == {i['id'] for i in original['items']}, 'Incomplete QA coverage'
+    # Keep earlier extraction QA as history; revised connection context supersedes
+    # only the listed drawings and does not imply user acceptance.
+    context_qa = ROOT / 'docs/fitting-preflight/group-3-expanded-context.json'
+    if context_qa.exists():
+        revised_ids = set()
+        for revision in json.loads(context_qa.read_text())['items']:
+            item_id = revision['id']
+            if item_id not in checks or item_id in revised_ids:
+                raise ValueError(f'Invalid or duplicate context revision: {item_id}')
+            revised_ids.add(item_id)
+            checks[item_id].update(revision, qaRecord=str(context_qa.relative_to(ROOT)))
+    edge_qa = ROOT / 'docs/fitting-preflight/group-3-edge-corrections.json'
+    if edge_qa.exists():
+        revised_ids = set()
+        for revision in json.loads(edge_qa.read_text())['items']:
+            item_id = revision['id']
+            if item_id not in checks or item_id in revised_ids:
+                raise ValueError(f'Invalid or duplicate edge revision: {item_id}')
+            revised_ids.add(item_id)
+            checks[item_id].update(revision, qaRecord=str(edge_qa.relative_to(ROOT)))
 
     # Deduplicate the full accepted images, while retaining every fitting's link.
     references = {}
@@ -95,6 +126,11 @@ def package(activate=False):
                                     'Individual fitting. ' + ' '.join(check['notes']) + ' High-resolution raster in SVG.'))
         item['svg'] = '/' + str(svg_path.relative_to(PUBLIC))
         item['revision'] = hashlib.sha256(svg_path.read_bytes() + (PUBLIC / item['referenceImage'].lstrip('/')).read_bytes()).hexdigest()
+        decision = saved_decisions.get((item['id'], item['revision']))
+        previously_accepted = bool(decision and decision['status'] == 'accepted')
+        if decision:
+            item['status'] = 'visually-approved' if previously_accepted else 'needs-work'
+            item['visualReview'] = decision
         with Image.open(path) as image:
             item['embeddedRasterSize'] = list(image.size)
         # Acceptance of the full reference does not approve a new extraction.
@@ -108,6 +144,18 @@ def package(activate=False):
             review_note = 'The connecting duct is shown as a cutaway with short wall strips.'
         elif item['id'].startswith('3D-') or item['id'] == '3H':
             review_note = 'The short connecting duct fragment is schematic.'
+        if check.get('expandedConnectionContext'):
+            review_note = 'Full-width original main duct retained upstream and downstream of the connection.'
+        if check.get('singleLineOpenings'):
+            review_note += ' Opening edges use a single outline.'
+        if check.get('upstreamJointCorrection'):
+            review_note += ' The main-duct joint has been moved upstream; the elbow stays in place.'
+        if check.get('largerUpstreamDuct'):
+            review_note += ' The wider upstream duct tapers down along the far side.'
+        if check.get('nearSideReduction'):
+            review_note += ' The wider upstream duct reduces along the near side, with the round takeoff in that sloping wall.'
+        if check.get('narrowerDownstreamDuct'):
+            review_note += ' The downstream duct is narrower, with its far edge moved inward.'
         if item.get('variant') and len(item.get('sharedArtworkIds', [])) > 1:
             review_note += ' Generic source artwork does not distinguish these corner or vane variants.'
         batch_items.append({'id': item['id'], 'number': item['fittingNumber'], 'name': item['name'], 'group': 3,
@@ -115,16 +163,20 @@ def package(activate=False):
                             'reference': '..' + item['referenceImage'], 'sourcePage': 167 if page >= 12 else 166,
                             'sourcePDF': f'../files/ManD.Groups.pdf#page={page}', 'revision': item['revision'],
                             'contextURL': 'group-3-references.html#' + ref['id'],
-                            'notes': check['notes'], 'reviewNote': review_note, 'priorApproval': False})
+                            'notes': check['notes'], 'reviewNote': review_note, 'priorApproval': previously_accepted})
+    all_accepted = len(items) == len(original['items']) and bool(items) and all(
+        item['status'] == 'visually-approved' for item in items)
     write_json(OUT / 'manifest.json', {'schemaVersion': 1, 'group': 3, 'title': 'Group 3 individual fittings',
-               'status': 'individual-needs-review', 'drawingCount': len(items), 'expectedDrawingCount': len(original['items']),
+               'status': 'visually-approved' if all_accepted else 'individual-needs-review', 'drawingCount': len(items), 'expectedDrawingCount': len(original['items']),
                'withheldIds': [i['id'] for i in withheld], 'withheld': withheld,
-               'upstreamContextRule': 'Keep a small piece of the existing connecting neighbor only when separating shared assembly artwork. Leave original standalone fittings unchanged.',
+               'upstreamContextRule': 'For separated assembly fittings, retain the full original main-duct cross-section and substantial upstream/downstream sections, following the user-confirmed 3C context example. Preserve original duct direction and taper. Leave original standalone fittings unchanged.',
                'referenceManifest': '/images/fittings/group-3-context/manifest.json', 'items': items})
-    description = ('Standalone drawings retain their original geometry. Fittings separated from shared assemblies retain a short piece of their existing connection. '
+    description = ('Standalone drawings retain their original geometry. Separated assembly fittings retain full-width main duct upstream and downstream, following the confirmed 3C example. '
                    'Open the full reference from any card. Corner and vane variants still share generic source artwork; their differences are recorded in the fitting metadata.')
     if withheld:
         description += ' Still being corrected: ' + ', '.join(i['id'] for i in withheld) + '.'
+    if all_accepted:
+        description = 'All 32 individual fitting drawings are accepted. ' + description
     batch = {'id': 'group-3-individual', 'title': 'Group 3 · individual fittings', 'description': description,
              'referenceGallery': 'group-3-references.html', 'items': batch_items}
     write_json(PUBLIC / 'fitting-review/batches/group-3-individual.json', batch)

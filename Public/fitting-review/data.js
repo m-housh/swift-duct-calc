@@ -1,7 +1,7 @@
 window.FITTING_REVIEW = {
   "id": "group-3-individual",
   "title": "Group 3 \u00b7 individual fittings",
-  "description": "Standalone drawings retain their original geometry. Fittings separated from shared assemblies retain a short piece of their existing connection. Open the full reference from any card. Corner and vane variants still share generic source artwork; their differences are recorded in the fitting metadata.",
+  "description": "All 32 individual fitting drawings are accepted. Standalone drawings retain their original geometry. Separated assembly fittings retain full-width main duct upstream and downstream, following the confirmed 3C example. Open the full reference from any card. Corner and vane variants still share generic source artwork; their differences are recorded in the fitting metadata.",
   "referenceGallery": "group-3-references.html",
   "items": [
     {
@@ -19,210 +19,220 @@ window.FITTING_REVIEW = {
         "Existing standalone drawing retained without adding upstream geometry, per user clarification."
       ],
       "reviewNote": "Original standalone artwork preserved.",
-      "priorApproval": false
+      "priorApproval": true
     },
     {
       "id": "3B",
       "number": "3B",
       "name": "Full-radius takeoff with offset transition",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3B.svg?revision=bd470025e574",
+      "image": "../images/fittings/group-3-individual/3B.svg?revision=3775a7e0d7b6",
       "reference": "../images/fittings/group-3-enhanced/source-art/3B.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "bd470025e5744fd091aae7f238eb0bd6b019a35ded6f7d726ac2c62796d3f649",
+      "revision": "3775a7e0d7b628f4d47064fb97da55fff662728028e674bd2be8c6d33ac7430c",
       "contextURL": "group-3-references.html#reference-3B",
       "notes": [
-        "Prepared from a tight approved-source crop after full-assembly attempts changed the geometry.",
-        "Offset transition, distinct tall curved takeoff neck, and outlet rim compared visually against the source crop.",
-        "Upstream context is represented by two short parent side-wall strips as a cutaway, rather than a fully closed trunk volume."
+        "Removed inset outline from both the branch outlet at lower-left AND the main-duct end at lower-right; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
       ],
-      "reviewNote": "The connecting duct is shown as a cutaway with short wall strips.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection. Opening edges use a single outline.",
+      "priorApproval": true
     },
     {
       "id": "3C",
       "number": "3C",
       "name": "Full-radius takeoff with straight transition",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3C.svg?revision=f8e81d28e5e8",
+      "image": "../images/fittings/group-3-individual/3C.svg?revision=2c56e97dfb97",
       "reference": "../images/fittings/group-3-enhanced/source-art/3B.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "f8e81d28e5e8ff8ecc3e90a35ac86e6983c076b6cb3919dab23970620fdcc785",
+      "revision": "2c56e97dfb9788327f24d218491caa2be785de7650023ccd50954f0be9f60273",
       "contextURL": "group-3-references.html#reference-3B",
       "notes": [
-        "Short attachment fragment retained at the inlet; straight-aspect transition, curved takeoff, outlet rim and original far-side orientation visually checked against approved assembly."
+        "Removed inset outline from both the branch outlet at upper-right AND the main-duct end at lower-right; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
       ],
-      "reviewNote": "A short portion of the existing connection is retained.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection. Opening edges use a single outline.",
+      "priorApproval": true
     },
     {
       "id": "3D-full",
       "number": "3D",
       "name": "Takeoff elbow with easy-bend elbow",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3D-full.svg?revision=2d769199e513",
+      "image": "../images/fittings/group-3-individual/3D-full.svg?revision=5d8caae82968",
       "reference": "../images/fittings/group-3-enhanced/source-art/3B.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "2d769199e5138f7690bd24b3c8a7752cf898d2d58dc81c1e6031fb864245222c",
+      "revision": "5d8caae8296875372244a158d681d5941731bdceb04e727f7772b058e891cb9b",
       "contextURL": "group-3-references.html#reference-3B",
       "notes": [
-        "Prepared from a tight approved-source crop after full-assembly attempts changed the geometry.",
-        "Compound elbow, inner and outer bends, seam and shallow rectangular outlet visually match the source crop.",
-        "Retains a short schematic parent duct fragment below the far-side branch; parent ends are completed boundaries.",
-        "Generic source artwork shared across corner variants; artwork does not distinguish full, tight and mitered configuration."
+        "Upstream main duct is wider on its far/back side and reduces toward the existing takeoff, following the user's third markup.",
+        "Retained the upstream joint location and extended its top seam across the wider duct; the reduction begins at this joint.",
+        "Elbow remains in its existing location; compound bend and lower throat retained.",
+        "Rectangular opening outlines remain single lines without inset rims.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct.",
+        "Added a straight connecting edge from the upstream far-side joint to the elbow, above the retained straight reducing edge. User clarification: downstream width = upstream width minus fitting width; the connection edge is not curved."
       ],
-      "reviewNote": "The short connecting duct fragment is schematic. Generic source artwork does not distinguish these corner or vane variants.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection. Opening edges use a single outline. The main-duct joint has been moved upstream; the elbow stays in place. The wider upstream duct tapers down along the far side. Generic source artwork does not distinguish these corner or vane variants.",
+      "priorApproval": true
     },
     {
       "id": "3D-tight",
       "number": "3D",
       "name": "Takeoff elbow with easy-bend elbow",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3D-tight.svg?revision=bb985c60c658",
+      "image": "../images/fittings/group-3-individual/3D-tight.svg?revision=c47868e7495b",
       "reference": "../images/fittings/group-3-enhanced/source-art/3B.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "bb985c60c65805fd327d7eef5d6c85912d9ee0e7155188ccddc5f8a1f52cc778",
+      "revision": "c47868e7495bcdc41fba8f72a4fe2900cd02e3f1625bec388850573b2a393163",
       "contextURL": "group-3-references.html#reference-3B",
       "notes": [
-        "Prepared from a tight approved-source crop after full-assembly attempts changed the geometry.",
-        "Compound elbow, inner and outer bends, seam and shallow rectangular outlet visually match the source crop.",
-        "Retains a short schematic parent duct fragment below the far-side branch; parent ends are completed boundaries.",
-        "Generic source artwork shared across corner variants; artwork does not distinguish full, tight and mitered configuration."
+        "Upstream main duct is wider on its far/back side and reduces toward the existing takeoff, following the user's third markup.",
+        "Retained the upstream joint location and extended its top seam across the wider duct; the reduction begins at this joint.",
+        "Elbow remains in its existing location; compound bend and lower throat retained.",
+        "Rectangular opening outlines remain single lines without inset rims.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct.",
+        "Added a straight connecting edge from the upstream far-side joint to the elbow, above the retained straight reducing edge. User clarification: downstream width = upstream width minus fitting width; the connection edge is not curved."
       ],
-      "reviewNote": "The short connecting duct fragment is schematic. Generic source artwork does not distinguish these corner or vane variants.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection. Opening edges use a single outline. The main-duct joint has been moved upstream; the elbow stays in place. The wider upstream duct tapers down along the far side. Generic source artwork does not distinguish these corner or vane variants.",
+      "priorApproval": true
     },
     {
       "id": "3D-mitered",
       "number": "3D",
       "name": "Takeoff elbow with easy-bend elbow",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3D-mitered.svg?revision=f3caa2331794",
+      "image": "../images/fittings/group-3-individual/3D-mitered.svg?revision=7e4420d8ee08",
       "reference": "../images/fittings/group-3-enhanced/source-art/3B.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "f3caa2331794a5561a754e09b27c85b2a51fd1668cffd5d28231e3ee5286bd09",
+      "revision": "7e4420d8ee082daf3d92321062ba2037b790476e14746f78518d8cedc4e36323",
       "contextURL": "group-3-references.html#reference-3B",
       "notes": [
-        "Prepared from a tight approved-source crop after full-assembly attempts changed the geometry.",
-        "Compound elbow, inner and outer bends, seam and shallow rectangular outlet visually match the source crop.",
-        "Retains a short schematic parent duct fragment below the far-side branch; parent ends are completed boundaries.",
-        "Generic source artwork shared across corner variants; artwork does not distinguish full, tight and mitered configuration."
+        "Upstream main duct is wider on its far/back side and reduces toward the existing takeoff, following the user's third markup.",
+        "Retained the upstream joint location and extended its top seam across the wider duct; the reduction begins at this joint.",
+        "Elbow remains in its existing location; compound bend and lower throat retained.",
+        "Rectangular opening outlines remain single lines without inset rims.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct.",
+        "Added a straight connecting edge from the upstream far-side joint to the elbow, above the retained straight reducing edge. User clarification: downstream width = upstream width minus fitting width; the connection edge is not curved."
       ],
-      "reviewNote": "The short connecting duct fragment is schematic. Generic source artwork does not distinguish these corner or vane variants.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection. Opening edges use a single outline. The main-duct joint has been moved upstream; the elbow stays in place. The wider upstream duct tapers down along the far side. Generic source artwork does not distinguish these corner or vane variants.",
+      "priorApproval": true
     },
     {
       "id": "3E",
       "number": "3E",
       "name": "Transition-wall takeoff",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3E.svg?revision=9f60601a06a2",
+      "image": "../images/fittings/group-3-individual/3E.svg?revision=b10b9afc4ac2",
       "reference": "../images/fittings/group-3-enhanced/source-art/3E.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "9f60601a06a2968a4402cd9f49f2c9bab02c8e4c06e25ea53da590019b81a35e",
+      "revision": "b10b9afc4ac2f5d2ccd31a71873d139fb441474b7771eacccc90c0cdf750520d",
       "contextURL": "group-3-references.html#reference-3E",
       "notes": [
-        "Short parent duct segment retained behind the side takeoff; square outlet and full curved throat visually checked against approved assembly."
+        "Original tall narrow outlet and long curved takeoff neck retained with the local main-duct reduction. A fresh source extraction replaced two trials that broadened the branch.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example."
       ],
-      "reviewNote": "A short portion of the existing connection is retained.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection.",
+      "priorApproval": true
     },
     {
       "id": "3F-full",
       "number": "3F",
       "name": "Transition-wall takeoff elbow with easy-bend elbow",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3F-full.svg?revision=ed7d72c65787",
+      "image": "../images/fittings/group-3-individual/3F-full.svg?revision=4ff9ad7f2c5e",
       "reference": "../images/fittings/group-3-enhanced/source-art/3E.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "ed7d72c657878386773e1dafe81c1038249f523727422d8105b401ad261e0822",
+      "revision": "4ff9ad7f2c5ef9521ef745d9a75dab7896761d6d0adf509e9cf52e678e267976",
       "contextURL": "group-3-references.html#reference-3E",
       "notes": [
-        "Short parent duct segment retained; complete compound takeoff/easy-bend elbow and broad shallow rectangular outlet visually checked against approved assembly.",
-        "Source uses generic artwork for these variants; differences in corner configuration remain metadata, and this drawing does not distinguish them."
+        "Removed inset outline from the main-duct end at lower-right; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct."
       ],
-      "reviewNote": "A short portion of the existing connection is retained. Generic source artwork does not distinguish these corner or vane variants.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection. Opening edges use a single outline. Generic source artwork does not distinguish these corner or vane variants.",
+      "priorApproval": true
     },
     {
       "id": "3F-tight",
       "number": "3F",
       "name": "Transition-wall takeoff elbow with easy-bend elbow",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3F-tight.svg?revision=a99b5f47247a",
+      "image": "../images/fittings/group-3-individual/3F-tight.svg?revision=91df2906ac30",
       "reference": "../images/fittings/group-3-enhanced/source-art/3E.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "a99b5f47247acdb910b0068a4a1d62d827c59a8e180f6787b7b1d7b8b78e969c",
+      "revision": "91df2906ac303791e43a8f20f2a9e7ba005dab8f5382e3c6e6a4627ca699440d",
       "contextURL": "group-3-references.html#reference-3E",
       "notes": [
-        "Short parent duct segment retained; complete compound takeoff/easy-bend elbow and broad shallow rectangular outlet visually checked against approved assembly.",
-        "Source uses generic artwork for these variants; differences in corner configuration remain metadata, and this drawing does not distinguish them."
+        "Removed inset outline from the main-duct end at lower-right; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct."
       ],
-      "reviewNote": "A short portion of the existing connection is retained. Generic source artwork does not distinguish these corner or vane variants.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection. Opening edges use a single outline. Generic source artwork does not distinguish these corner or vane variants.",
+      "priorApproval": true
     },
     {
       "id": "3F-mitered",
       "number": "3F",
       "name": "Transition-wall takeoff elbow with easy-bend elbow",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3F-mitered.svg?revision=f88f574dce03",
+      "image": "../images/fittings/group-3-individual/3F-mitered.svg?revision=88d9c07fb4ed",
       "reference": "../images/fittings/group-3-enhanced/source-art/3E.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "f88f574dce03d97f3b487e44673096674e87292473a89104f64df0ffd4308184",
+      "revision": "88d9c07fb4edaedcd033de4d0f96e8ba26d96d06dc5bc41436890737fa25388f",
       "contextURL": "group-3-references.html#reference-3E",
       "notes": [
-        "Short parent duct segment retained; complete compound takeoff/easy-bend elbow and broad shallow rectangular outlet visually checked against approved assembly.",
-        "Source uses generic artwork for these variants; differences in corner configuration remain metadata, and this drawing does not distinguish them."
+        "Removed inset outline from the main-duct end at lower-right; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct."
       ],
-      "reviewNote": "A short portion of the existing connection is retained. Generic source artwork does not distinguish these corner or vane variants.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection. Opening edges use a single outline. Generic source artwork does not distinguish these corner or vane variants.",
+      "priorApproval": true
     },
     {
       "id": "3G",
       "number": "3G",
       "name": "Transition-wall takeoff with straight-aspect transition",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3G.svg?revision=cf126b0491e2",
+      "image": "../images/fittings/group-3-individual/3G.svg?revision=a2162a76dc0c",
       "reference": "../images/fittings/group-3-enhanced/source-art/3E.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "cf126b0491e250aeb26efab234d58506274b78583f1347b3046ff86c5efcc4ba",
+      "revision": "a2162a76dc0c5634499cd6e90b150a4ec4481b5530a644cc856985da228d9ea3",
       "contextURL": "group-3-references.html#reference-3E",
       "notes": [
-        "Minimal local upstream transition fragment retained; curved inlet and straight-aspect transition seams visually checked against approved assembly."
+        "Removed inset outline from the main-duct end at lower-right; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
       ],
-      "reviewNote": "A short portion of the existing connection is retained.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection. Opening edges use a single outline.",
+      "priorApproval": true
     },
     {
       "id": "3H",
       "number": "3H",
       "name": "Transition-wall takeoff with offset-aspect transition",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3H.svg?revision=589cc936c7ea",
+      "image": "../images/fittings/group-3-individual/3H.svg?revision=45553187e6de",
       "reference": "../images/fittings/group-3-enhanced/source-art/3E.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "589cc936c7ea82141a627c4d6e00399fe135a584719143f9ea4ebed1f0266f0c",
+      "revision": "45553187e6de46ac0b4a8042c1ff61a1be292b502c2627b38d26c1c4cb36a5d3",
       "contextURL": "group-3-references.html#reference-3E",
       "notes": [
-        "Prepared from a tight approved-source crop after full-assembly attempts changed the geometry.",
-        "Offset transition, seams, and original curved side-wall attachment visually match source crop.",
-        "Retains only a small tapered parent fragment at the original side attachment, with schematic boundary completion."
+        "Removed inset outline from the left/upstream main-duct edge and the right/downstream main-duct opening; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
       ],
-      "reviewNote": "The short connecting duct fragment is schematic.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection. Opening edges use a single outline.",
+      "priorApproval": true
     },
     {
       "id": "3I",
@@ -239,201 +249,212 @@ window.FITTING_REVIEW = {
         "Existing standalone drawing retained without adding upstream geometry, per user clarification."
       ],
       "reviewNote": "Original standalone artwork preserved.",
-      "priorApproval": false
+      "priorApproval": true
     },
     {
       "id": "3J-full",
       "number": "3J",
       "name": "Takeoff elbow with easy-bend elbow",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3J-full.svg?revision=eb38cefc23ac",
+      "image": "../images/fittings/group-3-individual/3J-full.svg?revision=ddcce5f61fb0",
       "reference": "../images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "eb38cefc23ac35ba1c13532e00e92337ffa2c4619f05f7f84e27df15139f303b",
+      "revision": "ddcce5f61fb0789f5187f1065ed1706e9b9e36836ca275a8f1f9c0b102fea45a",
       "contextURL": "group-3-references.html#reference-3J-full",
       "notes": [
-        "Two curved rectangular elbow portions and wide flat outlet retained. A short parent-duct stub shows the original side attachment.",
-        "A stray arc on the first isolation was removed in a targeted correction.",
-        "Source gives one generic illustration for full, tight and mitered 3J variants. Shared artwork does not depict different radius or vanes configurations; use variant metadata."
+        "Removed inset outline from the lower-right downstream main-duct end; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct."
       ],
-      "reviewNote": "A short portion of the existing connection is retained. Generic source artwork does not distinguish these corner or vane variants.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection. Opening edges use a single outline. Generic source artwork does not distinguish these corner or vane variants.",
+      "priorApproval": true
     },
     {
       "id": "3J-tight",
       "number": "3J",
       "name": "Takeoff elbow with easy-bend elbow",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3J-tight.svg?revision=84d52dc20c7b",
+      "image": "../images/fittings/group-3-individual/3J-tight.svg?revision=798e9d435e75",
       "reference": "../images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "84d52dc20c7b39bddd004576304080f0abb58d7d7d5418c11f46eccb00865aa0",
+      "revision": "798e9d435e75dd3a6666a7ecd623f422f2ed594d4f9b27e843f8abae8431d23f",
       "contextURL": "group-3-references.html#reference-3J-full",
       "notes": [
-        "Two curved rectangular elbow portions and wide flat outlet retained. A short parent-duct stub shows the original side attachment.",
-        "A stray arc on the first isolation was removed in a targeted correction.",
-        "Source gives one generic illustration for full, tight and mitered 3J variants. Shared artwork does not depict different radius or vanes configurations; use variant metadata."
+        "Removed inset outline from the lower-right downstream main-duct end; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct."
       ],
-      "reviewNote": "A short portion of the existing connection is retained. Generic source artwork does not distinguish these corner or vane variants.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection. Opening edges use a single outline. Generic source artwork does not distinguish these corner or vane variants.",
+      "priorApproval": true
     },
     {
       "id": "3J-mitered",
       "number": "3J",
       "name": "Takeoff elbow with easy-bend elbow",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3J-mitered.svg?revision=7de9b5ac04ec",
+      "image": "../images/fittings/group-3-individual/3J-mitered.svg?revision=53f341339733",
       "reference": "../images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "7de9b5ac04ec3599003a44f005f7683ac50bbb42d68a61fee6fcd1382a593d3a",
+      "revision": "53f341339733560badff057e098f30fb27e43ce55cf8752030ec9f08743b4426",
       "contextURL": "group-3-references.html#reference-3J-full",
       "notes": [
-        "Two curved rectangular elbow portions and wide flat outlet retained. A short parent-duct stub shows the original side attachment.",
-        "A stray arc on the first isolation was removed in a targeted correction.",
-        "Source gives one generic illustration for full, tight and mitered 3J variants. Shared artwork does not depict different radius or vanes configurations; use variant metadata."
+        "Removed inset outline from the lower-right downstream main-duct end; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct."
       ],
-      "reviewNote": "A short portion of the existing connection is retained. Generic source artwork does not distinguish these corner or vane variants.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection. Opening edges use a single outline. Generic source artwork does not distinguish these corner or vane variants.",
+      "priorApproval": true
     },
     {
       "id": "3K",
       "number": "3K",
       "name": "Full-radius takeoff with straight transition",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3K.svg?revision=397a033bd135",
+      "image": "../images/fittings/group-3-individual/3K.svg?revision=4421400e946d",
       "reference": "../images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "397a033bd1355ef34cc620e49aaa9920288253d43a68de2f57082bf3279bbe81",
+      "revision": "4421400e946df527e7d97b47bc2e97888fc7b628de6ed1623cc85adef37b69d0",
       "contextURL": "group-3-references.html#reference-3J-full",
       "notes": [
-        "Original full-radius rectangular takeoff and straight tapered transition retained; short upstream duct section shows side connection."
+        "Removed inset outline from the lower-right downstream main-duct end; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
       ],
-      "reviewNote": "A short portion of the existing connection is retained.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection. Opening edges use a single outline.",
+      "priorApproval": true
     },
     {
       "id": "3L",
       "number": "3L",
       "name": "Full-radius takeoff with offset transition",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3L.svg?revision=b75035929c0c",
+      "image": "../images/fittings/group-3-individual/3L.svg?revision=3a75e445bf9b",
       "reference": "../images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "b75035929c0c15aee53f4d5f6854012039c64075052b276dcafd1ec6eba97f2d",
+      "revision": "3a75e445bf9bc8a7e537a3b304cfc9a8acf9a0f385360e5ab899227c05fb60cb",
       "contextURL": "group-3-references.html#reference-3J-full",
       "notes": [
-        "Original full-radius rectangular takeoff and offset tapered transition retained; short upstream duct section shows side connection."
+        "Narrowed the downstream main duct by moving its far/back boundary inward to the position marked in red in 3l.png.",
+        "Retained upstream main duct, downstream near/front wall and height, and the full-radius takeoff with offset transition.",
+        "Previous 3L acceptance belongs to the prior image revision; this correction needs user review."
       ],
-      "reviewNote": "A short portion of the existing connection is retained.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection. The downstream duct is narrower, with its far edge moved inward.",
+      "priorApproval": true
     },
     {
       "id": "3M",
       "number": "3M",
       "name": "In-line eased takeoff with one elbow",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3M.svg?revision=9a7237647a5a",
+      "image": "../images/fittings/group-3-individual/3M.svg?revision=6ed5448ca06f",
       "reference": "../images/fittings/group-3-enhanced/source-art/3M.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "9a7237647a5ac876051f4549b6f2086db91e7e0bf8abc55d541001d0d2ca9e48",
+      "revision": "6ed5448ca06f7b318951722ab507e1bb191deb90a0d2933d01d065e229363536",
       "contextURL": "group-3-references.html#reference-3M",
       "notes": [
-        "Complete eased takeoff base, one segmented elbow and round outlet retained. Short parent duct preserves source side attachment."
+        "Removed inset outline from the lower-right downstream main-duct end; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
       ],
-      "reviewNote": "A short portion of the existing connection is retained.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection. Opening edges use a single outline.",
+      "priorApproval": true
     },
     {
       "id": "3N",
       "number": "3N",
       "name": "In-line eased takeoff with two elbows",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3N.svg?revision=0cb246b8baa3",
+      "image": "../images/fittings/group-3-individual/3N.svg?revision=121ade8021b5",
       "reference": "../images/fittings/group-3-enhanced/source-art/3M.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "0cb246b8baa31438866dddc0ee2da6c82595035d7ad35db0a0d99d7e31dcde72",
+      "revision": "121ade8021b51b963d659aff1aa236217c66a4bb20fcd2225898fe8f71a2b9b5",
       "contextURL": "group-3-references.html#reference-3M",
       "notes": [
-        "Complete eased takeoff base, two segmented elbows and round outlet retained. Short parent duct preserves source side attachment."
+        "Boot and complete segmented round elbow/pipe retained on reducing near-side wall, with full main-duct sections.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example."
       ],
-      "reviewNote": "A short portion of the existing connection is retained.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection.",
+      "priorApproval": true
     },
     {
       "id": "3O",
       "number": "3O",
       "name": "Transition-wall eased takeoff",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3O.svg?revision=fa112209a17d",
+      "image": "../images/fittings/group-3-individual/3O.svg?revision=685183259585",
       "reference": "../images/fittings/group-3-enhanced/source-art/3O.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "fa112209a17d9b2300744811e59e4b4ad07b3d9febe1051be50449724e0aea38",
+      "revision": "685183259585b3f1e694b713073d67e71b16cf61595679eb56791ed09d7a15a9",
       "contextURL": "group-3-references.html#reference-3O",
       "notes": [
-        "Retains a short rectangular parent duct with cut marks and the original faceted sidewall transition and straight round outlet."
+        "Short reducing bay retains faceted triangular taper surfaces converging into the round collar.",
+        "Downstream duct is narrower on the near/front side; the far edge remains aligned.",
+        "Replaces rejected long plain-wall reducer; preserves a short fitting bay followed by two straight downstream bays."
       ],
-      "reviewNote": "A short portion of the existing connection is retained.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection. Opening edges use a single outline. The wider upstream duct reduces along the near side, with the round takeoff in that sloping wall.",
+      "priorApproval": true
     },
     {
       "id": "3P",
       "number": "3P",
       "name": "Transition-wall eased takeoff with two elbows",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3P.svg?revision=30c167938c6b",
+      "image": "../images/fittings/group-3-individual/3P.svg?revision=91306576977b",
       "reference": "../images/fittings/group-3-enhanced/source-art/3O.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "30c167938c6b4b1ea0818e1d6062ba2196d2392b02241c399a398d7cc3d43189",
+      "revision": "91306576977b2687453963178a843e436a5520305881b80d4b8db49bf3c5783c",
       "contextURL": "group-3-references.html#reference-3O",
       "notes": [
-        "Retains the short parent duct behind the sidewall transition, both segmented elbows, vertical section and up-right round outlet.",
-        "Two targeted cleanup passes corrected the parent duct outline and joined transition crease endpoints."
+        "Removed inset outline from the lower-right downstream main-duct end; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
       ],
-      "reviewNote": "A short portion of the existing connection is retained.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection. Opening edges use a single outline.",
+      "priorApproval": true
     },
     {
       "id": "3Q",
       "number": "3Q",
       "name": "Transition-wall eased takeoff with one elbow",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3Q.svg?revision=9fe65399c3ea",
+      "image": "../images/fittings/group-3-individual/3Q.svg?revision=fb6bc6f4281d",
       "reference": "../images/fittings/group-3-enhanced/source-art/3O.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "9fe65399c3ea3a7932a14c6bc23212f33a229a905f8874eee76b0170e4c85094",
+      "revision": "fb6bc6f4281d01e5e3ed04acd271dbc548641a828a495e8237d8e8cbd1974e2f",
       "contextURL": "group-3-references.html#reference-3O",
       "notes": [
-        "Retains a short open-ended parent duct and the sidewall collar, one segmented elbow and down-left round outlet."
+        "Widened the upstream main duct toward the near/front side and retained the smaller downstream section.",
+        "Retained substantial main duct context and single-line downstream opening boundaries.",
+        "Moved the round takeoff and collar toward the center of the reducing wall per 3q_2.png, retaining the wall boundaries and duct geometry.",
+        "Removed the stray diagonal seam across the middle of the upstream top face, retaining the joint near the reducing section and centered round fitting."
       ],
-      "reviewNote": "A short portion of the existing connection is retained.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection. Opening edges use a single outline. The wider upstream duct reduces along the near side, with the round takeoff in that sloping wall.",
+      "priorApproval": true
     },
     {
       "id": "3R",
       "number": "3R",
       "name": "Transition-wall eased takeoff",
       "group": 3,
-      "image": "../images/fittings/group-3-individual/3R.svg?revision=6a5c73b19f4c",
+      "image": "../images/fittings/group-3-individual/3R.svg?revision=774cc3e5db0b",
       "reference": "../images/fittings/group-3-enhanced/source-art/context-3R-3U.png",
       "sourcePage": 166,
       "sourcePDF": "../files/ManD.Groups.pdf#page=10",
-      "revision": "6a5c73b19f4c46c048acf277e14f0e58dc247615d04c82c51b99519ed0934512",
+      "revision": "774cc3e5db0b01f794723db0c0210c76a48b8fb583193e4e2cdf932109c91813",
       "contextURL": "group-3-references.html#reference-3R",
       "notes": [
-        "Retains the wide asymmetric sidewall transition, nearly face-on round outlet and short upstream rectangular duct context."
+        "Triangular short round takeoff retained on the original reducing main-duct section.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example."
       ],
-      "reviewNote": "A short portion of the existing connection is retained.",
-      "priorApproval": false
+      "reviewNote": "Full-width original main duct retained upstream and downstream of the connection.",
+      "priorApproval": true
     },
     {
       "id": "3S-full",
@@ -451,7 +472,7 @@ window.FITTING_REVIEW = {
         "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
       ],
       "reviewNote": "Original standalone artwork preserved. Generic source artwork does not distinguish these corner or vane variants.",
-      "priorApproval": false
+      "priorApproval": true
     },
     {
       "id": "3S-tight",
@@ -469,7 +490,7 @@ window.FITTING_REVIEW = {
         "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
       ],
       "reviewNote": "Original standalone artwork preserved. Generic source artwork does not distinguish these corner or vane variants.",
-      "priorApproval": false
+      "priorApproval": true
     },
     {
       "id": "3S-mitered",
@@ -487,7 +508,7 @@ window.FITTING_REVIEW = {
         "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
       ],
       "reviewNote": "Original standalone artwork preserved. Generic source artwork does not distinguish these corner or vane variants.",
-      "priorApproval": false
+      "priorApproval": true
     },
     {
       "id": "3T",
@@ -504,7 +525,7 @@ window.FITTING_REVIEW = {
         "Existing standalone drawing retained without adding upstream geometry, per user clarification."
       ],
       "reviewNote": "Original standalone artwork preserved.",
-      "priorApproval": false
+      "priorApproval": true
     },
     {
       "id": "3U-mitered-vanes",
@@ -522,7 +543,7 @@ window.FITTING_REVIEW = {
         "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
       ],
       "reviewNote": "Original standalone artwork preserved. Generic source artwork does not distinguish these corner or vane variants.",
-      "priorApproval": false
+      "priorApproval": true
     },
     {
       "id": "3U-mitered-no-vanes",
@@ -540,7 +561,7 @@ window.FITTING_REVIEW = {
         "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
       ],
       "reviewNote": "Original standalone artwork preserved. Generic source artwork does not distinguish these corner or vane variants.",
-      "priorApproval": false
+      "priorApproval": true
     },
     {
       "id": "3V",
@@ -557,7 +578,7 @@ window.FITTING_REVIEW = {
         "Left transition isolated from the mirrored pair; no upstream geometry added. Visually checked full collar, panel creases and rectangular end against the accepted reference."
       ],
       "reviewNote": "One transition from the original mirrored pair.",
-      "priorApproval": false
+      "priorApproval": true
     },
     {
       "id": "3W",
@@ -574,7 +595,7 @@ window.FITTING_REVIEW = {
         "Existing standalone drawing retained without adding upstream geometry, per user clarification."
       ],
       "reviewNote": "Original standalone artwork preserved.",
-      "priorApproval": false
+      "priorApproval": true
     }
   ]
 };

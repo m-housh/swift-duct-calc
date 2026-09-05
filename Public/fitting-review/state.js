@@ -11,7 +11,7 @@
     return {schemaVersion:1,batchId:batch.id,completedAt:!changed&&typeof saved?.completedAt==='string'?saved.completedAt:null,decisions};
   }
   function report(batch,state){
-    return {schemaVersion:1,batchId:batch.id,completedAt:state.completedAt,drawings:batch.items.map(item=>({id:item.id,revision:item.revision,status:state.decisions[item.id].needsWork?'needs-work':state.completedAt?'accepted':'pending',note:state.decisions[item.id].note}))};
+    return {schemaVersion:1,batchId:batch.id,completedAt:state.completedAt,drawings:batch.items.map(item=>({id:item.id,revision:item.revision,status:state.decisions[item.id].needsWork?'needs-work':state.completedAt||item.priorApproval?'accepted':'pending',note:state.decisions[item.id].note}))};
   }
   const api={reconcile,report};if(typeof module!=='undefined')module.exports=api;else root.ReviewState=api;
 })(globalThis);

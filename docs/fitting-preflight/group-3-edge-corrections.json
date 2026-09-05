@@ -1,0 +1,511 @@
+{
+  "schemaVersion": 1,
+  "group": 3,
+  "status": "accepted",
+  "reviewRecord": "docs/fitting-reviews/review-406a877467ebf0e6.json",
+  "acceptedCount": 32,
+  "updatedDrawingCount": 19,
+  "uniqueArtworkCount": 13,
+  "awaitingMarkup": [],
+  "notes": [
+    "3D connecting line is straight per latest clarification; bowed v6 is superseded. Upstream duct is larger, with downstream width described by the user as upstream width minus fitting width.",
+    "13 accepted drawings remain unchanged. 19 corrected fitting IDs require new user review; 3L was reopened by the latest user correction.",
+    "3Q upstream is widened on the near side, with the round collar within the angled reducing wall.",
+    "3L downstream far edge moved inward per user markup, narrowing the downstream duct. Prior acceptance does not apply to this revision.",
+    "3O v4 rejected by user: lost original tapers into round collar and lengthened reducer. v5 restores faceted tapers and shortens reducing bay.",
+    "3Q round takeoff repositioned at the center of the reducing section in v5.",
+    "All 32 current Group 3 revisions accepted explicitly by user in conversation. Earlier pending/rejection notes describe revision history."
+  ],
+  "items": [
+    {
+      "id": "3B",
+      "restoredArt": "/images/fittings/group-3-individual/3B-single-line-v3.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "singleLineOpenings": true,
+      "sharedArtworkIds": [
+        "3B"
+      ],
+      "notes": [
+        "Removed inset outline from both the branch outlet at lower-left AND the main-duct end at lower-right; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-individual/3B-context-v2.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-d4d9fbf2-bf4d-4c3d-800b-08378f89e544.png",
+      "visualReview": {
+        "checked": true,
+        "result": "Inspected against the previous artwork; requested inset outline removal is ready for user review.",
+        "remainingDetail": "A short isolated interior dash remains in the branch end face; the inset rectangular outline is removed."
+      },
+      "prompt": "Use case: precise-object-edit. Minimal line cleanup of this exact finished technical drawing. At both the branch outlet at lower-left AND the main-duct end at lower-right, remove the INNER inset rectangular outline/doubled rim lines so the opening is represented by ONLY ONE thin boundary line. The user does not want an inset square or any drawn sheet-metal thickness. Keep the outermost opening boundary and any legitimate diagonal interior line indicating an open end. Remove only the close parallel inset rim. Preserve ALL other pixels/geometry as closely as possible: branch shape and position, curves, seams/collars away from the end face, main-duct shape/extent/taper, perspective, proportions, framing and white margins. Do not redraw, move, resize or stylize any fitting. Plain thin black lines on white, no text."
+    },
+    {
+      "id": "3C",
+      "restoredArt": "/images/fittings/group-3-individual/3C-single-line-v3.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "singleLineOpenings": true,
+      "sharedArtworkIds": [
+        "3C"
+      ],
+      "notes": [
+        "Removed inset outline from both the branch outlet at upper-right AND the main-duct end at lower-right; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-individual/3C-context-v2.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-887e414d-d009-434d-a4f7-1fb969cf8dd4.png",
+      "visualReview": {
+        "checked": true,
+        "result": "Inspected against the previous artwork; requested inset outline removal is ready for user review."
+      },
+      "prompt": "Use case: precise-object-edit. Minimal line cleanup of this exact finished technical drawing. At both the branch outlet at upper-right AND the main-duct end at lower-right, remove the INNER inset rectangular outline/doubled rim lines so the opening is represented by ONLY ONE thin boundary line. The user does not want an inset square or any drawn sheet-metal thickness. Keep the outermost opening boundary and any legitimate diagonal interior line indicating an open end. Remove only the close parallel inset rim. Preserve ALL other pixels/geometry as closely as possible: branch shape and position, curves, seams/collars away from the end face, main-duct shape/extent/taper, perspective, proportions, framing and white margins. Do not redraw, move, resize or stylize any fitting. Plain thin black lines on white, no text.",
+      "finalPrompt": "Use case: precise-object-edit. Tiny local cleanup only. At the far LEFT upstream main-duct edge, remove the extra INNER vertical line running close parallel to the outermost left vertical edge (near x233,y408..551). Keep only the outermost left boundary at x222. All other outlines already have single boundaries; preserve them. Change absolutely nothing else. Preserve exact overall geometry, line weight, curves, seams, scale, position, viewpoint and framing. Black technical line art on white."
+    },
+    {
+      "id": "3F-full",
+      "restoredArt": "/images/fittings/group-3-individual/3F-full-single-line-v3.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "singleLineOpenings": true,
+      "sharedArtworkIds": [
+        "3F-full",
+        "3F-tight",
+        "3F-mitered"
+      ],
+      "notes": [
+        "Removed inset outline from the main-duct end at lower-right; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct."
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-individual/3F-full-context-v2.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-74331e27-bd77-4872-9470-66c33568d53f.png",
+      "visualReview": {
+        "checked": true,
+        "result": "Inspected against the previous artwork; requested inset outline removal is ready for user review."
+      },
+      "prompt": "Use case: precise-object-edit. Minimal line cleanup of this exact finished technical drawing. At the main-duct end at lower-right, remove the INNER inset rectangular outline/doubled rim lines so the opening is represented by ONLY ONE thin boundary line. The user does not want an inset square or any drawn sheet-metal thickness. Keep the outermost opening boundary and any legitimate diagonal interior line indicating an open end. Remove only the close parallel inset rim. Preserve ALL other pixels/geometry as closely as possible: branch shape and position, curves, seams/collars away from the end face, main-duct shape/extent/taper, perspective, proportions, framing and white margins. Do not redraw, move, resize or stylize any fitting. Plain thin black lines on white, no text."
+    },
+    {
+      "id": "3F-tight",
+      "restoredArt": "/images/fittings/group-3-individual/3F-full-single-line-v3.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "singleLineOpenings": true,
+      "sharedArtworkIds": [
+        "3F-full",
+        "3F-tight",
+        "3F-mitered"
+      ],
+      "notes": [
+        "Removed inset outline from the main-duct end at lower-right; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct."
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-individual/3F-full-context-v2.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-74331e27-bd77-4872-9470-66c33568d53f.png",
+      "visualReview": {
+        "checked": true,
+        "result": "Inspected against the previous artwork; requested inset outline removal is ready for user review."
+      }
+    },
+    {
+      "id": "3F-mitered",
+      "restoredArt": "/images/fittings/group-3-individual/3F-full-single-line-v3.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "singleLineOpenings": true,
+      "sharedArtworkIds": [
+        "3F-full",
+        "3F-tight",
+        "3F-mitered"
+      ],
+      "notes": [
+        "Removed inset outline from the main-duct end at lower-right; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct."
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-individual/3F-full-context-v2.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-74331e27-bd77-4872-9470-66c33568d53f.png",
+      "visualReview": {
+        "checked": true,
+        "result": "Inspected against the previous artwork; requested inset outline removal is ready for user review."
+      }
+    },
+    {
+      "id": "3G",
+      "restoredArt": "/images/fittings/group-3-individual/3G-single-line-v3.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "singleLineOpenings": true,
+      "sharedArtworkIds": [
+        "3G"
+      ],
+      "notes": [
+        "Removed inset outline from the main-duct end at lower-right; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-individual/3G-context-v2.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-401746a8-3a03-4cdc-8cb8-51537123741d.png",
+      "visualReview": {
+        "checked": true,
+        "result": "Inspected against the previous artwork; requested inset outline removal is ready for user review."
+      },
+      "prompt": "Use case: precise-object-edit. Minimal line cleanup of this exact finished technical drawing. At the main-duct end at lower-right, remove the INNER inset rectangular outline/doubled rim lines so the opening is represented by ONLY ONE thin boundary line. The user does not want an inset square or any drawn sheet-metal thickness. Keep the outermost opening boundary and any legitimate diagonal interior line indicating an open end. Remove only the close parallel inset rim. Preserve ALL other pixels/geometry as closely as possible: branch shape and position, curves, seams/collars away from the end face, main-duct shape/extent/taper, perspective, proportions, framing and white margins. Do not redraw, move, resize or stylize any fitting. Plain thin black lines on white, no text."
+    },
+    {
+      "id": "3H",
+      "restoredArt": "/images/fittings/group-3-individual/3H-single-line-v3.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "singleLineOpenings": true,
+      "sharedArtworkIds": [
+        "3H"
+      ],
+      "notes": [
+        "Removed inset outline from the left/upstream main-duct edge and the right/downstream main-duct opening; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-individual/3H-context-v2.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-49dcc987-93f6-4b24-82fc-ef5087fb773f.png",
+      "visualReview": {
+        "checked": true,
+        "result": "Inspected against the previous artwork; requested inset outline removal is ready for user review."
+      },
+      "prompt": "Use case: precise-object-edit. Minimal line cleanup of this exact finished technical drawing. At the left/upstream main-duct edge and the right/downstream main-duct opening, remove the INNER inset rectangular outline/doubled rim lines so the opening is represented by ONLY ONE thin boundary line. The user does not want an inset square or any drawn sheet-metal thickness. Keep the outermost opening boundary and any legitimate diagonal interior line indicating an open end. Remove only the close parallel inset rim. Preserve ALL other pixels/geometry as closely as possible: branch shape and position, curves, seams/collars away from the end face, main-duct shape/extent/taper, perspective, proportions, framing and white margins. Do not redraw, move, resize or stylize any fitting. Plain thin black lines on white, no text."
+    },
+    {
+      "id": "3J-full",
+      "restoredArt": "/images/fittings/group-3-individual/3J-full-single-line-v3.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "singleLineOpenings": true,
+      "sharedArtworkIds": [
+        "3J-full",
+        "3J-tight",
+        "3J-mitered"
+      ],
+      "notes": [
+        "Removed inset outline from the lower-right downstream main-duct end; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct."
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-individual/3J-full-context-v2.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-32bc9ff9-dce5-440a-a394-a054bf532921.png",
+      "visualReview": {
+        "checked": true,
+        "result": "Inspected against the previous artwork; requested inset outline removal is ready for user review."
+      },
+      "prompt": "Use case: precise-object-edit. Minimal line cleanup of this exact finished technical drawing. At the lower-right downstream main-duct end, remove the INNER inset rectangular outline/doubled rim lines so the opening is represented by ONLY ONE thin boundary line. The user does not want an inset square or any drawn sheet-metal thickness. Keep the outermost opening boundary and any legitimate diagonal interior line indicating an open end. Remove only the close parallel inset rim. Preserve ALL other pixels/geometry as closely as possible: branch shape and position, curves, seams/collars away from the end face, main-duct shape/extent/taper, perspective, proportions, framing and white margins. Do not redraw, move, resize or stylize any fitting. Plain thin black lines on white, no text."
+    },
+    {
+      "id": "3J-tight",
+      "restoredArt": "/images/fittings/group-3-individual/3J-full-single-line-v3.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "singleLineOpenings": true,
+      "sharedArtworkIds": [
+        "3J-full",
+        "3J-tight",
+        "3J-mitered"
+      ],
+      "notes": [
+        "Removed inset outline from the lower-right downstream main-duct end; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct."
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-individual/3J-full-context-v2.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-32bc9ff9-dce5-440a-a394-a054bf532921.png",
+      "visualReview": {
+        "checked": true,
+        "result": "Inspected against the previous artwork; requested inset outline removal is ready for user review."
+      }
+    },
+    {
+      "id": "3J-mitered",
+      "restoredArt": "/images/fittings/group-3-individual/3J-full-single-line-v3.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "singleLineOpenings": true,
+      "sharedArtworkIds": [
+        "3J-full",
+        "3J-tight",
+        "3J-mitered"
+      ],
+      "notes": [
+        "Removed inset outline from the lower-right downstream main-duct end; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct."
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-individual/3J-full-context-v2.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-32bc9ff9-dce5-440a-a394-a054bf532921.png",
+      "visualReview": {
+        "checked": true,
+        "result": "Inspected against the previous artwork; requested inset outline removal is ready for user review."
+      }
+    },
+    {
+      "id": "3K",
+      "restoredArt": "/images/fittings/group-3-individual/3K-single-line-v3.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "singleLineOpenings": true,
+      "sharedArtworkIds": [
+        "3K"
+      ],
+      "notes": [
+        "Removed inset outline from the lower-right downstream main-duct end; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-individual/3K-context-v2.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-1a92ef24-6ad2-4402-a90d-e0da8da5f208.png",
+      "visualReview": {
+        "checked": true,
+        "result": "Inspected against the previous artwork; requested inset outline removal is ready for user review."
+      },
+      "prompt": "Use case: precise-object-edit. Minimal line cleanup of this exact finished technical drawing. At the lower-right downstream main-duct end, remove the INNER inset rectangular outline/doubled rim lines so the opening is represented by ONLY ONE thin boundary line. The user does not want an inset square or any drawn sheet-metal thickness. Keep the outermost opening boundary and any legitimate diagonal interior line indicating an open end. Remove only the close parallel inset rim. Preserve ALL other pixels/geometry as closely as possible: branch shape and position, curves, seams/collars away from the end face, main-duct shape/extent/taper, perspective, proportions, framing and white margins. Do not redraw, move, resize or stylize any fitting. Plain thin black lines on white, no text."
+    },
+    {
+      "id": "3M",
+      "restoredArt": "/images/fittings/group-3-individual/3M-single-line-v3.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "singleLineOpenings": true,
+      "sharedArtworkIds": [
+        "3M"
+      ],
+      "notes": [
+        "Removed inset outline from the lower-right downstream main-duct end; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-individual/3M-context-v2.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-5866f3e8-52e8-4d74-9568-26e0c2375ab1.png",
+      "visualReview": {
+        "checked": true,
+        "result": "Inspected against the previous artwork; requested inset outline removal is ready for user review."
+      },
+      "prompt": "Use case: precise-object-edit. Minimal line cleanup of this exact finished technical drawing. At the lower-right downstream main-duct end, remove the INNER inset rectangular outline/doubled rim lines so the opening is represented by ONLY ONE thin boundary line. The user does not want an inset square or any drawn sheet-metal thickness. Keep the outermost opening boundary and any legitimate diagonal interior line indicating an open end. Remove only the close parallel inset rim. Preserve ALL other pixels/geometry as closely as possible: branch shape and position, curves, seams/collars away from the end face, main-duct shape/extent/taper, perspective, proportions, framing and white margins. Do not redraw, move, resize or stylize any fitting. Plain thin black lines on white, no text."
+    },
+    {
+      "id": "3O",
+      "restoredArt": "/images/fittings/group-3-individual/3O-short-faceted-reducer-v5.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "singleLineOpenings": true,
+      "sharedArtworkIds": [
+        "3O"
+      ],
+      "notes": [
+        "Short reducing bay retains faceted triangular taper surfaces converging into the round collar.",
+        "Downstream duct is narrower on the near/front side; the far edge remains aligned.",
+        "Replaces rejected long plain-wall reducer; preserves a short fitting bay followed by two straight downstream bays."
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-individual/3O-single-line-v3.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-73c82a73-e507-44be-87d7-6241412b2a83.png",
+      "visualReview": {
+        "checked": true,
+        "result": "Compared with source-art/3O.png and pre-edit 3O-single-line-v3.png: triangular taper surfaces converge into collar; reducer occupies one short bay rather than elongated v4 bay; two narrower straight downstream bays follow. Candidate requires user review, not acceptance."
+      },
+      "prompt": "Precise edit. Image 1 is user's red/yellow markup; image 2 is clean target. The main rectangular duct must REDUCE IN WIDTH at the bay containing the round takeoff. Keep first upstream bay unchanged. Move the near/front side of all downstream bays inward toward the far/back side to the RED marked position, replacing the yellow old edge. In clean image 2: near top start of reducer stays (381,402); near top end of reducer moves from (595,515) to approximately (670,460); downstream near top outline then continues as a STRAIGHT line to the new outlet near top corner (1250,770), moved inward from (1167,822). Move corresponding near bottom edges and vertical joints together, keeping height. Keep the far/back longitudinal edge unchanged and straight. The new reducing bay near wall slopes inward from the wider upstream duct to the narrower downstream duct. Mount the existing round takeoff collar DIRECTLY IN THAT SLOPING REDUCING WALL. Remove the separate triangular projecting boot/pyramid: the flat angled reducing wall itself carries the round eased collar. Preserve the short round tube, collar style and direction lower-left, adjusting its attachment naturally into the reducing wall. Keep original upstream/downstream lengths, far outline, perspective, single-line end boundaries, black-on-white style. No red/yellow markings or text. The red freehand lines indicate placement, use straight technical edges.",
+      "priorEdgePrompt": "Use case: precise-object-edit. Minimal line cleanup of this exact finished technical drawing. At the lower-right downstream main-duct end, remove the INNER inset rectangular outline/doubled rim lines so the opening is represented by ONLY ONE thin boundary line. The user does not want an inset square or any drawn sheet-metal thickness. Keep the outermost opening boundary and any legitimate diagonal interior line indicating an open end. Remove only the close parallel inset rim. Preserve ALL other pixels/geometry as closely as possible: branch shape and position, curves, seams/collars away from the end face, main-duct shape/extent/taper, perspective, proportions, framing and white margins. Do not redraw, move, resize or stylize any fitting. Plain thin black lines on white, no text.",
+      "correctionPrompt": "Correct the geometry in this image: the reducer must change WIDTH IN PLAN, not height. Keep vertical height constant. The second bay containing the round collar must have a strongly ANGLED FRONT WALL. Its TOP edge should go from (382,410) almost HORIZONTALLY RIGHT to about (718,463), NOT diagonally down-right to (642,535). Its BOTTOM edge must be parallel to this new top edge, at unchanged height about160 pixels below. The two downstream bays then have a substantially smaller width, their near/front longitudinal top and bottom outlines shifted inward/up-right to connect to that new reducing wall. Keep their far/back edge unchanged and straight. New downstream near top endpoint approximately (1279,781), bottom endpoint (1279,899). Round pipe collar must be fully within the sloping front reducing wall, attached directly without triangular boot, keep short tube projecting lower-left. There must be obvious kinks in BOTH top and bottom front edges at each end of the reducing bay: near-horizontal reducing edges between the diagonal upstream/downstream straight edges. Preserve first upstream bay, far/back outline, single-line end boundaries, black technical style and framing.",
+      "nearSideReduction": true,
+      "rejectedRevision": {
+        "restoredArt": "/images/fittings/group-3-individual/3O-reducing-wall-v4.png",
+        "reason": "User rejected loss of original taper surfaces around round collar and excessive reducer length. Previous visual QA failed to catch these."
+      },
+      "restorationPrompt": "Edit this duct reducer drawing. Two changes: (1) SHORTEN the reducing bay containing the round pipe by half: move its right-hand seam upstream/left, extending the narrow straight duct backward to meet it. Keep the obvious change of width at the angled near side. (2) ADD a faceted rectangular-to-round easing around the pipe collar. Four sloping triangular sheet-metal panels converge from the four corners of the SHORT angled reducing wall to the circular neck. Draw the diagonal crease lines clearly. The pipe must not look like a bare cylinder simply attached to a flat wall. Keep upstream wider, downstream narrower, near wall reducer angle unmistakable, downstream two straight sections. Preserve the short pipe and rest of the style. Black technical linework on white.",
+      "alignmentPrompt": "Correct only the reducer alignment in this drawing. Currently the FAR/BACK edge bends inward at the reducing bay, but it must remain one straight longitudinal line continuing the upstream far edge. Shift the ENTIRE smaller downstream duct (both straight bays, all their top/side/end lines together) diagonally UP-RIGHT by about 60 pixels right and 35 pixels up. This aligns its far/back edge with the upstream far/back edge. Reconnect the short reducer top face and faceted front wall to this translated downstream duct. The width reduction should now occur along the NEAR/FRONT wall: that wall angles inward across the short reducer bay, then runs straight downstream. Preserve the triangular taper panels/crease lines converging into the round collar, reconnecting only their downstream endpoints. Keep round tube/collar, upstream section, reducer length, downstream cross-section and linework style unchanged. No new curves or extra seams. Thin black technical drawing on white."
+    },
+    {
+      "id": "3P",
+      "restoredArt": "/images/fittings/group-3-individual/3P-single-line-v3.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "singleLineOpenings": true,
+      "sharedArtworkIds": [
+        "3P"
+      ],
+      "notes": [
+        "Removed inset outline from the lower-right downstream main-duct end; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-individual/3P-context-v2.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-cf985552-84e6-435c-896e-54eb5bf9dc66.png",
+      "visualReview": {
+        "checked": true,
+        "result": "Inspected against the previous artwork; requested inset outline removal is ready for user review."
+      },
+      "prompt": "Use case: precise-object-edit. Minimal line cleanup of this exact finished technical drawing. At the lower-right downstream main-duct end, remove the INNER inset rectangular outline/doubled rim lines so the opening is represented by ONLY ONE thin boundary line. The user does not want an inset square or any drawn sheet-metal thickness. Keep the outermost opening boundary and any legitimate diagonal interior line indicating an open end. Remove only the close parallel inset rim. Preserve ALL other pixels/geometry as closely as possible: branch shape and position, curves, seams/collars away from the end face, main-duct shape/extent/taper, perspective, proportions, framing and white margins. Do not redraw, move, resize or stylize any fitting. Plain thin black lines on white, no text.",
+      "finalPrompt": "Use case: precise-object-edit. Tiny local line cleanup. Remove the extra inner vertical line just inside the FAR LEFT end of the main duct (x125 next to the outer x117 edge, y228..359). Leave one outer boundary. Preserve absolutely everything else including all pipe collars, outlet, fitting position, main-duct panels and seams, scale, framing and perspective. Black lines on white, no new geometry."
+    },
+    {
+      "id": "3Q",
+      "restoredArt": "/images/fittings/group-3-individual/3Q-clean-upstream-v6.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "singleLineOpenings": true,
+      "sharedArtworkIds": [
+        "3Q"
+      ],
+      "notes": [
+        "Widened the upstream main duct toward the near/front side and retained the smaller downstream section.",
+        "Retained substantial main duct context and single-line downstream opening boundaries.",
+        "Moved the round takeoff and collar toward the center of the reducing wall per 3q_2.png, retaining the wall boundaries and duct geometry.",
+        "Removed the stray diagonal seam across the middle of the upstream top face, retaining the joint near the reducing section and centered round fitting."
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-individual/3Q-centered-takeoff-v5.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-25babb0e-6679-4b25-860b-9f67828fd00b.png",
+      "visualReview": {
+        "checked": true,
+        "result": "Compared with v5: specified upstream interior seam removed; adjacent joint/vertical edge, centered round takeoff, reducing wall, downstream seams and opening retained."
+      },
+      "prompt": "Precise geometry edit to this reference. Make the upstream rectangular duct TWICE AS WIDE in plan as the downstream duct, with unchanged vertical height. It must be an obvious offset reducer, not an almost-straight duct. Keep the back/far edge straight. The FRONT wall of the upstream section must be much closer to viewer, shifted diagonally down-left by half the existing duct width, and remain parallel to the original longitudinal direction. Only the first two bays have this doubled width. The round pipe is in bay three: that bay must have an obvious ANGLED FRONT REDUCING WALL connecting the much wider upstream front wall to the unchanged downstream front wall. In the image projection, the reducing wall top and bottom edges should run roughly HORIZONTALLY TO THE RIGHT (slightly upward), whereas upstream and downstream straight front wall edges run diagonally DOWN RIGHT. This change in direction must be unmistakable. Attach the round collar into this ANGLED reducing wall, with the same projecting round tube pointing lower-left. The last downstream bay stays original width/height. Duct height constant. Four top bays total, single-line open downstream end, no extra boots, no inset rims. Expand white margins/reframe to fit wider near-side upstream wall. Preserve original thin black technical style.",
+      "finalPrompt": "Reproduce this technical illustration faithfully, but draw both ends of the rectangular main duct with ZERO material thickness. At the upper-left extreme and lower-right extreme, the vertical edge must be ONE SINGLE BLACK STROKE. NO pair of parallel black vertical lines separated by white. There must be no inset rectangle or inner border at either end. The right end is an open rectangular cross-section with a single diagonal interior line meeting its outer edge. Draw only four outer edges for that cross-section and that one interior diagonal. The near left upstream end has one plain vertical boundary. Keep all pipe collars and circular geometry unchanged, along with main duct panel seams, position, silhouette, perspective and proportions. Clean technical linework on white. This correction is specifically to remove the thin white rim sandwiched between black strokes on the extreme left and right edges; it must be gone in the output.",
+      "priorEdgePrompt": "Use case: precise-object-edit. Minimal line cleanup of this exact finished technical drawing. At the lower-right downstream main-duct end, remove the INNER inset rectangular outline/doubled rim lines so the opening is represented by ONLY ONE thin boundary line. The user does not want an inset square or any drawn sheet-metal thickness. Keep the outermost opening boundary and any legitimate diagonal interior line indicating an open end. Remove only the close parallel inset rim. Preserve ALL other pixels/geometry as closely as possible: branch shape and position, curves, seams/collars away from the end face, main-duct shape/extent/taper, perspective, proportions, framing and white margins. Do not redraw, move, resize or stylize any fitting. Plain thin black lines on white, no text.",
+      "cleanupPrompt": "Minimal edit to this exact drawing. The round collar currently straddles the RIGHT edge of the sloping reducing wall, at the joint with the straight downstream wall. Move the whole round collar AND its attached straight round pipe about 70 pixels LEFT, maintaining their shape, scale, direction, and vertical position, so that the circular collar sits entirely within the angled reducing wall between its two vertical boundaries. Repair the background linework at its old position. Keep the widened upstream duct, near-side taper and all other main duct outlines EXACTLY unchanged. Also add the missing top transverse seam at the START of the reducing section: one thin straight line from the near-side taper-start corner around (657,596) diagonally up-right to the far/back straight edge around (984,381). This separates the last full-width upstream bay from the reducing bay. No other edits. Keep single-line end faces and white background.",
+      "nearSideReduction": true,
+      "centeringPrompt": "Surgical positional edit: translate the round pipe and all collar rings together 30 pixels to the RIGHT and 12 pixels UP. Do not change anything else. Preserve exactly the existing polygonal duct outline, ALL straight edges and vertical seams (especially the vertical left edge of the reducing wall), pipe shape and scale, collar detail, and framing. No curved duct edges. Only move the round fitting a small distance right/up so its collar is midway between the two vertical sides of the reducing wall. Repair any wall line uncovered at its old location. Do not redraw the duct.",
+      "seamRemovalPrompt": "Remove exactly ONE stray line: the leftmost interior diagonal seam across the large upstream TOP face, from approximately (422,499) to (777,291). Erase that entire segment, leaving the large upstream top face blank there. Keep the outer duct perimeter intact at both endpoints. Keep the NEXT diagonal seam from (597,574) to (938,363) and its front vertical segment. Keep all other lines and pixels as closely as possible, especially centered round pipe/collars, reducing wall, all downstream seams and end opening. Do not move or resize any geometry. One-line removal only. Clean black technical linework on white.",
+      "latestUserFeedback": "Remove the out-of-place line in the middle of the upstream duct, then everything should be good."
+    },
+    {
+      "id": "3D-full",
+      "restoredArt": "/images/fittings/group-3-individual/3D-full-straight-connection-v7.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "singleLineOpenings": true,
+      "upstreamJointCorrection": true,
+      "sharedArtworkIds": [
+        "3D-full",
+        "3D-tight",
+        "3D-mitered"
+      ],
+      "notes": [
+        "Upstream main duct is wider on its far/back side and reduces toward the existing takeoff, following the user's third markup.",
+        "Retained the upstream joint location and extended its top seam across the wider duct; the reduction begins at this joint.",
+        "Elbow remains in its existing location; compound bend and lower throat retained.",
+        "Rectangular opening outlines remain single lines without inset rims.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct.",
+        "Added a straight connecting edge from the upstream far-side joint to the elbow, above the retained straight reducing edge. User clarification: downstream width = upstream width minus fitting width; the connection edge is not curved."
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-individual/3D-full-connecting-line-v6.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-b0a47d52-7575-4b01-ad4c-18cd090f15a3.png",
+      "visualReview": {
+        "checked": true,
+        "result": "Compared with v6: bowed connecting line replaced by a straight segment; lower reducing edge, upstream enlargement, joint and elbow retained. Ready for user review."
+      },
+      "largerUpstreamDuct": true,
+      "previousJointPrompt": "Use case: precise-object-edit. Image 1 is the user's NEW authoritative markup. Image 2 is the clean edit target. The highlighted yellow line in Image 1 is just a transverse PANEL JOINT on the main duct. Move ONLY that joint upstream to the red-dotted location. The joint has two connected straight segments: a diagonal across the duct top and a vertical down its near/front wall. In Image 2 move this entire two-segment joint approximately 170 pixels LEFT and 100 pixels UP: original joint runs roughly (902,430)->(691,553)->(691,707); new joint should run roughly (732,330)->(521,453)->(521,607), with endpoints meeting the existing duct boundaries exactly. Erase the old joint completely and draw the new joint with the same thin black stroke. The elbow/takeoff itself MUST STAY EXACTLY WHERE IT IS, unchanged in size, shape, inlet, lower throat, curves and all its seams. Main duct silhouette, extent, perspective and framing stay unchanged. Also remove the INNER inset outline rectangles from BOTH the upper-right branch outlet face and lower-right main-duct end face: keep one single thin outer boundary at each opening and no thickness rim. No other changes. Plain black technical linework on white. No yellow highlight, no red dashes, no text.",
+      "prompt": "Use case: precise-object-edit. Image 1 is the user's latest markup showing the desired upstream duct enlargement in red. Image 2 is the clean edit target, which already has the correctly relocated transverse joint. Change ONLY the main duct's UPSTREAM WIDTH as indicated by the solid red outline in Image 1. Enlarge the upstream cross-section toward the FAR/BACK side (upper-right on the page), keeping its NEAR/FRONT wall and height in place. Increase width by about 40 percent. In Image 2, the upstream far rear corner currently near (424,152) should extend toward approximately (550,80); the upstream far edge then runs downstream parallel to its old direction until the moved transverse joint, whose far endpoint extends from about (750,340) to about (876,268). From there form a short straight sloping REDUCTION in the far wall back to the existing takeoff inlet near (940,400), following the red shoulder shown in Image 1. This produces a clearly larger upstream rectangular duct feeding a smaller downstream duct. Remove the old upstream far outline, replacing it with the expanded silhouette; do not leave an internal ghost of it. Extend the existing upstream transverse seam across the widened top face to the new far edge; keep its front/near vertical segment in place. Do not change the lower-right downstream duct width or outline. Preserve the elbow/takeoff EXACTLY where it is with all its curved contours, seam, lower throat and side connection. Maintain single-line opening boundaries, no inset rims. Same perspective, clean thin black lines on white, adequate margin. No red or yellow annotations or text.",
+      "cleanupPrompt": "Use case: precise-object-edit. Two small corrections to this drawing. (1) On the far/back edge of the main duct, start the reducing sloped shoulder EXACTLY where the transverse top seam meets the far edge (near x756,y246). Remove the extra straight wide-width extension between that point and the current shoulder corner near x878,y320. The reducing edge should run directly from the seam/far-edge intersection near (756,246) to the existing small inlet connection near (965,422). This makes the enlarged upstream section end at the panel joint, then taper toward the takeoff, as requested. Keep upstream full width, front wall, joint's front vertical, downstream dimensions and entire elbow unchanged. (2) Remove the INNER inset rectangle from the large LOWER-RIGHT main-duct opening. Leave ONLY its single outer boundary, no double rim/thickness strokes. Keep branch outlet single-lined too. Preserve all other geometry, elbow position, curved contours and seam, proportions, framing and thin black-on-white style.",
+      "connectingContour": true,
+      "connectingLinePrompt": "Precise minimal edit. Image 1 is the user's screenshot with a red line marking ONE missing contour; image 2 is the clean drawing to edit. Add just that missing line in the same thin black stroke as the rest of image 2. It starts at the far-side upstream transverse joint intersection (approximately x741,y240 in image 2), curves gently right/down ABOVE the existing straight reducing edge, and meets the left outer contour of the elbow approximately x998,y350 (above its base x976,y420). Approximate added cubic path M741,240 C855,260 915,310 998,350. Follow the red markup's shape and endpoint placement. KEEP the existing straight sloping line from the joint to the elbow base: the new curve and old straight line enclose a narrow tapered side surface. Preserve absolutely all other existing linework, elbow shape and position, upstream width, downstream geometry, single-line opening boundaries, perspective and framing. No red mark, no text, no double rims. Output only the clean black-on-white artwork.",
+      "straightConnectionPrompt": "Make ONE tiny line edit only. In this input drawing there is a narrow wedge immediately LEFT of the upright elbow. The wedge has a gently bowed UPPER edge and a straight LOWER diagonal edge. Replace ONLY the bowed upper edge with a single straight line joining its existing two endpoints. This is the line from the upstream transverse seam intersection to the elbow's left outline. Keep BOTH edges of the wedge: lower straight diagonal stays exactly where it is. Do not erase the lower diagonal. Do not extend either line across the face of the elbow. Preserve every other line and all geometry of this exact input image, including elbow base, duct proportions, joint and all existing single end-face boundaries. This is a surgical curve-to-straight-line replacement, not a new drawing. Thin black on white."
+    },
+    {
+      "id": "3D-tight",
+      "restoredArt": "/images/fittings/group-3-individual/3D-full-straight-connection-v7.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "singleLineOpenings": true,
+      "upstreamJointCorrection": true,
+      "sharedArtworkIds": [
+        "3D-full",
+        "3D-tight",
+        "3D-mitered"
+      ],
+      "notes": [
+        "Upstream main duct is wider on its far/back side and reduces toward the existing takeoff, following the user's third markup.",
+        "Retained the upstream joint location and extended its top seam across the wider duct; the reduction begins at this joint.",
+        "Elbow remains in its existing location; compound bend and lower throat retained.",
+        "Rectangular opening outlines remain single lines without inset rims.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct.",
+        "Added a straight connecting edge from the upstream far-side joint to the elbow, above the retained straight reducing edge. User clarification: downstream width = upstream width minus fitting width; the connection edge is not curved."
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-individual/3D-full-connecting-line-v6.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-b0a47d52-7575-4b01-ad4c-18cd090f15a3.png",
+      "visualReview": {
+        "checked": true,
+        "result": "Compared with v6: bowed connecting line replaced by a straight segment; lower reducing edge, upstream enlargement, joint and elbow retained. Ready for user review."
+      },
+      "largerUpstreamDuct": true,
+      "connectingContour": true,
+      "connectingLinePrompt": "Precise minimal edit. Image 1 is the user's screenshot with a red line marking ONE missing contour; image 2 is the clean drawing to edit. Add just that missing line in the same thin black stroke as the rest of image 2. It starts at the far-side upstream transverse joint intersection (approximately x741,y240 in image 2), curves gently right/down ABOVE the existing straight reducing edge, and meets the left outer contour of the elbow approximately x998,y350 (above its base x976,y420). Approximate added cubic path M741,240 C855,260 915,310 998,350. Follow the red markup's shape and endpoint placement. KEEP the existing straight sloping line from the joint to the elbow base: the new curve and old straight line enclose a narrow tapered side surface. Preserve absolutely all other existing linework, elbow shape and position, upstream width, downstream geometry, single-line opening boundaries, perspective and framing. No red mark, no text, no double rims. Output only the clean black-on-white artwork.",
+      "straightConnectionPrompt": "Make ONE tiny line edit only. In this input drawing there is a narrow wedge immediately LEFT of the upright elbow. The wedge has a gently bowed UPPER edge and a straight LOWER diagonal edge. Replace ONLY the bowed upper edge with a single straight line joining its existing two endpoints. This is the line from the upstream transverse seam intersection to the elbow's left outline. Keep BOTH edges of the wedge: lower straight diagonal stays exactly where it is. Do not erase the lower diagonal. Do not extend either line across the face of the elbow. Preserve every other line and all geometry of this exact input image, including elbow base, duct proportions, joint and all existing single end-face boundaries. This is a surgical curve-to-straight-line replacement, not a new drawing. Thin black on white."
+    },
+    {
+      "id": "3D-mitered",
+      "restoredArt": "/images/fittings/group-3-individual/3D-full-straight-connection-v7.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "singleLineOpenings": true,
+      "upstreamJointCorrection": true,
+      "sharedArtworkIds": [
+        "3D-full",
+        "3D-tight",
+        "3D-mitered"
+      ],
+      "notes": [
+        "Upstream main duct is wider on its far/back side and reduces toward the existing takeoff, following the user's third markup.",
+        "Retained the upstream joint location and extended its top seam across the wider duct; the reduction begins at this joint.",
+        "Elbow remains in its existing location; compound bend and lower throat retained.",
+        "Rectangular opening outlines remain single lines without inset rims.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct.",
+        "Added a straight connecting edge from the upstream far-side joint to the elbow, above the retained straight reducing edge. User clarification: downstream width = upstream width minus fitting width; the connection edge is not curved."
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-individual/3D-full-connecting-line-v6.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-b0a47d52-7575-4b01-ad4c-18cd090f15a3.png",
+      "visualReview": {
+        "checked": true,
+        "result": "Compared with v6: bowed connecting line replaced by a straight segment; lower reducing edge, upstream enlargement, joint and elbow retained. Ready for user review."
+      },
+      "largerUpstreamDuct": true,
+      "connectingContour": true,
+      "connectingLinePrompt": "Precise minimal edit. Image 1 is the user's screenshot with a red line marking ONE missing contour; image 2 is the clean drawing to edit. Add just that missing line in the same thin black stroke as the rest of image 2. It starts at the far-side upstream transverse joint intersection (approximately x741,y240 in image 2), curves gently right/down ABOVE the existing straight reducing edge, and meets the left outer contour of the elbow approximately x998,y350 (above its base x976,y420). Approximate added cubic path M741,240 C855,260 915,310 998,350. Follow the red markup's shape and endpoint placement. KEEP the existing straight sloping line from the joint to the elbow base: the new curve and old straight line enclose a narrow tapered side surface. Preserve absolutely all other existing linework, elbow shape and position, upstream width, downstream geometry, single-line opening boundaries, perspective and framing. No red mark, no text, no double rims. Output only the clean black-on-white artwork.",
+      "straightConnectionPrompt": "Make ONE tiny line edit only. In this input drawing there is a narrow wedge immediately LEFT of the upright elbow. The wedge has a gently bowed UPPER edge and a straight LOWER diagonal edge. Replace ONLY the bowed upper edge with a single straight line joining its existing two endpoints. This is the line from the upstream transverse seam intersection to the elbow's left outline. Keep BOTH edges of the wedge: lower straight diagonal stays exactly where it is. Do not erase the lower diagonal. Do not extend either line across the face of the elbow. Preserve every other line and all geometry of this exact input image, including elbow base, duct proportions, joint and all existing single end-face boundaries. This is a surgical curve-to-straight-line replacement, not a new drawing. Thin black on white."
+    },
+    {
+      "id": "3L",
+      "restoredArt": "/images/fittings/group-3-individual/3L-narrow-downstream-v3.png",
+      "status": "ready-for-review",
+      "expandedConnectionContext": true,
+      "narrowerDownstreamDuct": true,
+      "sharedArtworkIds": [
+        "3L"
+      ],
+      "notes": [
+        "Narrowed the downstream main duct by moving its far/back boundary inward to the position marked in red in 3l.png.",
+        "Retained upstream main duct, downstream near/front wall and height, and the full-radius takeoff with offset transition.",
+        "Previous 3L acceptance belongs to the prior image revision; this correction needs user review."
+      ],
+      "generationTool": "built-in imagegen",
+      "sourceArt": "/images/fittings/group-3-individual/3L-context-v2.png",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-fe5337e9-cc9a-4e1b-994b-5ff2e23d1ee6.png",
+      "prompt": "Precise edit. Image 1 is user markup: yellow marks the existing downstream duct far edge, red marks where to move it. Image 2 is the clean target. NARROW only the lower-right downstream main duct by moving its FAR/BACK side inward toward the near/front wall, following the red position. Keep the near/front wall, duct height, upstream two bays and entire branch takeoff/offset transition in place. In clean image 2, existing far downstream edge runs from near (951,458) through (1046,513) to outlet far top corner (1215,618). Replace that edge with the narrower boundary starting at the inner curved takeoff contour near (778,434), following that existing curve to about (880,473), then a STRAIGHT longitudinal edge to a new outlet far top corner approximately (1150,657). Move the outlet far vertical edge inward with it (new bottom around1150,797) and shorten the end face's top/bottom edges accordingly. This reduces downstream width by about 30%, keeping its near top/bottom corners (983,754)/(983,899) fixed. Preserve branch and existing curved takeoff boundary; repair its visible connection side surface naturally. The red freehand line indicates placement, not a wavy duct edge: longitudinal duct edges must be straight. Remove replaced old far edge, no ghost lines, no inset rims. Preserve all other geometry and thin black technical drawing on white. Output artwork only without markup or text.",
+      "visualReview": {
+        "checked": true,
+        "result": "Compared with original and markup: downstream far edge and outlet far vertical moved inward, smaller outlet width, upstream context and offset branch retained. Ready for user review."
+      }
+    }
+  ],
+  "acceptanceRecord": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json",
+  "acceptedAt": "2026-09-05T01:27:19.824Z"
+}

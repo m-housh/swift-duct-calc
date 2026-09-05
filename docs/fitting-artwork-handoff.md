@@ -1,0 +1,99 @@
+# Continue the fitting artwork work
+
+The portable branch is `codex/fitting-artwork` in
+`https://github.com/m-housh/swift-duct-calc.git`.
+The current worktree is `/home/michael/dev/swift-duct-calc`.
+
+## Clone on maia
+
+Run these in a terminal on the current computer, then in the SSH session:
+
+```sh
+ssh maia
+mkdir -p ~/dev
+git clone --branch codex/fitting-artwork https://github.com/m-housh/swift-duct-calc.git ~/dev/swift-duct-calc
+cd ~/dev/swift-duct-calc
+git status --short --branch
+```
+
+If a clone already exists elsewhere, fetch the branch there instead of cloning over it.
+The source PDF, selected images, SVGs, reference crops, review batches, and QA records are committed.
+Earlier untracked experiments remain in the original local checkout and are not required by the current review.
+Local secrets, dependencies, browser storage, and generated-image cache directories are not transferred by Git.
+
+## Continue in a fresh task on maia
+
+The attempted cross-host handoff of “Recreate duct fitting drawings” failed with:
+“Paginated chats cannot be continued on another host yet.” The existing conversation
+remains local. Do not keep retrying handoff or modify chat databases to work around it.
+
+Maia already has the project at `/home/michael/dev/swift-duct-calc`, checked out on
+`codex/fitting-artwork` at `a1124a04388dd7cda40b777c08a9bcaf0df948ea`.
+The branch is pushed to GitHub. Git and Python 3 are available on maia.
+
+Start a fresh task in the saved `swift-duct-calc` project on `maia`, using the existing
+checkout or starting a new worktree from `codex/fitting-artwork`. Read this guide
+from `/home/michael/dev/swift-duct-calc/docs/fitting-artwork-handoff.md` for context.
+This guide is tracked alongside the accepted Group 3 artwork and review records.
+
+The fresh task should verify its host, directory, and Git branch, then serve the
+existing Group 3 individual review without regenerating images. If the task starts
+from another Git state, inspect it and preserve existing work before arranging a
+checkout/worktree based on `codex/fitting-artwork`.
+
+The previous conversation is preserved locally for reference. This guide and the
+committed review/QA records carry forward the working decisions; they are not a full
+conversation transcript. Project credentials, tools, plugins, and skills come from
+the remote host. Original spreadsheet input `/home/michael/Downloads/manuald 080217.xls`
+and old untracked experiments remain on the original local computer; request/copy
+them only if actually needed. The active review assets are fully in Git.
+
+## Open the review from maia
+
+In the actual remote checkout/worktree that Codex is using:
+
+```sh
+python3 -m http.server 8765 --bind 127.0.0.1 --directory Public
+```
+
+In a separate terminal on the current computer:
+
+```sh
+ssh -N -o ExitOnForwardFailure=yes -L 127.0.0.1:8766:127.0.0.1:8765 maia
+```
+
+Open `http://127.0.0.1:8766/fitting-review/` locally. Port 8766 avoids the existing local review on 8765. Leave both commands running while reviewing. The review itself only needs Python 3; it does not require building the Swift app. Packaging artwork additionally needs Pillow.
+
+## Current artwork state and preferences
+
+- Group 1 is accepted. Group 2 is paused at the user's request.
+- Group 4 is accepted, including the corrected 4AG arrow.
+- **Group 3 is accepted**, including all 32 individual fitting IDs and previously accepted full references. Final acceptance recorded at 2026-09-05T01:27:19.824Z in `docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json` from explicit chat approval: “Okay, I think everything is good with group 3.” The review now preserves approval of every current image revision. Earlier decisions/corrections below are history.
+- Earlier Group 3 review: `docs/fitting-reviews/review-406a877467ebf0e6.json` (2026-09-05T00:13:36.619Z). All 32 revisions matched on import. Accepted: 3A, 3E, 3I, 3L, 3N, 3R, all 3S variants, 3T, both 3U variants, 3V and 3W (14 IDs). The other 18 IDs need corrections and re-review.
+- Completed correction request: remove inset rectangular opening outlines that imply material thickness; retain single boundary lines. Latest 3D clarification supersedes the earlier movement interpretation: move ONLY the two-segment transverse main-duct joint (top diagonal plus front vertical) upstream to the red-dotted position in `3d_2.png`. Keep the elbow and its connection in place. Apply to all three 3D variants.
+- Additional 3D clarification in `3d_3.png`: upstream duct must be wider/larger. Extend the far/back edge of the upstream duct outward, then taper down on that side toward the takeoff. Preserve the moved joint's near/front position, downstream duct size and elbow position. The red outline indicates the desired upstream width and reducing shoulder.
+- These corrections are now active: `docs/fitting-preflight/group-3-edge-corrections.json` covers 19 revised fitting IDs (13 unique images), including `3D-full-straight-connection-v7.png` shared by all three 3D variants. It includes the relocated joint, wider upstream duct, and straight connecting edge from the upstream far-side joint to the elbow requested in `3d_4.png` and clarified afterward, above the retained straight reducing edge. All revisions have been visually inspected; all 32 current IDs are now accepted.
+- Latest 3D clarification: the added line is straight, not curved; downstream width = upstream width minus fitting width. Bowed v6 is superseded by straight v7.
+- 3Q correction is active as `3Q-clean-upstream-v6.png`: upstream widened on the near/front side; round takeoff emerges within the sloping reducing wall leading into the smaller downstream duct, repositioned toward the center per `3q_2.png`; the extra diagonal seam in the upstream top face was then removed per follow-up feedback. Visually inspected and now accepted.
+- 3L reopened by user markup `3l.png`: downstream far/back boundary moved inward to narrow the downstream duct. Active `3L-narrow-downstream-v3.png` is visually inspected and now accepted; archived acceptance remains attached only to the previous revision.
+- 3O v4 was rejected: removing the original triangular tapers into the round collar was wrong, and the reducer was too long. Active candidate `3O-short-faceted-reducer-v5.png` restores faceted taper panels and confines reduction to one short fitting bay before two straight downstream bays. Compared with source and pre-edit artwork; now accepted. Preserve these original transition details in future edits.
+- Next: Group 5 has 15 prepared review entries, followed by Group 6 (16) and Group 7 (5). These are prepared restorations, not accepted artwork. Keep Group 2 paused. Preserve the Group 3 lessons about connecting duct context, reducing sections, and original fitting details.
+- Retain the original standalone drawings. Updated user clarification (2026-09-04): separated assembly fittings must show the full original main-duct cross-section and substantial upstream/downstream sections, preserving original direction and taper. The user confirmed the expanded `3C-context-v2.png` example as the amount to use throughout. Do not append new upstream geometry to standalone originals.
+- Preserve the accepted full illustrations for reference. Each individual review card links to its full reference.
+- Review one group at a time. The user can give feedback in chat; do not require downloading review files.
+- Visually inspect every changed drawing against its source before presenting it. Expanded-context revisions and prompts are recorded in `docs/fitting-preflight/group-3-expanded-context.json`. The earlier `group-3-individual-final.json` and linked JPGs document the superseded small-context drawings.
+- The accepted workflow uses high-resolution raster restorations embedded in self-contained SVGs. These are not path-based vector drawings. Some corner/vane variants share generic artwork while retaining distinct IDs and values.
+- Expanded-context revisions replace 3B's cutaway wall strips and the small schematic fragments on 3D and 3H with full-width main-duct sections. Revised drawings remain review candidates; confirmation of the 3C context amount does not imply acceptance of the whole batch.
+
+The active review data is checked in with the artwork; no regeneration is needed to view it.
+To rebuild Group 3 after intentionally editing artwork/QA records:
+
+```sh
+python3 scripts/package_group_3_individual.py --activate
+```
+
+The packager now imports archived Group 3 decisions only when the fitting ID and SVG/reference revision match exactly. Accepted drawings retain their approval and badge. Changed revisions return to pending review; do not infer acceptance from unchecked boxes during an unfinished review.
+
+For a new remote conversation if handoff is unavailable, use:
+
+> Read docs/fitting-artwork-handoff.md and the Group 3 individual manifest and final QA record. Continue the existing fitting artwork workflow on codex/fitting-artwork. Group 3 individual drawings are accepted; keep Group 2 paused and preserve accepted standalone and full reference artwork.

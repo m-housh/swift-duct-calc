@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "batchId": "group-3-individual",
+  "completedAt": "2026-09-05T00:13:36.619Z",
+  "drawings": [
+    {
+      "id": "3A",
+      "revision": "6c10e9f563e6d4c5bcf6423b2ec21adea47acd558937c5c74b61b4ec37ba8ea8",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "3B",
+      "revision": "dff0fa399c9e0fa74a5fd6838aa73848561f8fa95c90ed54ac4a2ce44b59fa40",
+      "status": "needs-work",
+      "note": "The fitting and downstream duct have double edges (an inset edge), which makes them look like they have a \"thickness\" to the duct. The inner square should be removed and only a single line."
+    },
+    {
+      "id": "3C",
+      "revision": "58d422ce299a031ed543f71d0bb900eec8e4b3a38ce873d5b24c42a8ad15bdc7",
+      "status": "needs-work",
+      "note": "The fitting and downstream duct have double edges (an inset edge), which makes them look like they have a \"thickness\" to the duct. The inner square should be removed and only a single line."
+    },
+    {
+      "id": "3D-full",
+      "revision": "2866ebeb4257ccf3da46bbeb117bc1752196068189f569d836e0932d45c73b81",
+      "status": "needs-work",
+      "note": "The fitting and downstream duct have double edges (an inset edge), which makes them look like they have a \"thickness\" to the duct. The inner square should be removed and only a single line. \n\nAlso on this one, there needs to be a slight shift of the \"fitting\" portion further towards the start of the image. The airflow is going left -> right, and this fitting comes off the left duct. I will upload a screenshot for this."
+    },
+    {
+      "id": "3D-tight",
+      "revision": "1dcd9d1232836d52e1ab9398d3f4f58b2591e5971109e9a2f8289d32e3b1c358",
+      "status": "needs-work",
+      "note": "See previous 3D notes, they apply here too."
+    },
+    {
+      "id": "3D-mitered",
+      "revision": "9bd27b2ef3ff89b7be306b721fd14bfc211ef96ccb4379b386e3c0191b68419f",
+      "status": "needs-work",
+      "note": "See previous 3D notes, they apply here too."
+    },
+    {
+      "id": "3E",
+      "revision": "b10b9afc4ac2f5d2ccd31a71873d139fb441474b7771eacccc90c0cdf750520d",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "3F-full",
+      "revision": "757ca56677bc32e55a1399033f15ccf39d108f40e685aa2daeaeefe7660f6a9a",
+      "status": "needs-work",
+      "note": "The downstream duct have double edges (an inset edge), which makes them look like they have a \"thickness\" to the duct. The inner square should be removed and only a single line."
+    },
+    {
+      "id": "3F-tight",
+      "revision": "09bf7d961baf4a5d1ecc6765b000805c16a040feafeb044a10b9761c05027ff5",
+      "status": "needs-work",
+      "note": "The downstream duct have double edges (an inset edge), which makes them look like they have a \"thickness\" to the duct. The inner square should be removed and only a single line."
+    },
+    {
+      "id": "3F-mitered",
+      "revision": "41cf9590771cfc492175eb4f145f132c10ba3dffefa8d66e91c5f35204b13d16",
+      "status": "needs-work",
+      "note": "The downstream duct have double edges (an inset edge), which makes them look like they have a \"thickness\" to the duct. The inner square should be removed and only a single line."
+    },
+    {
+      "id": "3G",
+      "revision": "0ce4b19922c7ec2bf197334bb185a3cf9f7e5810e83c496c7cfd3a226c7c5afb",
+      "status": "needs-work",
+      "note": "The downstream duct have double edges (an inset edge), which makes them look like they have a \"thickness\" to the duct. The inner square should be removed and only a single line."
+    },
+    {
+      "id": "3H",
+      "revision": "4ec23f75a449a71b5b3609bb90cdbe1a0c3a1e85117a24fd3b2d36f46ca59cd4",
+      "status": "needs-work",
+      "note": "The upstream and downstream duct have double edges (an inset edge), which makes them look like they have a \"thickness\" to the duct. The inner square should be removed and only a single line."
+    },
+    {
+      "id": "3I",
+      "revision": "08fa9e6414e98f35893fb89486d670daf392b893dc0c37a96eac7176c5d3178d",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "3J-full",
+      "revision": "b1fd8b61074a3c8b89e91baaf5a4e436ef2d250f1c27ddf930fb79524c5ab5d9",
+      "status": "needs-work",
+      "note": "The downstream duct have double edges (an inset edge), which makes them look like they have a \"thickness\" to the duct. The inner square should be removed and only a single line."
+    },
+    {
+      "id": "3J-tight",
+      "revision": "a41c0fa65f5ff59d33f73a5aeae80994c3cbb3081c112e14d1ab68e0629bed85",
+      "status": "needs-work",
+      "note": "The downstream duct have double edges (an inset edge), which makes them look like they have a \"thickness\" to the duct. The inner square should be removed and only a single line."
+    },
+    {
+      "id": "3J-mitered",
+      "revision": "2317471bb287ca34e8d85fef098a6e9f0cd72079cff501a3f4b98a4bf8c04a33",
+      "status": "needs-work",
+      "note": "The downstream duct have double edges (an inset edge), which makes them look like they have a \"thickness\" to the duct. The inner square should be removed and only a single line."
+    },
+    {
+      "id": "3K",
+      "revision": "dbd334871e725582b7ae46051a744439b5e2c5162b34e8522a874a25b4c5bf65",
+      "status": "needs-work",
+      "note": "The downstream duct have double edges (an inset edge), which makes them look like they have a \"thickness\" to the duct. The inner square should be removed and only a single line."
+    },
+    {
+      "id": "3L",
+      "revision": "d185a2e534ed98c6d8371b3ba3220499ad01a987f25c85c473b947fce5f0a2da",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "3M",
+      "revision": "7be235f518df995c23bc48b4d5fb9c4ff901f2102fefd4c7eb19d1420eec5c10",
+      "status": "needs-work",
+      "note": "The downstream duct have double edges (an inset edge), which makes them look like they have a \"thickness\" to the duct. The inner square should be removed and only a single line."
+    },
+    {
+      "id": "3N",
+      "revision": "121ade8021b51b963d659aff1aa236217c66a4bb20fcd2225898fe8f71a2b9b5",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "3O",
+      "revision": "d32b88e3a5f0ae3691c5908632bd297b6ac566a608be3586e7d93dcd545b3733",
+      "status": "needs-work",
+      "note": "The downstream duct have double edges (an inset edge), which makes them look like they have a \"thickness\" to the duct. The inner square should be removed and only a single line."
+    },
+    {
+      "id": "3P",
+      "revision": "b7a08459065aa06bbbe66f96863531d948830b2e5e63a293b999a06692337988",
+      "status": "needs-work",
+      "note": "The downstream duct have double edges (an inset edge), which makes them look like they have a \"thickness\" to the duct. The inner square should be removed and only a single line."
+    },
+    {
+      "id": "3Q",
+      "revision": "32c14c9827a4ff16dd1f955df3ef9b84dc34c3084965f3872ec5d46f0737c791",
+      "status": "needs-work",
+      "note": "The downstream duct have double edges (an inset edge), which makes them look like they have a \"thickness\" to the duct. The inner square should be removed and only a single line."
+    },
+    {
+      "id": "3R",
+      "revision": "774cc3e5db0b01f794723db0c0210c76a48b8fb583193e4e2cdf932109c91813",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "3S-full",
+      "revision": "4b503398e97a37dd53edc497c0e39f70683d8bd25efd0e8e01db57463f822729",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "3S-tight",
+      "revision": "fb1e6c53e6e5f31c1385ba7bc9dc107bdb8120cc7a2c78c9114f647aaabd3c9b",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "3S-mitered",
+      "revision": "b318ba18447b4a63f4449f581466a563f108c2efc4e5f0c12a666d1b95d57714",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "3T",
+      "revision": "2ed5676e315b3e9c4477e5958e0acba3ebad3d21c57bc466384d767bf108b78a",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "3U-mitered-vanes",
+      "revision": "068a9760f7e836f458b5afbf575e5501b0e7dab81957e0fa67c306e2e441c6c7",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "3U-mitered-no-vanes",
+      "revision": "736696476fb5741de1a7dba3d134ed43ead54cea5d8602c769f96bd455beb42c",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "3V",
+      "revision": "bc52b9681808975825d22eaf35dfaaf684ef562f277578a41d5b005c601e0917",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "3W",
+      "revision": "155e07368338cb995ab9b103498dad61790cab99a1f12de058161889e30ba448",
+      "status": "accepted",
+      "note": ""
+    }
+  ]
+}

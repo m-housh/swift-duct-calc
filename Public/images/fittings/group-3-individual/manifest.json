@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "group": 3,
   "title": "Group 3 individual fittings",
-  "status": "individual-needs-review",
+  "status": "visually-approved",
   "drawingCount": 32,
   "expectedDrawingCount": 32,
   "withheldIds": [],
   "withheld": [],
-  "upstreamContextRule": "Keep a small piece of the existing connecting neighbor only when separating shared assembly artwork. Leave original standalone fittings unchanged.",
+  "upstreamContextRule": "For separated assembly fittings, retain the full original main-duct cross-section and substantial upstream/downstream sections, following the user-confirmed 3C context example. Preserve original duct direction and taper. Leave original standalone fittings unchanged.",
   "referenceManifest": "/images/fittings/group-3-context/manifest.json",
   "items": [
     {
@@ -56,10 +56,18 @@
       "restorationNotes": [
         "Existing standalone drawing retained without adding upstream geometry, per user clarification."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3A.svg",
       "revision": "6c10e9f563e6d4c5bcf6423b2ec21adea47acd558937c5c74b61b4ec37ba8ea8",
+      "visualReview": {
+        "id": "3A",
+        "revision": "6c10e9f563e6d4c5bcf6423b2ec21adea47acd558937c5c74b61b4ec37ba8ea8",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
         1536,
         1024
@@ -95,28 +103,35 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3B-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3B-single-line-v3.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
       "sharedArtworkIds": [
         "3B"
       ],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "qaRecord": "docs/fitting-preflight/group-3-edge-corrections.json",
       "contextId": "reference-3B",
       "contextArt": "/images/fittings/group-3-enhanced/3B-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3B.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Prepared from a tight approved-source crop after full-assembly attempts changed the geometry.",
-        "Offset transition, distinct tall curved takeoff neck, and outlet rim compared visually against the source crop.",
-        "Upstream context is represented by two short parent side-wall strips as a cutaway, rather than a fully closed trunk volume."
+        "Removed inset outline from both the branch outlet at lower-left AND the main-duct end at lower-right; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3B.svg",
-      "revision": "bd470025e5744fd091aae7f238eb0bd6b019a35ded6f7d726ac2c62796d3f649",
+      "revision": "3775a7e0d7b628f4d47064fb97da55fff662728028e674bd2be8c6d33ac7430c",
+      "visualReview": {
+        "id": "3B",
+        "revision": "3775a7e0d7b628f4d47064fb97da55fff662728028e674bd2be8c6d33ac7430c",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1422,
-        1106
+        1548,
+        1016
       ]
     },
     {
@@ -149,26 +164,35 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3C-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3C-single-line-v3.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
       "sharedArtworkIds": [
         "3C"
       ],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "qaRecord": "docs/fitting-preflight/group-3-edge-corrections.json",
       "contextId": "reference-3B",
       "contextArt": "/images/fittings/group-3-enhanced/3B-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3B.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Short attachment fragment retained at the inlet; straight-aspect transition, curved takeoff, outlet rim and original far-side orientation visually checked against approved assembly."
+        "Removed inset outline from both the branch outlet at upper-right AND the main-duct end at lower-right; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3C.svg",
-      "revision": "f8e81d28e5e8ff8ecc3e90a35ac86e6983c076b6cb3919dab23970620fdcc785",
+      "revision": "2c56e97dfb9788327f24d218491caa2be785de7650023ccd50954f0be9f60273",
+      "visualReview": {
+        "id": "3C",
+        "revision": "2c56e97dfb9788327f24d218491caa2be785de7650023ccd50954f0be9f60273",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1466,
-        1073
+        1532,
+        1027
       ]
     },
     {
@@ -201,31 +225,41 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3D-full-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3D-full-straight-connection-v7.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
       "sharedArtworkIds": [
         "3D-full",
         "3D-tight",
         "3D-mitered"
       ],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "qaRecord": "docs/fitting-preflight/group-3-edge-corrections.json",
       "contextId": "reference-3B",
       "contextArt": "/images/fittings/group-3-enhanced/3B-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3B.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Prepared from a tight approved-source crop after full-assembly attempts changed the geometry.",
-        "Compound elbow, inner and outer bends, seam and shallow rectangular outlet visually match the source crop.",
-        "Retains a short schematic parent duct fragment below the far-side branch; parent ends are completed boundaries.",
-        "Generic source artwork shared across corner variants; artwork does not distinguish full, tight and mitered configuration."
+        "Upstream main duct is wider on its far/back side and reduces toward the existing takeoff, following the user's third markup.",
+        "Retained the upstream joint location and extended its top seam across the wider duct; the reduction begins at this joint.",
+        "Elbow remains in its existing location; compound bend and lower throat retained.",
+        "Rectangular opening outlines remain single lines without inset rims.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct.",
+        "Added a straight connecting edge from the upstream far-side joint to the elbow, above the retained straight reducing edge. User clarification: downstream width = upstream width minus fitting width; the connection edge is not curved."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3D-full.svg",
-      "revision": "2d769199e5138f7690bd24b3c8a7752cf898d2d58dc81c1e6031fb864245222c",
+      "revision": "5d8caae8296875372244a158d681d5941731bdceb04e727f7772b058e891cb9b",
+      "visualReview": {
+        "id": "3D-full",
+        "revision": "5d8caae8296875372244a158d681d5941731bdceb04e727f7772b058e891cb9b",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1470,
-        1070
+        1537,
+        1023
       ]
     },
     {
@@ -258,31 +292,41 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3D-tight-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3D-full-straight-connection-v7.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
       "sharedArtworkIds": [
         "3D-full",
         "3D-tight",
         "3D-mitered"
       ],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "qaRecord": "docs/fitting-preflight/group-3-edge-corrections.json",
       "contextId": "reference-3B",
       "contextArt": "/images/fittings/group-3-enhanced/3B-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3B.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Prepared from a tight approved-source crop after full-assembly attempts changed the geometry.",
-        "Compound elbow, inner and outer bends, seam and shallow rectangular outlet visually match the source crop.",
-        "Retains a short schematic parent duct fragment below the far-side branch; parent ends are completed boundaries.",
-        "Generic source artwork shared across corner variants; artwork does not distinguish full, tight and mitered configuration."
+        "Upstream main duct is wider on its far/back side and reduces toward the existing takeoff, following the user's third markup.",
+        "Retained the upstream joint location and extended its top seam across the wider duct; the reduction begins at this joint.",
+        "Elbow remains in its existing location; compound bend and lower throat retained.",
+        "Rectangular opening outlines remain single lines without inset rims.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct.",
+        "Added a straight connecting edge from the upstream far-side joint to the elbow, above the retained straight reducing edge. User clarification: downstream width = upstream width minus fitting width; the connection edge is not curved."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3D-tight.svg",
-      "revision": "bb985c60c65805fd327d7eef5d6c85912d9ee0e7155188ccddc5f8a1f52cc778",
+      "revision": "c47868e7495bcdc41fba8f72a4fe2900cd02e3f1625bec388850573b2a393163",
+      "visualReview": {
+        "id": "3D-tight",
+        "revision": "c47868e7495bcdc41fba8f72a4fe2900cd02e3f1625bec388850573b2a393163",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1470,
-        1070
+        1537,
+        1023
       ]
     },
     {
@@ -315,31 +359,41 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3D-mitered-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3D-full-straight-connection-v7.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/3B.png",
       "sharedArtworkIds": [
         "3D-full",
         "3D-tight",
         "3D-mitered"
       ],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "qaRecord": "docs/fitting-preflight/group-3-edge-corrections.json",
       "contextId": "reference-3B",
       "contextArt": "/images/fittings/group-3-enhanced/3B-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3B.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Prepared from a tight approved-source crop after full-assembly attempts changed the geometry.",
-        "Compound elbow, inner and outer bends, seam and shallow rectangular outlet visually match the source crop.",
-        "Retains a short schematic parent duct fragment below the far-side branch; parent ends are completed boundaries.",
-        "Generic source artwork shared across corner variants; artwork does not distinguish full, tight and mitered configuration."
+        "Upstream main duct is wider on its far/back side and reduces toward the existing takeoff, following the user's third markup.",
+        "Retained the upstream joint location and extended its top seam across the wider duct; the reduction begins at this joint.",
+        "Elbow remains in its existing location; compound bend and lower throat retained.",
+        "Rectangular opening outlines remain single lines without inset rims.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct.",
+        "Added a straight connecting edge from the upstream far-side joint to the elbow, above the retained straight reducing edge. User clarification: downstream width = upstream width minus fitting width; the connection edge is not curved."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3D-mitered.svg",
-      "revision": "f3caa2331794a5561a754e09b27c85b2a51fd1668cffd5d28231e3ee5286bd09",
+      "revision": "7e4420d8ee082daf3d92321062ba2037b790476e14746f78518d8cedc4e36323",
+      "visualReview": {
+        "id": "3D-mitered",
+        "revision": "7e4420d8ee082daf3d92321062ba2037b790476e14746f78518d8cedc4e36323",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1470,
-        1070
+        1537,
+        1023
       ]
     },
     {
@@ -372,26 +426,35 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3E-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3E-context-v2.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
       "sharedArtworkIds": [
         "3E"
       ],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "qaRecord": "docs/fitting-preflight/group-3-expanded-context.json",
       "contextId": "reference-3E",
       "contextArt": "/images/fittings/group-3-enhanced/3E-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3E.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Short parent duct segment retained behind the side takeoff; square outlet and full curved throat visually checked against approved assembly."
+        "Original tall narrow outlet and long curved takeoff neck retained with the local main-duct reduction. A fresh source extraction replaced two trials that broadened the branch.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3E.svg",
-      "revision": "9f60601a06a2968a4402cd9f49f2c9bab02c8e4c06e25ea53da590019b81a35e",
+      "revision": "b10b9afc4ac2f5d2ccd31a71873d139fb441474b7771eacccc90c0cdf750520d",
+      "visualReview": {
+        "id": "3E",
+        "revision": "b10b9afc4ac2f5d2ccd31a71873d139fb441474b7771eacccc90c0cdf750520d",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1426,
-        1103
+        1432,
+        1098
       ]
     },
     {
@@ -424,29 +487,38 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3F-full-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3F-full-single-line-v3.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
       "sharedArtworkIds": [
         "3F-full",
         "3F-tight",
         "3F-mitered"
       ],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "qaRecord": "docs/fitting-preflight/group-3-edge-corrections.json",
       "contextId": "reference-3E",
       "contextArt": "/images/fittings/group-3-enhanced/3E-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3E.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Short parent duct segment retained; complete compound takeoff/easy-bend elbow and broad shallow rectangular outlet visually checked against approved assembly.",
-        "Source uses generic artwork for these variants; differences in corner configuration remain metadata, and this drawing does not distinguish them."
+        "Removed inset outline from the main-duct end at lower-right; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3F-full.svg",
-      "revision": "ed7d72c657878386773e1dafe81c1038249f523727422d8105b401ad261e0822",
+      "revision": "4ff9ad7f2c5ef9521ef745d9a75dab7896761d6d0adf509e9cf52e678e267976",
+      "visualReview": {
+        "id": "3F-full",
+        "revision": "4ff9ad7f2c5ef9521ef745d9a75dab7896761d6d0adf509e9cf52e678e267976",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1447,
-        1087
+        1532,
+        1027
       ]
     },
     {
@@ -479,29 +551,38 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3F-tight-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3F-full-single-line-v3.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
       "sharedArtworkIds": [
         "3F-full",
         "3F-tight",
         "3F-mitered"
       ],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "qaRecord": "docs/fitting-preflight/group-3-edge-corrections.json",
       "contextId": "reference-3E",
       "contextArt": "/images/fittings/group-3-enhanced/3E-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3E.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Short parent duct segment retained; complete compound takeoff/easy-bend elbow and broad shallow rectangular outlet visually checked against approved assembly.",
-        "Source uses generic artwork for these variants; differences in corner configuration remain metadata, and this drawing does not distinguish them."
+        "Removed inset outline from the main-duct end at lower-right; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3F-tight.svg",
-      "revision": "a99b5f47247acdb910b0068a4a1d62d827c59a8e180f6787b7b1d7b8b78e969c",
+      "revision": "91df2906ac303791e43a8f20f2a9e7ba005dab8f5382e3c6e6a4627ca699440d",
+      "visualReview": {
+        "id": "3F-tight",
+        "revision": "91df2906ac303791e43a8f20f2a9e7ba005dab8f5382e3c6e6a4627ca699440d",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1447,
-        1087
+        1532,
+        1027
       ]
     },
     {
@@ -534,29 +615,38 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3F-mitered-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3F-full-single-line-v3.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
       "sharedArtworkIds": [
         "3F-full",
         "3F-tight",
         "3F-mitered"
       ],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "qaRecord": "docs/fitting-preflight/group-3-edge-corrections.json",
       "contextId": "reference-3E",
       "contextArt": "/images/fittings/group-3-enhanced/3E-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3E.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Short parent duct segment retained; complete compound takeoff/easy-bend elbow and broad shallow rectangular outlet visually checked against approved assembly.",
-        "Source uses generic artwork for these variants; differences in corner configuration remain metadata, and this drawing does not distinguish them."
+        "Removed inset outline from the main-duct end at lower-right; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3F-mitered.svg",
-      "revision": "f88f574dce03d97f3b487e44673096674e87292473a89104f64df0ffd4308184",
+      "revision": "88d9c07fb4edaedcd033de4d0f96e8ba26d96d06dc5bc41436890737fa25388f",
+      "visualReview": {
+        "id": "3F-mitered",
+        "revision": "88d9c07fb4edaedcd033de4d0f96e8ba26d96d06dc5bc41436890737fa25388f",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1447,
-        1087
+        1532,
+        1027
       ]
     },
     {
@@ -589,26 +679,35 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3G-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3G-single-line-v3.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
       "sharedArtworkIds": [
         "3G"
       ],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "qaRecord": "docs/fitting-preflight/group-3-edge-corrections.json",
       "contextId": "reference-3E",
       "contextArt": "/images/fittings/group-3-enhanced/3E-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3E.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Minimal local upstream transition fragment retained; curved inlet and straight-aspect transition seams visually checked against approved assembly."
+        "Removed inset outline from the main-duct end at lower-right; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3G.svg",
-      "revision": "cf126b0491e250aeb26efab234d58506274b78583f1347b3046ff86c5efcc4ba",
+      "revision": "a2162a76dc0c5634499cd6e90b150a4ec4481b5530a644cc856985da228d9ea3",
+      "visualReview": {
+        "id": "3G",
+        "revision": "a2162a76dc0c5634499cd6e90b150a4ec4481b5530a644cc856985da228d9ea3",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1404,
-        1120
+        1536,
+        1024
       ]
     },
     {
@@ -641,28 +740,35 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3H-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3H-single-line-v3.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/3E.png",
       "sharedArtworkIds": [
         "3H"
       ],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-b-h.json",
+      "qaRecord": "docs/fitting-preflight/group-3-edge-corrections.json",
       "contextId": "reference-3E",
       "contextArt": "/images/fittings/group-3-enhanced/3E-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3E.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Prepared from a tight approved-source crop after full-assembly attempts changed the geometry.",
-        "Offset transition, seams, and original curved side-wall attachment visually match source crop.",
-        "Retains only a small tapered parent fragment at the original side attachment, with schematic boundary completion."
+        "Removed inset outline from the left/upstream main-duct edge and the right/downstream main-duct opening; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3H.svg",
-      "revision": "589cc936c7ea82141a627c4d6e00399fe135a584719143f9ea4ebed1f0266f0c",
+      "revision": "45553187e6de46ac0b4a8042c1ff61a1be292b502c2627b38d26c1c4cb36a5d3",
+      "visualReview": {
+        "id": "3H",
+        "revision": "45553187e6de46ac0b4a8042c1ff61a1be292b502c2627b38d26c1c4cb36a5d3",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1385,
-        1136
+        1536,
+        1024
       ]
     },
     {
@@ -711,10 +817,18 @@
       "restorationNotes": [
         "Existing standalone drawing retained without adding upstream geometry, per user clarification."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3I.svg",
       "revision": "08fa9e6414e98f35893fb89486d670daf392b893dc0c37a96eac7176c5d3178d",
+      "visualReview": {
+        "id": "3I",
+        "revision": "08fa9e6414e98f35893fb89486d670daf392b893dc0c37a96eac7176c5d3178d",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
         1536,
         1024
@@ -750,30 +864,38 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3J-full-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3J-full-single-line-v3.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
       "sharedArtworkIds": [
         "3J-full",
         "3J-tight",
         "3J-mitered"
       ],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-j-n.json",
+      "qaRecord": "docs/fitting-preflight/group-3-edge-corrections.json",
       "contextId": "reference-3J-full",
       "contextArt": "/images/fittings/group-3-enhanced/3J-full-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3J-full.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Two curved rectangular elbow portions and wide flat outlet retained. A short parent-duct stub shows the original side attachment.",
-        "A stray arc on the first isolation was removed in a targeted correction.",
-        "Source gives one generic illustration for full, tight and mitered 3J variants. Shared artwork does not depict different radius or vanes configurations; use variant metadata."
+        "Removed inset outline from the lower-right downstream main-duct end; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3J-full.svg",
-      "revision": "eb38cefc23ac35ba1c13532e00e92337ffa2c4619f05f7f84e27df15139f303b",
+      "revision": "ddcce5f61fb0789f5187f1065ed1706e9b9e36836ca275a8f1f9c0b102fea45a",
+      "visualReview": {
+        "id": "3J-full",
+        "revision": "ddcce5f61fb0789f5187f1065ed1706e9b9e36836ca275a8f1f9c0b102fea45a",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1609,
-        977
+        1555,
+        1012
       ]
     },
     {
@@ -806,30 +928,38 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3J-tight-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3J-full-single-line-v3.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
       "sharedArtworkIds": [
         "3J-full",
         "3J-tight",
         "3J-mitered"
       ],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-j-n.json",
+      "qaRecord": "docs/fitting-preflight/group-3-edge-corrections.json",
       "contextId": "reference-3J-full",
       "contextArt": "/images/fittings/group-3-enhanced/3J-full-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3J-full.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Two curved rectangular elbow portions and wide flat outlet retained. A short parent-duct stub shows the original side attachment.",
-        "A stray arc on the first isolation was removed in a targeted correction.",
-        "Source gives one generic illustration for full, tight and mitered 3J variants. Shared artwork does not depict different radius or vanes configurations; use variant metadata."
+        "Removed inset outline from the lower-right downstream main-duct end; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3J-tight.svg",
-      "revision": "84d52dc20c7b39bddd004576304080f0abb58d7d7d5418c11f46eccb00865aa0",
+      "revision": "798e9d435e75dd3a6666a7ecd623f422f2ed594d4f9b27e843f8abae8431d23f",
+      "visualReview": {
+        "id": "3J-tight",
+        "revision": "798e9d435e75dd3a6666a7ecd623f422f2ed594d4f9b27e843f8abae8431d23f",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1609,
-        977
+        1555,
+        1012
       ]
     },
     {
@@ -862,30 +992,38 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3J-mitered-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3J-full-single-line-v3.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
       "sharedArtworkIds": [
         "3J-full",
         "3J-tight",
         "3J-mitered"
       ],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-j-n.json",
+      "qaRecord": "docs/fitting-preflight/group-3-edge-corrections.json",
       "contextId": "reference-3J-full",
       "contextArt": "/images/fittings/group-3-enhanced/3J-full-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3J-full.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Two curved rectangular elbow portions and wide flat outlet retained. A short parent-duct stub shows the original side attachment.",
-        "A stray arc on the first isolation was removed in a targeted correction.",
-        "Source gives one generic illustration for full, tight and mitered 3J variants. Shared artwork does not depict different radius or vanes configurations; use variant metadata."
+        "Removed inset outline from the lower-right downstream main-duct end; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream.",
+        "Generic source artwork remains shared across corner variants; IDs and fitting values are distinct."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3J-mitered.svg",
-      "revision": "7de9b5ac04ec3599003a44f005f7683ac50bbb42d68a61fee6fcd1382a593d3a",
+      "revision": "53f341339733560badff057e098f30fb27e43ce55cf8752030ec9f08743b4426",
+      "visualReview": {
+        "id": "3J-mitered",
+        "revision": "53f341339733560badff057e098f30fb27e43ce55cf8752030ec9f08743b4426",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1609,
-        977
+        1555,
+        1012
       ]
     },
     {
@@ -918,24 +1056,35 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3K-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3K-single-line-v3.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
-      "sharedArtworkIds": [],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-j-n.json",
+      "sharedArtworkIds": [
+        "3K"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-edge-corrections.json",
       "contextId": "reference-3J-full",
       "contextArt": "/images/fittings/group-3-enhanced/3J-full-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3J-full.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Original full-radius rectangular takeoff and straight tapered transition retained; short upstream duct section shows side connection."
+        "Removed inset outline from the lower-right downstream main-duct end; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3K.svg",
-      "revision": "397a033bd1355ef34cc620e49aaa9920288253d43a68de2f57082bf3279bbe81",
+      "revision": "4421400e946df527e7d97b47bc2e97888fc7b628de6ed1623cc85adef37b69d0",
+      "visualReview": {
+        "id": "3K",
+        "revision": "4421400e946df527e7d97b47bc2e97888fc7b628de6ed1623cc85adef37b69d0",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1641,
-        958
+        1548,
+        1016
       ]
     },
     {
@@ -968,24 +1117,36 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3L-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3L-narrow-downstream-v3.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
-      "sharedArtworkIds": [],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-j-n.json",
+      "sharedArtworkIds": [
+        "3L"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-edge-corrections.json",
       "contextId": "reference-3J-full",
       "contextArt": "/images/fittings/group-3-enhanced/3J-full-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3J-full.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Original full-radius rectangular takeoff and offset tapered transition retained; short upstream duct section shows side connection."
+        "Narrowed the downstream main duct by moving its far/back boundary inward to the position marked in red in 3l.png.",
+        "Retained upstream main duct, downstream near/front wall and height, and the full-radius takeoff with offset transition.",
+        "Previous 3L acceptance belongs to the prior image revision; this correction needs user review."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3L.svg",
-      "revision": "b75035929c0c15aee53f4d5f6854012039c64075052b276dcafd1ec6eba97f2d",
+      "revision": "3a75e445bf9bc8a7e537a3b304cfc9a8acf9a0f385360e5ab899227c05fb60cb",
+      "visualReview": {
+        "id": "3L",
+        "revision": "3a75e445bf9bc8a7e537a3b304cfc9a8acf9a0f385360e5ab899227c05fb60cb",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1479,
-        1064
+        1536,
+        1024
       ]
     },
     {
@@ -1018,24 +1179,35 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3M.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3M-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3M-single-line-v3.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/3M.png",
-      "sharedArtworkIds": [],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-j-n.json",
+      "sharedArtworkIds": [
+        "3M"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-edge-corrections.json",
       "contextId": "reference-3M",
       "contextArt": "/images/fittings/group-3-enhanced/3M-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3M.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Complete eased takeoff base, one segmented elbow and round outlet retained. Short parent duct preserves source side attachment."
+        "Removed inset outline from the lower-right downstream main-duct end; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3M.svg",
-      "revision": "9a7237647a5ac876051f4549b6f2086db91e7e0bf8abc55d541001d0d2ca9e48",
+      "revision": "6ed5448ca06f7b318951722ab507e1bb191deb90a0d2933d01d065e229363536",
+      "visualReview": {
+        "id": "3M",
+        "revision": "6ed5448ca06f7b318951722ab507e1bb191deb90a0d2933d01d065e229363536",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1561,
-        1008
+        1559,
+        1009
       ]
     },
     {
@@ -1068,24 +1240,35 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3M.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3N-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3N-context-v2.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/3M.png",
-      "sharedArtworkIds": [],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-j-n.json",
+      "sharedArtworkIds": [
+        "3N"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-expanded-context.json",
       "contextId": "reference-3M",
       "contextArt": "/images/fittings/group-3-enhanced/3M-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3M.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Complete eased takeoff base, two segmented elbows and round outlet retained. Short parent duct preserves source side attachment."
+        "Boot and complete segmented round elbow/pipe retained on reducing near-side wall, with full main-duct sections.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3N.svg",
-      "revision": "0cb246b8baa31438866dddc0ee2da6c82595035d7ad35db0a0d99d7e31dcde72",
+      "revision": "121ade8021b51b963d659aff1aa236217c66a4bb20fcd2225898fe8f71a2b9b5",
+      "visualReview": {
+        "id": "3N",
+        "revision": "121ade8021b51b963d659aff1aa236217c66a4bb20fcd2225898fe8f71a2b9b5",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1561,
-        1008
+        1555,
+        1012
       ]
     },
     {
@@ -1118,24 +1301,36 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3O-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3O-short-faceted-reducer-v5.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png",
-      "sharedArtworkIds": [],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-o-r.json",
+      "sharedArtworkIds": [
+        "3O"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-edge-corrections.json",
       "contextId": "reference-3O",
       "contextArt": "/images/fittings/group-3-enhanced/3O-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3O.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Retains a short rectangular parent duct with cut marks and the original faceted sidewall transition and straight round outlet."
+        "Short reducing bay retains faceted triangular taper surfaces converging into the round collar.",
+        "Downstream duct is narrower on the near/front side; the far edge remains aligned.",
+        "Replaces rejected long plain-wall reducer; preserves a short fitting bay followed by two straight downstream bays."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3O.svg",
-      "revision": "fa112209a17d9b2300744811e59e4b4ad07b3d9febe1051be50449724e0aea38",
+      "revision": "685183259585b3f1e694b713073d67e71b16cf61595679eb56791ed09d7a15a9",
+      "visualReview": {
+        "id": "3O",
+        "revision": "685183259585b3f1e694b713073d67e71b16cf61595679eb56791ed09d7a15a9",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1404,
-        1120
+        1525,
+        1031
       ]
     },
     {
@@ -1168,25 +1363,35 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3P-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3P-single-line-v3.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png",
-      "sharedArtworkIds": [],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-o-r.json",
+      "sharedArtworkIds": [
+        "3P"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-edge-corrections.json",
       "contextId": "reference-3O",
       "contextArt": "/images/fittings/group-3-enhanced/3O-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3O.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Retains the short parent duct behind the sidewall transition, both segmented elbows, vertical section and up-right round outlet.",
-        "Two targeted cleanup passes corrected the parent duct outline and joined transition crease endpoints."
+        "Removed inset outline from the lower-right downstream main-duct end; opening boundaries use single lines.",
+        "Retained the fitting geometry and full-width original main duct upstream and downstream."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3P.svg",
-      "revision": "30c167938c6b4b1ea0818e1d6062ba2196d2392b02241c399a398d7cc3d43189",
+      "revision": "91306576977b2687453963178a843e436a5520305881b80d4b8db49bf3c5783c",
+      "visualReview": {
+        "id": "3P",
+        "revision": "91306576977b2687453963178a843e436a5520305881b80d4b8db49bf3c5783c",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1423,
-        1105
+        1537,
+        1023
       ]
     },
     {
@@ -1219,24 +1424,37 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3Q-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3Q-clean-upstream-v6.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/3O.png",
-      "sharedArtworkIds": [],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-o-r.json",
+      "sharedArtworkIds": [
+        "3Q"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-edge-corrections.json",
       "contextId": "reference-3O",
       "contextArt": "/images/fittings/group-3-enhanced/3O-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3O.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Retains a short open-ended parent duct and the sidewall collar, one segmented elbow and down-left round outlet."
+        "Widened the upstream main duct toward the near/front side and retained the smaller downstream section.",
+        "Retained substantial main duct context and single-line downstream opening boundaries.",
+        "Moved the round takeoff and collar toward the center of the reducing wall per 3q_2.png, retaining the wall boundaries and duct geometry.",
+        "Removed the stray diagonal seam across the middle of the upstream top face, retaining the joint near the reducing section and centered round fitting."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3Q.svg",
-      "revision": "9fe65399c3ea3a7932a14c6bc23212f33a229a905f8874eee76b0170e4c85094",
+      "revision": "fb6bc6f4281d01e5e3ed04acd271dbc548641a828a495e8237d8e8cbd1974e2f",
+      "visualReview": {
+        "id": "3Q",
+        "revision": "fb6bc6f4281d01e5e3ed04acd271dbc548641a828a495e8237d8e8cbd1974e2f",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1396,
-        1127
+        1527,
+        1030
       ]
     },
     {
@@ -1269,24 +1487,35 @@
       },
       "originalReferenceImage": "/images/fittings/group-3-enhanced/source-art/context-3R-3U.png",
       "notes": [],
-      "restoredArt": "/images/fittings/group-3-individual/3R-restored-art.png",
+      "restoredArt": "/images/fittings/group-3-individual/3R-context-v2.png",
       "referenceImage": "/images/fittings/group-3-enhanced/source-art/context-3R-3U.png",
-      "sharedArtworkIds": [],
-      "qaRecord": "docs/fitting-preflight/group-3-individual-o-r.json",
+      "sharedArtworkIds": [
+        "3R"
+      ],
+      "qaRecord": "docs/fitting-preflight/group-3-expanded-context.json",
       "contextId": "reference-3R",
       "contextArt": "/images/fittings/group-3-enhanced/3R-restored-art.png",
       "contextSVG": "/images/fittings/group-3-context/reference-3R.svg",
       "unchangedStandalone": false,
       "restorationNotes": [
-        "Retains the wide asymmetric sidewall transition, nearly face-on round outlet and short upstream rectangular duct context."
+        "Triangular short round takeoff retained on the original reducing main-duct section.",
+        "Retains the full original main-duct cross-section and substantial upstream/downstream sections, following the confirmed 3C context example."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3R.svg",
-      "revision": "6a5c73b19f4c46c048acf277e14f0e58dc247615d04c82c51b99519ed0934512",
+      "revision": "774cc3e5db0b01f794723db0c0210c76a48b8fb583193e4e2cdf932109c91813",
+      "visualReview": {
+        "id": "3R",
+        "revision": "774cc3e5db0b01f794723db0c0210c76a48b8fb583193e4e2cdf932109c91813",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
-        1483,
-        1061
+        1565,
+        1005
       ]
     },
     {
@@ -1337,10 +1566,18 @@
         "Existing standalone drawing retained without adding upstream geometry, per user clarification.",
         "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3S-full.svg",
       "revision": "4b503398e97a37dd53edc497c0e39f70683d8bd25efd0e8e01db57463f822729",
+      "visualReview": {
+        "id": "3S-full",
+        "revision": "4b503398e97a37dd53edc497c0e39f70683d8bd25efd0e8e01db57463f822729",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
         1199,
         1312
@@ -1394,10 +1631,18 @@
         "Existing standalone drawing retained without adding upstream geometry, per user clarification.",
         "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3S-tight.svg",
       "revision": "fb1e6c53e6e5f31c1385ba7bc9dc107bdb8120cc7a2c78c9114f647aaabd3c9b",
+      "visualReview": {
+        "id": "3S-tight",
+        "revision": "fb1e6c53e6e5f31c1385ba7bc9dc107bdb8120cc7a2c78c9114f647aaabd3c9b",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
         1199,
         1312
@@ -1451,10 +1696,18 @@
         "Existing standalone drawing retained without adding upstream geometry, per user clarification.",
         "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3S-mitered.svg",
       "revision": "b318ba18447b4a63f4449f581466a563f108c2efc4e5f0c12a666d1b95d57714",
+      "visualReview": {
+        "id": "3S-mitered",
+        "revision": "b318ba18447b4a63f4449f581466a563f108c2efc4e5f0c12a666d1b95d57714",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
         1199,
         1312
@@ -1505,10 +1758,18 @@
       "restorationNotes": [
         "Existing standalone drawing retained without adding upstream geometry, per user clarification."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3T.svg",
       "revision": "2ed5676e315b3e9c4477e5958e0acba3ebad3d21c57bc466384d767bf108b78a",
+      "visualReview": {
+        "id": "3T",
+        "revision": "2ed5676e315b3e9c4477e5958e0acba3ebad3d21c57bc466384d767bf108b78a",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
         1254,
         1254
@@ -1561,10 +1822,18 @@
         "Existing standalone drawing retained without adding upstream geometry, per user clarification.",
         "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3U-mitered-vanes.svg",
       "revision": "068a9760f7e836f458b5afbf575e5501b0e7dab81957e0fa67c306e2e441c6c7",
+      "visualReview": {
+        "id": "3U-mitered-vanes",
+        "revision": "068a9760f7e836f458b5afbf575e5501b0e7dab81957e0fa67c306e2e441c6c7",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
         1538,
         1022
@@ -1617,10 +1886,18 @@
         "Existing standalone drawing retained without adding upstream geometry, per user clarification.",
         "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3U-mitered-no-vanes.svg",
       "revision": "736696476fb5741de1a7dba3d134ed43ead54cea5d8602c769f96bd455beb42c",
+      "visualReview": {
+        "id": "3U-mitered-no-vanes",
+        "revision": "736696476fb5741de1a7dba3d134ed43ead54cea5d8602c769f96bd455beb42c",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
         1538,
         1022
@@ -1669,10 +1946,18 @@
       "restorationNotes": [
         "Left transition isolated from the mirrored pair; no upstream geometry added. Visually checked full collar, panel creases and rectangular end against the accepted reference."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3V.svg",
       "revision": "bc52b9681808975825d22eaf35dfaaf684ef562f277578a41d5b005c601e0917",
+      "visualReview": {
+        "id": "3V",
+        "revision": "bc52b9681808975825d22eaf35dfaaf684ef562f277578a41d5b005c601e0917",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
         1188,
         1324
@@ -1721,10 +2006,18 @@
       "restorationNotes": [
         "Existing standalone drawing retained without adding upstream geometry, per user clarification."
       ],
-      "status": "individual-needs-review",
+      "status": "visually-approved",
       "drawingMethod": "High-resolution raster artwork embedded in an art-only, self-contained SVG.",
       "svg": "/images/fittings/group-3-individual/3W.svg",
       "revision": "155e07368338cb995ab9b103498dad61790cab99a1f12de058161889e30ba448",
+      "visualReview": {
+        "id": "3W",
+        "revision": "155e07368338cb995ab9b103498dad61790cab99a1f12de058161889e30ba448",
+        "status": "accepted",
+        "note": "Group 3 accepted by the user in conversation after the final corrections.",
+        "completedAt": "2026-09-05T01:27:19.824Z",
+        "record": "docs/fitting-reviews/review-e8adf2d2fbd5cd6c.json"
+      },
       "embeddedRasterSize": [
         1374,
         1145
