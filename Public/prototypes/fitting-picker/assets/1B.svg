@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="80 105 470 320" role="img" aria-labelledby="title desc">
+<title id="title">1B — Round tapered takeoff</title>
+<desc id="desc">Schematic side elevation of supply air fitting 1B. Plenum large compared with duct. Round duct connects through a tapered entry. Redrawn from ManD.Groups.pdf, PDF page 1, printed page 159. Review prototype; not to scale.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0 0L8 3L0 6Z" fill="#243b53" /></marker></defs>
+<style>text{font-family:Arial,sans-serif;fill:#243b53;stroke:none}.small{font-size:15px}.dimension{stroke:#64748b;stroke-width:1.2}</style>
+<rect width="640" height="520" rx="16" fill="white" />
+<g fill="none" stroke="#243b53" stroke-width="2.5" stroke-linejoin="round"><path d="M220 130H360V300H220Z" />
+<path d="M360 154L402 178H540M360 246L402 222H540M402 178V222" /><ellipse cx="540" cy="200" rx="8" ry="22" /><path d="M205 300H375V410L348 395L319 410L290 395L261 410L234 395L205 410Z" fill="#f1f5f9" />
+<path d="M437 200H510" marker-end="url(#arrow)" /></g>
+<text x="290" y="260" text-anchor="middle" font-size="14">Large plenum</text>
+<text x="290" y="348" text-anchor="middle" font-size="14">Air handler</text>
+</svg>

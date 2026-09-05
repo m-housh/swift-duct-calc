@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="80 105 470 320" role="img" aria-labelledby="title desc">
+<title id="title">1D — Rectangular 45-degree entry</title>
+<desc id="desc">Schematic side elevation of supply air fitting 1D. Plenum large compared with duct. Entry extends H/2 at 45 degrees; 10-inch minimum clearance. Redrawn from ManD.Groups.pdf, PDF page 1, printed page 159. Review prototype; not to scale.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0 0L8 3L0 6Z" fill="#243b53" /></marker></defs>
+<style>text{font-family:Arial,sans-serif;fill:#243b53;stroke:none}.small{font-size:15px}.dimension{stroke:#64748b;stroke-width:1.2}</style>
+<rect width="640" height="520" rx="16" fill="white" />
+<g fill="none" stroke="#243b53" stroke-width="2.5" stroke-linejoin="round"><path d="M220 130H360V300H220Z" />
+<path d="M360 178H540L528 189L546 200L528 211L540 222H382L360 244Z" /><path d="M382 178V222" stroke-dasharray="5 5" /><path d="M205 300H375V410L348 395L319 410L290 395L261 410L234 395L205 410Z" fill="#f1f5f9" />
+<path d="M437 200H510" marker-end="url(#arrow)" /><path d="M433 226V296M427 226H439M427 296H439" class="dimension" /><text x="445" y="280" class="small">10″ min.</text><text x="393" y="253" class="small">45°</text><text x="405" y="133" class="small">H/2 entry</text><text x="550" y="206" class="small">H</text></g>
+<text x="290" y="260" text-anchor="middle" font-size="14">Large plenum</text>
+<text x="290" y="348" text-anchor="middle" font-size="14">Air handler</text>
+</svg>

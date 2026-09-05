@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="80 105 470 320" role="img" aria-labelledby="title desc">
+<title id="title">1C — Rectangular straight takeoff</title>
+<desc id="desc">Schematic side elevation of supply air fitting 1C. Plenum large compared with duct. Maintain the illustrated 10-inch minimum clearance. Redrawn from ManD.Groups.pdf, PDF page 1, printed page 159. Review prototype; not to scale.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0 0L8 3L0 6Z" fill="#243b53" /></marker></defs>
+<style>text{font-family:Arial,sans-serif;fill:#243b53;stroke:none}.small{font-size:15px}.dimension{stroke:#64748b;stroke-width:1.2}</style>
+<rect width="640" height="520" rx="16" fill="white" />
+<g fill="none" stroke="#243b53" stroke-width="2.5" stroke-linejoin="round"><path d="M320 130H460V300H320Z" />
+<path d="M108 178H320V222H108L119 211L101 200L119 189Z" /><path d="M305 300H475V410L448 395L419 410L390 395L361 410L334 395L305 410Z" fill="#f1f5f9" />
+<path d="M267 200H165" marker-end="url(#arrow)" /><path d="M288 226V296M282 226H294M282 296H294" class="dimension" /><text x="300" y="280" class="small">10″ min.</text></g>
+<text x="390" y="260" text-anchor="middle" font-size="14">Large plenum</text>
+<text x="390" y="348" text-anchor="middle" font-size="14">Air handler</text>
+</svg>
