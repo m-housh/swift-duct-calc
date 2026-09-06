@@ -62,26 +62,18 @@ public enum Fitting {
     case downstreamBranches(finalBucketMinimum: Int)
   }
 
-  public struct Source: Codable, Equatable, Sendable {
-    public let pdfPath: String
-    public let pdfSHA256: String
-    public let pdfPage: Int
-    public let printedPage: Int
+  /// Applicability information for the fitting rule, independent of reference-document format.
+  public struct Conditions: Codable, Equatable, Sendable {
     public let referenceVelocityFPM: Int
     public let frictionRateIWCPer100Feet: Double
-    public let conditions: [String]
+    public let notes: [String]
 
     public init(
-      pdfPath: String, pdfSHA256: String, pdfPage: Int, printedPage: Int,
-      referenceVelocityFPM: Int, frictionRateIWCPer100Feet: Double, conditions: [String]
+      referenceVelocityFPM: Int, frictionRateIWCPer100Feet: Double, notes: [String]
     ) {
-      self.pdfPath = pdfPath
-      self.pdfSHA256 = pdfSHA256
-      self.pdfPage = pdfPage
-      self.printedPage = printedPage
       self.referenceVelocityFPM = referenceVelocityFPM
       self.frictionRateIWCPer100Feet = frictionRateIWCPer100Feet
-      self.conditions = conditions
+      self.notes = notes
     }
   }
 
@@ -96,12 +88,12 @@ public enum Fitting {
     public let inputRequirement: InputRequirement
     /// Initial values for a new draft only. Evaluation never applies defaults.
     public let defaultInputs: Inputs
-    public let source: Source
+    public let conditions: Conditions
 
     public init(
       id: ID, groupID: Group.ID, familyID: ID, sourceCode: SourceCode?, name: String,
       shape: Shape, pathTypes: [PathType], inputRequirement: InputRequirement,
-      defaultInputs: Inputs, source: Source
+      defaultInputs: Inputs, conditions: Conditions
     ) {
       self.id = id
       self.groupID = groupID
@@ -112,7 +104,7 @@ public enum Fitting {
       self.pathTypes = pathTypes
       self.inputRequirement = inputRequirement
       self.defaultInputs = defaultInputs
-      self.source = source
+      self.conditions = conditions
     }
   }
 
@@ -222,20 +214,20 @@ public enum Fitting {
     /// The submitted dimensions/count remain intact; bucket selection does not overwrite them.
     public let inputs: Inputs
     public let components: [Component]
-    public let source: Source
+    public let conditions: Conditions
     public let catalogRevision: String
     public let ruleRevision: String
 
     public init(
       fittingID: ID, sourceCode: SourceCode?, equivalentLengthFeet: Double, inputs: Inputs,
-      components: [Component], source: Source, catalogRevision: String, ruleRevision: String
+      components: [Component], conditions: Conditions, catalogRevision: String, ruleRevision: String
     ) {
       self.fittingID = fittingID
       self.sourceCode = sourceCode
       self.equivalentLengthFeet = equivalentLengthFeet
       self.inputs = inputs
       self.components = components
-      self.source = source
+      self.conditions = conditions
       self.catalogRevision = catalogRevision
       self.ruleRevision = ruleRevision
     }

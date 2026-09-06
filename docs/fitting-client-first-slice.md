@@ -24,7 +24,9 @@ and its running preview server are unchanged.
   inputs. Unsupported views/shapes have no implicit fallback. Existing static-file
   middleware remains responsible for serving the assets.
 - Calculated snapshots preserve per-fitting fractional feet, original inputs,
-  source ID, PDF/hash/page, source row, catalog/rule revisions and conditions.
+  fitting/source-code identity, rule component, catalog/rule revisions and applicability
+  conditions. Public contracts and runtime catalog data carry no PDF paths, hashes
+  or page numbers.
 - Source-code resolution normalizes surrounding whitespace/casing and returns
   candidate application IDs, without calculating or accepting an EL value.
   Recognition currently covers only these initial cases, not the complete PDF.
@@ -33,6 +35,15 @@ The first slice chooses bundled JSON for the runtime catalog and keeps rule
 execution in Swift. Client helpers are in `Internal/Catalog.swift` and
 `Internal/Evaluation.swift`; their separation follows behavior, not one file per
 public type. `ProjectClient`/`ViewController` do not yet call this dependency.
+
+## Internal MVP reference material
+
+The supplied PDF is an internal source for MVP rule verification, not a permanent
+product dependency. Its hash and page pointers stay in this audit documentation.
+The client does not require the PDF to be deployed or available during lookup or
+evaluation. A future continuous reference guide can replace it without changing
+fitting/calculation contracts. `Fitting.Conditions` carries the rule's reference
+velocity, friction rate and applicability notes, independent of document format.
 
 ## Source checks
 
@@ -52,8 +63,8 @@ states 700 FPM and the same friction rate. These are recorded reference conditio
 not instructions to scale a fixed value with an arbitrary velocity.
 
 The artwork catalog's 1F metadata points at viewer page 1, but its table is on
-viewer page 2. The new runtime resource corrects its own source link; original
-artwork manifests were not changed.
+viewer page 2. This correction is recorded in the internal audit table above;
+original artwork manifests were not changed. The runtime catalog has no PDF links.
 
 Group 11 and the known group 3/8 discrepancies remain outside implemented rules.
 Optional source codes allow future application-only cases without inventing

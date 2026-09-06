@@ -58,7 +58,11 @@ do not resolve the outstanding source-rule questions.
 
 Confirmed with the user:
 
-- Use the supplied `Public/files/ManD.Groups.pdf` for now. Do not silently mix in another edition.
+- Treat `Public/files/ManD.Groups.pdf` as internal MVP reference material, not a
+  permanent product dependency. Keep its path/hash/pages out of public fitting
+  contracts and calculation snapshots. A future continuous reference guide can
+  replace it; record current source evidence in internal audit documentation.
+- Use the supplied `Public/files/ManD.Groups.pdf` for rule verification for now. Do not silently mix in another edition.
   Identifying the edition remains useful provenance work, not a reason to prevent planning against
   this document.
 - Ask for missing fitting-specific dimensions, conditions, airflow, or velocity. Reuse existing
@@ -315,7 +319,7 @@ decoder/writer.
 
 | Component                                         | Responsibility                                                                                                                                            |
 | ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Source registry                                   | PDF identity/hash, viewer and printed pages, table/case keys, transcription and verification record                                                       |
+| Internal source audit                            | PDF identity/hash, viewer and printed pages, table/case keys and verification record in development documentation; no runtime PDF dependency                                                       |
 | Fitting catalog                                   | Stable app ID, actual source ID, family/variant identity, system applicability, shape/connection metadata, labels and approved artwork references         |
 | Shared types/routes in ManualDCore                | Typed fitting identities, inputs, results and route/request contracts; no new calculation implementation                                                  |
 | Fitting catalog/evaluation, proposed FittingClient | Exact table/range semantics, derived ratios/formulas, source assumptions and structured errors; final placement and API to review                         |

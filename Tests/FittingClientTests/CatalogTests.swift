@@ -31,9 +31,7 @@ struct FittingCatalogTests {
     let ratio = try #require(supply.first)
     #expect(ratio.inputRequirement == .heightWidth(exactRatios: [0.5, 1]))
     #expect(ratio.defaultInputs == .heightWidth(heightInches: nil, widthInches: nil))
-    // The old artwork catalog's 1F page pointer is wrong; the source is viewer page 2.
-    #expect(ratio.source.pdfPage == 2)
-    #expect(ratio.source.printedPage == 160)
+    #expect(ratio.conditions.notes.contains { $0.contains("10-inch") })
     let returns = try await client.fittings(.init(pathType: .return, groupID: .returnEquipment))
     #expect(returns.map(\.id) == ["5A-rectangular", "5A-round"])
     #expect(returns.map(\.sourceCode) == ["5A", "5B"])
@@ -87,9 +85,7 @@ struct FittingCatalogTests {
     for record in catalog.records {
       let svg = root.appendingPathComponent("Public" + record.artwork.publicPath)
       #expect(try String(contentsOf: svg, encoding: .utf8).contains("<svg"))
-      #expect(
-        FileManager.default.fileExists(
-          atPath: root.appendingPathComponent("Public" + record.source.pdfPath).path))
+
     }
   }
 

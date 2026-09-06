@@ -6,6 +6,15 @@ The wider contracts below remain the design reference for subsequent integration
 [fitting-picker implementation plan](fitting-picker-implementation-plan.md) to one
 reviewable dependency boundary.
 
+## Reference material direction
+
+The user considers the supplied PDF internal MVP reference material. Public types,
+calculation snapshots and runtime catalog data must not depend on its path, hash
+or page layout. Retain document/page evidence in development audit documentation.
+A future reference guide may be recreated without page breaks; designing that
+replacement is separate work. Keep fitting codes, rule/catalog versions and
+applicability conditions independent of the reference document's format.
+
 ## Proposed responsibility
 
 `FittingClient` describes fittings, resolves their artwork, and evaluates their
@@ -93,12 +102,12 @@ model style. All shared fitting definitions belong together in
 | `ID` | Stable application case/variant ID; do not derive it from a display name or asset filename |
 | `SourceCode` | Reference identity such as `5B`, independent of the application's family and variant grouping |
 | `Group` | ID, title, representative artwork ID and order |
-| `Definition` | ID, group, actual source code if one exists, name, variant/shape metadata, supported systems, input kind/defaults, source reference and calculation availability |
+| `Definition` | ID, group, actual source code if one exists, name, variant/shape metadata, supported systems, input kind/defaults, document-independent applicability conditions and calculation availability |
 | `Inputs` | Typed draft cases for rule families, with optional values where the user has not answered yet; explicit units |
 | `ArtworkRequest` | Fitting ID, relevant construction configuration and optional view selection |
 | `Artwork` | Catalog-owned public path, media type, alt text, revision and view identity |
 | `EvaluationRequest` | Path type, fitting ID and draft inputs; no project ID, quantity or user-entered EL |
-| `Calculation` | EL per fitting in fractional feet, normalized inputs, component breakdown, source/rule revision and applicable guidance |
+| `Calculation` | EL per fitting in fractional feet, normalized inputs, component breakdown, rule/catalog revision and applicable guidance |
 | `Issue` | Stable reason code, affected field if any, and parameters for presentation; no HTML |
 
 Identity examples that the contract must represent:
@@ -205,7 +214,7 @@ depends back on it. The new client does not call `ProjectClient`. There is no
 initial need to add fitting operations to `ManualDClient`.
 
 Proposed data approach: normalize reviewed artwork/source manifests into one
-versioned resource, retaining source links and separate artwork/rule review
+versioned resource, retaining internal audit traceability and separate artwork/rule review
 states. Evaluate with Swift helpers against that resource. Do not parse `Public`
 files on each request or ship the prototype's handwritten JavaScript adapters as
 production rules. Resource JSON versus checked-in Swift tables is an explicit
@@ -222,7 +231,7 @@ that packaged data resolves to the deployed public assets.
    and evaluate. Render field issues or a per-fitting result. Project-associated
    inputs, when available, are supplied explicitly through `ProjectClient`.
 3. **Save:** the agreed project save workflow reevaluates calculated entries from
-   their IDs/inputs through `FittingClient`. Store returned inputs and source/rule
+   their IDs/inputs through `FittingClient`. Store returned inputs and rule/catalog
    revision with the resulting value. Browser-supplied calculated EL is not the
    authority. Quantity multiplication remains path arithmetic.
 4. **Quick entry / existing data:** resolve source identity without invoking

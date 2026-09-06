@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "fitting-catalog-v1",
+  "revision": "fitting-catalog-v2",
   "groups": [
     {
       "id": 1,
@@ -98,17 +98,6 @@
       "sourceCode": "1F",
       "name": "Bull-head outlet",
       "shape": "rectangular",
-      "source": {
-        "pdfPath": "/files/ManD.Groups.pdf",
-        "pdfSHA256": "aae20d968d8238c8958a2c010012aca59ef4b5eed4ce749ed2b722d222997334",
-        "pdfPage": 2,
-        "printedPage": 160,
-        "referenceVelocityFPM": 900,
-        "frictionRateIWCPer100Feet": 0.08,
-        "conditions": [
-          "Maintain the illustrated 10-inch minimum clearance. Only the printed H/W 0.5 and 1.0 rows are supported."
-        ]
-      },
       "artwork": {
         "publicPath": "/images/fittings/1F.svg",
         "revision": "5b18b93b2f0484c811a6671075f398b8321213b75e25bf08af7db8350e1086a2",
@@ -116,7 +105,7 @@
         "view": "individual",
         "mediaType": "image/svg+xml"
       },
-      "ruleRevision": "1F-supplied-pdf-v1",
+      "ruleRevision": "1F-v1",
       "rule": {
         "kind": "heightWidth",
         "rows": [
@@ -131,6 +120,13 @@
             "feet": 85
           }
         ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Maintain the illustrated 10-inch minimum clearance. Only the printed H/W 0.5 and 1.0 rows are supported."
+        ]
       }
     },
     {
@@ -140,17 +136,6 @@
       "sourceCode": "2A",
       "name": "Straight round branch takeoff",
       "shape": "mixed",
-      "source": {
-        "pdfPath": "/files/ManD.Groups.pdf",
-        "pdfSHA256": "aae20d968d8238c8958a2c010012aca59ef4b5eed4ce749ed2b722d222997334",
-        "pdfPage": 5,
-        "printedPage": 163,
-        "referenceVelocityFPM": 900,
-        "frictionRateIWCPer100Feet": 0.08,
-        "conditions": [
-          "Count downstream branches to the next reducer or trunk end; restart after a reducer. The last bucket includes five or more branches."
-        ]
-      },
       "artwork": {
         "publicPath": "/images/fittings/group-2-restored/2A.svg",
         "revision": "a85d2aef2181f8a8b1a85295059e5f2f504036fd0a8420933ee4974d8e551bae",
@@ -158,7 +143,7 @@
         "view": "individual",
         "mediaType": "image/svg+xml"
       },
-      "ruleRevision": "2A-supplied-pdf-v1",
+      "ruleRevision": "2A-v1",
       "rule": {
         "kind": "downstreamBranches",
         "rows": [
@@ -193,6 +178,13 @@
             "feet": 80
           }
         ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Count downstream branches to the next reducer or trunk end; restart after a reducer. The last bucket includes five or more branches."
+        ]
       }
     },
     {
@@ -202,15 +194,6 @@
       "sourceCode": "4A",
       "name": "Radius boot with rectangular outlet",
       "shape": "mixed",
-      "source": {
-        "pdfPath": "/files/ManD.Groups.pdf",
-        "pdfSHA256": "aae20d968d8238c8958a2c010012aca59ef4b5eed4ce749ed2b722d222997334",
-        "pdfPage": 18,
-        "printedPage": 168,
-        "referenceVelocityFPM": 900,
-        "frictionRateIWCPer100Feet": 0.08,
-        "conditions": []
-      },
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4A.svg",
         "revision": "e17c555098f02a45daeb39fc163cda5c5fda4c04172433b519bf2b15b6821385",
@@ -218,7 +201,7 @@
         "view": "individual",
         "mediaType": "image/svg+xml"
       },
-      "ruleRevision": "4A-supplied-pdf-v1",
+      "ruleRevision": "4A-v1",
       "rule": {
         "kind": "fixed",
         "rows": [
@@ -228,6 +211,11 @@
             "feet": 30
           }
         ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
       }
     },
     {
@@ -237,17 +225,6 @@
       "sourceCode": "5A",
       "name": "Return to oversized plenum",
       "shape": "rectangular",
-      "source": {
-        "pdfPath": "/files/ManD.Groups.pdf",
-        "pdfSHA256": "aae20d968d8238c8958a2c010012aca59ef4b5eed4ce749ed2b722d222997334",
-        "pdfPage": 20,
-        "printedPage": 169,
-        "referenceVelocityFPM": 700,
-        "frictionRateIWCPer100Feet": 0.08,
-        "conditions": [
-          "Plenum size is large compared with duct size."
-        ]
-      },
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5A-rectangular.svg",
         "revision": "1c713ffba89beaf68390d4ef14e4e68e85e4773bd5580cd9e962773ebcdc93f3",
@@ -255,7 +232,7 @@
         "view": "individual",
         "mediaType": "image/svg+xml"
       },
-      "ruleRevision": "5A-supplied-pdf-v1",
+      "ruleRevision": "5A-v1",
       "rule": {
         "kind": "fixed",
         "rows": [
@@ -264,6 +241,13 @@
             "parameter": 0,
             "feet": 40
           }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Plenum size is large compared with duct size."
         ]
       }
     },
@@ -274,17 +258,6 @@
       "sourceCode": "5B",
       "name": "Return to oversized plenum",
       "shape": "round",
-      "source": {
-        "pdfPath": "/files/ManD.Groups.pdf",
-        "pdfSHA256": "aae20d968d8238c8958a2c010012aca59ef4b5eed4ce749ed2b722d222997334",
-        "pdfPage": 20,
-        "printedPage": 169,
-        "referenceVelocityFPM": 700,
-        "frictionRateIWCPer100Feet": 0.08,
-        "conditions": [
-          "Plenum size is large compared with duct size."
-        ]
-      },
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5A-round.svg",
         "revision": "dd95b3599308b174993684bd4f7ac55e57ddb3094bd69fbce75aa5ed1a3e2b7f",
@@ -292,7 +265,7 @@
         "view": "individual",
         "mediaType": "image/svg+xml"
       },
-      "ruleRevision": "5B-supplied-pdf-v1",
+      "ruleRevision": "5B-v1",
       "rule": {
         "kind": "fixed",
         "rows": [
@@ -301,6 +274,13 @@
             "parameter": 0,
             "feet": 40
           }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Plenum size is large compared with duct size."
         ]
       }
     }

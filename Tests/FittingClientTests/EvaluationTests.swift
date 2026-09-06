@@ -14,13 +14,10 @@ struct FittingEvaluationTests {
     #expect(value.equivalentLengthFeet == 30)
     #expect(value.inputs == .fixed)
     #expect(value.components == [.init(ruleKey: "4A", equivalentLengthFeet: 30)])
-    #expect(value.source.pdfPage == 18)
-    #expect(value.source.printedPage == 168)
-    #expect(value.source.referenceVelocityFPM == 900)
-    #expect(
-      value.source.pdfSHA256 == "aae20d968d8238c8958a2c010012aca59ef4b5eed4ce749ed2b722d222997334")
-    #expect(value.catalogRevision == "fitting-catalog-v1")
-    #expect(value.ruleRevision == "4A-supplied-pdf-v1")
+    #expect(value.conditions.referenceVelocityFPM == 900)
+    #expect(value.conditions.frictionRateIWCPer100Feet == 0.08)
+    #expect(value.catalogRevision == "fitting-catalog-v2")
+    #expect(value.ruleRevision == "4A-v1")
     let roundReturn = try await calculation("5A-round", .fixed, type: .return)
     #expect(roundReturn.equivalentLengthFeet == 40)
     #expect(roundReturn.sourceCode == "5B")
@@ -32,7 +29,7 @@ struct FittingEvaluationTests {
     let result = try await calculation("1F", inputs)
     #expect(result.equivalentLengthFeet == expected)
     #expect(result.inputs == inputs)
-    #expect(result.source.conditions.contains { $0.contains("10-inch") })
+    #expect(result.conditions.notes.contains { $0.contains("10-inch") })
   }
 
   @Test(arguments: [
@@ -103,8 +100,12 @@ struct FittingEvaluationTests {
     let fractional = Fitting.Calculation(
       fittingID: "test-fractional", sourceCode: "4A", equivalentLengthFeet: 7.5,
       inputs: .fixed, components: [.init(ruleKey: "test-only", equivalentLengthFeet: 7.5)],
-      source: source.source, catalogRevision: "test-only", ruleRevision: "test-only"
+      conditions: source.conditions, catalogRevision: "test-only", ruleRevision: "test-only"
     )
+    let encoded = try JSONEncoder().encode(fractional)
+    let object = try #require(JSONSerialization.jsonObject(with: encoded) as? [String: Any])
+    #expect(object["source"] == nil)
+    #expect(!String(decoding: encoded, as: UTF8.self).lowercased().contains("pdf"))
     let restored = try JSONDecoder().decode(
       Fitting.Calculation.self, from: JSONEncoder().encode(fractional))
     #expect(restored == fractional)

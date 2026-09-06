@@ -15,7 +15,7 @@ struct Catalog: Sendable {
     let sourceCode: Fitting.SourceCode?
     let name: String
     let shape: Fitting.Shape
-    let source: Fitting.Source
+    let conditions: Fitting.Conditions
     let artwork: Fitting.Artwork
     let ruleRevision: String
     let rule: Rule
@@ -109,20 +109,16 @@ struct Catalog: Sendable {
             of: #"^/[A-Za-z0-9/_-]+\.svg$"#, options: .regularExpression) != nil,
         "Artwork must be a catalog-owned SVG path"
       )
-      for hash in [record.source.pdfSHA256, record.artwork.revision] {
-        try require(
-          hash.range(of: #"^[a-f0-9]{64}$"#, options: .regularExpression) != nil,
-          "Invalid revision hash")
-      }
+      try require(
+        record.artwork.revision.range(of: #"^[a-f0-9]{64}$"#, options: .regularExpression) != nil,
+        "Invalid artwork revision hash")
       try require(
         record.artwork.mediaType == "image/svg+xml" && !record.artwork.altText.isEmpty,
         "Invalid artwork metadata")
-      try require(record.source.pdfPath == "/files/ManD.Groups.pdf", "Unknown source document")
-      try require(record.source.pdfPage > 0 && record.source.printedPage > 0, "Invalid source page")
-      try require(record.source.referenceVelocityFPM > 0, "Invalid reference velocity")
+      try require(record.conditions.referenceVelocityFPM > 0, "Invalid reference velocity")
       try require(
-        record.source.frictionRateIWCPer100Feet.isFinite
-          && record.source.frictionRateIWCPer100Feet > 0, "Invalid friction rate")
+        record.conditions.frictionRateIWCPer100Feet.isFinite
+          && record.conditions.frictionRateIWCPer100Feet > 0, "Invalid friction rate")
       let rows = record.rule.rows
       try require(!rows.isEmpty, "Rule has no source rows")
       try require(
@@ -171,7 +167,7 @@ struct Catalog: Sendable {
         id: record.id, groupID: record.groupID, familyID: record.familyID,
         sourceCode: record.sourceCode, name: record.name, shape: record.shape,
         pathTypes: pathTypes(for: record), inputRequirement: record.rule.requirement,
-        defaultInputs: record.rule.defaultInputs, source: record.source
+        defaultInputs: record.rule.defaultInputs, conditions: record.conditions
       )
     }
   }

@@ -49,7 +49,7 @@ extension Catalog {
         fittingID: record.id, sourceCode: record.sourceCode, equivalentLengthFeet: row.feet,
         inputs: request.inputs,
         components: [.init(ruleKey: row.key, equivalentLengthFeet: row.feet)],
-        source: record.source, catalogRevision: revision, ruleRevision: record.ruleRevision
+        conditions: record.conditions, catalogRevision: revision, ruleRevision: record.ruleRevision
       ))
   }
 }
