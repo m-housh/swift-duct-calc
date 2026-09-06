@@ -15,8 +15,12 @@ and its running preview server are unchanged.
 - One bundled JSON resource provides canonical group order/eligibility and five
   initial fitting definitions: 1F, 2A, 4A, 5A rectangular and 5A round (source 5B).
   Empty groups report zero available cases and no representative artwork.
-- `Live.swift` loads the bundled resource once while constructing the live client
-  and captures its catalog or loading error in the operation closures. `Catalog`
+- `FittingClient.live()` is an async throwing factory. `Live.swift` resolves its
+  own bundle resource and reads it through `FileClient.readFile`. Application
+  configuration provides a reader on the application's worker pool, loads one
+  fitting client, and passes it to `DependenciesMiddleware` for reuse across
+  requests. Loading failures prevent startup; operations capture only the loaded
+  catalog. Tests can replace the reader or the application factory. `Catalog`
   receives `Data` and decodes it without bundle or filesystem knowledge. Runtime
   loading checks schema support, group completeness, unique IDs, and nonempty
   rule tables so lookups/indexing cannot trap. A test-only `CatalogValidator`
@@ -81,19 +85,22 @@ lettered IDs. The first slice does not settle those cases' applicability.
 The tests cover independent PDF value fixtures, exact ratios, all six branch
 buckets, large counts, missing/invalid/nonfinite inputs, direct-request eligibility,
 shape/source remapping, artwork lookup, revisioned references, dependency override,
-resource rejection and fractional snapshot encoding. Test-only fractional values
+resource rejection and fractional snapshot encoding. Factory tests cover injected
+file data, one read per constructed client, and immediate read/decode failures.
+Application tests cover startup failure and middleware injection across requests.
+Test-only fractional values
 are labeled as contract fixtures, not as source values for these five cases.
 
 Reproduce with Swift 6.2:
 
 ```sh
 swift build --target FittingClient --jobs 4
-swift test --filter Fitting --jobs 4
+swift test --filter 'Fitting|DatabaseClientTests' --jobs 4
 ```
 
 The implementation was checked in the same Swift 6.2 container family used by the
-repository's test Dockerfile. No database or browser server is needed for these
-checks.
+repository's test Dockerfile. Database integration tests use in-memory SQLite;
+no external database or browser server is needed for these checks.
 
 Review the contracts and client implementation next. Subsequent work can expand
 verified cases, then connect the dependency to path drafts, favorites, quick entry,

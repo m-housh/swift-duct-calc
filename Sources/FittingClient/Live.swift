@@ -1,26 +1,27 @@
 import Dependencies
+import FileClient
 import Foundation
 import ManualDCore
 
-extension FittingClient: DependencyKey {
-  public static let liveValue: Self = {
-    // Resolve the packaged catalog once when assembling the live dependency.
-    // Capture failures too, so each operation reports the same infrastructure error.
-    let catalog = Result {
-      guard let url = Bundle.module.url(forResource: "catalog", withExtension: "json") else {
-        throw FittingClientError.missingCatalog
-      }
-      return try Catalog(data: Data(contentsOf: url))
+extension FittingClient {
+  /// Load the packaged catalog once, then share it across the client operations.
+  public static func live() async throws -> Self {
+    @Dependency(\.fileClient) var fileClient
+
+    guard let url = Bundle.module.url(forResource: "catalog", withExtension: "json") else {
+      throw FittingClientError.missingCatalog
     }
+    let data = try await fileClient.readFile(url.path)
+    let catalog = try Catalog(data: data)
 
     return .init(
-      groups: { try catalog.get().groups(for: $0) },
-      fittings: { try catalog.get().fittings($0) },
-      artwork: { try catalog.get().artwork($0) },
-      evaluate: { try catalog.get().evaluate($0) },
-      resolveReference: { try catalog.get().resolveReference($0) }
+      groups: { catalog.groups(for: $0) },
+      fittings: { catalog.fittings($0) },
+      artwork: { catalog.artwork($0) },
+      evaluate: { catalog.evaluate($0) },
+      resolveReference: { catalog.resolveReference($0) }
     )
-  }()
+  }
 }
 
 /// Infrastructure failures; normal incomplete/unsupported inputs return structured results.

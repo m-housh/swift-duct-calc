@@ -169,8 +169,9 @@ must replace the prototype concept paths before this case ships.
 No new custom SVG endpoint is needed initially. If stable typed artwork routes,
 protected assets or dynamic SVG rendering become requirements, declare the route
 in `ManualDCore` and handle the response at the HTTP layer. `FittingClient` can
-still resolve the asset; it need not return a Vapor `Response` or depend directly
-on `FileClient`.
+still resolve the asset without returning a Vapor `Response`. Its use of
+`FileClient` is limited to reading the bundled catalog during construction;
+serving artwork remains the HTTP layer's responsibility.
 
 Picker fragment and evaluation routes are a different concern: propose nesting
 them under the existing `SiteRoute.View.ProjectRoute.EquivalentLengthRoute`.
@@ -217,7 +218,7 @@ results/issues/provenance, and artwork requests/results. Do not split these into
 start small rather than creating every helper file immediately.
 
 Add a library and target for `FittingClient`, with direct dependencies on
-`ManualDCore`, `Dependencies`, and `DependenciesMacros`. `ProjectClient` and
+`ManualDCore`, `FileClient`, `Dependencies`, and `DependenciesMacros`. `ProjectClient` and
 `ViewController` may depend on it; neither `ManualDCore` nor `DatabaseClient`
 depends back on it. The new client does not call `ProjectClient`. There is no
 initial need to add fitting operations to `ManualDClient`.
@@ -233,6 +234,15 @@ that packaged data resolves to the deployed public assets. Authored catalog meta
 and rule-table validation belong in a test-only validator run against the checked-in
 JSON. Runtime loading retains decoding and the structural checks needed for safe
 lookup/indexing; user-input validation remains in the evaluator.
+
+Construct the client with `try await FittingClient.live()` during application
+configuration, under a configured `FileClient.readFile` dependency. Bundle lookup
+belongs to `FittingClient`; the generic file reader accepts the resolved path.
+The application supplies startup reads on its worker pool, then injects the
+loaded fitting client through `DependenciesMiddleware`. Keep request-specific
+file operations in the existing request dependency scope. Catalog failures abort
+startup instead of being cached for later requests. No global catalog cache is
+needed, and each factory invocation can be tested with independent file data.
 
 ## Calls through the feature
 

@@ -1,13 +1,15 @@
 import Dependencies
-import DependenciesTestSupport
 import FittingClient
 import Foundation
 import ManualDCore
 import Testing
 
-@Suite(.dependencies { $0.fittingClient = FittingClient.liveValue })
 struct FittingEvaluationTests {
-  @Dependency(\.fittingClient) var client
+  let client: FittingClient
+
+  init() async throws {
+    client = try await loadBundledFittingClient()
+  }
 
   @Test func fixedValueAndProvenance() async throws {
     let value = try await calculation("4A", .fixed)

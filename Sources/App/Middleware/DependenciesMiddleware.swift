@@ -3,6 +3,7 @@ import AuthClient
 import DatabaseClient
 import Dependencies
 import EnvVars
+import FittingClient
 import ManualDCore
 import PdfClient
 import Vapor
@@ -16,11 +17,13 @@ struct DependenciesMiddleware: AsyncMiddleware {
   // private let apiController: ApiController
   private let database: DatabaseClient
   private let environment: EnvVars
+  private let fittingClient: FittingClient
   private let viewController: ViewController
 
   init(
     database: DatabaseClient,
     environment: EnvVars,
+    fittingClient: FittingClient,
     // apiController: ApiController = .liveValue,
     viewController: ViewController = .liveValue
   ) {
@@ -28,6 +31,7 @@ struct DependenciesMiddleware: AsyncMiddleware {
     // self.apiController = apiController
     self.database = database
     self.environment = environment
+    self.fittingClient = fittingClient
     self.viewController = viewController
   }
 
@@ -38,6 +42,7 @@ struct DependenciesMiddleware: AsyncMiddleware {
         $0.auth = .live(on: request)
         $0.database = database
         $0.environment = environment
+        $0.fittingClient = fittingClient
         // $0.dateFormatter = .liveValue
         $0.viewController = viewController
         $0.pdfClient = .liveValue

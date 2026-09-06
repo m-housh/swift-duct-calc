@@ -45,6 +45,8 @@ let package = Package(
       dependencies: [
         .target(name: "AuthClient"),
         .target(name: "DatabaseClient"),
+        .target(name: "FileClient"),
+        .target(name: "FittingClient"),
         .target(name: "ViewController"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "Fluent", package: "fluent"),
@@ -103,6 +105,7 @@ let package = Package(
       dependencies: [
         .target(name: "App"),
         .target(name: "DatabaseClient"),
+        .target(name: "FittingClient"),
         .product(name: "DependenciesTestSupport", package: "swift-dependencies"),
         .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
       ],
@@ -130,6 +133,7 @@ let package = Package(
     .target(
       name: "FittingClient",
       dependencies: [
+        .target(name: "FileClient"),
         .target(name: "ManualDCore"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
@@ -139,6 +143,7 @@ let package = Package(
     .testTarget(
       name: "FittingClientTests",
       dependencies: [
+        .target(name: "FileClient"),
         .target(name: "FittingClient"),
         .product(name: "DependenciesTestSupport", package: "swift-dependencies"),
       ]
