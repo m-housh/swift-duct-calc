@@ -49,6 +49,11 @@ public enum Fitting {
     case individual, assembly
   }
 
+  /// The selected route through a junction, independent of supply/return path type.
+  public enum JunctionPath: String, Codable, CaseIterable, Sendable {
+    case branch, main
+  }
+
   public enum Inputs: Codable, Equatable, Sendable {
     case fixed
     case heightWidth(heightInches: Double?, widthInches: Double?)
@@ -56,6 +61,7 @@ public enum Fitting {
     case downstreamBranches(count: Int?)
     /// All return ducts entering the plenum, independent of fitting quantity.
     case plenumReturns(count: Int?)
+    case junction(path: JunctionPath?)
   }
 
   /// Presentation requirements derived from the same rule used for evaluation.
@@ -65,6 +71,7 @@ public enum Fitting {
     case radiusWidth(exactRatios: [Double])
     case downstreamBranches(finalBucketMinimum: Int)
     case plenumReturns(finalBucketMinimum: Int)
+    case junction
   }
 
   /// Applicability information for the fitting rule, independent of reference-document format.
@@ -187,13 +194,13 @@ public enum Fitting {
     }
 
     public enum Field: Equatable, Sendable {
-      case heightInches, widthInches, radiusInches, downstreamBranches, plenumReturns
+      case heightInches, widthInches, radiusInches, downstreamBranches, plenumReturns, junctionPath
     }
 
     public enum Code: Equatable, Sendable {
       case unknownFitting, ineligiblePathType, incompatibleInputs
       case missingInput, nonfiniteInput, nonpositiveDimension, negativeBranchCount
-      case unsupportedRatio, nonpositiveReturnCount
+      case unsupportedRatio, nonpositiveReturnCount, unsupportedCombination
     }
   }
 

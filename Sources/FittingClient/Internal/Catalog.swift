@@ -112,6 +112,7 @@ struct Catalog: Sendable {
       case .radiusWidth: .radiusWidth(exactRatios: rows.map(\.parameter))
       case .downstreamBranches: .downstreamBranches(finalBucketMinimum: rows.count - 1)
       case .plenumReturns: .plenumReturns(finalBucketMinimum: rows.count)
+      case .junction: .junction
       }
     }
 
@@ -122,17 +123,19 @@ struct Catalog: Sendable {
       case .radiusWidth: .radiusWidth(radiusInches: nil, widthInches: nil)
       case .downstreamBranches: .downstreamBranches(count: nil)
       case .plenumReturns: .plenumReturns(count: nil)
+      case .junction: .junction(path: nil)
       }
     }
 
     enum Kind: String, Decodable, Sendable {
-      case fixed, heightWidth, radiusWidth, downstreamBranches, plenumReturns
+      case fixed, heightWidth, radiusWidth, downstreamBranches, plenumReturns, junction
     }
 
     struct Row: Decodable, Sendable {
       let key: String
       let parameter: Double
       let feet: Double
+      let path: Fitting.JunctionPath?
     }
   }
 

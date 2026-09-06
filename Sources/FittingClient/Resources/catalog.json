@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "fitting-catalog-v3",
+  "revision": "fitting-catalog-v4",
   "groups": [
     {
       "id": 1,
@@ -3809,6 +3809,1254 @@
         "frictionRateIWCPer100Feet": 0.08,
         "notes": [
           "Short direct connection beneath a ceiling return path."
+        ]
+      }
+    },
+    {
+      "id": "6F",
+      "familyID": "6F",
+      "groupID": 6,
+      "sourceCode": "6F",
+      "name": "Rectangular register boot with rectangular side branch",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-6-enhanced/6F.svg",
+        "revision": "80c2d382b9c2275d9740c641ca17cd4d17aed3442cadb2e85fce2357d2fe7272",
+        "altText": "6F — Rectangular register boot with rectangular side branch (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "6F-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "6F",
+            "parameter": 0,
+            "feet": 25
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "6G",
+      "familyID": "6G",
+      "groupID": 6,
+      "sourceCode": "6G",
+      "name": "Square grille boot with round side branch",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-6-enhanced/6G.svg",
+        "revision": "4167330858bbc10d1fcb869efe3913ac388ed72aab8adf72d5d0711b086e329d",
+        "altText": "6G — Square grille boot with round side branch (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "6G-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "6G",
+            "parameter": 0,
+            "feet": 30
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "6H",
+      "familyID": "6H",
+      "groupID": 6,
+      "sourceCode": "6H",
+      "name": "Tapered wall register boot with side entry",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-6-enhanced/6H.svg",
+        "revision": "d7258f4a8307d426ff0a7e950c53c2b4f6d68fef1dca742b26deb8ce615edcff",
+        "altText": "6H — Tapered wall register boot with side entry (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "6H-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "6H",
+            "parameter": 0,
+            "feet": 15
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "6I",
+      "familyID": "6I",
+      "groupID": 6,
+      "sourceCode": "6I",
+      "name": "Square register boot with tapered round side branch",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-6-enhanced/6I.svg",
+        "revision": "005f5389ba8590231726d38186856e85adab45958e817139e9eb4d02375bd600",
+        "altText": "6I — Square register boot with tapered round side branch (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "6I-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "6I",
+            "parameter": 0,
+            "feet": 30
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "6J",
+      "familyID": "6J",
+      "groupID": 6,
+      "sourceCode": "6J",
+      "name": "Offset square register boot with round side branch",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-6-enhanced/6J.svg",
+        "revision": "5cda8cdd2f8768917e04642714256e9001dcf72066de8c1f72c8d5c1665775ed",
+        "altText": "6J — Offset square register boot with round side branch (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "6J-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "6J",
+            "parameter": 0,
+            "feet": 55
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "6K",
+      "familyID": "6K",
+      "groupID": 6,
+      "sourceCode": "6K",
+      "name": "Rectangular stack offset",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-6-enhanced/6K.svg",
+        "revision": "d42f3fcfa0bcaeb7645a76235ec6ddb799ac2ab7c6b36ed8304a94dd3df678b1",
+        "altText": "6K — Rectangular stack offset (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "6K-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "6K",
+            "parameter": 0,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "6L",
+      "familyID": "6L",
+      "groupID": 6,
+      "sourceCode": "6L",
+      "name": "Flat register boot with round elbow",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-6-enhanced/6L.svg",
+        "revision": "bdf386639f3b00a354e642abb5158bc55a4241ea23abbb80f2eefef55a84fd56",
+        "altText": "6L — Flat register boot with round elbow (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "6L-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "6L",
+            "parameter": 0,
+            "feet": 20
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "6M",
+      "familyID": "6M",
+      "groupID": 6,
+      "sourceCode": "6M",
+      "name": "Tapered register boot with round elbow",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-6-enhanced/6M.svg",
+        "revision": "7d838b27b929d2616b3b819d569a337e5b5df9cb87bb10e6e9c6a01f88ffdcd8",
+        "altText": "6M — Tapered register boot with round elbow (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "6M-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "6M",
+            "parameter": 0,
+            "feet": 20
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "6N",
+      "familyID": "6N",
+      "groupID": 6,
+      "sourceCode": "6N",
+      "name": "Rectangular-to-round-or-square transition boot",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-6-enhanced/6N.svg",
+        "revision": "b7871e4cc79cbbbbf1563014f9e8cd6ec08edea7f06b6400f03b1c219d27cdab",
+        "altText": "6N — Rectangular-to-round-or-square transition boot (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "6N-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "6N",
+            "parameter": 0,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "The source permits a round or square connection at the narrow end."
+        ]
+      }
+    },
+    {
+      "id": "6O",
+      "familyID": "6O",
+      "groupID": 6,
+      "sourceCode": "6O",
+      "name": "Tapered ceiling return boot",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-6-enhanced/6O.svg",
+        "revision": "936cff5594ef3b8c03db61ac316f6f55f0a5df1217d7013e71f64e58fbaf4a5b",
+        "altText": "6O — Tapered ceiling return boot (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "6O-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "6O",
+            "parameter": 0,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "6P",
+      "familyID": "6P",
+      "groupID": 6,
+      "sourceCode": "6P",
+      "name": "Straight-collar ceiling return boot",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-6-enhanced/6P.svg",
+        "revision": "12a1614a833f9b934ecc05bab06aecb2ed011736d683fcf19dbec81254f1cdbd",
+        "altText": "6P — Straight-collar ceiling return boot (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "6P-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "6P",
+            "parameter": 0,
+            "feet": 5
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "9A",
+      "familyID": "9A",
+      "groupID": 9,
+      "sourceCode": "9A",
+      "name": "Rectangular trunk with straight round branch",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-9/9A.svg",
+        "revision": "e7cdd571a387f0ea27e9ee0cbe62cd75cb837129fc8d5e6b1e0da196c02542b5",
+        "altText": "9A — Rectangular trunk with straight round branch (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "9A-v1",
+      "rule": {
+        "kind": "junction",
+        "rows": [
+          {
+            "key": "9A/branch",
+            "parameter": 0,
+            "feet": 80,
+            "path": "branch"
+          },
+          {
+            "key": "9A/main",
+            "parameter": 0,
+            "feet": 5,
+            "path": "main"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Secondary trunk flow is a substantial percentage of upstream primary duct flow. Group 2 covers branch runout equivalent lengths.",
+          "Choose the branch or main path through this junction. Only that path contributes to this entry; do not add both listed values."
+        ]
+      }
+    },
+    {
+      "id": "9B",
+      "familyID": "9B",
+      "groupID": 9,
+      "sourceCode": "9B",
+      "name": "Rectangular trunk with straight rectangular branch",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-9/9B.svg",
+        "revision": "51b87ff7d38262e23fea1dddca595813ffabfa39e3d5eac8c8b0c29bfc6f8672",
+        "altText": "9B — Rectangular trunk with straight rectangular branch (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "9B-v1",
+      "rule": {
+        "kind": "junction",
+        "rows": [
+          {
+            "key": "9B/branch",
+            "parameter": 0,
+            "feet": 80,
+            "path": "branch"
+          },
+          {
+            "key": "9B/main",
+            "parameter": 0,
+            "feet": 5,
+            "path": "main"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Secondary trunk flow is a substantial percentage of upstream primary duct flow. Group 2 covers branch runout equivalent lengths.",
+          "Choose the branch or main path through this junction. Only that path contributes to this entry; do not add both listed values."
+        ]
+      }
+    },
+    {
+      "id": "9C",
+      "familyID": "9C",
+      "groupID": 9,
+      "sourceCode": "9C",
+      "name": "Rectangular branch junction with single deflector",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-9/9C.svg",
+        "revision": "520f95555a002c7afa5524c5123c162504f18039cdd8785f49801b2d685c29fe",
+        "altText": "9C — Rectangular branch junction with single deflector (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "9C-v1",
+      "rule": {
+        "kind": "junction",
+        "rows": [
+          {
+            "key": "9C/branch",
+            "parameter": 0,
+            "feet": 80,
+            "path": "branch"
+          },
+          {
+            "key": "9C/main",
+            "parameter": 0,
+            "feet": 5,
+            "path": "main"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Secondary trunk flow is a substantial percentage of upstream primary duct flow. Group 2 covers branch runout equivalent lengths.",
+          "Choose the branch or main path through this junction. Only that path contributes to this entry; do not add both listed values."
+        ]
+      }
+    },
+    {
+      "id": "9D",
+      "familyID": "9D",
+      "groupID": 9,
+      "sourceCode": "9D",
+      "name": "Rectangular branch junction with vane bank",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-9/9D.svg",
+        "revision": "d71d6c623cba7ec1a0041d2abef6f3042e6066bf3e9d79d0efbe9113a4d40fb5",
+        "altText": "9D — Rectangular branch junction with vane bank (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "9D-v1",
+      "rule": {
+        "kind": "junction",
+        "rows": [
+          {
+            "key": "9D/branch",
+            "parameter": 0,
+            "feet": 75,
+            "path": "branch"
+          },
+          {
+            "key": "9D/main",
+            "parameter": 0,
+            "feet": 5,
+            "path": "main"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Secondary trunk flow is a substantial percentage of upstream primary duct flow. Group 2 covers branch runout equivalent lengths.",
+          "Choose the branch or main path through this junction. Only that path contributes to this entry; do not add both listed values."
+        ]
+      }
+    },
+    {
+      "id": "9E",
+      "familyID": "9E",
+      "groupID": 9,
+      "sourceCode": "9E",
+      "name": "Rectangular branch junction with eased entry",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-9/9E.svg",
+        "revision": "db6dc35aa9c0a0964d893361cc515f541ad029ea2b33a3184285ad88176b5aa1",
+        "altText": "9E — Rectangular branch junction with eased entry (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "9E-v1",
+      "rule": {
+        "kind": "junction",
+        "rows": [
+          {
+            "key": "9E/branch",
+            "parameter": 0,
+            "feet": 50,
+            "path": "branch"
+          },
+          {
+            "key": "9E/main",
+            "parameter": 0,
+            "feet": 5,
+            "path": "main"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Secondary trunk flow is a substantial percentage of upstream primary duct flow. Group 2 covers branch runout equivalent lengths.",
+          "Choose the branch or main path through this junction. Only that path contributes to this entry; do not add both listed values."
+        ]
+      }
+    },
+    {
+      "id": "9F",
+      "familyID": "9F",
+      "groupID": 9,
+      "sourceCode": "9F",
+      "name": "Eased rectangular branch junction with single deflector",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-9/9F.svg",
+        "revision": "ffecc242dfabfd8564f1b7e7046026a4c734b5c0361ba3c4529bfa1a4fd960d9",
+        "altText": "9F — Eased rectangular branch junction with single deflector (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "9F-v1",
+      "rule": {
+        "kind": "junction",
+        "rows": [
+          {
+            "key": "9F/branch",
+            "parameter": 0,
+            "feet": 45,
+            "path": "branch"
+          },
+          {
+            "key": "9F/main",
+            "parameter": 0,
+            "feet": 5,
+            "path": "main"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Secondary trunk flow is a substantial percentage of upstream primary duct flow. Group 2 covers branch runout equivalent lengths.",
+          "Choose the branch or main path through this junction. Only that path contributes to this entry; do not add both listed values."
+        ]
+      }
+    },
+    {
+      "id": "9G",
+      "familyID": "9G",
+      "groupID": 9,
+      "sourceCode": "9G",
+      "name": "Rectangular branch junction with radiused entry",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-9/9G.svg",
+        "revision": "742c4763afc4477e41e4cd5ce98ff8dfb0a9e28938f6a6c754f335d169edb245",
+        "altText": "9G — Rectangular branch junction with radiused entry (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "9G-v1",
+      "rule": {
+        "kind": "junction",
+        "rows": [
+          {
+            "key": "9G/branch",
+            "parameter": 0,
+            "feet": 35,
+            "path": "branch"
+          },
+          {
+            "key": "9G/main",
+            "parameter": 0,
+            "feet": 5,
+            "path": "main"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Secondary trunk flow is a substantial percentage of upstream primary duct flow. Group 2 covers branch runout equivalent lengths.",
+          "Choose the branch or main path through this junction. Only that path contributes to this entry; do not add both listed values."
+        ]
+      }
+    },
+    {
+      "id": "9H",
+      "familyID": "9H",
+      "groupID": 9,
+      "sourceCode": "9H",
+      "name": "Round trunk with elbow branch",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-9/9H.svg",
+        "revision": "75756e5e7b9f29c80cf11bd38119dfa4d5de523ae69d833c1b79be877c861de7",
+        "altText": "9H — Round trunk with elbow branch (round)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "9H-v1",
+      "rule": {
+        "kind": "junction",
+        "rows": [
+          {
+            "key": "9H/branch",
+            "parameter": 0,
+            "feet": 100,
+            "path": "branch"
+          },
+          {
+            "key": "9H/main",
+            "parameter": 0,
+            "feet": 5,
+            "path": "main"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Secondary trunk flow is a substantial percentage of upstream primary duct flow. Group 2 covers branch runout equivalent lengths.",
+          "Choose the branch or main path through this junction. Only that path contributes to this entry; do not add both listed values."
+        ]
+      }
+    },
+    {
+      "id": "9I",
+      "familyID": "9I",
+      "groupID": 9,
+      "sourceCode": "9I",
+      "name": "Round tee junction",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-9/9I.svg",
+        "revision": "7b04b7646f715d5db10157e5a1deb04bcffc0739b4263d1c46f4c1ce2cf10968",
+        "altText": "9I — Round tee junction (round)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "9I-v1",
+      "rule": {
+        "kind": "junction",
+        "rows": [
+          {
+            "key": "9I/branch",
+            "parameter": 0,
+            "feet": 85,
+            "path": "branch"
+          },
+          {
+            "key": "9I/main",
+            "parameter": 0,
+            "feet": 5,
+            "path": "main"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Secondary trunk flow is a substantial percentage of upstream primary duct flow. Group 2 covers branch runout equivalent lengths.",
+          "Choose the branch or main path through this junction. Only that path contributes to this entry; do not add both listed values."
+        ]
+      }
+    },
+    {
+      "id": "9J",
+      "familyID": "9J",
+      "groupID": 9,
+      "sourceCode": "9J",
+      "name": "Round wye junction",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-9/9J.svg",
+        "revision": "e81f7daf153a31b9d467cc279cdadbdcec27701aa380b5ead70349fc8e37d871",
+        "altText": "9J — Round wye junction (round)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "9J-v1",
+      "rule": {
+        "kind": "junction",
+        "rows": [
+          {
+            "key": "9J/branch",
+            "parameter": 0,
+            "feet": 25,
+            "path": "branch"
+          },
+          {
+            "key": "9J/main",
+            "parameter": 0,
+            "feet": 5,
+            "path": "main"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Secondary trunk flow is a substantial percentage of upstream primary duct flow. Group 2 covers branch runout equivalent lengths.",
+          "Choose the branch or main path through this junction. Only that path contributes to this entry; do not add both listed values."
+        ]
+      }
+    },
+    {
+      "id": "9K",
+      "familyID": "9K",
+      "groupID": 9,
+      "sourceCode": "9K",
+      "name": "Rectangular tee junction without vanes",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-9/9K.svg",
+        "revision": "414af45bae84e060c635ec5bfd3f8518d4e1c76346497ea4e326a6348906111c",
+        "altText": "9K — Rectangular tee junction without vanes (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "9K-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "9K",
+            "parameter": 0,
+            "feet": 65
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Secondary trunk flow is a substantial percentage of upstream primary duct flow. Group 2 covers branch runout equivalent lengths."
+        ]
+      }
+    },
+    {
+      "id": "9L",
+      "familyID": "9L",
+      "groupID": 9,
+      "sourceCode": "9L",
+      "name": "Rectangular tee junction with vane bank",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-9/9L.svg",
+        "revision": "ef86df37d7b620f94ee4ad93dc5754a5c910525d16001c7dafecc30545bee95f",
+        "altText": "9L — Rectangular tee junction with vane bank (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "9L-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "9L",
+            "parameter": 0,
+            "feet": 20
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Secondary trunk flow is a substantial percentage of upstream primary duct flow. Group 2 covers branch runout equivalent lengths."
+        ]
+      }
+    },
+    {
+      "id": "9M",
+      "familyID": "9M",
+      "groupID": 9,
+      "sourceCode": "9M",
+      "name": "Radiused rectangular split junction",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-9/9M.svg",
+        "revision": "03d6758a158792a02ef672a062eaf3fb3c6f63c07a99e22a838e99582f09858a",
+        "altText": "9M — Radiused rectangular split junction (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "9M-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "9M",
+            "parameter": 0,
+            "feet": 20
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Secondary trunk flow is a substantial percentage of upstream primary duct flow. Group 2 covers branch runout equivalent lengths."
+        ]
+      }
+    },
+    {
+      "id": "9N",
+      "familyID": "9N",
+      "groupID": 9,
+      "sourceCode": "9N",
+      "name": "Rectangular wye split junction",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-9/9N.svg",
+        "revision": "2243790baca3478efce6561b563ed7f22b326bb6772929cec1207770eb4585bf",
+        "altText": "9N — Rectangular wye split junction (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "9N-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "9N",
+            "parameter": 0,
+            "feet": 15
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Secondary trunk flow is a substantial percentage of upstream primary duct flow. Group 2 covers branch runout equivalent lengths."
+        ]
+      }
+    },
+    {
+      "id": "9O",
+      "familyID": "9O",
+      "groupID": 9,
+      "sourceCode": "9O",
+      "name": "Round wye split junction",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-9/9O.svg",
+        "revision": "63808b23dc8cbc563e630328c0f3770ce95f93d96354a55d2f5bd86939dad3b8",
+        "altText": "9O — Round wye split junction (round)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "9O-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "9O",
+            "parameter": 0,
+            "feet": 15
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Secondary trunk flow is a substantial percentage of upstream primary duct flow. Group 2 covers branch runout equivalent lengths."
+        ]
+      }
+    },
+    {
+      "id": "9P",
+      "familyID": "9P",
+      "groupID": 9,
+      "sourceCode": "9P",
+      "name": "Round tee split junction",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-9/9P.svg",
+        "revision": "da872acd24264e1940c7c9201b1e4d581c8d5bc213159554f18c82017b454e13",
+        "altText": "9P — Round tee split junction (round)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "9P-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "9P",
+            "parameter": 0,
+            "feet": 70
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Secondary trunk flow is a substantial percentage of upstream primary duct flow. Group 2 covers branch runout equivalent lengths."
+        ]
+      }
+    },
+    {
+      "id": "9Q",
+      "familyID": "9Q",
+      "groupID": 9,
+      "sourceCode": "9Q",
+      "name": "Rectangular vertical-to-horizontal junction",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-9/9Q.svg",
+        "revision": "2d14e2286d0863be1681c3eae851782b09fd4099e4421bbacf125415cc6545b1",
+        "altText": "9Q — Rectangular vertical-to-horizontal junction (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "9Q-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "9Q",
+            "parameter": 0,
+            "feet": 55
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Secondary trunk flow is a substantial percentage of upstream primary duct flow. Group 2 covers branch runout equivalent lengths."
+        ]
+      }
+    },
+    {
+      "id": "9R",
+      "familyID": "9R",
+      "groupID": 9,
+      "sourceCode": "9R",
+      "name": "Rectangular vertical-to-horizontal junction with transition",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-9/9R.svg",
+        "revision": "daa1e2d33c475956c5227b50d5520c03f40d19dcc6afd6838472694f29243811",
+        "altText": "9R — Rectangular vertical-to-horizontal junction with transition (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "9R-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "9R",
+            "parameter": 0,
+            "feet": 35
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Secondary trunk flow is a substantial percentage of upstream primary duct flow. Group 2 covers branch runout equivalent lengths."
+        ]
+      }
+    },
+    {
+      "id": "10A",
+      "familyID": "10A",
+      "groupID": 10,
+      "sourceCode": "10A",
+      "name": "Rectangular return tee without vanes",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-10/10A.svg",
+        "revision": "d70f17a47ce0f0654976045df75607307269703a34a6969dc5bd0210854e0810",
+        "altText": "10A — Rectangular return tee without vanes (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "10A-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "10A",
+            "parameter": 0,
+            "feet": 75
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Two return trunks merge. Source directs branch return equivalent lengths to Group 6."
+        ]
+      }
+    },
+    {
+      "id": "10B",
+      "familyID": "10B",
+      "groupID": 10,
+      "sourceCode": "10B",
+      "name": "Rectangular return tee with vane bank",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-10/10B.svg",
+        "revision": "313aa1c4c201b939d31882531e31fd582995e2a4a4dd6a6b0dd4e541b83805e2",
+        "altText": "10B — Rectangular return tee with vane bank (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "10B-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "10B",
+            "parameter": 0,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Two return trunks merge. Source directs branch return equivalent lengths to Group 6."
+        ]
+      }
+    },
+    {
+      "id": "10C",
+      "familyID": "10C",
+      "groupID": 10,
+      "sourceCode": "10C",
+      "name": "Radiused rectangular return merge",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-10/10C.svg",
+        "revision": "bda034f5f94281e56f60e20ff0e18a38ee4299bd3889c84f1c7ed1a7ac3abd20",
+        "altText": "10C — Radiused rectangular return merge (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "10C-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "10C",
+            "parameter": 0,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Two return trunks merge. Source directs branch return equivalent lengths to Group 6."
+        ]
+      }
+    },
+    {
+      "id": "10D",
+      "familyID": "10D",
+      "groupID": 10,
+      "sourceCode": "10D",
+      "name": "Rectangular return wye merge",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-10/10D.svg",
+        "revision": "2ef7012f1eb3ef1abc71c8c62144eeedafeb93346ba501513526a7a3f303a30f",
+        "altText": "10D — Rectangular return wye merge (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "10D-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "10D",
+            "parameter": 0,
+            "feet": 25
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Two return trunks merge. Source directs branch return equivalent lengths to Group 6."
+        ]
+      }
+    },
+    {
+      "id": "10E",
+      "familyID": "10E",
+      "groupID": 10,
+      "sourceCode": "10E",
+      "name": "Round angled return merge",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-10/10E.svg",
+        "revision": "53c8fe8cfe2f2a952cab0db041f5835d660e95f99eadd1133242a8f53dfdb754",
+        "altText": "10E — Round angled return merge (round)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "10E-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "10E",
+            "parameter": 0,
+            "feet": 25
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Two return trunks merge. Source directs branch return equivalent lengths to Group 6."
+        ]
+      }
+    },
+    {
+      "id": "10F",
+      "familyID": "10F",
+      "groupID": 10,
+      "sourceCode": "10F",
+      "name": "Round return wye merge",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-10/10F.svg",
+        "revision": "9400e285569d0e5d5fce5991e82147d6d990a84a9366d20b39df0482030b9820",
+        "altText": "10F — Round return wye merge (round)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "10F-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "10F",
+            "parameter": 0,
+            "feet": 35
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Two return trunks merge. Source directs branch return equivalent lengths to Group 6."
+        ]
+      }
+    },
+    {
+      "id": "10G",
+      "familyID": "10G",
+      "groupID": 10,
+      "sourceCode": "10G",
+      "name": "Round return tee merge",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-10/10G.svg",
+        "revision": "b2914847f5d2ee2e89d04add18badc8ed0466387723c3ae3424370583dab97c2",
+        "altText": "10G — Round return tee merge (round)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "10G-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "10G",
+            "parameter": 0,
+            "feet": 75
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Two return trunks merge. Source directs branch return equivalent lengths to Group 6."
         ]
       }
     }

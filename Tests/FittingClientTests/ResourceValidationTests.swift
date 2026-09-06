@@ -72,6 +72,25 @@ struct FittingResourceValidationTests {
     }
   }
 
+  @Test func duplicateJunctionPathsAreRejected() throws {
+    var doc = try document()
+    var records = try #require(doc["fittings"] as? [[String: Any]])
+    let index = try #require(records.firstIndex { ($0["id"] as? String) == "9A" })
+    var rule = try #require(records[index]["rule"] as? [String: Any])
+    var rows = try #require(rule["rows"] as? [[String: Any]])
+    rows[1]["path"] = "branch"
+    rule["rows"] = rows
+    records[index]["rule"] = rule
+    doc["fittings"] = records
+    let data = try JSONSerialization.data(withJSONObject: doc)
+    #expect(
+      throws: CatalogValidator.ValidationError(
+        message: "Junction must have one row for each path in canonical order")
+    ) {
+      try CatalogValidator.validate(JSONDecoder().decode(Catalog.Document.self, from: data))
+    }
+  }
+
   @Test func assetTraversalIsRejected() throws {
     var doc = try document()
     var records = try #require(doc["fittings"] as? [[String: Any]])

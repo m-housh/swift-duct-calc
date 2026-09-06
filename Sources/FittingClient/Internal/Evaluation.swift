@@ -53,6 +53,14 @@ extension Catalog {
       }
       // Group 5 starts at one return; the final bucket covers two or more.
       row = record.rule.rows[min(count, record.rule.rows.count) - 1]
+    case (.junction, .junction(let path)):
+      guard let path else {
+        return .unresolved([.init(.missingInput, field: .junctionPath)])
+      }
+      guard let match = record.rule.rows.first(where: { $0.path == path }) else {
+        return .unresolved([.init(.unsupportedCombination, field: .junctionPath)])
+      }
+      row = match
     default:
       return .unresolved([.init(.incompatibleInputs)])
     }

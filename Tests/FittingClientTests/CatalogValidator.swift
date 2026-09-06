@@ -59,6 +59,9 @@ struct CatalogValidator {
       try require(
         rows.allSatisfy { $0.parameter.isFinite && $0.feet.isFinite && $0.feet > 0 },
         "Invalid source values")
+      if record.rule.kind != .junction {
+        try require(rows.allSatisfy { $0.path == nil }, "Unexpected junction path")
+      }
       switch record.rule.kind {
       case .fixed:
         try require(rows.count == 1, "Fixed rule must have one row")
@@ -73,6 +76,11 @@ struct CatalogValidator {
         try require(
           rows.enumerated().allSatisfy { Double($0.offset + 1) == $0.element.parameter },
           "Return buckets must be contiguous from one")
+      case .junction:
+        try require(
+          rows.count == Fitting.JunctionPath.allCases.count
+            && rows.compactMap(\.path) == Fitting.JunctionPath.allCases,
+          "Junction must have one row for each path in canonical order")
       }
     }
   }
