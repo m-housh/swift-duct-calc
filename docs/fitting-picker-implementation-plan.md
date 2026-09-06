@@ -13,7 +13,9 @@ full picker or persistence changes.
 This is the reviewable working plan, not a finalized implementation specification. Product decisions
 explicitly confirmed below are settled; proposed API names, file placement, persistence mechanics
 and delivery sequence remain open to the repository owner's direction. Production implementation has
-not started.
+started with the dependency-only slice on `codex/fitting-client`; see
+[implementation scope and source checks](fitting-client-first-slice.md). The step-3
+UI and persistence integration are still pending.
 
 Architecture guidance from the user:
 

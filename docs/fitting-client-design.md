@@ -1,7 +1,8 @@
 # FittingClient design sketch
 
-Status: proposal for architecture review. No production code or package targets
-have been added. This narrows the broader
+Status: the dependency-only first implementation is available on
+`codex/fitting-client`; see [scope and source checks](fitting-client-first-slice.md).
+The wider contracts below remain the design reference for subsequent integration. This narrows the broader
 [fitting-picker implementation plan](fitting-picker-implementation-plan.md) to one
 reviewable dependency boundary.
 

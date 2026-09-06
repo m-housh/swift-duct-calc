@@ -1,0 +1,85 @@
+# FittingClient first implementation
+
+Branch: `codex/fitting-client`, based on prototype/review commit `d89aefb`.
+Worktree: `/home/michael/dev/swift-duct-calc-fitting-client`.
+
+This implements the dependency boundary from [the design sketch](fitting-client-design.md).
+It does not replace step 3 or write to existing projects. The prototype worktree
+and its running preview server are unchanged.
+
+## Included behavior
+
+- All shared fitting definitions are in `Sources/ManualDCore/Fittings.swift`.
+- `@Dependency(\.fittingClient)` exposes groups, fitting definitions, artwork,
+  equivalent-length evaluation and source-reference resolution.
+- One bundled JSON resource provides canonical group order/eligibility and five
+  initial fitting definitions: 1F, 2A, 4A, 5A rectangular and 5A round (source 5B).
+  Empty groups report zero available cases and no representative artwork.
+- The resource loads and validates once. Invalid packaged metadata throws;
+  incomplete inputs, unknown catalog IDs and unsupported conditions return typed
+  results. The evaluator does not interpolate or apply velocity corrections.
+- New-draft defaults and requirements derive from the same rules used to
+  evaluate. Missing submitted inputs are never filled by defaults.
+- Approved SVG paths and revisions are resolved without needing valid calculation
+  inputs. Unsupported views/shapes have no implicit fallback. Existing static-file
+  middleware remains responsible for serving the assets.
+- Calculated snapshots preserve per-fitting fractional feet, original inputs,
+  source ID, PDF/hash/page, source row, catalog/rule revisions and conditions.
+- Source-code resolution normalizes surrounding whitespace/casing and returns
+  candidate application IDs, without calculating or accepting an EL value.
+  Recognition currently covers only these initial cases, not the complete PDF.
+
+The first slice chooses bundled JSON for the runtime catalog and keeps rule
+execution in Swift. Client helpers are in `Internal/Catalog.swift` and
+`Internal/Evaluation.swift`; their separation follows behavior, not one file per
+public type. `ProjectClient`/`ViewController` do not yet call this dependency.
+
+## Source checks
+
+Values below were visually checked against `Public/files/ManD.Groups.pdf` during
+implementation, independently of the prototype's evaluator. PDF SHA-256:
+`aae20d968d8238c8958a2c010012aca59ef4b5eed4ce749ed2b722d222997334`.
+
+| Source case | PDF viewer page / printed page | Implemented values and scope |
+| --- | --- | --- |
+| 1F | 2 / 160 | H/W 0.50 → 120 ft; H/W 1.0 → 85 ft. Exact ratios only; retain the illustrated 10-inch minimum clearance as source guidance. |
+| 2A | 5 / 163 | Downstream branches 0, 1, 2, 3, 4, 5+ → 35, 45, 55, 65, 70, 80 ft. Count to the next reducer or trunk end; preserve the actual count in the result. |
+| 4A | 18 / 168 | Fixed 30 ft. |
+| 5A / 5B | 20 / 169 | Both 40 ft; rectangular/round connection to a plenum large compared with duct size. The round family variant retains source code 5B. |
+
+Groups 1, 2 and 4 state 900 FPM and 0.08 IWC/100 ft reference conditions; group 5
+states 700 FPM and the same friction rate. These are recorded reference conditions,
+not instructions to scale a fixed value with an arbitrary velocity.
+
+The artwork catalog's 1F metadata points at viewer page 1, but its table is on
+viewer page 2. The new runtime resource corrects its own source link; original
+artwork manifests were not changed.
+
+Group 11 and the known group 3/8 discrepancies remain outside implemented rules.
+Optional source codes allow future application-only cases without inventing
+lettered IDs. The first slice does not settle those cases' applicability.
+
+## Verification and next integration
+
+The tests cover independent PDF value fixtures, exact ratios, all six branch
+buckets, large counts, missing/invalid/nonfinite inputs, direct-request eligibility,
+shape/source remapping, artwork lookup, revisioned references, dependency override,
+resource rejection and fractional snapshot encoding. Test-only fractional values
+are labeled as contract fixtures, not as source values for these five cases.
+
+Reproduce with Swift 6.2:
+
+```sh
+swift build --target FittingClient --jobs 4
+swift test --filter Fitting --jobs 4
+```
+
+The implementation was checked in the same Swift 6.2 container family used by the
+repository's test Dockerfile. No database or browser server is needed for these
+checks.
+
+Review the contracts and client implementation next. Subsequent work can expand
+verified cases, then connect the dependency to path drafts, favorites, quick entry,
+legacy-aware persistence and the existing step-3 routes. This first change leaves
+the current form, saved-path representation and production calculation callers
+intact.
