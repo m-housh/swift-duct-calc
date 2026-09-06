@@ -161,8 +161,15 @@ These are findings/questions for implementation, not new interpretation of the P
    entries distinguish mitered with/without vanes. Verify the intended source identity; approval of
    the drawing does not settle the rule.
 3. **8A:** at R/D = 1 the manifest assigns 20 ft to four/five-piece and 25 ft to three-piece
-   constructions; old keys `8a-1-3` and `8a-1-5` contain 20 and 25 ft respectively. Resolve this
-   apparent mapping discrepancy against the PDF.
+   constructions; old keys `8a-1-3` and `8a-1-5` contain 20 and 25 ft respectively.
+   Source review of viewer page 32 confirms the manifest mapping: four/five-piece
+   is 20 ft and three-piece is 25 ft. Use those source columns in the new evaluator.
+   For smooth round elbows, the user confirmed support for all explicitly listed
+   angle multipliers (20°, 30°, 45°, 60°, 75°, 110°, 130°, 150°), plus the base
+   90° value. The heading says “less than 90°” despite listing larger angles;
+   retain that discrepancy in internal notes. This decision applies only to
+   smooth round elbows and does not authorize interpolation between angle entries.
+   Selection between the published R/D rows remains a separate decision.
 4. **8K:** metadata includes an R/H = 0 value absent from the old lookup. Confirm its applicability
    and include or explicitly withhold the case.
 5. **8L/8M:** replace the old instruction to supply a multiplier-based result with selection and
