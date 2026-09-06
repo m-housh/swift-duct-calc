@@ -203,6 +203,8 @@ Sources/
 Tests/
   FittingClientTests/
     CatalogTests.swift
+    CatalogValidator.swift               # test-only authored data checks
+    ResourceValidationTests.swift
     ArtworkTests.swift
     EvaluationTests.swift
     ReferenceResolutionTests.swift
@@ -227,7 +229,10 @@ files on each request or ship the prototype's handwritten JavaScript adapters as
 production rules. Resource JSON versus checked-in Swift tables is an explicit
 review choice; there must be one authoritative runtime dataset, not two manually
 maintained copies. Load/index once per live catalog, expose load errors, and test
-that packaged data resolves to the deployed public assets.
+that packaged data resolves to the deployed public assets. Authored catalog metadata
+and rule-table validation belong in a test-only validator run against the checked-in
+JSON. Runtime loading retains decoding and the structural checks needed for safe
+lookup/indexing; user-input validation remains in the evaluator.
 
 ## Calls through the feature
 

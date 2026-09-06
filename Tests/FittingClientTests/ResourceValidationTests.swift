@@ -12,18 +12,48 @@ struct FittingResourceValidationTests {
     return try #require(JSONSerialization.jsonObject(with: data) as? [String: Any])
   }
 
-  @Test func duplicateIDsFailAsInfrastructureError() throws {
+  @Test(arguments: ["duplicateID", "missingGroup", "emptyRows"])
+  func runtimeLoadingRejectsUnsafeStructure(fault: String) throws {
+    var doc = try document()
+    switch fault {
+    case "duplicateID":
+      var records = try #require(doc["fittings"] as? [[String: Any]])
+      records.append(records[0])
+      doc["fittings"] = records
+    case "missingGroup":
+      var groups = try #require(doc["groups"] as? [[String: Any]])
+      groups.removeFirst()
+      doc["groups"] = groups
+    default:
+      var records = try #require(doc["fittings"] as? [[String: Any]])
+      var rule = try #require(records[0]["rule"] as? [String: Any])
+      rule["rows"] = [] as [Any]
+      records[0]["rule"] = rule
+      doc["fittings"] = records
+    }
+    let data = try JSONSerialization.data(withJSONObject: doc)
+    #expect(throws: FittingClientError.self) {
+      try Catalog(data: data)
+    }
+  }
+
+  @Test func checkedInCatalogPassesValidation() throws {
+    let data = try JSONSerialization.data(withJSONObject: document())
+    try CatalogValidator.validate(JSONDecoder().decode(Catalog.Document.self, from: data))
+  }
+
+  @Test func duplicateIDsAreRejected() throws {
     var doc = try document()
     var records = try #require(doc["fittings"] as? [[String: Any]])
     records.append(records[0])
     doc["fittings"] = records
     let data = try JSONSerialization.data(withJSONObject: doc)
-    #expect(throws: FittingClientError.invalidCatalog("Duplicate fitting ID")) {
-      try Catalog(data: data)
+    #expect(throws: CatalogValidator.ValidationError(message: "Duplicate fitting ID")) {
+      try CatalogValidator.validate(JSONDecoder().decode(Catalog.Document.self, from: data))
     }
   }
 
-  @Test func malformedTablesAreRejectedBeforeEvaluation() throws {
+  @Test func malformedTablesAreRejectedByValidator() throws {
     var doc = try document()
     var records = try #require(doc["fittings"] as? [[String: Any]])
     let index = try #require(records.firstIndex { ($0["id"] as? String) == "2A" })
@@ -35,9 +65,10 @@ struct FittingResourceValidationTests {
     doc["fittings"] = records
     let data = try JSONSerialization.data(withJSONObject: doc)
     #expect(
-      throws: FittingClientError.invalidCatalog("Branch buckets must be contiguous from zero")
+      throws: CatalogValidator.ValidationError(
+        message: "Branch buckets must be contiguous from zero")
     ) {
-      try Catalog(data: data)
+      try CatalogValidator.validate(JSONDecoder().decode(Catalog.Document.self, from: data))
     }
   }
 
@@ -49,8 +80,10 @@ struct FittingResourceValidationTests {
     records[0]["artwork"] = art
     doc["fittings"] = records
     let data = try JSONSerialization.data(withJSONObject: doc)
-    #expect(throws: FittingClientError.invalidCatalog("Artwork must be a catalog-owned SVG path")) {
-      try Catalog(data: data)
+    #expect(
+      throws: CatalogValidator.ValidationError(message: "Artwork must be a catalog-owned SVG path")
+    ) {
+      try CatalogValidator.validate(JSONDecoder().decode(Catalog.Document.self, from: data))
     }
   }
 }

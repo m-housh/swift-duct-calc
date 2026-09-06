@@ -17,8 +17,11 @@ and its running preview server are unchanged.
   Empty groups report zero available cases and no representative artwork.
 - `Live.swift` loads the bundled resource once while constructing the live client
   and captures its catalog or loading error in the operation closures. `Catalog`
-  receives `Data` and handles decoding/validation without bundle or filesystem
-  knowledge. Invalid packaged metadata throws;
+  receives `Data` and decodes it without bundle or filesystem knowledge. Runtime
+  loading checks schema support, group completeness, unique IDs, and nonempty
+  rule tables so lookups/indexing cannot trap. A test-only `CatalogValidator`
+  checks the authored metadata, artwork paths, and rule tables against the
+  checked-in JSON before release. Loading/structural failures throw;
   incomplete inputs, unknown catalog IDs and unsupported conditions return typed
   results. The evaluator does not interpolate or apply velocity corrections.
 - New-draft defaults and requirements derive from the same rules used to
