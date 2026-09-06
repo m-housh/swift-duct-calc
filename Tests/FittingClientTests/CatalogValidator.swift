@@ -35,18 +35,23 @@ struct CatalogValidator {
         try require(sourceGroup == record.groupID.rawValue, "Source group mismatch")
       }
       try require(
-        record.artwork.publicPath.hasPrefix("/images/fittings/")
-          && !record.artwork.publicPath.contains("..")
-          && record.artwork.publicPath.range(
-            of: #"^/[A-Za-z0-9/_-]+\.svg$"#, options: .regularExpression) != nil,
-        "Artwork must be a catalog-owned SVG path"
-      )
-      try require(
-        record.artwork.revision.range(of: #"^[a-f0-9]{64}$"#, options: .regularExpression) != nil,
-        "Invalid artwork revision hash")
-      try require(
-        record.artwork.mediaType == "image/svg+xml" && !record.artwork.altText.isEmpty,
-        "Invalid artwork metadata")
+        Set(record.artworks.map(\.view)).count == record.artworks.count,
+        "Duplicate artwork view")
+      for artwork in record.artworks {
+        try require(
+          artwork.publicPath.hasPrefix("/images/fittings/")
+            && !artwork.publicPath.contains("..")
+            && artwork.publicPath.range(
+              of: #"^/[A-Za-z0-9/_-]+\.svg$"#, options: .regularExpression) != nil,
+          "Artwork must be a catalog-owned SVG path"
+        )
+        try require(
+          artwork.revision.range(of: #"^[a-f0-9]{64}$"#, options: .regularExpression) != nil,
+          "Invalid artwork revision hash")
+        try require(
+          artwork.mediaType == "image/svg+xml" && !artwork.altText.isEmpty,
+          "Invalid artwork metadata")
+      }
       try require(record.conditions.referenceVelocityFPM > 0, "Invalid reference velocity")
       try require(
         record.conditions.frictionRateIWCPer100Feet.isFinite
@@ -67,7 +72,18 @@ struct CatalogValidator {
           record.rule.firstRowIncludesLowerRatios == nil && rows.allSatisfy { $0.trunkFeet == nil },
           "Unexpected return junction metadata")
       }
+      if let feet = record.rule.mergingFlowFeet {
+        try require(
+          record.rule.kind == .pannedReturn && record.sourceCode == "7C" && feet == 40,
+          "Unexpected merging-flow adjustment")
+      }
       switch record.rule.kind {
+      case .pannedReturn:
+        try require(
+          record.groupID == .pannedReturns
+            && rows.allSatisfy { $0.parameter > 0 && $0.parameter.rounded() == $0.parameter }
+            && zip(rows, rows.dropFirst()).allSatisfy { $0.parameter < $1.parameter },
+          "Panned return airflow rows must be positive whole CFM in increasing order")
       case .fixed:
         try require(rows.count == 1, "Fixed rule must have one row")
       case .heightWidth, .radiusWidth:

@@ -105,4 +105,38 @@ struct FittingResourceValidationTests {
       try CatalogValidator.validate(JSONDecoder().decode(Catalog.Document.self, from: data))
     }
   }
+
+  @Test(arguments: ["duplicateView", "alternateTraversal", "unorderedAirflow", "wrongAdjustment"])
+  func invalidPannedReturnMetadataIsRejected(fault: String) throws {
+    var doc = try document()
+    var records = try #require(doc["fittings"] as? [[String: Any]])
+    let index = try #require(records.firstIndex { ($0["id"] as? String) == "7C" })
+    let message: String
+    switch fault {
+    case "duplicateView":
+      records[index]["alternateArtwork"] = [records[index]["artwork"]]
+      message = "Duplicate artwork view"
+    case "alternateTraversal":
+      var arts = try #require(records[index]["alternateArtwork"] as? [[String: Any]])
+      arts[0]["publicPath"] = "/images/fittings/../../invalid.svg"
+      records[index]["alternateArtwork"] = arts
+      message = "Artwork must be a catalog-owned SVG path"
+    case "unorderedAirflow":
+      var rule = try #require(records[index]["rule"] as? [String: Any])
+      let rows = try #require(rule["rows"] as? [[String: Any]])
+      rule["rows"] = Array(rows.reversed())
+      records[index]["rule"] = rule
+      message = "Panned return airflow rows must be positive whole CFM in increasing order"
+    default:
+      var rule = try #require(records[index]["rule"] as? [String: Any])
+      rule["mergingFlowFeet"] = 20
+      records[index]["rule"] = rule
+      message = "Unexpected merging-flow adjustment"
+    }
+    doc["fittings"] = records
+    let data = try JSONSerialization.data(withJSONObject: doc)
+    #expect(throws: CatalogValidator.ValidationError(message: message)) {
+      try CatalogValidator.validate(JSONDecoder().decode(Catalog.Document.self, from: data))
+    }
+  }
 }

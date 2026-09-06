@@ -1,7 +1,7 @@
 # Fitting catalog: return boots and trunk junctions
 
 The junction work now covers all of groups 6, 9, and 10. The catalog contains
-140 choices at revision `fitting-catalog-v5`. The latest addition is 6A–6E, using
+140 choices at this slice’s revision `fitting-catalog-v5`. The latest addition is 6A–6E, using
 the user's confirmed nearest-published-row policy and returning both branch and
 trunk contributions.
 
@@ -144,3 +144,5 @@ snapshot encoding, and path-total assembly. The 26 fixed-value fixtures and both
 paths for all ten group 9 branch/main junctions also pass. The asset integration
 check now covers all 140 entries. Existing startup, source-table, input-validation, reference lookup,
 and snapshot tests also pass. Step-3 UI and persistence integration remain pending.
+
+Subsequent coverage: [group 7 panned returns](fitting-client-panned-returns.md) adds five cases and nine artwork views at catalog revision v6.

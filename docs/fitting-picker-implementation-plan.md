@@ -17,9 +17,10 @@ started with the dependency-only slice on `codex/fitting-client`; see
 [implementation scope and source checks](fitting-client-first-slice.md). The step-3
 UI and persistence integration are still pending. The reviewed dependency foundation
 now includes async startup loading through `FileClient`; the
-[catalog expansion](fitting-client-catalog-expansion.md) and
-[junction slice](fitting-client-junctions.md) cover 140 fitting choices in groups
-1, 2, 4, 5, 6, 9, and 10. Group 6 uses the confirmed nearest-published-ratio-row
+[catalog expansion](fitting-client-catalog-expansion.md),
+[junction slice](fitting-client-junctions.md), and
+[group 7 slice](fitting-client-panned-returns.md) cover 145 fitting choices in groups
+1, 2, 4, 5, 6, 7, 9, and 10. Group 6 uses the confirmed nearest-published-ratio-row
 policy (midpoint ties upward) and returns both branch and trunk contributions.
 
 Architecture guidance from the user:
@@ -136,7 +137,7 @@ rule; shapes sometimes represent different source fitting IDs.
 | 4     | [enhanced manifest](../Public/images/fittings/group-4-enhanced/manifest.json)     | 44 approved entries                                              | Fixed values transcribed; audit conditions and full ID coverage                                            |
 | 5     | [shape manifest](../Public/images/fittings/group-5-shapes/manifest.json)          | 16 approved variants across 12 families, retaining 15 source IDs | Shape/source mapping and nested value data require normalization                                           |
 | 6     | [enhanced manifest](../Public/images/fittings/group-6-enhanced/manifest.json)     | 16 approved entries                                              | Flow-ratio and branch/trunk rules require explicit modeling                                                |
-| 7     | [options manifest](../Public/images/fittings/group-7-options/manifest.json)       | 9 approved views/options                                         | Airflow bounds and merging adjustment require explicit modeling                                            |
+| 7     | [options manifest](../Public/images/fittings/group-7-options/manifest.json)       | 9 approved views/options                                         | Implemented: bounded nearest CFM row, midpoint ties upward, optional 7C +40 ft; five cases share nine views                                            |
 | 8     | [manifest](../Public/images/fittings/group-8/manifest.json)                       | 25 approved entries                                              | Several rule types and discrepancies; split into independently verified cases                              |
 | 9     | [manifest](../Public/images/fittings/group-9/manifest.json)                       | 18 approved entries                                              | Branch/main path selection and application checks required                                                 |
 | 10    | [manifest](../Public/images/fittings/group-10/manifest.json)                      | 7 approved entries                                               | Fixed values transcribed; source application checks required                                               |

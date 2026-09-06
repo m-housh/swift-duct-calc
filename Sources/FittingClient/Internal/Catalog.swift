@@ -57,7 +57,8 @@ struct Catalog: Sendable {
         id: record.id, groupID: record.groupID, familyID: record.familyID,
         sourceCode: record.sourceCode, name: record.name, shape: record.shape,
         pathTypes: pathTypes(for: record), inputRequirement: record.rule.requirement,
-        defaultInputs: record.rule.defaultInputs, conditions: record.conditions
+        defaultInputs: record.rule.defaultInputs, conditions: record.conditions,
+        availableViews: record.artworks.map(\.view)
       )
     }
   }
@@ -67,8 +68,10 @@ struct Catalog: Sendable {
     guard request.shape == nil || request.shape == record.shape else {
       return .unavailable(.unsupportedShape)
     }
-    guard request.view == record.artwork.view else { return .unavailable(.unsupportedView) }
-    return .available(record.artwork)
+    guard let artwork = record.artworks.first(where: { $0.view == request.view }) else {
+      return .unavailable(.unsupportedView)
+    }
+    return .available(artwork)
   }
 
   func resolveReference(_ request: Fitting.ReferenceRequest) -> Fitting.ReferenceMatch {
@@ -97,14 +100,18 @@ struct Catalog: Sendable {
     let shape: Fitting.Shape
     let conditions: Fitting.Conditions
     let artwork: Fitting.Artwork
+    let alternateArtwork: [Fitting.Artwork]?
     let ruleRevision: String
     let rule: Rule
+
+    var artworks: [Fitting.Artwork] { [artwork] + (alternateArtwork ?? []) }
   }
 
   struct Rule: Decodable, Sendable {
     let kind: Kind
     let rows: [Row]
     let firstRowIncludesLowerRatios: Bool?
+    let mergingFlowFeet: Double?
 
     var requirement: Fitting.InputRequirement {
       switch kind {
@@ -114,6 +121,9 @@ struct Catalog: Sendable {
       case .downstreamBranches: .downstreamBranches(finalBucketMinimum: rows.count - 1)
       case .plenumReturns: .plenumReturns(finalBucketMinimum: rows.count)
       case .junction: .junction
+      case .pannedReturn:
+        .pannedReturn(
+          airflowRows: rows.map(\.parameter), supportsMergingFlow: mergingFlowFeet != nil)
       case .returnJunction:
         .returnJunction(
           ratios: rows.map(\.parameter),
@@ -129,13 +139,14 @@ struct Catalog: Sendable {
       case .downstreamBranches: .downstreamBranches(count: nil)
       case .plenumReturns: .plenumReturns(count: nil)
       case .junction: .junction(path: nil)
+      case .pannedReturn: .pannedReturn(airflowCFM: nil, mergingFlow: false)
       case .returnJunction: .returnJunction(branchCFM: nil, totalCFM: nil)
       }
     }
 
     enum Kind: String, Decodable, Sendable {
       case fixed, heightWidth, radiusWidth, downstreamBranches, plenumReturns, junction,
-        returnJunction
+        returnJunction, pannedReturn
     }
 
     struct Row: Decodable, Sendable {

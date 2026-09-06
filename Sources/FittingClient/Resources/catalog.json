@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "fitting-catalog-v5",
+  "revision": "fitting-catalog-v6",
   "groups": [
     {
       "id": 1,
@@ -4510,6 +4510,284 @@
         "referenceVelocityFPM": 700,
         "frictionRateIWCPer100Feet": 0.08,
         "notes": []
+      }
+    },
+    {
+      "id": "7A",
+      "familyID": "7A",
+      "groupID": 7,
+      "sourceCode": "7A",
+      "name": "Panned stud-space return",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-7-individual/7A.svg",
+        "revision": "2cf1bd8630e99e7d0a70cdc64a25fa9ea0969a176ad43ddd726c3bf37f2cbba6",
+        "altText": "Panned stud-space return — individual",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "alternateArtwork": [
+        {
+          "publicPath": "/images/fittings/group-7-options/7A-assembly.svg",
+          "revision": "5b0ed2ba4d8f883272b948a10c56b71fa6937e331a6ec17bbb41d33b26520e3e",
+          "altText": "Panned stud-space return — assembly",
+          "view": "assembly",
+          "mediaType": "image/svg+xml"
+        }
+      ],
+      "ruleRevision": "7A-v1",
+      "rule": {
+        "kind": "pannedReturn",
+        "rows": [
+          {
+            "key": "7A:cfm:100",
+            "parameter": 100,
+            "feet": 25
+          },
+          {
+            "key": "7A:cfm:150",
+            "parameter": 150,
+            "feet": 25
+          },
+          {
+            "key": "7A:cfm:200",
+            "parameter": 200,
+            "feet": 25
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Approximate equivalent lengths for existing panned stud or joist return systems. Panning is not recommended for new systems.",
+          "Obstructions are not covered by a sizing procedure; leakage can affect loads, pressure, and indoor air quality.",
+          "Supported airflow: 100–200 CFM. Select the nearest published row; midpoint ties use the higher CFM row.",
+          "Vertical return path within one panned stud space; source limit is 200 CFM in the stud space."
+        ]
+      }
+    },
+    {
+      "id": "7B",
+      "familyID": "7B",
+      "groupID": 7,
+      "sourceCode": "7B",
+      "name": "Stud-space to single-joist return turn",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-7-individual/7B.svg",
+        "revision": "42e925e451d38817b8ee05220a1c7edb860cc2724e26869b66065656361c7493",
+        "altText": "Stud-space to single-joist return turn — individual",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "alternateArtwork": [
+        {
+          "publicPath": "/images/fittings/group-7-options/7B-assembly.svg",
+          "revision": "8ee9bc2b0e92e5f55e4b00317c9cf7bde1c09d93060f94158153930069aa026e",
+          "altText": "Stud-space to single-joist return turn — assembly",
+          "view": "assembly",
+          "mediaType": "image/svg+xml"
+        }
+      ],
+      "ruleRevision": "7B-v1",
+      "rule": {
+        "kind": "pannedReturn",
+        "rows": [
+          {
+            "key": "7B:cfm:100",
+            "parameter": 100,
+            "feet": 10
+          },
+          {
+            "key": "7B:cfm:150",
+            "parameter": 150,
+            "feet": 15
+          },
+          {
+            "key": "7B:cfm:200",
+            "parameter": 200,
+            "feet": 25
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Approximate equivalent lengths for existing panned stud or joist return systems. Panning is not recommended for new systems.",
+          "Obstructions are not covered by a sizing procedure; leakage can affect loads, pressure, and indoor air quality.",
+          "Supported airflow: 100–200 CFM. Select the nearest published row; midpoint ties use the higher CFM row.",
+          "One turn connects a panned stud space to a single panned joist space."
+        ]
+      }
+    },
+    {
+      "id": "7C",
+      "familyID": "7C",
+      "groupID": 7,
+      "sourceCode": "7C",
+      "name": "Panned single-joist return",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-7-individual/7C.svg",
+        "revision": "8d81fc94e26581d03c7de2ed57801266ea001493c9ba7212c4511efc9b090404",
+        "altText": "Panned single-joist return — individual",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "alternateArtwork": [
+        {
+          "publicPath": "/images/fittings/group-7-options/7C-assembly.svg",
+          "revision": "f10fbdc483098f5c4b1a44bc8afe3434d0e0af5b6d19aecf232f41aa041439d7",
+          "altText": "Panned single-joist return — assembly",
+          "view": "assembly",
+          "mediaType": "image/svg+xml"
+        },
+        {
+          "publicPath": "/images/fittings/group-7-options/7C-assembly-merging.svg",
+          "revision": "8ba310c168e558c75be3a952c3bdf877b47e8f02fda1ef2f22866570996a201e",
+          "altText": "Panned single-joist return — assembly-merging",
+          "view": "assembly-merging",
+          "mediaType": "image/svg+xml"
+        }
+      ],
+      "ruleRevision": "7C-v1",
+      "rule": {
+        "kind": "pannedReturn",
+        "rows": [
+          {
+            "key": "7C:cfm:100",
+            "parameter": 100,
+            "feet": 10
+          },
+          {
+            "key": "7C:cfm:200",
+            "parameter": 200,
+            "feet": 30
+          },
+          {
+            "key": "7C:cfm:300",
+            "parameter": 300,
+            "feet": 60
+          },
+          {
+            "key": "7C:cfm:400",
+            "parameter": 400,
+            "feet": 110
+          }
+        ],
+        "mergingFlowFeet": 40
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Approximate equivalent lengths for existing panned stud or joist return systems. Panning is not recommended for new systems.",
+          "Obstructions are not covered by a sizing procedure; leakage can affect loads, pressure, and indoor air quality.",
+          "Supported airflow: 100–400 CFM. Select the nearest published row; midpoint ties use the higher CFM row.",
+          "Return path runs in one panned joist space; source limit is 400 CFM and merging flow adds 40 feet.",
+          "Merging upstream return flow adds 40 ft once to this fitting. Use airflow in the represented joist space."
+        ]
+      }
+    },
+    {
+      "id": "7D",
+      "familyID": "7D",
+      "groupID": 7,
+      "sourceCode": "7D",
+      "name": "Panned stud-to-joist double turn",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-7-individual/7D.svg",
+        "revision": "8f009d3d9d3913020961f28be810270deeba8f95729ba7d0c626c6fce1116ec5",
+        "altText": "Panned stud-to-joist double turn — individual",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "alternateArtwork": [],
+      "ruleRevision": "7D-v1",
+      "rule": {
+        "kind": "pannedReturn",
+        "rows": [
+          {
+            "key": "7D:cfm:100",
+            "parameter": 100,
+            "feet": 20
+          },
+          {
+            "key": "7D:cfm:150",
+            "parameter": 150,
+            "feet": 50
+          },
+          {
+            "key": "7D:cfm:200",
+            "parameter": 200,
+            "feet": 90
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Approximate equivalent lengths for existing panned stud or joist return systems. Panning is not recommended for new systems.",
+          "Obstructions are not covered by a sizing procedure; leakage can affect loads, pressure, and indoor air quality.",
+          "Supported airflow: 100–200 CFM. Select the nearest published row; midpoint ties use the higher CFM row.",
+          "Two turns carry return air between the panned stud and joist paths."
+        ]
+      }
+    },
+    {
+      "id": "7E",
+      "familyID": "7E",
+      "groupID": 7,
+      "sourceCode": "7E",
+      "name": "Panned double-joist return",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-7-individual/7E.svg",
+        "revision": "ded62f025e1a48ef6ff75b63dff88b499db7d7eae8b3f56e8d70105370f1867a",
+        "altText": "Panned double-joist return — individual",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "alternateArtwork": [],
+      "ruleRevision": "7E-v1",
+      "rule": {
+        "kind": "pannedReturn",
+        "rows": [
+          {
+            "key": "7E:cfm:200",
+            "parameter": 200,
+            "feet": 10
+          },
+          {
+            "key": "7E:cfm:400",
+            "parameter": 400,
+            "feet": 30
+          },
+          {
+            "key": "7E:cfm:600",
+            "parameter": 600,
+            "feet": 60
+          },
+          {
+            "key": "7E:cfm:800",
+            "parameter": 800,
+            "feet": 110
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Approximate equivalent lengths for existing panned stud or joist return systems. Panning is not recommended for new systems.",
+          "Obstructions are not covered by a sizing procedure; leakage can affect loads, pressure, and indoor air quality.",
+          "Supported airflow: 200–800 CFM. Select the nearest published row; midpoint ties use the higher CFM row.",
+          "A floor grille feeds two adjacent panned joist spaces; source limit is 800 CFM in the double space."
+        ]
       }
     },
     {

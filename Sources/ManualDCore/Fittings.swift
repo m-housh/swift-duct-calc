@@ -47,6 +47,7 @@ public enum Fitting {
 
   public enum View: String, Codable, Sendable {
     case individual, assembly
+    case assemblyMerging = "assembly-merging"
   }
 
   /// The selected route through a junction, independent of supply/return path type.
@@ -64,6 +65,7 @@ public enum Fitting {
     case junction(path: JunctionPath?)
     /// CFM1 entering the branch and CFM2 in the combined downstream trunk.
     case returnJunction(branchCFM: Double?, totalCFM: Double?)
+    case pannedReturn(airflowCFM: Double?, mergingFlow: Bool)
   }
 
   /// Presentation requirements derived from the same rule used for evaluation.
@@ -75,6 +77,8 @@ public enum Fitting {
     case plenumReturns(finalBucketMinimum: Int)
     case junction
     case returnJunction(ratios: [Double], firstRowIncludesLowerRatios: Bool)
+    /// Airflow must be within the first and last published rows, before rounding.
+    case pannedReturn(airflowRows: [Double], supportsMergingFlow: Bool)
   }
 
   /// Applicability information for the fitting rule, independent of reference-document format.
@@ -100,6 +104,7 @@ public enum Fitting {
     public let name: String
     public let shape: Shape
     public let pathTypes: [PathType]
+    public let availableViews: [View]
     public let inputRequirement: InputRequirement
     /// Initial values for a new draft only. Evaluation never applies defaults.
     public let defaultInputs: Inputs
@@ -108,7 +113,7 @@ public enum Fitting {
     public init(
       id: ID, groupID: Group.ID, familyID: ID, sourceCode: SourceCode?, name: String,
       shape: Shape, pathTypes: [PathType], inputRequirement: InputRequirement,
-      defaultInputs: Inputs, conditions: Conditions
+      defaultInputs: Inputs, conditions: Conditions, availableViews: [View] = [.individual]
     ) {
       self.id = id
       self.groupID = groupID
@@ -118,6 +123,7 @@ public enum Fitting {
       self.shape = shape
       self.pathTypes = pathTypes
       self.inputRequirement = inputRequirement
+      self.availableViews = availableViews
       self.defaultInputs = defaultInputs
       self.conditions = conditions
     }
@@ -198,14 +204,14 @@ public enum Fitting {
 
     public enum Field: Equatable, Sendable {
       case heightInches, widthInches, radiusInches, downstreamBranches, plenumReturns, junctionPath
-      case branchCFM, totalCFM
+      case branchCFM, totalCFM, airflowCFM, mergingFlow
     }
 
     public enum Code: Equatable, Sendable {
       case unknownFitting, ineligiblePathType, incompatibleInputs
       case missingInput, nonfiniteInput, nonpositiveDimension, negativeBranchCount
       case unsupportedRatio, nonpositiveReturnCount, unsupportedCombination
-      case nonpositiveAirflow, branchExceedsTotal
+      case nonpositiveAirflow, branchExceedsTotal, unsupportedAirflow
     }
   }
 
@@ -223,22 +229,38 @@ public enum Fitting {
     /// The submitted dimensions/count remain intact; bucket selection does not overwrite them.
     public let inputs: Inputs
     public let components: [Component]
+    public let airflowSelection: AirflowSelection?
     public let conditions: Conditions
     public let catalogRevision: String
     public let ruleRevision: String
 
     public init(
       fittingID: ID, sourceCode: SourceCode?, equivalentLengthFeet: Double, inputs: Inputs,
-      components: [Component], conditions: Conditions, catalogRevision: String, ruleRevision: String
+      components: [Component], conditions: Conditions, catalogRevision: String,
+      ruleRevision: String,
+      airflowSelection: AirflowSelection? = nil
     ) {
       self.fittingID = fittingID
       self.sourceCode = sourceCode
       self.equivalentLengthFeet = equivalentLengthFeet
       self.inputs = inputs
       self.components = components
+      self.airflowSelection = airflowSelection
       self.conditions = conditions
       self.catalogRevision = catalogRevision
       self.ruleRevision = ruleRevision
+    }
+
+    public struct AirflowSelection: Codable, Equatable, Sendable {
+      public let submittedCFM: Double
+      public let selectedCFM: Double
+
+      public init(submittedCFM: Double, selectedCFM: Double) {
+        self.submittedCFM = submittedCFM
+        self.selectedCFM = selectedCFM
+      }
+
+      public var wasRounded: Bool { submittedCFM != selectedCFM }
     }
 
     public struct Component: Codable, Equatable, Sendable {

@@ -61,6 +61,9 @@ extension Catalog {
         return .unresolved([.init(.unsupportedCombination, field: .junctionPath)])
       }
       row = match
+    case (.pannedReturn, .pannedReturn(let airflowCFM, let mergingFlow)):
+      return evaluatePannedReturn(
+        record, request: request, airflowCFM: airflowCFM, mergingFlow: mergingFlow)
     case (.returnJunction, .returnJunction(let branchCFM, let totalCFM)):
       return evaluateReturnJunction(
         record, request: request, branchCFM: branchCFM, totalCFM: totalCFM)

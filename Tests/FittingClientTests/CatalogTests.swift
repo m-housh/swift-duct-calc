@@ -98,7 +98,7 @@ struct FittingCatalogTests {
         }
       }
     }
-    #expect(checked.count == 140)
+    #expect(checked.count == 145)
   }
 
   @Test func dependencyCanBeReplacedWithoutLoadingCatalogOrProjects() async throws {
