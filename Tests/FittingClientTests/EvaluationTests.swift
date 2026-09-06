@@ -18,7 +18,7 @@ struct FittingEvaluationTests {
     #expect(value.components == [.init(ruleKey: "4A", equivalentLengthFeet: 30)])
     #expect(value.conditions.referenceVelocityFPM == 900)
     #expect(value.conditions.frictionRateIWCPer100Feet == 0.08)
-    #expect(value.catalogRevision == "fitting-catalog-v7")
+    #expect(value.catalogRevision == "fitting-catalog-v8")
     #expect(value.ruleRevision == "4A-v1")
     let roundReturn = try await calculation("5A-round", .fixed, type: .return)
     #expect(roundReturn.equivalentLengthFeet == 40)

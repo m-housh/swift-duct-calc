@@ -56,6 +56,7 @@ struct FittingRoundElbowTests {
 
   @Test func pickerChoicesAndDefaults() async throws {
     let definitions = try await client.fittings(.init(pathType: .supply, groupID: .elbows))
+      .filter { $0.familyID == "8A" }
     #expect(definitions.map(\.id) == ["8A-smooth", "8A-4-or-5-piece", "8A-3-piece"])
     for definition in definitions {
       #expect(

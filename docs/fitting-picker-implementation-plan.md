@@ -19,8 +19,9 @@ UI and persistence integration are still pending. The reviewed dependency founda
 now includes async startup loading through `FileClient`; the
 [catalog expansion](fitting-client-catalog-expansion.md),
 [junction slice](fitting-client-junctions.md),
-[group 7 slice](fitting-client-panned-returns.md), and
-[8A round elbow slice](fitting-client-round-elbows.md) cover 148 fitting choices in groups
+[group 7 slice](fitting-client-panned-returns.md),
+[8A round elbow slice](fitting-client-round-elbows.md), and
+[8B/8C rectangular elbow slice](fitting-client-rectangular-elbows.md) cover 150 fitting choices in groups
 1, 2, 4, 5, 6, 7, 8 (partial), 9, and 10. Group 6 uses the confirmed nearest-published-ratio-row
 policy (midpoint ties upward) and returns both branch and trunk contributions.
 
@@ -175,6 +176,11 @@ These are findings/questions for implementation, not new interpretation of the P
    typed choices, defaulting to 90°. This is implemented for the smooth,
    four/five-piece, and three-piece round constructions; only smooth round
    elbows offer the additional angle choices. See the [8A implementation notes](fitting-client-round-elbows.md).
+   **8B/8C:** implemented with typed R/W, bend-category, and angle choices. Per
+   user confirmation, drafts default to mitered R/W and 90°; bend category is an
+   explicit required selection. Supported R/W categories are 0, 0.25, and 0.5 or
+   greater; angles are 30°, 45°, 60°, and 90°. See the
+   [rectangular elbow implementation notes](fitting-client-rectangular-elbows.md).
 4. **8K:** metadata includes an R/H = 0 value absent from the old lookup. Confirm its applicability
    and include or explicitly withhold the case.
 5. **8L/8M:** replace the old instruction to supply a multiplier-based result with selection and

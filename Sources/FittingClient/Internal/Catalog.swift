@@ -117,6 +117,15 @@ struct Catalog: Sendable {
     var requirement: Fitting.InputRequirement {
       switch kind {
       case .fixed: .fixed
+      case .rectangularElbow:
+        .rectangularElbow(
+          radiusRatios: Fitting.RectangularElbowRadiusRatio.allCases.filter { ratio in
+            rows.contains { $0.parameter == ratio.rawValue }
+          },
+          bendCategories: Fitting.ElbowBendCategory.allCases.filter { category in
+            rows.contains { $0.bendCategory == category }
+          },
+          angles: (angleMultipliers ?? []).map(\.angle))
       case .roundElbow:
         .roundElbow(
           radiusRatios: rows.compactMap { Fitting.RoundElbowRadiusRatio(rawValue: $0.parameter) },
@@ -140,6 +149,8 @@ struct Catalog: Sendable {
       switch kind {
       case .fixed: .fixed
       case .roundElbow: .roundElbow(radiusRatio: nil, angle: .degrees90)
+      case .rectangularElbow:
+        .rectangularElbow(radiusRatio: .mitered, bendCategory: nil, angle: .degrees90)
       case .heightWidth: .heightWidth(heightInches: nil, widthInches: nil)
       case .radiusWidth: .radiusWidth(radiusInches: nil, widthInches: nil)
       case .downstreamBranches: .downstreamBranches(count: nil)
@@ -152,7 +163,7 @@ struct Catalog: Sendable {
 
     enum Kind: String, Decodable, Sendable {
       case fixed, heightWidth, radiusWidth, downstreamBranches, plenumReturns, junction,
-        returnJunction, pannedReturn, roundElbow
+        returnJunction, pannedReturn, roundElbow, rectangularElbow
     }
 
     struct AngleMultiplier: Decodable, Sendable {
@@ -165,6 +176,7 @@ struct Catalog: Sendable {
       let parameter: Double
       let feet: Double
       let path: Fitting.JunctionPath?
+      let bendCategory: Fitting.ElbowBendCategory?
       /// The group 6 trunk column; `feet` holds that row's branch value.
       let trunkFeet: Double?
     }

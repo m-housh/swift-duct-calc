@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "fitting-catalog-v7",
+  "revision": "fitting-catalog-v8",
   "groups": [
     {
       "id": 1,
@@ -4969,6 +4969,210 @@
         "notes": [
           "Select the published R/D category: 0.75, 1.0, or 1.5 or greater.",
           "This construction uses the published 90° table values."
+        ]
+      }
+    },
+    {
+      "id": "8B",
+      "familyID": "8B",
+      "groupID": 8,
+      "sourceCode": "8B",
+      "name": "Rectangular radius elbow without vanes",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8B.svg",
+        "revision": "3f8f185a9027837cda9a148a3e854a08792cca42bfe5a4dbb86ef08fa900ad1b",
+        "altText": "8B — Rectangular radius elbow without vanes",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8B-v1",
+      "rule": {
+        "kind": "rectangularElbow",
+        "rows": [
+          {
+            "key": "8B:rw:0:hardBend",
+            "parameter": 0,
+            "bendCategory": "hardBend",
+            "feet": 90
+          },
+          {
+            "key": "8B:rw:0:square",
+            "parameter": 0,
+            "bendCategory": "square",
+            "feet": 75
+          },
+          {
+            "key": "8B:rw:0:easyBend",
+            "parameter": 0,
+            "bendCategory": "easyBend",
+            "feet": 65
+          },
+          {
+            "key": "8B:rw:0.25:hardBend",
+            "parameter": 0.25,
+            "bendCategory": "hardBend",
+            "feet": 35
+          },
+          {
+            "key": "8B:rw:0.25:square",
+            "parameter": 0.25,
+            "bendCategory": "square",
+            "feet": 30
+          },
+          {
+            "key": "8B:rw:0.25:easyBend",
+            "parameter": 0.25,
+            "bendCategory": "easyBend",
+            "feet": 25
+          },
+          {
+            "key": "8B:rw:0.5:hardBend",
+            "parameter": 0.5,
+            "bendCategory": "hardBend",
+            "feet": 20
+          },
+          {
+            "key": "8B:rw:0.5:square",
+            "parameter": 0.5,
+            "bendCategory": "square",
+            "feet": 15
+          },
+          {
+            "key": "8B:rw:0.5:easyBend",
+            "parameter": 0.5,
+            "bendCategory": "easyBend",
+            "feet": 10
+          }
+        ],
+        "angleMultipliers": [
+          {
+            "angle": 30,
+            "multiplier": 0.45
+          },
+          {
+            "angle": 45,
+            "multiplier": 0.6
+          },
+          {
+            "angle": 60,
+            "multiplier": 0.78
+          },
+          {
+            "angle": 90,
+            "multiplier": 1
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Select the published R/W category: mitered (0), 0.25, or 0.5 or greater.",
+          "Select the hard-bend, square cross-section (H/W = 1), or easy-bend table column.",
+          "Apply the listed angle multiplier to the 90° equivalent length."
+        ]
+      }
+    },
+    {
+      "id": "8C",
+      "familyID": "8C",
+      "groupID": 8,
+      "sourceCode": "8C",
+      "name": "Rectangular radius elbow with turning vanes",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8C.svg",
+        "revision": "e8de893ecdc3ad4f3891987cf018b06e84b8f351172fe2cb3c1b830ed4804ff7",
+        "altText": "8C — Rectangular radius elbow with turning vanes",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8C-v1",
+      "rule": {
+        "kind": "rectangularElbow",
+        "rows": [
+          {
+            "key": "8C:rw:0:hardBend",
+            "parameter": 0,
+            "bendCategory": "hardBend",
+            "feet": 30
+          },
+          {
+            "key": "8C:rw:0:square",
+            "parameter": 0,
+            "bendCategory": "square",
+            "feet": 25
+          },
+          {
+            "key": "8C:rw:0:easyBend",
+            "parameter": 0,
+            "bendCategory": "easyBend",
+            "feet": 40
+          },
+          {
+            "key": "8C:rw:0.25:hardBend",
+            "parameter": 0.25,
+            "bendCategory": "hardBend",
+            "feet": 10
+          },
+          {
+            "key": "8C:rw:0.25:square",
+            "parameter": 0.25,
+            "bendCategory": "square",
+            "feet": 10
+          },
+          {
+            "key": "8C:rw:0.25:easyBend",
+            "parameter": 0.25,
+            "bendCategory": "easyBend",
+            "feet": 10
+          },
+          {
+            "key": "8C:rw:0.5:hardBend",
+            "parameter": 0.5,
+            "bendCategory": "hardBend",
+            "feet": 5
+          },
+          {
+            "key": "8C:rw:0.5:square",
+            "parameter": 0.5,
+            "bendCategory": "square",
+            "feet": 5
+          },
+          {
+            "key": "8C:rw:0.5:easyBend",
+            "parameter": 0.5,
+            "bendCategory": "easyBend",
+            "feet": 5
+          }
+        ],
+        "angleMultipliers": [
+          {
+            "angle": 30,
+            "multiplier": 0.45
+          },
+          {
+            "angle": 45,
+            "multiplier": 0.6
+          },
+          {
+            "angle": 60,
+            "multiplier": 0.78
+          },
+          {
+            "angle": 90,
+            "multiplier": 1
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Select the published R/W category: mitered (0), 0.25, or 0.5 or greater.",
+          "Select the hard-bend, square cross-section (H/W = 1), or easy-bend table column.",
+          "Apply the listed angle multiplier to the 90° equivalent length."
         ]
       }
     },

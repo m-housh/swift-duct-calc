@@ -70,7 +70,35 @@ public enum Fitting {
     }
   }
 
-  /// Published smooth round elbow angles; each fitting advertises its supported subset.
+  /// Published 8B/8C R/W choices; the final choice includes larger ratios.
+  public enum RectangularElbowRadiusRatio: Double, Codable, CaseIterable, Sendable {
+    case mitered = 0
+    case oneQuarter = 0.25
+    case oneHalfOrGreater = 0.5
+
+    public var label: String {
+      switch self {
+      case .mitered: "Mitered (R/W = 0)"
+      case .oneQuarter: "0.25"
+      case .oneHalfOrGreater: "0.5 or greater"
+      }
+    }
+  }
+
+  /// Explicit source-table column, selected independently of the radius and angle.
+  public enum ElbowBendCategory: String, Codable, CaseIterable, Sendable {
+    case hardBend, square, easyBend
+
+    public var label: String {
+      switch self {
+      case .hardBend: "Hard bend"
+      case .square: "Square cross-section (H/W = 1)"
+      case .easyBend: "Easy bend"
+      }
+    }
+  }
+
+  /// Published elbow angles; each fitting advertises its supported subset.
   public enum ElbowAngle: Int, Codable, CaseIterable, Sendable {
     case degrees20 = 20
     case degrees30 = 30
@@ -97,6 +125,9 @@ public enum Fitting {
     case returnJunction(branchCFM: Double?, totalCFM: Double?)
     case pannedReturn(airflowCFM: Double?, mergingFlow: Bool)
     case roundElbow(radiusRatio: RoundElbowRadiusRatio?, angle: ElbowAngle?)
+    case rectangularElbow(
+      radiusRatio: RectangularElbowRadiusRatio?, bendCategory: ElbowBendCategory?,
+      angle: ElbowAngle?)
   }
 
   /// Presentation requirements derived from the same rule used for evaluation.
@@ -111,6 +142,9 @@ public enum Fitting {
     /// Airflow must be within the first and last published rows, before rounding.
     case pannedReturn(airflowRows: [Double], supportsMergingFlow: Bool)
     case roundElbow(radiusRatios: [RoundElbowRadiusRatio], angles: [ElbowAngle])
+    case rectangularElbow(
+      radiusRatios: [RectangularElbowRadiusRatio], bendCategories: [ElbowBendCategory],
+      angles: [ElbowAngle])
   }
 
   /// Applicability information for the fitting rule, independent of reference-document format.
@@ -237,7 +271,7 @@ public enum Fitting {
     public enum Field: Equatable, Sendable {
       case heightInches, widthInches, radiusInches, downstreamBranches, plenumReturns, junctionPath
       case branchCFM, totalCFM, airflowCFM, mergingFlow
-      case radiusRatio, elbowAngle
+      case radiusRatio, elbowAngle, bendCategory
     }
 
     public enum Code: Equatable, Sendable {

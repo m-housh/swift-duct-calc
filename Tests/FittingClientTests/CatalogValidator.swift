@@ -77,10 +77,30 @@ struct CatalogValidator {
           record.rule.kind == .pannedReturn && record.sourceCode == "7C" && feet == 40,
           "Unexpected merging-flow adjustment")
       }
-      if record.rule.kind != .roundElbow {
+      if record.rule.kind != .roundElbow && record.rule.kind != .rectangularElbow {
         try require(record.rule.angleMultipliers == nil, "Unexpected elbow angle metadata")
       }
+      if record.rule.kind != .rectangularElbow {
+        try require(rows.allSatisfy { $0.bendCategory == nil }, "Unexpected bend category")
+      }
       switch record.rule.kind {
+      case .rectangularElbow:
+        let ratios = Fitting.RectangularElbowRadiusRatio.allCases
+        let categories = Fitting.ElbowBendCategory.allCases
+        try require(
+          record.groupID == .elbows && record.shape == .rectangular
+            && ["8B", "8C"].contains(record.sourceCode?.rawValue)
+            && rows.count == ratios.count * categories.count
+            && rows.enumerated().allSatisfy { index, row in
+              row.parameter == ratios[index / categories.count].rawValue
+                && row.bendCategory == categories[index % categories.count]
+            },
+          "Rectangular elbow must have each R/W and bend category pair in order")
+        let factors = record.rule.angleMultipliers ?? []
+        try require(
+          factors.map(\.angle) == [.degrees30, .degrees45, .degrees60, .degrees90]
+            && factors.map(\.multiplier) == [0.45, 0.60, 0.78, 1],
+          "Invalid rectangular elbow angle multipliers")
       case .roundElbow:
         try require(
           record.groupID == .elbows && record.sourceCode == "8A" && record.shape == .round
