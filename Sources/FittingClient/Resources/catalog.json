@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "fitting-catalog-v2",
+  "revision": "fitting-catalog-v3",
   "groups": [
     {
       "id": 1,
@@ -92,6 +92,176 @@
   ],
   "fittings": [
     {
+      "id": "1A",
+      "familyID": "1A",
+      "groupID": 1,
+      "sourceCode": "1A",
+      "name": "Round straight takeoff",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/1A.svg",
+        "revision": "fe1c369d58cedabcb42fd3a0491b7f18211ae0297a9e339f6c156e78c343dbe4",
+        "altText": "1A — Round straight takeoff (round)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1A-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "1A",
+            "parameter": 0,
+            "feet": 35
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Round duct connects directly to the plenum.",
+          "Plenum size is large compared with duct size."
+        ]
+      }
+    },
+    {
+      "id": "1B",
+      "familyID": "1B",
+      "groupID": 1,
+      "sourceCode": "1B",
+      "name": "Round tapered takeoff",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/1B.svg",
+        "revision": "1e952a9b7ee8edef8a58df1e8d308de7b3af1c39911898d428251f0053083677",
+        "altText": "1B — Round tapered takeoff (round)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1B-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "1B",
+            "parameter": 0,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Round duct connects through a tapered entry.",
+          "Plenum size is large compared with duct size."
+        ]
+      }
+    },
+    {
+      "id": "1C",
+      "familyID": "1C",
+      "groupID": 1,
+      "sourceCode": "1C",
+      "name": "Rectangular straight takeoff",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/1C.svg",
+        "revision": "674ecd31d74d87af283063524a97c3f8029954d3551474738b10dc9d56b1a211",
+        "altText": "1C — Rectangular straight takeoff (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1C-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "1C",
+            "parameter": 0,
+            "feet": 35
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Maintain the illustrated 10-inch minimum clearance.",
+          "Plenum size is large compared with duct size."
+        ]
+      }
+    },
+    {
+      "id": "1D",
+      "familyID": "1D",
+      "groupID": 1,
+      "sourceCode": "1D",
+      "name": "Rectangular 45-degree entry",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/1D.svg",
+        "revision": "589c36a45d3e1bc273adca6b03328fd400008c76155e5d2edc814bfc9f0a2ed0",
+        "altText": "1D — Rectangular 45-degree entry (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1D-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "1D",
+            "parameter": 0,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Entry extends H/2 at 45 degrees; 10-inch minimum clearance.",
+          "Plenum size is large compared with duct size."
+        ]
+      }
+    },
+    {
+      "id": "1E",
+      "familyID": "1E",
+      "groupID": 1,
+      "sourceCode": "1E",
+      "name": "Rectangular angled takeoff",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/1E.svg",
+        "revision": "e3027fc6ca9720954d00ce7890e1f00a03c61f6bd00cbe7d9aef7ada94541521",
+        "altText": "1E — Rectangular angled takeoff (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1E-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "1E",
+            "parameter": 0,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Upper transition: 30 degrees. Lower transition: 45 degrees.",
+          "Plenum size is large compared with duct size."
+        ]
+      }
+    },
+    {
       "id": "1F",
       "familyID": "1F",
       "groupID": 1,
@@ -101,7 +271,7 @@
       "artwork": {
         "publicPath": "/images/fittings/1F.svg",
         "revision": "5b18b93b2f0484c811a6671075f398b8321213b75e25bf08af7db8350e1086a2",
-        "altText": "1F \u2014 Bull-head outlet (rectangular)",
+        "altText": "1F — Bull-head outlet (rectangular)",
         "view": "individual",
         "mediaType": "image/svg+xml"
       },
@@ -130,6 +300,593 @@
       }
     },
     {
+      "id": "1G",
+      "familyID": "1G",
+      "groupID": 1,
+      "sourceCode": "1G",
+      "name": "Tapered-head outlet",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/1G.svg",
+        "revision": "016eb078fb427c5fb1942edb2ff81f410e26d9a2f414ce9bd3bb287f9a4004bb",
+        "altText": "1G — Tapered-head outlet (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1G-v1",
+      "rule": {
+        "kind": "heightWidth",
+        "rows": [
+          {
+            "key": "1G/0.5",
+            "parameter": 0.5,
+            "feet": 35
+          },
+          {
+            "key": "1G/1",
+            "parameter": 1,
+            "feet": 25
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "45° tapered entry.",
+          "Only the printed H/W ratios are supported; no interpolation or extrapolation."
+        ]
+      }
+    },
+    {
+      "id": "1H",
+      "familyID": "1H",
+      "groupID": 1,
+      "sourceCode": "1H",
+      "name": "Square elbow without vanes",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/1H.svg",
+        "revision": "451e0f8e6005dbe52b92c288ef2307c7ac727336d887a732a3b2d0636ccb372f",
+        "altText": "1H — Square elbow without vanes (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1H-v1",
+      "rule": {
+        "kind": "heightWidth",
+        "rows": [
+          {
+            "key": "1H/0.5",
+            "parameter": 0.5,
+            "feet": 120
+          },
+          {
+            "key": "1H/1",
+            "parameter": 1,
+            "feet": 85
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "No turning vanes.",
+          "Only the printed H/W ratios are supported; no interpolation or extrapolation."
+        ]
+      }
+    },
+    {
+      "id": "1I",
+      "familyID": "1I",
+      "groupID": 1,
+      "sourceCode": "1I",
+      "name": "Square elbow with vanes",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/1I.svg",
+        "revision": "0c4d81b5bc2f2f4f77f0147359da17d8111685fdac0ad773eef500c22226f2fc",
+        "altText": "1I — Square elbow with vanes (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1I-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "1I",
+            "parameter": 0,
+            "feet": 20
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Turning vanes follow the diagonal shown in the source."
+        ]
+      }
+    },
+    {
+      "id": "1K",
+      "familyID": "1K",
+      "groupID": 1,
+      "sourceCode": "1K",
+      "name": "Radius elbow with mitered inside corner",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/1K.svg",
+        "revision": "0abb3adf0dc39419ac29d661688fd478822bbdb00816533828606e40c10cf96a",
+        "altText": "1K — Radius elbow with mitered inside corner (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1K-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "1K",
+            "parameter": 0,
+            "feet": 85
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Mitered inside corner; curved outer wall."
+        ]
+      }
+    },
+    {
+      "id": "1L",
+      "familyID": "1L",
+      "groupID": 1,
+      "sourceCode": "1L",
+      "name": "Radius elbow without vanes",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/1L.svg",
+        "revision": "eb2f8af84fe0b3e9424f347e4b84448d04ac8d595ad3916def082b19a248f35e",
+        "altText": "1L — Radius elbow without vanes (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1L-v1",
+      "rule": {
+        "kind": "radiusWidth",
+        "rows": [
+          {
+            "key": "1L/0.25",
+            "parameter": 0.25,
+            "feet": 40
+          },
+          {
+            "key": "1L/0.5",
+            "parameter": 0.5,
+            "feet": 20
+          },
+          {
+            "key": "1L/1",
+            "parameter": 1,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Radius varies with R/W.",
+          "Only the printed R/W ratios are supported; no interpolation or extrapolation.",
+          "R is the inside bend radius shown on the drawing; W is the indicated duct width."
+        ]
+      }
+    },
+    {
+      "id": "1M-1-vane",
+      "familyID": "1M",
+      "groupID": 1,
+      "sourceCode": "1M",
+      "name": "Radius elbow · one vane",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/1M-1-vane.svg",
+        "revision": "231cd2d6c4bb6592af4de732361c1ce97ed7e156b8f1c8e2b8465c2017b42896",
+        "altText": "1M — Radius elbow · one vane (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1M-v1",
+      "rule": {
+        "kind": "radiusWidth",
+        "rows": [
+          {
+            "key": "1M-1-vane/0.05",
+            "parameter": 0.05,
+            "feet": 30
+          },
+          {
+            "key": "1M-1-vane/0.25",
+            "parameter": 0.25,
+            "feet": 20
+          },
+          {
+            "key": "1M-1-vane/0.5",
+            "parameter": 0.5,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "One internal turning vane.",
+          "Only the printed R/W ratios are supported; no interpolation or extrapolation.",
+          "R is the inside bend radius shown on the drawing; W is the indicated duct width."
+        ]
+      }
+    },
+    {
+      "id": "1M-2-vanes",
+      "familyID": "1M",
+      "groupID": 1,
+      "sourceCode": "1M",
+      "name": "Radius elbow · two vanes",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/1M-2-vanes.svg",
+        "revision": "78594412ec34f6c1e36728af0272b07eb872eebe2265154c567738eecf214ff6",
+        "altText": "1M — Radius elbow · two vanes (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1M-v1",
+      "rule": {
+        "kind": "radiusWidth",
+        "rows": [
+          {
+            "key": "1M-2-vanes/0.05",
+            "parameter": 0.05,
+            "feet": 20
+          },
+          {
+            "key": "1M-2-vanes/0.25",
+            "parameter": 0.25,
+            "feet": 10
+          },
+          {
+            "key": "1M-2-vanes/0.5",
+            "parameter": 0.5,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Two internal turning vanes.",
+          "Only the printed R/W ratios are supported; no interpolation or extrapolation.",
+          "R is the inside bend radius shown on the drawing; W is the indicated duct width."
+        ]
+      }
+    },
+    {
+      "id": "1N",
+      "familyID": "1N",
+      "groupID": 1,
+      "sourceCode": "1N",
+      "name": "Outlet transition",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/1N.svg",
+        "revision": "a5d6201151a6887d960597e739fd36d349029f92effb51a8dd958221628f2dde",
+        "altText": "1N — Outlet transition (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1N-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "1N",
+            "parameter": 0,
+            "feet": 15
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Add transition EL to the upstream elbow or tee EL."
+        ]
+      }
+    },
+    {
+      "id": "1O",
+      "familyID": "1O",
+      "groupID": 1,
+      "sourceCode": "1O",
+      "name": "Bull-head tee without vanes",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/1O.svg",
+        "revision": "c19306a61aca6dfa5da0340ee1cb80ddb2057127368fce2741e8cff9b3a286f7",
+        "altText": "1O — Bull-head tee without vanes (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1O-v1",
+      "rule": {
+        "kind": "heightWidth",
+        "rows": [
+          {
+            "key": "1O/0.5",
+            "parameter": 0.5,
+            "feet": 120
+          },
+          {
+            "key": "1O/1",
+            "parameter": 1,
+            "feet": 85
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Two outlets; no turning vanes.",
+          "Only the printed H/W ratios are supported; no interpolation or extrapolation."
+        ]
+      }
+    },
+    {
+      "id": "1P",
+      "familyID": "1P",
+      "groupID": 1,
+      "sourceCode": "1P",
+      "name": "Vaned tee",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/1P.svg",
+        "revision": "12cf0706943ef70034caf21efbe06ab44fe0b06b83ed0abdf87d5c2b9364320b",
+        "altText": "1P — Vaned tee (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1P-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "1P",
+            "parameter": 0,
+            "feet": 20
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Turning vanes divide flow between the two outlets."
+        ]
+      }
+    },
+    {
+      "id": "1Q",
+      "familyID": "1Q",
+      "groupID": 1,
+      "sourceCode": "1Q",
+      "name": "Vaned elbow at plenum",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/1Q.svg",
+        "revision": "83e2d4c06d7a46dea74f7c5642fd6aa575b34e2872183eac0911d489b2ce6199",
+        "altText": "1Q — Vaned elbow at plenum (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1Q-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "1Q",
+            "parameter": 0,
+            "feet": 50
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Maintain 10″ minimum clearance.",
+          "Maintain the illustrated 10-inch minimum clearance."
+        ]
+      }
+    },
+    {
+      "id": "1R",
+      "familyID": "1R",
+      "groupID": 1,
+      "sourceCode": "1R",
+      "name": "Square elbow at plenum",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/1R.svg",
+        "revision": "3a346864c2dc5a833225cb56f3b0cca62b1289b040363ce595bcd1559c599d97",
+        "altText": "1R — Square elbow at plenum (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1R-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "1R",
+            "parameter": 0,
+            "feet": 120
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Maintain 10″ minimum clearance.",
+          "Maintain the illustrated 10-inch minimum clearance."
+        ]
+      }
+    },
+    {
+      "id": "1S-0-vanes",
+      "familyID": "1S",
+      "groupID": 1,
+      "sourceCode": "1S",
+      "name": "Radius elbow at plenum · no vanes",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/1S-0-vanes.svg",
+        "revision": "b0da2ed7c7804b01e6e206daecda9fd694f287409c34b192c72746f8f959a05e",
+        "altText": "1S — Radius elbow at plenum · no vanes (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1S-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "1S-0-vanes",
+            "parameter": 0,
+            "feet": 60
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Maintain 10″ minimum clearance.",
+          "Maintain the illustrated 10-inch minimum clearance."
+        ]
+      }
+    },
+    {
+      "id": "1S-1-vane",
+      "familyID": "1S",
+      "groupID": 1,
+      "sourceCode": "1S",
+      "name": "Radius elbow at plenum · one vane",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/1S-1-vane.svg",
+        "revision": "0fa6bfb18b578ef863e0d9032927b9be44d82aa8d0e3f2bcbd9fe4af0c4b6c78",
+        "altText": "1S — Radius elbow at plenum · one vane (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1S-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "1S-1-vane",
+            "parameter": 0,
+            "feet": 40
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Maintain 10″ minimum clearance.",
+          "Maintain the illustrated 10-inch minimum clearance."
+        ]
+      }
+    },
+    {
+      "id": "1S-2-vanes",
+      "familyID": "1S",
+      "groupID": 1,
+      "sourceCode": "1S",
+      "name": "Radius elbow at plenum · two vanes",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/1S-2-vanes.svg",
+        "revision": "325447889d86f1527eb2d84b18d7789f37af10049a3781952ffa0fc282cae175",
+        "altText": "1S — Radius elbow at plenum · two vanes (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1S-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "1S-2-vanes",
+            "parameter": 0,
+            "feet": 30
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Maintain 10″ minimum clearance.",
+          "Maintain the illustrated 10-inch minimum clearance."
+        ]
+      }
+    },
+    {
+      "id": "1T",
+      "familyID": "1T",
+      "groupID": 1,
+      "sourceCode": "1T",
+      "name": "Elbow with angled inside corner",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/1T.svg",
+        "revision": "0bfe7a3c826ff51d0be0e0b597a730905420f41f745f18d039a61d74a3cd3260",
+        "altText": "1T — Elbow with angled inside corner (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "1T-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "1T",
+            "parameter": 0,
+            "feet": 60
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Angled inside corner as illustrated in the source."
+        ]
+      }
+    },
+    {
       "id": "2A",
       "familyID": "2A",
       "groupID": 2,
@@ -139,7 +896,7 @@
       "artwork": {
         "publicPath": "/images/fittings/group-2-restored/2A.svg",
         "revision": "a85d2aef2181f8a8b1a85295059e5f2f504036fd0a8420933ee4974d8e551bae",
-        "altText": "2A \u2014 Straight round branch takeoff (mixed)",
+        "altText": "2A — Straight round branch takeoff (mixed)",
         "view": "individual",
         "mediaType": "image/svg+xml"
       },
@@ -188,6 +945,934 @@
       }
     },
     {
+      "id": "2B",
+      "familyID": "2B",
+      "groupID": 2,
+      "sourceCode": "2B",
+      "name": "Round tapered branch takeoff",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-2-restored/2B.svg",
+        "revision": "10dd52f9b44607709a65960df8edd30d1429404e7ed5df46afc562b6ba3233e5",
+        "altText": "2B — Round tapered branch takeoff (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "2B-v1",
+      "rule": {
+        "kind": "downstreamBranches",
+        "rows": [
+          {
+            "key": "2B/0",
+            "parameter": 0,
+            "feet": 20
+          },
+          {
+            "key": "2B/1",
+            "parameter": 1,
+            "feet": 30
+          },
+          {
+            "key": "2B/2",
+            "parameter": 2,
+            "feet": 35
+          },
+          {
+            "key": "2B/3",
+            "parameter": 3,
+            "feet": 40
+          },
+          {
+            "key": "2B/4",
+            "parameter": 4,
+            "feet": 45
+          },
+          {
+            "key": "2B/5",
+            "parameter": 5,
+            "feet": 50
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Count downstream branches to the next reducer or trunk end; restart after a reducer. The last bucket includes five or more branches."
+        ]
+      }
+    },
+    {
+      "id": "2C",
+      "familyID": "2C",
+      "groupID": 2,
+      "sourceCode": "2C",
+      "name": "Round takeoff with projecting entry",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-2-restored/2C.svg",
+        "revision": "23b29c729c59d366a767d80920b409bbed40e974614cdd961c17bab5b6d82aed",
+        "altText": "2C — Round takeoff with projecting entry (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "2C-v1",
+      "rule": {
+        "kind": "downstreamBranches",
+        "rows": [
+          {
+            "key": "2C/0",
+            "parameter": 0,
+            "feet": 65
+          },
+          {
+            "key": "2C/1",
+            "parameter": 1,
+            "feet": 65
+          },
+          {
+            "key": "2C/2",
+            "parameter": 2,
+            "feet": 65
+          },
+          {
+            "key": "2C/3",
+            "parameter": 3,
+            "feet": 65
+          },
+          {
+            "key": "2C/4",
+            "parameter": 4,
+            "feet": 70
+          },
+          {
+            "key": "2C/5",
+            "parameter": 5,
+            "feet": 80
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Count downstream branches to the next reducer or trunk end; restart after a reducer. The last bucket includes five or more branches."
+        ]
+      }
+    },
+    {
+      "id": "2D",
+      "familyID": "2D",
+      "groupID": 2,
+      "sourceCode": "2D",
+      "name": "Straight rectangular branch takeoff",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-2-restored/2D.svg",
+        "revision": "796c9cc2acda76177eec2853715ad4efae455bbaa0f2682fda8430496240262a",
+        "altText": "2D — Straight rectangular branch takeoff (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "2D-v1",
+      "rule": {
+        "kind": "downstreamBranches",
+        "rows": [
+          {
+            "key": "2D/0",
+            "parameter": 0,
+            "feet": 40
+          },
+          {
+            "key": "2D/1",
+            "parameter": 1,
+            "feet": 50
+          },
+          {
+            "key": "2D/2",
+            "parameter": 2,
+            "feet": 60
+          },
+          {
+            "key": "2D/3",
+            "parameter": 3,
+            "feet": 65
+          },
+          {
+            "key": "2D/4",
+            "parameter": 4,
+            "feet": 75
+          },
+          {
+            "key": "2D/5",
+            "parameter": 5,
+            "feet": 85
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Count downstream branches to the next reducer or trunk end; restart after a reducer. The last bucket includes five or more branches."
+        ]
+      }
+    },
+    {
+      "id": "2E",
+      "familyID": "2E",
+      "groupID": 2,
+      "sourceCode": "2E",
+      "name": "Rectangular takeoff with flared entry",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-2-restored/2E.svg",
+        "revision": "32541786ce31c95f1bac51c93986220735383202e30ddd580bf18f4aee753aa9",
+        "altText": "2E — Rectangular takeoff with flared entry (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "2E-v1",
+      "rule": {
+        "kind": "downstreamBranches",
+        "rows": [
+          {
+            "key": "2E/0",
+            "parameter": 0,
+            "feet": 25
+          },
+          {
+            "key": "2E/1",
+            "parameter": 1,
+            "feet": 30
+          },
+          {
+            "key": "2E/2",
+            "parameter": 2,
+            "feet": 35
+          },
+          {
+            "key": "2E/3",
+            "parameter": 3,
+            "feet": 40
+          },
+          {
+            "key": "2E/4",
+            "parameter": 4,
+            "feet": 45
+          },
+          {
+            "key": "2E/5",
+            "parameter": 5,
+            "feet": 50
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Count downstream branches to the next reducer or trunk end; restart after a reducer. The last bucket includes five or more branches."
+        ]
+      }
+    },
+    {
+      "id": "2F",
+      "familyID": "2F",
+      "groupID": 2,
+      "sourceCode": "2F",
+      "name": "Flared takeoff with projecting entry",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-2-restored/2F.svg",
+        "revision": "9d3c3e3e6830603182377758855fdda5113f531f5616be5e593933e4cad0007c",
+        "altText": "2F — Flared takeoff with projecting entry (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "2F-v1",
+      "rule": {
+        "kind": "downstreamBranches",
+        "rows": [
+          {
+            "key": "2F/0",
+            "parameter": 0,
+            "feet": 20
+          },
+          {
+            "key": "2F/1",
+            "parameter": 1,
+            "feet": 20
+          },
+          {
+            "key": "2F/2",
+            "parameter": 2,
+            "feet": 20
+          },
+          {
+            "key": "2F/3",
+            "parameter": 3,
+            "feet": 20
+          },
+          {
+            "key": "2F/4",
+            "parameter": 4,
+            "feet": 25
+          },
+          {
+            "key": "2F/5",
+            "parameter": 5,
+            "feet": 25
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Count downstream branches to the next reducer or trunk end; restart after a reducer. The last bucket includes five or more branches."
+        ]
+      }
+    },
+    {
+      "id": "2G",
+      "familyID": "2G",
+      "groupID": 2,
+      "sourceCode": "2G",
+      "name": "Rectangular takeoff with projecting tab",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-2-restored/2G.svg",
+        "revision": "540ad3c36968270f7feadb3d77b6228d0f68b0cb96570af9b6ce619bb0b1c8b2",
+        "altText": "2G — Rectangular takeoff with projecting tab (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "2G-v1",
+      "rule": {
+        "kind": "downstreamBranches",
+        "rows": [
+          {
+            "key": "2G/0",
+            "parameter": 0,
+            "feet": 65
+          },
+          {
+            "key": "2G/1",
+            "parameter": 1,
+            "feet": 65
+          },
+          {
+            "key": "2G/2",
+            "parameter": 2,
+            "feet": 65
+          },
+          {
+            "key": "2G/3",
+            "parameter": 3,
+            "feet": 70
+          },
+          {
+            "key": "2G/4",
+            "parameter": 4,
+            "feet": 80
+          },
+          {
+            "key": "2G/5",
+            "parameter": 5,
+            "feet": 90
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Count downstream branches to the next reducer or trunk end; restart after a reducer. The last bucket includes five or more branches."
+        ]
+      }
+    },
+    {
+      "id": "2H",
+      "familyID": "2H",
+      "groupID": 2,
+      "sourceCode": "2H",
+      "name": "Rectangular takeoff with raised entry edge",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-2-restored/2H.svg",
+        "revision": "14c6a118dfad086fad69b0e0e0f9ba2d7a3ff3b675149a4649f959f3b4c4978b",
+        "altText": "2H — Rectangular takeoff with raised entry edge (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "2H-v1",
+      "rule": {
+        "kind": "downstreamBranches",
+        "rows": [
+          {
+            "key": "2H/0",
+            "parameter": 0,
+            "feet": 70
+          },
+          {
+            "key": "2H/1",
+            "parameter": 1,
+            "feet": 70
+          },
+          {
+            "key": "2H/2",
+            "parameter": 2,
+            "feet": 70
+          },
+          {
+            "key": "2H/3",
+            "parameter": 3,
+            "feet": 75
+          },
+          {
+            "key": "2H/4",
+            "parameter": 4,
+            "feet": 85
+          },
+          {
+            "key": "2H/5",
+            "parameter": 5,
+            "feet": 95
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Count downstream branches to the next reducer or trunk end; restart after a reducer. The last bucket includes five or more branches."
+        ]
+      }
+    },
+    {
+      "id": "2I",
+      "familyID": "2I",
+      "groupID": 2,
+      "sourceCode": "2I",
+      "name": "Round elbow takeoff",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-2-restored/2I.svg",
+        "revision": "53ac77337203621d7f98134f1e0c79f55741cc3011764bb9bdad728ba5b74edc",
+        "altText": "2I — Round elbow takeoff (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "2I-v1",
+      "rule": {
+        "kind": "downstreamBranches",
+        "rows": [
+          {
+            "key": "2I/0",
+            "parameter": 0,
+            "feet": 65
+          },
+          {
+            "key": "2I/1",
+            "parameter": 1,
+            "feet": 75
+          },
+          {
+            "key": "2I/2",
+            "parameter": 2,
+            "feet": 85
+          },
+          {
+            "key": "2I/3",
+            "parameter": 3,
+            "feet": 95
+          },
+          {
+            "key": "2I/4",
+            "parameter": 4,
+            "feet": 100
+          },
+          {
+            "key": "2I/5",
+            "parameter": 5,
+            "feet": 110
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Count downstream branches to the next reducer or trunk end; restart after a reducer. The last bucket includes five or more branches."
+        ]
+      }
+    },
+    {
+      "id": "2J",
+      "familyID": "2J",
+      "groupID": 2,
+      "sourceCode": "2J",
+      "name": "Eased round elbow takeoff",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-2-restored/2J.svg",
+        "revision": "1bc36b93c6d2cd8106a04e1980cffe399ded05ab97735faa0ede9ae987941027",
+        "altText": "2J — Eased round elbow takeoff (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "2J-v1",
+      "rule": {
+        "kind": "downstreamBranches",
+        "rows": [
+          {
+            "key": "2J/0",
+            "parameter": 0,
+            "feet": 50
+          },
+          {
+            "key": "2J/1",
+            "parameter": 1,
+            "feet": 60
+          },
+          {
+            "key": "2J/2",
+            "parameter": 2,
+            "feet": 65
+          },
+          {
+            "key": "2J/3",
+            "parameter": 3,
+            "feet": 70
+          },
+          {
+            "key": "2J/4",
+            "parameter": 4,
+            "feet": 75
+          },
+          {
+            "key": "2J/5",
+            "parameter": 5,
+            "feet": 80
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Count downstream branches to the next reducer or trunk end; restart after a reducer. The last bucket includes five or more branches."
+        ]
+      }
+    },
+    {
+      "id": "2K",
+      "familyID": "2K",
+      "groupID": 2,
+      "sourceCode": "2K",
+      "name": "Angled round takeoff on rectangular base",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-2-restored/2K.svg",
+        "revision": "563d89e2dafa03471622fe5554f7346a4f2fc86d0e47526c876d431bdf21561d",
+        "altText": "2K — Angled round takeoff on rectangular base (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "2K-v1",
+      "rule": {
+        "kind": "downstreamBranches",
+        "rows": [
+          {
+            "key": "2K/0",
+            "parameter": 0,
+            "feet": 50
+          },
+          {
+            "key": "2K/1",
+            "parameter": 1,
+            "feet": 60
+          },
+          {
+            "key": "2K/2",
+            "parameter": 2,
+            "feet": 65
+          },
+          {
+            "key": "2K/3",
+            "parameter": 3,
+            "feet": 70
+          },
+          {
+            "key": "2K/4",
+            "parameter": 4,
+            "feet": 75
+          },
+          {
+            "key": "2K/5",
+            "parameter": 5,
+            "feet": 80
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Count downstream branches to the next reducer or trunk end; restart after a reducer. The last bucket includes five or more branches."
+        ]
+      }
+    },
+    {
+      "id": "2L",
+      "familyID": "2L",
+      "groupID": 2,
+      "sourceCode": "2L",
+      "name": "Rectangular takeoff with curved heel",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-2-restored/2L.svg",
+        "revision": "f89394fc8a2ebfd6e1ca5a72239ae185750676a40d18191f1b9bda1e8ca1deae",
+        "altText": "2L — Rectangular takeoff with curved heel (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "2L-v1",
+      "rule": {
+        "kind": "downstreamBranches",
+        "rows": [
+          {
+            "key": "2L/0",
+            "parameter": 0,
+            "feet": 70
+          },
+          {
+            "key": "2L/1",
+            "parameter": 1,
+            "feet": 80
+          },
+          {
+            "key": "2L/2",
+            "parameter": 2,
+            "feet": 90
+          },
+          {
+            "key": "2L/3",
+            "parameter": 3,
+            "feet": 95
+          },
+          {
+            "key": "2L/4",
+            "parameter": 4,
+            "feet": 105
+          },
+          {
+            "key": "2L/5",
+            "parameter": 5,
+            "feet": 115
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Count downstream branches to the next reducer or trunk end; restart after a reducer. The last bucket includes five or more branches."
+        ]
+      }
+    },
+    {
+      "id": "2M",
+      "familyID": "2M",
+      "groupID": 2,
+      "sourceCode": "2M",
+      "name": "Rectangular takeoff with square heel",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-2-restored/2M.svg",
+        "revision": "54b8cd27d917b228a30f544953af34fadb1a06ab2b94d1ff4f57ea476f22cc00",
+        "altText": "2M — Rectangular takeoff with square heel (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "2M-v1",
+      "rule": {
+        "kind": "downstreamBranches",
+        "rows": [
+          {
+            "key": "2M/0",
+            "parameter": 0,
+            "feet": 70
+          },
+          {
+            "key": "2M/1",
+            "parameter": 1,
+            "feet": 80
+          },
+          {
+            "key": "2M/2",
+            "parameter": 2,
+            "feet": 90
+          },
+          {
+            "key": "2M/3",
+            "parameter": 3,
+            "feet": 95
+          },
+          {
+            "key": "2M/4",
+            "parameter": 4,
+            "feet": 105
+          },
+          {
+            "key": "2M/5",
+            "parameter": 5,
+            "feet": 115
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Count downstream branches to the next reducer or trunk end; restart after a reducer. The last bucket includes five or more branches."
+        ]
+      }
+    },
+    {
+      "id": "2N",
+      "familyID": "2N",
+      "groupID": 2,
+      "sourceCode": "2N",
+      "name": "Angled branch on round trunk",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-2-restored/2N.svg",
+        "revision": "dc9e7c3bc8c815b70f81a8cfa9a18df79880c1275f29ab389ccc0ddbefc2ebea",
+        "altText": "2N — Angled branch on round trunk (round)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "2N-v1",
+      "rule": {
+        "kind": "downstreamBranches",
+        "rows": [
+          {
+            "key": "2N/0",
+            "parameter": 0,
+            "feet": 35
+          },
+          {
+            "key": "2N/1",
+            "parameter": 1,
+            "feet": 35
+          },
+          {
+            "key": "2N/2",
+            "parameter": 2,
+            "feet": 40
+          },
+          {
+            "key": "2N/3",
+            "parameter": 3,
+            "feet": 40
+          },
+          {
+            "key": "2N/4",
+            "parameter": 4,
+            "feet": 40
+          },
+          {
+            "key": "2N/5",
+            "parameter": 5,
+            "feet": 40
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Count downstream branches to the next reducer or trunk end; restart after a reducer. The last bucket includes five or more branches."
+        ]
+      }
+    },
+    {
+      "id": "2O",
+      "familyID": "2O",
+      "groupID": 2,
+      "sourceCode": "2O",
+      "name": "Elbow branch on round trunk",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-2-restored/2O.svg",
+        "revision": "358c5247407c7b1e6f173d29aef3875b39db817ba93e6b6dc7a9333c7305c303",
+        "altText": "2O — Elbow branch on round trunk (round)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "2O-v1",
+      "rule": {
+        "kind": "downstreamBranches",
+        "rows": [
+          {
+            "key": "2O/0",
+            "parameter": 0,
+            "feet": 55
+          },
+          {
+            "key": "2O/1",
+            "parameter": 1,
+            "feet": 65
+          },
+          {
+            "key": "2O/2",
+            "parameter": 2,
+            "feet": 75
+          },
+          {
+            "key": "2O/3",
+            "parameter": 3,
+            "feet": 85
+          },
+          {
+            "key": "2O/4",
+            "parameter": 4,
+            "feet": 90
+          },
+          {
+            "key": "2O/5",
+            "parameter": 5,
+            "feet": 100
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Count downstream branches to the next reducer or trunk end; restart after a reducer. The last bucket includes five or more branches."
+        ]
+      }
+    },
+    {
+      "id": "2P",
+      "familyID": "2P",
+      "groupID": 2,
+      "sourceCode": "2P",
+      "name": "Straight collar on round trunk",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-2-restored/2P.svg",
+        "revision": "a7caeed7ba014c75c9e2480099c1aec3aa1c1c233b4a7e254e803a23caa6b987",
+        "altText": "2P — Straight collar on round trunk (round)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "2P-v1",
+      "rule": {
+        "kind": "downstreamBranches",
+        "rows": [
+          {
+            "key": "2P/0",
+            "parameter": 0,
+            "feet": 50
+          },
+          {
+            "key": "2P/1",
+            "parameter": 1,
+            "feet": 55
+          },
+          {
+            "key": "2P/2",
+            "parameter": 2,
+            "feet": 60
+          },
+          {
+            "key": "2P/3",
+            "parameter": 3,
+            "feet": 65
+          },
+          {
+            "key": "2P/4",
+            "parameter": 4,
+            "feet": 70
+          },
+          {
+            "key": "2P/5",
+            "parameter": 5,
+            "feet": 75
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Count downstream branches to the next reducer or trunk end; restart after a reducer. The last bucket includes five or more branches."
+        ]
+      }
+    },
+    {
+      "id": "2Q",
+      "familyID": "2Q",
+      "groupID": 2,
+      "sourceCode": "2Q",
+      "name": "Tapered collar on round trunk",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-2-restored/2Q.svg",
+        "revision": "458bf1de616ae13d1b44dba4d583c8e78cbde8ed1ac8ca94e00fd134f175704f",
+        "altText": "2Q — Tapered collar on round trunk (round)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "2Q-v1",
+      "rule": {
+        "kind": "downstreamBranches",
+        "rows": [
+          {
+            "key": "2Q/0",
+            "parameter": 0,
+            "feet": 10
+          },
+          {
+            "key": "2Q/1",
+            "parameter": 1,
+            "feet": 10
+          },
+          {
+            "key": "2Q/2",
+            "parameter": 2,
+            "feet": 15
+          },
+          {
+            "key": "2Q/3",
+            "parameter": 3,
+            "feet": 20
+          },
+          {
+            "key": "2Q/4",
+            "parameter": 4,
+            "feet": 20
+          },
+          {
+            "key": "2Q/5",
+            "parameter": 5,
+            "feet": 25
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Count downstream branches to the next reducer or trunk end; restart after a reducer. The last bucket includes five or more branches."
+        ]
+      }
+    },
+    {
       "id": "4A",
       "familyID": "4A",
       "groupID": 4,
@@ -197,7 +1882,7 @@
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4A.svg",
         "revision": "e17c555098f02a45daeb39fc163cda5c5fda4c04172433b519bf2b15b6821385",
-        "altText": "4A \u2014 Radius boot with rectangular outlet (mixed)",
+        "altText": "4A — Radius boot with rectangular outlet (mixed)",
         "view": "individual",
         "mediaType": "image/svg+xml"
       },
@@ -219,6 +1904,1339 @@
       }
     },
     {
+      "id": "4B",
+      "familyID": "4B",
+      "groupID": 4,
+      "sourceCode": "4B",
+      "name": "Radius boot with extended top transition",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4B.svg",
+        "revision": "472647f6810eb8901c7872e7860b65f50b1958133434d98f205707874f19e6bf",
+        "altText": "4B — Radius boot with extended top transition (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4B-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4B",
+            "parameter": 0,
+            "feet": 35
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4C",
+      "familyID": "4C",
+      "groupID": 4,
+      "sourceCode": "4C",
+      "name": "Low-profile radius boot with top collar",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4C.svg",
+        "revision": "9e79814703075541e59d17c3b0851f2e97dadba201c4a6705137f79a70ceb1fa",
+        "altText": "4C — Low-profile radius boot with top collar (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4C-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4C",
+            "parameter": 0,
+            "feet": 60
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4D",
+      "familyID": "4D",
+      "groupID": 4,
+      "sourceCode": "4D",
+      "name": "Horizontal boot with round throat transition",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4D.svg",
+        "revision": "9e084e4976892e0eb96a00ffdeb32f14d71c543f99c75cfce415a5730ac06718",
+        "altText": "4D — Horizontal boot with round throat transition (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4D-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4D",
+            "parameter": 0,
+            "feet": 55
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4E",
+      "familyID": "4E",
+      "groupID": 4,
+      "sourceCode": "4E",
+      "name": "Horizontal boot with tapered throat",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4E.svg",
+        "revision": "8a79f9c15d47e59fa3c60ffac4f3dd9891407d15a9587cb3ba4924a08569d715",
+        "altText": "4E — Horizontal boot with tapered throat (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4E-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4E",
+            "parameter": 0,
+            "feet": 70
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4F",
+      "familyID": "4F",
+      "groupID": 4,
+      "sourceCode": "4F",
+      "name": "Radius boot with side extension",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4F.svg",
+        "revision": "1fcc3d97448e522ebedcf1dd90b92427220990751ac2c506ce4c6361b2e5b744",
+        "altText": "4F — Radius boot with side extension (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4F-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4F",
+            "parameter": 0,
+            "feet": 45
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4G",
+      "familyID": "4G",
+      "groupID": 4,
+      "sourceCode": "4G",
+      "name": "Angled boot to round outlet",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4G.svg",
+        "revision": "c1f0312ebe510a26d6bafd92fa284abe37a623ad430b10ea4471660271f9ec11",
+        "altText": "4G — Angled boot to round outlet (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4G-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4G",
+            "parameter": 0,
+            "feet": 80
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4H",
+      "familyID": "4H",
+      "groupID": 4,
+      "sourceCode": "4H",
+      "name": "Tapered boot to round outlet",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4H.svg",
+        "revision": "0b6fa9365cf72b95c6c99f4986b0032d17dcc6b3cda73cd9931b8763e37231de",
+        "altText": "4H — Tapered boot to round outlet (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4H-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4H",
+            "parameter": 0,
+            "feet": 50
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4I",
+      "familyID": "4I",
+      "groupID": 4,
+      "sourceCode": "4I",
+      "name": "Compact round-to-rectangular transition",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4I.svg",
+        "revision": "aa6e2cd307ff5ef3592410ea57adf6f2eb914cc77bb56c3ea469ac9e2d0e1847",
+        "altText": "4I — Compact round-to-rectangular transition (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4I-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4I",
+            "parameter": 0,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4J",
+      "familyID": "4J",
+      "groupID": 4,
+      "sourceCode": "4J",
+      "name": "Angled boot to round outlet with smooth throat",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4J.svg",
+        "revision": "23290062561a683c22a73aa46eca49b2ec9d82133cc8a1ef7b872452970941d2",
+        "altText": "4J — Angled boot to round outlet with smooth throat (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4J-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4J",
+            "parameter": 0,
+            "feet": 30
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4K",
+      "familyID": "4K",
+      "groupID": 4,
+      "sourceCode": "4K",
+      "name": "Angled boot to round outlet with lined throat",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4K.svg",
+        "revision": "51770a207d3dfe6e51893228d349a7b610ac33a904b16a66da6d179deaa7bc94",
+        "altText": "4K — Angled boot to round outlet with lined throat (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4K-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4K",
+            "parameter": 0,
+            "feet": 30
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4L",
+      "familyID": "4L",
+      "groupID": 4,
+      "sourceCode": "4L",
+      "name": "Deep angled boot to round outlet with lined throat",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4L.svg",
+        "revision": "3f248c74b3ea8cc9204fa17c76a218d61824b183d1f2dbc4a6010a90b723fd9d",
+        "altText": "4L — Deep angled boot to round outlet with lined throat (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4L-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4L",
+            "parameter": 0,
+            "feet": 80
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4M",
+      "familyID": "4M",
+      "groupID": 4,
+      "sourceCode": "4M",
+      "name": "Long rectangular offset transition",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4M.svg",
+        "revision": "d41bef0db3a1ff9ed42d012246119f009e4333afc29b74b7f0b141ecf8fb1d22",
+        "altText": "4M — Long rectangular offset transition (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4M-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4M",
+            "parameter": 0,
+            "feet": 20
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4N",
+      "familyID": "4N",
+      "groupID": 4,
+      "sourceCode": "4N",
+      "name": "Rectangular offset with inset throat",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4N.svg",
+        "revision": "76eb4786a2fa5cc8218de5d6c38d827f7fe22645682e1fb4434c01796c5030f3",
+        "altText": "4N — Rectangular offset with inset throat (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4N-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4N",
+            "parameter": 0,
+            "feet": 45
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4O",
+      "familyID": "4O",
+      "groupID": 4,
+      "sourceCode": "4O",
+      "name": "Pitched rectangular boot",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4O.svg",
+        "revision": "122823705351bad3d3504ba359c30a95796c5f73b6873c21593dc3f86036e1cc",
+        "altText": "4O — Pitched rectangular boot (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4O-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4O",
+            "parameter": 0,
+            "feet": 20
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4P",
+      "familyID": "4P",
+      "groupID": 4,
+      "sourceCode": "4P",
+      "name": "Tapered rectangular boot",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4P.svg",
+        "revision": "175ef8a06d48d83cfa086d8d2fd3a9c62a83e254e8be58fb59561cf64b47b7c2",
+        "altText": "4P — Tapered rectangular boot (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4P-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4P",
+            "parameter": 0,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4Q",
+      "familyID": "4Q",
+      "groupID": 4,
+      "sourceCode": "4Q",
+      "name": "Rectangular-to-round side transition",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4Q.svg",
+        "revision": "73ba894533447a229e1dca355a7b83d62d766c5d8f42980cffc27321c6a9165b",
+        "altText": "4Q — Rectangular-to-round side transition (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4Q-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4Q",
+            "parameter": 0,
+            "feet": 50
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4R",
+      "familyID": "4R",
+      "groupID": 4,
+      "sourceCode": "4R",
+      "name": "Rectangular-to-round vertical transition",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4R.svg",
+        "revision": "5a60d7640ba67862a632fd20af449e4f0574b095f787a5b2d0cdf69a00f5d28f",
+        "altText": "4R — Rectangular-to-round vertical transition (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4R-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4R",
+            "parameter": 0,
+            "feet": 20
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4S",
+      "familyID": "4S",
+      "groupID": 4,
+      "sourceCode": "4S",
+      "name": "Rectangular-to-round tapered transition",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4S.svg",
+        "revision": "80778e2f67983e87a24669907fcc3ddc66aa16da15e31d8d7034deaa3f4ae48e",
+        "altText": "4S — Rectangular-to-round tapered transition (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4S-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4S",
+            "parameter": 0,
+            "feet": 20
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4T",
+      "familyID": "4T",
+      "groupID": 4,
+      "sourceCode": "4T",
+      "name": "Elongated rectangular-to-round boot",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4T.svg",
+        "revision": "5ef44ec35496add6f8d41ced90cde127d86dd259caf4e423a9349e072b886179",
+        "altText": "4T — Elongated rectangular-to-round boot (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4T-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4T",
+            "parameter": 0,
+            "feet": 20
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4U",
+      "familyID": "4U",
+      "groupID": 4,
+      "sourceCode": "4U",
+      "name": "Offset rectangular-to-round boot",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4U.svg",
+        "revision": "24608a6f8179f5220813fcead03519f3f3f8aed34f9e149eb656318b287a0e55",
+        "altText": "4U — Offset rectangular-to-round boot (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4U-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4U",
+            "parameter": 0,
+            "feet": 20
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4V",
+      "familyID": "4V",
+      "groupID": 4,
+      "sourceCode": "4V",
+      "name": "Rectangular collar on round duct",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4V.svg",
+        "revision": "746e72603d96c59de41e9e5ebd3cec2c542450ef6feadc13ee206ecb6b09c0ef",
+        "altText": "4V — Rectangular collar on round duct (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4V-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4V",
+            "parameter": 0,
+            "feet": 60
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4W",
+      "familyID": "4W",
+      "groupID": 4,
+      "sourceCode": "4W",
+      "name": "Ceiling boot with bell-mouth collar",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4W.svg",
+        "revision": "ed3d54a7bd850b98e13e38d6530f25f4edd2c4dc2a86f09bfcdb3fa904c83f6b",
+        "altText": "4W — Ceiling boot with bell-mouth collar (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4W-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4W",
+            "parameter": 0,
+            "feet": 35
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4X",
+      "familyID": "4X",
+      "groupID": 4,
+      "sourceCode": "4X",
+      "name": "Ceiling boot with straight collar",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4X.svg",
+        "revision": "0aff7b47f973889ecbcf8b9526c7220a56e7f470e7f131215c7bf13630e511ca",
+        "altText": "4X — Ceiling boot with straight collar (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4X-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4X",
+            "parameter": 0,
+            "feet": 35
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4Y",
+      "familyID": "4Y",
+      "groupID": 4,
+      "sourceCode": "4Y",
+      "name": "Rectangular ceiling register boot",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4Y.svg",
+        "revision": "a1fe6b3ce862618dbe8dfdf9691cedea5e12ca0b41f98e8fc182c65ae4353ec7",
+        "altText": "4Y — Rectangular ceiling register boot (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4Y-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4Y",
+            "parameter": 0,
+            "feet": 35
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4Z",
+      "familyID": "4Z",
+      "groupID": 4,
+      "sourceCode": "4Z",
+      "name": "Square grille boot to round branch",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4Z.svg",
+        "revision": "9b6d8dd87779b0ce117fe574770af5736d1d3819a8699d568ab590fb87c95dc6",
+        "altText": "4Z — Square grille boot to round branch (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4Z-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4Z",
+            "parameter": 0,
+            "feet": 60
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4AA",
+      "familyID": "4AA",
+      "groupID": 4,
+      "sourceCode": "4AA",
+      "name": "Tapered square ceiling boot",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4AA.svg",
+        "revision": "0a6e881a77be4eba9445b2dc15057e514a08cad647d13bdb3803d34bff0fd23f",
+        "altText": "4AA — Tapered square ceiling boot (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4AA-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4AA",
+            "parameter": 0,
+            "feet": 35
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4AB",
+      "familyID": "4AB",
+      "groupID": 4,
+      "sourceCode": "4AB",
+      "name": "Angled square boot with round branch",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4AB.svg",
+        "revision": "d05262e4b517f82f8a3ae3145c6a4570505187f401b3fde63a16e7ea6ff774d6",
+        "altText": "4AB — Angled square boot with round branch (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4AB-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4AB",
+            "parameter": 0,
+            "feet": 90
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4AC",
+      "familyID": "4AC",
+      "groupID": 4,
+      "sourceCode": "4AC",
+      "name": "Stack head with curved side outlet",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4AC.svg",
+        "revision": "ef9190135c3bb21c71d873f5a88e9a5e6b29ac1bff17c81db21214bbc3461b57",
+        "altText": "4AC — Stack head with curved side outlet (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4AC-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4AC",
+            "parameter": 0,
+            "feet": 100
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4AD",
+      "familyID": "4AD",
+      "groupID": 4,
+      "sourceCode": "4AD",
+      "name": "Segmented elbow on rectangular stack",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4AD.svg",
+        "revision": "c3e8403dcd6f2a0e8bbb2c291840a217fc1a80be3a4083f4241572cb4aff683b",
+        "altText": "4AD — Segmented elbow on rectangular stack (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4AD-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4AD",
+            "parameter": 0,
+            "feet": 60
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4AE",
+      "familyID": "4AE",
+      "groupID": 4,
+      "sourceCode": "4AE",
+      "name": "Segmented elbow on flange",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4AE.svg",
+        "revision": "50fa92ae08ef79ba14eaf3c5b195bf058bbe6c9f6e01000af284a266c68e4bec",
+        "altText": "4AE — Segmented elbow on flange (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4AE-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4AE",
+            "parameter": 0,
+            "feet": 55
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4AF",
+      "familyID": "4AF",
+      "groupID": 4,
+      "sourceCode": "4AF",
+      "name": "Rectangular register boot with side outlet",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4AF.svg",
+        "revision": "aafd8bf4dabb2c02be7d0cb00f1ccc2f6eb0ec152f3135c989b1fce961c3a79a",
+        "altText": "4AF — Rectangular register boot with side outlet (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4AF-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4AF",
+            "parameter": 0,
+            "feet": 50
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4AG",
+      "familyID": "4AG",
+      "groupID": 4,
+      "sourceCode": "4AG",
+      "name": "Split transition with round branches",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4AG.svg",
+        "revision": "acec282bfa72296772323f610e565c26147f482b98408f336ed2d9f5941cecc0",
+        "altText": "4AG — Split transition with round branches (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4AG-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4AG",
+            "parameter": 0,
+            "feet": 60
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4AH",
+      "familyID": "4AH",
+      "groupID": 4,
+      "sourceCode": "4AH",
+      "name": "Rectangular stack head with grille face",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4AH.svg",
+        "revision": "7932bceb41e2e232239bc19e8f1b5b838039f50e7a50c7edb6e7e347d077b64a",
+        "altText": "4AH — Rectangular stack head with grille face (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4AH-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4AH",
+            "parameter": 0,
+            "feet": 60
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4AI",
+      "familyID": "4AI",
+      "groupID": 4,
+      "sourceCode": "4AI",
+      "name": "Rectangular stack head with framed face",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4AI.svg",
+        "revision": "fb4332e27b268d38a35b6b3baa7e187aed12f61148c868ba7a961597e15acca5",
+        "altText": "4AI — Rectangular stack head with framed face (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4AI-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4AI",
+            "parameter": 0,
+            "feet": 20
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4AJ",
+      "familyID": "4AJ",
+      "groupID": 4,
+      "sourceCode": "4AJ",
+      "name": "Boot with flexible round branch",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4AJ.svg",
+        "revision": "868880ed03b582706ec196be18d55556ea9deef2ca364df824846eb28e4c3426",
+        "altText": "4AJ — Boot with flexible round branch (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4AJ-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4AJ",
+            "parameter": 0,
+            "feet": 25
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4AK",
+      "familyID": "4AK",
+      "groupID": 4,
+      "sourceCode": "4AK",
+      "name": "Low rectangular stack head with round branch",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4AK.svg",
+        "revision": "f5475d021c39a5aa030de2c524d9b76be657fd445fa3e52ddaa851a37a9095ff",
+        "altText": "4AK — Low rectangular stack head with round branch (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4AK-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4AK",
+            "parameter": 0,
+            "feet": 55
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4AL",
+      "familyID": "4AL",
+      "groupID": 4,
+      "sourceCode": "4AL",
+      "name": "Angled stack head with inset opening",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4AL.svg",
+        "revision": "b9abe1ad41d63fa19b6924d878a18f892ec51657104936c2de11851687fd59f2",
+        "altText": "4AL — Angled stack head with inset opening (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4AL-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4AL",
+            "parameter": 0,
+            "feet": 70
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4AM",
+      "familyID": "4AM",
+      "groupID": 4,
+      "sourceCode": "4AM",
+      "name": "Tapered stack head with front opening",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4AM.svg",
+        "revision": "ea7fcaf0bc735fb2b65853e93506d4ec6ce23693e45047a973a52fff851fe40a",
+        "altText": "4AM — Tapered stack head with front opening (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4AM-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4AM",
+            "parameter": 0,
+            "feet": 70
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4AN",
+      "familyID": "4AN",
+      "groupID": 4,
+      "sourceCode": "4AN",
+      "name": "Tapered stack head with stepped opening",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4AN.svg",
+        "revision": "69f712e66a2f2d7b296707f1fe7952e16af3597fa7b542bf3e1829d2ace55fa6",
+        "altText": "4AN — Tapered stack head with stepped opening (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4AN-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4AN",
+            "parameter": 0,
+            "feet": 70
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4AO",
+      "familyID": "4AO",
+      "groupID": 4,
+      "sourceCode": "4AO",
+      "name": "Straight wall stack offset",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4AO.svg",
+        "revision": "860e5165dcae2d93ec15fa1797a132fcd53d06b7e43aad456c952c12a599fc1f",
+        "altText": "4AO — Straight wall stack offset (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4AO-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4AO",
+            "parameter": 0,
+            "feet": 40
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4AP",
+      "familyID": "4AP",
+      "groupID": 4,
+      "sourceCode": "4AP",
+      "name": "Stepped wall stack offset",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4AP.svg",
+        "revision": "13295289992c387632757ebbe48016f3edae2ba2b2643255ab8e6f621ad6dddd",
+        "altText": "4AP — Stepped wall stack offset (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4AP-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4AP",
+            "parameter": 0,
+            "feet": 40
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4AQ",
+      "familyID": "4AQ",
+      "groupID": 4,
+      "sourceCode": "4AQ",
+      "name": "Plain rectangular stack-head turn",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4AQ.svg",
+        "revision": "8ec8ec3124a4a7f1c37e425451e40ecba360497a43c312f866da5769b1579c2a",
+        "altText": "4AQ — Plain rectangular stack-head turn (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4AQ-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4AQ",
+            "parameter": 0,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
+      "id": "4AR",
+      "familyID": "4AR",
+      "groupID": 4,
+      "sourceCode": "4AR",
+      "name": "Rectangular stack-head turn with raised collar",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-4-enhanced/4AR.svg",
+        "revision": "c324cdfa4c0825026a7c50e59d7b589d6bf88eace2c00a5d75790598c92c49b6",
+        "altText": "4AR — Rectangular stack-head turn with raised collar (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "4AR-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "4AR",
+            "parameter": 0,
+            "feet": 70
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": []
+      }
+    },
+    {
       "id": "5A-rectangular",
       "familyID": "5A",
       "groupID": 5,
@@ -228,7 +3246,7 @@
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5A-rectangular.svg",
         "revision": "1c713ffba89beaf68390d4ef14e4e68e85e4773bd5580cd9e962773ebcdc93f3",
-        "altText": "5A \u2014 Return to oversized plenum (rectangular)",
+        "altText": "5A — Return to oversized plenum (rectangular)",
         "view": "individual",
         "mediaType": "image/svg+xml"
       },
@@ -261,7 +3279,7 @@
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5A-round.svg",
         "revision": "dd95b3599308b174993684bd4f7ac55e57ddb3094bd69fbce75aa5ed1a3e2b7f",
-        "altText": "5B \u2014 Return to oversized plenum (round)",
+        "altText": "5B — Return to oversized plenum (round)",
         "view": "individual",
         "mediaType": "image/svg+xml"
       },
@@ -281,6 +3299,516 @@
         "frictionRateIWCPer100Feet": 0.08,
         "notes": [
           "Plenum size is large compared with duct size."
+        ]
+      }
+    },
+    {
+      "id": "5C-rectangular",
+      "familyID": "5C",
+      "groupID": 5,
+      "sourceCode": "5C",
+      "name": "Return with tapered plenum entry",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-5-shapes/5C-rectangular.svg",
+        "revision": "540dbbf6001ce632d1ba588886d5ce43412de21deb0f04f2af169ffff75f8320",
+        "altText": "5C — Return with tapered plenum entry (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "5C-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "5C",
+            "parameter": 0,
+            "feet": 40
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Rectangular entry expands through a short taper into the plenum."
+        ]
+      }
+    },
+    {
+      "id": "5C-round",
+      "familyID": "5C",
+      "groupID": 5,
+      "sourceCode": "5D",
+      "name": "Return with tapered plenum entry",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-5-shapes/5C-round.svg",
+        "revision": "6a527846e7d72262f742361540272f5b8fa9352531265e5c843727adb27bbe83",
+        "altText": "5D — Return with tapered plenum entry (round)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "5D-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "5D",
+            "parameter": 0,
+            "feet": 40
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Round entry expands through a tapered collar into the plenum."
+        ]
+      }
+    },
+    {
+      "id": "5E-rectangular",
+      "familyID": "5E",
+      "groupID": 5,
+      "sourceCode": "5E",
+      "name": "Top return into compact plenum",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-5-shapes/5E-rectangular.svg",
+        "revision": "83b02ae9936965d85c7e64a5b3dc6d45bd984bd1433d50c30101a3076e234328",
+        "altText": "5E — Top return into compact plenum (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "5E-v1",
+      "rule": {
+        "kind": "plenumReturns",
+        "rows": [
+          {
+            "key": "5E/1",
+            "parameter": 1,
+            "feet": 10
+          },
+          {
+            "key": "5E/2",
+            "parameter": 2,
+            "feet": 35
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Vertical return enters the top of a compact plenum; EL depends on return count.",
+          "Plenum size is comparable to duct size. Count all return ducts entering this plenum: one return or two or more. This count is not the quantity of this fitting in the path."
+        ]
+      }
+    },
+    {
+      "id": "5E-round",
+      "familyID": "5E",
+      "groupID": 5,
+      "sourceCode": "5E",
+      "name": "Top return into compact plenum",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-5-shapes/5E-round.svg",
+        "revision": "c04357bcf1a9846685035e2f9c2561dd945c66dc56015371adf1085e3a7a24b3",
+        "altText": "5E — Top return into compact plenum (round)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "5E-v1",
+      "rule": {
+        "kind": "plenumReturns",
+        "rows": [
+          {
+            "key": "5E/1",
+            "parameter": 1,
+            "feet": 10
+          },
+          {
+            "key": "5E/2",
+            "parameter": 2,
+            "feet": 35
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Vertical return enters the top of a compact plenum; EL depends on return count.",
+          "Plenum size is comparable to duct size. Count all return ducts entering this plenum: one return or two or more. This count is not the quantity of this fitting in the path."
+        ]
+      }
+    },
+    {
+      "id": "5F-rectangular",
+      "familyID": "5F",
+      "groupID": 5,
+      "sourceCode": "5F",
+      "name": "Side return into compact plenum",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-5-shapes/5F-rectangular.svg",
+        "revision": "4e86c9d6ea5fb4cc7288d1e69429d2504b3aaefebbb56a5712fd723819bf2f9e",
+        "altText": "5F — Side return into compact plenum (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "5F-v1",
+      "rule": {
+        "kind": "plenumReturns",
+        "rows": [
+          {
+            "key": "5F/1",
+            "parameter": 1,
+            "feet": 45
+          },
+          {
+            "key": "5F/2",
+            "parameter": 2,
+            "feet": 70
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Rectangular side return enters a compact plenum; EL depends on return count.",
+          "Plenum size is comparable to duct size. Count all return ducts entering this plenum: one return or two or more. This count is not the quantity of this fitting in the path."
+        ]
+      }
+    },
+    {
+      "id": "5F-round",
+      "familyID": "5F",
+      "groupID": 5,
+      "sourceCode": "5G",
+      "name": "Side return into compact plenum",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-5-shapes/5F-round.svg",
+        "revision": "11f52d89d76c363b991dcb23f0425db375d389d88e54e81291122aa3216fcd56",
+        "altText": "5G — Side return into compact plenum (round)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "5G-v1",
+      "rule": {
+        "kind": "plenumReturns",
+        "rows": [
+          {
+            "key": "5G/1",
+            "parameter": 1,
+            "feet": 45
+          },
+          {
+            "key": "5G/2",
+            "parameter": 2,
+            "feet": 70
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Round side return enters a compact plenum; EL depends on return count.",
+          "Plenum size is comparable to duct size. Count all return ducts entering this plenum: one return or two or more. This count is not the quantity of this fitting in the path."
+        ]
+      }
+    },
+    {
+      "id": "5H-rectangular",
+      "familyID": "5H",
+      "groupID": 5,
+      "sourceCode": "5H",
+      "name": "Square elbow at air handler",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-5-shapes/5H-rectangular.svg",
+        "revision": "75631494d4c1b71c0abdd5f718ee492d6a904f6efbfc9e13db1bd4300aa1e47d",
+        "altText": "5H — Square elbow at air handler (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "5H-v1",
+      "rule": {
+        "kind": "heightWidth",
+        "rows": [
+          {
+            "key": "5H/1",
+            "parameter": 1,
+            "feet": 45
+          },
+          {
+            "key": "5H/2",
+            "parameter": 2,
+            "feet": 30
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Sharp square elbow; the source table varies EL by H/W.",
+          "Only the printed H/W ratios are supported; no interpolation or extrapolation."
+        ]
+      }
+    },
+    {
+      "id": "5I-rectangular",
+      "familyID": "5I",
+      "groupID": 5,
+      "sourceCode": "5I",
+      "name": "Elbow with mitered inside corner at air handler",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-5-shapes/5I-rectangular.svg",
+        "revision": "4fb9bce1811d44a44a459defd7948d1221b06219ada1f3d73eac75147313b1da",
+        "altText": "5I — Elbow with mitered inside corner at air handler (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "5I-v1",
+      "rule": {
+        "kind": "heightWidth",
+        "rows": [
+          {
+            "key": "5I/1",
+            "parameter": 1,
+            "feet": 45
+          },
+          {
+            "key": "5I/2",
+            "parameter": 2,
+            "feet": 30
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Curved heel with a mitered inside corner; the source table varies EL by H/W.",
+          "Only the printed H/W ratios are supported; no interpolation or extrapolation."
+        ]
+      }
+    },
+    {
+      "id": "5J-rectangular",
+      "familyID": "5J",
+      "groupID": 5,
+      "sourceCode": "5J",
+      "name": "Radius elbow at air handler",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-5-shapes/5J-rectangular.svg",
+        "revision": "583a41f4b37f2891b28eb0b0955e2302323f8aa0eb6fb143abdcfcacc22b99a1",
+        "altText": "5J — Radius elbow at air handler (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "5J-v1",
+      "rule": {
+        "kind": "radiusWidth",
+        "rows": [
+          {
+            "key": "5J/0.25",
+            "parameter": 0.25,
+            "feet": 20
+          },
+          {
+            "key": "5J/0.5",
+            "parameter": 0.5,
+            "feet": 15
+          },
+          {
+            "key": "5J/1",
+            "parameter": 1,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Radius heel and inside corner; the source table varies EL by R/W.",
+          "Only the printed R/W ratios are supported; no interpolation or extrapolation.",
+          "R is the inside bend radius shown on the drawing; W is the indicated duct width."
+        ]
+      }
+    },
+    {
+      "id": "5K-rectangular",
+      "familyID": "5K",
+      "groupID": 5,
+      "sourceCode": "5K",
+      "name": "Square elbow with turning vanes at air handler",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-5-shapes/5K-rectangular.svg",
+        "revision": "37d70cc1999da22b549579206fa9d680e9b3206bf959681a55b4ee328703bcad",
+        "altText": "5K — Square elbow with turning vanes at air handler (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "5K-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "5K",
+            "parameter": 0,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Square elbow with the diagonal turning-vane bank shown in the source."
+        ]
+      }
+    },
+    {
+      "id": "5L-rectangular",
+      "familyID": "5L",
+      "groupID": 5,
+      "sourceCode": "5L",
+      "name": "Opposed returns into bull-head plenum",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-5-shapes/5L-rectangular.svg",
+        "revision": "727314770d47ec8df299917da4615c28b0e8f951ecf5b0680f594b1178c9e846",
+        "altText": "5L — Opposed returns into bull-head plenum (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "5L-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "5L",
+            "parameter": 0,
+            "feet": 75
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Opposed returns meet above the unit without the source's vane bank."
+        ]
+      }
+    },
+    {
+      "id": "5M-rectangular",
+      "familyID": "5M",
+      "groupID": 5,
+      "sourceCode": "5M",
+      "name": "Opposed returns into vaned plenum",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-5-shapes/5M-rectangular.svg",
+        "revision": "6ce82535b613dad948360794fde47181d83140795fa4dee04ee708b4e6c964d6",
+        "altText": "5M — Opposed returns into vaned plenum (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "5M-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "5M",
+            "parameter": 0,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Opposed returns meet at a divided, vaned bull-head connection."
+        ]
+      }
+    },
+    {
+      "id": "5N-rectangular",
+      "familyID": "5N",
+      "groupID": 5,
+      "sourceCode": "5N",
+      "name": "Offset ceiling return into air handler",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-5-shapes/5N-rectangular.svg",
+        "revision": "41f36d53d88b2d52d8c908eff06f9f1b07b02ff2a4dc1979d4f834dc094e2ff4",
+        "altText": "5N — Offset ceiling return into air handler (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "5N-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "5N",
+            "parameter": 0,
+            "feet": 55
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Offset connection beneath a ceiling return path."
+        ]
+      }
+    },
+    {
+      "id": "5O-rectangular",
+      "familyID": "5O",
+      "groupID": 5,
+      "sourceCode": "5O",
+      "name": "Direct ceiling return into air handler",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-5-shapes/5O-rectangular.svg",
+        "revision": "203cb91d4417f4b5cc9d25e40d970dcf49c05247b3fb5ca162ba87dcde1bf718",
+        "altText": "5O — Direct ceiling return into air handler (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "5O-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "5O",
+            "parameter": 0,
+            "feet": 35
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Short direct connection beneath a ceiling return path."
         ]
       }
     }

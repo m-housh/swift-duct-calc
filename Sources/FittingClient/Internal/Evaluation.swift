@@ -11,9 +11,12 @@ extension Catalog {
     switch (record.rule.kind, request.inputs) {
     case (.fixed, .fixed):
       row = record.rule.rows[0]
-    case (.heightWidth, .heightWidth(let height, let width)):
+    case (.heightWidth, .heightWidth(let numerator, let width)),
+      (.radiusWidth, .radiusWidth(let numerator, let width)):
+      let numeratorField: Fitting.Issue.Field =
+        record.rule.kind == .heightWidth ? .heightInches : .radiusInches
       var issues: [Fitting.Issue] = []
-      for (number, field) in [(height, Fitting.Issue.Field.heightInches), (width, .widthInches)] {
+      for (number, field) in [(numerator, numeratorField), (width, .widthInches)] {
         guard let number else {
           issues.append(.init(.missingInput, field: field))
           continue
@@ -24,9 +27,9 @@ extension Catalog {
           issues.append(.init(.nonpositiveDimension, field: field))
         }
       }
-      guard issues.isEmpty, let height, let width else { return .unresolved(issues) }
-      let ratio = height / width
-      // Source 1F lists exact H/W rows only. No interpolation or near-row tolerance.
+      guard issues.isEmpty, let numerator, let width else { return .unresolved(issues) }
+      let ratio = numerator / width
+      // Use only printed H/W or R/W rows. No interpolation or near-row tolerance.
       guard ratio.isFinite, let match = record.rule.rows.first(where: { $0.parameter == ratio })
       else {
         return .unresolved([.init(.unsupportedRatio)])
@@ -39,8 +42,17 @@ extension Catalog {
       guard count >= 0 else {
         return .unresolved([.init(.negativeBranchCount, field: .downstreamBranches)])
       }
-      // The final source bucket is inclusive (5+ for 2A). Preserve the submitted count.
+      // The final source bucket is inclusive (5+ in group 2). Preserve the submitted count.
       row = record.rule.rows[min(count, record.rule.rows.count - 1)]
+    case (.plenumReturns, .plenumReturns(let count)):
+      guard let count else {
+        return .unresolved([.init(.missingInput, field: .plenumReturns)])
+      }
+      guard count > 0 else {
+        return .unresolved([.init(.nonpositiveReturnCount, field: .plenumReturns)])
+      }
+      // Group 5 starts at one return; the final bucket covers two or more.
+      row = record.rule.rows[min(count, record.rule.rows.count) - 1]
     default:
       return .unresolved([.init(.incompatibleInputs)])
     }

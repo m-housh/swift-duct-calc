@@ -52,14 +52,19 @@ public enum Fitting {
   public enum Inputs: Codable, Equatable, Sendable {
     case fixed
     case heightWidth(heightInches: Double?, widthInches: Double?)
+    case radiusWidth(radiusInches: Double?, widthInches: Double?)
     case downstreamBranches(count: Int?)
+    /// All return ducts entering the plenum, independent of fitting quantity.
+    case plenumReturns(count: Int?)
   }
 
   /// Presentation requirements derived from the same rule used for evaluation.
   public enum InputRequirement: Equatable, Sendable {
     case fixed
     case heightWidth(exactRatios: [Double])
+    case radiusWidth(exactRatios: [Double])
     case downstreamBranches(finalBucketMinimum: Int)
+    case plenumReturns(finalBucketMinimum: Int)
   }
 
   /// Applicability information for the fitting rule, independent of reference-document format.
@@ -182,13 +187,13 @@ public enum Fitting {
     }
 
     public enum Field: Equatable, Sendable {
-      case heightInches, widthInches, downstreamBranches
+      case heightInches, widthInches, radiusInches, downstreamBranches, plenumReturns
     }
 
     public enum Code: Equatable, Sendable {
       case unknownFitting, ineligiblePathType, incompatibleInputs
       case missingInput, nonfiniteInput, nonpositiveDimension, negativeBranchCount
-      case unsupportedRatio
+      case unsupportedRatio, nonpositiveReturnCount
     }
   }
 

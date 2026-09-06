@@ -62,13 +62,17 @@ struct CatalogValidator {
       switch record.rule.kind {
       case .fixed:
         try require(rows.count == 1, "Fixed rule must have one row")
-      case .heightWidth:
+      case .heightWidth, .radiusWidth:
         try require(rows.allSatisfy { $0.parameter > 0 }, "Ratios must be positive")
         try require(Set(rows.map(\.parameter)).count == rows.count, "Duplicate ratio")
       case .downstreamBranches:
         try require(
           rows.enumerated().allSatisfy { Double($0.offset) == $0.element.parameter },
           "Branch buckets must be contiguous from zero")
+      case .plenumReturns:
+        try require(
+          rows.enumerated().allSatisfy { Double($0.offset + 1) == $0.element.parameter },
+          "Return buckets must be contiguous from one")
       }
     }
   }

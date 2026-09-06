@@ -109,7 +109,9 @@ struct Catalog: Sendable {
       switch kind {
       case .fixed: .fixed
       case .heightWidth: .heightWidth(exactRatios: rows.map(\.parameter))
+      case .radiusWidth: .radiusWidth(exactRatios: rows.map(\.parameter))
       case .downstreamBranches: .downstreamBranches(finalBucketMinimum: rows.count - 1)
+      case .plenumReturns: .plenumReturns(finalBucketMinimum: rows.count)
       }
     }
 
@@ -117,11 +119,15 @@ struct Catalog: Sendable {
       switch kind {
       case .fixed: .fixed
       case .heightWidth: .heightWidth(heightInches: nil, widthInches: nil)
+      case .radiusWidth: .radiusWidth(radiusInches: nil, widthInches: nil)
       case .downstreamBranches: .downstreamBranches(count: nil)
+      case .plenumReturns: .plenumReturns(count: nil)
       }
     }
 
-    enum Kind: String, Decodable, Sendable { case fixed, heightWidth, downstreamBranches }
+    enum Kind: String, Decodable, Sendable {
+      case fixed, heightWidth, radiusWidth, downstreamBranches, plenumReturns
+    }
 
     struct Row: Decodable, Sendable {
       let key: String

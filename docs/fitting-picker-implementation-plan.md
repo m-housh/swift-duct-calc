@@ -15,7 +15,10 @@ explicitly confirmed below are settled; proposed API names, file placement, pers
 and delivery sequence remain open to the repository owner's direction. Production implementation has
 started with the dependency-only slice on `codex/fitting-client`; see
 [implementation scope and source checks](fitting-client-first-slice.md). The step-3
-UI and persistence integration are still pending.
+UI and persistence integration are still pending. The reviewed dependency foundation
+now includes async startup loading through `FileClient`; the
+[catalog expansion](fitting-client-catalog-expansion.md) covers 99 fitting choices
+in groups 1, 2, 4, and 5.
 
 Architecture guidance from the user:
 
@@ -23,7 +26,8 @@ Architecture guidance from the user:
   implementation there.
 - The user subsequently proposed a `FittingClient` dependency. The current sketch
   places fitting catalog/artwork/evaluation there, with `ProjectClient` handling
-  project-input and save orchestration. This remains a proposal for review.
+  project-input and save orchestration. The dependency foundation is implemented
+  and reviewed; picker and persistence integration remain to be implemented.
 
 Existing structure and proposed responsibilities:
 
@@ -32,7 +36,7 @@ Existing structure and proposed responsibilities:
 | `Sources/ManualDCore`                                    | Shared fitting identities, typed inputs/results, entry payloads and routes; no new evaluator implementation            | User-directed boundary                          |
 | `Sources/ProjectClient/Interface.swift` and `Live.swift` | Dependency interface and live behavior; project-input and save orchestration calling the proposed FittingClient       | Exact API and ownership to review               |
 | `Sources/ProjectClient/Internal`                         | Existing project helpers; fitting-rule implementation is now proposed under FittingClient           | Proposed, filenames not committed               |
-| `Sources/FittingClient` (new, proposed) | Catalog, artwork resolution, source-code lookup and fitting evaluation | See focused design sketch; no target created |
+| `Sources/FittingClient` | Catalog, artwork resolution, source-code lookup and fitting evaluation | Implemented dependency; catalog currently covers groups 1, 2, 4, and 5 |
 | `Sources/ManualDClient`                                  | Existing reusable duct-sizing/friction calculations; determine whether fitting math needs any reusable operations here | Open; do not assume a new abstraction is needed |
 | `Sources/ViewController`                                 | Step-3 rendering, request handling, modal/carousel interaction and input-error presentation                            | Follow existing view/controller conventions     |
 | `Sources/DatabaseClient`                                 | Saved fitting entries, compatibility with existing JSON rows, user favorites                                           | Persistence design to review                    |

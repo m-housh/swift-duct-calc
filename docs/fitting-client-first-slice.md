@@ -12,8 +12,9 @@ and its running preview server are unchanged.
 - All shared fitting definitions are in `Sources/ManualDCore/Fittings.swift`.
 - `@Dependency(\.fittingClient)` exposes groups, fitting definitions, artwork,
   equivalent-length evaluation and source-reference resolution.
-- One bundled JSON resource provides canonical group order/eligibility and five
-  initial fitting definitions: 1F, 2A, 4A, 5A rectangular and 5A round (source 5B).
+- One bundled JSON resource provides canonical group order/eligibility and 99
+  fitting choices covering groups 1, 2, 4, and 5. See the
+  [catalog expansion and source audit](fitting-client-catalog-expansion.md).
   Empty groups report zero available cases and no representative artwork.
 - `FittingClient.live()` is an async throwing factory. `Live.swift` resolves its
   own bundle resource and reads it through `FileClient.readFile`. Application
@@ -39,7 +40,7 @@ and its running preview server are unchanged.
   or page numbers.
 - Source-code resolution normalizes surrounding whitespace/casing and returns
   candidate application IDs, without calculating or accepting an EL value.
-  Recognition currently covers only these initial cases, not the complete PDF.
+  Recognition currently covers groups 1, 2, 4, and 5, not the complete reference.
 
 The first slice chooses bundled JSON for the runtime catalog and keeps rule
 execution in Swift. Client helpers are in `Internal/Catalog.swift` and
@@ -57,7 +58,7 @@ velocity, friction rate and applicability notes, independent of document format.
 
 ## Source checks
 
-Values below were visually checked against `Public/files/ManD.Groups.pdf` during
+The original five values below were visually checked against `Public/files/ManD.Groups.pdf` during
 implementation, independently of the prototype's evaluator. PDF SHA-256:
 `aae20d968d8238c8958a2c010012aca59ef4b5eed4ce749ed2b722d222997334`.
 
@@ -88,8 +89,8 @@ shape/source remapping, artwork lookup, revisioned references, dependency overri
 resource rejection and fractional snapshot encoding. Factory tests cover injected
 file data, one read per constructed client, and immediate read/decode failures.
 Application tests cover startup failure and middleware injection across requests.
-Test-only fractional values
-are labeled as contract fixtures, not as source values for these five cases.
+Test-only fractional values are labeled as contract fixtures, not as source values.
+The expansion audit records numeric coverage for all 99 current fitting choices.
 
 Reproduce with Swift 6.2:
 

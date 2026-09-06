@@ -16,8 +16,8 @@ struct FittingCatalogTests {
     let returns = try await client.groups(.return)
     #expect(supply.map { $0.id.rawValue } == [1, 2, 3, 4, 8, 9, 11, 12])
     #expect(returns.map { $0.id.rawValue } == [5, 6, 7, 8, 10, 11, 12])
-    #expect(supply.first?.representativeFittingID == "1F")
-    #expect(supply.first?.availableFittingCount == 1)
+    #expect(supply.first?.representativeFittingID == "1A")
+    #expect(supply.first?.availableFittingCount == 22)
     #expect(supply.first { $0.id == .flexJunctions }?.availableFittingCount == 0)
     #expect(supply.first { $0.id == .flexJunctions }?.representativeFittingID == nil)
     #expect(throws: DecodingError.self) {
@@ -29,14 +29,15 @@ struct FittingCatalogTests {
 
   @Test func definitionsRetainSourceIdentityAndRequirements() async throws {
     let supply = try await client.fittings(.init(pathType: .supply, groupID: .supplyEquipment))
-    let ratio = try #require(supply.first)
+    let ratio = try #require(supply.first { $0.id == "1F" })
     #expect(ratio.inputRequirement == .heightWidth(exactRatios: [0.5, 1]))
     #expect(ratio.defaultInputs == .heightWidth(heightInches: nil, widthInches: nil))
     #expect(ratio.conditions.notes.contains { $0.contains("10-inch") })
     let returns = try await client.fittings(.init(pathType: .return, groupID: .returnEquipment))
-    #expect(returns.map(\.id) == ["5A-rectangular", "5A-round"])
-    #expect(returns.map(\.sourceCode) == ["5A", "5B"])
-    #expect(returns.allSatisfy { $0.familyID == "5A" })
+    let oversizedPlenum = returns.filter { $0.familyID == "5A" }
+    #expect(oversizedPlenum.map(\.id) == ["5A-rectangular", "5A-round"])
+    #expect(oversizedPlenum.map(\.sourceCode) == ["5A", "5B"])
+    #expect(returns.count == 16)
   }
 
   @Test func referenceResolutionDoesNotInferLengthOrVariant() async throws {
@@ -47,8 +48,8 @@ struct FittingCatalogTests {
     #expect(
       wrongPath
         == .ineligible(.init(code: "5B", groupID: .returnEquipment, fittingIDs: ["5A-round"])))
-    for code in ["5A-round", "11A", "", "../../1F", "4AG"] {
-      // 4AG exists in the PDF but is outside this deliberately small first catalog.
+    for code in ["5A-round", "11A", "", "../../1F", "4AS"] {
+      // Group 4 ends at 4AR; an unlisted reference must stay unknown.
       let result = try await client.resolveReference(.init(code: code, pathType: .supply))
       #expect(result == .unknown)
     }
@@ -97,7 +98,7 @@ struct FittingCatalogTests {
         }
       }
     }
-    #expect(checked.count == 5)
+    #expect(checked.count == 99)
   }
 
   @Test func dependencyCanBeReplacedWithoutLoadingCatalogOrProjects() async throws {
