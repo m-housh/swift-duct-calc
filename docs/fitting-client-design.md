@@ -176,6 +176,13 @@ Picker fragment and evaluation routes are a different concern: propose nesting
 them under the existing `SiteRoute.View.ProjectRoute.EquivalentLengthRoute`.
 Exact cases, methods and form encodings belong to the following UI/request review.
 
+## Declaration order
+
+For this feature, place stored properties first, then initializers and behavior,
+with nested type declarations at the end of the enclosing type. This keeps the
+main contract readable before the supporting types. Apply the same ordering
+inside nested structs; keep the shared definitions together in `Fittings.swift`.
+
 ## Proposed file layout and dependency direction
 
 ```text

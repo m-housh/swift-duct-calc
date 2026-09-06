@@ -2,66 +2,6 @@ import Foundation
 import ManualDCore
 
 struct Catalog: Sendable {
-  struct GroupRecord: Decodable, Sendable {
-    let id: Fitting.Group.ID
-    let title: String
-    let pathTypes: [Fitting.PathType]
-  }
-
-  struct Record: Decodable, Sendable {
-    let id: Fitting.ID
-    let familyID: Fitting.ID
-    let groupID: Fitting.Group.ID
-    let sourceCode: Fitting.SourceCode?
-    let name: String
-    let shape: Fitting.Shape
-    let conditions: Fitting.Conditions
-    let artwork: Fitting.Artwork
-    let ruleRevision: String
-    let rule: Rule
-  }
-
-  struct Rule: Decodable, Sendable {
-    enum Kind: String, Decodable, Sendable { case fixed, heightWidth, downstreamBranches }
-    struct Row: Decodable, Sendable {
-      let key: String
-      let parameter: Double
-      let feet: Double
-    }
-    let kind: Kind
-    let rows: [Row]
-
-    var requirement: Fitting.InputRequirement {
-      switch kind {
-      case .fixed: .fixed
-      case .heightWidth: .heightWidth(exactRatios: rows.map(\.parameter))
-      case .downstreamBranches: .downstreamBranches(finalBucketMinimum: rows.count - 1)
-      }
-    }
-
-    var defaultInputs: Fitting.Inputs {
-      switch kind {
-      case .fixed: .fixed
-      case .heightWidth: .heightWidth(heightInches: nil, widthInches: nil)
-      case .downstreamBranches: .downstreamBranches(count: nil)
-      }
-    }
-  }
-
-  private struct Document: Decodable {
-    let schemaVersion: Int
-    let revision: String
-    let groups: [GroupRecord]
-    let fittings: [Record]
-  }
-
-  static let bundled: Result<Catalog, Error> = Result {
-    guard let url = Bundle.module.url(forResource: "catalog", withExtension: "json") else {
-      throw FittingClientError.missingCatalog
-    }
-    return try Catalog(data: Data(contentsOf: url))
-  }
-
   let revision: String
   let groupRecords: [GroupRecord]
   let records: [Record]
@@ -145,6 +85,13 @@ struct Catalog: Sendable {
     byID = Dictionary(uniqueKeysWithValues: records.map { ($0.id, $0) })
   }
 
+  static let bundled: Result<Catalog, Error> = Result {
+    guard let url = Bundle.module.url(forResource: "catalog", withExtension: "json") else {
+      throw FittingClientError.missingCatalog
+    }
+    return try Catalog(data: Data(contentsOf: url))
+  }
+
   func groups(for pathType: Fitting.PathType) -> [Fitting.Group] {
     groupRecords.filter { $0.pathTypes.contains(pathType) }.map { group in
       let fittings = records.filter { $0.groupID == group.id }
@@ -190,5 +137,60 @@ struct Catalog: Sendable {
     )
     return pathTypes(for: first).contains(request.pathType)
       ? .recognized(reference) : .ineligible(reference)
+  }
+
+  struct GroupRecord: Decodable, Sendable {
+    let id: Fitting.Group.ID
+    let title: String
+    let pathTypes: [Fitting.PathType]
+  }
+
+  struct Record: Decodable, Sendable {
+    let id: Fitting.ID
+    let familyID: Fitting.ID
+    let groupID: Fitting.Group.ID
+    let sourceCode: Fitting.SourceCode?
+    let name: String
+    let shape: Fitting.Shape
+    let conditions: Fitting.Conditions
+    let artwork: Fitting.Artwork
+    let ruleRevision: String
+    let rule: Rule
+  }
+
+  struct Rule: Decodable, Sendable {
+    let kind: Kind
+    let rows: [Row]
+
+    var requirement: Fitting.InputRequirement {
+      switch kind {
+      case .fixed: .fixed
+      case .heightWidth: .heightWidth(exactRatios: rows.map(\.parameter))
+      case .downstreamBranches: .downstreamBranches(finalBucketMinimum: rows.count - 1)
+      }
+    }
+
+    var defaultInputs: Fitting.Inputs {
+      switch kind {
+      case .fixed: .fixed
+      case .heightWidth: .heightWidth(heightInches: nil, widthInches: nil)
+      case .downstreamBranches: .downstreamBranches(count: nil)
+      }
+    }
+
+    enum Kind: String, Decodable, Sendable { case fixed, heightWidth, downstreamBranches }
+
+    struct Row: Decodable, Sendable {
+      let key: String
+      let parameter: Double
+      let feet: Double
+    }
+  }
+
+  private struct Document: Decodable {
+    let schemaVersion: Int
+    let revision: String
+    let groups: [GroupRecord]
+    let fittings: [Record]
   }
 }

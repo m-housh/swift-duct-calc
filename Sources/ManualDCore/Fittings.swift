@@ -10,21 +10,6 @@ public enum Fitting {
   public typealias PathType = EquivalentLength.EffectiveLengthType
 
   public struct Group: Equatable, Sendable, Identifiable {
-    public enum ID: Int, Codable, CaseIterable, Sendable {
-      case supplyEquipment = 1
-      case supplyBranches = 2
-      case reducingTrunkTakeoffs = 3
-      case supplyBoots = 4
-      case returnEquipment = 5
-      case returnBranches = 6
-      case pannedReturns = 7
-      case elbows = 8
-      case supplyJunctions = 9
-      case returnJunctions = 10
-      case flexJunctions = 11
-      case transitions = 12
-    }
-
     public let id: ID
     public let title: String
     /// Nil when this group has no implemented cases in the current catalog.
@@ -38,6 +23,21 @@ public enum Fitting {
       self.title = title
       self.representativeFittingID = representativeFittingID
       self.availableFittingCount = availableFittingCount
+    }
+
+    public enum ID: Int, Codable, CaseIterable, Sendable {
+      case supplyEquipment = 1
+      case supplyBranches = 2
+      case reducingTrunkTakeoffs = 3
+      case supplyBoots = 4
+      case returnEquipment = 5
+      case returnBranches = 6
+      case pannedReturns = 7
+      case elbows = 8
+      case supplyJunctions = 9
+      case returnJunctions = 10
+      case flexJunctions = 11
+      case transitions = 12
     }
   }
 
@@ -173,6 +173,14 @@ public enum Fitting {
   }
 
   public struct Issue: Equatable, Sendable {
+    public let code: Code
+    public let field: Field?
+
+    public init(_ code: Code, field: Field? = nil) {
+      self.code = code
+      self.field = field
+    }
+
     public enum Field: Equatable, Sendable {
       case heightInches, widthInches, downstreamBranches
     }
@@ -182,14 +190,6 @@ public enum Fitting {
       case missingInput, nonfiniteInput, nonpositiveDimension, negativeBranchCount
       case unsupportedRatio
     }
-
-    public let code: Code
-    public let field: Field?
-
-    public init(_ code: Code, field: Field? = nil) {
-      self.code = code
-      self.field = field
-    }
   }
 
   public enum Evaluation: Equatable, Sendable {
@@ -198,16 +198,6 @@ public enum Fitting {
   }
 
   public struct Calculation: Codable, Equatable, Sendable {
-    public struct Component: Codable, Equatable, Sendable {
-      public let ruleKey: String
-      public let equivalentLengthFeet: Double
-
-      public init(ruleKey: String, equivalentLengthFeet: Double) {
-        self.ruleKey = ruleKey
-        self.equivalentLengthFeet = equivalentLengthFeet
-      }
-    }
-
     public let fittingID: ID
     public let sourceCode: SourceCode?
     public let equivalentLengthFeet: Double
@@ -230,6 +220,16 @@ public enum Fitting {
       self.conditions = conditions
       self.catalogRevision = catalogRevision
       self.ruleRevision = ruleRevision
+    }
+
+    public struct Component: Codable, Equatable, Sendable {
+      public let ruleKey: String
+      public let equivalentLengthFeet: Double
+
+      public init(ruleKey: String, equivalentLengthFeet: Double) {
+        self.ruleKey = ruleKey
+        self.equivalentLengthFeet = equivalentLengthFeet
+      }
     }
   }
 
