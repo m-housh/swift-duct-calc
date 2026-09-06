@@ -3,6 +3,11 @@
 Planning baseline: 2026-09-05; updated after the full-catalog and Group 11 review. This is a
 production implementation proposal, not a change to the Swift application or the frozen prototypes.
 
+For the current, narrower architecture review, start with the
+[FittingClient design sketch](fitting-client-design.md). It proposes the dependency
+interface, shared types, artwork handling and file layout without implementing the
+full picker or persistence changes.
+
 ## Review status and repository ownership
 
 This is the reviewable working plan, not a finalized implementation specification. Product decisions
@@ -14,16 +19,18 @@ Architecture guidance from the user:
 
 - `ManualDCore` is primarily for shared types and routes. Do not put the new fitting calculation
   implementation there.
-- `ProjectClient` is the likely home for calculation behavior and orchestration. This is the current
-  working proposal, not a finalized placement decision.
+- The user subsequently proposed a `FittingClient` dependency. The current sketch
+  places fitting catalog/artwork/evaluation there, with `ProjectClient` handling
+  project-input and save orchestration. This remains a proposal for review.
 
 Existing structure and proposed responsibilities:
 
 | Location                                                 | Existing role / proposed fitting-picker work                                                                           | Review status                                   |
 | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
 | `Sources/ManualDCore`                                    | Shared fitting identities, typed inputs/results, entry payloads and routes; no new evaluator implementation            | User-directed boundary                          |
-| `Sources/ProjectClient/Interface.swift` and `Live.swift` | Dependency interface and live behavior; proposed fitting calculation entry point and project-input orchestration       | Exact API and ownership to review               |
-| `Sources/ProjectClient/Internal`                         | Existing project calculation helpers; likely location for fitting rule implementation and supporting helpers           | Proposed, filenames not committed               |
+| `Sources/ProjectClient/Interface.swift` and `Live.swift` | Dependency interface and live behavior; project-input and save orchestration calling the proposed FittingClient       | Exact API and ownership to review               |
+| `Sources/ProjectClient/Internal`                         | Existing project helpers; fitting-rule implementation is now proposed under FittingClient           | Proposed, filenames not committed               |
+| `Sources/FittingClient` (new, proposed) | Catalog, artwork resolution, source-code lookup and fitting evaluation | See focused design sketch; no target created |
 | `Sources/ManualDClient`                                  | Existing reusable duct-sizing/friction calculations; determine whether fitting math needs any reusable operations here | Open; do not assume a new abstraction is needed |
 | `Sources/ViewController`                                 | Step-3 rendering, request handling, modal/carousel interaction and input-error presentation                            | Follow existing view/controller conventions     |
 | `Sources/DatabaseClient`                                 | Saved fitting entries, compatibility with existing JSON rows, user favorites                                           | Persistence design to review                    |
@@ -309,7 +316,7 @@ decoder/writer.
 | Source registry                                   | PDF identity/hash, viewer and printed pages, table/case keys, transcription and verification record                                                       |
 | Fitting catalog                                   | Stable app ID, actual source ID, family/variant identity, system applicability, shape/connection metadata, labels and approved artwork references         |
 | Shared types/routes in ManualDCore                | Typed fitting identities, inputs, results and route/request contracts; no new calculation implementation                                                  |
-| Calculation behavior, provisionally ProjectClient | Exact table/range semantics, derived ratios/formulas, source assumptions and structured errors; final placement and API to review                         |
+| Fitting catalog/evaluation, proposed FittingClient | Exact table/range semantics, derived ratios/formulas, source assumptions and structured errors; final placement and API to review                         |
 | Path entry                                        | Stable row ID, catalog/referenceEntry/legacy origin, source code, optional verified rule provenance, relevant inputs or supplied EL, quantity and order   |
 | Path draft                                        | Shared rows for visual/quick input, unsaved edits, totals, non-blocking usage warnings, row operations and save lifecycle                                 |
 | User favorites                                    | User-owned stable fitting/variant IDs; same favorites across projects/devices, independent of saved dimensions/quantities                                 |
@@ -345,7 +352,7 @@ an explained difference.
    introduce identifiable legacy/referenceEntry/catalog entries, and preserve totals. Define the CSV
    contract and retain compact reference editing before replacing old form routes.
 3. **Implement one production slice.** Add fixed, ratio-table, and branch-count cases through the
-   agreed calculation module (provisionally ProjectClient); both visual and quick entry; user
+   agreed calculation module (currently proposed FittingClient); both visual and quick entry; user
    favorites; mixed-path saving and reopening. Keep quantity in the path list and generally-once
    rules as warnings. Unsupported ranges return a specific unresolved-input condition.
 4. **Expand verified cases.** Flow-dependent returns, artwork/source shape mapping, composite elbow
