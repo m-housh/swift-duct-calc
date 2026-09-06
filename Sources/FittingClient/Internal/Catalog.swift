@@ -104,6 +104,7 @@ struct Catalog: Sendable {
   struct Rule: Decodable, Sendable {
     let kind: Kind
     let rows: [Row]
+    let firstRowIncludesLowerRatios: Bool?
 
     var requirement: Fitting.InputRequirement {
       switch kind {
@@ -113,6 +114,10 @@ struct Catalog: Sendable {
       case .downstreamBranches: .downstreamBranches(finalBucketMinimum: rows.count - 1)
       case .plenumReturns: .plenumReturns(finalBucketMinimum: rows.count)
       case .junction: .junction
+      case .returnJunction:
+        .returnJunction(
+          ratios: rows.map(\.parameter),
+          firstRowIncludesLowerRatios: firstRowIncludesLowerRatios == true)
       }
     }
 
@@ -124,11 +129,13 @@ struct Catalog: Sendable {
       case .downstreamBranches: .downstreamBranches(count: nil)
       case .plenumReturns: .plenumReturns(count: nil)
       case .junction: .junction(path: nil)
+      case .returnJunction: .returnJunction(branchCFM: nil, totalCFM: nil)
       }
     }
 
     enum Kind: String, Decodable, Sendable {
-      case fixed, heightWidth, radiusWidth, downstreamBranches, plenumReturns, junction
+      case fixed, heightWidth, radiusWidth, downstreamBranches, plenumReturns, junction,
+        returnJunction
     }
 
     struct Row: Decodable, Sendable {
@@ -136,6 +143,8 @@ struct Catalog: Sendable {
       let parameter: Double
       let feet: Double
       let path: Fitting.JunctionPath?
+      /// The group 6 trunk column; `feet` holds that row's branch value.
+      let trunkFeet: Double?
     }
   }
 

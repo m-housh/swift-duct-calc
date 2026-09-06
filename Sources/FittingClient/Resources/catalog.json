@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "fitting-catalog-v4",
+  "revision": "fitting-catalog-v5",
   "groups": [
     {
       "id": 1,
@@ -3809,6 +3809,363 @@
         "frictionRateIWCPer100Feet": 0.08,
         "notes": [
           "Short direct connection beneath a ceiling return path."
+        ]
+      }
+    },
+    {
+      "id": "6A",
+      "familyID": "6A",
+      "groupID": 6,
+      "sourceCode": "6A",
+      "name": "Rectangular branch-to-trunk junction, Type A",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-6-enhanced/6A.svg",
+        "revision": "2c085413bef55216506647d0456763e5ed6229ba08c908cc723e52f57dcb4cec",
+        "altText": "6A — Rectangular branch-to-trunk junction, Type A (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "6A-v1",
+      "rule": {
+        "kind": "returnJunction",
+        "firstRowIncludesLowerRatios": true,
+        "rows": [
+          {
+            "key": "6A/0.4",
+            "parameter": 0.4,
+            "feet": 10,
+            "trunkFeet": 10
+          },
+          {
+            "key": "6A/0.5",
+            "parameter": 0.5,
+            "feet": 25,
+            "trunkFeet": 25
+          },
+          {
+            "key": "6A/0.6",
+            "parameter": 0.6,
+            "feet": 40,
+            "trunkFeet": 25
+          },
+          {
+            "key": "6A/0.7",
+            "parameter": 0.7,
+            "feet": 60,
+            "trunkFeet": 25
+          },
+          {
+            "key": "6A/0.8",
+            "parameter": 0.8,
+            "feet": 75,
+            "trunkFeet": 25
+          },
+          {
+            "key": "6A/1",
+            "parameter": 1,
+            "feet": 75,
+            "trunkFeet": null
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "CFM1 is branch airflow; CFM2 is combined downstream trunk airflow. Both must be positive, and branch airflow cannot exceed total airflow.",
+          "Select the nearest published airflow-ratio row; midpoint ties select the higher ratio. Only original table lengths are returned, with no interpolation.",
+          "Use the branch value where a path enters the trunk, and trunk values at subsequent junctions along that path.",
+          "The selected 1.0 ratio row has no applicable trunk value. NA is not a zero-length value.",
+          "The first row includes ratios at or below 0.4."
+        ]
+      }
+    },
+    {
+      "id": "6B",
+      "familyID": "6B",
+      "groupID": 6,
+      "sourceCode": "6B",
+      "name": "Rectangular branch-to-trunk junction, Type B",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-6-enhanced/6B.svg",
+        "revision": "69ceabc90613168132462eaf4f8d98f144bcd475ea3679cdad21dcbdac1d2969",
+        "altText": "6B — Rectangular branch-to-trunk junction, Type B (rectangular)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "6B-v1",
+      "rule": {
+        "kind": "returnJunction",
+        "firstRowIncludesLowerRatios": true,
+        "rows": [
+          {
+            "key": "6B/0.4",
+            "parameter": 0.4,
+            "feet": 10,
+            "trunkFeet": 10
+          },
+          {
+            "key": "6B/0.5",
+            "parameter": 0.5,
+            "feet": 40,
+            "trunkFeet": 25
+          },
+          {
+            "key": "6B/0.6",
+            "parameter": 0.6,
+            "feet": 40,
+            "trunkFeet": 25
+          },
+          {
+            "key": "6B/0.7",
+            "parameter": 0.7,
+            "feet": 75,
+            "trunkFeet": 25
+          },
+          {
+            "key": "6B/0.8",
+            "parameter": 0.8,
+            "feet": 110,
+            "trunkFeet": 25
+          },
+          {
+            "key": "6B/1",
+            "parameter": 1,
+            "feet": 110,
+            "trunkFeet": null
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "CFM1 is branch airflow; CFM2 is combined downstream trunk airflow. Both must be positive, and branch airflow cannot exceed total airflow.",
+          "Select the nearest published airflow-ratio row; midpoint ties select the higher ratio. Only original table lengths are returned, with no interpolation.",
+          "Use the branch value where a path enters the trunk, and trunk values at subsequent junctions along that path.",
+          "The selected 1.0 ratio row has no applicable trunk value. NA is not a zero-length value.",
+          "The first row includes ratios at or below 0.4."
+        ]
+      }
+    },
+    {
+      "id": "6C",
+      "familyID": "6C",
+      "groupID": 6,
+      "sourceCode": "6C",
+      "name": "Round branch to rectangular return trunk",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-6-enhanced/6C.svg",
+        "revision": "ece7ef433c7a21bf1890cac10813b85d4e1f8c8501829aff7d2aafd4d8342fb7",
+        "altText": "6C — Round branch to rectangular return trunk (mixed)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "6C-v1",
+      "rule": {
+        "kind": "returnJunction",
+        "firstRowIncludesLowerRatios": true,
+        "rows": [
+          {
+            "key": "6C/0.4",
+            "parameter": 0.4,
+            "feet": 10,
+            "trunkFeet": 10
+          },
+          {
+            "key": "6C/0.5",
+            "parameter": 0.5,
+            "feet": 30,
+            "trunkFeet": 25
+          },
+          {
+            "key": "6C/0.6",
+            "parameter": 0.6,
+            "feet": 50,
+            "trunkFeet": 25
+          },
+          {
+            "key": "6C/0.7",
+            "parameter": 0.7,
+            "feet": 75,
+            "trunkFeet": 25
+          },
+          {
+            "key": "6C/0.8",
+            "parameter": 0.8,
+            "feet": 115,
+            "trunkFeet": 25
+          },
+          {
+            "key": "6C/1",
+            "parameter": 1,
+            "feet": 115,
+            "trunkFeet": null
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "CFM1 is branch airflow; CFM2 is combined downstream trunk airflow. Both must be positive, and branch airflow cannot exceed total airflow.",
+          "Select the nearest published airflow-ratio row; midpoint ties select the higher ratio. Only original table lengths are returned, with no interpolation.",
+          "Use the branch value where a path enters the trunk, and trunk values at subsequent junctions along that path.",
+          "The selected 1.0 ratio row has no applicable trunk value. NA is not a zero-length value.",
+          "The first row includes ratios at or below 0.4."
+        ]
+      }
+    },
+    {
+      "id": "6D",
+      "familyID": "6D",
+      "groupID": 6,
+      "sourceCode": "6D",
+      "name": "45-degree round branch to round return trunk",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-6-enhanced/6D.svg",
+        "revision": "f12584ea67e283c50c53d6c4c5686ab20fad833fd4a03f2661eba2f72aedde5f",
+        "altText": "6D — 45-degree round branch to round return trunk (round)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "6D-v1",
+      "rule": {
+        "kind": "returnJunction",
+        "firstRowIncludesLowerRatios": false,
+        "rows": [
+          {
+            "key": "6D/0.1",
+            "parameter": 0.1,
+            "feet": 10,
+            "trunkFeet": 5
+          },
+          {
+            "key": "6D/0.2",
+            "parameter": 0.2,
+            "feet": 15,
+            "trunkFeet": 5
+          },
+          {
+            "key": "6D/0.3",
+            "parameter": 0.3,
+            "feet": 20,
+            "trunkFeet": 5
+          },
+          {
+            "key": "6D/0.4",
+            "parameter": 0.4,
+            "feet": 30,
+            "trunkFeet": 5
+          },
+          {
+            "key": "6D/0.6",
+            "parameter": 0.6,
+            "feet": 30,
+            "trunkFeet": 5
+          },
+          {
+            "key": "6D/0.8",
+            "parameter": 0.8,
+            "feet": 30,
+            "trunkFeet": 5
+          },
+          {
+            "key": "6D/1",
+            "parameter": 1,
+            "feet": 30,
+            "trunkFeet": null
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "CFM1 is branch airflow; CFM2 is combined downstream trunk airflow. Both must be positive, and branch airflow cannot exceed total airflow.",
+          "Select the nearest published airflow-ratio row; midpoint ties select the higher ratio. Only original table lengths are returned, with no interpolation.",
+          "Use the branch value where a path enters the trunk, and trunk values at subsequent junctions along that path.",
+          "The selected 1.0 ratio row has no applicable trunk value. NA is not a zero-length value.",
+          "Ratios below 0.1 have no supported source row."
+        ]
+      }
+    },
+    {
+      "id": "6E",
+      "familyID": "6E",
+      "groupID": 6,
+      "sourceCode": "6E",
+      "name": "90-degree round branch to round return trunk",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-6-enhanced/6E.svg",
+        "revision": "cbf2d2947a86d7c462048670b7d3c5d07804b71265d7fb0bfba0f6a2b3a48c02",
+        "altText": "6E — 90-degree round branch to round return trunk (round)",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "6E-v1",
+      "rule": {
+        "kind": "returnJunction",
+        "firstRowIncludesLowerRatios": false,
+        "rows": [
+          {
+            "key": "6E/0.1",
+            "parameter": 0.1,
+            "feet": 15,
+            "trunkFeet": 10
+          },
+          {
+            "key": "6E/0.2",
+            "parameter": 0.2,
+            "feet": 30,
+            "trunkFeet": 10
+          },
+          {
+            "key": "6E/0.3",
+            "parameter": 0.3,
+            "feet": 40,
+            "trunkFeet": 10
+          },
+          {
+            "key": "6E/0.4",
+            "parameter": 0.4,
+            "feet": 40,
+            "trunkFeet": 10
+          },
+          {
+            "key": "6E/0.5",
+            "parameter": 0.5,
+            "feet": 40,
+            "trunkFeet": 25
+          },
+          {
+            "key": "6E/0.8",
+            "parameter": 0.8,
+            "feet": 40,
+            "trunkFeet": 25
+          },
+          {
+            "key": "6E/1",
+            "parameter": 1,
+            "feet": 40,
+            "trunkFeet": null
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 700,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "CFM1 is branch airflow; CFM2 is combined downstream trunk airflow. Both must be positive, and branch airflow cannot exceed total airflow.",
+          "Select the nearest published airflow-ratio row; midpoint ties select the higher ratio. Only original table lengths are returned, with no interpolation.",
+          "Use the branch value where a path enters the trunk, and trunk values at subsequent junctions along that path.",
+          "The selected 1.0 ratio row has no applicable trunk value. NA is not a zero-length value.",
+          "Ratios below 0.1 have no supported source row."
         ]
       }
     },

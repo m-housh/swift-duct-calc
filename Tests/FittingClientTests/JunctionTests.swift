@@ -67,7 +67,7 @@ struct FittingJunctionTests {
     let supply = try await client.groups(.supply)
     #expect(supply.first { $0.id == .supplyJunctions }?.availableFittingCount == 18)
     let returns = try await client.groups(.return)
-    #expect(returns.first { $0.id == .returnBranches }?.availableFittingCount == 11)
+    #expect(returns.first { $0.id == .returnBranches }?.availableFittingCount == 16)
     #expect(returns.first { $0.id == .returnJunctions }?.availableFittingCount == 7)
     let definitions = try await client.fittings(.init(pathType: .supply, groupID: .supplyJunctions))
     let junction = try #require(definitions.first { $0.id == "9A" })

@@ -12,10 +12,10 @@ and its running preview server are unchanged.
 - All shared fitting definitions are in `Sources/ManualDCore/Fittings.swift`.
 - `@Dependency(\.fittingClient)` exposes groups, fitting definitions, artwork,
   equivalent-length evaluation and source-reference resolution.
-- One bundled JSON resource provides canonical group order/eligibility and 135
-  fitting choices: groups 1, 2, 4, 5, 9, and 10, plus return boots 6F–6P. See the
+- One bundled JSON resource provides canonical group order/eligibility and 140
+  fitting choices: groups 1, 2, 4, 5, 6, 9, and 10. See the
   [first catalog expansion](fitting-client-catalog-expansion.md) and the
-  [junction slice and pending interpolation decision](fitting-client-junctions.md).
+  [junction slice and confirmed row-selection policy](fitting-client-junctions.md).
   Empty groups report zero available cases and no representative artwork.
 - `FittingClient.live()` is an async throwing factory. `Live.swift` resolves its
   own bundle resource and reads it through `FileClient.readFile`. Application
@@ -30,6 +30,8 @@ and its running preview server are unchanged.
   checked-in JSON before release. Loading/structural failures throw;
   incomplete inputs, unknown catalog IDs and unsupported conditions return typed
   results. The evaluator does not interpolate or apply velocity corrections.
+  Group 6 airflow ratios select the nearest published row, with midpoint ties
+  upward, and return both branch and trunk values plus selection metadata.
 - New-draft defaults and requirements derive from the same rules used to
   evaluate. Missing submitted inputs are never filled by defaults.
 - Approved SVG paths and revisions are resolved without needing valid calculation
@@ -91,7 +93,7 @@ resource rejection and fractional snapshot encoding. Factory tests cover injecte
 file data, one read per constructed client, and immediate read/decode failures.
 Application tests cover startup failure and middleware injection across requests.
 Test-only fractional values are labeled as contract fixtures, not as source values.
-The expansion audits record numeric coverage for all 135 current fitting choices.
+The expansion audits record numeric coverage for all 140 current fitting choices.
 
 Reproduce with Swift 6.2:
 

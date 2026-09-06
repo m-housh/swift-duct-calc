@@ -62,6 +62,11 @@ struct CatalogValidator {
       if record.rule.kind != .junction {
         try require(rows.allSatisfy { $0.path == nil }, "Unexpected junction path")
       }
+      if record.rule.kind != .returnJunction {
+        try require(
+          record.rule.firstRowIncludesLowerRatios == nil && rows.allSatisfy { $0.trunkFeet == nil },
+          "Unexpected return junction metadata")
+      }
       switch record.rule.kind {
       case .fixed:
         try require(rows.count == 1, "Fixed rule must have one row")
@@ -76,6 +81,21 @@ struct CatalogValidator {
         try require(
           rows.enumerated().allSatisfy { Double($0.offset + 1) == $0.element.parameter },
           "Return buckets must be contiguous from one")
+      case .returnJunction:
+        try require(
+          record.rule.firstRowIncludesLowerRatios != nil, "Missing first-row range policy")
+        try require(
+          rows.allSatisfy { $0.parameter > 0 && $0.parameter <= 1 }
+            && zip(rows, rows.dropFirst()).allSatisfy { $0.parameter < $1.parameter }
+            && rows.last?.parameter == 1,
+          "Return junction ratios must increase to one")
+        try require(
+          rows.allSatisfy { row in
+            if row.parameter == 1 { return row.trunkFeet == nil }
+            guard let feet = row.trunkFeet else { return false }
+            return feet.isFinite && feet > 0
+          },
+          "Return junction trunk values must be positive, with NA only at ratio one")
       case .junction:
         try require(
           rows.count == Fitting.JunctionPath.allCases.count

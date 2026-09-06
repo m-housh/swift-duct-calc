@@ -1,8 +1,9 @@
 # Fitting catalog: return boots and trunk junctions
 
-This slice adds 36 choices, bringing `fitting-catalog-v4` to 135. Group 9 and group
-10 are fully covered; group 6 includes its fixed return boots (6F–6P). The five
-flow-ratio junctions 6A–6E await the interpolation decision below.
+The junction work now covers all of groups 6, 9, and 10. The catalog contains
+140 choices at revision `fitting-catalog-v5`. The latest addition is 6A–6E, using
+the user's confirmed nearest-published-row policy and returning both branch and
+trunk contributions.
 
 ## Behavior and code to review
 
@@ -24,16 +25,21 @@ identify two merging return trunks and refer branch returns to group 6.
 
 Files to review:
 
-- `Sources/ManualDCore/Fittings.swift`: typed junction path, input, requirement,
-  and validation fields/results.
+- `Sources/ManualDCore/Fittings.swift`: typed junction path, airflow inputs,
+  requirements, and a separate paired result for return junctions.
 - `Sources/FittingClient/Internal/Catalog.swift`: optional path on source rows and
   junction presentation requirements.
-- `Sources/FittingClient/Internal/Evaluation.swift`: explicit path lookup.
-- `Sources/FittingClient/Resources/catalog.json`: 36 verified definitions.
+- `Sources/FittingClient/Internal/Evaluation.swift`: explicit group 9 path lookup.
+- `Sources/FittingClient/Internal/ReturnJunction.swift`: group 6 airflow validation,
+  nearest-row selection, and both branch/trunk contributions.
+- `Sources/FittingClient/Resources/catalog.json`: all 41 verified definitions in
+  groups 6, 9, and 10.
 - `Tests/FittingClientTests/JunctionTests.swift`: independent source values, both
   path choices, missing inputs, eligibility, snapshot encoding, and coverage.
 - `Tests/FittingClientTests/CatalogValidator.swift`: test-only validation requires
-  exactly one row per junction path in canonical order.
+  exactly one row per group 9 path, ordered group 6 ratios, and valid trunk cells.
+- `Tests/FittingClientTests/ReturnJunctionTests.swift`: both source columns,
+  midpoint boundaries, range semantics, rounding metadata, and path-total examples.
 
 ## Internal source audit
 
@@ -44,6 +50,8 @@ Viewer-page numbers are one-based; these references remain internal documentatio
 
 | Cases | Viewer pages | Printed page | Verified EL values (ft) |
 | --- | --- | --- | --- |
+| 6A–6C | 25 | 172 | Both columns at ≤0.4, 0.5, 0.6, 0.7, 0.8, 1.0; trunk is NA at 1.0 |
+| 6D–6E | 27 | 173 | Both columns at each printed ratio; trunk is NA at 1.0 |
 | 6F–6H | 28 | 174 | 25, 30, 15 |
 | 6I–6P | 29 | 174 | 30, 55, 10, 20, 20, 10, 10, 5 |
 | 9A–9J | 36–37 | 178 | Branch: 80, 80, 80, 75, 50, 45, 35, 100, 85, 25. Main: 5 for all ten. |
@@ -54,41 +62,74 @@ Viewer-page numbers are one-based; these references remain internal documentatio
 Group 6 and 10 reference velocity is 700 FPM; group 9 is 900 FPM. All use
 0.08 IWC/100 ft. These remain conditions, not a velocity-scaling formula.
 
-All 36 SVG/reference-image pairs match their approved review revisions. Artwork
+All 41 SVG/reference-image pairs match their approved review revisions. Artwork
 paths and descriptive names come from the approved group manifests. 6N's guidance
 retains the source's allowance for a round or square narrow-end connection. No
 artwork or prototype files were modified.
 
-## Pending decision: 6A–6E interpolation
+## Confirmed group 6 lookup policy
 
-The group 6 tables and examples were inspected on viewer pages 25–28 (printed
-172–173). Their ratio is branch airflow CFM1 divided by the combined downstream
-trunk airflow CFM2. Each table distinguishes branch EL from the trunk contribution
-for a path arriving from upstream.
+Use only equivalent lengths in the original table. Compute branch CFM1 / combined
+downstream trunk CFM2, then choose the nearest published ratio row. At the midpoint
+between rows, choose the higher ratio:
 
-The examples demonstrate between-row values:
+| 6A calculated ratio | Selected row | Branch EL | Trunk EL |
+| --- | --- | --- | --- |
+| 0.74 | 0.7 | 60 ft | 25 ft |
+| 0.75 | 0.8 | 75 ft | 25 ft |
 
-- On viewer page 26, 6A at a displayed ratio of 0.75 uses 68 ft. Its neighboring
-  table rows are 0.70 → 60 ft and 0.80 → 75 ft. Linear interpolation at 0.75 is
-  67.5 ft. The example also displays the ratio rounded from 530/707.
-- On viewer page 27, the 6E example uses 35 ft at a displayed ratio of 0.25,
-  between 0.20 → 30 ft and 0.30 → 40 ft.
+The midpoint rule applies to actual neighboring rows, including uneven gaps:
+6D's midpoint between 0.4 and 0.6 is 0.5; 6E's midpoint between 0.5 and 0.8 is
+0.65. No unlisted ratio row or interpolated equivalent length is invented.
 
-The examples support interpolation, but do not specify a general rounding
-procedure for ratios or final lengths. The user prefers the higher equivalent
-length, a visible adjustment indicator, and a 0.5 rounding factor. Clarification
-is pending on whether this means interpolating and rounding up to the next 0.5 ft,
-or selecting the higher neighboring table value. These five cases are not added
-until that distinction is settled.
+The ratio is not rounded for display before row selection. For example,
+530 / 707 ≈ 0.749646 selects 0.7, even though displaying only two decimal places
+would show 0.75. The result preserves the calculated ratio and selected ratio;
+the UI should show enough precision to explain a selection near a boundary.
+Decimal arithmetic constructs the table midpoints so binary representations do
+not send an exact decimal tie such as 0.15 to the lower 0.1 row.
 
-Further semantics to preserve whichever option is selected:
+These limits remain explicit:
 
-- The 0.40-or-less row applies only to 6A–6C; 6D/6E start at 0.10.
-- CFM1/CFM2 = 1 has no applicable trunk value. An NA cell must not become zero or
-  borrow the branch value.
-- The branch and trunk values belong to different path contributions. Evaluation
-  must not automatically add both to a selected fitting.
-- No extrapolation beyond supported source ranges.
+- 6A–6C have a source-defined 0.40-or-less range. Values within that range return
+  its published lengths and are marked `sourceRange`, not `rounded`.
+- 6D/6E have no supported range below 0.10; such inputs remain unresolved.
+- Both airflows must be finite and positive, and branch flow cannot exceed total.
+- An exact row is marked `exact`; any nearest-row adjustment is marked `rounded`.
+- The selected 1.0 row has an NA trunk cell. This remains unavailable even when
+  a nearby ratio rounded to that row; it is never represented as zero.
+- H/W and R/W rules keep their previously reviewed exact-match behavior. This
+  nearest-row policy is specific to group 6 airflow tables.
+
+### Both values and path totals
+
+`Inputs.returnJunction(branchCFM:totalCFM:)` does not ask the caller to discard one
+column. `Evaluation.resolvedReturnJunction` returns a `ReturnJunctionCalculation`
+containing separate `branch` and optional `trunk` components, the original inputs,
+ratio-selection metadata, conditions, and catalog/rule revisions. An unavailable
+trunk component explicitly represents the selected table's NA cell.
+
+The paired result is distinct from a single-length `Calculation`: there is no
+misleading sum or implicit choice of branch versus trunk. Both component keys
+identify their source row and column, e.g. `6A/0.8/branch` and `6A/0.8/trunk`.
+This supplies the future picker with an adjustment indicator and the future
+`ProjectClient` path orchestration with both contributions.
+
+The source's path example on viewer page 26 illustrates where they belong. Each
+path uses its entry branch length, then the trunk contribution at each subsequent
+junction toward the air handler. With the confirmed row-selection policy:
+
+| Path | Fitting contributions | Total fitting length |
+| --- | --- | --- |
+| R1 | Entry branch 75 + R2 trunk 25 + R3 trunk 10 | 110 ft |
+| R2 | Entry branch 60 + R3 trunk 10 | 70 ft |
+| R3 | Entry branch 10 | 10 ft |
+
+R2 uses the unrounded ratio 530/707 and therefore the 0.7 table row. The printed
+worked example uses an intermediate EL of 68; this application intentionally uses
+only the original table values per the user's instruction. Project topology,
+path persistence, and the visible picker indicator will be wired in their own
+integration pass; the evaluator now returns the information they require.
 
 ## Verification
 
@@ -96,7 +137,10 @@ Further semantics to preserve whichever option is selected:
 swift test --filter Fitting --jobs 4
 ```
 
-35 tests pass in seven suites, including 26 added fixed-value fixtures and both
-paths for all ten branch/main junctions. The asset integration check now covers
-all 135 entries. Existing startup, source-table, input-validation, reference lookup,
+43 tests pass in eight suites, including both original table columns for all
+five group 6 junctions, 17 midpoint boundaries (below/at/above each boundary),
+the user's rounding examples, source ranges, NA cells, invalid inputs, paired
+snapshot encoding, and path-total assembly. The 26 fixed-value fixtures and both
+paths for all ten group 9 branch/main junctions also pass. The asset integration
+check now covers all 140 entries. Existing startup, source-table, input-validation, reference lookup,
 and snapshot tests also pass. Step-3 UI and persistence integration remain pending.

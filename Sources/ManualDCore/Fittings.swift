@@ -62,6 +62,8 @@ public enum Fitting {
     /// All return ducts entering the plenum, independent of fitting quantity.
     case plenumReturns(count: Int?)
     case junction(path: JunctionPath?)
+    /// CFM1 entering the branch and CFM2 in the combined downstream trunk.
+    case returnJunction(branchCFM: Double?, totalCFM: Double?)
   }
 
   /// Presentation requirements derived from the same rule used for evaluation.
@@ -72,6 +74,7 @@ public enum Fitting {
     case downstreamBranches(finalBucketMinimum: Int)
     case plenumReturns(finalBucketMinimum: Int)
     case junction
+    case returnJunction(ratios: [Double], firstRowIncludesLowerRatios: Bool)
   }
 
   /// Applicability information for the fitting rule, independent of reference-document format.
@@ -195,17 +198,21 @@ public enum Fitting {
 
     public enum Field: Equatable, Sendable {
       case heightInches, widthInches, radiusInches, downstreamBranches, plenumReturns, junctionPath
+      case branchCFM, totalCFM
     }
 
     public enum Code: Equatable, Sendable {
       case unknownFitting, ineligiblePathType, incompatibleInputs
       case missingInput, nonfiniteInput, nonpositiveDimension, negativeBranchCount
       case unsupportedRatio, nonpositiveReturnCount, unsupportedCombination
+      case nonpositiveAirflow, branchExceedsTotal
     }
   }
 
   public enum Evaluation: Equatable, Sendable {
     case resolved(Calculation)
+    /// Both table contributions; the project selects the appropriate one for each path.
+    case resolvedReturnJunction(ReturnJunctionCalculation)
     case unresolved([Issue])
   }
 
@@ -241,6 +248,52 @@ public enum Fitting {
       public init(ruleKey: String, equivalentLengthFeet: Double) {
         self.ruleKey = ruleKey
         self.equivalentLengthFeet = equivalentLengthFeet
+      }
+    }
+  }
+
+  /// A group 6 table lookup produces two path contributions, not one additive fitting length.
+  public struct ReturnJunctionCalculation: Codable, Equatable, Sendable {
+    public let fittingID: ID
+    public let sourceCode: SourceCode?
+    public let inputs: Inputs
+    public let branch: Calculation.Component
+    /// Nil means the selected source row has no applicable trunk value; it is not zero.
+    public let trunk: Calculation.Component?
+    public let ratioSelection: RatioSelection
+    public let conditions: Conditions
+    public let catalogRevision: String
+    public let ruleRevision: String
+
+    public init(
+      fittingID: ID, sourceCode: SourceCode?, inputs: Inputs,
+      branch: Calculation.Component, trunk: Calculation.Component?, ratioSelection: RatioSelection,
+      conditions: Conditions, catalogRevision: String, ruleRevision: String
+    ) {
+      self.fittingID = fittingID
+      self.sourceCode = sourceCode
+      self.inputs = inputs
+      self.branch = branch
+      self.trunk = trunk
+      self.ratioSelection = ratioSelection
+      self.conditions = conditions
+      self.catalogRevision = catalogRevision
+      self.ruleRevision = ruleRevision
+    }
+
+    public struct RatioSelection: Codable, Equatable, Sendable {
+      public let calculatedRatio: Double
+      public let selectedRatio: Double
+      public let reason: Reason
+
+      public init(calculatedRatio: Double, selectedRatio: Double, reason: Reason) {
+        self.calculatedRatio = calculatedRatio
+        self.selectedRatio = selectedRatio
+        self.reason = reason
+      }
+
+      public enum Reason: String, Codable, Sendable {
+        case exact, rounded, sourceRange
       }
     }
   }

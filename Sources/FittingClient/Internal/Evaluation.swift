@@ -61,6 +61,9 @@ extension Catalog {
         return .unresolved([.init(.unsupportedCombination, field: .junctionPath)])
       }
       row = match
+    case (.returnJunction, .returnJunction(let branchCFM, let totalCFM)):
+      return evaluateReturnJunction(
+        record, request: request, branchCFM: branchCFM, totalCFM: totalCFM)
     default:
       return .unresolved([.init(.incompatibleInputs)])
     }
