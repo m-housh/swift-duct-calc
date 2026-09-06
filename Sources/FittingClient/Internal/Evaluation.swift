@@ -61,6 +61,8 @@ extension Catalog {
         return .unresolved([.init(.unsupportedCombination, field: .junctionPath)])
       }
       row = match
+    case (.roundElbow, .roundElbow(let radiusRatio, let angle)):
+      return evaluateRoundElbow(record, request: request, radiusRatio: radiusRatio, angle: angle)
     case (.pannedReturn, .pannedReturn(let airflowCFM, let mergingFlow)):
       return evaluatePannedReturn(
         record, request: request, airflowCFM: airflowCFM, mergingFlow: mergingFlow)

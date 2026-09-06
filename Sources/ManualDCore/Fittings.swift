@@ -55,6 +55,36 @@ public enum Fitting {
     case branch, main
   }
 
+  /// Published 8A R/D choices. The final choice is an inclusive range, not an exact ratio.
+  public enum RoundElbowRadiusRatio: Double, Codable, CaseIterable, Sendable {
+    case threeQuarters = 0.75
+    case one = 1
+    case oneAndHalfOrGreater = 1.5
+
+    public var label: String {
+      switch self {
+      case .threeQuarters: "0.75"
+      case .one: "1.0"
+      case .oneAndHalfOrGreater: "1.5 or greater"
+      }
+    }
+  }
+
+  /// Published smooth round elbow angles; each fitting advertises its supported subset.
+  public enum ElbowAngle: Int, Codable, CaseIterable, Sendable {
+    case degrees20 = 20
+    case degrees30 = 30
+    case degrees45 = 45
+    case degrees60 = 60
+    case degrees75 = 75
+    case degrees90 = 90
+    case degrees110 = 110
+    case degrees130 = 130
+    case degrees150 = 150
+
+    public var label: String { "\(rawValue)°" }
+  }
+
   public enum Inputs: Codable, Equatable, Sendable {
     case fixed
     case heightWidth(heightInches: Double?, widthInches: Double?)
@@ -66,6 +96,7 @@ public enum Fitting {
     /// CFM1 entering the branch and CFM2 in the combined downstream trunk.
     case returnJunction(branchCFM: Double?, totalCFM: Double?)
     case pannedReturn(airflowCFM: Double?, mergingFlow: Bool)
+    case roundElbow(radiusRatio: RoundElbowRadiusRatio?, angle: ElbowAngle?)
   }
 
   /// Presentation requirements derived from the same rule used for evaluation.
@@ -79,6 +110,7 @@ public enum Fitting {
     case returnJunction(ratios: [Double], firstRowIncludesLowerRatios: Bool)
     /// Airflow must be within the first and last published rows, before rounding.
     case pannedReturn(airflowRows: [Double], supportsMergingFlow: Bool)
+    case roundElbow(radiusRatios: [RoundElbowRadiusRatio], angles: [ElbowAngle])
   }
 
   /// Applicability information for the fitting rule, independent of reference-document format.
@@ -205,6 +237,7 @@ public enum Fitting {
     public enum Field: Equatable, Sendable {
       case heightInches, widthInches, radiusInches, downstreamBranches, plenumReturns, junctionPath
       case branchCFM, totalCFM, airflowCFM, mergingFlow
+      case radiusRatio, elbowAngle
     }
 
     public enum Code: Equatable, Sendable {

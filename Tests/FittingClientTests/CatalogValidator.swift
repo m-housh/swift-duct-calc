@@ -77,7 +77,24 @@ struct CatalogValidator {
           record.rule.kind == .pannedReturn && record.sourceCode == "7C" && feet == 40,
           "Unexpected merging-flow adjustment")
       }
+      if record.rule.kind != .roundElbow {
+        try require(record.rule.angleMultipliers == nil, "Unexpected elbow angle metadata")
+      }
       switch record.rule.kind {
+      case .roundElbow:
+        try require(
+          record.groupID == .elbows && record.sourceCode == "8A" && record.shape == .round
+            && rows.map(\.parameter) == Fitting.RoundElbowRadiusRatio.allCases.map(\.rawValue),
+          "Round elbow must have each published R/D category in order")
+        let factors = record.rule.angleMultipliers ?? []
+        let expectedAngles: [Fitting.ElbowAngle] =
+          record.id == "8A-smooth"
+          ? Fitting.ElbowAngle.allCases : [.degrees90]
+        try require(
+          factors.map(\.angle) == expectedAngles
+            && factors.allSatisfy { $0.multiplier.isFinite && $0.multiplier > 0 }
+            && factors.first { $0.angle == .degrees90 }?.multiplier == 1,
+          "Invalid round elbow angle multipliers")
       case .pannedReturn:
         try require(
           record.groupID == .pannedReturns

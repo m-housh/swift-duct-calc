@@ -18,9 +18,10 @@ started with the dependency-only slice on `codex/fitting-client`; see
 UI and persistence integration are still pending. The reviewed dependency foundation
 now includes async startup loading through `FileClient`; the
 [catalog expansion](fitting-client-catalog-expansion.md),
-[junction slice](fitting-client-junctions.md), and
-[group 7 slice](fitting-client-panned-returns.md) cover 145 fitting choices in groups
-1, 2, 4, 5, 6, 7, 9, and 10. Group 6 uses the confirmed nearest-published-ratio-row
+[junction slice](fitting-client-junctions.md),
+[group 7 slice](fitting-client-panned-returns.md), and
+[8A round elbow slice](fitting-client-round-elbows.md) cover 148 fitting choices in groups
+1, 2, 4, 5, 6, 7, 8 (partial), 9, and 10. Group 6 uses the confirmed nearest-published-ratio-row
 policy (midpoint ties upward) and returns both branch and trunk contributions.
 
 Architecture guidance from the user:
@@ -169,7 +170,11 @@ These are findings/questions for implementation, not new interpretation of the P
    90° value. The heading says “less than 90°” despite listing larger angles;
    retain that discrepancy in internal notes. This decision applies only to
    smooth round elbows and does not authorize interpolation between angle entries.
-   Selection between the published R/D rows remains a separate decision.
+   The user chose typed R/D categories (0.75, 1.0, 1.5 or greater) presented as
+   picker options instead of numeric entry or rounding. Supported angles are also
+   typed choices, defaulting to 90°. This is implemented for the smooth,
+   four/five-piece, and three-piece round constructions; only smooth round
+   elbows offer the additional angle choices. See the [8A implementation notes](fitting-client-round-elbows.md).
 4. **8K:** metadata includes an R/H = 0 value absent from the old lookup. Confirm its applicability
    and include or explicitly withhold the case.
 5. **8L/8M:** replace the old instruction to supply a multiplier-based result with selection and

@@ -112,10 +112,15 @@ struct Catalog: Sendable {
     let rows: [Row]
     let firstRowIncludesLowerRatios: Bool?
     let mergingFlowFeet: Double?
+    let angleMultipliers: [AngleMultiplier]?
 
     var requirement: Fitting.InputRequirement {
       switch kind {
       case .fixed: .fixed
+      case .roundElbow:
+        .roundElbow(
+          radiusRatios: rows.compactMap { Fitting.RoundElbowRadiusRatio(rawValue: $0.parameter) },
+          angles: (angleMultipliers ?? []).map(\.angle))
       case .heightWidth: .heightWidth(exactRatios: rows.map(\.parameter))
       case .radiusWidth: .radiusWidth(exactRatios: rows.map(\.parameter))
       case .downstreamBranches: .downstreamBranches(finalBucketMinimum: rows.count - 1)
@@ -134,6 +139,7 @@ struct Catalog: Sendable {
     var defaultInputs: Fitting.Inputs {
       switch kind {
       case .fixed: .fixed
+      case .roundElbow: .roundElbow(radiusRatio: nil, angle: .degrees90)
       case .heightWidth: .heightWidth(heightInches: nil, widthInches: nil)
       case .radiusWidth: .radiusWidth(radiusInches: nil, widthInches: nil)
       case .downstreamBranches: .downstreamBranches(count: nil)
@@ -146,7 +152,12 @@ struct Catalog: Sendable {
 
     enum Kind: String, Decodable, Sendable {
       case fixed, heightWidth, radiusWidth, downstreamBranches, plenumReturns, junction,
-        returnJunction, pannedReturn
+        returnJunction, pannedReturn, roundElbow
+    }
+
+    struct AngleMultiplier: Decodable, Sendable {
+      let angle: Fitting.ElbowAngle
+      let multiplier: Double
     }
 
     struct Row: Decodable, Sendable {

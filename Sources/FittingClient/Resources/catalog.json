@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "fitting-catalog-v6",
+  "revision": "fitting-catalog-v7",
   "groups": [
     {
       "id": 1,
@@ -4787,6 +4787,188 @@
           "Obstructions are not covered by a sizing procedure; leakage can affect loads, pressure, and indoor air quality.",
           "Supported airflow: 200–800 CFM. Select the nearest published row; midpoint ties use the higher CFM row.",
           "A floor grille feeds two adjacent panned joist spaces; source limit is 800 CFM in the double space."
+        ]
+      }
+    },
+    {
+      "id": "8A-smooth",
+      "familyID": "8A",
+      "groupID": 8,
+      "sourceCode": "8A",
+      "name": "Smooth round radius elbow",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8A-smooth.svg",
+        "revision": "d32708430100abaefb130bbb625cddb21c2cc6f456cf9cde58d990a03eb215e2",
+        "altText": "8A — Smooth round radius elbow",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8A-smooth-v1",
+      "rule": {
+        "kind": "roundElbow",
+        "rows": [
+          {
+            "key": "8A-smooth:rd:0.75",
+            "parameter": 0.75,
+            "feet": 20
+          },
+          {
+            "key": "8A-smooth:rd:1",
+            "parameter": 1,
+            "feet": 15
+          },
+          {
+            "key": "8A-smooth:rd:1.5",
+            "parameter": 1.5,
+            "feet": 10
+          }
+        ],
+        "angleMultipliers": [
+          {
+            "angle": 20,
+            "multiplier": 0.31
+          },
+          {
+            "angle": 30,
+            "multiplier": 0.45
+          },
+          {
+            "angle": 45,
+            "multiplier": 0.6
+          },
+          {
+            "angle": 60,
+            "multiplier": 0.78
+          },
+          {
+            "angle": 75,
+            "multiplier": 0.9
+          },
+          {
+            "angle": 90,
+            "multiplier": 1
+          },
+          {
+            "angle": 110,
+            "multiplier": 1.13
+          },
+          {
+            "angle": 130,
+            "multiplier": 1.2
+          },
+          {
+            "angle": 150,
+            "multiplier": 1.28
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Select the published R/D category: 0.75, 1.0, or 1.5 or greater.",
+          "For smooth round elbows, apply the listed angle multiplier to the 90° equivalent length."
+        ]
+      }
+    },
+    {
+      "id": "8A-4-or-5-piece",
+      "familyID": "8A",
+      "groupID": 8,
+      "sourceCode": "8A",
+      "name": "Four- or five-piece round elbow",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8A-4-or-5-piece.svg",
+        "revision": "9a4230f6863467e27d3d9e8b1afefa13cc50aff30423cee8784c943ad0d9736f",
+        "altText": "8A — Four- or five-piece round elbow",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8A-4-or-5-piece-v1",
+      "rule": {
+        "kind": "roundElbow",
+        "rows": [
+          {
+            "key": "8A-4-or-5-piece:rd:0.75",
+            "parameter": 0.75,
+            "feet": 30
+          },
+          {
+            "key": "8A-4-or-5-piece:rd:1",
+            "parameter": 1,
+            "feet": 20
+          },
+          {
+            "key": "8A-4-or-5-piece:rd:1.5",
+            "parameter": 1.5,
+            "feet": 15
+          }
+        ],
+        "angleMultipliers": [
+          {
+            "angle": 90,
+            "multiplier": 1
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Select the published R/D category: 0.75, 1.0, or 1.5 or greater.",
+          "This construction uses the published 90° table values."
+        ]
+      }
+    },
+    {
+      "id": "8A-3-piece",
+      "familyID": "8A",
+      "groupID": 8,
+      "sourceCode": "8A",
+      "name": "Three-piece round elbow",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8A-3-piece.svg",
+        "revision": "4c9d4f7434ca5a3ddd52e4da7415c41440f907d908ba3afa252ec1e88b3613f0",
+        "altText": "8A — Three-piece round elbow",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8A-3-piece-v1",
+      "rule": {
+        "kind": "roundElbow",
+        "rows": [
+          {
+            "key": "8A-3-piece:rd:0.75",
+            "parameter": 0.75,
+            "feet": 35
+          },
+          {
+            "key": "8A-3-piece:rd:1",
+            "parameter": 1,
+            "feet": 25
+          },
+          {
+            "key": "8A-3-piece:rd:1.5",
+            "parameter": 1.5,
+            "feet": 20
+          }
+        ],
+        "angleMultipliers": [
+          {
+            "angle": 90,
+            "multiplier": 1
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Select the published R/D category: 0.75, 1.0, or 1.5 or greater.",
+          "This construction uses the published 90° table values."
         ]
       }
     },
