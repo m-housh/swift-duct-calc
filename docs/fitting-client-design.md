@@ -82,7 +82,8 @@ the value is verified or reveal which construction the user consulted.
 ## Shared types and identity
 
 Proposed namespace: `Fitting` in `ManualDCore`, following the repository's nested
-model style. Keep it distinct from the existing persisted
+model style. All shared fitting definitions belong together in
+`Sources/ManualDCore/Fittings.swift`, per the user's file-layout direction. Keep it distinct from the existing persisted
 `EquivalentLength.FittingGroup`; this review does not replace that structure.
 
 | Type | Proposed contents |
@@ -170,11 +171,7 @@ Exact cases, methods and form encodings belong to the following UI/request revie
 ```text
 Sources/
   ManualDCore/
-    Fitting.swift                         # namespace, group and fitting IDs
-    Fitting+Definition.swift              # catalog and source contracts
-    Fitting+Inputs.swift                  # typed drafts/defaults
-    Fitting+Evaluation.swift              # result, issues and provenance
-    Fitting+Artwork.swift                 # artwork request/result
+    Fittings.swift                       # all shared fitting definitions
   FittingClient/
     Interface.swift                      # dependency operations + testValue
     Live.swift                           # live closures
@@ -194,8 +191,11 @@ Tests/
     ReferenceResolutionTests.swift
 ```
 
-Names are proposals, not instructions to create every file immediately. Start
-small and split helpers when there is enough behavior to justify the file.
+`Sources/ManualDCore/Fittings.swift` is the agreed location for all shared fitting
+definitions: identities, catalog/source contracts, inputs/defaults, evaluation
+results/issues/provenance, and artwork requests/results. Do not split these into
+`Fitting+<Type>.swift` files. The remaining client/helper filenames are proposals;
+start small rather than creating every helper file immediately.
 
 Add a library and target for `FittingClient`, with direct dependencies on
 `ManualDCore`, `Dependencies`, and `DependenciesMacros`. `ProjectClient` and
