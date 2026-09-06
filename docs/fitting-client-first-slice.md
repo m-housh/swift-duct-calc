@@ -15,7 +15,10 @@ and its running preview server are unchanged.
 - One bundled JSON resource provides canonical group order/eligibility and five
   initial fitting definitions: 1F, 2A, 4A, 5A rectangular and 5A round (source 5B).
   Empty groups report zero available cases and no representative artwork.
-- The resource loads and validates once. Invalid packaged metadata throws;
+- `Live.swift` loads the bundled resource once while constructing the live client
+  and captures its catalog or loading error in the operation closures. `Catalog`
+  receives `Data` and handles decoding/validation without bundle or filesystem
+  knowledge. Invalid packaged metadata throws;
   incomplete inputs, unknown catalog IDs and unsupported conditions return typed
   results. The evaluator does not interpolate or apply velocity corrections.
 - New-draft defaults and requirements derive from the same rules used to

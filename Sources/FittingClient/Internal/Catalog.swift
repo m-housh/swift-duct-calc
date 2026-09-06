@@ -85,13 +85,6 @@ struct Catalog: Sendable {
     byID = Dictionary(uniqueKeysWithValues: records.map { ($0.id, $0) })
   }
 
-  static let bundled: Result<Catalog, Error> = Result {
-    guard let url = Bundle.module.url(forResource: "catalog", withExtension: "json") else {
-      throw FittingClientError.missingCatalog
-    }
-    return try Catalog(data: Data(contentsOf: url))
-  }
-
   func groups(for pathType: Fitting.PathType) -> [Fitting.Group] {
     groupRecords.filter { $0.pathTypes.contains(pathType) }.map { group in
       let fittings = records.filter { $0.groupID == group.id }

@@ -1,10 +1,9 @@
 import Dependencies
 import DependenciesTestSupport
+import FittingClient
 import Foundation
 import ManualDCore
 import Testing
-
-@testable import FittingClient
 
 @Suite(.dependencies { $0.fittingClient = FittingClient.liveValue })
 struct FittingCatalogTests {
@@ -78,15 +77,25 @@ struct FittingCatalogTests {
     #expect(unknown == .unavailable(.unknownFitting))
   }
 
-  @Test func packagedReferencesPointToExistingApprovedAssets() throws {
+  @Test func packagedReferencesPointToExistingApprovedAssets() async throws {
     let root = URL(fileURLWithPath: #filePath)
       .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
-    let catalog = try Catalog.bundled.get()
-    for record in catalog.records {
-      let svg = root.appendingPathComponent("Public" + record.artwork.publicPath)
-      #expect(try String(contentsOf: svg, encoding: .utf8).contains("<svg"))
-
+    var checked: Set<Fitting.ID> = []
+    for pathType in [Fitting.PathType.supply, .return] {
+      for group in try await client.groups(pathType) {
+        let definitions = try await client.fittings(.init(pathType: pathType, groupID: group.id))
+        for definition in definitions where checked.insert(definition.id).inserted {
+          let result = try await client.artwork(.init(fittingID: definition.id))
+          guard case .available(let artwork) = result else {
+            Issue.record("Missing artwork for \(definition.id)")
+            continue
+          }
+          let svg = root.appendingPathComponent("Public" + artwork.publicPath)
+          #expect(try String(contentsOf: svg, encoding: .utf8).contains("<svg"))
+        }
+      }
     }
+    #expect(checked.count == 5)
   }
 
   @Test func dependencyCanBeReplacedWithoutLoadingCatalogOrProjects() async throws {
