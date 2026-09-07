@@ -9,13 +9,18 @@ extension Catalog {
     }
     let row: Rule.Row
     switch (record.rule.kind, request.inputs) {
+    case (.squareElbow, .squareElbow), (.steppedOffset, .steppedOffset),
+      (.fourTurnOffset, .fourTurnOffset), (.radiusOffset, .radiusOffset),
+      (.riserElbow, .riserElbow):
+      return evaluateOffset(record, request: request)
     case (.fixed, .fixed):
       row = record.rule.rows[0]
     case (.ovalElbow, .ovalElbow(let pieceCount)):
       guard let pieceCount else {
         return .unresolved([.init(.missingInput, field: .pieceCount)])
       }
-      guard let match = record.rule.rows.first(where: { $0.parameter == Double(pieceCount.rawValue) })
+      guard
+        let match = record.rule.rows.first(where: { $0.parameter == Double(pieceCount.rawValue) })
       else {
         return .unresolved([.init(.unsupportedCombination, field: .pieceCount)])
       }

@@ -117,6 +117,32 @@ struct Catalog: Sendable {
     var requirement: Fitting.InputRequirement {
       switch kind {
       case .fixed: .fixed
+      case .squareElbow: .squareElbow(bendCategories: rows.compactMap(\.bendCategory))
+      case .steppedOffset:
+        .steppedOffset(
+          lengthHeightRatios: rows.compactMap {
+            Fitting.OffsetLengthHeightRatio(rawValue: $0.parameter)
+          })
+      case .fourTurnOffset:
+        .fourTurnOffset(
+          heightLengthRatios: rows.compactMap {
+            Fitting.OffsetHeightLengthRatio(rawValue: $0.parameter)
+          },
+          vanedRatios: rows.filter { $0.vanedFeet != nil }.compactMap {
+            Fitting.OffsetHeightLengthRatio(rawValue: $0.parameter)
+          })
+      case .radiusOffset:
+        .radiusOffset(
+          radiusHeightRatios: rows.compactMap {
+            Fitting.OffsetRadiusHeightRatio(rawValue: $0.parameter)
+          })
+      case .riserElbow:
+        .riserElbow(
+          sizes: Fitting.RiserSize.allCases.filter { size in rows.contains { $0.riserSize == size }
+          },
+          corners: Fitting.RiserCorner.allCases.filter { corner in
+            rows.contains { $0.riserCorner == corner }
+          })
       case .ovalElbow:
         .ovalElbow(
           pieceCounts: Fitting.OvalElbowPieceCount.allCases.filter { count in
@@ -153,6 +179,11 @@ struct Catalog: Sendable {
     var defaultInputs: Fitting.Inputs {
       switch kind {
       case .fixed: .fixed
+      case .squareElbow: .squareElbow(bendCategory: nil)
+      case .steppedOffset: .steppedOffset(lengthHeightRatio: nil)
+      case .fourTurnOffset: .fourTurnOffset(heightLengthRatio: nil, turningVanes: false)
+      case .radiusOffset: .radiusOffset(radiusHeightRatio: nil)
+      case .riserElbow: .riserElbow(size: nil, corner: nil)
       case .ovalElbow: .ovalElbow(pieceCount: nil)
       case .roundElbow: .roundElbow(radiusRatio: nil, angle: .degrees90)
       case .rectangularElbow:
@@ -169,7 +200,8 @@ struct Catalog: Sendable {
 
     enum Kind: String, Decodable, Sendable {
       case fixed, heightWidth, radiusWidth, downstreamBranches, plenumReturns, junction,
-        returnJunction, pannedReturn, roundElbow, rectangularElbow, ovalElbow
+        returnJunction, pannedReturn, roundElbow, rectangularElbow, ovalElbow,
+        squareElbow, steppedOffset, fourTurnOffset, radiusOffset, riserElbow
     }
 
     struct AngleMultiplier: Decodable, Sendable {
@@ -183,6 +215,9 @@ struct Catalog: Sendable {
       let feet: Double
       let path: Fitting.JunctionPath?
       let bendCategory: Fitting.ElbowBendCategory?
+      let vanedFeet: Double?
+      let riserSize: Fitting.RiserSize?
+      let riserCorner: Fitting.RiserCorner?
       /// The group 6 trunk column; `feet` holds that row's branch value.
       let trunkFeet: Double?
     }

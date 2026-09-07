@@ -39,6 +39,8 @@ visual-review hash; no artwork or prototype files changed.
 
 ## Verification
 
+At this slice, the fitting suite passed 62 tests across 12 suites with Swift 6.2.
+
 `swift test --filter Fitting --jobs 4` covers all seven new source values on both
 path types, missing and incompatible inputs, unsupported piece-count decoding,
 snapshot round trips, all eight source identities, and artwork before selection.

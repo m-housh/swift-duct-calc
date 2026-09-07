@@ -120,6 +120,54 @@ public enum Fitting {
     public var label: String { "\(rawValue)-piece" }
   }
 
+  public enum OffsetLengthHeightRatio: Double, Codable, CaseIterable, Sendable {
+    case one = 1
+    case two = 2
+    case four = 4
+
+    public var label: String { String(rawValue) }
+  }
+
+  public enum OffsetHeightLengthRatio: Double, Codable, CaseIterable, Sendable {
+    case oneHalf = 0.5
+    case one = 1
+    case oneAndHalf = 1.5
+    case two = 2
+
+    public var label: String { String(rawValue) }
+  }
+
+  public enum OffsetRadiusHeightRatio: Double, Codable, CaseIterable, Sendable {
+    case mitered = 0
+    case oneQuarter = 0.25
+    case oneHalf = 0.5
+    case one = 1
+
+    public var label: String {
+      self == .mitered ? "Mitered (R/H = 0)" : String(rawValue)
+    }
+  }
+
+  public enum RiserSize: String, Codable, CaseIterable, Sendable {
+    case threeAndQuarterByTen = "3.25x10"
+    case threeAndQuarterByTwelve = "3.25x12"
+    case threeAndQuarterByFourteen = "3.25x14"
+
+    public var label: String {
+      switch self {
+      case .threeAndQuarterByTen: "3¼ × 10 inches"
+      case .threeAndQuarterByTwelve: "3¼ × 12 inches"
+      case .threeAndQuarterByFourteen: "3¼ × 14 inches"
+      }
+    }
+  }
+
+  public enum RiserCorner: String, Codable, CaseIterable, Sendable {
+    case miter, radius
+
+    public var label: String { self == .miter ? "Mitered inside corners" : "Radius inside corners" }
+  }
+
   public enum Inputs: Codable, Equatable, Sendable {
     case fixed
     case heightWidth(heightInches: Double?, widthInches: Double?)
@@ -133,6 +181,11 @@ public enum Fitting {
     case pannedReturn(airflowCFM: Double?, mergingFlow: Bool)
     case roundElbow(radiusRatio: RoundElbowRadiusRatio?, angle: ElbowAngle?)
     case ovalElbow(pieceCount: OvalElbowPieceCount?)
+    case squareElbow(bendCategory: ElbowBendCategory?)
+    case steppedOffset(lengthHeightRatio: OffsetLengthHeightRatio?)
+    case fourTurnOffset(heightLengthRatio: OffsetHeightLengthRatio?, turningVanes: Bool)
+    case radiusOffset(radiusHeightRatio: OffsetRadiusHeightRatio?)
+    case riserElbow(size: RiserSize?, corner: RiserCorner?)
     case rectangularElbow(
       radiusRatio: RectangularElbowRadiusRatio?, bendCategory: ElbowBendCategory?,
       angle: ElbowAngle?)
@@ -151,6 +204,12 @@ public enum Fitting {
     case pannedReturn(airflowRows: [Double], supportsMergingFlow: Bool)
     case roundElbow(radiusRatios: [RoundElbowRadiusRatio], angles: [ElbowAngle])
     case ovalElbow(pieceCounts: [OvalElbowPieceCount])
+    case squareElbow(bendCategories: [ElbowBendCategory])
+    case steppedOffset(lengthHeightRatios: [OffsetLengthHeightRatio])
+    case fourTurnOffset(
+      heightLengthRatios: [OffsetHeightLengthRatio], vanedRatios: [OffsetHeightLengthRatio])
+    case radiusOffset(radiusHeightRatios: [OffsetRadiusHeightRatio])
+    case riserElbow(sizes: [RiserSize], corners: [RiserCorner])
     case rectangularElbow(
       radiusRatios: [RectangularElbowRadiusRatio], bendCategories: [ElbowBendCategory],
       angles: [ElbowAngle])
@@ -281,6 +340,7 @@ public enum Fitting {
       case heightInches, widthInches, radiusInches, downstreamBranches, plenumReturns, junctionPath
       case branchCFM, totalCFM, airflowCFM, mergingFlow
       case radiusRatio, elbowAngle, bendCategory, pieceCount
+      case offsetRatio, turningVanes, riserSize, riserCorner
     }
 
     public enum Code: Equatable, Sendable {

@@ -76,4 +76,5 @@ R/W/category pair occurs once in canonical order and that angle factors match th
 source. Existing round elbow tests remain scoped to the 8A family.
 
 The [other 8A constructions](fitting-client-8a-constructions.md) are now implemented.
-Group 8 remains partially implemented: 8D–8P still need implementation. Rules will continue to be reviewed one group at a time.
+The [offset slice](fitting-client-offsets.md) now covers 8D–8K, 8N, and 8P.
+Group 8 remains partially implemented: 8L/8M and 8O still need implementation. Rules will continue to be reviewed one group at a time.

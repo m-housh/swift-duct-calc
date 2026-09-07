@@ -80,15 +80,60 @@ struct CatalogValidator {
       if record.rule.kind != .roundElbow && record.rule.kind != .rectangularElbow {
         try require(record.rule.angleMultipliers == nil, "Unexpected elbow angle metadata")
       }
-      if record.rule.kind != .rectangularElbow {
+      if record.rule.kind != .rectangularElbow && record.rule.kind != .squareElbow {
         try require(rows.allSatisfy { $0.bendCategory == nil }, "Unexpected bend category")
       }
+      if record.rule.kind != .fourTurnOffset {
+        try require(rows.allSatisfy { $0.vanedFeet == nil }, "Unexpected offset vane values")
+      }
+      if record.rule.kind != .riserElbow {
+        try require(
+          rows.allSatisfy { $0.riserSize == nil && $0.riserCorner == nil },
+          "Unexpected riser metadata")
+      }
       switch record.rule.kind {
+      case .squareElbow:
+        try require(
+          ["8D", "8E"].contains(record.sourceCode?.rawValue) && record.shape == .rectangular
+            && rows.count == Fitting.ElbowBendCategory.allCases.count
+            && rows.compactMap(\.bendCategory) == Fitting.ElbowBendCategory.allCases,
+          "Square elbow must have each bend category in order")
+      case .steppedOffset:
+        try require(
+          record.sourceCode == "8F"
+            && rows.map(\.parameter) == Fitting.OffsetLengthHeightRatio.allCases.map(\.rawValue),
+          "Stepped offset must have each published L/H ratio in order")
+      case .fourTurnOffset:
+        try require(
+          record.sourceCode == "8H"
+            && rows.map(\.parameter) == Fitting.OffsetHeightLengthRatio.allCases.map(\.rawValue)
+            && rows.allSatisfy { row in
+              if row.parameter == 0.5 { return row.vanedFeet == nil }
+              guard let feet = row.vanedFeet else { return false }
+              return feet.isFinite && feet > 0
+            },
+          "Four-turn offset must preserve published ratios and unavailable vane cell")
+      case .radiusOffset:
+        try require(
+          record.sourceCode == "8K"
+            && rows.map(\.parameter) == Fitting.OffsetRadiusHeightRatio.allCases.map(\.rawValue),
+          "Radius offset must have each published R/H ratio including zero in order")
+      case .riserElbow:
+        let sizes = Fitting.RiserSize.allCases
+        let corners = Fitting.RiserCorner.allCases
+        try require(
+          record.sourceCode == "8P" && rows.count == sizes.count * corners.count
+            && rows.enumerated().allSatisfy { index, row in
+              row.riserSize == sizes[index / corners.count]
+                && row.riserCorner == corners[index % corners.count]
+            },
+          "Riser elbow must have each size and inside-corner pair in order")
       case .ovalElbow:
         try require(
           record.groupID == .elbows && record.sourceCode == "8A" && record.shape == .oval
             && ["8A-easy-bend", "8A-hard-bend"].contains(record.id.rawValue)
-            && rows.map(\.parameter) == Fitting.OvalElbowPieceCount.allCases.map { Double($0.rawValue) },
+            && rows.map(\.parameter)
+              == Fitting.OvalElbowPieceCount.allCases.map { Double($0.rawValue) },
           "Oval elbow must have each published piece count in order")
       case .rectangularElbow:
         let ratios = Fitting.RectangularElbowRadiusRatio.allCases

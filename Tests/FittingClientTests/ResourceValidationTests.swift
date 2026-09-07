@@ -106,6 +106,27 @@ struct FittingResourceValidationTests {
     }
   }
 
+  @Test(arguments: ["8H", "8K", "8P"])
+  func alteredOffsetCoverageIsRejected(id: String) throws {
+    var doc = try document()
+    var records = try #require(doc["fittings"] as? [[String: Any]])
+    let index = try #require(records.firstIndex { ($0["id"] as? String) == id })
+    var rule = try #require(records[index]["rule"] as? [String: Any])
+    var rows = try #require(rule["rows"] as? [[String: Any]])
+    switch id {
+    case "8H": rows[0]["vanedFeet"] = 55 // The source has a dash, not a usable length.
+    case "8K": rows.removeFirst() // Mitered R/H = 0 is a supported source row.
+    default: rows[1]["riserCorner"] = "miter" // Must retain both corner constructions.
+    }
+    rule["rows"] = rows
+    records[index]["rule"] = rule
+    doc["fittings"] = records
+    let data = try JSONSerialization.data(withJSONObject: doc)
+    #expect(throws: CatalogValidator.ValidationError.self) {
+      try CatalogValidator.validate(JSONDecoder().decode(Catalog.Document.self, from: data))
+    }
+  }
+
   @Test(arguments: ["duplicateView", "alternateTraversal", "unorderedAirflow", "wrongAdjustment"])
   func invalidPannedReturnMetadataIsRejected(fault: String) throws {
     var doc = try document()

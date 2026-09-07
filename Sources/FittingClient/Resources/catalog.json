@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "fitting-catalog-v9",
+  "revision": "fitting-catalog-v10",
   "groups": [
     {
       "id": 1,
@@ -5348,6 +5348,443 @@
           "Select the published R/W category: mitered (0), 0.25, or 0.5 or greater.",
           "Select the hard-bend, square cross-section (H/W = 1), or easy-bend table column.",
           "Apply the listed angle multiplier to the 90° equivalent length."
+        ]
+      }
+    },
+    {
+      "id": "8D",
+      "familyID": "8D",
+      "groupID": 8,
+      "sourceCode": "8D",
+      "name": "Square elbow without turning vanes",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8D.svg",
+        "revision": "83692e33582ac471ffafb004a95b754f05b0e348186a1f1db2c8983706994ec9",
+        "altText": "8D — Square elbow without turning vanes",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8D-v1",
+      "rule": {
+        "kind": "squareElbow",
+        "rows": [
+          {
+            "key": "8D:hardBend",
+            "parameter": 0,
+            "feet": 80,
+            "bendCategory": "hardBend"
+          },
+          {
+            "key": "8D:square",
+            "parameter": 0,
+            "feet": 80,
+            "bendCategory": "square"
+          },
+          {
+            "key": "8D:easyBend",
+            "parameter": 0,
+            "feet": 65,
+            "bendCategory": "easyBend"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Square 90° elbow without turning vanes; select the illustrated bend category."
+        ]
+      }
+    },
+    {
+      "id": "8E",
+      "familyID": "8E",
+      "groupID": 8,
+      "sourceCode": "8E",
+      "name": "Square elbow with single-thickness turning vanes",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8E.svg",
+        "revision": "ff5c781fa512fb52faa5024777a6fcfba82322df4df37cc6d658d1c79cdf47ad",
+        "altText": "8E — Square elbow with single-thickness turning vanes",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8E-v1",
+      "rule": {
+        "kind": "squareElbow",
+        "rows": [
+          {
+            "key": "8E:hardBend",
+            "parameter": 0,
+            "feet": 10,
+            "bendCategory": "hardBend"
+          },
+          {
+            "key": "8E:square",
+            "parameter": 0,
+            "feet": 10,
+            "bendCategory": "square"
+          },
+          {
+            "key": "8E:easyBend",
+            "parameter": 0,
+            "feet": 10,
+            "bendCategory": "easyBend"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Square 90° elbow with single-thickness turning vanes; select the illustrated bend category."
+        ]
+      }
+    },
+    {
+      "id": "8F",
+      "familyID": "8F",
+      "groupID": 8,
+      "sourceCode": "8F",
+      "name": "Rectangular stepped offset without vanes",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8F.svg",
+        "revision": "ab56b807eafaaf1675f66a405fbb19d07c3d4bd237819923172075955053fe18",
+        "altText": "8F — Rectangular stepped offset without vanes",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8F-v1",
+      "rule": {
+        "kind": "steppedOffset",
+        "rows": [
+          {
+            "key": "8F:ratio:1",
+            "parameter": 1,
+            "feet": 160
+          },
+          {
+            "key": "8F:ratio:2",
+            "parameter": 2,
+            "feet": 260
+          },
+          {
+            "key": "8F:ratio:4",
+            "parameter": 4,
+            "feet": 190
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Offset without vanes. Select the exact published L/H ratio using the dimensions shown in the drawing."
+        ]
+      }
+    },
+    {
+      "id": "8G",
+      "familyID": "8G",
+      "groupID": 8,
+      "sourceCode": "8G",
+      "name": "Compact square offset without vanes",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8G.svg",
+        "revision": "411a761a2aebbc074dcc60a6a267a8be838b2fed5746cfbd97c86fe09b41ee8a",
+        "altText": "8G — Compact square offset without vanes",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8G-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "8G",
+            "parameter": 0,
+            "feet": 200
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Compact square offset without vanes. The listed length covers the whole illustrated fitting."
+        ]
+      }
+    },
+    {
+      "id": "8H",
+      "familyID": "8H",
+      "groupID": 8,
+      "sourceCode": "8H",
+      "name": "Four-turn rectangular offset",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8H.svg",
+        "revision": "efcacfcbb6d0f73d6e31741c26a4239054627130b992f88b334df98c49e3f13b",
+        "altText": "8H — Four-turn rectangular offset",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8H-v1",
+      "rule": {
+        "kind": "fourTurnOffset",
+        "rows": [
+          {
+            "key": "8H:ratio:0.5",
+            "parameter": 0.5,
+            "feet": 55
+          },
+          {
+            "key": "8H:ratio:1",
+            "parameter": 1,
+            "feet": 330,
+            "vanedFeet": 55
+          },
+          {
+            "key": "8H:ratio:1.5",
+            "parameter": 1.5,
+            "feet": 430,
+            "vanedFeet": 55
+          },
+          {
+            "key": "8H:ratio:2",
+            "parameter": 2,
+            "feet": 470,
+            "vanedFeet": 55
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Select the exact published H/L ratio. H/L = 0.5 with turning vanes has no supported source value."
+        ]
+      }
+    },
+    {
+      "id": "8I",
+      "familyID": "8I",
+      "groupID": 8,
+      "sourceCode": "8I",
+      "name": "Gradual rectangular offset",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8I.svg",
+        "revision": "4d19da12ee3e4dce1d6e29ea297a2d8d13ef4db48d05c37858ff3037a352b6c5",
+        "altText": "8I — Gradual rectangular offset",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8I-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "8I",
+            "parameter": 0,
+            "feet": 20
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "The listed length covers the whole illustrated gradual offset."
+        ]
+      }
+    },
+    {
+      "id": "8J",
+      "familyID": "8J",
+      "groupID": 8,
+      "sourceCode": "8J",
+      "name": "Rectangular offset with four 45-degree elbows",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8J.svg",
+        "revision": "d8fb83ef5f01fe98a7a2e2d67c71ff37f6bddb4bf590fdf4723a10dc3db9f428",
+        "altText": "8J — Rectangular offset with four 45-degree elbows",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8J-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "8J",
+            "parameter": 0,
+            "feet": 20
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "The listed length covers all four 45° elbows in the illustrated offset; do not multiply it by four."
+        ]
+      }
+    },
+    {
+      "id": "8K",
+      "familyID": "8K",
+      "groupID": 8,
+      "sourceCode": "8K",
+      "name": "Rectangular offset with four 90-degree elbows",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8K.svg",
+        "revision": "42caa077c473191089381da3c1820133430beafff20d627c301cb5a424fef588",
+        "altText": "8K — Rectangular offset with four 90-degree elbows",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8K-v1",
+      "rule": {
+        "kind": "radiusOffset",
+        "rows": [
+          {
+            "key": "8K:ratio:0",
+            "parameter": 0,
+            "feet": 250
+          },
+          {
+            "key": "8K:ratio:0.25",
+            "parameter": 0.25,
+            "feet": 100
+          },
+          {
+            "key": "8K:ratio:0.5",
+            "parameter": 0.5,
+            "feet": 20
+          },
+          {
+            "key": "8K:ratio:1",
+            "parameter": 1,
+            "feet": 20
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "R is the inside radius; H is duct height. Select the exact published R/H ratio, including mitered R = 0.",
+          "The listed length covers all four 90° elbows in the illustrated offset; do not multiply it by four."
+        ]
+      }
+    },
+    {
+      "id": "8N",
+      "familyID": "8N",
+      "groupID": 8,
+      "sourceCode": "8N",
+      "name": "Angled rectangular offset",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8N.svg",
+        "revision": "d14c89e24a170e0ebf8be504ca31bfff9971e4cb688c7d11edc08dd9b708f591",
+        "altText": "8N — Angled rectangular offset",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8N-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "8N",
+            "parameter": 0,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "The listed length covers the whole illustrated angled offset."
+        ]
+      }
+    },
+    {
+      "id": "8P",
+      "familyID": "8P",
+      "groupID": 8,
+      "sourceCode": "8P",
+      "name": "Rectangular riser elbow",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8P.svg",
+        "revision": "1620132a63aa0d838225eafe4b2764f4d825c97d3247e9b9818fd02864035051",
+        "altText": "8P — Rectangular riser elbow",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8P-v1",
+      "rule": {
+        "kind": "riserElbow",
+        "rows": [
+          {
+            "key": "8P:3.25x10:miter",
+            "parameter": 0,
+            "feet": 75,
+            "riserSize": "3.25x10",
+            "riserCorner": "miter"
+          },
+          {
+            "key": "8P:3.25x10:radius",
+            "parameter": 0,
+            "feet": 60,
+            "riserSize": "3.25x10",
+            "riserCorner": "radius"
+          },
+          {
+            "key": "8P:3.25x12:miter",
+            "parameter": 0,
+            "feet": 90,
+            "riserSize": "3.25x12",
+            "riserCorner": "miter"
+          },
+          {
+            "key": "8P:3.25x12:radius",
+            "parameter": 0,
+            "feet": 75,
+            "riserSize": "3.25x12",
+            "riserCorner": "radius"
+          },
+          {
+            "key": "8P:3.25x14:miter",
+            "parameter": 0,
+            "feet": 90,
+            "riserSize": "3.25x14",
+            "riserCorner": "miter"
+          },
+          {
+            "key": "8P:3.25x14:radius",
+            "parameter": 0,
+            "feet": 75,
+            "riserSize": "3.25x14",
+            "riserCorner": "radius"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Select the published riser dimensions in inches and the inside-corner construction."
         ]
       }
     },
