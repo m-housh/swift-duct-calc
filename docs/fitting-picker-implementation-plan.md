@@ -3,9 +3,10 @@
 Planning baseline: 2026-09-05; updated after the full-catalog and Group 11 review. This is a
 production implementation proposal, not a change to the Swift application or the frozen prototypes.
 
-Current implementation: the [live picker preview](fitting-picker-preview.md) is ready
-for UI review. It uses the 227-choice Swift catalog at `/fittings`; project saving,
-favorites, and CSV integration remain follow-up work. The
+Current implementation: the [project fitting picker](fitting-picker-preview.md) ports
+the agreed prototype into the application's Equivalent Lengths Add/Edit workflow.
+It uses the 227-choice Swift catalog and saves/reopens mixed-origin paths. Per-user
+favorites are implemented; CSV integration remains follow-up work. The
 [FittingClient design sketch](fitting-client-design.md) records the dependency boundary.
 
 ## Review status and repository ownership
@@ -14,8 +15,7 @@ This is the reviewable working plan, not a finalized implementation specificatio
 explicitly confirmed below are settled; proposed API names, file placement, persistence mechanics
 and delivery sequence remain open to the repository owner's direction. Production implementation has
 started with the dependency-only slice on `codex/fitting-client`; see
-[implementation scope and source checks](fitting-client-first-slice.md). The standalone live picker UI is implemented; step-3
-persistence integration is still pending. The reviewed dependency foundation
+[implementation scope and source checks](fitting-client-first-slice.md). The agreed prototype UI is integrated with project persistence. The reviewed dependency foundation
 now includes async startup loading through `FileClient` and **227 verified choices**
 across groups 1–12. Current audit notes cover the
 [catalog foundation](fitting-client-catalog-expansion.md),
@@ -33,7 +33,7 @@ Architecture guidance from the user:
 - The user subsequently proposed a `FittingClient` dependency. The current sketch
   places fitting catalog/artwork/evaluation there, with `ProjectClient` handling
   project-input and save orchestration. The dependency foundation is implemented
-  and reviewed; picker and persistence integration remain to be implemented.
+  and reviewed; project picker, persistence, and per-user favorites are now implemented.
 
 Existing structure and proposed responsibilities:
 
@@ -50,6 +50,9 @@ Existing structure and proposed responsibilities:
 | `Sources/PdfClient`                                      | Ensure existing and new fitting rows remain usable in exports                                                          | Compatibility requirement                       |
 | `Public/images/fittings`                                 | Approved source artwork and manifests                                                                                  | Preserve source IDs and artwork revisions       |
 | `Public/prototypes/fitting-picker`                       | Design reference and prototype-only adapters; not the production rule engine                                           | Prototype remains separate                      |
+
+The tables below retain the original planning context; current implementation details
+and verification are in the integrated-picker guide linked above.
 
 Useful review topics: module ownership and dependency direction; catalog/table storage; request and
 response types; legacy-data strategy; favorite persistence; CSV scope; and the order of

@@ -2,14 +2,26 @@ import Foundation
 @preconcurrency import URLRouting
 
 extension SiteRoute.View {
-  /// Read-only catalog preview; these endpoints do not write a project or saved path.
+  /// Catalog and row fragments for the project editor; these endpoints do not access saved projects.
   public enum FittingPickerRoute: Equatable, Sendable {
     case index(Fitting.PathType)
+    case group(String)
+    case rows(String)
     case configure(String)
     case evaluate(String)
     case reference(String)
 
     static let router = OneOf {
+      Route(.case(Self.group)) {
+        Path { "group" }
+        Method.post
+        Body { FormData { Field("payload", .string) } }
+      }
+      Route(.case(Self.rows)) {
+        Path { "rows" }
+        Method.post
+        Body { FormData { Field("payload", .string) } }
+      }
       Route(.case(Self.configure)) {
         Path { "configure" }
         Method.post

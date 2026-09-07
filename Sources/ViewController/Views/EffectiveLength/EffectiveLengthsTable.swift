@@ -89,7 +89,9 @@ struct EffectiveLengthsTable: HTML, Sendable {
         td {
           div(.class("grid grid-cols-3 gap-2 min-w-[220px]")) {
             for group in effectiveLength.groups {
-              span { "\(group.group)-\(group.letter)" }
+              span {
+                group.letter.isEmpty ? "Group \(group.group)" : "\(group.group)-\(group.letter)"
+              }
               div(.class("flex justify-center")) {
                 Number(group.value)
               }
@@ -120,17 +122,16 @@ struct EffectiveLengthsTable: HTML, Sendable {
                   )
                   .tooltip("Delete", position: .bottom)
 
-                EditButton()
-                  .attributes(
-                    .class("join-item btn-ghost"),
-                    .showModal(id: EffectiveLengthForm.id(effectiveLength))
-                  )
-                  .tooltip("Edit", position: .bottom)
+                a(
+                  .href(
+                    "/projects/\(effectiveLength.projectID)/effective-lengths/editor?id=\(effectiveLength.id)"
+                  ), .class("btn btn-ghost join-item")
+                ) { "Edit" }
+
               }
             }
           }
 
-          EffectiveLengthForm(effectiveLength: effectiveLength)
         }
       }
     }

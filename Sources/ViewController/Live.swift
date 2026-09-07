@@ -486,6 +486,8 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
     @Dependency(\.database) var database
 
     switch self {
+    case .editor, .savePath, .favorite:
+      return await renderPathEditor(on: request, projectID: projectID)
 
     case .delete(let id):
       return await ResultView {

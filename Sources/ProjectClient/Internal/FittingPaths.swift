@@ -40,6 +40,13 @@ func persistFittingPath(userID: User.ID, projectID: Project.ID, request: Fitting
   let allowed = Set(try await client.groups(request.pathType).map(\.id.rawValue))
   var groups: [EquivalentLength.FittingGroup] = []
   var usedSaved = Set<Int>()
+  func rowID(replacing index: Int?) throws -> UUID {
+    guard let index else { return uuid() }
+    guard let saved, saved.groups.indices.contains(index), usedSaved.insert(index).inserted else {
+      throw FittingPathError("The edited row does not identify an existing fitting.")
+    }
+    return saved.groups[index].fitting?.id ?? uuid()
+  }
   for (index, entry) in request.entries.enumerated() {
     let quantity: Int
     let group: EquivalentLength.FittingGroup
@@ -58,7 +65,7 @@ func persistFittingPath(userID: User.ID, projectID: Project.ID, request: Fitting
       group = .init(
         group: old.group, letter: old.letter, value: old.value, quantity: q,
         fitting: old.fitting ?? .init(id: uuid(), origin: .legacy, name: "Saved reference entry"))
-    case .reference(let code, let feet, let q):
+    case .reference(let code, let feet, let q, let replacing):
       quantity = q
       guard feet.isFinite, feet > 0,
         case .recognized(let reference) = try await client.resolveReference(
@@ -72,8 +79,9 @@ func persistFittingPath(userID: User.ID, projectID: Project.ID, request: Fitting
         group: reference.groupID.rawValue,
         letter: String(reference.code.rawValue.drop(while: { $0.isNumber })), value: feet,
         quantity: q,
-        fitting: .init(id: uuid(), origin: .referenceEntry, name: "Reference entry"))
-    case .catalog(let id, let inputs, let column, let q):
+        fitting: .init(
+          id: try rowID(replacing: replacing), origin: .referenceEntry, name: "Reference entry"))
+    case .catalog(let id, let inputs, let column, let q, let replacing):
       quantity = q
       let result = try await client.evaluate(
         .init(pathType: request.pathType, fittingID: id, inputs: inputs))
@@ -85,7 +93,8 @@ func persistFittingPath(userID: User.ID, projectID: Project.ID, request: Fitting
         if definition != nil { break }
       }
       guard let definition else { throw FittingPathError("Row \(index + 1): fitting unavailable.") }
-      var metadata = Fitting.SavedEntry(id: uuid(), origin: .catalog, name: definition.name)
+      var metadata = Fitting.SavedEntry(
+        id: try rowID(replacing: replacing), origin: .catalog, name: definition.name)
       let feet: Double
       switch result {
       case .resolved(let value):

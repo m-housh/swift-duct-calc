@@ -615,8 +615,8 @@ extension Fitting {
   /// Only changed/new catalog entries are evaluated. Saved indices refer to the authorized baseline.
   public enum PathEntry: Equatable, Sendable {
     case saved(index: Int, quantity: Int)
-    case reference(code: String, feet: Double, quantity: Int)
-    case catalog(id: ID, inputs: Inputs, column: Column?, quantity: Int)
+    case reference(code: String, feet: Double, quantity: Int, replacing: Int? = nil)
+    case catalog(id: ID, inputs: Inputs, column: Column?, quantity: Int, replacing: Int? = nil)
   }
   public struct PathSave: Equatable, Sendable {
     public let baseline: EquivalentLength?

@@ -440,6 +440,9 @@ extension SiteRoute.View.ProjectRoute {
   }
 
   public enum EquivalentLengthRoute: Equatable, Sendable {
+    case editor(EquivalentLength.ID?)
+    case savePath(String)
+    case favorite(String)
     case delete(id: EquivalentLength.ID)
     case field(FieldType, style: EquivalentLength.EffectiveLengthType? = nil)
     case index
@@ -449,6 +452,30 @@ extension SiteRoute.View.ProjectRoute {
     static let rootPath = "effective-lengths"
 
     public static let router = OneOf {
+      Route(.case(Self.editor)) {
+        Path {
+          rootPath
+          "editor"
+        }
+        Method.get
+        Query { Optionally { Field("id", default: nil) { EquivalentLength.ID.parser() } } }
+      }
+      Route(.case(Self.savePath)) {
+        Path {
+          rootPath
+          "save-path"
+        }
+        Method.post
+        Body { FormData { Field("payload", .string) } }
+      }
+      Route(.case(Self.favorite)) {
+        Path {
+          rootPath
+          "favorite"
+        }
+        Method.post
+        Body { FormData { Field("payload", .string) } }
+      }
       Route(.case(Self.delete(id:))) {
         Path {
           rootPath

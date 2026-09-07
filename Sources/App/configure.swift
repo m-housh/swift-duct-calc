@@ -47,6 +47,8 @@ public func configure(
     // Live reload of the application for development when launched with the `./swift-dev` command
     // app.lifecycle.use(BrowserSyncHandler())
   #endif
+  // The bounded fitting-path payload includes saved snapshots for conflict detection.
+  app.routes.defaultMaxBodySize = "2mb"
   // Add our route handlers.
   addRoutes(to: app)
   if app.environment != .testing {

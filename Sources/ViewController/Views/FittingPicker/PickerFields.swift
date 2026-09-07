@@ -1,14 +1,7 @@
 import Elementary
 import Foundation
 import ManualDCore
-
-struct PickerField: Sendable {
-  let name: String
-  let label: String
-  var choices: [(String, String)]? = nil
-  var kind = "number"
-  var help = ""
-}
+import Styleguide
 
 enum PickerFields {
   static func fields(_ requirement: Fitting.InputRequirement, base: Bool = false) -> [PickerField] {
@@ -177,7 +170,11 @@ enum PickerFields {
         "suppliedBend": String(supplied), "bendVelocity": raw(bendVelocity),
         "bendRadiusRatio": raw(ratio),
       ]
-    case .doubleElbow: return [:]
+    case .doubleElbow(let id, let inputs):
+      guard let id, let inputs else { return [:] }
+      return ["baseFitting": id.rawValue].merging(
+        Dictionary(uniqueKeysWithValues: defaults(inputs).map { ("base." + $0.key, $0.value) })
+      ) { _, new in new }
     }
   }
 

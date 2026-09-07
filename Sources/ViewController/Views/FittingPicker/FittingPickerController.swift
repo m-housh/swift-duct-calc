@@ -9,23 +9,50 @@ extension SiteRoute.View.FittingPickerRoute {
     @Dependency(\.fittingClient) var client
     do {
       switch self {
-      case .index(let path):
-        var sections: [PickerCatalogGroup] = []
-        for group in try await client.groups(path) {
-          var entries: [(Fitting.Definition, Fitting.Artwork?)] = []
-          for definition in try await client.fittings(.init(pathType: path, groupID: group.id)) {
-            var art: Fitting.Artwork?
-            if case .available(let image) = try await client.artwork(
-              .init(fittingID: definition.id))
-            {
-              art = image
+      case .index:
+        return await request.view {
+          div(.class("p-8")) {
+            h1 { "Fittings in your project" }
+            a(.href("/projects"), .class("link")) {
+              "Open a project and choose Equivalent Lengths to build a fitting path."
             }
-            entries.append((definition, art))
           }
-          sections.append(.init(group: group, entries: entries))
         }
-        let groups = sections
-        return await request.view { FittingPickerView(pathType: path, groups: groups) }
+      case .rows(let payload):
+        let rows = try Self.decode([PathEditorRow].self, payload, limit: 2_000_000)
+        guard rows.count <= 500 else { throw PickerError("Too many rows.") }
+        return PathRowsView(rows: rows)
+      case .group(let payload):
+        let submission = try Self.decode(GroupBrowserSubmission.self, payload)
+        let definitions = try await client.fittings(
+          .init(pathType: submission.pathType, groupID: submission.groupID))
+        var cards: [FittingBrowserCard] = []
+        for definition in definitions {
+          var artworks: [Fitting.Artwork] = []
+          for view in definition.availableViews {
+            if case .available(let art) = try await client.artwork(
+              .init(fittingID: definition.id, view: view))
+            {
+              artworks.append(art)
+            }
+          }
+          let submissionData = pickerJSONForSubmission(
+            path: submission.pathType, group: submission.groupID, id: definition.id, fields: [:])
+          let configuration = PickerConfiguration(
+            submission: try Self.decode(Submission.self, submissionData), definition: definition,
+            definitions: definitions, artworks: artworks)
+          cards.append(
+            .init(
+              configuration: configuration,
+              evaluation: try await client.evaluate(
+                .init(
+                  pathType: submission.pathType, fittingID: definition.id,
+                  inputs: definition.defaultInputs))))
+        }
+        let title =
+          try await client.groups(submission.pathType).first { $0.id == submission.groupID }?.title
+          ?? "Fittings"
+        return GroupBrowserView(title: title, cards: cards)
       case .configure(let payload), .evaluate(let payload):
         let submission = try Self.decode(Submission.self, payload)
         guard submission.fields.count <= 32,
@@ -90,8 +117,10 @@ extension SiteRoute.View.FittingPickerRoute {
     }
   }
 
-  static func decode<T: Decodable>(_ type: T.Type, _ payload: String) throws -> T {
-    guard payload.utf8.count <= 65_536, let data = payload.data(using: .utf8),
+  static func decode<T: Decodable>(_ type: T.Type, _ payload: String, limit: Int = 65_536) throws
+    -> T
+  {
+    guard payload.utf8.count <= limit, let data = payload.data(using: .utf8),
       let value = try? JSONDecoder().decode(type, from: data)
     else { throw PickerError("Invalid fitting request. Reopen the fitting and try again.") }
     return value
@@ -136,18 +165,7 @@ struct PickerResult: HTML, Sendable {
       groupID: definition.groupID.rawValue, origin: "catalog", feet: feet,
       fittingID: definition.id.rawValue, artwork: artwork, fields: fields, calculation: calculation,
       returnJunction: junction, column: column,
-      details: PickerFields.fields(definition.inputRequirement).compactMap { field in
-        guard let value = fields[field.name], !value.isEmpty else { return nil }
-        if ["bendVelocity", "bendRadiusRatio"].contains(field.name),
-          fields["suppliedBend"] != "true"
-        {
-          return nil
-        }
-        let label =
-          field.choices?.first(where: { $0.0 == value })?.1
-          ?? (value == "true" ? "Yes" : value == "false" ? "No" : value)
-        return "\(field.label): \(label)"
-      })
+      details: pickerInputDetails(definition, fields: fields))
   }
 
   var body: some HTML {
@@ -243,5 +261,33 @@ func pickerIssue(_ issue: Fitting.Issue) -> String {
     return "Enter a positive, finite value for the \(field)."
   case .negativeBranchCount: return "The branch count cannot be negative."
   default: return "Check the \(field); this selection cannot be calculated."
+  }
+}
+
+func pickerJSONForSubmission(
+  path: Fitting.PathType, group: Fitting.Group.ID, id: Fitting.ID, fields: [String: String]
+) -> String {
+  struct Value: Encodable {
+    let pathType: Fitting.PathType
+    let groupID: Fitting.Group.ID
+    let fittingID: Fitting.ID
+    let fields: [String: String]
+  }
+  return pickerJSON(Value(pathType: path, groupID: group, fittingID: id, fields: fields))
+}
+
+func pickerInputDetails(_ definition: Fitting.Definition, fields: [String: String]) -> [String] {
+  if case .doubleElbow = definition.inputRequirement {
+    return fields["baseFitting"].map { ["Matching 90° elbow construction: " + $0] } ?? []
+  }
+  return PickerFields.fields(definition.inputRequirement).compactMap { field in
+    guard let value = fields[field.name], !value.isEmpty else { return nil }
+    if ["bendVelocity", "bendRadiusRatio"].contains(field.name), fields["suppliedBend"] != "true" {
+      return nil
+    }
+    let label =
+      field.choices?.first(where: { $0.0 == value })?.1
+      ?? (value == "true" ? "Yes" : value == "false" ? "No" : value)
+    return "\(field.label): \(label)"
   }
 }

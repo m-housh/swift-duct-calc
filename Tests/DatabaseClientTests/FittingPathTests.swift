@@ -67,6 +67,19 @@ struct FittingPathTests {
             }))
         #expect(renamed.groups[0].value == 61.375 && renamed.groups[0].quantity == 3)
         #expect(renamed.groups.map(\.fitting) == reopened.groups.map(\.fitting))
+        let edited = try await projectClient.saveFittingPath(
+          user.id, project.id,
+          .init(
+            baseline: renamed, name: "Edited reference", pathType: .supply,
+            straightLengths: renamed.straightLengths,
+            entries: renamed.groups.indices.map {
+              $0 == 1
+                ? .reference(code: "4AG", feet: 99.5, quantity: 1, replacing: 1)
+                : .saved(index: $0, quantity: renamed.groups[$0].quantity)
+            }))
+        #expect(edited.groups[1].fitting?.id == renamed.groups[1].fitting?.id)
+        #expect(edited.groups[1].value == 99.5)
+
       }
     }
   }

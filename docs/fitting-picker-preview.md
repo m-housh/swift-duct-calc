@@ -1,96 +1,122 @@
-# Live fitting picker review
+# Fitting picker integrated into the application
 
-The live Swift application now serves `/fittings` with **227 catalog choices across
-groups 1–12**. Every calculation uses `FittingClient`; the JavaScript manages draft
-state, quantities, and straight-duct arithmetic. No fitting table is duplicated in
-JavaScript. The frozen HTML prototypes remain separate.
+The agreed `path-catalog.html` prototype is now implemented in the Swift application.
+Open a project, choose **Equivalent Lengths**, then **Add equivalent length** or **Edit**.
+The path editor saves to that project and reopens the recorded entries.
 
-## Review the UI
+## What is implemented
 
-Open `/fittings?type=supply` or `/fittings?type=return` on your development server.
-Step 3 of the existing equivalent-length form also links to the preview in a new tab.
-No login is needed to browse the catalog. The preview has no access to project data.
+- The prototype's tall path rows, drawing-led Add fitting dialog, three-card looping
+  group carousel, favorites-first cards, inline conditional inputs, and fitting totals.
+- Fixed fittings add directly from their drawing. Quantity is edited in the path list.
+- All 227 catalog choices use the Swift `FittingClient`. The browser contains no fitting tables.
+- Quick reference entry retains the supplied fractional length and distinguishes it from
+  a calculated fitting. Repeated rows stay separate.
+- Save/reopen, rename, quantity edits, removal, and fitting edits work on real project paths.
+- Favorites are stored per user in the database and shared across projects/devices.
+- Groups 1, 2, 3, 5, and 6 show non-blocking repeated-use warnings. Changing path type
+  retains the draft and requires incompatible rows to be resolved before saving.
+- 8O starts at **Mitered**. Group 11 has one **Velocity in flex duct** box control and
+  retained, independent inputs for its optional supplied bend. Group 6 requires the
+  appropriate branch or trunk contribution to be selected.
 
-On the remote host, the review server is running on port **8081**. Forward that port
-through your SSH client and open `http://localhost:8081/fittings` locally. For example,
-replace `YOUR_HOST` with your usual SSH host:
+![Application path editor](images/fitting-picker/path.png)
+
+![Looping group carousel](images/fitting-picker/carousel.png)
+
+![Group 11 in the application picker](images/fitting-picker/group-11.png)
+
+![Mobile group selection](images/fitting-picker/mobile.png)
+
+## Code ownership
+
+| Location | Responsibility |
+| --- | --- |
+| `Sources/ViewController/Views/FittingPicker` | Project page, path rows, fitting cards, request parsing, and result/error presentation |
+| `Sources/Styleguide/GroupCarousel.swift` | Reusable looping selector and picker dialog markup |
+| `Sources/Styleguide/PickerControl.swift` | Reusable labeled numeric, choice, and checkbox controls |
+| `Sources/ProjectClient/Internal/FittingPaths.swift` | Authorized saving, source evaluation, saved-row preservation, and validation |
+| `Sources/ManualDCore/Fittings.swift` | Shared typed inputs, snapshots, and path-entry contracts |
+| `Sources/DatabaseClient` | Additive saved-row metadata, project ownership lookup, and per-user favorites |
+| `Public/js/fitting-path.js`, `group-carousel.js` | Interaction state, gestures, requests, quantities, and totals |
+| `Public/css/fitting-path.css` | Scoped presentation ported from the agreed prototype |
+
+The frozen prototypes are unchanged. The separate `/fittings` preview has been retired;
+that URL directs users to their projects. Catalog calculation and HTML fragment endpoints
+remain available to the integrated editor.
+
+## Existing data and saving
+
+The existing fitting JSON keys (`group`, `letter`, `value`, `quantity`) are retained.
+Optional `fitting` metadata adds a durable row ID, origin, and calculation snapshots.
+Old rows decode without that metadata and preserve their historical lengths and quantities.
+No rewrite of existing paths is performed during startup. The only new table is
+`fitting_favorite`, associated with the user.
+
+Untouched saved entries are loaded from the authorized server record, including existing
+catalog snapshots. A rename or quantity change does not re-evaluate them. New or explicitly
+edited catalog fittings are evaluated by Swift at save time; browser-supplied lengths and
+calculation snapshots are not authoritative. Edited rows retain their durable identity.
+Reference-entry edits preserve the supplied value and record that origin.
+
+Saving checks project ownership, path ownership, eligibility, quantities, and finite
+values. A changed baseline is rejected rather than silently replacing another saved edit.
+Errors leave the in-page draft intact. Navigating away with unsaved changes prompts the
+browser's standard confirmation. Straight duct retains the application's existing
+whole-foot representation; fitting lengths retain fractional precision.
+
+CSV paste/upload and project-specific input suggestions remain follow-up work. The
+reference-entry CSV contract is still a proposal in the implementation plan.
+
+## Running and checking it
+
+The isolated review app runs on remote port **8081**. Forward that port through SSH and
+open `http://localhost:8081/projects`. Sign up or log in, then create/open a project and
+choose Equivalent Lengths. Screenshots above use disposable review data.
 
 ```sh
 ssh -N -L 8081:localhost:8081 michael@YOUR_HOST
 ```
 
-GitHub screenshots are below. Suggested review flow:
+From this checkout with Swift 6.2:
 
-1. Browse or search across the eligible groups, then open a fitting and its full-size drawing.
-2. Try **8O**: the new draft starts at **Mitered**. The other printed categories remain explicit.
-3. Try **Group 11**: one **Velocity in flex duct** control. At 700 FPM the box is 60 ft;
-   enabling the supplied bend with its default 700 FPM and R/D 1.0 gives 75 ft.
-   Bend inputs retain their values when toggled off and back on. The bend-detail
-   drawing is linked below the configuration.
-4. On a return path, try **Group 6**: enter branch and combined airflow, then choose
-   the branch or trunk contribution. Unavailable trunk cells cannot be added.
-5. Add quantities and straight duct, edit a fitting, and try **Quick entry** with
-   `4AG` and a supplied `61.375` ft. Entered values remain entered values, without
-   inferring a construction or replacing them with a calculated table value.
-6. Download the draft JSON to inspect calculation snapshots and source conditions.
+```sh
+swift run App serve --hostname 0.0.0.0 --port 8080
+```
 
-![Desktop fitting catalog](images/fitting-picker/catalog.png)
-
-![Group 11 configuration](images/fitting-picker/group-11.png)
-
-![Draft with calculated and entered rows](images/fitting-picker/path.png)
-
-![Mobile Group 11 configuration](images/fitting-picker/mobile.png)
-
-## Scope and next step
-
-Supply and return drafts are stored independently in `sessionStorage` for this browser
-tab. Reloading retains them. If browser storage is unavailable, the page explains
-that the draft is in memory only. Downloaded JSON contains unrounded values,
-quantities, selected inputs, calculation components, revisions, derivations,
-Group 6 column selection, and any upstream-pressure requirement.
-
-**This preview does not save to a project.** Its JSON is a review/export artifact,
-not a supported import format. The next slice connects the reviewed picker to
-`ProjectClient` and step-3 persistence: re-evaluate calculated rows on save, preserve
-entered/legacy values, and retain snapshots without trusting browser totals.
-Favorites, CSV integration, and project-provided input suggestions follow that work.
-
-## Run and verify
-
-With Swift 6.2, use `swift run App serve --hostname 0.0.0.0 --port 8080` and open
-`/fittings`. To reproduce the isolated Docker review server from the repository root:
+For Docker, use a separate directory for the review database so restarts preserve review
+accounts and paths. The current host directory is `/tmp/fitting-integration-review`.
 
 ```sh
 docker run --rm -v "$PWD:/workspace" -w /workspace swift:6.2-noble swift build --jobs 4
+mkdir -p /tmp/fitting-integration-review
 docker run --rm --name fitting-picker-preview -p 8081:8080 \
-  -e SQLITE_PATH=/tmp/fitting-picker-preview.sqlite \
+  -e SQLITE_PATH=/review-data/db.sqlite \
+  -v /tmp/fitting-integration-review:/review-data \
   -v "$PWD:/workspace" -w /workspace swift:6.2-noble \
   .build/debug/App serve --hostname 0.0.0.0 --port 8080
 ```
 
-The container's temporary database is separate from the repository's development database.
-Stop it with `docker stop fitting-picker-preview` before starting another on the same port.
+Stop the existing review container with `docker stop fitting-picker-preview` before
+starting another on that port. The review database is separate from the repository's
+normal development database.
 
-Validation: the full Swift suite passed **135 tests in 30 suites**. The six picker
-checks cover all catalog defaults through form transport, missing versus defaulted
-inputs, Group 11's velocity contract, Group 6's paired contributions, fractional
-reference entries, malformed input, and path eligibility. Targeted picker tests
-also passed after the final drawing-link change.
+Validation: **138 Swift tests in 31 suites** passed. Database tests cover mixed legacy,
+entered, and calculated paths; save/reopen and preserved snapshots; durable edited IDs;
+wrong-owner, forged saved-row, and stale-baseline rejection; Group 6 selection; and
+per-user favorites. The project-view snapshot now links Add/Edit to the integrated editor.
 
-Browser checks cover add/edit/remove controls, quantities, fractional totals,
-reload persistence, separate path types, retained bend inputs, stale result
-invalidation, Group 6 selection, and desktop/mobile layouts without horizontal
-page overflow. Screenshots use the live server, not mock data.
-
-With Playwright and its Chromium browser installed, the repeatable browser checks are:
+Repeatable browser checks require Playwright with Chromium. Run against a disposable
+development database: the first script creates a test account and project; the second
+uses that test session to check server authority and saved-path edge cases.
 
 ```sh
-FITTING_PICKER_URL=http://localhost:8081 node scripts/check_live_fitting_picker.cjs
-FITTING_PICKER_URL=http://localhost:8081 node scripts/check_live_fitting_picker_edges.cjs
+FITTING_APP_URL=http://localhost:8081 node scripts/check_fitting_path.cjs
+node scripts/check_fitting_path_edges.cjs
 ```
 
-If Playwright is installed outside this checkout, set `NODE_PATH` to its containing
-`node_modules` directory. The edge checks exercise matching-elbow derivations and
-edits, upstream-pressure conditions, exported snapshots, and cancellation of stale
-server responses. The main check writes temporary screenshots under `/tmp`.
+If Playwright is installed outside the checkout, set `NODE_PATH` to its `node_modules`
+directory. The scripts check real save/reopen/edit flows, fractional reference lengths,
+quantities, favorites across reloads, Group 11 controls, Group 6 saved contributions,
+server-authoritative calculations, row identity, stale-save rejection, carousel looping,
+and desktop/mobile layouts. Temporary test session data and screenshots are written to `/tmp`.

@@ -1,7 +1,8 @@
 # FittingClient design sketch
 
 Status: the live dependency now covers **227 choices across groups 1–12** and
-backs the reviewable [fitting picker preview](fitting-picker-preview.md) at `/fittings`.
+backs the [integrated project fitting picker](fitting-picker-preview.md).
+Project path saving and per-user favorites are implemented.
 The original [first-slice audit](fitting-client-first-slice.md) records the foundation;
 the wider contracts below remain the design reference for project persistence.
 
