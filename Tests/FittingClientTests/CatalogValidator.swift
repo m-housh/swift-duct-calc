@@ -52,7 +52,13 @@ struct CatalogValidator {
           artwork.mediaType == "image/svg+xml" && !artwork.altText.isEmpty,
           "Invalid artwork metadata")
       }
-      try require(record.conditions.referenceVelocityFPM > 0, "Invalid reference velocity")
+      if [.plenumPassage, .abruptSqueeze].contains(record.rule.kind) {
+        try require(
+          record.conditions.referenceVelocityFPM == nil,
+          "Velocity-table rule must not imply a fixed reference velocity")
+      } else {
+        try require((record.conditions.referenceVelocityFPM ?? 0) > 0, "Invalid reference velocity")
+      }
       try require(
         record.conditions.frictionRateIWCPer100Feet.isFinite
           && record.conditions.frictionRateIWCPer100Feet > 0, "Invalid friction rate")
@@ -103,7 +109,52 @@ struct CatalogValidator {
       if record.rule.kind != .easedTakeoff {
         try require(record.rule.buttedSleeveFeet == nil, "Unexpected butted-sleeve adjustment")
       }
+      if record.rule.kind != .transition {
+        try require(rows.allSatisfy { $0.slope == nil }, "Unexpected transition slope")
+      }
+      if ![.plenumPassage, .abruptSqueeze].contains(record.rule.kind) {
+        try require(rows.allSatisfy { $0.inletVelocity == nil }, "Unexpected inlet velocity")
+      }
+      if record.rule.kind != .plenumPassage {
+        try require(rows.allSatisfy { $0.outletVelocity == nil }, "Unexpected outlet velocity")
+      }
+      if record.rule.kind != .abruptSqueeze {
+        try require(
+          rows.allSatisfy { $0.minimumUpstreamStaticPressureIWC == nil },
+          "Unexpected static-pressure requirement")
+      }
       switch record.rule.kind {
+      case .transition:
+        let slopes: [Fitting.TransitionSlope] =
+          ["12B", "12G", "12K", "12P"].contains(record.sourceCode?.rawValue)
+          ? [.abrupt] : [.oneToOne, .twoToOne, .fourToOne]
+        let ratios = Fitting.TransitionAreaRatio.allCases
+        try require(
+          record.groupID == .transitions && rows.count == slopes.count * ratios.count
+            && rows.enumerated().allSatisfy { index, row in
+              row.slope == slopes[index / ratios.count]
+                && row.parameter == Double(ratios[index % ratios.count].rawValue)
+            }, "Transition must preserve each published slope and area-ratio pair in order")
+      case .plenumPassage:
+        let velocities = Fitting.TransitionVelocity.allCases
+        try require(
+          record.sourceCode == "12W" && rows.count == velocities.count * velocities.count
+            && rows.enumerated().allSatisfy { index, row in
+              row.outletVelocity == velocities[index / velocities.count]
+                && row.inletVelocity == velocities[index % velocities.count]
+            }, "Plenum table must preserve outlet-row and inlet-column identity")
+      case .abruptSqueeze:
+        let velocities = Fitting.TransitionVelocity.allCases
+        let ratios = Fitting.TransitionAreaRatio.allCases
+        try require(
+          record.sourceCode == "12X" && rows.count == velocities.count * ratios.count
+            && rows.enumerated().allSatisfy { index, row in
+              guard let pressure = row.minimumUpstreamStaticPressureIWC else { return false }
+              return row.inletVelocity == velocities[index / ratios.count]
+                && row.parameter == Double(ratios[index % ratios.count].rawValue)
+                && pressure.isFinite && pressure > 0
+            },
+          "Squeeze must preserve upstream velocity, area ratio, and separate pressure requirement")
       case .easedTakeoff:
         try require(
           ["3O", "3P", "3Q", "3R"].contains(record.sourceCode?.rawValue)

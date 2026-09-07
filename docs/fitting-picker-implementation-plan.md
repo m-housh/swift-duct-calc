@@ -16,17 +16,14 @@ and delivery sequence remain open to the repository owner's direction. Productio
 started with the dependency-only slice on `codex/fitting-client`; see
 [implementation scope and source checks](fitting-client-first-slice.md). The step-3
 UI and persistence integration are still pending. The reviewed dependency foundation
-now includes async startup loading through `FileClient`; the
-[catalog expansion](fitting-client-catalog-expansion.md),
-[junction slice](fitting-client-junctions.md),
-[group 7 slice](fitting-client-panned-returns.md),
-[8A round elbow slice](fitting-client-round-elbows.md),
-[8B/8C rectangular elbow slice](fitting-client-rectangular-elbows.md),
-[completed 8A constructions](fitting-client-8a-constructions.md), and
-[square elbows, offsets, and risers](fitting-client-offsets.md), and
-[double elbows and inside-corner offsets](fitting-client-double-elbows.md), and
-[Group 3 reducing-trunk takeoffs](fitting-client-reducing-takeoffs.md) cover 202 fitting choices in groups
-1, 2, 3, 4, 5, 6, 7, 8, 9, and 10. Group 6 uses the confirmed nearest-published-ratio-row
+now includes async startup loading through `FileClient` and **226 verified choices**
+across groups 1–10 and 12. Group 11 remains pending. Current audit notes cover the
+[catalog foundation](fitting-client-catalog-expansion.md),
+[junctions](fitting-client-junctions.md), [panned returns](fitting-client-panned-returns.md),
+[round elbows](fitting-client-round-elbows.md), [rectangular elbows](fitting-client-rectangular-elbows.md),
+[remaining 8A constructions](fitting-client-8a-constructions.md), [offsets](fitting-client-offsets.md),
+[double elbows](fitting-client-double-elbows.md), [reducing takeoffs](fitting-client-reducing-takeoffs.md),
+and [transitions](fitting-client-transitions.md). Group 6 uses the confirmed nearest-published-ratio-row
 policy (midpoint ties upward) and returns both branch and trunk contributions.
 
 Architecture guidance from the user:
@@ -155,55 +152,38 @@ illustration independently establishes the correct formula. Do not flatten all n
 `referenceEquivalentLengthFeet`: several manifests deliberately place their real values inside
 `referenceValues`, while the top-level field is null.
 
-## Specific rule audit queue
+## Rule audit status
 
-These are findings/questions for implementation, not new interpretation of the PDF:
+The source-review findings below are now settled in the new client; legacy lookup
+behavior remains separate.
 
-1. **3W:** individual manifest has a single 30 ft value, while the Swift lookup has
-   full/tight/mitered keys with 15/35/90 ft. Inspect the actual source case before selecting an
-   authoritative mapping. 3J also exists in the newer artwork but has no corresponding entry in the
-   old Group 3 lookup.
-2. **3U:** the old inventory records different overview/detail descriptions. Newer individual
-   entries distinguish mitered with/without vanes. Verify the intended source identity; approval of
-   the drawing does not settle the rule.
-3. **8A:** at R/D = 1 the manifest assigns 20 ft to four/five-piece and 25 ft to three-piece
-   constructions; old keys `8a-1-3` and `8a-1-5` contain 20 and 25 ft respectively.
-   Source review of viewer page 32 confirms the manifest mapping: four/five-piece
-   is 20 ft and three-piece is 25 ft. Use those source columns in the new evaluator.
-   For smooth round elbows, the user confirmed support for all explicitly listed
-   angle multipliers (20°, 30°, 45°, 60°, 75°, 110°, 130°, 150°), plus the base
-   90° value. The heading says “less than 90°” despite listing larger angles;
-   retain that discrepancy in internal notes. This decision applies only to
-   smooth round elbows and does not authorize interpolation between angle entries.
-   The user chose typed R/D categories (0.75, 1.0, 1.5 or greater) presented as
-   picker options instead of numeric entry or rounding. Supported angles are also
-   typed choices, defaulting to 90°. This is implemented for the smooth,
-   four/five-piece, and three-piece round constructions; only smooth round
-   elbows offer the additional angle choices. See the [8A implementation notes](fitting-client-round-elbows.md).
-   **8B/8C:** implemented with typed R/W, bend-category, and angle choices. Per
-   user confirmation, drafts default to mitered R/W and 90°; bend category is an
-   explicit required selection. Supported R/W categories are 0, 0.25, and 0.5 or
-   greater; angles are 30°, 45°, 60°, and 90°. See the
-   [rectangular elbow implementation notes](fitting-client-rectangular-elbows.md).
-4. **8K:** metadata includes an R/H = 0 value absent from the old lookup. Confirm its applicability
-   and include or explicitly withhold the case.
-5. **8L/8M:** replace the old instruction to supply a multiplier-based result with selection and
-   calculation of the underlying elbow. Keep a dependency graph restricted to supported base rules
-   so an arrangement cannot reference itself.
-6. **7A:** the full-catalog prototype now restricts selection to the transcribed airflow rows,
-   replacing the earlier fixed-25-ft sample. Production must verify maximum airflow and source
-   coverage independently of prototype behavior.
-7. **11:** visual cases still need a verified rule and explicit application keys. Quick entry may
-   record a supplied reference length without running that rule, once the source-case identifiers
-   are defined. This is a separate entry origin, not an override attached to a supposedly verified
-   automatic calculation.
-8. **12W/X:** add explicit cases for the two velocity-dependent tables. Verify the meaning of the
-   pressure constraint and which velocity applies; do not silently convert a pressure quantity into
-   EL or double-count it elsewhere.
-9. **Across tables:** distinguish exact entries, inclusive ranges, strict bounds, and missing cells.
-   No universal nearest-row rule, interpolation, extrapolation, or velocity correction is assumed.
-   Where the PDF lacks guidance, record the gap and withhold that calculation range rather than
-   invent a value.
+- **3W / 3J:** 3W is the explicit 30-ft detail; the old radius values belong to
+  adjacent 3S. 3J shares the overview's three 3D construction values.
+- **3U:** approved with/without-vane identities use the specific detail table's
+  10/80-ft values. The conflicting overview's 3S/3U grouping is recorded in the
+  [Group 3 audit](fitting-client-reducing-takeoffs.md).
+- **8A:** source column mapping is four/five-piece = 20 ft and three-piece = 25 ft
+  at R/D 1. All explicitly listed angles are supported only for smooth round.
+  R/D categories and angles are typed choices; all eight constructions are implemented.
+- **8B/8C:** typed R/W, bend category, and angle; user-confirmed defaults are
+  mitered and 90°, with bend category unanswered.
+- **8K:** source R/H = 0 is included at 250 ft.
+- **8L/8M:** user-confirmed matching 90° pairs calculate a supported same-shape
+  single elbow, apply 1.7/2.0 once, and preserve the base snapshot. Recursive
+  arrangements, unrelated bases, and non-90° angles are rejected.
+- **8O:** user-confirmed inside-corner categories retain the strict R > 0.50
+  boundary. Mitered is the user-requested new-draft default.
+- **7A:** requires airflow and retains its source bounds and reviewed row-selection policy.
+- **12W/X:** separate inlet/outlet velocities for 12W; upstream larger-section
+  velocity for 12X. The source defines 12X minimum upstream pressure as a condition
+  for positive static pressure at the throat. It is retained separately from EL.
+- **11 remains pending:** identify the controlling duct velocity for the junction
+  box, preserve source layout conditions, and settle production drawing handling.
+  Current prototype choices are recorded in [the Group 11 plan](group-11-picker-plan.md).
+
+Exact entries, inclusive ranges, strict bounds, and unavailable cells remain
+fitting-specific. There is no universal nearest-row rule, interpolation,
+extrapolation, or velocity correction.
 
 ## Where production inputs will come from
 

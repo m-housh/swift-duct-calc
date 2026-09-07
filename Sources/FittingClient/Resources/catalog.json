@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "fitting-catalog-v12",
+  "revision": "fitting-catalog-v13",
   "groups": [
     {
       "id": 1,
@@ -7958,6 +7958,1391 @@
         "frictionRateIWCPer100Feet": 0.08,
         "notes": [
           "Two return trunks merge. Source directs branch return equivalent lengths to Group 6."
+        ]
+      }
+    },
+    {
+      "id": "12A",
+      "familyID": "12A",
+      "groupID": 12,
+      "sourceCode": "12A",
+      "name": "Round tapered expansion",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12A.svg",
+        "revision": "4c79d7f8bdb8cf293d8d223dba9aaba6b7cdb1da000dde9169814c496773a85d",
+        "altText": "12A — Round tapered expansion",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12A-v1",
+      "rule": {
+        "kind": "transition",
+        "rows": [
+          {
+            "key": "12A:slope:1:1:area:2",
+            "parameter": 2,
+            "feet": 20,
+            "slope": "1:1"
+          },
+          {
+            "key": "12A:slope:1:1:area:4",
+            "parameter": 4,
+            "feet": 40,
+            "slope": "1:1"
+          },
+          {
+            "key": "12A:slope:2:1:area:2",
+            "parameter": 2,
+            "feet": 20,
+            "slope": "2:1"
+          },
+          {
+            "key": "12A:slope:2:1:area:4",
+            "parameter": 4,
+            "feet": 40,
+            "slope": "2:1"
+          },
+          {
+            "key": "12A:slope:4:1:area:2",
+            "parameter": 2,
+            "feet": 20,
+            "slope": "4:1"
+          },
+          {
+            "key": "12A:slope:4:1:area:4",
+            "parameter": 4,
+            "feet": 30,
+            "slope": "4:1"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "A1/A2 is larger cross-sectional area divided by smaller area, not a diameter or width ratio.",
+          "Slope is X/Y as shown in the source geometry. Select the exact published slope and area ratio.",
+          "Flow is diverging (expansion)."
+        ]
+      }
+    },
+    {
+      "id": "12B",
+      "familyID": "12B",
+      "groupID": 12,
+      "sourceCode": "12B",
+      "name": "Round abrupt expansion",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12B.svg",
+        "revision": "09694b981896b56b2a10e41a4b9934fc706c7a20b97e86f00e08a5d523b824b7",
+        "altText": "12B — Round abrupt expansion",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12B-v1",
+      "rule": {
+        "kind": "transition",
+        "rows": [
+          {
+            "key": "12B:slope:abrupt:area:2",
+            "parameter": 2,
+            "feet": 20,
+            "slope": "abrupt"
+          },
+          {
+            "key": "12B:slope:abrupt:area:4",
+            "parameter": 4,
+            "feet": 40,
+            "slope": "abrupt"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "A1/A2 is larger cross-sectional area divided by smaller area, not a diameter or width ratio.",
+          "Slope is X/Y as shown in the source geometry. Select the exact published slope and area ratio.",
+          "Flow is diverging (expansion)."
+        ]
+      }
+    },
+    {
+      "id": "12C",
+      "familyID": "12C",
+      "groupID": 12,
+      "sourceCode": "12C",
+      "name": "Round-to-rectangular tapered expansion",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12C.svg",
+        "revision": "04e604fc06854c0db580dd056649e3210766724ea3ca36dabf559dd95e09b967",
+        "altText": "12C — Round-to-rectangular tapered expansion",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12C-v1",
+      "rule": {
+        "kind": "transition",
+        "rows": [
+          {
+            "key": "12C:slope:1:1:area:2",
+            "parameter": 2,
+            "feet": 20,
+            "slope": "1:1"
+          },
+          {
+            "key": "12C:slope:1:1:area:4",
+            "parameter": 4,
+            "feet": 40,
+            "slope": "1:1"
+          },
+          {
+            "key": "12C:slope:2:1:area:2",
+            "parameter": 2,
+            "feet": 20,
+            "slope": "2:1"
+          },
+          {
+            "key": "12C:slope:2:1:area:4",
+            "parameter": 4,
+            "feet": 40,
+            "slope": "2:1"
+          },
+          {
+            "key": "12C:slope:4:1:area:2",
+            "parameter": 2,
+            "feet": 20,
+            "slope": "4:1"
+          },
+          {
+            "key": "12C:slope:4:1:area:4",
+            "parameter": 4,
+            "feet": 30,
+            "slope": "4:1"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "A1/A2 is larger cross-sectional area divided by smaller area, not a diameter or width ratio.",
+          "Slope is X/Y as shown in the source geometry. Select the exact published slope and area ratio.",
+          "Flow is diverging (expansion)."
+        ]
+      }
+    },
+    {
+      "id": "12D",
+      "familyID": "12D",
+      "groupID": 12,
+      "sourceCode": "12D",
+      "name": "Rectangular-to-round tapered expansion",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12D.svg",
+        "revision": "01267b290b5fb8762994474f02c23e823cc140a8eced7ff98ba3aaafa7f174a3",
+        "altText": "12D — Rectangular-to-round tapered expansion",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12D-v1",
+      "rule": {
+        "kind": "transition",
+        "rows": [
+          {
+            "key": "12D:slope:1:1:area:2",
+            "parameter": 2,
+            "feet": 20,
+            "slope": "1:1"
+          },
+          {
+            "key": "12D:slope:1:1:area:4",
+            "parameter": 4,
+            "feet": 40,
+            "slope": "1:1"
+          },
+          {
+            "key": "12D:slope:2:1:area:2",
+            "parameter": 2,
+            "feet": 20,
+            "slope": "2:1"
+          },
+          {
+            "key": "12D:slope:2:1:area:4",
+            "parameter": 4,
+            "feet": 40,
+            "slope": "2:1"
+          },
+          {
+            "key": "12D:slope:4:1:area:2",
+            "parameter": 2,
+            "feet": 20,
+            "slope": "4:1"
+          },
+          {
+            "key": "12D:slope:4:1:area:4",
+            "parameter": 4,
+            "feet": 30,
+            "slope": "4:1"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "A1/A2 is larger cross-sectional area divided by smaller area, not a diameter or width ratio.",
+          "Slope is X/Y as shown in the source geometry. Select the exact published slope and area ratio.",
+          "Flow is diverging (expansion)."
+        ]
+      }
+    },
+    {
+      "id": "12E",
+      "familyID": "12E",
+      "groupID": 12,
+      "sourceCode": "12E",
+      "name": "Round-to-flat-rectangular tapered expansion",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12E.svg",
+        "revision": "07c2e092e651de9b21153a48c203dae62d1d809c002287c9f9b94d9e2dbfe818",
+        "altText": "12E — Round-to-flat-rectangular tapered expansion",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12E-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "12E",
+            "parameter": 0,
+            "feet": 25
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Use the illustrated transition and flow orientation."
+        ]
+      }
+    },
+    {
+      "id": "12F",
+      "familyID": "12F",
+      "groupID": 12,
+      "sourceCode": "12F",
+      "name": "Rectangular tapered expansion",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12F.svg",
+        "revision": "99ac33b139d5cbb93bfa0ac39612fdaf5ee29bff142ac8abfa3d4795a1d550d6",
+        "altText": "12F — Rectangular tapered expansion",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12F-v1",
+      "rule": {
+        "kind": "transition",
+        "rows": [
+          {
+            "key": "12F:slope:1:1:area:2",
+            "parameter": 2,
+            "feet": 20,
+            "slope": "1:1"
+          },
+          {
+            "key": "12F:slope:1:1:area:4",
+            "parameter": 4,
+            "feet": 40,
+            "slope": "1:1"
+          },
+          {
+            "key": "12F:slope:2:1:area:2",
+            "parameter": 2,
+            "feet": 20,
+            "slope": "2:1"
+          },
+          {
+            "key": "12F:slope:2:1:area:4",
+            "parameter": 4,
+            "feet": 40,
+            "slope": "2:1"
+          },
+          {
+            "key": "12F:slope:4:1:area:2",
+            "parameter": 2,
+            "feet": 15,
+            "slope": "4:1"
+          },
+          {
+            "key": "12F:slope:4:1:area:4",
+            "parameter": 4,
+            "feet": 30,
+            "slope": "4:1"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "A1/A2 is larger cross-sectional area divided by smaller area, not a diameter or width ratio.",
+          "Slope is X/Y as shown in the source geometry. Select the exact published slope and area ratio.",
+          "Flow is diverging (expansion)."
+        ]
+      }
+    },
+    {
+      "id": "12G",
+      "familyID": "12G",
+      "groupID": 12,
+      "sourceCode": "12G",
+      "name": "Rectangular abrupt expansion",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12G.svg",
+        "revision": "0c1ac3fcc63e0183a43ee4bdf8106a8f6aa84250a5dc6549c37c7e7c33812596",
+        "altText": "12G — Rectangular abrupt expansion",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12G-v1",
+      "rule": {
+        "kind": "transition",
+        "rows": [
+          {
+            "key": "12G:slope:abrupt:area:2",
+            "parameter": 2,
+            "feet": 20,
+            "slope": "abrupt"
+          },
+          {
+            "key": "12G:slope:abrupt:area:4",
+            "parameter": 4,
+            "feet": 40,
+            "slope": "abrupt"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "A1/A2 is larger cross-sectional area divided by smaller area, not a diameter or width ratio.",
+          "Slope is X/Y as shown in the source geometry. Select the exact published slope and area ratio.",
+          "Flow is diverging (expansion)."
+        ]
+      }
+    },
+    {
+      "id": "12H",
+      "familyID": "12H",
+      "groupID": 12,
+      "sourceCode": "12H",
+      "name": "Rectangular one-sided tapered expansion",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12H.svg",
+        "revision": "9aaf20e6b3c522079c029b5c03b1c03ff89bbd92f8267d9b75646d9fa6542fb5",
+        "altText": "12H — Rectangular one-sided tapered expansion",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12H-v1",
+      "rule": {
+        "kind": "transition",
+        "rows": [
+          {
+            "key": "12H:slope:1:1:area:2",
+            "parameter": 2,
+            "feet": 20,
+            "slope": "1:1"
+          },
+          {
+            "key": "12H:slope:1:1:area:4",
+            "parameter": 4,
+            "feet": 40,
+            "slope": "1:1"
+          },
+          {
+            "key": "12H:slope:2:1:area:2",
+            "parameter": 2,
+            "feet": 20,
+            "slope": "2:1"
+          },
+          {
+            "key": "12H:slope:2:1:area:4",
+            "parameter": 4,
+            "feet": 40,
+            "slope": "2:1"
+          },
+          {
+            "key": "12H:slope:4:1:area:2",
+            "parameter": 2,
+            "feet": 15,
+            "slope": "4:1"
+          },
+          {
+            "key": "12H:slope:4:1:area:4",
+            "parameter": 4,
+            "feet": 25,
+            "slope": "4:1"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "A1/A2 is larger cross-sectional area divided by smaller area, not a diameter or width ratio.",
+          "Slope is X/Y as shown in the source geometry. Select the exact published slope and area ratio.",
+          "Flow is diverging (expansion)."
+        ]
+      }
+    },
+    {
+      "id": "12I",
+      "familyID": "12I",
+      "groupID": 12,
+      "sourceCode": "12I",
+      "name": "Rectangular side-offset tapered expansion",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12I.svg",
+        "revision": "e68cc44e2125bc86950a2f20a06bb19392420f174b6fe94c54e0f6e7551bfaf1",
+        "altText": "12I — Rectangular side-offset tapered expansion",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12I-v1",
+      "rule": {
+        "kind": "transition",
+        "rows": [
+          {
+            "key": "12I:slope:1:1:area:2",
+            "parameter": 2,
+            "feet": 20,
+            "slope": "1:1"
+          },
+          {
+            "key": "12I:slope:1:1:area:4",
+            "parameter": 4,
+            "feet": 35,
+            "slope": "1:1"
+          },
+          {
+            "key": "12I:slope:2:1:area:2",
+            "parameter": 2,
+            "feet": 15,
+            "slope": "2:1"
+          },
+          {
+            "key": "12I:slope:2:1:area:4",
+            "parameter": 4,
+            "feet": 25,
+            "slope": "2:1"
+          },
+          {
+            "key": "12I:slope:4:1:area:2",
+            "parameter": 2,
+            "feet": 10,
+            "slope": "4:1"
+          },
+          {
+            "key": "12I:slope:4:1:area:4",
+            "parameter": 4,
+            "feet": 10,
+            "slope": "4:1"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "A1/A2 is larger cross-sectional area divided by smaller area, not a diameter or width ratio.",
+          "Slope is X/Y as shown in the source geometry. Select the exact published slope and area ratio.",
+          "Flow is diverging (expansion)."
+        ]
+      }
+    },
+    {
+      "id": "12J",
+      "familyID": "12J",
+      "groupID": 12,
+      "sourceCode": "12J",
+      "name": "Round tapered reduction",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12J.svg",
+        "revision": "6b774633cb9fe5ed147437f9afaf2ad35dba55d2236054cebef35f617a2e3ff0",
+        "altText": "12J — Round tapered reduction",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12J-v1",
+      "rule": {
+        "kind": "transition",
+        "rows": [
+          {
+            "key": "12J:slope:1:1:area:2",
+            "parameter": 2,
+            "feet": 10,
+            "slope": "1:1"
+          },
+          {
+            "key": "12J:slope:1:1:area:4",
+            "parameter": 4,
+            "feet": 10,
+            "slope": "1:1"
+          },
+          {
+            "key": "12J:slope:2:1:area:2",
+            "parameter": 2,
+            "feet": 5,
+            "slope": "2:1"
+          },
+          {
+            "key": "12J:slope:2:1:area:4",
+            "parameter": 4,
+            "feet": 5,
+            "slope": "2:1"
+          },
+          {
+            "key": "12J:slope:4:1:area:2",
+            "parameter": 2,
+            "feet": 5,
+            "slope": "4:1"
+          },
+          {
+            "key": "12J:slope:4:1:area:4",
+            "parameter": 4,
+            "feet": 5,
+            "slope": "4:1"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "A1/A2 is larger cross-sectional area divided by smaller area, not a diameter or width ratio.",
+          "Slope is X/Y as shown in the source geometry. Select the exact published slope and area ratio.",
+          "Flow is converging (reduction)."
+        ]
+      }
+    },
+    {
+      "id": "12K",
+      "familyID": "12K",
+      "groupID": 12,
+      "sourceCode": "12K",
+      "name": "Round abrupt reduction",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12K.svg",
+        "revision": "6976d74a7c0441b6eca520cebd2852d214af3ad6aee607ac08cba2771439a896",
+        "altText": "12K — Round abrupt reduction",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12K-v1",
+      "rule": {
+        "kind": "transition",
+        "rows": [
+          {
+            "key": "12K:slope:abrupt:area:2",
+            "parameter": 2,
+            "feet": 25,
+            "slope": "abrupt"
+          },
+          {
+            "key": "12K:slope:abrupt:area:4",
+            "parameter": 4,
+            "feet": 25,
+            "slope": "abrupt"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "A1/A2 is larger cross-sectional area divided by smaller area, not a diameter or width ratio.",
+          "Slope is X/Y as shown in the source geometry. Select the exact published slope and area ratio.",
+          "Flow is converging (reduction)."
+        ]
+      }
+    },
+    {
+      "id": "12L",
+      "familyID": "12L",
+      "groupID": 12,
+      "sourceCode": "12L",
+      "name": "Rectangular-to-round tapered reduction",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12L.svg",
+        "revision": "ed4e63f2f577d6e011eea4996c7ee42d6dcfe3687ed2dd3d184fc86734217252",
+        "altText": "12L — Rectangular-to-round tapered reduction",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12L-v1",
+      "rule": {
+        "kind": "transition",
+        "rows": [
+          {
+            "key": "12L:slope:1:1:area:2",
+            "parameter": 2,
+            "feet": 10,
+            "slope": "1:1"
+          },
+          {
+            "key": "12L:slope:1:1:area:4",
+            "parameter": 4,
+            "feet": 10,
+            "slope": "1:1"
+          },
+          {
+            "key": "12L:slope:2:1:area:2",
+            "parameter": 2,
+            "feet": 5,
+            "slope": "2:1"
+          },
+          {
+            "key": "12L:slope:2:1:area:4",
+            "parameter": 4,
+            "feet": 5,
+            "slope": "2:1"
+          },
+          {
+            "key": "12L:slope:4:1:area:2",
+            "parameter": 2,
+            "feet": 5,
+            "slope": "4:1"
+          },
+          {
+            "key": "12L:slope:4:1:area:4",
+            "parameter": 4,
+            "feet": 5,
+            "slope": "4:1"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "A1/A2 is larger cross-sectional area divided by smaller area, not a diameter or width ratio.",
+          "Slope is X/Y as shown in the source geometry. Select the exact published slope and area ratio.",
+          "Flow is converging (reduction)."
+        ]
+      }
+    },
+    {
+      "id": "12M",
+      "familyID": "12M",
+      "groupID": 12,
+      "sourceCode": "12M",
+      "name": "Round-to-rectangular tapered reduction",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12M.svg",
+        "revision": "ad938f033afa2ae1b5a3d4ea91fe7637c6ca54f1ff0408afab99d950c7372fa7",
+        "altText": "12M — Round-to-rectangular tapered reduction",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12M-v1",
+      "rule": {
+        "kind": "transition",
+        "rows": [
+          {
+            "key": "12M:slope:1:1:area:2",
+            "parameter": 2,
+            "feet": 10,
+            "slope": "1:1"
+          },
+          {
+            "key": "12M:slope:1:1:area:4",
+            "parameter": 4,
+            "feet": 10,
+            "slope": "1:1"
+          },
+          {
+            "key": "12M:slope:2:1:area:2",
+            "parameter": 2,
+            "feet": 5,
+            "slope": "2:1"
+          },
+          {
+            "key": "12M:slope:2:1:area:4",
+            "parameter": 4,
+            "feet": 5,
+            "slope": "2:1"
+          },
+          {
+            "key": "12M:slope:4:1:area:2",
+            "parameter": 2,
+            "feet": 5,
+            "slope": "4:1"
+          },
+          {
+            "key": "12M:slope:4:1:area:4",
+            "parameter": 4,
+            "feet": 5,
+            "slope": "4:1"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "A1/A2 is larger cross-sectional area divided by smaller area, not a diameter or width ratio.",
+          "Slope is X/Y as shown in the source geometry. Select the exact published slope and area ratio.",
+          "Flow is converging (reduction)."
+        ]
+      }
+    },
+    {
+      "id": "12N",
+      "familyID": "12N",
+      "groupID": 12,
+      "sourceCode": "12N",
+      "name": "Flat-rectangular-to-round tapered reduction",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12N.svg",
+        "revision": "3445a95d7b0263330c0802debeb41723aad52fae676c93a7e9f78165de65e521",
+        "altText": "12N — Flat-rectangular-to-round tapered reduction",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12N-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "12N",
+            "parameter": 0,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Use the illustrated transition and flow orientation."
+        ]
+      }
+    },
+    {
+      "id": "12O",
+      "familyID": "12O",
+      "groupID": 12,
+      "sourceCode": "12O",
+      "name": "Rectangular tapered reduction",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12O.svg",
+        "revision": "46adb88d4e0d721c74a52fe9370859715567bba75ee71662bb68ef12a6767de1",
+        "altText": "12O — Rectangular tapered reduction",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12O-v1",
+      "rule": {
+        "kind": "transition",
+        "rows": [
+          {
+            "key": "12O:slope:1:1:area:2",
+            "parameter": 2,
+            "feet": 10,
+            "slope": "1:1"
+          },
+          {
+            "key": "12O:slope:1:1:area:4",
+            "parameter": 4,
+            "feet": 10,
+            "slope": "1:1"
+          },
+          {
+            "key": "12O:slope:2:1:area:2",
+            "parameter": 2,
+            "feet": 5,
+            "slope": "2:1"
+          },
+          {
+            "key": "12O:slope:2:1:area:4",
+            "parameter": 4,
+            "feet": 5,
+            "slope": "2:1"
+          },
+          {
+            "key": "12O:slope:4:1:area:2",
+            "parameter": 2,
+            "feet": 5,
+            "slope": "4:1"
+          },
+          {
+            "key": "12O:slope:4:1:area:4",
+            "parameter": 4,
+            "feet": 5,
+            "slope": "4:1"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "A1/A2 is larger cross-sectional area divided by smaller area, not a diameter or width ratio.",
+          "Slope is X/Y as shown in the source geometry. Select the exact published slope and area ratio.",
+          "Flow is converging (reduction)."
+        ]
+      }
+    },
+    {
+      "id": "12P",
+      "familyID": "12P",
+      "groupID": 12,
+      "sourceCode": "12P",
+      "name": "Rectangular abrupt reduction",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12P.svg",
+        "revision": "88d281a32880c9a9aa140604083d032d40b8bc8ad555e080525b9094402153cf",
+        "altText": "12P — Rectangular abrupt reduction",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12P-v1",
+      "rule": {
+        "kind": "transition",
+        "rows": [
+          {
+            "key": "12P:slope:abrupt:area:2",
+            "parameter": 2,
+            "feet": 30,
+            "slope": "abrupt"
+          },
+          {
+            "key": "12P:slope:abrupt:area:4",
+            "parameter": 4,
+            "feet": 30,
+            "slope": "abrupt"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "A1/A2 is larger cross-sectional area divided by smaller area, not a diameter or width ratio.",
+          "Slope is X/Y as shown in the source geometry. Select the exact published slope and area ratio.",
+          "Flow is converging (reduction)."
+        ]
+      }
+    },
+    {
+      "id": "12Q",
+      "familyID": "12Q",
+      "groupID": 12,
+      "sourceCode": "12Q",
+      "name": "Rectangular one-sided tapered reduction",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12Q.svg",
+        "revision": "e3746e573e08345ab5708b3c0bea0498d2b09036ca024c3d4e31357c35dd1897",
+        "altText": "12Q — Rectangular one-sided tapered reduction",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12Q-v1",
+      "rule": {
+        "kind": "transition",
+        "rows": [
+          {
+            "key": "12Q:slope:1:1:area:2",
+            "parameter": 2,
+            "feet": 10,
+            "slope": "1:1"
+          },
+          {
+            "key": "12Q:slope:1:1:area:4",
+            "parameter": 4,
+            "feet": 10,
+            "slope": "1:1"
+          },
+          {
+            "key": "12Q:slope:2:1:area:2",
+            "parameter": 2,
+            "feet": 5,
+            "slope": "2:1"
+          },
+          {
+            "key": "12Q:slope:2:1:area:4",
+            "parameter": 4,
+            "feet": 5,
+            "slope": "2:1"
+          },
+          {
+            "key": "12Q:slope:4:1:area:2",
+            "parameter": 2,
+            "feet": 5,
+            "slope": "4:1"
+          },
+          {
+            "key": "12Q:slope:4:1:area:4",
+            "parameter": 4,
+            "feet": 5,
+            "slope": "4:1"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "A1/A2 is larger cross-sectional area divided by smaller area, not a diameter or width ratio.",
+          "Slope is X/Y as shown in the source geometry. Select the exact published slope and area ratio.",
+          "Flow is converging (reduction)."
+        ]
+      }
+    },
+    {
+      "id": "12R",
+      "familyID": "12R",
+      "groupID": 12,
+      "sourceCode": "12R",
+      "name": "Rectangular side-offset tapered reduction",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12R.svg",
+        "revision": "949ebc6e42a68700b9505491868c325eebef86df0b22f2a29578d13ee7a8ecdf",
+        "altText": "12R — Rectangular side-offset tapered reduction",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12R-v1",
+      "rule": {
+        "kind": "transition",
+        "rows": [
+          {
+            "key": "12R:slope:1:1:area:2",
+            "parameter": 2,
+            "feet": 5,
+            "slope": "1:1"
+          },
+          {
+            "key": "12R:slope:1:1:area:4",
+            "parameter": 4,
+            "feet": 5,
+            "slope": "1:1"
+          },
+          {
+            "key": "12R:slope:2:1:area:2",
+            "parameter": 2,
+            "feet": 5,
+            "slope": "2:1"
+          },
+          {
+            "key": "12R:slope:2:1:area:4",
+            "parameter": 4,
+            "feet": 5,
+            "slope": "2:1"
+          },
+          {
+            "key": "12R:slope:4:1:area:2",
+            "parameter": 2,
+            "feet": 5,
+            "slope": "4:1"
+          },
+          {
+            "key": "12R:slope:4:1:area:4",
+            "parameter": 4,
+            "feet": 5,
+            "slope": "4:1"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "A1/A2 is larger cross-sectional area divided by smaller area, not a diameter or width ratio.",
+          "Slope is X/Y as shown in the source geometry. Select the exact published slope and area ratio.",
+          "Flow is converging (reduction)."
+        ]
+      }
+    },
+    {
+      "id": "12S",
+      "familyID": "12S",
+      "groupID": 12,
+      "sourceCode": "12S",
+      "name": "Oval-to-round angled adapter",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12S.svg",
+        "revision": "f0efdccc7de298df597a70eccd82caa260632eb656e5304ca28154b18b740290",
+        "altText": "12S — Oval-to-round angled adapter",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12S-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "12S",
+            "parameter": 0,
+            "feet": 30
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Use the illustrated transition and flow orientation."
+        ]
+      }
+    },
+    {
+      "id": "12T",
+      "familyID": "12T",
+      "groupID": 12,
+      "sourceCode": "12T",
+      "name": "Oval-to-round angled adapter — opposite orientation",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12T.svg",
+        "revision": "b8504176fd394e82f88a4218b89344d6affb5ec042d4bb3e41c0dfccc01cf461",
+        "altText": "12T — Oval-to-round angled adapter — opposite orientation",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12T-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "12T",
+            "parameter": 0,
+            "feet": 30
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Use the illustrated transition and flow orientation."
+        ]
+      }
+    },
+    {
+      "id": "12U",
+      "familyID": "12U",
+      "groupID": 12,
+      "sourceCode": "12U",
+      "name": "Oval-to-round straight adapter",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12U.svg",
+        "revision": "b23bc4ac060e90dead68bbe097319e768a9a55441c70f7198dd7d2046abeb399",
+        "altText": "12U — Oval-to-round straight adapter",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12U-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "12U",
+            "parameter": 0,
+            "feet": 25
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Use the illustrated transition and flow orientation."
+        ]
+      }
+    },
+    {
+      "id": "12V",
+      "familyID": "12V",
+      "groupID": 12,
+      "sourceCode": "12V",
+      "name": "Rectangular-to-round angled adapter",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12V.svg",
+        "revision": "97a2a0de830ad1e75a19cf6a1b5973b9526e7893c9a87cc9ba033a1c7203c867",
+        "altText": "12V — Rectangular-to-round angled adapter",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12V-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "12V",
+            "parameter": 0,
+            "feet": 30
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Use the illustrated transition and flow orientation."
+        ]
+      }
+    },
+    {
+      "id": "12W",
+      "familyID": "12W",
+      "groupID": 12,
+      "sourceCode": "12W",
+      "name": "Flow through a large plenum",
+      "shape": "schematic",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12W.svg",
+        "revision": "7e3c9490ed4e915986df5c546f66cf507df89c3c8386bd66737fbf5e85a0e777",
+        "altText": "12W — Flow through a large plenum",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12W-v1",
+      "rule": {
+        "kind": "plenumPassage",
+        "rows": [
+          {
+            "key": "12W:in:600:out:600",
+            "parameter": 0,
+            "feet": 40,
+            "inletVelocity": 600,
+            "outletVelocity": 600
+          },
+          {
+            "key": "12W:in:700:out:600",
+            "parameter": 0,
+            "feet": 40,
+            "inletVelocity": 700,
+            "outletVelocity": 600
+          },
+          {
+            "key": "12W:in:800:out:600",
+            "parameter": 0,
+            "feet": 35,
+            "inletVelocity": 800,
+            "outletVelocity": 600
+          },
+          {
+            "key": "12W:in:900:out:600",
+            "parameter": 0,
+            "feet": 35,
+            "inletVelocity": 900,
+            "outletVelocity": 600
+          },
+          {
+            "key": "12W:in:600:out:700",
+            "parameter": 0,
+            "feet": 55,
+            "inletVelocity": 600,
+            "outletVelocity": 700
+          },
+          {
+            "key": "12W:in:700:out:700",
+            "parameter": 0,
+            "feet": 55,
+            "inletVelocity": 700,
+            "outletVelocity": 700
+          },
+          {
+            "key": "12W:in:800:out:700",
+            "parameter": 0,
+            "feet": 50,
+            "inletVelocity": 800,
+            "outletVelocity": 700
+          },
+          {
+            "key": "12W:in:900:out:700",
+            "parameter": 0,
+            "feet": 50,
+            "inletVelocity": 900,
+            "outletVelocity": 700
+          },
+          {
+            "key": "12W:in:600:out:800",
+            "parameter": 0,
+            "feet": 70,
+            "inletVelocity": 600,
+            "outletVelocity": 800
+          },
+          {
+            "key": "12W:in:700:out:800",
+            "parameter": 0,
+            "feet": 70,
+            "inletVelocity": 700,
+            "outletVelocity": 800
+          },
+          {
+            "key": "12W:in:800:out:800",
+            "parameter": 0,
+            "feet": 70,
+            "inletVelocity": 800,
+            "outletVelocity": 800
+          },
+          {
+            "key": "12W:in:900:out:800",
+            "parameter": 0,
+            "feet": 65,
+            "inletVelocity": 900,
+            "outletVelocity": 800
+          },
+          {
+            "key": "12W:in:600:out:900",
+            "parameter": 0,
+            "feet": 90,
+            "inletVelocity": 600,
+            "outletVelocity": 900
+          },
+          {
+            "key": "12W:in:700:out:900",
+            "parameter": 0,
+            "feet": 90,
+            "inletVelocity": 700,
+            "outletVelocity": 900
+          },
+          {
+            "key": "12W:in:800:out:900",
+            "parameter": 0,
+            "feet": 90,
+            "inletVelocity": 800,
+            "outletVelocity": 900
+          },
+          {
+            "key": "12W:in:900:out:900",
+            "parameter": 0,
+            "feet": 85,
+            "inletVelocity": 900,
+            "outletVelocity": 900
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": null,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Flow through a plenum large compared with the connected ducts. Inlet and outlet velocities are separate table selections.",
+          "The result covers the illustrated entry and exit together; do not add a second plenum entry or exit loss for the same passage."
+        ]
+      }
+    },
+    {
+      "id": "12X",
+      "familyID": "12X",
+      "groupID": 12,
+      "sourceCode": "12X",
+      "name": "Abrupt squeeze",
+      "shape": "schematic",
+      "artwork": {
+        "publicPath": "/images/fittings/group-12/12X.svg",
+        "revision": "66b1146e5dfb11cdfd5837b36cd86c4b2e52633f75bea68eea8a63c9b6eb8e89",
+        "altText": "12X — Abrupt squeeze",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "12X-v1",
+      "rule": {
+        "kind": "abruptSqueeze",
+        "rows": [
+          {
+            "key": "12X:upstream:600:area:2",
+            "parameter": 2,
+            "feet": 65,
+            "inletVelocity": 600,
+            "minimumUpstreamStaticPressureIWC": 0.12
+          },
+          {
+            "key": "12X:upstream:600:area:4",
+            "parameter": 4,
+            "feet": 245,
+            "inletVelocity": 600,
+            "minimumUpstreamStaticPressureIWC": 0.52
+          },
+          {
+            "key": "12X:upstream:700:area:2",
+            "parameter": 2,
+            "feet": 90,
+            "inletVelocity": 700,
+            "minimumUpstreamStaticPressureIWC": 0.16
+          },
+          {
+            "key": "12X:upstream:700:area:4",
+            "parameter": 4,
+            "feet": 330,
+            "inletVelocity": 700,
+            "minimumUpstreamStaticPressureIWC": 0.71
+          },
+          {
+            "key": "12X:upstream:800:area:2",
+            "parameter": 2,
+            "feet": 115,
+            "inletVelocity": 800,
+            "minimumUpstreamStaticPressureIWC": 0.2
+          },
+          {
+            "key": "12X:upstream:800:area:4",
+            "parameter": 4,
+            "feet": 430,
+            "inletVelocity": 800,
+            "minimumUpstreamStaticPressureIWC": 0.92
+          },
+          {
+            "key": "12X:upstream:900:area:2",
+            "parameter": 2,
+            "feet": 145,
+            "inletVelocity": 900,
+            "minimumUpstreamStaticPressureIWC": 0.26
+          },
+          {
+            "key": "12X:upstream:900:area:4",
+            "parameter": 4,
+            "feet": 545,
+            "inletVelocity": 900,
+            "minimumUpstreamStaticPressureIWC": 1.17
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": null,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Velocity is in the larger upstream section A1; it doubles or quadruples at A2 according to the area ratio.",
+          "The minimum upstream static pressure is required for positive static pressure at A2. It is a separate condition, not additional equivalent length or a pressure loss to subtract again.",
+          "The listed equivalent length covers the complete abrupt squeeze and re-expansion."
         ]
       }
     }

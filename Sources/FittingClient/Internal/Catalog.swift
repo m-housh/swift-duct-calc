@@ -121,6 +121,30 @@ struct Catalog: Sendable {
     var requirement: Fitting.InputRequirement {
       switch kind {
       case .fixed: .fixed
+      case .transition:
+        .transition(
+          slopes: Fitting.TransitionSlope.allCases.filter { slope in
+            rows.contains { $0.slope == slope }
+          },
+          areaRatios: Fitting.TransitionAreaRatio.allCases.filter { ratio in
+            rows.contains { $0.parameter == Double(ratio.rawValue) }
+          })
+      case .plenumPassage:
+        .plenumPassage(
+          inletVelocities: Fitting.TransitionVelocity.allCases.filter { velocity in
+            rows.contains { $0.inletVelocity == velocity }
+          },
+          outletVelocities: Fitting.TransitionVelocity.allCases.filter { velocity in
+            rows.contains { $0.outletVelocity == velocity }
+          })
+      case .abruptSqueeze:
+        .abruptSqueeze(
+          upstreamVelocities: Fitting.TransitionVelocity.allCases.filter { velocity in
+            rows.contains { $0.inletVelocity == velocity }
+          },
+          areaRatios: Fitting.TransitionAreaRatio.allCases.filter { ratio in
+            rows.contains { $0.parameter == Double(ratio.rawValue) }
+          })
       case .easedTakeoff: .easedTakeoff
       case .doubleElbow: .doubleElbow(baseFittingIDs: baseFittingIDs ?? [])
       case .insideCornerOffset: .insideCornerOffset(radii: rows.compactMap(\.insideCornerRadius))
@@ -186,6 +210,10 @@ struct Catalog: Sendable {
     var defaultInputs: Fitting.Inputs {
       switch kind {
       case .fixed: .fixed
+      case .transition:
+        .transition(slope: rows.allSatisfy { $0.slope == .abrupt } ? .abrupt : nil, areaRatio: nil)
+      case .plenumPassage: .plenumPassage(inletVelocity: nil, outletVelocity: nil)
+      case .abruptSqueeze: .abruptSqueeze(upstreamVelocity: nil, areaRatio: nil)
       case .easedTakeoff: .easedTakeoff(buttedSleeve: false)
       case .doubleElbow: .doubleElbow(baseFittingID: nil, baseInputs: nil)
       case .insideCornerOffset: .insideCornerOffset(radius: .mitered)
@@ -212,7 +240,7 @@ struct Catalog: Sendable {
       case fixed, heightWidth, radiusWidth, downstreamBranches, plenumReturns, junction,
         returnJunction, pannedReturn, roundElbow, rectangularElbow, ovalElbow,
         squareElbow, steppedOffset, fourTurnOffset, radiusOffset, riserElbow,
-        doubleElbow, insideCornerOffset, easedTakeoff
+        doubleElbow, insideCornerOffset, easedTakeoff, transition, plenumPassage, abruptSqueeze
     }
 
     struct AngleMultiplier: Decodable, Sendable {
@@ -230,6 +258,10 @@ struct Catalog: Sendable {
       let riserSize: Fitting.RiserSize?
       let riserCorner: Fitting.RiserCorner?
       let insideCornerRadius: Fitting.InsideCornerRadius?
+      let slope: Fitting.TransitionSlope?
+      let inletVelocity: Fitting.TransitionVelocity?
+      let outletVelocity: Fitting.TransitionVelocity?
+      let minimumUpstreamStaticPressureIWC: Double?
       /// The group 6 trunk column; `feet` holds that row's branch value.
       let trunkFeet: Double?
     }

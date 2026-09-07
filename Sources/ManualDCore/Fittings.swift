@@ -42,7 +42,7 @@ public enum Fitting {
   }
 
   public enum Shape: String, Codable, Sendable {
-    case round, rectangular, oval, mixed
+    case round, rectangular, oval, mixed, schematic
   }
 
   public enum View: String, Codable, Sendable {
@@ -181,6 +181,32 @@ public enum Fitting {
     }
   }
 
+  public enum TransitionSlope: String, Codable, CaseIterable, Sendable {
+    case oneToOne = "1:1"
+    case twoToOne = "2:1"
+    case fourToOne = "4:1"
+    case abrupt
+
+    public var label: String { self == .abrupt ? "Abrupt" : rawValue }
+  }
+
+  /// Larger cross-sectional area divided by smaller area, independent of flow direction.
+  public enum TransitionAreaRatio: Int, Codable, CaseIterable, Sendable {
+    case two = 2
+    case four = 4
+
+    public var label: String { "\(rawValue):1" }
+  }
+
+  public enum TransitionVelocity: Int, Codable, CaseIterable, Sendable {
+    case fpm600 = 600
+    case fpm700 = 700
+    case fpm800 = 800
+    case fpm900 = 900
+
+    public var label: String { "\(rawValue) FPM" }
+  }
+
   public enum Inputs: Codable, Equatable, Sendable {
     case fixed
     case heightWidth(heightInches: Double?, widthInches: Double?)
@@ -201,6 +227,10 @@ public enum Fitting {
     case riserElbow(size: RiserSize?, corner: RiserCorner?)
     case insideCornerOffset(radius: InsideCornerRadius?)
     case easedTakeoff(buttedSleeve: Bool)
+    case transition(slope: TransitionSlope?, areaRatio: TransitionAreaRatio?)
+    case plenumPassage(inletVelocity: TransitionVelocity?, outletVelocity: TransitionVelocity?)
+    /// Velocity is in the larger upstream section A1, not in the restricted section A2.
+    case abruptSqueeze(upstreamVelocity: TransitionVelocity?, areaRatio: TransitionAreaRatio?)
     /// One selected construction represents both matching 90° elbows; no supplied EL.
     indirect case doubleElbow(baseFittingID: ID?, baseInputs: Inputs?)
     case rectangularElbow(
@@ -229,6 +259,10 @@ public enum Fitting {
     case riserElbow(sizes: [RiserSize], corners: [RiserCorner])
     case insideCornerOffset(radii: [InsideCornerRadius])
     case easedTakeoff
+    case transition(slopes: [TransitionSlope], areaRatios: [TransitionAreaRatio])
+    case plenumPassage(
+      inletVelocities: [TransitionVelocity], outletVelocities: [TransitionVelocity])
+    case abruptSqueeze(upstreamVelocities: [TransitionVelocity], areaRatios: [TransitionAreaRatio])
     case doubleElbow(baseFittingIDs: [ID])
     case rectangularElbow(
       radiusRatios: [RectangularElbowRadiusRatio], bendCategories: [ElbowBendCategory],
@@ -237,12 +271,13 @@ public enum Fitting {
 
   /// Applicability information for the fitting rule, independent of reference-document format.
   public struct Conditions: Codable, Equatable, Sendable {
-    public let referenceVelocityFPM: Int
+    /// Nil when the rule uses separately selected table velocities rather than one reference velocity.
+    public let referenceVelocityFPM: Int?
     public let frictionRateIWCPer100Feet: Double
     public let notes: [String]
 
     public init(
-      referenceVelocityFPM: Int, frictionRateIWCPer100Feet: Double, notes: [String]
+      referenceVelocityFPM: Int?, frictionRateIWCPer100Feet: Double, notes: [String]
     ) {
       self.referenceVelocityFPM = referenceVelocityFPM
       self.frictionRateIWCPer100Feet = frictionRateIWCPer100Feet
@@ -362,6 +397,7 @@ public enum Fitting {
       case radiusRatio, elbowAngle, bendCategory, pieceCount
       case offsetRatio, turningVanes, riserSize, riserCorner
       case insideCornerRadius, baseFitting, baseInputs
+      case transitionSlope, areaRatio, inletVelocity, outletVelocity, upstreamVelocity
     }
 
     public enum Code: Equatable, Sendable {
@@ -391,13 +427,16 @@ public enum Fitting {
     public let catalogRevision: String
     public let ruleRevision: String
     public let derivation: Derivation?
+    /// A source applicability requirement in inches water column, never an additive length.
+    public let minimumUpstreamStaticPressureIWC: Double?
 
     public init(
       fittingID: ID, sourceCode: SourceCode?, equivalentLengthFeet: Double, inputs: Inputs,
       components: [Component], conditions: Conditions, catalogRevision: String,
       ruleRevision: String,
       airflowSelection: AirflowSelection? = nil,
-      derivation: Derivation? = nil
+      derivation: Derivation? = nil,
+      minimumUpstreamStaticPressureIWC: Double? = nil
     ) {
       self.fittingID = fittingID
       self.sourceCode = sourceCode
@@ -409,6 +448,7 @@ public enum Fitting {
       self.catalogRevision = catalogRevision
       self.ruleRevision = ruleRevision
       self.derivation = derivation
+      self.minimumUpstreamStaticPressureIWC = minimumUpstreamStaticPressureIWC
     }
 
     /// Retains the evaluated base and its revisions without adding its length a second time.

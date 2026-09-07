@@ -9,6 +9,9 @@ extension Catalog {
     }
     let row: Rule.Row
     switch (record.rule.kind, request.inputs) {
+    case (.transition, .transition), (.plenumPassage, .plenumPassage),
+      (.abruptSqueeze, .abruptSqueeze):
+      return evaluateTransition(record, request: request)
     case (.easedTakeoff, .easedTakeoff(let buttedSleeve)):
       var components = [
         Fitting.Calculation.Component(
