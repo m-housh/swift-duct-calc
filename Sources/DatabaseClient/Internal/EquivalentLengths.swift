@@ -218,10 +218,12 @@ extension EquivalentLength.FittingGroup: Validatable {
       }
       .errorLabel("Group", inline: true)
 
-      Validator.validate(\.letter, with: .regex(matching: "[a-zA-Z]"))
-        .errorLabel("Letter", inline: true)
+      if fitting?.origin != .legacy && !(group == 11 && fitting?.origin == .catalog) {
+        Validator.validate(\.letter, with: .regex(matching: "^[a-zA-Z]+$"))
+          .errorLabel("Letter", inline: true)
+      }
 
-      Validator.validate(\.value, with: .greaterThan(0))
+      Validator.validate(\.value, with: .greaterThanOrEquals(0))
         .errorLabel("Value", inline: true)
 
       Validator.validate(\.quantity, with: .greaterThanOrEquals(1))

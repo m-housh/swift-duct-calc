@@ -41,6 +41,10 @@ extension DatabaseClient.Projects: TestDependencyKey {
       get: { id in
         try await ProjectModel.find(id, on: database).map { try $0.toDTO() }
       },
+      getForUser: { projectID, userID in
+        try await ProjectModel.query(on: database).filter(\.$id == projectID)
+          .filter(\.$user.$id == userID).first().map { try $0.toDTO() }
+      },
       getCompletedSteps: { id in
         let model = try await ProjectModel.fetchDetail(for: id, on: database)
         var equivalentLengthsCompleted = false

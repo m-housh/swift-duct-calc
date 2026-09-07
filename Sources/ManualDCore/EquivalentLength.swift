@@ -131,17 +131,21 @@ extension EquivalentLength {
     public let value: Double
     /// The quantity of the fittings in the path.
     public let quantity: Int
+    /// Optional additive JSON metadata; absent on existing saved rows.
+    public let fitting: Fitting.SavedEntry?
 
     public init(
       group: Int,
       letter: String,
       value: Double,
-      quantity: Int = 1
+      quantity: Int = 1,
+      fitting: Fitting.SavedEntry? = nil
     ) {
       self.group = group
       self.letter = letter
       self.value = value
       self.quantity = quantity
+      self.fitting = fitting
     }
   }
 

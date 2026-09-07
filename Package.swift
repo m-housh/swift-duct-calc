@@ -188,6 +188,7 @@ let package = Package(
     .target(
       name: "ProjectClient",
       dependencies: [
+        .target(name: "FittingClient"),
         .target(name: "DatabaseClient"),
         .target(name: "ManualDClient"),
         .target(name: "PdfClient"),

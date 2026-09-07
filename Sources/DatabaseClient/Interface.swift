@@ -15,6 +15,7 @@ extension DependencyValues {
 @DependencyClient
 public struct DatabaseClient: Sendable {
   /// Database migrations.
+  public var fittingFavorites: FittingFavorites
   public var migrations: Migrations
   /// Interactions with the projects table.
   public var projects: Projects
@@ -32,6 +33,12 @@ public struct DatabaseClient: Sendable {
   public var userProfiles: UserProfiles
   /// Interactions with the trunk sizes table.
   public var trunkSizes: TrunkSizes
+
+  @DependencyClient
+  public struct FittingFavorites: Sendable {
+    public var fetch: @Sendable (User.ID) async throws -> [Fitting.ID]
+    public var set: @Sendable (User.ID, Fitting.ID, Bool) async throws -> Void
+  }
 
   @DependencyClient
   public struct ComponentLosses: Sendable {
@@ -81,6 +88,7 @@ public struct DatabaseClient: Sendable {
     public var delete: @Sendable (Project.ID) async throws -> Void
     public var detail: @Sendable (Project.ID) async throws -> Project.Detail?
     public var get: @Sendable (Project.ID) async throws -> Project?
+    public var getForUser: @Sendable (Project.ID, User.ID) async throws -> Project?
     public var getCompletedSteps: @Sendable (Project.ID) async throws -> Project.CompletedSteps
     public var getSensibleHeatRatio: @Sendable (Project.ID) async throws -> Double?
     public var fetch: @Sendable (User.ID, PageRequest) async throws -> Page<Project>
@@ -136,6 +144,7 @@ public struct DatabaseClient: Sendable {
 
 extension DatabaseClient: TestDependencyKey {
   public static let testValue: DatabaseClient = Self(
+    fittingFavorites: .init(),
     migrations: .testValue,
     projects: .testValue,
     rooms: .testValue,
@@ -149,6 +158,7 @@ extension DatabaseClient: TestDependencyKey {
 
   public static func live(database: any Database) -> Self {
     .init(
+      fittingFavorites: .live(database: database),
       migrations: .liveValue,
       projects: .live(database: database),
       rooms: .live(database: database),

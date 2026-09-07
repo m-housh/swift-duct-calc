@@ -587,3 +587,52 @@ public enum Fitting {
     case unknown
   }
 }
+
+extension Fitting {
+  /// Metadata alongside the historical group/letter/value/quantity JSON keys.
+  public struct SavedEntry: Codable, Equatable, Sendable {
+    public var version: Int = 1
+    public let id: UUID
+    public let origin: Origin
+    public let name: String
+    public var calculation: Calculation?
+    public var returnJunction: ReturnJunctionCalculation?
+    public var column: Column?
+    public init(
+      id: UUID, origin: Origin, name: String, calculation: Calculation? = nil,
+      returnJunction: ReturnJunctionCalculation? = nil, column: Column? = nil
+    ) {
+      self.id = id
+      self.origin = origin
+      self.name = name
+      self.calculation = calculation
+      self.returnJunction = returnJunction
+      self.column = column
+    }
+  }
+  public enum Origin: String, Codable, Sendable { case legacy, referenceEntry, catalog }
+  public enum Column: String, Codable, Sendable { case branch, trunk }
+  /// Only changed/new catalog entries are evaluated. Saved indices refer to the authorized baseline.
+  public enum PathEntry: Equatable, Sendable {
+    case saved(index: Int, quantity: Int)
+    case reference(code: String, feet: Double, quantity: Int)
+    case catalog(id: ID, inputs: Inputs, column: Column?, quantity: Int)
+  }
+  public struct PathSave: Equatable, Sendable {
+    public let baseline: EquivalentLength?
+    public let name: String
+    public let pathType: PathType
+    public let straightLengths: [Int]
+    public let entries: [PathEntry]
+    public init(
+      baseline: EquivalentLength?, name: String, pathType: PathType, straightLengths: [Int],
+      entries: [PathEntry]
+    ) {
+      self.baseline = baseline
+      self.name = name
+      self.pathType = pathType
+      self.straightLengths = straightLengths
+      self.entries = entries
+    }
+  }
+}
