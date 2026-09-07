@@ -41,8 +41,8 @@ start with their previous shape classifications. All entries initially say **Nee
 review**, including the assistant-audited Group 2/4 entries. Review status does not
 hide a fitting or disable its calculations.
 
-The first user review is now saved for **165 fittings in Groups 2–4 and 6–11**.
-Groups **1, 5, and 12** remain pending. The Group 11 junction box is classified as
+User reviews are now saved for **189 fittings in Groups 2–4 and 6–12**.
+Groups **1 and 5** remain pending. The Group 11 junction box is classified as
 shape-independent. Groups 1 and 5 need a separate decision about how equipment
 connections should establish the preference for subsequent fitting selections;
 the current picker still uses the manual preference toggle.
