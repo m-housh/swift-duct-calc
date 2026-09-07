@@ -12,8 +12,15 @@ struct CatalogReviewTests {
       .deletingLastPathComponent().deletingLastPathComponent()
     let url = FileManager.default.temporaryDirectory.appendingPathComponent(
       "catalog-review-\(UUID()).json")
+    // Review tests start with pending records in their disposable copy, regardless
+    // of how much of the authored catalog has already been reviewed.
+    let source = try String(
+      contentsOf: root.appendingPathComponent("Sources/FittingClient/Resources/catalog.json"),
+      encoding: .utf8)
     try Data(
-      contentsOf: root.appendingPathComponent("Sources/FittingClient/Resources/catalog.json")
+      source.replacingOccurrences(
+        of: "\"ductShapeReviewed\": true", with: "\"ductShapeReviewed\": false"
+      ).utf8
     )
     .write(to: url)
     return url

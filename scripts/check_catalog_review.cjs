@@ -7,7 +7,9 @@ const fs = require('node:fs');
   const source = process.env.FITTING_REVIEW_CATALOG;
   assert(source, 'Set FITTING_REVIEW_CATALOG to the disposable host catalog path');
   assert(!source.includes('/Sources/'), 'Use a disposable catalog, not the checked-out source');
-  const initial = fs.readFileSync(source, 'utf8');
+  // Seed pending review status only in this disposable test catalog.
+  const initial = fs.readFileSync(source, 'utf8').replaceAll('"ductShapeReviewed": true', '"ductShapeReviewed": false');
+  fs.writeFileSync(source, initial);
   const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
   try {
     const anonymous = await browser.newContext();

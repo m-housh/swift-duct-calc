@@ -41,6 +41,12 @@ start with their previous shape classifications. All entries initially say **Nee
 review**, including the assistant-audited Group 2/4 entries. Review status does not
 hide a fitting or disable its calculations.
 
+The first user review is now saved for **165 fittings in Groups 2–4 and 6–11**.
+Groups **1, 5, and 12** remain pending. The Group 11 junction box is classified as
+shape-independent. Groups 1 and 5 need a separate decision about how equipment
+connections should establish the preference for subsequent fitting selections;
+the current picker still uses the manual preference toggle.
+
 The review page changes **only** `ductShape` and `ductShapeReviewed` for submitted IDs.
 It preserves the rest of the JSON and its formatting, so Git diffs show the actual
 review decisions. Unknown IDs, duplicate IDs, missing fields, and invalid enum values
@@ -93,7 +99,8 @@ metadata, stale and concurrent saves, invalid submissions, and preservation of s
 formatting. View tests check every card against its catalog classification without
 maintaining a second classification table in Swift.
 
-The browser review test uses a **disposable catalog copy and database**, verifies
+The browser review test uses a **disposable catalog copy and database**, resets
+review status to pending in that test copy, and verifies
 login requirements, edits/saves/reloads classifications, checks the live picker
 fragment, rejects stale/invalid writes, restores the exact original file through the
 UI, tests range/select-all bulk edits and failed-save retry, and checks desktop/mobile
