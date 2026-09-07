@@ -21,7 +21,7 @@ public func configure(
   _ app: Application,
   in environment: EnvVars,
   makeDatabaseClient: @escaping (any Database) -> DatabaseClient = { .live(database: $0) },
-  makeFittingClient: () async throws -> FittingClient = { try await .live() }
+  makeFittingClient: (() async throws -> FittingClient)? = nil
 ) async throws {
   // Read the catalog before installing routes. A load failure prevents startup.
   var startupFiles = FileClient()
@@ -33,7 +33,11 @@ public func configure(
   let fittingClient = try await withDependencies {
     $0.fileClient = startupFiles
   } operation: {
-    try await makeFittingClient()
+    if let makeFittingClient { return try await makeFittingClient() }
+    let reviewPath =
+      app.environment == .development
+      ? Environment.get("FITTING_CATALOG_REVIEW_PATH") : nil
+    return try await FittingClient.live(reviewCatalogPath: reviewPath)
   }
 
   // Setup the database client.

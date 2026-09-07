@@ -15,7 +15,7 @@ struct Catalog: Sendable {
       throw FittingClientError.invalidCatalog("Cannot decode catalog: \(error)")
     }
     // Keep only the structural guarantees required by lookup and table indexing.
-    guard document.schemaVersion == 1 else {
+    guard document.schemaVersion == 2 else {
       throw FittingClientError.invalidCatalog("Unsupported schema version")
     }
     guard Set(document.groups.map(\.id)) == Set(Fitting.Group.ID.allCases),
@@ -57,6 +57,7 @@ struct Catalog: Sendable {
       .init(
         id: record.id, groupID: record.groupID, familyID: record.familyID,
         sourceCode: record.sourceCode, name: record.name, shape: record.shape,
+        ductShape: record.ductShape, ductShapeReviewed: record.ductShapeReviewed,
         pathTypes: pathTypes(for: record), inputRequirement: record.rule.requirement,
         defaultInputs: record.rule.defaultInputs, conditions: record.conditions,
         availableViews: record.artworks.map(\.view)
@@ -99,6 +100,8 @@ struct Catalog: Sendable {
     let sourceCode: Fitting.SourceCode?
     let name: String
     let shape: Fitting.Shape
+    let ductShape: Fitting.Shape
+    let ductShapeReviewed: Bool
     let conditions: Fitting.Conditions
     let artwork: Fitting.Artwork
     let alternateArtwork: [Fitting.Artwork]?

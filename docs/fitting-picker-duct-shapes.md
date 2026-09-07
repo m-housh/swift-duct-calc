@@ -6,8 +6,9 @@ for a fitting with a rectangular register face and a round duct collar. Descript
 names are not a reliable substitute: the Group 4 names were inferred from geometry,
 while the source supplies fitting numbers and equivalent lengths.
 
-The presentation mapping lives in
-[`PickerDuctShape.swift`](../Sources/ViewController/Views/FittingPicker/PickerDuctShape.swift).
+The authoritative presentation mapping now lives in each record’s `ductShape` field in
+[`catalog.json`](../Sources/FittingClient/Resources/catalog.json). Edit and confirm these
+values through the [development catalog review page](fitting-catalog-review.md).
 It changes ordering in both Favorites and All fittings, without changing catalog IDs,
 artwork, calculation rules, saved lengths, or which fittings are available.
 
@@ -18,7 +19,10 @@ outlets on 2A–2C and 2I–2K do not make their rectangular trunk connections r
 
 ## Group 4: duct connection at the boot or stack head
 
-All 44 source reference drawings were reviewed for the connected duct shape. A
+The initial 44-entry mapping below was based on an assistant review of the source
+drawings. It is seeded into the catalog with `ductShapeReviewed: false` pending user
+confirmation. Subsequent saved review decisions in the catalog take precedence over
+this initial audit. A
 rectangular register opening does not make a round-neck boot rectangular; likewise,
 a curved heel on a rectangular boot does not make its duct connection round.
 
@@ -47,6 +51,7 @@ Examples from the source references:
 mapping is explicit so future additions cannot silently pass the full-catalog audit
 by inheriting the artwork's broad `mixed` classification.
 
-Swift checks cover all 44 IDs. The preference browser check verifies the full round
-and rectangular order, all 44 originals remaining visible, and matching ordering of
-favorite copies without moving originals when starred.
+Swift checks verify that every rendered card follows its catalog metadata, including
+when a development review changes it. No classification exception table remains in
+the views. The initial browser regression also checked all 44 originals and favorite
+copy ordering.

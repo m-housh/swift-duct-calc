@@ -4,6 +4,8 @@ import Foundation
 extension SiteRoute.View {
   /// Catalog and row fragments for the project editor; these endpoints do not access saved projects.
   public enum FittingPickerRoute: Equatable, Sendable {
+    case review(Int)
+    case saveReview(String)
     case index(Fitting.PathType)
     case group(String)
     case rows(String)
@@ -12,6 +14,16 @@ extension SiteRoute.View {
     case reference(String)
 
     static let router = OneOf {
+      Route(.case(Self.review)) {
+        Path { "review" }
+        Method.get
+        Query { Field("group", default: 1) { Int.parser() } }
+      }
+      Route(.case(Self.saveReview)) {
+        Path { "review" }
+        Method.post
+        Body { FormData { Field("payload", .string) } }
+      }
       Route(.case(Self.group)) {
         Path { "group" }
         Method.post

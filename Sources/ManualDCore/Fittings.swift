@@ -41,7 +41,7 @@ public enum Fitting {
     }
   }
 
-  public enum Shape: String, Codable, Sendable {
+  public enum Shape: String, Codable, CaseIterable, Sendable {
     case round, rectangular, oval, mixed, schematic
   }
 
@@ -323,6 +323,9 @@ public enum Fitting {
     public let sourceCode: SourceCode?
     public let name: String
     public let shape: Shape
+    /// Authored duct connection used only for picker ordering.
+    public let ductShape: Shape
+    public let ductShapeReviewed: Bool
     public let pathTypes: [PathType]
     public let availableViews: [View]
     public let inputRequirement: InputRequirement
@@ -332,7 +335,8 @@ public enum Fitting {
 
     public init(
       id: ID, groupID: Group.ID, familyID: ID, sourceCode: SourceCode?, name: String,
-      shape: Shape, pathTypes: [PathType], inputRequirement: InputRequirement,
+      shape: Shape, ductShape: Shape, ductShapeReviewed: Bool, pathTypes: [PathType],
+      inputRequirement: InputRequirement,
       defaultInputs: Inputs, conditions: Conditions, availableViews: [View] = [.individual]
     ) {
       self.id = id
@@ -341,6 +345,8 @@ public enum Fitting {
       self.sourceCode = sourceCode
       self.name = name
       self.shape = shape
+      self.ductShape = ductShape
+      self.ductShapeReviewed = ductShapeReviewed
       self.pathTypes = pathTypes
       self.inputRequirement = inputRequirement
       self.availableViews = availableViews

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "revision": "fitting-catalog-v14",
   "groups": [
     {
@@ -98,6 +98,8 @@
       "sourceCode": "1A",
       "name": "Round straight takeoff",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1A.svg",
         "revision": "fe1c369d58cedabcb42fd3a0491b7f18211ae0297a9e339f6c156e78c343dbe4",
@@ -132,6 +134,8 @@
       "sourceCode": "1B",
       "name": "Round tapered takeoff",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1B.svg",
         "revision": "1e952a9b7ee8edef8a58df1e8d308de7b3af1c39911898d428251f0053083677",
@@ -166,6 +170,8 @@
       "sourceCode": "1C",
       "name": "Rectangular straight takeoff",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1C.svg",
         "revision": "674ecd31d74d87af283063524a97c3f8029954d3551474738b10dc9d56b1a211",
@@ -200,6 +206,8 @@
       "sourceCode": "1D",
       "name": "Rectangular 45-degree entry",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1D.svg",
         "revision": "589c36a45d3e1bc273adca6b03328fd400008c76155e5d2edc814bfc9f0a2ed0",
@@ -234,6 +242,8 @@
       "sourceCode": "1E",
       "name": "Rectangular angled takeoff",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1E.svg",
         "revision": "e3027fc6ca9720954d00ce7890e1f00a03c61f6bd00cbe7d9aef7ada94541521",
@@ -268,6 +278,8 @@
       "sourceCode": "1F",
       "name": "Bull-head outlet",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1F.svg",
         "revision": "5b18b93b2f0484c811a6671075f398b8321213b75e25bf08af7db8350e1086a2",
@@ -306,6 +318,8 @@
       "sourceCode": "1G",
       "name": "Tapered-head outlet",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1G.svg",
         "revision": "016eb078fb427c5fb1942edb2ff81f410e26d9a2f414ce9bd3bb287f9a4004bb",
@@ -345,6 +359,8 @@
       "sourceCode": "1H",
       "name": "Square elbow without vanes",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1H.svg",
         "revision": "451e0f8e6005dbe52b92c288ef2307c7ac727336d887a732a3b2d0636ccb372f",
@@ -384,6 +400,8 @@
       "sourceCode": "1I",
       "name": "Square elbow with vanes",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1I.svg",
         "revision": "0c4d81b5bc2f2f4f77f0147359da17d8111685fdac0ad773eef500c22226f2fc",
@@ -417,6 +435,8 @@
       "sourceCode": "1K",
       "name": "Radius elbow with mitered inside corner",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1K.svg",
         "revision": "0abb3adf0dc39419ac29d661688fd478822bbdb00816533828606e40c10cf96a",
@@ -450,6 +470,8 @@
       "sourceCode": "1L",
       "name": "Radius elbow without vanes",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1L.svg",
         "revision": "eb2f8af84fe0b3e9424f347e4b84448d04ac8d595ad3916def082b19a248f35e",
@@ -495,6 +517,8 @@
       "sourceCode": "1M",
       "name": "Radius elbow · one vane",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1M-1-vane.svg",
         "revision": "231cd2d6c4bb6592af4de732361c1ce97ed7e156b8f1c8e2b8465c2017b42896",
@@ -540,6 +564,8 @@
       "sourceCode": "1M",
       "name": "Radius elbow · two vanes",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1M-2-vanes.svg",
         "revision": "78594412ec34f6c1e36728af0272b07eb872eebe2265154c567738eecf214ff6",
@@ -585,6 +611,8 @@
       "sourceCode": "1N",
       "name": "Outlet transition",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1N.svg",
         "revision": "a5d6201151a6887d960597e739fd36d349029f92effb51a8dd958221628f2dde",
@@ -618,6 +646,8 @@
       "sourceCode": "1O",
       "name": "Bull-head tee without vanes",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1O.svg",
         "revision": "c19306a61aca6dfa5da0340ee1cb80ddb2057127368fce2741e8cff9b3a286f7",
@@ -657,6 +687,8 @@
       "sourceCode": "1P",
       "name": "Vaned tee",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1P.svg",
         "revision": "12cf0706943ef70034caf21efbe06ab44fe0b06b83ed0abdf87d5c2b9364320b",
@@ -690,6 +722,8 @@
       "sourceCode": "1Q",
       "name": "Vaned elbow at plenum",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1Q.svg",
         "revision": "83e2d4c06d7a46dea74f7c5642fd6aa575b34e2872183eac0911d489b2ce6199",
@@ -724,6 +758,8 @@
       "sourceCode": "1R",
       "name": "Square elbow at plenum",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1R.svg",
         "revision": "3a346864c2dc5a833225cb56f3b0cca62b1289b040363ce595bcd1559c599d97",
@@ -758,6 +794,8 @@
       "sourceCode": "1S",
       "name": "Radius elbow at plenum · no vanes",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1S-0-vanes.svg",
         "revision": "b0da2ed7c7804b01e6e206daecda9fd694f287409c34b192c72746f8f959a05e",
@@ -792,6 +830,8 @@
       "sourceCode": "1S",
       "name": "Radius elbow at plenum · one vane",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1S-1-vane.svg",
         "revision": "0fa6bfb18b578ef863e0d9032927b9be44d82aa8d0e3f2bcbd9fe4af0c4b6c78",
@@ -826,6 +866,8 @@
       "sourceCode": "1S",
       "name": "Radius elbow at plenum · two vanes",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1S-2-vanes.svg",
         "revision": "325447889d86f1527eb2d84b18d7789f37af10049a3781952ffa0fc282cae175",
@@ -860,6 +902,8 @@
       "sourceCode": "1T",
       "name": "Elbow with angled inside corner",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/1T.svg",
         "revision": "0bfe7a3c826ff51d0be0e0b597a730905420f41f745f18d039a61d74a3cd3260",
@@ -893,6 +937,8 @@
       "sourceCode": "2A",
       "name": "Straight round branch takeoff",
       "shape": "mixed",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-2-restored/2A.svg",
         "revision": "a85d2aef2181f8a8b1a85295059e5f2f504036fd0a8420933ee4974d8e551bae",
@@ -951,6 +997,8 @@
       "sourceCode": "2B",
       "name": "Round tapered branch takeoff",
       "shape": "mixed",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-2-restored/2B.svg",
         "revision": "10dd52f9b44607709a65960df8edd30d1429404e7ed5df46afc562b6ba3233e5",
@@ -1009,6 +1057,8 @@
       "sourceCode": "2C",
       "name": "Round takeoff with projecting entry",
       "shape": "mixed",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-2-restored/2C.svg",
         "revision": "23b29c729c59d366a767d80920b409bbed40e974614cdd961c17bab5b6d82aed",
@@ -1067,6 +1117,8 @@
       "sourceCode": "2D",
       "name": "Straight rectangular branch takeoff",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-2-restored/2D.svg",
         "revision": "796c9cc2acda76177eec2853715ad4efae455bbaa0f2682fda8430496240262a",
@@ -1125,6 +1177,8 @@
       "sourceCode": "2E",
       "name": "Rectangular takeoff with flared entry",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-2-restored/2E.svg",
         "revision": "32541786ce31c95f1bac51c93986220735383202e30ddd580bf18f4aee753aa9",
@@ -1183,6 +1237,8 @@
       "sourceCode": "2F",
       "name": "Flared takeoff with projecting entry",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-2-restored/2F.svg",
         "revision": "9d3c3e3e6830603182377758855fdda5113f531f5616be5e593933e4cad0007c",
@@ -1241,6 +1297,8 @@
       "sourceCode": "2G",
       "name": "Rectangular takeoff with projecting tab",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-2-restored/2G.svg",
         "revision": "540ad3c36968270f7feadb3d77b6228d0f68b0cb96570af9b6ce619bb0b1c8b2",
@@ -1299,6 +1357,8 @@
       "sourceCode": "2H",
       "name": "Rectangular takeoff with raised entry edge",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-2-restored/2H.svg",
         "revision": "14c6a118dfad086fad69b0e0e0f9ba2d7a3ff3b675149a4649f959f3b4c4978b",
@@ -1357,6 +1417,8 @@
       "sourceCode": "2I",
       "name": "Round elbow takeoff",
       "shape": "mixed",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-2-restored/2I.svg",
         "revision": "53ac77337203621d7f98134f1e0c79f55741cc3011764bb9bdad728ba5b74edc",
@@ -1415,6 +1477,8 @@
       "sourceCode": "2J",
       "name": "Eased round elbow takeoff",
       "shape": "mixed",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-2-restored/2J.svg",
         "revision": "1bc36b93c6d2cd8106a04e1980cffe399ded05ab97735faa0ede9ae987941027",
@@ -1473,6 +1537,8 @@
       "sourceCode": "2K",
       "name": "Angled round takeoff on rectangular base",
       "shape": "mixed",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-2-restored/2K.svg",
         "revision": "563d89e2dafa03471622fe5554f7346a4f2fc86d0e47526c876d431bdf21561d",
@@ -1531,6 +1597,8 @@
       "sourceCode": "2L",
       "name": "Rectangular takeoff with curved heel",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-2-restored/2L.svg",
         "revision": "f89394fc8a2ebfd6e1ca5a72239ae185750676a40d18191f1b9bda1e8ca1deae",
@@ -1589,6 +1657,8 @@
       "sourceCode": "2M",
       "name": "Rectangular takeoff with square heel",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-2-restored/2M.svg",
         "revision": "54b8cd27d917b228a30f544953af34fadb1a06ab2b94d1ff4f57ea476f22cc00",
@@ -1647,6 +1717,8 @@
       "sourceCode": "2N",
       "name": "Angled branch on round trunk",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-2-restored/2N.svg",
         "revision": "dc9e7c3bc8c815b70f81a8cfa9a18df79880c1275f29ab389ccc0ddbefc2ebea",
@@ -1705,6 +1777,8 @@
       "sourceCode": "2O",
       "name": "Elbow branch on round trunk",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-2-restored/2O.svg",
         "revision": "358c5247407c7b1e6f173d29aef3875b39db817ba93e6b6dc7a9333c7305c303",
@@ -1763,6 +1837,8 @@
       "sourceCode": "2P",
       "name": "Straight collar on round trunk",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-2-restored/2P.svg",
         "revision": "a7caeed7ba014c75c9e2480099c1aec3aa1c1c233b4a7e254e803a23caa6b987",
@@ -1821,6 +1897,8 @@
       "sourceCode": "2Q",
       "name": "Tapered collar on round trunk",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-2-restored/2Q.svg",
         "revision": "458bf1de616ae13d1b44dba4d583c8e78cbde8ed1ac8ca94e00fd134f175704f",
@@ -1879,6 +1957,8 @@
       "sourceCode": "3A",
       "name": "Full-radius takeoff",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3A.svg",
         "revision": "6c10e9f563e6d4c5bcf6423b2ec21adea47acd558937c5c74b61b4ec37ba8ea8",
@@ -1912,6 +1992,8 @@
       "sourceCode": "3B",
       "name": "Full-radius takeoff with offset transition",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3B.svg",
         "revision": "3775a7e0d7b628f4d47064fb97da55fff662728028e674bd2be8c6d33ac7430c",
@@ -1945,6 +2027,8 @@
       "sourceCode": "3C",
       "name": "Full-radius takeoff with straight transition",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3C.svg",
         "revision": "2c56e97dfb9788327f24d218491caa2be785de7650023ccd50954f0be9f60273",
@@ -1978,6 +2062,8 @@
       "sourceCode": "3D",
       "name": "Takeoff elbow with easy-bend elbow — full radius",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3D-full.svg",
         "revision": "5d8caae8296875372244a158d681d5941731bdceb04e727f7772b058e891cb9b",
@@ -2012,6 +2098,8 @@
       "sourceCode": "3D",
       "name": "Takeoff elbow with easy-bend elbow — tight radius",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3D-tight.svg",
         "revision": "c47868e7495bcdc41fba8f72a4fe2900cd02e3f1625bec388850573b2a393163",
@@ -2046,6 +2134,8 @@
       "sourceCode": "3D",
       "name": "Takeoff elbow with easy-bend elbow — mitered inside corner",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3D-mitered.svg",
         "revision": "7e4420d8ee082daf3d92321062ba2037b790476e14746f78518d8cedc4e36323",
@@ -2080,6 +2170,8 @@
       "sourceCode": "3E",
       "name": "Transition-wall takeoff",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3E.svg",
         "revision": "b10b9afc4ac2f5d2ccd31a71873d139fb441474b7771eacccc90c0cdf750520d",
@@ -2113,6 +2205,8 @@
       "sourceCode": "3F",
       "name": "Transition-wall takeoff elbow with easy-bend elbow — full radius",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3F-full.svg",
         "revision": "4ff9ad7f2c5ef9521ef745d9a75dab7896761d6d0adf509e9cf52e678e267976",
@@ -2147,6 +2241,8 @@
       "sourceCode": "3F",
       "name": "Transition-wall takeoff elbow with easy-bend elbow — tight radius",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3F-tight.svg",
         "revision": "91df2906ac303791e43a8f20f2a9e7ba005dab8f5382e3c6e6a4627ca699440d",
@@ -2181,6 +2277,8 @@
       "sourceCode": "3F",
       "name": "Transition-wall takeoff elbow with easy-bend elbow — mitered inside corner",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3F-mitered.svg",
         "revision": "88d9c07fb4edaedcd033de4d0f96e8ba26d96d06dc5bc41436890737fa25388f",
@@ -2215,6 +2313,8 @@
       "sourceCode": "3G",
       "name": "Transition-wall takeoff with straight-aspect transition",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3G.svg",
         "revision": "a2162a76dc0c5634499cd6e90b150a4ec4481b5530a644cc856985da228d9ea3",
@@ -2248,6 +2348,8 @@
       "sourceCode": "3H",
       "name": "Transition-wall takeoff with offset-aspect transition",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3H.svg",
         "revision": "45553187e6de46ac0b4a8042c1ff61a1be292b502c2627b38d26c1c4cb36a5d3",
@@ -2281,6 +2383,8 @@
       "sourceCode": "3I",
       "name": "Full-radius takeoff",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3I.svg",
         "revision": "08fa9e6414e98f35893fb89486d670daf392b893dc0c37a96eac7176c5d3178d",
@@ -2314,6 +2418,8 @@
       "sourceCode": "3J",
       "name": "Takeoff elbow with easy-bend elbow — full radius",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3J-full.svg",
         "revision": "ddcce5f61fb0789f5187f1065ed1706e9b9e36836ca275a8f1f9c0b102fea45a",
@@ -2348,6 +2454,8 @@
       "sourceCode": "3J",
       "name": "Takeoff elbow with easy-bend elbow — tight radius",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3J-tight.svg",
         "revision": "798e9d435e75dd3a6666a7ecd623f422f2ed594d4f9b27e843f8abae8431d23f",
@@ -2382,6 +2490,8 @@
       "sourceCode": "3J",
       "name": "Takeoff elbow with easy-bend elbow — mitered inside corner",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3J-mitered.svg",
         "revision": "53f341339733560badff057e098f30fb27e43ce55cf8752030ec9f08743b4426",
@@ -2416,6 +2526,8 @@
       "sourceCode": "3K",
       "name": "Full-radius takeoff with straight transition",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3K.svg",
         "revision": "4421400e946df527e7d97b47bc2e97888fc7b628de6ed1623cc85adef37b69d0",
@@ -2449,6 +2561,8 @@
       "sourceCode": "3L",
       "name": "Full-radius takeoff with offset transition",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3L.svg",
         "revision": "3a75e445bf9bc8a7e537a3b304cfc9a8acf9a0f385360e5ab899227c05fb60cb",
@@ -2482,6 +2596,8 @@
       "sourceCode": "3M",
       "name": "In-line eased takeoff with one elbow",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3M.svg",
         "revision": "6ed5448ca06f7b318951722ab507e1bb191deb90a0d2933d01d065e229363536",
@@ -2516,6 +2632,8 @@
       "sourceCode": "3N",
       "name": "In-line eased takeoff with two elbows",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3N.svg",
         "revision": "121ade8021b51b963d659aff1aa236217c66a4bb20fcd2225898fe8f71a2b9b5",
@@ -2550,6 +2668,8 @@
       "sourceCode": "3O",
       "name": "Transition-wall eased takeoff",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3O.svg",
         "revision": "685183259585b3f1e694b713073d67e71b16cf61595679eb56791ed09d7a15a9",
@@ -2585,6 +2705,8 @@
       "sourceCode": "3P",
       "name": "Transition-wall eased takeoff with two elbows",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3P.svg",
         "revision": "91306576977b2687453963178a843e436a5520305881b80d4b8db49bf3c5783c",
@@ -2621,6 +2743,8 @@
       "sourceCode": "3Q",
       "name": "Transition-wall eased takeoff with one elbow",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3Q.svg",
         "revision": "fb6bc6f4281d01e5e3ed04acd271dbc548641a828a495e8237d8e8cbd1974e2f",
@@ -2657,6 +2781,8 @@
       "sourceCode": "3R",
       "name": "Transition-wall eased takeoff",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3R.svg",
         "revision": "774cc3e5db0b01f794723db0c0210c76a48b8fb583193e4e2cdf932109c91813",
@@ -2692,6 +2818,8 @@
       "sourceCode": "3S",
       "name": "Hard-bend takeoff elbow — full radius",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3S-full.svg",
         "revision": "4b503398e97a37dd53edc497c0e39f70683d8bd25efd0e8e01db57463f822729",
@@ -2725,6 +2853,8 @@
       "sourceCode": "3S",
       "name": "Hard-bend takeoff elbow — tight radius",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3S-tight.svg",
         "revision": "fb1e6c53e6e5f31c1385ba7bc9dc107bdb8120cc7a2c78c9114f647aaabd3c9b",
@@ -2758,6 +2888,8 @@
       "sourceCode": "3S",
       "name": "Hard-bend takeoff elbow — mitered inside corner",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3S-mitered.svg",
         "revision": "b318ba18447b4a63f4449f581466a563f108c2efc4e5f0c12a666d1b95d57714",
@@ -2791,6 +2923,8 @@
       "sourceCode": "3T",
       "name": "In-line eased takeoff",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3T.svg",
         "revision": "2ed5676e315b3e9c4477e5958e0acba3ebad3d21c57bc466384d767bf108b78a",
@@ -2824,6 +2958,8 @@
       "sourceCode": "3U",
       "name": "Mitered takeoff elbow — with vanes",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3U-mitered-vanes.svg",
         "revision": "068a9760f7e836f458b5afbf575e5501b0e7dab81957e0fa67c306e2e441c6c7",
@@ -2857,6 +2993,8 @@
       "sourceCode": "3U",
       "name": "Mitered takeoff elbow — without vanes",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3U-mitered-no-vanes.svg",
         "revision": "736696476fb5741de1a7dba3d134ed43ead54cea5d8602c769f96bd455beb42c",
@@ -2890,6 +3028,8 @@
       "sourceCode": "3V",
       "name": "Round-to-rectangular transition",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3V.svg",
         "revision": "bc52b9681808975825d22eaf35dfaaf684ef562f277578a41d5b005c601e0917",
@@ -2923,6 +3063,8 @@
       "sourceCode": "3W",
       "name": "Offset hard-bend transition",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-3-individual/3W.svg",
         "revision": "155e07368338cb995ab9b103498dad61790cab99a1f12de058161889e30ba448",
@@ -2956,6 +3098,8 @@
       "sourceCode": "4A",
       "name": "Radius boot with rectangular outlet",
       "shape": "mixed",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4A.svg",
         "revision": "e17c555098f02a45daeb39fc163cda5c5fda4c04172433b519bf2b15b6821385",
@@ -2987,6 +3131,8 @@
       "sourceCode": "4B",
       "name": "Radius boot with extended top transition",
       "shape": "mixed",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4B.svg",
         "revision": "472647f6810eb8901c7872e7860b65f50b1958133434d98f205707874f19e6bf",
@@ -3018,6 +3164,8 @@
       "sourceCode": "4C",
       "name": "Low-profile radius boot with top collar",
       "shape": "mixed",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4C.svg",
         "revision": "9e79814703075541e59d17c3b0851f2e97dadba201c4a6705137f79a70ceb1fa",
@@ -3049,6 +3197,8 @@
       "sourceCode": "4D",
       "name": "Horizontal boot with round throat transition",
       "shape": "mixed",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4D.svg",
         "revision": "9e084e4976892e0eb96a00ffdeb32f14d71c543f99c75cfce415a5730ac06718",
@@ -3080,6 +3230,8 @@
       "sourceCode": "4E",
       "name": "Horizontal boot with tapered throat",
       "shape": "mixed",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4E.svg",
         "revision": "8a79f9c15d47e59fa3c60ffac4f3dd9891407d15a9587cb3ba4924a08569d715",
@@ -3111,6 +3263,8 @@
       "sourceCode": "4F",
       "name": "Radius boot with side extension",
       "shape": "mixed",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4F.svg",
         "revision": "1fcc3d97448e522ebedcf1dd90b92427220990751ac2c506ce4c6361b2e5b744",
@@ -3142,6 +3296,8 @@
       "sourceCode": "4G",
       "name": "Angled boot to round outlet",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4G.svg",
         "revision": "c1f0312ebe510a26d6bafd92fa284abe37a623ad430b10ea4471660271f9ec11",
@@ -3173,6 +3329,8 @@
       "sourceCode": "4H",
       "name": "Tapered boot to round outlet",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4H.svg",
         "revision": "0b6fa9365cf72b95c6c99f4986b0032d17dcc6b3cda73cd9931b8763e37231de",
@@ -3204,6 +3362,8 @@
       "sourceCode": "4I",
       "name": "Compact round-to-rectangular transition",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4I.svg",
         "revision": "aa6e2cd307ff5ef3592410ea57adf6f2eb914cc77bb56c3ea469ac9e2d0e1847",
@@ -3235,6 +3395,8 @@
       "sourceCode": "4J",
       "name": "Angled boot to round outlet with smooth throat",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4J.svg",
         "revision": "23290062561a683c22a73aa46eca49b2ec9d82133cc8a1ef7b872452970941d2",
@@ -3266,6 +3428,8 @@
       "sourceCode": "4K",
       "name": "Angled boot to round outlet with lined throat",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4K.svg",
         "revision": "51770a207d3dfe6e51893228d349a7b610ac33a904b16a66da6d179deaa7bc94",
@@ -3297,6 +3461,8 @@
       "sourceCode": "4L",
       "name": "Deep angled boot to round outlet with lined throat",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4L.svg",
         "revision": "3f248c74b3ea8cc9204fa17c76a218d61824b183d1f2dbc4a6010a90b723fd9d",
@@ -3328,6 +3494,8 @@
       "sourceCode": "4M",
       "name": "Long rectangular offset transition",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4M.svg",
         "revision": "d41bef0db3a1ff9ed42d012246119f009e4333afc29b74b7f0b141ecf8fb1d22",
@@ -3359,6 +3527,8 @@
       "sourceCode": "4N",
       "name": "Rectangular offset with inset throat",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4N.svg",
         "revision": "76eb4786a2fa5cc8218de5d6c38d827f7fe22645682e1fb4434c01796c5030f3",
@@ -3390,6 +3560,8 @@
       "sourceCode": "4O",
       "name": "Pitched rectangular boot",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4O.svg",
         "revision": "122823705351bad3d3504ba359c30a95796c5f73b6873c21593dc3f86036e1cc",
@@ -3421,6 +3593,8 @@
       "sourceCode": "4P",
       "name": "Tapered rectangular boot",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4P.svg",
         "revision": "175ef8a06d48d83cfa086d8d2fd3a9c62a83e254e8be58fb59561cf64b47b7c2",
@@ -3452,6 +3626,8 @@
       "sourceCode": "4Q",
       "name": "Rectangular-to-round side transition",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4Q.svg",
         "revision": "73ba894533447a229e1dca355a7b83d62d766c5d8f42980cffc27321c6a9165b",
@@ -3483,6 +3659,8 @@
       "sourceCode": "4R",
       "name": "Rectangular-to-round vertical transition",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4R.svg",
         "revision": "5a60d7640ba67862a632fd20af449e4f0574b095f787a5b2d0cdf69a00f5d28f",
@@ -3514,6 +3692,8 @@
       "sourceCode": "4S",
       "name": "Rectangular-to-round tapered transition",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4S.svg",
         "revision": "80778e2f67983e87a24669907fcc3ddc66aa16da15e31d8d7034deaa3f4ae48e",
@@ -3545,6 +3725,8 @@
       "sourceCode": "4T",
       "name": "Elongated rectangular-to-round boot",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4T.svg",
         "revision": "5ef44ec35496add6f8d41ced90cde127d86dd259caf4e423a9349e072b886179",
@@ -3576,6 +3758,8 @@
       "sourceCode": "4U",
       "name": "Offset rectangular-to-round boot",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4U.svg",
         "revision": "24608a6f8179f5220813fcead03519f3f3f8aed34f9e149eb656318b287a0e55",
@@ -3607,6 +3791,8 @@
       "sourceCode": "4V",
       "name": "Rectangular collar on round duct",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4V.svg",
         "revision": "746e72603d96c59de41e9e5ebd3cec2c542450ef6feadc13ee206ecb6b09c0ef",
@@ -3638,6 +3824,8 @@
       "sourceCode": "4W",
       "name": "Ceiling boot with bell-mouth collar",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4W.svg",
         "revision": "ed3d54a7bd850b98e13e38d6530f25f4edd2c4dc2a86f09bfcdb3fa904c83f6b",
@@ -3669,6 +3857,8 @@
       "sourceCode": "4X",
       "name": "Ceiling boot with straight collar",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4X.svg",
         "revision": "0aff7b47f973889ecbcf8b9526c7220a56e7f470e7f131215c7bf13630e511ca",
@@ -3700,6 +3890,8 @@
       "sourceCode": "4Y",
       "name": "Rectangular ceiling register boot",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4Y.svg",
         "revision": "a1fe6b3ce862618dbe8dfdf9691cedea5e12ca0b41f98e8fc182c65ae4353ec7",
@@ -3731,6 +3923,8 @@
       "sourceCode": "4Z",
       "name": "Square grille boot to round branch",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4Z.svg",
         "revision": "9b6d8dd87779b0ce117fe574770af5736d1d3819a8699d568ab590fb87c95dc6",
@@ -3762,6 +3956,8 @@
       "sourceCode": "4AA",
       "name": "Tapered square ceiling boot",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4AA.svg",
         "revision": "0a6e881a77be4eba9445b2dc15057e514a08cad647d13bdb3803d34bff0fd23f",
@@ -3793,6 +3989,8 @@
       "sourceCode": "4AB",
       "name": "Angled square boot with round branch",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4AB.svg",
         "revision": "d05262e4b517f82f8a3ae3145c6a4570505187f401b3fde63a16e7ea6ff774d6",
@@ -3824,6 +4022,8 @@
       "sourceCode": "4AC",
       "name": "Stack head with curved side outlet",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4AC.svg",
         "revision": "ef9190135c3bb21c71d873f5a88e9a5e6b29ac1bff17c81db21214bbc3461b57",
@@ -3855,6 +4055,8 @@
       "sourceCode": "4AD",
       "name": "Segmented elbow on rectangular stack",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4AD.svg",
         "revision": "c3e8403dcd6f2a0e8bbb2c291840a217fc1a80be3a4083f4241572cb4aff683b",
@@ -3886,6 +4088,8 @@
       "sourceCode": "4AE",
       "name": "Segmented elbow on flange",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4AE.svg",
         "revision": "50fa92ae08ef79ba14eaf3c5b195bf058bbe6c9f6e01000af284a266c68e4bec",
@@ -3917,6 +4121,8 @@
       "sourceCode": "4AF",
       "name": "Rectangular register boot with side outlet",
       "shape": "mixed",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4AF.svg",
         "revision": "aafd8bf4dabb2c02be7d0cb00f1ccc2f6eb0ec152f3135c989b1fce961c3a79a",
@@ -3948,6 +4154,8 @@
       "sourceCode": "4AG",
       "name": "Split transition with round branches",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4AG.svg",
         "revision": "acec282bfa72296772323f610e565c26147f482b98408f336ed2d9f5941cecc0",
@@ -3979,6 +4187,8 @@
       "sourceCode": "4AH",
       "name": "Rectangular stack head with grille face",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4AH.svg",
         "revision": "7932bceb41e2e232239bc19e8f1b5b838039f50e7a50c7edb6e7e347d077b64a",
@@ -4010,6 +4220,8 @@
       "sourceCode": "4AI",
       "name": "Rectangular stack head with framed face",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4AI.svg",
         "revision": "fb4332e27b268d38a35b6b3baa7e187aed12f61148c868ba7a961597e15acca5",
@@ -4041,6 +4253,8 @@
       "sourceCode": "4AJ",
       "name": "Boot with flexible round branch",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4AJ.svg",
         "revision": "868880ed03b582706ec196be18d55556ea9deef2ca364df824846eb28e4c3426",
@@ -4072,6 +4286,8 @@
       "sourceCode": "4AK",
       "name": "Low rectangular stack head with round branch",
       "shape": "mixed",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4AK.svg",
         "revision": "f5475d021c39a5aa030de2c524d9b76be657fd445fa3e52ddaa851a37a9095ff",
@@ -4103,6 +4319,8 @@
       "sourceCode": "4AL",
       "name": "Angled stack head with inset opening",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4AL.svg",
         "revision": "b9abe1ad41d63fa19b6924d878a18f892ec51657104936c2de11851687fd59f2",
@@ -4134,6 +4352,8 @@
       "sourceCode": "4AM",
       "name": "Tapered stack head with front opening",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4AM.svg",
         "revision": "ea7fcaf0bc735fb2b65853e93506d4ec6ce23693e45047a973a52fff851fe40a",
@@ -4165,6 +4385,8 @@
       "sourceCode": "4AN",
       "name": "Tapered stack head with stepped opening",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4AN.svg",
         "revision": "69f712e66a2f2d7b296707f1fe7952e16af3597fa7b542bf3e1829d2ace55fa6",
@@ -4196,6 +4418,8 @@
       "sourceCode": "4AO",
       "name": "Straight wall stack offset",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4AO.svg",
         "revision": "860e5165dcae2d93ec15fa1797a132fcd53d06b7e43aad456c952c12a599fc1f",
@@ -4227,6 +4451,8 @@
       "sourceCode": "4AP",
       "name": "Stepped wall stack offset",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4AP.svg",
         "revision": "13295289992c387632757ebbe48016f3edae2ba2b2643255ab8e6f621ad6dddd",
@@ -4258,6 +4484,8 @@
       "sourceCode": "4AQ",
       "name": "Plain rectangular stack-head turn",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4AQ.svg",
         "revision": "8ec8ec3124a4a7f1c37e425451e40ecba360497a43c312f866da5769b1579c2a",
@@ -4289,6 +4517,8 @@
       "sourceCode": "4AR",
       "name": "Rectangular stack-head turn with raised collar",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-4-enhanced/4AR.svg",
         "revision": "c324cdfa4c0825026a7c50e59d7b589d6bf88eace2c00a5d75790598c92c49b6",
@@ -4320,6 +4550,8 @@
       "sourceCode": "5A",
       "name": "Return to oversized plenum",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5A-rectangular.svg",
         "revision": "1c713ffba89beaf68390d4ef14e4e68e85e4773bd5580cd9e962773ebcdc93f3",
@@ -4353,6 +4585,8 @@
       "sourceCode": "5B",
       "name": "Return to oversized plenum",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5A-round.svg",
         "revision": "dd95b3599308b174993684bd4f7ac55e57ddb3094bd69fbce75aa5ed1a3e2b7f",
@@ -4386,6 +4620,8 @@
       "sourceCode": "5C",
       "name": "Return with tapered plenum entry",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5C-rectangular.svg",
         "revision": "540dbbf6001ce632d1ba588886d5ce43412de21deb0f04f2af169ffff75f8320",
@@ -4419,6 +4655,8 @@
       "sourceCode": "5D",
       "name": "Return with tapered plenum entry",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5C-round.svg",
         "revision": "6a527846e7d72262f742361540272f5b8fa9352531265e5c843727adb27bbe83",
@@ -4452,6 +4690,8 @@
       "sourceCode": "5E",
       "name": "Top return into compact plenum",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5E-rectangular.svg",
         "revision": "83b02ae9936965d85c7e64a5b3dc6d45bd984bd1433d50c30101a3076e234328",
@@ -4491,6 +4731,8 @@
       "sourceCode": "5E",
       "name": "Top return into compact plenum",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5E-round.svg",
         "revision": "c04357bcf1a9846685035e2f9c2561dd945c66dc56015371adf1085e3a7a24b3",
@@ -4530,6 +4772,8 @@
       "sourceCode": "5F",
       "name": "Side return into compact plenum",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5F-rectangular.svg",
         "revision": "4e86c9d6ea5fb4cc7288d1e69429d2504b3aaefebbb56a5712fd723819bf2f9e",
@@ -4569,6 +4813,8 @@
       "sourceCode": "5G",
       "name": "Side return into compact plenum",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5F-round.svg",
         "revision": "11f52d89d76c363b991dcb23f0425db375d389d88e54e81291122aa3216fcd56",
@@ -4608,6 +4854,8 @@
       "sourceCode": "5H",
       "name": "Square elbow at air handler",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5H-rectangular.svg",
         "revision": "75631494d4c1b71c0abdd5f718ee492d6a904f6efbfc9e13db1bd4300aa1e47d",
@@ -4647,6 +4895,8 @@
       "sourceCode": "5I",
       "name": "Elbow with mitered inside corner at air handler",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5I-rectangular.svg",
         "revision": "4fb9bce1811d44a44a459defd7948d1221b06219ada1f3d73eac75147313b1da",
@@ -4686,6 +4936,8 @@
       "sourceCode": "5J",
       "name": "Radius elbow at air handler",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5J-rectangular.svg",
         "revision": "583a41f4b37f2891b28eb0b0955e2302323f8aa0eb6fb143abdcfcacc22b99a1",
@@ -4731,6 +4983,8 @@
       "sourceCode": "5K",
       "name": "Square elbow with turning vanes at air handler",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5K-rectangular.svg",
         "revision": "37d70cc1999da22b549579206fa9d680e9b3206bf959681a55b4ee328703bcad",
@@ -4764,6 +5018,8 @@
       "sourceCode": "5L",
       "name": "Opposed returns into bull-head plenum",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5L-rectangular.svg",
         "revision": "727314770d47ec8df299917da4615c28b0e8f951ecf5b0680f594b1178c9e846",
@@ -4797,6 +5053,8 @@
       "sourceCode": "5M",
       "name": "Opposed returns into vaned plenum",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5M-rectangular.svg",
         "revision": "6ce82535b613dad948360794fde47181d83140795fa4dee04ee708b4e6c964d6",
@@ -4830,6 +5088,8 @@
       "sourceCode": "5N",
       "name": "Offset ceiling return into air handler",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5N-rectangular.svg",
         "revision": "41f36d53d88b2d52d8c908eff06f9f1b07b02ff2a4dc1979d4f834dc094e2ff4",
@@ -4863,6 +5123,8 @@
       "sourceCode": "5O",
       "name": "Direct ceiling return into air handler",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-5-shapes/5O-rectangular.svg",
         "revision": "203cb91d4417f4b5cc9d25e40d970dcf49c05247b3fb5ca162ba87dcde1bf718",
@@ -4896,6 +5158,8 @@
       "sourceCode": "6A",
       "name": "Rectangular branch-to-trunk junction, Type A",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-6-enhanced/6A.svg",
         "revision": "2c085413bef55216506647d0456763e5ed6229ba08c908cc723e52f57dcb4cec",
@@ -4965,6 +5229,8 @@
       "sourceCode": "6B",
       "name": "Rectangular branch-to-trunk junction, Type B",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-6-enhanced/6B.svg",
         "revision": "69ceabc90613168132462eaf4f8d98f144bcd475ea3679cdad21dcbdac1d2969",
@@ -5034,6 +5300,8 @@
       "sourceCode": "6C",
       "name": "Round branch to rectangular return trunk",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-6-enhanced/6C.svg",
         "revision": "ece7ef433c7a21bf1890cac10813b85d4e1f8c8501829aff7d2aafd4d8342fb7",
@@ -5103,6 +5371,8 @@
       "sourceCode": "6D",
       "name": "45-degree round branch to round return trunk",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-6-enhanced/6D.svg",
         "revision": "f12584ea67e283c50c53d6c4c5686ab20fad833fd4a03f2661eba2f72aedde5f",
@@ -5178,6 +5448,8 @@
       "sourceCode": "6E",
       "name": "90-degree round branch to round return trunk",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-6-enhanced/6E.svg",
         "revision": "cbf2d2947a86d7c462048670b7d3c5d07804b71265d7fb0bfba0f6a2b3a48c02",
@@ -5253,6 +5525,8 @@
       "sourceCode": "6F",
       "name": "Rectangular register boot with rectangular side branch",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-6-enhanced/6F.svg",
         "revision": "80c2d382b9c2275d9740c641ca17cd4d17aed3442cadb2e85fce2357d2fe7272",
@@ -5284,6 +5558,8 @@
       "sourceCode": "6G",
       "name": "Square grille boot with round side branch",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-6-enhanced/6G.svg",
         "revision": "4167330858bbc10d1fcb869efe3913ac388ed72aab8adf72d5d0711b086e329d",
@@ -5315,6 +5591,8 @@
       "sourceCode": "6H",
       "name": "Tapered wall register boot with side entry",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-6-enhanced/6H.svg",
         "revision": "d7258f4a8307d426ff0a7e950c53c2b4f6d68fef1dca742b26deb8ce615edcff",
@@ -5346,6 +5624,8 @@
       "sourceCode": "6I",
       "name": "Square register boot with tapered round side branch",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-6-enhanced/6I.svg",
         "revision": "005f5389ba8590231726d38186856e85adab45958e817139e9eb4d02375bd600",
@@ -5377,6 +5657,8 @@
       "sourceCode": "6J",
       "name": "Offset square register boot with round side branch",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-6-enhanced/6J.svg",
         "revision": "5cda8cdd2f8768917e04642714256e9001dcf72066de8c1f72c8d5c1665775ed",
@@ -5408,6 +5690,8 @@
       "sourceCode": "6K",
       "name": "Rectangular stack offset",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-6-enhanced/6K.svg",
         "revision": "d42f3fcfa0bcaeb7645a76235ec6ddb799ac2ab7c6b36ed8304a94dd3df678b1",
@@ -5439,6 +5723,8 @@
       "sourceCode": "6L",
       "name": "Flat register boot with round elbow",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-6-enhanced/6L.svg",
         "revision": "bdf386639f3b00a354e642abb5158bc55a4241ea23abbb80f2eefef55a84fd56",
@@ -5470,6 +5756,8 @@
       "sourceCode": "6M",
       "name": "Tapered register boot with round elbow",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-6-enhanced/6M.svg",
         "revision": "7d838b27b929d2616b3b819d569a337e5b5df9cb87bb10e6e9c6a01f88ffdcd8",
@@ -5501,6 +5789,8 @@
       "sourceCode": "6N",
       "name": "Rectangular-to-round-or-square transition boot",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-6-enhanced/6N.svg",
         "revision": "b7871e4cc79cbbbbf1563014f9e8cd6ec08edea7f06b6400f03b1c219d27cdab",
@@ -5534,6 +5824,8 @@
       "sourceCode": "6O",
       "name": "Tapered ceiling return boot",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-6-enhanced/6O.svg",
         "revision": "936cff5594ef3b8c03db61ac316f6f55f0a5df1217d7013e71f64e58fbaf4a5b",
@@ -5565,6 +5857,8 @@
       "sourceCode": "6P",
       "name": "Straight-collar ceiling return boot",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-6-enhanced/6P.svg",
         "revision": "12a1614a833f9b934ecc05bab06aecb2ed011736d683fcf19dbec81254f1cdbd",
@@ -5596,6 +5890,8 @@
       "sourceCode": "7A",
       "name": "Panned stud-space return",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-7-individual/7A.svg",
         "revision": "2cf1bd8630e99e7d0a70cdc64a25fa9ea0969a176ad43ddd726c3bf37f2cbba6",
@@ -5651,6 +5947,8 @@
       "sourceCode": "7B",
       "name": "Stud-space to single-joist return turn",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-7-individual/7B.svg",
         "revision": "42e925e451d38817b8ee05220a1c7edb860cc2724e26869b66065656361c7493",
@@ -5706,6 +6004,8 @@
       "sourceCode": "7C",
       "name": "Panned single-joist return",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-7-individual/7C.svg",
         "revision": "8d81fc94e26581d03c7de2ed57801266ea001493c9ba7212c4511efc9b090404",
@@ -5775,6 +6075,8 @@
       "sourceCode": "7D",
       "name": "Panned stud-to-joist double turn",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-7-individual/7D.svg",
         "revision": "8f009d3d9d3913020961f28be810270deeba8f95729ba7d0c626c6fce1116ec5",
@@ -5822,6 +6124,8 @@
       "sourceCode": "7E",
       "name": "Panned double-joist return",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-7-individual/7E.svg",
         "revision": "ded62f025e1a48ef6ff75b63dff88b499db7d7eae8b3f56e8d70105370f1867a",
@@ -5874,6 +6178,8 @@
       "sourceCode": "8A",
       "name": "Smooth round radius elbow",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8A-smooth.svg",
         "revision": "d32708430100abaefb130bbb625cddb21c2cc6f456cf9cde58d990a03eb215e2",
@@ -5956,6 +6262,8 @@
       "sourceCode": "8A",
       "name": "Four- or five-piece round elbow",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8A-4-or-5-piece.svg",
         "revision": "9a4230f6863467e27d3d9e8b1afefa13cc50aff30423cee8784c943ad0d9736f",
@@ -6006,6 +6314,8 @@
       "sourceCode": "8A",
       "name": "Three-piece round elbow",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8A-3-piece.svg",
         "revision": "4c9d4f7434ca5a3ddd52e4da7415c41440f907d908ba3afa252ec1e88b3613f0",
@@ -6056,6 +6366,8 @@
       "sourceCode": "8A",
       "name": "Smooth mitered round elbow",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8A-mitered.svg",
         "revision": "6a5a228a35f4e807f5dae9b45862d379e66e7471fb199d20b8f6732809735a53",
@@ -6089,6 +6401,8 @@
       "sourceCode": "8A",
       "name": "Easy-bend oval elbow",
       "shape": "oval",
+      "ductShape": "oval",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8A-easy-bend.svg",
         "revision": "c9892b486c5ed6d3609e49eb8fb49fa48ee7d1af899db8ab1ed906f0954b2dfd",
@@ -6127,6 +6441,8 @@
       "sourceCode": "8A",
       "name": "Hard-bend oval elbow",
       "shape": "oval",
+      "ductShape": "oval",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8A-hard-bend.svg",
         "revision": "585eb44c47b430859f85bbd77934f8b42c2e376bb551c6f4da7d75eb6bfd1f39",
@@ -6165,6 +6481,8 @@
       "sourceCode": "8A",
       "name": "Three-piece 45-degree round elbow",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8A-3-piece-45.svg",
         "revision": "c0db658c085c03822bad8196df19d52e6d7cd43fbdf345c191f05868c8e763bc",
@@ -6198,6 +6516,8 @@
       "sourceCode": "8A",
       "name": "Two-piece 45-degree round elbow",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8A-2-piece-45.svg",
         "revision": "cd03939e162c31960b3439894a8967d48472b412942588991665177b3f7e07dc",
@@ -6231,6 +6551,8 @@
       "sourceCode": "8B",
       "name": "Rectangular radius elbow without vanes",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8B.svg",
         "revision": "3f8f185a9027837cda9a148a3e854a08792cca42bfe5a4dbb86ef08fa900ad1b",
@@ -6333,6 +6655,8 @@
       "sourceCode": "8C",
       "name": "Rectangular radius elbow with turning vanes",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8C.svg",
         "revision": "e8de893ecdc3ad4f3891987cf018b06e84b8f351172fe2cb3c1b830ed4804ff7",
@@ -6435,6 +6759,8 @@
       "sourceCode": "8D",
       "name": "Square elbow without turning vanes",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8D.svg",
         "revision": "83692e33582ac471ffafb004a95b754f05b0e348186a1f1db2c8983706994ec9",
@@ -6481,6 +6807,8 @@
       "sourceCode": "8E",
       "name": "Square elbow with single-thickness turning vanes",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8E.svg",
         "revision": "ff5c781fa512fb52faa5024777a6fcfba82322df4df37cc6d658d1c79cdf47ad",
@@ -6527,6 +6855,8 @@
       "sourceCode": "8F",
       "name": "Rectangular stepped offset without vanes",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8F.svg",
         "revision": "ab56b807eafaaf1675f66a405fbb19d07c3d4bd237819923172075955053fe18",
@@ -6570,6 +6900,8 @@
       "sourceCode": "8G",
       "name": "Compact square offset without vanes",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8G.svg",
         "revision": "411a761a2aebbc074dcc60a6a267a8be838b2fed5746cfbd97c86fe09b41ee8a",
@@ -6603,6 +6935,8 @@
       "sourceCode": "8H",
       "name": "Four-turn rectangular offset",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8H.svg",
         "revision": "efcacfcbb6d0f73d6e31741c26a4239054627130b992f88b334df98c49e3f13b",
@@ -6654,6 +6988,8 @@
       "sourceCode": "8I",
       "name": "Gradual rectangular offset",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8I.svg",
         "revision": "4d19da12ee3e4dce1d6e29ea297a2d8d13ef4db48d05c37858ff3037a352b6c5",
@@ -6687,6 +7023,8 @@
       "sourceCode": "8J",
       "name": "Rectangular offset with four 45-degree elbows",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8J.svg",
         "revision": "d8fb83ef5f01fe98a7a2e2d67c71ff37f6bddb4bf590fdf4723a10dc3db9f428",
@@ -6720,6 +7058,8 @@
       "sourceCode": "8K",
       "name": "Rectangular offset with four 90-degree elbows",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8K.svg",
         "revision": "42caa077c473191089381da3c1820133430beafff20d627c301cb5a424fef588",
@@ -6769,6 +7109,8 @@
       "sourceCode": "8L",
       "name": "Rectangular double elbow in one plane",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8L-rectangular.svg",
         "revision": "7cb16795e1613ef8ef439b48854a4afe03d7ca189381d62459e583f5299cfc93",
@@ -6805,6 +7147,8 @@
       "sourceCode": "8L",
       "name": "Round double elbow in one plane",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8L-round.svg",
         "revision": "c0059e0704bc7fe1bbb7b5a723118b0829da4ca7f4a7504415e2afc42cc556c4",
@@ -6841,6 +7185,8 @@
       "sourceCode": "8M",
       "name": "Rectangular double elbow in two planes",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8M-rectangular.svg",
         "revision": "d91c47abf400f3cf5c40c4365a9794f18df95015451a042e0733d9400b6c6b1c",
@@ -6877,6 +7223,8 @@
       "sourceCode": "8M",
       "name": "Round double elbow in two planes",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8M-round.svg",
         "revision": "5dd497b8edb39981d9af707c66943094e5ca7785cd139db2acb6b664ef3cafce",
@@ -6913,6 +7261,8 @@
       "sourceCode": "8N",
       "name": "Angled rectangular offset",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8N.svg",
         "revision": "d14c89e24a170e0ebf8be504ca31bfff9971e4cb688c7d11edc08dd9b708f591",
@@ -6946,6 +7296,8 @@
       "sourceCode": "8O",
       "name": "Rectangular S-offset with flanged ends",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8O.svg",
         "revision": "92cbf94fde445a227179e6aec6efecaa6344bd5f1e91eda9b6a18ebc028a5d6c",
@@ -6993,6 +7345,8 @@
       "sourceCode": "8P",
       "name": "Rectangular riser elbow",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-8/8P.svg",
         "revision": "1620132a63aa0d838225eafe4b2764f4d825c97d3247e9b9818fd02864035051",
@@ -7063,6 +7417,8 @@
       "sourceCode": "9A",
       "name": "Rectangular trunk with straight round branch",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-9/9A.svg",
         "revision": "e7cdd571a387f0ea27e9ee0cbe62cd75cb837129fc8d5e6b1e0da196c02542b5",
@@ -7104,6 +7460,8 @@
       "sourceCode": "9B",
       "name": "Rectangular trunk with straight rectangular branch",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-9/9B.svg",
         "revision": "51b87ff7d38262e23fea1dddca595813ffabfa39e3d5eac8c8b0c29bfc6f8672",
@@ -7145,6 +7503,8 @@
       "sourceCode": "9C",
       "name": "Rectangular branch junction with single deflector",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-9/9C.svg",
         "revision": "520f95555a002c7afa5524c5123c162504f18039cdd8785f49801b2d685c29fe",
@@ -7186,6 +7546,8 @@
       "sourceCode": "9D",
       "name": "Rectangular branch junction with vane bank",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-9/9D.svg",
         "revision": "d71d6c623cba7ec1a0041d2abef6f3042e6066bf3e9d79d0efbe9113a4d40fb5",
@@ -7227,6 +7589,8 @@
       "sourceCode": "9E",
       "name": "Rectangular branch junction with eased entry",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-9/9E.svg",
         "revision": "db6dc35aa9c0a0964d893361cc515f541ad029ea2b33a3184285ad88176b5aa1",
@@ -7268,6 +7632,8 @@
       "sourceCode": "9F",
       "name": "Eased rectangular branch junction with single deflector",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-9/9F.svg",
         "revision": "ffecc242dfabfd8564f1b7e7046026a4c734b5c0361ba3c4529bfa1a4fd960d9",
@@ -7309,6 +7675,8 @@
       "sourceCode": "9G",
       "name": "Rectangular branch junction with radiused entry",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-9/9G.svg",
         "revision": "742c4763afc4477e41e4cd5ce98ff8dfb0a9e28938f6a6c754f335d169edb245",
@@ -7350,6 +7718,8 @@
       "sourceCode": "9H",
       "name": "Round trunk with elbow branch",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-9/9H.svg",
         "revision": "75756e5e7b9f29c80cf11bd38119dfa4d5de523ae69d833c1b79be877c861de7",
@@ -7391,6 +7761,8 @@
       "sourceCode": "9I",
       "name": "Round tee junction",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-9/9I.svg",
         "revision": "7b04b7646f715d5db10157e5a1deb04bcffc0739b4263d1c46f4c1ce2cf10968",
@@ -7432,6 +7804,8 @@
       "sourceCode": "9J",
       "name": "Round wye junction",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-9/9J.svg",
         "revision": "e81f7daf153a31b9d467cc279cdadbdcec27701aa380b5ead70349fc8e37d871",
@@ -7473,6 +7847,8 @@
       "sourceCode": "9K",
       "name": "Rectangular tee junction without vanes",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-9/9K.svg",
         "revision": "414af45bae84e060c635ec5bfd3f8518d4e1c76346497ea4e326a6348906111c",
@@ -7506,6 +7882,8 @@
       "sourceCode": "9L",
       "name": "Rectangular tee junction with vane bank",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-9/9L.svg",
         "revision": "ef86df37d7b620f94ee4ad93dc5754a5c910525d16001c7dafecc30545bee95f",
@@ -7539,6 +7917,8 @@
       "sourceCode": "9M",
       "name": "Radiused rectangular split junction",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-9/9M.svg",
         "revision": "03d6758a158792a02ef672a062eaf3fb3c6f63c07a99e22a838e99582f09858a",
@@ -7572,6 +7952,8 @@
       "sourceCode": "9N",
       "name": "Rectangular wye split junction",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-9/9N.svg",
         "revision": "2243790baca3478efce6561b563ed7f22b326bb6772929cec1207770eb4585bf",
@@ -7605,6 +7987,8 @@
       "sourceCode": "9O",
       "name": "Round wye split junction",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-9/9O.svg",
         "revision": "63808b23dc8cbc563e630328c0f3770ce95f93d96354a55d2f5bd86939dad3b8",
@@ -7638,6 +8022,8 @@
       "sourceCode": "9P",
       "name": "Round tee split junction",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-9/9P.svg",
         "revision": "da872acd24264e1940c7c9201b1e4d581c8d5bc213159554f18c82017b454e13",
@@ -7671,6 +8057,8 @@
       "sourceCode": "9Q",
       "name": "Rectangular vertical-to-horizontal junction",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-9/9Q.svg",
         "revision": "2d14e2286d0863be1681c3eae851782b09fd4099e4421bbacf125415cc6545b1",
@@ -7704,6 +8092,8 @@
       "sourceCode": "9R",
       "name": "Rectangular vertical-to-horizontal junction with transition",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-9/9R.svg",
         "revision": "daa1e2d33c475956c5227b50d5520c03f40d19dcc6afd6838472694f29243811",
@@ -7737,6 +8127,8 @@
       "sourceCode": "10A",
       "name": "Rectangular return tee without vanes",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-10/10A.svg",
         "revision": "d70f17a47ce0f0654976045df75607307269703a34a6969dc5bd0210854e0810",
@@ -7770,6 +8162,8 @@
       "sourceCode": "10B",
       "name": "Rectangular return tee with vane bank",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-10/10B.svg",
         "revision": "313aa1c4c201b939d31882531e31fd582995e2a4a4dd6a6b0dd4e541b83805e2",
@@ -7803,6 +8197,8 @@
       "sourceCode": "10C",
       "name": "Radiused rectangular return merge",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-10/10C.svg",
         "revision": "bda034f5f94281e56f60e20ff0e18a38ee4299bd3889c84f1c7ed1a7ac3abd20",
@@ -7836,6 +8232,8 @@
       "sourceCode": "10D",
       "name": "Rectangular return wye merge",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-10/10D.svg",
         "revision": "2ef7012f1eb3ef1abc71c8c62144eeedafeb93346ba501513526a7a3f303a30f",
@@ -7869,6 +8267,8 @@
       "sourceCode": "10E",
       "name": "Round angled return merge",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-10/10E.svg",
         "revision": "53c8fe8cfe2f2a952cab0db041f5835d660e95f99eadd1133242a8f53dfdb754",
@@ -7902,6 +8302,8 @@
       "sourceCode": "10F",
       "name": "Round return wye merge",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-10/10F.svg",
         "revision": "9400e285569d0e5d5fce5991e82147d6d990a84a9366d20b39df0482030b9820",
@@ -7935,6 +8337,8 @@
       "sourceCode": "10G",
       "name": "Round return tee merge",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-10/10G.svg",
         "revision": "b2914847f5d2ee2e89d04add18badc8ed0466387723c3ae3424370583dab97c2",
@@ -7968,6 +8372,8 @@
       "sourceCode": null,
       "name": "Flex junction box",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-11/11-junction-box.svg",
         "revision": "b7230c6b50c53a2c82dcf57a4b037fdfd81faa4ccacb823fd551b8192bc6c93b",
@@ -8153,6 +8559,8 @@
       "sourceCode": "12A",
       "name": "Round tapered expansion",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12A.svg",
         "revision": "4c79d7f8bdb8cf293d8d223dba9aaba6b7cdb1da000dde9169814c496773a85d",
@@ -8219,6 +8627,8 @@
       "sourceCode": "12B",
       "name": "Round abrupt expansion",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12B.svg",
         "revision": "09694b981896b56b2a10e41a4b9934fc706c7a20b97e86f00e08a5d523b824b7",
@@ -8261,6 +8671,8 @@
       "sourceCode": "12C",
       "name": "Round-to-rectangular tapered expansion",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12C.svg",
         "revision": "04e604fc06854c0db580dd056649e3210766724ea3ca36dabf559dd95e09b967",
@@ -8327,6 +8739,8 @@
       "sourceCode": "12D",
       "name": "Rectangular-to-round tapered expansion",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12D.svg",
         "revision": "01267b290b5fb8762994474f02c23e823cc140a8eced7ff98ba3aaafa7f174a3",
@@ -8393,6 +8807,8 @@
       "sourceCode": "12E",
       "name": "Round-to-flat-rectangular tapered expansion",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12E.svg",
         "revision": "07c2e092e651de9b21153a48c203dae62d1d809c002287c9f9b94d9e2dbfe818",
@@ -8426,6 +8842,8 @@
       "sourceCode": "12F",
       "name": "Rectangular tapered expansion",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12F.svg",
         "revision": "99ac33b139d5cbb93bfa0ac39612fdaf5ee29bff142ac8abfa3d4795a1d550d6",
@@ -8492,6 +8910,8 @@
       "sourceCode": "12G",
       "name": "Rectangular abrupt expansion",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12G.svg",
         "revision": "0c1ac3fcc63e0183a43ee4bdf8106a8f6aa84250a5dc6549c37c7e7c33812596",
@@ -8534,6 +8954,8 @@
       "sourceCode": "12H",
       "name": "Rectangular one-sided tapered expansion",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12H.svg",
         "revision": "9aaf20e6b3c522079c029b5c03b1c03ff89bbd92f8267d9b75646d9fa6542fb5",
@@ -8600,6 +9022,8 @@
       "sourceCode": "12I",
       "name": "Rectangular side-offset tapered expansion",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12I.svg",
         "revision": "e68cc44e2125bc86950a2f20a06bb19392420f174b6fe94c54e0f6e7551bfaf1",
@@ -8666,6 +9090,8 @@
       "sourceCode": "12J",
       "name": "Round tapered reduction",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12J.svg",
         "revision": "6b774633cb9fe5ed147437f9afaf2ad35dba55d2236054cebef35f617a2e3ff0",
@@ -8732,6 +9158,8 @@
       "sourceCode": "12K",
       "name": "Round abrupt reduction",
       "shape": "round",
+      "ductShape": "round",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12K.svg",
         "revision": "6976d74a7c0441b6eca520cebd2852d214af3ad6aee607ac08cba2771439a896",
@@ -8774,6 +9202,8 @@
       "sourceCode": "12L",
       "name": "Rectangular-to-round tapered reduction",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12L.svg",
         "revision": "ed4e63f2f577d6e011eea4996c7ee42d6dcfe3687ed2dd3d184fc86734217252",
@@ -8840,6 +9270,8 @@
       "sourceCode": "12M",
       "name": "Round-to-rectangular tapered reduction",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12M.svg",
         "revision": "ad938f033afa2ae1b5a3d4ea91fe7637c6ca54f1ff0408afab99d950c7372fa7",
@@ -8906,6 +9338,8 @@
       "sourceCode": "12N",
       "name": "Flat-rectangular-to-round tapered reduction",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12N.svg",
         "revision": "3445a95d7b0263330c0802debeb41723aad52fae676c93a7e9f78165de65e521",
@@ -8939,6 +9373,8 @@
       "sourceCode": "12O",
       "name": "Rectangular tapered reduction",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12O.svg",
         "revision": "46adb88d4e0d721c74a52fe9370859715567bba75ee71662bb68ef12a6767de1",
@@ -9005,6 +9441,8 @@
       "sourceCode": "12P",
       "name": "Rectangular abrupt reduction",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12P.svg",
         "revision": "88d281a32880c9a9aa140604083d032d40b8bc8ad555e080525b9094402153cf",
@@ -9047,6 +9485,8 @@
       "sourceCode": "12Q",
       "name": "Rectangular one-sided tapered reduction",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12Q.svg",
         "revision": "e3746e573e08345ab5708b3c0bea0498d2b09036ca024c3d4e31357c35dd1897",
@@ -9113,6 +9553,8 @@
       "sourceCode": "12R",
       "name": "Rectangular side-offset tapered reduction",
       "shape": "rectangular",
+      "ductShape": "rectangular",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12R.svg",
         "revision": "949ebc6e42a68700b9505491868c325eebef86df0b22f2a29578d13ee7a8ecdf",
@@ -9179,6 +9621,8 @@
       "sourceCode": "12S",
       "name": "Oval-to-round angled adapter",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12S.svg",
         "revision": "f0efdccc7de298df597a70eccd82caa260632eb656e5304ca28154b18b740290",
@@ -9212,6 +9656,8 @@
       "sourceCode": "12T",
       "name": "Oval-to-round angled adapter — opposite orientation",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12T.svg",
         "revision": "b8504176fd394e82f88a4218b89344d6affb5ec042d4bb3e41c0dfccc01cf461",
@@ -9245,6 +9691,8 @@
       "sourceCode": "12U",
       "name": "Oval-to-round straight adapter",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12U.svg",
         "revision": "b23bc4ac060e90dead68bbe097319e768a9a55441c70f7198dd7d2046abeb399",
@@ -9278,6 +9726,8 @@
       "sourceCode": "12V",
       "name": "Rectangular-to-round angled adapter",
       "shape": "mixed",
+      "ductShape": "mixed",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12V.svg",
         "revision": "97a2a0de830ad1e75a19cf6a1b5973b9526e7893c9a87cc9ba033a1c7203c867",
@@ -9311,6 +9761,8 @@
       "sourceCode": "12W",
       "name": "Flow through a large plenum",
       "shape": "schematic",
+      "ductShape": "schematic",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12W.svg",
         "revision": "7e3c9490ed4e915986df5c546f66cf507df89c3c8386bd66737fbf5e85a0e777",
@@ -9452,6 +9904,8 @@
       "sourceCode": "12X",
       "name": "Abrupt squeeze",
       "shape": "schematic",
+      "ductShape": "schematic",
+      "ductShapeReviewed": false,
       "artwork": {
         "publicPath": "/images/fittings/group-12/12X.svg",
         "revision": "66b1146e5dfb11cdfd5837b36cd86c4b2e52633f75bea68eea8a63c9b6eb8e89",

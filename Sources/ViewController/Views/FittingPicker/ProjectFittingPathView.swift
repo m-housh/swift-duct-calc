@@ -8,6 +8,7 @@ struct ProjectFittingPathView: HTML, Sendable {
   let baseline: EquivalentLength?
   let rows: [PathEditorRow]
   let favorites: [Fitting.ID]
+  var catalogReviewEnabled: Bool = false
   let carousels: [(Fitting.PathType, [GroupCarousel.Item])]
   var root: String { "/projects/\(project.id)/effective-lengths" }
   var body: some HTML {
@@ -104,6 +105,11 @@ struct ProjectFittingPathView: HTML, Sendable {
           ], selected: "none")
         p(.class("muted picker-preference-help")) {
           "Preferred duct shape first. Starring a fitting keeps it in place and adds a copy to Favorites. Remembered in this browser."
+        }
+        if catalogReviewEnabled {
+          a(.href("/fittings/review"), .target("_blank"), .rel("noopener")) {
+            "Review catalog duct shapes ↗"
+          }
         }
         div(.id("group-selectors")) {
           for (path, items) in carousels {

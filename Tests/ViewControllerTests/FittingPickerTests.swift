@@ -33,44 +33,23 @@ struct FittingPickerTests {
     }
   }
 
-  @Test func preferenceUsesGroupTwoTrunkShapeWithoutRestrictingCatalog() async throws {
-    let expected = [
-      (1, "1A", "round"), (1, "1D", "rectangular"),
-      (2, "2A", "rectangular"), (2, "2K", "rectangular"),
-      (2, "2N", "round"), (2, "2Q", "round"), (4, "4A", "rectangular"),
-      (8, "8A-easy-bend", "oval"), (12, "12W", "schematic"),
-    ]
-    for (group, id, shapes) in expected {
-      let groupID = try #require(Fitting.Group.ID(rawValue: group))
-      let definition = try #require(
-        try await client.fittings(.init(pathType: .supply, groupID: groupID))
-          .first { $0.id.rawValue == id })
-      #expect(definition.pickerDuctShape.rawValue == shapes)
+  @Test func authoredDuctShapesReachEveryBrowserCard() async throws {
+    for path in Fitting.PathType.allCases {
+      for group in try await client.groups(path) {
+        let definitions = try await client.fittings(.init(pathType: path, groupID: group.id))
+        let rendered = await html(
+          .group("{\"pathType\":\"\(path.rawValue)\",\"groupID\":\(group.id.rawValue)}"))
+        let cards = rendered.components(separatedBy: "<article").dropFirst().map {
+          String($0.prefix { $0 != ">" })
+        }
+        #expect(cards.count == definitions.count)
+        for definition in definitions {
+          let card = try #require(
+            cards.first { $0.contains("data-catalog-id=\"\(definition.id.rawValue)\"") })
+          #expect(card.contains("data-duct-shape=\"\(definition.ductShape.rawValue)\""))
+        }
+      }
     }
-    let rendered = await html(.group("{\"pathType\":\"supply\",\"groupID\":2}"))
-    #expect(rendered.contains("data-catalog-id=\"2A\""))
-    #expect(rendered.contains("data-catalog-id=\"2N\""))
-    #expect(rendered.contains("data-duct-shape=\"round\""))
-    #expect(rendered.contains("data-duct-shape=\"rectangular\""))
-  }
-
-  @Test func everySupplyBootUsesItsAuditedDuctConnection() async throws {
-    let round: Set<String> = [
-      "4G", "4H", "4I", "4J", "4K", "4L", "4Q", "4R", "4S", "4T", "4U", "4V",
-      "4W", "4X", "4Y", "4Z", "4AA", "4AB", "4AC", "4AD", "4AE", "4AG", "4AJ", "4AK",
-    ]
-    let rectangular: Set<String> = [
-      "4A", "4B", "4C", "4D", "4E", "4F", "4M", "4N", "4O", "4P", "4AF", "4AH",
-      "4AI", "4AL", "4AM", "4AN", "4AO", "4AP", "4AQ", "4AR",
-    ]
-    let definitions = try await client.fittings(.init(pathType: .supply, groupID: .supplyBoots))
-    // A new catalog entry must be audited instead of silently inheriting "mixed".
-    #expect(Set(definitions.map { $0.id.rawValue }) == round.union(rectangular))
-    #expect(
-      Set(definitions.filter { $0.pickerDuctShape == .round }.map { $0.id.rawValue }) == round)
-    #expect(
-      Set(definitions.filter { $0.pickerDuctShape == .rectangular }.map { $0.id.rawValue })
-        == rectangular)
   }
 
   @Test func defaultsAreOnlyAppliedWhenOpeningADraft() async throws {

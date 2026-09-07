@@ -9,6 +9,8 @@ extension SiteRoute.View.FittingPickerRoute {
     @Dependency(\.fittingClient) var client
     do {
       switch self {
+      case .review, .saveReview:
+        return await renderCatalogReview(on: request)
       case .index:
         return await request.view {
           div(.class("p-8")) {

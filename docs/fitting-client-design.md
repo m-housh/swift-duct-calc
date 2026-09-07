@@ -1,5 +1,9 @@
 # FittingClient design sketch
 
+Duct-shape ordering is now authored in runtime `catalog.json` (schema 2), with a
+review status on every entry. The development-only [catalog review page](fitting-catalog-review.md)
+writes those fields directly; production continues to use the packaged catalog.
+
 Status: the live dependency now covers **227 choices across groups 1–12** and
 backs the [integrated project fitting picker](fitting-picker-preview.md).
 Project path saving and per-user favorites are implemented.

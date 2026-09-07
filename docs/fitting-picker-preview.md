@@ -9,6 +9,9 @@ Cancel or Escape returns to the list, asking before discarding unsaved changes. 
 inside a fitting picker or edit dialog closes only that child dialog. Failed saves leave
 the editor and draft open.
 
+The [development catalog review page](fitting-catalog-review.md) lets you inspect and
+save duct-shape classifications directly to the source catalog.
+
 ## What is implemented
 
 - The prototype's tall path rows, drawing-led Add fitting dialog, three-card looping
@@ -74,6 +77,7 @@ the editor and draft open.
 | `Sources/Styleguide/SegmentedControl.swift` | Reusable native radio toggle with keyboard navigation |
 | `Sources/Styleguide/PickerControl.swift` | Reusable labeled numeric, choice, and checkbox controls |
 | `Sources/ProjectClient/Internal/FittingPaths.swift` | Authorized saving, source evaluation, saved-row preservation, and validation |
+| `Sources/FittingClient/Resources/catalog.json` | Explicit duct-shape classification and review status for every fitting |
 | `Sources/ManualDCore/Fittings.swift` | Shared typed inputs, snapshots, and path-entry contracts |
 | `Sources/DatabaseClient` | Additive saved-row metadata, project ownership lookup, and per-user favorites |
 | `Public/js/fitting-path.js`, `group-carousel.js` | Interaction state, gestures, requests, quantities, and totals |
@@ -172,5 +176,5 @@ child-dialog dismissal and focus restoration, accepted/declined discard, failed-
 retention, and cancellation with no changes. The favorites check verifies the exact
 scroll → star → add sequence, favorites visible on group load, unchanged card coordinates
 when copies are added, adding from both copies, independent conditional inputs, search, mobile layout,
-Group 11 copy controls, keyboard focus restoration, and failed favorite writes. All **8 Swift picker tests** pass after the Group 4 correction, including coverage of
-every Group 4 connection shape; the preference browser check verifies both full orders and favorite copies. Temporary test session data and screenshots are written to `/tmp`.
+Group 11 copy controls, keyboard focus restoration, and failed favorite writes. The catalog-review update passes **144 Swift tests in 32 suites**, with every browser
+card checked against the authored catalog and separate persistence/concurrency coverage. Temporary test session data and screenshots are written to `/tmp`.

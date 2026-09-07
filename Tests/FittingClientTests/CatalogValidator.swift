@@ -9,7 +9,7 @@ struct CatalogValidator {
     func require(_ condition: Bool, _ message: String) throws {
       guard condition else { throw ValidationError(message: message) }
     }
-    try require(document.schemaVersion == 1, "Unsupported schema version")
+    try require(document.schemaVersion == 2, "Unsupported schema version")
     try require(!document.revision.isEmpty, "Missing catalog revision")
     try require(
       document.groups.map(\.id) == Fitting.Group.ID.allCases,

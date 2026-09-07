@@ -98,7 +98,8 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
         }
         let page = ProjectFittingPathView(
           project: project, baseline: saved, rows: rows,
-          favorites: try await database.fittingFavorites.fetch(user.id), carousels: carousels)
+          favorites: try await database.fittingFavorites.fetch(user.id),
+          catalogReviewEnabled: client.catalogReviewEnabled(), carousels: carousels)
         let steps = try await database.projects.getCompletedSteps(projectID)
         let paths = try await database.equivalentLengths.fetch(projectID)
         return await request.view {
@@ -187,7 +188,7 @@ struct FittingBrowserCard: HTML, Sendable {
         value:
           "\(definition.sourceCode?.rawValue ?? "Group 11") \(definition.name) \(definition.shape.rawValue)"
       ),
-      .data("duct-shape", value: definition.pickerDuctShape.rawValue),
+      .data("duct-shape", value: definition.ductShape.rawValue),
       .data("fixed", value: definition.inputRequirement == .fixed ? "true" : "false")
     ) {
       button(
