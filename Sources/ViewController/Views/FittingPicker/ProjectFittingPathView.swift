@@ -102,7 +102,7 @@ struct ProjectFittingPathView: HTML, Sendable {
             .init(value: "rectangular", label: "Rectangular"),
           ], selected: "none")
         p(.class("muted picker-preference-help")) {
-          "Matching and mixed-shape connections first. All fittings remain available. Remembered in this browser."
+          "Preferred duct shape first; favorites lead among equally matched fittings. All fittings stay in the list. Remembered in this browser."
         }
         div(.id("group-selectors")) {
           for (path, items) in carousels {

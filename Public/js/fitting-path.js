@@ -141,18 +141,12 @@
       const grid = $('#fitting-browser .fitting-grid'); if (!grid) return;
       const active = document.activeElement;
       const cards = [...grid.querySelectorAll('[data-catalog-id]')];
-      const rank = card => shapePreference === 'none' || card.dataset.preferredShapes.split(' ').includes(shapePreference) ? 0 : 1;
+      const rank = card => {
+        if (shapePreference === 'none' || card.dataset.ductShape === shapePreference) return 0;
+        return ['mixed', 'schematic'].includes(card.dataset.ductShape) ? 1 : 2;
+      };
       cards.sort((a,b) => rank(a) - rank(b) || Number(favorites.has(b.dataset.catalogId)) - Number(favorites.has(a.dataset.catalogId)) || Number(a.dataset.order) - Number(b.dataset.order));
-      grid.querySelectorAll('.shape-section-heading').forEach(heading => heading.remove());
-      let section = -1;
       for (const card of cards) {
-        const next = rank(card);
-        if (shapePreference !== 'none' && next !== section) {
-          const heading = document.createElement('h3'); heading.className = 'shape-section-heading'; heading.dataset.shapeSection = next;
-          heading.textContent = next === 0 ? `${shapePreference === 'round' ? 'Round' : 'Rectangular'} and shared connections` : 'Other shapes';
-          grid.append(heading); section = next;
-        }
-        card.dataset.shapeSection = next;
         const button = card.querySelector('[data-favorite]'), selected = favorites.has(card.dataset.catalogId);
         button.setAttribute('aria-pressed', String(selected)); button.textContent = selected ? '★ Favorite' : '☆ Favorite'; grid.append(card);
       }
@@ -161,12 +155,11 @@
     }
     function filterFittings() {
       const target = $('#fitting-browser'), query = $('#catalog-search')?.value.trim().toLowerCase() || '';
-      const visibleSections = new Set(); let count = 0;
+      let count = 0;
       target.querySelectorAll('[data-catalog-id]').forEach(card => {
         card.hidden = !card.dataset.search.toLowerCase().includes(query);
-        if (!card.hidden) { count++; visibleSections.add(card.dataset.shapeSection); }
+        if (!card.hidden) count++;
       });
-      target.querySelectorAll('.shape-section-heading').forEach(heading => { heading.hidden = !visibleSections.has(heading.dataset.shapeSection); });
       if ($('#catalog-empty')) $('#catalog-empty').hidden = count > 0;
     }
     async function chooseGroup(groupID) {

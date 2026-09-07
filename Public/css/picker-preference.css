@@ -16,7 +16,5 @@
     box-shadow: inset 0 0 0 1px var(--accent); font-weight: 600;
   }
   .picker-segment-options input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 3px; }
-  .shape-section-heading { grid-column: 1 / -1; padding-top: 12px; color: var(--muted); }
-  .shape-section-heading[hidden] { display: none; }
   .picker-preference-help { margin-bottom: 16px; }
 }

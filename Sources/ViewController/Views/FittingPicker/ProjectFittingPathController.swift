@@ -187,7 +187,7 @@ struct FittingBrowserCard: HTML, Sendable {
         value:
           "\(definition.sourceCode?.rawValue ?? "Group 11") \(definition.name) \(definition.shape.rawValue)"
       ),
-      .data("preferred-shapes", value: definition.pickerPreferredShapes),
+      .data("duct-shape", value: definition.pickerDuctShape.rawValue),
       .data("fixed", value: definition.inputRequirement == .fixed ? "true" : "false")
     ) {
       button(
@@ -220,20 +220,22 @@ struct GroupBrowserView: HTML, Sendable {
       }
     }
     p(.class("muted")) {
-      "Favorites first within each section · Select a fixed fitting to add it directly. Other fittings need the inputs shown on the card."
+      "Select a fixed fitting to add it directly. Other fittings need the inputs shown on the card."
     }
     div(.class("grid fitting-grid")) { for card in cards { card } }
     p(.id("catalog-empty"), .hidden) { "No matching fittings in this group." }
   }
 }
 
-// Presentation affinity only: mixed connections and shape-neutral schematics remain
-// alongside either preference. Do not interpret artwork shape as a path constraint.
+// Picker ordering follows the trunk connection for Group 2, not the branch outlet.
+// Keep this presentation hint separate from the catalog's overall artwork shape.
 extension Fitting.Definition {
-  var pickerPreferredShapes: String {
-    switch shape {
-    case .mixed, .schematic: "round rectangular"
-    default: shape.rawValue
+  var pickerDuctShape: Fitting.Shape {
+    if groupID == .supplyBranches,
+      ["2A", "2B", "2C", "2I", "2J", "2K"].contains(sourceCode?.rawValue ?? "")
+    {
+      return .rectangular
     }
+    return shape
   }
 }

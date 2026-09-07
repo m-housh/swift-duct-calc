@@ -33,24 +33,25 @@ struct FittingPickerTests {
     }
   }
 
-  @Test func preferenceIncludesConnectionsWithoutRestrictingCatalog() async throws {
+  @Test func preferenceUsesGroupTwoTrunkShapeWithoutRestrictingCatalog() async throws {
     let expected = [
       (1, "1A", "round"), (1, "1D", "rectangular"),
-      (2, "2A", "round rectangular"), (4, "4A", "round rectangular"),
-      (8, "8A-easy-bend", "oval"), (12, "12W", "round rectangular"),
+      (2, "2A", "rectangular"), (2, "2K", "rectangular"),
+      (2, "2N", "round"), (2, "2Q", "round"), (4, "4A", "mixed"),
+      (8, "8A-easy-bend", "oval"), (12, "12W", "schematic"),
     ]
     for (group, id, shapes) in expected {
       let groupID = try #require(Fitting.Group.ID(rawValue: group))
       let definition = try #require(
         try await client.fittings(.init(pathType: .supply, groupID: groupID))
           .first { $0.id.rawValue == id })
-      #expect(definition.pickerPreferredShapes == shapes)
+      #expect(definition.pickerDuctShape.rawValue == shapes)
     }
-    let rendered = await html(.group("{\"pathType\":\"supply\",\"groupID\":1}"))
-    #expect(rendered.contains("data-catalog-id=\"1A\""))
-    #expect(rendered.contains("data-catalog-id=\"1D\""))
-    #expect(rendered.contains("data-preferred-shapes=\"round\""))
-    #expect(rendered.contains("data-preferred-shapes=\"rectangular\""))
+    let rendered = await html(.group("{\"pathType\":\"supply\",\"groupID\":2}"))
+    #expect(rendered.contains("data-catalog-id=\"2A\""))
+    #expect(rendered.contains("data-catalog-id=\"2N\""))
+    #expect(rendered.contains("data-duct-shape=\"round\""))
+    #expect(rendered.contains("data-duct-shape=\"rectangular\""))
   }
 
   @Test func defaultsAreOnlyAppliedWhenOpeningADraft() async throws {
