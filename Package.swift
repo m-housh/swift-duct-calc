@@ -231,6 +231,7 @@ let package = Package(
     .target(
       name: "ViewController",
       dependencies: [
+        .target(name: "FittingClient"),
         .target(name: "AuthClient"),
         .target(name: "CSVParser"),
         .target(name: "DatabaseClient"),
@@ -250,6 +251,8 @@ let package = Package(
       name: "ViewControllerTests",
       dependencies: [
         .target(name: "ViewController"),
+        .target(name: "FittingClient"),
+        .target(name: "FileClient"),
         .target(name: "HTMLSnapshotTesting"),
       ],
       resources: [

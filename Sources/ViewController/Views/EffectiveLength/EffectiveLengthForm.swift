@@ -180,6 +180,9 @@ struct EffectiveLengthForm: HTML, Sendable {
           input(.class("hidden"), .name("id"), .value("\(id)"))
         }
         input(.class("hidden"), .name("name"), .value(stepTwo.name))
+        a(.href("/fittings?type=\(stepTwo.type.rawValue)"), .target(.blank), .class("link")) {
+          "Preview fitting picker ↗"
+        }
         input(.class("hidden"), .name("type"), .value(stepTwo.type.rawValue))
         for length in stepTwo.straightLengths {
           input(.class("hidden"), .name("straightLengths"), .value("\(length)"))

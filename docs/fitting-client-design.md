@@ -1,10 +1,9 @@
 # FittingClient design sketch
 
-Status: the dependency-only first implementation is available on
-`codex/fitting-client`; see [scope and source checks](fitting-client-first-slice.md).
-The wider contracts below remain the design reference for subsequent integration. This narrows the broader
-[fitting-picker implementation plan](fitting-picker-implementation-plan.md) to one
-reviewable dependency boundary.
+Status: the live dependency now covers **227 choices across groups 1–12** and
+backs the reviewable [fitting picker preview](fitting-picker-preview.md) at `/fittings`.
+The original [first-slice audit](fitting-client-first-slice.md) records the foundation;
+the wider contracts below remain the design reference for project persistence.
 
 ## Reference material direction
 
@@ -262,10 +261,10 @@ needed, and each factory invocation can be tested with independent file data.
 
 Group 11 illustrates the boundary: the default draft is box 700 FPM, sidewall
 openings, bend disabled, with bend defaults 700 FPM and R/D 1.0. Enabling the bend
-changes both artwork and the component breakdown. At those inputs the prototype
-shows 60 + 15 = 75 ft per entry. Quantity 2 makes the row 150 ft outside the
-client. This is an interface example, not source-rule approval: controlling box
-velocity, combined-case applicability and production artwork remain unresolved.
+changes both artwork and the component breakdown. At those inputs the live client
+returns 60 + 15 = 75 ft per entry. Quantity 2 makes the row 150 ft outside the
+client. The user chose one source-labeled box velocity control; see the
+[Group 11 source audit and decision](fitting-client-flex-junctions.md).
 
 ## Small first implementation and review questions
 

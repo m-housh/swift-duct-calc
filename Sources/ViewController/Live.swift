@@ -18,6 +18,8 @@ extension ViewController.Request {
     @Dependency(\.pdfClient) var pdfClient
 
     switch route {
+    case .fittings(let picker):
+      return await picker.renderView(on: self)
     case .home:
       return await view {
         HomeView()

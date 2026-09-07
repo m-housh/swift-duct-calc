@@ -34,7 +34,7 @@ The previously reviewed prototype flow's SVG schematics are promoted to
 `Public/images/fittings/group-11` with schematic captions and SHA-256 revisions.
 They are code-native illustrations, not extracted source artwork. The box-only,
 supplied-bend, and bend-detail views are available independently of calculation
-inputs. Their visual presentation is included in the upcoming picker UI review.
+inputs. Their visual presentation is included in the [live picker UI review](fitting-picker-preview.md).
 
 ## Verification
 

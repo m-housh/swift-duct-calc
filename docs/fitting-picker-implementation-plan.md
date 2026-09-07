@@ -3,10 +3,10 @@
 Planning baseline: 2026-09-05; updated after the full-catalog and Group 11 review. This is a
 production implementation proposal, not a change to the Swift application or the frozen prototypes.
 
-For the current, narrower architecture review, start with the
-[FittingClient design sketch](fitting-client-design.md). It proposes the dependency
-interface, shared types, artwork handling and file layout without implementing the
-full picker or persistence changes.
+Current implementation: the [live picker preview](fitting-picker-preview.md) is ready
+for UI review. It uses the 227-choice Swift catalog at `/fittings`; project saving,
+favorites, and CSV integration remain follow-up work. The
+[FittingClient design sketch](fitting-client-design.md) records the dependency boundary.
 
 ## Review status and repository ownership
 
@@ -14,8 +14,8 @@ This is the reviewable working plan, not a finalized implementation specificatio
 explicitly confirmed below are settled; proposed API names, file placement, persistence mechanics
 and delivery sequence remain open to the repository owner's direction. Production implementation has
 started with the dependency-only slice on `codex/fitting-client`; see
-[implementation scope and source checks](fitting-client-first-slice.md). The step-3
-UI and persistence integration are still pending. The reviewed dependency foundation
+[implementation scope and source checks](fitting-client-first-slice.md). The standalone live picker UI is implemented; step-3
+persistence integration is still pending. The reviewed dependency foundation
 now includes async startup loading through `FileClient` and **227 verified choices**
 across groups 1–12. Current audit notes cover the
 [catalog foundation](fitting-client-catalog-expansion.md),
