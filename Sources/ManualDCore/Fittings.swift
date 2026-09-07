@@ -48,6 +48,8 @@ public enum Fitting {
   public enum View: String, Codable, Sendable {
     case individual, assembly
     case assemblyMerging = "assembly-merging"
+    case suppliedBend = "supplied-bend"
+    case bendDetail = "bend-detail"
   }
 
   /// The selected route through a junction, independent of supply/return path type.
@@ -207,6 +209,31 @@ public enum Fitting {
     public var label: String { "\(rawValue) FPM" }
   }
 
+  public enum FlexVelocity: Int, Codable, CaseIterable, Sendable {
+    case fpm400 = 400, fpm500 = 500, fpm600 = 600, fpm700 = 700, fpm800 = 800, fpm900 = 900
+
+    public var label: String { "\(rawValue) FPM" }
+  }
+
+  public enum FlexBendRadiusRatio: String, Codable, CaseIterable, Sendable {
+    case one, oneAndHalf, twoToThree, fourToFive
+
+    public var label: String {
+      switch self {
+      case .one: "1.0"
+      case .oneAndHalf: "1.5"
+      case .twoToThree: "2–3"
+      case .fourToFive: "4–5"
+      }
+    }
+  }
+
+  public enum FlexOpenings: String, Codable, CaseIterable, Sendable {
+    case sidewall, topOrBottom
+
+    public var label: String { self == .sidewall ? "Sidewall" : "Top or bottom" }
+  }
+
   public enum Inputs: Codable, Equatable, Sendable {
     case fixed
     case heightWidth(heightInches: Double?, widthInches: Double?)
@@ -231,6 +258,9 @@ public enum Fitting {
     case plenumPassage(inletVelocity: TransitionVelocity?, outletVelocity: TransitionVelocity?)
     /// Velocity is in the larger upstream section A1, not in the restricted section A2.
     case abruptSqueeze(upstreamVelocity: TransitionVelocity?, areaRatio: TransitionAreaRatio?)
+    case flexJunctionBox(
+      boxVelocity: FlexVelocity?, openings: FlexOpenings?, suppliedBend: Bool,
+      bendVelocity: FlexVelocity?, bendRadiusRatio: FlexBendRadiusRatio?)
     /// One selected construction represents both matching 90° elbows; no supplied EL.
     indirect case doubleElbow(baseFittingID: ID?, baseInputs: Inputs?)
     case rectangularElbow(
@@ -263,6 +293,7 @@ public enum Fitting {
     case plenumPassage(
       inletVelocities: [TransitionVelocity], outletVelocities: [TransitionVelocity])
     case abruptSqueeze(upstreamVelocities: [TransitionVelocity], areaRatios: [TransitionAreaRatio])
+    case flexJunctionBox(velocities: [FlexVelocity], bendRadiusRatios: [FlexBendRadiusRatio])
     case doubleElbow(baseFittingIDs: [ID])
     case rectangularElbow(
       radiusRatios: [RectangularElbowRadiusRatio], bendCategories: [ElbowBendCategory],
@@ -398,6 +429,7 @@ public enum Fitting {
       case offsetRatio, turningVanes, riserSize, riserCorner
       case insideCornerRadius, baseFitting, baseInputs
       case transitionSlope, areaRatio, inletVelocity, outletVelocity, upstreamVelocity
+      case flexVelocity, flexOpenings, bendVelocity, bendRadiusRatio
     }
 
     public enum Code: Equatable, Sendable {

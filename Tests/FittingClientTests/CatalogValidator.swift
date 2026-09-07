@@ -52,7 +52,7 @@ struct CatalogValidator {
           artwork.mediaType == "image/svg+xml" && !artwork.altText.isEmpty,
           "Invalid artwork metadata")
       }
-      if [.plenumPassage, .abruptSqueeze].contains(record.rule.kind) {
+      if [.plenumPassage, .abruptSqueeze, .flexJunctionBox].contains(record.rule.kind) {
         try require(
           record.conditions.referenceVelocityFPM == nil,
           "Velocity-table rule must not imply a fixed reference velocity")
@@ -124,6 +124,17 @@ struct CatalogValidator {
           "Unexpected static-pressure requirement")
       }
       switch record.rule.kind {
+      case .flexJunctionBox:
+        try require(
+          record.id == "11-junction-box" && record.groupID == .flexJunctions
+            && record.sourceCode == nil
+            && rows.map(\.parameter) == Fitting.FlexVelocity.allCases.map { Double($0.rawValue) }
+            && rows.allSatisfy { row in
+              guard let bends = row.flexBends else { return false }
+              return bends.map(\.radiusRatio) == Fitting.FlexBendRadiusRatio.allCases
+                && bends.allSatisfy { $0.feet.isFinite && $0.feet > 0 }
+            },
+          "Flex junction must retain all box and bend source cells without invented source letters")
       case .transition:
         let slopes: [Fitting.TransitionSlope] =
           ["12B", "12G", "12K", "12P"].contains(record.sourceCode?.rawValue)

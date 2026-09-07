@@ -16,14 +16,14 @@ and delivery sequence remain open to the repository owner's direction. Productio
 started with the dependency-only slice on `codex/fitting-client`; see
 [implementation scope and source checks](fitting-client-first-slice.md). The step-3
 UI and persistence integration are still pending. The reviewed dependency foundation
-now includes async startup loading through `FileClient` and **226 verified choices**
-across groups 1–10 and 12. Group 11 remains pending. Current audit notes cover the
+now includes async startup loading through `FileClient` and **227 verified choices**
+across groups 1–12. Current audit notes cover the
 [catalog foundation](fitting-client-catalog-expansion.md),
 [junctions](fitting-client-junctions.md), [panned returns](fitting-client-panned-returns.md),
 [round elbows](fitting-client-round-elbows.md), [rectangular elbows](fitting-client-rectangular-elbows.md),
 [remaining 8A constructions](fitting-client-8a-constructions.md), [offsets](fitting-client-offsets.md),
 [double elbows](fitting-client-double-elbows.md), [reducing takeoffs](fitting-client-reducing-takeoffs.md),
-and [transitions](fitting-client-transitions.md). Group 6 uses the confirmed nearest-published-ratio-row
+[transitions](fitting-client-transitions.md), and [flex junctions](fitting-client-flex-junctions.md). Group 6 uses the confirmed nearest-published-ratio-row
 policy (midpoint ties upward) and returns both branch and trunk contributions.
 
 Architecture guidance from the user:

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "fitting-catalog-v13",
+  "revision": "fitting-catalog-v14",
   "groups": [
     {
       "id": 1,
@@ -7958,6 +7958,191 @@
         "frictionRateIWCPer100Feet": 0.08,
         "notes": [
           "Two return trunks merge. Source directs branch return equivalent lengths to Group 6."
+        ]
+      }
+    },
+    {
+      "id": "11-junction-box",
+      "familyID": "11-junction-box",
+      "groupID": 11,
+      "sourceCode": null,
+      "name": "Flex junction box",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-11/11-junction-box.svg",
+        "revision": "b7230c6b50c53a2c82dcf57a4b037fdfd81faa4ccacb823fd551b8192bc6c93b",
+        "altText": "Flex junction box with sidewall connections",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "alternateArtwork": [
+        {
+          "publicPath": "/images/fittings/group-11/11-junction-box-supplied-bend.svg",
+          "revision": "b50181d3df4c15522e34c2b25077a68aa9400dc001af357686eca24f6d9f5de5",
+          "altText": "Flex junction box supplied with a 90° radius bend",
+          "view": "supplied-bend",
+          "mediaType": "image/svg+xml"
+        },
+        {
+          "publicPath": "/images/fittings/group-11/11-radius-bend.svg",
+          "revision": "35ea20be252e8d1aa3772037cfada0aa012624cf304db61489fec31e9cd982a4",
+          "altText": "Supplied 90° flex bend with radius and diameter labels",
+          "view": "bend-detail",
+          "mediaType": "image/svg+xml"
+        }
+      ],
+      "ruleRevision": "11-junction-box-v1",
+      "rule": {
+        "kind": "flexJunctionBox",
+        "rows": [
+          {
+            "key": "11-junction-box:400",
+            "parameter": 400,
+            "feet": 20,
+            "flexBends": [
+              {
+                "radiusRatio": "one",
+                "feet": 5
+              },
+              {
+                "radiusRatio": "oneAndHalf",
+                "feet": 5
+              },
+              {
+                "radiusRatio": "twoToThree",
+                "feet": 5
+              },
+              {
+                "radiusRatio": "fourToFive",
+                "feet": 5
+              }
+            ]
+          },
+          {
+            "key": "11-junction-box:500",
+            "parameter": 500,
+            "feet": 30,
+            "flexBends": [
+              {
+                "radiusRatio": "one",
+                "feet": 5
+              },
+              {
+                "radiusRatio": "oneAndHalf",
+                "feet": 5
+              },
+              {
+                "radiusRatio": "twoToThree",
+                "feet": 5
+              },
+              {
+                "radiusRatio": "fourToFive",
+                "feet": 5
+              }
+            ]
+          },
+          {
+            "key": "11-junction-box:600",
+            "parameter": 600,
+            "feet": 40,
+            "flexBends": [
+              {
+                "radiusRatio": "one",
+                "feet": 10
+              },
+              {
+                "radiusRatio": "oneAndHalf",
+                "feet": 5
+              },
+              {
+                "radiusRatio": "twoToThree",
+                "feet": 5
+              },
+              {
+                "radiusRatio": "fourToFive",
+                "feet": 5
+              }
+            ]
+          },
+          {
+            "key": "11-junction-box:700",
+            "parameter": 700,
+            "feet": 60,
+            "flexBends": [
+              {
+                "radiusRatio": "one",
+                "feet": 15
+              },
+              {
+                "radiusRatio": "oneAndHalf",
+                "feet": 10
+              },
+              {
+                "radiusRatio": "twoToThree",
+                "feet": 5
+              },
+              {
+                "radiusRatio": "fourToFive",
+                "feet": 5
+              }
+            ]
+          },
+          {
+            "key": "11-junction-box:800",
+            "parameter": 800,
+            "feet": 75,
+            "flexBends": [
+              {
+                "radiusRatio": "one",
+                "feet": 15
+              },
+              {
+                "radiusRatio": "oneAndHalf",
+                "feet": 10
+              },
+              {
+                "radiusRatio": "twoToThree",
+                "feet": 10
+              },
+              {
+                "radiusRatio": "fourToFive",
+                "feet": 8
+              }
+            ]
+          },
+          {
+            "key": "11-junction-box:900",
+            "parameter": 900,
+            "feet": 95,
+            "flexBends": [
+              {
+                "radiusRatio": "one",
+                "feet": 20
+              },
+              {
+                "radiusRatio": "oneAndHalf",
+                "feet": 15
+              },
+              {
+                "radiusRatio": "twoToThree",
+                "feet": 10
+              },
+              {
+                "radiusRatio": "fourToFive",
+                "feet": 8
+              }
+            ]
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": null,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Use the selected velocity in flex duct for the junction-box table.",
+          "Source conditions require sidewall connections, straight approaches and departures, and exit spacing of at least two duct diameters from the entrance.",
+          "A nearby turn or inadequate spacing can make the listed losses too small. Adding bend EL does not correct an incompatible box layout.",
+          "The optional supplied bend is 90° and uses its own velocity and R/D selections."
         ]
       }
     },

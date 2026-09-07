@@ -1,6 +1,7 @@
 # Group 11 picker proposal
 
-Status: active UI exploration. The user requested integration of the completed
+Status: historical UI exploration, now followed by the
+[implemented Group 11 rules and confirmed velocity wording](fitting-client-flex-junctions.md). The user requested integration of the completed
 artwork and a Group 11 visual-picker proposal on 2026-09-05.
 
 ## Current prototype

@@ -18,8 +18,8 @@ struct FittingCatalogTests {
     #expect(returns.map { $0.id.rawValue } == [5, 6, 7, 8, 10, 11, 12])
     #expect(supply.first?.representativeFittingID == "1A")
     #expect(supply.first?.availableFittingCount == 22)
-    #expect(supply.first { $0.id == .flexJunctions }?.availableFittingCount == 0)
-    #expect(supply.first { $0.id == .flexJunctions }?.representativeFittingID == nil)
+    #expect(supply.first { $0.id == .flexJunctions }?.availableFittingCount == 1)
+    #expect(supply.first { $0.id == .flexJunctions }?.representativeFittingID == "11-junction-box")
     #expect(throws: DecodingError.self) {
       try JSONDecoder().decode(Fitting.Group.ID.self, from: Data("13".utf8))
     }
@@ -98,7 +98,7 @@ struct FittingCatalogTests {
         }
       }
     }
-    #expect(checked.count == 226)
+    #expect(checked.count == 227)
   }
 
   @Test func dependencyCanBeReplacedWithoutLoadingCatalogOrProjects() async throws {

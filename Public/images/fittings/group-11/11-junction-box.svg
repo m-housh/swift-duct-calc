@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+<title id="title">Flex junction box — schematic plan view</title><desc id="desc">One inlet on the right feeds side-wall outlets. Subtle blue flow lines branch from the inlet to all four outlets; no outlet is selected. L measures spacing from the inlet wall to the first outlet nearest the entrance; the source calls for at least two duct diameters.</desc>
+<defs><marker id="arrow" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0 1L7 4L0 7" fill="none" stroke="#7d9eb2" stroke-width="1.5"/></marker></defs>
+<rect width="640" height="400" rx="12" fill="white"/>
+<g stroke="#8495a4" stroke-width="3" fill="#f4f7fa"><path d="M120 128h370v170H120z"/><path d="M490 181h110v64H490"/><path d="M153 128V47h57v81M300 128V47h57v81M153 298v61h57v-61M300 298v61h57v-61" fill="white"/></g>
+<g stroke="#7d9eb2" stroke-width="2" stroke-linecap="round" fill="none">
+<path d="M575 212H402"/>
+<path d="M402 212C318 212 182 205 182 145V65" marker-end="url(#arrow)"/>
+<path d="M402 212C356 212 329 181 329 145V65" marker-end="url(#arrow)"/>
+<path d="M402 212C318 212 182 219 182 279V342" marker-end="url(#arrow)"/>
+<path d="M402 212C356 212 329 243 329 279V342" marker-end="url(#arrow)"/>
+</g>
+<g stroke="#65798a" stroke-width="1.5" fill="none"><path d="M329 113v-16M490 170V97M329 105H490M324 100l10 10M485 100l10 10M606 181h16m-8 0v64m-8 0h16"/></g>
+<g font-family="system-ui,sans-serif" text-anchor="middle"><text x="410" y="30" font-size="19" fill="#254b65">L ≥ 2 × D</text><text x="614" y="164" font-size="19" fill="#254b65">D</text><text x="555" y="279" font-size="15" fill="#516776">Inlet</text><text x="320" y="388" font-size="14" fill="#677986">Schematic · side-wall connections · plan view</text></g></svg>

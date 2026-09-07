@@ -9,6 +9,8 @@ extension Catalog {
     }
     let row: Rule.Row
     switch (record.rule.kind, request.inputs) {
+    case (.flexJunctionBox, .flexJunctionBox):
+      return evaluateFlexJunctionBox(record, request: request)
     case (.transition, .transition), (.plenumPassage, .plenumPassage),
       (.abruptSqueeze, .abruptSqueeze):
       return evaluateTransition(record, request: request)

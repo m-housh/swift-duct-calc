@@ -121,6 +121,14 @@ struct Catalog: Sendable {
     var requirement: Fitting.InputRequirement {
       switch kind {
       case .fixed: .fixed
+      case .flexJunctionBox:
+        .flexJunctionBox(
+          velocities: Fitting.FlexVelocity.allCases.filter { velocity in
+            rows.contains { $0.parameter == Double(velocity.rawValue) }
+          },
+          bendRadiusRatios: Fitting.FlexBendRadiusRatio.allCases.filter { ratio in
+            rows.contains { $0.flexBends?.contains { $0.radiusRatio == ratio } == true }
+          })
       case .transition:
         .transition(
           slopes: Fitting.TransitionSlope.allCases.filter { slope in
@@ -210,6 +218,10 @@ struct Catalog: Sendable {
     var defaultInputs: Fitting.Inputs {
       switch kind {
       case .fixed: .fixed
+      case .flexJunctionBox:
+        .flexJunctionBox(
+          boxVelocity: .fpm700, openings: .sidewall, suppliedBend: false,
+          bendVelocity: .fpm700, bendRadiusRatio: .one)
       case .transition:
         .transition(slope: rows.allSatisfy { $0.slope == .abrupt } ? .abrupt : nil, areaRatio: nil)
       case .plenumPassage: .plenumPassage(inletVelocity: nil, outletVelocity: nil)
@@ -240,7 +252,8 @@ struct Catalog: Sendable {
       case fixed, heightWidth, radiusWidth, downstreamBranches, plenumReturns, junction,
         returnJunction, pannedReturn, roundElbow, rectangularElbow, ovalElbow,
         squareElbow, steppedOffset, fourTurnOffset, radiusOffset, riserElbow,
-        doubleElbow, insideCornerOffset, easedTakeoff, transition, plenumPassage, abruptSqueeze
+        doubleElbow, insideCornerOffset, easedTakeoff, transition, plenumPassage, abruptSqueeze,
+        flexJunctionBox
     }
 
     struct AngleMultiplier: Decodable, Sendable {
@@ -262,8 +275,14 @@ struct Catalog: Sendable {
       let inletVelocity: Fitting.TransitionVelocity?
       let outletVelocity: Fitting.TransitionVelocity?
       let minimumUpstreamStaticPressureIWC: Double?
+      let flexBends: [FlexBend]?
       /// The group 6 trunk column; `feet` holds that row's branch value.
       let trunkFeet: Double?
+    }
+
+    struct FlexBend: Decodable, Sendable {
+      let radiusRatio: Fitting.FlexBendRadiusRatio
+      let feet: Double
     }
   }
 

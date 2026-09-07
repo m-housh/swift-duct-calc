@@ -12,14 +12,13 @@ and its running preview server are unchanged.
 - All shared fitting definitions are in `Sources/ManualDCore/Fittings.swift`.
 - `@Dependency(\.fittingClient)` exposes groups, fitting definitions, artwork,
   equivalent-length evaluation and source-reference resolution.
-- One bundled JSON resource provides canonical group order/eligibility and 226
-  fitting choices across groups 1–10 and 12. Group 11 currently has no cases or
-  representative artwork. See the [catalog expansion](fitting-client-catalog-expansion.md),
+- One bundled JSON resource provides canonical group order/eligibility and 227
+  fitting choices across groups 1–12, including the [flex junction box](fitting-client-flex-junctions.md). See the [catalog expansion](fitting-client-catalog-expansion.md),
   [junctions](fitting-client-junctions.md), [panned returns](fitting-client-panned-returns.md),
   [round elbows](fitting-client-round-elbows.md), [rectangular elbows](fitting-client-rectangular-elbows.md),
   [remaining 8A constructions](fitting-client-8a-constructions.md), [offsets](fitting-client-offsets.md),
   [double elbows](fitting-client-double-elbows.md), [reducing takeoffs](fitting-client-reducing-takeoffs.md),
-  and [transitions](fitting-client-transitions.md).
+  [transitions](fitting-client-transitions.md), and [flex junctions](fitting-client-flex-junctions.md).
 - `FittingClient.live()` is an async throwing factory. `Live.swift` resolves its
   own bundle resource and reads it through `FileClient.readFile`. Application
   configuration provides a reader on the application's worker pool, loads one
@@ -83,7 +82,7 @@ The artwork catalog's 1F metadata points at viewer page 1, but its table is on
 viewer page 2. This correction is recorded in the internal audit table above;
 original artwork manifests were not changed. The runtime catalog has no PDF links.
 
-Group 11 remains outside implemented rules; groups 3 and 8 are now implemented.
+All groups 1–12 now have implemented rules.
 The 8A piece-count discrepancy is resolved against the source in the round elbow slice.
 Optional source codes allow future application-only cases without inventing
 lettered IDs. The first slice does not settle those cases' applicability.
@@ -97,7 +96,7 @@ resource rejection and fractional snapshot encoding. Factory tests cover injecte
 file data, one read per constructed client, and immediate read/decode failures.
 Application tests cover startup failure and middleware injection across requests.
 Test-only fractional values are labeled as contract fixtures, not as source values.
-The expansion audits record numeric coverage for all 226 current fitting choices.
+The expansion audits record numeric coverage for all 227 current fitting choices.
 
 Reproduce with Swift 6.2:
 
