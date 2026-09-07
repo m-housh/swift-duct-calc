@@ -11,6 +11,15 @@ extension Catalog {
     switch (record.rule.kind, request.inputs) {
     case (.fixed, .fixed):
       row = record.rule.rows[0]
+    case (.ovalElbow, .ovalElbow(let pieceCount)):
+      guard let pieceCount else {
+        return .unresolved([.init(.missingInput, field: .pieceCount)])
+      }
+      guard let match = record.rule.rows.first(where: { $0.parameter == Double(pieceCount.rawValue) })
+      else {
+        return .unresolved([.init(.unsupportedCombination, field: .pieceCount)])
+      }
+      row = match
     case (.heightWidth, .heightWidth(let numerator, let width)),
       (.radiusWidth, .radiusWidth(let numerator, let width)):
       let numeratorField: Fitting.Issue.Field =

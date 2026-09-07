@@ -42,7 +42,7 @@ public enum Fitting {
   }
 
   public enum Shape: String, Codable, Sendable {
-    case round, rectangular, mixed
+    case round, rectangular, oval, mixed
   }
 
   public enum View: String, Codable, Sendable {
@@ -113,6 +113,13 @@ public enum Fitting {
     public var label: String { "\(rawValue)°" }
   }
 
+  public enum OvalElbowPieceCount: Int, Codable, CaseIterable, Sendable {
+    case three = 3
+    case four = 4
+
+    public var label: String { "\(rawValue)-piece" }
+  }
+
   public enum Inputs: Codable, Equatable, Sendable {
     case fixed
     case heightWidth(heightInches: Double?, widthInches: Double?)
@@ -125,6 +132,7 @@ public enum Fitting {
     case returnJunction(branchCFM: Double?, totalCFM: Double?)
     case pannedReturn(airflowCFM: Double?, mergingFlow: Bool)
     case roundElbow(radiusRatio: RoundElbowRadiusRatio?, angle: ElbowAngle?)
+    case ovalElbow(pieceCount: OvalElbowPieceCount?)
     case rectangularElbow(
       radiusRatio: RectangularElbowRadiusRatio?, bendCategory: ElbowBendCategory?,
       angle: ElbowAngle?)
@@ -142,6 +150,7 @@ public enum Fitting {
     /// Airflow must be within the first and last published rows, before rounding.
     case pannedReturn(airflowRows: [Double], supportsMergingFlow: Bool)
     case roundElbow(radiusRatios: [RoundElbowRadiusRatio], angles: [ElbowAngle])
+    case ovalElbow(pieceCounts: [OvalElbowPieceCount])
     case rectangularElbow(
       radiusRatios: [RectangularElbowRadiusRatio], bendCategories: [ElbowBendCategory],
       angles: [ElbowAngle])
@@ -271,7 +280,7 @@ public enum Fitting {
     public enum Field: Equatable, Sendable {
       case heightInches, widthInches, radiusInches, downstreamBranches, plenumReturns, junctionPath
       case branchCFM, totalCFM, airflowCFM, mergingFlow
-      case radiusRatio, elbowAngle, bendCategory
+      case radiusRatio, elbowAngle, bendCategory, pieceCount
     }
 
     public enum Code: Equatable, Sendable {

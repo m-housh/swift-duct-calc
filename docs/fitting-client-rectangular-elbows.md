@@ -75,5 +75,5 @@ source identity, and artwork routing. Catalog validation checks that every
 R/W/category pair occurs once in canonical order and that angle factors match the
 source. Existing round elbow tests remain scoped to the 8A family.
 
-Group 8 remains partially implemented: its other 8A constructions and 8D–8P still
-need implementation. Rules will continue to be reviewed one group at a time.
+The [other 8A constructions](fitting-client-8a-constructions.md) are now implemented.
+Group 8 remains partially implemented: 8D–8P still need implementation. Rules will continue to be reviewed one group at a time.

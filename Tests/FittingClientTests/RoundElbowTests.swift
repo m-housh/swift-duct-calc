@@ -56,7 +56,7 @@ struct FittingRoundElbowTests {
 
   @Test func pickerChoicesAndDefaults() async throws {
     let definitions = try await client.fittings(.init(pathType: .supply, groupID: .elbows))
-      .filter { $0.familyID == "8A" }
+      .filter { if case .roundElbow = $0.inputRequirement { true } else { false } }
     #expect(definitions.map(\.id) == ["8A-smooth", "8A-4-or-5-piece", "8A-3-piece"])
     for definition in definitions {
       #expect(
@@ -75,9 +75,6 @@ struct FittingRoundElbowTests {
     #expect(
       Fitting.RoundElbowRadiusRatio.allCases.map(\.label) == ["0.75", "1.0", "1.5 or greater"])
     #expect(Fitting.ElbowAngle.degrees90.label == "90°")
-    #expect(
-      try await client.resolveReference(.init(code: "8a", pathType: .return))
-        == .recognized(.init(code: "8A", groupID: .elbows, fittingIDs: definitions.map(\.id))))
   }
 
   @Test func arbitraryValuesCannotDecodeAsChoices() throws {

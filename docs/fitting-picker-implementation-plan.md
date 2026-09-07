@@ -21,7 +21,7 @@ now includes async startup loading through `FileClient`; the
 [junction slice](fitting-client-junctions.md),
 [group 7 slice](fitting-client-panned-returns.md),
 [8A round elbow slice](fitting-client-round-elbows.md), and
-[8B/8C rectangular elbow slice](fitting-client-rectangular-elbows.md) cover 150 fitting choices in groups
+[8B/8C rectangular elbow slice](fitting-client-rectangular-elbows.md) and the [completed 8A constructions](fitting-client-8a-constructions.md) cover 155 fitting choices in groups
 1, 2, 4, 5, 6, 7, 8 (partial), 9, and 10. Group 6 uses the confirmed nearest-published-ratio-row
 policy (midpoint ties upward) and returns both branch and trunk contributions.
 

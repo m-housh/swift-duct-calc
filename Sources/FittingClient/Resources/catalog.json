@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "fitting-catalog-v8",
+  "revision": "fitting-catalog-v9",
   "groups": [
     {
       "id": 1,
@@ -4969,6 +4969,181 @@
         "notes": [
           "Select the published R/D category: 0.75, 1.0, or 1.5 or greater.",
           "This construction uses the published 90° table values."
+        ]
+      }
+    },
+    {
+      "id": "8A-mitered",
+      "familyID": "8A",
+      "groupID": 8,
+      "sourceCode": "8A",
+      "name": "Smooth mitered round elbow",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8A-mitered.svg",
+        "revision": "6a5a228a35f4e807f5dae9b45862d379e66e7471fb199d20b8f6732809735a53",
+        "altText": "8A — Smooth mitered round elbow",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8A-mitered-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "8A-mitered",
+            "parameter": 0,
+            "feet": 75
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Mitered 90° round elbow, inside radius zero."
+        ]
+      }
+    },
+    {
+      "id": "8A-easy-bend",
+      "familyID": "8A",
+      "groupID": 8,
+      "sourceCode": "8A",
+      "name": "Easy-bend oval elbow",
+      "shape": "oval",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8A-easy-bend.svg",
+        "revision": "c9892b486c5ed6d3609e49eb8fb49fa48ee7d1af899db8ab1ed906f0954b2dfd",
+        "altText": "8A — Easy-bend oval elbow",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8A-easy-bend-v1",
+      "rule": {
+        "kind": "ovalElbow",
+        "rows": [
+          {
+            "key": "8A-easy-bend:pieces:3",
+            "parameter": 3,
+            "feet": 30
+          },
+          {
+            "key": "8A-easy-bend:pieces:4",
+            "parameter": 4,
+            "feet": 25
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Select three-piece or four-piece construction for this 90° oval elbow."
+        ]
+      }
+    },
+    {
+      "id": "8A-hard-bend",
+      "familyID": "8A",
+      "groupID": 8,
+      "sourceCode": "8A",
+      "name": "Hard-bend oval elbow",
+      "shape": "oval",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8A-hard-bend.svg",
+        "revision": "585eb44c47b430859f85bbd77934f8b42c2e376bb551c6f4da7d75eb6bfd1f39",
+        "altText": "8A — Hard-bend oval elbow",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8A-hard-bend-v1",
+      "rule": {
+        "kind": "ovalElbow",
+        "rows": [
+          {
+            "key": "8A-hard-bend:pieces:3",
+            "parameter": 3,
+            "feet": 35
+          },
+          {
+            "key": "8A-hard-bend:pieces:4",
+            "parameter": 4,
+            "feet": 30
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Select three-piece or four-piece construction for this 90° oval elbow."
+        ]
+      }
+    },
+    {
+      "id": "8A-3-piece-45",
+      "familyID": "8A",
+      "groupID": 8,
+      "sourceCode": "8A",
+      "name": "Three-piece 45-degree round elbow",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8A-3-piece-45.svg",
+        "revision": "c0db658c085c03822bad8196df19d52e6d7cd43fbdf345c191f05868c8e763bc",
+        "altText": "8A — Three-piece 45-degree round elbow",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8A-3-piece-45-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "8A-3-piece-45",
+            "parameter": 0,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Fixed length for the illustrated 45° construction; no additional angle multiplier applies."
+        ]
+      }
+    },
+    {
+      "id": "8A-2-piece-45",
+      "familyID": "8A",
+      "groupID": 8,
+      "sourceCode": "8A",
+      "name": "Two-piece 45-degree round elbow",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8A-2-piece-45.svg",
+        "revision": "cd03939e162c31960b3439894a8967d48472b412942588991665177b3f7e07dc",
+        "altText": "8A — Two-piece 45-degree round elbow",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8A-2-piece-45-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "8A-2-piece-45",
+            "parameter": 0,
+            "feet": 15
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Fixed length for the illustrated 45° construction; no additional angle multiplier applies."
         ]
       }
     },

@@ -117,6 +117,11 @@ struct Catalog: Sendable {
     var requirement: Fitting.InputRequirement {
       switch kind {
       case .fixed: .fixed
+      case .ovalElbow:
+        .ovalElbow(
+          pieceCounts: Fitting.OvalElbowPieceCount.allCases.filter { count in
+            rows.contains { $0.parameter == Double(count.rawValue) }
+          })
       case .rectangularElbow:
         .rectangularElbow(
           radiusRatios: Fitting.RectangularElbowRadiusRatio.allCases.filter { ratio in
@@ -148,6 +153,7 @@ struct Catalog: Sendable {
     var defaultInputs: Fitting.Inputs {
       switch kind {
       case .fixed: .fixed
+      case .ovalElbow: .ovalElbow(pieceCount: nil)
       case .roundElbow: .roundElbow(radiusRatio: nil, angle: .degrees90)
       case .rectangularElbow:
         .rectangularElbow(radiusRatio: .mitered, bendCategory: nil, angle: .degrees90)
@@ -163,7 +169,7 @@ struct Catalog: Sendable {
 
     enum Kind: String, Decodable, Sendable {
       case fixed, heightWidth, radiusWidth, downstreamBranches, plenumReturns, junction,
-        returnJunction, pannedReturn, roundElbow, rectangularElbow
+        returnJunction, pannedReturn, roundElbow, rectangularElbow, ovalElbow
     }
 
     struct AngleMultiplier: Decodable, Sendable {

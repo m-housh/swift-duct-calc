@@ -84,6 +84,12 @@ struct CatalogValidator {
         try require(rows.allSatisfy { $0.bendCategory == nil }, "Unexpected bend category")
       }
       switch record.rule.kind {
+      case .ovalElbow:
+        try require(
+          record.groupID == .elbows && record.sourceCode == "8A" && record.shape == .oval
+            && ["8A-easy-bend", "8A-hard-bend"].contains(record.id.rawValue)
+            && rows.map(\.parameter) == Fitting.OvalElbowPieceCount.allCases.map { Double($0.rawValue) },
+          "Oval elbow must have each published piece count in order")
       case .rectangularElbow:
         let ratios = Fitting.RectangularElbowRadiusRatio.allCases
         let categories = Fitting.ElbowBendCategory.allCases

@@ -2,8 +2,9 @@
 
 This slice implements the three R/D-based 8A constructions: smooth round,
 four/five-piece round, and three-piece round. Catalog revision `fitting-catalog-v7`
-contains 148 fitting choices. The remaining 8A constructions and 8B–8P still need
-their own implementation; the production step-3 picker is not wired up yet.
+contains 148 fitting choices. This is the historical R/D slice; the [remaining 8A constructions](fitting-client-8a-constructions.md)
+and [8B/8C](fitting-client-rectangular-elbows.md) have since been implemented.
+The production step-3 picker is not wired up yet.
 
 ## Confirmed input model
 
