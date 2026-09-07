@@ -186,8 +186,17 @@
       const form = $('#reference-form'); form.elements.code.value = entry?.row.sourceCode || ''; form.elements.length.value = entry?.row.feet ?? '';
       $('#reference-result').replaceChildren(); $('#reference-dialog').showModal();
     }
+    function closeEditor() {
+      if (busy || (dirty && !window.confirm('Discard unsaved changes to this path?'))) return;
+      dirty = false; root.close(); location.assign(endpoint);
+    }
+    root.addEventListener('cancel', event => {
+      if (event.target !== root) return;
+      event.preventDefault(); closeEditor();
+    });
     root.addEventListener('click', async event => {
       const button = event.target.closest('button'); if (!button || button.disabled) return;
+      if (button.id === 'close-path') { closeEditor(); return; }
       if (button.dataset.closeDialog) { editRequest++; $(`#${button.dataset.closeDialog}`).close(); return; }
       if (button.hasAttribute('data-open-picker')) { openPicker(); return; }
       if (button.id === 'choose-groups') { browserRequest++; showGroups(); return; }
@@ -235,7 +244,7 @@
           const html = await post(`${endpoint}/save-path`, { baseline, name: $('#path-name').value, pathType: pathType(), straightLengths, entries });
           const template = document.createElement('template'); template.innerHTML = html;
           const saved = template.content.querySelector('[data-saved-path]');
-          if (saved) { dirty = false; location.assign(`${endpoint}/editor?id=${encodeURIComponent(saved.dataset.savedPath)}`); }
+          if (saved) { dirty = false; location.assign(endpoint); }
           else $('#path-status').replaceChildren(template.content);
         } catch (error) { status(error.message); }
         finally { busy = false; root.inert = false; button.disabled = false; }
@@ -273,7 +282,7 @@
       } catch (error) { if (error.name !== 'AbortError') $('#reference-result').textContent = error.message; }
     });
     window.addEventListener('beforeunload', event => { if (dirty) { event.preventDefault(); event.returnValue = ''; } });
-    showGroups(); updateTotals();
+    showGroups(); updateTotals(); root.showModal(); $('#path-name').focus();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initialize); else initialize();
 })();

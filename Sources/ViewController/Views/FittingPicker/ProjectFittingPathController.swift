@@ -99,7 +99,14 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
         let page = ProjectFittingPathView(
           project: project, baseline: saved, rows: rows,
           favorites: try await database.fittingFavorites.fetch(user.id), carousels: carousels)
-        return await request.view { page }
+        let steps = try await database.projects.getCompletedSteps(projectID)
+        let paths = try await database.equivalentLengths.fetch(projectID)
+        return await request.view {
+          ProjectView(projectID: projectID, activeTab: .equivalentLength, completedSteps: steps) {
+            EffectiveLengthsView(effectiveLengths: paths)
+            page
+          }
+        }
       case .savePath(let payload):
         guard payload.utf8.count <= 2_000_000, let data = payload.data(using: .utf8),
           let submission = try? JSONDecoder().decode(PathEditorSubmission.self, from: data)

@@ -1,3 +1,4 @@
+const { saveAndReopen } = require('./fitting_browser_helpers.cjs');
 // Run after check_fitting_path.cjs against the same disposable application.
 const { chromium } = require('playwright');
 const assert = require('node:assert/strict');
@@ -73,7 +74,7 @@ const fs = require('node:fs');
     await page.locator('[data-close-dialog="picker-dialog"]').click();
     assert.deepEqual(await snapshot(), baseline);
     assert.equal(await page.locator('#path-total').innerText(), total);
-    await Promise.all([page.waitForEvent('domcontentloaded'), page.locator('#save-path').click()]);
+    await saveAndReopen(page);
     await page.locator('[data-open-picker]').click();
     assert(await prefer('round').isChecked(), 'Preference survives save/reload');
     assert.deepEqual(await snapshot(), baseline);

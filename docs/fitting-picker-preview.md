@@ -2,7 +2,12 @@
 
 The agreed `path-catalog.html` prototype is now implemented in the Swift application.
 Open a project, choose **Equivalent Lengths**, then **Add equivalent length** or **Edit**.
-The path editor saves to that project and reopens the recorded entries.
+The path editor opens in a modal over the project's Equivalent Lengths list: **88% of
+viewport width and height on desktop**, expanding to 96% width and 94% height on mobile.
+**Save path** returns to the updated list. Use its **Edit** link to reopen recorded entries.
+Cancel or Escape returns to the list, asking before discarding unsaved changes. Escape
+inside a fitting picker or edit dialog closes only that child dialog. Failed saves leave
+the editor and draft open.
 
 ## What is implemented
 
@@ -27,7 +32,11 @@ The path editor saves to that project and reopens the recorded entries.
   retained, independent inputs for its optional supplied bend. Group 6 requires the
   appropriate branch or trunk contribution to be selected.
 
-![Application path editor](images/fitting-picker/path.png)
+![Path editor in a large modal](images/fitting-picker/modal.png)
+
+![Path editor modal on mobile](images/fitting-picker/modal-mobile.png)
+
+[Earlier full-page layout for comparison](images/fitting-picker/path.png)
 
 ![Looping group carousel](images/fitting-picker/carousel.png)
 
@@ -44,6 +53,7 @@ The path editor saves to that project and reopens the recorded entries.
 | Location | Responsibility |
 | --- | --- |
 | `Sources/ViewController/Views/FittingPicker` | Project page, path rows, fitting cards, request parsing, and result/error presentation |
+| `Sources/Styleguide/EditorDialog.swift` | Reusable large form-dialog markup |
 | `Sources/Styleguide/GroupCarousel.swift` | Reusable looping selector and picker dialog markup |
 | `Sources/Styleguide/SegmentedControl.swift` | Reusable native radio toggle with keyboard navigation |
 | `Sources/Styleguide/PickerControl.swift` | Reusable labeled numeric, choice, and checkbox controls |
@@ -51,6 +61,7 @@ The path editor saves to that project and reopens the recorded entries.
 | `Sources/ManualDCore/Fittings.swift` | Shared typed inputs, snapshots, and path-entry contracts |
 | `Sources/DatabaseClient` | Additive saved-row metadata, project ownership lookup, and per-user favorites |
 | `Public/js/fitting-path.js`, `group-carousel.js` | Interaction state, gestures, requests, quantities, and totals |
+| `Public/css/fitting-path-modal.css` | Desktop/mobile editor dimensions and spacing |
 | `Public/css/picker-preference.css` | Scoped preference toggle and section styles |
 | `Public/css/fitting-path.css` | Scoped presentation ported from the agreed prototype |
 
@@ -127,6 +138,7 @@ uses that test session to check server authority and saved-path edge cases.
 FITTING_APP_URL=http://localhost:8081 node scripts/check_fitting_path.cjs
 node scripts/check_fitting_path_edges.cjs
 node scripts/check_fitting_preference.cjs
+node scripts/check_fitting_modal.cjs
 ```
 
 If Playwright is installed outside the checkout, set `NODE_PATH` to its `node_modules`
@@ -136,5 +148,7 @@ server-authoritative calculations, row identity, stale-save rejection, carousel 
 and desktop/mobile layouts. The preference check covers ordering, mixed connections,
 favorites within sections, searches across shapes, unchanged card inputs and saved paths,
 keyboard navigation, mobile layout, reload persistence, and blocked browser storage.
-The preference change also passes all **7 Swift picker tests**, including catalog default
-transport and mixed-connection presentation metadata. Temporary test session data and screenshots are written to `/tmp`.
+The modal change passes all **15 Swift view and picker tests**. Browser flows save back
+to the list and reopen through its Edit link. The modal check verifies viewport sizing,
+child-dialog dismissal and focus restoration, accepted/declined discard, failed-save
+retention, and cancellation with no changes. Temporary test session data and screenshots are written to `/tmp`.

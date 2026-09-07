@@ -13,20 +13,18 @@ struct ProjectFittingPathView: HTML, Sendable {
   var body: some HTML {
     link(.rel(.stylesheet), .href("/css/fitting-path.css"))
     link(.rel(.stylesheet), .href("/css/picker-preference.css"))
+    link(.rel(.stylesheet), .href("/css/fitting-path-modal.css"))
     script(.src("/js/group-carousel.js"), .defer) {}
     script(.src("/js/fitting-path.js"), .defer) {}
-    div(
-      .class("fitting-path"), .id("fitting-path"), .data("endpoint", value: root),
-      .data("baseline", value: pickerJSON(baseline)), .data("rows", value: pickerJSON(rows)),
-      .data("favorites", value: pickerJSON(favorites))
-    ) {
-      main(.class("path-sheet")) {
+    EditorDialog(id: "fitting-path", titleID: "path-title") {
+      section(.class("path-sheet")) {
         header {
           div {
-            a(.href(root)) { "← \(project.name) · Equivalent lengths" }
-            h1 { "Fittings in this path" }
+            p(.class("muted")) { "\(project.name) · Equivalent Lengths" }
+            h1(.id("path-title")) { "Fittings in this path" }
             p(.class("muted")) { "Build and review your path, one fitting at a time." }
           }
+          button(.type(.button), .id("close-path")) { "Cancel" }
         }
         div(.class("path-fields")) {
           label {
@@ -133,6 +131,10 @@ struct ProjectFittingPathView: HTML, Sendable {
         div(.id("reference-result"), .init(name: "aria-live", value: "polite")) {}
       }
     }
+    .attributes(
+      .class("fitting-path"), .data("endpoint", value: root),
+      .data("baseline", value: pickerJSON(baseline)), .data("rows", value: pickerJSON(rows)),
+      .data("favorites", value: pickerJSON(favorites)))
   }
 }
 
