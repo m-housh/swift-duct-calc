@@ -100,7 +100,15 @@ struct CatalogValidator {
           record.rule.baseFittingIDs == nil && record.rule.multiplier == nil,
           "Unexpected base-elbow metadata")
       }
+      if record.rule.kind != .easedTakeoff {
+        try require(record.rule.buttedSleeveFeet == nil, "Unexpected butted-sleeve adjustment")
+      }
       switch record.rule.kind {
+      case .easedTakeoff:
+        try require(
+          ["3O", "3P", "3Q", "3R"].contains(record.sourceCode?.rawValue)
+            && rows.count == 1 && record.rule.buttedSleeveFeet == 15,
+          "Eased takeoff must retain the source's 15-foot butted-sleeve adjustment")
       case .doubleElbow:
         let expected: [Fitting.ID] =
           record.shape == .round

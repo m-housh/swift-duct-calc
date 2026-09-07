@@ -9,6 +9,25 @@ extension Catalog {
     }
     let row: Rule.Row
     switch (record.rule.kind, request.inputs) {
+    case (.easedTakeoff, .easedTakeoff(let buttedSleeve)):
+      var components = [
+        Fitting.Calculation.Component(
+          ruleKey: record.rule.rows[0].key, equivalentLengthFeet: record.rule.rows[0].feet)
+      ]
+      if buttedSleeve {
+        guard let feet = record.rule.buttedSleeveFeet else {
+          return .unresolved([.init(.unsupportedCombination)])
+        }
+        components.append(
+          .init(ruleKey: record.id.rawValue + ":butted-sleeve", equivalentLengthFeet: feet))
+      }
+      return .resolved(
+        .init(
+          fittingID: record.id, sourceCode: record.sourceCode,
+          equivalentLengthFeet: components.reduce(0) { $0 + $1.equivalentLengthFeet },
+          inputs: request.inputs,
+          components: components, conditions: record.conditions, catalogRevision: revision,
+          ruleRevision: record.ruleRevision))
     case (.doubleElbow, .doubleElbow(let baseID, let inputs)):
       return evaluateDoubleElbow(record, request: request, baseID: baseID, inputs: inputs)
     case (.insideCornerOffset, .insideCornerOffset(let radius)):

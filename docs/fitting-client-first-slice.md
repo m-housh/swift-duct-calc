@@ -12,8 +12,8 @@ and its running preview server are unchanged.
 - All shared fitting definitions are in `Sources/ManualDCore/Fittings.swift`.
 - `@Dependency(\.fittingClient)` exposes groups, fitting definitions, artwork,
   equivalent-length evaluation and source-reference resolution.
-- One bundled JSON resource provides canonical group order/eligibility and 170
-  fitting choices: groups 1, 2, 4, 5, 6, 7, 8, 9, and 10. See the
+- One bundled JSON resource provides canonical group order/eligibility and 202
+  fitting choices: groups 1, 2, 3, 4, 5, 6, 7, 8, 9, and 10. See the
   [first catalog expansion](fitting-client-catalog-expansion.md) and the
   [junction slice and confirmed row-selection policy](fitting-client-junctions.md),
   plus [group 7 airflow rules and artwork views](fitting-client-panned-returns.md),
@@ -21,7 +21,8 @@ and its running preview server are unchanged.
   [8B/8C rectangular elbow choices](fitting-client-rectangular-elbows.md), and
   [completed 8A constructions](fitting-client-8a-constructions.md), plus
   [square elbows, offsets, and risers](fitting-client-offsets.md), and
-  [double elbows and inside-corner offsets](fitting-client-double-elbows.md).
+  [double elbows and inside-corner offsets](fitting-client-double-elbows.md), and
+  [Group 3 reducing-trunk takeoffs](fitting-client-reducing-takeoffs.md).
   Empty groups report zero available cases and no representative artwork.
 - `FittingClient.live()` is an async throwing factory. `Live.swift` resolves its
   own bundle resource and reads it through `FileClient.readFile`. Application
@@ -86,7 +87,7 @@ The artwork catalog's 1F metadata points at viewer page 1, but its table is on
 viewer page 2. This correction is recorded in the internal audit table above;
 original artwork manifests were not changed. The runtime catalog has no PDF links.
 
-Group 11 and the remaining group 3/8 rule questions remain outside implemented rules.
+Group 11 remains outside implemented rules; groups 3 and 8 are now implemented.
 The 8A piece-count discrepancy is resolved against the source in the round elbow slice.
 Optional source codes allow future application-only cases without inventing
 lettered IDs. The first slice does not settle those cases' applicability.
@@ -100,7 +101,7 @@ resource rejection and fractional snapshot encoding. Factory tests cover injecte
 file data, one read per constructed client, and immediate read/decode failures.
 Application tests cover startup failure and middleware injection across requests.
 Test-only fractional values are labeled as contract fixtures, not as source values.
-The expansion audits record numeric coverage for all 170 current fitting choices.
+The expansion audits record numeric coverage for all 202 current fitting choices.
 
 Reproduce with Swift 6.2:
 

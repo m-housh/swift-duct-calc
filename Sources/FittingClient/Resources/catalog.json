@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "fitting-catalog-v11",
+  "revision": "fitting-catalog-v12",
   "groups": [
     {
       "id": 1,
@@ -1869,6 +1869,1083 @@
         "frictionRateIWCPer100Feet": 0.08,
         "notes": [
           "Count downstream branches to the next reducer or trunk end; restart after a reducer. The last bucket includes five or more branches."
+        ]
+      }
+    },
+    {
+      "id": "3A",
+      "familyID": "3A",
+      "groupID": 3,
+      "sourceCode": "3A",
+      "name": "Full-radius takeoff",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3A.svg",
+        "revision": "6c10e9f563e6d4c5bcf6423b2ec21adea47acd558937c5c74b61b4ec37ba8ea8",
+        "altText": "3A — Full-radius takeoff",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3A-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3A",
+            "parameter": 0,
+            "feet": 15
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement."
+        ]
+      }
+    },
+    {
+      "id": "3B",
+      "familyID": "3B",
+      "groupID": 3,
+      "sourceCode": "3B",
+      "name": "Full-radius takeoff with offset transition",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3B.svg",
+        "revision": "3775a7e0d7b628f4d47064fb97da55fff662728028e674bd2be8c6d33ac7430c",
+        "altText": "3B — Full-radius takeoff with offset transition",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3B-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3B",
+            "parameter": 0,
+            "feet": 30
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement."
+        ]
+      }
+    },
+    {
+      "id": "3C",
+      "familyID": "3C",
+      "groupID": 3,
+      "sourceCode": "3C",
+      "name": "Full-radius takeoff with straight transition",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3C.svg",
+        "revision": "2c56e97dfb9788327f24d218491caa2be785de7650023ccd50954f0be9f60273",
+        "altText": "3C — Full-radius takeoff with straight transition",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3C-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3C",
+            "parameter": 0,
+            "feet": 20
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement."
+        ]
+      }
+    },
+    {
+      "id": "3D-full",
+      "familyID": "3D",
+      "groupID": 3,
+      "sourceCode": "3D",
+      "name": "Takeoff elbow with easy-bend elbow — full radius",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3D-full.svg",
+        "revision": "5d8caae8296875372244a158d681d5941731bdceb04e727f7772b058e891cb9b",
+        "altText": "3D — Takeoff elbow with easy-bend elbow — full radius",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3D-full-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3D-full",
+            "parameter": 0,
+            "feet": 35
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement.",
+          "The listed length includes the elbows or transition in the named assembly; do not add them again."
+        ]
+      }
+    },
+    {
+      "id": "3D-tight",
+      "familyID": "3D",
+      "groupID": 3,
+      "sourceCode": "3D",
+      "name": "Takeoff elbow with easy-bend elbow — tight radius",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3D-tight.svg",
+        "revision": "c47868e7495bcdc41fba8f72a4fe2900cd02e3f1625bec388850573b2a393163",
+        "altText": "3D — Takeoff elbow with easy-bend elbow — tight radius",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3D-tight-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3D-tight",
+            "parameter": 0,
+            "feet": 55
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement.",
+          "The listed length includes the elbows or transition in the named assembly; do not add them again."
+        ]
+      }
+    },
+    {
+      "id": "3D-mitered",
+      "familyID": "3D",
+      "groupID": 3,
+      "sourceCode": "3D",
+      "name": "Takeoff elbow with easy-bend elbow — mitered inside corner",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3D-mitered.svg",
+        "revision": "7e4420d8ee082daf3d92321062ba2037b790476e14746f78518d8cedc4e36323",
+        "altText": "3D — Takeoff elbow with easy-bend elbow — mitered inside corner",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3D-mitered-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3D-mitered",
+            "parameter": 0,
+            "feet": 110
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement.",
+          "The listed length includes the elbows or transition in the named assembly; do not add them again."
+        ]
+      }
+    },
+    {
+      "id": "3E",
+      "familyID": "3E",
+      "groupID": 3,
+      "sourceCode": "3E",
+      "name": "Transition-wall takeoff",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3E.svg",
+        "revision": "b10b9afc4ac2f5d2ccd31a71873d139fb441474b7771eacccc90c0cdf750520d",
+        "altText": "3E — Transition-wall takeoff",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3E-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3E",
+            "parameter": 0,
+            "feet": 30
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement."
+        ]
+      }
+    },
+    {
+      "id": "3F-full",
+      "familyID": "3F",
+      "groupID": 3,
+      "sourceCode": "3F",
+      "name": "Transition-wall takeoff elbow with easy-bend elbow — full radius",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3F-full.svg",
+        "revision": "4ff9ad7f2c5ef9521ef745d9a75dab7896761d6d0adf509e9cf52e678e267976",
+        "altText": "3F — Transition-wall takeoff elbow with easy-bend elbow — full radius",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3F-full-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3F-full",
+            "parameter": 0,
+            "feet": 50
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement.",
+          "The listed length includes the elbows or transition in the named assembly; do not add them again."
+        ]
+      }
+    },
+    {
+      "id": "3F-tight",
+      "familyID": "3F",
+      "groupID": 3,
+      "sourceCode": "3F",
+      "name": "Transition-wall takeoff elbow with easy-bend elbow — tight radius",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3F-tight.svg",
+        "revision": "91df2906ac303791e43a8f20f2a9e7ba005dab8f5382e3c6e6a4627ca699440d",
+        "altText": "3F — Transition-wall takeoff elbow with easy-bend elbow — tight radius",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3F-tight-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3F-tight",
+            "parameter": 0,
+            "feet": 70
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement.",
+          "The listed length includes the elbows or transition in the named assembly; do not add them again."
+        ]
+      }
+    },
+    {
+      "id": "3F-mitered",
+      "familyID": "3F",
+      "groupID": 3,
+      "sourceCode": "3F",
+      "name": "Transition-wall takeoff elbow with easy-bend elbow — mitered inside corner",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3F-mitered.svg",
+        "revision": "88d9c07fb4edaedcd033de4d0f96e8ba26d96d06dc5bc41436890737fa25388f",
+        "altText": "3F — Transition-wall takeoff elbow with easy-bend elbow — mitered inside corner",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3F-mitered-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3F-mitered",
+            "parameter": 0,
+            "feet": 125
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement.",
+          "The listed length includes the elbows or transition in the named assembly; do not add them again."
+        ]
+      }
+    },
+    {
+      "id": "3G",
+      "familyID": "3G",
+      "groupID": 3,
+      "sourceCode": "3G",
+      "name": "Transition-wall takeoff with straight-aspect transition",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3G.svg",
+        "revision": "a2162a76dc0c5634499cd6e90b150a4ec4481b5530a644cc856985da228d9ea3",
+        "altText": "3G — Transition-wall takeoff with straight-aspect transition",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3G-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3G",
+            "parameter": 0,
+            "feet": 35
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement."
+        ]
+      }
+    },
+    {
+      "id": "3H",
+      "familyID": "3H",
+      "groupID": 3,
+      "sourceCode": "3H",
+      "name": "Transition-wall takeoff with offset-aspect transition",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3H.svg",
+        "revision": "45553187e6de46ac0b4a8042c1ff61a1be292b502c2627b38d26c1c4cb36a5d3",
+        "altText": "3H — Transition-wall takeoff with offset-aspect transition",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3H-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3H",
+            "parameter": 0,
+            "feet": 35
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement."
+        ]
+      }
+    },
+    {
+      "id": "3I",
+      "familyID": "3I",
+      "groupID": 3,
+      "sourceCode": "3I",
+      "name": "Full-radius takeoff",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3I.svg",
+        "revision": "08fa9e6414e98f35893fb89486d670daf392b893dc0c37a96eac7176c5d3178d",
+        "altText": "3I — Full-radius takeoff",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3I-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3I",
+            "parameter": 0,
+            "feet": 15
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement."
+        ]
+      }
+    },
+    {
+      "id": "3J-full",
+      "familyID": "3J",
+      "groupID": 3,
+      "sourceCode": "3J",
+      "name": "Takeoff elbow with easy-bend elbow — full radius",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3J-full.svg",
+        "revision": "ddcce5f61fb0789f5187f1065ed1706e9b9e36836ca275a8f1f9c0b102fea45a",
+        "altText": "3J — Takeoff elbow with easy-bend elbow — full radius",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3J-full-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3J-full",
+            "parameter": 0,
+            "feet": 35
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement.",
+          "The listed length includes the elbows or transition in the named assembly; do not add them again."
+        ]
+      }
+    },
+    {
+      "id": "3J-tight",
+      "familyID": "3J",
+      "groupID": 3,
+      "sourceCode": "3J",
+      "name": "Takeoff elbow with easy-bend elbow — tight radius",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3J-tight.svg",
+        "revision": "798e9d435e75dd3a6666a7ecd623f422f2ed594d4f9b27e843f8abae8431d23f",
+        "altText": "3J — Takeoff elbow with easy-bend elbow — tight radius",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3J-tight-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3J-tight",
+            "parameter": 0,
+            "feet": 55
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement.",
+          "The listed length includes the elbows or transition in the named assembly; do not add them again."
+        ]
+      }
+    },
+    {
+      "id": "3J-mitered",
+      "familyID": "3J",
+      "groupID": 3,
+      "sourceCode": "3J",
+      "name": "Takeoff elbow with easy-bend elbow — mitered inside corner",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3J-mitered.svg",
+        "revision": "53f341339733560badff057e098f30fb27e43ce55cf8752030ec9f08743b4426",
+        "altText": "3J — Takeoff elbow with easy-bend elbow — mitered inside corner",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3J-mitered-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3J-mitered",
+            "parameter": 0,
+            "feet": 110
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement.",
+          "The listed length includes the elbows or transition in the named assembly; do not add them again."
+        ]
+      }
+    },
+    {
+      "id": "3K",
+      "familyID": "3K",
+      "groupID": 3,
+      "sourceCode": "3K",
+      "name": "Full-radius takeoff with straight transition",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3K.svg",
+        "revision": "4421400e946df527e7d97b47bc2e97888fc7b628de6ed1623cc85adef37b69d0",
+        "altText": "3K — Full-radius takeoff with straight transition",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3K-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3K",
+            "parameter": 0,
+            "feet": 20
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement."
+        ]
+      }
+    },
+    {
+      "id": "3L",
+      "familyID": "3L",
+      "groupID": 3,
+      "sourceCode": "3L",
+      "name": "Full-radius takeoff with offset transition",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3L.svg",
+        "revision": "3a75e445bf9bc8a7e537a3b304cfc9a8acf9a0f385360e5ab899227c05fb60cb",
+        "altText": "3L — Full-radius takeoff with offset transition",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3L-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3L",
+            "parameter": 0,
+            "feet": 30
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement."
+        ]
+      }
+    },
+    {
+      "id": "3M",
+      "familyID": "3M",
+      "groupID": 3,
+      "sourceCode": "3M",
+      "name": "In-line eased takeoff with one elbow",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3M.svg",
+        "revision": "6ed5448ca06f7b318951722ab507e1bb191deb90a0d2933d01d065e229363536",
+        "altText": "3M — In-line eased takeoff with one elbow",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3M-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3M",
+            "parameter": 0,
+            "feet": 25
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement.",
+          "The listed length includes the elbows or transition in the named assembly; do not add them again."
+        ]
+      }
+    },
+    {
+      "id": "3N",
+      "familyID": "3N",
+      "groupID": 3,
+      "sourceCode": "3N",
+      "name": "In-line eased takeoff with two elbows",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3N.svg",
+        "revision": "121ade8021b51b963d659aff1aa236217c66a4bb20fcd2225898fe8f71a2b9b5",
+        "altText": "3N — In-line eased takeoff with two elbows",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3N-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3N",
+            "parameter": 0,
+            "feet": 40
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement.",
+          "The listed length includes the elbows or transition in the named assembly; do not add them again."
+        ]
+      }
+    },
+    {
+      "id": "3O",
+      "familyID": "3O",
+      "groupID": 3,
+      "sourceCode": "3O",
+      "name": "Transition-wall eased takeoff",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3O.svg",
+        "revision": "685183259585b3f1e694b713073d67e71b16cf61595679eb56791ed09d7a15a9",
+        "altText": "3O — Transition-wall eased takeoff",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3O-v1",
+      "rule": {
+        "kind": "easedTakeoff",
+        "rows": [
+          {
+            "key": "3O",
+            "parameter": 0,
+            "feet": 20
+          }
+        ],
+        "buttedSleeveFeet": 15
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement.",
+          "Add 15 ft if a round sleeve is simply butted to the transition wall."
+        ]
+      }
+    },
+    {
+      "id": "3P",
+      "familyID": "3P",
+      "groupID": 3,
+      "sourceCode": "3P",
+      "name": "Transition-wall eased takeoff with two elbows",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3P.svg",
+        "revision": "91306576977b2687453963178a843e436a5520305881b80d4b8db49bf3c5783c",
+        "altText": "3P — Transition-wall eased takeoff with two elbows",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3P-v1",
+      "rule": {
+        "kind": "easedTakeoff",
+        "rows": [
+          {
+            "key": "3P",
+            "parameter": 0,
+            "feet": 50
+          }
+        ],
+        "buttedSleeveFeet": 15
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement.",
+          "Add 15 ft if a round sleeve is simply butted to the transition wall.",
+          "The listed length includes the elbows or transition in the named assembly; do not add them again."
+        ]
+      }
+    },
+    {
+      "id": "3Q",
+      "familyID": "3Q",
+      "groupID": 3,
+      "sourceCode": "3Q",
+      "name": "Transition-wall eased takeoff with one elbow",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3Q.svg",
+        "revision": "fb6bc6f4281d01e5e3ed04acd271dbc548641a828a495e8237d8e8cbd1974e2f",
+        "altText": "3Q — Transition-wall eased takeoff with one elbow",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3Q-v1",
+      "rule": {
+        "kind": "easedTakeoff",
+        "rows": [
+          {
+            "key": "3Q",
+            "parameter": 0,
+            "feet": 35
+          }
+        ],
+        "buttedSleeveFeet": 15
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement.",
+          "Add 15 ft if a round sleeve is simply butted to the transition wall.",
+          "The listed length includes the elbows or transition in the named assembly; do not add them again."
+        ]
+      }
+    },
+    {
+      "id": "3R",
+      "familyID": "3R",
+      "groupID": 3,
+      "sourceCode": "3R",
+      "name": "Transition-wall eased takeoff",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3R.svg",
+        "revision": "774cc3e5db0b01f794723db0c0210c76a48b8fb583193e4e2cdf932109c91813",
+        "altText": "3R — Transition-wall eased takeoff",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3R-v1",
+      "rule": {
+        "kind": "easedTakeoff",
+        "rows": [
+          {
+            "key": "3R",
+            "parameter": 0,
+            "feet": 20
+          }
+        ],
+        "buttedSleeveFeet": 15
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement.",
+          "Add 15 ft if a round sleeve is simply butted to the transition wall."
+        ]
+      }
+    },
+    {
+      "id": "3S-full",
+      "familyID": "3S",
+      "groupID": 3,
+      "sourceCode": "3S",
+      "name": "Hard-bend takeoff elbow — full radius",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3S-full.svg",
+        "revision": "4b503398e97a37dd53edc497c0e39f70683d8bd25efd0e8e01db57463f822729",
+        "altText": "3S — Hard-bend takeoff elbow — full radius",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3S-full-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3S-full",
+            "parameter": 0,
+            "feet": 15
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement."
+        ]
+      }
+    },
+    {
+      "id": "3S-tight",
+      "familyID": "3S",
+      "groupID": 3,
+      "sourceCode": "3S",
+      "name": "Hard-bend takeoff elbow — tight radius",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3S-tight.svg",
+        "revision": "fb1e6c53e6e5f31c1385ba7bc9dc107bdb8120cc7a2c78c9114f647aaabd3c9b",
+        "altText": "3S — Hard-bend takeoff elbow — tight radius",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3S-tight-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3S-tight",
+            "parameter": 0,
+            "feet": 35
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement."
+        ]
+      }
+    },
+    {
+      "id": "3S-mitered",
+      "familyID": "3S",
+      "groupID": 3,
+      "sourceCode": "3S",
+      "name": "Hard-bend takeoff elbow — mitered inside corner",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3S-mitered.svg",
+        "revision": "b318ba18447b4a63f4449f581466a563f108c2efc4e5f0c12a666d1b95d57714",
+        "altText": "3S — Hard-bend takeoff elbow — mitered inside corner",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3S-mitered-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3S-mitered",
+            "parameter": 0,
+            "feet": 90
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement."
+        ]
+      }
+    },
+    {
+      "id": "3T",
+      "familyID": "3T",
+      "groupID": 3,
+      "sourceCode": "3T",
+      "name": "In-line eased takeoff",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3T.svg",
+        "revision": "2ed5676e315b3e9c4477e5958e0acba3ebad3d21c57bc466384d767bf108b78a",
+        "altText": "3T — In-line eased takeoff",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3T-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3T",
+            "parameter": 0,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement."
+        ]
+      }
+    },
+    {
+      "id": "3U-mitered-vanes",
+      "familyID": "3U",
+      "groupID": 3,
+      "sourceCode": "3U",
+      "name": "Mitered takeoff elbow — with vanes",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3U-mitered-vanes.svg",
+        "revision": "068a9760f7e836f458b5afbf575e5501b0e7dab81957e0fa67c306e2e441c6c7",
+        "altText": "3U — Mitered takeoff elbow — with vanes",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3U-mitered-vanes-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3U-mitered-vanes",
+            "parameter": 0,
+            "feet": 10
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement."
+        ]
+      }
+    },
+    {
+      "id": "3U-mitered-no-vanes",
+      "familyID": "3U",
+      "groupID": 3,
+      "sourceCode": "3U",
+      "name": "Mitered takeoff elbow — without vanes",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3U-mitered-no-vanes.svg",
+        "revision": "736696476fb5741de1a7dba3d134ed43ead54cea5d8602c769f96bd455beb42c",
+        "altText": "3U — Mitered takeoff elbow — without vanes",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3U-mitered-no-vanes-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3U-mitered-no-vanes",
+            "parameter": 0,
+            "feet": 80
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement."
+        ]
+      }
+    },
+    {
+      "id": "3V",
+      "familyID": "3V",
+      "groupID": 3,
+      "sourceCode": "3V",
+      "name": "Round-to-rectangular transition",
+      "shape": "mixed",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3V.svg",
+        "revision": "bc52b9681808975825d22eaf35dfaaf684ef562f277578a41d5b005c601e0917",
+        "altText": "3V — Round-to-rectangular transition",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3V-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3V",
+            "parameter": 0,
+            "feet": 30
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement."
+        ]
+      }
+    },
+    {
+      "id": "3W",
+      "familyID": "3W",
+      "groupID": 3,
+      "sourceCode": "3W",
+      "name": "Offset hard-bend transition",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-3-individual/3W.svg",
+        "revision": "155e07368338cb995ab9b103498dad61790cab99a1f12de058161889e30ba448",
+        "altText": "3W — Offset hard-bend transition",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "3W-v1",
+      "rule": {
+        "kind": "fixed",
+        "rows": [
+          {
+            "key": "3W",
+            "parameter": 0,
+            "feet": 30
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "For the illustrated reducing-trunk takeoff arrangement."
         ]
       }
     },

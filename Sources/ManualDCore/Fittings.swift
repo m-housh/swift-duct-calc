@@ -200,6 +200,7 @@ public enum Fitting {
     case radiusOffset(radiusHeightRatio: OffsetRadiusHeightRatio?)
     case riserElbow(size: RiserSize?, corner: RiserCorner?)
     case insideCornerOffset(radius: InsideCornerRadius?)
+    case easedTakeoff(buttedSleeve: Bool)
     /// One selected construction represents both matching 90° elbows; no supplied EL.
     indirect case doubleElbow(baseFittingID: ID?, baseInputs: Inputs?)
     case rectangularElbow(
@@ -227,6 +228,7 @@ public enum Fitting {
     case radiusOffset(radiusHeightRatios: [OffsetRadiusHeightRatio])
     case riserElbow(sizes: [RiserSize], corners: [RiserCorner])
     case insideCornerOffset(radii: [InsideCornerRadius])
+    case easedTakeoff
     case doubleElbow(baseFittingIDs: [ID])
     case rectangularElbow(
       radiusRatios: [RectangularElbowRadiusRatio], bendCategories: [ElbowBendCategory],

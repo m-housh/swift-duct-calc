@@ -116,10 +116,12 @@ struct Catalog: Sendable {
     let angleMultipliers: [AngleMultiplier]?
     let baseFittingIDs: [Fitting.ID]?
     let multiplier: Double?
+    let buttedSleeveFeet: Double?
 
     var requirement: Fitting.InputRequirement {
       switch kind {
       case .fixed: .fixed
+      case .easedTakeoff: .easedTakeoff
       case .doubleElbow: .doubleElbow(baseFittingIDs: baseFittingIDs ?? [])
       case .insideCornerOffset: .insideCornerOffset(radii: rows.compactMap(\.insideCornerRadius))
       case .squareElbow: .squareElbow(bendCategories: rows.compactMap(\.bendCategory))
@@ -184,6 +186,7 @@ struct Catalog: Sendable {
     var defaultInputs: Fitting.Inputs {
       switch kind {
       case .fixed: .fixed
+      case .easedTakeoff: .easedTakeoff(buttedSleeve: false)
       case .doubleElbow: .doubleElbow(baseFittingID: nil, baseInputs: nil)
       case .insideCornerOffset: .insideCornerOffset(radius: .mitered)
       case .squareElbow: .squareElbow(bendCategory: nil)
@@ -209,7 +212,7 @@ struct Catalog: Sendable {
       case fixed, heightWidth, radiusWidth, downstreamBranches, plenumReturns, junction,
         returnJunction, pannedReturn, roundElbow, rectangularElbow, ovalElbow,
         squareElbow, steppedOffset, fourTurnOffset, radiusOffset, riserElbow,
-        doubleElbow, insideCornerOffset
+        doubleElbow, insideCornerOffset, easedTakeoff
     }
 
     struct AngleMultiplier: Decodable, Sendable {

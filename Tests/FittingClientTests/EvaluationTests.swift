@@ -18,7 +18,7 @@ struct FittingEvaluationTests {
     #expect(value.components == [.init(ruleKey: "4A", equivalentLengthFeet: 30)])
     #expect(value.conditions.referenceVelocityFPM == 900)
     #expect(value.conditions.frictionRateIWCPer100Feet == 0.08)
-    #expect(value.catalogRevision == "fitting-catalog-v11")
+    #expect(value.catalogRevision == "fitting-catalog-v12")
     #expect(value.ruleRevision == "4A-v1")
     let roundReturn = try await calculation("5A-round", .fixed, type: .return)
     #expect(roundReturn.equivalentLengthFeet == 40)
@@ -92,7 +92,7 @@ struct FittingEvaluationTests {
       .init(pathType: .return, fittingID: "4A", inputs: .fixed))
     #expect(ineligible == .unresolved([.init(.ineligiblePathType)]))
     let unknown = try await client.evaluate(
-      .init(pathType: .supply, fittingID: "3W", inputs: .fixed))
+      .init(pathType: .supply, fittingID: "3ZZ", inputs: .fixed))
     #expect(unknown == .unresolved([.init(.unknownFitting)]))
   }
 
