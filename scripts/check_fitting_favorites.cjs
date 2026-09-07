@@ -37,13 +37,15 @@ const fs = require('node:fs');
     assert.deepEqual(await order(), beforeOrder);
     assert(Math.abs((await original('4AR').boundingBox()).y - before.y) < 2, 'Favoriting must preserve the source card screen position');
     assert.equal(await copy('4AR').count(), 1);
-    assert.equal(await page.locator('#catalog-favorites').getAttribute('open'), null);
+    assert.equal(await page.locator('#catalog-favorites').evaluate(node => node.tagName), 'SECTION');
+    assert.equal(await page.locator('#catalog-favorites > summary').count(), 0);
+    assert(await copy('4AR').isVisible());
     await original('4AR').locator('[data-row]').click();
     await page.waitForFunction(count => document.querySelectorAll('#path-rows [data-row-id]').length === count, rows + 1);
     assert((await page.locator('#path-rows [data-row-id]').last().innerText()).includes('4AR'));
     // Favorite copies can add fittings and leave the full catalog intact.
-    await group(4); await page.locator('#catalog-favorites > summary').click();
-    assert(await copy('4AR').isVisible());
+    await group(4);
+    assert(await copy('4AR').isVisible(), 'Saved favorites must be visible as soon as the group loads');
     await copy('4AR').locator('.fp-active-art').press('Enter');
     await page.waitForFunction(count => document.querySelectorAll('#path-rows [data-row-id]').length === count, rows + 2);
     // Conditional originals retain their inputs while copies have independent drafts.
@@ -53,16 +55,17 @@ const fs = require('node:fs');
     await favorite('8O', true);
     assert.equal(await original('8O').locator('[name=insideCornerRadius]').inputValue(), 'oneQuarter');
     assert((await original('8O').locator('.fp-result').innerText()).includes('90 ft'));
-    await page.locator('#catalog-favorites > summary').click();
+
     await copy('8O').locator('[name=insideCornerRadius]').selectOption('greaterThanOneHalf');
     await page.waitForFunction(() => document.querySelector('[data-favorite-copy="8O"] .fp-result').textContent.includes('45 ft'));
     assert.equal(await original('8O').locator('[name=insideCornerRadius]').inputValue(), 'oneQuarter');
+    await page.locator('#picker-dialog').evaluate(dialog => { dialog.scrollTop = 0; });
     await page.screenshot({ path: '/tmp/fitting-favorites.png' });
     await copy('8O').locator('[data-row]').click();
     await page.waitForFunction(count => document.querySelectorAll('#path-rows [data-row-id]').length === count, rows + 3);
     assert((await page.locator('#path-rows [data-row-id]').last().innerText()).includes('45 ft'));
-    // Even with Favorites expanded, adding a copy above the catalog keeps the source under the pointer.
-    await group(4); await favorite('4AQ', false); await page.locator('#catalog-favorites > summary').click();
+    // Adding a copy above the catalog keeps the source under the pointer.
+    await group(4); await favorite('4AQ', false);
     await original('4AQ').locator('[data-favorite]').scrollIntoViewIfNeeded();
     const expandedBefore = await original('4AQ').boundingBox(); const expandedOrder = await order();
     await favorite('4AQ', true);
@@ -73,7 +76,7 @@ const fs = require('node:fs');
     assert(await copy('4AQ').isVisible()); assert(await original('4AQ').isVisible());
     await page.locator('#catalog-search').fill('');
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.locator('#catalog-favorites > summary').scrollIntoViewIfNeeded();
+    await page.locator('#catalog-favorites-title').scrollIntoViewIfNeeded();
     assert(await page.locator('#picker-dialog').evaluate(dialog => dialog.scrollWidth <= dialog.clientWidth));
     await page.screenshot({ path: '/tmp/fitting-favorites-mobile.png' });
     // Failed favorite writes leave both membership and catalog order unchanged.
@@ -87,7 +90,7 @@ const fs = require('node:fs');
     await page.unroute('**/favorite');
     // The junction-box copy keeps the wide desktop layout and independent bend controls.
     await page.setViewportSize({ width: 1440, height: 1000 });
-    await group(11); await favorite('11-junction-box', true); await page.locator('#catalog-favorites > summary').click();
+    await group(11); await favorite('11-junction-box', true);
     const flex = copy('11-junction-box');
     assert((await flex.boundingBox()).width > 1000);
     await flex.locator('[name=suppliedBend]').check(); await flex.locator('[name=bendVelocity]').selectOption('900');
@@ -98,8 +101,8 @@ const fs = require('node:fs');
     await flex.locator('[data-favorite]').click();
     await flex.waitFor({ state: 'detached' });
     assert.equal(await original('11-junction-box').locator('[data-favorite]').getAttribute('aria-pressed'), 'false');
-    assert(await page.locator('#catalog-favorites > summary').evaluate(node => node === document.activeElement));
+    assert(await page.locator('#catalog-favorites-title').evaluate(node => node === document.activeElement));
     assert.deepEqual(errors, []);
-    console.log('PASS: stable catalog order and scroll, collapsed/expanded favorites, add from original/copy, independent conditional inputs, search, mobile, and failed writes.');
+    console.log('PASS: stable catalog order and scroll, favorites visible on group load, add from original/copy, independent conditional inputs, search, mobile, and failed writes.');
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exit(1); });

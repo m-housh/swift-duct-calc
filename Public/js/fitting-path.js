@@ -168,8 +168,8 @@
       $('#catalog-favorite-count').textContent = grid.children.length;
       updateFavoriteButtons(); filterFittings();
       if (active?.isConnected && grid.contains(active)) active.focus({ preventScroll: true });
-      else if (active && !active.isConnected) $('#catalog-favorites > summary').focus({ preventScroll: true });
-      // Adding/removing copies above an expanded catalog must not move the source card
+      else if (active && !active.isConnected) $('#catalog-favorites-title').focus({ preventScroll: true });
+      // Adding/removing copies above the catalog must not move the source card
       // on screen. Measure after the browser's own scroll anchoring has run.
       if (top !== null && anchor.isConnected) $('#picker-dialog').scrollTop += anchor.getBoundingClientRect().top - top;
     }
@@ -241,7 +241,7 @@
         finally {
           favoriteRequests.delete(id); updateFavoriteButtons();
           if (hadFocus && [document.body, root, $('#picker-dialog')].includes(document.activeElement)) {
-            (button.isConnected ? button : $('#catalog-favorites > summary'))?.focus({ preventScroll: true });
+            (button.isConnected ? button : $('#catalog-favorites-title'))?.focus({ preventScroll: true });
           }
         } return;
       }

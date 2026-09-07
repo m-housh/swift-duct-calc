@@ -3,7 +3,7 @@
     border: 1px solid var(--line); border-radius: var(--radius-box, 10px);
     padding: 12px; margin: 16px 0; font-size: inherit; color: var(--text);
   }
-  .catalog-favorites > summary { font-weight: 600; min-height: 24px; }
+  .catalog-favorites > h3 { font-weight: 600; min-height: 24px; }
   .favorite-grid { margin-top: 16px; }
   .catalog-list-title { margin: 16px 0 12px; }
 

@@ -30,9 +30,9 @@ the editor and draft open.
   a calculated fitting. Repeated rows stay separate.
 - Save/reopen, rename, quantity edits, removal, and fitting edits work on real project paths.
 - Favorites are stored per user in the database and shared across projects/devices.
-  A collapsible **Favorites** area holds duplicate cards for the current group. Originals
-  stay in the complete list. Starring a fitting keeps its position, scroll location, and
-  inputs intact, including when the Favorites area is expanded. Either copy can add to
+  An always-visible **Favorites** area above the full list holds duplicate cards for the
+  current group. Originals stay in the complete list. Starring a fitting keeps its position, scroll location, and
+  inputs intact, while favorite copies are added above the list. Either copy can add to
   the path. Favorites save the fitting choice; each card starts at catalog defaults and
   has independent draft inputs. Search and shape ordering apply to both lists.
 - Groups 1, 2, 3, 5, and 6 show non-blocking repeated-use warnings. Changing path type
@@ -75,7 +75,7 @@ the editor and draft open.
 | `Sources/DatabaseClient` | Additive saved-row metadata, project ownership lookup, and per-user favorites |
 | `Public/js/fitting-path.js`, `group-carousel.js` | Interaction state, gestures, requests, quantities, and totals |
 | `Public/css/fitting-path-modal.css` | Desktop/mobile editor dimensions and spacing |
-| `Public/css/fitting-favorites.css` | Collapsible favorite-copy layout |
+| `Public/css/fitting-favorites.css` | Always-visible favorite-copy layout |
 | `Public/css/picker-preference.css` | Scoped preference toggle styles |
 | `Public/css/fitting-path.css` | Scoped presentation ported from the agreed prototype |
 
@@ -167,6 +167,6 @@ The modal change passes all **15 Swift view and picker tests**. Browser flows sa
 to the list and reopen through its Edit link. The modal check verifies viewport sizing,
 child-dialog dismissal and focus restoration, accepted/declined discard, failed-save
 retention, and cancellation with no changes. The favorites check verifies the exact
-scroll → star → add sequence, unchanged card coordinates with Favorites collapsed or
-expanded, adding from both copies, independent conditional inputs, search, mobile layout,
+scroll → star → add sequence, favorites visible on group load, unchanged card coordinates
+when copies are added, adding from both copies, independent conditional inputs, search, mobile layout,
 Group 11 copy controls, keyboard focus restoration, and failed favorite writes. All **7 Swift picker tests** also pass after the favorites change. Temporary test session data and screenshots are written to `/tmp`.

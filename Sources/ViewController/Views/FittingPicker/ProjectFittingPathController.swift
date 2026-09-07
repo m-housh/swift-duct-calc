@@ -222,8 +222,11 @@ struct GroupBrowserView: HTML, Sendable {
     p(.class("muted")) {
       "Select a fixed fitting to add it directly. Other fittings need the inputs shown on the card."
     }
-    details(.id("catalog-favorites"), .class("catalog-favorites")) {
-      summary {
+    section(
+      .id("catalog-favorites"), .class("catalog-favorites"),
+      .init(name: "aria-labelledby", value: "catalog-favorites-title")
+    ) {
+      h3(.id("catalog-favorites-title"), .init(name: "tabindex", value: "-1")) {
         "Favorites · "
         span(.id("catalog-favorite-count")) { "0" }
       }
