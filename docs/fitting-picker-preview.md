@@ -18,8 +18,9 @@ the editor and draft open.
   connections/shape-neutral schematics, then other shapes. Source order breaks ties;
   No preference restores source order. Favoriting never changes this order.
   Group 2 uses **trunk shape**: Round puts **2N–2Q first**; Rectangular puts **2A–2M first**,
-  including round branches on rectangular trunks. Mixed boots remain available without
-  being treated as direct matches for both shapes.
+  including round branches on rectangular trunks. Group 4 uses audited boot/stack-head
+  duct connections: Round starts **4G–4L**, Rectangular starts **4A–4F**. All 44 fittings
+  stay available. See the [connection-shape audit](fitting-picker-duct-shapes.md).
   The browser remembers this presentation preference across groups and reloads; it is
   not stored on the project or inferred from selected fittings. Changing the toggle
   preserves card inputs, path entries, and calculations. If browser storage is blocked
@@ -52,6 +53,8 @@ the editor and draft open.
 ![Group 11 in the application picker](images/fitting-picker/group-11.png)
 
 ![Mobile group selection](images/fitting-picker/mobile.png)
+
+![Group 4 with round duct connections first](images/fitting-picker/group-4-round.png)
 
 ![Round preference in the fitting picker](images/fitting-picker/preference.png)
 
@@ -169,4 +172,5 @@ child-dialog dismissal and focus restoration, accepted/declined discard, failed-
 retention, and cancellation with no changes. The favorites check verifies the exact
 scroll → star → add sequence, favorites visible on group load, unchanged card coordinates
 when copies are added, adding from both copies, independent conditional inputs, search, mobile layout,
-Group 11 copy controls, keyboard focus restoration, and failed favorite writes. All **7 Swift picker tests** also pass after the favorites change. Temporary test session data and screenshots are written to `/tmp`.
+Group 11 copy controls, keyboard focus restoration, and failed favorite writes. All **8 Swift picker tests** pass after the Group 4 correction, including coverage of
+every Group 4 connection shape; the preference browser check verifies both full orders and favorite copies. Temporary test session data and screenshots are written to `/tmp`.

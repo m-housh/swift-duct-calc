@@ -238,16 +238,3 @@ struct GroupBrowserView: HTML, Sendable {
     p(.id("catalog-empty"), .hidden) { "No matching fittings in this group." }
   }
 }
-
-// Picker ordering follows the trunk connection for Group 2, not the branch outlet.
-// Keep this presentation hint separate from the catalog's overall artwork shape.
-extension Fitting.Definition {
-  var pickerDuctShape: Fitting.Shape {
-    if groupID == .supplyBranches,
-      ["2A", "2B", "2C", "2I", "2J", "2K"].contains(sourceCode?.rawValue ?? "")
-    {
-      return .rectangular
-    }
-    return shape
-  }
-}

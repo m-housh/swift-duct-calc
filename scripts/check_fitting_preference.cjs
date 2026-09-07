@@ -70,7 +70,35 @@ const fs = require('node:fs');
     if (!wasFavorite) { await favorite2A.click(); await page.waitForFunction(() => document.querySelector('#catalog-grid [data-favorite="2A"]').getAttribute('aria-pressed') === 'false'); }
     await select('round');
     await group(4);
-    assert.equal(await cards.first().getAttribute('data-catalog-id'), '4A', 'Mixed boots remain useful when there are no direct round matches');
+    const roundBoots = ['4G','4H','4I','4J','4K','4L','4Q','4R','4S','4T','4U','4V','4W','4X','4Y','4Z','4AA','4AB','4AC','4AD','4AE','4AG','4AJ','4AK'];
+    const rectangularBoots = ['4A','4B','4C','4D','4E','4F','4M','4N','4O','4P','4AF','4AH','4AI','4AL','4AM','4AN','4AO','4AP','4AQ','4AR'];
+    assert.deepEqual(await order(), [...roundBoots, ...rectangularBoots], 'Group 4 must follow duct connections, not the mixed artwork label');
+    assert.equal(await page.locator('#catalog-grid [data-catalog-id]:visible').count(), 44);
+    await select('rectangular');
+    assert.deepEqual(await order(), [...rectangularBoots, ...roundBoots]);
+    await select('round');
+    await page.locator('.catalog-list-title').evaluate(node => node.scrollIntoView({ block: 'start' }));
+    await page.screenshot({ path: '/tmp/fitting-group4-round.png' });
+    // Favorite copies use the same audited ranking while originals stay in place.
+    const bootStars = ['4A', '4G'];
+    const oldBootFavorites = [];
+    for (const id of bootStars) {
+      const star = page.locator(`[data-catalog-id="${id}"] [data-favorite]`);
+      const wasFavorite = await star.getAttribute('aria-pressed') === 'true'; oldBootFavorites.push(wasFavorite);
+      if (!wasFavorite) await star.click();
+      await page.waitForFunction(id => document.querySelector(`[data-catalog-id="${id}"] [data-favorite]`).getAttribute('aria-pressed') === 'true', id);
+    }
+    const favoriteOrder = () => page.locator('.favorite-grid > *').evaluateAll(nodes => nodes.map(node => node.dataset.favoriteCopy));
+    let copies = await favoriteOrder(); assert(copies.indexOf('4G') < copies.indexOf('4A'));
+    assert.deepEqual(await order(), [...roundBoots, ...rectangularBoots]);
+    await select('rectangular'); copies = await favoriteOrder(); assert(copies.indexOf('4A') < copies.indexOf('4G'));
+    for (const [index, id] of bootStars.entries()) {
+      if (!oldBootFavorites[index]) {
+        await page.locator(`[data-catalog-id="${id}"] [data-favorite]`).click();
+        await page.waitForFunction(id => document.querySelector(`[data-catalog-id="${id}"] [data-favorite]`).getAttribute('aria-pressed') === 'false', id);
+      }
+    }
+    await select('round');
     await group(8);
     const offset = page.locator('[data-catalog-id="8O"]');
     await offset.locator('[name="insideCornerRadius"]').selectOption('oneQuarter');
