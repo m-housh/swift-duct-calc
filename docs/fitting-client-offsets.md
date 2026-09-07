@@ -2,7 +2,8 @@
 
 Catalog revision `fitting-catalog-v10` contains 165 fitting choices. This slice
 adds 8D–8K, 8N, and 8P; together with the earlier slices it implements 20 of the
-25 approved Group 8 artwork identities. 8L/8M and 8O remain pending.
+25 approved Group 8 artwork identities at this slice.
+[8L/8M and 8O have since been implemented](fitting-client-double-elbows.md).
 
 ## Inputs and source values
 
@@ -59,17 +60,8 @@ of incompatible rule families, and snapshot round trips. Requirements and artwor
 are checked before selection. Catalog mutation tests reject filling the unavailable
 8H cell, removing the 8K mitered row, and duplicating an 8P corner construction.
 
-## Remaining Group 8 review
+## Subsequent review
 
-- **8L/8M:** source multipliers are 1.7 and 2.0 times the selected single elbow's
-  EL. The drawings show paired 90° elbows. Proposed initial scope is two matching
-  90° elbows, using a same-shape supported single-elbow construction and its typed
-  inputs. The arrangement must calculate that base itself, preserve the base
-  snapshot, and disallow recursive arrangements or an arbitrary supplied EL.
-  Confirm whether selectable base elbows should also include 45° or other angles
-  before extending beyond the illustrated 90° arrangement.
-- **8O:** the source prints `R = 0`, `R = 0.25`, and `R > 0.50`, with lengths
-  235, 90, and 45 ft. It does not identify a unit or ratio denominator for R.
-  Its strict `>` also leaves exactly 0.50 unsupported. Do not silently relabel
-  it R/W, treat it as inches, or change `>` to `≥`. Clarify the intended input
-  meaning before exposing a physical-radius calculation.
+The user confirmed matching 90° elbow pairs for 8L/8M and printed inside-corner
+radius categories for 8O, with mitered as the new-draft default. These decisions
+are implemented in the [completed Group 8 slice](fitting-client-double-elbows.md).

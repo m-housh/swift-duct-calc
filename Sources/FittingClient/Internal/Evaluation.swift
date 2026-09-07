@@ -9,6 +9,16 @@ extension Catalog {
     }
     let row: Rule.Row
     switch (record.rule.kind, request.inputs) {
+    case (.doubleElbow, .doubleElbow(let baseID, let inputs)):
+      return evaluateDoubleElbow(record, request: request, baseID: baseID, inputs: inputs)
+    case (.insideCornerOffset, .insideCornerOffset(let radius)):
+      guard let radius else {
+        return .unresolved([.init(.missingInput, field: .insideCornerRadius)])
+      }
+      guard let match = record.rule.rows.first(where: { $0.insideCornerRadius == radius }) else {
+        return .unresolved([.init(.unsupportedCombination, field: .insideCornerRadius)])
+      }
+      row = match
     case (.squareElbow, .squareElbow), (.steppedOffset, .steppedOffset),
       (.fourTurnOffset, .fourTurnOffset), (.radiusOffset, .radiusOffset),
       (.riserElbow, .riserElbow):

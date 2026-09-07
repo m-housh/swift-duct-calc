@@ -26,7 +26,8 @@ struct Catalog: Sendable {
     guard Set(document.fittings.map(\.id)).count == document.fittings.count else {
       throw FittingClientError.invalidCatalog("Duplicate fitting ID")
     }
-    guard document.fittings.allSatisfy({ !$0.rule.rows.isEmpty }) else {
+    guard document.fittings.allSatisfy({ $0.rule.kind == .doubleElbow || !$0.rule.rows.isEmpty })
+    else {
       throw FittingClientError.invalidCatalog("Rule has no source rows")
     }
     revision = document.revision
@@ -113,10 +114,14 @@ struct Catalog: Sendable {
     let firstRowIncludesLowerRatios: Bool?
     let mergingFlowFeet: Double?
     let angleMultipliers: [AngleMultiplier]?
+    let baseFittingIDs: [Fitting.ID]?
+    let multiplier: Double?
 
     var requirement: Fitting.InputRequirement {
       switch kind {
       case .fixed: .fixed
+      case .doubleElbow: .doubleElbow(baseFittingIDs: baseFittingIDs ?? [])
+      case .insideCornerOffset: .insideCornerOffset(radii: rows.compactMap(\.insideCornerRadius))
       case .squareElbow: .squareElbow(bendCategories: rows.compactMap(\.bendCategory))
       case .steppedOffset:
         .steppedOffset(
@@ -179,6 +184,8 @@ struct Catalog: Sendable {
     var defaultInputs: Fitting.Inputs {
       switch kind {
       case .fixed: .fixed
+      case .doubleElbow: .doubleElbow(baseFittingID: nil, baseInputs: nil)
+      case .insideCornerOffset: .insideCornerOffset(radius: .mitered)
       case .squareElbow: .squareElbow(bendCategory: nil)
       case .steppedOffset: .steppedOffset(lengthHeightRatio: nil)
       case .fourTurnOffset: .fourTurnOffset(heightLengthRatio: nil, turningVanes: false)
@@ -201,7 +208,8 @@ struct Catalog: Sendable {
     enum Kind: String, Decodable, Sendable {
       case fixed, heightWidth, radiusWidth, downstreamBranches, plenumReturns, junction,
         returnJunction, pannedReturn, roundElbow, rectangularElbow, ovalElbow,
-        squareElbow, steppedOffset, fourTurnOffset, radiusOffset, riserElbow
+        squareElbow, steppedOffset, fourTurnOffset, radiusOffset, riserElbow,
+        doubleElbow, insideCornerOffset
     }
 
     struct AngleMultiplier: Decodable, Sendable {
@@ -218,6 +226,7 @@ struct Catalog: Sendable {
       let vanedFeet: Double?
       let riserSize: Fitting.RiserSize?
       let riserCorner: Fitting.RiserCorner?
+      let insideCornerRadius: Fitting.InsideCornerRadius?
       /// The group 6 trunk column; `feet` holds that row's branch value.
       let trunkFeet: Double?
     }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "fitting-catalog-v10",
+  "revision": "fitting-catalog-v11",
   "groups": [
     {
       "id": 1,
@@ -5686,6 +5686,150 @@
       }
     },
     {
+      "id": "8L-rectangular",
+      "familyID": "8L",
+      "groupID": 8,
+      "sourceCode": "8L",
+      "name": "Rectangular double elbow in one plane",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8L-rectangular.svg",
+        "revision": "7cb16795e1613ef8ef439b48854a4afe03d7ca189381d62459e583f5299cfc93",
+        "altText": "8L — Rectangular double elbow in one plane",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8L-rectangular-v1",
+      "rule": {
+        "kind": "doubleElbow",
+        "rows": [],
+        "multiplier": 1.7,
+        "baseFittingIDs": [
+          "8B",
+          "8C",
+          "8D",
+          "8E"
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Two matching 90° elbows with the same construction and inputs.",
+          "Calculate the selected single elbow, then apply the pair multiplier once. Quantity counts complete pairs.",
+          "The selected base elbow’s applicability conditions also apply."
+        ]
+      }
+    },
+    {
+      "id": "8L-round",
+      "familyID": "8L",
+      "groupID": 8,
+      "sourceCode": "8L",
+      "name": "Round double elbow in one plane",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8L-round.svg",
+        "revision": "c0059e0704bc7fe1bbb7b5a723118b0829da4ca7f4a7504415e2afc42cc556c4",
+        "altText": "8L — Round double elbow in one plane",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8L-round-v1",
+      "rule": {
+        "kind": "doubleElbow",
+        "rows": [],
+        "multiplier": 1.7,
+        "baseFittingIDs": [
+          "8A-smooth",
+          "8A-4-or-5-piece",
+          "8A-3-piece",
+          "8A-mitered"
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Two matching 90° elbows with the same construction and inputs.",
+          "Calculate the selected single elbow, then apply the pair multiplier once. Quantity counts complete pairs.",
+          "The selected base elbow’s applicability conditions also apply."
+        ]
+      }
+    },
+    {
+      "id": "8M-rectangular",
+      "familyID": "8M",
+      "groupID": 8,
+      "sourceCode": "8M",
+      "name": "Rectangular double elbow in two planes",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8M-rectangular.svg",
+        "revision": "d91c47abf400f3cf5c40c4365a9794f18df95015451a042e0733d9400b6c6b1c",
+        "altText": "8M — Rectangular double elbow in two planes",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8M-rectangular-v1",
+      "rule": {
+        "kind": "doubleElbow",
+        "rows": [],
+        "multiplier": 2,
+        "baseFittingIDs": [
+          "8B",
+          "8C",
+          "8D",
+          "8E"
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Two matching 90° elbows with the same construction and inputs.",
+          "Calculate the selected single elbow, then apply the pair multiplier once. Quantity counts complete pairs.",
+          "The selected base elbow’s applicability conditions also apply."
+        ]
+      }
+    },
+    {
+      "id": "8M-round",
+      "familyID": "8M",
+      "groupID": 8,
+      "sourceCode": "8M",
+      "name": "Round double elbow in two planes",
+      "shape": "round",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8M-round.svg",
+        "revision": "5dd497b8edb39981d9af707c66943094e5ca7785cd139db2acb6b664ef3cafce",
+        "altText": "8M — Round double elbow in two planes",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8M-round-v1",
+      "rule": {
+        "kind": "doubleElbow",
+        "rows": [],
+        "multiplier": 2,
+        "baseFittingIDs": [
+          "8A-smooth",
+          "8A-4-or-5-piece",
+          "8A-3-piece",
+          "8A-mitered"
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "Two matching 90° elbows with the same construction and inputs.",
+          "Calculate the selected single elbow, then apply the pair multiplier once. Quantity counts complete pairs.",
+          "The selected base elbow’s applicability conditions also apply."
+        ]
+      }
+    },
+    {
       "id": "8N",
       "familyID": "8N",
       "groupID": 8,
@@ -5715,6 +5859,53 @@
         "frictionRateIWCPer100Feet": 0.08,
         "notes": [
           "The listed length covers the whole illustrated angled offset."
+        ]
+      }
+    },
+    {
+      "id": "8O",
+      "familyID": "8O",
+      "groupID": 8,
+      "sourceCode": "8O",
+      "name": "Rectangular S-offset with flanged ends",
+      "shape": "rectangular",
+      "artwork": {
+        "publicPath": "/images/fittings/group-8/8O.svg",
+        "revision": "92cbf94fde445a227179e6aec6efecaa6344bd5f1e91eda9b6a18ebc028a5d6c",
+        "altText": "8O — Rectangular S-offset with flanged ends",
+        "view": "individual",
+        "mediaType": "image/svg+xml"
+      },
+      "ruleRevision": "8O-v1",
+      "rule": {
+        "kind": "insideCornerOffset",
+        "rows": [
+          {
+            "key": "8O:mitered",
+            "parameter": 0,
+            "feet": 235,
+            "insideCornerRadius": "mitered"
+          },
+          {
+            "key": "8O:oneQuarter",
+            "parameter": 0,
+            "feet": 90,
+            "insideCornerRadius": "oneQuarter"
+          },
+          {
+            "key": "8O:greaterThanOneHalf",
+            "parameter": 0,
+            "feet": 45,
+            "insideCornerRadius": "greaterThanOneHalf"
+          }
+        ]
+      },
+      "conditions": {
+        "referenceVelocityFPM": 900,
+        "frictionRateIWCPer100Feet": 0.08,
+        "notes": [
+          "R identifies the inside corner radius. Select the printed category; the final category is strictly R > 0.50.",
+          "Mitered is the common construction and the default for a new selection."
         ]
       }
     },

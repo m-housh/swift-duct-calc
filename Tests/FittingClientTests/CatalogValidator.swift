@@ -57,7 +57,7 @@ struct CatalogValidator {
         record.conditions.frictionRateIWCPer100Feet.isFinite
           && record.conditions.frictionRateIWCPer100Feet > 0, "Invalid friction rate")
       let rows = record.rule.rows
-      try require(!rows.isEmpty, "Rule has no source rows")
+      try require(record.rule.kind == .doubleElbow || !rows.isEmpty, "Rule has no source rows")
       try require(
         Set(rows.map(\.key)).count == rows.count && rows.allSatisfy { !$0.key.isEmpty },
         "Invalid source row keys")
@@ -91,7 +91,41 @@ struct CatalogValidator {
           rows.allSatisfy { $0.riserSize == nil && $0.riserCorner == nil },
           "Unexpected riser metadata")
       }
+      if record.rule.kind != .insideCornerOffset {
+        try require(
+          rows.allSatisfy { $0.insideCornerRadius == nil }, "Unexpected inside-corner radius")
+      }
+      if record.rule.kind != .doubleElbow {
+        try require(
+          record.rule.baseFittingIDs == nil && record.rule.multiplier == nil,
+          "Unexpected base-elbow metadata")
+      }
       switch record.rule.kind {
+      case .doubleElbow:
+        let expected: [Fitting.ID] =
+          record.shape == .round
+          ? ["8A-smooth", "8A-4-or-5-piece", "8A-3-piece", "8A-mitered"]
+          : ["8B", "8C", "8D", "8E"]
+        try require(
+          ["8L", "8M"].contains(record.sourceCode?.rawValue)
+            && [.round, .rectangular].contains(record.shape) && rows.isEmpty
+            && record.rule.baseFittingIDs == expected
+            && record.rule.multiplier == (record.sourceCode == "8L" ? 1.7 : 2),
+          "Double elbow must select matching supported 90-degree constructions and source multiplier"
+        )
+        for id in expected {
+          let base = document.fittings.first { $0.id == id }
+          try require(
+            base?.shape == record.shape && base?.groupID == .elbows
+              && [.roundElbow, .rectangularElbow, .squareElbow, .fixed].contains(base?.rule.kind),
+            "Invalid single-elbow reference")
+        }
+      case .insideCornerOffset:
+        try require(
+          record.sourceCode == "8O"
+            && rows.count == Fitting.InsideCornerRadius.allCases.count
+            && rows.compactMap(\.insideCornerRadius) == Fitting.InsideCornerRadius.allCases,
+          "Inside-corner offset must preserve each printed radius category")
       case .squareElbow:
         try require(
           ["8D", "8E"].contains(record.sourceCode?.rawValue) && record.shape == .rectangular

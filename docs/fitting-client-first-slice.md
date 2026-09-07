@@ -12,15 +12,16 @@ and its running preview server are unchanged.
 - All shared fitting definitions are in `Sources/ManualDCore/Fittings.swift`.
 - `@Dependency(\.fittingClient)` exposes groups, fitting definitions, artwork,
   equivalent-length evaluation and source-reference resolution.
-- One bundled JSON resource provides canonical group order/eligibility and 165
-  fitting choices: groups 1, 2, 4, 5, 6, 7, 8 (partial), 9, and 10. See the
+- One bundled JSON resource provides canonical group order/eligibility and 170
+  fitting choices: groups 1, 2, 4, 5, 6, 7, 8, 9, and 10. See the
   [first catalog expansion](fitting-client-catalog-expansion.md) and the
   [junction slice and confirmed row-selection policy](fitting-client-junctions.md),
   plus [group 7 airflow rules and artwork views](fitting-client-panned-returns.md),
   [8A typed round elbow choices](fitting-client-round-elbows.md), and
   [8B/8C rectangular elbow choices](fitting-client-rectangular-elbows.md), and
   [completed 8A constructions](fitting-client-8a-constructions.md), plus
-  [square elbows, offsets, and risers](fitting-client-offsets.md).
+  [square elbows, offsets, and risers](fitting-client-offsets.md), and
+  [double elbows and inside-corner offsets](fitting-client-double-elbows.md).
   Empty groups report zero available cases and no representative artwork.
 - `FittingClient.live()` is an async throwing factory. `Live.swift` resolves its
   own bundle resource and reads it through `FileClient.readFile`. Application
@@ -99,7 +100,7 @@ resource rejection and fractional snapshot encoding. Factory tests cover injecte
 file data, one read per constructed client, and immediate read/decode failures.
 Application tests cover startup failure and middleware injection across requests.
 Test-only fractional values are labeled as contract fixtures, not as source values.
-The expansion audits record numeric coverage for all 165 current fitting choices.
+The expansion audits record numeric coverage for all 170 current fitting choices.
 
 Reproduce with Swift 6.2:
 

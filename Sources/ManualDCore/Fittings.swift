@@ -168,6 +168,19 @@ public enum Fitting {
     public var label: String { self == .miter ? "Mitered inside corners" : "Radius inside corners" }
   }
 
+  /// Printed 8O inside-corner categories; the final category is strictly greater than 0.50.
+  public enum InsideCornerRadius: String, Codable, CaseIterable, Sendable {
+    case mitered, oneQuarter, greaterThanOneHalf
+
+    public var label: String {
+      switch self {
+      case .mitered: "Mitered (R = 0)"
+      case .oneQuarter: "R = 0.25"
+      case .greaterThanOneHalf: "R > 0.50"
+      }
+    }
+  }
+
   public enum Inputs: Codable, Equatable, Sendable {
     case fixed
     case heightWidth(heightInches: Double?, widthInches: Double?)
@@ -186,6 +199,9 @@ public enum Fitting {
     case fourTurnOffset(heightLengthRatio: OffsetHeightLengthRatio?, turningVanes: Bool)
     case radiusOffset(radiusHeightRatio: OffsetRadiusHeightRatio?)
     case riserElbow(size: RiserSize?, corner: RiserCorner?)
+    case insideCornerOffset(radius: InsideCornerRadius?)
+    /// One selected construction represents both matching 90° elbows; no supplied EL.
+    indirect case doubleElbow(baseFittingID: ID?, baseInputs: Inputs?)
     case rectangularElbow(
       radiusRatio: RectangularElbowRadiusRatio?, bendCategory: ElbowBendCategory?,
       angle: ElbowAngle?)
@@ -210,6 +226,8 @@ public enum Fitting {
       heightLengthRatios: [OffsetHeightLengthRatio], vanedRatios: [OffsetHeightLengthRatio])
     case radiusOffset(radiusHeightRatios: [OffsetRadiusHeightRatio])
     case riserElbow(sizes: [RiserSize], corners: [RiserCorner])
+    case insideCornerOffset(radii: [InsideCornerRadius])
+    case doubleElbow(baseFittingIDs: [ID])
     case rectangularElbow(
       radiusRatios: [RectangularElbowRadiusRatio], bendCategories: [ElbowBendCategory],
       angles: [ElbowAngle])
@@ -341,6 +359,7 @@ public enum Fitting {
       case branchCFM, totalCFM, airflowCFM, mergingFlow
       case radiusRatio, elbowAngle, bendCategory, pieceCount
       case offsetRatio, turningVanes, riserSize, riserCorner
+      case insideCornerRadius, baseFitting, baseInputs
     }
 
     public enum Code: Equatable, Sendable {
@@ -369,12 +388,14 @@ public enum Fitting {
     public let conditions: Conditions
     public let catalogRevision: String
     public let ruleRevision: String
+    public let derivation: Derivation?
 
     public init(
       fittingID: ID, sourceCode: SourceCode?, equivalentLengthFeet: Double, inputs: Inputs,
       components: [Component], conditions: Conditions, catalogRevision: String,
       ruleRevision: String,
-      airflowSelection: AirflowSelection? = nil
+      airflowSelection: AirflowSelection? = nil,
+      derivation: Derivation? = nil
     ) {
       self.fittingID = fittingID
       self.sourceCode = sourceCode
@@ -385,6 +406,12 @@ public enum Fitting {
       self.conditions = conditions
       self.catalogRevision = catalogRevision
       self.ruleRevision = ruleRevision
+      self.derivation = derivation
+    }
+
+    /// Retains the evaluated base and its revisions without adding its length a second time.
+    public indirect enum Derivation: Codable, Equatable, Sendable {
+      case scaled(base: Calculation, multiplier: Double)
     }
 
     public struct AirflowSelection: Codable, Equatable, Sendable {
