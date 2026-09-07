@@ -12,6 +12,7 @@ struct ProjectFittingPathView: HTML, Sendable {
   var root: String { "/projects/\(project.id)/effective-lengths" }
   var body: some HTML {
     link(.rel(.stylesheet), .href("/css/fitting-path.css"))
+    link(.rel(.stylesheet), .href("/css/picker-preference.css"))
     script(.src("/js/group-carousel.js"), .defer) {}
     script(.src("/js/fitting-path.js"), .defer) {}
     div(
@@ -94,6 +95,16 @@ struct ProjectFittingPathView: HTML, Sendable {
         div(.class("toolbar")) {
           button(.type(.button), .id("choose-groups")) { "1 · Choose group" }
           span { "2 · Choose fitting" }
+        }
+        SegmentedControl(
+          name: "shape-preference", title: "Prefer",
+          options: [
+            .init(value: "none", label: "No preference"),
+            .init(value: "round", label: "Round"),
+            .init(value: "rectangular", label: "Rectangular"),
+          ], selected: "none")
+        p(.class("muted picker-preference-help")) {
+          "Matching and mixed-shape connections first. All fittings remain available. Remembered in this browser."
         }
         div(.id("group-selectors")) {
           for (path, items) in carousels {

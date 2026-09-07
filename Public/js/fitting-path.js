@@ -9,6 +9,13 @@
     let entries = JSON.parse(root.dataset.rows), favorites = new Set(JSON.parse(root.dataset.favorites));
     let editing = null, dirty = false, busy = false, browserRequest = 0, rowsRequest = 0, editRequest = 0;
     const requests = new WeakMap(), timers = new WeakMap();
+    const preferenceKey = 'fitting-picker.shape-preference.v1';
+    let shapePreference = 'none';
+    try {
+      const stored = localStorage.getItem(preferenceKey);
+      if (['none', 'round', 'rectangular'].includes(stored)) shapePreference = stored;
+    } catch { /* Browser storage is optional; keep the preference for this editor session. */ }
+    root.querySelectorAll('[name="shape-preference"]').forEach(input => { input.checked = input.value === shapePreference; });
     const pathType = () => $('#path-type').value;
     const number = value => new Intl.NumberFormat(undefined, { maximumFractionDigits: 12 }).format(value);
     const status = text => { $('#path-status').textContent = text; };
@@ -130,14 +137,37 @@
         image.addEventListener('click', add); image.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); add(); } });
       }
     }
-    function sortFavorites() {
+    function sortFittings() {
       const grid = $('#fitting-browser .fitting-grid'); if (!grid) return;
+      const active = document.activeElement;
       const cards = [...grid.querySelectorAll('[data-catalog-id]')];
-      cards.sort((a,b) => Number(favorites.has(b.dataset.catalogId)) - Number(favorites.has(a.dataset.catalogId)) || Number(a.dataset.order) - Number(b.dataset.order));
+      const rank = card => shapePreference === 'none' || card.dataset.preferredShapes.split(' ').includes(shapePreference) ? 0 : 1;
+      cards.sort((a,b) => rank(a) - rank(b) || Number(favorites.has(b.dataset.catalogId)) - Number(favorites.has(a.dataset.catalogId)) || Number(a.dataset.order) - Number(b.dataset.order));
+      grid.querySelectorAll('.shape-section-heading').forEach(heading => heading.remove());
+      let section = -1;
       for (const card of cards) {
+        const next = rank(card);
+        if (shapePreference !== 'none' && next !== section) {
+          const heading = document.createElement('h3'); heading.className = 'shape-section-heading'; heading.dataset.shapeSection = next;
+          heading.textContent = next === 0 ? `${shapePreference === 'round' ? 'Round' : 'Rectangular'} and shared connections` : 'Other shapes';
+          grid.append(heading); section = next;
+        }
+        card.dataset.shapeSection = next;
         const button = card.querySelector('[data-favorite]'), selected = favorites.has(card.dataset.catalogId);
         button.setAttribute('aria-pressed', String(selected)); button.textContent = selected ? '★ Favorite' : '☆ Favorite'; grid.append(card);
       }
+      filterFittings();
+      if (active && grid.contains(active)) active.focus({ preventScroll: true });
+    }
+    function filterFittings() {
+      const target = $('#fitting-browser'), query = $('#catalog-search')?.value.trim().toLowerCase() || '';
+      const visibleSections = new Set(); let count = 0;
+      target.querySelectorAll('[data-catalog-id]').forEach(card => {
+        card.hidden = !card.dataset.search.toLowerCase().includes(query);
+        if (!card.hidden) { count++; visibleSections.add(card.dataset.shapeSection); }
+      });
+      target.querySelectorAll('.shape-section-heading').forEach(heading => { heading.hidden = !visibleSections.has(heading.dataset.shapeSection); });
+      if ($('#catalog-empty')) $('#catalog-empty').hidden = count > 0;
     }
     async function chooseGroup(groupID) {
       const current = ++browserRequest; $('#group-selectors').hidden = true;
@@ -148,12 +178,8 @@
         target.innerHTML = html; $('#picker-dialog').scrollTop = 0;
         target.querySelectorAll('[data-catalog-id]').forEach((card, index) => { card.dataset.order = index; });
         target.querySelectorAll('.fitting-configuration').forEach(configuration => bindConfiguration(configuration, true));
-        sortFavorites();
-        $('#catalog-search')?.addEventListener('input', event => {
-          const query = event.target.value.trim().toLowerCase(); let count = 0;
-          target.querySelectorAll('[data-catalog-id]').forEach(card => { card.hidden = !card.dataset.search.toLowerCase().includes(query); if (!card.hidden) count++; });
-          $('#catalog-empty').hidden = count > 0;
-        });
+        sortFittings();
+        $('#catalog-search')?.addEventListener('input', filterFittings);
       } catch (error) { target.textContent = error.message; }
     }
     function openReference(entry) {
@@ -172,7 +198,7 @@
           const html = await post(`${endpoint}/favorite`, { fittingID: id, selected });
           if (!html.includes('data-favorite-saved')) throw Error('Favorite could not be saved. Please try again.');
           if (selected) favorites.add(id); else favorites.delete(id);
-          sortFavorites();
+          sortFittings();
         } catch (error) { $('#picker-status').textContent = error.message; }
         finally { button.disabled = false; } return;
       }
@@ -216,6 +242,12 @@
       }
     });
     root.addEventListener('change', event => {
+      if (event.target.name === 'shape-preference') {
+        shapePreference = event.target.value;
+        try { localStorage.setItem(preferenceKey, shapePreference); } catch { /* Session-only fallback. */ }
+        sortFittings();
+        return;
+      }
       if (event.target.dataset.quantity) {
         const entry = entries.find(entry => entry.id === event.target.dataset.quantity), quantity = Number(event.target.value);
         if (!entry) return;

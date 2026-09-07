@@ -175,7 +175,12 @@ struct FittingBrowserCard: HTML, Sendable {
   var body: some HTML {
     article(
       .class("art-card guided-input-card"), .data("catalog-id", value: definition.id.rawValue),
-      .data("search", value: "\(definition.sourceCode?.rawValue ?? "Group 11") \(definition.name)"),
+      .data(
+        "search",
+        value:
+          "\(definition.sourceCode?.rawValue ?? "Group 11") \(definition.name) \(definition.shape.rawValue)"
+      ),
+      .data("preferred-shapes", value: definition.pickerPreferredShapes),
       .data("fixed", value: definition.inputRequirement == .fixed ? "true" : "false")
     ) {
       button(
@@ -208,9 +213,20 @@ struct GroupBrowserView: HTML, Sendable {
       }
     }
     p(.class("muted")) {
-      "Favorites first · Select a fixed fitting to add it directly. Other fittings need the inputs shown on the card."
+      "Favorites first within each section · Select a fixed fitting to add it directly. Other fittings need the inputs shown on the card."
     }
     div(.class("grid fitting-grid")) { for card in cards { card } }
     p(.id("catalog-empty"), .hidden) { "No matching fittings in this group." }
+  }
+}
+
+// Presentation affinity only: mixed connections and shape-neutral schematics remain
+// alongside either preference. Do not interpret artwork shape as a path constraint.
+extension Fitting.Definition {
+  var pickerPreferredShapes: String {
+    switch shape {
+    case .mixed, .schematic: "round rectangular"
+    default: shape.rawValue
+    }
   }
 }

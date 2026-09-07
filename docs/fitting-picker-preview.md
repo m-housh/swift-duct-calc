@@ -8,6 +8,13 @@ The path editor saves to that project and reopens the recorded entries.
 
 - The prototype's tall path rows, drawing-led Add fitting dialog, three-card looping
   group carousel, favorites-first cards, inline conditional inputs, and fitting totals.
+- **Prefer: No preference / Round / Rectangular** in the picker brings matching fittings
+  and shared connections to the top; favorites lead within each section. Other shapes
+  stay visible and searchable. The browser remembers this presentation preference across
+  groups and reloads; it is not stored on the project or inferred from selected fittings.
+  Mixed-shape connections and shape-neutral schematics appear with either preference;
+  oval fittings appear under Other shapes. Changing the toggle preserves card inputs,
+  path entries, and calculations. If browser storage is blocked it lasts for the editor session.
 - Fixed fittings add directly from their drawing. Quantity is edited in the path list.
 - All 227 catalog choices use the Swift `FittingClient`. The browser contains no fitting tables.
 - Quick reference entry retains the supplied fractional length and distinguishes it from
@@ -28,17 +35,23 @@ The path editor saves to that project and reopens the recorded entries.
 
 ![Mobile group selection](images/fitting-picker/mobile.png)
 
+![Round preference in the fitting picker](images/fitting-picker/preference.png)
+
+![Preference toggle on mobile](images/fitting-picker/preference-mobile.png)
+
 ## Code ownership
 
 | Location | Responsibility |
 | --- | --- |
 | `Sources/ViewController/Views/FittingPicker` | Project page, path rows, fitting cards, request parsing, and result/error presentation |
 | `Sources/Styleguide/GroupCarousel.swift` | Reusable looping selector and picker dialog markup |
+| `Sources/Styleguide/SegmentedControl.swift` | Reusable native radio toggle with keyboard navigation |
 | `Sources/Styleguide/PickerControl.swift` | Reusable labeled numeric, choice, and checkbox controls |
 | `Sources/ProjectClient/Internal/FittingPaths.swift` | Authorized saving, source evaluation, saved-row preservation, and validation |
 | `Sources/ManualDCore/Fittings.swift` | Shared typed inputs, snapshots, and path-entry contracts |
 | `Sources/DatabaseClient` | Additive saved-row metadata, project ownership lookup, and per-user favorites |
 | `Public/js/fitting-path.js`, `group-carousel.js` | Interaction state, gestures, requests, quantities, and totals |
+| `Public/css/picker-preference.css` | Scoped preference toggle and section styles |
 | `Public/css/fitting-path.css` | Scoped presentation ported from the agreed prototype |
 
 The frozen prototypes are unchanged. The separate `/fittings` preview has been retired;
@@ -113,10 +126,15 @@ uses that test session to check server authority and saved-path edge cases.
 ```sh
 FITTING_APP_URL=http://localhost:8081 node scripts/check_fitting_path.cjs
 node scripts/check_fitting_path_edges.cjs
+node scripts/check_fitting_preference.cjs
 ```
 
 If Playwright is installed outside the checkout, set `NODE_PATH` to its `node_modules`
 directory. The scripts check real save/reopen/edit flows, fractional reference lengths,
 quantities, favorites across reloads, Group 11 controls, Group 6 saved contributions,
 server-authoritative calculations, row identity, stale-save rejection, carousel looping,
-and desktop/mobile layouts. Temporary test session data and screenshots are written to `/tmp`.
+and desktop/mobile layouts. The preference check covers ordering, mixed connections,
+favorites within sections, searches across shapes, unchanged card inputs and saved paths,
+keyboard navigation, mobile layout, reload persistence, and blocked browser storage.
+The preference change also passes all **7 Swift picker tests**, including catalog default
+transport and mixed-connection presentation metadata. Temporary test session data and screenshots are written to `/tmp`.

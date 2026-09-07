@@ -33,6 +33,26 @@ struct FittingPickerTests {
     }
   }
 
+  @Test func preferenceIncludesConnectionsWithoutRestrictingCatalog() async throws {
+    let expected = [
+      (1, "1A", "round"), (1, "1D", "rectangular"),
+      (2, "2A", "round rectangular"), (4, "4A", "round rectangular"),
+      (8, "8A-easy-bend", "oval"), (12, "12W", "round rectangular"),
+    ]
+    for (group, id, shapes) in expected {
+      let groupID = try #require(Fitting.Group.ID(rawValue: group))
+      let definition = try #require(
+        try await client.fittings(.init(pathType: .supply, groupID: groupID))
+          .first { $0.id.rawValue == id })
+      #expect(definition.pickerPreferredShapes == shapes)
+    }
+    let rendered = await html(.group("{\"pathType\":\"supply\",\"groupID\":1}"))
+    #expect(rendered.contains("data-catalog-id=\"1A\""))
+    #expect(rendered.contains("data-catalog-id=\"1D\""))
+    #expect(rendered.contains("data-preferred-shapes=\"round\""))
+    #expect(rendered.contains("data-preferred-shapes=\"rectangular\""))
+  }
+
   @Test func defaultsAreOnlyAppliedWhenOpeningADraft() async throws {
     let config = await html(.configure(payload("8O", group: 8)))
     #expect(config.contains("value=\"mitered\" selected"))
