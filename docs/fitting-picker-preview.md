@@ -12,11 +12,11 @@ the editor and draft open.
 ## What is implemented
 
 - The prototype's tall path rows, drawing-led Add fitting dialog, three-card looping
-  group carousel, favorites-first cards, inline conditional inputs, and fitting totals.
+  group carousel, favorite copies, inline conditional inputs, and fitting totals.
 - **Prefer: No preference / Round / Rectangular** reorders one continuous list; it
   adds no sections and hides no fittings. Direct matches come first, followed by mixed
-  connections/shape-neutral schematics, then other shapes. Favorites lead among equally
-  matched fittings; No preference restores favorites-first source order.
+  connections/shape-neutral schematics, then other shapes. Source order breaks ties;
+  No preference restores source order. Favoriting never changes this order.
   Group 2 uses **trunk shape**: Round puts **2N–2Q first**; Rectangular puts **2A–2M first**,
   including round branches on rectangular trunks. Mixed boots remain available without
   being treated as direct matches for both shapes.
@@ -30,6 +30,11 @@ the editor and draft open.
   a calculated fitting. Repeated rows stay separate.
 - Save/reopen, rename, quantity edits, removal, and fitting edits work on real project paths.
 - Favorites are stored per user in the database and shared across projects/devices.
+  A collapsible **Favorites** area holds duplicate cards for the current group. Originals
+  stay in the complete list. Starring a fitting keeps its position, scroll location, and
+  inputs intact, including when the Favorites area is expanded. Either copy can add to
+  the path. Favorites save the fitting choice; each card starts at catalog defaults and
+  has independent draft inputs. Search and shape ordering apply to both lists.
 - Groups 1, 2, 3, 5, and 6 show non-blocking repeated-use warnings. Changing path type
   retains the draft and requires incompatible rows to be resolved before saving.
 - 8O starts at **Mitered**. Group 11 has one **Velocity in flex duct** box control and
@@ -52,6 +57,10 @@ the editor and draft open.
 
 ![Preference toggle on mobile](images/fitting-picker/preference-mobile.png)
 
+![Favorite copies above the complete fitting list](images/fitting-picker/favorites.png)
+
+![Favorite copies on mobile](images/fitting-picker/favorites-mobile.png)
+
 ## Code ownership
 
 | Location | Responsibility |
@@ -66,6 +75,7 @@ the editor and draft open.
 | `Sources/DatabaseClient` | Additive saved-row metadata, project ownership lookup, and per-user favorites |
 | `Public/js/fitting-path.js`, `group-carousel.js` | Interaction state, gestures, requests, quantities, and totals |
 | `Public/css/fitting-path-modal.css` | Desktop/mobile editor dimensions and spacing |
+| `Public/css/fitting-favorites.css` | Collapsible favorite-copy layout |
 | `Public/css/picker-preference.css` | Scoped preference toggle styles |
 | `Public/css/fitting-path.css` | Scoped presentation ported from the agreed prototype |
 
@@ -143,6 +153,7 @@ FITTING_APP_URL=http://localhost:8081 node scripts/check_fitting_path.cjs
 node scripts/check_fitting_path_edges.cjs
 node scripts/check_fitting_preference.cjs
 node scripts/check_fitting_modal.cjs
+node scripts/check_fitting_favorites.cjs
 ```
 
 If Playwright is installed outside the checkout, set `NODE_PATH` to its `node_modules`
@@ -150,9 +161,12 @@ directory. The scripts check real save/reopen/edit flows, fractional reference l
 quantities, favorites across reloads, Group 11 controls, Group 6 saved contributions,
 server-authoritative calculations, row identity, stale-save rejection, carousel looping,
 and desktop/mobile layouts. The preference check covers ordering, mixed connections,
-Group 2 trunk-shape ordering, favorites among equal matches, searches across shapes, unchanged card inputs and saved paths,
+Group 2 trunk-shape ordering, stable catalog order when favoriting, searches across shapes, unchanged card inputs and saved paths,
 keyboard navigation, mobile layout, reload persistence, and blocked browser storage.
 The modal change passes all **15 Swift view and picker tests**. Browser flows save back
 to the list and reopen through its Edit link. The modal check verifies viewport sizing,
 child-dialog dismissal and focus restoration, accepted/declined discard, failed-save
-retention, and cancellation with no changes. Temporary test session data and screenshots are written to `/tmp`.
+retention, and cancellation with no changes. The favorites check verifies the exact
+scroll → star → add sequence, unchanged card coordinates with Favorites collapsed or
+expanded, adding from both copies, independent conditional inputs, search, mobile layout,
+Group 11 copy controls, keyboard focus restoration, and failed favorite writes. All **7 Swift picker tests** also pass after the favorites change. Temporary test session data and screenshots are written to `/tmp`.

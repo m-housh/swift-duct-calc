@@ -13,6 +13,7 @@ struct ProjectFittingPathView: HTML, Sendable {
   var body: some HTML {
     link(.rel(.stylesheet), .href("/css/fitting-path.css"))
     link(.rel(.stylesheet), .href("/css/picker-preference.css"))
+    link(.rel(.stylesheet), .href("/css/fitting-favorites.css"))
     link(.rel(.stylesheet), .href("/css/fitting-path-modal.css"))
     script(.src("/js/group-carousel.js"), .defer) {}
     script(.src("/js/fitting-path.js"), .defer) {}
@@ -102,7 +103,7 @@ struct ProjectFittingPathView: HTML, Sendable {
             .init(value: "rectangular", label: "Rectangular"),
           ], selected: "none")
         p(.class("muted picker-preference-help")) {
-          "Preferred duct shape first; favorites lead among equally matched fittings. All fittings stay in the list. Remembered in this browser."
+          "Preferred duct shape first. Starring a fitting keeps it in place and adds a copy to Favorites. Remembered in this browser."
         }
         div(.id("group-selectors")) {
           for (path, items) in carousels {

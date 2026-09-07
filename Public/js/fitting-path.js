@@ -8,7 +8,8 @@
     const baseline = JSON.parse(root.dataset.baseline), endpoint = root.dataset.endpoint;
     let entries = JSON.parse(root.dataset.rows), favorites = new Set(JSON.parse(root.dataset.favorites));
     let editing = null, dirty = false, busy = false, browserRequest = 0, rowsRequest = 0, editRequest = 0;
-    const requests = new WeakMap(), timers = new WeakMap();
+    const requests = new WeakMap(), timers = new WeakMap(), favoriteRequests = new Set();
+    let favoriteTemplates = new Map();
     const preferenceKey = 'fitting-picker.shape-preference.v1';
     let shapePreference = 'none';
     try {
@@ -137,30 +138,60 @@
         image.addEventListener('click', add); image.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); add(); } });
       }
     }
-    function sortFittings() {
-      const grid = $('#fitting-browser .fitting-grid'); if (!grid) return;
+    function shapeRank(card) {
+      if (shapePreference === 'none' || card.dataset.ductShape === shapePreference) return 0;
+      return ['mixed', 'schematic'].includes(card.dataset.ductShape) ? 1 : 2;
+    }
+    const compareCards = (a, b) => shapeRank(a) - shapeRank(b) || Number(a.dataset.order) - Number(b.dataset.order);
+    function updateFavoriteButtons() {
+      root.querySelectorAll('[data-favorite]').forEach(button => {
+        const selected = favorites.has(button.dataset.favorite);
+        button.setAttribute('aria-pressed', String(selected)); button.textContent = selected ? '★ Favorite' : '☆ Favorite';
+        button.disabled = favoriteRequests.has(button.dataset.favorite);
+      });
+    }
+    function syncFavorites(anchor) {
+      const grid = $('#fitting-browser .favorite-grid'); if (!grid) return;
+      const top = anchor?.isConnected ? anchor.getBoundingClientRect().top : null;
       const active = document.activeElement;
-      const cards = [...grid.querySelectorAll('[data-catalog-id]')];
-      const rank = card => {
-        if (shapePreference === 'none' || card.dataset.ductShape === shapePreference) return 0;
-        return ['mixed', 'schematic'].includes(card.dataset.ductShape) ? 1 : 2;
-      };
-      cards.sort((a,b) => rank(a) - rank(b) || Number(favorites.has(b.dataset.catalogId)) - Number(favorites.has(a.dataset.catalogId)) || Number(a.dataset.order) - Number(b.dataset.order));
-      for (const card of cards) {
-        const button = card.querySelector('[data-favorite]'), selected = favorites.has(card.dataset.catalogId);
-        button.setAttribute('aria-pressed', String(selected)); button.textContent = selected ? '★ Favorite' : '☆ Favorite'; grid.append(card);
+      const existing = new Map([...grid.querySelectorAll('[data-favorite-copy]')].map(card => [card.dataset.favoriteCopy, card]));
+      for (const [id, card] of existing) {
+        if (!favorites.has(id)) { card.remove(); existing.delete(id); }
       }
-      filterFittings();
+      for (const [id, template] of favoriteTemplates) {
+        if (!favorites.has(id) || existing.has(id)) continue;
+        // Each copy starts with the catalog defaults and owns its own draft inputs.
+        const card = template.cloneNode(true); card.dataset.favoriteCopy = id; delete card.dataset.catalogId;
+        grid.append(card); bindConfiguration(card.querySelector('.fitting-configuration'), true);
+      }
+      [...grid.children].sort(compareCards).forEach(card => grid.append(card));
+      $('#catalog-favorite-count').textContent = grid.children.length;
+      updateFavoriteButtons(); filterFittings();
+      if (active?.isConnected && grid.contains(active)) active.focus({ preventScroll: true });
+      else if (active && !active.isConnected) $('#catalog-favorites > summary').focus({ preventScroll: true });
+      // Adding/removing copies above an expanded catalog must not move the source card
+      // on screen. Measure after the browser's own scroll anchoring has run.
+      if (top !== null && anchor.isConnected) $('#picker-dialog').scrollTop += anchor.getBoundingClientRect().top - top;
+    }
+    function sortFittings() {
+      const grid = $('#catalog-grid'); if (!grid) return;
+      const active = document.activeElement;
+      [...grid.children].sort(compareCards).forEach(card => grid.append(card));
+      syncFavorites();
       if (active && grid.contains(active)) active.focus({ preventScroll: true });
     }
     function filterFittings() {
       const target = $('#fitting-browser'), query = $('#catalog-search')?.value.trim().toLowerCase() || '';
-      let count = 0;
-      target.querySelectorAll('[data-catalog-id]').forEach(card => {
+      let count = 0, favoriteCount = 0;
+      target.querySelectorAll('[data-catalog-id], [data-favorite-copy]').forEach(card => {
         card.hidden = !card.dataset.search.toLowerCase().includes(query);
-        if (!card.hidden) count++;
+        if (!card.hidden) { if (card.dataset.favoriteCopy) favoriteCount++; else count++; }
       });
       if ($('#catalog-empty')) $('#catalog-empty').hidden = count > 0;
+      if ($('#favorites-empty')) {
+        $('#favorites-empty').hidden = favoriteCount > 0;
+        $('#favorites-empty').textContent = $('#catalog-favorite-count').textContent === '0' ? 'Star a fitting to keep a copy here.' : 'No favorites match your search.';
+      }
     }
     async function chooseGroup(groupID) {
       const current = ++browserRequest; $('#group-selectors').hidden = true;
@@ -169,7 +200,10 @@
         const html = await post('/fittings/group', { pathType: pathType(), groupID });
         if (current !== browserRequest) return;
         target.innerHTML = html; $('#picker-dialog').scrollTop = 0;
-        target.querySelectorAll('[data-catalog-id]').forEach((card, index) => { card.dataset.order = index; });
+        favoriteTemplates = new Map();
+        target.querySelectorAll('[data-catalog-id]').forEach((card, index) => {
+          card.dataset.order = index; favoriteTemplates.set(card.dataset.catalogId, card.cloneNode(true));
+        });
         target.querySelectorAll('.fitting-configuration').forEach(configuration => bindConfiguration(configuration, true));
         sortFittings();
         $('#catalog-search')?.addEventListener('input', filterFittings);
@@ -195,14 +229,21 @@
       if (button.id === 'choose-groups') { browserRequest++; showGroups(); return; }
       if (button.dataset.chooseGroup) { chooseGroup(Number(button.dataset.chooseGroup)); return; }
       if (button.dataset.favorite) {
-        const id = button.dataset.favorite, selected = !favorites.has(id); button.disabled = true;
+        const id = button.dataset.favorite, selected = !favorites.has(id), hadFocus = document.activeElement === button;
+        if (favoriteRequests.has(id)) return;
+        favoriteRequests.add(id); updateFavoriteButtons();
         try {
           const html = await post(`${endpoint}/favorite`, { fittingID: id, selected });
           if (!html.includes('data-favorite-saved')) throw Error('Favorite could not be saved. Please try again.');
           if (selected) favorites.add(id); else favorites.delete(id);
-          sortFittings();
+          syncFavorites(button.closest('[data-catalog-id]'));
         } catch (error) { $('#picker-status').textContent = error.message; }
-        finally { button.disabled = false; } return;
+        finally {
+          favoriteRequests.delete(id); updateFavoriteButtons();
+          if (hadFocus && [document.body, root, $('#picker-dialog')].includes(document.activeElement)) {
+            (button.isConnected ? button : $('#catalog-favorites > summary'))?.focus({ preventScroll: true });
+          }
+        } return;
       }
       if (button.dataset.row) {
         const row = JSON.parse(button.dataset.row), previous = entries.find(entry => entry.id === editing);

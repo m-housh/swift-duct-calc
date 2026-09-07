@@ -222,7 +222,16 @@ struct GroupBrowserView: HTML, Sendable {
     p(.class("muted")) {
       "Select a fixed fitting to add it directly. Other fittings need the inputs shown on the card."
     }
-    div(.class("grid fitting-grid")) { for card in cards { card } }
+    details(.id("catalog-favorites"), .class("catalog-favorites")) {
+      summary {
+        "Favorites · "
+        span(.id("catalog-favorite-count")) { "0" }
+      }
+      div(.class("grid favorite-grid")) {}
+      p(.id("favorites-empty"), .class("muted")) { "Star a fitting to keep a copy here." }
+    }
+    h3(.class("catalog-list-title")) { "All fittings" }
+    div(.id("catalog-grid"), .class("grid fitting-grid")) { for card in cards { card } }
     p(.id("catalog-empty"), .hidden) { "No matching fittings in this group." }
   }
 }

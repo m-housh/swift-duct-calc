@@ -1,0 +1,25 @@
+@scope (.fitting-path) {
+  .catalog-favorites {
+    border: 1px solid var(--line); border-radius: var(--radius-box, 10px);
+    padding: 12px; margin: 16px 0; font-size: inherit; color: var(--text);
+  }
+  .catalog-favorites > summary { font-weight: 600; min-height: 24px; }
+  .favorite-grid { margin-top: 16px; }
+  .catalog-list-title { margin: 16px 0 12px; }
+
+  /* Favorite copies retain the wide junction-box configuration layout. */
+  .favorite-grid:has([data-favorite-copy="11-junction-box"]) { grid-template-columns:minmax(0,1fr)!important; }
+  [data-favorite-copy="11-junction-box"] .fitting-configuration { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:0 28px; padding:24px; }
+  [data-favorite-copy="11-junction-box"] .fp-config-art { grid-column:1; grid-row:1/5; margin-top:0; }
+  [data-favorite-copy="11-junction-box"] .fp-active-art { height:380px; }
+  [data-favorite-copy="11-junction-box"] .fp-eyebrow { grid-column:2; grid-row:1; }
+  [data-favorite-copy="11-junction-box"] h2 { grid-column:2; grid-row:2; }
+  [data-favorite-copy="11-junction-box"] .fp-fields { grid-column:2; grid-row:3; }
+  [data-favorite-copy="11-junction-box"] .fp-result { grid-column:2; grid-row:4; }
+  [data-favorite-copy="11-junction-box"] .fp-drawing-links { grid-column:1/-1; grid-row:5; }
+  [data-favorite-copy="11-junction-box"] .fp-conditions { grid-column:1/-1; grid-row:6; }
+  @media(max-width:700px) {
+    [data-favorite-copy="11-junction-box"] .fitting-configuration { display:flex; padding:16px; }
+    [data-favorite-copy="11-junction-box"] .fp-active-art { height:240px; }
+  }
+}
