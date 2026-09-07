@@ -15,6 +15,7 @@ extension SiteRoute {
     case signup(SignupRoute)
     case project(ProjectRoute)
     case ductulator(DuctulatorRoute)
+    case fittingReference(FittingsQuery)
     case user(UserRoute)
     //FIX: Remove.
     case test
@@ -34,6 +35,19 @@ extension SiteRoute {
       Route(.case(Self.privacyPolicy)) {
         Path { "privacy-policy" }
         Method.get
+      }
+      Route(.case(Self.fittingReference)) {
+        Path { "fittings" }
+        Method.get
+        Query {
+          Optionally { Field("system", .string) }
+          Optionally { Field("group", .string) }
+          Optionally { Field("fitting", .string) }
+          Optionally { Field("q", .string) }
+          Optionally { Field("type", .string) }
+          Optionally { Field("data", .string) }
+        }
+        .map(.memberwise(FittingsQuery.init))
       }
       Route(.case(Self.login)) {
         SiteRoute.View.LoginRoute.router

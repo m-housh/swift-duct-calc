@@ -13,7 +13,7 @@ const{chromium}=require('playwright'),assert=require('node:assert/strict'),fs=re
  await context.storageState({path:'/tmp/fitting-review-auth.json'});fs.chmodSync('/tmp/fitting-review-auth.json',0o600);
 
  const errors=[];p.on('pageerror',e=>errors.push(e.message));p.on('dialog',d=>d.accept());
- await p.goto(base);await p.getByRole('link',{name:'Add equivalent length',exact:true}).click();await p.locator('#fitting-path').waitFor({state:'visible'});await p.locator('#path-name').fill('Living room supply');await p.locator('#path-straight').fill('10, 25');
+ await p.goto(base);await p.getByRole('link',{name:'Add equivalent length',exact:true}).click();await p.locator('#fitting-path').waitFor({state:'visible'});assert.equal(new URL(await p.locator('#path-fitting-reference').getAttribute('href'), appURL).searchParams.get('system'),'supply');await p.locator('#path-name').fill('Living room supply');await p.locator('#path-straight').fill('10, 25');
  async function group(n){await p.locator('[data-open-picker]').click();const carousel=p.locator('[data-path-carousel="supply"]');await carousel.getByRole('button',{name:new RegExp(`^Show Group ${n}:`)}).click();await carousel.locator('.is-current [data-choose-group]').click();await p.locator('.fitting-grid').waitFor();}
  await group(1);const fixed=p.locator('[data-catalog-id="1A"]');await fixed.locator('.fp-active-art').click();await p.locator('#path-rows [data-row-id]').waitFor();assert.equal(await p.locator('#picker-dialog').evaluate(e=>e.open),false);
  await p.locator('[data-quantity]').fill('2');await p.locator('[data-quantity]').press('Tab');await p.waitForFunction(()=>document.querySelector('.sheet-subtotal').textContent==='70 ft');

@@ -299,7 +299,7 @@
       }
       if (['path-name','path-straight','path-type'].includes(event.target.id)) {
         dirty = true; updateTotals();
-        if (event.target.id === 'path-type') { browserRequest++; showGroups(); status('The path type changed. Existing rows are retained; incompatible rows must be removed or the original type restored before saving.'); }
+        if (event.target.id === 'path-type') { $('#path-fitting-reference').href = '/fittings?' + new URLSearchParams({ system: pathType() }); browserRequest++; showGroups(); status('The path type changed. Existing rows are retained; incompatible rows must be removed or the original type restored before saving.'); }
       }
     });
     $('#path-name').addEventListener('input', () => { dirty = true; });

@@ -50,6 +50,7 @@ extension SiteRoute.View {
         Body { FormData { Field("payload", .string) } }
       }
       Route(.case(Self.index)) {
+        Path { "picker" }
         Method.get
         Query { Field("type", default: Fitting.PathType.supply) { Fitting.PathType.parser() } }
       }

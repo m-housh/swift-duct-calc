@@ -4,6 +4,13 @@
 
 Residential duct design software.
 
+## Fitting reference
+
+Open `/fittings` on the running app for the public fitting reference. Signed-in
+users can also inspect and export CSV/JSON records. See the
+[reference documentation](docs/fitting-reference.md) for routes, session behavior,
+and catalog maintenance.
+
 ## Overview
 
 This is the source code for [ductcalc.pro](https://ductcalc.pro) web site. Which is a residential

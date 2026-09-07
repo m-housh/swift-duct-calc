@@ -71,6 +71,11 @@ struct ProjectFittingPathView: HTML, Sendable {
         }
         div(.class("path-entry-actions")) {
           button(.type(.button), .id("quick-entry-open")) { "Quick reference entry" }
+          a(
+            .id("path-fitting-reference"),
+            .href(route: .fittingReference(.init(system: (baseline?.type ?? .supply).rawValue))),
+            .target("_blank"), .rel("noopener"), .class("link-button")
+          ) { "Open fitting reference ↗" }
         }
         footer(.class("sheet-total")) {
           div(.class("fitting-total")) {

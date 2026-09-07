@@ -1,5 +1,6 @@
 import Elementary
 import ElementaryHTMX
+import ManualDCore
 import Styleguide
 
 struct HomeView: HTML, Sendable {
@@ -10,6 +11,9 @@ struct HomeView: HTML, Sendable {
     // NOTE: Footer background color will follow system theme.
     ) {
       div(.class("flex justify-end space-x-4 m-4")) {
+        a(.class("btn btn-ghost"), .href(route: .fittingReference(.init()))) {
+          "Fitting reference"
+        }
         DuctulatorButton()
           .attributes(.class("btn-ghost btn-accent text-lg"))
           .tooltip("Duct size calculator", position: .left)
