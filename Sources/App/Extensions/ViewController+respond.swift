@@ -8,6 +8,15 @@ extension ViewController {
   func respond(route: SiteRoute.View, request: Vapor.Request) async throws
     -> any AsyncResponseEncodable
   {
+    if case .fittings = route, request.isHtmxRequest {
+      // This page owns its stylesheet and scripts. Login's HTMX
+      // continuation must load the full document rather than replace only the body.
+      return Response(status: .ok, headers: [
+        "HX-Redirect": request.url.string,
+        "Cache-Control": "private, no-store",
+        "Vary": "Cookie, HX-Request",
+      ])
+    }
     let html = try await view(
       .init(
         route: route,
@@ -15,6 +24,11 @@ extension ViewController {
         logger: request.logger
       )
     )
+    if case .fittings = route {
+      return AnyHTMLResponse(additionalHeaders: [
+        "Cache-Control": "private, no-store", "Vary": "Cookie, HX-Request",
+      ], value: html)
+    }
     return AnyHTMLResponse(value: html)
   }
 }

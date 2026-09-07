@@ -63,6 +63,13 @@ let package = Package(
         .product(name: "ArgumentParser", package: "swift-argument-parser"),
       ]
     ),
+    .testTarget(
+      name: "AppTests",
+      dependencies: [
+        .target(name: "App"),
+        .product(name: "VaporTesting", package: "vapor"),
+      ]
+    ),
     .target(
       name: "AuthClient",
       dependencies: [

@@ -6,20 +6,29 @@ import Styleguide
 
 public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable {
 
-  public var title: String { "Duct Calc" }
+  public var title: String { pageTitle }
   public var lang: String { "en" }
 
   let inner: Inner
   let theme: Theme?
   let displayFooter: Bool
+  let pageTitle: String
+  let stylesheets: [String]
+  let scripts: [String]
 
   init(
     displayFooter: Bool = true,
     theme: Theme? = nil,
+    title: String = "Duct Calc",
+    stylesheets: [String] = [],
+    scripts: [String] = [],
     _ inner: () -> Inner
   ) {
     self.displayFooter = displayFooter
     self.theme = theme
+    self.pageTitle = title
+    self.stylesheets = stylesheets
+    self.scripts = scripts
     self.inner = inner()
   }
 
@@ -81,6 +90,12 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
       .crossorigin(.anonymous),
       .integrity("sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT")
     ) {}
+    for stylesheet in stylesheets {
+      link(.rel(.stylesheet), .href(stylesheet))
+    }
+    for source in scripts {
+      script(.src(source), .init(name: "defer", value: "")) {}
+    }
   }
 
   public var body: some HTML {

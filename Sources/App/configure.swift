@@ -61,6 +61,7 @@ private func addMiddleware(
   app.sessions.use(.fluent)
   app.migrations.add(SessionRecord.migration)
   app.middleware.use(app.sessions.middleware)
+  app.middleware.use(UserSessionAuthenticator())
 
   app.middleware.use(DependenciesMiddleware(database: databaseClient, environment: environment))
 }
@@ -96,13 +97,7 @@ private func addRoutes(to app: Application) {
 
   app.mount(
     SiteRoute.router,
-    middleware: {
-      if app.environment == .testing {
-        return nil
-      } else {
-        return $0.middleware()
-      }
-    },
+    middleware: { $0.middleware() },
     use: siteHandler
   )
 }

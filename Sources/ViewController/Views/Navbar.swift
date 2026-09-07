@@ -3,15 +3,18 @@ import ManualDCore
 import Styleguide
 
 struct Navbar: HTML, Sendable {
+  let showFittingsButton: Bool
   let showDuctulatorButton: Bool
   let showSidebarToggle: Bool
   let isLoggedIn: Bool
 
   init(
+    showFittingsButton: Bool = true,
     showDuctulatorButton: Bool = true,
     showSidebarToggle: Bool,
     isLoggedIn: Bool = true
   ) {
+    self.showFittingsButton = showFittingsButton
     self.showDuctulatorButton = showDuctulatorButton
     self.showSidebarToggle = showSidebarToggle
     self.isLoggedIn = isLoggedIn
@@ -60,6 +63,12 @@ struct Navbar: HTML, Sendable {
 
       div(.class("flex-none")) {
         div(.class("flex items-end space-x-4")) {
+
+          if showFittingsButton {
+            a(.class("btn btn-ghost"), .href(route: .fittings(.init()))) {
+              "Fitting reference"
+            }
+          }
 
           if showDuctulatorButton {
             DuctulatorButton()

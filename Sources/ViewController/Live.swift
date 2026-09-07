@@ -22,6 +22,16 @@ extension ViewController.Request {
       return await view {
         HomeView()
       }
+    case .fittings:
+      return MainPage(
+        theme: await theme ?? .default,
+        title: "Fitting reference · Duct Calc",
+        stylesheets: ["/fittings/styles.css"],
+        scripts: ["catalog-data.js", "catalog-rules.js", "reference-core.js", "app.js"]
+          .map { "/fittings/\($0)" }
+      ) {
+        FittingsView(isLoggedIn: isLoggedIn)
+      }
     case .privacyPolicy:
       return await view {
         PrivacyPolicyView()

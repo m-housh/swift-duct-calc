@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
-"""Build the full-catalog prototype from approved artwork metadata; no production rules."""
+"""Build a reference catalog from approved artwork metadata; no production rules."""
+import argparse
 import json
 import xml.etree.ElementTree as ET
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ART = ROOT / 'Public/images/fittings'
-OUT = ROOT / 'Public/prototypes/fitting-picker'
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--output', type=Path, default=ROOT / 'Public/prototypes/fitting-picker',
+                    help='Destination directory (defaults to the existing picker prototype).')
+OUT = parser.parse_args().output
+OUT.mkdir(parents=True, exist_ok=True)
 SOURCES = {1:'catalog.json',2:'group-2-restored/manifest.json',3:'group-3-individual/manifest.json',4:'group-4-enhanced/manifest.json',5:'group-5-shapes/manifest.json',6:'group-6-enhanced/manifest.json',7:'group-7-options/manifest.json',8:'group-8/manifest.json',9:'group-9/manifest.json',10:'group-10/manifest.json',12:'group-12/manifest.json'}
 items=[]
 for group, path in SOURCES.items():

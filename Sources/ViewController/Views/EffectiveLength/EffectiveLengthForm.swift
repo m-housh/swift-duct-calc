@@ -201,11 +201,11 @@ struct EffectiveLengthForm: HTML, Sendable {
         }
 
         a(
-          .href("/files/ManD.Groups.pdf"),
+          .href(route: .fittings(.init(system: stepTwo.type.rawValue))),
           .target(.blank),
           .class("btn btn-link")
         ) {
-          "Click here for Manual-D groups reference."
+          "Open fitting reference"
         }
 
         div(.id("groups"), .class("space-y-4")) {
