@@ -4,13 +4,18 @@ Open **`http://localhost:8081/fittings/review?group=4`** through the existing SS
 forward, and sign in with your review-app account. The picker also links to **Review
 catalog duct shapes** when this feature is enabled.
 
-1. Select a group and inspect each drawing. Click a drawing to open it at full size.
-2. Choose **Round**, **Rectangular**, **Oval**, **Mixed / transition**, or
-   **Shape-independent** for the duct connection used by the picker.
-3. If the existing choice is correct, check **I have reviewed this classification**.
-   Changing the choice checks it automatically; you can uncheck it to leave it pending.
-4. Click **Save review**. Unsaved cards are highlighted, and leaving with unsaved
-   choices triggers the browser's confirmation.
+1. Select a group. The compact table shows a drawing, fitting name, duct shape, and
+   review status for each fitting. Click a drawing to open it at full size.
+2. Select individual rows, **Shift-click** a range, or use the header checkbox to
+   select the entire group. Selection alone makes no catalog changes.
+3. Choose a duct shape in the bulk toolbar and click **Apply shape** to classify all
+   selected rows and mark them reviewed. **Mark reviewed** confirms their existing
+   shapes; **Mark pending** clears review status without changing shapes. Individual
+   row controls remain available for exceptions.
+4. Click **Save review** to write all unsaved changes in this group, including rows
+   no longer selected. Changed rows and the unsaved count show the pending work;
+   leaving with unsaved choices triggers the browser's confirmation. Selection
+   persists after saving and **Clear selection** only clears the row selection.
 5. Reopen the fitting group in the picker to see the saved ordering. Existing open
    picker cards retain their current draft until that group is reopened.
 
@@ -91,7 +96,8 @@ maintaining a second classification table in Swift.
 The browser review test uses a **disposable catalog copy and database**, verifies
 login requirements, edits/saves/reloads classifications, checks the live picker
 fragment, rejects stale/invalid writes, restores the exact original file through the
-UI, and checks desktop/mobile layouts:
+UI, tests range/select-all bulk edits and failed-save retry, and checks desktop/mobile
+layouts:
 
 ```sh
 FITTING_REVIEW_URL=http://localhost:YOUR_QA_PORT \

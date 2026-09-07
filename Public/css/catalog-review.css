@@ -1,20 +1,37 @@
-.catalog-review { max-width: 1500px; margin: auto; padding: 24px; }
+.catalog-review { width: 100%; min-width: 0; max-width: 1500px; margin: auto; padding: 24px; }
 .catalog-review h1 { font-size: 28px; font-weight: 600; margin: 12px 0; }
 .catalog-review h2 { font-size: 21px; font-weight: 600; }
-.catalog-review h3 { font-size: 17px; font-weight: 600; }
 .catalog-review header p { max-width: 1000px; margin: 8px 0; }
-.review-note, .review-card small, .review-card-status { opacity: .75; }
+.review-note, .review-card-status { opacity: .75; }
 .review-groups { display: flex; gap: 8px; flex-wrap: wrap; margin: 24px 0; }
-.review-save-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; position: sticky; top: 0; z-index: 2; background: var(--color-base-100); padding: 14px 0; border-bottom: 1px solid var(--color-base-300); }
-#review-status { min-height: 28px; margin: 10px 0; }
-.review-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; }
-.review-card { min-width: 0; border: 1px solid var(--color-base-300); border-radius: var(--radius-box, 10px); overflow: hidden; }
-.review-card img { width: 100%; height: 300px; object-fit: contain; background: white; padding: 12px; }
-.review-card-controls { padding: 16px; }
-.review-card label { display: block; margin-top: 16px; }
-.review-card select { display: block; width: 100%; margin-top: 6px; }
-.review-card .review-checkbox { display: flex; gap: 10px; align-items: center; }
-.review-card-status { margin-top: 12px; }
-.review-card[data-changed=true] { border-color: var(--color-primary); }
-@media (max-width: 1000px) { .review-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
-@media (max-width: 650px) { .review-grid { grid-template-columns: minmax(0,1fr); } .catalog-review { padding: 16px; } }
+.review-save-bar { position: sticky; top: 0; z-index: 2; background: var(--color-base-100); padding: 14px 0; border-bottom: 1px solid var(--color-base-300); }
+.review-save-heading, .review-bulk { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.review-save-heading { justify-content: space-between; margin-bottom: 14px; }
+.review-bulk select { width: 190px; }
+#review-selection-count { min-width: 90px; font-weight: 600; }
+.review-selection-help { font-size: 13px; margin-top: 10px; }
+#review-status { min-height: 24px; margin: 8px 0; }
+.review-table-scroll { overflow: auto; max-height: 65vh; border: 1px solid var(--color-base-300); border-radius: var(--radius-box, 10px); }
+.review-table { width: 100%; min-width: 850px; border-collapse: separate; border-spacing: 0; font-size: 14px; }
+.review-table thead th { position: sticky; top: 0; z-index: 1; background: var(--color-base-200); font-size: 13px; white-space: nowrap; }
+.review-table th, .review-table td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--color-base-300); vertical-align: middle; }
+.review-table tbody tr:last-child > * { border-bottom: 0; }
+.review-table tbody tr:hover { background: var(--color-base-200); }
+.review-table tr[data-selected=true], .review-table tr[data-selected=true]:hover { background: color-mix(in srgb, var(--color-primary) 10%, var(--color-base-100)); }
+.review-table tr[data-changed=true] > :first-child { box-shadow: inset 3px 0 var(--color-primary); }
+.review-drawing { width: 116px; }
+.review-drawing a { display: block; }
+.review-drawing img { display: block; width: 92px; height: 76px; object-fit: contain; background: white; padding: 4px; border-radius: 4px; }
+.review-fitting { min-width: 210px; font-weight: 400; }
+.review-fitting strong, .review-fitting span { display: block; }
+.review-fitting strong { margin-bottom: 3px; }
+.review-table select { width: 180px; }
+.review-table .review-confirm { text-align: center; }
+.review-card-status { width: 150px; }
+@media (max-width: 650px) {
+  .catalog-review { padding: 12px; }
+  .catalog-review h1 { font-size: 24px; }
+  .review-save-bar { position: static; }
+  .review-bulk { gap: 8px; }
+  .review-table-scroll { max-height: 70vh; }
+}

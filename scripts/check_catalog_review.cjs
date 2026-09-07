@@ -66,14 +66,73 @@ const fs = require('node:fs');
     await page.locator('#save-catalog-review').click();
     await page.locator('#review-status').filter({ hasText: 'Saved to catalog.json' }).waitFor();
     assert.equal(fs.readFileSync(source, 'utf8'), initial, 'Round trip preserves exact source formatting');
-    await page.screenshot({ path: '/tmp/catalog-review-desktop.png', fullPage: false });
+    // Row selection alone never changes the catalog or enables Save.
+    assert.equal(await page.locator('tbody tr[data-review-id]').count(), 44);
+    assert(await page.locator('#review-apply-shape').isDisabled());
+    await card('4A').locator('[name=selected]').click();
+    await card('4C').locator('[name=selected]').click({ modifiers: ['Shift'] });
+    assert.equal(await page.locator('#review-selection-count').innerText(), '3 selected');
+    assert(await page.locator('#review-select-all').evaluate(input => input.indeterminate));
+    assert(await page.locator('#save-catalog-review').isDisabled());
+    await page.locator('#review-bulk-shape').selectOption('oval');
+    await page.locator('#review-apply-shape').click();
+    for (const id of ['4A', '4B', '4C']) {
+      assert.equal(await card(id).locator('[name=ductShape]').inputValue(), 'oval');
+      assert(await card(id).locator('[name=reviewed]').isChecked());
+    }
+    assert.equal(await card('4D').locator('[name=ductShape]').inputValue(), 'rectangular');
+    assert.equal(await card('4D').locator('[name=reviewed]').isChecked(), false);
+    assert.equal(fs.readFileSync(source, 'utf8'), initial, 'Bulk actions remain drafts until Save');
+    // Failed bulk saves retain both choices and selection for retry.
+    await page.route('**/fittings/review', route => route.abort());
+    await page.locator('#save-catalog-review').click();
+    await page.waitForFunction(() => !document.querySelector('#catalog-review').inert);
+    assert(await page.locator('#save-catalog-review').isEnabled());
+    assert.equal(await page.locator('#review-selection-count').innerText(), '3 selected');
+    assert.equal(fs.readFileSync(source, 'utf8'), initial);
+    await page.unroute('**/fittings/review');
+    await page.locator('#save-catalog-review').click();
+    await page.locator('#review-status').filter({ hasText: 'Saved to catalog.json' }).waitFor();
+    const bulkExpected = JSON.parse(initial);
+    for (const item of bulkExpected.fittings.filter(item => ['4A', '4B', '4C'].includes(item.id))) {
+      item.ductShape = 'oval'; item.ductShapeReviewed = true;
+    }
+    assert.deepEqual(JSON.parse(fs.readFileSync(source, 'utf8')), bulkExpected);
+    await page.reload();
+    assert.equal(await page.locator('#review-selection-count').innerText(), '0 selected');
+    assert.equal(await card('4C').locator('[name=ductShape]').inputValue(), 'oval');
+    await page.locator('#review-select-all').check();
+    assert.equal(await page.locator('#review-selection-count').innerText(), '44 selected');
+    await page.locator('#review-mark-reviewed').click();
+    assert.equal(await page.locator('[name=reviewed]:checked').count(), 44);
+    assert.equal(await card('4G').locator('[name=ductShape]').inputValue(), 'round');
+    await page.locator('#review-mark-pending').click();
+    assert.equal(await page.locator('[name=reviewed]:checked').count(), 0);
+    await page.locator('#review-clear-selection').click();
+    assert.equal(await page.locator('#review-selection-count').innerText(), '0 selected');
+    assert(await page.locator('#review-mark-reviewed').isDisabled());
+    for (const id of ['4A', '4B', '4C']) await card(id).locator('[name=selected]').check();
+    await page.locator('#review-bulk-shape').selectOption('rectangular');
+    await page.locator('#review-apply-shape').click();
+    await page.locator('#review-mark-pending').click();
+    await page.locator('#save-catalog-review').click();
+    await page.locator('#review-status').filter({ hasText: 'Saved to catalog.json' }).waitFor();
+    assert.equal(fs.readFileSync(source, 'utf8'), initial, 'Bulk round trip preserves exact file');
+    await page.locator('#review-clear-selection').click();
+    // Capture the table with a representative range selected, ready for bulk editing.
+    await card('4A').locator('[name=selected]').click();
+    await card('4F').locator('[name=selected]').click({ modifiers: ['Shift'] });
+    assert.equal(await page.locator('[name=selected]:checked').count(), 6);
+    await page.evaluate(() => { window.scrollTo(0, 0); document.querySelector('.review-table-scroll').scrollTop = 0; });
+    await page.screenshot({ path: '/tmp/catalog-review-desktop.png', fullPage: false, animations: 'disabled' });
     await page.setViewportSize({ width: 390, height: 844 });
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
-    await page.screenshot({ path: '/tmp/catalog-review-mobile.png' });
+    await page.locator('.review-save-bar').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: '/tmp/catalog-review-mobile.png', animations: 'disabled' });
     await page.locator('[data-review-group="2"]').click();
     assert.equal(await card('2A').locator('[name=ductShape]').inputValue(), 'rectangular');
     assert.equal(await card('2N').locator('[name=ductShape]').inputValue(), 'round');
     assert.deepEqual(errors, []);
-    console.log('PASS: authenticated review, persisted source edits, live picker metadata, reload, stale/invalid rejection, exact formatting round trip, groups, and mobile.');
+    console.log('PASS: authenticated review, persisted source edits, live picker metadata, reload, stale/invalid rejection, exact formatting round trip, groups, bulk/range selection, failed bulk save retry, and mobile.');
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exit(1); });

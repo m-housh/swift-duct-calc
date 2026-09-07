@@ -76,43 +76,111 @@ struct CatalogReviewView: HTML, Sendable {
         }
       }
       div(.class("review-save-bar")) {
-        div {
-          h2 { "Group \(group.rawValue) · \(entries.first?.groupTitle ?? "Fittings")" }
-          p(.id("review-progress")) {
-            "\(entries.filter(\.reviewed).count) of \(entries.count) reviewed"
+        div(.class("review-save-heading")) {
+          div {
+            h2 { "Group \(group.rawValue) · \(entries.first?.groupTitle ?? "Fittings")" }
+            p(.id("review-progress")) {
+              "\(entries.filter(\.reviewed).count) of \(entries.count) reviewed"
+            }
+          }
+          button(.id("save-catalog-review"), .type(.button), .class("btn btn-primary"), .disabled) {
+            "Save review"
           }
         }
-        button(.id("save-catalog-review"), .type(.button), .class("btn btn-primary"), .disabled) {
-          "Save review"
+        div(
+          .class("review-bulk"), .init(name: "role", value: "group"),
+          .init(name: "aria-label", value: "Bulk review actions")
+        ) {
+          span(.id("review-selection-count"), .init(name: "role", value: "status")) { "0 selected" }
+          select(
+            .id("review-bulk-shape"), .class("select select-bordered select-sm"),
+            .init(name: "aria-label", value: "Duct shape for selected rows")
+          ) {
+            option(.value("")) { "Choose duct shape…" }
+            for shape in Fitting.Shape.allCases {
+              option(.value(shape.rawValue)) { shape.reviewLabel }
+            }
+          }
+          button(.id("review-apply-shape"), .type(.button), .class("btn btn-sm"), .disabled) {
+            "Apply shape"
+          }
+          button(.id("review-mark-reviewed"), .type(.button), .class("btn btn-sm"), .disabled) {
+            "Mark reviewed"
+          }
+          button(.id("review-mark-pending"), .type(.button), .class("btn btn-sm"), .disabled) {
+            "Mark pending"
+          }
+          button(
+            .id("review-clear-selection"), .type(.button), .class("btn btn-sm btn-ghost"), .disabled
+          ) { "Clear selection" }
+        }
+        p(.class("review-note review-selection-help")) {
+          "Select rows or Shift-click a range. Applying a shape also marks the selected rows reviewed. Save review writes all unsaved changes in this group."
         }
       }
       p(.id("review-status"), .init(name: "role", value: "status")) {}
-      div(.class("review-grid")) {
-        for entry in entries {
-          article(.class("review-card"), .data("review-id", value: entry.id.rawValue)) {
-            a(.href(entry.artwork.versionedPath), .target("_blank"), .rel("noopener")) {
-              img(
-                .src(entry.artwork.versionedPath), .alt(entry.artwork.altText),
-                .init(name: "loading", value: "lazy"))
+      div(
+        .class("review-table-scroll"), .init(name: "tabindex", value: "0"),
+        .init(name: "role", value: "region"),
+        .init(name: "aria-label", value: "Fitting classifications")
+      ) {
+        table(.class("review-table")) {
+          thead {
+            tr {
+              th(.init(name: "scope", value: "col")) {
+                input(
+                  .id("review-select-all"), .type(.checkbox), .class("checkbox checkbox-sm"),
+                  .init(name: "aria-label", value: "Select all fittings in this group"))
+              }
+              th(.init(name: "scope", value: "col")) { "Drawing" }
+              th(.init(name: "scope", value: "col")) { "Fitting" }
+              th(.init(name: "scope", value: "col")) { "Prefer for duct shape" }
+              th(.init(name: "scope", value: "col")) { "Reviewed" }
+              th(.init(name: "scope", value: "col")) { "Status" }
             }
-            div(.class("review-card-controls")) {
-              h3 { "\(entry.sourceCode?.rawValue ?? "Group 11") · \(entry.name)" }
-              small { entry.id.rawValue }
-              label {
-                "Prefer for duct shape"
-                select(.name("ductShape"), .class("select select-bordered")) {
-                  for shape in Fitting.Shape.allCases {
-                    option(.value(shape.rawValue)) { shape.reviewLabel }.attributes(
-                      .selected, when: shape == entry.ductShape)
+          }
+          tbody {
+            for entry in entries {
+              let code = entry.sourceCode?.rawValue ?? "Group 11"
+              tr(.data("review-id", value: entry.id.rawValue)) {
+                td {
+                  input(
+                    .type(.checkbox), .name("selected"), .class("checkbox checkbox-sm"),
+                    .init(name: "aria-label", value: "Select \(code)"))
+                }
+                td(.class("review-drawing")) {
+                  a(
+                    .href(entry.artwork.versionedPath), .target("_blank"), .rel("noopener"),
+                    .init(name: "aria-label", value: "Open \(code) drawing at full size")
+                  ) {
+                    img(
+                      .src(entry.artwork.versionedPath), .alt(entry.artwork.altText),
+                      .init(name: "loading", value: "lazy"))
                   }
                 }
+                th(.init(name: "scope", value: "row"), .class("review-fitting")) {
+                  strong { code }
+                  span { entry.name }
+                }
+                td {
+                  select(
+                    .name("ductShape"), .class("select select-bordered select-sm"),
+                    .init(name: "aria-label", value: "Duct shape for \(code)")
+                  ) {
+                    for shape in Fitting.Shape.allCases {
+                      option(.value(shape.rawValue)) { shape.reviewLabel }.attributes(
+                        .selected, when: shape == entry.ductShape)
+                    }
+                  }
+                }
+                td(.class("review-confirm")) {
+                  input(
+                    .type(.checkbox), .name("reviewed"), .class("checkbox checkbox-sm"),
+                    .init(name: "aria-label", value: "Reviewed \(code)")
+                  ).attributes(.checked, when: entry.reviewed)
+                }
+                td(.class("review-card-status")) { entry.reviewed ? "Reviewed" : "Needs review" }
               }
-              label(.class("review-checkbox")) {
-                input(.type(.checkbox), .name("reviewed"), .class("checkbox")).attributes(
-                  .checked, when: entry.reviewed)
-                "I have reviewed this classification"
-              }
-              p(.class("review-card-status")) { entry.reviewed ? "Reviewed" : "Needs review" }
             }
           }
         }
