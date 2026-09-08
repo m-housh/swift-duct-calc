@@ -278,10 +278,11 @@ async function mount(html, http) {
   await ui.click('save-path');
   assert.equal(ui.redirects.at(-1), `/projects/${projectID}/effective-lengths`);
   const list = await (await http(ui.redirects.at(-1))).text();
-  assert.equal(
-    new JSDOM(list).window.document.querySelector(`a[href="${base}"]`)?.textContent,
-    'From template'
-  );
+  const listDocument = new JSDOM(list).window.document;
+  assert.equal(listDocument.querySelector(`a[href="${base}"]`), null);
+  const addURL = listDocument.querySelector('a[aria-label="Add equivalent length"]').getAttribute('href');
+  const addPage = await (await http(addURL)).text();
+  assert.equal(new JSDOM(addPage).window.document.querySelector(`#fitting-path a[href="${base}"]`)?.textContent, 'From template');
   const editURL = list.match(/\/projects\/[^" ]+\/guided\/edit\/[A-Fa-f0-9-]{36}/)?.[0];
   assert(editURL, 'Saved guided path should reopen in the guided editor');
   assert.equal(

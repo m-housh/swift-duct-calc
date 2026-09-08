@@ -28,6 +28,11 @@ struct ProjectFittingPathView: HTML, Sendable {
           }
           button(.type(.button), .id("close-path")) { "Cancel" }
         }
+        if baseline == nil {
+          div(.class("mb-4")) {
+            a(.class("link-button"), .href(guidedPathURL(project.id))) { "From template" }
+          }
+        }
         div(.class("path-fields")) {
           label {
             "Path name"

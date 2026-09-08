@@ -2,7 +2,7 @@
 
 Status: the first production implementation is in the Swift application.
 Configuration covers every eligible fitting group. Account → Path templates
-opens the editor; Equivalent Lengths → From template starts a guided path.
+opens the editor; Equivalent Lengths → + → From template starts a guided path.
 
 The implementation includes user-owned template storage with revision checks,
 starter templates, section and choice editing, reordering, independent Try,
@@ -38,8 +38,8 @@ that file. It cannot overwrite `Resources/catalog.json`, which retains all 189
 reviewed duct classifications and the Group 8 R/D 1.0 default. The template editor's
 broader input mapping remains follow-up work.
 
-The existing Add equivalent length action still opens the picker modal. From
-template opens the guided flow. Edit selects the matching editor for a saved path,
+The + add button opens the picker modal. From template appears inside that
+modal for new paths and opens the guided flow. Edit selects the matching editor for a saved path,
 and the ordinary picker rejects writes to template paths to preserve their section
 metadata. The public fitting reference remains available at `/fittings`.
 

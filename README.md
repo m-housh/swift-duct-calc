@@ -26,7 +26,7 @@ Documentation coming soon!
 
 ## Path templates
 
-Use From template on Equivalent Lengths to build a guided path.
+On Equivalent Lengths, click + and choose From template inside the add modal to build a guided path.
 Manage templates from the project or your account, and share independent copies
 through [JSON export/import](docs/path-template-sharing.md).
 

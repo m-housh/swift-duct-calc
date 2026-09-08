@@ -1,7 +1,7 @@
 # Fitting picker integrated into the application
 
 The agreed `path-catalog.html` prototype is now implemented in the Swift application.
-Open a project, choose **Equivalent Lengths**, then **Add equivalent length** or **Edit**.
+Open a project, choose **Equivalent Lengths**, then **+** or **Edit**. The + opens the path modal, which also offers **From template** for a new guided path.
 The path editor opens in a modal over the project's Equivalent Lengths list: **88% of
 viewport width and height on desktop**, expanding to 96% width and 94% height on mobile.
 **Save path** returns to the updated list. Use its **Edit** link to reopen recorded entries.

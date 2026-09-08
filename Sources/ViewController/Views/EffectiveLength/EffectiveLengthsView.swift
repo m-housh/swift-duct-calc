@@ -23,16 +23,17 @@ struct EffectiveLengthsView: HTML, Sendable {
     div(.class("space-y-4")) {
       PageTitleRow {
         PageTitle { "Equivalent Lengths" }
-        a(.href("/projects/\(projectID)/effective-lengths/editor"), .class("btn btn-primary")) {
-          "Add equivalent length"
+        a(
+          .href("/projects/\(projectID)/effective-lengths/editor"), .class("btn btn-primary"),
+          .init(name: "aria-label", value: "Add equivalent length"), .title("Add equivalent length")
+        ) {
+          SVG(.circlePlus)
         }
 
       }
       .attributes(.class("pb-6"))
 
       a(.class("link"), .href(pathTemplatesURL(projectID))) { "Manage path templates" }
-
-      a(.class("btn btn-secondary"), .href(guidedPathURL(projectID))) { "From template" }
 
       EffectiveLengthsTable(effectiveLengths: effectiveLengths)
 
