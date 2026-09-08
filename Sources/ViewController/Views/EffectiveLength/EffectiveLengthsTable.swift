@@ -46,14 +46,14 @@ struct EffectiveLengthsTable: HTML, Sendable {
       }
       tbody {
         for row in sortedLengths {
-          EffectiveLenghtRow(effectiveLength: row)
+          EffectiveLengthRow(effectiveLength: row)
         }
       }
 
     }
   }
 
-  struct EffectiveLenghtRow: HTML, Sendable {
+  struct EffectiveLengthRow: HTML, Sendable {
 
     let effectiveLength: EquivalentLength
 
@@ -102,13 +102,12 @@ struct EffectiveLengthsTable: HTML, Sendable {
         }
         td {
           // Total
-          // Row {
-          div(.class("flex justify-end mx-auto space-x-4")) {
+          div(.class("flex items-center justify-end gap-4")) {
             Badge(number: effectiveLength.totalEquivalentLength, digits: 0)
-              .attributes(.class("badge-primary badge-lg pt-2"))
+              .attributes(.class("badge-primary"))
 
             // Buttons
-            div(.class("flex justify-end -mt-2")) {
+            div(.class("flex items-center justify-end")) {
               div(.class("join")) {
                 TrashButton()
                   .attributes(
@@ -120,17 +119,26 @@ struct EffectiveLengthsTable: HTML, Sendable {
                   )
                   .tooltip("Delete", position: .bottom)
 
-                EditButton()
-                  .attributes(
-                    .class("join-item btn-ghost"),
-                    .showModal(id: EffectiveLengthForm.id(effectiveLength))
-                  )
-                  .tooltip("Edit", position: .bottom)
+                if effectiveLength.templateSnapshot != nil {
+                  a(
+                    .class("btn join-item btn-ghost"),
+                    .href("\(guidedPathURL(effectiveLength.projectID))/edit/\(effectiveLength.id)")
+                  ) { "Edit" }
+                } else {
+                  EditButton()
+                    .attributes(
+                      .class("join-item btn-ghost"),
+                      .showModal(id: EffectiveLengthForm.id(effectiveLength))
+                    )
+                    .tooltip("Edit", position: .bottom)
+                }
               }
             }
           }
 
-          EffectiveLengthForm(effectiveLength: effectiveLength)
+          if effectiveLength.templateSnapshot == nil {
+            EffectiveLengthForm(effectiveLength: effectiveLength)
+          }
         }
       }
     }

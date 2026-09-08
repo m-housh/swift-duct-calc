@@ -66,11 +66,14 @@ p-6 w-full pb-6">
                     <button type="button" class="btn btn-primary" onclick="equivalentLengthForm.showModal()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></button>
                   </div>
                 </div>
+                Manage path templates<a class="link" href="/path-templates?project=00000000-0000-0000-0000-000000000000"></a>
                 <dialog id="equivalentLengthForm" class="modal">
                   <div class="modal-box">
                     <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="equivalentLengthForm.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
                     <h1 class="text-2xl font-bold">Effective Length</h1>
                     <div id="formStep_equivalentLengthForm" class="mt-4">
+                      <a class="btn btn-secondary w-full" href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/guided">From template</a>
+                      <div class="divider">Or enter manually</div>
                       <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/stepOne" hx-target="#formStep_equivalentLengthForm" hx-swap="innerHTML">
                         <label class="input w-full"><span class="label">Name</span>
                         <input name="name" type="text" value="" required autofocus>
@@ -132,9 +135,9 @@ p-6 w-full pb-6">
                         </div>
                       </td>
                       <td>
-                        <div class="flex justify-end mx-auto space-x-4">
-                          <div class="badge badge-lg badge-primary badge-lg pt-2"><span>105</span></div>
-                          <div class="flex justify-end -mt-2">
+                        <div class="flex items-center justify-end gap-4">
+                          <div class="badge badge-lg badge-primary"><span>105</span></div>
+                          <div class="flex items-center justify-end">
                             <div class="join">
                               <div class="tooltip tooltip-bottom" data-tip="Delete">
                                 <button type="button" class="btn btn-error join-item btn-ghost" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000008" hx-confirm="Are you sure?" hx-target="closest tr" hx-swap="outerHTML"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
@@ -196,9 +199,9 @@ p-6 w-full pb-6">
                         </div>
                       </td>
                       <td>
-                        <div class="flex justify-end mx-auto space-x-4">
-                          <div class="badge badge-lg badge-primary badge-lg pt-2"><span>80</span></div>
-                          <div class="flex justify-end -mt-2">
+                        <div class="flex items-center justify-end gap-4">
+                          <div class="badge badge-lg badge-primary"><span>80</span></div>
+                          <div class="flex items-center justify-end">
                             <div class="join">
                               <div class="tooltip tooltip-bottom" data-tip="Delete">
                                 <button type="button" class="btn btn-error join-item btn-ghost" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000009" hx-confirm="Are you sure?" hx-target="closest tr" hx-swap="outerHTML"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>

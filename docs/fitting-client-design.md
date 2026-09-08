@@ -1,7 +1,13 @@
 # FittingClient design sketch
 
-Status: proposal for architecture review. No production code or package targets
-have been added. This narrows the broader
+Status: the initial `FittingClient` target is implemented for guided paths. It
+provides catalog definitions, evaluation, and template validation. Definitions
+include artwork references; standalone artwork and reference-resolution
+operations below remain proposed. See the
+[production template implementation](path-template-implementation-plan.md) and
+[source audit](fitting-rule-audit.md) for current coverage.
+
+The original boundary proposal below narrows the broader
 [fitting-picker implementation plan](fitting-picker-implementation-plan.md) to one
 reviewable dependency boundary.
 

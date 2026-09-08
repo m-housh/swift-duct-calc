@@ -9,6 +9,36 @@ import Testing
 struct EquivalentLengthTests {
 
   @Test
+  func fractionalLengthsSurviveSaveAndEdit() async throws {
+    try await withTestUserAndProject { _, project in
+      @Dependency(\.database.equivalentLengths) var equivalentLengths
+      let created = try await equivalentLengths.create(
+        .init(
+          projectID: project.id,
+          name: "Fractional fittings",
+          type: .supply,
+          straightLengths: [10],
+          groups: [.init(group: 8, letter: "A", value: 10.25, quantity: 2)]
+        )
+      )
+
+      let reopened = try #require(await equivalentLengths.get(created.id))
+      #expect(reopened.groups == created.groups)
+      #expect(reopened.totalEquivalentLength == 30.5)
+
+      let updated = try await equivalentLengths.update(
+        created.id,
+        .init(groups: [.init(group: 8, letter: "A", value: 7.125, quantity: 3)])
+      )
+      let reopenedUpdate = try #require(await equivalentLengths.get(created.id))
+      #expect(reopenedUpdate.groups == updated.groups)
+      #expect(reopenedUpdate.totalEquivalentLength == 31.375)
+      let longest = try await equivalentLengths.fetchMax(project.id)
+      #expect(longest.supply?.totalEquivalentLength == 31.375)
+    }
+  }
+
+  @Test
   func happyPath() async throws {
     try await withTestUserAndProject { user, project in
       @Dependency(\.database.equivalentLengths) var equivalentLengths

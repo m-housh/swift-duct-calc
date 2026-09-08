@@ -1,6 +1,7 @@
 import Dependencies
 import DependenciesMacros
 import FluentKit
+import Foundation
 import ManualDCore
 
 extension DependencyValues {
@@ -32,6 +33,18 @@ public struct DatabaseClient: Sendable {
   public var userProfiles: UserProfiles
   /// Interactions with the trunk sizes table.
   public var trunkSizes: TrunkSizes
+  /// User-owned guided path templates.
+  public var pathTemplates: PathTemplates
+
+  @DependencyClient
+  public struct PathTemplates: Sendable {
+    public var create: @Sendable (User.ID, PathTemplate.Configuration) async throws -> PathTemplate
+    public var delete: @Sendable (User.ID, PathTemplate.ID) async throws -> Void
+    public var fetch: @Sendable (User.ID) async throws -> [PathTemplate]
+    public var get: @Sendable (User.ID, PathTemplate.ID) async throws -> PathTemplate?
+    public var update:
+      @Sendable (User.ID, PathTemplate.ID, UUID, PathTemplate.Configuration) async throws -> PathTemplate
+  }
 
   @DependencyClient
   public struct ComponentLosses: Sendable {
@@ -81,6 +94,7 @@ public struct DatabaseClient: Sendable {
     public var delete: @Sendable (Project.ID) async throws -> Void
     public var detail: @Sendable (Project.ID) async throws -> Project.Detail?
     public var get: @Sendable (Project.ID) async throws -> Project?
+    public var getOwned: @Sendable (User.ID, Project.ID) async throws -> Project?
     public var getCompletedSteps: @Sendable (Project.ID) async throws -> Project.CompletedSteps
     public var getSensibleHeatRatio: @Sendable (Project.ID) async throws -> Double?
     public var fetch: @Sendable (User.ID, PageRequest) async throws -> Page<Project>
@@ -144,7 +158,8 @@ extension DatabaseClient: TestDependencyKey {
     equivalentLengths: .testValue,
     users: .testValue,
     userProfiles: .testValue,
-    trunkSizes: .testValue
+    trunkSizes: .testValue,
+    pathTemplates: .testValue
   )
 
   public static func live(database: any Database) -> Self {
@@ -157,7 +172,8 @@ extension DatabaseClient: TestDependencyKey {
       equivalentLengths: .live(database: database),
       users: .live(database: database),
       userProfiles: .live(database: database),
-      trunkSizes: .live(database: database)
+      trunkSizes: .live(database: database),
+      pathTemplates: .live(database: database)
     )
   }
 }

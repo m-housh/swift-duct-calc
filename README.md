@@ -17,6 +17,15 @@ preference.
 
 Documentation coming soon!
 
+## Path templates
+
+Use the plus button on Equivalent Lengths to build a path from a template.
+Manage templates from the project or your account, and share independent copies
+through [JSON export/import](docs/path-template-sharing.md).
+
+See the [implementation and verification notes](docs/path-template-implementation-plan.md)
+for catalog coverage, persistence, and local checks.
+
 ## License
 
 This project is licensed under Creative Commons 4.0.  See the
@@ -25,4 +34,3 @@ This project is licensed under Creative Commons 4.0.  See the
 ## Contributions
 
 We are open to contributions.  Feel free to open an issue or pull-request.
-
