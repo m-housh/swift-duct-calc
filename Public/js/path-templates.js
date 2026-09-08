@@ -91,14 +91,15 @@
     function startPath(trial = false) {
       if (trial) trialWasDirty = dirty;
       const config = clone(configuration),
-        saved = trial ? null : data.path;
+        saved = trial ? null : data.path,
+        initial = trial ? null : data.initialValues;
       path = {
         config,
         trial,
         cursor: saved ? config.steps.length : 0,
         visited: saved ? config.steps.length : 0,
-        name: saved?.name || '',
-        straight: saved?.straightLengths.join(', ') || '',
+        name: saved?.name ?? initial?.name ?? '',
+        straight: (saved?.straightLengths ?? initial?.straightLengths ?? []).join(', '),
         rows: [],
         inputs: {},
         quantities: {},
@@ -316,7 +317,7 @@
                       })
                       .join('')}</div>`
               }<div id="step-fitting-rows">${rowList(stepRows(step))}</div>`
-            : `<label class="block">Path name<input class="input w-full" maxlength="100" data-path="name" value="${esc(path.name)}"></label><label class="block">Straight duct lengths (ft)<input class="input w-full" data-path="straight" placeholder="10, 25, 5" value="${esc(path.straight)}"></label><p class="text-sm">Separate whole-foot lengths with commas. Leave blank if there are none.</p>${rowList(path.rows)}<p class="font-bold">Fittings: ${Number(total.toFixed(3))} ft</p>`
+            : `<label class="block">Path name<input class="input w-full" maxlength="200" data-path="name" value="${esc(path.name)}"></label><label class="block">Straight duct lengths (ft)<input class="input w-full" data-path="straight" placeholder="10, 25, 5" value="${esc(path.straight)}"></label><p class="text-sm">Separate whole-foot lengths with commas. Leave blank if there are none.</p>${rowList(path.rows)}<p class="font-bold">Fittings: ${Number(total.toFixed(3))} ft</p>`
         }
         ${button('browse', 'Browse all fittings')}<div class="sticky bottom-0 bg-base-100 border-t border-base-300 p-3 flex flex-wrap gap-2 justify-end">${button('back', 'Back', path.cursor === 0 ? 'disabled' : '')}${step?.allowsSkipping ? button('skip', stepRows(step).length ? 'Clear and skip' : 'Skip') : ''}${step ? button('done', step.behavior === 'chooseOne' ? 'Continue' : `Done with ${esc(step.title)}`, '', 'btn-secondary') : path.trial ? button('exit-trial', 'Back to template', '', 'btn-secondary') : button('save-path', 'Save path', '', 'btn-secondary')}</div></section></div>`;
     }

@@ -38,12 +38,14 @@ struct GuidedPathTests {
       let template = try await client.createPathTemplate(
         userID: user.id, configuration: Self.configuration)
       let snapshot = PathTemplate.Snapshot(template: template)
+      let pathName = String(repeating: "Supply ", count: 25)
       let saved = try await client.saveGuidedPath(
         userID: user.id, projectID: project.id,
         request: .init(
-          name: "Guided supply", straightLengths: [10], snapshot: snapshot,
+          name: pathName, straightLengths: [10], snapshot: snapshot,
           rows: Array(Self.rows.reversed())
         ))
+      #expect(saved.name == pathName)
       #expect(abs(saved.totalEquivalentLength - 38.6) < 1e-9)
       #expect(saved.groups[1].calculation?.equivalentLengthFeet == 6.2)
       #expect(saved.groups[1].rowID == UUID(61))

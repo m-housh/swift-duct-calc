@@ -7,6 +7,7 @@ struct PathTemplatesView: HTML, Sendable {
   let templates: [PathTemplate]
   let projectID: Project.ID?
   var choosing: Bool = false
+  var draft: String? = nil
 
   var body: some HTML {
     Navbar(showSidebarToggle: false, isLoggedIn: true)
@@ -41,8 +42,10 @@ struct PathTemplatesView: HTML, Sendable {
         if choosing, let projectID {
           for type in EquivalentLength.EffectiveLengthType.allCases {
             if !templates.contains(where: { $0.configuration.type == type }) {
-              form(.method(.post), .action("\(guidedPathURL(projectID))/starter/\(type.rawValue)"))
-              {
+              form(
+                .method(.post),
+                .action(withDraft("\(guidedPathURL(projectID))/starter/\(type.rawValue)"))
+              ) {
                 SubmitButton(title: "Use starter \(type.rawValue)")
               }
             }
@@ -67,7 +70,7 @@ struct PathTemplatesView: HTML, Sendable {
               if choosing, let projectID {
                 a(
                   .class("btn btn-secondary"),
-                  .href("\(guidedPathURL(projectID))/start/\(template.id)")
+                  .href(withDraft("\(guidedPathURL(projectID))/start/\(template.id)"))
                 ) {
                   "Use template"
                 }
@@ -81,6 +84,15 @@ struct PathTemplatesView: HTML, Sendable {
       }
     }
   }
+
+  private func withDraft(_ path: String) -> String {
+    guard let draft else { return path }
+    var url = URLComponents()
+    url.path = path
+    url.queryItems = [.init(name: "draft", value: draft)]
+    url.percentEncodedQuery = url.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+    return url.string!
+  }
 }
 
 struct PathTemplateWorkspace: HTML, Sendable {
@@ -93,6 +105,7 @@ struct PathTemplateWorkspace: HTML, Sendable {
     let path: EquivalentLength?
     let saveURL: String
     let backURL: String
+    var initialValues: GuidedPath.InitialValues? = nil
   }
   let data: Data
   let encoded: String
@@ -130,7 +143,8 @@ struct PathTemplateWorkspace: HTML, Sendable {
 }
 
 func guidedPathURL(_ projectID: Project.ID) -> String {
-  SiteRoute.View.router.path(for: .project(.detail(projectID, .equivalentLength(.guided(.index)))))
+  SiteRoute.View.router.path(
+    for: .project(.detail(projectID, .equivalentLength(.guided(.index())))))
 }
 
 func effectiveLengthsURL(_ projectID: Project.ID) -> String {

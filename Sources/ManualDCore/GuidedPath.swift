@@ -1,6 +1,23 @@
 import Foundation
 
 public enum GuidedPath {
+  public enum InitialValuesError: Error { case invalid }
+
+  public struct InitialValues: Codable, Equatable, Sendable {
+    public let name: String
+    public let straightLengths: [Int]
+
+    public init(draft: String) throws {
+      guard draft.utf8.count <= 4096 else {
+        throw InitialValuesError.invalid
+      }
+      self = try JSONDecoder().decode(Self.self, from: Data(draft.utf8))
+      guard name.count <= 200, straightLengths.count <= 100,
+        straightLengths.allSatisfy({ $0 > 0 })
+      else { throw InitialValuesError.invalid }
+    }
+  }
+
   public struct SaveRequest: Codable, Equatable, Sendable {
     public let id: EquivalentLength.ID?
     public let name: String
@@ -28,7 +45,8 @@ public enum GuidedPath {
     public let quantity: Int
 
     public init(
-      id: UUID, stepID: UUID?, fittingID: TemplateFitting.ID, inputs: TemplateFitting.Inputs, quantity: Int
+      id: UUID, stepID: UUID?, fittingID: TemplateFitting.ID, inputs: TemplateFitting.Inputs,
+      quantity: Int
     ) {
       self.id = id
       self.stepID = stepID

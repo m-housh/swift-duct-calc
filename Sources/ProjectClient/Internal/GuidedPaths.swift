@@ -50,7 +50,7 @@ extension ProjectClient {
     }
     try await fittings.validateTemplate(snapshot.configuration)
     guard !request.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
-      request.name.count <= 100, request.rows.count <= 1000,
+      request.name.count <= 200, request.rows.count <= 1000,
       Set(request.rows.map(\.id)).count == request.rows.count,
       request.straightLengths.count <= 100,
       request.straightLengths.allSatisfy({ $0 > 0 })

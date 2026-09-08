@@ -217,6 +217,18 @@
       if (busy || (dirty && !window.confirm('Discard unsaved changes to this path?'))) return;
       dirty = false; root.close(); location.assign(endpoint);
     }
+    $('#path-from-template')?.addEventListener('click', event => {
+      event.preventDefault();
+      if (busy) return;
+      try {
+        const draft = { name: $('#path-name').value, straightLengths: parseStraight() };
+        if (entries.length && !window.confirm('Starting a template replaces the fittings in this draft. Continue?')) return;
+        const url = new URL(event.currentTarget.href);
+        url.search = `?draft=${encodeURIComponent(JSON.stringify(draft))}`;
+        dirty = false;
+        location.assign(url.href);
+      } catch (error) { status(error.message); $('#path-straight').focus(); }
+    });
     root.addEventListener('cancel', event => {
       if (event.target !== root) return;
       event.preventDefault(); closeEditor();

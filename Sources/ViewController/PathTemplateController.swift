@@ -29,7 +29,9 @@ extension SiteRoute.View.UserRoute.PathTemplateRoute {
       }
       if let projectID {
         @Dependency(\.database.projects) var projects
-        guard try await projects.getForUser(projectID, user.id) != nil else { throw NotFoundError() }
+        guard try await projects.getForUser(projectID, user.id) != nil else {
+          throw NotFoundError()
+        }
       }
       switch self {
       case .index:
@@ -122,21 +124,26 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute.GuidedRoute {
         throw NotFoundError()
       }
       switch self {
-      case .index:
+      case .index(let draft):
+        _ = try draft.map(GuidedPath.InitialValues.init(draft:))
         let templates = try await database.pathTemplates.fetch(user.id)
         return await request.view {
-          PathTemplatesView(templates: templates, projectID: projectID, choosing: true)
+          PathTemplatesView(
+            templates: templates, projectID: projectID, choosing: true, draft: draft)
         }
-      case .start(let id):
+      case .start(let id, let draft):
         guard let template = try await database.pathTemplates.get(user.id, id) else {
           throw NotFoundError()
         }
-        return try await workspace(on: request, projectID: projectID, template: template)
-      case .starter(let type):
+        return try await workspace(
+          on: request, projectID: projectID, template: template, draft: draft)
+      case .starter(let type, let draft):
+        _ = try draft.map(GuidedPath.InitialValues.init(draft:))
         let configuration = PathTemplate.starterConfigurations().first { $0.type == type }!
         let template = try await project.createPathTemplate(
           userID: user.id, configuration: configuration)
-        return try await workspace(on: request, projectID: projectID, template: template)
+        return try await workspace(
+          on: request, projectID: projectID, template: template, draft: draft)
       case .edit(let id):
         guard let path = try await database.equivalentLengths.get(id), path.projectID == projectID,
           let snapshot = path.templateSnapshot
@@ -165,7 +172,8 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute.GuidedRoute {
   }
 
   private func workspace(
-    on request: ViewController.Request, projectID: Project.ID, template: PathTemplate
+    on request: ViewController.Request, projectID: Project.ID, template: PathTemplate,
+    draft: String?
   )
     async throws -> AnySendableHTML
   {
@@ -173,7 +181,8 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute.GuidedRoute {
       data: .init(
         mode: "path", configuration: template.configuration, template: template,
         definitions: allFittings(), projectID: projectID, path: nil,
-        saveURL: guidedPathURL(projectID), backURL: effectiveLengthsURL(projectID)
+        saveURL: guidedPathURL(projectID), backURL: effectiveLengthsURL(projectID),
+        initialValues: draft.map(GuidedPath.InitialValues.init(draft:))
       ))
     return await request.view { view }
   }
@@ -187,6 +196,9 @@ private func workspaceError(_ error: any Error) -> some HTML & Sendable {
   if let error = error as? ValidationError { return workspaceError(error.message) }
   if error is NotFoundError {
     return workspaceError("This project, path, or template is unavailable.")
+  }
+  if error is GuidedPath.InitialValuesError {
+    return workspaceError("Check the path name and straight duct lengths.")
   }
   if error is PathTemplateConflictError {
     return workspaceError(

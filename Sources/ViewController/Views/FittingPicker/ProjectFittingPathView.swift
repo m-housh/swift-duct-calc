@@ -28,11 +28,6 @@ struct ProjectFittingPathView: HTML, Sendable {
           }
           button(.type(.button), .id("close-path")) { "Cancel" }
         }
-        if baseline == nil {
-          div(.class("mb-4")) {
-            a(.class("link-button"), .href(guidedPathURL(project.id))) { "From template" }
-          }
-        }
         div(.class("path-fields")) {
           label {
             "Path name"
@@ -59,7 +54,15 @@ struct ProjectFittingPathView: HTML, Sendable {
           }
         }
         section(.class("coverage")) {
-          small { "Groups in this path" }
+          div(.class("flex w-full flex-wrap items-center justify-between gap-2")) {
+            small { "Groups in this path" }
+            if baseline == nil {
+              a(.id("path-from-template"), .class("link-button"), .href(guidedPathURL(project.id)))
+              {
+                "From template"
+              }
+            }
+          }
           div(.id("group-coverage")) {}
         }
         section(.class("path-table"), .init(name: "aria-label", value: "Fitting path entries")) {

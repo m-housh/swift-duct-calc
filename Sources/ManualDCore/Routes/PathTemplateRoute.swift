@@ -66,20 +66,24 @@ extension SiteRoute.View.UserRoute {
 
 extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
   public enum GuidedRoute: Equatable, Sendable {
-    case index
-    case start(PathTemplate.ID)
-    case starter(EquivalentLength.EffectiveLengthType)
+    case index(draft: String? = nil)
+    case start(PathTemplate.ID, draft: String? = nil)
+    case starter(EquivalentLength.EffectiveLengthType, draft: String? = nil)
     case edit(EquivalentLength.ID)
     case save(GuidedPath.SaveRequest)
 
     public static let router = OneOf {
-      Route(.case(Self.index)) { Method.get }
+      Route(.case(Self.index)) {
+        Method.get
+        Query { Optionally { Field("draft", .string) } }
+      }
       Route(.case(Self.start)) {
         Path {
           "start"
           PathTemplate.ID.parser()
         }
         Method.get
+        Query { Optionally { Field("draft", .string) } }
       }
       Route(.case(Self.starter)) {
         Path {
@@ -87,6 +91,7 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
           EquivalentLength.EffectiveLengthType.parser()
         }
         Method.post
+        Query { Optionally { Field("draft", .string) } }
       }
       Route(.case(Self.edit)) {
         Path {

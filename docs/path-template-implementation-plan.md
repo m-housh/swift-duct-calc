@@ -39,7 +39,9 @@ reviewed duct classifications and the Group 8 R/D 1.0 default. The template edit
 broader input mapping remains follow-up work.
 
 The + add button opens the picker modal. From template appears inside that
-modal for new paths and opens the guided flow. Edit selects the matching editor for a saved path,
+modal beside Groups in this path for new paths. It carries the path name and
+straight duct lengths through saved-template or starter-template selection into
+the guided flow. The details also survive reloading the new guided page. Edit selects the matching editor for a saved path,
 and the ordinary picker rejects writes to template paths to preserve their section
 metadata. The public fitting reference remains available at `/fittings`.
 
@@ -314,3 +316,9 @@ Run it with Playwright available and `FITTING_APP_URL` set to the disposable app
 ![Template editor on mobile](images/fitting-picker/templates-editor-mobile.png)
 
 ![Guided path](images/fitting-picker/templates-guided.png)
+
+The handoff browser check covers invalid straight lengths, names containing spaces
+and punctuation, both template selection routes, page reload, and save/reopen.
+Draft details apply only to a new guided path; saved paths retain their own values.
+
+![Template handoff in the path modal](images/fitting-picker/template-handoff.png)

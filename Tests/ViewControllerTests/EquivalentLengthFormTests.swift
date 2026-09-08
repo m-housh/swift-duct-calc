@@ -15,6 +15,39 @@ import URLRouting
 struct EquivalentLengthFormTests {
   typealias Route = SiteRoute.View.ProjectRoute.EquivalentLengthRoute
 
+  @Test
+  func templateDraftSurvivesChooserAndStartRoutes() throws {
+    let draft = #"{"name":"Supply + \"East\" & <West>","straightLengths":[10,25,15]}"#
+    let values = try GuidedPath.InitialValues(draft: draft)
+    #expect(values.name == "Supply + \"East\" & <West>")
+    #expect(values.straightLengths == [10, 25, 15])
+    let routes: [Route.GuidedRoute] = [
+      .index(draft: draft), .start(UUID(), draft: draft), .starter(.return, draft: draft),
+      .index(), .start(UUID()), .starter(.supply),
+    ]
+    for route in routes {
+      var request = URLRequest(
+        url: URL(string: "http://localhost" + Route.GuidedRoute.router.path(for: route))!)
+      if case .starter = route { request.httpMethod = "POST" }
+      #expect(try Route.GuidedRoute.router.match(request: request) == route)
+    }
+  }
+
+  @Test
+  func invalidTemplateDraftsAreRejected() throws {
+    for draft in [
+      #"{"name":"Test","straightLengths":[-1]}"#,
+      #"{"name":"Test","straightLengths":[0]}"#,
+      #"{"name":"Test","straightLengths":[10.5]}"#,
+      #"{"name":"Test","straightLengths":"10,25"}"#,
+      String(repeating: "x", count: 4097),
+    ] {
+      #expect(throws: (any Error).self) { try GuidedPath.InitialValues(draft: draft) }
+    }
+    let empty = try GuidedPath.InitialValues(draft: #"{"name":"","straightLengths":[]}"#)
+    #expect(empty.name.isEmpty && empty.straightLengths.isEmpty)
+  }
+
   @Test(arguments: ["POST", "PATCH"])
   func fractionalLengthsSurviveFormSubmission(method: String) throws {
     let form = try parseForm(method: method, lengths: ["10.25", "7.5"])
