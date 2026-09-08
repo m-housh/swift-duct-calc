@@ -457,6 +457,7 @@ extension SiteRoute.View.ProjectRoute {
     case editor(EquivalentLength.ID?)
     case savePath(String)
     case favorite(String)
+    case guided(GuidedRoute)
     case delete(id: EquivalentLength.ID)
     case field(FieldType, style: EquivalentLength.EffectiveLengthType? = nil)
     case index
@@ -489,6 +490,13 @@ extension SiteRoute.View.ProjectRoute {
         }
         Method.post
         Body { FormData { Field("payload", .string) } }
+      }
+      Route(.case(Self.guided)) {
+        Path {
+          rootPath
+          "guided"
+        }
+        GuidedRoute.router
       }
       Route(.case(Self.delete(id:))) {
         Path {
@@ -549,7 +557,7 @@ extension SiteRoute.View.ProjectRoute {
             }
             Many {
               Field("group[length]") {
-                Int.parser()
+                Double.parser()
               }
 
             }
@@ -631,7 +639,7 @@ extension SiteRoute.View.ProjectRoute {
               }
               Many {
                 Field("group[length]") {
-                  Int.parser()
+                  Double.parser()
                 }
 
               }
@@ -686,7 +694,7 @@ extension SiteRoute.View.ProjectRoute {
       public let straightLengths: [Int]
       public let groupGroups: [Int]
       public let groupLetters: [String]
-      public let groupLengths: [Int]
+      public let groupLengths: [Double]
       public let groupQuantities: [Int]
     }
 
@@ -959,10 +967,15 @@ extension SiteRoute.View {
 
 extension SiteRoute.View {
   public enum UserRoute: Equatable, Sendable {
+    case templates(PathTemplateRoute)
     case profile(Profile)
     case logout
 
     static let router = OneOf {
+      Route(.case(Self.templates)) {
+        Path { "path-templates" }
+        PathTemplateRoute.router
+      }
       Route(.case(Self.profile)) {
         Profile.router
       }

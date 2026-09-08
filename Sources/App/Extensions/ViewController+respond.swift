@@ -58,15 +58,14 @@ struct AnyHTMLResponse: AsyncResponseEncodable {
     Response(
       status: .ok,
       headers: headers,
-      body: .init(asyncStream: { [value, chunkSize] writer in
+      // Managed streams finish with .error when rendering or a disconnected client throws.
+      body: .init(managedAsyncStream: { [value, chunkSize] writer in
         guard let html = value.tryTake() else {
           assertionFailure("Non-sendable HTML value consumed more than once")
           request.logger.error("Non-sendable HTML value consumed more than once")
           throw Abort(.internalServerError)
         }
         try await writer.writeHTML(html, chunkSize: chunkSize)
-        try await writer.write(.end)
-
       })
     )
   }

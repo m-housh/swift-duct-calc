@@ -65,6 +65,12 @@ struct EffectiveLengthForm: HTML, Sendable {
     }
 
     var body: some HTML {
+      if effectiveLength == nil {
+        a(.class("btn btn-secondary w-full"), .href(guidedPathURL(projectID))) {
+          "From template"
+        }
+        div(.class("divider")) { "Or enter manually" }
+      }
       form(
         .class("space-y-4"),
         .hx.post(route),
@@ -280,6 +286,7 @@ struct GroupField: HTML, Sendable {
         "Length",
         .name("group[length]"),
         .type(.number),
+        .step("any"),
         .value(group?.value),
         .placeholder("10"),
         .min("0"),

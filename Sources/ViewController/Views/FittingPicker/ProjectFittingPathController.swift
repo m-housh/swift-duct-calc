@@ -41,6 +41,18 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
         if let id {
           guard let path = try await database.equivalentLengths.get(id), path.projectID == projectID
           else { throw PickerError("Path not found.") }
+          if path.templateSnapshot != nil {
+            return await request.view {
+              div(.class("p-6 space-y-4")) {
+                p {
+                  "This path uses a template. Open its guided editor to keep the section layout."
+                }
+                a(.class("btn btn-primary"), .href("\(guidedPathURL(projectID))/edit/\(path.id)")) {
+                  "Edit template path"
+                }
+              }
+            }
+          }
           saved = path
         }
         var rows: [PathEditorRow] = []

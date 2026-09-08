@@ -1,3 +1,7 @@
+Template integration is described in [the path-template implementation notes](path-template-implementation-plan.md).
+Guided inputs now adapt to this implementation through `TemplateFittingClient`;
+the reviewed runtime catalog and picker calculation types remain authoritative.
+
 # FittingClient design sketch
 
 Duct-shape ordering is now authored in runtime `catalog.json` (schema 2), with a

@@ -43,6 +43,7 @@ struct DependenciesMiddleware: AsyncMiddleware {
         $0.database = database
         $0.environment = environment
         $0.fittingClient = fittingClient
+        $0.templateFittingClient = .live(using: fittingClient)
         // $0.dateFormatter = .liveValue
         $0.viewController = viewController
         $0.pdfClient = .liveValue

@@ -31,7 +31,7 @@ struct Navbar: HTML, Sendable {
     nav(
       .class(
         """
-        navbar w-full bg-base-300 text-base-content shadow-sm mb-4
+        navbar flex-wrap w-full bg-base-300 text-base-content shadow-sm mb-4
         """
       )
     ) {

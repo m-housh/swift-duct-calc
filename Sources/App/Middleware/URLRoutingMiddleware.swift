@@ -44,7 +44,10 @@ where
     chainingTo next: any AsyncResponder
   ) async throws -> Response {
     if request.body.data == nil {
-      try await _ = request.body.collect(max: request.application.routes.defaultMaxBodySize.value)
+      let templateJSON = request.method == .POST
+        && ["/path-templates", "/path-templates/import-preview"].contains(request.url.path)
+      let limit = templateJSON ? 1024 * 1024 : request.application.routes.defaultMaxBodySize.value
+      try await _ = request.body.collect(max: limit)
         .get()
     }
 

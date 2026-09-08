@@ -2,6 +2,8 @@
 
 ## Current review entry points
 
+- **Template editor:** [Configure Group 2 and elbows, then try the flow](guided-path.html?view=templates).
+- **Guided path:** [Personal supply and return workflows](guided-path.html).
 - **Full catalog:** [All groups in the preferred carousel](path-catalog.html).
 - **Group 11 discussion:** [Junction box with optional supplied bend](path-catalog.html?group=11).
 
@@ -58,6 +60,77 @@ exercise favorites-first ordering, search and concept-card conditions.
 The user approved the latest carousel pass for continued exploration. This remains
 a prototype with a partial sample catalog. Use the new full-catalog entry point
 above for complete-path exploration.
+
+### Guided path workflow
+
+`guided-path.html` explores the user's configured supply and return sequences.
+`guided-path-model.js` holds the seed templates and completion/total logic;
+`guided-path.js` renders the flow using the existing catalog and rule adapters.
+No production routes, account settings, or saved projects are changed.
+`template-editor.js` adds an in-tab editor for the Group 2 and elbow steps.
+
+- Supply: Group 1, optional Group 2 with choices beside Skip, Group 4,
+  elbow quantities, optional repeatable Group 12.
+- Return: Group 5, Group 6, elbow quantities, optional repeatable Group 12.
+- Shortlists follow the user's round/rectangular buckets independently per step.
+  Group 5 preserves distinct round and rectangular 5E identities.
+- Elbows: `8A-4-or-5-piece` at 90° and the user-selected `8A-3-piece-45`.
+  Both quantities start at zero. The 90° elbow defaults to R/D = 1.0;
+  the three-piece 45° uses its own catalog value. The reference page's angle
+  multipliers apply to smooth radius round elbows, not the four-/five-piece case.
+- R/D stays editable in both paths. Defaults apply to new entries only; revisiting
+  an entry or setting its quantity to zero and back preserves its inputs, including
+  an explicitly cleared input. The three-piece 45° remains a separate fitting.
+- Selecting a resolved fitting adds it directly with quantity 1. Configured input
+  defaults can resolve a fitting. Missing context opens the detail dialog; explicit
+  Edit always opens it. Quantity and fitting details remain editable on the path.
+- Single-fitting choices advance to the next section after adding. If required
+  details are missing, "Add and next" completes the fitting and advances. There
+  is no separate Continue action in the normal single-choice flow. Optional
+  shortlists appear immediately, without a "Choose from list" gate. Skip sits in
+  the bottom navigation beside Back and Done, including on empty optional sections.
+  Quantity and multiple-fitting sections stay open until "Done with [section]"
+  so users can enter both elbow quantities or add several transitions. Revisiting
+  a completed section offers "Next section"; explicit row edits stay in place.
+  Navigation moves focus and scroll position to the new section's heading.
+- Inputs without configured defaults remain blank. An explicit downstream count of
+  zero resolves normally. Incomplete steps or unresolved entries prevent finish.
+- Group 6 being required and Group 12 being optional/multiple are prototype
+  assumptions called out in the interface.
+- Users can browse other fittings in the current group, revisit steps, and add,
+  edit, or remove exceptions on review. Skipping clears that step's entries.
+- Review asks for the actual path name and total straight duct length. Supply
+  and return drafts are isolated in memory and reset on reload.
+
+The template editor shows the complete step list, with Group 2 and elbows editable.
+Users can rename templates and these steps, change their fitting shortlists using
+drawing checkboxes, select choice or quantity behavior, allow skipping, and set
+table-input defaults or "Ask for each path". The R/D default appears as 1.0;
+the catalog's corresponding stored value is `1`. Empty shortlists and blank names
+block Save and Try. Required quantity steps need at least one included fitting;
+optional quantity steps allow all zeros.
+
+"Try this template" creates a separate path from the current editor draft. Returning
+to the editor preserves unsaved changes; closing the editor restores the original
+path. Save keeps the template in this tab. "New path from saved template" starts a
+fresh path from that saved copy. Every path has its own template snapshot, so
+editing or saving a template cannot change paths already started. Supply and return
+templates remain independent. Reload resets all templates and paths in this pass.
+General step editors, adding/reordering steps, account persistence, duplication,
+and saving an existing path as a template remain outside this focused editor pass.
+
+Validation: `node scripts/check_guided_path.cjs` checks template identities,
+eligibility, input requirements, skipped/unfinished steps, and path arithmetic.
+Additional DOM-based interaction checks exercised both full flows, zero versus
+missing branch counts, invalid quantities, both elbows, exception removal,
+multiple transitions, back/edit/skip, review additions, and draft isolation.
+Editor checks additionally cover direct add, explicit edit, default/override/blank
+preservation, shortlists, input defaults, optional and quantity behavior, empty
+validation, Save/Discard/Try, template snapshots, and separate supply/return edits.
+Streamlined-flow checks cover automatic advancement, optional shortlists without
+an extra gate, missing-input validation and cancellation, batch completion,
+review edits without advancement, revisiting sections, clearing skipped entries,
+catalog exceptions, and isolated trials with configured defaults.
 
 
 Served by the existing static server at `/prototypes/fitting-picker/`.

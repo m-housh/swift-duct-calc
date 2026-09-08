@@ -73,7 +73,8 @@ extension EquivalentLength.Create {
       type: type.rawValue,
       straightLengths: straightLengths,
       groups: JSONEncoder().encode(groups),
-      projectID: projectID
+      projectID: projectID,
+      templateSnapshot: templateSnapshot.map { try JSONEncoder().encode($0) }
     )
   }
 }
@@ -126,6 +127,9 @@ final class EffectiveLengthModel: Model, @unchecked Sendable {
   @Field(key: "groups")
   var groups: Data
 
+  @OptionalField(key: "templateSnapshot")
+  var templateSnapshot: Data?
+
   @Timestamp(key: "createdAt", on: .create, format: .iso8601)
   var createdAt: Date?
 
@@ -145,7 +149,8 @@ final class EffectiveLengthModel: Model, @unchecked Sendable {
     groups: Data,
     createdAt: Date? = nil,
     updatedAt: Date? = nil,
-    projectID: Project.ID
+    projectID: Project.ID,
+    templateSnapshot: Data? = nil
   ) {
     self.id = id
     self.name = name
@@ -155,6 +160,7 @@ final class EffectiveLengthModel: Model, @unchecked Sendable {
     self.createdAt = createdAt
     self.updatedAt = updatedAt
     $project.id = projectID
+    self.templateSnapshot = templateSnapshot
   }
 
   func toDTO() throws -> EquivalentLength {
@@ -166,11 +172,17 @@ final class EffectiveLengthModel: Model, @unchecked Sendable {
       straightLengths: straightLengths,
       groups: JSONDecoder().decode([EquivalentLength.FittingGroup].self, from: groups),
       createdAt: createdAt!,
-      updatedAt: updatedAt!
+      updatedAt: updatedAt!,
+      templateSnapshot: templateSnapshot.map {
+        try JSONDecoder().decode(PathTemplate.Snapshot.self, from: $0)
+      }
     )
   }
 
   func applyUpdates(_ updates: EquivalentLength.Update) throws {
+    if let snapshot = updates.templateSnapshot {
+      templateSnapshot = try JSONEncoder().encode(snapshot)
+    }
     if let name = updates.name, name != self.name {
       self.name = name
     }
@@ -228,6 +240,19 @@ extension EquivalentLength.FittingGroup: Validatable {
 
       Validator.validate(\.quantity, with: .greaterThanOrEquals(1))
         .errorLabel("Quantity", inline: true)
+    }
+  }
+}
+extension EquivalentLength {
+  struct AddTemplateSnapshot: AsyncMigration {
+    let name = "AddEffectiveLengthTemplateSnapshot"
+    func prepare(on database: any Database) async throws {
+      try await database.schema(EffectiveLengthModel.schema)
+        .field("templateSnapshot", .data).update()
+    }
+    func revert(on database: any Database) async throws {
+      try await database.schema(EffectiveLengthModel.schema)
+        .deleteField("templateSnapshot").update()
     }
   }
 }

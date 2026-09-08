@@ -499,6 +499,9 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
     case .editor, .savePath, .favorite:
       return await renderPathEditor(on: request, projectID: projectID)
 
+    case .guided(let route):
+      return await route.renderView(on: request, projectID: projectID)
+
     case .delete(let id):
       return await ResultView {
         try await database.equivalentLengths.delete(id)
@@ -518,6 +521,9 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
 
     case .update(let id, let form):
       return await view(on: request, projectID: projectID) {
+        if try await database.equivalentLengths.get(id)?.templateSnapshot != nil {
+          throw ValidationError("Open this path in the guided editor to keep its fitting details.")
+        }
         _ = try await database.equivalentLengths.update(id, .init(form: form, projectID: projectID))
       }
 
@@ -683,6 +689,8 @@ extension SiteRoute.View.UserRoute {
         }
       }
     case .profile(let route):
+      return await route.renderView(on: request)
+    case .templates(let route):
       return await route.renderView(on: request)
     }
   }

@@ -31,6 +31,9 @@ func persistFittingPath(userID: User.ID, projectID: Project.ID, request: Fitting
       let current = try await database.equivalentLengths.get(baseline.id),
       current.projectID == projectID
     else { throw FittingPathError("Path not found.") }
+    guard current.templateSnapshot == nil else {
+      throw FittingPathError("Open this path in the guided editor to keep its sections and fitting details.")
+    }
     guard current == baseline else {
       throw FittingPathError(
         "This path changed since you opened it. Reload it before saving; your draft has been kept.")

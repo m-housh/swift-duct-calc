@@ -19,6 +19,8 @@ extension DatabaseClient.Migrations: DependencyKey {
         EquivalentLength.Migrate(),
         TrunkSize.Migrate(),
         FittingFavoriteMigration(),
+        PathTemplate.Migrate(),
+        EquivalentLength.AddTemplateSnapshot(),
       ]
     }
   )

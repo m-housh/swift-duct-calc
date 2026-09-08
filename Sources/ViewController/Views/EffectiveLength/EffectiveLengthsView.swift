@@ -30,6 +30,10 @@ struct EffectiveLengthsView: HTML, Sendable {
       }
       .attributes(.class("pb-6"))
 
+      a(.class("link"), .href(pathTemplatesURL(projectID))) { "Manage path templates" }
+
+      a(.class("btn btn-secondary"), .href(guidedPathURL(projectID))) { "From template" }
+
       EffectiveLengthsTable(effectiveLengths: effectiveLengths)
 
     }
