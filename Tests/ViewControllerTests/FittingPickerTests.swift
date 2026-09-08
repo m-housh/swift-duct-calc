@@ -52,6 +52,29 @@ struct FittingPickerTests {
     }
   }
 
+  @Test func roundRadiusDefaultsAlsoReachPairsWithoutReplacingExplicitChoices() async throws {
+    for id in ["8A-smooth", "8A-4-or-5-piece", "8A-3-piece"] {
+      let fresh = await html(.configure(payload(id, group: 8)))
+      #expect(fresh.contains("value=\"1.0\" selected"))
+      let edited = await html(.configure(payload(id, group: 8, fields: ["radiusRatio": "0.75"])))
+      #expect(edited.contains("value=\"0.75\" selected"))
+      #expect(!edited.contains("value=\"1.0\" selected"))
+      // Missing submitted inputs still require a choice; defaults initialize drafts only.
+      let incomplete = await html(.evaluate(payload(id, group: 8, fields: ["angle": "90"])))
+      #expect(!incomplete.contains("data-row="))
+      for pair in ["8L-round", "8M-round"] {
+        let base = await html(.configure(payload(pair, group: 8, fields: ["baseFitting": id])))
+        #expect(base.contains("name=\"base.radiusRatio\""))
+        #expect(base.contains("value=\"1.0\" selected"))
+        let editedBase = await html(
+          .configure(
+            payload(pair, group: 8, fields: ["baseFitting": id, "base.radiusRatio": "1.5"])))
+        #expect(editedBase.contains("value=\"1.5\" selected"))
+        #expect(!editedBase.contains("value=\"1.0\" selected"))
+      }
+    }
+  }
+
   @Test func defaultsAreOnlyAppliedWhenOpeningADraft() async throws {
     let config = await html(.configure(payload("8O", group: 8)))
     #expect(config.contains("value=\"mitered\" selected"))

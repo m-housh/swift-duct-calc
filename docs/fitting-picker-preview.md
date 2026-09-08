@@ -178,3 +178,14 @@ scroll → star → add sequence, favorites visible on group load, unchanged car
 when copies are added, adding from both copies, independent conditional inputs, search, mobile layout,
 Group 11 copy controls, keyboard focus restoration, and failed favorite writes. The catalog-review update passes **144 Swift tests in 32 suites**, with every browser
 card checked against the authored catalog and separate persistence/concurrency coverage. Temporary test session data and screenshots are written to `/tmp`.
+
+### Common Group 8 radius default
+
+New round elbow drafts use **R/D 1.0** and **90°** for 8A smooth, four-/five-piece,
+and three-piece variants. This also initializes R/D when one of those constructions
+is selected for 8L/8M round double elbows, including favorite copies. Explicit
+choices and saved path values remain intact; missing submitted values still require
+input. Other radius controls retain their existing defaults, including 8O Mitered.
+
+Validated with 18 Swift round-elbow, double-elbow, and picker tests plus
+`scripts/check_fitting_radius_defaults.cjs` against a disposable application.

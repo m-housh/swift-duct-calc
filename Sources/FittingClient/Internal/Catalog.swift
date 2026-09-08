@@ -238,7 +238,11 @@ struct Catalog: Sendable {
       case .radiusOffset: .radiusOffset(radiusHeightRatio: nil)
       case .riserElbow: .riserElbow(size: nil, corner: nil)
       case .ovalElbow: .ovalElbow(pieceCount: nil)
-      case .roundElbow: .roundElbow(radiusRatio: nil, angle: .degrees90)
+      case .roundElbow:
+        .roundElbow(
+          radiusRatio: rows.contains { $0.parameter == Fitting.RoundElbowRadiusRatio.one.rawValue }
+            ? .one : nil,
+          angle: .degrees90)
       case .rectangularElbow:
         .rectangularElbow(radiusRatio: .mitered, bendCategory: nil, angle: .degrees90)
       case .heightWidth: .heightWidth(heightInches: nil, widthInches: nil)

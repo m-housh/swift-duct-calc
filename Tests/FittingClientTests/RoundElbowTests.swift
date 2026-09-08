@@ -64,13 +64,17 @@ struct FittingRoundElbowTests {
           == .roundElbow(
             radiusRatios: [.threeQuarters, .one, .oneAndHalfOrGreater],
             angles: definition.id == "8A-smooth" ? Fitting.ElbowAngle.allCases : [.degrees90]))
-      #expect(definition.defaultInputs == .roundElbow(radiusRatio: nil, angle: .degrees90))
+      #expect(definition.defaultInputs == .roundElbow(radiusRatio: .one, angle: .degrees90))
+      guard
+        case .resolved(let calculation) = try await client.evaluate(
+          .init(pathType: .supply, fittingID: definition.id, inputs: definition.defaultInputs))
+      else {
+        Issue.record("The common radius default should resolve immediately")
+        continue
+      }
       #expect(
-        try await client.evaluate(
-          .init(
-            pathType: .supply, fittingID: definition.id,
-            inputs: definition.defaultInputs))
-          == .unresolved([.init(.missingInput, field: .radiusRatio)]))
+        calculation.equivalentLengthFeet
+          == ["8A-smooth": 15.0, "8A-4-or-5-piece": 20, "8A-3-piece": 25][definition.id.rawValue])
     }
     #expect(
       Fitting.RoundElbowRadiusRatio.allCases.map(\.label) == ["0.75", "1.0", "1.5 or greater"])
