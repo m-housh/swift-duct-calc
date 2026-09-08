@@ -331,3 +331,10 @@ Draft details apply only to a new guided path; saved paths retain their own valu
 ![Template selection inside the path modal](images/fitting-picker/template-modal-chooser.png)
 
 ![Guided steps inside the path modal](images/fitting-picker/template-modal-guided.png)
+
+The From template action is a `type="button"` control with no navigation fallback.
+The picker, template workspace, and modal controller use versioned script URLs so
+an older cached script cannot restore the former page-navigation behavior.
+`scripts/check_template_handoff.cjs` checks name-only, lengths-only, and combined
+input with obsolete scripts intercepted at their old URLs. All cases retain the
+same dialog and URL, carry the initial values, and show no leave-site prompt.

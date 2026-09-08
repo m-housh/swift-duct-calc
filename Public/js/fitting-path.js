@@ -227,7 +227,7 @@
       if (busy) return;
       try {
         const draft = { name: $('#path-name').value, straightLengths: parseStraight() };
-        const url = new URL(event.currentTarget.href);
+        const url = new URL(event.currentTarget.dataset.templateUrl, location.origin);
         url.search = `?draft=${encodeURIComponent(JSON.stringify(draft))}`;
         status('Loading templates…');
         templateModal.open(url.href);

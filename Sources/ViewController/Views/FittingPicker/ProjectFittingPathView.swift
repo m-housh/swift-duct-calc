@@ -17,9 +17,9 @@ struct ProjectFittingPathView: HTML, Sendable {
     link(.rel(.stylesheet), .href("/css/fitting-favorites.css"))
     link(.rel(.stylesheet), .href("/css/fitting-path-modal.css?v=2"))
     script(.src("/js/group-carousel.js"), .defer) {}
-    script(.src("/js/path-templates.js"), .defer) {}
-    script(.src("/js/template-modal.js"), .defer) {}
-    script(.src("/js/fitting-path.js"), .defer) {}
+    script(.src("/js/path-templates.js?v=template-modal-2"), .defer) {}
+    script(.src("/js/template-modal.js?v=template-modal-2"), .defer) {}
+    script(.src("/js/fitting-path.js?v=template-modal-2"), .defer) {}
     EditorDialog(id: "fitting-path", titleID: "path-title") {
       section(.class("path-sheet")) {
         header {
@@ -59,9 +59,10 @@ struct ProjectFittingPathView: HTML, Sendable {
           div(.class("flex w-full flex-wrap items-center justify-between gap-2")) {
             small { "Groups in this path" }
             if baseline == nil {
-              a(
+              button(
+                .type(.button),
                 .id("path-from-template"), .class("link-button template-action"),
-                .href(guidedPathURL(project.id))
+                .data("template-url", value: guidedPathURL(project.id))
               ) {
                 "From template"
               }

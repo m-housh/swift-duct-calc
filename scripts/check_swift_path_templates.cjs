@@ -282,7 +282,7 @@ async function mount(html, http) {
   assert.equal(listDocument.querySelector(`a[href="${base}"]`), null);
   const addURL = listDocument.querySelector('a[aria-label="Add equivalent length"]').getAttribute('href');
   const addPage = await (await http(addURL)).text();
-  assert.equal(new JSDOM(addPage).window.document.querySelector(`#fitting-path a[href="${base}"]`)?.textContent, 'From template');
+  assert.equal(new JSDOM(addPage).window.document.querySelector(`#fitting-path button[data-template-url="${base}"]`)?.textContent, 'From template');
   const editURL = list.match(/\/projects\/[^" ]+\/guided\/edit\/[A-Fa-f0-9-]{36}/)?.[0];
   assert(editURL, 'Saved guided path should reopen in the guided editor');
   assert.equal(
