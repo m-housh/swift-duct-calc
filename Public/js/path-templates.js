@@ -45,6 +45,12 @@
     if (!root || root.dataset.initialized) return;
     root.dataset.initialized = 'true';
     const data = JSON.parse(document.getElementById('path-template-data').textContent);
+    function navigate(url, saved = false) {
+      const event = new CustomEvent(saved ? 'path-template:saved' : 'path-template:navigate', {
+        bubbles: true, cancelable: true, detail: { url }
+      });
+      if (root.dispatchEvent(event)) location.assign(url);
+    }
     const definitions = new Map(data.definitions.map((d) => [d.id, d]));
     let configuration = clone(data.configuration),
       selected = 0,
@@ -525,7 +531,7 @@
         const redirect = result.querySelector('[data-redirect]')?.dataset.redirect;
         if (!redirect) throw new Error('Template save did not complete.');
         dirty = false;
-        location.assign(templateURL(redirect));
+        navigate(templateURL(redirect));
         return;
       }
       if (action === 'delete-template') {
@@ -533,7 +539,7 @@
           return;
         await request(`/path-templates/${data.template.id}`, undefined, 'DELETE');
         dirty = false;
-        location.assign(data.backURL);
+        navigate(data.backURL);
         return;
       }
       if (action === 'try') {
@@ -693,7 +699,7 @@
         const redirect = result.querySelector('[data-redirect]')?.dataset.redirect;
         if (!redirect) throw new Error('Path save did not complete.');
         dirty = false;
-        location.assign(redirect);
+        navigate(redirect, true);
       }
     }
     function renderBrowse() {
@@ -875,6 +881,9 @@
         event.returnValue = '';
       }
     });
+    root.addEventListener('path-template:leave', event => {
+      if (busy || pendingQuantities || ((dirty || event.detail?.force) && !confirm('Discard unsaved changes to this template path?'))) event.preventDefault();
+    });
     if (mode === 'path') startPath();
     else render();
   }
@@ -882,4 +891,5 @@
     document.addEventListener('DOMContentLoaded', initialize, { once: true });
   else initialize();
   document.addEventListener('htmx:afterSwap', initialize);
+  document.addEventListener('path-template:mount', initialize);
 })();

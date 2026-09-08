@@ -1,7 +1,7 @@
 # Fitting picker integrated into the application
 
 The agreed `path-catalog.html` prototype is now implemented in the Swift application.
-Open a project, choose **Equivalent Lengths**, then **+** or **Edit**. The + opens the path modal. **From template**, beside **Groups in this path**, carries the entered path name and straight duct lengths into a new guided path.
+Open a project, choose **Equivalent Lengths**, then **+** or **Edit**. The + opens the path modal. **From template**, beside **Groups in this path**, uses the primary button color and carries the entered path name and straight duct lengths into a guided flow inside the same dialog. **Back to path** restores the original form and fitting rows.
 The path editor opens in a modal over the project's Equivalent Lengths list: **88% of
 viewport width and height on desktop**, expanding to 96% width and 94% height on mobile.
 **Save path** returns to the updated list. Use its **Edit** link to reopen recorded entries.

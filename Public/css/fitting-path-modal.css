@@ -1,5 +1,5 @@
 /* Large editor over the project's Equivalent Lengths page. */
-.fitting-path.editor-dialog {
+.editor-dialog:is(.fitting-path, .template-path-active) {
   width: 88vw;
   height: 88dvh;
   min-height: 0;
@@ -11,14 +11,30 @@
   border: 1px solid var(--line);
   border-radius: var(--radius-box, 14px);
 }
-.fitting-path.editor-dialog::backdrop { background: var(--backdrop, #12233399); }
+.editor-dialog:is(.fitting-path, .template-path-active)::backdrop { background: var(--backdrop, #12233399); }
 @scope (.fitting-path) {
   .path-sheet { max-width: none; margin: 0; padding: 20px 28px; }
   .path-sheet > header { padding-top: 0; }
 }
 @media (max-width: 700px) {
-  .fitting-path.editor-dialog { width: 96vw; height: 94dvh; }
+  .editor-dialog:is(.fitting-path, .template-path-active) { width: 96vw; height: 94dvh; }
   @scope (.fitting-path) {
     .path-sheet { padding: 16px 12px; }
   }
 }
+
+.template-path-active {
+  color: var(--color-base-content);
+  background: var(--color-base-100);
+  --line: var(--color-base-300);
+  --backdrop: color-mix(in oklab, var(--color-neutral) 65%, transparent);
+}
+.template-modal-toolbar { display: flex; justify-content: space-between; gap: 12px; padding: 16px; }
+.template-modal-content { min-width: 0; }
+.fitting-path #path-from-template.template-action {
+  background: var(--color-primary);
+  color: var(--color-primary-content);
+  border-color: var(--color-primary);
+  font-weight: 600;
+}
+.fitting-path #path-from-template.template-action:hover { filter: brightness(.92); }

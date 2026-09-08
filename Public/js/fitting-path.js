@@ -10,6 +10,10 @@
     let editing = null, dirty = false, busy = false, browserRequest = 0, rowsRequest = 0, editRequest = 0;
     const requests = new WeakMap(), timers = new WeakMap(), favoriteRequests = new Set();
     let favoriteTemplates = new Map();
+    const templateModal = window.FittingTemplateModal.create(root, {
+      endpoint, hasDraft: () => dirty,
+      finish: url => { dirty = false; root.close(); location.assign(url); }
+    });
     const preferenceKey = 'fitting-picker.shape-preference.v1';
     let shapePreference = 'none';
     try {
@@ -214,6 +218,7 @@
       $('#reference-result').replaceChildren(); $('#reference-dialog').showModal();
     }
     function closeEditor() {
+      if (templateModal.active) { templateModal.close(); return; }
       if (busy || (dirty && !window.confirm('Discard unsaved changes to this path?'))) return;
       dirty = false; root.close(); location.assign(endpoint);
     }
@@ -222,11 +227,10 @@
       if (busy) return;
       try {
         const draft = { name: $('#path-name').value, straightLengths: parseStraight() };
-        if (entries.length && !window.confirm('Starting a template replaces the fittings in this draft. Continue?')) return;
         const url = new URL(event.currentTarget.href);
         url.search = `?draft=${encodeURIComponent(JSON.stringify(draft))}`;
-        dirty = false;
-        location.assign(url.href);
+        status('Loading templates…');
+        templateModal.open(url.href);
       } catch (error) { status(error.message); $('#path-straight').focus(); }
     });
     root.addEventListener('cancel', event => {
@@ -234,6 +238,7 @@
       event.preventDefault(); closeEditor();
     });
     root.addEventListener('click', async event => {
+      if (templateModal.active) return;
       const button = event.target.closest('button'); if (!button || button.disabled) return;
       if (button.id === 'close-path') { closeEditor(); return; }
       if (button.dataset.closeDialog) { editRequest++; $(`#${button.dataset.closeDialog}`).close(); return; }
@@ -297,6 +302,7 @@
       }
     });
     root.addEventListener('change', event => {
+      if (templateModal.active) return;
       if (event.target.name === 'shape-preference') {
         shapePreference = event.target.value;
         try { localStorage.setItem(preferenceKey, shapePreference); } catch { /* Session-only fallback. */ }

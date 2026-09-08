@@ -17,6 +17,8 @@ struct ProjectFittingPathView: HTML, Sendable {
     link(.rel(.stylesheet), .href("/css/fitting-favorites.css"))
     link(.rel(.stylesheet), .href("/css/fitting-path-modal.css"))
     script(.src("/js/group-carousel.js"), .defer) {}
+    script(.src("/js/path-templates.js"), .defer) {}
+    script(.src("/js/template-modal.js"), .defer) {}
     script(.src("/js/fitting-path.js"), .defer) {}
     EditorDialog(id: "fitting-path", titleID: "path-title") {
       section(.class("path-sheet")) {
@@ -57,8 +59,10 @@ struct ProjectFittingPathView: HTML, Sendable {
           div(.class("flex w-full flex-wrap items-center justify-between gap-2")) {
             small { "Groups in this path" }
             if baseline == nil {
-              a(.id("path-from-template"), .class("link-button"), .href(guidedPathURL(project.id)))
-              {
+              a(
+                .id("path-from-template"), .class("link-button template-action"),
+                .href(guidedPathURL(project.id))
+              ) {
                 "From template"
               }
             }

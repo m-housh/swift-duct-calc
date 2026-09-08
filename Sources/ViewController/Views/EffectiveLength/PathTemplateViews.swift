@@ -11,7 +11,7 @@ struct PathTemplatesView: HTML, Sendable {
 
   var body: some HTML {
     Navbar(showSidebarToggle: false, isLoggedIn: true)
-    div(.class("w-full p-4 space-y-6")) {
+    div(.id("path-template-list"), .class("w-full p-4 space-y-6")) {
       if let projectID {
         a(.class("btn btn-ghost"), .href(effectiveLengthsURL(projectID))) { "← Back to project" }
       }
@@ -120,7 +120,7 @@ struct PathTemplateWorkspace: HTML, Sendable {
 
   var body: some HTML {
     Navbar(showSidebarToggle: false, isLoggedIn: true)
-    div(.class("w-full p-4 space-y-4")) {
+    div(.id("path-template-page"), .class("w-full p-4 space-y-4")) {
       div(.class("flex flex-wrap items-center gap-2")) {
         if data.mode != "path", let projectID = data.projectID {
           a(.class("btn btn-ghost"), .href(effectiveLengthsURL(projectID))) { "← Back to project" }
