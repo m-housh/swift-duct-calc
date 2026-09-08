@@ -32,9 +32,9 @@
 .template-modal-toolbar { display: flex; justify-content: space-between; gap: 12px; padding: 16px; }
 .template-modal-content { min-width: 0; }
 .fitting-path #path-from-template.template-action {
-  background: var(--color-primary);
-  color: var(--color-primary-content);
-  border-color: var(--color-primary);
+  background: var(--color-secondary);
+  color: var(--color-secondary-content);
+  border-color: var(--color-secondary);
   font-weight: 600;
 }
 .fitting-path #path-from-template.template-action:hover { filter: brightness(.92); }
