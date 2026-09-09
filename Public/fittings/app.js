@@ -11,6 +11,9 @@
     const toggle = page.querySelector('.system-toggle');
     const target = page.querySelector(narrow.matches ? '#filters' : '.group-sidebar-header');
     target.prepend(toggle);
+    const group = page.querySelector('.group-control');
+    if (narrow.matches) page.querySelector('.mobile-group-navigation').append(group);
+    else page.querySelector('.search').after(group);
   }
   function focusSelector(element) {
     if (element?.id) return '#' + CSS.escape(element.id);
@@ -29,6 +32,7 @@
       return [selector, area.scrollTop, area.scrollLeft];
     });
     const oldSelected = page.querySelector('[data-select][aria-current]')?.dataset.select;
+    const oldGroup = page.querySelector('[data-group][aria-current]')?.dataset.group;
     const selection = document.activeElement?.id === 'search' ? [document.activeElement.selectionStart, document.activeElement.selectionEnd] : null;
     page.setAttribute('aria-busy', 'true');
     try {
@@ -44,6 +48,7 @@
       const selected = next.querySelector('[data-select][aria-current]')?.dataset.select;
       for (const [selector, top, left] of positions) {
         if (selector === '.detail-panel' && selected !== oldSelected) continue;
+        if (selector === '.fitting-sidebar' && next.querySelector('#group-filter').value !== oldGroup) continue;
         const area = next.querySelector(selector); area.scrollTop = top; area.scrollLeft = left;
       }
       const active = focus && next.querySelector(focus);
