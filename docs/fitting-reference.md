@@ -21,8 +21,8 @@ The typed `FittingsQuery` holds optional `system`, `group`, `fitting`, `q`, `typ
 and `data` fields. The browser normalizes unsupported values and updates the URL.
 For example, `/fittings?system=supply&group=8&fitting=8A-smooth` opens an elbow;
 adding `data=csv` opens its CSV record when signed in. JSON/CSV export schemas
-and the path-entry example remain experimental. Source-value audit limitations
-and the Group 11 concept status carry over from the prototype. Group 13 is excluded.
+and the path-entry example remain experimental. The reference retains its own
+source-value audit limitations and Group 11 concept status. Group 13 is excluded.
 
 ## Authentication and navigation
 
@@ -48,7 +48,7 @@ in place under `Public/images/fittings`. To refresh the catalog after changing
 its source manifests:
 
 ```sh
-python3 scripts/build_fitting_picker_catalog.py --output Public/fittings
+python3 scripts/build_fitting_reference_catalog.py
 node scripts/check_fitting_reference.cjs
 ```
 
@@ -58,9 +58,9 @@ sessions, query round trips, and HTMX continuation. Middleware runs in tests as
 it does in the application. View snapshots cover navigation link changes.
 
 
-The generator reads the approved SVG manifests directly. Its default destination
-still supports the separate picker prototype; `--output Public/fittings` writes
-only the served reference catalog. The reference maintains its own table adapters
+The generator reads the approved SVG manifests directly and writes the served
+reference catalog by default. Use `--output /tmp/fitting-reference` for a review
+copy. The reference maintains its own table adapters
 and the one Group 11 concept illustration it displays. It does not load or copy
 picker UI code. The exported experimental schema identifiers remain unchanged.
 

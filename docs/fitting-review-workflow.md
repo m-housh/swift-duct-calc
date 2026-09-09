@@ -1,9 +1,16 @@
 # Batch drawing review
 
-Use `/fitting-review/` in the running app. The review page is served by the
-existing public-file middleware. For a standalone preview, serve `Public` with
-`python3 -m http.server 8765 --bind 127.0.0.1 --directory Public` and open
-`http://127.0.0.1:8765/fitting-review/`.
+This is a local artwork-authoring tool, separate from the application's
+[duct classification review](fitting-catalog-review.md). It is excluded from Docker
+images. Serve the checkout's assets locally:
+
+```sh
+python3 -m http.server 8765 --bind 127.0.0.1 --directory Public
+```
+
+Open `http://127.0.0.1:8765/fitting-review/`. Use the group-specific packager's
+`--activate` option where supported to select a batch. The archived
+exports in `docs/fitting-reviews` record acceptance of exact artwork revisions.
 
 ## Review by exception
 
@@ -28,21 +35,6 @@ in the correction. Earlier feedback remains in its archived review export.
 Exports include exact drawing/reference revisions, so approval cannot be
 mistaken for approval of a later redraw.
 
-## Batch size
-
-The completed pilot review accepted all 13 drawings, with no revision requests.
-The original export is archived under `docs/fitting-reviews/`, and the catalog
-records the reviewed revision and completion time for each drawing.
-
-Use complete groups rather than 4–6 drawing batches. Group 1 and its correction
-pass are complete; proceed with all 17 Group 2 fittings, followed by Group 3.
-After each batch, revise the checked drawings and repeat the comparison.
-
-The page currently contains the [complete Group 2 batch](group-2-review.md):
-17 drawings covering 2A–2Q. The correction pass revises the 15 drawings
-flagged in the first review; 2P and 2Q remain approved and unchanged. Group 1
-is complete and approved; Group 3 still has only pilot drawings.
-
 ## Regeneration
 
 Import a completed export with
@@ -51,10 +43,12 @@ checks the batch, completeness and current asset hashes before changing any
 files. Archived decisions are reapplied during combined regeneration only
 when the SVG and reference still match the reviewed revision.
 
-Run `python3 scripts/generate-fittings.py`. This creates
-`Public/fitting-review/data.js` with asset paths and revision hashes; it does
-not overwrite browser decisions. No frontend dependency installation or CSS
-build is required for this standalone review surface.
+Use the appropriate `scripts/package_group_*.py` tool for the artwork being
+changed. These tools read source manifests, preflight records, and archived
+approvals; inspect their arguments before regeneration. The older
+`generate-fittings.py` command only rebuilds the original traced Group 1/2 and
+pilot workflow, despite its name. It does not regenerate the complete current
+catalog. No frontend dependency installation or CSS build is required.
 
 Reference crops are committed under `Public/images/fittings/references`.
 Additional pilot crop provenance (x, y, width, height in embedded image pixels):

@@ -1,6 +1,6 @@
 # Fitting picker integrated into the application
 
-The agreed `path-catalog.html` prototype is now implemented in the Swift application.
+The fitting picker is implemented in the Swift application.
 Open a project, choose **Equivalent Lengths**, then **+** or **Edit**. The + opens the path modal. **From template**, beside **Groups in this path**, matches Continue, using the purple secondary button color in Dracula, and carries the entered path name and straight duct lengths into a guided flow inside the same dialog. **Back to path** restores the original form and fitting rows.
 The path editor opens in a modal over the project's Equivalent Lengths list: **88% of
 viewport width and height on desktop**, expanding to 96% width and 94% height on mobile.
@@ -14,7 +14,7 @@ save duct-shape classifications directly to the source catalog.
 
 ## What is implemented
 
-- The prototype's tall path rows, drawing-led Add fitting dialog, three-card looping
+- Tall path rows, drawing-led Add fitting dialog, three-card looping
   group carousel, favorite copies, inline conditional inputs, and fitting totals.
 - **Prefer: No preference / Round / Rectangular** reorders one continuous list; it
   adds no sections and hides no fittings. Direct matches come first, followed by mixed
@@ -48,8 +48,6 @@ save duct-shape classifications directly to the source catalog.
 ![Path editor in a large modal](images/fitting-picker/modal.png)
 
 ![Path editor modal on mobile](images/fitting-picker/modal-mobile.png)
-
-[Earlier full-page layout for comparison](images/fitting-picker/path.png)
 
 ![Looping group carousel](images/fitting-picker/carousel.png)
 
@@ -86,9 +84,9 @@ save duct-shape classifications directly to the source catalog.
 | `Public/css/picker-preference.css` | Scoped preference toggle styles |
 | `Public/css/fitting-path.css` | Scoped presentation ported from the agreed prototype |
 
-The frozen prototypes are unchanged. The separate `/fittings` preview has been retired;
-that URL directs users to their projects. Catalog calculation and HTML fragment endpoints
-remain available to the integrated editor.
+The superseded static picker prototypes have been removed. `/fittings` serves the
+[public fitting reference](fitting-reference.md). Catalog calculation and HTML
+fragment endpoints remain available to the integrated editor.
 
 ## Existing data and saving
 
@@ -111,7 +109,7 @@ browser's standard confirmation. Straight duct retains the application's existin
 whole-foot representation; fitting lengths retain fractional precision.
 
 CSV paste/upload and project-specific input suggestions remain follow-up work. The
-reference-entry CSV contract is still a proposal in the implementation plan.
+[reference-entry CSV contract](fitting-reference-entry-csv.md) is still a proposal.
 
 ## Running and checking it
 

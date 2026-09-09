@@ -42,7 +42,6 @@ The original template generator and duplicate catalog have been removed. Current
 identities, requirements, and numeric evaluation come from `FittingClient` and
 `Resources/catalog.json`. This table remains a record of the initial audit.
 
-The remaining audit queue in `fitting-picker-implementation-plan.md` still
-applies, including 3U/3W, 7A, other elbow families, Group 11 controlling velocity,
-and 12W/12X conditions. Catalog group coverage does not imply calculation
-availability for every fitting in that group.
+Current rule coverage and limitations are recorded in the
+[catalog expansion](fitting-client-catalog-expansion.md) and per-rule audits.
+The original template restrictions above are historical.

@@ -164,7 +164,7 @@ The initial proposal keeps this mechanism and the approved files under
 Example: `artwork` resolves `11-junction-box` with a supplied bend to the combined
 box/bend reference, and box-only configuration to the standalone box reference.
 The view renders the returned asset path. Production-approved Group 11 assets
-must replace the prototype concept paths before this case ships.
+now use the promoted drawings under `Public/images/fittings/group-11`.
 
 - Resolve from catalog IDs/configuration, not a user-supplied filesystem path.
 - Return revisioned asset references so browsers can cache drawings and refresh

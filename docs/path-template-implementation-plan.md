@@ -179,7 +179,7 @@ does not create a project path or change the editor's unsaved template.
 
 Follow the boundaries in [FittingClient design](fitting-client-design.md) and the
 legacy compatibility requirements in the
-[fitting-picker plan](fitting-picker-implementation-plan.md).
+[integrated picker guide](fitting-picker-preview.md).
 
 | Owner | Production work |
 | --- | --- |
@@ -261,9 +261,8 @@ skip removing all section entries; exceptions surviving revisits; template
 edits/deletion leaving saved paths intact; and fractional totals surviving save,
 reopen, sizing, and exports. Verify route ownership with two different users.
 
-The prototype remains the interaction reference in
-`Public/prototypes/fitting-picker/guided-path.html`. Its JavaScript data and
-calculations do not constitute audited production catalog data.
+The Swift views and `Public/js/path-templates.js` implement the guided interaction.
+The superseded static prototype and its separate workflow test have been removed.
 
 ## Running the checks
 
