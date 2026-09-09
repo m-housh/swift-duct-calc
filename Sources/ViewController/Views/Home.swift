@@ -11,12 +11,17 @@ struct HomeView: HTML, Sendable {
     // NOTE: Footer background color will follow system theme.
     ) {
       div(.class("flex justify-end space-x-4 m-4")) {
-        a(.class("btn btn-ghost"), .href(route: .fittingReference(.init()))) {
+        a(
+          .class("btn btn-outline btn-secondary"), .href(route: .fittingReference(.init())),
+          .init(name: "aria-describedby", value: "fitting-reference-help")
+        ) {
           "Fitting reference"
         }
+        .tooltip("Browse fitting references", position: .bottom)
+        span(.id("fitting-reference-help"), .class("sr-only")) { "Browse fitting references" }
         DuctulatorButton()
-          .attributes(.class("btn-ghost btn-accent text-lg"))
-          .tooltip("Duct size calculator", position: .left)
+          .attributes(.class("btn-outline btn-primary"))
+          .tooltip("Duct size calculator", position: .bottom)
 
         button(
           .class("btn btn-ghost btn-secondary text-lg"),
@@ -118,7 +123,13 @@ struct HomeView: HTML, Sendable {
               ul(.class("list-disc")) {
                 li { "API integration." }
                 li { "Command line interface." }
-                li { "Fitting selection tool." }
+                li {
+                  "Fitting selection tool. "
+                  span(.class("badge badge-success badge-outline")) {
+                    span(.init(name: "aria-hidden", value: "true")) { "✓" }
+                    "Available now"
+                  }
+                }
                 li { "Room load import from PDF." }
               }
             }
