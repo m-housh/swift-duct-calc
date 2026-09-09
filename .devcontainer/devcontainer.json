@@ -10,7 +10,7 @@
 		"ghcr.io/rocker-org/devcontainer-features/pandoc:1": {},
 		//"ghcr.io/devcontainers/features/docker-in-docker:2": {},
 		"ghcr.io/wxw-matt/devcontainer-features/apt:latest": {
-			"packages": "weasyprint gnupg2 tmux"
+			"packages": "weasyprint poppler-utils util-linux gnupg2 tmux"
     },
 	  "ghcr.io/swift-server-community/swift-devcontainer-features/jemalloc:1": { },
 

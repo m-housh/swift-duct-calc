@@ -12,14 +12,14 @@ struct ProjectFittingPathView: HTML, Sendable {
   let carousels: [(Fitting.PathType, [GroupCarousel.Item])]
   var root: String { "/projects/\(project.id)/effective-lengths" }
   var body: some HTML {
-    link(.rel(.stylesheet), .href("/css/fitting-path.css"))
+    link(.rel(.stylesheet), .href("/css/fitting-path.css?v=app-theme-1"))
     link(.rel(.stylesheet), .href("/css/picker-preference.css"))
     link(.rel(.stylesheet), .href("/css/fitting-favorites.css"))
     link(.rel(.stylesheet), .href("/css/fitting-path-modal.css?v=2"))
     script(.src("/js/group-carousel.js"), .defer) {}
     script(.src("/js/path-templates.js?v=path-revisions-3"), .defer) {}
     script(.src("/js/template-modal.js?v=template-modal-2"), .defer) {}
-    script(.src("/js/fitting-path.js?v=template-modal-2"), .defer) {}
+    script(.src("/js/fitting-path.js?v=template-path-type-3"), .defer) {}
     EditorDialog(id: "fitting-path", titleID: "path-title") {
       section(.class("path-sheet")) {
         header {

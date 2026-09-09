@@ -24,6 +24,9 @@ public struct EnvVars: Codable, Equatable, Sendable {
   /// The path to the pandoc executable on the system, used to generate pdf's.
   public let pandocPath: String
 
+  /// Poppler executable used to extract text from imported PDFs.
+  public let pdfToTextPath: String
+
   /// The pdf engine to use with pandoc when creating pdf's.
   public let pdfEngine: String
 
@@ -45,6 +48,7 @@ public struct EnvVars: Codable, Equatable, Sendable {
   public init(
     pandocPath: String = "/usr/bin/pandoc",
     pdfEngine: String = "weasyprint",
+    pdfToTextPath: String = "/usr/bin/pdftotext",
     postgresHostname: String? = "localhost",
     postgresUsername: String? = "vapor",
     postgresPassword: String? = "super-secret",
@@ -53,6 +57,7 @@ public struct EnvVars: Codable, Equatable, Sendable {
   ) {
     self.pandocPath = pandocPath
     self.pdfEngine = pdfEngine
+    self.pdfToTextPath = pdfToTextPath
     self.postgresHostname = postgresHostname
     self.postgresUsername = postgresUsername
     self.postgresPassword = postgresPassword
@@ -63,6 +68,7 @@ public struct EnvVars: Codable, Equatable, Sendable {
   enum CodingKeys: String, CodingKey {
     case pandocPath = "PANDOC_PATH"
     case pdfEngine = "PDF_ENGINE"
+    case pdfToTextPath = "PDFTOTEXT_PATH"
     case postgresHostname = "POSTGRES_HOSTNAME"
     case postgresUsername = "POSTGRES_USER"
     case postgresPassword = "POSTGRES_PASSWORD"

@@ -64,6 +64,7 @@ RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
        libcurl4 \
 # If your app or its dependencies import FoundationXML, also install `libxml2`.
       # libxml2 \
+      poppler-utils util-linux \
       sqlite3 \
       curl \
 			pandoc \

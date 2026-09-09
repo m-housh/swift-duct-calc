@@ -1,0 +1,203 @@
+MJ8 Report
+SHR: 0.880
+
+                                     INDIVIDUAL ROOM ANALYSIS
+
+Room 1 - Level: Basement
+
+Heating Load:                               4,480 BTU/h            Cooling Load:                                814 BTU/h
+
+Airflow:                                      118 CFM              Area:                                          475 ft²
+
+Exposed Wall Area:                             486 ft²
+
+
+
+Room 2 - Level: Basement
+
+Heating Load:                               5,013 BTU/h            Cooling Load:                                985 BTU/h
+
+Airflow:                                      132 CFM              Area:                                          483 ft²
+
+Exposed Wall Area:                             478 ft²
+
+
+
+Dining - Level: Level 1
+
+
+Heating Load:                               3,846 BTU/h            Cooling Load:                               1,668 BTU/h
+
+Airflow:                                      101 CFM              Area:                                          226 ft²
+
+Exposed Wall Area:                             197 ft²
+
+
+
+Foyer - Level: Level 1
+
+
+Heating Load:                               3,320 BTU/h            Cooling Load:                                892 BTU/h
+
+Airflow:                                      87 CFM               Area:                                          212 ft²
+
+Exposed Wall Area:                             185 ft²
+
+
+
+Kitchen - Level: Level 1
+
+
+Heating Load:                               3,821 BTU/h            Cooling Load:                               4,085 BTU/h
+
+Airflow:                                      170 CFM              Area:                                          210 ft²
+
+Exposed Wall Area:                             192 ft²
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                          Page 6 of 44Living - Level: Level 1
+
+
+Heating Load:                                3,628 BTU/h             Cooling Load:                                 5,113 BTU/h
+
+Airflow:                                       213 CFM               Area:                                             248 ft²
+
+Exposed Wall Area:                               225 ft²
+
+
+
+Room 1 - Level: Level 1
+
+
+Heating Load:                                  322 BTU/h             Cooling Load:                                   66 BTU/h
+
+Airflow:                                         9 CFM               Area:                                             31 ft²
+
+Exposed Wall Area:                                27 ft²
+
+
+
+Stairway (Basement) - Level: Level 1
+
+Heating Load:                                  308 BTU/h             Cooling Load:                                   63 BTU/h
+
+Airflow:                                         8 CFM               Area:                                             29 ft²
+
+Exposed Wall Area:                                26 ft²
+
+
+
+Bath (1) - Level: Level 2
+
+Heating Load:                                1,854 BTU/h             Cooling Load:                                  548 BTU/h
+
+Airflow:                                        48 CFM               Area:                                             65 ft²
+
+Exposed Wall Area:                               123 ft²
+
+
+
+Bath (2) - Level: Level 2
+
+Heating Load:                                1,888 BTU/h             Cooling Load:                                  522 BTU/h
+
+Airflow:                                        50 CFM               Area:                                             75 ft²
+
+Exposed Wall Area:                               140 ft²
+
+
+
+Bed (1) - Level: Level 2
+
+Heating Load:                                2,983 BTU/h             Cooling Load:                                 2,365 BTU/h
+
+Airflow:                                        98 CFM               Area:                                             160 ft²
+
+Exposed Wall Area:                               185 ft²
+
+
+
+
+
+                                                            Page 7 of 44Bed (2) - Level: Level 2
+
+
+Heating Load:                                3,289 BTU/h             Cooling Load:                                 2,632 BTU/h
+
+Airflow:                                       110 CFM               Area:                                             178 ft²
+
+Exposed Wall Area:                               190 ft²
+
+
+
+Bed (3) - Level: Level 2
+
+
+Heating Load:                                1,186 BTU/h             Cooling Load:                                 1,497 BTU/h
+
+Airflow:                                        62 CFM               Area:                                             169 ft²
+
+Exposed Wall Area:                                87 ft²
+
+
+
+Hall / Stairwell (up/down) - Level: Level 2
+
+Heating Load:                                1,332 BTU/h             Cooling Load:                                  314 BTU/h
+
+Airflow:                                        35 CFM               Area:                                             155 ft²
+
+Exposed Wall Area:                                93 ft²
+
+
+
+Laundry - Level: Level 2
+
+Heating Load:                                1,466 BTU/h             Cooling Load:                                 1,175 BTU/h
+
+Airflow:                                        49 CFM               Area:                                             155 ft²
+
+Exposed Wall Area:                               106 ft²
+
+
+
+Level 3 - Level: Level 3
+
+Heating Load:                                10,010 BTU/h            Cooling Load:                                 2,995 BTU/h
+
+Airflow:                                       263 CFM               Area:                                             422 ft²
+
+Exposed Wall Area:                               662 ft²
+
+
+
+Room 1 - Level: Level 3
+
+Heating Load:                                4,152 BTU/h             Cooling Load:                                 2,630 BTU/h
+
+Airflow:                                       110 CFM               Area:                                             154 ft²
+
+Exposed Wall Area:                               268 ft²
+
+
+
+
+
+                                                            Page 8 of 44
+Room 1 - Basement
+Basement Walls:

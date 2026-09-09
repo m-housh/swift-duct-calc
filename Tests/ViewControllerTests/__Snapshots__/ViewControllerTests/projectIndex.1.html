@@ -96,19 +96,84 @@ p-6 w-full pb-6">
             <div class="modal-box">
               <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="projectForm.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
               <h1 class="text-3xl font-bold pb-6 ps-2">Project</h1>
-              <form class="grid grid-cols-1 gap-4" hx-post="/projects" hx-target="body" hx-swap="outerHTML">
-                <label class="input w-full"><span class="label">Name</span>
-                <input name="name" type="text" value="" placeholder="Project Name" required autofocus>
-                Address</label><label class="input w-full"><span class="label"></span>
-                <input name="streetAddress" type="text" value="" placeholder="Street Address" required>
-                City</label><label class="input w-full"><span class="label"></span>
-                <input name="city" type="text" value="" placeholder="City" required>
-                State</label><label class="input w-full"><span class="label"></span>
-                <input name="state" type="text" value="" placeholder="State" required>
-                Zip</label><label class="input w-full"><span class="label"></span>
-                <input name="zipCode" type="text" value="" placeholder="Zip Code" required></label>
-                <button class="btn btn-secondary btn-block my-6" type="submit">Submit</button>
-              </form>
+              <button type="button" class="btn btn-outline btn-block mb-4" aria-controls="newProjectPDF" aria-expanded="false" onclick="const upload = document.getElementById('newProjectPDF');
+upload.hidden = !upload.hidden;
+document.getElementById('projectDetailsForm').hidden = !upload.hidden;
+this.textContent = upload.hidden ? 'Import from Cool Calc PDF' : 'Enter project manually';
+this.setAttribute('aria-expanded', String(!upload.hidden));">Import from Cool Calc PDF</button>
+              <div id="newProjectPDF" hidden>
+                <p class="mb-4">Create a project using the name, address, sensible heat ratio, and room loads from a Cool Calc MJ8 report. You can edit them after import.</p>
+                <p class="text-sm mb-4">Maximum 10 MB and 200 pages.</p>
+                <form hx-post="/projects/import/pdf" hx-target="body" hx-swap="outerHTML" hx-encoding="multipart/form-data" hx-disabled-elt="find button" hx-on::response-error="const error = this.querySelector('[role=alert]');
+error.textContent = event.detail.xhr.status === 413
+  ? 'The file is too large. Choose a file smaller than 10 MB.'
+  : 'The server could not complete the upload. Please try again.';
+error.hidden = false;" hx-on::send-error="const error = this.querySelector('[role=alert]');
+error.textContent = 'The connection to the server was lost. Check your connection and try again.';
+error.hidden = false;" hx-on::before-request="this.querySelector('[role=alert]').hidden = true;" enctype="multipart/form-data" hx-on::before-on-load="const response = new DOMParser().parseFromString(event.detail.xhr.responseText, 'text/html');
+const missingZIP = response.querySelector('[data-project-import-missing-zip]');
+if (missingZIP) {
+  event.preventDefault();
+  this.querySelector('[data-missing-zip]').hidden = false;
+  this.querySelector('[data-zip-message]').textContent = missingZIP.textContent;
+  this.elements.zipCode.disabled = false;
+  this.elements.zipCode.required = true;
+  this.elements.zipCode.focus();
+}
+const conflict = response.querySelector('[data-project-import-conflict]');
+if (conflict) {
+  event.preventDefault();
+  const warning = this.querySelector('[data-duplicate-warning]');
+  warning.querySelector('[data-duplicate-details]').replaceChildren(conflict);
+  warning.hidden = false;
+  this.querySelector('[data-import-submit]').hidden = true;
+  warning.querySelector('button').focus();
+}" hx-on::after-request="this.elements.confirmDuplicate.value = 'false';">
+                  <input type="hidden" name="confirmDuplicate" value="false">
+                  <input type="file" name="file" accept=".pdf,application/pdf" aria-label="Cool Calc PDF" required onchange="this.form.elements.confirmDuplicate.value = 'false';
+this.form.querySelector('[data-duplicate-warning]').hidden = true;
+this.form.querySelector('[data-import-submit]').hidden = false;
+this.form.querySelector('[data-missing-zip]').hidden = true;
+this.form.elements.zipCode.disabled = true;
+this.form.elements.zipCode.required = false;
+this.form.elements.zipCode.value = '';">
+                  <div data-missing-zip="" class="mt-6" hidden>
+                    <p class="mb-4" data-zip-message="" aria-live="polite"></p>
+                    ZIP code<label class="input w-full"><span class="label"></span>
+                    <input name="zipCode" type="text" placeholder="ZIP code" pattern="[0-9]{5}(-[0-9]{4})?" disabled></label>
+                  </div>
+                  <div data-import-submit="">
+                    <button class="btn btn-secondary btn-block mt-6" type="submit">Create project from PDF</button>
+                  </div>
+                  <div data-duplicate-warning="" class="mt-6" hidden aria-live="polite">
+                    <div data-duplicate-details=""></div>
+                    <div class="flex gap-4 mt-6">
+                      <button type="button" class="btn btn-outline" onclick="this.form.elements.confirmDuplicate.value = 'false';
+this.form.querySelector('[data-duplicate-warning]').hidden = true;
+this.form.querySelector('[data-import-submit]').hidden = false;
+this.form.querySelector('input[type=file]').focus();">Cancel</button>
+                      <button class="btn btn-secondary" type="submit" onclick="this.form.elements.confirmDuplicate.value = 'true';">Create another project</button>
+                    </div>
+                  </div>
+                  <p class="htmx-indicator text-sm mt-2">Reading project and room loads…</p>
+                  <p class="text-error mt-2" role="alert" hidden></p>
+                </form>
+              </div>
+              <div id="projectDetailsForm">
+                <form class="grid grid-cols-1 gap-4" hx-post="/projects" hx-target="body" hx-swap="outerHTML">
+                  <label class="input w-full"><span class="label">Name</span>
+                  <input name="name" type="text" value="" placeholder="Project Name" required autofocus>
+                  Address</label><label class="input w-full"><span class="label"></span>
+                  <input name="streetAddress" type="text" value="" placeholder="Street Address" required>
+                  City</label><label class="input w-full"><span class="label"></span>
+                  <input name="city" type="text" value="" placeholder="City" required>
+                  State</label><label class="input w-full"><span class="label"></span>
+                  <input name="state" type="text" value="" placeholder="State" required>
+                  Zip</label><label class="input w-full"><span class="label"></span>
+                  <input name="zipCode" type="text" value="" placeholder="Zip Code" required></label>
+                  <button class="btn btn-secondary btn-block my-6" type="submit">Submit</button>
+                </form>
+              </div>
             </div>
           </dialog>
         </div>

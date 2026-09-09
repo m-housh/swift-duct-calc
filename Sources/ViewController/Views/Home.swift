@@ -130,7 +130,13 @@ struct HomeView: HTML, Sendable {
                     "Available now"
                   }
                 }
-                li { "Room load import from PDF." }
+                li {
+                  "Room load import from Cool Calc PDF. "
+                  span(.class("badge badge-success badge-outline")) {
+                    span(.init(name: "aria-hidden", value: "true")) { "✓" }
+                    "Available now"
+                  }
+                }
               }
             }
           }

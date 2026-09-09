@@ -5,6 +5,7 @@ public enum GuidedPath {
 
   public struct InitialValues: Codable, Equatable, Sendable {
     public let name: String
+    public let type: EquivalentLength.EffectiveLengthType?
     public let straightLengths: [Int]
 
     public init(draft: String) throws {

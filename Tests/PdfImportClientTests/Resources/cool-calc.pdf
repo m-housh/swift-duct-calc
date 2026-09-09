@@ -1,0 +1,368 @@
+%PDF-1.3
+%‚„œ”
+1 0 obj
+<<
+/Producer (pypdf)
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Count 5
+/Kids [ 4 0 R 7 0 R 9 0 R 11 0 R 13 0 R ]
+>>
+endobj
+3 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+4 0 obj
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 5 0 R
+>>
+>>
+/MediaBox [ 0.0 0.0 900 792 ]
+/Parent 2 0 R
+/Contents 6 0 R
+>>
+endobj
+5 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Courier
+>>
+endobj
+6 0 obj
+<<
+/Length 2340
+>>
+stream
+BT /F1 6 Tf 10 TL 20 770 Td
+(MJ8 Report) Tj T*
+(SHR: 0.880) Tj T*
+() Tj T*
+(                                     INDIVIDUAL ROOM ANALYSIS) Tj T*
+() Tj T*
+(Room 1 - Level: Basement) Tj T*
+() Tj T*
+(Heating Load:                               4,480 BTU/h            Cooling Load:                                814 BTU/h) Tj T*
+() Tj T*
+(Airflow:                                      118 CFM              Area:                                          475 ft≤) Tj T*
+() Tj T*
+(Exposed Wall Area:                             486 ft≤) Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+(Room 2 - Level: Basement) Tj T*
+() Tj T*
+(Heating Load:                               5,013 BTU/h            Cooling Load:                                985 BTU/h) Tj T*
+() Tj T*
+(Airflow:                                      132 CFM              Area:                                          483 ft≤) Tj T*
+() Tj T*
+(Exposed Wall Area:                             478 ft≤) Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+(Dining - Level: Level 1) Tj T*
+() Tj T*
+() Tj T*
+(Heating Load:                               3,846 BTU/h            Cooling Load:                               1,668 BTU/h) Tj T*
+() Tj T*
+(Airflow:                                      101 CFM              Area:                                          226 ft≤) Tj T*
+() Tj T*
+(Exposed Wall Area:                             197 ft≤) Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+(Foyer - Level: Level 1) Tj T*
+() Tj T*
+() Tj T*
+(Heating Load:                               3,320 BTU/h            Cooling Load:                                892 BTU/h) Tj T*
+() Tj T*
+(Airflow:                                      87 CFM               Area:                                          212 ft≤) Tj T*
+() Tj T*
+(Exposed Wall Area:                             185 ft≤) Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+(Kitchen - Level: Level 1) Tj T*
+() Tj T*
+() Tj T*
+(Heating Load:                               3,821 BTU/h            Cooling Load:                               4,085 BTU/h) Tj T*
+() Tj T*
+(Airflow:                                      170 CFM              Area:                                          210 ft≤) Tj T*
+() Tj T*
+(Exposed Wall Area:                             192 ft≤) Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+ET
+endstream
+endobj
+7 0 obj
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 5 0 R
+>>
+>>
+/MediaBox [ 0.0 0.0 900 792 ]
+/Parent 2 0 R
+/Contents 8 0 R
+>>
+endobj
+8 0 obj
+<<
+/Length 127
+>>
+stream
+BT /F1 6 Tf 10 TL 20 770 Td
+() Tj T*
+() Tj T*
+(                                                          Page 6 of 44) Tj T*
+ET
+endstream
+endobj
+9 0 obj
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 5 0 R
+>>
+>>
+/MediaBox [ 0.0 0.0 900 792 ]
+/Parent 2 0 R
+/Contents 10 0 R
+>>
+endobj
+10 0 obj
+<<
+/Length 2691
+>>
+stream
+BT /F1 6 Tf 10 TL 20 770 Td
+(Living - Level: Level 1) Tj T*
+() Tj T*
+() Tj T*
+(Heating Load:                                3,628 BTU/h             Cooling Load:                                 5,113 BTU/h) Tj T*
+() Tj T*
+(Airflow:                                       213 CFM               Area:                                             248 ft≤) Tj T*
+() Tj T*
+(Exposed Wall Area:                               225 ft≤) Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+(Room 1 - Level: Level 1) Tj T*
+() Tj T*
+() Tj T*
+(Heating Load:                                  322 BTU/h             Cooling Load:                                   66 BTU/h) Tj T*
+() Tj T*
+(Airflow:                                         9 CFM               Area:                                             31 ft≤) Tj T*
+() Tj T*
+(Exposed Wall Area:                                27 ft≤) Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+(Stairway \(Basement\) - Level: Level 1) Tj T*
+() Tj T*
+(Heating Load:                                  308 BTU/h             Cooling Load:                                   63 BTU/h) Tj T*
+() Tj T*
+(Airflow:                                         8 CFM               Area:                                             29 ft≤) Tj T*
+() Tj T*
+(Exposed Wall Area:                                26 ft≤) Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+(Bath \(1\) - Level: Level 2) Tj T*
+() Tj T*
+(Heating Load:                                1,854 BTU/h             Cooling Load:                                  548 BTU/h) Tj T*
+() Tj T*
+(Airflow:                                        48 CFM               Area:                                             65 ft≤) Tj T*
+() Tj T*
+(Exposed Wall Area:                               123 ft≤) Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+(Bath \(2\) - Level: Level 2) Tj T*
+() Tj T*
+(Heating Load:                                1,888 BTU/h             Cooling Load:                                  522 BTU/h) Tj T*
+() Tj T*
+(Airflow:                                        50 CFM               Area:                                             75 ft≤) Tj T*
+() Tj T*
+(Exposed Wall Area:                               140 ft≤) Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+(Bed \(1\) - Level: Level 2) Tj T*
+() Tj T*
+(Heating Load:                                2,983 BTU/h             Cooling Load:                                 2,365 BTU/h) Tj T*
+() Tj T*
+(Airflow:                                        98 CFM               Area:                                             160 ft≤) Tj T*
+() Tj T*
+(Exposed Wall Area:                               185 ft≤) Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+(                                                            Page 7 of 44) Tj T*
+ET
+endstream
+endobj
+11 0 obj
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 5 0 R
+>>
+>>
+/MediaBox [ 0.0 0.0 900 792 ]
+/Parent 2 0 R
+/Contents 12 0 R
+>>
+endobj
+12 0 obj
+<<
+/Length 2702
+>>
+stream
+BT /F1 6 Tf 10 TL 20 770 Td
+(Bed \(2\) - Level: Level 2) Tj T*
+() Tj T*
+() Tj T*
+(Heating Load:                                3,289 BTU/h             Cooling Load:                                 2,632 BTU/h) Tj T*
+() Tj T*
+(Airflow:                                       110 CFM               Area:                                             178 ft≤) Tj T*
+() Tj T*
+(Exposed Wall Area:                               190 ft≤) Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+(Bed \(3\) - Level: Level 2) Tj T*
+() Tj T*
+() Tj T*
+(Heating Load:                                1,186 BTU/h             Cooling Load:                                 1,497 BTU/h) Tj T*
+() Tj T*
+(Airflow:                                        62 CFM               Area:                                             169 ft≤) Tj T*
+() Tj T*
+(Exposed Wall Area:                                87 ft≤) Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+(Hall / Stairwell \(up/down\) - Level: Level 2) Tj T*
+() Tj T*
+(Heating Load:                                1,332 BTU/h             Cooling Load:                                  314 BTU/h) Tj T*
+() Tj T*
+(Airflow:                                        35 CFM               Area:                                             155 ft≤) Tj T*
+() Tj T*
+(Exposed Wall Area:                                93 ft≤) Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+(Laundry - Level: Level 2) Tj T*
+() Tj T*
+(Heating Load:                                1,466 BTU/h             Cooling Load:                                 1,175 BTU/h) Tj T*
+() Tj T*
+(Airflow:                                        49 CFM               Area:                                             155 ft≤) Tj T*
+() Tj T*
+(Exposed Wall Area:                               106 ft≤) Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+(Level 3 - Level: Level 3) Tj T*
+() Tj T*
+(Heating Load:                                10,010 BTU/h            Cooling Load:                                 2,995 BTU/h) Tj T*
+() Tj T*
+(Airflow:                                       263 CFM               Area:                                             422 ft≤) Tj T*
+() Tj T*
+(Exposed Wall Area:                               662 ft≤) Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+(Room 1 - Level: Level 3) Tj T*
+() Tj T*
+(Heating Load:                                4,152 BTU/h             Cooling Load:                                 2,630 BTU/h) Tj T*
+() Tj T*
+(Airflow:                                       110 CFM               Area:                                             154 ft≤) Tj T*
+() Tj T*
+(Exposed Wall Area:                               268 ft≤) Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+() Tj T*
+(                                                            Page 8 of 44) Tj T*
+ET
+endstream
+endobj
+13 0 obj
+<<
+/Type /Page
+/Resources <<
+/Font <<
+/F1 5 0 R
+>>
+>>
+/MediaBox [ 0.0 0.0 900 792 ]
+/Parent 2 0 R
+/Contents 14 0 R
+>>
+endobj
+14 0 obj
+<<
+/Length 80
+>>
+stream
+BT /F1 6 Tf 10 TL 20 770 Td
+(Room 1 - Basement) Tj T*
+(Basement Walls:) Tj T*
+ET
+endstream
+endobj
+xref
+0 15
+0000000000 65535 f 
+0000000015 00000 n 
+0000000054 00000 n 
+0000000139 00000 n 
+0000000188 00000 n 
+0000000320 00000 n 
+0000000388 00000 n 
+0000002780 00000 n 
+0000002912 00000 n 
+0000003090 00000 n 
+0000003223 00000 n 
+0000005967 00000 n 
+0000006101 00000 n 
+0000008856 00000 n 
+0000008990 00000 n 
+trailer
+<<
+/Size 15
+/Root 3 0 R
+/Info 1 0 R
+>>
+startxref
+9121
+%%EOF

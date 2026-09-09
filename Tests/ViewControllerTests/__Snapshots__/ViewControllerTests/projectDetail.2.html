@@ -124,8 +124,8 @@ p-6 w-full">
                       </th>
                       <th>
                         <div class="flex justify-end me-2 space-x-4">
-                          <div class="tooltip tooltip-left" data-tip="Upload CSV">
-                            <button class="btn btn-secondary" onclick="uploadCSV.showModal()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-plus-corner-icon lucide-file-plus-corner"><path d="M11.35 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v5.35"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M14 19h6"/><path d="M17 16v6"/></svg></button>
+                          <div class="tooltip tooltip-left" data-tip="Import room loads">
+                            <button class="btn btn-secondary" onclick="uploadRooms.showModal()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-plus-corner-icon lucide-file-plus-corner"><path d="M11.35 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v5.35"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M14 19h6"/><path d="M17 16v6"/></svg></button>
                           </div>
                           <div class="tooltip tooltip-left" data-tip="Add Room">
                             <button type="button" class="btn btn-primary mx-auto tooltip-left" onclick="roomForm.showModal()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></button>
@@ -593,17 +593,50 @@ p-6 w-full">
                     </form>
                   </div>
                 </dialog>
-                <dialog id="uploadCSV" class="modal">
+                <dialog id="uploadRooms" class="modal">
                   <div class="modal-box">
-                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="uploadCSV.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                    <div class="pb-6 space-y-3">
-                      <h1 class="text-3xl font-bold">Upload CSV</h1>
-                      <p class="text-sm italic">Drag and drop, or click to upload</p>
+                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="uploadRooms.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                    <h1 class="text-2xl font-bold mb-4">Import room loads</h1>
+                    File type<label for="roomImportFormat" class="label"></label>
+                    <select id="roomImportFormat" class="select w-full mb-4" onchange="this.closest('dialog').querySelectorAll('[data-import-format]').forEach(panel => {
+  panel.hidden = panel.dataset.importFormat !== this.value;
+});">
+                      <option value="csv">CSV</option>
+                      <option value="pdf">Cool Calc PDF</option>
+                    </select>
+                    <div data-import-format="csv">
+                      <p class="mb-4">Upload a room-load CSV with names, levels, heating and cooling loads, register counts, and optional airflow delegation.</p>
+                      <p class="text-sm mb-4">Rooms are matched by name. Matching rooms will be updated, missing rooms will be added, and rooms absent from the file will be kept.</p>
+                      <form hx-post="/projects/00000000-0000-0000-0000-000000000000/rooms/csv" hx-target="body" hx-swap="outerHTML" hx-encoding="multipart/form-data" hx-disabled-elt="find button" hx-on::response-error="const error = this.querySelector('[role=alert]');
+error.textContent = event.detail.xhr.status === 413
+  ? 'The file is too large. Choose a file smaller than 10 MB.'
+  : 'The server could not complete the upload. Please try again.';
+error.hidden = false;" hx-on::send-error="const error = this.querySelector('[role=alert]');
+error.textContent = 'The connection to the server was lost. Check your connection and try again.';
+error.hidden = false;" hx-on::before-request="this.querySelector('[role=alert]').hidden = true;" enctype="multipart/form-data" hx-confirm="This project already has rooms. Update matching room names with the CSV values, including register counts and airflow delegation, and add missing rooms? Rooms absent from the file will be kept.">
+                        <input type="file" name="file" accept=".csv,text/csv" aria-label="Room loads CSV" required>
+                        <button class="btn btn-secondary btn-block mt-6" type="submit">Import rooms</button>
+                        <p class="htmx-indicator text-sm mt-2">Reading room loads…</p>
+                        <p class="text-error mt-2" role="alert" hidden></p>
+                      </form>
                     </div>
-                    <form hx-post="/projects/00000000-0000-0000-0000-000000000000/rooms/csv" hx-target="body" hx-swap="outerHTML" enctype="multipart/form-data">
-                      <input type="file" name="file" accept=".csv">
-                      <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
-                    </form>
+                    <div data-import-format="pdf" hidden>
+                      <p class="mb-4">Upload a Cool Calc MJ8 report. New rooms start with one register and no airflow delegation. You can edit them after import.</p>
+                      <p class="text-sm mb-4">Maximum 10 MB and 200 pages.</p>
+                      <p class="text-sm mb-4">Rooms are matched by name. Matching rooms will be updated, missing rooms will be added, and rooms absent from the file will be kept.</p>
+                      <form hx-post="/projects/00000000-0000-0000-0000-000000000000/rooms/pdf" hx-target="body" hx-swap="outerHTML" hx-encoding="multipart/form-data" hx-disabled-elt="find button" hx-on::response-error="const error = this.querySelector('[role=alert]');
+error.textContent = event.detail.xhr.status === 413
+  ? 'The file is too large. Choose a file smaller than 10 MB.'
+  : 'The server could not complete the upload. Please try again.';
+error.hidden = false;" hx-on::send-error="const error = this.querySelector('[role=alert]');
+error.textContent = 'The connection to the server was lost. Check your connection and try again.';
+error.hidden = false;" hx-on::before-request="this.querySelector('[role=alert]').hidden = true;" enctype="multipart/form-data" hx-confirm="This project already has rooms. Update loads and levels for matching room names and add missing rooms? Register counts, airflow delegation, and rooms absent from the file will be kept.">
+                        <input type="file" name="file" accept=".pdf,application/pdf" aria-label="Cool Calc PDF" required>
+                        <button class="btn btn-secondary btn-block mt-6" type="submit">Import rooms</button>
+                        <p class="htmx-indicator text-sm mt-2">Reading room loads…</p>
+                        <p class="text-error mt-2" role="alert" hidden></p>
+                      </form>
+                    </div>
                   </div>
                 </dialog>
               </div>
