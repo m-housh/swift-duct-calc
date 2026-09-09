@@ -28,6 +28,7 @@ struct FittingsView: HTML, Sendable {
         }
       }
       toolbar
+      div(.class("mobile-group-navigation")) {}
       div(.id("workspace"), .tabindex(-1)) {
         div(.class("explorer combined")) {
           groupNavigation
@@ -79,10 +80,11 @@ struct FittingsView: HTML, Sendable {
           .custom(name: "autocomplete", value: "off"))
         kbd { "/" }
       }
-      label(.class("select-label")) {
-        "Group"
+      label(.class("select-label group-control")) {
+        span { "Fitting group" }
         select(
-          .id("group-filter"), .name("group"), .custom(name: "aria-label", value: "Filter by group")
+          .id("group-filter"), .name("group"), .custom(name: "form", value: "filters"),
+          .custom(name: "aria-label", value: "Fitting group")
         ) {
           option(.value("all")) { page.allGroupsLabel }.attributes(
             .selected, when: page.group == "all")
