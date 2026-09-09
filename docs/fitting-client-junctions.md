@@ -1,5 +1,9 @@
 # Fitting catalog: return boots and trunk junctions
 
+Source-file paths and review hashes below record the completed import. Those
+files are now retained in Git history; the app uses the
+[finished SVGs and catalogs](fitting-assets.md) without a PDF or regeneration step.
+
 The junction work now covers all of groups 6, 9, and 10. The catalog contains
 140 choices at this slice’s revision `fitting-catalog-v5`. The latest addition is 6A–6E, using
 the user's confirmed nearest-published-row policy and returning both branch and

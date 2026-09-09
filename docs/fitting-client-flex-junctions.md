@@ -1,5 +1,9 @@
 # Group 11 flex junction box
 
+Source-file paths and review hashes below record the completed import. Those
+files are now retained in Git history; the app uses the
+[finished SVGs and catalogs](fitting-assets.md) without a PDF or regeneration step.
+
 Catalog revision `fitting-catalog-v14` contains 227 fitting choices and covers all
 groups 1–12. Group 11 has one application identity, `11-junction-box`, with an
 optional supplied 90° radius bend. No source letters 11A/11B are invented.

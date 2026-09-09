@@ -53,7 +53,8 @@ for (let i = 0; i < R.items.length; i++) {
   assert.equal(csv.fixed_equivalent_length_ft, f.fixed === undefined ? '' : String(f.fixed));
   assert.ok(fs.existsSync(path.join(root, 'Public', R.imageURL(f).split('#')[0])));
   if (f.viewport) assert.match(fs.readFileSync(path.join(root, 'Public', f.image), 'utf8'), /width="640" height="520"/, f.id + ' sheet framing dimensions');
-  assert.ok(Number(new URL('http://test' + record.source.url).hash.split('=')[1]) > 0);
+  assert.deepEqual(record.source, {document: 'ACCA Manual D', printed_page: f.page});
+  assert.match(f.page, /^\d+(?:–\d+)?$/);
   for (const row of record.reference.table.rows) {
     assert.equal(row.keys.length, record.reference.table.labels.length);
     assert.equal(typeof row.value, 'number');
@@ -70,4 +71,20 @@ const fixture = {...R.items[0], name: 'Test, "quoted"\nmultiline name', notes:['
 const fixtureRows = parseCSV(R.csv([fixture]));
 assert.equal(fixtureRows[1][columns.indexOf('name')], fixture.name);
 assert.deepEqual(JSON.parse(fixtureRows[1][columns.indexOf('reference_json')]).notes, fixture.notes);
-console.log('PASS: 231 catalog records; 12 groups; SVG and source links; variant IDs; conditional tables; lossless JSON/CSV exports, including quoted multiline content.');
+// Both catalogs must work using only the finished, self-contained artwork.
+const runtime = JSON.parse(fs.readFileSync(path.join(root, 'Sources/FittingClient/Resources/catalog.json'), 'utf8'));
+const drawings = new Set([
+  ...R.items.map(f => R.imageURL(f).split('#')[0]),
+  ...runtime.fittings.flatMap(f => [f.artwork, ...(f.alternateArtwork || [])].map(art => art.publicPath)),
+]);
+assert.equal(runtime.fittings.length, 227);
+assert.equal(drawings.size, 234);
+for (const url of drawings) {
+  const svg = fs.readFileSync(path.join(root, 'Public', url), 'utf8');
+  assert.match(svg, /<svg\b/, url);
+  for (const [, href] of svg.matchAll(/\b(?:xlink:)?href=["']([^"']*)["']/g)) {
+    assert.ok(href.startsWith('data:') || href.startsWith('#'), url + ' must not load an external asset: ' + href);
+  }
+}
+assert.doesNotMatch(R.json(R.items), /\.pdf|\/source-art\/|\/references\/|manifest\.json/i);
+console.log('PASS: 231 reference records; 227 runtime definitions; 234 standalone SVGs; 12 groups; citations; variant IDs; conditional tables; lossless JSON/CSV exports.');

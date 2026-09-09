@@ -18,5 +18,4 @@ postgres
 # Maintenance material is not needed by the Swift build or runtime.
 docs
 scripts
-Public/fitting-review
 Public/prototypes

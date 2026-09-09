@@ -1,5 +1,9 @@
 # Group 7: panned stud and joist returns
 
+Source-file paths and review hashes below record the completed import. Those
+files are now retained in Git history; the app uses the
+[finished SVGs and catalogs](fitting-assets.md) without a PDF or regeneration step.
+
 This slice adds 7A–7E to `FittingClient`, bringing the catalog to 145 fitting
 choices at revision `fitting-catalog-v6`. It includes five calculation cases and
 nine approved artwork views. Production step-3 UI and project persistence remain

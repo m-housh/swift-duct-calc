@@ -1,5 +1,9 @@
 # Square elbows, offsets, and risers
 
+Source-file paths and review hashes below record the completed import. Those
+files are now retained in Git history; the app uses the
+[finished SVGs and catalogs](fitting-assets.md) without a PDF or regeneration step.
+
 Catalog revision `fitting-catalog-v10` contains 165 fitting choices. This slice
 adds 8D–8K, 8N, and 8P; together with the earlier slices it implements 20 of the
 25 approved Group 8 artwork identities at this slice.

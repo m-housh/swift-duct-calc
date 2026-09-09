@@ -1,5 +1,9 @@
 # Remaining 8A constructions
 
+Source-file paths and review hashes below record the completed import. Those
+files are now retained in Git history; the app uses the
+[finished SVGs and catalogs](fitting-assets.md) without a PDF or regeneration step.
+
 Catalog revision `fitting-catalog-v9` contains 155 fitting choices and completes
 all eight 8A construction identities. The existing radius-based round elbow rules
 and the 8B/8C rules are unchanged. The production picker is still pending.

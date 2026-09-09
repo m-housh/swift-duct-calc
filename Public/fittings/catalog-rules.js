@@ -1,4 +1,4 @@
-/* Reference-table adapters for the supplied artwork manifests. Not audited calculation rules. */
+/* Reference-table adapters for the checked-in fitting data. Not audited calculation rules. */
 (()=>{
 'use strict';
 const data=window.FITTINGS;

@@ -1,5 +1,9 @@
 # Initial FittingClient source audit
 
+Source-file paths and review hashes below record the completed import. Those
+files are now retained in Git history; the app uses the
+[finished SVGs and catalogs](fitting-assets.md) without a PDF or regeneration step.
+
 This records the original five-case source check. Current implementation and
 validation are documented in [the picker guide](fitting-picker-preview.md) and
 [the catalog expansion audit](fitting-client-catalog-expansion.md).
