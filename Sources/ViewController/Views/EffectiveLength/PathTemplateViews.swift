@@ -8,6 +8,7 @@ struct PathTemplatesView: HTML, Sendable {
   let projectID: Project.ID?
   var choosing: Bool = false
   var draft: String? = nil
+  var preferredType: EquivalentLength.EffectiveLengthType? = nil
 
   var body: some HTML {
     Navbar(showSidebarToggle: false, isLoggedIn: true)
@@ -38,9 +39,10 @@ struct PathTemplatesView: HTML, Sendable {
         }
       }
       p { "Use your usual fittings, with the choices and defaults you prefer." }
-      div(.class("flex flex-wrap gap-2")) {
-        if choosing, let projectID {
-          for type in EquivalentLength.EffectiveLengthType.allCases {
+      if choosing, let projectID {
+        for type in orderedTypes {
+          section(.class("space-y-4"), .data("template-type", value: type.rawValue)) {
+            h2(.class("text-xl font-bold")) { "\(type.rawValue.capitalized) templates" }
             if !templates.contains(where: { $0.configuration.type == type }) {
               form(
                 .method(.post),
@@ -49,40 +51,35 @@ struct PathTemplatesView: HTML, Sendable {
                 SubmitButton(title: "Use starter \(type.rawValue)")
               }
             }
-          }
-        } else if !choosing {
-          a(.class("btn"), .href(pathTemplatesURL(projectID, suffix: "/import"))) {
-            "Import JSON template"
-          }
-        }
-      }
-      for template in templates {
-        div(.class("card bg-base-200 border border-base-300")) {
-          div(.class("card-body")) {
-            h2(.class("card-title")) { template.configuration.name }
-            p {
-              "\(template.configuration.type.rawValue.capitalized) · \(template.configuration.steps.count) sections"
-            }
-            div(.class("card-actions justify-end")) {
-              a(.class("btn"), .href(pathTemplatesURL(projectID, suffix: "/\(template.id)"))) {
-                "Configure"
-              }
-              if choosing, let projectID {
-                a(
-                  .class("btn btn-secondary"),
-                  .href(withDraft("\(guidedPathURL(projectID))/start/\(template.id)"))
-                ) {
-                  "Use template"
-                }
-              }
+            for template in templates where template.configuration.type == type {
+              templateCard(template)
             }
           }
         }
+      } else {
+        a(.class("btn"), .href(pathTemplatesURL(projectID, suffix: "/import"))) {
+          "Import JSON template"
+        }
+        for template in templates { templateCard(template) }
       }
       if choosing {
         a(.class("link"), .href(pathTemplatesURL(projectID))) { "Manage templates" }
       }
     }
+  }
+
+  private var orderedTypes: [EquivalentLength.EffectiveLengthType] {
+    guard let preferredType else { return EquivalentLength.EffectiveLengthType.allCases }
+    return [preferredType]
+      + EquivalentLength.EffectiveLengthType.allCases.filter { $0 != preferredType }
+  }
+
+  private func templateCard(_ template: PathTemplate) -> PathTemplateCard {
+    .init(
+      template: template,
+      configureURL: pathTemplatesURL(projectID, suffix: "/\(template.id)"),
+      useURL: choosing
+        ? projectID.map { withDraft("\(guidedPathURL($0))/start/\(template.id)") } : nil)
   }
 
   private func withDraft(_ path: String) -> String {
@@ -92,6 +89,29 @@ struct PathTemplatesView: HTML, Sendable {
     url.queryItems = [.init(name: "draft", value: draft)]
     url.percentEncodedQuery = url.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
     return url.string!
+  }
+}
+
+private struct PathTemplateCard: HTML, Sendable {
+  let template: PathTemplate
+  let configureURL: String
+  let useURL: String?
+
+  var body: some HTML {
+    div(.class("card bg-base-200 border border-base-300")) {
+      div(.class("card-body")) {
+        h3(.class("card-title")) { template.configuration.name }
+        p {
+          "\(template.configuration.type.rawValue.capitalized) · \(template.configuration.steps.count) sections"
+        }
+        div(.class("card-actions justify-end")) {
+          a(.class("btn"), .href(configureURL)) { "Configure" }
+          if let useURL {
+            a(.class("btn btn-secondary"), .href(useURL)) { "Use template" }
+          }
+        }
+      }
+    }
   }
 }
 

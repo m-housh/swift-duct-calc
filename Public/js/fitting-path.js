@@ -226,7 +226,7 @@
       event.preventDefault();
       if (busy) return;
       try {
-        const draft = { name: $('#path-name').value, straightLengths: parseStraight() };
+        const draft = { name: $('#path-name').value, type: pathType(), straightLengths: parseStraight() };
         const url = new URL(event.currentTarget.dataset.templateUrl, location.origin);
         url.search = `?draft=${encodeURIComponent(JSON.stringify(draft))}`;
         status('Loading templates…');
