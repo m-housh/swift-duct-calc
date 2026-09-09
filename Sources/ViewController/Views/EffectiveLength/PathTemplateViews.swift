@@ -13,6 +13,7 @@ struct PathTemplatesView: HTML, Sendable {
   var body: some HTML {
     Navbar(showSidebarToggle: false, isLoggedIn: true)
     div(.id("path-template-list"), .class("w-full p-4 space-y-6")) {
+      link(.rel(.stylesheet), .href("/css/path-template-chooser.css?v=1"))
       if let projectID {
         a(.class("btn btn-ghost"), .href(effectiveLengthsURL(projectID))) { "← Back to project" }
       }
@@ -41,15 +42,25 @@ struct PathTemplatesView: HTML, Sendable {
       p { "Use your usual fittings, with the choices and defaults you prefer." }
       if choosing, let projectID {
         for type in orderedTypes {
-          section(.class("space-y-4"), .data("template-type", value: type.rawValue)) {
-            h2(.class("text-xl font-bold")) { "\(type.rawValue.capitalized) templates" }
-            if !templates.contains(where: { $0.configuration.type == type }) {
-              form(
-                .method(.post),
-                .action(withDraft("\(guidedPathURL(projectID))/starter/\(type.rawValue)"))
-              ) {
-                SubmitButton(title: "Use starter \(type.rawValue)")
+          section(
+            .class("template-choice-section space-y-4"),
+            .data("template-type", value: type.rawValue),
+            .data("template-preferred", value: String(type == preferredType))
+          ) {
+            div(.class("template-choice-heading")) {
+              h2(.class("text-xl font-bold")) { "\(type.rawValue.capitalized) templates" }
+              if type == preferredType {
+                span(.class("template-choice-match")) { "Matches your \(type.rawValue) path" }
               }
+            }
+            if !templates.contains(where: { $0.configuration.type == type }) {
+              PathTemplateCard(
+                title: "Starter \(type.rawValue) path",
+                summary:
+                  "A ready-to-use set of \(type.rawValue) fittings. Adjust it as you build your path.",
+                configureURL: nil,
+                useURL: withDraft("\(guidedPathURL(projectID))/starter/\(type.rawValue)"),
+                starterType: type, emphasized: preferredType == nil || type == preferredType)
             }
             for template in templates where template.configuration.type == type {
               templateCard(template)
@@ -76,10 +87,13 @@ struct PathTemplatesView: HTML, Sendable {
 
   private func templateCard(_ template: PathTemplate) -> PathTemplateCard {
     .init(
-      template: template,
+      title: template.configuration.name,
+      summary:
+        "\(template.configuration.type.rawValue.capitalized) · \(template.configuration.steps.count) sections",
       configureURL: pathTemplatesURL(projectID, suffix: "/\(template.id)"),
       useURL: choosing
-        ? projectID.map { withDraft("\(guidedPathURL($0))/start/\(template.id)") } : nil)
+        ? projectID.map { withDraft("\(guidedPathURL($0))/start/\(template.id)") } : nil,
+      emphasized: preferredType == nil || template.configuration.type == preferredType)
   }
 
   private func withDraft(_ path: String) -> String {
@@ -93,21 +107,34 @@ struct PathTemplatesView: HTML, Sendable {
 }
 
 private struct PathTemplateCard: HTML, Sendable {
-  let template: PathTemplate
-  let configureURL: String
+  let title: String
+  let summary: String
+  let configureURL: String?
   let useURL: String?
+  var starterType: EquivalentLength.EffectiveLengthType? = nil
+  var emphasized: Bool = true
+
+  private var actionClass: String { emphasized ? "btn btn-secondary" : "btn btn-outline" }
 
   var body: some HTML {
     div(.class("card bg-base-200 border border-base-300")) {
       div(.class("card-body")) {
-        h3(.class("card-title")) { template.configuration.name }
-        p {
-          "\(template.configuration.type.rawValue.capitalized) · \(template.configuration.steps.count) sections"
-        }
+        h3(.class("card-title")) { title }
+        p { summary }
         div(.class("card-actions justify-end")) {
-          a(.class("btn"), .href(configureURL)) { "Configure" }
+          if let configureURL {
+            a(.class("btn btn-ghost"), .href(configureURL)) { "Configure" }
+          }
           if let useURL {
-            a(.class("btn btn-secondary"), .href(useURL)) { "Use template" }
+            if let starterType {
+              form(.method(.post), .action(useURL)) {
+                button(.type(.submit), .class(actionClass)) {
+                  "Use starter \(starterType.rawValue)"
+                }
+              }
+            } else {
+              a(.class(actionClass), .href(useURL)) { "Use template" }
+            }
           }
         }
       }
