@@ -125,3 +125,11 @@ separate disposable-catalog authoring check.
 ![Signed-in reference and JSON inspector](images/fitting-picker/reference-integrated.png)
 
 ![Reference on mobile](images/fitting-picker/reference-integrated-mobile.png)
+
+The navbar's Fitting reference action uses the theme's secondary outline button,
+with a filled hover/focus state. The existing Styleguide tooltip helper displays
+"Browse fitting references" beneath it on hover and keyboard focus. An
+`aria-describedby` link provides the same description to screen readers. Browser
+checks cover Dracula and light themes, keyboard activation, and mobile width.
+
+![Themed reference button and tooltip](images/fitting-picker/reference-nav-tooltip.png)

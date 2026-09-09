@@ -19,7 +19,7 @@
     <script src="/js/htmx-download.js"></script>
     <script src="/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="/css/output.css?v=navbar-reference-1">
     <link rel="stylesheet" href="/css/htmx.css">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
@@ -45,7 +45,8 @@
               </div>
               <div class="flex-none">
                 <div class="flex items-end space-x-4">
-                  <a class="btn btn-ghost" href="/fittings">Fitting reference</a>
+                  <div class="tooltip tooltip-bottom" data-tip="Browse fitting references"><a class="btn btn-outline btn-secondary" href="/fittings" aria-describedby="fitting-reference-help">Fitting reference</a></div>
+                  Browse fitting references<span id="fitting-reference-help" class="sr-only"></span>
                   <div class="tooltip tooltip-left" data-tip="Duct size calculator"><a class="btn btn-ghost btn-primary text-lg" href="/ductulator" target="_blank">Ductulator</a></div>
                   <div class="dropdown dropdown-end dropdown-hover">
                     <div class="btn m-1 btn btn-square btn-ghost hover:bg-neutral hover:text-white" tabindex="0" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg></div>

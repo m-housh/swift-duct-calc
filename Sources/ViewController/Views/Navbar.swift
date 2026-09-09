@@ -65,9 +65,14 @@ struct Navbar: HTML, Sendable {
         div(.class("flex items-end space-x-4")) {
 
           if showFittingsButton {
-            a(.class("btn btn-ghost"), .href(route: .fittingReference(.init()))) {
+            a(
+              .class("btn btn-outline btn-secondary"), .href(route: .fittingReference(.init())),
+              .init(name: "aria-describedby", value: "fitting-reference-help")
+            ) {
               "Fitting reference"
             }
+            .tooltip("Browse fitting references", position: .bottom)
+            span(.id("fitting-reference-help"), .class("sr-only")) { "Browse fitting references" }
           }
 
           if showDuctulatorButton {

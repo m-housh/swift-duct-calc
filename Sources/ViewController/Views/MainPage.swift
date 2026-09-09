@@ -62,7 +62,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     script(.src("/js/htmx-download.js")) {}
     script(.src("/js/main.js")) {}
     script(.src("https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4")) {}
-    link(.rel(.stylesheet), .href("/css/output.css"))
+    link(.rel(.stylesheet), .href("/css/output.css?v=navbar-reference-1"))
     link(.rel(.stylesheet), .href("/css/htmx.css"))
     link(
       .rel(.icon),

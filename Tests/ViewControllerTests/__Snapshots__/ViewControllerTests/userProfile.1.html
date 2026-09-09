@@ -19,7 +19,7 @@
     <script src="/js/htmx-download.js"></script>
     <script src="/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="/css/output.css?v=navbar-reference-1">
     <link rel="stylesheet" href="/css/htmx.css">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
@@ -42,7 +42,8 @@
             </div>
             <div class="flex-none">
               <div class="flex items-end space-x-4">
-                <a class="btn btn-ghost" href="/fittings">Fitting reference</a>
+                <div class="tooltip tooltip-bottom" data-tip="Browse fitting references"><a class="btn btn-outline btn-secondary" href="/fittings" aria-describedby="fitting-reference-help">Fitting reference</a></div>
+                Browse fitting references<span id="fitting-reference-help" class="sr-only"></span>
                 <div class="tooltip tooltip-left" data-tip="Duct size calculator"><a class="btn btn-ghost btn-primary text-lg" href="/ductulator" target="_blank">Ductulator</a></div>
               </div>
             </div>
