@@ -10,15 +10,21 @@ extension SiteRoute {
   public enum View: Equatable, Sendable {
     case home
     case privacyPolicy
+    case fittings(FittingPickerRoute)
     case login(LoginRoute)
     case signup(SignupRoute)
     case project(ProjectRoute)
     case ductulator(DuctulatorRoute)
+    case fittingReference(FittingsQuery)
     case user(UserRoute)
     //FIX: Remove.
     case test
 
     public static let router = OneOf {
+      Route(.case(Self.fittings)) {
+        Path { "fittings" }
+        FittingPickerRoute.router
+      }
       Route(.case(Self.test)) {
         Path { "test" }
         Method.get
@@ -29,6 +35,19 @@ extension SiteRoute {
       Route(.case(Self.privacyPolicy)) {
         Path { "privacy-policy" }
         Method.get
+      }
+      Route(.case(Self.fittingReference)) {
+        Path { "fittings" }
+        Method.get
+        Query {
+          Optionally { Field("system", .string) }
+          Optionally { Field("group", .string) }
+          Optionally { Field("fitting", .string) }
+          Optionally { Field("q", .string) }
+          Optionally { Field("type", .string) }
+          Optionally { Field("data", .string) }
+        }
+        .map(.memberwise(FittingsQuery.init))
       }
       Route(.case(Self.login)) {
         SiteRoute.View.LoginRoute.router
@@ -435,6 +454,10 @@ extension SiteRoute.View.ProjectRoute {
   }
 
   public enum EquivalentLengthRoute: Equatable, Sendable {
+    case editor(EquivalentLength.ID?)
+    case savePath(String)
+    case favorite(String)
+    case guided(GuidedRoute)
     case delete(id: EquivalentLength.ID)
     case field(FieldType, style: EquivalentLength.EffectiveLengthType? = nil)
     case index
@@ -444,6 +467,37 @@ extension SiteRoute.View.ProjectRoute {
     static let rootPath = "effective-lengths"
 
     public static let router = OneOf {
+      Route(.case(Self.editor)) {
+        Path {
+          rootPath
+          "editor"
+        }
+        Method.get
+        Query { Optionally { Field("id", default: nil) { EquivalentLength.ID.parser() } } }
+      }
+      Route(.case(Self.savePath)) {
+        Path {
+          rootPath
+          "save-path"
+        }
+        Method.post
+        Body { FormData { Field("payload", .string) } }
+      }
+      Route(.case(Self.favorite)) {
+        Path {
+          rootPath
+          "favorite"
+        }
+        Method.post
+        Body { FormData { Field("payload", .string) } }
+      }
+      Route(.case(Self.guided)) {
+        Path {
+          rootPath
+          "guided"
+        }
+        GuidedRoute.router
+      }
       Route(.case(Self.delete(id:))) {
         Path {
           rootPath
@@ -503,7 +557,7 @@ extension SiteRoute.View.ProjectRoute {
             }
             Many {
               Field("group[length]") {
-                Int.parser()
+                Double.parser()
               }
 
             }
@@ -585,7 +639,7 @@ extension SiteRoute.View.ProjectRoute {
               }
               Many {
                 Field("group[length]") {
-                  Int.parser()
+                  Double.parser()
                 }
 
               }
@@ -640,7 +694,7 @@ extension SiteRoute.View.ProjectRoute {
       public let straightLengths: [Int]
       public let groupGroups: [Int]
       public let groupLetters: [String]
-      public let groupLengths: [Int]
+      public let groupLengths: [Double]
       public let groupQuantities: [Int]
     }
 
@@ -913,10 +967,15 @@ extension SiteRoute.View {
 
 extension SiteRoute.View {
   public enum UserRoute: Equatable, Sendable {
+    case templates(PathTemplateRoute)
     case profile(Profile)
     case logout
 
     static let router = OneOf {
+      Route(.case(Self.templates)) {
+        Path { "path-templates" }
+        PathTemplateRoute.router
+      }
       Route(.case(Self.profile)) {
         Profile.router
       }

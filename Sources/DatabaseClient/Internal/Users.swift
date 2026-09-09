@@ -260,7 +260,9 @@ public struct UserSessionAuthenticator: AsyncSessionAuthenticator {
         .filter(\UserModel.$email == sessionID)
         .first()
     else {
-      throw Abort(.unauthorized)
+      // A stale session is anonymous; protected routes still enforce their login guard.
+      request.session.unauthenticate(User.self)
+      return
     }
     try request.auth.login(user.toDTO())
   }

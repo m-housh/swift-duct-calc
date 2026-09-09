@@ -19,7 +19,7 @@
     <script src="/js/htmx-download.js"></script>
     <script src="/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="/css/output.css?v=navbar-reference-1">
     <link rel="stylesheet" href="/css/htmx.css">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
@@ -34,7 +34,7 @@
         <div class="drawer lg:drawer-open h-full">
           <input id="my-drawer-1" type="checkbox" class="drawer-toggle">
           <div class="drawer-content overflow-auto">
-            <nav class="navbar w-full bg-base-300 text-base-content shadow-sm mb-4">
+            <nav class="navbar flex-wrap w-full bg-base-300 text-base-content shadow-sm mb-4">
               <div class="flex flex-1 space-x-4 items-center">
                 <div class="tooltip tooltip-right" data-tip="Open / close sidebar"><label for="my-drawer-1" class="size-7 btn btn-square btn-ghost hover:bg-neutral hover:text-white" aria-label="open / close sidebar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor" class="my-1.5 inline-block"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg></label></div>
                 <div class="tooltip tooltip-right" data-tip="Projects">
@@ -45,7 +45,9 @@
               </div>
               <div class="flex-none">
                 <div class="flex items-end space-x-4">
-                  <div class="tooltip tooltip-left" data-tip="Duct size calculator"><a class="btn btn-ghost btn-primary text-lg" href="/ductulator" target="_blank">Ductulator</a></div>
+                  <div class="tooltip tooltip-bottom" data-tip="Browse fitting references"><a class="btn btn-outline btn-secondary" href="/fittings" aria-describedby="fitting-reference-help">Fitting reference</a></div>
+                  Browse fitting references<span id="fitting-reference-help" class="sr-only"></span>
+                  <div class="tooltip tooltip-bottom" data-tip="Duct size calculator"><a class="btn btn-outline btn-primary" href="/ductulator" target="_blank">Ductulator</a></div>
                   <div class="dropdown dropdown-end dropdown-hover">
                     <div class="btn m-1 btn btn-square btn-ghost hover:bg-neutral hover:text-white" tabindex="0" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg></div>
                     <ul tabindex="-1" class="dropdown-content menu bg-base-200 rounded-box z-1 w-52 py-2 shadow-sm">
@@ -62,31 +64,9 @@
                 <div class="flex justify-between bg-secondary border-2 border-primary rounded-sm shadow-sm 
 p-6 w-full pb-6">
                   <h1 class="text-3xl font-bold">Equivalent Lengths</h1>
-                  <div class="tooltip tooltip-left" data-tip="Add equivalent length">
-                    <button type="button" class="btn btn-primary" onclick="equivalentLengthForm.showModal()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></button>
-                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg><a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/editor" class="btn btn-primary" aria-label="Add equivalent length" title="Add equivalent length"></a>
                 </div>
-                <dialog id="equivalentLengthForm" class="modal">
-                  <div class="modal-box">
-                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="equivalentLengthForm.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                    <h1 class="text-2xl font-bold">Effective Length</h1>
-                    <div id="formStep_equivalentLengthForm" class="mt-4">
-                      <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/stepOne" hx-target="#formStep_equivalentLengthForm" hx-swap="innerHTML">
-                        <label class="input w-full"><span class="label">Name</span>
-                        <input name="name" type="text" value="" required autofocus>
-                        Type</label><label class="select w-full"><span class="label"></span>
-                        <select name="type" id="type">
-                          <option value="return">Return</option>
-                          <option value="supply" selected>Supply</option>
-                        </select></label>
-                        <div class="flex justify-between">
-                          <div></div>
-                          <button class="btn btn-secondary" type="submit">Next</button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </dialog>
+                Manage path templates<a class="link" href="/path-templates?project=00000000-0000-0000-0000-000000000000"></a>
                 <table class="table table-zebra text-lg">
                   <thead>
                     <tr class="text-lg">
@@ -132,46 +112,17 @@ p-6 w-full pb-6">
                         </div>
                       </td>
                       <td>
-                        <div class="flex justify-end mx-auto space-x-4">
-                          <div class="badge badge-lg badge-primary badge-lg pt-2"><span>105</span></div>
-                          <div class="flex justify-end -mt-2">
+                        <div class="flex items-center justify-end gap-4">
+                          <div class="badge badge-lg badge-primary"><span>105</span></div>
+                          <div class="flex items-center justify-end">
                             <div class="join">
                               <div class="tooltip tooltip-bottom" data-tip="Delete">
                                 <button type="button" class="btn btn-error join-item btn-ghost" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000008" hx-confirm="Are you sure?" hx-target="closest tr" hx-swap="outerHTML"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
                               </div>
-                              <div class="tooltip tooltip-bottom" data-tip="Edit">
-                                <button class="btn join-item btn-ghost" type="button" onclick="equivalentLengthForm_00000000000000000000000000000008.showModal()">
-                                  <div class="flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                    
-                                  </div>
-                                </button>
-                              </div>
+                              Edit<a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/editor?id=00000000-0000-0000-0000-000000000008" class="btn btn-ghost join-item"></a>
                             </div>
                           </div>
                         </div>
-                        <dialog id="equivalentLengthForm_00000000000000000000000000000008" class="modal">
-                          <div class="modal-box">
-                            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="equivalentLengthForm_00000000000000000000000000000008.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                            <h1 class="text-2xl font-bold">Effective Length</h1>
-                            <div id="formStep_equivalentLengthForm_00000000000000000000000000000008" class="mt-4">
-                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/stepOne" hx-target="#formStep_equivalentLengthForm_00000000000000000000000000000008" hx-swap="innerHTML">
-                                <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000008">
-                                Name<label class="input w-full"><span class="label"></span>
-                                <input name="name" type="text" value="Supply - 1" required autofocus>
-                                Type</label><label class="select w-full"><span class="label"></span>
-                                <select name="type" id="type">
-                                  <option value="return">Return</option>
-                                  <option value="supply" selected>Supply</option>
-                                </select></label>
-                                <div class="flex justify-between">
-                                  <div></div>
-                                  <button class="btn btn-secondary" type="submit">Next</button>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
-                        </dialog>
                       </td>
                     </tr>
                     <tr id="00000000000000000000000000000009">
@@ -196,46 +147,17 @@ p-6 w-full pb-6">
                         </div>
                       </td>
                       <td>
-                        <div class="flex justify-end mx-auto space-x-4">
-                          <div class="badge badge-lg badge-primary badge-lg pt-2"><span>80</span></div>
-                          <div class="flex justify-end -mt-2">
+                        <div class="flex items-center justify-end gap-4">
+                          <div class="badge badge-lg badge-primary"><span>80</span></div>
+                          <div class="flex items-center justify-end">
                             <div class="join">
                               <div class="tooltip tooltip-bottom" data-tip="Delete">
                                 <button type="button" class="btn btn-error join-item btn-ghost" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000009" hx-confirm="Are you sure?" hx-target="closest tr" hx-swap="outerHTML"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
                               </div>
-                              <div class="tooltip tooltip-bottom" data-tip="Edit">
-                                <button class="btn join-item btn-ghost" type="button" onclick="equivalentLengthForm_00000000000000000000000000000009.showModal()">
-                                  <div class="flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                    
-                                  </div>
-                                </button>
-                              </div>
+                              Edit<a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/editor?id=00000000-0000-0000-0000-000000000009" class="btn btn-ghost join-item"></a>
                             </div>
                           </div>
                         </div>
-                        <dialog id="equivalentLengthForm_00000000000000000000000000000009" class="modal">
-                          <div class="modal-box">
-                            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="equivalentLengthForm_00000000000000000000000000000009.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                            <h1 class="text-2xl font-bold">Effective Length</h1>
-                            <div id="formStep_equivalentLengthForm_00000000000000000000000000000009" class="mt-4">
-                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/stepOne" hx-target="#formStep_equivalentLengthForm_00000000000000000000000000000009" hx-swap="innerHTML">
-                                <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000009">
-                                Name<label class="input w-full"><span class="label"></span>
-                                <input name="name" type="text" value="Return - 1" required autofocus>
-                                Type</label><label class="select w-full"><span class="label"></span>
-                                <select name="type" id="type">
-                                  <option value="return" selected>Return</option>
-                                  <option value="supply">Supply</option>
-                                </select></label>
-                                <div class="flex justify-between">
-                                  <div></div>
-                                  <button class="btn btn-secondary" type="submit">Next</button>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
-                        </dialog>
                       </td>
                     </tr>
                   </tbody>

@@ -10,6 +10,9 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute.StepThree {
     else {
       throw ValidationError("Equivalent length form group counts are not equal.")
     }
+    guard groupLengths.allSatisfy({ $0.isFinite && $0 > 0 }) else {
+      throw ValidationError("Fitting lengths must be finite numbers greater than zero.")
+    }
   }
 
   var groups: [EquivalentLength.FittingGroup] {
@@ -19,7 +22,7 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute.StepThree {
         .init(
           group: group,
           letter: groupLetters[n],
-          value: Double(groupLengths[n]),
+          value: groupLengths[n],
           quantity: groupQuantities[n]
         )
       )
@@ -34,7 +37,8 @@ extension EquivalentLength.Create {
   init(
     form: SiteRoute.View.ProjectRoute.EquivalentLengthRoute.StepThree,
     projectID: Project.ID
-  ) {
+  ) throws {
+    try form.validate()
     self.init(
       projectID: projectID,
       name: form.name,
@@ -50,6 +54,7 @@ extension EquivalentLength.Update {
     form: SiteRoute.View.ProjectRoute.EquivalentLengthRoute.StepThree,
     projectID: Project.ID
   ) throws {
+    try form.validate()
     self.init(
       name: form.name,
       type: form.type,

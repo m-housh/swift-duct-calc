@@ -56,7 +56,7 @@ struct EffectiveLengthGroupTable: HTML, Sendable {
       tbody {
         for row in groups {
           tr {
-            td { "\(row.group)-\(row.letter)" }
+            td { row.letter.isEmpty ? "Group \(row.group)" : "\(row.group)-\(row.letter)" }
             td { row.value.string(digits: 0) }
             td { row.quantity.string() }
             td { (row.value * Double(row.quantity)).string(digits: 0) }

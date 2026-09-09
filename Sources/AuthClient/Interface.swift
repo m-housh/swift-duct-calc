@@ -48,6 +48,7 @@ extension AuthClient: TestDependencyKey {
       login: { loginForm in
         let token = try await database.users.login(loginForm)
         let user = try await database.users.get(token.userID)!
+        request.auth.login(user)
         request.session.authenticate(user)
         request.logger.debug("LOGGED IN: \(user.id)")
         return user

@@ -4,6 +4,13 @@
 
 Residential duct design software.
 
+## Fitting reference
+
+Open `/fittings` on the running app for the public fitting reference. Signed-in
+users can also inspect and export CSV/JSON records. See the
+[reference documentation](docs/fitting-reference.md) for routes, session behavior,
+and catalog maintenance.
+
 ## Overview
 
 This is the source code for [ductcalc.pro](https://ductcalc.pro) web site. Which is a residential
@@ -17,6 +24,15 @@ preference.
 
 Documentation coming soon!
 
+## Path templates
+
+On Equivalent Lengths, click + and choose From template inside the add modal to build a guided path.
+Manage templates from the project or your account, and share independent copies
+through [JSON export/import](docs/path-template-sharing.md).
+
+See the [implementation and verification notes](docs/path-template-implementation-plan.md)
+for catalog coverage, persistence, and local checks.
+
 ## License
 
 This project is licensed under Creative Commons 4.0.  See the
@@ -25,4 +41,3 @@ This project is licensed under Creative Commons 4.0.  See the
 ## Contributions
 
 We are open to contributions.  Feel free to open an issue or pull-request.
-

@@ -15,6 +15,7 @@ extension ProjectClient: DependencyKey {
     @Dependency(\.fileClient) var fileClient
 
     return .init(
+      saveFittingPath: { try await persistFittingPath(userID: $0, projectID: $1, request: $2) },
       calculateRoomDuctSizes: { projectID in
         guard let details = try await database.projects.detail(projectID) else {
           throw ProjectClientError.notFound(.project(projectID))

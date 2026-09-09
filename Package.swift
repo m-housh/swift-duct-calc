@@ -12,6 +12,7 @@ let package = Package(
     .library(name: "DatabaseClient", targets: ["DatabaseClient"]),
     .library(name: "EnvVars", targets: ["EnvVars"]),
     .library(name: "FileClient", targets: ["FileClient"]),
+    .library(name: "FittingClient", targets: ["FittingClient"]),
     .library(name: "HTMLSnapshotTesting", targets: ["HTMLSnapshotTesting"]),
     .library(name: "PdfClient", targets: ["PdfClient"]),
     .library(name: "ProjectClient", targets: ["ProjectClient"]),
@@ -44,6 +45,8 @@ let package = Package(
       dependencies: [
         .target(name: "AuthClient"),
         .target(name: "DatabaseClient"),
+        .target(name: "FileClient"),
+        .target(name: "FittingClient"),
         .target(name: "ViewController"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "Fluent", package: "fluent"),
@@ -61,6 +64,13 @@ let package = Package(
       dependencies: [
         .target(name: "ManualDClient"),
         .product(name: "ArgumentParser", package: "swift-argument-parser"),
+      ]
+    ),
+    .testTarget(
+      name: "AppTests",
+      dependencies: [
+        .target(name: "App"),
+        .product(name: "VaporTesting", package: "vapor"),
       ]
     ),
     .target(
@@ -102,6 +112,7 @@ let package = Package(
       dependencies: [
         .target(name: "App"),
         .target(name: "DatabaseClient"),
+        .target(name: "FittingClient"),
         .product(name: "DependenciesTestSupport", package: "swift-dependencies"),
         .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
       ],
@@ -124,6 +135,24 @@ let package = Package(
       ],
       resources: [
         .copy("Resources")
+      ]
+    ),
+    .target(
+      name: "FittingClient",
+      dependencies: [
+        .target(name: "FileClient"),
+        .target(name: "ManualDCore"),
+        .product(name: "Dependencies", package: "swift-dependencies"),
+        .product(name: "DependenciesMacros", package: "swift-dependencies"),
+      ],
+      resources: [.process("Resources")]
+    ),
+    .testTarget(
+      name: "FittingClientTests",
+      dependencies: [
+        .target(name: "FileClient"),
+        .target(name: "FittingClient"),
+        .product(name: "DependenciesTestSupport", package: "swift-dependencies"),
       ]
     ),
     .target(
@@ -166,6 +195,7 @@ let package = Package(
     .target(
       name: "ProjectClient",
       dependencies: [
+        .target(name: "FittingClient"),
         .target(name: "DatabaseClient"),
         .target(name: "ManualDClient"),
         .target(name: "PdfClient"),
@@ -209,6 +239,7 @@ let package = Package(
     .target(
       name: "ViewController",
       dependencies: [
+        .target(name: "FittingClient"),
         .target(name: "AuthClient"),
         .target(name: "CSVParser"),
         .target(name: "DatabaseClient"),
@@ -228,6 +259,8 @@ let package = Package(
       name: "ViewControllerTests",
       dependencies: [
         .target(name: "ViewController"),
+        .target(name: "FittingClient"),
+        .target(name: "FileClient"),
         .target(name: "HTMLSnapshotTesting"),
       ],
       resources: [

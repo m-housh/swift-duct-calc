@@ -10,8 +10,12 @@ extension DatabaseClient.EquivalentLengths: TestDependencyKey {
 
   public static func live(database: any Database) -> Self {
     .init(
+      updateIfUnchanged: { baseline, updates in
+        try await updatePath(on: database, baseline: baseline, updates: updates)
+      },
       create: { request in
         let model = try request.toModel()
+        model.revision = UUID()
         try await model.validateAndSave(on: database)
         return try model.toDTO()
       },
@@ -52,11 +56,7 @@ extension DatabaseClient.EquivalentLengths: TestDependencyKey {
         guard let model = try await EffectiveLengthModel.find(id, on: database) else {
           throw NotFoundError()
         }
-        try model.applyUpdates(updates)
-        if model.hasChanges {
-          try await model.validateAndSave(on: database)
-        }
-        return try model.toDTO()
+        return try await updatePath(on: database, baseline: model.toDTO(), updates: updates)
       }
     )
   }
@@ -73,7 +73,8 @@ extension EquivalentLength.Create {
       type: type.rawValue,
       straightLengths: straightLengths,
       groups: JSONEncoder().encode(groups),
-      projectID: projectID
+      projectID: projectID,
+      templateSnapshot: templateSnapshot.map { try JSONEncoder().encode($0) }
     )
   }
 }
@@ -126,6 +127,12 @@ final class EffectiveLengthModel: Model, @unchecked Sendable {
   @Field(key: "groups")
   var groups: Data
 
+  @OptionalField(key: "revision")
+  var revision: UUID?
+
+  @OptionalField(key: "templateSnapshot")
+  var templateSnapshot: Data?
+
   @Timestamp(key: "createdAt", on: .create, format: .iso8601)
   var createdAt: Date?
 
@@ -145,7 +152,8 @@ final class EffectiveLengthModel: Model, @unchecked Sendable {
     groups: Data,
     createdAt: Date? = nil,
     updatedAt: Date? = nil,
-    projectID: Project.ID
+    projectID: Project.ID,
+    templateSnapshot: Data? = nil
   ) {
     self.id = id
     self.name = name
@@ -155,6 +163,7 @@ final class EffectiveLengthModel: Model, @unchecked Sendable {
     self.createdAt = createdAt
     self.updatedAt = updatedAt
     $project.id = projectID
+    self.templateSnapshot = templateSnapshot
   }
 
   func toDTO() throws -> EquivalentLength {
@@ -166,11 +175,18 @@ final class EffectiveLengthModel: Model, @unchecked Sendable {
       straightLengths: straightLengths,
       groups: JSONDecoder().decode([EquivalentLength.FittingGroup].self, from: groups),
       createdAt: createdAt!,
-      updatedAt: updatedAt!
+      updatedAt: updatedAt!,
+      templateSnapshot: templateSnapshot.map {
+        try JSONDecoder().decode(PathTemplate.Snapshot.self, from: $0)
+      },
+      revision: revision
     )
   }
 
   func applyUpdates(_ updates: EquivalentLength.Update) throws {
+    if let snapshot = updates.templateSnapshot {
+      templateSnapshot = try JSONEncoder().encode(snapshot)
+    }
     if let name = updates.name, name != self.name {
       self.name = name
     }
@@ -218,14 +234,69 @@ extension EquivalentLength.FittingGroup: Validatable {
       }
       .errorLabel("Group", inline: true)
 
-      Validator.validate(\.letter, with: .regex(matching: "[a-zA-Z]"))
-        .errorLabel("Letter", inline: true)
+      if fitting?.origin != .legacy && !(group == 11 && fitting?.origin == .catalog) {
+        Validator.validate(\.letter, with: .regex(matching: "^[a-zA-Z]+$"))
+          .errorLabel("Letter", inline: true)
+      }
 
-      Validator.validate(\.value, with: .greaterThan(0))
+      Validator.validate(\.value, with: .greaterThanOrEquals(0))
         .errorLabel("Value", inline: true)
 
       Validator.validate(\.quantity, with: .greaterThanOrEquals(1))
         .errorLabel("Quantity", inline: true)
     }
+  }
+}
+extension EquivalentLength {
+  struct AddTemplateSnapshot: AsyncMigration {
+    let name = "AddEffectiveLengthTemplateSnapshot"
+    func prepare(on database: any Database) async throws {
+      try await database.schema(EffectiveLengthModel.schema)
+        .field("templateSnapshot", .data).update()
+    }
+    func revert(on database: any Database) async throws {
+      try await database.schema(EffectiveLengthModel.schema)
+        .deleteField("templateSnapshot").update()
+    }
+  }
+}
+
+public struct PathConflictError: Error, Sendable {
+  public init() {}
+  public var message: String {
+    "This path changed in another tab. Your draft is still here. Reload the saved path before trying again."
+  }
+}
+
+extension EquivalentLength {
+  struct AddRevision: AsyncMigration {
+    let name = "AddEffectiveLengthRevision"
+    func prepare(on database: any Database) async throws {
+      try await database.schema(EffectiveLengthModel.schema).field("revision", .uuid).update()
+    }
+    func revert(on database: any Database) async throws {
+      try await database.schema(EffectiveLengthModel.schema).deleteField("revision").update()
+    }
+  }
+}
+
+private func updatePath(
+  on database: any Database, baseline: EquivalentLength, updates: EquivalentLength.Update
+) async throws -> EquivalentLength {
+  let revision = UUID()
+  return try await database.transaction { transaction in
+    // Claim this revision atomically. The row stays locked through validation and saving.
+    try await EffectiveLengthModel.query(on: transaction)
+      .filter(\.$id == baseline.id)
+      .filter(\.$project.$id == baseline.projectID)
+      .filter(\.$revision == baseline.revision)
+      .set(\.$revision, to: revision)
+      .update()
+    guard let model = try await EffectiveLengthModel.find(baseline.id, on: transaction),
+      model.revision == revision
+    else { throw PathConflictError() }
+    try model.applyUpdates(updates)
+    try await model.validateAndSave(on: transaction)
+    return try model.toDTO()
   }
 }

@@ -133,7 +133,7 @@ Full source pages 182–184 preserve the slope/area definitions, velocity-depend
 plenum table and squeeze static-pressure table. The 86 source values for 12A–12V
 were cross-checked against the existing Swift lookup; 12W/12X are additional
 source cases absent from that lookup. No calculator code was changed.
-Group 11 remains deferred under `docs/group-11-picker-plan.md`.
+Group 11 is implemented; see [the flex junction audit](fitting-client-flex-junctions.md).
 
 ## Group 13 excluded
 

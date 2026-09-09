@@ -19,6 +19,9 @@ extension DependencyValues {
 @DependencyClient
 public struct ProjectClient: Sendable {
 
+  public var saveFittingPath:
+    @Sendable (User.ID, Project.ID, Fitting.PathSave) async throws -> EquivalentLength
+
   /// Calculates the room duct sizes for the given project.
   public var calculateRoomDuctSizes:
     @Sendable (Project.ID) async throws -> [DuctSizes.RoomContainer]

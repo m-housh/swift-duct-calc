@@ -19,7 +19,7 @@
     <script src="/js/htmx-download.js"></script>
     <script src="/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="/css/output.css?v=navbar-reference-1">
     <link rel="stylesheet" href="/css/htmx.css">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
@@ -33,7 +33,9 @@
       <main class="flex flex-col min-h-screen min-w-full grow mb-auto">
         <div>
           <div class="flex justify-end space-x-4 m-4">
-            <div class="tooltip tooltip-left" data-tip="Duct size calculator"><a class="btn btn-ghost btn-accent text-lg" href="/ductulator" target="_blank">Ductulator</a></div>
+            <div class="tooltip tooltip-bottom" data-tip="Browse fitting references"><a class="btn btn-outline btn-secondary" href="/fittings" aria-describedby="fitting-reference-help">Fitting reference</a></div>
+            Browse fitting references<span id="fitting-reference-help" class="sr-only"></span>
+            <div class="tooltip tooltip-bottom" data-tip="Duct size calculator"><a class="btn btn-outline btn-primary" href="/ductulator" target="_blank">Ductulator</a></div>
             <button class="btn btn-ghost btn-secondary text-lg" hx-get="/login" hx-target="body" hx-swap="outerHTML" hx-push-url="true">Login</button>
           </div>
           <div class="mx-10 lg:mx-20">
@@ -90,7 +92,7 @@ text-8xl font-bold my-auto space-2">
                   <ul class="list-disc">
                     <li>API integration.</li>
                     <li>Command line interface.</li>
-                    <li>Fitting selection tool.</li>
+                    <li>Fitting selection tool. <span class="badge badge-success badge-outline"><span aria-hidden="true">✓</span>Available now</span></li>
                     <li>Room load import from PDF.</li>
                   </ul>
                 </div>

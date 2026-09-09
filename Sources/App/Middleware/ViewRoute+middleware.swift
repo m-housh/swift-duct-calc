@@ -5,7 +5,6 @@ import Vapor
 
 private let viewRouteMiddleware: [any Middleware] = [
   UserPasswordAuthenticator(),
-  UserSessionAuthenticator(),
   User.redirectMiddleware { req in
     "/login?next=\(req.url.string)"
   },
@@ -14,9 +13,17 @@ private let viewRouteMiddleware: [any Middleware] = [
 extension SiteRoute.View {
   var middleware: [any Middleware]? {
     switch self {
-    case .home, .login, .signup, .test, .ductulator, .privacyPolicy:
+    case .fittings(.review), .fittings(.saveReview):
+      return viewRouteMiddleware
+    case .home, .login, .signup, .test, .ductulator, .privacyPolicy, .fittings, .fittingReference:
       return nil
-    case .project, .user:
+    case .project(let route):
+      switch route {
+      case .detail(let id, _), .delete(let id), .update(let id, _):
+        return viewRouteMiddleware + [ProjectOwnershipMiddleware(projectID: id)]
+      default: return viewRouteMiddleware
+      }
+    case .user:
       return viewRouteMiddleware
     }
   }

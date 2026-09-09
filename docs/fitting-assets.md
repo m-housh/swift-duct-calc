@@ -1,8 +1,33 @@
-# Individual fitting drawings — pilot
+# Fitting artwork and packaging
 
-**Current:** [Complete Group 2 batch](group-2-review.md). Group 1 is approved.
-Regenerate everything
-with `python3 scripts/generate-fittings.py`.
+The working picker uses `Sources/FittingClient/Resources/catalog.json`. The public
+reference uses `Public/fittings/catalog-data.js`, generated from approved artwork
+manifests by `scripts/build_fitting_reference_catalog.py`.
+
+## Production assets and maintenance files
+
+The production Dockerfile copies `Public` and Swift package resources into the
+final image. `.dockerignore` excludes docs, scripts, the local drawing-review UI,
+repository history, Node dependencies, and local environment/database files from
+the build context. The Swift test image uses the same exclusions.
+
+Keep the calculation audits, `docs/fitting-preflight`, `docs/fitting-reviews`, and
+artwork packaging scripts. They record source checks and exact-revision approvals
+and are inputs to later artwork regeneration. The public reference exposes source
+manifests, which link to reference crops and restored PNGs as well as SVGs. Those
+linked files remain part of the served reference. Many SVGs embed raster artwork;
+their size is not evidence that the separate source image is unused.
+
+The obsolete static picker, guided-path prototype, their workflow tests, old
+handoff/planning notes, an earlier full-page screenshot, and five unreferenced
+superseded artwork drafts were removed before merge. Git history retains them.
+Further image-size work should preserve the artwork revisions and source links.
+
+## Historical Group 1 pilot
+
+The notes below describe the original artwork extraction, not the current catalog
+coverage. Use the [drawing review workflow](fitting-review-workflow.md) for local
+review and the group-specific packaging scripts for current assets.
 
 See the latest [2B and 3T source-trace review](fitting-trace-review.md) for
 side-by-side comparisons of the revised difficult fittings.

@@ -1,3 +1,22 @@
 .build/
 .swiftpm/
 
+# Development dependencies, local state, and repository history.
+.git
+.github
+node_modules
+**/__pycache__
+**/*.pyc
+.env*
+.netrc
+.DS_Store
+postgres
+**/*.sqlite
+**/*.sqlite-*
+**/db.sqlite*
+
+# Maintenance material is not needed by the Swift build or runtime.
+docs
+scripts
+Public/fitting-review
+Public/prototypes

@@ -1,9 +1,27 @@
+Template integration is described in [the path-template implementation notes](path-template-implementation-plan.md).
+Guided inputs now adapt to this implementation through `TemplateFittingClient`;
+the reviewed runtime catalog and picker calculation types remain authoritative.
+
 # FittingClient design sketch
 
-Status: proposal for architecture review. No production code or package targets
-have been added. This narrows the broader
-[fitting-picker implementation plan](fitting-picker-implementation-plan.md) to one
-reviewable dependency boundary.
+Duct-shape ordering is now authored in runtime `catalog.json` (schema 2), with a
+review status on every entry. The development-only [catalog review page](fitting-catalog-review.md)
+writes those fields directly; production continues to use the packaged catalog.
+
+Status: the live dependency now covers **227 choices across groups 1–12** and
+backs the [integrated project fitting picker](fitting-picker-preview.md).
+Project path saving and per-user favorites are implemented.
+The original [first-slice audit](fitting-client-first-slice.md) records the foundation;
+the wider contracts below remain the design reference for project persistence.
+
+## Reference material direction
+
+The user considers the supplied PDF internal MVP reference material. Public types,
+calculation snapshots and runtime catalog data must not depend on its path, hash
+or page layout. Retain document/page evidence in development audit documentation.
+A future reference guide may be recreated without page breaks; designing that
+replacement is separate work. Keep fitting codes, rule/catalog versions and
+applicability conditions independent of the reference document's format.
 
 ## Proposed responsibility
 
@@ -92,12 +110,12 @@ model style. All shared fitting definitions belong together in
 | `ID` | Stable application case/variant ID; do not derive it from a display name or asset filename |
 | `SourceCode` | Reference identity such as `5B`, independent of the application's family and variant grouping |
 | `Group` | ID, title, representative artwork ID and order |
-| `Definition` | ID, group, actual source code if one exists, name, variant/shape metadata, supported systems, input kind/defaults, source reference and calculation availability |
+| `Definition` | ID, group, actual source code if one exists, name, variant/shape metadata, supported systems, input kind/defaults, document-independent applicability conditions and calculation availability |
 | `Inputs` | Typed draft cases for rule families, with optional values where the user has not answered yet; explicit units |
 | `ArtworkRequest` | Fitting ID, relevant construction configuration and optional view selection |
 | `Artwork` | Catalog-owned public path, media type, alt text, revision and view identity |
 | `EvaluationRequest` | Path type, fitting ID and draft inputs; no project ID, quantity or user-entered EL |
-| `Calculation` | EL per fitting in fractional feet, normalized inputs, component breakdown, source/rule revision and applicable guidance |
+| `Calculation` | EL per fitting in fractional feet, normalized inputs, component breakdown, rule/catalog revision and applicable guidance |
 | `Issue` | Stable reason code, affected field if any, and parameters for presentation; no HTML |
 
 Identity examples that the contract must represent:
@@ -146,7 +164,7 @@ The initial proposal keeps this mechanism and the approved files under
 Example: `artwork` resolves `11-junction-box` with a supplied bend to the combined
 box/bend reference, and box-only configuration to the standalone box reference.
 The view renders the returned asset path. Production-approved Group 11 assets
-must replace the prototype concept paths before this case ships.
+now use the promoted drawings under `Public/images/fittings/group-11`.
 
 - Resolve from catalog IDs/configuration, not a user-supplied filesystem path.
 - Return revisioned asset references so browsers can cache drawings and refresh
@@ -159,12 +177,20 @@ must replace the prototype concept paths before this case ships.
 No new custom SVG endpoint is needed initially. If stable typed artwork routes,
 protected assets or dynamic SVG rendering become requirements, declare the route
 in `ManualDCore` and handle the response at the HTTP layer. `FittingClient` can
-still resolve the asset; it need not return a Vapor `Response` or depend directly
-on `FileClient`.
+still resolve the asset without returning a Vapor `Response`. Its use of
+`FileClient` is limited to reading the bundled catalog during construction;
+serving artwork remains the HTTP layer's responsibility.
 
 Picker fragment and evaluation routes are a different concern: propose nesting
 them under the existing `SiteRoute.View.ProjectRoute.EquivalentLengthRoute`.
 Exact cases, methods and form encodings belong to the following UI/request review.
+
+## Declaration order
+
+For this feature, place stored properties first, then initializers and behavior,
+with nested type declarations at the end of the enclosing type. This keeps the
+main contract readable before the supporting types. Apply the same ordering
+inside nested structs; keep the shared definitions together in `Fittings.swift`.
 
 ## Proposed file layout and dependency direction
 
@@ -186,6 +212,8 @@ Sources/
 Tests/
   FittingClientTests/
     CatalogTests.swift
+    CatalogValidator.swift               # test-only authored data checks
+    ResourceValidationTests.swift
     ArtworkTests.swift
     EvaluationTests.swift
     ReferenceResolutionTests.swift
@@ -198,19 +226,31 @@ results/issues/provenance, and artwork requests/results. Do not split these into
 start small rather than creating every helper file immediately.
 
 Add a library and target for `FittingClient`, with direct dependencies on
-`ManualDCore`, `Dependencies`, and `DependenciesMacros`. `ProjectClient` and
+`ManualDCore`, `FileClient`, `Dependencies`, and `DependenciesMacros`. `ProjectClient` and
 `ViewController` may depend on it; neither `ManualDCore` nor `DatabaseClient`
 depends back on it. The new client does not call `ProjectClient`. There is no
 initial need to add fitting operations to `ManualDClient`.
 
 Proposed data approach: normalize reviewed artwork/source manifests into one
-versioned resource, retaining source links and separate artwork/rule review
+versioned resource, retaining internal audit traceability and separate artwork/rule review
 states. Evaluate with Swift helpers against that resource. Do not parse `Public`
 files on each request or ship the prototype's handwritten JavaScript adapters as
 production rules. Resource JSON versus checked-in Swift tables is an explicit
 review choice; there must be one authoritative runtime dataset, not two manually
 maintained copies. Load/index once per live catalog, expose load errors, and test
-that packaged data resolves to the deployed public assets.
+that packaged data resolves to the deployed public assets. Authored catalog metadata
+and rule-table validation belong in a test-only validator run against the checked-in
+JSON. Runtime loading retains decoding and the structural checks needed for safe
+lookup/indexing; user-input validation remains in the evaluator.
+
+Construct the client with `try await FittingClient.live()` during application
+configuration, under a configured `FileClient.readFile` dependency. Bundle lookup
+belongs to `FittingClient`; the generic file reader accepts the resolved path.
+The application supplies startup reads on its worker pool, then injects the
+loaded fitting client through `DependenciesMiddleware`. Keep request-specific
+file operations in the existing request dependency scope. Catalog failures abort
+startup instead of being cached for later requests. No global catalog cache is
+needed, and each factory invocation can be tested with independent file data.
 
 ## Calls through the feature
 
@@ -221,7 +261,7 @@ that packaged data resolves to the deployed public assets.
    and evaluate. Render field issues or a per-fitting result. Project-associated
    inputs, when available, are supplied explicitly through `ProjectClient`.
 3. **Save:** the agreed project save workflow reevaluates calculated entries from
-   their IDs/inputs through `FittingClient`. Store returned inputs and source/rule
+   their IDs/inputs through `FittingClient`. Store returned inputs and rule/catalog
    revision with the resulting value. Browser-supplied calculated EL is not the
    authority. Quantity multiplication remains path arithmetic.
 4. **Quick entry / existing data:** resolve source identity without invoking
@@ -230,10 +270,10 @@ that packaged data resolves to the deployed public assets.
 
 Group 11 illustrates the boundary: the default draft is box 700 FPM, sidewall
 openings, bend disabled, with bend defaults 700 FPM and R/D 1.0. Enabling the bend
-changes both artwork and the component breakdown. At those inputs the prototype
-shows 60 + 15 = 75 ft per entry. Quantity 2 makes the row 150 ft outside the
-client. This is an interface example, not source-rule approval: controlling box
-velocity, combined-case applicability and production artwork remain unresolved.
+changes both artwork and the component breakdown. At those inputs the live client
+returns 60 + 15 = 75 ft per entry. Quantity 2 makes the row 150 ft outside the
+client. The user chose one source-labeled box velocity control; see the
+[Group 11 source audit and decision](fitting-client-flex-junctions.md).
 
 ## Small first implementation and review questions
 

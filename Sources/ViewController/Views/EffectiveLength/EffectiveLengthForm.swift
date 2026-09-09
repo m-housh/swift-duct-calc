@@ -65,6 +65,12 @@ struct EffectiveLengthForm: HTML, Sendable {
     }
 
     var body: some HTML {
+      if effectiveLength == nil {
+        a(.class("btn btn-secondary w-full"), .href(guidedPathURL(projectID))) {
+          "From template"
+        }
+        div(.class("divider")) { "Or enter manually" }
+      }
       form(
         .class("space-y-4"),
         .hx.post(route),
@@ -180,6 +186,7 @@ struct EffectiveLengthForm: HTML, Sendable {
           input(.class("hidden"), .name("id"), .value("\(id)"))
         }
         input(.class("hidden"), .name("name"), .value(stepTwo.name))
+
         input(.class("hidden"), .name("type"), .value(stepTwo.type.rawValue))
         for length in stepTwo.straightLengths {
           input(.class("hidden"), .name("straightLengths"), .value("\(length)"))
@@ -201,11 +208,11 @@ struct EffectiveLengthForm: HTML, Sendable {
         }
 
         a(
-          .href("/files/ManD.Groups.pdf"),
+          .href(route: .fittingReference(.init(system: stepTwo.type.rawValue))),
           .target(.blank),
           .class("btn btn-link")
         ) {
-          "Click here for Manual-D groups reference."
+          "Open fitting reference"
         }
 
         div(.id("groups"), .class("space-y-4")) {
@@ -279,6 +286,7 @@ struct GroupField: HTML, Sendable {
         "Length",
         .name("group[length]"),
         .type(.number),
+        .step("any"),
         .value(group?.value),
         .placeholder("10"),
         .min("0"),

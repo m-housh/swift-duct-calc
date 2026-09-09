@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="80 105 470 320" role="img" aria-labelledby="title desc">
-<title id="title">2C — Round takeoff with projecting entry</title><desc id="desc">Dashed lines retain the projecting entry shown in the source. Source printed page 163. Reference equivalent length depends on downstream branch count. Review drawing, not to scale.</desc>
-<style>text{font-family:Arial,sans-serif;fill:#243b53}path,ellipse{stroke-linecap:round;stroke-linejoin:round}</style>
-<rect width="640" height="520" rx="16" fill="white" />
-<g transform="translate(190.1887 105) scale(1.207547) translate(-195 -240)" fill="none" stroke="#243b53" stroke-width="1.2"><path d="M185 263.50L415 280.30L415 328.30L185 311.50Z" fill="#f8fafc" /><path d="M185 311.50L415 328.30L415 377.30L185 360.50Z" fill="#e2e8f0" /><path d="M318 338L331 325Q339 321 346 328Q352 334 347 340L337 350" stroke-dasharray="3 2" stroke-width="1.1" /><path d="M244 415L316 340Q324 331 334 336Q342 341 338 348L257 430Z" fill="white" /><ellipse cx="250" cy="422" rx="10" ry="11" fill="white" /></g>
-</svg>
