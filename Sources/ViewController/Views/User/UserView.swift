@@ -11,7 +11,7 @@ struct UserView: HTML, Sendable {
       Navbar(showSidebarToggle: false, isLoggedIn: false)
 
       div(.class("p-4")) {
-        a(.class("btn mb-4"), .href("/path-templates")) { "Path templates" }
+        a(.class("btn btn-secondary mb-4"), .href("/path-templates")) { "Path templates" }
         Row {
           h1(.class("text-2xl font-bold")) { "Account" }
           EditButton()
