@@ -1,0 +1,19 @@
+{
+  "id": "fitting-4Y-enhanced",
+  "title": "High-resolution restoration pilot \u00b7 4Y",
+  "description": "A sharper restoration beside the exact low-resolution source. Check it if its geometry differs too much or still needs work.",
+  "items": [
+    {
+      "id": "4Y",
+      "number": "4Y",
+      "name": "Rectangular ceiling register boot",
+      "group": 4,
+      "image": "../images/fittings/group-4-enhanced/4Y.svg?revision=0e662dd96836",
+      "reference": "../images/fittings/references/group-4/4Y.png",
+      "sourcePage": 168,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=18",
+      "revision": "0e662dd96836be8117666aeb52aa3c05ad7571ac0008072f5a9aa67e042baab9",
+      "priorApproval": false
+    }
+  ]
+}

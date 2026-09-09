@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="0 0 640 520" role="img" aria-labelledby="title desc">
+<title id="title">1I — Square elbow with vanes</title><desc id="desc">Turning vanes follow the diagonal shown in the source. Side elevation traced from printed page 160. Review drawing, not to scale.</desc>
+<defs><marker id="flow" viewBox="0 0 8 5" markerWidth="6" markerHeight="4" refX="7" refY="2.5" orient="auto"><path d="M0 0L8 2.5L0 5Z" fill="#243b53"/></marker></defs>
+<style>text{font-family:Arial,sans-serif}path{stroke-linejoin:round;stroke-linecap:round}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<g fill="#243b53"><text x="32" y="44" font-size="28" font-weight="700">1I</text><text x="96" y="43" font-size="18">Square elbow with vanes</text><text x="32" y="76" font-size="13">GROUP 1 · SUPPLY AIR · SOURCE SIDE ELEVATION</text></g>
+<g transform="translate(108.6184 105) scale(1.657895) translate(-80 -951)" fill="none" stroke="#243b53" stroke-width="1.6"><path d="M104 959H312l-8 12l17 5l-9 7l15 10l-22 4l10 10H222v35H104Z" /><path d="M92 1042h142v86l-25.56 -10.32l-25.56 17.2l-22.72 -8.6l-34.08 23.220000000000002v-23.220000000000002l-34.08 15.479999999999999Z" /><path d="M163.0 1103.92V1066.08" marker-end="url(#flow)" stroke-width="1.4"/><path d="M264 983h37" marker-end="url(#flow)" stroke-width="1.4"/><path d="M105 959l119 47" stroke="#8192a2" stroke-width="0.7"/><path d="M109.5 967.3571428571429q0 -8 9 -7" stroke-width="0.9"/><path d="M126.5 974.0714285714286q0 -8 9 -7" stroke-width="0.9"/><path d="M143.5 980.7857142857143q0 -8 9 -7" stroke-width="0.9"/><path d="M160.5 987.5q0 -8 9 -7" stroke-width="0.9"/><path d="M177.5 994.2142857142857q0 -8 9 -7" stroke-width="0.9"/><path d="M194.5 1000.9285714285714q0 -8 9 -7" stroke-width="0.9"/><path d="M211.5 1007.6428571428571q0 -8 9 -7" stroke-width="0.9"/></g>
+<text x="32" y="459" fill="#243b53" font-size="14">Turning vanes follow the diagonal shown in the source.</text>
+<text x="32" y="490" fill="#4b6274" font-size="12">REVIEW DRAWING · NOT TO SCALE · Source: PDF p. 1 / printed p. 160</text>
+</svg>

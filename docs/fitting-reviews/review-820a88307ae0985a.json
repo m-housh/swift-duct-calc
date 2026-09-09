@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "batchId": "group-12",
+  "completedAt": "2026-09-05T20:55:50.355135+00:00",
+  "decisionSource": "Explicit user approval in conversation",
+  "userStatement": "Those all look good, commit them, group 13 shouldn't need to be in the picker. So we should be able to skip making svg's for that group.",
+  "drawings": [
+    {
+      "id": "12A",
+      "revision": "4c79d7f8bdb8cf293d8d223dba9aaba6b7cdb1da000dde9169814c496773a85d",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12B",
+      "revision": "09694b981896b56b2a10e41a4b9934fc706c7a20b97e86f00e08a5d523b824b7",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12C",
+      "revision": "04e604fc06854c0db580dd056649e3210766724ea3ca36dabf559dd95e09b967",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12D",
+      "revision": "01267b290b5fb8762994474f02c23e823cc140a8eced7ff98ba3aaafa7f174a3",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12E",
+      "revision": "07c2e092e651de9b21153a48c203dae62d1d809c002287c9f9b94d9e2dbfe818",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12F",
+      "revision": "99ac33b139d5cbb93bfa0ac39612fdaf5ee29bff142ac8abfa3d4795a1d550d6",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12G",
+      "revision": "0c1ac3fcc63e0183a43ee4bdf8106a8f6aa84250a5dc6549c37c7e7c33812596",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12H",
+      "revision": "9aaf20e6b3c522079c029b5c03b1c03ff89bbd92f8267d9b75646d9fa6542fb5",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12I",
+      "revision": "e68cc44e2125bc86950a2f20a06bb19392420f174b6fe94c54e0f6e7551bfaf1",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12J",
+      "revision": "6b774633cb9fe5ed147437f9afaf2ad35dba55d2236054cebef35f617a2e3ff0",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12K",
+      "revision": "6976d74a7c0441b6eca520cebd2852d214af3ad6aee607ac08cba2771439a896",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12L",
+      "revision": "ed4e63f2f577d6e011eea4996c7ee42d6dcfe3687ed2dd3d184fc86734217252",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12M",
+      "revision": "ad938f033afa2ae1b5a3d4ea91fe7637c6ca54f1ff0408afab99d950c7372fa7",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12N",
+      "revision": "3445a95d7b0263330c0802debeb41723aad52fae676c93a7e9f78165de65e521",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12O",
+      "revision": "46adb88d4e0d721c74a52fe9370859715567bba75ee71662bb68ef12a6767de1",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12P",
+      "revision": "88d281a32880c9a9aa140604083d032d40b8bc8ad555e080525b9094402153cf",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12Q",
+      "revision": "e3746e573e08345ab5708b3c0bea0498d2b09036ca024c3d4e31357c35dd1897",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12R",
+      "revision": "949ebc6e42a68700b9505491868c325eebef86df0b22f2a29578d13ee7a8ecdf",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12S",
+      "revision": "f0efdccc7de298df597a70eccd82caa260632eb656e5304ca28154b18b740290",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12T",
+      "revision": "b8504176fd394e82f88a4218b89344d6affb5ec042d4bb3e41c0dfccc01cf461",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12U",
+      "revision": "b23bc4ac060e90dead68bbe097319e768a9a55441c70f7198dd7d2046abeb399",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12V",
+      "revision": "97a2a0de830ad1e75a19cf6a1b5973b9526e7893c9a87cc9ba033a1c7203c867",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12W",
+      "revision": "7e3c9490ed4e915986df5c546f66cf507df89c3c8386bd66737fbf5e85a0e777",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    },
+    {
+      "id": "12X",
+      "revision": "66b1146e5dfb11cdfd5837b36cd86c4b2e52633f75bea68eea8a63c9b6eb8e89",
+      "status": "accepted",
+      "note": "User approved all 24 Group 12 drawings."
+    }
+  ]
+}

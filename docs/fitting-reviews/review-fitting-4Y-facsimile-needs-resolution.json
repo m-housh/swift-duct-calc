@@ -1,0 +1,12 @@
+{
+  "batchId": "fitting-4Y-facsimile",
+  "reviewedAt": "2026-09-04",
+  "status": "needs-more-work",
+  "items": [
+    {
+      "id": "4Y",
+      "needsMoreWork": true,
+      "feedback": "The exact-source facsimile is acceptable in shape but blurs when scaled up."
+    }
+  ]
+}

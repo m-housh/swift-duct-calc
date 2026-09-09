@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="0 0 640 520" role="img" aria-labelledby="title desc">
+<title id="title">4S — Rectangular-to-round tapered transition</title>
+<desc id="desc">Source-traced Group 4 fitting. Reference equivalent length 20 feet at 900 FPM and 0.08 IWC per 100 feet. Drawing not to scale.</desc>
+<style>text{font-family:Arial,sans-serif;fill:#243b53}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<text x="32" y="44" font-size="28" font-weight="700">4S</text>
+<text x="112" y="43" font-size="17">Rectangular-to-round tapered transition</text>
+<text x="32" y="76" font-size="13">GROUP 4 · SUPPLY AIR BOOT AND STACK HEAD FITTINGS</text>
+<svg x="55" y="104" width="530" height="295" viewBox="49 46 258 291" preserveAspectRatio="xMidYMid meet"><path d="M255 65L250 84M290 84L284 72L254 54L79 96L68 101L68 109M290 84L115 131L97 140M290 84L298 92L297 101L291 105M57 105L68 109M291 105L118 147L97 140M291 105L277 235L292 279M78 107L71 114M68 109L71 114M71 114L82 131M91 123L85 131M82 131L85 131M82 131L80 153L168 287M85 131L97 140M115 163L114 168L159 233M269 251L234 259L221 268L181 281M177 277L181 281M292 279L193 326L184 326L168 295L168 287M292 279L298 283M181 281L168 287" fill="none" stroke="#243b53" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<text x="32" y="446" font-size="15">Reference equivalent length: 20 ft</text>
+<text x="32" y="474" font-size="12">900 FPM · 0.08 IWC per 100 ft</text>
+<text x="32" y="500" font-size="12">SOURCE TRACE · NOT TO SCALE · PDF pp. 18–19 / printed p. 168</text>
+</svg>

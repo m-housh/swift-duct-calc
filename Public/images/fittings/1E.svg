@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="0 0 640 520" role="img" aria-labelledby="title desc">
+<title id="title">1E — Rectangular angled takeoff</title>
+<desc id="desc">Schematic side elevation of supply air fitting 1E. Plenum large compared with duct. Upper transition: 30 degrees. Lower transition: 45 degrees. Redrawn from ManD.Groups.pdf, PDF page 1, printed page 159. Review prototype; not to scale.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0 0L8 3L0 6Z" fill="#243b53"/></marker></defs>
+<style>text{font-family:Arial,sans-serif;fill:#243b53;stroke:none}.small{font-size:15px}.dimension{stroke:#64748b;stroke-width:1.2}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<text x="32" y="47" font-size="28" font-weight="700">1E</text><text x="95" y="45" font-size="21">Rectangular angled takeoff</text>
+<text x="32" y="77" font-size="14" fill="#64748b">GROUP 1 · SUPPLY AIR · SIDE ELEVATION</text>
+<g fill="none" stroke="#243b53" stroke-width="2.5" stroke-linejoin="round"><path d="M220 130H360V300H220Z"/>
+<path d="M360 178L423 142H540L528 153L546 164L528 175L540 186H408L360 234Z"/><path d="M408 151V186" stroke-dasharray="5 5"/><path d="M205 300H375V410L348 395L319 410L290 395L261 410L234 395L205 410Z" fill="#f1f5f9"/>
+<path d="M443 164H510" marker-end="url(#arrow)"/><text x="413" y="124" class="small">30°</text><text x="396" y="237" class="small">45°</text></g>
+<text x="290" y="260" text-anchor="middle" font-size="14">Large plenum</text>
+<text x="290" y="348" text-anchor="middle" font-size="14">Air handler</text>
+<text x="32" y="460" font-size="14">Plenum size is large compared with duct size.</text>
+<text x="32" y="488" font-size="12">SCHEMATIC PILOT · NOT TO SCALE · Source: PDF p. 1 / printed p. 159</text>
+</svg>

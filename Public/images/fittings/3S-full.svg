@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="0 0 640 520" role="img" aria-labelledby="title desc">
+<title id="title">3S — Hard-bend takeoff · full radius</title><desc id="desc">Hard-bend takeoff · full radius. Reference geometry; review against source before use. Source PDF page 11, printed page 167. Schematic, not to scale.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0 0L8 3L0 6Z" fill="#64748b"/></marker></defs>
+<style>text{font-family:Arial,sans-serif;fill:#243b53;stroke:none}path,ellipse{stroke-linejoin:round;stroke-linecap:round}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<text x="32" y="44" font-size="28">3S</text><text x="96" y="43" font-size="18">Hard-bend takeoff · full radius</text><text x="32" y="76" font-size="13">GROUP 3 · SUPPLY AIR · PLAN VIEW</text>
+<g stroke="#243b53" stroke-width="2.3" fill="none"><path d="M150 140H230V210Q230 310 330 310H465V390H330Q150 390 150 210Z" fill="#f8fafc" /><path d="M190 170V215Q190 350 335 350H420" fill="none" stroke="#64748b" stroke-dasharray="6 6"/><path d="M420 350H443" fill="none" marker-end="url(#arrow)"/><text x="285" y="245" font-size="15">Full inside corner</text><path d="M310 254L274 278" fill="none" stroke="#64748b"/><text x="115" y="430" font-size="15">Same fitting number; corner geometry selects the variant</text></g>
+<text x="32" y="465" font-size="14">Reference geometry; review against source before use.</text><text x="32" y="493" font-size="12">REVIEW PILOT · NOT TO SCALE · Source: PDF p. 11 / printed p. 167</text>
+</svg>

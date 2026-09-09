@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="700" viewBox="0 0 1280 700" role="img" aria-label="4X source and SVG comparison">
+<rect width="1280" height="700" fill="#f8fafc"/>
+<text x="40" y="54" font-family="Arial,sans-serif" font-size="30" font-weight="700" fill="#243b53">4X · Ceiling boot with straight collar</text>
+<text x="40" y="100" font-family="Arial,sans-serif" font-size="20" fill="#243b53">Original source crop</text>
+<text x="660" y="100" font-family="Arial,sans-serif" font-size="20" fill="#243b53">Source-traced SVG</text>
+<rect x="40" y="120" width="580" height="520" rx="12" fill="white" stroke="#cbd5e1"/>
+<rect x="660" y="120" width="580" height="520" rx="12" fill="white" stroke="#cbd5e1"/>
+<image href="4X.png" x="60" y="140" width="540" height="480" preserveAspectRatio="xMidYMid meet"/>
+<svg x="660" y="120" width="580" height="520" viewBox="0 0 640 520" preserveAspectRatio="xMidYMid meet"><title id="title">4X — Ceiling boot with straight collar</title>
+<desc id="desc">Source-traced Group 4 fitting. Reference equivalent length 35 feet at 900 FPM and 0.08 IWC per 100 feet. Drawing not to scale.</desc>
+<style>text{font-family:Arial,sans-serif;fill:#243b53}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<text x="32" y="44" font-size="28" font-weight="700">4X</text>
+<text x="112" y="43" font-size="17">Ceiling boot with straight collar</text>
+<text x="32" y="76" font-size="13">GROUP 4 · SUPPLY AIR BOOT AND STACK HEAD FITTINGS</text>
+<svg x="55" y="104" width="530" height="295" viewBox="43 77 296 247" preserveAspectRatio="xMidYMid meet"><path d="M187 87L190 126M190 126L144 138L141 177M190 126L234 134L239 144L239 177M141 177L85 179L82 190M141 177L239 177M239 177L296 179L300 189M300 189L201 191L194 195M300 189L327 193M331 189L327 193M82 190L54 193L76 251L144 249M82 190L179 191L185 195M327 193L302 250L234 249M185 195L194 195M185 195L165 205M194 195L213 205M165 205L158 204L150 212M165 205L166 210M213 205L223 206L227 215M213 205L211 211M166 210L211 211M166 210L159 215L151 214M211 211L227 215M150 212L149 214M150 212L151 214M149 214L151 214M149 214L137 228L144 249M227 215L235 219L240 229L234 249M144 249L178 258L214 256L234 249M187 271L187 316" fill="none" stroke="#243b53" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<text x="32" y="446" font-size="15">Reference equivalent length: 35 ft</text>
+<text x="32" y="474" font-size="12">900 FPM · 0.08 IWC per 100 ft</text>
+<text x="32" y="500" font-size="12">SOURCE TRACE · NOT TO SCALE · PDF pp. 18–19 / printed p. 168</text>
+</svg>
+</svg>

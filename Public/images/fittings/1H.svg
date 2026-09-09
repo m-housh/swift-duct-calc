@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="0 0 640 520" role="img" aria-labelledby="title desc">
+<title id="title">1H — Square elbow without vanes</title><desc id="desc">No turning vanes. Side elevation traced from printed page 160. Review drawing, not to scale.</desc>
+<defs><marker id="flow" viewBox="0 0 8 5" markerWidth="6" markerHeight="4" refX="7" refY="2.5" orient="auto"><path d="M0 0L8 2.5L0 5Z" fill="#243b53"/></marker></defs>
+<style>text{font-family:Arial,sans-serif}path{stroke-linejoin:round;stroke-linecap:round}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<g fill="#243b53"><text x="32" y="44" font-size="28" font-weight="700">1H</text><text x="96" y="43" font-size="18">Square elbow without vanes</text><text x="32" y="76" font-size="13">GROUP 1 · SUPPLY AIR · SOURCE SIDE ELEVATION</text></g>
+<g transform="translate(108.6184 105) scale(1.657895) translate(-80 -729)" fill="none" stroke="#243b53" stroke-width="1.6"><path d="M104 737H312l-8 12l17 5l-9 7l15 10l-22 4l10 10H222v35H104Z" /><path d="M92 820h142v86l-25.56 -10.32l-25.56 17.2l-22.72 -8.6l-34.08 23.220000000000002v-23.220000000000002l-34.08 15.479999999999999Z" /><path d="M163.0 881.92V844.08" marker-end="url(#flow)" stroke-width="1.4"/><path d="M264 761h37" marker-end="url(#flow)" stroke-width="1.4"/><path d="M234 737v47" /><path d="M110 802L219 802" stroke="#8192a2" stroke-width="0.8"/><text x="153" y="807" font-size="11" stroke="none" fill="#243b53">W</text><path d="M247 740L247 781" stroke="#8192a2" stroke-width="0.8"/><text x="243" y="764" font-size="11" stroke="none" fill="#243b53">H</text></g>
+<text x="32" y="459" fill="#243b53" font-size="14">No turning vanes.</text>
+<text x="32" y="490" fill="#4b6274" font-size="12">REVIEW DRAWING · NOT TO SCALE · Source: PDF p. 1 / printed p. 160</text>
+</svg>

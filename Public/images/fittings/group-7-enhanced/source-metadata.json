@@ -1,0 +1,249 @@
+{
+  "group": 7,
+  "title": "Panned Joists and Panned Stud Return Air Fittings",
+  "items": [
+    {
+      "id": "7A",
+      "fittingNumber": "7A",
+      "name": "Panned stud-space return",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "maximumCfm": 200,
+        "equivalentLengthByCfm": [
+          {
+            "cfm": 100,
+            "feet": 25
+          },
+          {
+            "cfm": 150,
+            "feet": 25
+          },
+          {
+            "cfm": 200,
+            "feet": 25
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 30,
+        "printedPage": 175,
+        "embeddedImageIndex": 80,
+        "cropPixels": [
+          55,
+          210,
+          480,
+          235
+        ],
+        "referenceSha256": "f66a49f8dcc4c56107867989e5b6d6106c77e66ec2cd0ab5b5b015003dc2e45c"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-7/7A.png",
+      "notes": [
+        "Vertical return path within one panned stud space; source limit is 200 CFM in the stud space."
+      ]
+    },
+    {
+      "id": "7B",
+      "fittingNumber": "7B",
+      "name": "Stud-space to single-joist return turn",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthByCfm": [
+          {
+            "cfm": 100,
+            "feet": 10
+          },
+          {
+            "cfm": 150,
+            "feet": 15
+          },
+          {
+            "cfm": 200,
+            "feet": 25
+          }
+        ],
+        "sourceCrossReference": "See 7D for double turn."
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 30,
+        "printedPage": 175,
+        "embeddedImageIndex": 80,
+        "cropPixels": [
+          50,
+          235,
+          495,
+          475
+        ],
+        "referenceSha256": "80037bac2f3676e77233f3d9932bf2cd15508b5bfead35013223330a2472730b"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-7/7B.png",
+      "notes": [
+        "One turn connects a panned stud space to a single panned joist space."
+      ]
+    },
+    {
+      "id": "7C",
+      "fittingNumber": "7C",
+      "name": "Panned single-joist return",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "maximumCfm": 400,
+        "equivalentLengthByCfm": [
+          {
+            "cfm": 100,
+            "feet": 10
+          },
+          {
+            "cfm": 200,
+            "feet": 30
+          },
+          {
+            "cfm": 300,
+            "feet": 60
+          },
+          {
+            "cfm": 400,
+            "feet": 110
+          }
+        ],
+        "mergingFlowEquivalentLengthFeet": 40,
+        "sourceCrossReference": "See 7E for double joist."
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 30,
+        "printedPage": 175,
+        "embeddedImageIndex": 80,
+        "cropPixels": [
+          255,
+          220,
+          510,
+          485
+        ],
+        "referenceSha256": "bb9a51d2c79dfc6cc57c6c93eb6e1d8c267cd44e34899cf38f62180ff498368c"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-7/7C.png",
+      "notes": [
+        "Return path runs in one panned joist space; source limit is 400 CFM and merging flow adds 40 feet."
+      ]
+    },
+    {
+      "id": "7D",
+      "fittingNumber": "7D",
+      "name": "Panned stud-to-joist double turn",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "maximumCfm": 200,
+        "equivalentLengthByCfm": [
+          {
+            "cfm": 100,
+            "feet": 20
+          },
+          {
+            "cfm": 150,
+            "feet": 50
+          },
+          {
+            "cfm": 200,
+            "feet": 90
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 31,
+        "printedPage": 175,
+        "embeddedImageIndex": 82,
+        "cropPixels": [
+          45,
+          690,
+          585,
+          430
+        ],
+        "referenceSha256": "55f135334e2ee9eab59e0400e46fdad599b4ce9b45d144edb35e4e45d6a008ed"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-7/7D.png",
+      "notes": [
+        "Two turns carry return air between the panned stud and joist paths."
+      ]
+    },
+    {
+      "id": "7E",
+      "fittingNumber": "7E",
+      "name": "Panned double-joist return",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "maximumCfm": 800,
+        "equivalentLengthByCfm": [
+          {
+            "cfm": 200,
+            "feet": 10
+          },
+          {
+            "cfm": 400,
+            "feet": 30
+          },
+          {
+            "cfm": 600,
+            "feet": 60
+          },
+          {
+            "cfm": 800,
+            "feet": 110
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 31,
+        "printedPage": 175,
+        "embeddedImageIndex": 82,
+        "cropPixels": [
+          440,
+          690,
+          490,
+          430
+        ],
+        "referenceSha256": "3d647e547f5678ab483e43c028e22572304a69729299909bec20516e43be4c49"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-7/7E.png",
+      "notes": [
+        "A floor grille feeds two adjacent panned joist spaces; source limit is 800 CFM in the double space."
+      ]
+    }
+  ],
+  "source": {},
+  "printedPages": [
+    175
+  ],
+  "referenceConditions": {
+    "velocityFpm": 700,
+    "frictionRateIwcPer100Feet": 0.08
+  }
+}

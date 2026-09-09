@@ -1,0 +1,1595 @@
+{
+  "schemaVersion": 1,
+  "group": 8,
+  "title": "Elbows and Offsets",
+  "drawingCount": 25,
+  "familyCount": 16,
+  "families": [
+    {
+      "id": "8A",
+      "artworkByVariant": {
+        "smooth": {
+          "itemId": "8A-smooth",
+          "image": "/images/fittings/group-8/8A-smooth.svg",
+          "ductShape": "round"
+        },
+        "4-or-5-piece": {
+          "itemId": "8A-4-or-5-piece",
+          "image": "/images/fittings/group-8/8A-4-or-5-piece.svg",
+          "ductShape": "round"
+        },
+        "3-piece": {
+          "itemId": "8A-3-piece",
+          "image": "/images/fittings/group-8/8A-3-piece.svg",
+          "ductShape": "round"
+        },
+        "mitered": {
+          "itemId": "8A-mitered",
+          "image": "/images/fittings/group-8/8A-mitered.svg",
+          "ductShape": "round"
+        },
+        "easy-bend": {
+          "itemId": "8A-easy-bend",
+          "image": "/images/fittings/group-8/8A-easy-bend.svg",
+          "ductShape": "oval"
+        },
+        "hard-bend": {
+          "itemId": "8A-hard-bend",
+          "image": "/images/fittings/group-8/8A-hard-bend.svg",
+          "ductShape": "oval"
+        },
+        "3-piece-45": {
+          "itemId": "8A-3-piece-45",
+          "image": "/images/fittings/group-8/8A-3-piece-45.svg",
+          "ductShape": "round"
+        },
+        "2-piece-45": {
+          "itemId": "8A-2-piece-45",
+          "image": "/images/fittings/group-8/8A-2-piece-45.svg",
+          "ductShape": "round"
+        }
+      }
+    },
+    {
+      "id": "8B",
+      "artworkByVariant": {
+        "default": {
+          "itemId": "8B",
+          "image": "/images/fittings/group-8/8B.svg",
+          "ductShape": "rectangular"
+        }
+      }
+    },
+    {
+      "id": "8C",
+      "artworkByVariant": {
+        "default": {
+          "itemId": "8C",
+          "image": "/images/fittings/group-8/8C.svg",
+          "ductShape": "rectangular"
+        }
+      }
+    },
+    {
+      "id": "8D",
+      "artworkByVariant": {
+        "default": {
+          "itemId": "8D",
+          "image": "/images/fittings/group-8/8D.svg",
+          "ductShape": "rectangular"
+        }
+      }
+    },
+    {
+      "id": "8E",
+      "artworkByVariant": {
+        "default": {
+          "itemId": "8E",
+          "image": "/images/fittings/group-8/8E.svg",
+          "ductShape": "rectangular"
+        }
+      }
+    },
+    {
+      "id": "8F",
+      "artworkByVariant": {
+        "default": {
+          "itemId": "8F",
+          "image": "/images/fittings/group-8/8F.svg",
+          "ductShape": "rectangular"
+        }
+      }
+    },
+    {
+      "id": "8G",
+      "artworkByVariant": {
+        "default": {
+          "itemId": "8G",
+          "image": "/images/fittings/group-8/8G.svg",
+          "ductShape": "rectangular"
+        }
+      }
+    },
+    {
+      "id": "8H",
+      "artworkByVariant": {
+        "default": {
+          "itemId": "8H",
+          "image": "/images/fittings/group-8/8H.svg",
+          "ductShape": "rectangular"
+        }
+      }
+    },
+    {
+      "id": "8I",
+      "artworkByVariant": {
+        "default": {
+          "itemId": "8I",
+          "image": "/images/fittings/group-8/8I.svg",
+          "ductShape": "rectangular"
+        }
+      }
+    },
+    {
+      "id": "8J",
+      "artworkByVariant": {
+        "default": {
+          "itemId": "8J",
+          "image": "/images/fittings/group-8/8J.svg",
+          "ductShape": "rectangular"
+        }
+      }
+    },
+    {
+      "id": "8K",
+      "artworkByVariant": {
+        "default": {
+          "itemId": "8K",
+          "image": "/images/fittings/group-8/8K.svg",
+          "ductShape": "rectangular"
+        }
+      }
+    },
+    {
+      "id": "8L",
+      "artworkByVariant": {
+        "rectangular": {
+          "itemId": "8L-rectangular",
+          "image": "/images/fittings/group-8/8L-rectangular.svg",
+          "ductShape": "rectangular"
+        },
+        "round": {
+          "itemId": "8L-round",
+          "image": "/images/fittings/group-8/8L-round.svg",
+          "ductShape": "round"
+        }
+      },
+      "artworkByShape": {
+        "rectangular": {
+          "itemId": "8L-rectangular",
+          "image": "/images/fittings/group-8/8L-rectangular.svg"
+        },
+        "round": {
+          "itemId": "8L-round",
+          "image": "/images/fittings/group-8/8L-round.svg"
+        }
+      }
+    },
+    {
+      "id": "8M",
+      "artworkByVariant": {
+        "rectangular": {
+          "itemId": "8M-rectangular",
+          "image": "/images/fittings/group-8/8M-rectangular.svg",
+          "ductShape": "rectangular"
+        },
+        "round": {
+          "itemId": "8M-round",
+          "image": "/images/fittings/group-8/8M-round.svg",
+          "ductShape": "round"
+        }
+      },
+      "artworkByShape": {
+        "rectangular": {
+          "itemId": "8M-rectangular",
+          "image": "/images/fittings/group-8/8M-rectangular.svg"
+        },
+        "round": {
+          "itemId": "8M-round",
+          "image": "/images/fittings/group-8/8M-round.svg"
+        }
+      }
+    },
+    {
+      "id": "8N",
+      "artworkByVariant": {
+        "default": {
+          "itemId": "8N",
+          "image": "/images/fittings/group-8/8N.svg",
+          "ductShape": "rectangular"
+        }
+      }
+    },
+    {
+      "id": "8O",
+      "artworkByVariant": {
+        "default": {
+          "itemId": "8O",
+          "image": "/images/fittings/group-8/8O.svg",
+          "ductShape": "rectangular"
+        }
+      }
+    },
+    {
+      "id": "8P",
+      "artworkByVariant": {
+        "default": {
+          "itemId": "8P",
+          "image": "/images/fittings/group-8/8P.svg",
+          "ductShape": "rectangular"
+        }
+      }
+    }
+  ],
+  "status": "visually-approved",
+  "items": [
+    {
+      "id": "8A-smooth",
+      "fittingId": "8A",
+      "name": "Smooth round radius elbow",
+      "ductShape": "round",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 32,
+        "printedPage": 176,
+        "cropPixels": [
+          201,
+          239,
+          281,
+          294
+        ],
+        "referenceSha256": "25478964aad86d357bcb497385a232c1b96d7a8d63f82225b309dd96ca61a591"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8A-smooth.png",
+      "referenceValues": {
+        "radiusRatioValues": [
+          {
+            "rOverD": 0.75,
+            "feet": 20
+          },
+          {
+            "rOverD": 1,
+            "feet": 15
+          },
+          {
+            "rOverDMinimum": 1.5,
+            "feet": 10
+          }
+        ],
+        "angleMultipliers": {
+          "20": 0.31,
+          "30": 0.45,
+          "45": 0.6,
+          "60": 0.78,
+          "75": 0.9,
+          "110": 1.13,
+          "130": 1.2,
+          "150": 1.28
+        },
+        "sourceAngleNote": "Source heading says less than 90 degrees but also tabulates 110, 130 and 150 degrees; values transcribed without resolving this inconsistency."
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "One smooth curved round 90 degree elbow, no segmented seams.",
+      "variant": "smooth",
+      "svg": "/images/fittings/group-8/8A-smooth.svg",
+      "restoredArt": "/images/fittings/group-8/8A-smooth-restored-v1.png",
+      "revision": "d32708430100abaefb130bbb625cddb21c2cc6f456cf9cde58d990a03eb215e2",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8A-smooth",
+        "revision": "d32708430100abaefb130bbb625cddb21c2cc6f456cf9cde58d990a03eb215e2",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8A-4-or-5-piece",
+      "fittingId": "8A",
+      "name": "Four- or five-piece round elbow",
+      "ductShape": "round",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 32,
+        "printedPage": 176,
+        "cropPixels": [
+          282,
+          239,
+          363,
+          294
+        ],
+        "referenceSha256": "c69a7ea4c0fd13470cba40d4275e7ba2a3c6b855a9d486ef32a68fe5969a55ce"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8A-4-or-5-piece.png",
+      "referenceValues": {
+        "radiusRatioValues": [
+          {
+            "rOverD": 0.75,
+            "feet": 30
+          },
+          {
+            "rOverD": 1,
+            "feet": 20
+          },
+          {
+            "rOverDMinimum": 1.5,
+            "feet": 15
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Segmented round 90 degree elbow; retain the original five-piece appearance and visible circumferential joints.",
+      "variant": "4-or-5-piece",
+      "svg": "/images/fittings/group-8/8A-4-or-5-piece.svg",
+      "restoredArt": "/images/fittings/group-8/8A-4-or-5-piece-single-seams-v3.png",
+      "revision": "9a4230f6863467e27d3d9e8b1afefa13cc50aff30423cee8784c943ad0d9736f",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8A-4-or-5-piece",
+        "revision": "9a4230f6863467e27d3d9e8b1afefa13cc50aff30423cee8784c943ad0d9736f",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8A-3-piece",
+      "fittingId": "8A",
+      "name": "Three-piece round elbow",
+      "ductShape": "round",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 32,
+        "printedPage": 176,
+        "cropPixels": [
+          364,
+          239,
+          445,
+          294
+        ],
+        "referenceSha256": "077311250a2c90bc1d4657cd1be0cdf30034bf4f5ca250727b5054ba4184ddbb"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8A-3-piece.png",
+      "referenceValues": {
+        "radiusRatioValues": [
+          {
+            "rOverD": 0.75,
+            "feet": 35
+          },
+          {
+            "rOverD": 1,
+            "feet": 25
+          },
+          {
+            "rOverDMinimum": 1.5,
+            "feet": 20
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Round 90 degree elbow of three sections with two angled circumferential joints.",
+      "variant": "3-piece",
+      "svg": "/images/fittings/group-8/8A-3-piece.svg",
+      "restoredArt": "/images/fittings/group-8/8A-3-piece-single-seams-v3.png",
+      "revision": "4c9d4f7434ca5a3ddd52e4da7415c41440f907d908ba3afa252ec1e88b3613f0",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8A-3-piece",
+        "revision": "4c9d4f7434ca5a3ddd52e4da7415c41440f907d908ba3afa252ec1e88b3613f0",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8A-mitered",
+      "fittingId": "8A",
+      "name": "Smooth mitered round elbow",
+      "ductShape": "round",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 32,
+        "printedPage": 176,
+        "cropPixels": [
+          446,
+          239,
+          525,
+          294
+        ],
+        "referenceSha256": "4d1998d9a35794e47af25a06672fa848e6357807a7328e179c63d0ba57eeed47"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8A-mitered.png",
+      "referenceValues": {
+        "equivalentLengthFeet": 75,
+        "rOverD": 0
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Two straight cylindrical round tubes joined at a sharp mitered 90 degree corner, preserve original V perspective.",
+      "variant": "mitered",
+      "svg": "/images/fittings/group-8/8A-mitered.svg",
+      "restoredArt": "/images/fittings/group-8/8A-mitered-restored-v2.png",
+      "revision": "6a5a228a35f4e807f5dae9b45862d379e66e7471fb199d20b8f6732809735a53",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8A-mitered",
+        "revision": "6a5a228a35f4e807f5dae9b45862d379e66e7471fb199d20b8f6732809735a53",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8A-easy-bend",
+      "fittingId": "8A",
+      "name": "Easy-bend oval elbow",
+      "ductShape": "oval",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 32,
+        "printedPage": 176,
+        "cropPixels": [
+          527,
+          239,
+          607,
+          294
+        ],
+        "referenceSha256": "3a2b62e4b9da4c111f0e6fcdb3da7d95800da6cab045f930189d1f450a77876b"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8A-easy-bend.png",
+      "referenceValues": {
+        "equivalentLengthByPieceCount": {
+          "4": 25,
+          "3": 30
+        }
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Oval segmented 90 degree elbow bending about the easy axis; wide oval opening, preserve source orientation.",
+      "variant": "easy-bend",
+      "svg": "/images/fittings/group-8/8A-easy-bend.svg",
+      "restoredArt": "/images/fittings/group-8/8A-easy-bend-single-seams-v3.png",
+      "revision": "c9892b486c5ed6d3609e49eb8fb49fa48ee7d1af899db8ab1ed906f0954b2dfd",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8A-easy-bend",
+        "revision": "c9892b486c5ed6d3609e49eb8fb49fa48ee7d1af899db8ab1ed906f0954b2dfd",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8A-hard-bend",
+      "fittingId": "8A",
+      "name": "Hard-bend oval elbow",
+      "ductShape": "oval",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 32,
+        "printedPage": 176,
+        "cropPixels": [
+          609,
+          239,
+          688,
+          294
+        ],
+        "referenceSha256": "6c08c5f6152a18d384376dfaa81986f55ab208875c022190848e7d6acd1fbb60"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8A-hard-bend.png",
+      "referenceValues": {
+        "equivalentLengthByPieceCount": {
+          "4": 30,
+          "3": 35
+        }
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Oval segmented 90 degree elbow bending about the hard axis, tall oval opening, preserve source orientation.",
+      "variant": "hard-bend",
+      "svg": "/images/fittings/group-8/8A-hard-bend.svg",
+      "restoredArt": "/images/fittings/group-8/8A-hard-bend-single-seams-v3.png",
+      "revision": "585eb44c47b430859f85bbd77934f8b42c2e376bb551c6f4da7d75eb6bfd1f39",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8A-hard-bend",
+        "revision": "585eb44c47b430859f85bbd77934f8b42c2e376bb551c6f4da7d75eb6bfd1f39",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8A-3-piece-45",
+      "fittingId": "8A",
+      "name": "Three-piece 45-degree round elbow",
+      "ductShape": "round",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 32,
+        "printedPage": 176,
+        "cropPixels": [
+          690,
+          239,
+          770,
+          294
+        ],
+        "referenceSha256": "e92906f0cc2b3b7204706b7e9648d72d9fd7c769623a57c4789a65c79ae23e7b"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8A-3-piece-45.png",
+      "referenceValues": {
+        "equivalentLengthFeet": 10,
+        "angleDegrees": 45
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Exactly three round tube sections forming a total 45 degree elbow, same opening and joints as source.",
+      "variant": "3-piece-45",
+      "svg": "/images/fittings/group-8/8A-3-piece-45.svg",
+      "restoredArt": "/images/fittings/group-8/8A-3-piece-45-restored-v2.png",
+      "revision": "c0db658c085c03822bad8196df19d52e6d7cd43fbdf345c191f05868c8e763bc",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8A-3-piece-45",
+        "revision": "c0db658c085c03822bad8196df19d52e6d7cd43fbdf345c191f05868c8e763bc",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8A-2-piece-45",
+      "fittingId": "8A",
+      "name": "Two-piece 45-degree round elbow",
+      "ductShape": "round",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 32,
+        "printedPage": 176,
+        "cropPixels": [
+          772,
+          239,
+          851,
+          294
+        ],
+        "referenceSha256": "8dc3628095c77758db49fb0324ff5af70591ba985df0a17464120147c46e31d0"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8A-2-piece-45.png",
+      "referenceValues": {
+        "equivalentLengthFeet": 15,
+        "angleDegrees": 45
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Exactly two cylindrical round sections joined at a miter making a total45 degree elbow, same orientation as source.",
+      "variant": "2-piece-45",
+      "svg": "/images/fittings/group-8/8A-2-piece-45.svg",
+      "restoredArt": "/images/fittings/group-8/8A-2-piece-45-restored-v2.png",
+      "revision": "cd03939e162c31960b3439894a8967d48472b412942588991665177b3f7e07dc",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8A-2-piece-45",
+        "revision": "cd03939e162c31960b3439894a8967d48472b412942588991665177b3f7e07dc",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8B",
+      "fittingId": "8B",
+      "name": "Rectangular radius elbow without vanes",
+      "ductShape": "rectangular",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 33,
+        "printedPage": 176,
+        "cropPixels": [
+          58,
+          747,
+          200,
+          846
+        ],
+        "referenceSha256": "dbd156943df0bdf4ad6c7d23aa39a77b584f1e3aad459fbcb5b14209e002e4da"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8B.png",
+      "referenceValues": {
+        "radiusRatioTable": {
+          "columns": [
+            "hardBend",
+            "hOverW1",
+            "easyBend"
+          ],
+          "rows": [
+            {
+              "rOverW": 0,
+              "feet": [
+                90,
+                75,
+                65
+              ]
+            },
+            {
+              "rOverW": 0.25,
+              "feet": [
+                35,
+                30,
+                25
+              ]
+            },
+            {
+              "rOverWMinimum": 0.5,
+              "feet": [
+                20,
+                15,
+                10
+              ]
+            }
+          ]
+        },
+        "angleMultipliers": {
+          "30": 0.45,
+          "45": 0.6,
+          "60": 0.78
+        }
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Single rectangular radius elbow, curved inner and outer edges, no turning vanes. Remove dimension arrows and letters.",
+      "variant": null,
+      "svg": "/images/fittings/group-8/8B.svg",
+      "restoredArt": "/images/fittings/group-8/8B-restored-v1.png",
+      "revision": "3f8f185a9027837cda9a148a3e854a08792cca42bfe5a4dbb86ef08fa900ad1b",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8B",
+        "revision": "3f8f185a9027837cda9a148a3e854a08792cca42bfe5a4dbb86ef08fa900ad1b",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8C",
+      "fittingId": "8C",
+      "name": "Rectangular radius elbow with turning vanes",
+      "ductShape": "rectangular",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 33,
+        "printedPage": 176,
+        "cropPixels": [
+          475,
+          747,
+          618,
+          846
+        ],
+        "referenceSha256": "49678ebe6e65c5b594e737d4b9d6db682b901e08faa39ec735f119c8127dbc65"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8C.png",
+      "referenceValues": {
+        "radiusRatioTable": {
+          "columns": [
+            "hardBend",
+            "hOverW1",
+            "easyBend"
+          ],
+          "rows": [
+            {
+              "rOverW": 0,
+              "feet": [
+                30,
+                25,
+                40
+              ]
+            },
+            {
+              "rOverW": 0.25,
+              "feet": [
+                10,
+                10,
+                10
+              ]
+            },
+            {
+              "rOverWMinimum": 0.5,
+              "feet": [
+                5,
+                5,
+                5
+              ]
+            }
+          ]
+        },
+        "angleMultipliers": {
+          "30": 0.45,
+          "45": 0.6,
+          "60": 0.78
+        }
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Single rectangular radius elbow with turning vanes. Preserve parallel visible vane edges in mouth AND hidden dashed curved vanes inside body, original number and spacing.",
+      "variant": null,
+      "svg": "/images/fittings/group-8/8C.svg",
+      "restoredArt": "/images/fittings/group-8/8C-restored-v1.png",
+      "revision": "e8de893ecdc3ad4f3891987cf018b06e84b8f351172fe2cb3c1b830ed4804ff7",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8C",
+        "revision": "e8de893ecdc3ad4f3891987cf018b06e84b8f351172fe2cb3c1b830ed4804ff7",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8D",
+      "fittingId": "8D",
+      "name": "Square elbow without turning vanes",
+      "ductShape": "rectangular",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 34,
+        "printedPage": 177,
+        "cropPixels": [
+          96,
+          231,
+          235,
+          329
+        ],
+        "referenceSha256": "aa5c69fa8c0d064d18a7d1600264dbd84c185bd97cdcb8bd7f1412853579b1d9"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8D.png",
+      "referenceValues": {
+        "equivalentLengthByAspect": {
+          "hardBend": 80,
+          "hOverW1": 80,
+          "easyBend": 65
+        }
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Single rectangular square/mitered 90 degree elbow without vanes. Preserve inside sharp corner and all visible faces. Remove dimensions.",
+      "variant": null,
+      "svg": "/images/fittings/group-8/8D.svg",
+      "restoredArt": "/images/fittings/group-8/8D-restored-v1.png",
+      "revision": "83692e33582ac471ffafb004a95b754f05b0e348186a1f1db2c8983706994ec9",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8D",
+        "revision": "83692e33582ac471ffafb004a95b754f05b0e348186a1f1db2c8983706994ec9",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8E",
+      "fittingId": "8E",
+      "name": "Square elbow with single-thickness turning vanes",
+      "ductShape": "rectangular",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 34,
+        "printedPage": 177,
+        "cropPixels": [
+          509,
+          229,
+          650,
+          326
+        ],
+        "referenceSha256": "f95586a60ca76b6a3583e7cb2ca4678e40c5f1f45789101d3be55b250ef3fa56"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8E.png",
+      "referenceValues": {
+        "equivalentLengthByAspect": {
+          "hardBend": 10,
+          "hOverW1": 10,
+          "easyBend": 10
+        }
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Single rectangular square 90 degree elbow, cutaway shows curved single thickness turning vanes; retain all vanes and sharp external square corner.",
+      "variant": null,
+      "svg": "/images/fittings/group-8/8E.svg",
+      "restoredArt": "/images/fittings/group-8/8E-restored-v2.png",
+      "revision": "ff5c781fa512fb52faa5024777a6fcfba82322df4df37cc6d658d1c79cdf47ad",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8E",
+        "revision": "ff5c781fa512fb52faa5024777a6fcfba82322df4df37cc6d658d1c79cdf47ad",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8F",
+      "fittingId": "8F",
+      "name": "Rectangular stepped offset without vanes",
+      "ductShape": "rectangular",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 34,
+        "printedPage": 177,
+        "cropPixels": [
+          205,
+          407,
+          343,
+          489
+        ],
+        "referenceSha256": "2d2f7a9042798967537b42f1ea7acf160fba8c949170b5a78f01f3b397fdcc0e"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8F.png",
+      "referenceValues": {
+        "equivalentLengthByLOverH": {
+          "1": 160,
+          "2": 260,
+          "4": 190
+        }
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Single stepped rectangular offset with two sharp square turns between parallel runs at different heights; no vanes. Preserve opening faces; remove dimension lines.",
+      "variant": null,
+      "svg": "/images/fittings/group-8/8F.svg",
+      "restoredArt": "/images/fittings/group-8/8F-restored-v2.png",
+      "revision": "ab56b807eafaaf1675f66a405fbb19d07c3d4bd237819923172075955053fe18",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8F",
+        "revision": "ab56b807eafaaf1675f66a405fbb19d07c3d4bd237819923172075955053fe18",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8G",
+      "fittingId": "8G",
+      "name": "Compact square offset without vanes",
+      "ductShape": "rectangular",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 34,
+        "printedPage": 177,
+        "cropPixels": [
+          516,
+          402,
+          650,
+          509
+        ],
+        "referenceSha256": "16d6cd2f5ca19a93ac9fe93353ff8707ed184200b51e076db84f22792f08a78f"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8G.png",
+      "referenceValues": {
+        "equivalentLengthFeet": 200
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Single compact block-like rectangular square offset with sharp stepped inside and outside corners, no vanes. Preserve original orientation.",
+      "variant": null,
+      "svg": "/images/fittings/group-8/8G.svg",
+      "restoredArt": "/images/fittings/group-8/8G-restored-v1.png",
+      "revision": "411a761a2aebbc074dcc60a6a267a8be838b2fed5746cfbd97c86fe09b41ee8a",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8G",
+        "revision": "411a761a2aebbc074dcc60a6a267a8be838b2fed5746cfbd97c86fe09b41ee8a",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8H",
+      "fittingId": "8H",
+      "name": "Four-turn rectangular offset",
+      "ductShape": "rectangular",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 34,
+        "printedPage": 177,
+        "cropPixels": [
+          91,
+          548,
+          322,
+          637
+        ],
+        "referenceSha256": "17901ff968e624e68f6d3df9f2d8a12e5977af41cf3cdd1efc15202158a556bf"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8H.png",
+      "referenceValues": {
+        "table": {
+          "columns": [
+            "withoutVanes",
+            "withVanes"
+          ],
+          "rows": [
+            {
+              "hOverL": 0.5,
+              "feet": [
+                55,
+                null
+              ]
+            },
+            {
+              "hOverL": 1,
+              "feet": [
+                330,
+                55
+              ]
+            },
+            {
+              "hOverL": 1.5,
+              "feet": [
+                430,
+                55
+              ]
+            },
+            {
+              "hOverL": 2,
+              "feet": [
+                470,
+                55
+              ]
+            }
+          ]
+        }
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Single rectangular down-and-up offset forming a central trough between flat straight ducts. Four sharp turns. Preserve both upstream and downstream straight portions and inside corners. Remove dimensions.",
+      "variant": null,
+      "svg": "/images/fittings/group-8/8H.svg",
+      "restoredArt": "/images/fittings/group-8/8H-restored-v1.png",
+      "revision": "efcacfcbb6d0f73d6e31741c26a4239054627130b992f88b334df98c49e3f13b",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8H",
+        "revision": "efcacfcbb6d0f73d6e31741c26a4239054627130b992f88b334df98c49e3f13b",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8I",
+      "fittingId": "8I",
+      "name": "Gradual rectangular offset",
+      "ductShape": "rectangular",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 34,
+        "printedPage": 177,
+        "cropPixels": [
+          542,
+          539,
+          778,
+          650
+        ],
+        "referenceSha256": "a3eada2772b9813d7254d44e6fdfc88b3a1784cfdd2d8f872b6eef452b19a659"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8I.png",
+      "referenceValues": {
+        "equivalentLengthFeet": 20
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Single shallow smooth sloped rectangular offset between equal-size straight ducts; preserve tapered offset middle faces and panel seams. No branches.",
+      "variant": null,
+      "svg": "/images/fittings/group-8/8I.svg",
+      "restoredArt": "/images/fittings/group-8/8I-restored-v1.png",
+      "revision": "4d19da12ee3e4dce1d6e29ea297a2d8d13ef4db48d05c37858ff3037a352b6c5",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8I",
+        "revision": "4d19da12ee3e4dce1d6e29ea297a2d8d13ef4db48d05c37858ff3037a352b6c5",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8J",
+      "fittingId": "8J",
+      "name": "Rectangular offset with four 45-degree elbows",
+      "ductShape": "rectangular",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 34,
+        "printedPage": 177,
+        "cropPixels": [
+          94,
+          693,
+          325,
+          772
+        ],
+        "referenceSha256": "151ce382b4f87d5c2844c482bbdc62fa5fdd505b1593c7352f82185d667ade66"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8J.png",
+      "referenceValues": {
+        "equivalentLengthFeet": 20,
+        "elbowCount": 4,
+        "elbowAngleDegrees": 45
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Single rectangular down-and-up offset using four 45 degree mitered elbow bends, central straight lower passage, straight inlet/outlet; preserve each joint.",
+      "variant": null,
+      "svg": "/images/fittings/group-8/8J.svg",
+      "restoredArt": "/images/fittings/group-8/8J-restored-v1.png",
+      "revision": "d8fb83ef5f01fe98a7a2e2d67c71ff37f6bddb4bf590fdf4723a10dc3db9f428",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8J",
+        "revision": "d8fb83ef5f01fe98a7a2e2d67c71ff37f6bddb4bf590fdf4723a10dc3db9f428",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8K",
+      "fittingId": "8K",
+      "name": "Rectangular offset with four 90-degree elbows",
+      "ductShape": "rectangular",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 34,
+        "printedPage": 177,
+        "cropPixels": [
+          469,
+          709,
+          699,
+          778
+        ],
+        "referenceSha256": "bfead524e4d45bac13e5cfd8fdd4d3583467e1fb390caca2a2cc17b78b318003"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8K.png",
+      "referenceValues": {
+        "equivalentLengthByROverH": {
+          "0": 250,
+          ".25": 100,
+          ".5": 20,
+          "1": 20
+        }
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Single rectangular down-and-up offset using four radius90 degree elbows forming curved trough; preserve source inside/outside radii, seams and straight ends.",
+      "variant": null,
+      "svg": "/images/fittings/group-8/8K.svg",
+      "restoredArt": "/images/fittings/group-8/8K-restored-v1.png",
+      "revision": "42caa077c473191089381da3c1820133430beafff20d627c301cb5a424fef588",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8K",
+        "revision": "42caa077c473191089381da3c1820133430beafff20d627c301cb5a424fef588",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8L-rectangular",
+      "fittingId": "8L",
+      "name": "Rectangular double elbow in one plane",
+      "ductShape": "rectangular",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 34,
+        "printedPage": 177,
+        "cropPixels": [
+          115,
+          795,
+          200,
+          901
+        ],
+        "referenceSha256": "e5abc45bad0db5fb51121a727ffda5055b85e31cdc7a6e0e89e72679166fec2c"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8L-rectangular.png",
+      "referenceValues": {
+        "singleElbowEquivalentLengthMultiplier": 1.7,
+        "planes": 1
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Only the single rectangular S-offset made of two radius 90 degree elbows IN ONE PLANE. Preserve rectangular section and existing seams, both open ends. No other drawing.",
+      "variant": "rectangular",
+      "svg": "/images/fittings/group-8/8L-rectangular.svg",
+      "restoredArt": "/images/fittings/group-8/8L-rectangular-restored-v1.png",
+      "revision": "7cb16795e1613ef8ef439b48854a4afe03d7ca189381d62459e583f5299cfc93",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8L-rectangular",
+        "revision": "7cb16795e1613ef8ef439b48854a4afe03d7ca189381d62459e583f5299cfc93",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8L-round",
+      "fittingId": "8L",
+      "name": "Round double elbow in one plane",
+      "ductShape": "round",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 34,
+        "printedPage": 177,
+        "cropPixels": [
+          199,
+          795,
+          268,
+          900
+        ],
+        "referenceSha256": "c7f64c979ce488f69fbfa9fa3be874f3efe7bc0407e138faa8c5995fce763d78"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8L-round.png",
+      "referenceValues": {
+        "singleElbowEquivalentLengthMultiplier": 1.7,
+        "planes": 1
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Only the single round S-offset tube made of two smooth curved elbows IN ONE PLANE. Preserve round openings and central seam. No rectangular companion.",
+      "variant": "round",
+      "svg": "/images/fittings/group-8/8L-round.svg",
+      "restoredArt": "/images/fittings/group-8/8L-round-restored-v1.png",
+      "revision": "c0059e0704bc7fe1bbb7b5a723118b0829da4ca7f4a7504415e2afc42cc556c4",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8L-round",
+        "revision": "c0059e0704bc7fe1bbb7b5a723118b0829da4ca7f4a7504415e2afc42cc556c4",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8M-rectangular",
+      "fittingId": "8M",
+      "name": "Rectangular double elbow in two planes",
+      "ductShape": "rectangular",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 34,
+        "printedPage": 177,
+        "cropPixels": [
+          532,
+          830,
+          631,
+          938
+        ],
+        "referenceSha256": "19ed9e081e60e2ff9e1e1b6c104668b8810c0071512ad8318e34d44229017857"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8M-rectangular.png",
+      "referenceValues": {
+        "singleElbowEquivalentLengthMultiplier": 2,
+        "planes": 2
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Single rectangular double radius elbow offset with second bend rotated into a DIFFERENT PLANE. Preserve source perspective, rotation, seams, opening faces.",
+      "variant": "rectangular",
+      "svg": "/images/fittings/group-8/8M-rectangular.svg",
+      "restoredArt": "/images/fittings/group-8/8M-rectangular-restored-v1.png",
+      "revision": "d91c47abf400f3cf5c40c4365a9794f18df95015451a042e0733d9400b6c6b1c",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8M-rectangular",
+        "revision": "d91c47abf400f3cf5c40c4365a9794f18df95015451a042e0733d9400b6c6b1c",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8M-round",
+      "fittingId": "8M",
+      "name": "Round double elbow in two planes",
+      "ductShape": "round",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 34,
+        "printedPage": 177,
+        "cropPixels": [
+          621,
+          832,
+          703,
+          938
+        ],
+        "referenceSha256": "54b50593a8641588f253cee84101abc7c5a80ea6680f0dc16eb3ea8634481eb7"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8M-round.png",
+      "referenceValues": {
+        "singleElbowEquivalentLengthMultiplier": 2,
+        "planes": 2
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Single round double elbow offset in TWO PLANES; preserve upper outlet rotated toward viewer and lower opening perspective, central seam.",
+      "variant": "round",
+      "svg": "/images/fittings/group-8/8M-round.svg",
+      "restoredArt": "/images/fittings/group-8/8M-round-restored-v1.png",
+      "revision": "5dd497b8edb39981d9af707c66943094e5ca7785cd139db2acb6b664ef3cafce",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8M-round",
+        "revision": "5dd497b8edb39981d9af707c66943094e5ca7785cd139db2acb6b664ef3cafce",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8N",
+      "fittingId": "8N",
+      "name": "Angled rectangular offset",
+      "ductShape": "rectangular",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 35,
+        "printedPage": 177,
+        "cropPixels": [
+          209,
+          907,
+          335,
+          1010
+        ],
+        "referenceSha256": "d64c6a982223cf16005a8a83ca4e4cda32005fad057acf21fcedc59af042f4eb"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8N.png",
+      "referenceValues": {
+        "equivalentLengthFeet": 10
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Single straight diagonal rectangular duct with two small mitered offset ends; preserve original long diagonal perspective and open rectangular mouths. No neighboring table or labels.",
+      "variant": null,
+      "svg": "/images/fittings/group-8/8N.svg",
+      "restoredArt": "/images/fittings/group-8/8N-restored-v1.png",
+      "revision": "d14c89e24a170e0ebf8be504ca31bfff9971e4cb688c7d11edc08dd9b708f591",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8N",
+        "revision": "d14c89e24a170e0ebf8be504ca31bfff9971e4cb688c7d11edc08dd9b708f591",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8O",
+      "fittingId": "8O",
+      "name": "Rectangular S-offset with flanged ends",
+      "ductShape": "rectangular",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 35,
+        "printedPage": 177,
+        "cropPixels": [
+          141,
+          1029,
+          276,
+          1135
+        ],
+        "referenceSha256": "8c3f0113b5ce73bb61bb641b2cb4b077a1ac748f0530d0857460c81c35614129"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8O.png",
+      "referenceValues": {
+        "equivalentLengthByInsideRadius": {
+          "mitered": 235,
+          "rEquals0.25": 90,
+          "rGreaterThan0.50": 45
+        }
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Single compact rectangular S-offset with curved inside corners and flanged inlet/outlet, original perspective and all flange edges.",
+      "variant": null,
+      "svg": "/images/fittings/group-8/8O.svg",
+      "restoredArt": "/images/fittings/group-8/8O-restored-v1.png",
+      "revision": "92cbf94fde445a227179e6aec6efecaa6344bd5f1e91eda9b6a18ebc028a5d6c",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8O",
+        "revision": "92cbf94fde445a227179e6aec6efecaa6344bd5f1e91eda9b6a18ebc028a5d6c",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    },
+    {
+      "id": "8P",
+      "fittingId": "8P",
+      "name": "Rectangular riser elbow",
+      "ductShape": "rectangular",
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 35,
+        "printedPage": 177,
+        "cropPixels": [
+          526,
+          948,
+          639,
+          1145
+        ],
+        "referenceSha256": "135f5acccbf7bae71782f21fb49ac9058fc46dbd76cca6039efcbeed51c87472"
+      },
+      "referenceImage": "/images/fittings/group-8/source-art/8P.png",
+      "referenceValues": {
+        "equivalentLengthByRiser": {
+          "3.25x10": {
+            "miter": 75,
+            "radius": 60
+          },
+          "3.25x12": {
+            "miter": 90,
+            "radius": 75
+          },
+          "3.25x14": {
+            "miter": 90,
+            "radius": 75
+          }
+        }
+      },
+      "referenceConditions": {
+        "velocityFpm": 900,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "detail": "Single vertical tall rectangular riser turning through90 degrees to a short horizontal flattened rectangular outlet at top; preserve curved outside corner and short inside radius.",
+      "variant": null,
+      "svg": "/images/fittings/group-8/8P.svg",
+      "restoredArt": "/images/fittings/group-8/8P-restored-v1.png",
+      "revision": "1620132a63aa0d838225eafe4b2764f4d825c97d3247e9b9818fd02864035051",
+      "qaRecord": "docs/fitting-preflight/group-8.json",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "visualReview": {
+        "id": "8P",
+        "revision": "1620132a63aa0d838225eafe4b2764f4d825c97d3247e9b9818fd02864035051",
+        "status": "accepted",
+        "note": "User approved Group 8 after the four 8A seam corrections.",
+        "completedAt": "2026-09-05T19:26:12.489082+00:00",
+        "record": "docs/fitting-reviews/review-35e1706592a0fb59.json"
+      }
+    }
+  ]
+}

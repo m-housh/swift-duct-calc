@@ -1,0 +1,860 @@
+{
+  "group": 6,
+  "title": "Branch Return Air Fittings at the Return Trunk and Return Air Boot Fittings",
+  "items": [
+    {
+      "id": "6A",
+      "fittingNumber": "6A",
+      "name": "Rectangular branch-to-trunk junction, Type A",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "ratioParameter": "Cfm1/Cfm2",
+        "rows": [
+          {
+            "ratio": "0.40 or less",
+            "branchEquivalentLengthFeet": 10,
+            "trunkEquivalentLengthFeet": 10
+          },
+          {
+            "ratio": 0.5,
+            "branchEquivalentLengthFeet": 25,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.6,
+            "branchEquivalentLengthFeet": 40,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.7,
+            "branchEquivalentLengthFeet": 60,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.8,
+            "branchEquivalentLengthFeet": 75,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 1.0,
+            "branchEquivalentLengthFeet": 75,
+            "trunkEquivalentLengthFeet": null
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          25,
+          26
+        ],
+        "printedPage": 172,
+        "embeddedImageIndex": 66,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          205,
+          389,
+          378,
+          457
+        ],
+        "referenceCropPixels": [
+          50,
+          375,
+          855,
+          655
+        ],
+        "referenceSha256": "ad103ae5d4c5bb8065225fb8d701dde0dd33234ecc113a39cd2612398ea51d02"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6A.png",
+      "notes": []
+    },
+    {
+      "id": "6B",
+      "fittingNumber": "6B",
+      "name": "Rectangular branch-to-trunk junction, Type B",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "ratioParameter": "Cfm1/Cfm2",
+        "rows": [
+          {
+            "ratio": "0.40 or less",
+            "branchEquivalentLengthFeet": 10,
+            "trunkEquivalentLengthFeet": 10
+          },
+          {
+            "ratio": 0.5,
+            "branchEquivalentLengthFeet": 40,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.6,
+            "branchEquivalentLengthFeet": 40,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.7,
+            "branchEquivalentLengthFeet": 75,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.8,
+            "branchEquivalentLengthFeet": 110,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 1.0,
+            "branchEquivalentLengthFeet": 110,
+            "trunkEquivalentLengthFeet": null
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          25,
+          26
+        ],
+        "printedPage": 172,
+        "embeddedImageIndex": 66,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          410,
+          389,
+          585,
+          457
+        ],
+        "referenceCropPixels": [
+          50,
+          375,
+          855,
+          655
+        ],
+        "referenceSha256": "ad103ae5d4c5bb8065225fb8d701dde0dd33234ecc113a39cd2612398ea51d02"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6B.png",
+      "notes": []
+    },
+    {
+      "id": "6C",
+      "fittingNumber": "6C",
+      "name": "Round branch to rectangular return trunk",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "ratioParameter": "Cfm1/Cfm2",
+        "rows": [
+          {
+            "ratio": "0.40 or less",
+            "branchEquivalentLengthFeet": 10,
+            "trunkEquivalentLengthFeet": 10
+          },
+          {
+            "ratio": 0.5,
+            "branchEquivalentLengthFeet": 30,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.6,
+            "branchEquivalentLengthFeet": 50,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.7,
+            "branchEquivalentLengthFeet": 75,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.8,
+            "branchEquivalentLengthFeet": 115,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 1.0,
+            "branchEquivalentLengthFeet": 115,
+            "trunkEquivalentLengthFeet": null
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          25,
+          26
+        ],
+        "printedPage": 172,
+        "embeddedImageIndex": 66,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          655,
+          389,
+          825,
+          457
+        ],
+        "referenceCropPixels": [
+          50,
+          375,
+          855,
+          655
+        ],
+        "referenceSha256": "ad103ae5d4c5bb8065225fb8d701dde0dd33234ecc113a39cd2612398ea51d02"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6C.png",
+      "notes": []
+    },
+    {
+      "id": "6D",
+      "fittingNumber": "6D",
+      "name": "45-degree round branch to round return trunk",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "ratioParameter": "Cfm1/Cfm2",
+        "rows": [
+          {
+            "ratio": 0.1,
+            "branchEquivalentLengthFeet": 10,
+            "trunkEquivalentLengthFeet": 5
+          },
+          {
+            "ratio": 0.2,
+            "branchEquivalentLengthFeet": 15,
+            "trunkEquivalentLengthFeet": 5
+          },
+          {
+            "ratio": 0.3,
+            "branchEquivalentLengthFeet": 20,
+            "trunkEquivalentLengthFeet": 5
+          },
+          {
+            "ratio": 0.4,
+            "branchEquivalentLengthFeet": 30,
+            "trunkEquivalentLengthFeet": 5
+          },
+          {
+            "ratio": 0.6,
+            "branchEquivalentLengthFeet": 30,
+            "trunkEquivalentLengthFeet": 5
+          },
+          {
+            "ratio": 0.8,
+            "branchEquivalentLengthFeet": 30,
+            "trunkEquivalentLengthFeet": 5
+          },
+          {
+            "ratio": 1.0,
+            "branchEquivalentLengthFeet": 30,
+            "trunkEquivalentLengthFeet": null
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          26,
+          27,
+          28
+        ],
+        "printedPage": 173,
+        "embeddedImageIndex": 70,
+        "embeddedImageSize": [
+          951,
+          1231
+        ],
+        "artCropPixels": [
+          245,
+          382,
+          470,
+          450
+        ],
+        "referenceCropPixels": [
+          90,
+          365,
+          475,
+          695
+        ],
+        "referenceSha256": "dbde71b23e3f4980b615d3308f9f4917dbffc88ba029caa620c87862d907fdf3"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6D.png",
+      "notes": []
+    },
+    {
+      "id": "6E",
+      "fittingNumber": "6E",
+      "name": "90-degree round branch to round return trunk",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "ratioParameter": "Cfm1/Cfm2",
+        "rows": [
+          {
+            "ratio": 0.1,
+            "branchEquivalentLengthFeet": 15,
+            "trunkEquivalentLengthFeet": 10
+          },
+          {
+            "ratio": 0.2,
+            "branchEquivalentLengthFeet": 30,
+            "trunkEquivalentLengthFeet": 10
+          },
+          {
+            "ratio": 0.3,
+            "branchEquivalentLengthFeet": 40,
+            "trunkEquivalentLengthFeet": 10
+          },
+          {
+            "ratio": 0.4,
+            "branchEquivalentLengthFeet": 40,
+            "trunkEquivalentLengthFeet": 10
+          },
+          {
+            "ratio": 0.5,
+            "branchEquivalentLengthFeet": 40,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.8,
+            "branchEquivalentLengthFeet": 40,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 1.0,
+            "branchEquivalentLengthFeet": 40,
+            "trunkEquivalentLengthFeet": null
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          26,
+          27,
+          28
+        ],
+        "printedPage": 173,
+        "embeddedImageIndex": 70,
+        "embeddedImageSize": [
+          951,
+          1231
+        ],
+        "artCropPixels": [
+          650,
+          382,
+          885,
+          450
+        ],
+        "referenceCropPixels": [
+          515,
+          365,
+          895,
+          695
+        ],
+        "referenceSha256": "f20fc3ed11950083f5e0ddb3732667b431272d0fea0fae2bf2d81a054415ee29"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6E.png",
+      "notes": []
+    },
+    {
+      "id": "6F",
+      "fittingNumber": "6F",
+      "name": "Rectangular register boot with rectangular side branch",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 25
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          95,
+          220,
+          310,
+          345
+        ],
+        "referenceCropPixels": [
+          75,
+          215,
+          330,
+          405
+        ],
+        "referenceSha256": "beeaa430260e4724ecced5b69f1e2c55428768917005c6aaa657f0d9f73ef967"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6F.png",
+      "notes": []
+    },
+    {
+      "id": "6G",
+      "fittingNumber": "6G",
+      "name": "Square grille boot with round side branch",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 30
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          635,
+          215,
+          825,
+          360
+        ],
+        "referenceCropPixels": [
+          610,
+          215,
+          850,
+          405
+        ],
+        "referenceSha256": "7c83515b7598383dbe27624ad96b5c11d323bf6e47c404fc4824244afdef1a25"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6G.png",
+      "notes": []
+    },
+    {
+      "id": "6H",
+      "fittingNumber": "6H",
+      "name": "Tapered wall register boot with side entry",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 15
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          330,
+          325,
+          560,
+          490
+        ],
+        "referenceCropPixels": [
+          310,
+          310,
+          585,
+          535
+        ],
+        "referenceSha256": "93787c0b6c6337c1df1518308aafa1d4efaab8462ad5f8fcf1a3a6f9fbb6be09"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6H.png",
+      "notes": []
+    },
+    {
+      "id": "6I",
+      "fittingNumber": "6I",
+      "name": "Square register boot with tapered round side branch",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 30
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          90,
+          470,
+          315,
+          640
+        ],
+        "referenceCropPixels": [
+          70,
+          450,
+          340,
+          690
+        ],
+        "referenceSha256": "914715ff1314d7472fc04794bfcfb372869cf5532c303602c423a03f9b4ed0b2"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6I.png",
+      "notes": []
+    },
+    {
+      "id": "6J",
+      "fittingNumber": "6J",
+      "name": "Offset square register boot with round side branch",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 55
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          600,
+          465,
+          845,
+          645
+        ],
+        "referenceCropPixels": [
+          580,
+          445,
+          865,
+          695
+        ],
+        "referenceSha256": "1db945b8885c19c17cd18d883df84598ff30788e7955e3406a3f45da2c33a937"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6J.png",
+      "notes": []
+    },
+    {
+      "id": "6K",
+      "fittingNumber": "6K",
+      "name": "Rectangular stack offset",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 10
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          335,
+          580,
+          570,
+          742
+        ],
+        "referenceCropPixels": [
+          310,
+          560,
+          590,
+          785
+        ],
+        "referenceSha256": "c6ff841346b64291fde7ef6bcbcf7e066c3281009972094cb2eaa84faa607923"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6K.png",
+      "notes": []
+    },
+    {
+      "id": "6L",
+      "fittingNumber": "6L",
+      "name": "Flat register boot with round elbow",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 20
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          90,
+          700,
+          310,
+          882
+        ],
+        "referenceCropPixels": [
+          65,
+          680,
+          335,
+          925
+        ],
+        "referenceSha256": "9ba18411085498f68246b4d7c7c2c7c2c0995db506f49c8842aeb836f9684534"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6L.png",
+      "notes": []
+    },
+    {
+      "id": "6M",
+      "fittingNumber": "6M",
+      "name": "Tapered register boot with round elbow",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 20
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          610,
+          690,
+          840,
+          882
+        ],
+        "referenceCropPixels": [
+          585,
+          675,
+          865,
+          912
+        ],
+        "referenceSha256": "3a12660b239e574a834db648db41eefefac40cb1abc03026f77550d5bdeb6639"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6M.png",
+      "notes": []
+    },
+    {
+      "id": "6N",
+      "fittingNumber": "6N",
+      "name": "Rectangular-to-round-or-square transition boot",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 10
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          305,
+          825,
+          545,
+          1000
+        ],
+        "referenceCropPixels": [
+          285,
+          810,
+          650,
+          1030
+        ],
+        "referenceSha256": "8dbd81a3328cefd64de8209ff38d6004fd93231785199069c65e4e675376ac17"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6N.png",
+      "notes": []
+    },
+    {
+      "id": "6O",
+      "fittingNumber": "6O",
+      "name": "Tapered ceiling return boot",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 10
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          75,
+          940,
+          330,
+          1135
+        ],
+        "referenceCropPixels": [
+          60,
+          925,
+          345,
+          1175
+        ],
+        "referenceSha256": "5eba4595e215e6df1a3757580511789b94ccc88842151711ea3f6818466a157f"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6O.png",
+      "notes": []
+    },
+    {
+      "id": "6P",
+      "fittingNumber": "6P",
+      "name": "Straight-collar ceiling return boot",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 5
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          590,
+          940,
+          855,
+          1135
+        ],
+        "referenceCropPixels": [
+          575,
+          925,
+          875,
+          1175
+        ],
+        "referenceSha256": "ec046e892ec78a1cca15f0046fe9da9ce3fb7c3dabb3f93b9968e0766f56fb0b"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6P.png",
+      "notes": []
+    }
+  ],
+  "source": {},
+  "printedPages": [
+    172,
+    173,
+    174
+  ],
+  "referenceConditions": {
+    "velocityFpm": 700,
+    "frictionRateIwcPer100Feet": 0.08
+  }
+}

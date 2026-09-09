@@ -1,0 +1,319 @@
+import Foundation
+import ManualDCore
+
+@testable import FittingClient
+
+/// Checks authored catalog content during tests, before it is shipped.
+struct CatalogValidator {
+  static func validate(_ document: Catalog.Document) throws {
+    func require(_ condition: Bool, _ message: String) throws {
+      guard condition else { throw ValidationError(message: message) }
+    }
+    try require(document.schemaVersion == 2, "Unsupported schema version")
+    try require(!document.revision.isEmpty, "Missing catalog revision")
+    try require(
+      document.groups.map(\.id) == Fitting.Group.ID.allCases,
+      "Groups must occur once each in canonical order"
+    )
+    for group in document.groups {
+      try require(!group.title.isEmpty && !group.pathTypes.isEmpty, "Missing group metadata")
+      try require(
+        Set(group.pathTypes.map(\.rawValue)).count == group.pathTypes.count, "Duplicate path type")
+    }
+    try require(
+      Set(document.fittings.map(\.id)).count == document.fittings.count, "Duplicate fitting ID")
+    for record in document.fittings {
+      try require(
+        !record.id.rawValue.isEmpty && !record.familyID.rawValue.isEmpty, "Missing identity")
+      try require(!record.name.isEmpty && !record.ruleRevision.isEmpty, "Missing fitting metadata")
+      if let code = record.sourceCode {
+        try require(
+          code.rawValue.range(of: #"^(?:[1-9]|1[0-2])[A-Z]+$"#, options: .regularExpression) != nil,
+          "Invalid source code"
+        )
+        let sourceGroup = Int(code.rawValue.prefix(while: { $0.isNumber }))
+        try require(sourceGroup == record.groupID.rawValue, "Source group mismatch")
+      }
+      try require(
+        Set(record.artworks.map(\.view)).count == record.artworks.count,
+        "Duplicate artwork view")
+      for artwork in record.artworks {
+        try require(
+          artwork.publicPath.hasPrefix("/images/fittings/")
+            && !artwork.publicPath.contains("..")
+            && artwork.publicPath.range(
+              of: #"^/[A-Za-z0-9/_-]+\.svg$"#, options: .regularExpression) != nil,
+          "Artwork must be a catalog-owned SVG path"
+        )
+        try require(
+          artwork.revision.range(of: #"^[a-f0-9]{64}$"#, options: .regularExpression) != nil,
+          "Invalid artwork revision hash")
+        try require(
+          artwork.mediaType == "image/svg+xml" && !artwork.altText.isEmpty,
+          "Invalid artwork metadata")
+      }
+      if [.plenumPassage, .abruptSqueeze, .flexJunctionBox].contains(record.rule.kind) {
+        try require(
+          record.conditions.referenceVelocityFPM == nil,
+          "Velocity-table rule must not imply a fixed reference velocity")
+      } else {
+        try require((record.conditions.referenceVelocityFPM ?? 0) > 0, "Invalid reference velocity")
+      }
+      try require(
+        record.conditions.frictionRateIWCPer100Feet.isFinite
+          && record.conditions.frictionRateIWCPer100Feet > 0, "Invalid friction rate")
+      let rows = record.rule.rows
+      try require(record.rule.kind == .doubleElbow || !rows.isEmpty, "Rule has no source rows")
+      try require(
+        Set(rows.map(\.key)).count == rows.count && rows.allSatisfy { !$0.key.isEmpty },
+        "Invalid source row keys")
+      try require(
+        rows.allSatisfy { $0.parameter.isFinite && $0.feet.isFinite && $0.feet > 0 },
+        "Invalid source values")
+      if record.rule.kind != .junction {
+        try require(rows.allSatisfy { $0.path == nil }, "Unexpected junction path")
+      }
+      if record.rule.kind != .returnJunction {
+        try require(
+          record.rule.firstRowIncludesLowerRatios == nil && rows.allSatisfy { $0.trunkFeet == nil },
+          "Unexpected return junction metadata")
+      }
+      if let feet = record.rule.mergingFlowFeet {
+        try require(
+          record.rule.kind == .pannedReturn && record.sourceCode == "7C" && feet == 40,
+          "Unexpected merging-flow adjustment")
+      }
+      if record.rule.kind != .roundElbow && record.rule.kind != .rectangularElbow {
+        try require(record.rule.angleMultipliers == nil, "Unexpected elbow angle metadata")
+      }
+      if record.rule.kind != .rectangularElbow && record.rule.kind != .squareElbow {
+        try require(rows.allSatisfy { $0.bendCategory == nil }, "Unexpected bend category")
+      }
+      if record.rule.kind != .fourTurnOffset {
+        try require(rows.allSatisfy { $0.vanedFeet == nil }, "Unexpected offset vane values")
+      }
+      if record.rule.kind != .riserElbow {
+        try require(
+          rows.allSatisfy { $0.riserSize == nil && $0.riserCorner == nil },
+          "Unexpected riser metadata")
+      }
+      if record.rule.kind != .insideCornerOffset {
+        try require(
+          rows.allSatisfy { $0.insideCornerRadius == nil }, "Unexpected inside-corner radius")
+      }
+      if record.rule.kind != .doubleElbow {
+        try require(
+          record.rule.baseFittingIDs == nil && record.rule.multiplier == nil,
+          "Unexpected base-elbow metadata")
+      }
+      if record.rule.kind != .easedTakeoff {
+        try require(record.rule.buttedSleeveFeet == nil, "Unexpected butted-sleeve adjustment")
+      }
+      if record.rule.kind != .transition {
+        try require(rows.allSatisfy { $0.slope == nil }, "Unexpected transition slope")
+      }
+      if ![.plenumPassage, .abruptSqueeze].contains(record.rule.kind) {
+        try require(rows.allSatisfy { $0.inletVelocity == nil }, "Unexpected inlet velocity")
+      }
+      if record.rule.kind != .plenumPassage {
+        try require(rows.allSatisfy { $0.outletVelocity == nil }, "Unexpected outlet velocity")
+      }
+      if record.rule.kind != .abruptSqueeze {
+        try require(
+          rows.allSatisfy { $0.minimumUpstreamStaticPressureIWC == nil },
+          "Unexpected static-pressure requirement")
+      }
+      switch record.rule.kind {
+      case .flexJunctionBox:
+        try require(
+          record.id == "11-junction-box" && record.groupID == .flexJunctions
+            && record.sourceCode == nil
+            && rows.map(\.parameter) == Fitting.FlexVelocity.allCases.map { Double($0.rawValue) }
+            && rows.allSatisfy { row in
+              guard let bends = row.flexBends else { return false }
+              return bends.map(\.radiusRatio) == Fitting.FlexBendRadiusRatio.allCases
+                && bends.allSatisfy { $0.feet.isFinite && $0.feet > 0 }
+            },
+          "Flex junction must retain all box and bend source cells without invented source letters")
+      case .transition:
+        let slopes: [Fitting.TransitionSlope] =
+          ["12B", "12G", "12K", "12P"].contains(record.sourceCode?.rawValue)
+          ? [.abrupt] : [.oneToOne, .twoToOne, .fourToOne]
+        let ratios = Fitting.TransitionAreaRatio.allCases
+        try require(
+          record.groupID == .transitions && rows.count == slopes.count * ratios.count
+            && rows.enumerated().allSatisfy { index, row in
+              row.slope == slopes[index / ratios.count]
+                && row.parameter == Double(ratios[index % ratios.count].rawValue)
+            }, "Transition must preserve each published slope and area-ratio pair in order")
+      case .plenumPassage:
+        let velocities = Fitting.TransitionVelocity.allCases
+        try require(
+          record.sourceCode == "12W" && rows.count == velocities.count * velocities.count
+            && rows.enumerated().allSatisfy { index, row in
+              row.outletVelocity == velocities[index / velocities.count]
+                && row.inletVelocity == velocities[index % velocities.count]
+            }, "Plenum table must preserve outlet-row and inlet-column identity")
+      case .abruptSqueeze:
+        let velocities = Fitting.TransitionVelocity.allCases
+        let ratios = Fitting.TransitionAreaRatio.allCases
+        try require(
+          record.sourceCode == "12X" && rows.count == velocities.count * ratios.count
+            && rows.enumerated().allSatisfy { index, row in
+              guard let pressure = row.minimumUpstreamStaticPressureIWC else { return false }
+              return row.inletVelocity == velocities[index / ratios.count]
+                && row.parameter == Double(ratios[index % ratios.count].rawValue)
+                && pressure.isFinite && pressure > 0
+            },
+          "Squeeze must preserve upstream velocity, area ratio, and separate pressure requirement")
+      case .easedTakeoff:
+        try require(
+          ["3O", "3P", "3Q", "3R"].contains(record.sourceCode?.rawValue)
+            && rows.count == 1 && record.rule.buttedSleeveFeet == 15,
+          "Eased takeoff must retain the source's 15-foot butted-sleeve adjustment")
+      case .doubleElbow:
+        let expected: [Fitting.ID] =
+          record.shape == .round
+          ? ["8A-smooth", "8A-4-or-5-piece", "8A-3-piece", "8A-mitered"]
+          : ["8B", "8C", "8D", "8E"]
+        try require(
+          ["8L", "8M"].contains(record.sourceCode?.rawValue)
+            && [.round, .rectangular].contains(record.shape) && rows.isEmpty
+            && record.rule.baseFittingIDs == expected
+            && record.rule.multiplier == (record.sourceCode == "8L" ? 1.7 : 2),
+          "Double elbow must select matching supported 90-degree constructions and source multiplier"
+        )
+        for id in expected {
+          let base = document.fittings.first { $0.id == id }
+          try require(
+            base?.shape == record.shape && base?.groupID == .elbows
+              && [.roundElbow, .rectangularElbow, .squareElbow, .fixed].contains(base?.rule.kind),
+            "Invalid single-elbow reference")
+        }
+      case .insideCornerOffset:
+        try require(
+          record.sourceCode == "8O"
+            && rows.count == Fitting.InsideCornerRadius.allCases.count
+            && rows.compactMap(\.insideCornerRadius) == Fitting.InsideCornerRadius.allCases,
+          "Inside-corner offset must preserve each printed radius category")
+      case .squareElbow:
+        try require(
+          ["8D", "8E"].contains(record.sourceCode?.rawValue) && record.shape == .rectangular
+            && rows.count == Fitting.ElbowBendCategory.allCases.count
+            && rows.compactMap(\.bendCategory) == Fitting.ElbowBendCategory.allCases,
+          "Square elbow must have each bend category in order")
+      case .steppedOffset:
+        try require(
+          record.sourceCode == "8F"
+            && rows.map(\.parameter) == Fitting.OffsetLengthHeightRatio.allCases.map(\.rawValue),
+          "Stepped offset must have each published L/H ratio in order")
+      case .fourTurnOffset:
+        try require(
+          record.sourceCode == "8H"
+            && rows.map(\.parameter) == Fitting.OffsetHeightLengthRatio.allCases.map(\.rawValue)
+            && rows.allSatisfy { row in
+              if row.parameter == 0.5 { return row.vanedFeet == nil }
+              guard let feet = row.vanedFeet else { return false }
+              return feet.isFinite && feet > 0
+            },
+          "Four-turn offset must preserve published ratios and unavailable vane cell")
+      case .radiusOffset:
+        try require(
+          record.sourceCode == "8K"
+            && rows.map(\.parameter) == Fitting.OffsetRadiusHeightRatio.allCases.map(\.rawValue),
+          "Radius offset must have each published R/H ratio including zero in order")
+      case .riserElbow:
+        let sizes = Fitting.RiserSize.allCases
+        let corners = Fitting.RiserCorner.allCases
+        try require(
+          record.sourceCode == "8P" && rows.count == sizes.count * corners.count
+            && rows.enumerated().allSatisfy { index, row in
+              row.riserSize == sizes[index / corners.count]
+                && row.riserCorner == corners[index % corners.count]
+            },
+          "Riser elbow must have each size and inside-corner pair in order")
+      case .ovalElbow:
+        try require(
+          record.groupID == .elbows && record.sourceCode == "8A" && record.shape == .oval
+            && ["8A-easy-bend", "8A-hard-bend"].contains(record.id.rawValue)
+            && rows.map(\.parameter)
+              == Fitting.OvalElbowPieceCount.allCases.map { Double($0.rawValue) },
+          "Oval elbow must have each published piece count in order")
+      case .rectangularElbow:
+        let ratios = Fitting.RectangularElbowRadiusRatio.allCases
+        let categories = Fitting.ElbowBendCategory.allCases
+        try require(
+          record.groupID == .elbows && record.shape == .rectangular
+            && ["8B", "8C"].contains(record.sourceCode?.rawValue)
+            && rows.count == ratios.count * categories.count
+            && rows.enumerated().allSatisfy { index, row in
+              row.parameter == ratios[index / categories.count].rawValue
+                && row.bendCategory == categories[index % categories.count]
+            },
+          "Rectangular elbow must have each R/W and bend category pair in order")
+        let factors = record.rule.angleMultipliers ?? []
+        try require(
+          factors.map(\.angle) == [.degrees30, .degrees45, .degrees60, .degrees90]
+            && factors.map(\.multiplier) == [0.45, 0.60, 0.78, 1],
+          "Invalid rectangular elbow angle multipliers")
+      case .roundElbow:
+        try require(
+          record.groupID == .elbows && record.sourceCode == "8A" && record.shape == .round
+            && rows.map(\.parameter) == Fitting.RoundElbowRadiusRatio.allCases.map(\.rawValue),
+          "Round elbow must have each published R/D category in order")
+        let factors = record.rule.angleMultipliers ?? []
+        let expectedAngles: [Fitting.ElbowAngle] =
+          record.id == "8A-smooth"
+          ? Fitting.ElbowAngle.allCases : [.degrees90]
+        try require(
+          factors.map(\.angle) == expectedAngles
+            && factors.allSatisfy { $0.multiplier.isFinite && $0.multiplier > 0 }
+            && factors.first { $0.angle == .degrees90 }?.multiplier == 1,
+          "Invalid round elbow angle multipliers")
+      case .pannedReturn:
+        try require(
+          record.groupID == .pannedReturns
+            && rows.allSatisfy { $0.parameter > 0 && $0.parameter.rounded() == $0.parameter }
+            && zip(rows, rows.dropFirst()).allSatisfy { $0.parameter < $1.parameter },
+          "Panned return airflow rows must be positive whole CFM in increasing order")
+      case .fixed:
+        try require(rows.count == 1, "Fixed rule must have one row")
+      case .heightWidth, .radiusWidth:
+        try require(rows.allSatisfy { $0.parameter > 0 }, "Ratios must be positive")
+        try require(Set(rows.map(\.parameter)).count == rows.count, "Duplicate ratio")
+      case .downstreamBranches:
+        try require(
+          rows.enumerated().allSatisfy { Double($0.offset) == $0.element.parameter },
+          "Branch buckets must be contiguous from zero")
+      case .plenumReturns:
+        try require(
+          rows.enumerated().allSatisfy { Double($0.offset + 1) == $0.element.parameter },
+          "Return buckets must be contiguous from one")
+      case .returnJunction:
+        try require(
+          record.rule.firstRowIncludesLowerRatios != nil, "Missing first-row range policy")
+        try require(
+          rows.allSatisfy { $0.parameter > 0 && $0.parameter <= 1 }
+            && zip(rows, rows.dropFirst()).allSatisfy { $0.parameter < $1.parameter }
+            && rows.last?.parameter == 1,
+          "Return junction ratios must increase to one")
+        try require(
+          rows.allSatisfy { row in
+            if row.parameter == 1 { return row.trunkFeet == nil }
+            guard let feet = row.trunkFeet else { return false }
+            return feet.isFinite && feet > 0
+          },
+          "Return junction trunk values must be positive, with NA only at ratio one")
+      case .junction:
+        try require(
+          rows.count == Fitting.JunctionPath.allCases.count
+            && rows.compactMap(\.path) == Fitting.JunctionPath.allCases,
+          "Junction must have one row for each path in canonical order")
+      }
+    }
+  }
+
+  struct ValidationError: Error, Equatable {
+    let message: String
+  }
+}

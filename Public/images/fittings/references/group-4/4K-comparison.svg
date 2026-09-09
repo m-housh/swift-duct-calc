@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="700" viewBox="0 0 1280 700" role="img" aria-label="4K source and SVG comparison">
+<rect width="1280" height="700" fill="#f8fafc"/>
+<text x="40" y="54" font-family="Arial,sans-serif" font-size="30" font-weight="700" fill="#243b53">4K · Angled boot to round outlet with lined throat</text>
+<text x="40" y="100" font-family="Arial,sans-serif" font-size="20" fill="#243b53">Original source crop</text>
+<text x="660" y="100" font-family="Arial,sans-serif" font-size="20" fill="#243b53">Source-traced SVG</text>
+<rect x="40" y="120" width="580" height="520" rx="12" fill="white" stroke="#cbd5e1"/>
+<rect x="660" y="120" width="580" height="520" rx="12" fill="white" stroke="#cbd5e1"/>
+<image href="4K.png" x="60" y="140" width="540" height="480" preserveAspectRatio="xMidYMid meet"/>
+<svg x="660" y="120" width="580" height="520" viewBox="0 0 640 520" preserveAspectRatio="xMidYMid meet"><title id="title">4K — Angled boot to round outlet with lined throat</title>
+<desc id="desc">Source-traced Group 4 fitting. Reference equivalent length 30 feet at 900 FPM and 0.08 IWC per 100 feet. Drawing not to scale.</desc>
+<style>text{font-family:Arial,sans-serif;fill:#243b53}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<text x="32" y="44" font-size="28" font-weight="700">4K</text>
+<text x="112" y="43" font-size="17">Angled boot to round outlet with lined throat</text>
+<text x="32" y="76" font-size="13">GROUP 4 · SUPPLY AIR BOOT AND STACK HEAD FITTINGS</text>
+<svg x="55" y="104" width="530" height="295" viewBox="32 27 342 265" preserveAspectRatio="xMidYMid meet"><path d="M230 35L224 41M172 37L178 41M178 41L189 37L224 41M178 41L178 45M224 41L224 47M178 45L168 48L137 78L51 168M178 45L186 76M224 47L219 47L197 71L186 76M224 47L230 56M230 56L241 67M230 56L111 174L99 181M241 67L108 195M241 67L249 72M249 72L263 76M249 72L219 106L128 192L125 201M304 72L300 76M186 76L175 92L94 172M263 76L281 73L292 77M263 76L258 87L144 195L144 202M300 76L292 77M300 76L305 95M292 77L242 131L222 145L176 192L175 200M305 95L301 106M305 95L312 106M301 106L299 162M301 106L312 106M312 106L325 158M325 158L299 162M325 158L337 175M299 162L264 192M51 168L43 178L44 202L51 215L90 249L110 256L120 253M51 168L94 172M94 172L99 181M360 172L356 177M337 175L312 189L288 217L280 241L279 272M337 175L343 178M356 177L343 178M356 177L366 201L360 232L347 258L320 283L302 284L292 278M343 178L344 201L336 232L317 258L292 278M99 181L98 187L108 195M264 192L206 197L196 205M264 192L256 210M108 195L120 204M175 200L167 205M175 200L195 206M125 201L120 204M125 201L140 205M144 202L140 205M144 202L167 205M120 204L120 253M140 205L140 253M167 205L169 253M196 205L195 206M196 205L256 210M195 206L203 216L249 229M256 210L249 229M249 229L251 237L247 243M247 243L193 248L187 255M247 243L252 263M120 253L140 253M140 253L169 253M169 253L187 255M187 255L216 264L252 263M252 263L264 271L279 272M279 272L292 278" fill="none" stroke="#243b53" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<text x="32" y="446" font-size="15">Reference equivalent length: 30 ft</text>
+<text x="32" y="474" font-size="12">900 FPM · 0.08 IWC per 100 ft</text>
+<text x="32" y="500" font-size="12">SOURCE TRACE · NOT TO SCALE · PDF pp. 18–19 / printed p. 168</text>
+</svg>
+</svg>

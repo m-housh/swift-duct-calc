@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="0 0 640 520" role="img" aria-labelledby="title desc">
+<title id="title">1S — Radius elbow at plenum · one vane</title><desc id="desc">Maintain 10″ minimum clearance. Side elevation traced from printed page 162. Review drawing, not to scale.</desc>
+<defs><marker id="flow" viewBox="0 0 8 5" markerWidth="6" markerHeight="4" refX="7" refY="2.5" orient="auto"><path d="M0 0L8 2.5L0 5Z" fill="#243b53"/></marker></defs>
+<style>text{font-family:Arial,sans-serif}path{stroke-linejoin:round;stroke-linecap:round}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<g fill="#243b53"><text x="32" y="44" font-size="28" font-weight="700">1S</text><text x="96" y="43" font-size="18">Radius elbow at plenum · one vane</text><text x="32" y="76" font-size="13">GROUP 1 · SUPPLY AIR · SOURCE SIDE ELEVATION</text></g>
+<g transform="translate(127.0625 105) scale(1.575000) translate(-49 -950)" fill="none" stroke="#243b53" stroke-width="1.6"><path d="M73 961H152Q205 961 205 1011V1042H154V1019Q154 1007 142 1007H73L85 998L63 994L75 985L66 978L80 975Z" /><path d="M131 961V1007M154 1031H205" /><path d="M141 1042h139v81l-25.02 -9.719999999999999l-25.02 16.2l-22.240000000000002 -8.1l-33.36 21.87v-21.87l-33.36 14.58Z" /><path d="M210.5 1100.32V1064.68" marker-end="url(#flow)" stroke-width="1.4"/><path d="M123 984H85" marker-end="url(#flow)" stroke-width="1.4"/><path d="M112 1010L112 1040" stroke="#8192a2" stroke-width="0.8"/><text x="54" y="1052" font-size="11" stroke="none" fill="#243b53">10″ min.</text><path d="M188 1030V1011Q187 973 151 973H143" stroke-dasharray="6 4" stroke-width="1"/></g>
+<text x="32" y="459" fill="#243b53" font-size="14">Maintain 10″ minimum clearance.</text>
+<text x="32" y="490" fill="#4b6274" font-size="12">REVIEW DRAWING · NOT TO SCALE · Source: PDF p. 3 / printed p. 162</text>
+</svg>

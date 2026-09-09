@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "scope": "Preserve existing standalone drawings; isolate only the 3V pair.",
+  "upstreamRule": "Retain existing neighbor only when separating a fitting from shared artwork. Never append new upstream geometry to a standalone source.",
+  "method": "Approved artwork reused without pixel changes; 3V edited with built-in imagegen.",
+  "prompts": {
+    "3V": "Retain only the left transition from the accepted mirrored pair, centered on white. Preserve all geometry and crease lines. Add no upstream geometry."
+  },
+  "items": [
+    {
+      "id": "3A",
+      "restoredArt": "/images/fittings/group-3-enhanced/3A-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3A.png",
+      "contextArt": "/images/fittings/group-3-enhanced/3A-restored-art.png",
+      "status": "ready-for-review",
+      "unchangedStandalone": true,
+      "notes": [
+        "Existing standalone drawing retained without adding upstream geometry, per user clarification."
+      ],
+      "sharedArtworkIds": [
+        "3A",
+        "3I"
+      ]
+    },
+    {
+      "id": "3I",
+      "restoredArt": "/images/fittings/group-3-enhanced/3I-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3A.png",
+      "contextArt": "/images/fittings/group-3-enhanced/3I-restored-art.png",
+      "status": "ready-for-review",
+      "unchangedStandalone": true,
+      "notes": [
+        "Existing standalone drawing retained without adding upstream geometry, per user clarification."
+      ],
+      "sharedArtworkIds": [
+        "3A",
+        "3I"
+      ]
+    },
+    {
+      "id": "3S-full",
+      "restoredArt": "/images/fittings/group-3-enhanced/3S-full-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png",
+      "contextArt": "/images/fittings/group-3-enhanced/3S-full-restored-art.png",
+      "status": "ready-for-review",
+      "unchangedStandalone": true,
+      "notes": [
+        "Existing standalone drawing retained without adding upstream geometry, per user clarification.",
+        "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
+      ],
+      "sharedArtworkIds": [
+        "3S-full",
+        "3S-tight",
+        "3S-mitered"
+      ]
+    },
+    {
+      "id": "3S-tight",
+      "restoredArt": "/images/fittings/group-3-enhanced/3S-tight-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png",
+      "contextArt": "/images/fittings/group-3-enhanced/3S-tight-restored-art.png",
+      "status": "ready-for-review",
+      "unchangedStandalone": true,
+      "notes": [
+        "Existing standalone drawing retained without adding upstream geometry, per user clarification.",
+        "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
+      ],
+      "sharedArtworkIds": [
+        "3S-full",
+        "3S-tight",
+        "3S-mitered"
+      ]
+    },
+    {
+      "id": "3S-mitered",
+      "restoredArt": "/images/fittings/group-3-enhanced/3S-mitered-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3S-full.png",
+      "contextArt": "/images/fittings/group-3-enhanced/3S-mitered-restored-art.png",
+      "status": "ready-for-review",
+      "unchangedStandalone": true,
+      "notes": [
+        "Existing standalone drawing retained without adding upstream geometry, per user clarification.",
+        "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
+      ],
+      "sharedArtworkIds": [
+        "3S-full",
+        "3S-tight",
+        "3S-mitered"
+      ]
+    },
+    {
+      "id": "3T",
+      "restoredArt": "/images/fittings/group-3-enhanced/3T-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3T.png",
+      "contextArt": "/images/fittings/group-3-enhanced/3T-restored-art.png",
+      "status": "ready-for-review",
+      "unchangedStandalone": true,
+      "notes": [
+        "Existing standalone drawing retained without adding upstream geometry, per user clarification."
+      ],
+      "sharedArtworkIds": [
+        "3T"
+      ]
+    },
+    {
+      "id": "3U-mitered-vanes",
+      "restoredArt": "/images/fittings/group-3-enhanced/3U-mitered-vanes-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3U-mitered-vanes.png",
+      "contextArt": "/images/fittings/group-3-enhanced/3U-mitered-vanes-restored-art.png",
+      "status": "ready-for-review",
+      "unchangedStandalone": true,
+      "notes": [
+        "Existing standalone drawing retained without adding upstream geometry, per user clarification.",
+        "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
+      ],
+      "sharedArtworkIds": [
+        "3U-mitered-vanes",
+        "3U-mitered-no-vanes"
+      ]
+    },
+    {
+      "id": "3U-mitered-no-vanes",
+      "restoredArt": "/images/fittings/group-3-enhanced/3U-mitered-no-vanes-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3U-mitered-vanes.png",
+      "contextArt": "/images/fittings/group-3-enhanced/3U-mitered-no-vanes-restored-art.png",
+      "status": "ready-for-review",
+      "unchangedStandalone": true,
+      "notes": [
+        "Existing standalone drawing retained without adding upstream geometry, per user clarification.",
+        "The source uses generic artwork for these variants; the drawing does not distinguish corner or vane configurations."
+      ],
+      "sharedArtworkIds": [
+        "3U-mitered-vanes",
+        "3U-mitered-no-vanes"
+      ]
+    },
+    {
+      "id": "3V",
+      "restoredArt": "/images/fittings/group-3-individual/3V-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3V.png",
+      "contextArt": "/images/fittings/group-3-enhanced/3V-restored-art.png",
+      "status": "ready-for-review",
+      "unchangedStandalone": false,
+      "notes": [
+        "Left transition isolated from the mirrored pair; no upstream geometry added. Visually checked full collar, panel creases and rectangular end against the accepted reference."
+      ],
+      "sharedArtworkIds": [
+        "3V"
+      ]
+    },
+    {
+      "id": "3W",
+      "restoredArt": "/images/fittings/group-3-enhanced/3W-restored-art.png",
+      "referenceImage": "/images/fittings/group-3-enhanced/source-art/3W.png",
+      "contextArt": "/images/fittings/group-3-enhanced/3W-restored-art.png",
+      "status": "ready-for-review",
+      "unchangedStandalone": true,
+      "notes": [
+        "Existing standalone drawing retained without adding upstream geometry, per user clarification."
+      ],
+      "sharedArtworkIds": [
+        "3W"
+      ]
+    }
+  ]
+}

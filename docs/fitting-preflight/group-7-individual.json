@@ -1,0 +1,109 @@
+{
+  "group": 7,
+  "status": "ready-for-user-review",
+  "method": "Built-in image generation to separate 7A\u20137C from the shared original; 7D\u20137E standalone restorations reused. Full originals retained.",
+  "items": [
+    {
+      "id": "7A",
+      "status": "ready-for-review",
+      "notes": [
+        "Isolated vertical panned stud-space return, retaining the framing, panning and downward airflow."
+      ],
+      "unchangedStandalone": false,
+      "visualReview": {
+        "checked": true,
+        "comparison": "Compared with the original source illustration and inspected the selected artwork before packaging."
+      },
+      "prompt": "Use case: precise-object-edit. From the attached original technical HVAC drawing isolate ONLY the specified fitting. High-resolution crisp thin black line art on pure white, no labels, numbers, prose, tables or leader lines. Preserve actual source construction, perspective and airflow arrows; do not substitute metal ductwork for wood stud/joist cavities with sheet metal panning. Single individual illustration centered with generous margins. Isolate 7A, the VERTICAL PANNED STUD-SPACE RETURN at the far upper-left of the source. Show the tall parallel wood studs bounding the single vertical return cavity, its top inlet/crosspiece and visible framing, its panned face/cutaway, and the original downward airflow arrows. Retain a small bottom plate/base context. Focus on the straight vertical stud-space run. Omit the 7B horizontal turn, entire floor deck, joist runs, lower trunk and all other assemblies. Preserve original narrow elongated vertical proportions and isometric view; no added grille or round ducts.",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-c751176a-bf79-48bd-9d0b-d9f06cb8ec9a.png",
+      "restoredArt": "/images/fittings/group-7-individual/7A-individual-v1.png"
+    },
+    {
+      "id": "7B",
+      "status": "ready-for-review",
+      "notes": [
+        "Isolated stud-space-to-single-joist turn, with the horizontal passage aligned directly with the wall cavity between the two studs.",
+        "A prominent curved arrow highlights the wall-to-floor change of direction; the two straight wall arrows are removed and the downstream floor arrow retained."
+      ],
+      "unchangedStandalone": false,
+      "visualReview": {
+        "checked": true,
+        "comparison": "Confirmed both straight wall arrows removed, one prominent curved arrow descends through the transition toward the floor outlet, and existing downstream arrow remains. Wall/floor alignment and framing preserved; small line breaks behind the arrow provide visual clearance."
+      },
+      "prompt": "Use case: precise-object-edit. From the attached original technical HVAC drawing isolate ONLY the specified fitting. High-resolution crisp thin black line art on pure white, no labels, numbers, prose, tables or leader lines. Preserve actual source construction, perspective and airflow arrows; do not substitute metal ductwork for wood stud/joist cavities with sheet metal panning. Single individual illustration centered with generous margins. Isolate 7B, the STUD-SPACE TO SINGLE-JOIST 90-DEGREE RETURN TURN at upper-left base of the vertical studs. Retain a substantial lower portion of the vertical stud cavity and the contiguous horizontal panned single-joist cavity extending right/down-right from its base, with original wood framing/plates and panning at the junction. Vertical airflow points DOWN into the corner, then right/down-right along the short outgoing joist section. Focus and zoom on this one L-shaped change of direction. Remove big floor decking cutaway that obscures the junction, other distant joists, merging branch, lower vertical rectangular trunk, and tall unused portions of studs above retained context. Do not make a metal rectangular elbow; preserve wood-stud/joist-cavity construction and original simple corner, not the curved double-turn 7D.",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-1f2e2c0a-d196-46ae-86e2-1348d914df0a.png",
+      "initialCandidate": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-2e71c3c8-c23a-450f-9ad2-447244599454.png",
+      "correctionPrompt": "Use case: precise-object-edit. Edit ONLY airflow arrows in this existing technical drawing. DELETE BOTH straight downward arrows in the vertical wall cavity (around x381 y383-490 and x381 y599-708 in the 1354x1162 image). Replace them with ONE prominent smoothly CURVED directional arrow located at the actual WALL-TO-FLOOR change of direction at the foot of the stud cavity. Its tail begins inside the lower vertical cavity approximately (380,630), travels DOWN toward (380,755), then smoothly bends into the horizontal joist bay, ending approximately (530,885) with a clear filled black arrowhead pointing DOWN-RIGHT along that bay toward the outlet. This must be a continuous rounded elbow arrow, not two separate arrows, not a right-angle sharp corner. Make this transition arrow visually prominent, a slightly heavier black shaft and clear larger arrowhead than the remaining straight floor arrow, while keeping it fully inside the open passage and clear of wood framing. KEEP the existing straight floor arrow at approximately (594,936) to (697,999). The final drawing must have exactly TWO airflow arrows: one curved at the transition plus the existing straight downstream arrow. Preserve ALL construction lines, studs, panning, cutaways, perspective, corrected wall/floor alignment, scale, white background and margins. No labels, shading or other alterations. Output the corrected clean illustration only.",
+      "restoredArt": "/images/fittings/group-7-individual/7B-transition-arrow-v4.png",
+      "previousRevisions": [
+        {
+          "restoredArt": "/images/fittings/group-7-individual/7B-individual-v2.png",
+          "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-adc8a576-8381-4bba-8334-42f49ac832e4.png",
+          "correctionPrompt": "Use case precise-object-edit. Correct this isolated 7B stud-space-to-SINGLE-joist-return technical illustration. Its horizontal section currently appears to have two adjacent passages: an extra narrow foreground strip carrying an arrow outside the main joist bay. REMOVE that extra foreground strip and its peeled strip end. Show exactly TWO parallel horizontal wooden joists bounding ONE continuous panned rectangular passage. Keep the two joists currently bounding the broad empty central horizontal bay, the bottom sheet pan between them, and the connection to the vertical stud cavity. Put the one horizontal airflow arrow ON the pan inside that single broad bay, pointing from the vertical cavity toward the lower-right outlet. The passage outlet must remain OPEN, not blocked by a full-height rectangular end cap; show pan thin lower edge and exposed wooden joist end grain. Retain vertical stud context, downward arrows, top crosspiece and source geometry. Clean black technical strokes white ground, no labels or shading. Keep adequate white margin all around and finish upper stud cut ends within canvas. No additional ducts or bays.",
+          "notes": [
+            "Isolated stud-space-to-single-joist turn, with vertical and horizontal connecting sections.",
+            "Two joists bound one panned return passage; airflow turns down and toward the outlet."
+          ],
+          "visualReview": {
+            "checked": true,
+            "comparison": "Compared with the original source illustration and inspected the selected artwork before packaging."
+          }
+        },
+        {
+          "restoredArt": "/images/fittings/group-7-individual/7B-aligned-wall-v3.png",
+          "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-4952dbba-a2cb-49c3-9b00-5087a11273b8.png",
+          "correctionPrompt": "Use case: precise-object-edit. Correct ONLY the alignment of the bottom horizontal joist passage in this technical HVAC illustration. It is offset one full bay to the RIGHT of the vertical stud-space cavity. Move the ENTIRE horizontal assembly (both joists, bottom pan, outlet, and its airflow arrow) LEFT and slightly DOWN in the image, along the wall baseline, so it connects DIRECTLY in front of the vertical opening BETWEEN the TWO tall studs. The left/near horizontal joist must start at the FOOT OF THE LEFT STUD, and the right/far horizontal joist must start at the FOOT OF THE RIGHT STUD. In this approximately 1354x1162 image, shift the horizontal assembly about -145px x and +80px y: current near root (443,760) should be near (298,840), current far root (598,688) should be near (453,768). Match horizontal passage inside width to the stud cavity width and adjust joining corner edges as needed. Air descending the vertical white cavity must turn straight into the centered horizontal bay, with NO sideways offset, dogleg, intervening dividing wall or extra bay. The two vertical boundaries of the tall white cavity should continue naturally at their bottom into the two parallel boundaries of the floor passage. Keep wall studs, upper crosspiece, panning cutaway, vertical arrows unchanged. Retain horizontal direction toward bottom-right, two joists and one open passage, wood end grain and thin sheet panning. Preserve black technical line art on white. Do not move the wall to meet the existing passage. Do not merely change arrow position. Output only the corrected clean drawing, no labels.",
+          "notes": [
+            "Isolated stud-space-to-single-joist turn, with the horizontal passage aligned directly with the wall cavity between the two studs.",
+            "Two joists bound one panned return passage; airflow turns down and toward the open outlet."
+          ],
+          "visualReview": {
+            "checked": true,
+            "comparison": "Compared with user markup 7b.png and the previous drawing: horizontal joist roots now line up with the left and right wall cavity boundaries. Both joists, pan, open outlet and airflow arrows retained."
+          }
+        }
+      ]
+    },
+    {
+      "id": "7C",
+      "status": "ready-for-review",
+      "notes": [
+        "Isolated straight single-joist return bay with panning and arrows pointing toward the lower-left outlet."
+      ],
+      "unchangedStandalone": false,
+      "visualReview": {
+        "checked": true,
+        "comparison": "Compared with the original source illustration and inspected the selected artwork before packaging."
+      },
+      "prompt": "Use case: precise-object-edit. From the attached original technical HVAC drawing isolate ONLY the specified fitting. High-resolution crisp thin black line art on pure white, no labels, numbers, prose, tables or leader lines. Preserve actual source construction, perspective and airflow arrows; do not substitute metal ductwork for wood stud/joist cavities with sheet metal panning. Single individual illustration centered with generous margins. Isolate 7C, the STRAIGHT PANNED SINGLE-JOIST RETURN visible from middle-right toward lower-left in the source. Show one straight horizontal joist bay with TWO parallel wood joists, sheet-metal panning forming the bottom of the rectangular air passage, source perspective upper-right to lower-left, and return flow arrows pointing along the bay toward LOWER LEFT. Keep enough length to show the passage clearly with open/cutaway ends and wood end grain. Remove the large floor-deck overlay, all vertical stud cavities (7A), their 7B corner, any perpendicular merging branches, and lower metal trunk/drop. Only one straight panned single-joist passage, no double-joist configuration (7E). Preserve construction details, no text.",
+      "selectedGeneratedFile": "/home/michael/.codex/generated_images/01a06ec7-8fa9-7500-b4cc-244ab1d54a91/exec-3a9a196d-11c1-476d-8c78-82e68abcdef5.png",
+      "restoredArt": "/images/fittings/group-7-individual/7C-individual-v1.png"
+    },
+    {
+      "id": "7D",
+      "status": "ready-for-review",
+      "notes": [
+        "Original standalone double-turn illustration retained."
+      ],
+      "unchangedStandalone": true,
+      "visualReview": {
+        "checked": true,
+        "comparison": "Compared with the original source illustration and inspected the selected artwork before packaging."
+      },
+      "restoredArt": "/images/fittings/group-7-enhanced/7D-restored-art.png"
+    },
+    {
+      "id": "7E",
+      "status": "ready-for-review",
+      "notes": [
+        "Original standalone double-joist illustration retained."
+      ],
+      "unchangedStandalone": true,
+      "visualReview": {
+        "checked": true,
+        "comparison": "Compared with the original source illustration and inspected the selected artwork before packaging."
+      },
+      "restoredArt": "/images/fittings/group-7-enhanced/7E-restored-art.png"
+    }
+  ]
+}

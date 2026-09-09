@@ -1,0 +1,1220 @@
+{
+  "schemaVersion": 1,
+  "group": 6,
+  "title": "Branch Return Air Fittings at the Return Trunk and Return Air Boot Fittings",
+  "drawingCount": 16,
+  "expectedDrawingCount": 16,
+  "withheldIds": [],
+  "status": "visually-approved",
+  "referenceConditions": {
+    "velocityFpm": 700,
+    "frictionRateIwcPer100Feet": 0.08
+  },
+  "items": [
+    {
+      "id": "6A",
+      "fittingNumber": "6A",
+      "name": "Rectangular branch-to-trunk junction, Type A",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "ratioParameter": "Cfm1/Cfm2",
+        "rows": [
+          {
+            "ratio": "0.40 or less",
+            "branchEquivalentLengthFeet": 10,
+            "trunkEquivalentLengthFeet": 10
+          },
+          {
+            "ratio": 0.5,
+            "branchEquivalentLengthFeet": 25,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.6,
+            "branchEquivalentLengthFeet": 40,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.7,
+            "branchEquivalentLengthFeet": 60,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.8,
+            "branchEquivalentLengthFeet": 75,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 1.0,
+            "branchEquivalentLengthFeet": 75,
+            "trunkEquivalentLengthFeet": null
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          25,
+          26
+        ],
+        "printedPage": 172,
+        "embeddedImageIndex": 66,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          205,
+          389,
+          378,
+          457
+        ],
+        "referenceCropPixels": [
+          50,
+          375,
+          855,
+          655
+        ],
+        "referenceSha256": "ad103ae5d4c5bb8065225fb8d701dde0dd33234ecc113a39cd2612398ea51d02"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6A.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-6-enhanced/6A-restored-art.png",
+      "referenceImage": "/images/fittings/group-6-enhanced/source-art/6A.png",
+      "sharedArtworkIds": [],
+      "restorationNotes": [
+        "Checked rectangular trunk with side branch and enlarged throat; three complete arrows retain return-air directions.",
+        "Rejected first attempt for reversed trunk arrows; rejected second attempt for invented cylinder; targeted correction removed cylinder.",
+        "Source branch throat is very small; user review should check exact shoulder shape.",
+        "Review reference isolates the original drawing; full sizing table remains in the linked source PDF and metadata."
+      ],
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "svg": "/images/fittings/group-6-enhanced/6A.svg",
+      "revision": "2c085413bef55216506647d0456763e5ed6229ba08c908cc723e52f57dcb4cec",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "2c085413bef55216506647d0456763e5ed6229ba08c908cc723e52f57dcb4cec",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
+    },
+    {
+      "id": "6B",
+      "fittingNumber": "6B",
+      "name": "Rectangular branch-to-trunk junction, Type B",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "ratioParameter": "Cfm1/Cfm2",
+        "rows": [
+          {
+            "ratio": "0.40 or less",
+            "branchEquivalentLengthFeet": 10,
+            "trunkEquivalentLengthFeet": 10
+          },
+          {
+            "ratio": 0.5,
+            "branchEquivalentLengthFeet": 40,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.6,
+            "branchEquivalentLengthFeet": 40,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.7,
+            "branchEquivalentLengthFeet": 75,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.8,
+            "branchEquivalentLengthFeet": 110,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 1.0,
+            "branchEquivalentLengthFeet": 110,
+            "trunkEquivalentLengthFeet": null
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          25,
+          26
+        ],
+        "printedPage": 172,
+        "embeddedImageIndex": 66,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          410,
+          389,
+          585,
+          457
+        ],
+        "referenceCropPixels": [
+          50,
+          375,
+          855,
+          655
+        ],
+        "referenceSha256": "ad103ae5d4c5bb8065225fb8d701dde0dd33234ecc113a39cd2612398ea51d02"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6B.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-6-enhanced/6B-restored-art.png",
+      "referenceImage": "/images/fittings/group-6-enhanced/source-art/6B.png",
+      "sharedArtworkIds": [],
+      "restorationNotes": [
+        "Checked straight rectangular branch on side face of trunk; three complete return-air arrows.",
+        "Review reference isolates the original drawing; full sizing table remains in the linked source PDF and metadata."
+      ],
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "svg": "/images/fittings/group-6-enhanced/6B.svg",
+      "revision": "69ceabc90613168132462eaf4f8d98f144bcd475ea3679cdad21dcbdac1d2969",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "69ceabc90613168132462eaf4f8d98f144bcd475ea3679cdad21dcbdac1d2969",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
+    },
+    {
+      "id": "6C",
+      "fittingNumber": "6C",
+      "name": "Round branch to rectangular return trunk",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "ratioParameter": "Cfm1/Cfm2",
+        "rows": [
+          {
+            "ratio": "0.40 or less",
+            "branchEquivalentLengthFeet": 10,
+            "trunkEquivalentLengthFeet": 10
+          },
+          {
+            "ratio": 0.5,
+            "branchEquivalentLengthFeet": 30,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.6,
+            "branchEquivalentLengthFeet": 50,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.7,
+            "branchEquivalentLengthFeet": 75,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.8,
+            "branchEquivalentLengthFeet": 115,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 1.0,
+            "branchEquivalentLengthFeet": 115,
+            "trunkEquivalentLengthFeet": null
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          25,
+          26
+        ],
+        "printedPage": 172,
+        "embeddedImageIndex": 66,
+        "embeddedImageSize": [
+          948,
+          1231
+        ],
+        "artCropPixels": [
+          655,
+          389,
+          825,
+          457
+        ],
+        "referenceCropPixels": [
+          50,
+          375,
+          855,
+          655
+        ],
+        "referenceSha256": "ad103ae5d4c5bb8065225fb8d701dde0dd33234ecc113a39cd2612398ea51d02"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6C.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-6-enhanced/6C-restored-art.png",
+      "referenceImage": "/images/fittings/group-6-enhanced/source-art/6C.png",
+      "sharedArtworkIds": [],
+      "restorationNotes": [
+        "Checked circular side branch and ellipse end, three complete return-air arrows.",
+        "Review reference isolates the original drawing; full sizing table remains in the linked source PDF and metadata."
+      ],
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "svg": "/images/fittings/group-6-enhanced/6C.svg",
+      "revision": "ece7ef433c7a21bf1890cac10813b85d4e1f8c8501829aff7d2aafd4d8342fb7",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "ece7ef433c7a21bf1890cac10813b85d4e1f8c8501829aff7d2aafd4d8342fb7",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
+    },
+    {
+      "id": "6D",
+      "fittingNumber": "6D",
+      "name": "45-degree round branch to round return trunk",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "ratioParameter": "Cfm1/Cfm2",
+        "rows": [
+          {
+            "ratio": 0.1,
+            "branchEquivalentLengthFeet": 10,
+            "trunkEquivalentLengthFeet": 5
+          },
+          {
+            "ratio": 0.2,
+            "branchEquivalentLengthFeet": 15,
+            "trunkEquivalentLengthFeet": 5
+          },
+          {
+            "ratio": 0.3,
+            "branchEquivalentLengthFeet": 20,
+            "trunkEquivalentLengthFeet": 5
+          },
+          {
+            "ratio": 0.4,
+            "branchEquivalentLengthFeet": 30,
+            "trunkEquivalentLengthFeet": 5
+          },
+          {
+            "ratio": 0.6,
+            "branchEquivalentLengthFeet": 30,
+            "trunkEquivalentLengthFeet": 5
+          },
+          {
+            "ratio": 0.8,
+            "branchEquivalentLengthFeet": 30,
+            "trunkEquivalentLengthFeet": 5
+          },
+          {
+            "ratio": 1.0,
+            "branchEquivalentLengthFeet": 30,
+            "trunkEquivalentLengthFeet": null
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          26,
+          27,
+          28
+        ],
+        "printedPage": 173,
+        "embeddedImageIndex": 70,
+        "embeddedImageSize": [
+          951,
+          1231
+        ],
+        "artCropPixels": [
+          245,
+          382,
+          470,
+          450
+        ],
+        "referenceCropPixels": [
+          90,
+          365,
+          475,
+          695
+        ],
+        "referenceSha256": "dbde71b23e3f4980b615d3308f9f4917dbffc88ba029caa620c87862d907fdf3"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6D.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-6-enhanced/6D-restored-art.png",
+      "referenceImage": "/images/fittings/group-6-enhanced/source-art/6D.png",
+      "sharedArtworkIds": [],
+      "restorationNotes": [
+        "Checked diagonal underside round branch, source schematic break ends, rightward trunk and inward branch arrows.",
+        "Review reference isolates the original drawing; full sizing table remains in the linked source PDF and metadata."
+      ],
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "svg": "/images/fittings/group-6-enhanced/6D.svg",
+      "revision": "f12584ea67e283c50c53d6c4c5686ab20fad833fd4a03f2661eba2f72aedde5f",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "f12584ea67e283c50c53d6c4c5686ab20fad833fd4a03f2661eba2f72aedde5f",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
+    },
+    {
+      "id": "6E",
+      "fittingNumber": "6E",
+      "name": "90-degree round branch to round return trunk",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "ratioParameter": "Cfm1/Cfm2",
+        "rows": [
+          {
+            "ratio": 0.1,
+            "branchEquivalentLengthFeet": 15,
+            "trunkEquivalentLengthFeet": 10
+          },
+          {
+            "ratio": 0.2,
+            "branchEquivalentLengthFeet": 30,
+            "trunkEquivalentLengthFeet": 10
+          },
+          {
+            "ratio": 0.3,
+            "branchEquivalentLengthFeet": 40,
+            "trunkEquivalentLengthFeet": 10
+          },
+          {
+            "ratio": 0.4,
+            "branchEquivalentLengthFeet": 40,
+            "trunkEquivalentLengthFeet": 10
+          },
+          {
+            "ratio": 0.5,
+            "branchEquivalentLengthFeet": 40,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 0.8,
+            "branchEquivalentLengthFeet": 40,
+            "trunkEquivalentLengthFeet": 25
+          },
+          {
+            "ratio": 1.0,
+            "branchEquivalentLengthFeet": 40,
+            "trunkEquivalentLengthFeet": null
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          26,
+          27,
+          28
+        ],
+        "printedPage": 173,
+        "embeddedImageIndex": 70,
+        "embeddedImageSize": [
+          951,
+          1231
+        ],
+        "artCropPixels": [
+          650,
+          382,
+          885,
+          450
+        ],
+        "referenceCropPixels": [
+          515,
+          365,
+          895,
+          695
+        ],
+        "referenceSha256": "f20fc3ed11950083f5e0ddb3732667b431272d0fea0fae2bf2d81a054415ee29"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6E.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-6-enhanced/6E-restored-art.png",
+      "referenceImage": "/images/fittings/group-6-enhanced/source-art/6E.png",
+      "sharedArtworkIds": [],
+      "restorationNotes": [
+        "Checked vertical underside round branch, source schematic break ends, rightward trunk and upward branch arrows.",
+        "Review reference isolates the original drawing; full sizing table remains in the linked source PDF and metadata."
+      ],
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "svg": "/images/fittings/group-6-enhanced/6E.svg",
+      "revision": "cbf2d2947a86d7c462048670b7d3c5d07804b71265d7fb0bfba0f6a2b3a48c02",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "cbf2d2947a86d7c462048670b7d3c5d07804b71265d7fb0bfba0f6a2b3a48c02",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
+    },
+    {
+      "id": "6F",
+      "fittingNumber": "6F",
+      "name": "Rectangular register boot with rectangular side branch",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 25
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          95,
+          220,
+          310,
+          345
+        ],
+        "referenceCropPixels": [
+          75,
+          215,
+          330,
+          405
+        ],
+        "referenceSha256": "beeaa430260e4724ecced5b69f1e2c55428768917005c6aaa657f0d9f73ef967"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6F.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-6-enhanced/6F-restored-edges-v2.png",
+      "referenceImage": "/images/fittings/references/group-6/6F.png",
+      "sharedArtworkIds": [],
+      "restorationNotes": [
+        "Restored the original short vertical seam at the step and the outgoing near top edge of the rectangular branch, following user markup 6f.png.",
+        "Compared with the source: open flange, interior seam, step and three uncapped outgoing edges retained."
+      ],
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "svg": "/images/fittings/group-6-enhanced/6F.svg",
+      "revision": "80c2d382b9c2275d9740c641ca17cd4d17aed3442cadb2e85fce2357d2fe7272",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "80c2d382b9c2275d9740c641ca17cd4d17aed3442cadb2e85fce2357d2fe7272",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
+    },
+    {
+      "id": "6G",
+      "fittingNumber": "6G",
+      "name": "Square grille boot with round side branch",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 30
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          635,
+          215,
+          825,
+          360
+        ],
+        "referenceCropPixels": [
+          610,
+          215,
+          850,
+          405
+        ],
+        "referenceSha256": "7c83515b7598383dbe27624ad96b5c11d323bf6e47c404fc4824244afdef1a25"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6G.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-6-enhanced/6G-restored-art.png",
+      "referenceImage": "/images/fittings/references/group-6/6G.png",
+      "sharedArtworkIds": [],
+      "restorationNotes": [
+        "Checked open grille grid, cubic boot, side round branch and downward inlet arrow.",
+        "Targeted correction removed pale mesh scribbles and straightened lattice."
+      ],
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "svg": "/images/fittings/group-6-enhanced/6G.svg",
+      "revision": "4167330858bbc10d1fcb869efe3913ac388ed72aab8adf72d5d0711b086e329d",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "4167330858bbc10d1fcb869efe3913ac388ed72aab8adf72d5d0711b086e329d",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
+    },
+    {
+      "id": "6H",
+      "fittingNumber": "6H",
+      "name": "Tapered wall register boot with side entry",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 15
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          330,
+          325,
+          560,
+          490
+        ],
+        "referenceCropPixels": [
+          310,
+          310,
+          585,
+          535
+        ],
+        "referenceSha256": "93787c0b6c6337c1df1518308aafa1d4efaab8462ad5f8fcf1a3a6f9fbb6be09"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6H.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-6-enhanced/6H-restored-art.png",
+      "referenceImage": "/images/fittings/references/group-6/6H.png",
+      "sharedArtworkIds": [],
+      "restorationNotes": [
+        "Checked narrow top lips, tall wall boot and curved lower contours; leftward arrow retained."
+      ],
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "svg": "/images/fittings/group-6-enhanced/6H.svg",
+      "revision": "d7258f4a8307d426ff0a7e950c53c2b4f6d68fef1dca742b26deb8ce615edcff",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "d7258f4a8307d426ff0a7e950c53c2b4f6d68fef1dca742b26deb8ce615edcff",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
+    },
+    {
+      "id": "6I",
+      "fittingNumber": "6I",
+      "name": "Square register boot with tapered round side branch",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 30
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          90,
+          470,
+          315,
+          640
+        ],
+        "referenceCropPixels": [
+          70,
+          450,
+          340,
+          690
+        ],
+        "referenceSha256": "914715ff1314d7472fc04794bfcfb372869cf5532c303602c423a03f9b4ed0b2"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6I.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-6-enhanced/6I-restored-art.png",
+      "referenceImage": "/images/fittings/references/group-6/6I.png",
+      "sharedArtworkIds": [],
+      "restorationNotes": [
+        "Checked open flanged boot, rectangular side extension, tapered transition, round outlet and facet lines."
+      ],
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "svg": "/images/fittings/group-6-enhanced/6I.svg",
+      "revision": "005f5389ba8590231726d38186856e85adab45958e817139e9eb4d02375bd600",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "005f5389ba8590231726d38186856e85adab45958e817139e9eb4d02375bd600",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
+    },
+    {
+      "id": "6J",
+      "fittingNumber": "6J",
+      "name": "Offset square register boot with round side branch",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 55
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          600,
+          465,
+          845,
+          645
+        ],
+        "referenceCropPixels": [
+          580,
+          445,
+          865,
+          695
+        ],
+        "referenceSha256": "1db945b8885c19c17cd18d883df84598ff30788e7955e3406a3f45da2c33a937"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6J.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-6-enhanced/6J-restored-art.png",
+      "referenceImage": "/images/fittings/references/group-6/6J.png",
+      "sharedArtworkIds": [],
+      "restorationNotes": [
+        "Checked raised open boot, stepped offset transition to lower right round branch and original seam layout."
+      ],
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "svg": "/images/fittings/group-6-enhanced/6J.svg",
+      "revision": "5cda8cdd2f8768917e04642714256e9001dcf72066de8c1f72c8d5c1665775ed",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "5cda8cdd2f8768917e04642714256e9001dcf72066de8c1f72c8d5c1665775ed",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
+    },
+    {
+      "id": "6K",
+      "fittingNumber": "6K",
+      "name": "Rectangular stack offset",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 10
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          335,
+          580,
+          570,
+          742
+        ],
+        "referenceCropPixels": [
+          310,
+          560,
+          590,
+          785
+        ],
+        "referenceSha256": "c6ff841346b64291fde7ef6bcbcf7e066c3281009972094cb2eaa84faa607923"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6K.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-6-enhanced/6K-restored-art.png",
+      "referenceImage": "/images/fittings/references/group-6/6K.png",
+      "sharedArtworkIds": [],
+      "restorationNotes": [
+        "Checked straight offset stack edges and two leftward arrows."
+      ],
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "svg": "/images/fittings/group-6-enhanced/6K.svg",
+      "revision": "d42f3fcfa0bcaeb7645a76235ec6ddb799ac2ab7c6b36ed8304a94dd3df678b1",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "d42f3fcfa0bcaeb7645a76235ec6ddb799ac2ab7c6b36ed8304a94dd3df678b1",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
+    },
+    {
+      "id": "6L",
+      "fittingNumber": "6L",
+      "name": "Flat register boot with round elbow",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 20
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          90,
+          700,
+          310,
+          882
+        ],
+        "referenceCropPixels": [
+          65,
+          680,
+          335,
+          925
+        ],
+        "referenceSha256": "9ba18411085498f68246b4d7c7c2c7c2c0995db506f49c8842aeb836f9684534"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6L.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-6-enhanced/6L-restored-art.png",
+      "referenceImage": "/images/fittings/references/group-6/6L.png",
+      "sharedArtworkIds": [],
+      "restorationNotes": [
+        "Checked flat base with opposed flanges, segmented elbow and open extension; no clipping."
+      ],
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "svg": "/images/fittings/group-6-enhanced/6L.svg",
+      "revision": "bdf386639f3b00a354e642abb5158bc55a4241ea23abbb80f2eefef55a84fd56",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "bdf386639f3b00a354e642abb5158bc55a4241ea23abbb80f2eefef55a84fd56",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
+    },
+    {
+      "id": "6M",
+      "fittingNumber": "6M",
+      "name": "Tapered register boot with round elbow",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 20
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          610,
+          690,
+          840,
+          882
+        ],
+        "referenceCropPixels": [
+          585,
+          675,
+          865,
+          912
+        ],
+        "referenceSha256": "3a12660b239e574a834db648db41eefefac40cb1abc03026f77550d5bdeb6639"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6M.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-6-enhanced/6M-restored-art.png",
+      "referenceImage": "/images/fittings/references/group-6/6M.png",
+      "sharedArtworkIds": [],
+      "restorationNotes": [
+        "Checked tapered rectangular boot housing, flanged base, segmented elbow and open extension."
+      ],
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "svg": "/images/fittings/group-6-enhanced/6M.svg",
+      "revision": "7d838b27b929d2616b3b819d569a337e5b5df9cb87bb10e6e9c6a01f88ffdcd8",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "7d838b27b929d2616b3b819d569a337e5b5df9cb87bb10e6e9c6a01f88ffdcd8",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
+    },
+    {
+      "id": "6N",
+      "fittingNumber": "6N",
+      "name": "Rectangular-to-round-or-square transition boot",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 10
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          305,
+          825,
+          545,
+          1000
+        ],
+        "referenceCropPixels": [
+          285,
+          810,
+          650,
+          1030
+        ],
+        "referenceSha256": "8dbd81a3328cefd64de8209ff38d6004fd93231785199069c65e4e675376ac17"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6N.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-6-enhanced/6N-restored-art.png",
+      "referenceImage": "/images/fittings/references/group-6/6N.png",
+      "sharedArtworkIds": [],
+      "restorationNotes": [
+        "Checked rectangular open mouth, tapered boot, short round collar; removed clipped descriptive label and external leader."
+      ],
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "svg": "/images/fittings/group-6-enhanced/6N.svg",
+      "revision": "b7871e4cc79cbbbbf1563014f9e8cd6ec08edea7f06b6400f03b1c219d27cdab",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "b7871e4cc79cbbbbf1563014f9e8cd6ec08edea7f06b6400f03b1c219d27cdab",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
+    },
+    {
+      "id": "6O",
+      "fittingNumber": "6O",
+      "name": "Tapered ceiling return boot",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 10
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          75,
+          940,
+          330,
+          1135
+        ],
+        "referenceCropPixels": [
+          60,
+          925,
+          345,
+          1175
+        ],
+        "referenceSha256": "5eba4595e215e6df1a3757580511789b94ccc88842151711ea3f6818466a157f"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6O.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-6-enhanced/6O-restored-art.png",
+      "referenceImage": "/images/fittings/references/group-6/6O.png",
+      "sharedArtworkIds": [],
+      "restorationNotes": [
+        "Checked ceiling plane, underside oval opening, tapered neck and both upward arrows."
+      ],
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "svg": "/images/fittings/group-6-enhanced/6O.svg",
+      "revision": "936cff5594ef3b8c03db61ac316f6f55f0a5df1217d7013e71f64e58fbaf4a5b",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "936cff5594ef3b8c03db61ac316f6f55f0a5df1217d7013e71f64e58fbaf4a5b",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
+    },
+    {
+      "id": "6P",
+      "fittingNumber": "6P",
+      "name": "Straight-collar ceiling return boot",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 5
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPages": [
+          28,
+          29
+        ],
+        "printedPage": 174,
+        "embeddedImageIndex": 76,
+        "embeddedImageSize": [
+          951,
+          1229
+        ],
+        "artCropPixels": [
+          590,
+          940,
+          855,
+          1135
+        ],
+        "referenceCropPixels": [
+          575,
+          925,
+          875,
+          1175
+        ],
+        "referenceSha256": "ec046e892ec78a1cca15f0046fe9da9ce3fb7c3dabb3f93b9968e0766f56fb0b"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-6/6P.png",
+      "notes": [],
+      "restoredArt": "/images/fittings/group-6-enhanced/6P-restored-art.png",
+      "referenceImage": "/images/fittings/references/group-6/6P.png",
+      "sharedArtworkIds": [],
+      "restorationNotes": [
+        "Checked ceiling plane, underside oval opening, straight collar and both upward arrows."
+      ],
+      "embeddedRasterSize": [
+        1254,
+        1254
+      ],
+      "svg": "/images/fittings/group-6-enhanced/6P.svg",
+      "revision": "12a1614a833f9b934ecc05bab06aecb2ed011736d683fcf19dbec81254f1cdbd",
+      "status": "visually-approved",
+      "drawingMethod": "AI-assisted raster restoration embedded in self-contained SVG.",
+      "qaRecord": "docs/fitting-preflight/group-6-enhanced-agent.json",
+      "visualReview": {
+        "revision": "12a1614a833f9b934ecc05bab06aecb2ed011736d683fcf19dbec81254f1cdbd",
+        "completedAt": "2026-09-05T17:16:21.023Z",
+        "batchId": "group-6-enhanced",
+        "note": "All Group 6 fittings approved by the user after the 6F edge correction.",
+        "record": "docs/fitting-reviews/review-625342bb18da45c4.json"
+      }
+    }
+  ]
+}

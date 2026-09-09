@@ -1,0 +1,548 @@
+{
+  "group": 5,
+  "title": "Return Air Fittings at the Air Handling Equipment",
+  "items": [
+    {
+      "id": "5A",
+      "fittingNumber": "5A",
+      "name": "Rectangular return to oversized plenum",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 40
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 20,
+        "printedPage": 169,
+        "embeddedImageIndex": 52,
+        "cropPixels": [
+          70,
+          210,
+          820,
+          270
+        ],
+        "referenceSha256": "80f3c188a97c96a629c7facc24909a749fa96b782b74b8781a6a750116fe7d25"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-5/5A.png",
+      "notes": [
+        "Straight rectangular side connection; plenum is large compared with duct size."
+      ]
+    },
+    {
+      "id": "5B",
+      "fittingNumber": "5B",
+      "name": "Round return to oversized plenum",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 40
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 20,
+        "printedPage": 169,
+        "embeddedImageIndex": 52,
+        "cropPixels": [
+          70,
+          210,
+          820,
+          270
+        ],
+        "referenceSha256": "80f3c188a97c96a629c7facc24909a749fa96b782b74b8781a6a750116fe7d25"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-5/5B.png",
+      "notes": [
+        "Straight round side connection; plenum is large compared with duct size."
+      ]
+    },
+    {
+      "id": "5C",
+      "fittingNumber": "5C",
+      "name": "Rectangular return with tapered plenum entry",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 40
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 20,
+        "printedPage": 169,
+        "embeddedImageIndex": 52,
+        "cropPixels": [
+          70,
+          465,
+          820,
+          290
+        ],
+        "referenceSha256": "dcd52f9a90f80ac7c7d1ecbde556c82c125291158bb1fc94a24670b65636017f"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-5/5C.png",
+      "notes": [
+        "Rectangular entry expands through a short taper into the plenum."
+      ]
+    },
+    {
+      "id": "5D",
+      "fittingNumber": "5D",
+      "name": "Round return with tapered plenum entry",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 40
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 20,
+        "printedPage": 169,
+        "embeddedImageIndex": 52,
+        "cropPixels": [
+          70,
+          465,
+          820,
+          290
+        ],
+        "referenceSha256": "dcd52f9a90f80ac7c7d1ecbde556c82c125291158bb1fc94a24670b65636017f"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-5/5D.png",
+      "notes": [
+        "Round entry expands through a tapered collar into the plenum."
+      ]
+    },
+    {
+      "id": "5E",
+      "fittingNumber": "5E",
+      "name": "Top return into compact plenum",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthByReturnCount": [
+          {
+            "returnCount": 1,
+            "feet": 10
+          },
+          {
+            "returnCountMin": 2,
+            "feet": 35
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 20,
+        "printedPage": 169,
+        "embeddedImageIndex": 52,
+        "cropPixels": [
+          70,
+          755,
+          820,
+          385
+        ],
+        "referenceSha256": "fdc1116c92acb7f62e64a6f0f6743ad81ad62c53f58853d9c2be1021d3787f24"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-5/5E.png",
+      "notes": [
+        "Vertical return enters the top of a compact plenum; EL depends on return count."
+      ]
+    },
+    {
+      "id": "5F",
+      "fittingNumber": "5F",
+      "name": "Rectangular side return into compact plenum",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthByReturnCount": [
+          {
+            "returnCount": 1,
+            "feet": 45
+          },
+          {
+            "returnCountMin": 2,
+            "feet": 70
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 20,
+        "printedPage": 169,
+        "embeddedImageIndex": 52,
+        "cropPixels": [
+          70,
+          755,
+          820,
+          385
+        ],
+        "referenceSha256": "fdc1116c92acb7f62e64a6f0f6743ad81ad62c53f58853d9c2be1021d3787f24"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-5/5F.png",
+      "notes": [
+        "Rectangular side return enters a compact plenum; EL depends on return count."
+      ]
+    },
+    {
+      "id": "5G",
+      "fittingNumber": "5G",
+      "name": "Round side return into compact plenum",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthByReturnCount": [
+          {
+            "returnCount": 1,
+            "feet": 45
+          },
+          {
+            "returnCountMin": 2,
+            "feet": 70
+          }
+        ]
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 20,
+        "printedPage": 169,
+        "embeddedImageIndex": 52,
+        "cropPixels": [
+          70,
+          755,
+          820,
+          385
+        ],
+        "referenceSha256": "fdc1116c92acb7f62e64a6f0f6743ad81ad62c53f58853d9c2be1021d3787f24"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-5/5G.png",
+      "notes": [
+        "Round side return enters a compact plenum; EL depends on return count."
+      ]
+    },
+    {
+      "id": "5H",
+      "fittingNumber": "5H",
+      "name": "Square elbow at air handler",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthByRatio": {
+          "parameter": "H/W",
+          "rows": [
+            {
+              "ratio": 1,
+              "feet": 45
+            },
+            {
+              "ratio": 2,
+              "feet": 30
+            }
+          ]
+        }
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 21,
+        "printedPage": 170,
+        "embeddedImageIndex": 56,
+        "cropPixels": [
+          40,
+          215,
+          455,
+          270
+        ],
+        "referenceSha256": "5d6988b277cce0f38b7c6c2e3f74e74f403d4fc8d238404e70aa9bcd12bd9871"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-5/5H.png",
+      "notes": [
+        "Sharp square elbow; the source table varies EL by H/W."
+      ]
+    },
+    {
+      "id": "5I",
+      "fittingNumber": "5I",
+      "name": "Elbow with mitered inside corner at air handler",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthByRatio": {
+          "parameter": "H/W",
+          "rows": [
+            {
+              "ratio": 1,
+              "feet": 45
+            },
+            {
+              "ratio": 2,
+              "feet": 30
+            }
+          ]
+        }
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 21,
+        "printedPage": 170,
+        "embeddedImageIndex": 56,
+        "cropPixels": [
+          285,
+          445,
+          560,
+          270
+        ],
+        "referenceSha256": "45530b97c7ab48ce19fc9b42a77e9b387ec896ce62435af7a997b12c8669ed8b"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-5/5I.png",
+      "notes": [
+        "Curved heel with a mitered inside corner; the source table varies EL by H/W."
+      ]
+    },
+    {
+      "id": "5J",
+      "fittingNumber": "5J",
+      "name": "Radius elbow at air handler",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthByRatio": {
+          "parameter": "R/W",
+          "rows": [
+            {
+              "ratio": 0.25,
+              "feet": 20
+            },
+            {
+              "ratio": 0.5,
+              "feet": 15
+            },
+            {
+              "ratio": 1,
+              "feet": 10
+            }
+          ]
+        }
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 21,
+        "printedPage": 170,
+        "embeddedImageIndex": 56,
+        "cropPixels": [
+          40,
+          690,
+          575,
+          270
+        ],
+        "referenceSha256": "10e8433622ba37506e7c2b23b9efc04411c4aee7e4f2f8e1e4a8178572eed56d"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-5/5J.png",
+      "notes": [
+        "Radius heel and inside corner; the source table varies EL by R/W."
+      ]
+    },
+    {
+      "id": "5K",
+      "fittingNumber": "5K",
+      "name": "Square elbow with turning vanes at air handler",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 10
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 21,
+        "printedPage": 170,
+        "embeddedImageIndex": 56,
+        "cropPixels": [
+          90,
+          930,
+          770,
+          275
+        ],
+        "referenceSha256": "afc1f00b5cc8ff7fdc11a29a0c54f17cf8fa122b670a6dafb89873d822dbf54c"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-5/5K.png",
+      "notes": [
+        "Square elbow with the diagonal turning-vane bank shown in the source."
+      ]
+    },
+    {
+      "id": "5L",
+      "fittingNumber": "5L",
+      "name": "Opposed returns into bull-head plenum",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 75
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 23,
+        "printedPage": 171,
+        "embeddedImageIndex": 62,
+        "cropPixels": [
+          45,
+          205,
+          820,
+          285
+        ],
+        "referenceSha256": "7c0ee73133aa45ac5287e98872ff06e3cb62ca0e098abd0fb3fc222d035b8f88"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-5/5L.png",
+      "notes": [
+        "Opposed returns meet above the unit without the source's vane bank."
+      ]
+    },
+    {
+      "id": "5M",
+      "fittingNumber": "5M",
+      "name": "Opposed returns into vaned plenum",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 10
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 23,
+        "printedPage": 171,
+        "embeddedImageIndex": 62,
+        "cropPixels": [
+          45,
+          495,
+          455,
+          300
+        ],
+        "referenceSha256": "e56010ef4207188f626b52db1d3218689f79264802ae5c0ef9aff375a8b62dcf"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-5/5M.png",
+      "notes": [
+        "Opposed returns meet at a divided, vaned bull-head connection."
+      ]
+    },
+    {
+      "id": "5N",
+      "fittingNumber": "5N",
+      "name": "Offset ceiling return into air handler",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 55
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 23,
+        "printedPage": 171,
+        "embeddedImageIndex": 62,
+        "cropPixels": [
+          495,
+          485,
+          400,
+          305
+        ],
+        "referenceSha256": "56fda65be7514a0c95db50f376a06ad50d910fe9fe73fe341dd6f8408dca5d99"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-5/5N.png",
+      "notes": [
+        "Offset connection beneath a ceiling return path."
+      ]
+    },
+    {
+      "id": "5O",
+      "fittingNumber": "5O",
+      "name": "Direct ceiling return into air handler",
+      "variant": null,
+      "referenceEquivalentLengthFeet": null,
+      "referenceValues": {
+        "equivalentLengthFeet": 35
+      },
+      "referenceConditions": {
+        "velocityFpm": 700,
+        "frictionRateIwcPer100Feet": 0.08
+      },
+      "source": {
+        "pdf": "/files/ManD.Groups.pdf",
+        "pdfPage": 23,
+        "printedPage": 171,
+        "embeddedImageIndex": 62,
+        "cropPixels": [
+          495,
+          775,
+          400,
+          275
+        ],
+        "referenceSha256": "a6db6574f1fa952024d3662ec81fa468aa5c28faf74bfedcecc03701aabb6ee5"
+      },
+      "originalReferenceImage": "/images/fittings/references/group-5/5O.png",
+      "notes": [
+        "Short direct connection beneath a ceiling return path."
+      ]
+    }
+  ],
+  "source": {},
+  "printedPages": [
+    169,
+    170,
+    171
+  ],
+  "referenceConditions": {
+    "velocityFpm": 700,
+    "frictionRateIwcPer100Feet": 0.08
+  }
+}

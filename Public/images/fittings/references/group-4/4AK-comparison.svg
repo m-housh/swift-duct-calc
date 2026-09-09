@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="700" viewBox="0 0 1280 700" role="img" aria-label="4AK source and SVG comparison">
+<rect width="1280" height="700" fill="#f8fafc"/>
+<text x="40" y="54" font-family="Arial,sans-serif" font-size="30" font-weight="700" fill="#243b53">4AK · Low rectangular stack head with round branch</text>
+<text x="40" y="100" font-family="Arial,sans-serif" font-size="20" fill="#243b53">Original source crop</text>
+<text x="660" y="100" font-family="Arial,sans-serif" font-size="20" fill="#243b53">Source-traced SVG</text>
+<rect x="40" y="120" width="580" height="520" rx="12" fill="white" stroke="#cbd5e1"/>
+<rect x="660" y="120" width="580" height="520" rx="12" fill="white" stroke="#cbd5e1"/>
+<image href="4AK.png" x="60" y="140" width="540" height="480" preserveAspectRatio="xMidYMid meet"/>
+<svg x="660" y="120" width="580" height="520" viewBox="0 0 640 520" preserveAspectRatio="xMidYMid meet"><title id="title">4AK — Low rectangular stack head with round branch</title>
+<desc id="desc">Source-traced Group 4 fitting. Reference equivalent length 55 feet at 900 FPM and 0.08 IWC per 100 feet. Drawing not to scale.</desc>
+<style>text{font-family:Arial,sans-serif;fill:#243b53}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<text x="32" y="44" font-size="28" font-weight="700">4AK</text>
+<text x="112" y="43" font-size="17">Low rectangular stack head with round branch</text>
+<text x="32" y="76" font-size="13">GROUP 4 · SUPPLY AIR BOOT AND STACK HEAD FITTINGS</text>
+<svg x="55" y="104" width="530" height="295" viewBox="48 132 295 159" preserveAspectRatio="xMidYMid meet"><path d="M216 140L212 148M201 147L89 158L79 163M201 147L212 148M201 147L191 161M212 148L212 151M212 151L222 160L225 173L226 196L220 223M212 151L205 162L194 166M191 161L181 161L174 168M191 161L194 166M79 163L67 168L67 177M79 163L80 173M194 166L194 169M164 168L149 165L142 172M164 168L174 168M164 168L157 175L142 172M174 168L194 169M194 169L195 211M132 172L118 169L111 176M132 172L142 172M132 172L124 179L111 176M80 173L102 176M80 173L76 180M56 175L65 177M102 176L111 176M102 176L89 183L76 180M65 177L66 177M65 177L65 178M66 177L67 177M66 177L66 178M67 177L67 178M65 178L66 178M65 178L65 216M66 178L67 178M67 178L76 180M195 211L183 210L176 216M195 211L196 217M65 216L86 216L92 221M65 216L62 226M157 216L155 217M157 216L176 216M157 216L155 217M176 216L183 220L196 217M152 217L147 212L125 213L116 220M152 217L155 217M152 217L146 222L116 220M196 217L220 223M116 220L92 221M92 221L85 226L62 226M220 223L245 231M62 226L58 241L89 258L242 277M335 230L261 232M245 231L261 232M245 231L245 238M261 232L258 239M245 238L241 243L242 269M245 238L258 239M73 239L170 243M258 239L255 269M242 269L255 269M242 269L242 277M255 269L256 276M256 276L242 277M256 276L294 283" fill="none" stroke="#243b53" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<text x="32" y="446" font-size="15">Reference equivalent length: 55 ft</text>
+<text x="32" y="474" font-size="12">900 FPM · 0.08 IWC per 100 ft</text>
+<text x="32" y="500" font-size="12">SOURCE TRACE · NOT TO SCALE · PDF pp. 18–19 / printed p. 168</text>
+</svg>
+</svg>

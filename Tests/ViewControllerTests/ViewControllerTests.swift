@@ -145,6 +145,7 @@ struct ViewControllerTests {
 
     try await withDefaultDependencies {
       $0.database.projects.get = { _ in project }
+      $0.database.projects.getForUser = { _, _ in project }
       $0.database.projects.getCompletedSteps = { _ in
         .init(equipmentInfo: true, rooms: true, equivalentLength: true, frictionRate: true)
       }

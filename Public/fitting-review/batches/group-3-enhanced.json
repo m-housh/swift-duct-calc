@@ -1,0 +1,491 @@
+{
+  "id": "group-3-enhanced",
+  "title": "Group 3 \u00b7 high-resolution restorations",
+  "description": "Compare the restored artwork with its original. Check only drawings that still need work. Some fittings share an original assembly illustration; their individual IDs and values are retained. The source does not separately illustrate every corner or vane variant; shared artwork does not depict those differences.",
+  "items": [
+    {
+      "id": "3A",
+      "number": "3A",
+      "name": "Full-radius takeoff",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3A.svg?revision=fedd8a4455bd",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3A.png",
+      "sourcePage": 167,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=12",
+      "revision": "fedd8a4455bd9b0195355750740072184c3b428d0f0aed046bc8ef8de94e72a6",
+      "priorApproval": true,
+      "notes": []
+    },
+    {
+      "id": "3B",
+      "number": "3B",
+      "name": "Full-radius takeoff with offset transition",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3B.svg?revision=97c19ce37a93",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3B.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "97c19ce37a93dc0c743066a7a82922c2d4873346d33c43343acfecd20466e11e",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ]
+    },
+    {
+      "id": "3C",
+      "number": "3C",
+      "name": "Full-radius takeoff with straight transition",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3C.svg?revision=a79921f0a93a",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3B.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "a79921f0a93a5abb5a64368407be8e9d03cae150cb55d98a33a857630a37a3e5",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ]
+    },
+    {
+      "id": "3D-full",
+      "number": "3D",
+      "name": "Takeoff elbow with easy-bend elbow",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3D-full.svg?revision=dd35ae9be011",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3B.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "dd35ae9be011aeca070e430582e78644a51d81ea6f994c56ed4c3df93fef9f68",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ]
+    },
+    {
+      "id": "3D-tight",
+      "number": "3D",
+      "name": "Takeoff elbow with easy-bend elbow",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3D-tight.svg?revision=60da779a8119",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3B.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "60da779a8119016e020de5f64009ab8d826b7015a9e9172a384a8fd887068f91",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ]
+    },
+    {
+      "id": "3D-mitered",
+      "number": "3D",
+      "name": "Takeoff elbow with easy-bend elbow",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3D-mitered.svg?revision=aae707c0edaa",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3B.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "aae707c0edaa5cc824af06533beb9e1ffbaa8552da33e116b3b2f5d535e8fd89",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ]
+    },
+    {
+      "id": "3E",
+      "number": "3E",
+      "name": "Transition-wall takeoff",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3E.svg?revision=6c478b971bb7",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3E.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "6c478b971bb7282b9a1b2385fa32b98d1d5380791885a8222c838e5655840134",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ]
+    },
+    {
+      "id": "3F-full",
+      "number": "3F",
+      "name": "Transition-wall takeoff elbow with easy-bend elbow",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3F-full.svg?revision=a844a112789e",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3E.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "a844a112789e38d368467997c69001dcd80446454ccd89f4a138705aa04e5574",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ]
+    },
+    {
+      "id": "3F-tight",
+      "number": "3F",
+      "name": "Transition-wall takeoff elbow with easy-bend elbow",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3F-tight.svg?revision=d5cd62312083",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3E.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "d5cd623120839686abf3cb97d500998fcae3b89b84cc3d45d82927a05031b4b5",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ]
+    },
+    {
+      "id": "3F-mitered",
+      "number": "3F",
+      "name": "Transition-wall takeoff elbow with easy-bend elbow",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3F-mitered.svg?revision=765247fa2556",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3E.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "765247fa2556dd6f5ddd72db599d3b6e6a60dbbaee5b143f5e682f3720a7bab1",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ]
+    },
+    {
+      "id": "3G",
+      "number": "3G",
+      "name": "Transition-wall takeoff with straight-aspect transition",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3G.svg?revision=cad333710a48",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3E.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "cad333710a489bf0131697b6a5cf1fb2fec11ad49c09445b20546e7ec0413e80",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ]
+    },
+    {
+      "id": "3H",
+      "number": "3H",
+      "name": "Transition-wall takeoff with offset-aspect transition",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3H.svg?revision=6bec772092ee",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3E.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "6bec772092ee7639ab4d0f3d82bf373cc438f5c8697c3f5f36fe8e7627164286",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ]
+    },
+    {
+      "id": "3I",
+      "number": "3I",
+      "name": "Full-radius takeoff",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3I.svg?revision=34fad8cace1f",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3A.png",
+      "sourcePage": 167,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=12",
+      "revision": "34fad8cace1fcb0e626aac3ab7109549287be42cb9aaf45a9cf20e983979d57f",
+      "priorApproval": true,
+      "notes": []
+    },
+    {
+      "id": "3J-full",
+      "number": "3J",
+      "name": "Takeoff elbow with easy-bend elbow",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3J-full.svg?revision=8477bee02590",
+      "reference": "../images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "8477bee02590d51dcd1867cf2a8539275975c7502e69624a70947b573d8a27ab",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ]
+    },
+    {
+      "id": "3J-tight",
+      "number": "3J",
+      "name": "Takeoff elbow with easy-bend elbow",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3J-tight.svg?revision=70362a2406a5",
+      "reference": "../images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "70362a2406a5b7da8b4239e6dface8f80611d71ce153b2a08a3f7129d8621f2d",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ]
+    },
+    {
+      "id": "3J-mitered",
+      "number": "3J",
+      "name": "Takeoff elbow with easy-bend elbow",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3J-mitered.svg?revision=70e047ab661a",
+      "reference": "../images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "70e047ab661a0eac6a5ee74f0df5afc31fccf8a4dae0c1bbbd989290498e6700",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ]
+    },
+    {
+      "id": "3K",
+      "number": "3K",
+      "name": "Full-radius takeoff with straight transition",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3K.svg?revision=f3388df6b536",
+      "reference": "../images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "f3388df6b53652cb2ecec57f0d9094c8a3c595acff3ab5645598e8a1bb9e9bb1",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ]
+    },
+    {
+      "id": "3L",
+      "number": "3L",
+      "name": "Full-radius takeoff with offset transition",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3L.svg?revision=87bd0a6a4b72",
+      "reference": "../images/fittings/group-3-enhanced/source-art/context-3I-3L.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "87bd0a6a4b72f92c84fa9f639b5d1901b5b8ccc2703268dd9bca1d4e736a4c96",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ]
+    },
+    {
+      "id": "3M",
+      "number": "3M",
+      "name": "In-line eased takeoff with one elbow",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3M.svg?revision=d822d8cb8eb9",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3M.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "d822d8cb8eb98aa3b689ae2dcae58a679f01284dbc3c8164cc44bb0634c7669d",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ]
+    },
+    {
+      "id": "3N",
+      "number": "3N",
+      "name": "In-line eased takeoff with two elbows",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3N.svg?revision=50c494d43546",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3M.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "50c494d43546ced67aac97f74c8c097bad9ccf83f79284d9b5eb39ab63ea45d3",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ]
+    },
+    {
+      "id": "3O",
+      "number": "3O",
+      "name": "Transition-wall eased takeoff",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3O.svg?revision=4da8e2fa1f8d",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3O.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "4da8e2fa1f8dd2729c3209c4b93521d3c7de8e30d54f35f6ddcbf09005db0a84",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "Second restoration retained 3Q ribbed elbow; first attempt incorrectly replaced it with a bolted straight collar and is excluded."
+      ]
+    },
+    {
+      "id": "3P",
+      "number": "3P",
+      "name": "Transition-wall eased takeoff with two elbows",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3P.svg?revision=5de532860865",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3O.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "5de532860865c5ce27330952cc71c3bb615de75dc89ff901483854a928dd916d",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "Second restoration retained 3Q ribbed elbow; first attempt incorrectly replaced it with a bolted straight collar and is excluded."
+      ]
+    },
+    {
+      "id": "3Q",
+      "number": "3Q",
+      "name": "Transition-wall eased takeoff with one elbow",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3Q.svg?revision=d2f52228ea61",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3O.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "d2f52228ea6109d73aaf1279d2e2d98ad7ddff89f11d5a7f5e10ff164347e819",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits.",
+        "Second restoration retained 3Q ribbed elbow; first attempt incorrectly replaced it with a bolted straight collar and is excluded."
+      ]
+    },
+    {
+      "id": "3R",
+      "number": "3R",
+      "name": "Transition-wall eased takeoff",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3R.svg?revision=37b1bbdfd7e9",
+      "reference": "../images/fittings/group-3-enhanced/source-art/context-3R-3U.png",
+      "sourcePage": 166,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=10",
+      "revision": "37b1bbdfd7e9c508ba7a3d6783539a468ea310a34e7e32aa4a088858c9d52be8",
+      "priorApproval": true,
+      "notes": [
+        "Shared source assembly artwork: identify this fitting by its blue label. The complete original trunk and neighboring fittings remain visible because isolation changed attachment geometry in trial edits."
+      ]
+    },
+    {
+      "id": "3S-full",
+      "number": "3S",
+      "name": "Hard-bend takeoff elbow",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3S-full.svg?revision=e4aea4c3baaa",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3S-full.png",
+      "sourcePage": 167,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=12",
+      "revision": "e4aea4c3baaa3bf0110a51cc8b25f8ef727a57816684101b37d22c4402f4952d",
+      "priorApproval": true,
+      "notes": [
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ]
+    },
+    {
+      "id": "3S-tight",
+      "number": "3S",
+      "name": "Hard-bend takeoff elbow",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3S-tight.svg?revision=153931c1325d",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3S-full.png",
+      "sourcePage": 167,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=12",
+      "revision": "153931c1325d0bfd338e3ad5b4cb17afe97170828c1a97996ad216db356060f7",
+      "priorApproval": true,
+      "notes": [
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ]
+    },
+    {
+      "id": "3S-mitered",
+      "number": "3S",
+      "name": "Hard-bend takeoff elbow",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3S-mitered.svg?revision=fd8e61964e6c",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3S-full.png",
+      "sourcePage": 167,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=12",
+      "revision": "fd8e61964e6c717862dad38d2a0692d6a62aa4e041872f57183adcf801b4e0ac",
+      "priorApproval": true,
+      "notes": [
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction."
+      ]
+    },
+    {
+      "id": "3T",
+      "number": "3T",
+      "name": "In-line eased takeoff",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3T.svg?revision=2fefb6a1ca79",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3T.png",
+      "sourcePage": 167,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=12",
+      "revision": "2fefb6a1ca794d5727244b34dd303002d10fa1adb8ea4f3d6912728e5ccb6c3e",
+      "priorApproval": true,
+      "notes": []
+    },
+    {
+      "id": "3U-mitered-vanes",
+      "number": "3U",
+      "name": "Mitered takeoff elbow",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3U-mitered-vanes.svg?revision=4924aa5cca02",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3U-mitered-vanes.png",
+      "sourcePage": 167,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=12",
+      "revision": "4924aa5cca021b7e13ca3c700779ef29e4c820ed963cd7fbbf3551c9c556f1b1",
+      "priorApproval": true,
+      "notes": [
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction.",
+        "Generic source illustration retains the source vane/chevron marks for both with-vanes and without-vanes records."
+      ]
+    },
+    {
+      "id": "3U-mitered-no-vanes",
+      "number": "3U",
+      "name": "Mitered takeoff elbow",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3U-mitered-no-vanes.svg?revision=d49aec3f059c",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3U-mitered-vanes.png",
+      "sourcePage": 167,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=12",
+      "revision": "d49aec3f059c0e3fcd8b13f92be85941279b5b9658e817dfd94ed5716ea5ba90",
+      "priorApproval": true,
+      "notes": [
+        "The source uses one generic illustration for these catalog variants; artwork does not visually distinguish the selected corner/vanes configuration. Use variant metadata for that distinction.",
+        "Generic source illustration retains the source vane/chevron marks for both with-vanes and without-vanes records."
+      ]
+    },
+    {
+      "id": "3V",
+      "number": "3V",
+      "name": "Round-to-rectangular transition",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3V.svg?revision=03421dfbb1be",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3V.png",
+      "sourcePage": 167,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=12",
+      "revision": "03421dfbb1be1b47d617ffa8c1d79779f8bb232143c9be8719229fdfec23a66d",
+      "priorApproval": true,
+      "notes": []
+    },
+    {
+      "id": "3W",
+      "number": "3W",
+      "name": "Offset hard-bend transition",
+      "group": 3,
+      "image": "../images/fittings/group-3-enhanced/3W.svg?revision=83727126d567",
+      "reference": "../images/fittings/group-3-enhanced/source-art/3W.png",
+      "sourcePage": 167,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=13",
+      "revision": "83727126d5677e564fecbb68525cdc35a0dfcf03e357b1b61f8f1e75d1abac23",
+      "priorApproval": true,
+      "notes": []
+    }
+  ]
+}

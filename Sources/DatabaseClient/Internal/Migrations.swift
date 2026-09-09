@@ -18,6 +18,10 @@ extension DatabaseClient.Migrations: DependencyKey {
         Room.Migrate(),
         EquivalentLength.Migrate(),
         TrunkSize.Migrate(),
+        FittingFavoriteMigration(),
+        PathTemplate.Migrate(),
+        EquivalentLength.AddTemplateSnapshot(),
+        EquivalentLength.AddRevision(),
       ]
     }
   )

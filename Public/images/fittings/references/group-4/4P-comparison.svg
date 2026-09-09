@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="700" viewBox="0 0 1280 700" role="img" aria-label="4P source and SVG comparison">
+<rect width="1280" height="700" fill="#f8fafc"/>
+<text x="40" y="54" font-family="Arial,sans-serif" font-size="30" font-weight="700" fill="#243b53">4P · Tapered rectangular boot</text>
+<text x="40" y="100" font-family="Arial,sans-serif" font-size="20" fill="#243b53">Original source crop</text>
+<text x="660" y="100" font-family="Arial,sans-serif" font-size="20" fill="#243b53">Source-traced SVG</text>
+<rect x="40" y="120" width="580" height="520" rx="12" fill="white" stroke="#cbd5e1"/>
+<rect x="660" y="120" width="580" height="520" rx="12" fill="white" stroke="#cbd5e1"/>
+<image href="4P.png" x="60" y="140" width="540" height="480" preserveAspectRatio="xMidYMid meet"/>
+<svg x="660" y="120" width="580" height="520" viewBox="0 0 640 520" preserveAspectRatio="xMidYMid meet"><title id="title">4P — Tapered rectangular boot</title>
+<desc id="desc">Source-traced Group 4 fitting. Reference equivalent length 10 feet at 900 FPM and 0.08 IWC per 100 feet. Drawing not to scale.</desc>
+<style>text{font-family:Arial,sans-serif;fill:#243b53}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<text x="32" y="44" font-size="28" font-weight="700">4P</text>
+<text x="112" y="43" font-size="17">Tapered rectangular boot</text>
+<text x="32" y="76" font-size="13">GROUP 4 · SUPPLY AIR BOOT AND STACK HEAD FITTINGS</text>
+<svg x="55" y="104" width="530" height="295" viewBox="66 75 270 230" preserveAspectRatio="xMidYMid meet"><path d="M328 125L323 131M323 131L293 128L257 84L223 84L101 193L85 212M323 131L324 139M324 139L312 144L288 172M324 139L328 146L328 224L327 241L319 250M288 172L282 172L270 184M288 172L291 230L287 238M270 184L244 181L237 186M270 184L271 224L275 233M237 186L200 190L118 218M237 186L234 293M85 212L78 222L77 261L118 262M85 212L118 218M118 218L118 262M275 233L287 238M275 233L271 246L274 255M287 238L290 244M290 244L319 250M290 244L274 255M319 250L319 255L298 276L280 291L272 292M274 255L272 292M118 262L219 294L234 293M272 292L263 297L241 297L234 293" fill="none" stroke="#243b53" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<text x="32" y="446" font-size="15">Reference equivalent length: 10 ft</text>
+<text x="32" y="474" font-size="12">900 FPM · 0.08 IWC per 100 ft</text>
+<text x="32" y="500" font-size="12">SOURCE TRACE · NOT TO SCALE · PDF pp. 18–19 / printed p. 168</text>
+</svg>
+</svg>

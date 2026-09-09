@@ -28,10 +28,14 @@ public struct EquivalentLength: Codable, Equatable, Identifiable, Sendable {
   public let straightLengths: [Int]
   /// The fitting groups associated with this equivalent length.
   public let groups: [FittingGroup]
+  /// The copied workflow used to create this path, if it was guided.
+  public let templateSnapshot: PathTemplate.Snapshot?
   /// When this equivalent length was created in the database.
   public let createdAt: Date
   /// When this equivalent length was updated in the database.
   public let updatedAt: Date
+  /// Changes on every write; nil identifies paths saved before revision tracking.
+  public let revision: UUID?
 
   public init(
     id: UUID,
@@ -41,8 +45,11 @@ public struct EquivalentLength: Codable, Equatable, Identifiable, Sendable {
     straightLengths: [Int],
     groups: [EquivalentLength.FittingGroup],
     createdAt: Date,
-    updatedAt: Date
+    updatedAt: Date,
+    templateSnapshot: PathTemplate.Snapshot? = nil,
+    revision: UUID? = nil
   ) {
+    self.revision = revision
     self.id = id
     self.projectID = projectID
     self.name = name
@@ -51,6 +58,7 @@ public struct EquivalentLength: Codable, Equatable, Identifiable, Sendable {
     self.groups = groups
     self.createdAt = createdAt
     self.updatedAt = updatedAt
+    self.templateSnapshot = templateSnapshot
   }
 }
 
@@ -69,19 +77,22 @@ extension EquivalentLength {
     public let straightLengths: [Int]
     /// The fitting groups associated with this equivalent length.
     public let groups: [FittingGroup]
+    public let templateSnapshot: PathTemplate.Snapshot?
 
     public init(
       projectID: Project.ID,
       name: String,
       type: EquivalentLength.EffectiveLengthType,
       straightLengths: [Int],
-      groups: [EquivalentLength.FittingGroup]
+      groups: [EquivalentLength.FittingGroup],
+      templateSnapshot: PathTemplate.Snapshot? = nil
     ) {
       self.projectID = projectID
       self.name = name
       self.type = type
       self.straightLengths = straightLengths
       self.groups = groups
+      self.templateSnapshot = templateSnapshot
     }
   }
 
@@ -98,17 +109,20 @@ extension EquivalentLength {
     public let straightLengths: [Int]?
     /// The fitting groups associated with this equivalent length.
     public let groups: [FittingGroup]?
+    public let templateSnapshot: PathTemplate.Snapshot?
 
     public init(
       name: String? = nil,
       type: EquivalentLength.EffectiveLengthType? = nil,
       straightLengths: [Int]? = nil,
-      groups: [EquivalentLength.FittingGroup]? = nil
+      groups: [EquivalentLength.FittingGroup]? = nil,
+      templateSnapshot: PathTemplate.Snapshot? = nil
     ) {
       self.name = name
       self.type = type
       self.straightLengths = straightLengths
       self.groups = groups
+      self.templateSnapshot = templateSnapshot
     }
   }
 
@@ -131,17 +145,30 @@ extension EquivalentLength {
     public let value: Double
     /// The quantity of the fittings in the path.
     public let quantity: Int
+    /// Optional additive JSON metadata; absent on existing saved rows.
+    public let fitting: Fitting.SavedEntry?
+    public let rowID: UUID?
+    public let stepID: UUID?
+    public let calculation: TemplateFitting.Calculation?
 
     public init(
       group: Int,
       letter: String,
       value: Double,
-      quantity: Int = 1
+      quantity: Int = 1,
+      fitting: Fitting.SavedEntry? = nil,
+      rowID: UUID? = nil,
+      stepID: UUID? = nil,
+      calculation: TemplateFitting.Calculation? = nil
     ) {
       self.group = group
       self.letter = letter
       self.value = value
       self.quantity = quantity
+      self.fitting = fitting
+      self.rowID = rowID
+      self.stepID = stepID
+      self.calculation = calculation
     }
   }
 

@@ -1,0 +1,314 @@
+{
+  "id": "group-9",
+  "title": "Group 9 \u00b7 supply trunk junctions",
+  "description": "Individual supply trunk junction fittings 9A\u20139R. Original branch geometry, internal deflectors/vanes and flow arrows retained. Full source tables remain linked.",
+  "referenceGallery": "group-9-references.html",
+  "items": [
+    {
+      "id": "9A",
+      "number": "9A",
+      "name": "Rectangular trunk with straight round branch",
+      "group": 9,
+      "image": "../images/fittings/group-9/9A.svg?revision=e7cdd571a387",
+      "reference": "../images/fittings/group-9/source-art/9A.png",
+      "revision": "e7cdd571a387f0ea27e9ee0cbe62cd75cb837129fc8d5e6b1e0da196c02542b5",
+      "sourcePage": 178,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=36",
+      "contextURL": "group-9-references.html#page-178",
+      "notes": [
+        "Original trunk and branch geometry retained. Source equivalent length: branch 80 ft; main 5 ft."
+      ],
+      "reviewNote": "Original trunk and branch geometry retained. Source equivalent length: branch 80 ft; main 5 ft.",
+      "priorApproval": true
+    },
+    {
+      "id": "9B",
+      "number": "9B",
+      "name": "Rectangular trunk with straight rectangular branch",
+      "group": 9,
+      "image": "../images/fittings/group-9/9B.svg?revision=51b87ff7d382",
+      "reference": "../images/fittings/group-9/source-art/9B.png",
+      "revision": "51b87ff7d38262e23fea1dddca595813ffabfa39e3d5eac8c8b0c29bfc6f8672",
+      "sourcePage": 178,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=36",
+      "contextURL": "group-9-references.html#page-178",
+      "notes": [
+        "Original trunk and branch geometry retained. Source equivalent length: branch 80 ft; main 5 ft."
+      ],
+      "reviewNote": "Original trunk and branch geometry retained. Source equivalent length: branch 80 ft; main 5 ft.",
+      "priorApproval": true
+    },
+    {
+      "id": "9C",
+      "number": "9C",
+      "name": "Rectangular branch junction with single deflector",
+      "group": 9,
+      "image": "../images/fittings/group-9/9C.svg?revision=520f95555a00",
+      "reference": "../images/fittings/group-9/source-art/9C.png",
+      "revision": "520f95555a002c7afa5524c5123c162504f18039cdd8785f49801b2d685c29fe",
+      "sourcePage": 178,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=37",
+      "contextURL": "group-9-references.html#page-178",
+      "notes": [
+        "Original trunk and branch geometry retained. Source equivalent length: branch 80 ft; main 5 ft."
+      ],
+      "reviewNote": "Original trunk and branch geometry retained. Source equivalent length: branch 80 ft; main 5 ft.",
+      "priorApproval": true
+    },
+    {
+      "id": "9D",
+      "number": "9D",
+      "name": "Rectangular branch junction with vane bank",
+      "group": 9,
+      "image": "../images/fittings/group-9/9D.svg?revision=d71d6c623cba",
+      "reference": "../images/fittings/group-9/source-art/9D.png",
+      "revision": "d71d6c623cba7ec1a0041d2abef6f3042e6066bf3e9d79d0efbe9113a4d40fb5",
+      "sourcePage": 178,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=37",
+      "contextURL": "group-9-references.html#page-178",
+      "notes": [
+        "Original trunk and branch geometry retained. Source equivalent length: branch 75 ft; main 5 ft."
+      ],
+      "reviewNote": "Original trunk and branch geometry retained. Source equivalent length: branch 75 ft; main 5 ft.",
+      "priorApproval": true
+    },
+    {
+      "id": "9E",
+      "number": "9E",
+      "name": "Rectangular branch junction with eased entry",
+      "group": 9,
+      "image": "../images/fittings/group-9/9E.svg?revision=db6dc35aa9c0",
+      "reference": "../images/fittings/group-9/source-art/9E.png",
+      "revision": "db6dc35aa9c0a0964d893361cc515f541ad029ea2b33a3184285ad88176b5aa1",
+      "sourcePage": 178,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=37",
+      "contextURL": "group-9-references.html#page-178",
+      "notes": [
+        "Original trunk and branch geometry retained. Source equivalent length: branch 50 ft; main 5 ft."
+      ],
+      "reviewNote": "Original trunk and branch geometry retained. Source equivalent length: branch 50 ft; main 5 ft.",
+      "priorApproval": true
+    },
+    {
+      "id": "9F",
+      "number": "9F",
+      "name": "Eased rectangular branch junction with single deflector",
+      "group": 9,
+      "image": "../images/fittings/group-9/9F.svg?revision=ffecc242dfab",
+      "reference": "../images/fittings/group-9/source-art/9F.png",
+      "revision": "ffecc242dfabfd8564f1b7e7046026a4c734b5c0361ba3c4529bfa1a4fd960d9",
+      "sourcePage": 178,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=37",
+      "contextURL": "group-9-references.html#page-178",
+      "notes": [
+        "Original trunk and branch geometry retained. Source equivalent length: branch 45 ft; main 5 ft."
+      ],
+      "reviewNote": "Original trunk and branch geometry retained. Source equivalent length: branch 45 ft; main 5 ft.",
+      "priorApproval": true
+    },
+    {
+      "id": "9G",
+      "number": "9G",
+      "name": "Rectangular branch junction with radiused entry",
+      "group": 9,
+      "image": "../images/fittings/group-9/9G.svg?revision=742c4763afc4",
+      "reference": "../images/fittings/group-9/source-art/9G.png",
+      "revision": "742c4763afc4477e41e4cd5ce98ff8dfb0a9e28938f6a6c754f335d169edb245",
+      "sourcePage": 178,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=36",
+      "contextURL": "group-9-references.html#page-178",
+      "notes": [
+        "Original trunk and branch geometry retained. Source equivalent length: branch 35 ft; main 5 ft."
+      ],
+      "reviewNote": "Original trunk and branch geometry retained. Source equivalent length: branch 35 ft; main 5 ft.",
+      "priorApproval": true
+    },
+    {
+      "id": "9H",
+      "number": "9H",
+      "name": "Round trunk with elbow branch",
+      "group": 9,
+      "image": "../images/fittings/group-9/9H.svg?revision=75756e5e7b9f",
+      "reference": "../images/fittings/group-9/source-art/9H.png",
+      "revision": "75756e5e7b9f29c80cf11bd38119dfa4d5de523ae69d833c1b79be877c861de7",
+      "sourcePage": 178,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=36",
+      "contextURL": "group-9-references.html#page-178",
+      "notes": [
+        "Original trunk and branch geometry retained. Source equivalent length: branch 100 ft; main 5 ft."
+      ],
+      "reviewNote": "Original trunk and branch geometry retained. Source equivalent length: branch 100 ft; main 5 ft.",
+      "priorApproval": true
+    },
+    {
+      "id": "9I",
+      "number": "9I",
+      "name": "Round tee junction",
+      "group": 9,
+      "image": "../images/fittings/group-9/9I.svg?revision=7b04b7646f71",
+      "reference": "../images/fittings/group-9/source-art/9I.png",
+      "revision": "7b04b7646f715d5db10157e5a1deb04bcffc0739b4263d1c46f4c1ce2cf10968",
+      "sourcePage": 178,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=36",
+      "contextURL": "group-9-references.html#page-178",
+      "notes": [
+        "Original trunk and branch geometry retained. Source equivalent length: branch 85 ft; main 5 ft."
+      ],
+      "reviewNote": "Original trunk and branch geometry retained. Source equivalent length: branch 85 ft; main 5 ft.",
+      "priorApproval": true
+    },
+    {
+      "id": "9J",
+      "number": "9J",
+      "name": "Round wye junction",
+      "group": 9,
+      "image": "../images/fittings/group-9/9J.svg?revision=e81f7daf153a",
+      "reference": "../images/fittings/group-9/source-art/9J.png",
+      "revision": "e81f7daf153a31b9d467cc279cdadbdcec27701aa380b5ead70349fc8e37d871",
+      "sourcePage": 178,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=37",
+      "contextURL": "group-9-references.html#page-178",
+      "notes": [
+        "Original trunk and branch geometry retained. Source equivalent length: branch 25 ft; main 5 ft."
+      ],
+      "reviewNote": "Original trunk and branch geometry retained. Source equivalent length: branch 25 ft; main 5 ft.",
+      "priorApproval": true
+    },
+    {
+      "id": "9K",
+      "number": "9K",
+      "name": "Rectangular tee junction without vanes",
+      "group": 9,
+      "image": "../images/fittings/group-9/9K.svg?revision=414af45bae84",
+      "reference": "../images/fittings/group-9/source-art/9K.png",
+      "revision": "414af45bae84e060c635ec5bfd3f8518d4e1c76346497ea4e326a6348906111c",
+      "sourcePage": 178,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=37",
+      "contextURL": "group-9-references.html#page-178",
+      "notes": [
+        "Original trunk and branch geometry retained. Source equivalent length: 65 ft."
+      ],
+      "reviewNote": "Original trunk and branch geometry retained. Source equivalent length: 65 ft.",
+      "priorApproval": true
+    },
+    {
+      "id": "9L",
+      "number": "9L",
+      "name": "Rectangular tee junction with vane bank",
+      "group": 9,
+      "image": "../images/fittings/group-9/9L.svg?revision=ef86df37d7b6",
+      "reference": "../images/fittings/group-9/source-art/9L.png",
+      "revision": "ef86df37d7b620f94ee4ad93dc5754a5c910525d16001c7dafecc30545bee95f",
+      "sourcePage": 178,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=37",
+      "contextURL": "group-9-references.html#page-178",
+      "notes": [
+        "Original trunk and branch geometry retained. Source equivalent length: 20 ft."
+      ],
+      "reviewNote": "Original trunk and branch geometry retained. Source equivalent length: 20 ft.",
+      "priorApproval": true
+    },
+    {
+      "id": "9M",
+      "number": "9M",
+      "name": "Radiused rectangular split junction",
+      "group": 9,
+      "image": "../images/fittings/group-9/9M.svg?revision=03d6758a1587",
+      "reference": "../images/fittings/group-9/source-art/9M.png",
+      "revision": "03d6758a158792a02ef672a062eaf3fb3c6f63c07a99e22a838e99582f09858a",
+      "sourcePage": 178,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=37",
+      "contextURL": "group-9-references.html#page-178",
+      "notes": [
+        "Original trunk and branch geometry retained. Source equivalent length: 20 ft."
+      ],
+      "reviewNote": "Original trunk and branch geometry retained. Source equivalent length: 20 ft.",
+      "priorApproval": true
+    },
+    {
+      "id": "9N",
+      "number": "9N",
+      "name": "Rectangular wye split junction",
+      "group": 9,
+      "image": "../images/fittings/group-9/9N.svg?revision=2243790baca3",
+      "reference": "../images/fittings/group-9/source-art/9N.png",
+      "revision": "2243790baca3478efce6561b563ed7f22b326bb6772929cec1207770eb4585bf",
+      "sourcePage": 179,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=38",
+      "contextURL": "group-9-references.html#page-179",
+      "notes": [
+        "Original trunk and branch geometry retained. Source equivalent length: 15 ft."
+      ],
+      "reviewNote": "Original trunk and branch geometry retained. Source equivalent length: 15 ft.",
+      "priorApproval": true
+    },
+    {
+      "id": "9O",
+      "number": "9O",
+      "name": "Round wye split junction",
+      "group": 9,
+      "image": "../images/fittings/group-9/9O.svg?revision=63808b23dc8c",
+      "reference": "../images/fittings/group-9/source-art/9O.png",
+      "revision": "63808b23dc8cbc563e630328c0f3770ce95f93d96354a55d2f5bd86939dad3b8",
+      "sourcePage": 179,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=38",
+      "contextURL": "group-9-references.html#page-179",
+      "notes": [
+        "Original trunk and branch geometry retained. Source equivalent length: 15 ft."
+      ],
+      "reviewNote": "Original trunk and branch geometry retained. Source equivalent length: 15 ft.",
+      "priorApproval": true
+    },
+    {
+      "id": "9P",
+      "number": "9P",
+      "name": "Round tee split junction",
+      "group": 9,
+      "image": "../images/fittings/group-9/9P.svg?revision=da872acd2426",
+      "reference": "../images/fittings/group-9/source-art/9P.png",
+      "revision": "da872acd24264e1940c7c9201b1e4d581c8d5bc213159554f18c82017b454e13",
+      "sourcePage": 179,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=38",
+      "contextURL": "group-9-references.html#page-179",
+      "notes": [
+        "Original trunk and branch geometry retained. Source equivalent length: 70 ft."
+      ],
+      "reviewNote": "Original trunk and branch geometry retained. Source equivalent length: 70 ft.",
+      "priorApproval": true
+    },
+    {
+      "id": "9Q",
+      "number": "9Q",
+      "name": "Rectangular vertical-to-horizontal junction",
+      "group": 9,
+      "image": "../images/fittings/group-9/9Q.svg?revision=2d14e2286d08",
+      "reference": "../images/fittings/group-9/source-art/9Q.png",
+      "revision": "2d14e2286d0863be1681c3eae851782b09fd4099e4421bbacf125415cc6545b1",
+      "sourcePage": 179,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=38",
+      "contextURL": "group-9-references.html#page-179",
+      "notes": [
+        "Original trunk and branch geometry retained. Source equivalent length: 55 ft."
+      ],
+      "reviewNote": "Original trunk and branch geometry retained. Source equivalent length: 55 ft.",
+      "priorApproval": true
+    },
+    {
+      "id": "9R",
+      "number": "9R",
+      "name": "Rectangular vertical-to-horizontal junction with transition",
+      "group": 9,
+      "image": "../images/fittings/group-9/9R.svg?revision=daa1e2d33c47",
+      "reference": "../images/fittings/group-9/source-art/9R.png",
+      "revision": "daa1e2d33c475956c5227b50d5520c03f40d19dcc6afd6838472694f29243811",
+      "sourcePage": 179,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=38",
+      "contextURL": "group-9-references.html#page-179",
+      "notes": [
+        "Original trunk and branch geometry retained. Source equivalent length: 35 ft."
+      ],
+      "reviewNote": "Original trunk and branch geometry retained. Source equivalent length: 35 ft.",
+      "priorApproval": true
+    }
+  ]
+}

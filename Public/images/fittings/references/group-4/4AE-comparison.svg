@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="700" viewBox="0 0 1280 700" role="img" aria-label="4AE source and SVG comparison">
+<rect width="1280" height="700" fill="#f8fafc"/>
+<text x="40" y="54" font-family="Arial,sans-serif" font-size="30" font-weight="700" fill="#243b53">4AE · Segmented elbow on flange</text>
+<text x="40" y="100" font-family="Arial,sans-serif" font-size="20" fill="#243b53">Original source crop</text>
+<text x="660" y="100" font-family="Arial,sans-serif" font-size="20" fill="#243b53">Source-traced SVG</text>
+<rect x="40" y="120" width="580" height="520" rx="12" fill="white" stroke="#cbd5e1"/>
+<rect x="660" y="120" width="580" height="520" rx="12" fill="white" stroke="#cbd5e1"/>
+<image href="4AE.png" x="60" y="140" width="540" height="480" preserveAspectRatio="xMidYMid meet"/>
+<svg x="660" y="120" width="580" height="520" viewBox="0 0 640 520" preserveAspectRatio="xMidYMid meet"><title id="title">4AE — Segmented elbow on flange</title>
+<desc id="desc">Source-traced Group 4 fitting. Reference equivalent length 55 feet at 900 FPM and 0.08 IWC per 100 feet. Drawing not to scale.</desc>
+<style>text{font-family:Arial,sans-serif;fill:#243b53}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<text x="32" y="44" font-size="28" font-weight="700">4AE</text>
+<text x="112" y="43" font-size="17">Segmented elbow on flange</text>
+<text x="32" y="76" font-size="13">GROUP 4 · SUPPLY AIR BOOT AND STACK HEAD FITTINGS</text>
+<svg x="55" y="104" width="530" height="295" viewBox="58 60 275 291" preserveAspectRatio="xMidYMid meet"><path d="M289 68L253 82L246 89M246 89L236 89L212 102L205 111M246 89L262 109L275 152M205 111L193 113L175 137M205 111L230 132L246 164M175 137L163 146L158 175M175 137L205 152L234 174M325 139L275 152M275 152L255 164L246 164M246 164L234 174M234 174L227 189M158 175L193 186L227 189M158 175L153 184L155 207M227 189L229 197L224 212M155 207L137 244M155 207L183 216L224 212M224 212L238 242L236 253M137 244L69 270L72 286M137 244L142 253M142 253L135 261M142 253L158 264L178 269L213 266L236 253M236 253L242 268M135 261L76 286M135 261L140 285L165 302L205 304L224 296L233 287M242 268L283 280L291 287M242 268L235 285M321 277L312 287M234 285L233 286M234 285L235 285M234 285L234 286M235 285L235 286M72 286L68 292M72 286L76 286M76 286L86 295L134 316L195 342L205 341M233 286L234 286M233 286L233 287M234 286L235 286M234 286L234 287M235 286L234 287M233 287L234 287M291 287L312 287M291 287L283 295L208 328L205 341M312 287L312 291M312 291L322 295M312 291L307 299L266 319L216 342L205 341" fill="none" stroke="#243b53" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<text x="32" y="446" font-size="15">Reference equivalent length: 55 ft</text>
+<text x="32" y="474" font-size="12">900 FPM · 0.08 IWC per 100 ft</text>
+<text x="32" y="500" font-size="12">SOURCE TRACE · NOT TO SCALE · PDF pp. 18–19 / printed p. 168</text>
+</svg>
+</svg>

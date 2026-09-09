@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="700" viewBox="0 0 1280 700" role="img" aria-label="4Q source and SVG comparison">
+<rect width="1280" height="700" fill="#f8fafc"/>
+<text x="40" y="54" font-family="Arial,sans-serif" font-size="30" font-weight="700" fill="#243b53">4Q · Rectangular-to-round side transition</text>
+<text x="40" y="100" font-family="Arial,sans-serif" font-size="20" fill="#243b53">Original source crop</text>
+<text x="660" y="100" font-family="Arial,sans-serif" font-size="20" fill="#243b53">Source-traced SVG</text>
+<rect x="40" y="120" width="580" height="520" rx="12" fill="white" stroke="#cbd5e1"/>
+<rect x="660" y="120" width="580" height="520" rx="12" fill="white" stroke="#cbd5e1"/>
+<image href="4Q.png" x="60" y="140" width="540" height="480" preserveAspectRatio="xMidYMid meet"/>
+<svg x="660" y="120" width="580" height="520" viewBox="0 0 640 520" preserveAspectRatio="xMidYMid meet"><title id="title">4Q — Rectangular-to-round side transition</title>
+<desc id="desc">Source-traced Group 4 fitting. Reference equivalent length 50 feet at 900 FPM and 0.08 IWC per 100 feet. Drawing not to scale.</desc>
+<style>text{font-family:Arial,sans-serif;fill:#243b53}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<text x="32" y="44" font-size="28" font-weight="700">4Q</text>
+<text x="112" y="43" font-size="17">Rectangular-to-round side transition</text>
+<text x="32" y="76" font-size="13">GROUP 4 · SUPPLY AIR BOOT AND STACK HEAD FITTINGS</text>
+<svg x="55" y="104" width="530" height="295" viewBox="46 60 296 262" preserveAspectRatio="xMidYMid meet"><path d="M62 80L68 74L90 68L232 106L246 115M62 80L54 84L54 131L60 139L71 142M62 80L68 85L214 127M246 115L252 121L254 177L273 189M246 115L214 127M214 127L213 175M71 142L84 142L198 179M71 142L76 153L218 278L225 278M244 178L226 184M273 189L287 190L302 200M273 189L241 209L229 242L226 278M302 200L315 203L330 216L334 244L326 277L314 296L298 310L278 314L261 305M302 200L277 220L261 247M300 217L303 236L297 254L286 279L271 292M259 261L261 305M225 278L226 278M225 278L225 279M226 278L226 279M225 279L226 279M225 279L226 280M226 279L226 280M226 280L235 296L261 305" fill="none" stroke="#243b53" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<text x="32" y="446" font-size="15">Reference equivalent length: 50 ft</text>
+<text x="32" y="474" font-size="12">900 FPM · 0.08 IWC per 100 ft</text>
+<text x="32" y="500" font-size="12">SOURCE TRACE · NOT TO SCALE · PDF pp. 18–19 / printed p. 168</text>
+</svg>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="700" viewBox="0 0 1280 700" role="img" aria-label="4AO source and SVG comparison">
+<rect width="1280" height="700" fill="#f8fafc"/>
+<text x="40" y="54" font-family="Arial,sans-serif" font-size="30" font-weight="700" fill="#243b53">4AO · Straight wall stack offset</text>
+<text x="40" y="100" font-family="Arial,sans-serif" font-size="20" fill="#243b53">Original source crop</text>
+<text x="660" y="100" font-family="Arial,sans-serif" font-size="20" fill="#243b53">Source-traced SVG</text>
+<rect x="40" y="120" width="580" height="520" rx="12" fill="white" stroke="#cbd5e1"/>
+<rect x="660" y="120" width="580" height="520" rx="12" fill="white" stroke="#cbd5e1"/>
+<image href="4AO.png" x="60" y="140" width="540" height="480" preserveAspectRatio="xMidYMid meet"/>
+<svg x="660" y="120" width="580" height="520" viewBox="0 0 640 520" preserveAspectRatio="xMidYMid meet"><title id="title">4AO — Straight wall stack offset</title>
+<desc id="desc">Source-traced Group 4 fitting. Reference equivalent length 40 feet at 900 FPM and 0.08 IWC per 100 feet. Drawing not to scale.</desc>
+<style>text{font-family:Arial,sans-serif;fill:#243b53}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<text x="32" y="44" font-size="28" font-weight="700">4AO</text>
+<text x="112" y="43" font-size="17">Straight wall stack offset</text>
+<text x="32" y="76" font-size="13">GROUP 4 · SUPPLY AIR BOOT AND STACK HEAD FITTINGS</text>
+<svg x="55" y="104" width="530" height="295" viewBox="121 87 180 289" preserveAspectRatio="xMidYMid meet"><path d="M293 96L288 102M283 101L276 95L215 96L160 128L148 140M283 101L288 102M283 101L214 145M288 102L291 183L285 190L268 196M148 140L132 148L132 364L181 363M148 140L154 144L185 144L200 150M214 145L200 150M214 145L220 212M200 150L202 223M262 196L259 199M262 196L268 196M262 196L259 199M268 196L270 314L188 364L181 363M259 199L255 200M255 200L252 203M255 200L252 203M252 203L248 205M248 205L246 207M248 205L246 207M246 207L242 208M239 208L229 211M239 208L242 208M239 208L242 211M242 208L242 211M229 211L222 212M229 211L231 220M242 211L231 220M220 212L221 212M220 212L220 213M221 212L222 212M221 212L221 213M222 212L222 213M220 213L215 219M220 213L221 213M221 213L222 213M222 213L224 224M215 219L202 223M215 219L217 228M231 220L224 224M202 223L201 236M224 224L217 228M217 228L209 236L201 236M201 236L180 244L181 363" fill="none" stroke="#243b53" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<text x="32" y="446" font-size="15">Reference equivalent length: 40 ft</text>
+<text x="32" y="474" font-size="12">900 FPM · 0.08 IWC per 100 ft</text>
+<text x="32" y="500" font-size="12">SOURCE TRACE · NOT TO SCALE · PDF pp. 18–19 / printed p. 168</text>
+</svg>
+</svg>

@@ -1,0 +1,94 @@
+{
+  "id": "group-7-individual",
+  "title": "Group 7 \u00b7 individual fittings",
+  "description": "Each entry shows its own fitting. 7A\u20137C are separated from their shared assembly; 7D\u20137E retain their original standalone views. Full source illustrations remain available for comparison.",
+  "referenceGallery": "group-7-references.html",
+  "items": [
+    {
+      "id": "7A",
+      "number": "7A",
+      "name": "Panned stud-space return",
+      "group": 7,
+      "image": "../images/fittings/group-7-individual/7A.svg?revision=2cf1bd8630e9",
+      "reference": "../images/fittings/group-7-enhanced/source-art/7ABC.png",
+      "sourcePage": 175,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=30",
+      "revision": "2cf1bd8630e99e7d0a70cdc64a25fa9ea0969a176ad43ddd726c3bf37f2cbba6",
+      "contextURL": "group-7-references.html#reference-7A",
+      "notes": [
+        "Isolated vertical panned stud-space return, retaining the framing, panning and downward airflow."
+      ],
+      "reviewNote": "Only this fitting connection is shown. Original stud/joist construction and connecting context retained.",
+      "priorApproval": true
+    },
+    {
+      "id": "7B",
+      "number": "7B",
+      "name": "Stud-space to single-joist return turn",
+      "group": 7,
+      "image": "../images/fittings/group-7-individual/7B.svg?revision=42e925e451d3",
+      "reference": "../images/fittings/group-7-enhanced/source-art/7ABC.png",
+      "sourcePage": 175,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=30",
+      "revision": "42e925e451d38817b8ee05220a1c7edb860cc2724e26869b66065656361c7493",
+      "contextURL": "group-7-references.html#reference-7A",
+      "notes": [
+        "Isolated stud-space-to-single-joist turn, with the horizontal passage aligned directly with the wall cavity between the two studs.",
+        "A prominent curved arrow highlights the wall-to-floor change of direction; the two straight wall arrows are removed and the downstream floor arrow retained."
+      ],
+      "reviewNote": "Only this fitting connection is shown. Original stud/joist construction and connecting context retained.",
+      "priorApproval": true
+    },
+    {
+      "id": "7C",
+      "number": "7C",
+      "name": "Panned single-joist return",
+      "group": 7,
+      "image": "../images/fittings/group-7-individual/7C.svg?revision=8d81fc94e265",
+      "reference": "../images/fittings/group-7-enhanced/source-art/7ABC.png",
+      "sourcePage": 175,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=30",
+      "revision": "8d81fc94e26581d03c7de2ed57801266ea001493c9ba7212c4511efc9b090404",
+      "contextURL": "group-7-references.html#reference-7A",
+      "notes": [
+        "Isolated straight single-joist return bay with panning and arrows pointing toward the lower-left outlet."
+      ],
+      "reviewNote": "Only this fitting connection is shown. Original stud/joist construction and connecting context retained.",
+      "priorApproval": true
+    },
+    {
+      "id": "7D",
+      "number": "7D",
+      "name": "Panned stud-to-joist double turn",
+      "group": 7,
+      "image": "../images/fittings/group-7-individual/7D.svg?revision=8f009d3d9d39",
+      "reference": "../images/fittings/group-7-enhanced/source-art/7D.png",
+      "sourcePage": 175,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=31",
+      "revision": "8f009d3d9d3913020961f28be810270deeba8f95729ba7d0c626c6fce1116ec5",
+      "contextURL": "group-7-references.html#reference-7D",
+      "notes": [
+        "Original standalone double-turn illustration retained."
+      ],
+      "reviewNote": "Original standalone fitting views retained.",
+      "priorApproval": true
+    },
+    {
+      "id": "7E",
+      "number": "7E",
+      "name": "Panned double-joist return",
+      "group": 7,
+      "image": "../images/fittings/group-7-individual/7E.svg?revision=ded62f025e1a",
+      "reference": "../images/fittings/group-7-enhanced/source-art/7E.png",
+      "sourcePage": 175,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=31",
+      "revision": "ded62f025e1a48ef6ff75b63dff88b499db7d7eae8b3f56e8d70105370f1867a",
+      "contextURL": "group-7-references.html#reference-7E",
+      "notes": [
+        "Original standalone double-joist illustration retained."
+      ],
+      "reviewNote": "Original standalone fitting views retained.",
+      "priorApproval": true
+    }
+  ]
+}

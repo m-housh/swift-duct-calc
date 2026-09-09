@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Fitting drawing review</title>
+  <link rel="stylesheet" href="review.css">
+  <script src="data.js" defer></script>
+  <script src="state.js?v=2" defer></script>
+  <script src="review.js?v=4" defer></script>
+</head>
+<body>
+  <header>
+    <div class="heading"><span class="eyebrow">DRAWING REVIEW</span><h1>Check only the drawings that need work.</h1>
+    <p>Compare each SVG with its source. Leave acceptable drawings unchecked, then finish the batch.</p></div>
+    <div class="toolbar"><div><strong id="batch-title"></strong><p id="summary" role="status" aria-live="polite"></p></div>
+    <div class="actions"><button id="finish" type="button">Finish review</button><button id="export" class="secondary" type="button">Download review</button></div></div>
+    <p id="storage" class="muted">Choices save in this browser. Tell me your feedback in chat, or download a review if you prefer.</p>
+    <p id="batch-description" class="muted"></p>
+  </header>
+  <main id="drawings" aria-label="Fitting comparisons"></main>
+  <noscript>This review requires JavaScript to display drawings and save checkboxes.</noscript>
+</body>
+</html>

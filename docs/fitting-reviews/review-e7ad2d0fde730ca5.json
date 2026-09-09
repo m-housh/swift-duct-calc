@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "batchId": "group-1",
+  "completedAt": "2026-09-04T17:28:52.383Z",
+  "drawings": [
+    {
+      "id": "1A",
+      "revision": "fe1c369d58cedabcb42fd3a0491b7f18211ae0297a9e339f6c156e78c343dbe4",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "1B",
+      "revision": "1e952a9b7ee8edef8a58df1e8d308de7b3af1c39911898d428251f0053083677",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "1C",
+      "revision": "674ecd31d74d87af283063524a97c3f8029954d3551474738b10dc9d56b1a211",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "1D",
+      "revision": "589c36a45d3e1bc273adca6b03328fd400008c76155e5d2edc814bfc9f0a2ed0",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "1E",
+      "revision": "e3027fc6ca9720954d00ce7890e1f00a03c61f6bd00cbe7d9aef7ada94541521",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "1F",
+      "revision": "5b18b93b2f0484c811a6671075f398b8321213b75e25bf08af7db8350e1086a2",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "1G",
+      "revision": "016eb078fb427c5fb1942edb2ff81f410e26d9a2f414ce9bd3bb287f9a4004bb",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "1H",
+      "revision": "451e0f8e6005dbe52b92c288ef2307c7ac727336d887a732a3b2d0636ccb372f",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "1I",
+      "revision": "0c4d81b5bc2f2f4f77f0147359da17d8111685fdac0ad773eef500c22226f2fc",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "1K",
+      "revision": "0abb3adf0dc39419ac29d661688fd478822bbdb00816533828606e40c10cf96a",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "1L",
+      "revision": "eb2f8af84fe0b3e9424f347e4b84448d04ac8d595ad3916def082b19a248f35e",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "1M-1-vane",
+      "revision": "231cd2d6c4bb6592af4de732361c1ce97ed7e156b8f1c8e2b8465c2017b42896",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "1M-2-vanes",
+      "revision": "78594412ec34f6c1e36728af0272b07eb872eebe2265154c567738eecf214ff6",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "1N",
+      "revision": "a5d6201151a6887d960597e739fd36d349029f92effb51a8dd958221628f2dde",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "1O",
+      "revision": "c19306a61aca6dfa5da0340ee1cb80ddb2057127368fce2741e8cff9b3a286f7",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "1P",
+      "revision": "79c19148c832e4c95881d82eb3bb84d1f9b61c659589f3771fa281397f31636f",
+      "status": "needs-work",
+      "note": "Left side turning vanes are in the wrong orientation."
+    },
+    {
+      "id": "1Q",
+      "revision": "a15d2f6195ac661605a8b082b38ae01f42a857a430180fa2b660ad4c692fcf54",
+      "status": "needs-work",
+      "note": "Turning vanes are in the wrong orientation."
+    },
+    {
+      "id": "1R",
+      "revision": "3a346864c2dc5a833225cb56f3b0cca62b1289b040363ce595bcd1559c599d97",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "1S-0-vanes",
+      "revision": "b0da2ed7c7804b01e6e206daecda9fd694f287409c34b192c72746f8f959a05e",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "1S-1-vane",
+      "revision": "0fa6bfb18b578ef863e0d9032927b9be44d82aa8d0e3f2bcbd9fe4af0c4b6c78",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "1S-2-vanes",
+      "revision": "325447889d86f1527eb2d84b18d7789f37af10049a3781952ffa0fc282cae175",
+      "status": "accepted",
+      "note": ""
+    },
+    {
+      "id": "1T",
+      "revision": "0bfe7a3c826ff51d0be0e0b597a730905420f41f745f18d039a61d74a3cd3260",
+      "status": "accepted",
+      "note": ""
+    }
+  ]
+}

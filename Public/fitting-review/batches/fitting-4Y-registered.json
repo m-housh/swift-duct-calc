@@ -1,0 +1,19 @@
+{
+  "id": "fitting-4Y-registered",
+  "title": "Source-registered SVG pilot \u00b7 4Y",
+  "description": "One SVG drawn in the original source-cell coordinate system and checked with a registered overlay. Check it only if it still needs work.",
+  "items": [
+    {
+      "id": "4Y",
+      "number": "4Y",
+      "name": "Rectangular ceiling register boot",
+      "group": 4,
+      "image": "../images/fittings/group-4-registered/4Y.svg?revision=6c52f321b227",
+      "reference": "../images/fittings/references/group-4/4Y.png",
+      "sourcePage": 168,
+      "sourcePDF": "../files/ManD.Groups.pdf#page=18",
+      "revision": "6c52f321b2279830b6f61018e3cd3e96cd1be25feb0974623552535c42c3f237",
+      "priorApproval": false
+    }
+  ]
+}

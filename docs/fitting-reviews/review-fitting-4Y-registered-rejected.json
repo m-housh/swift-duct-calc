@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "batchId": "fitting-4Y-registered",
+  "completedAt": "2026-09-04T20:08:20.921Z",
+  "reviewSource": "User found the source-registered manual SVG unacceptable in conversation.",
+  "drawings": [
+    {
+      "id": "4Y",
+      "revision": "6c52f321b2279830b6f61018e3cd3e96cd1be25feb0974623552535c42c3f237",
+      "status": "needs-work",
+      "note": "Not looking good enough; do not extend this reconstruction method."
+    }
+  ]
+}

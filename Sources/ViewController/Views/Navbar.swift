@@ -3,15 +3,18 @@ import ManualDCore
 import Styleguide
 
 struct Navbar: HTML, Sendable {
+  let showFittingsButton: Bool
   let showDuctulatorButton: Bool
   let showSidebarToggle: Bool
   let isLoggedIn: Bool
 
   init(
+    showFittingsButton: Bool = true,
     showDuctulatorButton: Bool = true,
     showSidebarToggle: Bool,
     isLoggedIn: Bool = true
   ) {
+    self.showFittingsButton = showFittingsButton
     self.showDuctulatorButton = showDuctulatorButton
     self.showSidebarToggle = showSidebarToggle
     self.isLoggedIn = isLoggedIn
@@ -28,7 +31,7 @@ struct Navbar: HTML, Sendable {
     nav(
       .class(
         """
-        navbar w-full bg-base-300 text-base-content shadow-sm mb-4
+        navbar flex-wrap w-full bg-base-300 text-base-content shadow-sm mb-4
         """
       )
     ) {
@@ -61,10 +64,21 @@ struct Navbar: HTML, Sendable {
       div(.class("flex-none")) {
         div(.class("flex items-end space-x-4")) {
 
+          if showFittingsButton {
+            a(
+              .class("btn btn-outline btn-secondary"), .href(route: .fittingReference(.init())),
+              .init(name: "aria-describedby", value: "fitting-reference-help")
+            ) {
+              "Fitting reference"
+            }
+            .tooltip("Browse fitting references", position: .bottom)
+            span(.id("fitting-reference-help"), .class("sr-only")) { "Browse fitting references" }
+          }
+
           if showDuctulatorButton {
             DuctulatorButton()
-              .attributes(.class("btn-ghost btn-primary text-lg"))
-              .tooltip("Duct size calculator", position: .left)
+              .attributes(.class("btn-outline btn-primary"))
+              .tooltip("Duct size calculator", position: .bottom)
           }
 
           if isLoggedIn {

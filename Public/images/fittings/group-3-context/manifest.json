@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "group": 3,
+  "items": [
+    {
+      "id": "reference-3A",
+      "fittingIds": [
+        "3A",
+        "3I"
+      ],
+      "art": "/images/fittings/group-3-enhanced/3A-restored-art.png",
+      "svg": "/images/fittings/group-3-context/reference-3A.svg",
+      "artSHA256": "dc53007cd3d181d79d0499aa88dc07f8d3d678338f5134434a9471748e55d6e5",
+      "status": "accepted-reference-artwork"
+    },
+    {
+      "id": "reference-3B",
+      "fittingIds": [
+        "3B",
+        "3C",
+        "3D-full",
+        "3D-tight",
+        "3D-mitered"
+      ],
+      "art": "/images/fittings/group-3-enhanced/3B-restored-art.png",
+      "svg": "/images/fittings/group-3-context/reference-3B.svg",
+      "artSHA256": "8a2fd5fadfa538e2d33ba99c040db0f81b2752db7d1e346ebf7178e12dd8d465",
+      "status": "accepted-reference-artwork"
+    },
+    {
+      "id": "reference-3E",
+      "fittingIds": [
+        "3E",
+        "3F-full",
+        "3F-tight",
+        "3F-mitered",
+        "3G",
+        "3H"
+      ],
+      "art": "/images/fittings/group-3-enhanced/3E-restored-art.png",
+      "svg": "/images/fittings/group-3-context/reference-3E.svg",
+      "artSHA256": "22cc136f34fef72e1c164d3d2761484d37d5c70fe18910995c4ae7efc02f6af3",
+      "status": "accepted-reference-artwork"
+    },
+    {
+      "id": "reference-3J-full",
+      "fittingIds": [
+        "3J-full",
+        "3J-tight",
+        "3J-mitered",
+        "3K",
+        "3L"
+      ],
+      "art": "/images/fittings/group-3-enhanced/3J-full-restored-art.png",
+      "svg": "/images/fittings/group-3-context/reference-3J-full.svg",
+      "artSHA256": "f4b6585c7ccf086ab343a47dc48289e35e5686d5244f2e1efe64af06052727ac",
+      "status": "accepted-reference-artwork"
+    },
+    {
+      "id": "reference-3M",
+      "fittingIds": [
+        "3M",
+        "3N"
+      ],
+      "art": "/images/fittings/group-3-enhanced/3M-restored-art.png",
+      "svg": "/images/fittings/group-3-context/reference-3M.svg",
+      "artSHA256": "dec7f5dab7962d7effca3dbdf98f5927f2bd408dff26cf7c4fdd230ff80d026c",
+      "status": "accepted-reference-artwork"
+    },
+    {
+      "id": "reference-3O",
+      "fittingIds": [
+        "3O",
+        "3P",
+        "3Q"
+      ],
+      "art": "/images/fittings/group-3-enhanced/3O-restored-art.png",
+      "svg": "/images/fittings/group-3-context/reference-3O.svg",
+      "artSHA256": "ec18ee3071477e4c3fa4285e685dba190381486de2f6a8fcca7876d5dbe72a7d",
+      "status": "accepted-reference-artwork"
+    },
+    {
+      "id": "reference-3R",
+      "fittingIds": [
+        "3R"
+      ],
+      "art": "/images/fittings/group-3-enhanced/3R-restored-art.png",
+      "svg": "/images/fittings/group-3-context/reference-3R.svg",
+      "artSHA256": "7055b7456450753c50894f6c1109e230094a9a82c238822bcdb0b18e8b7cdde6",
+      "status": "accepted-reference-artwork"
+    },
+    {
+      "id": "reference-3S-full",
+      "fittingIds": [
+        "3S-full",
+        "3S-tight",
+        "3S-mitered"
+      ],
+      "art": "/images/fittings/group-3-enhanced/3S-full-restored-art.png",
+      "svg": "/images/fittings/group-3-context/reference-3S-full.svg",
+      "artSHA256": "e33adac61c200193428b3e0219c06afaec366129495e1d43757552c47e8ade28",
+      "status": "accepted-reference-artwork"
+    },
+    {
+      "id": "reference-3T",
+      "fittingIds": [
+        "3T"
+      ],
+      "art": "/images/fittings/group-3-enhanced/3T-restored-art.png",
+      "svg": "/images/fittings/group-3-context/reference-3T.svg",
+      "artSHA256": "79c09cb9c51cd74dcdf7b5eaa1ff0826a9fc7f9f7d60ac1ca4593aa60cbde409",
+      "status": "accepted-reference-artwork"
+    },
+    {
+      "id": "reference-3U-mitered-vanes",
+      "fittingIds": [
+        "3U-mitered-vanes",
+        "3U-mitered-no-vanes"
+      ],
+      "art": "/images/fittings/group-3-enhanced/3U-mitered-vanes-restored-art.png",
+      "svg": "/images/fittings/group-3-context/reference-3U-mitered-vanes.svg",
+      "artSHA256": "8a6a7130d4ba421da8ae7bd080cd6f0cee6c6240d230802acf3e7d149e355e27",
+      "status": "accepted-reference-artwork"
+    },
+    {
+      "id": "reference-3V",
+      "fittingIds": [
+        "3V"
+      ],
+      "art": "/images/fittings/group-3-enhanced/3V-restored-art.png",
+      "svg": "/images/fittings/group-3-context/reference-3V.svg",
+      "artSHA256": "13e9c7b94df093ead75d42d7105a3e3eeb5716f6d4ee79fbdded83ebab3fc5ed",
+      "status": "accepted-reference-artwork"
+    },
+    {
+      "id": "reference-3W",
+      "fittingIds": [
+        "3W"
+      ],
+      "art": "/images/fittings/group-3-enhanced/3W-restored-art.png",
+      "svg": "/images/fittings/group-3-context/reference-3W.svg",
+      "artSHA256": "0ca8f7abb932c6bd7c10bcb4a5c5bc3e7d9a6ac95335b45cedf30c129208e3c7",
+      "status": "accepted-reference-artwork"
+    }
+  ]
+}

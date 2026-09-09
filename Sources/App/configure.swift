@@ -2,9 +2,12 @@ import DatabaseClient
 import Dependencies
 import Elementary
 import EnvVars
+import FileClient
+import FittingClient
 import Fluent
 import FluentPostgresDriver
 import FluentSQLiteDriver
+import Foundation
 import ManualDCore
 import NIOSSL
 import ProjectClient
@@ -17,18 +20,39 @@ import ViewController
 public func configure(
   _ app: Application,
   in environment: EnvVars,
-  makeDatabaseClient: @escaping (any Database) -> DatabaseClient = { .live(database: $0) }
+  makeDatabaseClient: @escaping (any Database) -> DatabaseClient = { .live(database: $0) },
+  makeFittingClient: (() async throws -> FittingClient)? = nil
 ) async throws {
+  // Read the catalog before installing routes. A load failure prevents startup.
+  var startupFiles = FileClient()
+  startupFiles.readFile = { path in
+    try await app.threadPool.runIfActive {
+      try Data(contentsOf: URL(fileURLWithPath: path))
+    }
+  }
+  let fittingClient = try await withDependencies {
+    $0.fileClient = startupFiles
+  } operation: {
+    if let makeFittingClient { return try await makeFittingClient() }
+    let reviewPath =
+      app.environment == .development
+      ? Environment.get("FITTING_CATALOG_REVIEW_PATH") : nil
+    return try await FittingClient.live(reviewCatalogPath: reviewPath)
+  }
+
   // Setup the database client.
   let databaseClient = try await setupDatabase(
     on: app, environment: environment, factory: makeDatabaseClient
   )
   // Add the global middlewares.
-  addMiddleware(to: app, database: databaseClient, environment: environment)
+  addMiddleware(
+    to: app, database: databaseClient, environment: environment, fittingClient: fittingClient)
   #if DEBUG
     // Live reload of the application for development when launched with the `./swift-dev` command
     // app.lifecycle.use(BrowserSyncHandler())
   #endif
+  // The bounded fitting-path payload includes saved snapshots for conflict detection.
+  app.routes.defaultMaxBodySize = "2mb"
   // Add our route handlers.
   addRoutes(to: app)
   if app.environment != .testing {
@@ -41,7 +65,8 @@ public func configure(
 private func addMiddleware(
   to app: Application,
   database databaseClient: DatabaseClient,
-  environment: EnvVars
+  environment: EnvVars,
+  fittingClient: FittingClient
 ) {
   // cors middleware should come before default error middleware using `at: .beginning`
   let corsConfiguration = CORSMiddleware.Configuration(
@@ -61,8 +86,11 @@ private func addMiddleware(
   app.sessions.use(.fluent)
   app.migrations.add(SessionRecord.migration)
   app.middleware.use(app.sessions.middleware)
+  app.middleware.use(UserSessionAuthenticator())
 
-  app.middleware.use(DependenciesMiddleware(database: databaseClient, environment: environment))
+  app.middleware.use(
+    DependenciesMiddleware(
+      database: databaseClient, environment: environment, fittingClient: fittingClient))
 }
 
 private func setupDatabase(
@@ -96,13 +124,7 @@ private func addRoutes(to app: Application) {
 
   app.mount(
     SiteRoute.router,
-    middleware: {
-      if app.environment == .testing {
-        return nil
-      } else {
-        return $0.middleware()
-      }
-    },
+    middleware: { $0.middleware() },
     use: siteHandler
   )
 }

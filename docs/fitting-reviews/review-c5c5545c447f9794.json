@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "batchId": "group-10",
+  "completedAt": "2026-09-05T20:31:20.892653+00:00",
+  "decisionSource": "Explicit user approval in conversation",
+  "userStatement": "I approve those, commit them. Group 11, I'm not sure what the plan is for that as it's sort of complex and we may need to read and understand the guidance on how we need to represent it in a picker context.",
+  "drawings": [
+    {
+      "id": "10A",
+      "revision": "d70f17a47ce0f0654976045df75607307269703a34a6969dc5bd0210854e0810",
+      "status": "accepted",
+      "note": "User approved all seven Group 10 drawings, including corrected 10F arrows."
+    },
+    {
+      "id": "10B",
+      "revision": "313aa1c4c201b939d31882531e31fd582995e2a4a4dd6a6b0dd4e541b83805e2",
+      "status": "accepted",
+      "note": "User approved all seven Group 10 drawings, including corrected 10F arrows."
+    },
+    {
+      "id": "10C",
+      "revision": "bda034f5f94281e56f60e20ff0e18a38ee4299bd3889c84f1c7ed1a7ac3abd20",
+      "status": "accepted",
+      "note": "User approved all seven Group 10 drawings, including corrected 10F arrows."
+    },
+    {
+      "id": "10D",
+      "revision": "2ef7012f1eb3ef1abc71c8c62144eeedafeb93346ba501513526a7a3f303a30f",
+      "status": "accepted",
+      "note": "User approved all seven Group 10 drawings, including corrected 10F arrows."
+    },
+    {
+      "id": "10E",
+      "revision": "53c8fe8cfe2f2a952cab0db041f5835d660e95f99eadd1133242a8f53dfdb754",
+      "status": "accepted",
+      "note": "User approved all seven Group 10 drawings, including corrected 10F arrows."
+    },
+    {
+      "id": "10F",
+      "revision": "9400e285569d0e5d5fce5991e82147d6d990a84a9366d20b39df0482030b9820",
+      "status": "accepted",
+      "note": "User approved all seven Group 10 drawings, including corrected 10F arrows."
+    },
+    {
+      "id": "10G",
+      "revision": "b2914847f5d2ee2e89d04add18badc8ed0466387723c3ae3424370583dab97c2",
+      "status": "accepted",
+      "note": "User approved all seven Group 10 drawings, including corrected 10F arrows."
+    }
+  ]
+}

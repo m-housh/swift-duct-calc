@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "batchId": "group-9",
+  "completedAt": "2026-09-05T20:11:46.749934+00:00",
+  "decisionSource": "Explicit user approval in conversation",
+  "userStatement": "I approve all those, commit, and move on to the next.",
+  "drawings": [
+    {
+      "id": "9A",
+      "revision": "e7cdd571a387f0ea27e9ee0cbe62cd75cb837129fc8d5e6b1e0da196c02542b5",
+      "status": "accepted",
+      "note": "User approved all 18 Group 9 supply trunk junction drawings."
+    },
+    {
+      "id": "9B",
+      "revision": "51b87ff7d38262e23fea1dddca595813ffabfa39e3d5eac8c8b0c29bfc6f8672",
+      "status": "accepted",
+      "note": "User approved all 18 Group 9 supply trunk junction drawings."
+    },
+    {
+      "id": "9C",
+      "revision": "520f95555a002c7afa5524c5123c162504f18039cdd8785f49801b2d685c29fe",
+      "status": "accepted",
+      "note": "User approved all 18 Group 9 supply trunk junction drawings."
+    },
+    {
+      "id": "9D",
+      "revision": "d71d6c623cba7ec1a0041d2abef6f3042e6066bf3e9d79d0efbe9113a4d40fb5",
+      "status": "accepted",
+      "note": "User approved all 18 Group 9 supply trunk junction drawings."
+    },
+    {
+      "id": "9E",
+      "revision": "db6dc35aa9c0a0964d893361cc515f541ad029ea2b33a3184285ad88176b5aa1",
+      "status": "accepted",
+      "note": "User approved all 18 Group 9 supply trunk junction drawings."
+    },
+    {
+      "id": "9F",
+      "revision": "ffecc242dfabfd8564f1b7e7046026a4c734b5c0361ba3c4529bfa1a4fd960d9",
+      "status": "accepted",
+      "note": "User approved all 18 Group 9 supply trunk junction drawings."
+    },
+    {
+      "id": "9G",
+      "revision": "742c4763afc4477e41e4cd5ce98ff8dfb0a9e28938f6a6c754f335d169edb245",
+      "status": "accepted",
+      "note": "User approved all 18 Group 9 supply trunk junction drawings."
+    },
+    {
+      "id": "9H",
+      "revision": "75756e5e7b9f29c80cf11bd38119dfa4d5de523ae69d833c1b79be877c861de7",
+      "status": "accepted",
+      "note": "User approved all 18 Group 9 supply trunk junction drawings."
+    },
+    {
+      "id": "9I",
+      "revision": "7b04b7646f715d5db10157e5a1deb04bcffc0739b4263d1c46f4c1ce2cf10968",
+      "status": "accepted",
+      "note": "User approved all 18 Group 9 supply trunk junction drawings."
+    },
+    {
+      "id": "9J",
+      "revision": "e81f7daf153a31b9d467cc279cdadbdcec27701aa380b5ead70349fc8e37d871",
+      "status": "accepted",
+      "note": "User approved all 18 Group 9 supply trunk junction drawings."
+    },
+    {
+      "id": "9K",
+      "revision": "414af45bae84e060c635ec5bfd3f8518d4e1c76346497ea4e326a6348906111c",
+      "status": "accepted",
+      "note": "User approved all 18 Group 9 supply trunk junction drawings."
+    },
+    {
+      "id": "9L",
+      "revision": "ef86df37d7b620f94ee4ad93dc5754a5c910525d16001c7dafecc30545bee95f",
+      "status": "accepted",
+      "note": "User approved all 18 Group 9 supply trunk junction drawings."
+    },
+    {
+      "id": "9M",
+      "revision": "03d6758a158792a02ef672a062eaf3fb3c6f63c07a99e22a838e99582f09858a",
+      "status": "accepted",
+      "note": "User approved all 18 Group 9 supply trunk junction drawings."
+    },
+    {
+      "id": "9N",
+      "revision": "2243790baca3478efce6561b563ed7f22b326bb6772929cec1207770eb4585bf",
+      "status": "accepted",
+      "note": "User approved all 18 Group 9 supply trunk junction drawings."
+    },
+    {
+      "id": "9O",
+      "revision": "63808b23dc8cbc563e630328c0f3770ce95f93d96354a55d2f5bd86939dad3b8",
+      "status": "accepted",
+      "note": "User approved all 18 Group 9 supply trunk junction drawings."
+    },
+    {
+      "id": "9P",
+      "revision": "da872acd24264e1940c7c9201b1e4d581c8d5bc213159554f18c82017b454e13",
+      "status": "accepted",
+      "note": "User approved all 18 Group 9 supply trunk junction drawings."
+    },
+    {
+      "id": "9Q",
+      "revision": "2d14e2286d0863be1681c3eae851782b09fd4099e4421bbacf125415cc6545b1",
+      "status": "accepted",
+      "note": "User approved all 18 Group 9 supply trunk junction drawings."
+    },
+    {
+      "id": "9R",
+      "revision": "daa1e2d33c475956c5227b50d5520c03f40d19dcc6afd6838472694f29243811",
+      "status": "accepted",
+      "note": "User approved all 18 Group 9 supply trunk junction drawings."
+    }
+  ]
+}

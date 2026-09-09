@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="0 0 640 520" role="img" aria-labelledby="title desc">
+<title id="title">2A — Straight round branch takeoff</title><desc id="desc">Connection contours follow the source perspective. Source printed page 163. Reference equivalent length depends on downstream branch count. Review drawing, not to scale.</desc>
+<style>text{font-family:Arial,sans-serif;fill:#243b53}path,ellipse{stroke-linecap:round;stroke-linejoin:round}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<text x="32" y="44" font-size="28" font-weight="700">2A</text><text x="96" y="43" font-size="18">Straight round branch takeoff</text>
+<text x="32" y="76" font-size="13">GROUP 2 · SUPPLY AIR · SOURCE PERSPECTIVE</text>
+<g transform="translate(195.5556 105) scale(1.185185) translate(-70 -230)" fill="none" stroke="#243b53" stroke-width="1.2"><path d="M75 255.48L305 272.26L305 320.26L75 303.48Z" fill="#f8fafc"/><path d="M75 303.48L305 320.26L305 369.26L75 352.48Z" fill="#e2e8f0"/><path d="M120 400L192 323Q201 314 211 320Q220 326 215 334L134 415Z" fill="white"/><ellipse cx="127" cy="408" rx="10" ry="10" fill="white"/></g>
+<text x="32" y="448" font-size="13">Connection contours follow the source perspective.</text>
+<text x="32" y="473" font-size="13">Reference EL varies with downstream branch count.</text>
+<text x="32" y="499" font-size="12">REVIEW DRAWING · NOT TO SCALE · Source: PDF p. 5 / printed p. 163</text>
+</svg>

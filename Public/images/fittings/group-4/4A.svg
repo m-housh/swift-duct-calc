@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="0 0 640 520" role="img" aria-labelledby="title desc">
+<title id="title">4A — Radius boot with rectangular outlet</title>
+<desc id="desc">Source-traced Group 4 fitting. Reference equivalent length 30 feet at 900 FPM and 0.08 IWC per 100 feet. Drawing not to scale.</desc>
+<style>text{font-family:Arial,sans-serif;fill:#243b53}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<text x="32" y="44" font-size="28" font-weight="700">4A</text>
+<text x="112" y="43" font-size="17">Radius boot with rectangular outlet</text>
+<text x="32" y="76" font-size="13">GROUP 4 · SUPPLY AIR BOOT AND STACK HEAD FITTINGS</text>
+<svg x="55" y="104" width="530" height="295" viewBox="44 37 273 287" preserveAspectRatio="xMidYMid meet"><path d="M232 45L226 51M226 51L211 46L185 46L177 52M226 51L226 54M177 52L171 52L64 154L59 165M177 52L182 67M226 54L202 71M226 54L232 62L232 74M182 67L96 148L85 164M182 67L202 71M202 71L104 169M232 74L128 170L114 184L114 191M232 74L276 131M276 131L302 136M276 131L223 185M308 131L303 136M302 136L303 136M302 136L302 137M303 136L303 137M302 137L303 137M302 137L302 138M303 137L303 138M302 138L277 160L273 170M302 138L303 138M303 138L308 145L309 182L309 250L304 259M85 164L59 165M85 164L104 169M59 165L52 172L55 191M104 169L108 190M273 170L265 172L246 192M273 170L275 251M223 185L214 192M223 185L246 192M108 190L55 191M108 190L113 191M55 191L52 204L68 250L88 276L107 292L161 314L203 315L212 311M113 191L114 191M113 191L114 202L192 290L212 306M114 191L214 192M214 192L216 299L212 306M246 192L250 253M275 251L250 253M275 251L304 259M250 253L247 296L251 309M304 259L273 293L251 309M212 306L212 311M251 309L235 316L212 311" fill="none" stroke="#243b53" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<text x="32" y="446" font-size="15">Reference equivalent length: 30 ft</text>
+<text x="32" y="474" font-size="12">900 FPM · 0.08 IWC per 100 ft</text>
+<text x="32" y="500" font-size="12">SOURCE TRACE · NOT TO SCALE · PDF pp. 18–19 / printed p. 168</text>
+</svg>

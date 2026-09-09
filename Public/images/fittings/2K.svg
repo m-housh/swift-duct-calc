@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="0 0 640 520" role="img" aria-labelledby="title desc">
+<title id="title">2K — Angled round takeoff on rectangular base</title><desc id="desc">Angled round takeoff on rectangular base. EL varies with downstream branch count. Source PDF page 6, printed page 164. Schematic, not to scale.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0 0L8 3L0 6Z" fill="#64748b"/></marker></defs>
+<style>text{font-family:Arial,sans-serif;fill:#243b53;stroke:none}path,ellipse{stroke-linejoin:round;stroke-linecap:round}</style>
+<rect width="640" height="520" rx="16" fill="white"/>
+<text x="32" y="44" font-size="28">2K</text><text x="96" y="43" font-size="18">Angled round takeoff on rectangular base</text><text x="32" y="76" font-size="13">GROUP 2 · SUPPLY AIR · PERSPECTIVE SCHEMATIC</text>
+<g stroke="#243b53" stroke-width="2.3" fill="none"><path d="M104 326L194 270L548 325L459 384Z" fill="#f1f5f9" /><path d="M267 215L431 84Q440 78 448 86L456 94Q462 102 454 109L294 234Z" fill="white" /><ellipse cx="444" cy="96" rx="11" ry="17" transform="rotate(-39 444 96)" fill="white"/><path d="M190 330L250 292L360 310L300 350Z" fill="white" /><path d="M190 330V339L300 359L360 319V310" fill="white" /><path d="M210 324Q221 271 249 231Q257 219 267 215Q282 211 294 234Q324 265 340 317L300 341Z" fill="white" /><text x="100" y="408" font-size="15">Rectangular base transitions continuously to an angled round outlet</text></g>
+<text x="32" y="465" font-size="14">EL varies with downstream branch count.</text><text x="32" y="493" font-size="12">REVIEW PILOT · NOT TO SCALE · Source: PDF p. 6 / printed p. 164</text>
+</svg>

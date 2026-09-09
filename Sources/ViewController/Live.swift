@@ -18,9 +18,21 @@ extension ViewController.Request {
     @Dependency(\.pdfClient) var pdfClient
 
     switch route {
+    case .fittings(let picker):
+      return await picker.renderView(on: self)
     case .home:
       return await view {
         HomeView()
+      }
+    case .fittingReference:
+      return MainPage(
+        theme: await theme ?? .default,
+        title: "Fitting reference · Duct Calc",
+        stylesheets: ["/fittings/styles.css"],
+        scripts: ["catalog-data.js", "catalog-rules.js", "reference-core.js", "app.js"]
+          .map { "/fittings/\($0)" }
+      ) {
+        FittingsView(isLoggedIn: isLoggedIn)
       }
     case .privacyPolicy:
       return await view {
@@ -483,7 +495,35 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
   ) async -> AnySendableHTML {
     @Dependency(\.database) var database
 
+    do {
+      let user = try request.currentUser()
+      guard try await database.projects.getForUser(projectID, user.id) != nil else {
+        throw NotFoundError()
+      }
+      let pathID: EquivalentLength.ID?
+      switch self {
+      case .delete(let id), .update(let id, _): pathID = id
+      case .submit(.one(let form)): pathID = form.id
+      case .submit(.two(let form)): pathID = form.id
+      default: pathID = nil
+      }
+      if let pathID {
+        guard let path = try await database.equivalentLengths.get(pathID),
+          path.projectID == projectID
+        else { throw NotFoundError() }
+      }
+    } catch {
+      return p(.class("alert alert-error"), .role("alert")) {
+        "This project or path is unavailable."
+      }
+    }
+
     switch self {
+    case .editor, .savePath, .favorite:
+      return await renderPathEditor(on: request, projectID: projectID)
+
+    case .guided(let route):
+      return await route.renderView(on: request, projectID: projectID)
 
     case .delete(let id):
       return await ResultView {
@@ -504,6 +544,9 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
 
     case .update(let id, let form):
       return await view(on: request, projectID: projectID) {
+        if try await database.equivalentLengths.get(id)?.templateSnapshot != nil {
+          throw ValidationError("Open this path in the guided editor to keep its fitting details.")
+        }
         _ = try await database.equivalentLengths.update(id, .init(form: form, projectID: projectID))
       }
 
@@ -669,6 +712,8 @@ extension SiteRoute.View.UserRoute {
         }
       }
     case .profile(let route):
+      return await route.renderView(on: request)
+    case .templates(let route):
       return await route.renderView(on: request)
     }
   }
