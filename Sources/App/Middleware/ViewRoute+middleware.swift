@@ -17,7 +17,13 @@ extension SiteRoute.View {
       return viewRouteMiddleware
     case .home, .login, .signup, .test, .ductulator, .privacyPolicy, .fittings, .fittingReference:
       return nil
-    case .project, .user:
+    case .project(let route):
+      switch route {
+      case .detail(let id, _), .delete(let id), .update(let id, _):
+        return viewRouteMiddleware + [ProjectOwnershipMiddleware(projectID: id)]
+      default: return viewRouteMiddleware
+      }
+    case .user:
       return viewRouteMiddleware
     }
   }

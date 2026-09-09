@@ -495,6 +495,29 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
   ) async -> AnySendableHTML {
     @Dependency(\.database) var database
 
+    do {
+      let user = try request.currentUser()
+      guard try await database.projects.getForUser(projectID, user.id) != nil else {
+        throw NotFoundError()
+      }
+      let pathID: EquivalentLength.ID?
+      switch self {
+      case .delete(let id), .update(let id, _): pathID = id
+      case .submit(.one(let form)): pathID = form.id
+      case .submit(.two(let form)): pathID = form.id
+      default: pathID = nil
+      }
+      if let pathID {
+        guard let path = try await database.equivalentLengths.get(pathID),
+          path.projectID == projectID
+        else { throw NotFoundError() }
+      }
+    } catch {
+      return p(.class("alert alert-error"), .role("alert")) {
+        "This project or path is unavailable."
+      }
+    }
+
     switch self {
     case .editor, .savePath, .favorite:
       return await renderPathEditor(on: request, projectID: projectID)
