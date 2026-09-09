@@ -44,9 +44,21 @@ where
     chainingTo next: any AsyncResponder
   ) async throws -> Response {
     if request.body.data == nil {
-      let templateJSON = request.method == .POST
+      let templateJSON =
+        request.method == .POST
         && ["/path-templates", "/path-templates/import-preview"].contains(request.url.path)
-      let limit = templateJSON ? 1024 * 1024 : request.application.routes.defaultMaxBodySize.value
+      let path = request.url.path.split(separator: "/")
+      let roomUpload =
+        path.count == 4 && path[0] == "projects"
+        && UUID(uuidString: String(path[1])) != nil && path[2] == "rooms"
+        && ["pdf", "csv"].contains(path[3])
+      let fileUpload =
+        request.method == .POST
+        && (path == ["projects", "import", "pdf"] || roomUpload)
+      let limit =
+        fileUpload
+        ? 11 * 1024 * 1024
+        : templateJSON ? 1024 * 1024 : request.application.routes.defaultMaxBodySize.value
       try await _ = request.body.collect(max: limit)
         .get()
     }
@@ -61,7 +73,8 @@ where
       do {
         return try await next.respond(to: request)
       } catch {
-        request.logger.info("\(routingError)")
+        // Parser errors may include the submitted body; do not log uploaded documents or form data.
+        request.logger.debug("No route matched request", metadata: ["path": "\(request.url.path)"])
 
         guard request.application.environment == .development
         else { throw error }

@@ -11,6 +11,82 @@ import Vapor
 struct ProjectTests {
 
   @Test
+  func importsProjectAndRoomsAtomically() async throws {
+    try await withTestUser { user in
+      @Dependency(\.database) var database
+      let report = Project.PDFImport(
+        project: .mock,
+        rooms: [
+          .init(name: "Dining", heatingLoad: 3846, coolingTotal: 1668),
+          .init(name: "Kitchen", heatingLoad: 3821, coolingTotal: 4085),
+        ])
+      let project = try await database.projects.importPDF(user.id, report, false)
+      #expect(project.sensibleHeatRatio == report.project.sensibleHeatRatio)
+      #expect(project.streetAddress == report.project.streetAddress)
+      let rooms = try await database.rooms.fetch(project.id)
+      #expect(rooms.count == 2)
+      #expect(rooms.allSatisfy { $0.registerCount == 1 && $0.delegatedTo == nil })
+      #expect(try await !database.componentLosses.fetch(project.id).isEmpty)
+      let steps = try await database.projects.getCompletedSteps(project.id)
+      #expect(steps.rooms && steps.frictionRate && !steps.equipmentInfo && !steps.equivalentLength)
+      let second = try await database.projects.importPDF(user.id, report, true)
+      #expect(second.id != project.id)
+      #expect(second.name == "\(project.name) (2)")
+      // Fail after the first room has been saved: the project, rooms and defaults roll back.
+      await #expect(throws: (any Error).self) {
+        try await database.projects.importPDF(
+          user.id,
+          .init(
+            project: .mock,
+            rooms: [
+              report.rooms[0], .init(name: "Invalid", heatingLoad: -1, coolingTotal: 200),
+            ]), true)
+      }
+      #expect(try await database.projects.fetch(user.id, .first).items.count == 2)
+      #expect(try await database.rooms.fetch(project.id).count == 2)
+    }
+  }
+
+  @Test
+  func duplicateImportRequiresConfirmationForNameOrAddress() async throws {
+    try await withTestUser { user in
+      @Dependency(\.database) var database
+      let original = try await database.projects.create(user.id, .mock)
+      let rooms: [Room.Create] = [.init(name: "Dining", heatingLoad: 3846, coolingTotal: 1668)]
+      let sameName = Project.PDFImport(
+        project: .init(
+          name: "  " + original.name.uppercased() + "  ", streetAddress: "Different address",
+          city: "Elsewhere", state: "OH", zipCode: "11111", sensibleHeatRatio: 0.88), rooms: rooms)
+      let sameAddress = Project.PDFImport(
+        project: .init(
+          name: "Different duct system",
+          streetAddress: "  "
+            + original.streetAddress.uppercased().replacingOccurrences(of: " ", with: "  ") + "  ",
+          city: original.city, state: original.state, zipCode: original.zipCode + "-1234",
+          sensibleHeatRatio: 0.88), rooms: rooms)
+      for report in [sameName, sameAddress] {
+        do {
+          _ = try await database.projects.importPDF(user.id, report, false)
+          Issue.record("Expected duplicate confirmation")
+        } catch let conflict as Project.ImportConflict {
+          #expect(conflict.projects.map(\.id) == [original.id])
+        }
+        #expect(try await database.projects.fetch(user.id, .first).items.count == 1)
+      }
+      let another = try await database.projects.importPDF(user.id, sameAddress, true)
+      #expect(another.id != original.id)
+      #expect(try await database.projects.get(original.id) == original)
+      #expect(try await database.rooms.fetch(original.id).isEmpty)
+      // Identical metadata owned by another user must neither warn nor be disclosed.
+      let otherUser = try await database.users.create(
+        .init(email: "other@example.com", password: "super-secret", confirmPassword: "super-secret")
+      )
+      let separate = try await database.projects.importPDF(otherUser.id, sameName, false)
+      #expect(separate.name == sameName.project.name)
+    }
+  }
+
+  @Test
   func projectHappyPaths() async throws {
     try await withTestUser { user in
       @Dependency(\.database.projects) var projects

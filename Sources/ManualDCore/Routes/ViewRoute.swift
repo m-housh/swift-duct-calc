@@ -70,6 +70,7 @@ extension SiteRoute {
 
 extension SiteRoute.View {
   public enum ProjectRoute: Equatable, Sendable {
+    case importPDF(Project.PDFUpload)
     case create(Project.Create)
     case delete(id: Project.ID)
     case detail(Project.ID, DetailRoute)
@@ -84,11 +85,25 @@ extension SiteRoute.View {
     static let rootPath = "projects"
 
     public static let router = OneOf {
+      Route(.case(Self.importPDF)) {
+        Path {
+          rootPath
+          "import"
+          "pdf"
+        }
+        EndOfPath()
+        Method.post
+        Headers { Field("Content-Type") { "multipart/form-data" } }
+        Body().map(.memberwise(Project.PDFUpload.init(file:)))
+      }
       Route(.case(Self.create)) {
+        // Finish matching the endpoint before inspecting the body. Otherwise a POST to
+        // /projects/:id/rooms/pdf reaches FormData with binary multipart data.
         Path { rootPath }
+        EndOfPath()
         Method.post
         Body {
-          FormData {
+          SafeFormData {
             Field("name", .string)
             Field("streetAddress", .string)
             Field("city", .string)
@@ -140,7 +155,7 @@ extension SiteRoute.View {
         }
         Method.patch
         Body {
-          FormData {
+          SafeFormData {
             Optionally {
               Field("name", .string)
             }
@@ -221,6 +236,7 @@ extension SiteRoute.View.ProjectRoute {
 
   public enum RoomRoute: Equatable, Sendable {
     case csv(Room.CSV)
+    case pdf(Room.PDF)
     case delete(id: Room.ID)
     case index
     case submit(Room.Create)
@@ -230,6 +246,17 @@ extension SiteRoute.View.ProjectRoute {
     static let rootPath = "rooms"
 
     public static let router = OneOf {
+      Route(.case(Self.pdf)) {
+        Path {
+          rootPath
+          "pdf"
+        }
+        Headers {
+          Field("Content-Type") { "multipart/form-data" }
+        }
+        Method.post
+        Body().map(.memberwise(Room.PDF.init))
+      }
       Route(.case(Self.csv)) {
         Path {
           rootPath
@@ -258,7 +285,7 @@ extension SiteRoute.View.ProjectRoute {
         Path { rootPath }
         Method.post
         Body {
-          FormData {
+          SafeFormData {
             Field("name", .string)
             Optionally {
               Field("level") {
@@ -288,7 +315,7 @@ extension SiteRoute.View.ProjectRoute {
         }
         Method.patch
         Body {
-          FormData {
+          SafeFormData {
             Optionally {
               Field("name", .string)
             }
@@ -321,7 +348,7 @@ extension SiteRoute.View.ProjectRoute {
         }
         Method.patch
         Body {
-          FormData {
+          SafeFormData {
             Field("projectID") { Project.ID.parser() }
             Optionally {
               Field("sensibleHeatRatio") { Double.parser() }
@@ -362,7 +389,7 @@ extension SiteRoute.View.ProjectRoute {
         Path { rootPath }
         Method.post
         Body {
-          FormData {
+          SafeFormData {
             Field("projectID") { Project.ID.parser() }
             Field("name", .string)
             Field("value") { Double.parser() }
@@ -377,7 +404,7 @@ extension SiteRoute.View.ProjectRoute {
         }
         Method.patch
         Body {
-          FormData {
+          SafeFormData {
             Optionally {
               Field("name", .string)
             }
@@ -420,7 +447,7 @@ extension SiteRoute.View.ProjectRoute {
         Path { rootPath }
         Method.post
         Body {
-          FormData {
+          SafeFormData {
             Field("projectID") { Project.ID.parser() }
             Field("staticPressure") { Double.parser() }
             Field("heatingCFM") { Int.parser() }
@@ -436,7 +463,7 @@ extension SiteRoute.View.ProjectRoute {
         }
         Method.patch
         Body {
-          FormData {
+          SafeFormData {
             Optionally {
               Field("staticPressure", default: nil) { Double.parser() }
             }
@@ -481,7 +508,7 @@ extension SiteRoute.View.ProjectRoute {
           "save-path"
         }
         Method.post
-        Body { FormData { Field("payload", .string) } }
+        Body { SafeFormData { Field("payload", .string) } }
       }
       Route(.case(Self.favorite)) {
         Path {
@@ -489,7 +516,7 @@ extension SiteRoute.View.ProjectRoute {
           "favorite"
         }
         Method.post
-        Body { FormData { Field("payload", .string) } }
+        Body { SafeFormData { Field("payload", .string) } }
       }
       Route(.case(Self.guided)) {
         Path {
@@ -536,7 +563,7 @@ extension SiteRoute.View.ProjectRoute {
         }
         Method.patch
         Body {
-          FormData {
+          SafeFormData {
             Optionally {
               Field("id", default: nil) { EquivalentLength.ID.parser() }
             }
@@ -583,7 +610,7 @@ extension SiteRoute.View.ProjectRoute {
             Key.stepOne.rawValue
           }
           Body {
-            FormData {
+            SafeFormData {
               Optionally {
                 Field("id", default: nil) { EquivalentLength.ID.parser() }
               }
@@ -598,7 +625,7 @@ extension SiteRoute.View.ProjectRoute {
             Key.stepTwo.rawValue
           }
           Body {
-            FormData {
+            SafeFormData {
               Optionally {
                 Field("id", default: nil) { EquivalentLength.ID.parser() }
               }
@@ -618,7 +645,7 @@ extension SiteRoute.View.ProjectRoute {
             Key.stepThree.rawValue
           }
           Body {
-            FormData {
+            SafeFormData {
               Optionally {
                 Field("id", default: nil) { EquivalentLength.ID.parser() }
               }
@@ -740,7 +767,7 @@ extension SiteRoute.View.ProjectRoute {
         }
         Method.post
         Body {
-          FormData {
+          SafeFormData {
             Optionally {
               Field("id") { Room.RectangularSize.ID.parser() }
             }
@@ -788,7 +815,7 @@ extension SiteRoute.View.ProjectRoute {
           }
           Method.post
           Body {
-            FormData {
+            SafeFormData {
               Field("projectID") { Project.ID.parser() }
               Field("type") { TrunkSize.TrunkType.parser() }
               Optionally {
@@ -812,7 +839,7 @@ extension SiteRoute.View.ProjectRoute {
           }
           Method.patch
           Body {
-            FormData {
+            SafeFormData {
               Field("projectID") { Project.ID.parser() }
               Field("type") { TrunkSize.TrunkType.parser() }
               Optionally {
@@ -898,7 +925,7 @@ extension SiteRoute.View {
         Path { rootPath }
         Method.post
         Body {
-          FormData {
+          SafeFormData {
             Field("email", .string)
             Field("password", .string)
             Optionally {
@@ -930,7 +957,7 @@ extension SiteRoute.View {
         Path { rootPath }
         Method.post
         Body {
-          FormData {
+          SafeFormData {
             Field("email", .string)
             Field("password", .string)
             Field("confirmPassword", .string)
@@ -945,7 +972,7 @@ extension SiteRoute.View {
         }
         Method.post
         Body {
-          FormData {
+          SafeFormData {
             Field("userID") { User.ID.parser() }
             Field("firstName", .string)
             Field("lastName", .string)
@@ -1004,7 +1031,7 @@ extension SiteRoute.View.UserRoute {
         Path { rootPath }
         Method.post
         Body {
-          FormData {
+          SafeFormData {
             Field("userID") { User.ID.parser() }
             Field("firstName", .string)
             Field("lastName", .string)
@@ -1027,7 +1054,7 @@ extension SiteRoute.View.UserRoute {
         }
         Method.patch
         Body {
-          FormData {
+          SafeFormData {
             Optionally {
               Field("firstName", .string)
             }
@@ -1076,7 +1103,7 @@ extension SiteRoute.View {
         Path { rootPath }
         Method.post
         Body {
-          FormData {
+          SafeFormData {
             Field("cfm") { Int.parser() }
             Field("frictionRate") { Double.parser() }
             Optionally {

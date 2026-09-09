@@ -125,11 +125,12 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute.GuidedRoute {
       }
       switch self {
       case .index(let draft):
-        _ = try draft.map(GuidedPath.InitialValues.init(draft:))
+        let initialValues = try draft.map(GuidedPath.InitialValues.init(draft:))
         let templates = try await database.pathTemplates.fetch(user.id)
         return await request.view {
           PathTemplatesView(
-            templates: templates, projectID: projectID, choosing: true, draft: draft)
+            templates: templates, projectID: projectID, choosing: true, draft: draft,
+            preferredType: initialValues?.type)
         }
       case .start(let id, let draft):
         guard let template = try await database.pathTemplates.get(user.id, id) else {

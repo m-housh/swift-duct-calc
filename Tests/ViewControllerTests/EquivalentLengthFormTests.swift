@@ -15,14 +15,17 @@ import URLRouting
 struct EquivalentLengthFormTests {
   typealias Route = SiteRoute.View.ProjectRoute.EquivalentLengthRoute
 
-  @Test
-  func templateDraftSurvivesChooserAndStartRoutes() throws {
+  @Test(arguments: ["supply", "return"])
+  func templateDraftSurvivesChooserAndStartRoutes(type: String) throws {
     let draft = #"{"name":"Supply + \"East\" & <West>","straightLengths":[10,25,15]}"#
-    let values = try GuidedPath.InitialValues(draft: draft)
+    let typedDraft = draft.dropLast() + #","type":""# + type + #""}"#
+    let values = try GuidedPath.InitialValues(draft: typedDraft)
     #expect(values.name == "Supply + \"East\" & <West>")
     #expect(values.straightLengths == [10, 25, 15])
+    #expect(values.type?.rawValue == type)
     let routes: [Route.GuidedRoute] = [
-      .index(draft: draft), .start(UUID(), draft: draft), .starter(.return, draft: draft),
+      .index(draft: typedDraft), .start(UUID(), draft: typedDraft),
+      .starter(.return, draft: typedDraft),
       .index(), .start(UUID()), .starter(.supply),
     ]
     for route in routes {
@@ -33,6 +36,44 @@ struct EquivalentLengthFormTests {
     }
   }
 
+  @Test(arguments: [EquivalentLength.EffectiveLengthType.supply, .return], [false, true])
+  func chooserPrioritizesDraftTypeWithoutHidingOtherTemplates(
+    type: EquivalentLength.EffectiveLengthType, hasMatching: Bool
+  ) throws {
+    let other: EquivalentLength.EffectiveLengthType = type == .supply ? .return : .supply
+    func template(_ type: EquivalentLength.EffectiveLengthType) -> PathTemplate {
+      .init(
+        id: UUID(), userID: UUID(), revision: UUID(),
+        configuration: .init(name: "Saved \(type.rawValue)", type: type, steps: []),
+        createdAt: .now, updatedAt: .now)
+    }
+    let projectID = UUID()
+    let templates = [template(other)] + (hasMatching ? [template(type)] : [])
+    let draft =
+      "{\"name\":\"East + West\",\"type\":\"\(type.rawValue)\",\"straightLengths\":[10,25,15]}"
+    let html = PathTemplatesView(
+      templates: templates, projectID: projectID, choosing: true, draft: draft,
+      preferredType: try GuidedPath.InitialValues(draft: draft).type
+    ).render()
+    let preferred = try #require(html.range(of: "data-template-type=\"\(type.rawValue)\""))
+    let remaining = try #require(html.range(of: "data-template-type=\"\(other.rawValue)\""))
+    #expect(preferred.lowerBound < remaining.lowerBound)
+    #expect(html.contains("Saved \(other.rawValue)"))
+    #expect(html.contains("Use starter \(type.rawValue)") == !hasMatching)
+    #expect(!html.contains("Use starter \(other.rawValue)"))
+    let links = try NSRegularExpression(
+      pattern: #"(?:href|action)="([^"]*/(?:start|starter)/[^"]+)""#
+    )
+    .matches(in: html, range: NSRange(html.startIndex..., in: html))
+    #expect(links.count == 2)
+    for link in links {
+      let range = try #require(Range(link.range(at: 1), in: html))
+      let url = try #require(URLComponents(string: String(html[range])))
+      #expect(url.queryItems?.first { $0.name == "draft" }?.value == draft)
+    }
+
+  }
+
   @Test
   func invalidTemplateDraftsAreRejected() throws {
     for draft in [
@@ -40,12 +81,13 @@ struct EquivalentLengthFormTests {
       #"{"name":"Test","straightLengths":[0]}"#,
       #"{"name":"Test","straightLengths":[10.5]}"#,
       #"{"name":"Test","straightLengths":"10,25"}"#,
+      #"{"name":"Test","type":"invalid","straightLengths":[]}"#,
       String(repeating: "x", count: 4097),
     ] {
       #expect(throws: (any Error).self) { try GuidedPath.InitialValues(draft: draft) }
     }
     let empty = try GuidedPath.InitialValues(draft: #"{"name":"","straightLengths":[]}"#)
-    #expect(empty.name.isEmpty && empty.straightLengths.isEmpty)
+    #expect(empty.name.isEmpty && empty.straightLengths.isEmpty && empty.type == nil)
   }
 
   @Test(arguments: ["POST", "PATCH"])

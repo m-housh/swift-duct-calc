@@ -111,20 +111,22 @@ p-6 w-full">
                   <div class="modal-box">
                     <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="projectForm.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
                     <h1 class="text-3xl font-bold pb-6 ps-2">Project</h1>
-                    <form class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000" hx-target="body" hx-swap="outerHTML">
-                      <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000000">
-                      Name<label class="input w-full"><span class="label"></span>
-                      <input name="name" type="text" value="Testy McTestface" placeholder="Project Name" required autofocus>
-                      Address</label><label class="input w-full"><span class="label"></span>
-                      <input name="streetAddress" type="text" value="1234 Sesame Street" placeholder="Street Address" required>
-                      City</label><label class="input w-full"><span class="label"></span>
-                      <input name="city" type="text" value="Monroe" placeholder="City" required>
-                      State</label><label class="input w-full"><span class="label"></span>
-                      <input name="state" type="text" value="OH" placeholder="State" required>
-                      Zip</label><label class="input w-full"><span class="label"></span>
-                      <input name="zipCode" type="text" value="55555" placeholder="Zip Code" required></label>
-                      <button class="btn btn-secondary btn-block my-6" type="submit">Submit</button>
-                    </form>
+                    <div id="projectDetailsForm">
+                      <form class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000" hx-target="body" hx-swap="outerHTML">
+                        <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000000">
+                        Name<label class="input w-full"><span class="label"></span>
+                        <input name="name" type="text" value="Testy McTestface" placeholder="Project Name" required autofocus>
+                        Address</label><label class="input w-full"><span class="label"></span>
+                        <input name="streetAddress" type="text" value="1234 Sesame Street" placeholder="Street Address" required>
+                        City</label><label class="input w-full"><span class="label"></span>
+                        <input name="city" type="text" value="Monroe" placeholder="City" required>
+                        State</label><label class="input w-full"><span class="label"></span>
+                        <input name="state" type="text" value="OH" placeholder="State" required>
+                        Zip</label><label class="input w-full"><span class="label"></span>
+                        <input name="zipCode" type="text" value="55555" placeholder="Zip Code" required></label>
+                        <button class="btn btn-secondary btn-block my-6" type="submit">Submit</button>
+                      </form>
+                    </div>
                   </div>
                 </dialog>
               </div>
