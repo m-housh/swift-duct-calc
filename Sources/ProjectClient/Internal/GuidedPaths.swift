@@ -56,6 +56,16 @@ extension ProjectClient {
       request.straightLengths.allSatisfy({ $0 > 0 })
     else { throw ValidationError("Check the path name, lengths, and fitting rows.") }
     let configuration = snapshot.configuration
+    let paths = try await database.equivalentLengths.fetch(projectID)
+    guard
+      !paths.contains(where: {
+        $0.id != existing?.id && $0.type == configuration.type && $0.name == request.name
+      })
+    else {
+      throw ValidationError(
+        "A \(configuration.type.rawValue) path named \"\(request.name)\" already exists in this project. Choose a different name or edit the existing path."
+      )
+    }
     for step in configuration.steps {
       let rows = request.rows.filter { $0.stepID == step.id }
       guard step.allowsSkipping || !rows.isEmpty else {

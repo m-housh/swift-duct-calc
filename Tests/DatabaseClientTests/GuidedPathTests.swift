@@ -8,6 +8,57 @@ import Testing
 
 @Suite
 struct GuidedPathTests {
+  @Test
+  func duplicateNamesKeepExistingPathsAndAllowRenameRetry() async throws {
+    try await withTestUserAndProject(setupDependencies: { $0.templateFittingClient = .liveValue }) {
+      user, project in
+      @Dependency(\.database) var database
+      let client = ProjectClient.liveValue
+      let configuration = PathTemplate.starterConfigurations().first { $0.type == .supply }!
+      let template = try await client.createPathTemplate(
+        userID: user.id, configuration: configuration)
+      let snapshot = PathTemplate.Snapshot(template: template)
+      let rows = zip(configuration.steps, ["1B", "2Q", "4R"]).map { step, code in
+        GuidedPath.Row(
+          id: UUID(), stepID: step.id, fittingID: .init(rawValue: code),
+          inputs: code == "2Q" ? .downstreamBranches(2) : .fixed, quantity: 1
+        )
+      }
+      let original = try await client.saveGuidedPath(
+        userID: user.id, projectID: project.id,
+        request: .init(name: "Bang", straightLengths: [10, 15], snapshot: snapshot, rows: rows))
+      #expect(original.groups.map(\.value) == [10, 15, 20])
+      #expect(original.totalEquivalentLength == 70)
+      do {
+        _ = try await client.saveGuidedPath(
+          userID: user.id, projectID: project.id,
+          request: .init(name: "Bang", straightLengths: [10, 15], snapshot: snapshot, rows: rows))
+        Issue.record("Expected a duplicate-name validation error")
+      } catch let error as ValidationError {
+        #expect(error.message.contains("A supply path named \"Bang\" already exists"))
+      }
+      #expect(try await database.equivalentLengths.fetch(project.id) == [original])
+      let renamed = try await client.saveGuidedPath(
+        userID: user.id, projectID: project.id,
+        request: .init(
+          name: "Bang upstairs", straightLengths: [10, 15], snapshot: snapshot, rows: rows))
+      await #expect(throws: ValidationError.self) {
+        try await client.saveGuidedPath(
+          userID: user.id, projectID: project.id,
+          request: .init(
+            id: renamed.id, name: "Bang", straightLengths: [], snapshot: snapshot, rows: rows))
+      }
+      #expect(try await database.equivalentLengths.get(renamed.id) == renamed)
+      _ = try await database.equivalentLengths.create(
+        .init(projectID: project.id, name: "Bang", type: .return, straightLengths: [], groups: []))
+      let unchanged = try await client.saveGuidedPath(
+        userID: user.id, projectID: project.id,
+        request: .init(
+          id: original.id, name: "Bang", straightLengths: [10, 15], snapshot: snapshot, rows: rows))
+      #expect(unchanged.id == original.id)
+    }
+  }
+
   static var configuration: PathTemplate.Configuration {
     .init(
       name: "Test supply", type: .supply,

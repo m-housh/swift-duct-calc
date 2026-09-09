@@ -338,3 +338,10 @@ an older cached script cannot restore the former page-navigation behavior.
 `scripts/check_template_handoff.cjs` checks name-only, lengths-only, and combined
 input with obsolete scripts intercepted at their old URLs. All cases retain the
 same dialog and URL, carry the initial values, and show no leave-site prompt.
+
+Guided saves check for an existing path with the same name and supply/return type
+within the project, excluding the path being edited. A duplicate names the conflict
+and asks for a different name or an edit to the existing path. The draft stays in
+the modal for retry. Regression coverage includes the reported 1B, 2Q with two
+downstream branches, and 4R combination, duplicate creates/renames, same-name edits,
+and successful save after changing the name. The existing path remains unchanged.
