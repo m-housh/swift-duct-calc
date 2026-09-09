@@ -7,6 +7,14 @@ import Testing
 @testable import FittingClient
 
 struct CatalogReviewTests {
+  private func reviewClient(path: String) async throws -> FittingClient {
+    try await withDependencies {
+      $0.fileClient.readFile = { try Data(contentsOf: URL(fileURLWithPath: $0)) }
+    } operation: {
+      try await FittingClient.live(reviewCatalogPath: path)
+    }
+  }
+
   func fixture() throws -> URL {
     let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
       .deletingLastPathComponent().deletingLastPathComponent()
@@ -30,7 +38,7 @@ struct CatalogReviewTests {
     let url = try fixture()
     defer { try? FileManager.default.removeItem(at: url) }
     let before = try Data(contentsOf: url)
-    let client = try await FittingClient.live(reviewCatalogPath: url.path)
+    let client = try await reviewClient(path: url.path)
     let review = try await client.catalogReview()
     #expect(client.catalogReviewEnabled())
     let evaluation = try await client.evaluate(
@@ -65,7 +73,9 @@ struct CatalogReviewTests {
       try await client.evaluate(.init(pathType: .supply, fittingID: "4A", inputs: .fixed))
         == evaluation)
     let packaged = try await withDependencies {
-      $0.fileClient.readFile = { _ in after }
+      $0.fileClient.readFile = { path in
+        path.hasSuffix("/catalog.json") ? after : try Data(contentsOf: URL(fileURLWithPath: path))
+      }
     } operation: {
       try await FittingClient.live()
     }
@@ -84,7 +94,7 @@ struct CatalogReviewTests {
   @Test func staleAndInvalidSubmissionsCannotChangeTheFile() async throws {
     let url = try fixture()
     defer { try? FileManager.default.removeItem(at: url) }
-    let client = try await FittingClient.live(reviewCatalogPath: url.path)
+    let client = try await reviewClient(path: url.path)
     let review = try await client.catalogReview()
     let saved = try await client.saveCatalogReview(
       .init(
@@ -125,7 +135,7 @@ struct CatalogReviewTests {
   @Test func concurrentReviewsCannotOverwriteTheSameBaseline() async throws {
     let url = try fixture()
     defer { try? FileManager.default.removeItem(at: url) }
-    let client = try await FittingClient.live(reviewCatalogPath: url.path)
+    let client = try await reviewClient(path: url.path)
     let review = try await client.catalogReview()
     func attempt(_ id: Fitting.ID) async -> Bool {
       do {
@@ -170,7 +180,7 @@ struct CatalogReviewTests {
     let compact = try JSONSerialization.data(
       withJSONObject: JSONSerialization.jsonObject(with: Data(contentsOf: url)))
     try compact.write(to: url)
-    let client = try await FittingClient.live(reviewCatalogPath: url.path)
+    let client = try await reviewClient(path: url.path)
     let review = try await client.catalogReview()
     await #expect(throws: CatalogReviewError.unsupportedFormatting) {
       try await client.saveCatalogReview(

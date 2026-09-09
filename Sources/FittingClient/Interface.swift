@@ -12,6 +12,7 @@ extension DependencyValues {
 /// Project-independent fitting catalog, source identity, artwork and equivalent-length rules.
 @DependencyClient
 public struct FittingClient: Sendable {
+  public var reference: @Sendable () throws -> FittingReference
   public var catalogReviewEnabled: @Sendable () -> Bool = { false }
   public var catalogReview: @Sendable () async throws -> Fitting.CatalogReview
   public var saveCatalogReview:

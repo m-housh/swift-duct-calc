@@ -8,9 +8,10 @@ The two catalog files are maintained directly:
 
 - `Sources/FittingClient/Resources/catalog.json` holds the picker's 227 fitting
   definitions, calculation rules, artwork paths, and duct-shape classifications.
-- `Public/fittings/catalog-data.js` holds the public reference's 231 records,
-  including its separate Group 11 concept. `catalog-rules.js` adapts their tables
-  for display and export. This reference data is separate from calculation rules.
+- `Sources/FittingClient/Resources/reference.json` holds the public reference's 231 records,
+  including its separate Group 11 concept and normalized source tables. Swift
+  renders and exports these records. This transcription is separate from reviewed
+  calculation rules; the browser has no catalog or table adapters.
 
 Together they use 234 distinct SVG files under `Public/images/fittings` and
 `Public/fittings/concepts`. Each SVG is self-contained. Some embed raster artwork;

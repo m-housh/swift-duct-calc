@@ -14,11 +14,13 @@ The view controller uses its existing `isLoggedIn` helper (via
 Guest visitors see the complete reference and a sign-in link. Login returns to
 the same fitting and filters, with the requested data format open. A direct
 `data=json` query does not enable data tools for a guest. This is a convenience
-feature for signed-in users: the underlying reference, SVGs, and catalog assets
-are public, and no private catalog or live API is introduced.
+feature for signed-in users. Guests can still browse every reference and SVG.
+The bundled reference resource is no longer served as a JavaScript asset.
 
 The typed `FittingsQuery` holds optional `system`, `group`, `fitting`, `q`, `type`,
-and `data` fields. The browser normalizes unsupported values and updates the URL.
+`data`, `scope`, and `download` fields. Swift normalizes unsupported values and
+renders canonical navigation links. `scope=filtered` selects all matching records;
+`download=1` returns an authenticated JSON/CSV attachment.
 For example, `/fittings?system=supply&group=8&fitting=8A-smooth` opens an elbow;
 adding `data=csv` opens its CSV record when signed in. JSON/CSV export schemas
 and the path-entry example remain experimental. The reference retains its own
@@ -44,21 +46,36 @@ the application and development workflow.
 ## Assets and verification
 
 The app view is `Sources/ViewController/Views/Fittings/FittingsView.swift`.
-Served scripts/styles live under `Public/fittings`; approved SVGs are referenced
-in place under `Public/images/fittings`. `catalog-data.js` is the checked-in
-reference data; there is no generation step. Validate it with:
+`FittingClient` loads `Resources/reference.json` once at startup through `FileClient`.
+`FittingReference` owns the typed reference records, filtering, and export encoding.
+`FittingReferencePage` normalizes query state for both HTML and downloads. Group
+applicability comes from the calculation catalog. Elementary renders the complete
+reference, including source tables and the optional data inspector.
+
+Normal links and GET forms work without JavaScript. `Public/fittings/app.js` adds
+debounced search and navigation by fetching server-rendered HTML, restores focus
+and scroll position, handles browser history, and provides clipboard access.
+It contains no fitting records, table adapters, filtering, or export serialization.
+Downloads use the server's authenticated response and work without JavaScript.
+Scoped CSS and the Group 11 concept remain under `Public/fittings`; other SVGs
+remain under `Public/images/fittings`.
+
+The resource is maintained directly, with no generation step. During migration,
+all 231 records were compared against the previous JavaScript JSON exports,
+including every table, null value, source condition, and citation. Validate assets with:
 
 ```sh
 node scripts/check_fitting_reference.cjs
 ```
 
-`swift test --filter FittingsRouteTests` exercises public access, actual login
+`swift test --filter 'FittingReferenceTests|FittingsRouteTests'` exercises public access, actual login
 cookies, public-page user recognition, protected-route guards, logout, stale
-sessions, query round trips, and HTMX continuation. Middleware runs in tests as
+sessions, query round trips, server-rendered tables, authenticated downloads, filtering,
+lossless JSON/CSV exports, and HTMX continuation. Middleware runs in tests as
 it does in the application. View snapshots cover navigation link changes.
 
 
-The reference maintains its own table adapters and the one Group 11 concept
+The reference retains normalized source tables and the one Group 11 concept
 illustration it displays. All drawings are final, self-contained SVGs. The
 artwork review, extraction, and packaging tooling has been retired. See
 [finished fitting assets](fitting-assets.md).
@@ -90,21 +107,26 @@ The reference exports the checked-in reference transcription. The reviewed
 of calculation behavior. Its **189 reviewed classifications** were preserved
 byte-for-byte during integration. Adapting the reference to that catalog needs
 explicit mapping of variant IDs, source tables, review status, and Group 11.
-The two data schemas remain separate. Both use the finished SVG assets.
+Both resources now live in `FittingClient`, with distinct meanings. `reference.json`
+preserves source transcription and experimental exports; `catalog.json` owns
+reviewed calculation behavior. This migration does not reinterpret reference tables
+as audited rules or change saved project calculations. Consolidating their source
+values still requires the mappings above. Both use the finished SVG assets.
 The reference retains its concept illustration under
 `Public/fittings/concepts`; the picker's three Group 11 drawings under
 `Public/images/fittings/group-11` are unchanged.
 
 ### Validation of the integrated application
 
-- **150 Swift tests in 33 suites pass**, including actual session/login middleware,
+- **222 Swift tests in 45 suites pass**, including actual session/login middleware,
   public reference queries, protected picker/review routes, fragment responses,
   catalog calculations, saved paths, and combined view snapshots.
 - `node scripts/check_fitting_reference.cjs` passes for 231 records, 12 groups,
-  standalone artwork, citations, and lossless CSV/JSON exports.
+  standalone artwork, citations, and normalized tables. Swift tests check lossless
+  CSV/JSON exports for every record.
 - `scripts/check_fitting_reference_browser.cjs` passes guest access, real login and
-  HTMX return state, persisted Nord theme, record/filtered downloads, path examples,
-  logout, and mobile layout.
+  HTMX return state, persisted Nord theme, record/filtered downloads, path examples, browser history, search focus,
+  browsing and downloads without JavaScript, logout, and mobile layout.
 - The path, preference, favorites, edge-case, modal, and catalog-review browser
   checks pass against an isolated database and disposable review catalog. These
   include save/reopen, server-authoritative values, stale saves, stable favorites,

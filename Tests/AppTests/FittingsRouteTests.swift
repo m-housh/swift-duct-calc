@@ -1,6 +1,7 @@
 import App
 import DatabaseClient
 import EnvVars
+import Foundation
 import ManualDCore
 import Testing
 import URLRouting
@@ -23,6 +24,16 @@ struct FittingsRouteTests {
       #expect(response.status == .ok)
       #expect(response.body.string.contains("data-tools=\"disabled\""))
       #expect(response.body.string.contains("/fittings/app.js"))
+      #expect(response.body.string.contains("class=\"source-table\""))
+      #expect(response.body.string.contains("data-select=\"8A-smooth\""))
+      #expect(!response.body.string.contains("catalog-data.js"))
+      #expect(!response.body.string.contains("Enable JavaScript"))
+      let guestDownload = try await client.sendRequest(.GET, "/fittings?data=json&download=1")
+      #expect(guestDownload.status == .unauthorized)
+      for file in ["catalog-data.js", "catalog-rules.js", "reference-core.js"] {
+        let removed = try await client.sendRequest(.GET, "/fittings/\(file)")
+        #expect(removed.status == .notFound)
+      }
       #expect(response.body.string.contains("/css/output.css"))
       #expect(response.body.string.contains("/images/mand_logo_sm.webp"))
       #expect(response.body.string.contains("support@ductcalc.pro"))
@@ -38,7 +49,25 @@ struct FittingsRouteTests {
 
       let script = try await client.sendRequest(.GET, "/fittings/app.js")
       #expect(script.status == .ok)
-      #expect(script.body.string.contains("canUseData"))
+      #expect(script.body.string.contains("Swift owns records"))
+    }
+  }
+
+  @Test
+  func formQueriesDecodeSpacesWithoutLosingLiteralPlusSigns() async throws {
+    try await withApp(configure: configuredApp) { app in
+      let client = try app.testing()
+      for query in ["8a+smooth", "8a%20smooth"] {
+        let response = try await client.sendRequest(.GET, "/fittings?group=all&q=\(query)")
+        #expect(response.body.string.contains("value=\"8a smooth\""))
+        #expect(response.body.string.contains("data-select=\"8A-smooth\""))
+      }
+      let literalPlus = try await client.sendRequest(.GET, "/fittings?group=all&q=8a%2Bsmooth")
+      #expect(literalPlus.body.string.contains("value=\"8a+smooth\""))
+      let markup = try await client.sendRequest(
+        .GET, "/fittings?group=all&q=%22%3E%3Cscript%3Ealert%281%29%3C%2Fscript%3E")
+      #expect(!markup.body.string.contains("value=\"\"><script>"))
+      #expect(markup.body.string.contains("value=\"&quot;>"))
     }
   }
 
@@ -72,6 +101,21 @@ struct FittingsRouteTests {
       #expect(reference.body.string.contains("data-tools=\"enabled\""))
       #expect(reference.body.string.contains("/projects"))
       #expect(reference.body.string.contains("data-theme=\"nord\""))
+
+      let download = try await client.sendRequest(
+        .GET, "/fittings?group=8&fitting=8A-smooth&data=json&download=1", headers: headers)
+      #expect(download.status == .ok)
+      #expect(
+        download.headers.first(name: .contentDisposition)
+          == "attachment; filename=\"fitting-reference.json\"")
+      #expect(download.headers.first(name: .cacheControl) == "private, no-store")
+      let exported =
+        try JSONSerialization.jsonObject(with: Data(download.body.string.utf8)) as! [String: Any]
+      #expect(
+        (exported["fittings"] as! [[String: Any]]).map { $0["id"] as! String } == ["8A-smooth"])
+      let missing = try await client.sendRequest(
+        .GET, "/fittings?q=does-not-exist&data=csv&download=1", headers: headers)
+      #expect(missing.status == .notFound)
 
       let ductulator = try await client.sendRequest(.GET, "/ductulator", headers: headers)
       #expect(ductulator.status == .ok)

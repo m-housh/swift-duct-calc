@@ -17,7 +17,8 @@ struct FittingLiveTests {
     let client = try await withDependencies {
       $0.fileClient.readFile = { path in
         await reads.append(path)
-        return fixture
+        return path.hasSuffix("/catalog.json")
+          ? fixture : try Data(contentsOf: URL(fileURLWithPath: path))
       }
     } operation: {
       try await FittingClient.live()
@@ -35,11 +36,16 @@ struct FittingLiveTests {
       return
     }
     #expect(calculation.catalogRevision == "injected-test-catalog")
+    _ = try client.reference()
     let paths = await reads.paths
-    #expect(paths.count == 1)
+    #expect(paths.count == 2)
+    #expect(
+      Set(paths.map { URL(fileURLWithPath: $0).lastPathComponent }) == [
+        "catalog.json", "reference.json",
+      ])
     let path = try #require(paths.first)
     #expect(path.hasPrefix("/"))
-    #expect(URL(fileURLWithPath: path).lastPathComponent == "catalog.json")
+    #expect(paths.allSatisfy { $0.hasPrefix("/") })
   }
 
   @Test func readFailureThrowsDuringConstruction() async {
