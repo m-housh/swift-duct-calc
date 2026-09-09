@@ -29,6 +29,7 @@ struct FittingsRouteTests {
       #expect(response.body.string.contains("data-theme=\"default\""))
       #expect(!response.body.string.contains("DESIGN LAB"))
       #expect(!response.body.string.contains("/prototypes/"))
+      #expect(!response.body.string.contains(".pdf"))
       #expect(response.headers.first(name: .cacheControl) == "private, no-store")
       #expect(response.headers.first(name: .vary) == "Cookie, HX-Request")
 

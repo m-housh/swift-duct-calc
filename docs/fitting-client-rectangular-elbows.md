@@ -1,5 +1,9 @@
 # 8B and 8C: rectangular radius elbows
 
+Source-file paths and review hashes below record the completed import. Those
+files are now retained in Git history; the app uses the
+[finished SVGs and catalogs](fitting-assets.md) without a PDF or regeneration step.
+
 This slice adds the rectangular radius elbow without turning vanes (8B) and with
 turning vanes (8C). Catalog revision `fitting-catalog-v8` contains 150 fitting
 choices. Both fittings are available on supply and return paths. Production

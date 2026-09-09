@@ -1,5 +1,9 @@
 # Original template input audit
 
+This audit records the completed source review. The PDF is retained in Git
+history; current checks use the imported rules and test expectations. See
+[finished fitting assets](fitting-assets.md).
+
 This document records the template branch's original source audit. The integrated
 application uses the current `FittingClient` for all numeric evaluation. The
 historical restrictions below describe the original template form options. Current

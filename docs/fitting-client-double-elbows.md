@@ -1,5 +1,9 @@
 # Double elbows and inside-corner offsets
 
+Source-file paths and review hashes below record the completed import. Those
+files are now retained in Git history; the app uses the
+[finished SVGs and catalogs](fitting-assets.md) without a PDF or regeneration step.
+
 Catalog revision `fitting-catalog-v11` contains 170 fitting choices and completes
 all 25 Group 8 artwork identities. The user confirmed matching 90° elbow pairs
 for 8L/8M and the printed inside-corner radius choices for 8O. Mitered is the

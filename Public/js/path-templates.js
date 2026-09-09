@@ -57,7 +57,7 @@
       for (const choice of step.choices) {
         if (!definitions.has(choice.fittingID)) definitions.set(choice.fittingID, {
           id: choice.fittingID, group: step.group, name: `Unavailable fitting (${choice.fittingID})`,
-          sourcePages: [], notes: [], requirements: { unavailable: { _0: 'Choose a current fitting.' } }
+          notes: [], requirements: { unavailable: { _0: 'Choose a current fitting.' } }
         });
       }
     }
@@ -170,9 +170,7 @@
       )}${unavailable ? '<p class="text-warning">Guided inputs are not available for this fitting. Use the project picker.</p>' : ''}${source(d)}</article>`;
     }
     function source(d) {
-      const links = d.sourcePages.length
-        ? d.sourcePages.map((page) => `<a class="link block" href="/files/ManD.Groups.pdf#page=${page}" target="_blank" rel="noopener">Source PDF, page ${page}</a>`).join('')
-        : `<a class="link block" href="/fittings?fitting=${encodeURIComponent(d.id)}" target="_blank" rel="noopener">Fitting reference and source</a>`;
+      const links = `<a class="link block" href="/fittings?fitting=${encodeURIComponent(d.id)}" target="_blank" rel="noopener">Fitting reference</a>`;
       return `<details class="text-sm mt-2"><summary class="cursor-pointer">Reference and conditions</summary>${d.notes.map((n) => `<p class="mt-2">${esc(n)}</p>`).join('')}${links}</details>`;
     }
     function fields(d, inputs, scope) {

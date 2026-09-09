@@ -1,5 +1,9 @@
 # Group 12 transitions, plenum passages, and squeezes
 
+Source-file paths and review hashes below record the completed import. Those
+files are now retained in Git history; the app uses the
+[finished SVGs and catalogs](fitting-assets.md) without a PDF or regeneration step.
+
 Catalog revision `fitting-catalog-v13` contains 226 choices. All 24 Group 12
 identities are now implemented on supply and return paths. Group 11 is the only
 remaining group without production rules. Step-3 picker and persistence integration

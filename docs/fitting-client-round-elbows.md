@@ -1,5 +1,9 @@
 # 8A round elbows: typed picker inputs
 
+Source-file paths and review hashes below record the completed import. Those
+files are now retained in Git history; the app uses the
+[finished SVGs and catalogs](fitting-assets.md) without a PDF or regeneration step.
+
 This slice implements the three R/D-based 8A constructions: smooth round,
 four/five-piece round, and three-piece round. Catalog revision `fitting-catalog-v7`
 contains 148 fitting choices. This is the historical R/D slice; the [remaining 8A constructions](fitting-client-8a-constructions.md)

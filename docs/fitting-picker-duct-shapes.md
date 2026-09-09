@@ -34,22 +34,22 @@ a curved heel on a rectangular boot does not make its duct connection round.
 Round therefore starts **4G, 4H, 4I, 4J, 4K, 4L**. Rectangular starts
 **4A, 4B, 4C, 4D, 4E, 4F**. Source order is retained within each set.
 
-Examples from the source references:
+Examples in the finished drawings:
 
-- [4A](../Public/images/fittings/references/group-4/4A.png) and
-  [4D](../Public/images/fittings/references/group-4/4D.png) have rectangular connections.
+- [4A](../Public/images/fittings/group-4-enhanced/4A.svg) and
+  [4D](../Public/images/fittings/group-4-enhanced/4D.svg) have rectangular connections.
   The inferred 4D name mentioning a “round throat” must not control its ranking.
-- [4G](../Public/images/fittings/references/group-4/4G.png) and
-  [4I](../Public/images/fittings/references/group-4/4I.png) show round duct collars.
-- [4Y](../Public/images/fittings/references/group-4/4Y.png) and
-  [4AA](../Public/images/fittings/references/group-4/4AA.png) have rectangular register
+- [4G](../Public/images/fittings/group-4-enhanced/4G.svg) and
+  [4I](../Public/images/fittings/group-4-enhanced/4I.svg) show round duct collars.
+- [4Y](../Public/images/fittings/group-4-enhanced/4Y.svg) and
+  [4AA](../Public/images/fittings/group-4-enhanced/4AA.svg) have rectangular register
   faces but round duct necks.
-- [4AF](../Public/images/fittings/references/group-4/4AF.png) has a rectangular side
-  connection; [4AG](../Public/images/fittings/references/group-4/4AG.png) has round connections.
+- [4AF](../Public/images/fittings/group-4-enhanced/4AF.svg) has a rectangular side
+  connection; [4AG](../Public/images/fittings/group-4-enhanced/4AG.svg) has round connections.
 
-[The Group 4 source review](group-4-review.md) links every reference drawing. This
-mapping is explicit so future additions cannot silently pass the full-catalog audit
-by inheriting the artwork's broad `mixed` classification.
+This mapping is explicit so classifications do not inherit the artwork's broad
+`mixed` label. The [finished SVG assets](fitting-assets.md) replace the retired
+source-review workflow.
 
 Swift checks verify that every rendered card follows its catalog metadata, including
 when a development review changes it. No classification exception table remains in

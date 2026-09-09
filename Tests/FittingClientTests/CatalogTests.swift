@@ -76,7 +76,7 @@ struct FittingCatalogTests {
     #expect(wrongShape == .unavailable(.unsupportedShape))
     let wrongView = try await client.artwork(.init(fittingID: "1F", view: .assembly))
     #expect(wrongView == .unavailable(.unsupportedView))
-    let unknown = try await client.artwork(.init(fittingID: "../../files/ManD.Groups.pdf"))
+    let unknown = try await client.artwork(.init(fittingID: "../../Package.swift"))
     #expect(unknown == .unavailable(.unknownFitting))
   }
 
