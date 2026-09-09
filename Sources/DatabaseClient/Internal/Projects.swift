@@ -10,6 +10,59 @@ extension DatabaseClient.Projects: TestDependencyKey {
 
   public static func live(database: any Database) -> Self {
     .init(
+      importPDF: { userID, report, confirmDuplicate in
+        try await database.transaction { transaction in
+          guard !report.rooms.isEmpty else {
+            throw RoomImportError("No room loads were found to import.")
+          }
+          guard let shr = report.project.sensibleHeatRatio, shr.isFinite, shr > 0, shr <= 1 else {
+            throw RoomImportError("The report has no valid sensible heat ratio.")
+          }
+          let model = report.project.toModel(userID: userID)
+          model.sensibleHeatRatio = shr
+          // A project import always creates a new project; keep existing projects intact.
+          let existing = try await ProjectModel.query(on: transaction)
+            .filter(\.$user.$id == userID).all()
+          func normalized(_ value: String) -> String {
+            value.split(whereSeparator: \.isWhitespace).joined(separator: " ").lowercased()
+          }
+          let matches = existing.filter {
+            normalized($0.name) == normalized(report.project.name)
+              || (normalized($0.streetAddress) == normalized(report.project.streetAddress)
+                && normalized($0.zipCode).prefix(5) == normalized(report.project.zipCode).prefix(5))
+          }
+          if !confirmDuplicate && !matches.isEmpty {
+            throw Project.ImportConflict(projects: try matches.map { try $0.toDTO() })
+          }
+          let names = Set(existing.map { normalized($0.name) })
+          var suffix = 2
+          while names.contains(normalized(model.name)) {
+            model.name = "\(report.project.name) (\(suffix))"
+            suffix += 1
+          }
+          try await model.validateAndSave(on: transaction)
+          let projectID = try model.requireID()
+          var roomNames = Set<String>()
+          for room in report.rooms {
+            guard
+              roomNames.insert(
+                room.name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+              ).inserted
+            else {
+              throw RoomImportError("The report contains repeated room names.")
+            }
+            let roomModel = RoomModel(
+              name: room.name, level: room.level?.rawValue, heatingLoad: room.heatingLoad,
+              coolingLoad: .init(total: room.coolingTotal, sensible: room.coolingSensible),
+              registerCount: 1, projectID: projectID)
+            try await roomModel.validateAndSave(on: transaction)
+          }
+          for loss in ComponentPressureLoss.Create.default(projectID: projectID) {
+            try await loss.toModel().validateAndSave(on: transaction)
+          }
+          return try model.toDTO()
+        }
+      },
       create: { userID, request in
         let model = request.toModel(userID: userID)
         try await model.validateAndSave(on: database)

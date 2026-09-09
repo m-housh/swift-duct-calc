@@ -15,6 +15,7 @@ let package = Package(
     .library(name: "FittingClient", targets: ["FittingClient"]),
     .library(name: "HTMLSnapshotTesting", targets: ["HTMLSnapshotTesting"]),
     .library(name: "PdfClient", targets: ["PdfClient"]),
+    .library(name: "PdfImportClient", targets: ["PdfImportClient"]),
     .library(name: "ProjectClient", targets: ["ProjectClient"]),
     .library(name: "ManualDCore", targets: ["ManualDCore"]),
     .library(name: "ManualDClient", targets: ["ManualDClient"]),
@@ -113,6 +114,8 @@ let package = Package(
         .target(name: "App"),
         .target(name: "DatabaseClient"),
         .target(name: "FittingClient"),
+        .target(name: "PdfImportClient"),
+        .product(name: "VaporTesting", package: "vapor"),
         .product(name: "DependenciesTestSupport", package: "swift-dependencies"),
         .product(name: "FluentSQLiteDriver", package: "fluent-sqlite-driver"),
       ],
@@ -169,6 +172,20 @@ let package = Package(
         .product(name: "Elementary", package: "elementary"),
         .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
       ]
+    ),
+    .target(
+      name: "PdfImportClient",
+      dependencies: [
+        .target(name: "ManualDCore"),
+        .target(name: "EnvVars"),
+        .product(name: "Dependencies", package: "swift-dependencies"),
+        .product(name: "DependenciesMacros", package: "swift-dependencies"),
+      ]
+    ),
+    .testTarget(
+      name: "PdfImportClientTests",
+      dependencies: [.target(name: "PdfImportClient")],
+      resources: [.copy("Resources")]
     ),
     .target(
       name: "PdfClient",
@@ -244,6 +261,7 @@ let package = Package(
         .target(name: "CSVParser"),
         .target(name: "DatabaseClient"),
         .target(name: "PdfClient"),
+        .target(name: "PdfImportClient"),
         .target(name: "ProjectClient"),
         .target(name: "ManualDClient"),
         .target(name: "ManualDCore"),

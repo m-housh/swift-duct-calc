@@ -6,6 +6,7 @@ import Foundation
 import ManualDClient
 import ManualDCore
 import PdfClient
+import PdfImportClient
 import ProjectClient
 import Styleguide
 
@@ -149,6 +150,38 @@ extension ViewController.Request {
   }
 }
 
+private enum ProjectPDFImportResult: HTML, Sendable {
+  case created(ProjectClient.CreateProjectResponse)
+  case confirmation([Project])
+
+  var body: some HTML {
+    switch self {
+    case .created(let response):
+      ProjectView(
+        projectID: response.projectID, activeTab: .rooms,
+        completedSteps: response.completedSteps
+      ) {
+        RoomsView(rooms: response.rooms, sensibleHeatRatio: response.sensibleHeatRatio)
+      }
+    case .confirmation(let projects):
+      div(.custom(name: "data-project-import-conflict", value: "")) {
+        p(.class("font-bold mb-2")) { "Possible duplicate project" }
+        p(.class("mb-2")) { "The report's name or address matches an existing project:" }
+        ul(.class("mb-4")) {
+          for project in projects {
+            li {
+              "\(project.name) — \(project.streetAddress), \(project.city), \(project.state) \(project.zipCode)"
+            }
+          }
+        }
+        p {
+          "You can create another project for a different duct system at this location. Existing projects will be kept. A matching name will receive a numbered suffix."
+        }
+      }
+    }
+  }
+}
+
 extension SiteRoute.View.ProjectRoute {
 
   func renderView(on request: ViewController.Request) async -> AnySendableHTML {
@@ -178,6 +211,26 @@ extension SiteRoute.View.ProjectRoute {
         )
       } onSuccess: { (userID, projects) in
         ProjectsTable(userID: userID, projects: projects)
+      }
+
+    case .importPDF(let pdf):
+      return await request.view {
+        await ResultView {
+          let user = try request.currentUser()
+          @Dependency(\.pdfImport) var pdfImport
+          let report = try await pdfImport.parseProject(.init(file: pdf.file))
+          do {
+            let project = try await database.projects.importPDF(
+              user.id, report, pdf.confirmDuplicate)
+            return try await ProjectPDFImportResult.created(
+              .init(
+                projectID: project.id, rooms: database.rooms.fetch(project.id),
+                sensibleHeatRatio: project.sensibleHeatRatio,
+                completedSteps: database.projects.getCompletedSteps(project.id)))
+          } catch let conflict as Project.ImportConflict {
+            return ProjectPDFImportResult.confirmation(conflict.projects)
+          }
+        }
       }
 
     case .create(let form):
@@ -316,10 +369,19 @@ extension SiteRoute.View.ProjectRoute.RoomRoute {
 
     switch self {
 
+    case .pdf(let pdf):
+      return await roomsView(on: request, projectID: projectID) {
+        let user = try request.currentUser()
+        @Dependency(\.pdfImport) var pdfImport
+        let loads = try await pdfImport.parseRooms(pdf)
+        _ = try await database.rooms.importLoads(projectID, user.id, loads)
+      }
+
     case .csv(let csv):
       return await roomsView(on: request, projectID: projectID) {
+        let user = try request.currentUser()
         let rooms = try await csvParser.parseRooms(csv)
-        _ = try await database.rooms.createFromCSV(projectID, rooms)
+        _ = try await database.rooms.createFromCSV(projectID, user.id, rooms)
       }
     // return EmptyHTML()
 

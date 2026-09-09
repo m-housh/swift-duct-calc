@@ -18,59 +18,21 @@ extension DatabaseClient.Rooms: TestDependencyKey {
       createMany: { projectID, rooms in
         try await RoomModel.createMany(projectID: projectID, rooms: rooms, on: database)
       },
-      createFromCSV: { projectID, rows in
-
-        database.logger.debug("\nCreate From CSV rows: \(rows)\n")
-
-        // Filter out rows that delegate their airflow / load to another room,
-        // these need to be created last.
-        let rowsThatDelegate = rows.filter({
-          $0.delegatedToName != nil && $0.delegatedToName != ""
-        })
-
-        // Filter out the rest of the rooms that don't delegate their airflow / loads.
-        let initialRooms = rows.filter({
-          $0.delegatedToName == nil || $0.delegatedToName == ""
-        })
-        .map(\.createModel)
-
-        database.logger.debug("\nInitial rows: \(initialRooms)\n")
-
-        let initialCreated = try await RoomModel.createMany(
-          projectID: projectID,
-          rooms: initialRooms,
-          on: database
-        )
-        database.logger.debug("\nInitially created rows: \(initialCreated)\n")
-
-        let roomsThatDelegateModels = try rowsThatDelegate.reduce(into: [Room.Create]()) {
-          array, row in
-          database.logger.debug("\n\(row.name), delegating to: \(row.delegatedToName!)\n")
-          guard let created = initialCreated.first(where: { $0.name == row.delegatedToName }) else {
-            database.logger.debug(
-              "\nUnable to find created room with name: \(row.delegatedToName!)\n"
-            )
-            throw NotFoundError()
-          }
-          array.append(
-            Room.Create.init(
-              name: row.name,
-              level: row.level,
-              heatingLoad: row.heatingLoad,
-              coolingTotal: row.coolingTotal,
-              coolingSensible: row.coolingSensible,
-              registerCount: 0,
-              delegatedTo: created.id
-            )
-          )
-        }
-
-        return try await RoomModel.createMany(
-          projectID: projectID,
-          rooms: roomsThatDelegateModels,
-          on: database
-        ) + initialCreated
-
+      importLoads: { projectID, userID, loads in
+        try await RoomModel.importRows(
+          projectID: projectID, userID: userID,
+          rows: loads.rooms.map {
+            .init(
+              name: $0.name, level: $0.level, heatingLoad: $0.heatingLoad,
+              coolingTotal: $0.coolingTotal, coolingSensible: $0.coolingSensible,
+              registerCount: 1)
+          },
+          reportSHR: loads.sensibleHeatRatio, updateDistribution: false, on: database)
+      },
+      createFromCSV: { projectID, userID, rows in
+        try await RoomModel.importRows(
+          projectID: projectID, userID: userID, rows: rows,
+          reportSHR: nil, updateDistribution: true, on: database)
       },
       delete: { id in
         guard let model = try await RoomModel.find(id, on: database) else {
@@ -127,21 +89,6 @@ extension DatabaseClient.Rooms: TestDependencyKey {
         try await model.save(on: database)
         return try model.toDTO()
       }
-    )
-  }
-}
-
-extension Room.CSV.Row {
-  fileprivate var createModel: Room.Create {
-    assert(delegatedToName == nil || delegatedToName == "")
-    return .init(
-      name: name,
-      level: level,
-      heatingLoad: heatingLoad,
-      coolingTotal: coolingTotal,
-      coolingSensible: coolingSensible,
-      registerCount: registerCount,
-      delegatedTo: nil
     )
   }
 }

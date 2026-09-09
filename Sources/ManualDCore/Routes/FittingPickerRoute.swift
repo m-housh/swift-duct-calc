@@ -22,32 +22,32 @@ extension SiteRoute.View {
       Route(.case(Self.saveReview)) {
         Path { "review" }
         Method.post
-        Body { FormData { Field("payload", .string) } }
+        Body { SafeFormData { Field("payload", .string) } }
       }
       Route(.case(Self.group)) {
         Path { "group" }
         Method.post
-        Body { FormData { Field("payload", .string) } }
+        Body { SafeFormData { Field("payload", .string) } }
       }
       Route(.case(Self.rows)) {
         Path { "rows" }
         Method.post
-        Body { FormData { Field("payload", .string) } }
+        Body { SafeFormData { Field("payload", .string) } }
       }
       Route(.case(Self.configure)) {
         Path { "configure" }
         Method.post
-        Body { FormData { Field("payload", .string) } }
+        Body { SafeFormData { Field("payload", .string) } }
       }
       Route(.case(Self.evaluate)) {
         Path { "evaluate" }
         Method.post
-        Body { FormData { Field("payload", .string) } }
+        Body { SafeFormData { Field("payload", .string) } }
       }
       Route(.case(Self.reference)) {
         Path { "reference" }
         Method.post
-        Body { FormData { Field("payload", .string) } }
+        Body { SafeFormData { Field("payload", .string) } }
       }
       Route(.case(Self.index)) {
         Path { "picker" }

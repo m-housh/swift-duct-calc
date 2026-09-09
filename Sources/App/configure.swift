@@ -165,6 +165,35 @@ private func siteHandler(
   // need to handle it seperately.
   case .view(.project(.detail(let projectID, .pdf))):
     return try await projectClient.generatePdf(projectID)
+  case .view(.project(.importPDF)):
+    let upload = try request.content.decode(ProjectPDFUpload.self)
+    return try await viewController.respond(
+      route: .project(
+        .importPDF(
+          .init(
+            file: Data(buffer: upload.file.data),
+            confirmDuplicate: upload.confirmDuplicate == "true"))), request: request)
+  case .view(.project(.detail(let projectID, .rooms(.csv)))):
+    let upload = try request.content.decode(RoomFileUpload.self)
+    let route = SiteRoute.View.project(
+      .detail(
+        projectID,
+        .rooms(
+          .csv(
+            .init(file: Data(buffer: upload.file.data))
+          ))))
+    return try await viewController.respond(route: route, request: request)
+  case .view(.project(.detail(let projectID, .rooms(.pdf)))):
+    // The router consumes the multipart envelope; Vapor decodes the binary file part.
+    let upload = try request.content.decode(RoomFileUpload.self)
+    let route = SiteRoute.View.project(
+      .detail(
+        projectID,
+        .rooms(
+          .pdf(
+            .init(file: Data(buffer: upload.file.data))
+          ))))
+    return try await viewController.respond(route: route, request: request)
   case .view(let route):
     return try await viewController.respond(route: route, request: request)
   }
@@ -195,4 +224,13 @@ struct EnvError: Error {
   init(_ reason: String) {
     self.reason = reason
   }
+}
+
+private struct ProjectPDFUpload: Content {
+  var file: File
+  var confirmDuplicate: String?
+}
+
+private struct RoomFileUpload: Content {
+  var file: File
 }
