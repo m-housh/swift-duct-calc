@@ -44,7 +44,8 @@ public struct DatabaseClient: Sendable {
     public var fetch: @Sendable (User.ID) async throws -> [PathTemplate]
     public var get: @Sendable (User.ID, PathTemplate.ID) async throws -> PathTemplate?
     public var update:
-      @Sendable (User.ID, PathTemplate.ID, UUID, PathTemplate.Configuration) async throws -> PathTemplate
+      @Sendable (User.ID, PathTemplate.ID, UUID, PathTemplate.Configuration) async throws ->
+        PathTemplate
   }
 
   @DependencyClient
@@ -67,6 +68,8 @@ public struct DatabaseClient: Sendable {
 
   @DependencyClient
   public struct EquivalentLengths: Sendable {
+    public var updateIfUnchanged:
+      @Sendable (EquivalentLength, EquivalentLength.Update) async throws -> EquivalentLength
     public var create: @Sendable (EquivalentLength.Create) async throws -> EquivalentLength
     public var delete: @Sendable (EquivalentLength.ID) async throws -> Void
     public var fetch: @Sendable (Project.ID) async throws -> [EquivalentLength]

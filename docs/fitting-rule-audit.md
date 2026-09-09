@@ -2,8 +2,8 @@
 
 This document records the template branch's original source audit. The integrated
 application uses the current `FittingClient` for all numeric evaluation. The
-historical restrictions below describe the template form options, not the ordinary
-picker's calculation coverage. See [the integration notes](path-template-implementation-plan.md).
+historical restrictions below describe the original template form options. Current
+guided options come from the same catalog as the ordinary picker. See [the integration notes](path-template-implementation-plan.md).
 
 The initial template catalog packages 231 definitions for all eligible groups. It
 enables 47 calculation cases checked against the supplied
@@ -38,10 +38,9 @@ Group 5/6 source reference velocity is 700 FPM; Group 1/2/4/8 and these Group 12
 cases use 900 FPM. Their source reference friction rate is 0.08 IWC per 100 ft.
 The drawings and source conditions still govern fitting applicability.
 
-`scripts/build_swift_fitting_catalog.py` records the reviewed rules explicitly
-and packages identities/artwork from the manifests into `Resources/template-catalog.json`. It does not execute or copy
-the prototype JavaScript evaluator. Changing a calculation requires updating
-the source audit, fixtures, and catalog revision together.
+The original template generator and duplicate catalog have been removed. Current
+identities, requirements, and numeric evaluation come from `FittingClient` and
+`Resources/catalog.json`. This table remains a record of the initial audit.
 
 The remaining audit queue in `fitting-picker-implementation-plan.md` still
 applies, including 3U/3W, 7A, other elbow families, Group 11 controlling velocity,

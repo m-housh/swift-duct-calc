@@ -124,8 +124,8 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
         guard payload.utf8.count <= 2_000_000, let data = payload.data(using: .utf8),
           let submission = try? JSONDecoder().decode(PathEditorSubmission.self, from: data)
         else { throw PickerError("Invalid path submission.") }
-        guard submission.entries.count <= 500 else {
-          throw PickerError("A path can contain up to 500 rows.")
+        guard submission.entries.count <= 1000 else {
+          throw PickerError("A path can contain up to 1,000 rows.")
         }
         var entries: [Fitting.PathEntry] = []
         var definitions: [Fitting.Definition] = []
@@ -177,6 +177,8 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
       }
     } catch let error as PickerError {
       return p(.class("fp-error"), .init(name: "role", value: "alert")) { error.description }
+    } catch let error as PathConflictError {
+      return p(.class("fp-error"), .init(name: "role", value: "alert")) { error.message }
     } catch let error as FittingPathError {
       return p(.class("fp-error"), .init(name: "role", value: "alert")) { error.description }
     } catch {

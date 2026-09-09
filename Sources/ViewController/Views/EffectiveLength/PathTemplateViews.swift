@@ -137,7 +137,7 @@ struct PathTemplateWorkspace: HTML, Sendable {
       script(.id("path-template-data"), .init(name: "type", value: "application/json")) {
         HTMLRaw(encoded)
       }
-      script(.src("/js/path-templates.js?v=template-modal-2"), .init(name: "defer", value: "")) {}
+      script(.src("/js/path-templates.js?v=path-revisions-3"), .init(name: "defer", value: "")) {}
     }
   }
 }

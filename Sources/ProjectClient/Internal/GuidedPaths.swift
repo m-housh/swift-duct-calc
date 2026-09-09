@@ -39,6 +39,7 @@ extension ProjectClient {
       guard let saved = try await database.equivalentLengths.get(id), saved.projectID == projectID,
         let savedSnapshot = saved.templateSnapshot
       else { throw NotFoundError() }
+      guard saved.revision == request.revision else { throw PathConflictError() }
       existing = saved
       snapshot = savedSnapshot
     } else {
@@ -49,21 +50,20 @@ extension ProjectClient {
       snapshot = request.snapshot
     }
     try await fittings.validateTemplate(snapshot.configuration)
-    guard !request.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
-      request.name.count <= 200, request.rows.count <= 1000,
-      Set(request.rows.map(\.id)).count == request.rows.count,
-      request.straightLengths.count <= 100,
-      request.straightLengths.allSatisfy({ $0 > 0 })
-    else { throw ValidationError("Check the path name, lengths, and fitting rows.") }
+    let name = try PathValidation.name(
+      request.name, straightLengths: request.straightLengths, rowCount: request.rows.count)
+    guard Set(request.rows.map(\.id)).count == request.rows.count else {
+      throw ValidationError("Each fitting row must have a unique identity.")
+    }
     let configuration = snapshot.configuration
     let paths = try await database.equivalentLengths.fetch(projectID)
     guard
       !paths.contains(where: {
-        $0.id != existing?.id && $0.type == configuration.type && $0.name == request.name
+        $0.id != existing?.id && $0.type == configuration.type && $0.name == name
       })
     else {
       throw ValidationError(
-        "A \(configuration.type.rawValue) path named \"\(request.name)\" already exists in this project. Choose a different name or edit the existing path."
+        "A \(configuration.type.rawValue) path named \"\(name)\" already exists in this project. Choose a different name or edit the existing path."
       )
     }
     for step in configuration.steps {
@@ -92,8 +92,7 @@ extension ProjectClient {
     }.map(\.element)
     var groups = [EquivalentLength.FittingGroup]()
     for row in orderedRows {
-      guard row.quantity > 0, row.quantity <= 10000,
-        let definition = definitions.first(where: { $0.id == row.fittingID }),
+      guard let definition = definitions.first(where: { $0.id == row.fittingID }),
         let code = definition.sourceCode
       else { throw ValidationError("Check the fitting and its quantity.") }
       if let stepID = row.stepID {
@@ -124,20 +123,18 @@ extension ProjectClient {
           rowID: row.id, stepID: row.stepID, calculation: calculation
         ))
     }
-    guard groups.totalEquivalentLength.isFinite else {
-      throw ValidationError("The fitting total is too large.")
-    }
+    try PathValidation.validate(groups)
     if let existing {
-      return try await database.equivalentLengths.update(
-        existing.id,
+      return try await database.equivalentLengths.updateIfUnchanged(
+        existing,
         .init(
-          name: request.name, type: configuration.type, straightLengths: request.straightLengths,
+          name: name, type: configuration.type, straightLengths: request.straightLengths,
           groups: groups, templateSnapshot: snapshot
         ))
     }
     return try await database.equivalentLengths.create(
       .init(
-        projectID: projectID, name: request.name, type: configuration.type,
+        projectID: projectID, name: name, type: configuration.type,
         straightLengths: request.straightLengths, groups: groups, templateSnapshot: snapshot
       ))
   }

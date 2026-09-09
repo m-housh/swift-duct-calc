@@ -22,7 +22,7 @@ extension SiteRoute.View.FittingPickerRoute {
         }
       case .rows(let payload):
         let rows = try Self.decode([PathEditorRow].self, payload, limit: 2_000_000)
-        guard rows.count <= 500 else { throw PickerError("Too many rows.") }
+        guard rows.count <= 1000 else { throw PickerError("Too many rows.") }
         return PathRowsView(rows: rows)
       case .group(let payload):
         let submission = try Self.decode(GroupBrowserSubmission.self, payload)

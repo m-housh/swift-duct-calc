@@ -177,6 +177,8 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute.GuidedRoute {
   )
     async throws -> AnySendableHTML
   {
+    @Dependency(\.templateFittingClient) var fittings
+    try await fittings.validateTemplate(template.configuration)
     let view = try await PathTemplateWorkspace(
       data: .init(
         mode: "path", configuration: template.configuration, template: template,
@@ -200,6 +202,7 @@ private func workspaceError(_ error: any Error) -> some HTML & Sendable {
   if error is GuidedPath.InitialValuesError {
     return workspaceError("Check the path name and straight duct lengths.")
   }
+  if let error = error as? PathConflictError { return workspaceError(error.message) }
   if error is PathTemplateConflictError {
     return workspaceError(
       "This template changed in another tab. Your edits are still here; duplicate them or reload the saved template."

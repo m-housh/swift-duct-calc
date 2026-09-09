@@ -1,149 +1,57 @@
 import Foundation
 import ManualDCore
 
-struct TemplateCatalog: Decodable, Sendable {
-  static let shared = Result {
-    guard let url = Bundle.module.url(forResource: "template-catalog", withExtension: "json") else {
-      throw CatalogError.missingResource
-    }
-    let catalog = try JSONDecoder().decode(Self.self, from: Data(contentsOf: url))
-    guard catalog.revision == "2026-09-08.1",
-      Set(catalog.entries.map(\.id)).count == catalog.entries.count
-    else { throw CatalogError.invalidResource }
-    for entry in catalog.entries { try entry.rule?.validate() }
-    return catalog
-  }
-
-  let revision: String
-  let entries: [Entry]
-
-  struct Entry: Decodable, Sendable {
-    let id: TemplateFitting.ID
-    let group: TemplateFitting.Group
-    let sourceCode: String?
-    let name: String
-    let artworkPath: String?
-    let sourcePages: [Int]
-    let notes: [String]
-    let rule: Rule?
-
-    var definition: TemplateFitting.Definition {
-      .init(
-        id: id, group: group, sourceCode: sourceCode, name: name, artworkPath: artworkPath,
-        sourcePages: sourcePages, notes: notes,
-        requirements: rule?.requirements
-          ?? .unavailable(
-            "Guided input controls are not yet supported. Use the project fitting picker.")
-      )
-    }
-  }
-
-  struct Rule: Decodable, Sendable {
-    enum Kind: String, Decodable, Sendable {
-      case fixed, dimensions, downstreamBranches, sourceTable
-    }
-    let kind: Kind
-    let feet: Double?
-    let labels: [String]?
-    let rows: [Row]?
-
-    func validate() throws {
-      func require(_ condition: Bool) throws {
-        guard condition else { throw CatalogError.invalidResource }
-      }
-      if kind == .fixed {
-        try require(feet.map { $0.isFinite && $0 > 0 } ?? false)
-        return
-      }
-      guard let rows, !rows.isEmpty else { throw CatalogError.invalidResource }
-      try require(rows.allSatisfy { $0.feet.isFinite && $0.feet > 0 })
-      switch kind {
-      case .dimensions:
-        try require(labels?.count == 2)
-        try require(rows.allSatisfy { $0.ratio.map { $0.isFinite && $0 > 0 } ?? false })
-      case .downstreamBranches:
-        try require(
-          rows.allSatisfy { row in
-            guard let minimum = row.minimum, minimum >= 0 else { return false }
-            return row.maximum.map { $0 >= minimum } ?? true
-          })
-      case .sourceTable:
-        guard let labels, !labels.isEmpty else { throw CatalogError.invalidResource }
-        try require(rows.allSatisfy { $0.keys?.count == labels.count })
-      case .fixed: break
-      }
-    }
-
-    var requirements: TemplateFitting.Requirements {
-      switch kind {
-      case .fixed: return .fixed
-      case .dimensions: return .dimensions(numerator: labels![0], denominator: labels![1])
-      case .downstreamBranches: return .downstreamBranches
-      case .sourceTable:
-        return .sourceTable(
-          axes: (labels ?? []).enumerated().map { index, label in
-            var options = [String]()
-            for row in rows ?? [] {
-              if let key = row.keys?[index], !options.contains(key) { options.append(key) }
-            }
-            return .init(label: label, options: options)
-          })
-      }
-    }
-  }
-
-  struct Row: Decodable, Sendable {
-    let feet: Double
-    let ratio: Double?
-    let minimum: Int?
-    let maximum: Int?
-    let keys: [String]?
-  }
-
-  // Template input transport is separate; all numeric results come from the current catalog.
+/// Adapts current catalog inputs to the saved template transport format.
+/// Fitting identities, artwork, conditions, and numeric tables belong to FittingClient.
+enum TemplateCatalog {
   static let runtime = Result {
     guard let url = Bundle.module.url(forResource: "catalog", withExtension: "json") else {
-      throw CatalogError.missingResource
+      throw FittingClientError.missingCatalog
     }
     return try Catalog(data: Data(contentsOf: url))
   }
 
-  func evaluate(
-    _ request: TemplateFitting.EvaluationRequest,
-    browse: @Sendable (Fitting.BrowseRequest) async throws -> [Fitting.Definition],
-    evaluate: @Sendable (Fitting.EvaluationRequest) async throws -> Fitting.Evaluation
-  ) async throws -> TemplateFitting.Evaluation {
-    guard let entry = entries.first(where: { $0.id == request.fittingID }),
-      entry.group.supports(request.type)
-    else { return .unresolved("This fitting is unavailable for this path type.") }
-    guard let rule = entry.rule else {
-      return .unresolved(
-        "This fitting's inputs are not yet supported in guided templates. Use the project fitting picker."
-      )
-    }
-    guard rule.requirements.accepts(request.inputs),
-      let group = Fitting.Group.ID(rawValue: entry.group.rawValue),
-      let definition = try await browse(.init(pathType: request.type, groupID: group)).first(
-        where: { $0.id.rawValue == entry.id.rawValue }),
-      let inputs = Self.runtimeInputs(request.inputs, requirement: definition.inputRequirement)
-    else { return .unresolved("Choose the source conditions for this fitting.") }
-    switch try await evaluate(
-      .init(pathType: request.type, fittingID: definition.id, inputs: inputs))
-    {
-    case .resolved(let calculation):
-      return .resolved(
+  static func requirements(_ input: Fitting.InputRequirement) -> TemplateFitting.Requirements {
+    switch input {
+    case .fixed: return .fixed
+    case .heightWidth: return .dimensions(numerator: "H", denominator: "W")
+    case .radiusWidth: return .dimensions(numerator: "R", denominator: "W")
+    case .downstreamBranches: return .downstreamBranches
+    case .plenumReturns(let minimum):
+      return .sourceTable(axes: [
         .init(
-          fittingID: entry.id, inputs: request.inputs,
-          equivalentLengthFeet: calculation.equivalentLengthFeet,
-          ruleRevision: calculation.ruleRevision, catalogCalculation: calculation))
+          label: "Returns entering this plenum",
+          options: (1...minimum).map { $0 == minimum ? "\($0) or more" : "\($0)" })
+      ])
+    case .roundElbow(let ratios, let angles):
+      var axes = [
+        TemplateFitting.Axis(
+          label: "R/D",
+          options: ratios.map {
+            // Keep the option ID used by already-saved templates and exported files.
+            $0.rawValue == 1.5 ? "1.5 or larger" : String(format: "%g", $0.rawValue)
+          })
+      ]
+      if angles != [.degrees90] {
+        axes.append(.init(label: "Bend angle (degrees)", options: angles.map { "\($0.rawValue)" }))
+      }
+      return .sourceTable(axes: axes)
+    case .ovalElbow(let counts):
+      return .sourceTable(axes: [
+        .init(label: "Piece count", options: counts.map { "\($0.rawValue)" })
+      ])
+    case .transition(let slopes, let ratios):
+      return .sourceTable(axes: [
+        .init(label: "Slope X/Y", options: slopes.map(\.rawValue)),
+        .init(label: "Larger / smaller area", options: ratios.map { "\($0.rawValue)" }),
+      ])
     default:
-      return .unresolved(
-        "No supported calculation covers these inputs. Complete the source conditions and check the listed choices."
-      )
+      return .unavailable(
+        "Guided input controls are not yet supported. Use the project fitting picker.")
     }
   }
 
-  private static func runtimeInputs(
+  static func runtimeInputs(
     _ inputs: TemplateFitting.Inputs, requirement: Fitting.InputRequirement
   ) -> Fitting.Inputs? {
     switch (inputs, requirement) {
@@ -158,8 +66,11 @@ struct TemplateCatalog: Decodable, Sendable {
       return .plenumReturns(
         count: choices.first.flatMap { $0 }.flatMap { Int($0.prefix(while: { $0.isNumber })) })
     case (.sourceTable(let choices), .roundElbow):
-      let ratio = choices.first.flatMap { $0 }.flatMap { Double($0.split(separator: " ")[0]) }
-        .flatMap(Fitting.RoundElbowRadiusRatio.init(rawValue:))
+      let ratio = choices.first.flatMap { $0 }.flatMap {
+        Double($0.split(separator: " ").first ?? "")
+      }
+      .flatMap(Fitting.RoundElbowRadiusRatio.init(rawValue:))
+      guard !choices.isEmpty else { return nil }
       let angle =
         choices.count == 1
         ? Fitting.ElbowAngle.degrees90
@@ -179,5 +90,4 @@ struct TemplateCatalog: Decodable, Sendable {
     }
   }
 
-  enum CatalogError: Error { case missingResource, invalidResource }
 }

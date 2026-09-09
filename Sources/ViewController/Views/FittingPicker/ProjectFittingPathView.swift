@@ -17,7 +17,7 @@ struct ProjectFittingPathView: HTML, Sendable {
     link(.rel(.stylesheet), .href("/css/fitting-favorites.css"))
     link(.rel(.stylesheet), .href("/css/fitting-path-modal.css?v=2"))
     script(.src("/js/group-carousel.js"), .defer) {}
-    script(.src("/js/path-templates.js?v=template-modal-2"), .defer) {}
+    script(.src("/js/path-templates.js?v=path-revisions-3"), .defer) {}
     script(.src("/js/template-modal.js?v=template-modal-2"), .defer) {}
     script(.src("/js/fitting-path.js?v=template-modal-2"), .defer) {}
     EditorDialog(id: "fitting-path", titleID: "path-title") {

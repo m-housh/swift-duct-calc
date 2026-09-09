@@ -34,6 +34,8 @@ public struct EquivalentLength: Codable, Equatable, Identifiable, Sendable {
   public let createdAt: Date
   /// When this equivalent length was updated in the database.
   public let updatedAt: Date
+  /// Changes on every write; nil identifies paths saved before revision tracking.
+  public let revision: UUID?
 
   public init(
     id: UUID,
@@ -44,8 +46,10 @@ public struct EquivalentLength: Codable, Equatable, Identifiable, Sendable {
     groups: [EquivalentLength.FittingGroup],
     createdAt: Date,
     updatedAt: Date,
-    templateSnapshot: PathTemplate.Snapshot? = nil
+    templateSnapshot: PathTemplate.Snapshot? = nil,
+    revision: UUID? = nil
   ) {
+    self.revision = revision
     self.id = id
     self.projectID = projectID
     self.name = name

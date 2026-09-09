@@ -28,6 +28,25 @@ struct PathTemplateTransferTests {
   }
 
   @Test
+  func requiredUnsupportedSectionsAreRejectedButOptionalAndMixedSectionsWork() async throws {
+    var config = PathTemplate.Configuration(
+      name: "Offsets", type: .supply,
+      steps: [
+        .init(id: UUID(), title: "Offset", group: .elbow, choices: [.init(fittingID: "8O")])
+      ])
+    await #expect(
+      throws: TemplateFittingClient.TemplateValidationError.unusableSection(section: "Offset")
+    ) {
+      try await TemplateFittingClient.liveValue.validateTemplate(config)
+    }
+    config.steps[0].allowsSkipping = true
+    try await TemplateFittingClient.liveValue.validateTemplate(config)
+    config.steps[0].allowsSkipping = false
+    config.steps[0].choices.append(.init(fittingID: "8A-smooth"))
+    try await TemplateFittingClient.liveValue.validateTemplate(config)
+  }
+
+  @Test
   func unknownVersionAndMalformedFileCannotBeImported() throws {
     try withDependencies {
       $0.uuid = .incrementing

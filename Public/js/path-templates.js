@@ -52,6 +52,16 @@
       if (root.dispatchEvent(event)) location.assign(url);
     }
     const definitions = new Map(data.definitions.map((d) => [d.id, d]));
+    // Older templates may reference retired artwork-only IDs. Keep them editable.
+    for (const step of data.configuration.steps) {
+      for (const choice of step.choices) {
+        if (!definitions.has(choice.fittingID)) definitions.set(choice.fittingID, {
+          id: choice.fittingID, group: step.group, name: `Unavailable fitting (${choice.fittingID})`,
+          sourcePages: [], notes: [], requirements: { unavailable: { _0: 'Choose a current fitting.' } }
+        });
+      }
+    }
+
     let configuration = clone(data.configuration),
       selected = 0,
       mode = data.mode;
@@ -160,7 +170,10 @@
       )}${unavailable ? '<p class="text-warning">Guided inputs are not available for this fitting. Use the project picker.</p>' : ''}${source(d)}</article>`;
     }
     function source(d) {
-      return `<details class="text-sm mt-2"><summary class="cursor-pointer">Reference and conditions</summary>${d.notes.map((n) => `<p class="mt-2">${esc(n)}</p>`).join('')}${d.sourcePages.map((page) => `<a class="link block" href="/files/ManD.Groups.pdf#page=${page}" target="_blank" rel="noopener">Source PDF, page ${page}</a>`).join('')}</details>`;
+      const links = d.sourcePages.length
+        ? d.sourcePages.map((page) => `<a class="link block" href="/files/ManD.Groups.pdf#page=${page}" target="_blank" rel="noopener">Source PDF, page ${page}</a>`).join('')
+        : `<a class="link block" href="/fittings?fitting=${encodeURIComponent(d.id)}" target="_blank" rel="noopener">Fitting reference and source</a>`;
+      return `<details class="text-sm mt-2"><summary class="cursor-pointer">Reference and conditions</summary>${d.notes.map((n) => `<p class="mt-2">${esc(n)}</p>`).join('')}${links}</details>`;
     }
     function fields(d, inputs, scope) {
       const attrs = (key) =>
@@ -552,6 +565,7 @@
           throw new Error(
             'Add fitting choices to each compatible section before trying this template.'
           );
+        await previewImport(portableTemplate());
         startPath(true);
         return;
       }
@@ -691,6 +705,7 @@
         };
         const result = await request(data.saveURL, {
           id: data.path?.id,
+          revision: data.path?.revision,
           name: path.name,
           straightLengths: tokens.map(Number),
           snapshot,

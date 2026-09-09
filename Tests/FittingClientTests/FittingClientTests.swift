@@ -34,12 +34,36 @@ struct FittingClientTests {
   func catalogCoversAllGroupsAndPreservesSourceIdentity() async throws {
     let supply = try await client.fittings(.supply)
     let returns = try await client.fittings(.return)
-    #expect(Set((supply + returns).map(\.id)).count == 231)
+    #expect(Set((supply + returns).map(\.id)).count == 227)
     #expect(Set(supply.map(\.group.rawValue)) == [1, 2, 3, 4, 8, 9, 11, 12])
     #expect(Set(returns.map(\.group.rawValue)) == [5, 6, 7, 8, 10, 11, 12])
     #expect(returns.first { $0.id == "5A-round" }?.sourceCode == "5B")
     #expect(returns.first { $0.id == "5C-round" }?.sourceCode == "5D")
     #expect(supply.first { $0.id == "11-junction-box" }?.sourceCode == nil)
+  }
+
+  @Test
+  func newlySupportedInputsAndDefinitionsComeFromCurrentCatalog() async throws {
+    let current = try await loadBundledFittingClient()
+    let bridge = TemplateFittingClient.live(using: current)
+    let definitions = try await bridge.fittings(.supply)
+    for group in try await current.groups(.supply) {
+      for fitting in try await current.fittings(.init(pathType: .supply, groupID: group.id)) {
+        let definition = try #require(definitions.first { $0.id.rawValue == fitting.id.rawValue })
+        #expect(definition.name == fitting.name)
+        #expect(definition.sourceCode == fitting.sourceCode?.rawValue)
+        #expect(definition.notes == fitting.conditions.notes)
+      }
+    }
+    #expect(
+      feet(try await bridge.evaluate(.init(type: .supply, fittingID: "3W", inputs: .fixed))) == 30)
+    // Preserve the option IDs used in existing exported templates.
+    #expect(
+      feet(
+        try await bridge.evaluate(
+          .init(
+            type: .supply, fittingID: "8A-smooth",
+            inputs: .sourceTable(choices: ["1.5 or larger", "90"])))) == 10)
   }
 
   @Test
@@ -88,10 +112,10 @@ struct FittingClientTests {
   func missingUnsupportedAndIneligibleInputsRemainUnresolved() async throws {
     let requests: [TemplateFitting.EvaluationRequest] = [
       .init(type: .return, fittingID: "1A", inputs: .fixed),
-      .init(type: .supply, fittingID: "3W", inputs: .fixed),
+      .init(type: .supply, fittingID: "8O", inputs: .fixed),
       .init(type: .supply, fittingID: "11-junction-box", inputs: .flexJunctionBox(.init())),
       .init(type: .supply, fittingID: "8A-4-or-5-piece", inputs: .sourceTable(choices: [nil])),
-      .init(type: .supply, fittingID: "8A-smooth", inputs: .sourceTable(choices: ["1", "110"])),
+      .init(type: .supply, fittingID: "8A-smooth", inputs: .sourceTable(choices: ["1", "100"])),
       .init(
         type: .return, fittingID: "5H-rectangular",
         inputs: .dimensions(numeratorInches: 15, denominatorInches: 10)),

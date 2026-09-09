@@ -46,7 +46,8 @@ struct GuidedPathTests {
         try await client.saveGuidedPath(
           userID: user.id, projectID: project.id,
           request: .init(
-            id: renamed.id, name: "Bang", straightLengths: [], snapshot: snapshot, rows: rows))
+            id: renamed.id, name: "Bang", straightLengths: [], snapshot: snapshot, rows: rows,
+            revision: renamed.revision))
       }
       #expect(try await database.equivalentLengths.get(renamed.id) == renamed)
       _ = try await database.equivalentLengths.create(
@@ -54,7 +55,8 @@ struct GuidedPathTests {
       let unchanged = try await client.saveGuidedPath(
         userID: user.id, projectID: project.id,
         request: .init(
-          id: original.id, name: "Bang", straightLengths: [10, 15], snapshot: snapshot, rows: rows))
+          id: original.id, name: "Bang", straightLengths: [10, 15], snapshot: snapshot, rows: rows,
+          revision: original.revision))
       #expect(unchanged.id == original.id)
     }
   }
@@ -96,7 +98,7 @@ struct GuidedPathTests {
           name: pathName, straightLengths: [10], snapshot: snapshot,
           rows: Array(Self.rows.reversed())
         ))
-      #expect(saved.name == pathName)
+      #expect(saved.name == pathName.trimmingCharacters(in: .whitespacesAndNewlines))
       #expect(abs(saved.totalEquivalentLength - 38.6) < 1e-9)
       #expect(saved.groups[1].calculation?.equivalentLengthFeet == 6.2)
       #expect(saved.groups[1].rowID == UUID(61))
@@ -128,7 +130,7 @@ struct GuidedPathTests {
           userID: user.id, projectID: project.id,
           request: .init(
             id: saved.id, name: "Renamed path", straightLengths: [20], snapshot: snapshot,
-            rows: Self.rows
+            rows: Self.rows, revision: saved.revision
           ))
       }
       #expect(updated.groups == saved.groups)
@@ -199,6 +201,37 @@ struct GuidedPathTests {
     #expect(rows[0].rowID == nil)
     #expect(rows[0].calculation == nil)
     #expect(rows.totalEquivalentLength == 20.5)
+  }
+
+  @Test
+  func staleGuidedEditsKeepTheNewerPath() async throws {
+    try await withTestUserAndProject(setupDependencies: { $0.templateFittingClient = .liveValue }) {
+      user, project in
+      @Dependency(\.database) var database
+      let client = ProjectClient.liveValue
+      let template = try await client.createPathTemplate(
+        userID: user.id, configuration: Self.configuration)
+      let snapshot = PathTemplate.Snapshot(template: template)
+      let saved = try await client.saveGuidedPath(
+        userID: user.id, projectID: project.id,
+        request: .init(name: "Original", straightLengths: [10], snapshot: snapshot, rows: Self.rows)
+      )
+      let newer = try await client.saveGuidedPath(
+        userID: user.id, projectID: project.id,
+        request: .init(
+          id: saved.id, name: "Newer", straightLengths: [25], snapshot: snapshot, rows: Self.rows,
+          revision: saved.revision))
+      for revision in [saved.revision, nil] {
+        await #expect(throws: PathConflictError.self) {
+          try await client.saveGuidedPath(
+            userID: user.id, projectID: project.id,
+            request: .init(
+              id: saved.id, name: "Stale", straightLengths: [10], snapshot: snapshot,
+              rows: Self.rows, revision: revision))
+        }
+      }
+      #expect(try await database.equivalentLengths.get(saved.id) == newer)
+    }
   }
 
   private struct UnexpectedEvaluation: Error {}

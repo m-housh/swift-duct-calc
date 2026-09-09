@@ -18,13 +18,11 @@ func persistFittingPath(userID: User.ID, projectID: Project.ID, request: Fitting
   guard try await database.projects.getForUser(projectID, userID) != nil else {
     throw FittingPathError("Project not found.")
   }
-  let name = request.name.trimmingCharacters(in: .whitespacesAndNewlines)
-  guard !name.isEmpty, name.count <= 200, request.entries.count <= 500,
-    request.straightLengths.count <= 100, request.straightLengths.allSatisfy({ $0 > 0 })
-  else {
-    throw FittingPathError(
-      "Enter a path name and positive straight lengths (up to 100 lengths and 500 fittings).")
-  }
+  let name: String
+  do {
+    name = try PathValidation.name(
+      request.name, straightLengths: request.straightLengths, rowCount: request.entries.count)
+  } catch let error as ValidationError { throw FittingPathError(error.message) }
   var saved: EquivalentLength?
   if let baseline = request.baseline {
     guard baseline.projectID == projectID,
@@ -32,7 +30,8 @@ func persistFittingPath(userID: User.ID, projectID: Project.ID, request: Fitting
       current.projectID == projectID
     else { throw FittingPathError("Path not found.") }
     guard current.templateSnapshot == nil else {
-      throw FittingPathError("Open this path in the guided editor to keep its sections and fitting details.")
+      throw FittingPathError(
+        "Open this path in the guided editor to keep its sections and fitting details.")
     }
     guard current == baseline else {
       throw FittingPathError(
@@ -51,11 +50,9 @@ func persistFittingPath(userID: User.ID, projectID: Project.ID, request: Fitting
     return saved.groups[index].fitting?.id ?? uuid()
   }
   for (index, entry) in request.entries.enumerated() {
-    let quantity: Int
     let group: EquivalentLength.FittingGroup
     switch entry {
     case .saved(let i, let q):
-      quantity = q
       guard let saved, saved.groups.indices.contains(i), usedSaved.insert(i).inserted else {
         throw FittingPathError("Row \(index + 1) does not identify an existing fitting.")
       }
@@ -69,7 +66,6 @@ func persistFittingPath(userID: User.ID, projectID: Project.ID, request: Fitting
         group: old.group, letter: old.letter, value: old.value, quantity: q,
         fitting: old.fitting ?? .init(id: uuid(), origin: .legacy, name: "Saved reference entry"))
     case .reference(let code, let feet, let q, let replacing):
-      quantity = q
       guard feet.isFinite, feet > 0,
         case .recognized(let reference) = try await client.resolveReference(
           .init(code: code, pathType: request.pathType))
@@ -85,7 +81,6 @@ func persistFittingPath(userID: User.ID, projectID: Project.ID, request: Fitting
         fitting: .init(
           id: try rowID(replacing: replacing), origin: .referenceEntry, name: "Reference entry"))
     case .catalog(let id, let inputs, let column, let q, let replacing):
-      quantity = q
       let result = try await client.evaluate(
         .init(pathType: request.pathType, fittingID: id, inputs: inputs))
       var definition: Fitting.Definition?
@@ -119,18 +114,14 @@ func persistFittingPath(userID: User.ID, projectID: Project.ID, request: Fitting
         letter: String((definition.sourceCode?.rawValue ?? "").drop(while: { $0.isNumber })),
         value: feet, quantity: q, fitting: metadata)
     }
-    guard quantity > 0, quantity <= 1_000_000, group.value.isFinite,
-      (group.value * Double(quantity)).isFinite
-    else { throw FittingPathError("Row \(index + 1): quantity must be between 1 and 1,000,000.") }
     groups.append(group)
   }
-  guard
-    (groups.totalEquivalentLength + request.straightLengths.reduce(0.0, { $0 + Double($1) }))
-      .isFinite
-  else { throw FittingPathError("The path total is too large.") }
+  do { try PathValidation.validate(groups) } catch let error as ValidationError {
+    throw FittingPathError(error.message)
+  }
   if let saved {
-    return try await database.equivalentLengths.update(
-      saved.id,
+    return try await database.equivalentLengths.updateIfUnchanged(
+      saved,
       .init(
         name: name, type: request.pathType, straightLengths: request.straightLengths, groups: groups
       ))

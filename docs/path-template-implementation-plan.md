@@ -14,29 +14,31 @@ JSON export/import creates independent copies after preview and validation; see
 The interface uses the existing theme and semantic styles. Fractional fitting
 lengths also work in the existing manual form.
 
-Two additive migrations create template storage and add an optional template
-snapshot to saved paths. Legacy fitting rows decode without invented metadata.
+Additive migrations create template storage, add an optional template
+snapshot, and add a nullable UUID revision to saved paths. Both path editors use
+an atomic conditional update to reject stale saves. Pre-migration paths receive
+a revision on their first edit. Legacy fitting rows decode without invented metadata.
 Guided rows retain their identity, explicit inputs, per-fitting length, and rule
 revision. Reopening and saving unchanged inputs preserves the stored calculation.
 
-The template configurator lists 231 artwork definitions and currently has guided
-input controls for 47 cases, including every starter-template choice. Other
-choices can stay in a configuration but cannot be added by the guided flow yet.
-Use the existing project picker for those fittings.
+The template configurator derives its 227 fitting definitions from the same
+`FittingClient` as the ordinary picker. Guided controls support 187 choices across fixed values,
+dimensions, downstream counts, return counts, round and oval elbows, and transitions.
+Other choices remain visible with an unavailable message. Required sections must
+contain at least one supported choice; save, import preview, and Try enforce this.
+Optional sections may retain unavailable choices. Retired artwork-only IDs in
+older templates remain visible for removal or replacement.
 
-After integration into `codex/fitting-client`, `TemplateFitting` describes the
-template JSON/form format. `TemplateFittingClient` validates that format and maps
-supported inputs to the current `FittingClient`. The application injects its
-prepared client, so template calculations use the same engine and reviewed runtime
-catalog as the ordinary picker. The adapter preserves the full current calculation
-snapshot on guided rows, alongside the template inputs needed for reopening.
-It does not evaluate the older template catalog's numeric table values.
+`TemplateFitting` retains the saved template JSON/input format.
+`TemplateFittingClient` maps that format to the current catalog's requirements and
+calculations. Identities, names, conditions, artwork, and numeric tables come from
+`FittingClient`; the duplicate template catalog and its generator have been removed.
+Existing template option IDs and saved calculation snapshots remain compatible.
 
-`Sources/FittingClient/Resources/template-catalog.json` supplies template identities
-and supported form options. `scripts/build_swift_fitting_catalog.py` writes only
-that file. It cannot overwrite `Resources/catalog.json`, which retains all 189
-reviewed duct classifications and the Group 8 R/D 1.0 default. The template editor's
-broader input mapping remains follow-up work.
+All project routes enforce project ownership, including exports and deletion.
+Legacy equivalent-length routes also verify that referenced paths belong to the
+project in the URL. The two path editors share name normalization and persistence
+limits through `PathValidation`.
 
 The + add button opens the picker modal. From template appears inside that
 modal beside Groups in this path for new paths. It carries the path name and

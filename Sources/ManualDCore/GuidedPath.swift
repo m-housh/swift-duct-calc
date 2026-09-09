@@ -20,6 +20,7 @@ public enum GuidedPath {
 
   public struct SaveRequest: Codable, Equatable, Sendable {
     public let id: EquivalentLength.ID?
+    public let revision: UUID?
     public let name: String
     public let straightLengths: [Int]
     public let snapshot: PathTemplate.Snapshot
@@ -27,9 +28,10 @@ public enum GuidedPath {
 
     public init(
       id: EquivalentLength.ID? = nil, name: String, straightLengths: [Int],
-      snapshot: PathTemplate.Snapshot, rows: [Row]
+      snapshot: PathTemplate.Snapshot, rows: [Row], revision: UUID? = nil
     ) {
       self.id = id
+      self.revision = revision
       self.name = name
       self.straightLengths = straightLengths
       self.snapshot = snapshot

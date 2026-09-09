@@ -21,6 +21,7 @@ extension DatabaseClient.Migrations: DependencyKey {
         FittingFavoriteMigration(),
         PathTemplate.Migrate(),
         EquivalentLength.AddTemplateSnapshot(),
+        EquivalentLength.AddRevision(),
       ]
     }
   )
