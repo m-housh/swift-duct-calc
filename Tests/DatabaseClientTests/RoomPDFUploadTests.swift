@@ -60,11 +60,21 @@ struct RoomPDFUploadTests {
     try await uploadProject(file: Data("%PDF-\0&%ZZ".utf8), useLiveParser: false, expectedRooms: 1)
   }
 
-  @Test(.enabled(if: ProcessInfo.processInfo.environment["COOL_CALC_REFERENCE_PDF"] != nil))
-  func originalPDFCreatesProjectThroughHTTP() async throws {
-    let path = try #require(ProcessInfo.processInfo.environment["COOL_CALC_REFERENCE_PDF"])
-    try await uploadProject(
-      file: Data(contentsOf: URL(fileURLWithPath: path)), useLiveParser: true, expectedRooms: 17)
+  private func examplePDF() throws -> Data {
+    let path = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
+      .deletingLastPathComponent().appendingPathComponent(
+        "PdfImportClientTests/Resources/ExampleHouse_ManJ.pdf")
+    return try Data(contentsOf: path)
+  }
+
+  @Test
+  func examplePDFCreatesProjectThroughHTTP() async throws {
+    try await uploadProject(file: examplePDF(), useLiveParser: true, expectedRooms: 6)
+  }
+
+  @Test
+  func examplePDFImportsAndRestoresRoomsThroughHTTP() async throws {
+    try await upload(file: examplePDF(), expectedCount: 6, useLiveParser: true)
   }
 
   private func uploadProject(file: Data, useLiveParser: Bool, expectedRooms: Int) async throws {
@@ -95,6 +105,30 @@ struct RoomPDFUploadTests {
         )
         body.writeBytes(file)
         body.writeString("\r\n--\(boundary)--\r\n")
+        if useLiveParser {
+          for zip in ["", "invalid"] {
+            var missing = ByteBuffer()
+            missing.writeString(
+              "--\(boundary)\r\nContent-Disposition: form-data; name=\"zipCode\"\r\n\r\n\(zip)\r\n")
+            missing.writeBytes(body.readableBytesView)
+            try await app.testing().test(
+              .POST, "/projects/import/pdf",
+              headers: [
+                "Content-Type": "multipart/form-data; boundary=\(boundary)", "HX-Request": "true",
+              ], body: missing
+            ) { response in
+              #expect(response.status == .ok)
+              #expect(response.body.string.contains("data-project-import-missing-zip"))
+              #expect(!response.body.string.contains("Oops: Error"))
+            }
+            #expect(try await database.projects.fetch(user.id, .first).items.isEmpty)
+          }
+          var withZIP = ByteBuffer()
+          withZIP.writeString(
+            "--\(boundary)\r\nContent-Disposition: form-data; name=\"zipCode\"\r\n\r\n12345\r\n")
+          withZIP.writeBytes(body.readableBytesView)
+          body = withZIP
+        }
         try await app.testing().test(
           .POST, "/projects/import/pdf",
           headers: [
@@ -102,7 +136,7 @@ struct RoomPDFUploadTests {
           ], body: body
         ) { response in
           #expect(response.status == .ok)
-          #expect(response.body.string.contains("Dining"))
+          #expect(response.body.string.contains(useLiveParser ? "Entry" : "Dining"))
           #expect(!response.body.string.contains("Oops: Error"))
         }
         let projects = try await database.projects.fetch(user.id, .first)
@@ -111,10 +145,14 @@ struct RoomPDFUploadTests {
         #expect(
           !project.name.isEmpty && !project.streetAddress.isEmpty && !project.city.isEmpty
             && !project.state.isEmpty && !project.zipCode.isEmpty)
-        #expect(project.sensibleHeatRatio == (useLiveParser ? 0.88 : 0.83))
+        #expect(project.sensibleHeatRatio == (useLiveParser ? 0.833 : 0.83))
         #expect(try await database.rooms.fetch(project.id).count == expectedRooms)
         #expect(try await !database.componentLosses.fetch(project.id).isEmpty)
-        if !useLiveParser {
+        if useLiveParser {
+          #expect(project.name == "Example House")
+          #expect(project.streetAddress == "16 South Main Street")
+          #expect(project.zipCode == "12345")
+        } else {
           #expect(project.streetAddress == Project.Create.mock.streetAddress)
         }
         // The repeated upload returns a warning and creates nothing until confirmed.
@@ -142,7 +180,7 @@ struct RoomPDFUploadTests {
         ) { response in
           #expect(response.status == .ok)
           #expect(!response.body.string.contains("data-project-import-conflict"))
-          #expect(response.body.string.contains("Dining"))
+          #expect(response.body.string.contains(useLiveParser ? "Entry" : "Dining"))
         }
         #expect(try await database.projects.fetch(user.id, .first).items.count == 2)
         #expect(try await database.projects.get(project.id) == project)
@@ -168,13 +206,6 @@ struct RoomPDFUploadTests {
     // FormData parser if an unrelated route inspects the PDF body.
     let file = Data([0x25, 0x50, 0x44, 0x46, 0x2D, 0x00, 0xFF, 0x0D, 0x0A]) + Data("&%ZZ".utf8)
     try await upload(file: file, expectedCount: 1, useLiveParser: false)
-  }
-
-  @Test(.enabled(if: ProcessInfo.processInfo.environment["COOL_CALC_REFERENCE_PDF"] != nil))
-  func originalPDFThroughHTTP() async throws {
-    let path = try #require(ProcessInfo.processInfo.environment["COOL_CALC_REFERENCE_PDF"])
-    try await upload(
-      file: Data(contentsOf: URL(fileURLWithPath: path)), expectedCount: 17, useLiveParser: true)
   }
 
   private func upload(file: Data, expectedCount: Int, useLiveParser: Bool, format: String = "pdf")
@@ -221,13 +252,13 @@ struct RoomPDFUploadTests {
           body: body
         ) { response in
           #expect(response.status == .ok)
-          #expect(response.body.string.contains("Dining"))
+          #expect(response.body.string.contains(useLiveParser ? "Entry" : "Dining"))
           #expect(!response.body.string.contains("Oops: Error"))
         }
         let rooms = try await database.rooms.fetch(project.id)
         #expect(rooms.count == expectedCount)
-        let dining = try #require(rooms.first { $0.name == "Dining" })
-        #expect(dining.coolingLoad.total == 1668)
+        let dining = try #require(rooms.first { $0.name == (useLiveParser ? "Entry" : "Dining") })
+        #expect(dining.coolingLoad.total == (useLiveParser ? 2916 : 1668))
         #expect(dining.coolingLoad.sensible == nil)
 
         // Re-upload after deleting one room: add it back and update the others in place.

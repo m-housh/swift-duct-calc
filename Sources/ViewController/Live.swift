@@ -153,6 +153,7 @@ extension ViewController.Request {
 private enum ProjectPDFImportResult: HTML, Sendable {
   case created(ProjectClient.CreateProjectResponse)
   case confirmation([Project])
+  case missingZIP
 
   var body: some HTML {
     switch self {
@@ -162,6 +163,10 @@ private enum ProjectPDFImportResult: HTML, Sendable {
         completedSteps: response.completedSteps
       ) {
         RoomsView(rooms: response.rooms, sensibleHeatRatio: response.sensibleHeatRatio)
+      }
+    case .missingZIP:
+      p(.custom(name: "data-project-import-missing-zip", value: "")) {
+        "This report does not include a ZIP code. Enter it below to create the project."
       }
     case .confirmation(let projects):
       div(.custom(name: "data-project-import-conflict", value: "")) {
@@ -218,7 +223,18 @@ extension SiteRoute.View.ProjectRoute {
         await ResultView {
           let user = try request.currentUser()
           @Dependency(\.pdfImport) var pdfImport
-          let report = try await pdfImport.parseProject(.init(file: pdf.file))
+          var report = try await pdfImport.parseProject(.init(file: pdf.file))
+          if report.project.zipCode.isEmpty {
+            guard let zip = pdf.zipCode?.trimmingCharacters(in: .whitespacesAndNewlines),
+              zip.range(of: #"^\d{5}(?:-\d{4})?$"#, options: .regularExpression) != nil
+            else { return ProjectPDFImportResult.missingZIP }
+            let parsed = report.project
+            report = .init(
+              project: .init(
+                name: parsed.name, streetAddress: parsed.streetAddress,
+                city: parsed.city, state: parsed.state, zipCode: zip,
+                sensibleHeatRatio: parsed.sensibleHeatRatio), rooms: report.rooms)
+          }
           do {
             let project = try await database.projects.importPDF(
               user.id, report, pdf.confirmDuplicate)

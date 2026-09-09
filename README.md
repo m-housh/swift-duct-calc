@@ -45,8 +45,11 @@ project and preserves existing projects. Existing project names receive a number
 duct design settings still need to be entered in their usual tabs.
 
 On a project's Room Loads page, use the upload icon, choose **Cool Calc PDF** under **File type**, and upload a text-based
-Cool Calc MJ8 report. The first version supports the `Individual Room Analysis` layout
-with room headings such as `Dining - Level: Level 1` and paired heating/cooling loads.
+Cool Calc MJ8 report. Supported layouts are `Individual Room Analysis`, with headings
+such as `Dining - Level: Level 1`, and `Room Detail`, with `Room name`, `Total Heating BTUH`,
+and `Total Cooling BTUH` fields. Room Detail exports do not include levels, so those stay
+blank. Their summed room floor areas are checked against the system totals to detect
+missing room pages.
 
 The importer creates rooms using the analysis heating and total cooling loads, including
 their infiltration allocation. It uses the summary's room list, when present, to check
@@ -79,9 +82,16 @@ the executable is not at `/usr/bin/pdftotext`.
 
 Run `swift test --filter 'PdfImportClientTests|ProjectTests|RoomTests|RoomPDFUploadTests|EnvVarsTests'`
 to verify extraction, upload handling, and database behavior. The PDF test fixture is a
-synthetic document containing the reference room-analysis values, without the customer's
-project name or address. Set `COOL_CALC_REFERENCE_PDF` to the original reference PDF's
-path to also compare its extraction with the fixture.
+synthetic document for the supported Individual Room Analysis layout, without customer
+names or addresses.
+
+The approved sample report is
+[ExampleHouse_ManJ.pdf](Tests/PdfImportClientTests/Resources/ExampleHouse_ManJ.pdf), which
+uses the office address supplied for sharing. It contains six rooms in the **Room Detail**
+layout. When a report omits its ZIP code, project import asks for that field before
+creating anything and keeps the selected file. Importing rooms into an existing project
+does not require the report's ZIP code. The original customer report is not included in
+the repository or required by the tests.
 
 ## License
 

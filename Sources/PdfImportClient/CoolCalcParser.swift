@@ -1,8 +1,8 @@
 import Foundation
 import ManualDCore
 
-/// Parser for the text-based Cool Calc MJ8 report with an Individual Room Analysis section.
-/// Cooling Load in this section is total cooling, including the room's infiltration allocation.
+/// Parser for Cool Calc MJ8 Individual Room Analysis and Room Detail exports.
+/// Both layouts report total cooling in their per-room load fields.
 enum CoolCalcParser {
   static func parseProject(_ text: String) throws -> Project.PDFImport {
     let loads = try parse(text)
@@ -34,7 +34,7 @@ enum CoolCalcParser {
       parts.removeLast()
     }
     let stateZip = try NSRegularExpression(
-      pattern: #"^([A-Za-z][A-Za-z .]*?)[ \t]+(\d{5}(?:-\d{4})?)$"#)
+      pattern: #"^([A-Za-z][A-Za-z .]*?)(?:[ \t]+(\d{5}(?:-\d{4})?))?$"#)
     guard parts.count >= 3, let region = parts.last,
       let fields = captures(stateZip, in: region),
       parts.allSatisfy({ !$0.isEmpty })
@@ -46,11 +46,13 @@ enum CoolCalcParser {
     return .init(
       project: .init(
         name: name, streetAddress: parts.dropLast(2).joined(separator: ", "),
-        city: parts[parts.count - 2], state: fields[0], zipCode: fields[1], sensibleHeatRatio: shr),
+        city: parts[parts.count - 2], state: fields[0], zipCode: fields.count > 1 ? fields[1] : "",
+        sensibleHeatRatio: shr),
       rooms: loads.rooms)
   }
 
   static func parse(_ text: String) throws -> Room.LoadImport {
+    if text.contains("ROOM DETAIL") { return try RoomDetailParser.parse(text) }
     let heading = "INDIVIDUAL ROOM ANALYSIS"
     let sections = text.components(separatedBy: heading)
     guard text.contains("MJ8 Report"), sections.count == 2 else {

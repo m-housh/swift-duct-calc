@@ -22,7 +22,20 @@ struct ProjectPDFForm: HTML {
             this.form.elements.confirmDuplicate.value = 'false';
             this.form.querySelector('[data-duplicate-warning]').hidden = true;
             this.form.querySelector('[data-import-submit]').hidden = false;
+            this.form.querySelector('[data-missing-zip]').hidden = true;
+            this.form.elements.zipCode.disabled = true;
+            this.form.elements.zipCode.required = false;
+            this.form.elements.zipCode.value = '';
             """))
+      div(.custom(name: "data-missing-zip", value: ""), .class("mt-6"), .hidden) {
+        p(
+          .class("mb-4"), .custom(name: "data-zip-message", value: ""),
+          .custom(name: "aria-live", value: "polite")
+        ) {}
+        LabeledInput(
+          "ZIP code", .name("zipCode"), .type(.text), .placeholder("ZIP code"),
+          .pattern(value: "[0-9]{5}(-[0-9]{4})?"), .disabled)
+      }
       div(.custom(name: "data-import-submit", value: "")) {
         SubmitButton(title: "Create project from PDF")
           .attributes(.class("btn-block mt-6"))
@@ -57,6 +70,15 @@ struct ProjectPDFForm: HTML {
         name: "hx-on::before-on-load",
         value: """
           const response = new DOMParser().parseFromString(event.detail.xhr.responseText, 'text/html');
+          const missingZIP = response.querySelector('[data-project-import-missing-zip]');
+          if (missingZIP) {
+            event.preventDefault();
+            this.querySelector('[data-missing-zip]').hidden = false;
+            this.querySelector('[data-zip-message]').textContent = missingZIP.textContent;
+            this.elements.zipCode.disabled = false;
+            this.elements.zipCode.required = true;
+            this.elements.zipCode.focus();
+          }
           const conflict = response.querySelector('[data-project-import-conflict]');
           if (conflict) {
             event.preventDefault();

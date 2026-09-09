@@ -144,12 +144,67 @@ struct PdfImportClientTests {
     #expect(parsed == (try CoolCalcParser.parse(fixture())))
   }
 
-  @Test(.enabled(if: ProcessInfo.processInfo.environment["COOL_CALC_REFERENCE_PDF"] != nil))
-  func originalReferencePDF() async throws {
-    let path = try #require(ProcessInfo.processInfo.environment["COOL_CALC_REFERENCE_PDF"])
-    let parsed = try await PdfImportClient.liveValue.parseRooms(
-      .init(file: Data(contentsOf: URL(fileURLWithPath: path))))
-    #expect(parsed == (try CoolCalcParser.parse(fixture())))
+  @Test
+  func exampleHouseReferenceUsesRoomDetailLayout() async throws {
+    let url = try #require(
+      Bundle.module.url(
+        forResource: "ExampleHouse_ManJ", withExtension: "pdf", subdirectory: "Resources"))
+    let pdf = Room.PDF(file: try Data(contentsOf: url))
+    let result = try await PdfImportClient.liveValue.parseProject(pdf)
+    #expect(result.project.name == "Example House")
+    #expect(result.project.streetAddress == "16 South Main Street")
+    #expect(result.project.city == "Monroe")
+    #expect(result.project.state == "OH")
+    #expect(result.project.zipCode.isEmpty)
+    #expect(result.project.sensibleHeatRatio == 0.833)
+    let expected: [(String, Double, Double)] = [
+      ("Entry", 7659, 2916), ("Master", 7577, 2076), ("Bedroom-1", 3288, 2472),
+      ("Living Room", 6945, 6829), ("Kitchen", 3893, 5069), ("Family Room", 9160, 7446),
+    ]
+    #expect(result.rooms.count == expected.count)
+    for (room, values) in zip(result.rooms, expected) {
+      #expect(room.name == values.0)
+      #expect(room.heatingLoad == values.1)
+      #expect(room.coolingTotal == values.2)
+      #expect(room.coolingSensible == nil && room.level == nil)
+    }
+    #expect(result.rooms.reduce(0) { $0 + $1.heatingLoad } == 38522)
+    #expect(result.rooms.reduce(0) { $0 + ($1.coolingTotal ?? 0) } == 26808)
+  }
+
+  @Test
+  func rejectsIncompleteRoomDetail() throws {
+    let header = """
+      Project Name: Sample
+      OUTDOOR DESIGN CONDITIONS
+      LOAD CALCULATION TOTALS
+      HVAC System: Main
+      SHR: 0.833
+      Heated square footage: 100
+      Cooled square footage: 100
+      """
+    let room = """
+      ROOM DETAIL
+      Room name: Test Room
+      Total Heating BTUH: 1,000
+      Total Cooling BTUH: 500
+      Heated square footage: 100
+      Cooled square footage: 100
+      """
+    let text = header + "\n" + room
+    #expect(try CoolCalcParser.parse(text).rooms.count == 1)
+    for invalid in [
+      text + "\n" + room,
+      text.replacingOccurrences(of: "Total Cooling BTUH: 500", with: ""),
+      text.replacingOccurrences(of: "1,000", with: "1,00"),
+      text.replacingOccurrences(of: "SHR: 0.833", with: "SHR: 0.833\nSHR: 0.8"),
+      header.replacingOccurrences(of: "footage: 100", with: "footage: 200") + "\n" + room,
+      text + "\nINDIVIDUAL ROOM ANALYSIS",
+      text.replacingOccurrences(
+        of: "HVAC System: Main", with: "HVAC System: Main\nHVAC System: Upstairs"),
+    ] {
+      #expect(throws: RoomImportError.self) { try CoolCalcParser.parse(invalid) }
+    }
   }
 
   @Test

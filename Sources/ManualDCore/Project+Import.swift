@@ -4,14 +4,16 @@ extension Project {
   public struct PDFUpload: Equatable, Sendable {
     public let file: Data
     public let confirmDuplicate: Bool
+    public let zipCode: String?
 
     public init(file: Data) {
       self.init(file: file, confirmDuplicate: false)
     }
 
-    public init(file: Data, confirmDuplicate: Bool) {
+    public init(file: Data, confirmDuplicate: Bool, zipCode: String? = nil) {
       self.file = file
       self.confirmDuplicate = confirmDuplicate
+      self.zipCode = zipCode
     }
   }
 
