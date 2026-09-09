@@ -1,4 +1,7 @@
+import AuthClient
+import Dependencies
 import Elementary
+import FittingClient
 import ManualDCore
 import Vapor
 import VaporElementary
@@ -8,6 +11,31 @@ extension ViewController {
   func respond(route: SiteRoute.View, request: Vapor.Request) async throws
     -> any AsyncResponseEncodable
   {
+    var route = route
+    if case .fittingReference(var query) = route, query.q != nil {
+      // HTML GET forms encode spaces as '+'. Decode with Vapor's form-query decoder
+      // before rendering; URLRouting's query parser preserves a literal '+'.
+      query.q = try request.query.get(String.self, at: "q")
+      route = .fittingReference(query)
+    }
+    if case .fittingReference(let query) = route, query.download == "1" {
+      @Dependency(\.auth.currentUser) var currentUser
+      guard (try? currentUser()) != nil else { throw Abort(.unauthorized) }
+      @Dependency(\.fittingClient) var fittingClient
+      var exportQuery = query
+      if !["json", "csv", "path"].contains(exportQuery.data ?? "") { exportQuery.data = "json" }
+      let page = try FittingReferencePage(
+        catalog: fittingClient.reference(), query: exportQuery, isLoggedIn: true)
+      guard page.selected != nil else { throw Abort(.notFound) }
+      return Response(
+        status: .ok,
+        headers: [
+          "Content-Type": page.format == "csv"
+            ? "text/csv; charset=utf-8" : "application/json; charset=utf-8",
+          "Content-Disposition": "attachment; filename=\"\(page.filename)\"",
+          "Cache-Control": "private, no-store", "Vary": "Cookie, HX-Request",
+        ], body: .init(string: page.exportText))
+    }
     if case .fittingReference = route, request.isHtmxRequest {
       // This page owns its stylesheet and scripts. Login's HTMX
       // continuation must load the full document rather than replace only the body.

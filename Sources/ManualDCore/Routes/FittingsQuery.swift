@@ -7,6 +7,8 @@ extension SiteRoute.View {
     public var q: String?
     public var type: String?
     public var data: String?
+    public var scope: String?
+    public var download: String?
 
     public init(
       system: String? = nil,
@@ -14,7 +16,9 @@ extension SiteRoute.View {
       fitting: String? = nil,
       q: String? = nil,
       type: String? = nil,
-      data: String? = nil
+      data: String? = nil,
+      scope: String? = nil,
+      download: String? = nil
     ) {
       self.system = system
       self.group = group
@@ -22,6 +26,8 @@ extension SiteRoute.View {
       self.q = q
       self.type = type
       self.data = data
+      self.scope = scope
+      self.download = download
     }
   }
 }

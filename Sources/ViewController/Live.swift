@@ -2,6 +2,7 @@ import CSVParser
 import DatabaseClient
 import Dependencies
 import Elementary
+import FittingClient
 import Foundation
 import ManualDClient
 import ManualDCore
@@ -25,15 +26,20 @@ extension ViewController.Request {
       return await view {
         HomeView()
       }
-    case .fittingReference:
-      return MainPage(
-        theme: await theme ?? .default,
-        title: "Fitting reference · Duct Calc",
-        stylesheets: ["/fittings/styles.css"],
-        scripts: ["catalog-data.js", "catalog-rules.js", "reference-core.js", "app.js"]
-          .map { "/fittings/\($0)" }
-      ) {
-        FittingsView(isLoggedIn: isLoggedIn)
+    case .fittingReference(let query):
+      @Dependency(\.fittingClient) var fittingClient
+      return await ResultView {
+        let page = try FittingReferencePage(
+          catalog: fittingClient.reference(), query: query, isLoggedIn: isLoggedIn)
+        return MainPage(
+          theme: await theme ?? .default,
+          title: "Fitting reference · Duct Calc",
+          stylesheets: ["/fittings/styles.css"],
+          scripts: ["app.js"]
+            .map { "/fittings/\($0)" }
+        ) {
+          FittingsView(page: page)
+        }
       }
     case .privacyPolicy:
       return await view {

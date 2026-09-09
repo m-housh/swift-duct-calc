@@ -46,6 +46,8 @@ extension SiteRoute {
           Optionally { Field("q", .string) }
           Optionally { Field("type", .string) }
           Optionally { Field("data", .string) }
+          Optionally { Field("scope", .string) }
+          Optionally { Field("download", .string) }
         }
         .map(.memberwise(FittingsQuery.init))
       }
