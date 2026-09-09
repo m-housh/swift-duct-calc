@@ -12,7 +12,7 @@ struct ProjectFittingPathView: HTML, Sendable {
   let carousels: [(Fitting.PathType, [GroupCarousel.Item])]
   var root: String { "/projects/\(project.id)/effective-lengths" }
   var body: some HTML {
-    link(.rel(.stylesheet), .href("/css/fitting-path.css"))
+    link(.rel(.stylesheet), .href("/css/fitting-path.css?v=app-theme-1"))
     link(.rel(.stylesheet), .href("/css/picker-preference.css"))
     link(.rel(.stylesheet), .href("/css/fitting-favorites.css"))
     link(.rel(.stylesheet), .href("/css/fitting-path-modal.css?v=2"))
