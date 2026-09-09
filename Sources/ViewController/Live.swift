@@ -62,7 +62,11 @@ extension ViewController.Request {
       switch route {
       case .index(let next):
         return await view {
-          LoginForm(next: next)
+          if isLoggedIn {
+            LoggedIn(next: next)
+          } else {
+            LoginForm(next: next)
+          }
         }
       case .submit(let login):
         // let _ = try await authenticate(login)
