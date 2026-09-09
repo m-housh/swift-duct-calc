@@ -133,3 +133,9 @@ with a filled hover/focus state. The existing Styleguide tooltip helper displays
 checks cover Dracula and light themes, keyboard activation, and mobile width.
 
 ![Themed reference button and tooltip](images/fitting-picker/reference-nav-tooltip.png)
+
+Ductulator uses the same outline styling and text size, retaining the theme's
+primary color, pink in Dracula. Its tooltip also appears below the button on
+hover and keyboard focus.
+
+![Matching navbar buttons](images/fitting-picker/ductulator-nav-tooltip.png)

@@ -77,8 +77,8 @@ struct Navbar: HTML, Sendable {
 
           if showDuctulatorButton {
             DuctulatorButton()
-              .attributes(.class("btn-ghost btn-primary text-lg"))
-              .tooltip("Duct size calculator", position: .left)
+              .attributes(.class("btn-outline btn-primary"))
+              .tooltip("Duct size calculator", position: .bottom)
           }
 
           if isLoggedIn {
