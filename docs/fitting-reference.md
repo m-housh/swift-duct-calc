@@ -38,17 +38,17 @@ HTMX requests to this page receive `HX-Redirect` to load its full
 head, styles, and scripts, including the continuation from the existing login
 form. All entry links use normal navigation. The navbar and home page link to
 the reference, and the equivalent-length form supplies its current path type
-instead of linking directly to the PDF. The PDF remains available inside the reference.
+to open the matching fitting reference. The reference PDF has been removed from
+the application and development workflow.
 
 ## Assets and verification
 
 The app view is `Sources/ViewController/Views/Fittings/FittingsView.swift`.
 Served scripts/styles live under `Public/fittings`; approved SVGs are referenced
-in place under `Public/images/fittings`. To refresh the catalog after changing
-its source manifests:
+in place under `Public/images/fittings`. `catalog-data.js` is the checked-in
+reference data; there is no generation step. Validate it with:
 
 ```sh
-python3 scripts/build_fitting_reference_catalog.py
 node scripts/check_fitting_reference.cjs
 ```
 
@@ -58,11 +58,14 @@ sessions, query round trips, and HTMX continuation. Middleware runs in tests as
 it does in the application. View snapshots cover navigation link changes.
 
 
-The generator reads the approved SVG manifests directly and writes the served
-reference catalog by default. Use `--output /tmp/fitting-reference` for a review
-copy. The reference maintains its own table adapters
-and the one Group 11 concept illustration it displays. It does not load or copy
-picker UI code. The exported experimental schema identifiers remain unchanged.
+The reference maintains its own table adapters and the one Group 11 concept
+illustration it displays. All drawings are final, self-contained SVGs. The
+artwork review, extraction, and packaging tooling has been retired. See
+[finished fitting assets](fitting-assets.md).
+
+JSON/CSV exports retain a source document citation and printed page. They no
+longer contain PDF URLs, source-image paths, crop coordinates, or links to
+retired manifests. The exported experimental schema identifiers remain unchanged.
 
 ## Integration with the fitting-client branch
 
@@ -82,13 +85,13 @@ remain intact. The current path editor and legacy form both link to the referenc
 the current editor updates the link's system filter when its path type changes.
 The combined navigation/project snapshots pass without replacing the path editor.
 
-The reference still exports the artwork-manifest transcription. The reviewed
+The reference exports the checked-in reference transcription. The reviewed
 `Sources/FittingClient/Resources/catalog.json` remains the separate, newer source
 of calculation behavior. Its **189 reviewed classifications** were preserved
 byte-for-byte during integration. Adapting the reference to that catalog needs
-explicit mapping of variant IDs, source tables, review status, and Group 11;
-this merge does not reconcile the two data schemas. Shared artwork and the original
-PDF remain in place. The reference retains its concept illustration under
+explicit mapping of variant IDs, source tables, review status, and Group 11.
+The two data schemas remain separate. Both use the finished SVG assets.
+The reference retains its concept illustration under
 `Public/fittings/concepts`; the picker's three Group 11 drawings under
 `Public/images/fittings/group-11` are unchanged.
 
@@ -98,7 +101,7 @@ PDF remain in place. The reference retains its concept illustration under
   public reference queries, protected picker/review routes, fragment responses,
   catalog calculations, saved paths, and combined view snapshots.
 - `node scripts/check_fitting_reference.cjs` passes for 231 records, 12 groups,
-  artwork/source links, and lossless CSV/JSON exports.
+  standalone artwork, citations, and lossless CSV/JSON exports.
 - `scripts/check_fitting_reference_browser.cjs` passes guest access, real login and
   HTMX return state, persisted Nord theme, record/filtered downloads, path examples,
   logout, and mobile layout.

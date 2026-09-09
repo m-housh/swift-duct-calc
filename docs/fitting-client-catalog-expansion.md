@@ -1,5 +1,9 @@
 # Fitting catalog expansion: groups 1, 2, 4, and 5
 
+Source-file paths and review hashes below record the completed import. Those
+files are now retained in Git history; the app uses the
+[finished SVGs and catalogs](fitting-assets.md) without a PDF or regeneration step.
+
 This slice expands the production catalog from 5 to 99 fitting choices. It completes
 coverage of the approved artwork entries in these four groups. The catalog revision
 is `fitting-catalog-v3`; existing fitting rule revisions and values are unchanged.

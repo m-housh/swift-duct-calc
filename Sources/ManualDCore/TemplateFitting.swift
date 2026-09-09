@@ -11,20 +11,18 @@ public enum TemplateFitting {
     public let sourceCode: String?
     public let name: String
     public let artworkPath: String?
-    public let sourcePages: [Int]
     public let notes: [String]
     public let requirements: Requirements
 
     public init(
       id: ID, group: Group, sourceCode: String?, name: String, artworkPath: String?,
-      sourcePages: [Int], notes: [String], requirements: Requirements
+      notes: [String], requirements: Requirements
     ) {
       self.id = id
       self.group = group
       self.sourceCode = sourceCode
       self.name = name
       self.artworkPath = artworkPath
-      self.sourcePages = sourcePages
       self.notes = notes
       self.requirements = requirements
     }

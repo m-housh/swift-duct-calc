@@ -59,8 +59,9 @@ Saving writes to the checkout, **not browser storage or the project database**. 
 server uses the updated source immediately. Changes persist through server restarts.
 They remain normal uncommitted Git changes until committed and pushed; the page does
 not perform Git operations. Production builds package the same reviewed source file.
-The separate artwork manifests and reference catalog generator do not generate or
-replace this runtime catalog.
+The public reference has its own checked-in data in `Public/fittings/catalog-data.js`.
+It does not generate or replace this runtime catalog. Artwork generation and PDF
+review have been retired; see [finished fitting assets](fitting-assets.md).
 
 ## Enable the review server
 

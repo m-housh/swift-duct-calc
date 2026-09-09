@@ -50,7 +50,7 @@ extension TemplateFittingClient: DependencyKey {
               id: .init(rawValue: fitting.id.rawValue),
               group: TemplateFitting.Group(rawValue: fitting.groupID.rawValue)!,
               sourceCode: fitting.sourceCode?.rawValue, name: fitting.name,
-              artworkPath: artworkPath, sourcePages: [], notes: fitting.conditions.notes,
+              artworkPath: artworkPath, notes: fitting.conditions.notes,
               requirements: TemplateCatalog.requirements(fitting.inputRequirement)))
         }
         return result

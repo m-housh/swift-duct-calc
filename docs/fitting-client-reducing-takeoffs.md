@@ -1,5 +1,9 @@
 # Group 3 reducing-trunk takeoffs
 
+Source-file paths and review hashes below record the completed import. Those
+files are now retained in Git history; the app uses the
+[finished SVGs and catalogs](fitting-assets.md) without a PDF or regeneration step.
+
 Catalog revision `fitting-catalog-v12` contains 202 fitting choices, including all
 32 approved Group 3 construction identities. Group 3 is supply-only. Existing
 artwork and legacy project lookup behavior are unchanged.

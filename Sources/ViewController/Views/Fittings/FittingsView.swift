@@ -14,7 +14,6 @@ struct FittingsView: HTML, Sendable {
       HTMLRaw(Self.referenceShell)
       footer(.class("reference-footer")) {
         span { "Reference values · calculation rules remain under review." }
-        a(.href("/files/ManD.Groups.pdf"), .target(.blank), .rel(.init(rawValue: "noopener"))) { "Original PDF ↗" }
       }
       HTMLRaw("""
           <dialog id="copy-dialog" aria-labelledby="copy-title">
@@ -26,8 +25,7 @@ struct FittingsView: HTML, Sendable {
           """)
       div(.class("reference-toast"), .id("toast"), .role("status")) {}
       noscript {
-        "This reference needs JavaScript. "
-        a(.href("/files/ManD.Groups.pdf")) { "Open the original PDF." }
+        "Enable JavaScript to browse the fitting drawings and reference tables."
       }
     }
   }

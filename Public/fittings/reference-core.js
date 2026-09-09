@@ -2,26 +2,25 @@
 (() => {
   'use strict';
   const groups = [
-    [1, 'Supply at equipment', 'Supply air fittings at equipment', 1],
-    [2, 'Supply branch takeoffs', 'Supply trunk branch takeoffs', 5],
-    [3, 'Reducing trunk takeoffs', 'Reducing trunk takeoffs', 10],
-    [4, 'Supply boots & heads', 'Supply boots and stack heads', 18],
-    [5, 'Return at equipment', 'Return fittings at equipment', 20],
-    [6, 'Return branches & boots', 'Return trunk branches and return boots', 25],
-    [7, 'Joist & stud returns', 'Panned joists and stud returns', 30],
-    [8, 'Elbows & offsets', 'Elbows and offsets', 32],
-    [9, 'Supply junctions', 'Supply trunk junctions', 36],
-    [10, 'Return junctions', 'Return trunk junctions', 40],
-    [11, 'Flex junctions & bends', 'Flexible duct junctions and bends', 42],
-    [12, 'Transitions & squeezes', 'Transitions and oval squeezes', 44],
-  ].map(([id, name, title, pdfPage]) => ({id, name, title, pdfPage}));
+    [1, 'Supply at equipment', 'Supply air fittings at equipment'],
+    [2, 'Supply branch takeoffs', 'Supply trunk branch takeoffs'],
+    [3, 'Reducing trunk takeoffs', 'Reducing trunk takeoffs'],
+    [4, 'Supply boots & heads', 'Supply boots and stack heads'],
+    [5, 'Return at equipment', 'Return fittings at equipment'],
+    [6, 'Return branches & boots', 'Return trunk branches and return boots'],
+    [7, 'Joist & stud returns', 'Panned joists and stud returns'],
+    [8, 'Elbows & offsets', 'Elbows and offsets'],
+    [9, 'Supply junctions', 'Supply trunk junctions'],
+    [10, 'Return junctions', 'Return trunk junctions'],
+    [11, 'Flex junctions & bends', 'Flexible duct junctions and bends'],
+    [12, 'Transitions & squeezes', 'Transitions and oval squeezes'],
+  ].map(([id, name, title]) => ({id, name, title}));
   const items = window.FITTINGS;
   // Same applicability as the full-catalog path picker. Shared groups occur in both paths.
   const pathGroups = {supply: [1, 2, 3, 4, 8, 9, 11, 12], return: [5, 6, 7, 8, 10, 11, 12]};
   const groupsForSystem = (system = 'all') => groups.filter(g => !pathGroups[system] || pathGroups[system].includes(g.id));
   const group = id => groups.find(g => g.id === Number(id));
   const imageURL = f => (f.image.startsWith('/') ? f.image : '/fittings/' + f.image) + (f.viewport ? '#svgView(viewBox(' + f.viewport.join(',') + '))' : '');
-  const sourceURL = f => '/files/ManD.Groups.pdf#page=' + (f.source.pdfPage || f.source.pdfPages?.[0] || group(f.group).pdfPage);
   function table(f) {
     if (f.fixed !== undefined) return {labels: ['Reference'], rows: [{keys: ['At stated conditions'], value: f.fixed}]};
     if (f.rule?.kind === 'ratio') return {labels: [f.rule.parameter], rows: f.rule.rows.map(r => ({keys: [String(r.ratio)], value: r.feet}))};
@@ -38,7 +37,7 @@
         source_values: f.values, ratio_table: f.ratioTable || null, downstream_branches: f.branches || null,
         adjustment: f.adjustment || null, counting_rule: f.countingRule || null,
         notes: f.notes, calculation_status: 'prototype-adapter-not-audited'},
-      source: {...f.source, printed_page: f.page, url: sourceURL(f), manifest: f.manifest ? '/images/fittings/' + f.manifest : null},
+      source: {document: 'ACCA Manual D', printed_page: f.page},
     };
   }
   function filter({group: groupId = 'all', query = '', type = 'all', system = 'all'} = {}) {
@@ -56,5 +55,5 @@
   function json(fittings) {
     return JSON.stringify({schema: 'duct-calc.fitting-reference.prototype.v1', status: 'reference-only; not a production API or import contract', fittings: fittings.map(record)}, null, 2);
   }
-  window.FittingReference = {groups, groupsForSystem, items, group, imageURL, sourceURL, table, record, filter, csv, json};
+  window.FittingReference = {groups, groupsForSystem, items, group, imageURL, table, record, filter, csv, json};
 })();
