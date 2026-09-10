@@ -195,7 +195,9 @@ struct ProjectTests {
       let project = try await database.projects.create(user.id, .mock)
 
       var detail = try await database.projects.detail(project.id)
-      #expect(detail == nil)
+      #expect(detail?.project == project)
+      #expect(detail?.equipmentInfo == nil)
+      #expect(try await database.projects.detail(UUID(999)) == nil)
 
       let equipment = try await database.equipment.create(
         .init(projectID: project.id, heatingCFM: 1000, coolingCFM: 1000)

@@ -43,7 +43,7 @@ extension PdfClient.Request {
       rooms: details.rooms,
       componentLosses: details.componentLosses,
       ductSizes: ductSizes,
-      equipmentInfo: details.equipmentInfo,
+      equipmentInfo: shared.equipmentInfo,
       maxSupplyTEL: shared.maxSupplyLength,
       maxReturnTEL: shared.maxReturnLenght,
       frictionRate: frictionRate,

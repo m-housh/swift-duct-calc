@@ -1,7 +1,7 @@
 import Foundation
 import ManualDCore
 
-public struct ProjectClientError: Error {
+public struct ProjectClientError: LocalizedError {
   public let reason: String
 
   public init(_ reason: String) {
@@ -12,7 +12,7 @@ public struct ProjectClientError: Error {
     .init(notFound.reason)
   }
 
-  public var localizedDescription: String {
+  public var errorDescription: String? {
     reason
   }
 

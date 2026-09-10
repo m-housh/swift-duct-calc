@@ -114,7 +114,7 @@ extension Project {
   /// Represents project details loaded from the database.
   ///
   /// This is generally used to perform duct sizing calculations for the
-  /// project, once all the steps have been completed.
+  /// project, including inputs that have not been entered yet.
   public struct Detail: Codable, Equatable, Sendable {
 
     /// The project.
@@ -122,7 +122,7 @@ extension Project {
     /// The component pressure losses for the project.
     public let componentLosses: [ComponentPressureLoss]
     /// The equipment info for the project.
-    public let equipmentInfo: EquipmentInfo
+    public let equipmentInfo: EquipmentInfo?
     /// The equivalent lengths for the project.
     public let equivalentLengths: [EquivalentLength]
     /// The rooms in the project.
@@ -133,7 +133,7 @@ extension Project {
     public init(
       project: Project,
       componentLosses: [ComponentPressureLoss],
-      equipmentInfo: EquipmentInfo,
+      equipmentInfo: EquipmentInfo?,
       equivalentLengths: [EquivalentLength],
       rooms: [Room],
       trunks: [TrunkSize]

@@ -18,14 +18,6 @@ struct DuctSizingView: HTML, Sendable {
       PageTitleRow {
         div {
           PageTitle("Duct Sizes")
-
-          Alert(
-            """
-            Must complete all the previous sections to display duct sizing calculations.
-            """
-          )
-          .hidden(when: ductSizes.rooms.count > 0)
-          .attributes(.class("text-error font-bold italic mt-4"))
         }
 
         div {
