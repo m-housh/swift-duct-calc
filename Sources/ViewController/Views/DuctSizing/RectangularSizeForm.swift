@@ -43,9 +43,8 @@ struct RectangularSizeForm: HTML, Sendable {
     room.ductSize.height
   }
 
-  var body: some HTML<HTMLTag.dialog> {
-    ModalForm(id: id, dismiss: dismiss) {
-      h1(.class("text-lg pb-6")) { "Rectangular Size" }
+  var body: some HTML {
+    ModalForm(id: id, title: "Rectangular Size", dismiss: dismiss) {
 
       form(
         .class("space-y-4"),

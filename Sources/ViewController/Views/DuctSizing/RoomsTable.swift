@@ -138,7 +138,7 @@ extension DuctSizingView {
               div(.class("join")) {
                 if room.ductSize.width != nil {
                   Tooltip("Delete Size", position: .bottom) {
-                    TrashButton()
+                    TrashButton("Delete rectangular size for \(room.label)")
                       .attributes(.class("join-item btn-ghost"))
                       .attributes(
                         .hx.delete(deleteRoute),
@@ -150,7 +150,7 @@ extension DuctSizingView {
                 }
 
                 Tooltip("Edit Size", position: .bottom) {
-                  EditButton()
+                  EditButton(accessibilityLabel: "Edit rectangular size for \(room.label)")
                     .attributes(
                       .class("join-item btn-ghost"),
                       .showModal(id: RectangularSizeForm.id(room))

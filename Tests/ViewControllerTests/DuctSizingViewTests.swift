@@ -22,7 +22,7 @@ struct DuctSizingViewTests {
       let view = await render(
         error: Project.DuctSizingUnavailable(missingInputs: missing), htmx: htmx)
       let html = view.render()
-      #expect(html.contains("drawer-side"))
+      #expect(html.contains("aria-label=\"Project\""))
       #expect(html.contains("navbar"))
       #expect(html.contains("Complete these inputs"))
       #expect(!html.contains("Oops: Error"))
@@ -59,7 +59,7 @@ struct DuctSizingViewTests {
 
   @Test func calculationFailureKeepsNavigation() async {
     let view = await render(error: ProjectClientError("Unable to calculate duct sizes."))
-    #expect(view.render().contains("drawer-side"))
+    #expect(view.render().contains("aria-label=\"Project\""))
     #expect(view.render().contains("Unable to calculate duct sizes."))
     assertSnapshot(of: view, as: .html)
   }
@@ -73,7 +73,7 @@ struct DuctSizingViewTests {
     }
     #expect(view.render().contains("Oops: Error"))
     #expect(!view.render().contains("Complete these inputs"))
-    #expect(!view.render().contains("drawer-side"))
+    #expect(!view.render().contains("aria-label=\"Project\""))
   }
 
   private func render(error: any Error, htmx: Bool = false) async -> AnySendableHTML {

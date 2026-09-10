@@ -15,7 +15,7 @@ struct EquipmentInfoView: HTML, Sendable {
       PageTitleRow {
         PageTitle { "Equipment Details" }
 
-        EditButton()
+        EditButton(accessibilityLabel: "Edit equipment")
           .attributes(
             .class("btn-primary"),
             .showModal(id: EquipmentInfoForm.id)

@@ -46,7 +46,7 @@ struct DuctSizingView: HTML, Sendable {
             "Trunk / Runout Sizes"
           }
 
-          PlusButton()
+          PlusButton("Add trunk or runout")
             .attributes(
               .class("btn-primary"),
               .showModal(id: TrunkSizeForm.id())

@@ -26,8 +26,7 @@ struct EquipmentInfoForm: HTML, Sendable {
   }
 
   var body: some HTML {
-    ModalForm(id: Self.id, dismiss: dismiss) {
-      h1(.class("text-3xl font-bold pb-6 ps-2")) { "Equipment Info" }
+    ModalForm(id: Self.id, title: "Equipment", dismiss: dismiss) {
       form(
         .class("grid grid-cols-1 gap-4"),
         equipmentInfo != nil

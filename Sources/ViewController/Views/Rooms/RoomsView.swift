@@ -118,6 +118,7 @@ struct RoomsView: HTML, Sendable {
                 Tooltip("Import room loads", position: .left) {
                   button(
                     .class("btn btn-secondary"),
+                    .init(name: "aria-label", value: "Import room loads"),
                     .showModal(id: UploadRoomsForm.id)
                   ) {
                     SVG(.filePlusCorner)
@@ -125,7 +126,7 @@ struct RoomsView: HTML, Sendable {
                 }
 
                 Tooltip("Add Room") {
-                  PlusButton()
+                  PlusButton("Add room")
                     .attributes(
                       .class("btn-primary mx-auto"),
                       .showModal(id: RoomForm.id())
@@ -212,7 +213,7 @@ struct RoomsView: HTML, Sendable {
           div(.class("flex justify-end")) {
             div(.class("join")) {
               Tooltip("Delete room", position: .bottom) {
-                TrashButton()
+                TrashButton("Delete \(room.name)")
                   .attributes(
                     .class("join-item btn-ghost"),
                     .hx.delete(
@@ -223,7 +224,7 @@ struct RoomsView: HTML, Sendable {
               }
 
               Tooltip("Edit room", position: .bottom) {
-                EditButton()
+                EditButton(accessibilityLabel: "Edit \(room.name)")
                   .attributes(
                     .class("join-item btn-ghost"),
                     .showModal(id: RoomForm.id(room))
@@ -256,10 +257,7 @@ struct RoomsView: HTML, Sendable {
     }
 
     var body: some HTML {
-      ModalForm(id: Self.id, dismiss: dismiss) {
-        h1(.class("text-xl font-bold mb-6")) {
-          "Sensible Heat Ratio"
-        }
+      ModalForm(id: Self.id, title: "Sensible Heat Ratio", dismiss: dismiss) {
         form(
           .class("grid grid-cols-1 gap-4"),
           .hx.patch(route),
@@ -290,8 +288,7 @@ struct RoomsView: HTML, Sendable {
     let hasExistingRooms: Bool
 
     var body: some HTML {
-      ModalForm(id: Self.id, dismiss: true) {
-        h1(.class("text-2xl font-bold mb-4")) { "Import room loads" }
+      ModalForm(id: Self.id, title: "Import room loads", dismiss: true) {
         label(.for("roomImportFormat"), .class("label")) { "File type" }
         select(
           .id("roomImportFormat"), .class("select w-full mb-4"),

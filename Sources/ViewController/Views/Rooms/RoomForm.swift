@@ -42,8 +42,7 @@ struct RoomForm: HTML, Sendable {
   }
 
   var body: some HTML {
-    ModalForm(id: Self.id(room), dismiss: dismiss) {
-      h1(.class("text-3xl font-bold pb-6")) { "Room" }
+    ModalForm(id: Self.id(room), title: "Room", dismiss: dismiss) {
 
       form(
         .class("grid grid-cols-1 gap-4"),

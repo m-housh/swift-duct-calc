@@ -18,10 +18,10 @@
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
     <script src="/js/htmx-download.js"></script>
     <script src="/js/main.js"></script>
-    <script src="/js/daisy-multiselect.js" defer=""></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="/css/output.css?v=navbar-reference-1">
     <link rel="stylesheet" href="/css/htmx.css">
+    <link rel="stylesheet" href="/css/accessibility.css?v=1">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
     <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
@@ -32,53 +32,30 @@
   <body>
     <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
       <main class="flex flex-col min-h-screen min-w-full grow mb-auto">
-        <dialog id="loginForm" class="modal modal-open">
-          <div class="modal-box">
-            <div class="flex justify-between">
-              <h1 class="text-2xl font-bold mb-6">Login</h1>
-              Privacy Policy<a class="btn btn-link" href="/privacy-policy" target="_blank"></a>
+        <section id="loginForm" class="page-form" aria-labelledby="loginForm-title">
+          <h1 id="loginForm-title" class="text-2xl font-bold mb-6">Sign Up</h1>
+          <div class="flex justify-between"><a class="btn btn-link" href="/privacy-policy" target="_blank">Privacy Policy</a></div>
+          <form method="post" class="space-y-4">
+            <div>
+              <label class="input validator w-full"><span class="label">Email</span>
+              <input type="email" placeholder="Email" required name="email" id="email" autocomplete="username" autofocus></label>
+              <div class="validator-hint hidden">Enter valid email address.</div>
             </div>
-            <form method="post" class="space-y-4">
-              <div>
-                <label class="input validator w-full">  <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <g
-                    stroke-linejoin="round"
-                    stroke-linecap="round"
-                    stroke-width="2.5"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                  </g>
-                </svg>
-                <input type="email" placeholder="Email" required name="email" id="email" autofocus></label>
-                <div class="validator-hint hidden">Enter valid email address.</div>
-              </div>
-              <div>
-                <label class="input validator w-full">  <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <g
-                      stroke-linejoin="round"
-                      stroke-linecap="round"
-                      stroke-width="2.5"
-                      fill="none"
-                      stroke="currentColor"
-                    >
-                      <path
-                        d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"
-                      ></path>
-                      <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
-                    </g>
-                  </svg>
-                <input type="password" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" name="password" id="password"></label>
-              </div>
-              <div class="flex">
-                <button class="btn btn-secondary mt-4 w-full">Login</button>
-              </div>
-              <div class="flex justify-center"><a class="btn btn-link" href="/signup">Sign Up</a></div>
-            </form>
-          </div>
-        </dialog>
+            <div>
+              <label class="input validator w-full"><span class="label">Password</span>
+              <input type="password" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" name="password" id="password" autocomplete="new-password" aria-describedby="password-help"></label>
+            </div>
+            <div>
+              <label class="input validator w-full"><span class="label">Confirm password</span>
+              <input type="password" placeholder="Confirm Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" name="confirmPassword" id="confirmPassword" autocomplete="new-password" aria-describedby="password-help"></label>
+            </div>
+            <p id="password-help" class="text-sm">Use at least 8 characters, including an uppercase letter, a lowercase letter, and a number.</p>
+            <div class="flex">
+              <button class="btn btn-secondary mt-4 w-full">Sign Up</button>
+            </div>
+            <div class="flex justify-center"><a class="btn btn-link" href="/login">Login</a></div>
+          </form>
+        </section>
       </main>
       <div class="bottom-0 left-0 bg-error"></div>
     </div>

@@ -11,7 +11,7 @@ struct ProjectDetail: HTML, Sendable {
       PageTitleRow {
         PageTitle { "Project" }
 
-        EditButton()
+        EditButton(accessibilityLabel: "Edit project")
           .attributes(
             .class("btn-primary"),
             .on(.click, "projectForm.showModal()")

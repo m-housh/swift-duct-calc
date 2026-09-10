@@ -111,7 +111,7 @@ struct EffectiveLengthsTable: HTML, Sendable {
             // Buttons
             div(.class("flex items-center justify-end")) {
               div(.class("join")) {
-                TrashButton()
+                TrashButton("Delete equivalent length")
                   .attributes(
                     .class("join-item btn-ghost"),
                     .hx.delete(route: deleteRoute),

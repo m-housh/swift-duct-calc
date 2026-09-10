@@ -30,18 +30,21 @@ public struct SubmitButton: HTML, Sendable {
 
 public struct EditButton: HTML, Sendable {
   let title: String?
+  let accessibilityLabel: String
   let type: HTMLAttribute<HTMLTag.button>.ButtonType
 
   public init(
     title: String? = nil,
+    accessibilityLabel: String = "Edit",
     type: HTMLAttribute<HTMLTag.button>.ButtonType = .button
   ) {
     self.title = title
+    self.accessibilityLabel = title ?? accessibilityLabel
     self.type = type
   }
 
   public var body: some HTML<HTMLTag.button> {
-    button(.class("btn"), .type(type)) {
+    button(.class("btn"), .type(type), .init(name: "aria-label", value: accessibilityLabel)) {
       div(.class("flex")) {
         if let title {
           span(.class("pe-2")) { title }
@@ -53,24 +56,25 @@ public struct EditButton: HTML, Sendable {
 }
 
 public struct PlusButton: HTML, Sendable {
-
-  public init() {}
+  let label: String
+  public init(_ label: String = "Add") { self.label = label }
 
   public var body: some HTML<HTMLTag.button> {
     button(
       .type(.button),
-      .class("btn")
+      .class("btn"), .init(name: "aria-label", value: label)
     ) { SVG(.circlePlus) }
   }
 }
 
 public struct TrashButton: HTML, Sendable {
-  public init() {}
+  let label: String
+  public init(_ label: String = "Delete") { self.label = label }
 
   public var body: some HTML<HTMLTag.button> {
     button(
       .type(.button),
-      .class("btn btn-error")
+      .class("btn btn-error"), .init(name: "aria-label", value: label)
     ) {
       SVG(.trash)
     }

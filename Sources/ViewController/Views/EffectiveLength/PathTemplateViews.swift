@@ -11,7 +11,7 @@ struct PathTemplatesView: HTML, Sendable {
   var preferredType: EquivalentLength.EffectiveLengthType? = nil
 
   var body: some HTML {
-    Navbar(showSidebarToggle: false, isLoggedIn: true)
+    Navbar(isLoggedIn: true)
     div(.id("path-template-list"), .class("w-full p-4 space-y-6")) {
       link(.rel(.stylesheet), .href("/css/path-template-chooser.css?v=1"))
       if let projectID {
@@ -19,12 +19,11 @@ struct PathTemplatesView: HTML, Sendable {
       }
       PageTitleRow {
         PageTitle { choosing ? "Choose a path template" : "Path templates" }
-        PlusButton()
+        PlusButton("Add path template")
           .attributes(.class("btn-primary"), .showModal(id: "newPathTemplate"))
           .tooltip("Add path template")
       }
-      ModalForm(id: "newPathTemplate", dismiss: true) {
-        h2(.class("text-2xl font-bold")) { "Add path template" }
+      ModalForm(id: "newPathTemplate", title: "Add path template", dismiss: true) {
         div(.class("space-y-3 mt-4")) {
           for type in EquivalentLength.EffectiveLengthType.allCases {
             a(
@@ -166,7 +165,7 @@ struct PathTemplateWorkspace: HTML, Sendable {
   }
 
   var body: some HTML {
-    Navbar(showSidebarToggle: false, isLoggedIn: true)
+    Navbar(isLoggedIn: true)
     div(.id("path-template-page"), .class("w-full p-4 space-y-4")) {
       div(.class("flex flex-wrap items-center gap-2")) {
         if data.mode != "path", let projectID = data.projectID {

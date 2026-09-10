@@ -8,13 +8,13 @@ struct UserView: HTML, Sendable {
 
   var body: some HTML {
     div {
-      Navbar(showSidebarToggle: false, isLoggedIn: false)
+      Navbar()
 
       div(.class("p-4")) {
         a(.class("btn btn-secondary mb-4"), .href("/path-templates")) { "Path templates" }
         Row {
           h1(.class("text-2xl font-bold")) { "Account" }
-          EditButton()
+          EditButton(accessibilityLabel: "Edit profile")
             .attributes(.showModal(id: UserProfileForm.id(profile)))
         }
 

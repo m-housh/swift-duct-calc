@@ -10,7 +10,7 @@ struct TestPage: HTML, Sendable {
 
   var body: some HTML {
     div {
-      Navbar(showSidebarToggle: false, isLoggedIn: false)
+      Navbar(isLoggedIn: false)
       div(.class("flex justify-center items-center px-10")) {
         div(
           .class(

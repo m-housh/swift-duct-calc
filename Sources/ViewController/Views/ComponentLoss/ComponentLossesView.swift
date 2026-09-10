@@ -22,7 +22,7 @@ struct ComponentPressureLossesView: HTML, Sendable {
     div(.class("space-y-4")) {
       Row {
         h1(.class("text-2xl font-bold")) { "Component Pressure Losses" }
-        PlusButton()
+        PlusButton("Add component loss")
           .attributes(
             .class("btn-primary text-2xl me-2"),
             .showModal(id: ComponentLossForm.id())
@@ -59,7 +59,7 @@ struct ComponentPressureLossesView: HTML, Sendable {
         td {
           div(.class("flex join items-end justify-end mx-auto")) {
             Tooltip("Delete", position: .bottom) {
-              TrashButton()
+              TrashButton("Delete component loss")
                 .attributes(
                   .class("join-item btn-ghost"),
                   .hx.delete(
@@ -74,7 +74,7 @@ struct ComponentPressureLossesView: HTML, Sendable {
                 )
             }
             Tooltip("Edit", position: .bottom) {
-              EditButton()
+              EditButton(accessibilityLabel: "Edit component loss")
                 .attributes(
                   .class("join-item btn-ghost"),
                   .showModal(id: ComponentLossForm.id(row))

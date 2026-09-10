@@ -1,0 +1,34 @@
+/* Shared navigation and form layouts use native controls and theme foreground colors. */
+.app-navbar { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; padding:1rem; margin-bottom:1rem; background:var(--color-base-300); color:var(--color-base-content); }
+.app-brand { display:flex; align-items:center; gap:.5rem; font-size:1.5rem; font-weight:700; white-space:nowrap; }
+.app-brand img { width:3rem; height:3rem; object-fit:contain; }
+.app-nav-actions { display:flex; flex-wrap:wrap; align-items:center; gap:.75rem; }
+.account-menu { position:relative; margin:0; color:inherit; font-size:inherit; }
+.account-menu > summary { list-style:none; }
+.account-menu > summary::-webkit-details-marker { display:none; }
+.account-menu > ul { position:absolute; right:0; top:100%; min-width:12rem; z-index:50; }
+.account-menu form, .account-menu form button { width:100%; text-align:left; }
+.project-layout { display:grid; grid-template-columns:14rem minmax(0,1fr); gap:1rem; align-items:start; }
+.project-navigation { background:var(--color-base-200); color:var(--color-base-content); margin:0; font-size:inherit; border-radius:.5rem; }
+.project-navigation summary { padding:1rem; cursor:pointer; font-weight:700; }
+.project-navigation a { display:flex; flex-direction:column; gap:.25rem; padding:.75rem 1rem; color:inherit; }
+.project-navigation a:hover, .project-navigation a[aria-current=page] { background:var(--color-base-300); text-decoration:underline; text-underline-offset:.2em; }
+.project-navigation a[aria-current=page] { border-inline-start:4px solid currentColor; font-weight:700; }
+.project-step-status { font-size:.75rem; }
+.project-content { min-width:0; padding:0 1rem 1rem; }
+.page-form { width:calc(100% - 2rem); max-width:36rem; margin:2rem auto; padding:1.5rem; background:var(--color-base-200); color:var(--color-base-content); border-radius:1rem; }
+.checkbox-options { max-height:18rem; overflow:auto; border:1px solid currentColor; border-radius:.5rem; }
+.checkbox-options label { display:flex; align-items:center; gap:.75rem; padding:.75rem; cursor:pointer; }
+.checkbox-options input { flex-shrink:0; }
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible { outline:3px solid currentColor; outline-offset:3px; }
+.modal:not([open]) { display:none; }
+@media (max-width: 800px) {
+  .project-layout { grid-template-columns:minmax(0,1fr); }
+  .project-navigation { margin:0 1rem; }
+}
+@media (max-width: 480px) {
+  .app-navbar { align-items:flex-start; }
+  .app-nav-actions { width:100%; }
+  .account-menu > ul { right:auto; left:0; }
+  .page-form { padding:1rem; }
+}

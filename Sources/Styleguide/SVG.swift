@@ -9,7 +9,7 @@ public struct SVG: HTML, Sendable {
   }
 
   public var body: some HTML {
-    HTMLRaw(key.svg)
+    HTMLRaw(key.svg.replacingOccurrences(of: "<svg ", with: "<svg aria-hidden=\"true\" focusable=\"false\" "))
   }
 }
 

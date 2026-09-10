@@ -38,9 +38,8 @@ struct UserProfileForm: HTML, Sendable {
   }
 
   var body: some HTML {
-    ModalForm(id: Self.id(profile), closeButton: dismiss, dismiss: dismiss) {
+    ModalForm(id: Self.id(profile), title: "Profile", dismiss: dismiss) {
 
-      h1(.class("text-xl font-bold pb-6")) { "Profile" }
 
       form(
         .class("grid grid-cols-1 gap-4 p-4"),
@@ -90,57 +89,21 @@ struct UserProfileForm: HTML, Sendable {
           input(.name("zipCode"), .value(profile?.zipCode), .required)
         }
 
-        div(.class("dropdown dropdown-top")) {
-          div(.class("input btn m-1 w-full"), .tabindex(0), .role(.init(rawValue: "button"))) {
-            "Theme"
-            SVG(.chevronDown)
-          }
-          ul(
-            .tabindex(-1),
-            .class("dropdown-content bg-base-300 rounded-box z-1 p-2 shadow-2xl")
-          ) {
-            li {
-              input(
-                .type(.radio),
-                .name("theme"),
-                .class("theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"),
-                .init(name: "aria-label", value: "Default"),
-                .value("default")
-              )
-              .attributes(.checked, when: profile?.theme == .default)
-            }
-            li {
-              span(.class("text-sm font-bold text-gray-400")) {
-                "Light"
+        label(.class("select w-full")) {
+          span(.class("label")) { "Theme" }
+          select(.name("theme")) {
+            option(.value("default")) { "System default" }
+              .attributes(.selected, when: profile?.theme == nil || profile?.theme == .default)
+            optgroup(.label("Light")) {
+              for theme in Theme.lightThemes {
+                option(.value(theme.rawValue)) { theme.rawValue.capitalized }
+                  .attributes(.selected, when: profile?.theme == theme)
               }
             }
-            for theme in Theme.lightThemes {
-              li {
-                input(
-                  .type(.radio),
-                  .name("theme"),
-                  .class("theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"),
-                  .init(name: "aria-label", value: "\(theme.rawValue.capitalized)"),
-                  .value(theme.rawValue)
-                )
-                .attributes(.checked, when: profile?.theme == theme)
-              }
-            }
-            li {
-              span(.class("text-sm font-bold text-gray-400")) {
-                "Dark"
-              }
-            }
-            for theme in Theme.darkThemes {
-              li {
-                input(
-                  .type(.radio),
-                  .name("theme"),
-                  .class("theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"),
-                  .init(name: "aria-label", value: "\(theme.rawValue.capitalized)"),
-                  .value(theme.rawValue)
-                )
-                .attributes(.checked, when: profile?.theme == theme)
+            optgroup(.label("Dark")) {
+              for theme in Theme.darkThemes {
+                option(.value(theme.rawValue)) { theme.rawValue.capitalized }
+                  .attributes(.selected, when: profile?.theme == theme)
               }
             }
           }
