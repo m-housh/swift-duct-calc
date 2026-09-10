@@ -25,10 +25,10 @@ struct EquipmentInfoView: HTML, Sendable {
 
       if let equipmentInfo {
 
-        table(.class("table table-zebra")) {
+        table(.class("table details-table table-zebra")) {
           tbody(.class("text-lg")) {
             tr {
-              td { Label { "Static Pressure" } }
+              th(.init(name: "scope", value: "row")) { Label { "Static Pressure" } }
               td {
                 div(.class("flex justify-end")) {
                   Number(equipmentInfo.staticPressure)
@@ -36,7 +36,7 @@ struct EquipmentInfoView: HTML, Sendable {
               }
             }
             tr {
-              td { Label { "Heating CFM" } }
+              th(.init(name: "scope", value: "row")) { Label { "Heating CFM" } }
               td {
                 div(.class("flex justify-end")) {
                   Number(equipmentInfo.heatingCFM)
@@ -44,7 +44,7 @@ struct EquipmentInfoView: HTML, Sendable {
               }
             }
             tr {
-              td { Label { "Cooling CFM" } }
+              th(.init(name: "scope", value: "row")) { Label { "Cooling CFM" } }
               td {
                 div(.class("flex justify-end")) {
                   Number(equipmentInfo.coolingCFM)

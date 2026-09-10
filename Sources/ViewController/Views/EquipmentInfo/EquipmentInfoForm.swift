@@ -28,6 +28,7 @@ struct EquipmentInfoForm: HTML, Sendable {
   var body: some HTML {
     ModalForm(id: Self.id, title: "Equipment", dismiss: dismiss) {
       form(
+        .data("success-message", value: "Changes saved."),
         .class("grid grid-cols-1 gap-4"),
         equipmentInfo != nil
           ? .hx.patch(route)

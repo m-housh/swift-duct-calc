@@ -31,8 +31,12 @@ public struct CheckboxGroup: HTML, Sendable {
         p { "No supply runs available." }
       } else {
         div(.class("flex flex-wrap gap-2 my-2")) {
-          button(.type(.button), .class("btn btn-sm"), .data("check-all", value: "true")) { "Select all" }
-          button(.type(.button), .class("btn btn-sm"), .data("check-all", value: "false")) { "Clear selection" }
+          button(.type(.button), .class("btn btn-sm"), .data("check-all", value: "true")) {
+            "Select all"
+          }
+          button(.type(.button), .class("btn btn-sm"), .data("check-all", value: "false")) {
+            "Clear selection"
+          }
         }
         div(.class("checkbox-options")) {
           for option in options {

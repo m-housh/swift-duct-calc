@@ -176,6 +176,7 @@ struct EffectiveLengthForm: HTML, Sendable {
 
     var body: some HTML {
       form(
+        .data("success-message", value: "Equivalent length saved."),
         .class("space-y-4"),
         effectiveLength == nil
           ? .hx.post(route)
@@ -345,7 +346,7 @@ struct GroupTypeSelect: HTML, Sendable {
   var body: some HTML<HTMLTag.label> {
     label(.class("select w-full")) {
       span(.class("label")) { "Type" }
-      select(.name("type"), .id("type")) {
+      select(.name("type")) {
         for value in EquivalentLength.EffectiveLengthType.allCases {
           option(
             .value("\(value.rawValue)"),

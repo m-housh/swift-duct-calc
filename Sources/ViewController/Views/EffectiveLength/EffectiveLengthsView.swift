@@ -35,7 +35,12 @@ struct EffectiveLengthsView: HTML, Sendable {
 
       a(.class("link"), .href(pathTemplatesURL(projectID))) { "Manage path templates" }
 
-      EffectiveLengthsTable(effectiveLengths: effectiveLengths)
+      div(
+        .class("table-scroll"), .tabindex(0), .role("region"),
+        .init(name: "aria-label", value: "Equivalent lengths")
+      ) {
+        EffectiveLengthsTable(effectiveLengths: effectiveLengths)
+      }
 
     }
   }

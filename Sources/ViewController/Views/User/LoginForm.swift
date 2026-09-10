@@ -46,7 +46,8 @@ struct LoginForm: HTML, Sendable {
             span(.class("label")) { "Email" }
             input(
               .type(.email), .placeholder("Email"), .required,
-              .name("email"), .id("email"), .init(name: "autocomplete", value: "username"), .autofocus
+              .name("email"), .id("email"), .init(name: "autocomplete", value: "username"),
+              .autofocus
             )
           }
           div(.class("validator-hint hidden")) { "Enter valid email address." }
@@ -59,7 +60,8 @@ struct LoginForm: HTML, Sendable {
               .type(.password), .placeholder("Password"), .required,
               .pattern(.password), .minlength("8"),
               .name("password"), .id("password"),
-              .init(name: "autocomplete", value: style == .signup ? "new-password" : "current-password"),
+              .init(
+                name: "autocomplete", value: style == .signup ? "new-password" : "current-password"),
               .init(name: "aria-describedby", value: "password-help"),
             )
           }

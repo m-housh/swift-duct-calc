@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Duct Calc</title>
+    <title>Equivalent lengths · Duct Calc</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="ductcalc.com" name="og:site_name">
@@ -31,7 +31,8 @@
   </head>
   <body>
     <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
-      <main class="flex flex-col min-h-screen min-w-full grow mb-auto">
+      <a class="skip-link" href="#main-content">Skip to content</a>
+      <main id="main-content" tabindex="-1" class="flex flex-col min-h-screen min-w-full grow mb-auto">
         <nav class="app-navbar" aria-label="Main">
           <a class="app-brand" href="/projects">
           <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
@@ -68,115 +69,118 @@
           </details>
           <div class="project-content" id="project-content" tabindex="-1">
             <div class="space-y-4">
-              <div class="flex justify-between bg-secondary border-2 border-primary rounded-sm shadow-sm 
-p-6 w-full pb-6">
+              <div class="page-title-row pb-6">
                 <h1 class="text-3xl font-bold">Equivalent Lengths</h1>
                 <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg><a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/editor" class="btn btn-primary" aria-label="Add equivalent length" title="Add equivalent length"></a>
               </div>
               Manage path templates<a class="link" href="/path-templates?project=00000000-0000-0000-0000-000000000000"></a>
-              <table class="table table-zebra text-lg">
-                <thead>
-                  <tr class="text-lg">
-                    <th>Type</th>
-                    <th>Name</th>
-                    <th>Straight Lengths</th>
-                    <th>
-                      <div class="grid grid-cols-3 gap-2 min-w-[220px]">
-                        <div class="flex justify-center col-span-3">Groups</div>
-                        <div>Group</div>
-                        <div class="flex justify-center">T.E.L.</div>
-                        <div class="flex justify-end">Quantity</div>
-                      </div>
-                    </th>
-                    <th>
-                      <div class="flex justify-end me-[140px]">T.E.L.</div>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr id="00000000000000000000000000000008">
-                    <td>
-                      <div class="badge badge-lg badge-info"><span>supply</span></div>
-                    </td>
-                    <td>Supply - 1</td>
-                    <td>
-                      <div class="grid grid-cols-1 gap-2"><span>10</span><span>25</span></div>
-                    </td>
-                    <td>
-                      <div class="grid grid-cols-3 gap-2 min-w-[220px]">
-                        <span>1-a</span>
-                        <div class="flex justify-center"><span>20</span></div>
-                        <div class="flex justify-end"><span>1</span></div>
-                        2-b<span></span>
-                        <div class="flex justify-center"><span>30</span></div>
-                        <div class="flex justify-end"><span>1</span></div>
-                        3-a<span></span>
-                        <div class="flex justify-center"><span>10</span></div>
-                        <div class="flex justify-end"><span>1</span></div>
-                        12-a<span></span>
-                        <div class="flex justify-center"><span>10</span></div>
-                        <div class="flex justify-end"><span>1</span></div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="flex items-center justify-end gap-4">
-                        <div class="badge badge-lg badge-primary"><span>105</span></div>
-                        <div class="flex items-center justify-end">
-                          <div class="join">
-                            <div class="tooltip tooltip-bottom" data-tip="Delete">
-                              <button type="button" class="btn btn-error join-item btn-ghost" aria-label="Delete equivalent length" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000008" hx-confirm="Are you sure?" hx-target="closest tr" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+              <div class="table-scroll" tabindex="0" role="region" aria-label="Equivalent lengths">
+                <table class="table table-zebra text-lg">
+                  <thead>
+                    <tr class="text-lg">
+                      <th>Type</th>
+                      <th>Name</th>
+                      <th>Straight Lengths</th>
+                      <th>
+                        <div class="grid grid-cols-3 gap-2 min-w-[220px]">
+                          <div class="flex justify-center col-span-3">Groups</div>
+                          <div>Group</div>
+                          <div class="flex justify-center">T.E.L.</div>
+                          <div class="flex justify-end">Quantity</div>
+                        </div>
+                      </th>
+                      <th>
+                        <div class="flex justify-end me-[140px]">T.E.L.</div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr id="00000000000000000000000000000008">
+                      <td>
+                        <div class="badge badge-lg badge-info"><span>supply</span></div>
+                      </td>
+                      <td>Supply - 1</td>
+                      <td>
+                        <div class="grid grid-cols-1 gap-2"><span>10</span><span>25</span></div>
+                      </td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 min-w-[220px]">
+                          <span>1-a</span>
+                          <div class="flex justify-center"><span>20</span></div>
+                          <div class="flex justify-end"><span>1</span></div>
+                          2-b<span></span>
+                          <div class="flex justify-center"><span>30</span></div>
+                          <div class="flex justify-end"><span>1</span></div>
+                          3-a<span></span>
+                          <div class="flex justify-center"><span>10</span></div>
+                          <div class="flex justify-end"><span>1</span></div>
+                          12-a<span></span>
+                          <div class="flex justify-center"><span>10</span></div>
+                          <div class="flex justify-end"><span>1</span></div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="flex items-center justify-end gap-4">
+                          <div class="badge badge-lg badge-primary"><span>105</span></div>
+                          <div class="flex items-center justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Delete">
+                                <button type="button" class="btn btn-error join-item btn-ghost" aria-label="Delete Supply - 1" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000008" hx-confirm="Are you sure?" hx-target="closest tr" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                              </div>
+                              Edit<a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/editor?id=00000000-0000-0000-0000-000000000008" class="btn btn-ghost join-item"></a>
                             </div>
-                            Edit<a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/editor?id=00000000-0000-0000-0000-000000000008" class="btn btn-ghost join-item"></a>
                           </div>
                         </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr id="00000000000000000000000000000009">
-                    <td>
-                      <div class="badge badge-lg badge-error"><span>return</span></div>
-                    </td>
-                    <td>Return - 1</td>
-                    <td>
-                      <div class="grid grid-cols-1 gap-2"><span>10</span><span>20</span><span>5</span></div>
-                    </td>
-                    <td>
-                      <div class="grid grid-cols-3 gap-2 min-w-[220px]">
-                        <span>5-a</span>
-                        <div class="flex justify-center"><span>10</span></div>
-                        <div class="flex justify-end"><span>1</span></div>
-                        6-a<span></span>
-                        <div class="flex justify-center"><span>15</span></div>
-                        <div class="flex justify-end"><span>1</span></div>
-                        7-a<span></span>
-                        <div class="flex justify-center"><span>20</span></div>
-                        <div class="flex justify-end"><span>1</span></div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="flex items-center justify-end gap-4">
-                        <div class="badge badge-lg badge-primary"><span>80</span></div>
-                        <div class="flex items-center justify-end">
-                          <div class="join">
-                            <div class="tooltip tooltip-bottom" data-tip="Delete">
-                              <button type="button" class="btn btn-error join-item btn-ghost" aria-label="Delete equivalent length" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000009" hx-confirm="Are you sure?" hx-target="closest tr" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                      </td>
+                    </tr>
+                    <tr id="00000000000000000000000000000009">
+                      <td>
+                        <div class="badge badge-lg badge-error"><span>return</span></div>
+                      </td>
+                      <td>Return - 1</td>
+                      <td>
+                        <div class="grid grid-cols-1 gap-2"><span>10</span><span>20</span><span>5</span></div>
+                      </td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 min-w-[220px]">
+                          <span>5-a</span>
+                          <div class="flex justify-center"><span>10</span></div>
+                          <div class="flex justify-end"><span>1</span></div>
+                          6-a<span></span>
+                          <div class="flex justify-center"><span>15</span></div>
+                          <div class="flex justify-end"><span>1</span></div>
+                          7-a<span></span>
+                          <div class="flex justify-center"><span>20</span></div>
+                          <div class="flex justify-end"><span>1</span></div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="flex items-center justify-end gap-4">
+                          <div class="badge badge-lg badge-primary"><span>80</span></div>
+                          <div class="flex items-center justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Delete">
+                                <button type="button" class="btn btn-error join-item btn-ghost" aria-label="Delete Return - 1" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000009" hx-confirm="Are you sure?" hx-target="closest tr" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                              </div>
+                              Edit<a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/editor?id=00000000-0000-0000-0000-000000000009" class="btn btn-ghost join-item"></a>
                             </div>
-                            Edit<a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/editor?id=00000000-0000-0000-0000-000000000009" class="btn btn-ghost join-item"></a>
                           </div>
                         </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
       </main>
-      <div class="bottom-0 left-0 bg-error">
+      <div id="app-status" class="sr-only" role="status" aria-atomic="true"></div>
+      <div id="app-error" class="request-error" role="alert"></div>
+      <div>
         <footer class="footer footer-horizontal footer-center
 bg-base-300 text-base-content p-4">
-          <aside class="grid-flow-row items-center">
+          <div class="grid-flow-row items-center">
             <div class="flex mx-auto">
               <a class="btn btn-ghost" href="mailto:support@ductcalc.pro">  <svg aria-hidden="true" focusable="false" class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g
@@ -193,7 +197,7 @@ bg-base-300 text-base-content p-4">
             </div>
             Source available via PolyForm Perimeter 1.0.1<a class="btn btn-ghost mx-auto" href="https://github.com/m-housh/swift-duct-calc/src/branch/main/LICENSE" target="_blank"></a>
             <p class="">Copyright © 2026 - All rights reserved by Michael Housh</p>
-          </aside>
+          </div>
         </footer>
       </div>
     </div>

@@ -39,12 +39,15 @@ struct DuctSizingView: HTML, Sendable {
       }
 
       if ductSizes.rooms.count != 0 {
-        RoomsTable(rooms: sortedRooms)
+        div(
+          .class("table-scroll"), .tabindex(0), .role("region"),
+          .init(name: "aria-label", value: "Room duct sizes")
+        ) {
+          RoomsTable(rooms: sortedRooms)
+        }
 
         PageTitleRow {
-          PageTitle {
-            "Trunk / Runout Sizes"
-          }
+          h2(.class("text-2xl font-bold")) { "Trunk / Runout Sizes" }
 
           PlusButton("Add trunk or runout")
             .attributes(
@@ -55,7 +58,12 @@ struct DuctSizingView: HTML, Sendable {
         }
 
         if ductSizes.trunks.count > 0 {
-          TrunkTable(ductSizes: ductSizes)
+          div(
+            .class("table-scroll"), .tabindex(0), .role("region"),
+            .init(name: "aria-label", value: "Trunk duct sizes")
+          ) {
+            TrunkTable(ductSizes: ductSizes)
+          }
         }
 
       }

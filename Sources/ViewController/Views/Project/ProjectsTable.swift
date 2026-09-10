@@ -31,17 +31,22 @@ struct ProjectsTable: HTML, Sendable {
         }
         .attributes(.class("pb-6"))
 
-        table(.class("table table-zebra")) {
-          thead {
-            tr {
-              th { Label("Date") }
-              th { Label("Name") }
-              th { Label("Address") }
-              th { span(.class("sr-only")) { "Actions" } }
+        div(
+          .class("table-scroll"), .tabindex(0), .role("region"),
+          .init(name: "aria-label", value: "Projects")
+        ) {
+          table(.class("table table-zebra")) {
+            thead {
+              tr {
+                th { Label("Date") }
+                th { Label("Name") }
+                th { Label("Address") }
+                th { span(.class("sr-only")) { "Actions" } }
+              }
             }
-          }
-          tbody {
-            Rows(projects: projects)
+            tbody {
+              Rows(projects: projects)
+            }
           }
         }
       }

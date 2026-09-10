@@ -32,7 +32,7 @@ public struct LabeledContent<Label: HTML, Content: HTML>: HTML {
         label()
       }
     }
-    .attributes(.class("flex space-x-4"), when: position.isHorizontal)
+    .attributes(.class("flex flex-wrap gap-3"), when: position.isHorizontal)
     .attributes(.class("space-y-4"), when: position.isVertical)
   }
 }

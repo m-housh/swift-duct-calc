@@ -14,15 +14,15 @@ struct ProjectDetail: HTML, Sendable {
         EditButton(accessibilityLabel: "Edit project")
           .attributes(
             .class("btn-primary"),
-            .on(.click, "projectForm.showModal()")
+            .showModal(id: ProjectForm.id)
           )
           .tooltip("Edit project", position: .left)
       }
 
-      table(.class("table table-zebra text-lg")) {
+      table(.class("table details-table table-zebra text-lg")) {
         tbody {
           tr {
-            td(.class("label font-bold")) { "Name" }
+            th(.class("font-bold"), .init(name: "scope", value: "row")) { "Name" }
             td {
               div(.class("flex justify-end")) {
                 project.name
@@ -30,7 +30,7 @@ struct ProjectDetail: HTML, Sendable {
             }
           }
           tr {
-            td(.class("label font-bold")) { "Street Address" }
+            th(.class("font-bold"), .init(name: "scope", value: "row")) { "Street Address" }
             td {
               div(.class("flex justify-end")) {
                 project.streetAddress
@@ -38,7 +38,7 @@ struct ProjectDetail: HTML, Sendable {
             }
           }
           tr {
-            td(.class("label font-bold")) { "City" }
+            th(.class("font-bold"), .init(name: "scope", value: "row")) { "City" }
             td {
               div(.class("flex justify-end")) {
                 project.city
@@ -46,7 +46,7 @@ struct ProjectDetail: HTML, Sendable {
             }
           }
           tr {
-            td(.class("label font-bold")) { "State" }
+            th(.class("font-bold"), .init(name: "scope", value: "row")) { "State" }
             td {
               div(.class("flex justify-end")) {
                 project.state
@@ -54,7 +54,7 @@ struct ProjectDetail: HTML, Sendable {
             }
           }
           tr {
-            td(.class("label font-bold")) { "Zip" }
+            th(.class("font-bold"), .init(name: "scope", value: "row")) { "Zip" }
             td {
               div(.class("flex justify-end")) {
                 project.zipCode

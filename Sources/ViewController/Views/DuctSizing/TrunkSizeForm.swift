@@ -41,6 +41,7 @@ struct TrunkSizeForm: HTML, Sendable {
   var body: some HTML {
     ModalForm(id: Self.id(container), title: "Trunk / Runout Size", dismiss: dismiss) {
       form(
+        .data("success-message", value: "Changes saved."),
         .class("space-y-4"),
         trunk == nil
           ? .hx.post(route)

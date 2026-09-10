@@ -97,9 +97,7 @@ extension ViewController.Request {
           await ResultView {
             try await createAndAuthenticate(request)
           } onSuccess: { user in
-            MainPage {
-              UserProfileForm(userID: user.id, profile: nil, dismiss: false, signup: true)
-            }
+            UserProfileForm(userID: user.id, profile: nil, dismiss: false, signup: true)
           }
         }
       case .submitProfile(let profile):
@@ -113,10 +111,8 @@ extension ViewController.Request {
               try await database.projects.fetch(userID, .init(page: 1, per: 25)),
               profile.theme
             )
-          } onSuccess: { (userID, projects, theme) in
-            MainPage(displayFooter: true, theme: theme) {
-              ProjectsTable(userID: userID, projects: projects)
-            }
+          } onSuccess: { (userID, projects, _) in
+            ProjectsTable(userID: userID, projects: projects)
           }
         }
       }
@@ -137,7 +133,8 @@ extension ViewController.Request {
     let inner = await inner()
     let theme = await self.theme
 
-    return MainPage(displayFooter: displayFooter, theme: theme ?? .default) {
+    return MainPage(displayFooter: displayFooter, theme: theme ?? .default, title: route.pageTitle)
+    {
       inner
     }
   }

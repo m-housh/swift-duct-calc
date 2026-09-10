@@ -46,6 +46,7 @@ struct ProjectForm: HTML, Sendable {
       }
       div(.id("projectDetailsForm")) {
         form(
+          .data("success-message", value: "Changes saved."),
           .class("grid grid-cols-1 gap-4"),
           project == nil
             ? .hx.post(route)

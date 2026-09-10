@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Duct Calc</title>
+    <title>Duct sizes · Duct Calc</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="ductcalc.com" name="og:site_name">
@@ -31,7 +31,8 @@
   </head>
   <body>
     <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
-      <main class="flex flex-col min-h-screen min-w-full grow mb-auto">
+      <a class="skip-link" href="#main-content">Skip to content</a>
+      <main id="main-content" tabindex="-1" class="flex flex-col min-h-screen min-w-full grow mb-auto">
         <nav class="app-navbar" aria-label="Main">
           <a class="app-brand" href="/projects">
           <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
@@ -68,8 +69,7 @@
           </details>
           <div class="project-content" id="project-content" tabindex="-1">
             <div class="space-y-4">
-              <div class="flex justify-between bg-secondary border-2 border-primary rounded-sm shadow-sm 
-p-6 w-full">
+              <div class="page-title-row">
                 <div>
                   <h1 class="text-3xl font-bold">Duct Sizes</h1>
                 </div>
@@ -77,1046 +77,1049 @@ p-6 w-full">
                   <button class="btn btn-primary" hx-get="/projects/00000000-0000-0000-0000-000000000000/pdf" hx-ext="htmx-download" hx-swap="none" hx-indicator=".htmx-indicator"><span>PDF</span><span class="loading loading-spinner loading-lg htmx-indicator"></span></button>
                 </div>
               </div>
-              <table class="table table-zebra text-lg">
-                <thead>
-                  <tr class="text-lg">
-                    <th>Name</th>
-                    <th>BTU</th>
-                    <th>CFM</th>
-                    <th>Velocity</th>
-                    <th class="w-[330px]">Size</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="text-lg" id="roomRow_Bed1">
-                    <td>Bed-1 - SR.1</td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,913</span><span class="label">Cooling</span><span>2,472</span></div>
-                    </td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2">
-                        <span class="label">Design</span>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>92</span></div>
+              <div class="table-scroll" tabindex="0" role="region" aria-label="Room duct sizes">
+                <table class="table table-zebra text-lg">
+                  <thead>
+                    <tr class="text-lg">
+                      <th>Name</th>
+                      <th>BTU</th>
+                      <th>CFM</th>
+                      <th>Velocity</th>
+                      <th class="w-[330px]">Size</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000001_1">
+                      <td>Bed-1 - SR.1</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,913</span><span class="label">Cooling</span><span>2,472</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>92</span></div>
+                          </div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>83</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>92</span></div>
                         </div>
-                        Heating<span class="label"></span>
-                        <div class="flex justify-center"><span>83</span></div>
-                        Cooling<span class="label"></span>
-                        <div class="flex justify-center"><span>92</span></div>
-                      </div>
-                    </td>
-                    <td><span>489</span></td>
-                    <td>
-                      <div class="grid grid-cols-3 gap-2 w-[330px]">
-                        <div class="label">Calculated</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>7</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Final</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-secondary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Flex</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-primary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Rectangular</div>
-                        <div class="flex justify-center"></div>
-                        <div class="flex justify-end">
-                          <div class="join">
-                            <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Bed-1 - SR.1" onclick="rectangularSize_Bed1.showModal()">
-                                <div class="flex">
-                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                  
-                                </div>
-                              </button>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Bed-1 - SR.1" data-open-dialog="rectangularSize_00000000000000000000000000000001_1">
+                                  <div class="flex">
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
                             </div>
                           </div>
+                          <dialog id="rectangularSize_00000000000000000000000000000001_1" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000001_1-title">
+                            <div class="modal-box">
+                              <h2 id="rectangularSize_00000000000000000000000000000001_1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000001" hx-target="#roomRow_00000000000000000000000000000001_1" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="1">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
                         </div>
-                        <dialog id="rectangularSize_Bed1" class="modal" aria-labelledby="rectangularSize_Bed1-title">
-                          <div class="modal-box">
-                            <h2 id="rectangularSize_Bed1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
-                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                            <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000001" hx-target="#roomRow_Bed1" hx-swap="outerHTML">
-                              <input class="hidden" name="register" value="1">
-                              <input class="hidden" name="id" value="">
-                              Height<label class="input w-full"><span class="label"></span>
-                              <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
-                              <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                            </form>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000002_1">
+                      <td>Entry - SR.1</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,142</span><span class="label">Cooling</span><span>1,458</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>88</span></div>
                           </div>
-                        </dialog>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr class="text-lg" id="roomRow_Entry">
-                    <td>Entry - SR.1</td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,142</span><span class="label">Cooling</span><span>1,458</span></div>
-                    </td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2">
-                        <span class="label">Design</span>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>88</span></div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>88</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>54</span></div>
                         </div>
-                        Heating<span class="label"></span>
-                        <div class="flex justify-center"><span>88</span></div>
-                        Cooling<span class="label"></span>
-                        <div class="flex justify-center"><span>54</span></div>
-                      </div>
-                    </td>
-                    <td><span>489</span></td>
-                    <td>
-                      <div class="grid grid-cols-3 gap-2 w-[330px]">
-                        <div class="label">Calculated</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>7</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Final</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-secondary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Flex</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-primary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Rectangular</div>
-                        <div class="flex justify-center"></div>
-                        <div class="flex justify-end">
-                          <div class="join">
-                            <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Entry - SR.1" onclick="rectangularSize_Entry.showModal()">
-                                <div class="flex">
-                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                  
-                                </div>
-                              </button>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Entry - SR.1" data-open-dialog="rectangularSize_00000000000000000000000000000002_1">
+                                  <div class="flex">
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
                             </div>
                           </div>
+                          <dialog id="rectangularSize_00000000000000000000000000000002_1" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000002_1-title">
+                            <div class="modal-box">
+                              <h2 id="rectangularSize_00000000000000000000000000000002_1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000002" hx-target="#roomRow_00000000000000000000000000000002_1" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="1">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
                         </div>
-                        <dialog id="rectangularSize_Entry" class="modal" aria-labelledby="rectangularSize_Entry-title">
-                          <div class="modal-box">
-                            <h2 id="rectangularSize_Entry-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
-                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                            <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000002" hx-target="#roomRow_Entry" hx-swap="outerHTML">
-                              <input class="hidden" name="register" value="1">
-                              <input class="hidden" name="id" value="">
-                              Height<label class="input w-full"><span class="label"></span>
-                              <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
-                              <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                            </form>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000002_2">
+                      <td>Entry - SR.2</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,142</span><span class="label">Cooling</span><span>1,458</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>88</span></div>
                           </div>
-                        </dialog>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr class="text-lg" id="roomRow_Entry">
-                    <td>Entry - SR.2</td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,142</span><span class="label">Cooling</span><span>1,458</span></div>
-                    </td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2">
-                        <span class="label">Design</span>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>88</span></div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>88</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>54</span></div>
                         </div>
-                        Heating<span class="label"></span>
-                        <div class="flex justify-center"><span>88</span></div>
-                        Cooling<span class="label"></span>
-                        <div class="flex justify-center"><span>54</span></div>
-                      </div>
-                    </td>
-                    <td><span>489</span></td>
-                    <td>
-                      <div class="grid grid-cols-3 gap-2 w-[330px]">
-                        <div class="label">Calculated</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>7</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Final</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-secondary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Flex</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-primary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Rectangular</div>
-                        <div class="flex justify-center"></div>
-                        <div class="flex justify-end">
-                          <div class="join">
-                            <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Entry - SR.2" onclick="rectangularSize_Entry.showModal()">
-                                <div class="flex">
-                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                  
-                                </div>
-                              </button>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Entry - SR.2" data-open-dialog="rectangularSize_00000000000000000000000000000002_2">
+                                  <div class="flex">
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
                             </div>
                           </div>
+                          <dialog id="rectangularSize_00000000000000000000000000000002_2" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000002_2-title">
+                            <div class="modal-box">
+                              <h2 id="rectangularSize_00000000000000000000000000000002_2-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000002" hx-target="#roomRow_00000000000000000000000000000002_2" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="2">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
                         </div>
-                        <dialog id="rectangularSize_Entry" class="modal" aria-labelledby="rectangularSize_Entry-title">
-                          <div class="modal-box">
-                            <h2 id="rectangularSize_Entry-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
-                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                            <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000002" hx-target="#roomRow_Entry" hx-swap="outerHTML">
-                              <input class="hidden" name="register" value="2">
-                              <input class="hidden" name="id" value="">
-                              Height<label class="input w-full"><span class="label"></span>
-                              <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
-                              <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                            </form>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000003_1">
+                      <td>Family Room - SR.1</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,262</span><span class="label">Cooling</span><span>2,482</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>92</span></div>
                           </div>
-                        </dialog>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr class="text-lg" id="roomRow_FamilyRoom">
-                    <td>Family Room - SR.1</td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,262</span><span class="label">Cooling</span><span>2,482</span></div>
-                    </td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2">
-                        <span class="label">Design</span>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>92</span></div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>69</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>92</span></div>
                         </div>
-                        Heating<span class="label"></span>
-                        <div class="flex justify-center"><span>69</span></div>
-                        Cooling<span class="label"></span>
-                        <div class="flex justify-center"><span>92</span></div>
-                      </div>
-                    </td>
-                    <td><span>489</span></td>
-                    <td>
-                      <div class="grid grid-cols-3 gap-2 w-[330px]">
-                        <div class="label">Calculated</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>7</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Final</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-secondary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Flex</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-primary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Rectangular</div>
-                        <div class="flex justify-center"></div>
-                        <div class="flex justify-end">
-                          <div class="join">
-                            <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Family Room - SR.1" onclick="rectangularSize_FamilyRoom.showModal()">
-                                <div class="flex">
-                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                  
-                                </div>
-                              </button>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Family Room - SR.1" data-open-dialog="rectangularSize_00000000000000000000000000000003_1">
+                                  <div class="flex">
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
                             </div>
                           </div>
+                          <dialog id="rectangularSize_00000000000000000000000000000003_1" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000003_1-title">
+                            <div class="modal-box">
+                              <h2 id="rectangularSize_00000000000000000000000000000003_1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000003" hx-target="#roomRow_00000000000000000000000000000003_1" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="1">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
                         </div>
-                        <dialog id="rectangularSize_FamilyRoom" class="modal" aria-labelledby="rectangularSize_FamilyRoom-title">
-                          <div class="modal-box">
-                            <h2 id="rectangularSize_FamilyRoom-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
-                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                            <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000003" hx-target="#roomRow_FamilyRoom" hx-swap="outerHTML">
-                              <input class="hidden" name="register" value="1">
-                              <input class="hidden" name="id" value="">
-                              Height<label class="input w-full"><span class="label"></span>
-                              <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
-                              <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                            </form>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000003_2">
+                      <td>Family Room - SR.2</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,262</span><span class="label">Cooling</span><span>2,482</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>92</span></div>
                           </div>
-                        </dialog>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr class="text-lg" id="roomRow_FamilyRoom">
-                    <td>Family Room - SR.2</td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,262</span><span class="label">Cooling</span><span>2,482</span></div>
-                    </td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2">
-                        <span class="label">Design</span>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>92</span></div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>69</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>92</span></div>
                         </div>
-                        Heating<span class="label"></span>
-                        <div class="flex justify-center"><span>69</span></div>
-                        Cooling<span class="label"></span>
-                        <div class="flex justify-center"><span>92</span></div>
-                      </div>
-                    </td>
-                    <td><span>489</span></td>
-                    <td>
-                      <div class="grid grid-cols-3 gap-2 w-[330px]">
-                        <div class="label">Calculated</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>7</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Final</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-secondary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Flex</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-primary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Rectangular</div>
-                        <div class="flex justify-center"></div>
-                        <div class="flex justify-end">
-                          <div class="join">
-                            <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Family Room - SR.2" onclick="rectangularSize_FamilyRoom.showModal()">
-                                <div class="flex">
-                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                  
-                                </div>
-                              </button>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Family Room - SR.2" data-open-dialog="rectangularSize_00000000000000000000000000000003_2">
+                                  <div class="flex">
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
                             </div>
                           </div>
+                          <dialog id="rectangularSize_00000000000000000000000000000003_2" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000003_2-title">
+                            <div class="modal-box">
+                              <h2 id="rectangularSize_00000000000000000000000000000003_2-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000003" hx-target="#roomRow_00000000000000000000000000000003_2" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="2">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
                         </div>
-                        <dialog id="rectangularSize_FamilyRoom" class="modal" aria-labelledby="rectangularSize_FamilyRoom-title">
-                          <div class="modal-box">
-                            <h2 id="rectangularSize_FamilyRoom-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
-                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                            <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000003" hx-target="#roomRow_FamilyRoom" hx-swap="outerHTML">
-                              <input class="hidden" name="register" value="2">
-                              <input class="hidden" name="id" value="">
-                              Height<label class="input w-full"><span class="label"></span>
-                              <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
-                              <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                            </form>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000003_3">
+                      <td>Family Room - SR.3</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,262</span><span class="label">Cooling</span><span>2,482</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>92</span></div>
                           </div>
-                        </dialog>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr class="text-lg" id="roomRow_FamilyRoom">
-                    <td>Family Room - SR.3</td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,262</span><span class="label">Cooling</span><span>2,482</span></div>
-                    </td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2">
-                        <span class="label">Design</span>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>92</span></div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>69</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>92</span></div>
                         </div>
-                        Heating<span class="label"></span>
-                        <div class="flex justify-center"><span>69</span></div>
-                        Cooling<span class="label"></span>
-                        <div class="flex justify-center"><span>92</span></div>
-                      </div>
-                    </td>
-                    <td><span>489</span></td>
-                    <td>
-                      <div class="grid grid-cols-3 gap-2 w-[330px]">
-                        <div class="label">Calculated</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>7</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Final</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-secondary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Flex</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-primary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Rectangular</div>
-                        <div class="flex justify-center"></div>
-                        <div class="flex justify-end">
-                          <div class="join">
-                            <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Family Room - SR.3" onclick="rectangularSize_FamilyRoom.showModal()">
-                                <div class="flex">
-                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                  
-                                </div>
-                              </button>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Family Room - SR.3" data-open-dialog="rectangularSize_00000000000000000000000000000003_3">
+                                  <div class="flex">
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
                             </div>
                           </div>
+                          <dialog id="rectangularSize_00000000000000000000000000000003_3" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000003_3-title">
+                            <div class="modal-box">
+                              <h2 id="rectangularSize_00000000000000000000000000000003_3-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000003" hx-target="#roomRow_00000000000000000000000000000003_3" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="3">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
                         </div>
-                        <dialog id="rectangularSize_FamilyRoom" class="modal" aria-labelledby="rectangularSize_FamilyRoom-title">
-                          <div class="modal-box">
-                            <h2 id="rectangularSize_FamilyRoom-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
-                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                            <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000003" hx-target="#roomRow_FamilyRoom" hx-swap="outerHTML">
-                              <input class="hidden" name="register" value="3">
-                              <input class="hidden" name="id" value="">
-                              Height<label class="input w-full"><span class="label"></span>
-                              <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
-                              <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                            </form>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000004_1">
+                      <td>Kitchen - SR.1</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>2,259</span><span class="label">Cooling</span><span>2,548</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>95</span></div>
                           </div>
-                        </dialog>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr class="text-lg" id="roomRow_Kitchen">
-                    <td>Kitchen - SR.1</td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>2,259</span><span class="label">Cooling</span><span>2,548</span></div>
-                    </td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2">
-                        <span class="label">Design</span>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>95</span></div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>48</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>95</span></div>
                         </div>
-                        Heating<span class="label"></span>
-                        <div class="flex justify-center"><span>48</span></div>
-                        Cooling<span class="label"></span>
-                        <div class="flex justify-center"><span>95</span></div>
-                      </div>
-                    </td>
-                    <td><span>489</span></td>
-                    <td>
-                      <div class="grid grid-cols-3 gap-2 w-[330px]">
-                        <div class="label">Calculated</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>7</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Final</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-secondary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Flex</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-primary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Rectangular</div>
-                        <div class="flex justify-center"></div>
-                        <div class="flex justify-end">
-                          <div class="join">
-                            <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Kitchen - SR.1" onclick="rectangularSize_Kitchen.showModal()">
-                                <div class="flex">
-                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                  
-                                </div>
-                              </button>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Kitchen - SR.1" data-open-dialog="rectangularSize_00000000000000000000000000000004_1">
+                                  <div class="flex">
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
                             </div>
                           </div>
+                          <dialog id="rectangularSize_00000000000000000000000000000004_1" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000004_1-title">
+                            <div class="modal-box">
+                              <h2 id="rectangularSize_00000000000000000000000000000004_1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000004" hx-target="#roomRow_00000000000000000000000000000004_1" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="1">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
                         </div>
-                        <dialog id="rectangularSize_Kitchen" class="modal" aria-labelledby="rectangularSize_Kitchen-title">
-                          <div class="modal-box">
-                            <h2 id="rectangularSize_Kitchen-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
-                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                            <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000004" hx-target="#roomRow_Kitchen" hx-swap="outerHTML">
-                              <input class="hidden" name="register" value="1">
-                              <input class="hidden" name="id" value="">
-                              Height<label class="input w-full"><span class="label"></span>
-                              <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
-                              <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                            </form>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000004_2">
+                      <td>Kitchen - SR.2</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>2,259</span><span class="label">Cooling</span><span>2,548</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>95</span></div>
                           </div>
-                        </dialog>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr class="text-lg" id="roomRow_Kitchen">
-                    <td>Kitchen - SR.2</td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>2,259</span><span class="label">Cooling</span><span>2,548</span></div>
-                    </td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2">
-                        <span class="label">Design</span>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>95</span></div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>48</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>95</span></div>
                         </div>
-                        Heating<span class="label"></span>
-                        <div class="flex justify-center"><span>48</span></div>
-                        Cooling<span class="label"></span>
-                        <div class="flex justify-center"><span>95</span></div>
-                      </div>
-                    </td>
-                    <td><span>489</span></td>
-                    <td>
-                      <div class="grid grid-cols-3 gap-2 w-[330px]">
-                        <div class="label">Calculated</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>7</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Final</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-secondary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Flex</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-primary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Rectangular</div>
-                        <div class="flex justify-center"></div>
-                        <div class="flex justify-end">
-                          <div class="join">
-                            <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Kitchen - SR.2" onclick="rectangularSize_Kitchen.showModal()">
-                                <div class="flex">
-                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                  
-                                </div>
-                              </button>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Kitchen - SR.2" data-open-dialog="rectangularSize_00000000000000000000000000000004_2">
+                                  <div class="flex">
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
                             </div>
                           </div>
+                          <dialog id="rectangularSize_00000000000000000000000000000004_2" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000004_2-title">
+                            <div class="modal-box">
+                              <h2 id="rectangularSize_00000000000000000000000000000004_2-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000004" hx-target="#roomRow_00000000000000000000000000000004_2" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="2">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
                         </div>
-                        <dialog id="rectangularSize_Kitchen" class="modal" aria-labelledby="rectangularSize_Kitchen-title">
-                          <div class="modal-box">
-                            <h2 id="rectangularSize_Kitchen-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
-                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                            <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000004" hx-target="#roomRow_Kitchen" hx-swap="outerHTML">
-                              <input class="hidden" name="register" value="2">
-                              <input class="hidden" name="id" value="">
-                              Height<label class="input w-full"><span class="label"></span>
-                              <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
-                              <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                            </form>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000005_1">
+                      <td>Living Room - SR.1</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,776</span><span class="label">Cooling</span><span>3,414</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>127</span></div>
                           </div>
-                        </dialog>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr class="text-lg" id="roomRow_LivingRoom">
-                    <td>Living Room - SR.1</td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,776</span><span class="label">Cooling</span><span>3,414</span></div>
-                    </td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2">
-                        <span class="label">Design</span>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>127</span></div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>80</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>127</span></div>
                         </div>
-                        Heating<span class="label"></span>
-                        <div class="flex justify-center"><span>80</span></div>
-                        Cooling<span class="label"></span>
-                        <div class="flex justify-center"><span>127</span></div>
-                      </div>
-                    </td>
-                    <td><span>489</span></td>
-                    <td>
-                      <div class="grid grid-cols-3 gap-2 w-[330px]">
-                        <div class="label">Calculated</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>7</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Final</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-secondary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Flex</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-primary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Rectangular</div>
-                        <div class="flex justify-center"></div>
-                        <div class="flex justify-end">
-                          <div class="join">
-                            <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Living Room - SR.1" onclick="rectangularSize_LivingRoom.showModal()">
-                                <div class="flex">
-                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                  
-                                </div>
-                              </button>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Living Room - SR.1" data-open-dialog="rectangularSize_00000000000000000000000000000005_1">
+                                  <div class="flex">
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
                             </div>
                           </div>
+                          <dialog id="rectangularSize_00000000000000000000000000000005_1" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000005_1-title">
+                            <div class="modal-box">
+                              <h2 id="rectangularSize_00000000000000000000000000000005_1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000005" hx-target="#roomRow_00000000000000000000000000000005_1" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="1">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
                         </div>
-                        <dialog id="rectangularSize_LivingRoom" class="modal" aria-labelledby="rectangularSize_LivingRoom-title">
-                          <div class="modal-box">
-                            <h2 id="rectangularSize_LivingRoom-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
-                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                            <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000005" hx-target="#roomRow_LivingRoom" hx-swap="outerHTML">
-                              <input class="hidden" name="register" value="1">
-                              <input class="hidden" name="id" value="">
-                              Height<label class="input w-full"><span class="label"></span>
-                              <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
-                              <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                            </form>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000005_2">
+                      <td>Living Room - SR.2</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,776</span><span class="label">Cooling</span><span>3,414</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>127</span></div>
                           </div>
-                        </dialog>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr class="text-lg" id="roomRow_LivingRoom">
-                    <td>Living Room - SR.2</td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,776</span><span class="label">Cooling</span><span>3,414</span></div>
-                    </td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2">
-                        <span class="label">Design</span>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>127</span></div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>80</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>127</span></div>
                         </div>
-                        Heating<span class="label"></span>
-                        <div class="flex justify-center"><span>80</span></div>
-                        Cooling<span class="label"></span>
-                        <div class="flex justify-center"><span>127</span></div>
-                      </div>
-                    </td>
-                    <td><span>489</span></td>
-                    <td>
-                      <div class="grid grid-cols-3 gap-2 w-[330px]">
-                        <div class="label">Calculated</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>7</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Final</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-secondary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Flex</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-primary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Rectangular</div>
-                        <div class="flex justify-center"></div>
-                        <div class="flex justify-end">
-                          <div class="join">
-                            <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Living Room - SR.2" onclick="rectangularSize_LivingRoom.showModal()">
-                                <div class="flex">
-                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                  
-                                </div>
-                              </button>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Living Room - SR.2" data-open-dialog="rectangularSize_00000000000000000000000000000005_2">
+                                  <div class="flex">
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
                             </div>
                           </div>
+                          <dialog id="rectangularSize_00000000000000000000000000000005_2" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000005_2-title">
+                            <div class="modal-box">
+                              <h2 id="rectangularSize_00000000000000000000000000000005_2-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000005" hx-target="#roomRow_00000000000000000000000000000005_2" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="2">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
                         </div>
-                        <dialog id="rectangularSize_LivingRoom" class="modal" aria-labelledby="rectangularSize_LivingRoom-title">
-                          <div class="modal-box">
-                            <h2 id="rectangularSize_LivingRoom-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
-                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                            <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000005" hx-target="#roomRow_LivingRoom" hx-swap="outerHTML">
-                              <input class="hidden" name="register" value="2">
-                              <input class="hidden" name="id" value="">
-                              Height<label class="input w-full"><span class="label"></span>
-                              <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
-                              <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                            </form>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000006_1">
+                      <td>Master - SR.1</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,101</span><span class="label">Cooling</span><span>1,038</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>87</span></div>
                           </div>
-                        </dialog>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr class="text-lg" id="roomRow_Master">
-                    <td>Master - SR.1</td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,101</span><span class="label">Cooling</span><span>1,038</span></div>
-                    </td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2">
-                        <span class="label">Design</span>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>87</span></div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>87</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>39</span></div>
                         </div>
-                        Heating<span class="label"></span>
-                        <div class="flex justify-center"><span>87</span></div>
-                        Cooling<span class="label"></span>
-                        <div class="flex justify-center"><span>39</span></div>
-                      </div>
-                    </td>
-                    <td><span>489</span></td>
-                    <td>
-                      <div class="grid grid-cols-3 gap-2 w-[330px]">
-                        <div class="label">Calculated</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>7</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Final</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-secondary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Flex</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-primary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Rectangular</div>
-                        <div class="flex justify-center"></div>
-                        <div class="flex justify-end">
-                          <div class="join">
-                            <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Master - SR.1" onclick="rectangularSize_Master.showModal()">
-                                <div class="flex">
-                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                  
-                                </div>
-                              </button>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Master - SR.1" data-open-dialog="rectangularSize_00000000000000000000000000000006_1">
+                                  <div class="flex">
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
                             </div>
                           </div>
+                          <dialog id="rectangularSize_00000000000000000000000000000006_1" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000006_1-title">
+                            <div class="modal-box">
+                              <h2 id="rectangularSize_00000000000000000000000000000006_1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000006" hx-target="#roomRow_00000000000000000000000000000006_1" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="1">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
                         </div>
-                        <dialog id="rectangularSize_Master" class="modal" aria-labelledby="rectangularSize_Master-title">
-                          <div class="modal-box">
-                            <h2 id="rectangularSize_Master-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
-                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                            <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000006" hx-target="#roomRow_Master" hx-swap="outerHTML">
-                              <input class="hidden" name="register" value="1">
-                              <input class="hidden" name="id" value="">
-                              Height<label class="input w-full"><span class="label"></span>
-                              <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
-                              <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                            </form>
+                      </td>
+                    </tr>
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000006_2">
+                      <td>Master - SR.2</td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,101</span><span class="label">Cooling</span><span>1,038</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap grid grid-cols-2 gap-2">
+                          <span class="label">Design</span>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>87</span></div>
                           </div>
-                        </dialog>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr class="text-lg" id="roomRow_Master">
-                    <td>Master - SR.2</td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,101</span><span class="label">Cooling</span><span>1,038</span></div>
-                    </td>
-                    <td>
-                      <div class="flex flex-wrap grid grid-cols-2 gap-2">
-                        <span class="label">Design</span>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>87</span></div>
+                          Heating<span class="label"></span>
+                          <div class="flex justify-center"><span>87</span></div>
+                          Cooling<span class="label"></span>
+                          <div class="flex justify-center"><span>39</span></div>
                         </div>
-                        Heating<span class="label"></span>
-                        <div class="flex justify-center"><span>87</span></div>
-                        Cooling<span class="label"></span>
-                        <div class="flex justify-center"><span>39</span></div>
-                      </div>
-                    </td>
-                    <td><span>489</span></td>
-                    <td>
-                      <div class="grid grid-cols-3 gap-2 w-[330px]">
-                        <div class="label">Calculated</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>7</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Final</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-secondary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Flex</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-primary"><span>8</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Rectangular</div>
-                        <div class="flex justify-center"></div>
-                        <div class="flex justify-end">
-                          <div class="join">
-                            <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Master - SR.2" onclick="rectangularSize_Master.showModal()">
-                                <div class="flex">
-                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                  
-                                </div>
-                              </button>
+                      </td>
+                      <td><span>489</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>7</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-secondary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-primary"><span>8</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end">
+                            <div class="join">
+                              <div class="tooltip tooltip-bottom" data-tip="Edit Size">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Master - SR.2" data-open-dialog="rectangularSize_00000000000000000000000000000006_2">
+                                  <div class="flex">
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    
+                                  </div>
+                                </button>
+                              </div>
                             </div>
                           </div>
+                          <dialog id="rectangularSize_00000000000000000000000000000006_2" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000006_2-title">
+                            <div class="modal-box">
+                              <h2 id="rectangularSize_00000000000000000000000000000006_2-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000006" hx-target="#roomRow_00000000000000000000000000000006_2" hx-swap="outerHTML">
+                                <input class="hidden" name="register" value="2">
+                                <input class="hidden" name="id" value="">
+                                Height<label class="input w-full"><span class="label"></span>
+                                <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                              </form>
+                            </div>
+                          </dialog>
                         </div>
-                        <dialog id="rectangularSize_Master" class="modal" aria-labelledby="rectangularSize_Master-title">
-                          <div class="modal-box">
-                            <h2 id="rectangularSize_Master-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
-                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                            <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000006" hx-target="#roomRow_Master" hx-swap="outerHTML">
-                              <input class="hidden" name="register" value="2">
-                              <input class="hidden" name="id" value="">
-                              Height<label class="input w-full"><span class="label"></span>
-                              <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
-                              <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                            </form>
-                          </div>
-                        </dialog>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="flex justify-between bg-secondary border-2 border-primary rounded-sm shadow-sm 
-p-6 w-full">
-                <h1 class="text-3xl font-bold">Trunk / Runout Sizes</h1>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="page-title-row">
+                <h2 class="text-2xl font-bold">Trunk / Runout Sizes</h2>
                 <div class="tooltip tooltip-left" data-tip="Add trunk / runout">
-                  <button type="button" class="btn btn-primary" aria-label="Add trunk or runout" onclick="trunkSizeForm.showModal()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></button>
+                  <button type="button" class="btn btn-primary" aria-label="Add trunk or runout" data-open-dialog="trunkSizeForm"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></button>
                 </div>
               </div>
-              <table class="table table-zebra text-lg">
-                <thead>
-                  <tr class="text-lg">
-                    <th>Name / Type</th>
-                    <th>Associated Supplies</th>
-                    <th>Dsn CFM</th>
-                    <th>Velocity</th>
-                    <th class="w-[330px]">Size</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <div class="grid grid-cols-1 space-y-2">
-                        <div class="badge badge-lg badge-info">supply</div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="flex flex-wrap space-x-2 space-y-2">
-                        <div class="badge badge-lg">Bed-1</div>
-                        <div class="badge badge-lg">Entry</div>
-                        <div class="badge badge-lg">Entry</div>
-                        <div class="badge badge-lg">Family Room</div>
-                        <div class="badge badge-lg">Family Room</div>
-                        <div class="badge badge-lg">Family Room</div>
-                        <div class="badge badge-lg">Kitchen</div>
-                        <div class="badge badge-lg">Kitchen</div>
-                        <div class="badge badge-lg">Living Room</div>
-                        <div class="badge badge-lg">Living Room</div>
-                        <div class="badge badge-lg">Master</div>
-                        <div class="badge badge-lg">Master</div>
-                      </div>
-                    </td>
-                    <td><span>1,000</span></td>
-                    <td><span>987</span></td>
-                    <td>
-                      <div class="grid grid-cols-3 gap-2 w-[330px]">
-                        <div class="label">Calculated</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>18</span></div>
+              <div class="table-scroll" tabindex="0" role="region" aria-label="Trunk duct sizes">
+                <table class="table table-zebra text-lg">
+                  <thead>
+                    <tr class="text-lg">
+                      <th>Name / Type</th>
+                      <th>Associated Supplies</th>
+                      <th>Dsn CFM</th>
+                      <th>Velocity</th>
+                      <th class="w-[330px]">Size</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="grid grid-cols-1 space-y-2">
+                          <div class="badge badge-lg badge-info">supply</div>
                         </div>
-                        <div></div>
-                        <div class="label">Final</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-secondary"><span>20</span></div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap space-x-2 space-y-2">
+                          <div class="badge badge-lg">Bed-1</div>
+                          <div class="badge badge-lg">Entry</div>
+                          <div class="badge badge-lg">Entry</div>
+                          <div class="badge badge-lg">Family Room</div>
+                          <div class="badge badge-lg">Family Room</div>
+                          <div class="badge badge-lg">Family Room</div>
+                          <div class="badge badge-lg">Kitchen</div>
+                          <div class="badge badge-lg">Kitchen</div>
+                          <div class="badge badge-lg">Living Room</div>
+                          <div class="badge badge-lg">Living Room</div>
+                          <div class="badge badge-lg">Master</div>
+                          <div class="badge badge-lg">Master</div>
                         </div>
-                        <div></div>
-                        <div class="label">Flex</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-primary"><span>20</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Rectangular</div>
-                        <div class="flex justify-center"></div>
-                        <div class="flex justify-end items-end">
-                          <div class="join">
-                            <button class="btn join-item btn-ghost" type="button" aria-label="Edit trunk" onclick="trunkSizeForm_0000000000000000000000000000000F.showModal()">
-                              <div class="flex">
-                                <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                
-                              </div>
-                            </button>
+                      </td>
+                      <td><span>1,000</span></td>
+                      <td><span>987</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>18</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-secondary"><span>20</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-primary"><span>20</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end items-end">
+                            <div class="join">
+                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit trunk" data-open-dialog="trunkSizeForm_0000000000000000000000000000000F">
+                                <div class="flex">
+                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                  
+                                </div>
+                              </button>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <dialog id="trunkSizeForm_0000000000000000000000000000000F" class="modal" aria-labelledby="trunkSizeForm_0000000000000000000000000000000F-title">
-                        <div class="modal-box">
-                          <h2 id="trunkSizeForm_0000000000000000000000000000000F-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
-                          <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Trunk / Runout Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                          <form class="space-y-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk/00000000-0000-0000-0000-00000000000F" hx-target="body" hx-swap="outerHTML">
-                            <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                              <label class="select w-full"><span class="label">Type</span>
-                              <select name="type">
-                                <option value="supply" selected>Supply</option>
-                                <option value="return">Return</option>
-                              </select>
-                              Height</label><label class="input w-full"><span class="label"></span>
-                              <input type="text" name="height" value="" placeholder="8 (Optional)"></label>
+                        <dialog id="trunkSizeForm_0000000000000000000000000000000F" class="modal" aria-labelledby="trunkSizeForm_0000000000000000000000000000000F-title">
+                          <div class="modal-box">
+                            <h2 id="trunkSizeForm_0000000000000000000000000000000F-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
+                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Trunk / Runout Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                            <form data-success-message="Changes saved." class="space-y-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk/00000000-0000-0000-0000-00000000000F" hx-target="body" hx-swap="outerHTML">
+                              <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <label class="select w-full"><span class="label">Type</span>
+                                <select name="type">
+                                  <option value="supply" selected>Supply</option>
+                                  <option value="return">Return</option>
+                                </select>
+                                Height</label><label class="input w-full"><span class="label"></span>
+                                <input type="text" name="height" value="" placeholder="8 (Optional)"></label>
+                              </div>
+                              Name<label class="input w-full"><span class="label"></span>
+                              <input type="text" name="name" value="" placeholder="Trunk-1" required></label>
+                              <fieldset class="checkbox-group">
+                                <legend class="font-bold">Associated Supply Runs</legend>
+                                <div class="flex flex-wrap gap-2 my-2">
+                                  <button type="button" class="btn btn-sm" data-check-all="true">Select all</button>
+                                  <button type="button" class="btn btn-sm" data-check-all="false">Clear selection</button>
+                                </div>
+                                <div class="checkbox-options">
+                                  <label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000001_1" checked>
+                                  Bed-1 - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_1" checked>
+                                  Entry - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_2" checked>
+                                  Entry - SR.2<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_1" checked>
+                                  Family Room - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_2" checked>
+                                  Family Room - SR.2<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_3" checked>
+                                  Family Room - SR.3<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_1" checked>
+                                  Kitchen - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_2" checked>
+                                  Kitchen - SR.2<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_1" checked>
+                                  Living Room - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_2" checked>
+                                  Living Room - SR.2<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_1" checked>
+                                  Master - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_2" checked>
+                                  Master - SR.2<span></span></label>
+                                </div>
+                              </fieldset>
+                              <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
+                            </form>
+                          </div>
+                        </dialog>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="grid grid-cols-1 space-y-2">
+                          <div class="badge badge-lg badge-error">return</div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="flex flex-wrap space-x-2 space-y-2">
+                          <div class="badge badge-lg">Bed-1</div>
+                          <div class="badge badge-lg">Entry</div>
+                          <div class="badge badge-lg">Entry</div>
+                          <div class="badge badge-lg">Family Room</div>
+                          <div class="badge badge-lg">Family Room</div>
+                          <div class="badge badge-lg">Family Room</div>
+                          <div class="badge badge-lg">Kitchen</div>
+                          <div class="badge badge-lg">Kitchen</div>
+                          <div class="badge badge-lg">Living Room</div>
+                          <div class="badge badge-lg">Living Room</div>
+                          <div class="badge badge-lg">Master</div>
+                          <div class="badge badge-lg">Master</div>
+                        </div>
+                      </td>
+                      <td><span>1,000</span></td>
+                      <td><span>987</span></td>
+                      <td>
+                        <div class="grid grid-cols-3 gap-2 w-[330px]">
+                          <div class="label">Calculated</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg"><span>18</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Final</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-secondary"><span>20</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Flex</div>
+                          <div class="flex justify-center">
+                            <div class="badge badge-lg badge-primary"><span>20</span></div>
+                          </div>
+                          <div></div>
+                          <div class="label">Rectangular</div>
+                          <div class="flex justify-center"></div>
+                          <div class="flex justify-end items-end">
+                            <div class="join">
+                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit trunk" data-open-dialog="trunkSizeForm_00000000000000000000000000000010">
+                                <div class="flex">
+                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                  
+                                </div>
+                              </button>
                             </div>
-                            Name<label class="input w-full"><span class="label"></span>
-                            <input type="text" name="name" value="" placeholder="Trunk-1" required></label>
-                            <fieldset class="checkbox-group">
-                              <legend class="font-bold">Associated Supply Runs</legend>
-                              <div class="flex flex-wrap gap-2 my-2">
-                                <button type="button" class="btn btn-sm" data-check-all="true">Select all</button>
-                                <button type="button" class="btn btn-sm" data-check-all="false">Clear selection</button>
-                              </div>
-                              <div class="checkbox-options">
-                                <label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000001_1" checked>
-                                Bed-1 - SR.1<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_1" checked>
-                                Entry - SR.1<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_2" checked>
-                                Entry - SR.2<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_1" checked>
-                                Family Room - SR.1<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_2" checked>
-                                Family Room - SR.2<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_3" checked>
-                                Family Room - SR.3<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_1" checked>
-                                Kitchen - SR.1<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_2" checked>
-                                Kitchen - SR.2<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_1" checked>
-                                Living Room - SR.1<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_2" checked>
-                                Living Room - SR.2<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_1" checked>
-                                Master - SR.1<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_2" checked>
-                                Master - SR.2<span></span></label>
-                              </div>
-                            </fieldset>
-                            <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
-                          </form>
-                        </div>
-                      </dialog>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="grid grid-cols-1 space-y-2">
-                        <div class="badge badge-lg badge-error">return</div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="flex flex-wrap space-x-2 space-y-2">
-                        <div class="badge badge-lg">Bed-1</div>
-                        <div class="badge badge-lg">Entry</div>
-                        <div class="badge badge-lg">Entry</div>
-                        <div class="badge badge-lg">Family Room</div>
-                        <div class="badge badge-lg">Family Room</div>
-                        <div class="badge badge-lg">Family Room</div>
-                        <div class="badge badge-lg">Kitchen</div>
-                        <div class="badge badge-lg">Kitchen</div>
-                        <div class="badge badge-lg">Living Room</div>
-                        <div class="badge badge-lg">Living Room</div>
-                        <div class="badge badge-lg">Master</div>
-                        <div class="badge badge-lg">Master</div>
-                      </div>
-                    </td>
-                    <td><span>1,000</span></td>
-                    <td><span>987</span></td>
-                    <td>
-                      <div class="grid grid-cols-3 gap-2 w-[330px]">
-                        <div class="label">Calculated</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg"><span>18</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Final</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-secondary"><span>20</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Flex</div>
-                        <div class="flex justify-center">
-                          <div class="badge badge-lg badge-primary"><span>20</span></div>
-                        </div>
-                        <div></div>
-                        <div class="label">Rectangular</div>
-                        <div class="flex justify-center"></div>
-                        <div class="flex justify-end items-end">
-                          <div class="join">
-                            <button class="btn join-item btn-ghost" type="button" aria-label="Edit trunk" onclick="trunkSizeForm_00000000000000000000000000000010.showModal()">
-                              <div class="flex">
-                                <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                
-                              </div>
-                            </button>
                           </div>
                         </div>
-                      </div>
-                      <dialog id="trunkSizeForm_00000000000000000000000000000010" class="modal" aria-labelledby="trunkSizeForm_00000000000000000000000000000010-title">
-                        <div class="modal-box">
-                          <h2 id="trunkSizeForm_00000000000000000000000000000010-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
-                          <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Trunk / Runout Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                          <form class="space-y-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk/00000000-0000-0000-0000-000000000010" hx-target="body" hx-swap="outerHTML">
-                            <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                              <label class="select w-full"><span class="label">Type</span>
-                              <select name="type">
-                                <option value="supply">Supply</option>
-                                <option value="return" selected>Return</option>
-                              </select>
-                              Height</label><label class="input w-full"><span class="label"></span>
-                              <input type="text" name="height" value="" placeholder="8 (Optional)"></label>
-                            </div>
-                            Name<label class="input w-full"><span class="label"></span>
-                            <input type="text" name="name" value="" placeholder="Trunk-1" required></label>
-                            <fieldset class="checkbox-group">
-                              <legend class="font-bold">Associated Supply Runs</legend>
-                              <div class="flex flex-wrap gap-2 my-2">
-                                <button type="button" class="btn btn-sm" data-check-all="true">Select all</button>
-                                <button type="button" class="btn btn-sm" data-check-all="false">Clear selection</button>
+                        <dialog id="trunkSizeForm_00000000000000000000000000000010" class="modal" aria-labelledby="trunkSizeForm_00000000000000000000000000000010-title">
+                          <div class="modal-box">
+                            <h2 id="trunkSizeForm_00000000000000000000000000000010-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
+                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Trunk / Runout Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                            <form data-success-message="Changes saved." class="space-y-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk/00000000-0000-0000-0000-000000000010" hx-target="body" hx-swap="outerHTML">
+                              <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <label class="select w-full"><span class="label">Type</span>
+                                <select name="type">
+                                  <option value="supply">Supply</option>
+                                  <option value="return" selected>Return</option>
+                                </select>
+                                Height</label><label class="input w-full"><span class="label"></span>
+                                <input type="text" name="height" value="" placeholder="8 (Optional)"></label>
                               </div>
-                              <div class="checkbox-options">
-                                <label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000001_1" checked>
-                                Bed-1 - SR.1<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_1" checked>
-                                Entry - SR.1<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_2" checked>
-                                Entry - SR.2<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_1" checked>
-                                Family Room - SR.1<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_2" checked>
-                                Family Room - SR.2<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_3" checked>
-                                Family Room - SR.3<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_1" checked>
-                                Kitchen - SR.1<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_2" checked>
-                                Kitchen - SR.2<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_1" checked>
-                                Living Room - SR.1<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_2" checked>
-                                Living Room - SR.2<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_1" checked>
-                                Master - SR.1<span></span></label><label>
-                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_2" checked>
-                                Master - SR.2<span></span></label>
-                              </div>
-                            </fieldset>
-                            <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
-                          </form>
-                        </div>
-                      </dialog>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                              Name<label class="input w-full"><span class="label"></span>
+                              <input type="text" name="name" value="" placeholder="Trunk-1" required></label>
+                              <fieldset class="checkbox-group">
+                                <legend class="font-bold">Associated Supply Runs</legend>
+                                <div class="flex flex-wrap gap-2 my-2">
+                                  <button type="button" class="btn btn-sm" data-check-all="true">Select all</button>
+                                  <button type="button" class="btn btn-sm" data-check-all="false">Clear selection</button>
+                                </div>
+                                <div class="checkbox-options">
+                                  <label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000001_1" checked>
+                                  Bed-1 - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_1" checked>
+                                  Entry - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_2" checked>
+                                  Entry - SR.2<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_1" checked>
+                                  Family Room - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_2" checked>
+                                  Family Room - SR.2<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_3" checked>
+                                  Family Room - SR.3<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_1" checked>
+                                  Kitchen - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_2" checked>
+                                  Kitchen - SR.2<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_1" checked>
+                                  Living Room - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_2" checked>
+                                  Living Room - SR.2<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_1" checked>
+                                  Master - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_2" checked>
+                                  Master - SR.2<span></span></label>
+                                </div>
+                              </fieldset>
+                              <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
+                            </form>
+                          </div>
+                        </dialog>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
               <dialog id="trunkSizeForm" class="modal" aria-labelledby="trunkSizeForm-title">
                 <div class="modal-box">
                   <h2 id="trunkSizeForm-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
                   <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Trunk / Runout Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                  <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk" hx-target="body" hx-swap="outerHTML">
+                  <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk" hx-target="body" hx-swap="outerHTML">
                     <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <label class="select w-full"><span class="label">Type</span>
@@ -1171,10 +1174,12 @@ p-6 w-full">
           </div>
         </div>
       </main>
-      <div class="bottom-0 left-0 bg-error">
+      <div id="app-status" class="sr-only" role="status" aria-atomic="true"></div>
+      <div id="app-error" class="request-error" role="alert"></div>
+      <div>
         <footer class="footer footer-horizontal footer-center
 bg-base-300 text-base-content p-4">
-          <aside class="grid-flow-row items-center">
+          <div class="grid-flow-row items-center">
             <div class="flex mx-auto">
               <a class="btn btn-ghost" href="mailto:support@ductcalc.pro">  <svg aria-hidden="true" focusable="false" class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g
@@ -1191,7 +1196,7 @@ bg-base-300 text-base-content p-4">
             </div>
             Source available via PolyForm Perimeter 1.0.1<a class="btn btn-ghost mx-auto" href="https://github.com/m-housh/swift-duct-calc/src/branch/main/LICENSE" target="_blank"></a>
             <p class="">Copyright © 2026 - All rights reserved by Michael Housh</p>
-          </aside>
+          </div>
         </footer>
       </div>
     </div>

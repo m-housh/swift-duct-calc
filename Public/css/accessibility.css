@@ -20,7 +20,7 @@
 .checkbox-options { max-height:18rem; overflow:auto; border:1px solid currentColor; border-radius:.5rem; }
 .checkbox-options label { display:flex; align-items:center; gap:.75rem; padding:.75rem; cursor:pointer; }
 .checkbox-options input { flex-shrink:0; }
-:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible { outline:3px solid currentColor; outline-offset:3px; }
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible { outline:3px solid var(--color-base-content); outline-offset:3px; }
 .modal:not([open]) { display:none; }
 @media (max-width: 800px) {
   .project-layout { grid-template-columns:minmax(0,1fr); }
@@ -32,3 +32,37 @@
   .account-menu > ul { right:auto; left:0; }
   .page-form { padding:1rem; }
 }
+.skip-link { position:fixed; top:.5rem; left:.5rem; transform:translateY(-200%); z-index:1000; padding:.75rem 1rem; background:var(--color-base-100); color:var(--color-base-content); border:2px solid currentColor; }
+.skip-link:focus { transform:none; }
+.page-title-row { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; padding:1.5rem; width:100%; background:var(--color-base-200); color:var(--color-base-content); border-radius:.5rem; }
+.table-scroll { max-width:100%; overflow:auto; }
+.room-load-summary { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; width:100%; }
+.ductulator-shell { width:100%; max-width:56rem; margin:0 auto; padding:0 1rem 2rem; }
+.ductulator-panel { background:var(--color-base-200); color:var(--color-base-content); border-radius:1.5rem; padding:1.5rem; }
+.ductulator-result { border:2px solid currentColor; border-radius:.5rem; padding:1rem; margin:1.5rem 0; }
+.ductulator-values > div { display:flex; flex-wrap:wrap; justify-content:space-between; gap:.5rem 1rem; padding:.75rem 0; border-bottom:1px solid currentColor; }
+.ductulator-values dd { font-weight:700; }
+.request-error:not(:empty) { padding:1rem; margin:1rem; border:2px solid currentColor; }
+/* Labels and placeholder text must remain legible on the selected theme's surface. */
+.label, .input .label, .select .label, .table thead, .table tfoot { color:inherit; opacity:1; }
+input::placeholder, textarea::placeholder { color:inherit; opacity:1; }
+.input, .select { min-width:0; }
+.input input { min-width:0; }
+@media (max-width: 800px) {
+  .room-load-summary { grid-template-columns:minmax(0,1fr); }
+  .room-load-summary > * { grid-column:auto; justify-content:flex-start; flex-wrap:wrap; }
+}
+@media (max-width: 480px) {
+  .page-title-row, .ductulator-panel { padding:1rem; }
+  .input:has(.label) { height:auto; min-height:2.5rem; flex-wrap:wrap; padding-block:.5rem; gap:.5rem; }
+  .input input { flex-basis:8rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior:auto !important; }
+}
+
+@media (forced-colors: active) {
+  :focus-visible { outline-color:Highlight; }
+}
+.details-table { width:100%; table-layout:fixed; overflow-wrap:anywhere; }
+.details-table th { width:45%; text-align:left; }

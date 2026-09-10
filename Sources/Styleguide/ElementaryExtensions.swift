@@ -30,7 +30,7 @@ extension HTMLAttribute where Tag == HTMLTag.input {
 
 extension HTMLAttribute where Tag == HTMLTag.button {
   public static func showModal(id: String) -> Self {
-    .on(.click, "\(id).showModal()")
+    .data("open-dialog", value: id)
   }
 }
 

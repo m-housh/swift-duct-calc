@@ -35,7 +35,7 @@ extension DuctSizingView {
   struct RoomRow: HTML, Sendable {
 
     static func id(_ room: DuctSizes.RoomContainer) -> String {
-      "roomRow_\(room.roomName.idString)"
+      "roomRow_\(room.roomID.idString)_\(room.roomRegister)"
     }
 
     @Environment(ProjectViewValue.$projectID) var projectID

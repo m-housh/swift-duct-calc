@@ -21,7 +21,7 @@ struct RoomsView: HTML, Sendable {
   var body: some HTML {
     div(.class("flex w-full flex-col")) {
       PageTitleRow {
-        div(.class("flex grid grid-cols-3 w-full gap-y-4")) {
+        div(.class("room-load-summary")) {
 
           div(.class("col-span-2")) {
             PageTitle { "Room Loads" }
@@ -37,7 +37,7 @@ struct RoomsView: HTML, Sendable {
                 ),
                 .showModal(id: SHRForm.id)
               ) {
-                div(.class("flex grow justify-end items-end space-x-4")) {
+                div(.class("flex flex-wrap grow justify-end items-end gap-2")) {
                   span {
                     "Sensible Heat Ratio"
                   }
@@ -69,7 +69,7 @@ struct RoomsView: HTML, Sendable {
               .attributes(.class("badge-success"))
           }
 
-          div(.class("flex grow justify-end items-end space-x-4 me-4 my-auto font-bold")) {
+          div(.class("flex flex-wrap grow justify-end items-end gap-2 me-4 my-auto font-bold")) {
             span(.class("text-lg")) { "Cooling Sensible" }
             // TODO: ResultView ??
             Badge(number: try! rooms.totalCoolingSensible(shr: sensibleHeatRatio ?? 1.0), digits: 0)
@@ -83,64 +83,69 @@ struct RoomsView: HTML, Sendable {
         dismiss: true
       )
 
-      table(.class("table table-zebra text-lg"), .id("roomsTable")) {
-        thead {
-          tr(.class("text-lg font-bold")) {
-            th { "Name" }
-            th {
-              div(.class("flex justify-center")) {
-                "Heating Load"
+      div(
+        .class("table-scroll"), .tabindex(0), .role("region"),
+        .init(name: "aria-label", value: "Room loads")
+      ) {
+        table(.class("table table-zebra text-lg"), .id("roomsTable")) {
+          thead {
+            tr(.class("text-lg font-bold")) {
+              th { "Name" }
+              th {
+                div(.class("flex justify-center")) {
+                  "Heating Load"
+                }
               }
-            }
-            th {
-              div(.class("flex justify-center")) {
-                "Cooling Total"
+              th {
+                div(.class("flex justify-center")) {
+                  "Cooling Total"
+                }
               }
-            }
-            th {
-              div(.class("flex justify-center")) {
-                "Cooling Sensible"
+              th {
+                div(.class("flex justify-center")) {
+                  "Cooling Sensible"
+                }
               }
-            }
-            th {
-              div(.class("flex justify-center")) {
-                "Register Count"
+              th {
+                div(.class("flex justify-center")) {
+                  "Register Count"
+                }
               }
-            }
-            th {
-              div(.class("flex justify-center")) {
-                "Delegated To"
+              th {
+                div(.class("flex justify-center")) {
+                  "Delegated To"
+                }
               }
-            }
-            th {
-              div(.class("flex justify-end me-2 space-x-4")) {
+              th {
+                div(.class("flex justify-end me-2 space-x-4")) {
 
-                Tooltip("Import room loads", position: .left) {
-                  button(
-                    .class("btn btn-secondary"),
-                    .init(name: "aria-label", value: "Import room loads"),
-                    .showModal(id: UploadRoomsForm.id)
-                  ) {
-                    SVG(.filePlusCorner)
+                  Tooltip("Import room loads", position: .left) {
+                    button(
+                      .class("btn btn-secondary"),
+                      .init(name: "aria-label", value: "Import room loads"),
+                      .showModal(id: UploadRoomsForm.id)
+                    ) {
+                      SVG(.filePlusCorner)
+                    }
                   }
-                }
 
-                Tooltip("Add Room") {
-                  PlusButton("Add room")
-                    .attributes(
-                      .class("btn-primary mx-auto"),
-                      .showModal(id: RoomForm.id())
-                    )
-                    .attributes(.class("tooltip-left"))
-                }
+                  Tooltip("Add Room") {
+                    PlusButton("Add room")
+                      .attributes(
+                        .class("btn-primary mx-auto"),
+                        .showModal(id: RoomForm.id())
+                      )
+                      .attributes(.class("tooltip-left"))
+                  }
 
+                }
               }
             }
           }
-        }
-        tbody {
-          for room in sortedRooms {
-            RoomRow(room: room, shr: sensibleHeatRatio, rooms: rooms)
+          tbody {
+            for room in sortedRooms {
+              RoomRow(room: room, shr: sensibleHeatRatio, rooms: rooms)
+            }
           }
         }
       }
@@ -259,6 +264,7 @@ struct RoomsView: HTML, Sendable {
     var body: some HTML {
       ModalForm(id: Self.id, title: "Sensible Heat Ratio", dismiss: dismiss) {
         form(
+          .data("success-message", value: "Sensible heat ratio saved."),
           .class("grid grid-cols-1 gap-4"),
           .hx.patch(route),
           .hx.target("body"),

@@ -101,11 +101,20 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
 
   public var body: some HTML {
     div(.class("flex flex-col min-h-screen min-w-full justify-between")) {
-      main(.class("flex flex-col min-h-screen min-w-full grow mb-auto")) {
+      a(.class("skip-link"), .href("#main-content")) { "Skip to content" }
+      main(
+        .id("main-content"), .tabindex(-1),
+        .class("flex flex-col min-h-screen min-w-full grow mb-auto")
+      ) {
         inner
       }
 
-      div(.class("bottom-0 left-0 bg-error")) {
+      div(
+        .id("app-status"), .class("sr-only"), .role("status"),
+        .init(name: "aria-atomic", value: "true")
+      ) {}
+      div(.id("app-error"), .class("request-error"), .role("alert")) {}
+      div {
         if displayFooter {
           footer(
             .class(
@@ -115,7 +124,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
               """
             )
           ) {
-            aside(
+            div(
               .class("grid-flow-row items-center")
             ) {
 

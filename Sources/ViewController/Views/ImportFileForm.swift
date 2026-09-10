@@ -13,6 +13,7 @@ struct ImportFileForm<Inner: HTML & Sendable>: HTML, Sendable {
 
   var body: some HTML<HTMLTag.form> {
     form(
+      .data("success-message", value: "Import complete."),
       .hx.post(action),
       .hx.target("body"),
       .hx.swap(.outerHTML),

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Duct Calc</title>
+    <title>Sign up · Duct Calc</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="ductcalc.com" name="og:site_name">
@@ -31,10 +31,11 @@
   </head>
   <body>
     <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
-      <main class="flex flex-col min-h-screen min-w-full grow mb-auto">
+      <a class="skip-link" href="#main-content">Skip to content</a>
+      <main id="main-content" tabindex="-1" class="flex flex-col min-h-screen min-w-full grow mb-auto">
         <section id="loginForm" class="page-form" aria-labelledby="loginForm-title">
           <h1 id="loginForm-title" class="text-2xl font-bold mb-6">Sign Up</h1>
-          <div class="flex justify-between"><a class="btn btn-link" href="/privacy-policy" target="_blank">Privacy Policy</a></div>
+          <div class="flex flex-wrap items-center justify-between gap-3"><a class="btn btn-link" href="/privacy-policy" target="_blank">Privacy Policy</a></div>
           <form method="post" class="space-y-4">
             <div>
               <label class="input validator w-full"><span class="label">Email</span>
@@ -57,7 +58,9 @@
           </form>
         </section>
       </main>
-      <div class="bottom-0 left-0 bg-error"></div>
+      <div id="app-status" class="sr-only" role="status" aria-atomic="true"></div>
+      <div id="app-error" class="request-error" role="alert"></div>
+      <div></div>
     </div>
   </body>
 </html>

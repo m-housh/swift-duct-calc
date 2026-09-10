@@ -11,7 +11,7 @@ public struct Row<T: HTML>: HTML, Sendable where T: Sendable {
   }
 
   public var body: some HTML<HTMLTag.div> {
-    div(.class("flex justify-between")) {
+    div(.class("flex flex-wrap items-center justify-between gap-3")) {
       inner
     }
   }

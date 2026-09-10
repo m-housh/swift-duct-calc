@@ -40,8 +40,8 @@ struct UserProfileForm: HTML, Sendable {
   var body: some HTML {
     ModalForm(id: Self.id(profile), title: "Profile", dismiss: dismiss) {
 
-
       form(
+        .data("success-message", value: "Changes saved."),
         .class("grid grid-cols-1 gap-4 p-4"),
         profile == nil
           ? .hx.post(route)

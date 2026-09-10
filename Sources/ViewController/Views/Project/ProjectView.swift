@@ -36,9 +36,15 @@ struct ProjectView<Inner: HTML & Sendable>: HTML, Sendable {
           ul {
             row("Project", tab: .project, route: .index, complete: nil)
             row("Rooms", tab: .rooms, route: .rooms(.index), complete: completedSteps.rooms)
-            row("Equipment", tab: .equipment, route: .equipment(.index), complete: completedSteps.equipmentInfo)
-            row("T.E.L.", tab: .equivalentLength, route: .equivalentLength(.index), complete: completedSteps.equivalentLength)
-            row("Friction Rate", tab: .frictionRate, route: .frictionRate(.index), complete: completedSteps.frictionRate)
+            row(
+              "Equipment", tab: .equipment, route: .equipment(.index),
+              complete: completedSteps.equipmentInfo)
+            row(
+              "T.E.L.", tab: .equivalentLength, route: .equivalentLength(.index),
+              complete: completedSteps.equivalentLength)
+            row(
+              "Friction Rate", tab: .frictionRate, route: .frictionRate(.index),
+              complete: completedSteps.frictionRate)
             row("Duct Sizes", tab: .ductSizing, route: .ductSizing(.index), complete: nil)
           }
         }
