@@ -15,6 +15,15 @@ extension DependencyValues {
 /// Represents the database interactions used by the application.
 @DependencyClient
 public struct DatabaseClient: Sendable {
+  public var adminMetrics: AdminMetrics
+
+  @DependencyClient
+  public struct AdminMetrics: Sendable {
+    public var snapshot:
+      @Sendable (_ fromDay: String, _ throughDay: String) async throws -> AdminMetricsSnapshot
+    public var flush: @Sendable ([MetricBucket: MetricCount], Date) async throws -> Void
+    public var prune: @Sendable (Date) async throws -> Void
+  }
   /// Database migrations.
   public var fittingFavorites: FittingFavorites
   public var migrations: Migrations
@@ -150,6 +159,8 @@ public struct DatabaseClient: Sendable {
 
   @DependencyClient
   public struct Users: Sendable {
+    /// Resolves deployment-configured admin emails to existing accounts, failing on ambiguity.
+    public var administratorAccounts: @Sendable (Set<String>) async throws -> Set<User.ID>
     public var create: @Sendable (User.Create) async throws -> User
     public var delete: @Sendable (User.ID) async throws -> Void
     public var get: @Sendable (User.ID) async throws -> User?
@@ -162,6 +173,7 @@ public struct DatabaseClient: Sendable {
 
 extension DatabaseClient: TestDependencyKey {
   public static let testValue: DatabaseClient = Self(
+    adminMetrics: .init(),
     fittingFavorites: .init(),
     migrations: .testValue,
     projects: .testValue,
@@ -177,6 +189,7 @@ extension DatabaseClient: TestDependencyKey {
 
   public static func live(database: any Database) -> Self {
     .init(
+      adminMetrics: .live(database: database),
       fittingFavorites: .live(database: database),
       migrations: .liveValue,
       projects: .live(database: database),

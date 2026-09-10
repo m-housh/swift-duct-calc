@@ -21,6 +21,26 @@ extension DependencyValues {
 /// if not found.
 public struct EnvVars: Codable, Equatable, Sendable {
 
+  /// Comma-separated existing account emails authorized to view /admin. Empty denies everyone.
+  public let adminEmails: String
+  /// String-valued to match the environment decoder. Validated during app setup.
+  public let aggregateMetricsEnabled: String
+
+  public func administratorEmails() throws -> Set<String> {
+    guard !adminEmails.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return [] }
+    return try Set(
+      adminEmails.split(separator: ",", omittingEmptySubsequences: false).map {
+        let email = $0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        let parts = email.split(separator: "@", omittingEmptySubsequences: false)
+        guard parts.count == 2, !parts[0].isEmpty, parts[1].contains("."),
+          !email.contains(where: { $0.isWhitespace })
+        else {
+          throw AdminConfigurationError.invalidEmail
+        }
+        return email
+      })
+  }
+
   /// The path to the pandoc executable on the system, used to generate pdf's.
   public let pandocPath: String
 
@@ -53,8 +73,12 @@ public struct EnvVars: Codable, Equatable, Sendable {
     postgresUsername: String? = "vapor",
     postgresPassword: String? = "super-secret",
     postgresDatabase: String? = "vapor",
-    sqlitePath: String? = "db.sqlite"
+    sqlitePath: String? = "db.sqlite",
+    adminEmails: String = "",
+    aggregateMetricsEnabled: String = "true"
   ) {
+    self.adminEmails = adminEmails
+    self.aggregateMetricsEnabled = aggregateMetricsEnabled
     self.pandocPath = pandocPath
     self.pdfEngine = pdfEngine
     self.pdfToTextPath = pdfToTextPath
@@ -66,6 +90,8 @@ public struct EnvVars: Codable, Equatable, Sendable {
   }
 
   enum CodingKeys: String, CodingKey {
+    case adminEmails = "ADMIN_EMAILS"
+    case aggregateMetricsEnabled = "AGGREGATE_METRICS_ENABLED"
     case pandocPath = "PANDOC_PATH"
     case pdfEngine = "PDF_ENGINE"
     case pdfToTextPath = "PDFTOTEXT_PATH"
@@ -97,6 +123,10 @@ public struct EnvVars: Codable, Equatable, Sendable {
       ?? .init()
   }
 
+}
+
+public enum AdminConfigurationError: Error {
+  case invalidEmail
 }
 
 private func mergeWithFileData(_ dict: inout [String: String]) async throws {

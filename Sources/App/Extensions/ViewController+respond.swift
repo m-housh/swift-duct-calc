@@ -47,13 +47,22 @@ extension ViewController {
           "Vary": "Cookie, HX-Request",
         ])
     }
-    let html = try await view(
+    let content = try await view(
       .init(
         route: route,
         isHtmxRequest: request.isHtmxRequest,
         logger: request.logger
       )
     )
+    let isAdministrator: Bool
+    if let user = request.auth.get(User.self),
+      let access = request.application.storage[AdminAccessKey.self]
+    {
+      isAdministrator = await access.allows(user.id)
+    } else {
+      isAdministrator = false
+    }
+    let html = withAdminVisibility(content, isAdministrator: isAdministrator)
     if case .fittingReference = route {
       return AnyHTMLResponse(
         additionalHeaders: [
@@ -62,6 +71,12 @@ extension ViewController {
     }
     return AnyHTMLResponse(value: html)
   }
+}
+
+private func withAdminVisibility<Content: HTML & Sendable>(
+  _ content: Content, isAdministrator: Bool
+) -> AnySendableHTML {
+  content.environment(AdminViewValue.$isAdministrator, isAdministrator)
 }
 
 // Re-adapted from `HTMLResponse` in the VaporElementary package to work with any html types

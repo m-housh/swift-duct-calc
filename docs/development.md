@@ -29,6 +29,19 @@ toolchain. PDF import uses Poppler's `pdftotext`. Native installations can overr
 `PDFTOTEXT_PATH` when it is outside `/usr/bin`; container images include Poppler,
 Pandoc, and WeasyPrint for import and report generation.
 
+### Admin metrics checks
+
+Run `just test-docker --filter 'AdminMetrics|EnvVarsTests|LoginRouteTests'` to check
+admin access, collection, and retention against SQLite. For a manual preview,
+create an account first, then pass `ADMIN_EMAILS` with that address to the dev
+container when recreating it. Keep using this worktree's data volume and port.
+
+`AdminMetricsPostgresTests` is opt-in. Set `METRICS_TEST_POSTGRES_HOST` inside the
+test container to a disposable PostgreSQL server with database and username
+`admin_metrics_test` and password `local-test-password`. It creates and reverts
+the app migrations in that database. Never point it at an existing app database.
+The test exercises concurrent aggregate updates, email lookup, and retention.
+
 ### App and browser checks
 
 Use a disposable worktree database. These scripts create accounts and projects.

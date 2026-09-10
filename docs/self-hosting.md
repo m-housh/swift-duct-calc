@@ -48,6 +48,38 @@ The production image includes Poppler for CoolCalc imports and Pandoc/WeasyPrint
 for PDF reports. Production uses PostgreSQL. Setting `SQLITE_PATH` does not switch
 a production instance to SQLite; SQLite is used by the development environment.
 
+## Admin dashboard
+
+Create and confirm an account you control before adding its email to `ADMIN_EMAILS`
+in `docker/.env`. Separate multiple addresses with commas; whitespace and case are
+ignored. Recreate the app container with the updated environment, then sign in and
+open `/admin` or Account > Admin. An empty list denies access to everyone.
+
+```dotenv
+ADMIN_EMAILS=admin@example.com,owner@example.com
+AGGREGATE_METRICS_ENABLED=true
+```
+
+Each configured email must match exactly one existing account. Missing accounts,
+malformed entries, and case-variant duplicate accounts prevent startup. Signup does
+not verify email ownership, so the app resolves the configured emails to accounts
+at startup instead of granting access to future signups. Update the list and
+recreate the app container when changing admin access.
+
+The dashboard stores daily aggregate activity locally, without account IDs,
+emails, IP addresses, project details, or browsing histories in its metrics tables.
+It adds no analytics cookies or scripts. Set `AGGREGATE_METRICS_ENABLED=false` and
+recreate the app container to stop collection; current account/project totals and
+previously collected history remain available. Activity rows are removed after 12
+calendar months while the app and database are running, including when collection
+is disabled. Backups follow your separate retention settings.
+
+Keep reverse proxies and Cloudflare configured to respect the dashboard's
+`Cache-Control: private, no-store` header and bypass caching for `/admin`, including
+query variants. Visitor estimates remain separate in Cloudflare. These metrics do
+not describe everything a proxy, framework log, or other service may collect;
+review those settings and the generated privacy policy for your deployment.
+
 ## Data and updates
 
 PostgreSQL persists data in `docker/data/` beside the Compose file. Recreating

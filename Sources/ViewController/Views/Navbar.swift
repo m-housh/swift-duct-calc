@@ -27,6 +27,10 @@ struct Navbar: HTML, Sendable {
     return .home
   }
 
+  private var isAdministrator: Bool {
+    AdminViewValue.isAdministrator
+  }
+
   var body: some HTML<HTMLTag.nav> {
     nav(
       .class(
@@ -91,6 +95,9 @@ struct Navbar: HTML, Sendable {
                 .tabindex(-1),
                 .class("dropdown-content menu bg-base-200 rounded-box z-1 w-52 py-2 shadow-sm")
               ) {
+                if isAdministrator {
+                  li { a(.href("/admin")) { "Admin" } }
+                }
                 li {
                   a(
                     .href(route: .user(.profile(.index)))

@@ -746,7 +746,6 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
           try await database.trunkSizes.delete(id)
         }
       case .submit(let form):
-        request.logger.debug("Trunk Form: \(form)")
         return await view(on: request, projectID: projectID) {
           _ = try await database.trunkSizes.create(
             form.toCreate(logger: request.logger)

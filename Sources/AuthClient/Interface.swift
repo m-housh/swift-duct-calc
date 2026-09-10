@@ -4,6 +4,11 @@ import DependenciesMacros
 import ManualDCore
 import Vapor
 
+/// A transient success flag, consumed by aggregate middleware without retaining account data.
+public struct SignupMetricKey: StorageKey {
+  public typealias Value = Bool
+}
+
 extension DependencyValues {
   /// Authentication dependency, for handling authentication tasks.
   public var auth: AuthClient {
@@ -34,12 +39,12 @@ extension AuthClient: TestDependencyKey {
     return .init(
       createAndLogin: { createForm in
         let user = try await database.users.create(createForm)
+        request.storage[SignupMetricKey.self] = true
         _ = try await database.users.login(
           .init(email: createForm.email, password: createForm.password)
         )
         request.auth.login(user)
         request.session.authenticate(user)
-        request.logger.debug("LOGGED IN: \(user.id)")
         return user
       },
       currentUser: {
@@ -50,13 +55,9 @@ extension AuthClient: TestDependencyKey {
         let user = try await database.users.get(token.userID)!
         request.auth.login(user)
         request.session.authenticate(user)
-        request.logger.debug("LOGGED IN: \(user.id)")
         return user
       },
       logout: {
-        request.logger.debug(
-          "Logged Out: \((try? request.auth.require(User.self).id.uuidString) ?? "N/A")"
-        )
         request.session.destroy()
         request.auth.logout(User.self)
       }

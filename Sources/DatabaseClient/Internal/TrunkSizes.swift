@@ -276,9 +276,7 @@ final class TrunkModel: Model, @unchecked Sendable {
 
     for (roomID, registers) in updateRooms {
       if let currRoom = rooms.first(where: { $0.$room.id == roomID }) {
-        database.logger.debug("CURRENT ROOM: \(currRoom.room.name)")
         if registers != currRoom.registers {
-          database.logger.debug("Updating registers for: \(currRoom.room.name)")
           currRoom.registers = registers
         }
         if currRoom.hasChanges {
