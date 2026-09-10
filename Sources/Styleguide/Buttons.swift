@@ -90,7 +90,7 @@ public struct DuctulatorButton: HTML, Sendable {
       .href(route: .ductulator(.index)),
       .target(.blank)
     ) {
-      "Ductulator"
+      span { "Ductulator" }
     }
   }
 }

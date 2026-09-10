@@ -33,7 +33,9 @@ if (!window.ductCalcFocusInitialized) {
   window.ductCalcFocusInitialized = true;
   const requests = new WeakMap();
   const openers = new WeakMap();
-  const visible = element => element && element.checkVisibility({ checkVisibilityCSS: true });
+  const visible = element => element && (element.checkVisibility
+    ? element.checkVisibility({ checkVisibilityCSS: true })
+    : element.getClientRects().length > 0);
   const focus = element => {
     if (!visible(element)) return;
     if (!element.matches('a[href],button,input,select,textarea,summary,[tabindex]')) element.tabIndex = -1;
@@ -124,4 +126,40 @@ if (!window.ductCalcFocusInitialized) {
   for (const name of ['htmx:responseError', 'htmx:sendError', 'htmx:timeout']) {
     document.addEventListener(name, () => announce('The request could not be completed. Please try again.', true));
   }
+}
+
+if (!window.ductCalcShortcutsInitialized) {
+  window.ductCalcShortcutsInitialized = true;
+// Resolve the current controls on each press because HTMX replaces the body during navigation.
+document.addEventListener('keydown', (event) => {
+  const key = event.key.toLowerCase();
+  if (event.defaultPrevented || event.repeat || event.isComposing
+      || !event.ctrlKey || !event.altKey || event.shiftKey || event.metaKey
+      || event.getModifierState('AltGraph') || !/^[1-6jkdfpu]$/.test(key)) return;
+
+  const editing = event.composedPath().some(node => node instanceof Element && (
+    node.isContentEditable
+    || node.matches('input, textarea, select, [contenteditable]:not([contenteditable="false"]), [role="textbox"], [role="combobox"], [role="spinbutton"]')
+  ));
+  if (editing || document.querySelector('dialog[open], [role="dialog"][aria-modal="true"]')) return;
+
+  const buttons = [...document.querySelectorAll('#project-sidebar a[aria-keyshortcuts]')];
+  let control;
+  if (key === 'j' || key === 'k') {
+    const current = buttons.findIndex(button => button.getAttribute('aria-current') === 'page');
+    if (current === -1) return;
+    const next = Math.max(0, Math.min(buttons.length - 1, current + (key === 'j' ? 1 : -1)));
+    control = buttons[next];
+  } else {
+    const shortcut = `Control+Alt+${key.toUpperCase()}`;
+    control = document.querySelector(
+      `#project-sidebar a[aria-keyshortcuts="${shortcut}"], nav a[aria-keyshortcuts="${shortcut}"]`
+    );
+  }
+  if (!control || control.matches(':disabled, [aria-disabled="true"]') || control.closest('[inert]')) return;
+
+  event.preventDefault();
+  if (control.getAttribute('aria-current') !== 'page') control.click();
+});
+
 }

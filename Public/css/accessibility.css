@@ -66,3 +66,10 @@ input::placeholder, textarea::placeholder { color:inherit; opacity:1; }
 }
 .details-table { width:100%; table-layout:fixed; overflow-wrap:anywhere; }
 .details-table th { width:45%; text-align:left; }
+.checkbox-group { min-width:0; }
+.checkbox-options span { min-width:0; overflow-wrap:anywhere; }
+@media (max-width: 480px) {
+  .app-nav-actions { position:relative; }
+  .account-menu { position:static; }
+  .account-menu > ul { left:auto; right:0; max-width:100%; }
+}

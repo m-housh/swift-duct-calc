@@ -11,6 +11,7 @@ struct Navbar: HTML, Sendable {
   var showFittingsButton = true
   var showDuctulatorButton = true
   var isLoggedIn = true
+  var showProjectShortcuts = false
 
   var body: some HTML {
     nav(.class("app-navbar"), .init(name: "aria-label", value: "Main")) {
@@ -19,13 +20,29 @@ struct Navbar: HTML, Sendable {
         span { "Duct Calc" }
       }
       div(.class("app-nav-actions")) {
+        if showProjectShortcuts {
+          button(
+            .type(.button), .class("btn"),
+            .init(name: "aria-label", value: "Keyboard shortcuts"),
+            .init(name: "aria-haspopup", value: "dialog"),
+            .init(name: "aria-controls", value: ProjectShortcutsDialog.id),
+            .showModal(id: ProjectShortcutsDialog.id)
+          ) { SVG(.keyboard) }
+        }
         if showFittingsButton {
-          a(.class("btn btn-outline"), .href(route: .fittingReference(.init()))) {
-            "Fitting reference"
+          a(
+            .class("btn btn-outline"), .href(route: .fittingReference(.init())), .target(.blank),
+            .title("Fitting reference, Ctrl+Alt+F"),
+            .init(name: "aria-keyshortcuts", value: "Control+Alt+F")
+          ) {
+            span { "Fitting reference" }
           }
         }
         if showDuctulatorButton {
-          DuctulatorButton().attributes(.class("btn-outline"))
+          DuctulatorButton().attributes(
+            .class("btn-outline"), .title("Ductulator, Ctrl+Alt+D"),
+            .init(name: "aria-keyshortcuts", value: "Control+Alt+D")
+          )
         }
         if isLoggedIn {
           details(.class("account-menu")) {
@@ -37,8 +54,28 @@ struct Navbar: HTML, Sendable {
               if AdminViewValue.isAdministrator {
                 li { a(.href("/admin")) { "Admin" } }
               }
-              li { a(.href(route: .user(.profile(.index)))) { "Profile" } }
-              li { a(.href(route: .project(.index))) { "Projects" } }
+              li {
+                a(
+                  .href(route: .user(.profile(.index))),
+                  .init(name: "aria-keyshortcuts", value: "Control+Alt+U")
+                ) {
+                  span { "Profile" }
+                  span(.class("text-xs"), .init(name: "aria-hidden", value: "true")) {
+                    "Ctrl+Alt+U"
+                  }
+                }
+              }
+              li {
+                a(
+                  .href(route: .project(.index)),
+                  .init(name: "aria-keyshortcuts", value: "Control+Alt+P")
+                ) {
+                  span { "Projects" }
+                  span(.class("text-xs"), .init(name: "aria-hidden", value: "true")) {
+                    "Ctrl+Alt+P"
+                  }
+                }
+              }
               li {
                 form(.action(SiteRoute.View.router.path(for: .user(.logout))), .method(.get)) {
                   button(.type(.submit)) { "Logout" }

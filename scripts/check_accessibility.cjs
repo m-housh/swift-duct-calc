@@ -67,6 +67,8 @@ const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'nig
     await page.locator('#userProfileForm button[type=submit]').click();
     await page.getByRole('heading', { name: 'Projects', exact: true }).waitFor();
     await audit('Projects');
+    assert.equal(await page.getByRole('link', { name: 'Ductulator', exact: true }).count(), 1);
+    assert.equal(await page.getByRole('link', { name: 'Fitting reference', exact: true }).count(), 1);
     await page.goto(origin + '/profile');
     await audit('Account', true);
     await page.goto(origin + '/projects');
@@ -76,10 +78,15 @@ const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'nig
     await page.keyboard.press('Enter');
     for (const name of ['Profile', 'Projects', 'Logout']) {
       await page.keyboard.press('Tab');
-      assert.equal(await page.evaluate(() => document.activeElement.textContent.trim()), name);
+      await focused(page.getByRole(name === 'Logout' ? 'button' : 'link', { name, exact: true }));
     }
     await page.keyboard.press('Escape');
     await focused(account);
+    await page.setViewportSize({ width: 320, height: 800 });
+    await account.click();
+    assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'Account menu must fit at 320px');
+    await page.keyboard.press('Escape');
+    await page.setViewportSize({ width: 1280, height: 900 });
 
     const addProject = page.getByRole('button', { name: 'Add project', exact: true });
     await addProject.click();
@@ -140,6 +147,14 @@ const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'nig
       }
       await page.setViewportSize({ width: 1280, height: 900 });
     }
+    await page.getByRole('button', { name: 'Keyboard shortcuts', exact: true }).click();
+    await audit('Keyboard shortcuts dialog', true);
+    await page.keyboard.press('Escape');
+    await focused(page.getByRole('button', { name: 'Keyboard shortcuts', exact: true }));
+    await page.keyboard.press('Control+Alt+2');
+    await page.getByRole('heading', { name: 'Room Loads', exact: true }).waitFor();
+    await page.keyboard.press('Control+Alt+6');
+    await page.getByRole('heading', { name: 'Duct Sizes', exact: true }).waitFor();
     const editors = page.getByRole('button', { name: /Edit rectangular size for Kitchen/ });
     assert.equal(await editors.count(), 2);
     const ids = await editors.evaluateAll(nodes => nodes.map(node => node.dataset.openDialog));

@@ -38,12 +38,14 @@
           <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
           Duct Calc<span></span></a>
           <div class="app-nav-actions">
-            <a class="btn btn-outline" href="/fittings">Fitting reference</a><a class="btn btn-outline" href="/ductulator" target="_blank">Ductulator</a>
+            <button type="button" class="btn" aria-label="Keyboard shortcuts" aria-haspopup="dialog" aria-controls="projectShortcuts" data-open-dialog="projectShortcuts"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 15h12"/></svg></button>
+            Fitting reference
+            Ductulator<a class="btn btn-outline" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span></span></a><a class="btn btn-outline" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span></span></a>
             <details class="account-menu">
               <summary class="btn"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>Account</summary>
               <ul class="menu bg-base-200 rounded-box shadow-lg">
-                <li><a href="/profile">Profile</a></li>
-                <li><a href="/projects">Projects</a></li>
+                <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
+                <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
                 <li>
                   <form action="/logout" method="get">
                     <button type="submit">Logout</button>
@@ -57,13 +59,13 @@
           <details class="project-navigation" open="">
             <summary>Project navigation</summary>
             <nav aria-label="Project">
-              <ul>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000"><span>Project</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/rooms" aria-current="page"><span>Rooms</span><span class="project-step-status">Complete</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/equipment"><span>Equipment</span><span class="project-step-status">Complete</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths"><span>T.E.L.</span><span class="project-step-status">Complete</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/friction-rate"><span>Friction Rate</span><span class="project-step-status">Complete</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/duct-sizing"><span>Duct Sizes</span></a></li>
+              <ul id="project-sidebar">
+                <li><a href="/projects/00000000-0000-0000-0000-000000000000" title="Project, Ctrl+Alt+1" aria-keyshortcuts="Control+Alt+1"><span>Project</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+1</span></a></li>
+                <li><a href="/projects/00000000-0000-0000-0000-000000000000/rooms" title="Rooms, Ctrl+Alt+2" aria-keyshortcuts="Control+Alt+2" aria-current="page"><span>Rooms</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+2</span><span class="project-step-status">Complete</span></a></li>
+                <li><a href="/projects/00000000-0000-0000-0000-000000000000/equipment" title="Equipment, Ctrl+Alt+3" aria-keyshortcuts="Control+Alt+3"><span>Equipment</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+3</span><span class="project-step-status">Complete</span></a></li>
+                <li><a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths" title="T.E.L., Ctrl+Alt+4" aria-keyshortcuts="Control+Alt+4"><span>T.E.L.</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+4</span><span class="project-step-status">Complete</span></a></li>
+                <li><a href="/projects/00000000-0000-0000-0000-000000000000/friction-rate" title="Friction Rate, Ctrl+Alt+5" aria-keyshortcuts="Control+Alt+5"><span>Friction Rate</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+5</span><span class="project-step-status">Complete</span></a></li>
+                <li><a href="/projects/00000000-0000-0000-0000-000000000000/duct-sizing" title="Duct Sizes, Ctrl+Alt+6" aria-keyshortcuts="Control+Alt+6"><span>Duct Sizes</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+6</span></a></li>
               </ul>
             </nav>
           </details>
@@ -651,6 +653,72 @@ error.hidden = false;" hx-on::before-request="this.querySelector('[role=alert]')
             </div>
           </div>
         </div>
+        <dialog id="projectShortcuts" class="modal" aria-labelledby="projectShortcuts-title">
+          <div class="modal-box">
+            <h2 id="projectShortcuts-title" class="text-2xl font-bold mb-6 pe-10">Keyboard shortcuts</h2>
+            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Keyboard shortcuts" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+            <p class="text-sm mt-2">Hold Ctrl+Alt and press a key below.</p>
+            <table class="table table-sm mt-4">
+              <caption class="text-left font-bold p-2">Project sections</caption>
+              <tbody>
+                <tr>
+                  <th scope="row">Project</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">1</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">Rooms</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">2</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">Equipment</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">3</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">T.E.L.</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">4</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">Friction Rate</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">5</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">Duct Sizes</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">6</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">Next section</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">J</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">Previous section</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">K</kbd></td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="table table-sm mt-4">
+              <caption class="text-left font-bold p-2">App navigation</caption>
+              <tbody>
+                <tr>
+                  <th scope="row">Ductulator</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">D</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">Fitting reference</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">F</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">Projects</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">P</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">Profile</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">U</kbd></td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="text-sm mt-2">Ductulator and fitting reference open in new tabs. Shortcuts pause while editing a field or when a dialog is open.</p>
+          </div>
+        </dialog>
       </main>
       <div id="app-status" class="sr-only" role="status" aria-atomic="true"></div>
       <div id="app-error" class="request-error" role="alert"></div>
@@ -672,7 +740,7 @@ bg-base-300 text-base-content p-4">
                 </g>
               </svg><span>support@ductcalc.pro</span></a>
             </div>
-            Source available via PolyForm Perimeter 1.0.1<a class="btn btn-ghost mx-auto" href="https://github.com/m-housh/swift-duct-calc/src/branch/main/LICENSE" target="_blank"></a>
+            Source available via PolyForm Perimeter 1.0.1<a class="btn btn-ghost mx-auto" href="https://github.com/m-housh/swift-duct-calc/src/branch/main/LICENSE" target="_blank"><span></span></a>
             <p class="">Copyright © 2026 - All rights reserved by Michael Housh</p>
           </div>
         </footer>

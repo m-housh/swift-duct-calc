@@ -4,6 +4,26 @@ Create an account and a project for the system you are designing. Work through
 the project sections in order. The fitting reference and ductulator are also
 available without an account.
 
+## Project navigation
+
+Open Keyboard shortcuts in the project navigation to see the project and app shortcuts.
+Close the dialog with Close or Escape.
+
+Use Ctrl+Alt+1 through Ctrl+Alt+6 to open Project, Rooms, Equipment, T.E.L.,
+Friction Rate, and Duct Sizes in sidebar order. Ctrl+Alt+J opens the next section;
+Ctrl+Alt+K opens the previous section. Navigation stops at the first and last
+sections. The sidebar displays the shortcuts beside their sections.
+These shortcuts are fixed and work with the sidebar open or closed.
+They pause while a form field has focus or a dialog is open. Save your changes
+before switching sections.
+
+Ctrl+Alt+D opens the ductulator in a new tab. Ctrl+Alt+F opens the fitting
+reference in a new tab. These shortcuts work wherever the corresponding
+navigation links appear, with the same field and dialog restrictions.
+
+While signed in, Ctrl+Alt+P returns to Projects and Ctrl+Alt+U opens your Profile
+in the current tab. These shortcuts also pause in form fields and dialogs.
+
 ## Room loads
 
 Open Rooms to enter each room's heating load, cooling load, and register count.

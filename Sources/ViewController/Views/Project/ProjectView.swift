@@ -28,24 +28,28 @@ struct ProjectView<Inner: HTML & Sendable>: HTML, Sendable {
   }
 
   var body: some HTML {
-    Navbar()
+    Navbar(showProjectShortcuts: true)
     div(.class("project-layout")) {
       details(.class("project-navigation"), .init(name: "open", value: "")) {
         summary { "Project navigation" }
         nav(.init(name: "aria-label", value: "Project")) {
-          ul {
-            row("Project", tab: .project, route: .index, complete: nil)
-            row("Rooms", tab: .rooms, route: .rooms(.index), complete: completedSteps.rooms)
+          ul(.id("project-sidebar")) {
+            row("Project", shortcut: "1", tab: .project, route: .index, complete: nil)
             row(
-              "Equipment", tab: .equipment, route: .equipment(.index),
+              "Rooms", shortcut: "2", tab: .rooms, route: .rooms(.index),
+              complete: completedSteps.rooms)
+            row(
+              "Equipment", shortcut: "3", tab: .equipment, route: .equipment(.index),
               complete: completedSteps.equipmentInfo)
             row(
-              "T.E.L.", tab: .equivalentLength, route: .equivalentLength(.index),
+              "T.E.L.", shortcut: "4", tab: .equivalentLength, route: .equivalentLength(.index),
               complete: completedSteps.equivalentLength)
             row(
-              "Friction Rate", tab: .frictionRate, route: .frictionRate(.index),
+              "Friction Rate", shortcut: "5", tab: .frictionRate, route: .frictionRate(.index),
               complete: completedSteps.frictionRate)
-            row("Duct Sizes", tab: .ductSizing, route: .ductSizing(.index), complete: nil)
+            row(
+              "Duct Sizes", shortcut: "6", tab: .ductSizing, route: .ductSizing(.index),
+              complete: nil)
           }
         }
       }
@@ -53,17 +57,26 @@ struct ProjectView<Inner: HTML & Sendable>: HTML, Sendable {
         inner.environment(ProjectViewValue.$projectID, projectID)
       }
     }
+    ProjectShortcutsDialog()
   }
 
   private func row(
     _ title: String,
+    shortcut: String,
     tab: SiteRoute.View.ProjectRoute.DetailRoute.Tab,
     route: SiteRoute.View.ProjectRoute.DetailRoute,
     complete: Bool?
   ) -> some HTML {
     li {
-      a(.href(route: .project(.detail(projectID, route)))) {
+      a(
+        .href(route: .project(.detail(projectID, route))),
+        .title("\(title), Ctrl+Alt+\(shortcut)"),
+        .init(name: "aria-keyshortcuts", value: "Control+Alt+\(shortcut)")
+      ) {
         span { title }
+        span(.class("text-xs"), .init(name: "aria-hidden", value: "true")) {
+          "Ctrl+Alt+\(shortcut)"
+        }
         if let complete {
           span(.class("project-step-status")) { complete ? "Complete" : "Incomplete" }
         }

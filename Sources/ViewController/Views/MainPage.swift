@@ -143,7 +143,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
                 .href("https://github.com/m-housh/swift-duct-calc/src/branch/main/LICENSE"),
                 .target(.blank)
               ) {
-                "Source available via PolyForm Perimeter 1.0.1"
+                span { "Source available via PolyForm Perimeter 1.0.1" }
               }
 
               p(.class("")) {

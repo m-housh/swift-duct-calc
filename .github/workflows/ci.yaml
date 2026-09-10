@@ -35,6 +35,7 @@ jobs:
         node-version: 22
         cache: npm
     - run: npm ci
+    - run: npm run test:project-shortcuts
     - run: npx playwright install --with-deps chromium
     - name: Start isolated accessibility test app
       run: |
