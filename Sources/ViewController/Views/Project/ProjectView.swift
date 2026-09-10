@@ -48,6 +48,7 @@ struct ProjectView<Inner: HTML>: HTML, Sendable where Inner: Sendable {
         completedSteps: completedSteps
       )
     }
+    ProjectShortcutsDialog()
   }
 
 }
@@ -77,11 +78,12 @@ extension ProjectView {
           )
         ) {
 
-          ul(.class("w-full grow")) {
+          ul(.id("project-sidebar"), .class("w-full grow")) {
 
             li(.class("flex w-full")) {
               row(
                 title: "Project",
+                shortcut: "1",
                 icon: .mapPin,
                 route: .project(.detail(projectID, .index)),
                 isComplete: true
@@ -92,6 +94,7 @@ extension ProjectView {
             li(.class("w-full")) {
               row(
                 title: "Rooms",
+                shortcut: "2",
                 icon: .doorClosed,
                 route: .project(.detail(projectID, .rooms(.index))),
                 isComplete: completedSteps.rooms
@@ -102,6 +105,7 @@ extension ProjectView {
             li(.class("flex w-full")) {
               row(
                 title: "Equipment",
+                shortcut: "3",
                 icon: .fan,
                 route: .project(.detail(projectID, .equipment(.index))),
                 isComplete: completedSteps.equipmentInfo
@@ -113,6 +117,7 @@ extension ProjectView {
               // Tooltip("Equivalent Lengths", position: .right) {
               row(
                 title: "T.E.L.",
+                shortcut: "4",
                 icon: .rulerDimensionLine,
                 route: .project(.detail(projectID, .equivalentLength(.index))),
                 isComplete: completedSteps.equivalentLength
@@ -124,6 +129,7 @@ extension ProjectView {
             li(.class("w-full")) {
               row(
                 title: "Friction Rate",
+                shortcut: "5",
                 icon: .squareFunction,
                 route: .project(.detail(projectID, .frictionRate(.index))),
                 isComplete: completedSteps.frictionRate
@@ -134,6 +140,7 @@ extension ProjectView {
             li(.class("w-full")) {
               row(
                 title: "Duct Sizes",
+                shortcut: "6",
                 icon: .wind,
                 route: .project(.detail(projectID, .ductSizing(.index))),
                 isComplete: false,
@@ -142,6 +149,11 @@ extension ProjectView {
               .attributes(.data("active", value: "true"), when: active == .ductSizing)
             }
           }
+
+          div(.class("p-2 text-xs")) {
+            p { "Next: Ctrl+Alt+J" }
+            p { "Previous: Ctrl+Alt+K" }
+          }
         }
       }
     }
@@ -149,12 +161,15 @@ extension ProjectView {
     // TODO: Use SiteRoute.View routes as href.
     private func row(
       title: String,
+      shortcut: String,
       icon: SVG.Key,
       href: String,
       isComplete: Bool,
       hideIsComplete: Bool = false
     ) -> some HTML<HTMLTag.button> {
       button(
+        .title("\(title), Ctrl+Alt+\(shortcut)"),
+        .init(name: "aria-keyshortcuts", value: "Control+Alt+\(shortcut)"),
         .class(
           """
           w-full gap-1 py-2 border-b-1 border-gray-200
@@ -169,15 +184,7 @@ extension ProjectView {
         .hx.target("body"),
         .hx.swap(.outerHTML)
       ) {
-        div(
-          .class(
-            """
-            w-full p-2 gap-1
-            is-drawer-open:flex is-drawer-open:space-x-4
-            is-drawer-close:grid-cols-1
-            """
-          )
-        ) {
+        div(.class("w-full p-2 flex flex-col gap-1")) {
           div(
             .class(
               """
@@ -197,6 +204,7 @@ extension ProjectView {
               span { title }
             }
           }
+          div(.class("text-center text-xs opacity-70")) { "Ctrl+Alt+\(shortcut)" }
 
           // if !hideIsComplete {
           //   div(.class("flex grow justify-end items-end is-drawer-close:hidden")) {
@@ -215,13 +223,14 @@ extension ProjectView {
 
     private func row(
       title: String,
+      shortcut: String,
       icon: SVG.Key,
       route: SiteRoute.View,
       isComplete: Bool,
       hideIsComplete: Bool = false
     ) -> some HTML<HTMLTag.button> {
       row(
-        title: title, icon: icon, href: SiteRoute.View.router.path(for: route),
+        title: title, shortcut: shortcut, icon: icon, href: SiteRoute.View.router.path(for: route),
         isComplete: isComplete, hideIsComplete: hideIsComplete
       )
     }

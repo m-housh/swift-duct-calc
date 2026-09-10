@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test:project-shortcuts": "node --test scripts/check_project_shortcuts.cjs",
     "test:path-templates": "node scripts/check_swift_path_templates.cjs",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:css": "npx @tailwindcss/cli -i Public/css/main.css -o Public/css/output.css"

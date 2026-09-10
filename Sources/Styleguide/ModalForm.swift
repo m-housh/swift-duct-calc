@@ -24,7 +24,9 @@ public struct ModalForm<T: HTML>: HTML, Sendable where T: Sendable {
       div(.class("modal-box")) {
         if closeButton {
           button(
+            .type(.button),
             .class("btn btn-sm btn-circle btn-ghost absolute right-2 top-2"),
+            .init(name: "aria-label", value: "Close"),
             .on(.click, "\(id).close()")
           ) {
             SVG(.close)

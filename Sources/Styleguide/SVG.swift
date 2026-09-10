@@ -29,6 +29,7 @@ extension SVG {
     case fan
     case filePlusCorner
     case key
+    case keyboard
     case mapPin
     case rulerDimensionLine
     case sidebarToggle
@@ -120,6 +121,10 @@ extension SVG {
                 <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
               </g>
             </svg>
+          """
+      case .keyboard:
+        return """
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 15h12"/></svg>
           """
       case .mapPin:
         return """
