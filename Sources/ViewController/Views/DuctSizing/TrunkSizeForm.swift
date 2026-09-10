@@ -39,7 +39,6 @@ struct TrunkSizeForm: HTML, Sendable {
   }
 
   var body: some HTML {
-    script(.src("/js/daisy-multiselect.js")) {}
     ModalForm(id: Self.id(container), dismiss: dismiss) {
       h1(.class("text-lg font-bold mb-4")) { "Trunk / Runout Size" }
       form(
