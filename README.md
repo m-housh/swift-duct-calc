@@ -65,7 +65,8 @@ without starting the app.
 
 ## Contributing
 
-Open an issue to discuss a change or submit a pull request. Read [AGENTS.md](AGENTS.md)
+Open an issue to discuss a change or submit a pull request. Read [CONTRIBUTING.md](CONTRIBUTING.md)
+and [AGENTS.md](AGENTS.md)
 for repository guidance. Maintainer notes explain
 [fitting catalog boundaries](docs/internals/fitting-catalog.md),
 [source interpretation decisions](docs/internals/fitting-rules.md), and
@@ -73,6 +74,8 @@ for repository guidance. Maintainer notes explain
 
 ## License
 
-Source is available under the
-[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license](LICENSE),
-CC BY-NC-SA 4.0.
+This project is source available under the [PolyForm Perimeter License 1.0.1](LICENSE).
+You may use, modify, self-host, and redistribute DuctCalc, but you may not use it to
+provide others with a product or service that competes with DuctCalc.
+
+DuctCalc's name, logo, and other branding are not licensed under the software license.

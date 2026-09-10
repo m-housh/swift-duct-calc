@@ -135,7 +135,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
                 .href("https://github.com/m-housh/swift-duct-calc/src/branch/main/LICENSE"),
                 .target(.blank)
               ) {
-                "Openly licensed via CC-BY-NC-SA 4.0"
+                "Source available via PolyForm Perimeter 1.0.1"
               }
 
               p(.class("")) {
