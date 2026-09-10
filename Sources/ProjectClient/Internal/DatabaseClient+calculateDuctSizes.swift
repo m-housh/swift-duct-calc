@@ -49,78 +49,32 @@ extension DatabaseClient {
   }
 
   func sharedDuctRequest(details: Project.Detail) throws -> DuctSizeSharedRequest {
-    let projectSHR = try details.project.ensuredSHR()
+    let lengths = details.maxContainer
+    var missing: [Project.DuctSizingUnavailable.Input] = []
+    if details.equipmentInfo == nil { missing.append(.equipment) }
+    if details.project.sensibleHeatRatio == nil { missing.append(.sensibleHeatRatio) }
+    if details.rooms.isEmpty { missing.append(.rooms) }
+    if lengths.supply == nil { missing.append(.supplyPath) }
+    if lengths.return == nil { missing.append(.returnPath) }
+    if details.componentLosses.isEmpty { missing.append(.componentLosses) }
 
-    guard
-      let dfrResponse = designFrictionRate(
-        componentLosses: details.componentLosses,
-        equipmentInfo: details.equipmentInfo,
-        equivalentLengths: details.maxContainer
-      )
+    guard missing.isEmpty,
+      let equipment = details.equipmentInfo,
+      let shr = details.project.sensibleHeatRatio,
+      let supply = lengths.supply,
+      let returnLength = lengths.return
     else {
-      throw ProjectClientError("Project not complete.")
+      throw Project.DuctSizingUnavailable(missingInputs: missing)
     }
 
-    let ensuredTEL = try dfrResponse.ensureMaxContainer()
-
+    let availableStaticPressure = equipment.staticPressure - details.componentLosses.total
+    let tel = supply.totalEquivalentLength + returnLength.totalEquivalentLength
     return .init(
-      equipmentInfo: dfrResponse.equipmentInfo,
-      maxSupplyLength: ensuredTEL.supply,
-      maxReturnLenght: ensuredTEL.return,
-      designFrictionRate: dfrResponse.designFrictionRate,
-      projectSHR: projectSHR
-    )
-  }
-
-  // Internal container.
-  struct DesignFrictionRateResponse: Equatable, Sendable {
-
-    typealias EnsuredTEL = (supply: EquivalentLength, return: EquivalentLength)
-
-    let designFrictionRate: Double
-    let equipmentInfo: EquipmentInfo
-    let telMaxContainer: EquivalentLength.MaxContainer
-
-    func ensureMaxContainer() throws -> EnsuredTEL {
-
-      guard let maxSupplyLength = telMaxContainer.supply else {
-        throw ProjectClientError("Max supply TEL not found")
-      }
-      guard let maxReturnLength = telMaxContainer.return else {
-        throw ProjectClientError("Max supply TEL not found")
-      }
-
-      return (maxSupplyLength, maxReturnLength)
-
-    }
-  }
-
-  func designFrictionRate(
-    componentLosses: [ComponentPressureLoss],
-    equipmentInfo: EquipmentInfo,
-    equivalentLengths: EquivalentLength.MaxContainer
-  ) -> DesignFrictionRateResponse? {
-    guard let tel = equivalentLengths.totalEquivalentLength,
-      componentLosses.count > 0
-    else { return nil }
-
-    let availableStaticPressure = equipmentInfo.staticPressure - componentLosses.total
-
-    return .init(
+      equipmentInfo: equipment,
+      maxSupplyLength: supply,
+      maxReturnLenght: returnLength,
       designFrictionRate: (availableStaticPressure * 100) / tel,
-      equipmentInfo: equipmentInfo,
-      telMaxContainer: equivalentLengths
+      projectSHR: shr
     )
-
-  }
-
-}
-
-extension Project {
-  func ensuredSHR() throws -> Double {
-    guard let shr = sensibleHeatRatio else {
-      throw ProjectClientError("Sensible heat ratio not set on project id: \(id)")
-    }
-    return shr
   }
 }

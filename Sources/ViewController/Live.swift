@@ -770,14 +770,15 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
 
     return await request.view {
       await ResultView {
-        try await catching()
-        return (
-          try await database.projects.getCompletedSteps(projectID),
-          try await project.calculateDuctSizes(projectID)
-        )
-      } onSuccess: { (steps, ducts) in
-        ProjectView(projectID: projectID, activeTab: .ductSizing, completedSteps: steps) {
-          DuctSizingView(ductSizes: ducts)
+        let steps = try await database.projects.getCompletedSteps(projectID)
+        let content = await ResultView {
+          try await catching()
+          return try await DuctSizingView(ductSizes: project.calculateDuctSizes(projectID))
+        } onError: { error in
+          DuctSizingErrorView(error: error)
+        }
+        return ProjectView(projectID: projectID, activeTab: .ductSizing, completedSteps: steps) {
+          content
         }
       }
     }
