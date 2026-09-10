@@ -9,6 +9,23 @@ import Testing
 @Suite
 struct AdminMetricsDatabaseTests {
   @Test
+  func retentionKeepsTheCutoffDay() async throws {
+    try await withDatabase {
+      @Dependency(\.database.adminMetrics) var metrics
+      let expired = MetricBucket(day: "2023-02-28", feature: .projects, statusClass: 2)
+      let retained = MetricBucket(day: "2023-03-01", feature: .projects, statusClass: 2)
+      try await metrics.flush(
+        [expired: .init(count: 1), retained: .init(count: 2)],
+        Date(timeIntervalSince1970: 1_677_628_800))  // 2023-03-01 UTC
+      let now = Date(timeIntervalSince1970: 1_709_251_200)  // 2024-03-01 UTC
+      try await metrics.flush([:], now)
+      let snapshot = try await metrics.snapshot("2023-02-28", "2023-03-01")
+      #expect(snapshot.buckets[expired] == nil)
+      #expect(snapshot.buckets[retained]?.count == 2)
+    }
+  }
+
+  @Test
   func emailAllowlistRequiresOneExistingAccount() async throws {
     try await withTestUser { user in
       @Dependency(\.database) var database

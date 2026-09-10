@@ -2,6 +2,11 @@ import Elementary
 import ManualDCore
 import Styleguide
 
+/// Carries AuthClient's resolved decision into HTML streamed outside the request dependency scope.
+public enum AdminViewValue {
+  @TaskLocal public static var isAdministrator = false
+}
+
 struct Navbar: HTML, Sendable {
   let showFittingsButton: Bool
   let showDuctulatorButton: Bool

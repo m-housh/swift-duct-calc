@@ -26,8 +26,8 @@ struct AdminMetricsPostgresTests {
         .init(
           email: "admin@example.com", password: "super-secret", confirmPassword: "super-secret"))
       #expect(try await database.users.administratorAccounts(["admin@example.com"]) == [user.id])
-      let now = Date()
-      let day = MetricCalendar.day(now)
+      let now = Date(timeIntervalSince1970: 1_709_251_200)  // 2024-03-01 UTC
+      let day = "2024-03-01"
       let success = MetricBucket(day: day, feature: .projects, statusClass: 2)
       let errors = MetricBucket(day: day, feature: .projects, statusClass: 5)
       try await withThrowingTaskGroup(of: Void.self) { group in

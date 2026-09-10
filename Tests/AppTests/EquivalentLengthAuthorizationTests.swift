@@ -1,11 +1,13 @@
 import App
 import DatabaseClient
+import DependenciesTestSupport
 import EnvVars
+import Foundation
 import ManualDCore
 import Testing
 import VaporTesting
 
-@Suite
+@Suite(.dependencies { $0.date.now = Date(timeIntervalSince1970: 1_709_251_200) })
 struct EquivalentLengthAuthorizationTests {
   @Test
   func legacyRoutesEnforceOwnershipAndPathMembership() async throws {

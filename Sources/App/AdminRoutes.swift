@@ -1,4 +1,6 @@
+import AuthClient
 import DatabaseClient
+import Dependencies
 import Elementary
 import Foundation
 import ManualDCore
@@ -13,16 +15,18 @@ func addAdminRoutes(
   app.storage[AdminAccessKey.self] = access
   app.lifecycle.use(AdminAccessLifecycle(access: access))
   app.get("admin") { request async throws -> Response in
+    @Dependency(\.auth) var auth
+    @Dependency(\.date.now) var currentDate
     let headers: HTTPHeaders = [
       "Cache-Control": "private, no-store", "Vary": "Cookie, HX-Request",
       "X-Robots-Tag": "noindex, nofollow", "Referrer-Policy": "no-referrer",
     ]
-    guard let user = request.auth.get(User.self) else {
+    guard (try? auth.currentUser()) != nil else {
       let response = Response(status: .seeOther, headers: headers)
       response.headers.replaceOrAdd(name: .location, value: "/login?next=%2Fadmin")
       return response
     }
-    guard await access.allows(user.id) else {
+    guard await auth.isAdministrator() else {
       return Response(status: .forbidden, headers: headers, body: .init(string: "Access denied"))
     }
     let days: Int
@@ -38,7 +42,7 @@ func addAdminRoutes(
       response.headers.replaceOrAdd(name: "HX-Redirect", value: "/admin?days=\(days)")
       return response
     }
-    let now = Date()
+    let now = currentDate
     let from = MetricCalendar.utc.date(byAdding: .day, value: -(days - 1), to: now)!
     do {
       let snapshot = try await database.adminMetrics.snapshot(

@@ -243,6 +243,7 @@ extension AuthClient {
     currentUser: {
       throw TestError()
     },
+    isAdministrator: { false },
     login: { _ in
       throw TestError()
     },

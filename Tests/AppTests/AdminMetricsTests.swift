@@ -1,5 +1,6 @@
 import AuthClient
 import Dependencies
+import DependenciesTestSupport
 import EnvVars
 import Fluent
 import Foundation
@@ -10,9 +11,58 @@ import VaporTesting
 @testable import App
 @testable import DatabaseClient
 
-@Suite
+@Suite(.dependencies { $0.date.now = metricsTestDate })
 struct AdminMetricsTests {
   private let adminID = UUID(uuidString: "00000000-0000-0000-0000-000000000123")!
+
+  @Test
+  func recorderUsesInjectedTimeAcrossUTCMidnight() async throws {
+    try await withApp(configure: { app in
+      app.logger.logLevel = .critical
+      try await configure(app, in: .init())
+      try await app.autoMigrate()
+    }) { app in
+      let recorder = try #require(app.storage[MetricsRecorderKey.self])
+      await withDependencies {
+        $0.date.now = metricsTestDate.addingTimeInterval(-1)
+      } operation: {
+        await recorder.record(feature: .projects, status: 200, milliseconds: 10, signup: false)
+      }
+      await recorder.record(feature: .projects, status: 200, milliseconds: 20, signup: false)
+      await recorder.flush()
+      let snapshot = try await DatabaseClient.live(database: app.db).adminMetrics.snapshot(
+        "2024-02-29", "2024-03-01")
+      #expect(
+        snapshot.buckets[.init(day: "2024-02-29", feature: .projects, statusClass: 2)]
+          == .init(count: 1, durationMilliseconds: 10))
+      #expect(
+        snapshot.buckets[.init(day: "2024-03-01", feature: .projects, statusClass: 2)]
+          == .init(count: 1, durationMilliseconds: 20))
+      #expect(snapshot.lastFlush == metricsTestDate)
+    }
+  }
+
+  @Test
+  func authClientChecksTheCurrentAccountAndDefaultsToDenied() async throws {
+    try await withApp { app in
+      let request = Request(application: app, on: app.eventLoopGroup.next())
+      let auth = AuthClient.live(on: request, isAdministrator: { $0 == adminID })
+      #expect(await auth.isAdministrator() == false)
+      let member = User(
+        id: UUID(), email: "member@example.com", createdAt: metricsTestDate,
+        updatedAt: metricsTestDate)
+      request.auth.login(member)
+      #expect(await auth.isAdministrator() == false)
+      let admin = User(
+        id: adminID, email: "admin@example.com", createdAt: metricsTestDate,
+        updatedAt: metricsTestDate)
+      request.auth.login(admin)
+      #expect(await auth.isAdministrator())
+      #expect(await AuthClient.live(on: request).isAdministrator() == false)
+      request.auth.logout(User.self)
+      #expect(await auth.isAdministrator() == false)
+    }
+  }
 
   @Test
   func failedFlushDoesNotReplayAnUncertainBatch() async throws {
@@ -23,13 +73,13 @@ struct AdminMetricsTests {
     database.flush = { batch, _ in try await probe.flush(batch) }
     let recorder = AggregateMetricsRecorder(
       database: database, logger: logger)
-    let now = Date()
+    let now = metricsTestDate
     await recorder.record(
-      feature: .projects, status: 200, milliseconds: 20, signup: false, now: now)
-    await recorder.flush(now: now)
+      feature: .projects, status: 200, milliseconds: 20, signup: false)
+    await recorder.flush()
     await recorder.record(
-      feature: .ductulator, status: 200, milliseconds: 30, signup: false, now: now)
-    await recorder.flush(now: now)
+      feature: .ductulator, status: 200, milliseconds: 30, signup: false)
+    await recorder.flush()
     let saved = await probe.saved
     #expect(saved.keys.allSatisfy { $0.feature != .projects })
     #expect(
@@ -96,6 +146,11 @@ struct AdminMetricsTests {
         #expect(response.status == .ok)
         #expect(response.body.string.contains("Last \(days) days"))
         #expect(response.body.string.contains("Registered accounts"))
+        #expect(response.body.string.contains("2024-03-01T00:00:00Z"))
+        if days == 7 {
+          #expect(response.body.string.contains("2024-02-24"))
+          #expect(!response.body.string.contains("2024-02-23"))
+        }
         #expect(!response.body.string.contains("@example.com"))
         #expect(!response.body.string.contains(adminID.uuidString))
         #expect(!response.body.string.contains("<script"))
@@ -140,7 +195,7 @@ struct AdminMetricsTests {
       }
       let recorder = try #require(app.storage[MetricsRecorderKey.self])
       await recorder.flush()
-      let today = MetricCalendar.day(Date())
+      let today = "2024-03-01"
       let snapshot = try await DatabaseClient.live(database: app.db).adminMetrics.snapshot(
         today, today)
       #expect(snapshot.accounts == 1)
@@ -209,7 +264,7 @@ struct AdminMetricsTests {
         try await group.waitForAll()
       }
       await recorder.flush()
-      let today = MetricCalendar.day(Date())
+      let today = "2024-03-01"
       let snapshot = try await DatabaseClient.live(database: app.db).adminMetrics.snapshot(
         today, today)
       #expect(snapshot.buckets[.init(day: today, feature: .projects, statusClass: 2)]?.count == 50)
@@ -227,3 +282,5 @@ private actor MetricsFlushProbe {
     saved = batch
   }
 }
+
+private let metricsTestDate = Date(timeIntervalSince1970: 1_709_251_200)  // 2024-03-01 UTC

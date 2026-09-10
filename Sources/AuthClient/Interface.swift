@@ -24,6 +24,8 @@ public struct AuthClient: Sendable {
   public var createAndLogin: @Sendable (User.Create) async throws -> User
   /// Get the current user.
   public var currentUser: @Sendable () throws -> User
+  /// Whether the currently authenticated account has administrator access.
+  public var isAdministrator: @Sendable () async -> Bool = { false }
   /// Login a user.
   public var login: @Sendable (User.Login) async throws -> User
   /// Logout a user.
@@ -33,7 +35,10 @@ public struct AuthClient: Sendable {
 extension AuthClient: TestDependencyKey {
   public static let testValue = Self()
 
-  public static func live(on request: Request) -> Self {
+  public static func live(
+    on request: Request,
+    isAdministrator: @escaping @Sendable (User.ID) async -> Bool = { _ in false }
+  ) -> Self {
     @Dependency(\.database) var database
 
     return .init(
@@ -49,6 +54,10 @@ extension AuthClient: TestDependencyKey {
       },
       currentUser: {
         try request.auth.require(User.self)
+      },
+      isAdministrator: {
+        guard let user = request.auth.get(User.self) else { return false }
+        return await isAdministrator(user.id)
       },
       login: { loginForm in
         let token = try await database.users.login(loginForm)

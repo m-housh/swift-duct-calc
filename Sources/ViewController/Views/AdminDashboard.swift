@@ -2,10 +2,6 @@ import Elementary
 import Foundation
 import ManualDCore
 
-public enum AdminViewValue {
-  @TaskLocal public static var isAdministrator = false
-}
-
 /// A standalone document with local CSS and no scripts or external requests.
 public struct AdminDashboard: HTMLDocument, Sendable {
   public var title: String { "Admin · Duct Calc" }

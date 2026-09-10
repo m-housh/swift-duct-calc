@@ -54,15 +54,8 @@ extension ViewController {
         logger: request.logger
       )
     )
-    let isAdministrator: Bool
-    if let user = request.auth.get(User.self),
-      let access = request.application.storage[AdminAccessKey.self]
-    {
-      isAdministrator = await access.allows(user.id)
-    } else {
-      isAdministrator = false
-    }
-    let html = withAdminVisibility(content, isAdministrator: isAdministrator)
+    @Dependency(\.auth.isAdministrator) var isAdministrator
+    let html = withAdminVisibility(content, isAdministrator: await isAdministrator())
     if case .fittingReference = route {
       return AnyHTMLResponse(
         additionalHeaders: [

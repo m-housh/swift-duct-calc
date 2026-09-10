@@ -1,5 +1,6 @@
 import AuthClient
 import DatabaseClient
+import Dependencies
 import Foundation
 import ManualDCore
 import Vapor
@@ -14,6 +15,7 @@ struct MetricsRecorderKey: StorageKey {
 
 /// This actor receives only enum labels, counts, and durations. No request or user objects.
 actor AggregateMetricsRecorder {
+  @Dependency(\.date.now) private var now
   private var buckets: [MetricBucket: MetricCount] = [:]
   private var task: Task<Void, Never>?
   private var flushing = false
@@ -28,7 +30,7 @@ actor AggregateMetricsRecorder {
   }
 
   func record(
-    feature: MetricFeature, status: Int, milliseconds: Double, signup: Bool, now: Date = Date()
+    feature: MetricFeature, status: Int, milliseconds: Double, signup: Bool
   ) {
     guard enabled else { return }
     let day = MetricCalendar.day(now)
@@ -44,10 +46,11 @@ actor AggregateMetricsRecorder {
     }
   }
 
-  func flush(now: Date = Date()) async {
+  func flush() async {
     guard !flushing else { return }
     flushing = true
     defer { flushing = false }
+    let now = self.now
     var batch = buckets
     buckets.removeAll(keepingCapacity: true)
     batch[.init(day: MetricCalendar.day(now), feature: .coverage, statusClass: 0)] = .init()

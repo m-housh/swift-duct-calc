@@ -1,6 +1,7 @@
 import App
 import CSVParser
 import DatabaseClient
+import DependenciesTestSupport
 import Dependencies
 import Foundation
 import ManualDCore
@@ -8,7 +9,7 @@ import PdfImportClient
 import Testing
 import VaporTesting
 
-@Suite(.serialized)
+@Suite(.serialized, .dependencies { $0.date.now = Date(timeIntervalSince1970: 1_709_251_200) })
 struct RoomPDFUploadTests {
   @Test
   func rejectsMalformedBodiesWithoutCrashing() async throws {
