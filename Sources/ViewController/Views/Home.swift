@@ -61,7 +61,7 @@ struct HomeView: HTML, Sendable {
               .href("https://github.com/m-housh/swift-duct-calc"),
               .target(.blank)
             ) {
-              "Open source residential duct design program"
+              "Source-available residential duct design program"
             }
             p(.class("text-3xl py-6")) {
               """
@@ -103,7 +103,7 @@ struct HomeView: HTML, Sendable {
                     "Built by humans"
                   }
                 }
-                li { "Fully open source." }
+                li { "Source available for transparency and self-hosting." }
                 li { "Great replacement for speed sheet users." }
                 li { "Great for classrooms." }
                 li { "Store your projects in one place." }
