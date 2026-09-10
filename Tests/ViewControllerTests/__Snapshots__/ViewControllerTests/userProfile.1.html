@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Duct Calc</title>
+    <title>Account · Duct Calc</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="ductcalc.com" name="og:site_name">
@@ -18,10 +18,10 @@
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
     <script src="/js/htmx-download.js"></script>
     <script src="/js/main.js"></script>
-    <script src="/js/daisy-multiselect.js" defer=""></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="/css/output.css?v=navbar-reference-1">
     <link rel="stylesheet" href="/css/htmx.css">
+    <link rel="stylesheet" href="/css/accessibility.css?v=1">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
     <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
@@ -31,78 +31,75 @@
   </head>
   <body>
     <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
-      <main class="flex flex-col min-h-screen min-w-full grow mb-auto">
+      <a class="skip-link" href="#main-content">Skip to content</a>
+      <main id="main-content" tabindex="-1" class="flex flex-col min-h-screen min-w-full grow mb-auto">
         <div>
-          <nav class="navbar flex-wrap w-full bg-base-300 text-base-content shadow-sm mb-4">
-            <div class="flex flex-1 space-x-4 items-center">
-              <div class="tooltip tooltip-right" data-tip="Projects, Ctrl+Alt+P">
-                <a class="flex w-fit h-fit text-2xl items-end px-4 py-2 btn btn-square btn-ghost hover:bg-neutral hover:text-white" href="/projects">
-                <img src="/images/mand_logo_sm.webp">
-                Duct Calc<span></span></a>
-              </div>
-            </div>
-            <div class="flex-none">
-              <div class="flex items-end space-x-4">
-                <div class="tooltip tooltip-bottom" data-tip="Fitting reference, Ctrl+Alt+F"><a class="btn btn-outline btn-secondary" href="/fittings" target="_blank" aria-keyshortcuts="Control+Alt+F" aria-describedby="fitting-reference-help">Fitting reference</a></div>
-                Browse fitting references<span id="fitting-reference-help" class="sr-only"></span>
-                <div class="tooltip tooltip-bottom" data-tip="Ductulator, Ctrl+Alt+D"><a class="btn btn-outline btn-primary" href="/ductulator" target="_blank" aria-keyshortcuts="Control+Alt+D">Ductulator</a></div>
-                <div class="dropdown dropdown-end dropdown-hover">
-                  <div class="btn m-1 btn btn-square btn-ghost hover:bg-neutral hover:text-white" tabindex="0" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg></div>
-                  <ul tabindex="-1" class="dropdown-content menu bg-base-200 rounded-box z-1 w-52 py-2 shadow-sm">
-                    <li><a href="/profile" class="flex justify-between" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs opacity-70">Ctrl+Alt+U</span></a></li>
-                    <li><a href="/projects" class="flex justify-between" aria-keyshortcuts="Control+Alt+P" hx-get="/projects" hx-push-url="true" hx-target="body" hx-swap="outerHTML"><span>Projects</span><span class="text-xs opacity-70">Ctrl+Alt+P</span></a></li>
-                    <li><a hx-get="/logout" hx-push-url="/login" hx-target="body" hx-swap="outerHTML">Logout</a></li>
-                  </ul>
-                </div>
-              </div>
+          <nav class="app-navbar" aria-label="Main">
+            <a class="app-brand" href="/projects">
+            <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
+            Duct Calc<span></span></a>
+            <div class="app-nav-actions">
+              <a class="btn btn-outline" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span>Fitting reference</span></a><a class="btn btn-outline" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span>Ductulator</span></a>
+              <details class="account-menu">
+                <summary class="btn"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>Account</summary>
+                <ul class="menu bg-base-200 rounded-box shadow-lg">
+                  <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
+                  <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
+                  <li>
+                    <form action="/logout" method="get">
+                      <button type="submit">Logout</button>
+                    </form>
+                  </li>
+                </ul>
+              </details>
             </div>
           </nav>
           <div class="p-4">
             <a class="btn btn-secondary mb-4" href="/path-templates">Path templates</a>
-            <div class="flex justify-between">
+            <div class="flex flex-wrap items-center justify-between gap-3">
               <h1 class="text-2xl font-bold">Account</h1>
-              <button class="btn" type="button" onclick="userProfileForm_00000000000000000000000000000001.showModal()">
+              <button class="btn" type="button" aria-label="Edit profile" data-open-dialog="userProfileForm_00000000000000000000000000000001">
                 <div class="flex">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
                   
                 </div>
               </button>
             </div>
-            <table class="table table-zebra border rounded-lg">
+            <table class="table details-table table-zebra border rounded-lg">
               <tr>
-                <td><span class="text-lg label font-bold">Name</span></td>
+                <th scope="row"><span class="text-lg font-bold">Name</span></th>
                 <td>Testy McTestface</td>
               </tr>
               <tr>
-                <td><span class="text-lg label font-bold">Company</span></td>
+                <th scope="row"><span class="text-lg font-bold">Company</span></th>
                 <td>Acme Co.</td>
               </tr>
               <tr>
-                <td><span class="text-lg label font-bold">Street Address</span></td>
+                <th scope="row"><span class="text-lg font-bold">Street Address</span></th>
                 <td>1234 Sesame St</td>
               </tr>
               <tr>
-                <td><span class="text-lg label font-bold">City</span></td>
+                <th scope="row"><span class="text-lg font-bold">City</span></th>
                 <td>Monroe</td>
               </tr>
               <tr>
-                <td><span class="text-lg label font-bold">State</span></td>
+                <th scope="row"><span class="text-lg font-bold">State</span></th>
                 <td>OH</td>
               </tr>
               <tr>
-                <td><span class="text-lg label font-bold">Zip Code</span></td>
+                <th scope="row"><span class="text-lg font-bold">Zip Code</span></th>
                 <td>55555</td>
               </tr>
               <tr>
-                <td><span class="text-lg label font-bold">Theme</span></td>
+                <th scope="row"><span class="text-lg font-bold">Theme</span></th>
                 <td></td>
               </tr>
             </table>
-            <dialog id="userProfileForm_00000000000000000000000000000001" class="modal">
+            <dialog id="userProfileForm_00000000000000000000000000000001" class="modal" aria-labelledby="userProfileForm_00000000000000000000000000000001-title">
               <div class="modal-box">
-                <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close" onclick="userProfileForm_00000000000000000000000000000001.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                <h1 class="text-xl font-bold pb-6">Profile</h1>
-                <form class="grid grid-cols-1 gap-4 p-4" hx-patch="/profile/00000000-0000-0000-0000-000000000001" hx-target="body" hx-swap="outerHTML">
+                <h2 id="userProfileForm_00000000000000000000000000000001-title" class="text-2xl font-bold mb-6 pe-10">Profile</h2>
+                <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Profile" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4 p-4" hx-patch="/profile/00000000-0000-0000-0000-000000000001" hx-target="body" hx-swap="outerHTML">
                   <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000001">
                   <input class="hidden" name="userID" value="00000000-0000-0000-0000-000000000000">
                   First Name<label class="input w-full"><span class="label"></span>
@@ -118,47 +115,25 @@
                   State</label><label class="input w-full"><span class="label"></span>
                   <input name="state" value="OH" required>
                   Zip</label><label class="input w-full"><span class="label"></span>
-                  <input name="zipCode" value="55555" required></label>
-                  <div class="dropdown dropdown-top">
-                    <div class="input btn m-1 w-full" tabindex="0" role="button">Theme<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg></div>
-                    <ul tabindex="-1" class="dropdown-content bg-base-300 rounded-box z-1 p-2 shadow-2xl">
-                      <li>
-                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Default" value="default">
-                      </li>
-                      <li><span class="text-sm font-bold text-gray-400">Light</span></li>
-                      <li>
-                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Cupcake" value="cupcake">
-                      </li>
-                      <li>
-                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Light" value="light">
-                      </li>
-                      <li>
-                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Nord" value="nord">
-                      </li>
-                      <li>
-                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Retro" value="retro">
-                      </li>
-                      <li><span class="text-sm font-bold text-gray-400">Dark</span></li>
-                      <li>
-                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Aqua" value="aqua">
-                      </li>
-                      <li>
-                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Cyberpunk" value="cyberpunk">
-                      </li>
-                      <li>
-                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Dark" value="dark">
-                      </li>
-                      <li>
-                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Dracula" value="dracula">
-                      </li>
-                      <li>
-                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Night" value="night">
-                      </li>
-                      <li>
-                        <input type="radio" name="theme" class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start" aria-label="Synthwave" value="synthwave">
-                      </li>
-                    </ul>
-                  </div>
+                  <input name="zipCode" value="55555" required>
+                  Theme</label><label class="select w-full"><span class="label"></span>
+                  <select name="theme">
+                    <option value="default" selected>System default</option>
+                    <optgroup label="Light">
+                      <option value="cupcake">Cupcake</option>
+                      <option value="light">Light</option>
+                      <option value="nord">Nord</option>
+                      <option value="retro">Retro</option>
+                    </optgroup>
+                    <optgroup label="Dark">
+                      <option value="aqua">Aqua</option>
+                      <option value="cyberpunk">Cyberpunk</option>
+                      <option value="dark">Dark</option>
+                      <option value="dracula">Dracula</option>
+                      <option value="night">Night</option>
+                      <option value="synthwave">Synthwave</option>
+                    </optgroup>
+                  </select></label>
                   <button class="btn btn-secondary btn-block" type="submit">Submit</button>
                 </form>
               </div>
@@ -166,12 +141,14 @@
           </div>
         </div>
       </main>
-      <div class="bottom-0 left-0 bg-error">
+      <div id="app-status" class="sr-only" role="status" aria-atomic="true"></div>
+      <div id="app-error" class="request-error" role="alert"></div>
+      <div>
         <footer class="footer footer-horizontal footer-center
 bg-base-300 text-base-content p-4">
-          <aside class="grid-flow-row items-center">
+          <div class="grid-flow-row items-center">
             <div class="flex mx-auto">
-              <a class="btn btn-ghost" href="mailto:support@ductcalc.pro">  <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <a class="btn btn-ghost" href="mailto:support@ductcalc.pro">  <svg aria-hidden="true" focusable="false" class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g
                   stroke-linejoin="round"
                   stroke-linecap="round"
@@ -184,9 +161,9 @@ bg-base-300 text-base-content p-4">
                 </g>
               </svg><span>support@ductcalc.pro</span></a>
             </div>
-            Source available via PolyForm Perimeter 1.0.1<a class="btn btn-ghost mx-auto" href="https://github.com/m-housh/swift-duct-calc/src/branch/main/LICENSE" target="_blank"></a>
+            Source available via PolyForm Perimeter 1.0.1<a class="btn btn-ghost mx-auto" href="https://github.com/m-housh/swift-duct-calc/src/branch/main/LICENSE" target="_blank"><span></span></a>
             <p class="">Copyright © 2026 - All rights reserved by Michael Housh</p>
-          </aside>
+          </div>
         </footer>
       </div>
     </div>

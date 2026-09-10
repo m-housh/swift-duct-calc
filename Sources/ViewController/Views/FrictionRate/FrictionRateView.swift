@@ -57,7 +57,7 @@ struct FrictionRateView: HTML, Sendable {
   var body: some HTML {
     div(.class("space-y-6")) {
       PageTitleRow {
-        div(.class("grid grid-cols-2 px-4 w-full")) {
+        div(.class("flex flex-wrap justify-between gap-4 w-full")) {
 
           PageTitle { "Friction Rate" }
 
@@ -144,7 +144,7 @@ struct FrictionRateView: HTML, Sendable {
 
           }
           .attributes(
-            .class("border border-red-800 bg-error rounded-lg shadow-lg mt-4"),
+            .class("border border-red-800 bg-error text-error-content rounded-lg shadow-lg mt-4"),
             when: hasAlerts
           )
         }

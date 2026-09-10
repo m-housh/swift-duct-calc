@@ -35,7 +35,7 @@ extension DuctSizingView {
   struct RoomRow: HTML, Sendable {
 
     static func id(_ room: DuctSizes.RoomContainer) -> String {
-      "roomRow_\(room.roomName.idString)"
+      "roomRow_\(room.roomID.idString)_\(room.roomRegister)"
     }
 
     @Environment(ProjectViewValue.$projectID) var projectID
@@ -138,7 +138,7 @@ extension DuctSizingView {
               div(.class("join")) {
                 if room.ductSize.width != nil {
                   Tooltip("Delete Size", position: .bottom) {
-                    TrashButton()
+                    TrashButton("Delete rectangular size for \(room.label)")
                       .attributes(.class("join-item btn-ghost"))
                       .attributes(
                         .hx.delete(deleteRoute),
@@ -150,7 +150,7 @@ extension DuctSizingView {
                 }
 
                 Tooltip("Edit Size", position: .bottom) {
-                  EditButton()
+                  EditButton(accessibilityLabel: "Edit rectangular size for \(room.label)")
                     .attributes(
                       .class("join-item btn-ghost"),
                       .showModal(id: RectangularSizeForm.id(room))

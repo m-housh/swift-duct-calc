@@ -42,10 +42,10 @@ struct RoomForm: HTML, Sendable {
   }
 
   var body: some HTML {
-    ModalForm(id: Self.id(room), dismiss: dismiss) {
-      h1(.class("text-3xl font-bold pb-6")) { "Room" }
+    ModalForm(id: Self.id(room), title: "Room", dismiss: dismiss) {
 
       form(
+        .data("success-message", value: "Changes saved."),
         .class("grid grid-cols-1 gap-4"),
         room == nil
           ? .hx.post(route)
@@ -69,16 +69,17 @@ struct RoomForm: HTML, Sendable {
         )
 
         LabeledInput(
-          "Level",
+          "Level (optional)",
           .name("level"),
+          .init(name: "aria-describedby", value: "\(Self.id(room))-level-help"),
           .type(.number),
           .placeholder("1 (Optional)"),
           .value(room?.level?.rawValue),
           .min("-1"),
           .step("1")
         )
-        div(.class("text-sm italic -mt-2")) {
-          span(.class("text-primary")) {
+        div(.id("\(Self.id(room))-level-help"), .class("text-sm italic -mt-2")) {
+          span {
             "Use -1 or 0 for a basement"
           }
         }
@@ -96,6 +97,7 @@ struct RoomForm: HTML, Sendable {
         LabeledInput(
           "Cooling Total",
           .name("coolingTotal"),
+          .init(name: "aria-describedby", value: "\(Self.id(room))-cooling-help"),
           .type(.number),
           .placeholder("1234 (Optional)"),
           .min("0"),
@@ -105,12 +107,13 @@ struct RoomForm: HTML, Sendable {
         LabeledInput(
           "Cooling Sensible",
           .name("coolingSensible"),
+          .init(name: "aria-describedby", value: "\(Self.id(room))-cooling-help"),
           .type(.number),
           .placeholder("1234 (Optional)"),
           .min("0"),
           .value(room?.coolingLoad.sensible)
         )
-        div(.class("text-primary text-sm italic -mt-2")) {
+        div(.id("\(Self.id(room))-cooling-help"), .class("text-sm italic -mt-2")) {
           p {
             "Should enter at least one of the cooling loads."
           }
@@ -125,8 +128,7 @@ struct RoomForm: HTML, Sendable {
           .type(.number),
           .min("1"),
           .required,
-          .value(room?.registerCount ?? 1),
-          .id("registerCount")
+          .value(room?.registerCount ?? 1)
         )
 
         label(.class("select w-full")) {

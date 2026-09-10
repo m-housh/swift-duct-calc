@@ -21,9 +21,8 @@ struct LoginForm: HTML, Sendable {
   }
 
   var body: some HTML {
-    ModalForm(id: "loginForm", closeButton: false, dismiss: false) {
+    ModalForm(id: "loginForm", title: style.title, dismiss: false) {
       Row {
-        h1(.class("text-2xl font-bold mb-6")) { style.title }
         a(
           .class("btn btn-link"),
           .href(route: .privacyPolicy),
@@ -44,10 +43,11 @@ struct LoginForm: HTML, Sendable {
 
         div {
           label(.class("input validator w-full")) {
-            SVG(.email)
+            span(.class("label")) { "Email" }
             input(
               .type(.email), .placeholder("Email"), .required,
-              .name("email"), .id("email"), .autofocus
+              .name("email"), .id("email"), .init(name: "autocomplete", value: "username"),
+              .autofocus
             )
           }
           div(.class("validator-hint hidden")) { "Enter valid email address." }
@@ -55,11 +55,14 @@ struct LoginForm: HTML, Sendable {
 
         div {
           label(.class("input validator w-full")) {
-            SVG(.key)
+            span(.class("label")) { "Password" }
             input(
               .type(.password), .placeholder("Password"), .required,
               .pattern(.password), .minlength("8"),
               .name("password"), .id("password"),
+              .init(
+                name: "autocomplete", value: style == .signup ? "new-password" : "current-password"),
+              .init(name: "aria-describedby", value: "password-help"),
             )
           }
         }
@@ -67,27 +70,20 @@ struct LoginForm: HTML, Sendable {
         if style == .signup {
           div {
             label(.class("input validator w-full")) {
-              SVG(.key)
+              span(.class("label")) { "Confirm password" }
               input(
                 .type(.password), .placeholder("Confirm Password"), .required,
                 .pattern(.password), .minlength("8"),
                 .name("confirmPassword"), .id("confirmPassword"),
+                .init(name: "autocomplete", value: "new-password"),
+                .init(name: "aria-describedby", value: "password-help"),
               )
             }
           }
+        }
 
-          div(.class("validator-hint hidden")) {
-            p {
-              "Must be more than 8 characters, including"
-              br()
-              "At least one number"
-              br()
-              "At least one lowercase letter"
-              br()
-              "At least one uppercase letter"
-            }
-          }
-
+        p(.id("password-help"), .class("text-sm")) {
+          "Use at least 8 characters, including an uppercase letter, a lowercase letter, and a number."
         }
 
         div(.class("flex")) {

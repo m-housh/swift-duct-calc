@@ -67,7 +67,7 @@ public struct ErrorView: HTML, Sendable {
   }
 
   public var body: some HTML<HTMLTag.div> {
-    div {
+    div(.role("alert"), .tabindex(-1), .data("error-message", value: "true")) {
       h1(.class("text-xl font-bold text-error")) { "Oops: Error" }
       p {
         if let validationError = (error as? ValidationError) {

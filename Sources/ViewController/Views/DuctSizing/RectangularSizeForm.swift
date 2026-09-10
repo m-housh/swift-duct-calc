@@ -7,7 +7,7 @@ struct RectangularSizeForm: HTML, Sendable {
 
   static func id(_ room: DuctSizes.RoomContainer) -> String {
     let base = "rectangularSize"
-    return "\(base)_\(room.roomName.idString)"
+    return "\(base)_\(room.roomID.idString)_\(room.roomRegister)"
   }
 
   @Environment(ProjectViewValue.$projectID) var projectID
@@ -43,11 +43,11 @@ struct RectangularSizeForm: HTML, Sendable {
     room.ductSize.height
   }
 
-  var body: some HTML<HTMLTag.dialog> {
-    ModalForm(id: id, dismiss: dismiss) {
-      h1(.class("text-lg pb-6")) { "Rectangular Size" }
+  var body: some HTML {
+    ModalForm(id: id, title: "Rectangular Size", dismiss: dismiss) {
 
       form(
+        .data("success-message", value: "Changes saved."),
         .class("space-y-4"),
         .hx.post(route),
         .hx.target("#\(rowID)"),

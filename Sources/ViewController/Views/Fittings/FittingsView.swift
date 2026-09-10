@@ -8,7 +8,7 @@ struct FittingsView: HTML, Sendable {
   let page: FittingReferencePage
 
   var body: some HTML {
-    Navbar(showFittingsButton: false, showSidebarToggle: false, isLoggedIn: page.isLoggedIn)
+    Navbar(showFittingsButton: false, isLoggedIn: page.isLoggedIn)
     div(
       .id("fittings-page"), .data("tools", value: page.isLoggedIn ? "enabled" : "disabled"),
       .data("url", value: page.path())

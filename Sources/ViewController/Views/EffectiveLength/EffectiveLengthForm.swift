@@ -44,9 +44,9 @@ struct EffectiveLengthForm: HTML, Sendable {
   var body: some HTML {
     ModalForm(
       id: id,
+      title: "Effective Length",
       dismiss: dismiss
     ) {
-      h1(.class("text-2xl font-bold")) { "Effective Length" }
       div(.id("formStep_\(id)"), .class("mt-4")) {
         StepOne(projectID: projectID, effectiveLength: effectiveLength)
       }
@@ -126,9 +126,10 @@ struct EffectiveLengthForm: HTML, Sendable {
         input(.class("hidden"), .name("type"), .value(stepOne.type.rawValue))
 
         Row {
-          Label { "Straigth Lengths" }
+          Label { "Straight Lengths" }
           button(
             .type(.button),
+            .init(name: "aria-label", value: "Add straight length"),
             .hx.get(
               route: .project(.detail(projectID, .equivalentLength(.field(.straightLength))))
             ),
@@ -175,6 +176,7 @@ struct EffectiveLengthForm: HTML, Sendable {
 
     var body: some HTML {
       form(
+        .data("success-message", value: "Equivalent length saved."),
         .class("space-y-4"),
         effectiveLength == nil
           ? .hx.post(route)
@@ -196,6 +198,7 @@ struct EffectiveLengthForm: HTML, Sendable {
           Label { "Groups" }
           button(
             .type(.button),
+            .init(name: "aria-label", value: "Add fitting group"),
             .hx.get(
               route: .project(
                 .detail(projectID, .equivalentLength(.field(.group, style: stepTwo.type))))
@@ -252,7 +255,7 @@ struct StraightLengthField: HTML, Sendable {
         .autofocus,
         .required
       )
-      TrashButton()
+      TrashButton("Remove straight length")
         .attributes(.data("remove", value: "true"))
     }
     .attributes(.hx.ext("remove"), .class("space-x-4"))
@@ -303,7 +306,7 @@ struct GroupField: HTML, Sendable {
       )
       .attributes(.class("col-span-2"))
 
-      TrashButton()
+      TrashButton("Remove fitting group")
         .attributes(
           .data("remove", value: "true"),
           .class("me-2 btn-block")
@@ -343,7 +346,7 @@ struct GroupTypeSelect: HTML, Sendable {
   var body: some HTML<HTMLTag.label> {
     label(.class("select w-full")) {
       span(.class("label")) { "Type" }
-      select(.name("type"), .id("type")) {
+      select(.name("type")) {
         for value in EquivalentLength.EffectiveLengthType.allCases {
           option(
             .value("\(value.rawValue)"),

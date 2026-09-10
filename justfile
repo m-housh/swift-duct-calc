@@ -64,3 +64,7 @@ code-coverage:
 [positional-arguments]
 test *ARGS:
     @swift test --enable-code-coverage "$@"
+
+# Run against this worktree's isolated app after starting it with `just run`.
+test-accessibility: _dev-port
+    @DUCTCALC_A11Y_ORIGIN="http://127.0.0.1:$(cat .dev-port)" npm run test:accessibility

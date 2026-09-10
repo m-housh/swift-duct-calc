@@ -24,8 +24,7 @@ struct ProjectForm: HTML, Sendable {
   }
 
   var body: some HTML {
-    ModalForm(id: Self.id, dismiss: dismiss) {
-      h1(.class("text-3xl font-bold pb-6 ps-2")) { "Project" }
+    ModalForm(id: Self.id, title: "Project", dismiss: dismiss) {
       if project == nil {
         button(
           .type(.button), .class("btn btn-outline btn-block mb-4"),
@@ -47,6 +46,7 @@ struct ProjectForm: HTML, Sendable {
       }
       div(.id("projectDetailsForm")) {
         form(
+          .data("success-message", value: "Changes saved."),
           .class("grid grid-cols-1 gap-4"),
           project == nil
             ? .hx.post(route)

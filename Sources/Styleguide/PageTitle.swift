@@ -10,12 +10,7 @@ public struct PageTitleRow<Content: HTML>: HTML, Sendable where Content: Sendabl
 
   public var body: some HTML<HTMLTag.div> {
     div(
-      .class(
-        """
-        flex justify-between bg-secondary border-2 border-primary rounded-sm shadow-sm 
-        p-6 w-full
-        """
-      )
+      .class("page-title-row")
     ) {
       inner
     }

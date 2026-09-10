@@ -71,7 +71,7 @@ struct ViewControllerTests {
     } operation: {
       @Dependency(\.viewController) var viewController
 
-      let signup = try await viewController.view(.test(.login(.index())))
+      let signup = try await viewController.view(.test(.signup(.index)))
       assertSnapshot(of: signup, as: .html)
     }
   }

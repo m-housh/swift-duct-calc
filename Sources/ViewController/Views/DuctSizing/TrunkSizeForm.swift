@@ -39,9 +39,9 @@ struct TrunkSizeForm: HTML, Sendable {
   }
 
   var body: some HTML {
-    ModalForm(id: Self.id(container), dismiss: dismiss) {
-      h1(.class("text-lg font-bold mb-4")) { "Trunk / Runout Size" }
+    ModalForm(id: Self.id(container), title: "Trunk / Runout Size", dismiss: dismiss) {
       form(
+        .data("success-message", value: "Changes saved."),
         .class("space-y-4"),
         trunk == nil
           ? .hx.post(route)
@@ -81,30 +81,17 @@ struct TrunkSizeForm: HTML, Sendable {
           .required
         )
 
-        div {
-          h2(.class("label font-bold col-span-3 mb-6")) { "Associated Supply Runs" }
-          daisyMultiSelect(
-            .class("z-50 bg-base-200"),
-            .placeholder("Select rooms"),
-            .name("rooms"),
-            .chipStyle,
-            .showSelectAll,
-            .showClear,
-            .required,
-            .virtualScroll
-          ) {
-            for room in rooms {
-              option(.value("\(room.roomID)_\(room.roomRegister)")) {
-                room.label
-              }
-              .attributes(
-                .selected,
-                when: trunk == nil ? false : trunk!.rooms.hasRoom(room)
-              )
-            }
+        CheckboxGroup(
+          "Associated Supply Runs",
+          name: "rooms",
+          options: rooms.map { room in
+            .init(
+              value: "\(room.roomID)_\(room.roomRegister)",
+              label: room.label,
+              selected: trunk?.rooms.hasRoom(room) ?? false
+            )
           }
-
-        }
+        )
 
         SubmitButton()
           .attributes(.class("btn-block mt-6"))

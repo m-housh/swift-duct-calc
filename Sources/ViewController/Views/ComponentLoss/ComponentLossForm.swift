@@ -25,9 +25,9 @@ struct ComponentLossForm: HTML, Sendable {
   }
 
   var body: some HTML {
-    ModalForm(id: Self.id(componentLoss), dismiss: dismiss) {
-      h1(.class("text-2xl font-bold")) { "Component Loss" }
+    ModalForm(id: Self.id(componentLoss), title: "Component Loss", dismiss: dismiss) {
       form(
+        .data("success-message", value: "Changes saved."),
         .class("space-y-4 p-4"),
         componentLoss == nil
           ? .hx.post(route)

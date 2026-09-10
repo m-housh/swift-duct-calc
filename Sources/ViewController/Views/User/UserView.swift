@@ -8,44 +8,44 @@ struct UserView: HTML, Sendable {
 
   var body: some HTML {
     div {
-      Navbar(showSidebarToggle: false)
+      Navbar()
 
       div(.class("p-4")) {
         a(.class("btn btn-secondary mb-4"), .href("/path-templates")) { "Path templates" }
         Row {
           h1(.class("text-2xl font-bold")) { "Account" }
-          EditButton()
+          EditButton(accessibilityLabel: "Edit profile")
             .attributes(.showModal(id: UserProfileForm.id(profile)))
         }
 
         if let profile {
-          table(.class("table table-zebra border rounded-lg")) {
+          table(.class("table details-table table-zebra border rounded-lg")) {
             tr {
-              td { Label("Name") }
+              th(.init(name: "scope", value: "row")) { Label("Name") }
               td { "\(profile.firstName) \(profile.lastName)" }
             }
             tr {
-              td { Label("Company") }
+              th(.init(name: "scope", value: "row")) { Label("Company") }
               td { profile.companyName }
             }
             tr {
-              td { Label("Street Address") }
+              th(.init(name: "scope", value: "row")) { Label("Street Address") }
               td { profile.streetAddress }
             }
             tr {
-              td { Label("City") }
+              th(.init(name: "scope", value: "row")) { Label("City") }
               td { profile.city }
             }
             tr {
-              td { Label("State") }
+              th(.init(name: "scope", value: "row")) { Label("State") }
               td { profile.state }
             }
             tr {
-              td { Label("Zip Code") }
+              th(.init(name: "scope", value: "row")) { Label("Zip Code") }
               td { profile.zipCode }
             }
             tr {
-              td { Label("Theme") }
+              th(.init(name: "scope", value: "row")) { Label("Theme") }
               td { profile.theme?.rawValue ?? "" }
             }
 

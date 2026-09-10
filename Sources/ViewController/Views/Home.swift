@@ -10,7 +10,7 @@ struct HomeView: HTML, Sendable {
     // .data("theme", value: "cyberpunk")
     // NOTE: Footer background color will follow system theme.
     ) {
-      div(.class("flex justify-end space-x-4 m-4")) {
+      div(.class("flex flex-wrap justify-end gap-3 m-4")) {
         a(
           .class("btn btn-outline btn-secondary"), .href(route: .fittingReference(.init())),
           .init(name: "aria-describedby", value: "fitting-reference-help")
@@ -34,7 +34,7 @@ struct HomeView: HTML, Sendable {
         }
       }
 
-      div(.class("mx-10 lg:mx-20")) {
+      div(.class("mx-4 sm:mx-10 lg:mx-20")) {
         div(
           .class(
             """
@@ -46,7 +46,7 @@ struct HomeView: HTML, Sendable {
           div(
             .class(
               """
-              bg-secondary text-xl font-bold 
+              bg-secondary text-secondary-content text-xl font-bold
               absolute top-10 -left-15
               px-6 py-2 w-[250px] -rotate-45
               """
@@ -90,7 +90,7 @@ struct HomeView: HTML, Sendable {
         div(.class("grid grid-cols-1 md:grid-cols-2 gap-4 my-6")) {
           div(.class("border-3 border-accent rounded-lg shadow-lg p-4")) {
             div(.class("flex items-center space-x-4")) {
-              div(.class("text-5xl text-primary font-bold")) {
+              div(.class("text-3xl sm:text-5xl font-bold")) {
                 "Features"
               }
             }
@@ -98,7 +98,7 @@ struct HomeView: HTML, Sendable {
               ul(.class("list-disc")) {
                 li {
                   div(
-                    .class("font-bold italic bg-secondary rounded-lg shadow-lg px-4 w-fit")
+                    .class("font-bold italic bg-secondary text-secondary-content rounded-lg shadow-lg px-4 w-fit")
                   ) {
                     "Built by humans"
                   }
@@ -116,7 +116,7 @@ struct HomeView: HTML, Sendable {
           }
 
           div(.class("border-3 border-accent rounded-lg shadow-lg p-4")) {
-            div(.class("text-5xl text-primary font-bold")) {
+            div(.class("text-3xl sm:text-5xl font-bold")) {
               "Coming Soon"
             }
             div(.class("text-xl ms-10 mt-10")) {
@@ -125,14 +125,14 @@ struct HomeView: HTML, Sendable {
                 li { "Command line interface." }
                 li {
                   "Fitting selection tool. "
-                  span(.class("badge badge-success badge-outline")) {
+                  span(.class("badge badge-outline")) {
                     span(.init(name: "aria-hidden", value: "true")) { "✓" }
                     "Available now"
                   }
                 }
                 li {
                   "Room load import from Cool Calc PDF. "
-                  span(.class("badge badge-success badge-outline")) {
+                  span(.class("badge badge-outline")) {
                     span(.init(name: "aria-hidden", value: "true")) { "✓" }
                     "Available now"
                   }
@@ -152,7 +152,7 @@ struct HomeView: HTML, Sendable {
         .class(
           """
           flex items-end border-b-6 border-accent
-          text-8xl font-bold my-auto space-2
+          text-4xl sm:text-6xl lg:text-8xl font-bold my-auto space-2
           """
         )
       ) {
@@ -161,8 +161,8 @@ struct HomeView: HTML, Sendable {
           span(
             .class(
               """
-              bg-secondary rounded-md
-              text-5xl rotate-180 p-2 -mx-2
+              bg-secondary text-secondary-content rounded-md
+              text-2xl sm:text-4xl lg:text-5xl rotate-180 p-2 -mx-2
               """
             ),
             .style("writing-mode: vertical-rl")

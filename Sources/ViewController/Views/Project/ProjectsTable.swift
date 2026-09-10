@@ -17,12 +17,12 @@ struct ProjectsTable: HTML, Sendable {
 
   var body: some HTML {
     div {
-      Navbar(showSidebarToggle: false)
+      Navbar()
       div(.class("m-6")) {
         PageTitleRow {
           PageTitle { "Projects" }
           Tooltip("Add project") {
-            PlusButton()
+            PlusButton("Add project")
               .attributes(
                 .class("btn-primary"),
                 .showModal(id: ProjectForm.id)
@@ -31,17 +31,22 @@ struct ProjectsTable: HTML, Sendable {
         }
         .attributes(.class("pb-6"))
 
-        table(.class("table table-zebra")) {
-          thead {
-            tr {
-              th { Label("Date") }
-              th { Label("Name") }
-              th { Label("Address") }
-              th {}
+        div(
+          .class("table-scroll"), .tabindex(0), .role("region"),
+          .init(name: "aria-label", value: "Projects")
+        ) {
+          table(.class("table table-zebra")) {
+            thead {
+              tr {
+                th { Label("Date") }
+                th { Label("Name") }
+                th { Label("Address") }
+                th { span(.class("sr-only")) { "Actions" } }
+              }
             }
-          }
-          tbody {
-            Rows(projects: projects)
+            tbody {
+              Rows(projects: projects)
+            }
           }
         }
       }
@@ -75,7 +80,7 @@ extension ProjectsTable {
             div(.class("flex justify-end space-x-6")) {
               div(.class("join")) {
                 Tooltip("Delete project", position: tooltipPosition(n)) {
-                  TrashButton()
+                  TrashButton("Delete \(project.name)")
                     .attributes(
                       .class("join-item btn-ghost"),
                       .hx.delete(route: .project(.delete(id: project.id))),
@@ -86,6 +91,7 @@ extension ProjectsTable {
                 Tooltip("View project", position: tooltipPosition(n)) {
                   a(
                     .class("join-item btn btn-success btn-ghost"),
+                    .init(name: "aria-label", value: "View \(project.name)"),
                     .href(route: .project(.detail(project.id, .rooms(.index))))
                   ) {
                     SVG(.chevronRight)

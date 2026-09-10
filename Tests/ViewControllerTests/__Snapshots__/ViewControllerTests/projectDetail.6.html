@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Duct Calc</title>
+    <title>Duct sizes · Duct Calc</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="ductcalc.com" name="og:site_name">
@@ -18,10 +18,10 @@
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
     <script src="/js/htmx-download.js"></script>
     <script src="/js/main.js"></script>
-    <script src="/js/daisy-multiselect.js" defer=""></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="/css/output.css?v=navbar-reference-1">
     <link rel="stylesheet" href="/css/htmx.css">
+    <link rel="stylesheet" href="/css/accessibility.css?v=1">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
     <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
@@ -31,49 +31,55 @@
   </head>
   <body>
     <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
-      <main class="flex flex-col min-h-screen min-w-full grow mb-auto">
-        <div class="drawer lg:drawer-open h-full">
-          <input id="my-drawer-1" type="checkbox" class="drawer-toggle">
-          <div class="drawer-content overflow-auto">
-            <nav class="navbar flex-wrap w-full bg-base-300 text-base-content shadow-sm mb-4">
-              <div class="flex flex-1 space-x-4 items-center">
-                <div class="tooltip tooltip-right" data-tip="Open / close sidebar"><label for="my-drawer-1" class="size-7 btn btn-square btn-ghost hover:bg-neutral hover:text-white" aria-label="open / close sidebar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor" class="my-1.5 inline-block"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg></label></div>
-                <div class="tooltip tooltip-right" data-tip="Projects, Ctrl+Alt+P">
-                  <a class="flex w-fit h-fit text-2xl items-end px-4 py-2 btn btn-square btn-ghost hover:bg-neutral hover:text-white" href="/projects">
-                  <img src="/images/mand_logo_sm.webp">
-                  Duct Calc<span></span></a>
-                </div>
-                <div class="tooltip tooltip-bottom" data-tip="Keyboard shortcuts">
-                  <button type="button" class="size-7 btn btn-square btn-ghost hover:bg-neutral hover:text-white" aria-label="Keyboard shortcuts" aria-haspopup="dialog" aria-controls="projectShortcuts" onclick="projectShortcuts.showModal()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 15h12"/></svg></button>
-                </div>
-              </div>
-              <div class="flex-none">
-                <div class="flex items-end space-x-4">
-                  <div class="tooltip tooltip-bottom" data-tip="Fitting reference, Ctrl+Alt+F"><a class="btn btn-outline btn-secondary" href="/fittings" target="_blank" aria-keyshortcuts="Control+Alt+F" aria-describedby="fitting-reference-help">Fitting reference</a></div>
-                  Browse fitting references<span id="fitting-reference-help" class="sr-only"></span>
-                  <div class="tooltip tooltip-bottom" data-tip="Ductulator, Ctrl+Alt+D"><a class="btn btn-outline btn-primary" href="/ductulator" target="_blank" aria-keyshortcuts="Control+Alt+D">Ductulator</a></div>
-                  <div class="dropdown dropdown-end dropdown-hover">
-                    <div class="btn m-1 btn btn-square btn-ghost hover:bg-neutral hover:text-white" tabindex="0" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg></div>
-                    <ul tabindex="-1" class="dropdown-content menu bg-base-200 rounded-box z-1 w-52 py-2 shadow-sm">
-                      <li><a href="/profile" class="flex justify-between" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs opacity-70">Ctrl+Alt+U</span></a></li>
-                      <li><a href="/projects" class="flex justify-between" aria-keyshortcuts="Control+Alt+P" hx-get="/projects" hx-push-url="true" hx-target="body" hx-swap="outerHTML"><span>Projects</span><span class="text-xs opacity-70">Ctrl+Alt+P</span></a></li>
-                      <li><a hx-get="/logout" hx-push-url="/login" hx-target="body" hx-swap="outerHTML">Logout</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+      <a class="skip-link" href="#main-content">Skip to content</a>
+      <main id="main-content" tabindex="-1" class="flex flex-col min-h-screen min-w-full grow mb-auto">
+        <nav class="app-navbar" aria-label="Main">
+          <a class="app-brand" href="/projects">
+          <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
+          Duct Calc<span></span></a>
+          <div class="app-nav-actions">
+            <button type="button" class="btn" aria-label="Keyboard shortcuts" aria-haspopup="dialog" aria-controls="projectShortcuts" data-open-dialog="projectShortcuts"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 15h12"/></svg></button>
+            Fitting reference
+            Ductulator<a class="btn btn-outline" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span></span></a><a class="btn btn-outline" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span></span></a>
+            <details class="account-menu">
+              <summary class="btn"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>Account</summary>
+              <ul class="menu bg-base-200 rounded-box shadow-lg">
+                <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
+                <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
+                <li>
+                  <form action="/logout" method="get">
+                    <button type="submit">Logout</button>
+                  </form>
+                </li>
+              </ul>
+            </details>
+          </div>
+        </nav>
+        <div class="project-layout">
+          <details class="project-navigation" open="">
+            <summary>Project navigation</summary>
+            <nav aria-label="Project">
+              <ul id="project-sidebar">
+                <li><a href="/projects/00000000-0000-0000-0000-000000000000" title="Project, Ctrl+Alt+1" aria-keyshortcuts="Control+Alt+1"><span>Project</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+1</span></a></li>
+                <li><a href="/projects/00000000-0000-0000-0000-000000000000/rooms" title="Rooms, Ctrl+Alt+2" aria-keyshortcuts="Control+Alt+2"><span>Rooms</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+2</span><span class="project-step-status">Complete</span></a></li>
+                <li><a href="/projects/00000000-0000-0000-0000-000000000000/equipment" title="Equipment, Ctrl+Alt+3" aria-keyshortcuts="Control+Alt+3"><span>Equipment</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+3</span><span class="project-step-status">Complete</span></a></li>
+                <li><a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths" title="T.E.L., Ctrl+Alt+4" aria-keyshortcuts="Control+Alt+4"><span>T.E.L.</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+4</span><span class="project-step-status">Complete</span></a></li>
+                <li><a href="/projects/00000000-0000-0000-0000-000000000000/friction-rate" title="Friction Rate, Ctrl+Alt+5" aria-keyshortcuts="Control+Alt+5"><span>Friction Rate</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+5</span><span class="project-step-status">Complete</span></a></li>
+                <li><a href="/projects/00000000-0000-0000-0000-000000000000/duct-sizing" title="Duct Sizes, Ctrl+Alt+6" aria-keyshortcuts="Control+Alt+6" aria-current="page"><span>Duct Sizes</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+6</span></a></li>
+              </ul>
             </nav>
-            <div class="p-4">
-              <div class="space-y-4">
-                <div class="flex justify-between bg-secondary border-2 border-primary rounded-sm shadow-sm 
-p-6 w-full">
-                  <div>
-                    <h1 class="text-3xl font-bold">Duct Sizes</h1>
-                  </div>
-                  <div>
-                    <button class="btn btn-primary" hx-get="/projects/00000000-0000-0000-0000-000000000000/pdf" hx-ext="htmx-download" hx-swap="none" hx-indicator=".htmx-indicator"><span>PDF</span><span class="loading loading-spinner loading-lg htmx-indicator"></span></button>
-                  </div>
+          </details>
+          <div class="project-content" id="project-content" tabindex="-1">
+            <div class="space-y-4">
+              <div class="page-title-row">
+                <div>
+                  <h1 class="text-3xl font-bold">Duct Sizes</h1>
                 </div>
+                <div>
+                  <button class="btn btn-primary" hx-get="/projects/00000000-0000-0000-0000-000000000000/pdf" hx-ext="htmx-download" hx-swap="none" hx-indicator=".htmx-indicator"><span>PDF</span><span class="loading loading-spinner loading-lg htmx-indicator"></span></button>
+                </div>
+              </div>
+              <div class="table-scroll" tabindex="0" role="region" aria-label="Room duct sizes">
                 <table class="table table-zebra text-lg">
                   <thead>
                     <tr class="text-lg">
@@ -85,7 +91,7 @@ p-6 w-full">
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="text-lg" id="roomRow_Bed1">
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000001_1">
                       <td>Bed-1 - SR.1</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,913</span><span class="label">Cooling</span><span>2,472</span></div>
@@ -125,20 +131,20 @@ p-6 w-full">
                           <div class="flex justify-end">
                             <div class="join">
                               <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_Bed1.showModal()">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Bed-1 - SR.1" data-open-dialog="rectangularSize_00000000000000000000000000000001_1">
                                   <div class="flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
                                     
                                   </div>
                                 </button>
                               </div>
                             </div>
                           </div>
-                          <dialog id="rectangularSize_Bed1" class="modal">
+                          <dialog id="rectangularSize_00000000000000000000000000000001_1" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000001_1-title">
                             <div class="modal-box">
-                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close" onclick="rectangularSize_Bed1.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                              <h1 class="text-lg pb-6">Rectangular Size</h1>
-                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000001" hx-target="#roomRow_Bed1" hx-swap="outerHTML">
+                              <h2 id="rectangularSize_00000000000000000000000000000001_1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000001" hx-target="#roomRow_00000000000000000000000000000001_1" hx-swap="outerHTML">
                                 <input class="hidden" name="register" value="1">
                                 <input class="hidden" name="id" value="">
                                 Height<label class="input w-full"><span class="label"></span>
@@ -150,7 +156,7 @@ p-6 w-full">
                         </div>
                       </td>
                     </tr>
-                    <tr class="text-lg" id="roomRow_Entry">
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000002_1">
                       <td>Entry - SR.1</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,142</span><span class="label">Cooling</span><span>1,458</span></div>
@@ -190,20 +196,20 @@ p-6 w-full">
                           <div class="flex justify-end">
                             <div class="join">
                               <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_Entry.showModal()">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Entry - SR.1" data-open-dialog="rectangularSize_00000000000000000000000000000002_1">
                                   <div class="flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
                                     
                                   </div>
                                 </button>
                               </div>
                             </div>
                           </div>
-                          <dialog id="rectangularSize_Entry" class="modal">
+                          <dialog id="rectangularSize_00000000000000000000000000000002_1" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000002_1-title">
                             <div class="modal-box">
-                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close" onclick="rectangularSize_Entry.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                              <h1 class="text-lg pb-6">Rectangular Size</h1>
-                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000002" hx-target="#roomRow_Entry" hx-swap="outerHTML">
+                              <h2 id="rectangularSize_00000000000000000000000000000002_1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000002" hx-target="#roomRow_00000000000000000000000000000002_1" hx-swap="outerHTML">
                                 <input class="hidden" name="register" value="1">
                                 <input class="hidden" name="id" value="">
                                 Height<label class="input w-full"><span class="label"></span>
@@ -215,7 +221,7 @@ p-6 w-full">
                         </div>
                       </td>
                     </tr>
-                    <tr class="text-lg" id="roomRow_Entry">
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000002_2">
                       <td>Entry - SR.2</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,142</span><span class="label">Cooling</span><span>1,458</span></div>
@@ -255,20 +261,20 @@ p-6 w-full">
                           <div class="flex justify-end">
                             <div class="join">
                               <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_Entry.showModal()">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Entry - SR.2" data-open-dialog="rectangularSize_00000000000000000000000000000002_2">
                                   <div class="flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
                                     
                                   </div>
                                 </button>
                               </div>
                             </div>
                           </div>
-                          <dialog id="rectangularSize_Entry" class="modal">
+                          <dialog id="rectangularSize_00000000000000000000000000000002_2" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000002_2-title">
                             <div class="modal-box">
-                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close" onclick="rectangularSize_Entry.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                              <h1 class="text-lg pb-6">Rectangular Size</h1>
-                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000002" hx-target="#roomRow_Entry" hx-swap="outerHTML">
+                              <h2 id="rectangularSize_00000000000000000000000000000002_2-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000002" hx-target="#roomRow_00000000000000000000000000000002_2" hx-swap="outerHTML">
                                 <input class="hidden" name="register" value="2">
                                 <input class="hidden" name="id" value="">
                                 Height<label class="input w-full"><span class="label"></span>
@@ -280,7 +286,7 @@ p-6 w-full">
                         </div>
                       </td>
                     </tr>
-                    <tr class="text-lg" id="roomRow_FamilyRoom">
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000003_1">
                       <td>Family Room - SR.1</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,262</span><span class="label">Cooling</span><span>2,482</span></div>
@@ -320,20 +326,20 @@ p-6 w-full">
                           <div class="flex justify-end">
                             <div class="join">
                               <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_FamilyRoom.showModal()">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Family Room - SR.1" data-open-dialog="rectangularSize_00000000000000000000000000000003_1">
                                   <div class="flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
                                     
                                   </div>
                                 </button>
                               </div>
                             </div>
                           </div>
-                          <dialog id="rectangularSize_FamilyRoom" class="modal">
+                          <dialog id="rectangularSize_00000000000000000000000000000003_1" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000003_1-title">
                             <div class="modal-box">
-                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close" onclick="rectangularSize_FamilyRoom.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                              <h1 class="text-lg pb-6">Rectangular Size</h1>
-                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000003" hx-target="#roomRow_FamilyRoom" hx-swap="outerHTML">
+                              <h2 id="rectangularSize_00000000000000000000000000000003_1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000003" hx-target="#roomRow_00000000000000000000000000000003_1" hx-swap="outerHTML">
                                 <input class="hidden" name="register" value="1">
                                 <input class="hidden" name="id" value="">
                                 Height<label class="input w-full"><span class="label"></span>
@@ -345,7 +351,7 @@ p-6 w-full">
                         </div>
                       </td>
                     </tr>
-                    <tr class="text-lg" id="roomRow_FamilyRoom">
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000003_2">
                       <td>Family Room - SR.2</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,262</span><span class="label">Cooling</span><span>2,482</span></div>
@@ -385,20 +391,20 @@ p-6 w-full">
                           <div class="flex justify-end">
                             <div class="join">
                               <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_FamilyRoom.showModal()">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Family Room - SR.2" data-open-dialog="rectangularSize_00000000000000000000000000000003_2">
                                   <div class="flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
                                     
                                   </div>
                                 </button>
                               </div>
                             </div>
                           </div>
-                          <dialog id="rectangularSize_FamilyRoom" class="modal">
+                          <dialog id="rectangularSize_00000000000000000000000000000003_2" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000003_2-title">
                             <div class="modal-box">
-                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close" onclick="rectangularSize_FamilyRoom.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                              <h1 class="text-lg pb-6">Rectangular Size</h1>
-                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000003" hx-target="#roomRow_FamilyRoom" hx-swap="outerHTML">
+                              <h2 id="rectangularSize_00000000000000000000000000000003_2-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000003" hx-target="#roomRow_00000000000000000000000000000003_2" hx-swap="outerHTML">
                                 <input class="hidden" name="register" value="2">
                                 <input class="hidden" name="id" value="">
                                 Height<label class="input w-full"><span class="label"></span>
@@ -410,7 +416,7 @@ p-6 w-full">
                         </div>
                       </td>
                     </tr>
-                    <tr class="text-lg" id="roomRow_FamilyRoom">
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000003_3">
                       <td>Family Room - SR.3</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,262</span><span class="label">Cooling</span><span>2,482</span></div>
@@ -450,20 +456,20 @@ p-6 w-full">
                           <div class="flex justify-end">
                             <div class="join">
                               <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_FamilyRoom.showModal()">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Family Room - SR.3" data-open-dialog="rectangularSize_00000000000000000000000000000003_3">
                                   <div class="flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
                                     
                                   </div>
                                 </button>
                               </div>
                             </div>
                           </div>
-                          <dialog id="rectangularSize_FamilyRoom" class="modal">
+                          <dialog id="rectangularSize_00000000000000000000000000000003_3" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000003_3-title">
                             <div class="modal-box">
-                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close" onclick="rectangularSize_FamilyRoom.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                              <h1 class="text-lg pb-6">Rectangular Size</h1>
-                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000003" hx-target="#roomRow_FamilyRoom" hx-swap="outerHTML">
+                              <h2 id="rectangularSize_00000000000000000000000000000003_3-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000003" hx-target="#roomRow_00000000000000000000000000000003_3" hx-swap="outerHTML">
                                 <input class="hidden" name="register" value="3">
                                 <input class="hidden" name="id" value="">
                                 Height<label class="input w-full"><span class="label"></span>
@@ -475,7 +481,7 @@ p-6 w-full">
                         </div>
                       </td>
                     </tr>
-                    <tr class="text-lg" id="roomRow_Kitchen">
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000004_1">
                       <td>Kitchen - SR.1</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>2,259</span><span class="label">Cooling</span><span>2,548</span></div>
@@ -515,20 +521,20 @@ p-6 w-full">
                           <div class="flex justify-end">
                             <div class="join">
                               <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_Kitchen.showModal()">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Kitchen - SR.1" data-open-dialog="rectangularSize_00000000000000000000000000000004_1">
                                   <div class="flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
                                     
                                   </div>
                                 </button>
                               </div>
                             </div>
                           </div>
-                          <dialog id="rectangularSize_Kitchen" class="modal">
+                          <dialog id="rectangularSize_00000000000000000000000000000004_1" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000004_1-title">
                             <div class="modal-box">
-                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close" onclick="rectangularSize_Kitchen.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                              <h1 class="text-lg pb-6">Rectangular Size</h1>
-                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000004" hx-target="#roomRow_Kitchen" hx-swap="outerHTML">
+                              <h2 id="rectangularSize_00000000000000000000000000000004_1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000004" hx-target="#roomRow_00000000000000000000000000000004_1" hx-swap="outerHTML">
                                 <input class="hidden" name="register" value="1">
                                 <input class="hidden" name="id" value="">
                                 Height<label class="input w-full"><span class="label"></span>
@@ -540,7 +546,7 @@ p-6 w-full">
                         </div>
                       </td>
                     </tr>
-                    <tr class="text-lg" id="roomRow_Kitchen">
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000004_2">
                       <td>Kitchen - SR.2</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>2,259</span><span class="label">Cooling</span><span>2,548</span></div>
@@ -580,20 +586,20 @@ p-6 w-full">
                           <div class="flex justify-end">
                             <div class="join">
                               <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_Kitchen.showModal()">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Kitchen - SR.2" data-open-dialog="rectangularSize_00000000000000000000000000000004_2">
                                   <div class="flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
                                     
                                   </div>
                                 </button>
                               </div>
                             </div>
                           </div>
-                          <dialog id="rectangularSize_Kitchen" class="modal">
+                          <dialog id="rectangularSize_00000000000000000000000000000004_2" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000004_2-title">
                             <div class="modal-box">
-                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close" onclick="rectangularSize_Kitchen.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                              <h1 class="text-lg pb-6">Rectangular Size</h1>
-                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000004" hx-target="#roomRow_Kitchen" hx-swap="outerHTML">
+                              <h2 id="rectangularSize_00000000000000000000000000000004_2-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000004" hx-target="#roomRow_00000000000000000000000000000004_2" hx-swap="outerHTML">
                                 <input class="hidden" name="register" value="2">
                                 <input class="hidden" name="id" value="">
                                 Height<label class="input w-full"><span class="label"></span>
@@ -605,7 +611,7 @@ p-6 w-full">
                         </div>
                       </td>
                     </tr>
-                    <tr class="text-lg" id="roomRow_LivingRoom">
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000005_1">
                       <td>Living Room - SR.1</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,776</span><span class="label">Cooling</span><span>3,414</span></div>
@@ -645,20 +651,20 @@ p-6 w-full">
                           <div class="flex justify-end">
                             <div class="join">
                               <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_LivingRoom.showModal()">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Living Room - SR.1" data-open-dialog="rectangularSize_00000000000000000000000000000005_1">
                                   <div class="flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
                                     
                                   </div>
                                 </button>
                               </div>
                             </div>
                           </div>
-                          <dialog id="rectangularSize_LivingRoom" class="modal">
+                          <dialog id="rectangularSize_00000000000000000000000000000005_1" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000005_1-title">
                             <div class="modal-box">
-                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close" onclick="rectangularSize_LivingRoom.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                              <h1 class="text-lg pb-6">Rectangular Size</h1>
-                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000005" hx-target="#roomRow_LivingRoom" hx-swap="outerHTML">
+                              <h2 id="rectangularSize_00000000000000000000000000000005_1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000005" hx-target="#roomRow_00000000000000000000000000000005_1" hx-swap="outerHTML">
                                 <input class="hidden" name="register" value="1">
                                 <input class="hidden" name="id" value="">
                                 Height<label class="input w-full"><span class="label"></span>
@@ -670,7 +676,7 @@ p-6 w-full">
                         </div>
                       </td>
                     </tr>
-                    <tr class="text-lg" id="roomRow_LivingRoom">
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000005_2">
                       <td>Living Room - SR.2</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>3,776</span><span class="label">Cooling</span><span>3,414</span></div>
@@ -710,20 +716,20 @@ p-6 w-full">
                           <div class="flex justify-end">
                             <div class="join">
                               <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_LivingRoom.showModal()">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Living Room - SR.2" data-open-dialog="rectangularSize_00000000000000000000000000000005_2">
                                   <div class="flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
                                     
                                   </div>
                                 </button>
                               </div>
                             </div>
                           </div>
-                          <dialog id="rectangularSize_LivingRoom" class="modal">
+                          <dialog id="rectangularSize_00000000000000000000000000000005_2" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000005_2-title">
                             <div class="modal-box">
-                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close" onclick="rectangularSize_LivingRoom.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                              <h1 class="text-lg pb-6">Rectangular Size</h1>
-                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000005" hx-target="#roomRow_LivingRoom" hx-swap="outerHTML">
+                              <h2 id="rectangularSize_00000000000000000000000000000005_2-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000005" hx-target="#roomRow_00000000000000000000000000000005_2" hx-swap="outerHTML">
                                 <input class="hidden" name="register" value="2">
                                 <input class="hidden" name="id" value="">
                                 Height<label class="input w-full"><span class="label"></span>
@@ -735,7 +741,7 @@ p-6 w-full">
                         </div>
                       </td>
                     </tr>
-                    <tr class="text-lg" id="roomRow_Master">
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000006_1">
                       <td>Master - SR.1</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,101</span><span class="label">Cooling</span><span>1,038</span></div>
@@ -775,20 +781,20 @@ p-6 w-full">
                           <div class="flex justify-end">
                             <div class="join">
                               <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_Master.showModal()">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Master - SR.1" data-open-dialog="rectangularSize_00000000000000000000000000000006_1">
                                   <div class="flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
                                     
                                   </div>
                                 </button>
                               </div>
                             </div>
                           </div>
-                          <dialog id="rectangularSize_Master" class="modal">
+                          <dialog id="rectangularSize_00000000000000000000000000000006_1" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000006_1-title">
                             <div class="modal-box">
-                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close" onclick="rectangularSize_Master.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                              <h1 class="text-lg pb-6">Rectangular Size</h1>
-                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000006" hx-target="#roomRow_Master" hx-swap="outerHTML">
+                              <h2 id="rectangularSize_00000000000000000000000000000006_1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000006" hx-target="#roomRow_00000000000000000000000000000006_1" hx-swap="outerHTML">
                                 <input class="hidden" name="register" value="1">
                                 <input class="hidden" name="id" value="">
                                 Height<label class="input w-full"><span class="label"></span>
@@ -800,7 +806,7 @@ p-6 w-full">
                         </div>
                       </td>
                     </tr>
-                    <tr class="text-lg" id="roomRow_Master">
+                    <tr class="text-lg" id="roomRow_00000000000000000000000000000006_2">
                       <td>Master - SR.2</td>
                       <td>
                         <div class="flex flex-wrap grid grid-cols-2 gap-2"><span class="label">Heating</span><span>4,101</span><span class="label">Cooling</span><span>1,038</span></div>
@@ -840,20 +846,20 @@ p-6 w-full">
                           <div class="flex justify-end">
                             <div class="join">
                               <div class="tooltip tooltip-bottom" data-tip="Edit Size">
-                                <button class="btn join-item btn-ghost" type="button" onclick="rectangularSize_Master.showModal()">
+                                <button class="btn join-item btn-ghost" type="button" aria-label="Edit rectangular size for Master - SR.2" data-open-dialog="rectangularSize_00000000000000000000000000000006_2">
                                   <div class="flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
                                     
                                   </div>
                                 </button>
                               </div>
                             </div>
                           </div>
-                          <dialog id="rectangularSize_Master" class="modal">
+                          <dialog id="rectangularSize_00000000000000000000000000000006_2" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000006_2-title">
                             <div class="modal-box">
-                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close" onclick="rectangularSize_Master.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                              <h1 class="text-lg pb-6">Rectangular Size</h1>
-                              <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000006" hx-target="#roomRow_Master" hx-swap="outerHTML">
+                              <h2 id="rectangularSize_00000000000000000000000000000006_2-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                              <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000006" hx-target="#roomRow_00000000000000000000000000000006_2" hx-swap="outerHTML">
                                 <input class="hidden" name="register" value="2">
                                 <input class="hidden" name="id" value="">
                                 Height<label class="input w-full"><span class="label"></span>
@@ -867,13 +873,14 @@ p-6 w-full">
                     </tr>
                   </tbody>
                 </table>
-                <div class="flex justify-between bg-secondary border-2 border-primary rounded-sm shadow-sm 
-p-6 w-full">
-                  <h1 class="text-3xl font-bold">Trunk / Runout Sizes</h1>
-                  <div class="tooltip tooltip-left" data-tip="Add trunk / runout">
-                    <button type="button" class="btn btn-primary" onclick="trunkSizeForm.showModal()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></button>
-                  </div>
+              </div>
+              <div class="page-title-row">
+                <h2 class="text-2xl font-bold">Trunk / Runout Sizes</h2>
+                <div class="tooltip tooltip-left" data-tip="Add trunk / runout">
+                  <button type="button" class="btn btn-primary" aria-label="Add trunk or runout" data-open-dialog="trunkSizeForm"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></button>
                 </div>
+              </div>
+              <div class="table-scroll" tabindex="0" role="region" aria-label="Trunk duct sizes">
                 <table class="table table-zebra text-lg">
                   <thead>
                     <tr class="text-lg">
@@ -930,20 +937,20 @@ p-6 w-full">
                           <div class="flex justify-center"></div>
                           <div class="flex justify-end items-end">
                             <div class="join">
-                              <button class="btn join-item btn-ghost" type="button" onclick="trunkSizeForm_0000000000000000000000000000000F.showModal()">
+                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit trunk" data-open-dialog="trunkSizeForm_0000000000000000000000000000000F">
                                 <div class="flex">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
                                   
                                 </div>
                               </button>
                             </div>
                           </div>
                         </div>
-                        <dialog id="trunkSizeForm_0000000000000000000000000000000F" class="modal">
+                        <dialog id="trunkSizeForm_0000000000000000000000000000000F" class="modal" aria-labelledby="trunkSizeForm_0000000000000000000000000000000F-title">
                           <div class="modal-box">
-                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close" onclick="trunkSizeForm_0000000000000000000000000000000F.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                            <h1 class="text-lg font-bold mb-4">Trunk / Runout Size</h1>
-                            <form class="space-y-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk/00000000-0000-0000-0000-00000000000F" hx-target="body" hx-swap="outerHTML">
+                            <h2 id="trunkSizeForm_0000000000000000000000000000000F-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
+                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Trunk / Runout Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                            <form data-success-message="Changes saved." class="space-y-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk/00000000-0000-0000-0000-00000000000F" hx-target="body" hx-swap="outerHTML">
                               <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
                               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <label class="select w-full"><span class="label">Type</span>
@@ -956,23 +963,40 @@ p-6 w-full">
                               </div>
                               Name<label class="input w-full"><span class="label"></span>
                               <input type="text" name="name" value="" placeholder="Trunk-1" required></label>
-                              <div>
-                                <h2 class="label font-bold col-span-3 mb-6">Associated Supply Runs</h2>
-                                <daisy-multiselect class="z-50 bg-base-200" placeholder="Select rooms" name="rooms" chip-style show-select-all show-clear required virtual-scroll>
-                                  <option value="00000000-0000-0000-0000-000000000001_1" selected>Bed-1 - SR.1</option>
-                                  <option value="00000000-0000-0000-0000-000000000002_1" selected>Entry - SR.1</option>
-                                  <option value="00000000-0000-0000-0000-000000000002_2" selected>Entry - SR.2</option>
-                                  <option value="00000000-0000-0000-0000-000000000003_1" selected>Family Room - SR.1</option>
-                                  <option value="00000000-0000-0000-0000-000000000003_2" selected>Family Room - SR.2</option>
-                                  <option value="00000000-0000-0000-0000-000000000003_3" selected>Family Room - SR.3</option>
-                                  <option value="00000000-0000-0000-0000-000000000004_1" selected>Kitchen - SR.1</option>
-                                  <option value="00000000-0000-0000-0000-000000000004_2" selected>Kitchen - SR.2</option>
-                                  <option value="00000000-0000-0000-0000-000000000005_1" selected>Living Room - SR.1</option>
-                                  <option value="00000000-0000-0000-0000-000000000005_2" selected>Living Room - SR.2</option>
-                                  <option value="00000000-0000-0000-0000-000000000006_1" selected>Master - SR.1</option>
-                                  <option value="00000000-0000-0000-0000-000000000006_2" selected>Master - SR.2</option>
-                                </daisy-multiselect>
-                              </div>
+                              <fieldset class="checkbox-group">
+                                <legend class="font-bold">Associated Supply Runs</legend>
+                                <div class="flex flex-wrap gap-2 my-2">
+                                  <button type="button" class="btn btn-sm" data-check-all="true">Select all</button>
+                                  <button type="button" class="btn btn-sm" data-check-all="false">Clear selection</button>
+                                </div>
+                                <div class="checkbox-options">
+                                  <label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000001_1" checked>
+                                  Bed-1 - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_1" checked>
+                                  Entry - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_2" checked>
+                                  Entry - SR.2<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_1" checked>
+                                  Family Room - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_2" checked>
+                                  Family Room - SR.2<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_3" checked>
+                                  Family Room - SR.3<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_1" checked>
+                                  Kitchen - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_2" checked>
+                                  Kitchen - SR.2<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_1" checked>
+                                  Living Room - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_2" checked>
+                                  Living Room - SR.2<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_1" checked>
+                                  Master - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_2" checked>
+                                  Master - SR.2<span></span></label>
+                                </div>
+                              </fieldset>
                               <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
                             </form>
                           </div>
@@ -1024,20 +1048,20 @@ p-6 w-full">
                           <div class="flex justify-center"></div>
                           <div class="flex justify-end items-end">
                             <div class="join">
-                              <button class="btn join-item btn-ghost" type="button" onclick="trunkSizeForm_00000000000000000000000000000010.showModal()">
+                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit trunk" data-open-dialog="trunkSizeForm_00000000000000000000000000000010">
                                 <div class="flex">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
+                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
                                   
                                 </div>
                               </button>
                             </div>
                           </div>
                         </div>
-                        <dialog id="trunkSizeForm_00000000000000000000000000000010" class="modal">
+                        <dialog id="trunkSizeForm_00000000000000000000000000000010" class="modal" aria-labelledby="trunkSizeForm_00000000000000000000000000000010-title">
                           <div class="modal-box">
-                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close" onclick="trunkSizeForm_00000000000000000000000000000010.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                            <h1 class="text-lg font-bold mb-4">Trunk / Runout Size</h1>
-                            <form class="space-y-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk/00000000-0000-0000-0000-000000000010" hx-target="body" hx-swap="outerHTML">
+                            <h2 id="trunkSizeForm_00000000000000000000000000000010-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
+                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Trunk / Runout Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                            <form data-success-message="Changes saved." class="space-y-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk/00000000-0000-0000-0000-000000000010" hx-target="body" hx-swap="outerHTML">
                               <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
                               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <label class="select w-full"><span class="label">Type</span>
@@ -1050,23 +1074,40 @@ p-6 w-full">
                               </div>
                               Name<label class="input w-full"><span class="label"></span>
                               <input type="text" name="name" value="" placeholder="Trunk-1" required></label>
-                              <div>
-                                <h2 class="label font-bold col-span-3 mb-6">Associated Supply Runs</h2>
-                                <daisy-multiselect class="z-50 bg-base-200" placeholder="Select rooms" name="rooms" chip-style show-select-all show-clear required virtual-scroll>
-                                  <option value="00000000-0000-0000-0000-000000000001_1" selected>Bed-1 - SR.1</option>
-                                  <option value="00000000-0000-0000-0000-000000000002_1" selected>Entry - SR.1</option>
-                                  <option value="00000000-0000-0000-0000-000000000002_2" selected>Entry - SR.2</option>
-                                  <option value="00000000-0000-0000-0000-000000000003_1" selected>Family Room - SR.1</option>
-                                  <option value="00000000-0000-0000-0000-000000000003_2" selected>Family Room - SR.2</option>
-                                  <option value="00000000-0000-0000-0000-000000000003_3" selected>Family Room - SR.3</option>
-                                  <option value="00000000-0000-0000-0000-000000000004_1" selected>Kitchen - SR.1</option>
-                                  <option value="00000000-0000-0000-0000-000000000004_2" selected>Kitchen - SR.2</option>
-                                  <option value="00000000-0000-0000-0000-000000000005_1" selected>Living Room - SR.1</option>
-                                  <option value="00000000-0000-0000-0000-000000000005_2" selected>Living Room - SR.2</option>
-                                  <option value="00000000-0000-0000-0000-000000000006_1" selected>Master - SR.1</option>
-                                  <option value="00000000-0000-0000-0000-000000000006_2" selected>Master - SR.2</option>
-                                </daisy-multiselect>
-                              </div>
+                              <fieldset class="checkbox-group">
+                                <legend class="font-bold">Associated Supply Runs</legend>
+                                <div class="flex flex-wrap gap-2 my-2">
+                                  <button type="button" class="btn btn-sm" data-check-all="true">Select all</button>
+                                  <button type="button" class="btn btn-sm" data-check-all="false">Clear selection</button>
+                                </div>
+                                <div class="checkbox-options">
+                                  <label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000001_1" checked>
+                                  Bed-1 - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_1" checked>
+                                  Entry - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_2" checked>
+                                  Entry - SR.2<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_1" checked>
+                                  Family Room - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_2" checked>
+                                  Family Room - SR.2<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_3" checked>
+                                  Family Room - SR.3<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_1" checked>
+                                  Kitchen - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_2" checked>
+                                  Kitchen - SR.2<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_1" checked>
+                                  Living Room - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_2" checked>
+                                  Living Room - SR.2<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_1" checked>
+                                  Master - SR.1<span></span></label><label>
+                                  <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_2" checked>
+                                  Master - SR.2<span></span></label>
+                                </div>
+                              </fieldset>
                               <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
                             </form>
                           </div>
@@ -1075,169 +1116,72 @@ p-6 w-full">
                     </tr>
                   </tbody>
                 </table>
-                <dialog id="trunkSizeForm" class="modal">
-                  <div class="modal-box">
-                    <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close" onclick="trunkSizeForm.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                    <h1 class="text-lg font-bold mb-4">Trunk / Runout Size</h1>
-                    <form class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk" hx-target="body" hx-swap="outerHTML">
-                      <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
-                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <label class="select w-full"><span class="label">Type</span>
-                        <select name="type">
-                          <option value="supply">Supply</option>
-                          <option value="return">Return</option>
-                        </select>
-                        Height</label><label class="input w-full"><span class="label"></span>
-                        <input type="text" name="height" value="" placeholder="8 (Optional)"></label>
-                      </div>
-                      Name<label class="input w-full"><span class="label"></span>
-                      <input type="text" name="name" value="" placeholder="Trunk-1" required></label>
-                      <div>
-                        <h2 class="label font-bold col-span-3 mb-6">Associated Supply Runs</h2>
-                        <daisy-multiselect class="z-50 bg-base-200" placeholder="Select rooms" name="rooms" chip-style show-select-all show-clear required virtual-scroll>
-                          <option value="00000000-0000-0000-0000-000000000001_1">Bed-1 - SR.1</option>
-                          <option value="00000000-0000-0000-0000-000000000002_1">Entry - SR.1</option>
-                          <option value="00000000-0000-0000-0000-000000000002_2">Entry - SR.2</option>
-                          <option value="00000000-0000-0000-0000-000000000003_1">Family Room - SR.1</option>
-                          <option value="00000000-0000-0000-0000-000000000003_2">Family Room - SR.2</option>
-                          <option value="00000000-0000-0000-0000-000000000003_3">Family Room - SR.3</option>
-                          <option value="00000000-0000-0000-0000-000000000004_1">Kitchen - SR.1</option>
-                          <option value="00000000-0000-0000-0000-000000000004_2">Kitchen - SR.2</option>
-                          <option value="00000000-0000-0000-0000-000000000005_1">Living Room - SR.1</option>
-                          <option value="00000000-0000-0000-0000-000000000005_2">Living Room - SR.2</option>
-                          <option value="00000000-0000-0000-0000-000000000006_1">Master - SR.1</option>
-                          <option value="00000000-0000-0000-0000-000000000006_2">Master - SR.2</option>
-                        </daisy-multiselect>
-                      </div>
-                      <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
-                    </form>
-                  </div>
-                </dialog>
               </div>
-            </div>
-          </div>
-          <div class="drawer-side is-drawer-close:overflow-visible grow">
-            <label for="my-drawer-1" aria-label="close sidebar" class="drawer-overlay"></label>
-            <div class="flex grow h-full flex-col items-start bg-base-300 text-base-content
-is-drawer-close:min-w-[80px] is-drawer-open:max-w-[300px]">
-              <ul id="project-sidebar" class="w-full grow">
-                <li class="flex w-full">
-                  <button title="Project, Ctrl+Alt+1" aria-keyshortcuts="Control+Alt+1" class="w-full gap-1 py-2 border-b-1 border-gray-200
-hover:bg-neutral data-active:bg-neutral
-hover:text-white data-active:text-white
-is-drawer-open:flex is-drawer-open:space-x-4
-is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
-                    <div class="w-full p-2 flex flex-col gap-1">
-                      <div class="items-center
-is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
-is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
-                        <div class="flex items-center justify-center text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></div>
-                        <div class="flex items-center justify-center"><span>Project</span></div>
-                      </div>
-                      <div class="text-center text-xs opacity-70">Ctrl+Alt+1</div>
+              <dialog id="trunkSizeForm" class="modal" aria-labelledby="trunkSizeForm-title">
+                <div class="modal-box">
+                  <h2 id="trunkSizeForm-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
+                  <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Trunk / Runout Size" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                  <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk" hx-target="body" hx-swap="outerHTML">
+                    <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <label class="select w-full"><span class="label">Type</span>
+                      <select name="type">
+                        <option value="supply">Supply</option>
+                        <option value="return">Return</option>
+                      </select>
+                      Height</label><label class="input w-full"><span class="label"></span>
+                      <input type="text" name="height" value="" placeholder="8 (Optional)"></label>
                     </div>
-                  </button>
-                </li>
-                <li class="w-full">
-                  <button title="Rooms, Ctrl+Alt+2" aria-keyshortcuts="Control+Alt+2" class="w-full gap-1 py-2 border-b-1 border-gray-200
-hover:bg-neutral data-active:bg-neutral
-hover:text-white data-active:text-white
-is-drawer-open:flex is-drawer-open:space-x-4
-is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/rooms" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
-                    <div class="w-full p-2 flex flex-col gap-1">
-                      <div class="items-center
-is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
-is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
-                        <div class="flex items-center justify-center text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-door-closed-icon lucide-door-closed"><path d="M10 12h.01"/><path d="M18 20V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14"/><path d="M2 20h20"/></svg></div>
-                        <div class="flex items-center justify-center"><span>Rooms</span></div>
+                    Name<label class="input w-full"><span class="label"></span>
+                    <input type="text" name="name" value="" placeholder="Trunk-1" required></label>
+                    <fieldset class="checkbox-group">
+                      <legend class="font-bold">Associated Supply Runs</legend>
+                      <div class="flex flex-wrap gap-2 my-2">
+                        <button type="button" class="btn btn-sm" data-check-all="true">Select all</button>
+                        <button type="button" class="btn btn-sm" data-check-all="false">Clear selection</button>
                       </div>
-                      <div class="text-center text-xs opacity-70">Ctrl+Alt+2</div>
-                    </div>
-                  </button>
-                </li>
-                <li class="flex w-full">
-                  <button title="Equipment, Ctrl+Alt+3" aria-keyshortcuts="Control+Alt+3" class="w-full gap-1 py-2 border-b-1 border-gray-200
-hover:bg-neutral data-active:bg-neutral
-hover:text-white data-active:text-white
-is-drawer-open:flex is-drawer-open:space-x-4
-is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/equipment" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
-                    <div class="w-full p-2 flex flex-col gap-1">
-                      <div class="items-center
-is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
-is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
-                        <div class="flex items-center justify-center text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fan-icon lucide-fan"><path d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.002l5.412 1.45a6.082 6.082 0 0 1 7.002-8.618l-1.45 5.412a6.082 6.082 0 0 1 8.618 7.002l-5.412-1.45a6.082 6.082 0 0 1-7.002 8.618l1.45-5.412Z"/><path d="M12 12v.01"/></svg></div>
-                        <div class="flex items-center justify-center"><span>Equipment</span></div>
+                      <div class="checkbox-options">
+                        <label>
+                        <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000001_1">
+                        Bed-1 - SR.1<span></span></label><label>
+                        <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_1">
+                        Entry - SR.1<span></span></label><label>
+                        <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_2">
+                        Entry - SR.2<span></span></label><label>
+                        <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_1">
+                        Family Room - SR.1<span></span></label><label>
+                        <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_2">
+                        Family Room - SR.2<span></span></label><label>
+                        <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_3">
+                        Family Room - SR.3<span></span></label><label>
+                        <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_1">
+                        Kitchen - SR.1<span></span></label><label>
+                        <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_2">
+                        Kitchen - SR.2<span></span></label><label>
+                        <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_1">
+                        Living Room - SR.1<span></span></label><label>
+                        <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_2">
+                        Living Room - SR.2<span></span></label><label>
+                        <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_1">
+                        Master - SR.1<span></span></label><label>
+                        <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_2">
+                        Master - SR.2<span></span></label>
                       </div>
-                      <div class="text-center text-xs opacity-70">Ctrl+Alt+3</div>
-                    </div>
-                  </button>
-                </li>
-                <li class="w-full">
-                  <button title="T.E.L., Ctrl+Alt+4" aria-keyshortcuts="Control+Alt+4" class="w-full gap-1 py-2 border-b-1 border-gray-200
-hover:bg-neutral data-active:bg-neutral
-hover:text-white data-active:text-white
-is-drawer-open:flex is-drawer-open:space-x-4
-is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/effective-lengths" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
-                    <div class="w-full p-2 flex flex-col gap-1">
-                      <div class="items-center
-is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
-is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
-                        <div class="flex items-center justify-center text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ruler-dimension-line-icon lucide-ruler-dimension-line"><path d="M10 15v-3"/><path d="M14 15v-3"/><path d="M18 15v-3"/><path d="M2 8V4"/><path d="M22 6H2"/><path d="M22 8V4"/><path d="M6 15v-3"/><rect x="2" y="12" width="20" height="8" rx="2"/></svg></div>
-                        <div class="flex items-center justify-center"><span>T.E.L.</span></div>
-                      </div>
-                      <div class="text-center text-xs opacity-70">Ctrl+Alt+4</div>
-                    </div>
-                  </button>
-                </li>
-                <li class="w-full">
-                  <button title="Friction Rate, Ctrl+Alt+5" aria-keyshortcuts="Control+Alt+5" class="w-full gap-1 py-2 border-b-1 border-gray-200
-hover:bg-neutral data-active:bg-neutral
-hover:text-white data-active:text-white
-is-drawer-open:flex is-drawer-open:space-x-4
-is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/friction-rate" hx-push-url="true" hx-target="body" hx-swap="outerHTML">
-                    <div class="w-full p-2 flex flex-col gap-1">
-                      <div class="items-center
-is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
-is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
-                        <div class="flex items-center justify-center text-green-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-function-icon lucide-square-function"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M9 17c2 0 2.8-1 2.8-2.8V10c0-2 1-3.3 3.2-3"/><path d="M9 11.2h5.7"/></svg></div>
-                        <div class="flex items-center justify-center"><span>Friction Rate</span></div>
-                      </div>
-                      <div class="text-center text-xs opacity-70">Ctrl+Alt+5</div>
-                    </div>
-                  </button>
-                </li>
-                <li class="w-full">
-                  <button title="Duct Sizes, Ctrl+Alt+6" aria-keyshortcuts="Control+Alt+6" class="w-full gap-1 py-2 border-b-1 border-gray-200
-hover:bg-neutral data-active:bg-neutral
-hover:text-white data-active:text-white
-is-drawer-open:flex is-drawer-open:space-x-4
-is-drawer-close:grid-cols-1" hx-get="/projects/00000000-0000-0000-0000-000000000000/duct-sizing" hx-push-url="true" hx-target="body" hx-swap="outerHTML" data-active="true">
-                    <div class="w-full p-2 flex flex-col gap-1">
-                      <div class="items-center
-is-drawer-open:justify-start is-drawer-open:flex is-drawer-open:space-x-4
-is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2">
-                        <div class="flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg></div>
-                        <div class="flex items-center justify-center"><span>Duct Sizes</span></div>
-                      </div>
-                      <div class="text-center text-xs opacity-70">Ctrl+Alt+6</div>
-                    </div>
-                  </button>
-                </li>
-              </ul>
-              <div class="p-2 text-xs">
-                <p>Next: Ctrl+Alt+J</p>
-                <p>Previous: Ctrl+Alt+K</p>
-              </div>
+                    </fieldset>
+                    <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
+                  </form>
+                </div>
+              </dialog>
             </div>
           </div>
         </div>
-        <dialog id="projectShortcuts" class="modal" aria-labelledby="project-shortcuts-title">
+        <dialog id="projectShortcuts" class="modal" aria-labelledby="projectShortcuts-title">
           <div class="modal-box">
-            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close" onclick="projectShortcuts.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-            <h2 id="project-shortcuts-title" class="text-lg font-bold">Keyboard shortcuts</h2>
+            <h2 id="projectShortcuts-title" class="text-2xl font-bold mb-6 pe-10">Keyboard shortcuts</h2>
+            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Keyboard shortcuts" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
             <p class="text-sm mt-2">Hold Ctrl+Alt and press a key below.</p>
             <table class="table table-sm mt-4">
-              <caption class="text-left font-bold text-primary p-2">Project sections</caption>
+              <caption class="text-left font-bold p-2">Project sections</caption>
               <tbody>
                 <tr>
                   <th scope="row">Project</th>
@@ -1274,7 +1218,7 @@ is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2
               </tbody>
             </table>
             <table class="table table-sm mt-4">
-              <caption class="text-left font-bold text-primary p-2">App navigation</caption>
+              <caption class="text-left font-bold p-2">App navigation</caption>
               <tbody>
                 <tr>
                   <th scope="row">Ductulator</th>
@@ -1298,12 +1242,14 @@ is-drawer-close:justify-center is-drawer-close:mx-auto is-drawer-close:space-y-2
           </div>
         </dialog>
       </main>
-      <div class="bottom-0 left-0 bg-error">
+      <div id="app-status" class="sr-only" role="status" aria-atomic="true"></div>
+      <div id="app-error" class="request-error" role="alert"></div>
+      <div>
         <footer class="footer footer-horizontal footer-center
 bg-base-300 text-base-content p-4">
-          <aside class="grid-flow-row items-center">
+          <div class="grid-flow-row items-center">
             <div class="flex mx-auto">
-              <a class="btn btn-ghost" href="mailto:support@ductcalc.pro">  <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <a class="btn btn-ghost" href="mailto:support@ductcalc.pro">  <svg aria-hidden="true" focusable="false" class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g
                   stroke-linejoin="round"
                   stroke-linecap="round"
@@ -1316,9 +1262,9 @@ bg-base-300 text-base-content p-4">
                 </g>
               </svg><span>support@ductcalc.pro</span></a>
             </div>
-            Source available via PolyForm Perimeter 1.0.1<a class="btn btn-ghost mx-auto" href="https://github.com/m-housh/swift-duct-calc/src/branch/main/LICENSE" target="_blank"></a>
+            Source available via PolyForm Perimeter 1.0.1<a class="btn btn-ghost mx-auto" href="https://github.com/m-housh/swift-duct-calc/src/branch/main/LICENSE" target="_blank"><span></span></a>
             <p class="">Copyright © 2026 - All rights reserved by Michael Housh</p>
-          </aside>
+          </div>
         </footer>
       </div>
     </div>

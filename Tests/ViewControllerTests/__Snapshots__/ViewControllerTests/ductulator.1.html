@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Duct Calc</title>
+    <title>Ductulator · Duct Calc</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="ductcalc.com" name="og:site_name">
@@ -18,10 +18,10 @@
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
     <script src="/js/htmx-download.js"></script>
     <script src="/js/main.js"></script>
-    <script src="/js/daisy-multiselect.js" defer=""></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="/css/output.css?v=navbar-reference-1">
     <link rel="stylesheet" href="/css/htmx.css">
+    <link rel="stylesheet" href="/css/accessibility.css?v=1">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
     <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
@@ -31,31 +31,22 @@
   </head>
   <body>
     <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
-      <main class="flex flex-col min-h-screen min-w-full grow mb-auto">
+      <a class="skip-link" href="#main-content">Skip to content</a>
+      <main id="main-content" tabindex="-1" class="flex flex-col min-h-screen min-w-full grow mb-auto">
         <div>
-          <nav class="navbar flex-wrap w-full bg-base-300 text-base-content shadow-sm mb-4">
-            <div class="flex flex-1 space-x-4 items-center">
-              <div class="tooltip tooltip-right" data-tip="Home">
-                <a class="flex w-fit h-fit text-2xl items-end px-4 py-2 btn btn-square btn-ghost hover:bg-neutral hover:text-white" href="/">
-                <img src="/images/mand_logo_sm.webp">
-                Duct Calc<span></span></a>
-              </div>
-            </div>
-            <div class="flex-none">
-              <div class="flex items-end space-x-4">
-                <div class="tooltip tooltip-bottom" data-tip="Fitting reference, Ctrl+Alt+F"><a class="btn btn-outline btn-secondary" href="/fittings" target="_blank" aria-keyshortcuts="Control+Alt+F" aria-describedby="fitting-reference-help">Fitting reference</a></div>
-                Browse fitting references<span id="fitting-reference-help" class="sr-only"></span>
-              </div>
-            </div>
+          <nav class="app-navbar" aria-label="Main">
+            <a class="app-brand" href="/">
+            <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
+            Duct Calc<span></span></a>
+            <div class="app-nav-actions"><a class="btn btn-outline" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span>Fitting reference</span></a></div>
           </nav>
-          <div class="flex justify-center items-center px-10">
-            <div class="bg-base-300 rounded-3xl shadow-3xl
-p-6 w-full">
-              <div class="flex space-x-6 items-center text-4xl">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calculator-icon lucide-calculator"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
-                <h1 class="text-4xl font-bold me-10">Ductulator</h1>
+          <div class="ductulator-shell">
+            <div class="ductulator-panel">
+              <div class="flex flex-wrap gap-3 items-center">
+                <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calculator-icon lucide-calculator"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+                <h1 class="text-3xl font-bold">Ductulator</h1>
               </div>
-              <p class="text-primary font-bold italic">Calculate duct size for the given parameters</p>
+              <p class="font-bold italic">Calculate duct size for the given parameters</p>
               <form class="space-y-4 mt-6" hx-post="/ductulator" hx-target="#resultView" hx-swap="outerHTML">
                 <label class="input w-full"><span class="label">CFM</span>
                 <input name="cfm" type="number" placeholder="1000" required autofocus></label>
@@ -63,11 +54,11 @@ p-6 w-full">
                   <legend class="fieldset-legend">Friction Rate</legend>
                   Value<label class="input w-full"><span class="label"></span>
                   <input name="frictionRate" value="0.06" required type="number" min="0.01" step="0.01" id="frictionRateInput" onchange="syncInputs('frictionRateSlider', 'frictionRateInput');"></label>
-                  <input class="range range-sm range-accent w-full mt-3" type="range" min="0.00" max="0.2" step="0.01" value="0.06" id="frictionRateSlider" onchange="syncInputs('frictionRateInput', 'frictionRateSlider');">
+                  <input class="range range-sm range-accent w-full mt-3" type="range" min="0.00" max="0.2" step="0.01" value="0.06" id="frictionRateSlider" aria-label="Friction rate" onchange="syncInputs('frictionRateInput', 'frictionRateSlider');">
                   <div class="flex justify-between px-2.5 text-xs"><span>0.00</span><span>0.05</span><span>0.10</span><span>0.15</span><span>0.20</span></div>
                 </fieldset>
-                Height<label class="input w-full"><span class="label"></span>
-                <input name="height" type="number" placeholder="Height (Optional)"></label>
+                Height (inches, optional)<label class="input w-full"><span class="label"></span>
+                <input name="height" type="number" placeholder="8"></label>
                 <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
               </form>
               <div id="resultView"></div>
@@ -75,12 +66,14 @@ p-6 w-full">
           </div>
         </div>
       </main>
-      <div class="bottom-0 left-0 bg-error">
+      <div id="app-status" class="sr-only" role="status" aria-atomic="true"></div>
+      <div id="app-error" class="request-error" role="alert"></div>
+      <div>
         <footer class="footer footer-horizontal footer-center
 bg-base-300 text-base-content p-4">
-          <aside class="grid-flow-row items-center">
+          <div class="grid-flow-row items-center">
             <div class="flex mx-auto">
-              <a class="btn btn-ghost" href="mailto:support@ductcalc.pro">  <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <a class="btn btn-ghost" href="mailto:support@ductcalc.pro">  <svg aria-hidden="true" focusable="false" class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g
                   stroke-linejoin="round"
                   stroke-linecap="round"
@@ -93,9 +86,9 @@ bg-base-300 text-base-content p-4">
                 </g>
               </svg><span>support@ductcalc.pro</span></a>
             </div>
-            Source available via PolyForm Perimeter 1.0.1<a class="btn btn-ghost mx-auto" href="https://github.com/m-housh/swift-duct-calc/src/branch/main/LICENSE" target="_blank"></a>
+            Source available via PolyForm Perimeter 1.0.1<a class="btn btn-ghost mx-auto" href="https://github.com/m-housh/swift-duct-calc/src/branch/main/LICENSE" target="_blank"><span></span></a>
             <p class="">Copyright © 2026 - All rights reserved by Michael Housh</p>
-          </aside>
+          </div>
         </footer>
       </div>
     </div>

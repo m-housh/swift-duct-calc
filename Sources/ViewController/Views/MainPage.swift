@@ -61,11 +61,10 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     script(.src("https://unpkg.com/htmx.org@2.0.8")) {}
     script(.src("/js/htmx-download.js")) {}
     script(.src("/js/main.js")) {}
-    // Wait for option children to be parsed, and keep registration across HTMX page swaps.
-    script(.src("/js/daisy-multiselect.js"), .init(name: "defer", value: "")) {}
     script(.src("https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4")) {}
     link(.rel(.stylesheet), .href("/css/output.css?v=navbar-reference-1"))
     link(.rel(.stylesheet), .href("/css/htmx.css"))
+    link(.rel(.stylesheet), .href("/css/accessibility.css?v=1"))
     link(
       .rel(.icon),
       .href("/images/favicon.ico"),
@@ -102,11 +101,20 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
 
   public var body: some HTML {
     div(.class("flex flex-col min-h-screen min-w-full justify-between")) {
-      main(.class("flex flex-col min-h-screen min-w-full grow mb-auto")) {
+      a(.class("skip-link"), .href("#main-content")) { "Skip to content" }
+      main(
+        .id("main-content"), .tabindex(-1),
+        .class("flex flex-col min-h-screen min-w-full grow mb-auto")
+      ) {
         inner
       }
 
-      div(.class("bottom-0 left-0 bg-error")) {
+      div(
+        .id("app-status"), .class("sr-only"), .role("status"),
+        .init(name: "aria-atomic", value: "true")
+      ) {}
+      div(.id("app-error"), .class("request-error"), .role("alert")) {}
+      div {
         if displayFooter {
           footer(
             .class(
@@ -116,7 +124,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
               """
             )
           ) {
-            aside(
+            div(
               .class("grid-flow-row items-center")
             ) {
 
@@ -135,7 +143,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
                 .href("https://github.com/m-housh/swift-duct-calc/src/branch/main/LICENSE"),
                 .target(.blank)
               ) {
-                "Source available via PolyForm Perimeter 1.0.1"
+                span { "Source available via PolyForm Perimeter 1.0.1" }
               }
 
               p(.class("")) {

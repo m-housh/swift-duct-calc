@@ -18,26 +18,18 @@ struct DuctulatorView: HTML, Sendable {
     div {
       Navbar(
         showDuctulatorButton: false,
-        showSidebarToggle: false,
         isLoggedIn: isLoggedIn
       )
-      div(.class("flex justify-center items-center px-10")) {
-        div(
-          .class(
-            """
-            bg-base-300 rounded-3xl shadow-3xl
-            p-6 w-full
-            """
-          )
-        ) {
-          div(.class("flex space-x-6 items-center text-4xl")) {
+      div(.class("ductulator-shell")) {
+        div(.class("ductulator-panel")) {
+          div(.class("flex flex-wrap gap-3 items-center")) {
             SVG(.calculator)
-            h1(.class("text-4xl font-bold me-10")) {
+            h1(.class("text-3xl font-bold")) {
               "Ductulator"
             }
           }
 
-          p(.class("text-primary font-bold italic")) {
+          p(.class("font-bold italic")) {
             "Calculate duct size for the given parameters"
           }
 
@@ -82,6 +74,7 @@ struct DuctulatorView: HTML, Sendable {
                 .step("0.01"),
                 .value("0.06"),
                 .id("frictionRateSlider"),
+                .init(name: "aria-label", value: "Friction rate"),
                 .on(.change, "syncInputs('frictionRateInput', 'frictionRateSlider');")
               )
 
@@ -95,10 +88,10 @@ struct DuctulatorView: HTML, Sendable {
             }
 
             LabeledInput(
-              "Height",
+              "Height (inches, optional)",
               .name("height"),
               .type(.number),
-              .placeholder("Height (Optional)"),
+              .placeholder("8"),
             )
 
             SubmitButton()
@@ -122,14 +115,18 @@ struct DuctulatorView: HTML, Sendable {
     var body: some HTML<HTMLTag.div> {
       div(
         .id(Self.id),
+        .data(
+          "result-summary",
+          value:
+            "Final round size: \(Int(ductSize.finalSize)) inches. Flex size: \(Int(ductSize.flexSize)) inches."
+        ),
         .class(
           """
-          border-2 border-accent rounded-lg shadow-lg
-          w-full p-6 my-6
+          ductulator-result
           """
         )
       ) {
-        div(.class("flex justify-between p-4")) {
+        div(.class("flex flex-wrap gap-3 justify-between mb-4")) {
           h2(.class("text-3xl font-bold")) { "Result" }
           button(
             .class("btn btn-primary"),
@@ -142,30 +139,28 @@ struct DuctulatorView: HTML, Sendable {
           .tooltip("Reset form", position: .left)
         }
 
-        table(.class("table table-zebra text-lg font-bold")) {
-          tbody {
-            tr {
-              td { Label("Calculated Size") }
-              td { Number(ductSize.calculatedSize, digits: 2) }
+        dl(.class("ductulator-values")) {
+          div {
+            dt { Label("Calculated Size") }
+            dd { Number(ductSize.calculatedSize, digits: 2) }
+          }
+          div {
+            dt { Label("Final Size") }
+            dd { Number(ductSize.finalSize) }
+          }
+          div {
+            dt { Label("Flex Size") }
+            dd { Number(ductSize.flexSize) }
+          }
+          if let rectangularSize {
+            div {
+              dt { Label("Rectangular Size") }
+              dd { "\(rectangularSize.width) x \(rectangularSize.height)" }
             }
-            tr {
-              td { Label("Final Size") }
-              td { Number(ductSize.finalSize) }
-            }
-            tr {
-              td { Label("Flex Size") }
-              td { Number(ductSize.flexSize) }
-            }
-            if let rectangularSize {
-              tr {
-                td { Label("Rectangular Size") }
-                td { "\(rectangularSize.width) x \(rectangularSize.height)" }
-              }
-            }
-            tr {
-              td { Label("Velocity") }
-              td { Number(ductSize.velocity) }
-            }
+          }
+          div {
+            dt { Label("Velocity") }
+            dd { Number(ductSize.velocity) }
           }
         }
 

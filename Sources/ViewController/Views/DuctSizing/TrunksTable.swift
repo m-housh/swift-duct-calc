@@ -107,7 +107,7 @@ extension DuctSizingView {
             div(.class("flex justify-end items-end")) {
               div(.class("join")) {
                 if trunk.width != nil {
-                  TrashButton()
+                  TrashButton("Delete \(trunk.name ?? "trunk")")
                     .attributes(.class("join-item btn-ghost"))
                     .attributes(
                       .hx.delete(route: deleteRoute),
@@ -116,7 +116,7 @@ extension DuctSizingView {
                     )
                 }
 
-                EditButton()
+                EditButton(accessibilityLabel: "Edit \(trunk.name ?? "trunk")")
                   .attributes(
                     .class("join-item btn-ghost"),
                     .showModal(id: TrunkSizeForm.id(trunk))
