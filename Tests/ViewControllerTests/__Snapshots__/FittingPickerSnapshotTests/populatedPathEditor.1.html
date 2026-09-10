@@ -1,0 +1,211 @@
+<link rel="stylesheet" href="/css/fitting-path.css?v=app-theme-1">
+<link rel="stylesheet" href="/css/picker-preference.css">
+<link rel="stylesheet" href="/css/fitting-favorites.css">
+<link rel="stylesheet" href="/css/fitting-path-modal.css?v=2">
+<script src="/js/group-carousel.js" defer></script>
+<script src="/js/path-templates.js?v=path-revisions-3" defer></script>
+<script src="/js/template-modal.js?v=template-modal-2" defer></script>
+<script src="/js/fitting-path.js?v=template-path-type-3" defer></script>
+<dialog id="fitting-path" class="editor-dialog fitting-path" aria-labelledby="path-title" data-endpoint="/projects/00000000-0000-0000-0000-000000000000/effective-lengths" data-baseline="{&quot;createdAt&quot;:-978307200,&quot;groups&quot;:[],&quot;id&quot;:&quot;00000000-0000-0000-0000-000000000001&quot;,&quot;name&quot;:&quot;Bedroom return&quot;,&quot;projectID&quot;:&quot;00000000-0000-0000-0000-000000000000&quot;,&quot;straightLengths&quot;:[10,25],&quot;type&quot;:&quot;return&quot;,&quot;updatedAt&quot;:-978307200}" data-rows="[{&quot;id&quot;:&quot;catalog-row&quot;,&quot;quantity&quot;:2,&quot;row&quot;:{&quot;artwork&quot;:&quot;\/images\/fittings\/group-8\/8A-smooth.svg&quot;,&quot;details&quot;:[&quot;Angle: 90°&quot;,&quot;Radius ratio: 1.5&quot;],&quot;feet&quot;:10,&quot;fields&quot;:{&quot;angle&quot;:&quot;90&quot;,&quot;radiusRatio&quot;:&quot;1.5&quot;},&quot;fittingID&quot;:&quot;8A-smooth&quot;,&quot;groupID&quot;:8,&quot;name&quot;:&quot;Smooth round radius elbow&quot;,&quot;origin&quot;:&quot;catalog&quot;,&quot;sourceCode&quot;:&quot;8A&quot;},&quot;savedIndex&quot;:0},{&quot;id&quot;:&quot;reference-row&quot;,&quot;quantity&quot;:1,&quot;row&quot;:{&quot;details&quot;:[],&quot;feet&quot;:61.375,&quot;groupID&quot;:6,&quot;name&quot;:&quot;Reference entry&quot;,&quot;origin&quot;:&quot;referenceEntry&quot;,&quot;sourceCode&quot;:&quot;6A&quot;},&quot;savedIndex&quot;:1},{&quot;id&quot;:&quot;legacy-row&quot;,&quot;quantity&quot;:1,&quot;row&quot;:{&quot;details&quot;:[],&quot;feet&quot;:30,&quot;groupID&quot;:5,&quot;name&quot;:&quot;Previously saved fitting&quot;,&quot;origin&quot;:&quot;legacy&quot;},&quot;savedIndex&quot;:2}]" data-favorites="[&quot;8A-smooth&quot;]">
+  <section class="path-sheet">
+    <header>
+      <div>
+        <p class="muted">Sample house · Equivalent Lengths</p>
+        <h1 id="path-title">Fittings in this path</h1>
+        <p class="muted">Build and review your path, one fitting at a time.</p>
+      </div>
+      <button type="button" id="close-path">Cancel</button>
+    </header>
+    <div class="path-fields">
+      <label>Path name
+      <input id="path-name" value="Bedroom return" required maxlength="200">
+      Path type</label><label>
+      <select id="path-type">
+        <option value="supply">Supply</option>
+        <option value="return" selected>Return</option>
+      </select>
+      Straight duct lengths (ft)</label><label>
+      <input id="path-straight" value="10, 25" placeholder="10, 25, 15">
+      Separate whole-foot runs with commas; leave empty for no straight duct.<small></small></label>
+    </div>
+    <section class="coverage">
+      <div class="flex w-full flex-wrap items-center justify-between gap-2"><small>Groups in this path</small></div>
+      <div id="group-coverage"></div>
+    </section>
+    <section class="path-table" aria-label="Fitting path entries">
+      <div class="sheet-columns" aria-hidden="true"><span>#</span><span>Drawing</span><span>Fitting / group</span><span>EL each</span><span>Quantity</span><span>Subtotal</span><span></span></div>
+      <div id="path-rows">
+        <article class="path-row sheet-row" data-row-id="catalog-row">
+          <span class="row-number">1</span>
+          <img src="/images/fittings/group-8/8A-smooth.svg" alt="Smooth round radius elbow" class="sheet-art">
+          <div class="sheet-description">
+            <strong class="code">8A</strong>
+            <h3>Smooth round radius elbow</h3>
+            <p class="sheet-group">Group 8</p>
+            Calculated<small></small>
+            <details>
+              <summary>Selected inputs</summary>
+              <p>Angle: 90°</p>
+              <p>Radius ratio: 1.5</p>
+            </details>
+          </div>
+          10 ft
+          Quantity for 8A<span class="sheet-unit"></span><label class="row-quantity-label"><span class="visually-hidden"></span>
+          <input type="number" min="1" max="1000000" step="1" value="2" data-quantity="catalog-row">
+          20 ft</label><strong class="sheet-subtotal"></strong>
+          <div class="sheet-actions">
+            <button type="button" data-edit-row="catalog-row">Edit</button>
+            <button type="button" data-remove-row="catalog-row">Remove</button>
+          </div>
+        </article>
+        <article class="path-row sheet-row" data-row-id="reference-row">
+          <span class="row-number">2</span>
+          <div class="sheet-art"><span>6A</span></div>
+          <div class="sheet-description">
+            <strong class="code">6A</strong>
+            <h3>Reference entry</h3>
+            <p class="sheet-group">Group 6</p>
+            Entered from reference<small></small>
+          </div>
+          61.375 ft
+          Quantity for 6A<span class="sheet-unit"></span><label class="row-quantity-label"><span class="visually-hidden"></span>
+          <input type="number" min="1" max="1000000" step="1" value="1" data-quantity="reference-row">
+          61.375 ft</label><strong class="sheet-subtotal"></strong>
+          <div class="sheet-actions">
+            <button type="button" data-edit-row="reference-row">Edit</button>
+            <button type="button" data-remove-row="reference-row">Remove</button>
+          </div>
+        </article>
+        <article class="path-row sheet-row" data-row-id="legacy-row">
+          <span class="row-number">3</span>
+          <div class="sheet-art"><span>Group 5</span></div>
+          <div class="sheet-description">
+            <strong class="code">Group 5</strong>
+            <h3>Previously saved fitting</h3>
+            <p class="sheet-group">Group 5</p>
+            Previously saved value<small></small>
+          </div>
+          30 ft
+          Quantity for Previously saved fitting<span class="sheet-unit"></span><label class="row-quantity-label"><span class="visually-hidden"></span>
+          <input type="number" min="1" max="1000000" step="1" value="1" data-quantity="legacy-row">
+          30 ft</label><strong class="sheet-subtotal"></strong>
+          <div class="sheet-actions">
+            <button type="button" data-edit-row="legacy-row">Edit</button>
+            <button type="button" data-remove-row="legacy-row">Remove</button>
+          </div>
+        </article>
+      </div>
+      <button type="button" class="add-row" data-open-picker="true"><span aria-hidden="true">+</span>Add fitting</button>
+    </section>
+    <div class="path-entry-actions">
+      <button type="button" id="quick-entry-open">Quick reference entry</button>
+      Open fitting reference ↗<a id="path-fitting-reference" href="/fittings?system=return" target="_blank" rel="noopener" class="link-button"></a>
+    </div>
+    <footer class="sheet-total">
+      <div class="fitting-total"><small>Fittings total</small><strong id="fittings-total">0 ft</strong></div>
+      <div class="total-context">
+        <div><small>Straight duct</small><strong id="straight-total">0 ft</strong></div>
+        <div><small>Total equivalent length</small><strong id="path-total">0 ft</strong></div>
+      </div>
+      <button type="button" class="primary" id="save-path">Save path</button>
+    </footer>
+    <p id="path-status" role="status"></p>
+  </section>
+  <dialog id="picker-dialog" class="path-picker-dialog" aria-labelledby="picker-dialog-title">
+    <div class="picker-top">
+      <h2 id="picker-dialog-title">Choose a fitting</h2>
+      <button type="button" data-close-dialog="picker-dialog">Close</button>
+    </div>
+    <div class="toolbar">
+      <button type="button" id="choose-groups">1 · Choose group</button>
+      2 · Choose fitting<span></span>
+    </div>
+    <fieldset class="picker-segments">
+      <legend>Prefer</legend>
+      <div class="picker-segment-options">
+        <label>
+        <input type="radio" name="shape-preference" value="none" checked>
+        No preference<span></span></label><label>
+        <input type="radio" name="shape-preference" value="round">
+        Round<span></span></label><label>
+        <input type="radio" name="shape-preference" value="rectangular">
+        Rectangular<span></span></label>
+      </div>
+    </fieldset>
+    <p class="muted picker-preference-help">Preferred duct shape first. Starring a fitting keeps it in place and adds a copy to Favorites. Remembered in this browser.</p>
+    <div id="group-selectors">
+      <div data-path-carousel="supply">
+        <section class="group-carousel" aria-roledescription="carousel" aria-label="Fitting groups">
+          <div class="carousel-controls">
+            <button type="button" data-carousel-step="-1">← Previous group</button>
+            1 of 1 groups<span class="carousel-position" role="status"></span>
+            <button type="button" data-carousel-step="1">Next group →</button>
+          </div>
+          <div class="carousel-track">
+            <div class="carousel-slide" data-carousel-index="0">
+              <div class="group-option">
+                <button type="button" class="group-card" data-choose-group="4"><span>Group 4 · Supply boots and stack heads<small>1 fitting choices</small></span></button>
+                <div class="group-path-state" data-group-state="4">None in this path</div>
+              </div>
+              <button type="button" class="carousel-peek" data-carousel-jump="0" aria-label="Bring Group 4 to front"></button>
+            </div>
+          </div>
+          <div class="carousel-pagination" aria-label="Jump to group">
+            <button type="button" data-carousel-jump="0" aria-label="Show Group 4: Supply boots and stack heads">4</button>
+          </div>
+          <p class="carousel-hint">Swipe or drag in either direction · Select the front card to choose a group</p>
+        </section>
+      </div>
+      <div data-path-carousel="return">
+        <section class="group-carousel" aria-roledescription="carousel" aria-label="Fitting groups">
+          <div class="carousel-controls">
+            <button type="button" data-carousel-step="-1">← Previous group</button>
+            1 of 1 groups<span class="carousel-position" role="status"></span>
+            <button type="button" data-carousel-step="1">Next group →</button>
+          </div>
+          <div class="carousel-track">
+            <div class="carousel-slide" data-carousel-index="0">
+              <div class="group-option">
+                <button type="button" class="group-card" data-choose-group="8">
+                  <img src="/images/fittings/group-8/8A-smooth.svg" alt="Group 8: Elbows and offsets" draggable="false">
+                  Group 8 · Elbows and offsets
+                  2 fitting choices<span><small></small></span>
+                </button>
+                <div class="group-path-state" data-group-state="8">None in this path</div>
+              </div>
+              <button type="button" class="carousel-peek" data-carousel-jump="0" aria-label="Bring Group 8 to front"></button>
+            </div>
+          </div>
+          <div class="carousel-pagination" aria-label="Jump to group">
+            <button type="button" data-carousel-jump="0" aria-label="Show Group 8: Elbows and offsets">8</button>
+          </div>
+          <p class="carousel-hint">Swipe or drag in either direction · Select the front card to choose a group</p>
+        </section>
+      </div>
+    </div>
+    <div id="fitting-browser" hidden></div>
+    <p id="picker-status" role="status"></p>
+  </dialog>
+  <dialog id="edit-dialog" class="path-picker-dialog" aria-labelledby="edit-dialog-title">
+    <div class="picker-top">
+      <h2 id="edit-dialog-title">Edit fitting</h2>
+      <button type="button" data-close-dialog="edit-dialog">Close</button>
+    </div>
+    <div id="edit-fitting"></div>
+  </dialog>
+  <dialog id="reference-dialog" class="path-picker-dialog" aria-labelledby="reference-dialog-title">
+    <div class="picker-top">
+      <h2 id="reference-dialog-title">Quick reference entry</h2>
+      <button type="button" data-close-dialog="reference-dialog">Close</button>
+    </div>
+    <p>Enter the code and equivalent length from your reference. Your supplied length is preserved.</p>
+    <form id="reference-form">
+      <label>Fitting code
+      <input name="code" required placeholder="4AG">
+      Equivalent length per fitting (ft)</label><label>
+      <input name="length" type="number" step="any" min="0.000001" required></label>
+      <button type="submit" class="primary">Check entry</button>
+    </form>
+    <div id="reference-result" aria-live="polite"></div>
+  </dialog>
+</dialog>

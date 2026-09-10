@@ -73,6 +73,12 @@ Most code changes do not need an internal documentation change. Agents can read 
 - A merged PR is the implementation record. Close or update its tracking item when the work lands;
   do not preserve a second checklist in the repository.
 
+## View tests
+
+When creating views, add HTML snapshot tests for representative states using the existing
+`HTMLSnapshotTesting` helper. When changing views, review and update affected snapshots. Keep
+fixtures deterministic and retain behavioral tests for interactions and validation.
+
 ## Code Structure
 
 The layout of the repository and guidance:

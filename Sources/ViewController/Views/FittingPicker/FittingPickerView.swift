@@ -103,7 +103,9 @@ struct PickerConfiguration: HTML, Sendable {
 }
 
 func pickerJSON<T: Encodable>(_ value: T) -> String {
-  guard let data = try? JSONEncoder().encode(value),
+  let encoder = JSONEncoder()
+  encoder.outputFormatting = .sortedKeys
+  guard let data = try? encoder.encode(value),
     let string = String(data: data, encoding: .utf8)
   else { return "null" }
   return string
