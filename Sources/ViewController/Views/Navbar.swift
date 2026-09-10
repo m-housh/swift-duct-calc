@@ -67,7 +67,19 @@ struct Navbar: HTML, Sendable {
           span { "Duct Calc" }
         }
         .navButton()
-        .tooltip(isLoggedIn ? "Projects" : "Home", position: .right)
+        .tooltip(isLoggedIn ? "Projects, Ctrl+Alt+P" : "Home", position: .right)
+
+        if showSidebarToggle {
+          button(
+            .type(.button), .class("size-7"),
+            .init(name: "aria-label", value: "Keyboard shortcuts"),
+            .init(name: "aria-haspopup", value: "dialog"),
+            .init(name: "aria-controls", value: ProjectShortcutsDialog.id),
+            .showModal(id: ProjectShortcutsDialog.id)
+          ) { SVG(.keyboard) }
+          .navButton()
+          .tooltip("Keyboard shortcuts", position: .bottom)
+        }
       }
 
       div(.class("flex-none")) {
@@ -76,18 +88,23 @@ struct Navbar: HTML, Sendable {
           if showFittingsButton {
             a(
               .class("btn btn-outline btn-secondary"), .href(route: .fittingReference(.init())),
+              .target(.blank),
+              .init(name: "aria-keyshortcuts", value: "Control+Alt+F"),
               .init(name: "aria-describedby", value: "fitting-reference-help")
             ) {
               "Fitting reference"
             }
-            .tooltip("Browse fitting references", position: .bottom)
+            .tooltip("Fitting reference, Ctrl+Alt+F", position: .bottom)
             span(.id("fitting-reference-help"), .class("sr-only")) { "Browse fitting references" }
           }
 
           if showDuctulatorButton {
             DuctulatorButton()
-              .attributes(.class("btn-outline btn-primary"))
-              .tooltip("Duct size calculator", position: .bottom)
+              .attributes(
+                .class("btn-outline btn-primary"),
+                .init(name: "aria-keyshortcuts", value: "Control+Alt+D")
+              )
+              .tooltip("Ductulator, Ctrl+Alt+D", position: .bottom)
           }
 
           if isLoggedIn {
@@ -105,16 +122,27 @@ struct Navbar: HTML, Sendable {
                 }
                 li {
                   a(
-                    .href(route: .user(.profile(.index)))
-                  ) { "Profile" }
+                    .href(route: .user(.profile(.index))),
+                    .class("flex justify-between"),
+                    .init(name: "aria-keyshortcuts", value: "Control+Alt+U")
+                  ) {
+                    span { "Profile" }
+                    span(.class("text-xs opacity-70")) { "Ctrl+Alt+U" }
+                  }
                 }
                 li {
                   a(
+                    .href(route: .project(.index)),
+                    .class("flex justify-between"),
+                    .init(name: "aria-keyshortcuts", value: "Control+Alt+P"),
                     .hx.get(route: .project(.index)),
                     .hx.pushURL(true),
                     .hx.target("body"),
                     .hx.swap(.outerHTML)
-                  ) { "Projects" }
+                  ) {
+                    span { "Projects" }
+                    span(.class("text-xs opacity-70")) { "Ctrl+Alt+P" }
+                  }
                 }
                 li {
                   a(

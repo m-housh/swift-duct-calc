@@ -8,7 +8,7 @@ struct UserView: HTML, Sendable {
 
   var body: some HTML {
     div {
-      Navbar(showSidebarToggle: false, isLoggedIn: false)
+      Navbar(showSidebarToggle: false)
 
       div(.class("p-4")) {
         a(.class("btn btn-secondary mb-4"), .href("/path-templates")) { "Path templates" }

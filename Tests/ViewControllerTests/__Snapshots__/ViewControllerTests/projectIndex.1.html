@@ -35,7 +35,7 @@
         <div>
           <nav class="navbar flex-wrap w-full bg-base-300 text-base-content shadow-sm mb-4">
             <div class="flex flex-1 space-x-4 items-center">
-              <div class="tooltip tooltip-right" data-tip="Projects">
+              <div class="tooltip tooltip-right" data-tip="Projects, Ctrl+Alt+P">
                 <a class="flex w-fit h-fit text-2xl items-end px-4 py-2 btn btn-square btn-ghost hover:bg-neutral hover:text-white" href="/projects">
                 <img src="/images/mand_logo_sm.webp">
                 Duct Calc<span></span></a>
@@ -43,14 +43,14 @@
             </div>
             <div class="flex-none">
               <div class="flex items-end space-x-4">
-                <div class="tooltip tooltip-bottom" data-tip="Browse fitting references"><a class="btn btn-outline btn-secondary" href="/fittings" aria-describedby="fitting-reference-help">Fitting reference</a></div>
+                <div class="tooltip tooltip-bottom" data-tip="Fitting reference, Ctrl+Alt+F"><a class="btn btn-outline btn-secondary" href="/fittings" target="_blank" aria-keyshortcuts="Control+Alt+F" aria-describedby="fitting-reference-help">Fitting reference</a></div>
                 Browse fitting references<span id="fitting-reference-help" class="sr-only"></span>
-                <div class="tooltip tooltip-bottom" data-tip="Duct size calculator"><a class="btn btn-outline btn-primary" href="/ductulator" target="_blank">Ductulator</a></div>
+                <div class="tooltip tooltip-bottom" data-tip="Ductulator, Ctrl+Alt+D"><a class="btn btn-outline btn-primary" href="/ductulator" target="_blank" aria-keyshortcuts="Control+Alt+D">Ductulator</a></div>
                 <div class="dropdown dropdown-end dropdown-hover">
                   <div class="btn m-1 btn btn-square btn-ghost hover:bg-neutral hover:text-white" tabindex="0" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg></div>
                   <ul tabindex="-1" class="dropdown-content menu bg-base-200 rounded-box z-1 w-52 py-2 shadow-sm">
-                    <li><a href="/profile">Profile</a></li>
-                    <li><a hx-get="/projects" hx-push-url="true" hx-target="body" hx-swap="outerHTML">Projects</a></li>
+                    <li><a href="/profile" class="flex justify-between" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs opacity-70">Ctrl+Alt+U</span></a></li>
+                    <li><a href="/projects" class="flex justify-between" aria-keyshortcuts="Control+Alt+P" hx-get="/projects" hx-push-url="true" hx-target="body" hx-swap="outerHTML"><span>Projects</span><span class="text-xs opacity-70">Ctrl+Alt+P</span></a></li>
                     <li><a hx-get="/logout" hx-push-url="/login" hx-target="body" hx-swap="outerHTML">Logout</a></li>
                   </ul>
                 </div>
@@ -95,7 +95,7 @@ p-6 w-full pb-6">
           </div>
           <dialog id="projectForm" class="modal">
             <div class="modal-box">
-              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onclick="projectForm.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close" onclick="projectForm.close()">  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
               <h1 class="text-3xl font-bold pb-6 ps-2">Project</h1>
               <button type="button" class="btn btn-outline btn-block mb-4" aria-controls="newProjectPDF" aria-expanded="false" onclick="const upload = document.getElementById('newProjectPDF');
 upload.hidden = !upload.hidden;
