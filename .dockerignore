@@ -11,6 +11,8 @@ node_modules
 .netrc
 .DS_Store
 postgres
+docker/data
+.dev-port
 **/*.sqlite
 **/*.sqlite-*
 **/db.sqlite*

@@ -4,7 +4,7 @@ import ManualDCore
 import Testing
 
 /// PDF-derived expectations; these values are not loaded from the runtime catalog.
-/// See docs/fitting-client-catalog-expansion.md for the page-by-page audit.
+/// See docs/internals/fitting-rules.md for source interpretation decisions.
 struct FittingSourceCoverageTests {
   let client: FittingClient
 

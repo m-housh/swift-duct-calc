@@ -1,103 +1,78 @@
-# swift-duct-calc
+# DuctCalc
 
 [![CI](https://github.com/m-housh/swift-duct-calc/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/m-housh/swift-duct-calc/actions/workflows/ci.yaml)
 
-Residential duct design software.
+[DuctCalc](https://ductcalc.pro) is residential HVAC duct design software based on
+ACCA Manual D and the speed-sheet workflow. The hosted app is free to use, and you
+can run your own instance.
 
-## Fitting reference
+- Enter room loads or import them from CoolCalc reports.
+- Calculate friction rate and size room ducts, trunks, and runouts.
+- Build equivalent-length paths with a fitting picker and reusable path templates.
+- Browse the fitting reference or use the standalone ductulator.
 
-Open `/fittings` on the running app for the public fitting reference. Signed-in
-users can also inspect and export CSV/JSON records. See the
-[reference documentation](docs/fitting-reference.md) for routes, session behavior,
-and catalog maintenance.
+See the [user guide](docs/user/guide.md) for the design workflow and
+[self-hosting instructions](docs/self-hosting.md) to run a production instance.
 
-## Overview
+## Development
 
-This is the source code for [ductcalc.pro](https://ductcalc.pro) web site. Which is a residential
-duct design software based on ACCA Manual-D. This is meant as a replacement for speed-sheet users or
-people who are new / learning duct design concepts.
+Install Podman, or Docker if Podman is unavailable, plus `just` and Python 3.
+Run these commands from the checkout:
 
-The web site is free to use, but this project is also setup to be self-hostable if that's your
-preference.
+```sh
+just run
+```
 
-## Self Hosting
+This builds the development image from `docker/Dockerfile.test`, compiles the app
+with Swift 6.2, and starts it in development mode. The first build takes a while.
+Run `just url` in another terminal to print the local address. Create an account
+there to work with projects.
 
-Documentation coming soon!
+Each worktree gets a port saved in the ignored `.dev-port` file, a separate
+container, and named volumes for its SQLite database and compiler cache. The
+server binds to localhost. Podman is preferred automatically; use
+`just container_engine=docker run` to select Docker explicitly.
 
-## Path templates
+After changing Swift or public files, stop this worktree's server with `just stop`
+and run `just run` again. This rebuilds the source image and reuses its data and
+compiler cache. The checkout is not mounted over the app in the container.
 
-On Equivalent Lengths, click + and choose From template inside the add modal to build a guided path.
-Manage templates from the project or your account, and share independent copies
-through [JSON export/import](docs/path-template-sharing.md).
+For CSS changes, install Node.js and npm, then run:
 
-See the [implementation and verification notes](docs/path-template-implementation-plan.md)
-for catalog coverage, persistence, and local checks.
-## Cool Calc PDF import
+```sh
+just install-deps
+just run-css
+```
 
-To create a project and its rooms together, open the new-project dialog on the Projects
-page and choose **Import from Cool Calc PDF**. Upload the report, then choose **Create
-project from PDF**. The importer reads the project name, US address, and SHR from the
-report and opens Room Loads. It saves the project, rooms, and default component losses
-in one transaction. If the parsed name or street address and ZIP code match one of the user's projects, the
-upload pauses for **Cancel** or **Create another project**. Matching ignores capitalization
-and repeated whitespace; ZIP+4 matches its five-digit ZIP. Confirming creates a separate
-project and preserves existing projects. Existing project names receive a numbered suffix. Equipment and
-duct design settings still need to be entered in their usual tabs.
+The watcher rebuilds `Public/css/output.css`. Rebuild the app image to serve the
+updated CSS. See [development checks and catalog editing](docs/development.md)
+for additional workflows.
 
-On a project's Room Loads page, use the upload icon, choose **Cool Calc PDF** under **File type**, and upload a text-based
-Cool Calc MJ8 report. Supported layouts are `Individual Room Analysis`, with headings
-such as `Dining - Level: Level 1`, and `Room Detail`, with `Room name`, `Total Heating BTUH`,
-and `Total Cooling BTUH` fields. Room Detail exports do not include levels, so those stay
-blank. Their summed room floor areas are checked against the system totals to detect
-missing room pages.
+## Tests
 
-The importer creates rooms using the analysis heating and total cooling loads, including
-their infiltration allocation. It uses the summary's room list, when present, to check
-for missing analysis rooms; it does not import the summary's load values or system loads.
-Rooms start with one register and no delegation. Repeated names across levels receive a
-level suffix. Names, registers, and delegation can be edited after import.
+Run the Swift suite in a container, matching CI:
 
-Sensible cooling is calculated from total cooling using the project SHR. An existing SHR
-is preserved; if unset, the report's SHR initializes it. The calculated sensible value is
-not stored as a reported load, so changing SHR updates it. This assumes the same
-sensible/latent split for every room.
+```sh
+just test-docker
+# Or select a suite:
+just test-docker --filter Fitting
+```
 
-Re-importing into a project with rooms asks for confirmation. Continuing updates rooms
-with matching names and adds missing rooms. Matching ignores case and surrounding spaces;
-renamed rooms whose names no longer match the file are treated as separate rooms. Rooms
-absent from the file are kept. PDF imports preserve register counts and delegation on
-existing rooms; CSV imports apply those settings from the CSV. Updates preserve room IDs
-and trunk assignments.
+With Swift 6.2 installed locally, `just test` runs tests with code coverage. PDF
+import tests need Poppler's `pdftotext`; the container already includes it.
+`node scripts/check_fitting_reference.cjs` checks the fitting catalogs and assets
+without starting the app.
 
-Imports are saved in a transaction. Ambiguous names, incomplete room records, and invalid
-loads leave the project unchanged. Scanned, locked, and multiple-system reports are not
-supported in this draft. Uploads are limited to 10 MB and 200 pages, with a 20-second
-text-extraction timeout, at most four active extractors, and a 5 MB streamed text limit.
-Linux extractors also have 512 MiB address-space and 20-second CPU limits; core dumps
-are disabled. Temporary uploaded PDFs are removed after extraction.
+## Contributing
 
-The server needs Poppler's `pdftotext`. The Docker images and devcontainer install
-`poppler-utils` and `util-linux` for Linux resource limits. For a native installation, install Poppler and set `PDFTOTEXT_PATH` if
-the executable is not at `/usr/bin/pdftotext`.
-
-Run `swift test --filter 'PdfImportClientTests|ProjectTests|RoomTests|RoomPDFUploadTests|EnvVarsTests'`
-to verify extraction, upload handling, and database behavior. The PDF test fixture is a
-synthetic document for the supported Individual Room Analysis layout, without customer
-names or addresses.
-
-The approved sample report is
-[ExampleHouse_ManJ.pdf](Tests/PdfImportClientTests/Resources/ExampleHouse_ManJ.pdf), which
-uses the office address supplied for sharing. It contains six rooms in the **Room Detail**
-layout. When a report omits its ZIP code, project import asks for that field before
-creating anything and keeps the selected file. Importing rooms into an existing project
-does not require the report's ZIP code. The original customer report is not included in
-the repository or required by the tests.
+Open an issue to discuss a change or submit a pull request. Read [AGENTS.md](AGENTS.md)
+for repository guidance. Maintainer notes explain
+[fitting catalog boundaries](docs/internals/fitting-catalog.md),
+[source interpretation decisions](docs/internals/fitting-rules.md), and
+[saved-path compatibility](docs/internals/saved-paths.md).
 
 ## License
 
-This project is licensed under Creative Commons 4.0.  See the
-[LICENSE](https://github.com/m-housh/swift-duct-calc/blob/main/LICENSE).
-
-## Contributions
-
-We are open to contributions.  Feel free to open an issue or pull-request.
+Source is available under the
+[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license](LICENSE),
+CC BY-NC-SA 4.0.
