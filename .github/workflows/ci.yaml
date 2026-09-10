@@ -29,4 +29,27 @@ jobs:
         cache-to: type=gha,mode=max
     - name: Run Tests
       run: |
-        docker run --rm ${{ github.repository_owner }}/ductcalc:test swift test
+        docker run --rm -v ductcalc-build:/app/.build ${{ github.repository_owner }}/ductcalc:test swift test
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        cache: npm
+    - run: npm ci
+    - run: npx playwright install --with-deps chromium
+    - name: Start isolated accessibility test app
+      run: |
+        docker run --rm -d --name ductcalc-accessibility \
+          -p 127.0.0.1:58681:8080 -e SQLITE_PATH=/tmp/accessibility.sqlite -e LOG_LEVEL=warning \
+          -v ductcalc-build:/app/.build ${{ github.repository_owner }}/ductcalc:test \
+          .build/debug/App serve --env development --hostname 0.0.0.0 --port 8080
+        for attempt in $(seq 1 60); do
+          if curl -fsS http://127.0.0.1:58681/ >/dev/null; then exit 0; fi
+          sleep 1
+        done
+        docker logs ductcalc-accessibility
+        exit 1
+    - name: Check accessibility and keyboard workflows
+      run: npm run test:accessibility
+    - name: Stop accessibility test app
+      if: always()
+      run: docker stop ductcalc-accessibility || true
