@@ -3,6 +3,7 @@ import DependenciesMacros
 import Fluent
 import Foundation
 import ManualDCore
+import SQLKit
 import Vapor
 
 extension DatabaseClient.Users: TestDependencyKey {
@@ -10,6 +11,20 @@ extension DatabaseClient.Users: TestDependencyKey {
 
   public static func live(database: any Database) -> Self {
     .init(
+      administratorAccounts: { emails in
+        guard let sql = database as? any SQLDatabase else { throw Abort(.internalServerError) }
+        var ids = Set<User.ID>()
+        for email in emails.sorted() {
+          let matches = try await sql.raw(
+            """
+            SELECT id FROM "user" WHERE LOWER(TRIM(email)) = \(bind: email)
+            """
+          ).all(decoding: AdminAccountID.self)
+          guard matches.count == 1 else { throw Abort(.internalServerError) }
+          ids.insert(matches[0].id)
+        }
+        return ids
+      },
       create: { request in
         try request.validate()
         let model = try request.toModel()
@@ -65,6 +80,10 @@ extension DatabaseClient.Users: TestDependencyKey {
 
     )
   }
+}
+
+private struct AdminAccountID: Decodable {
+  let id: UUID
 }
 
 extension User {

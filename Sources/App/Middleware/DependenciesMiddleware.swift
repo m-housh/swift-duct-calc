@@ -36,11 +36,16 @@ struct DependenciesMiddleware: AsyncMiddleware {
   }
 
   func respond(to request: Request, chainingTo next: any AsyncResponder) async throws -> Response {
-    try await values.yield {
+    let adminAccess = request.application.storage[AdminAccessKey.self]
+    return try await values.yield {
       try await withDependencies {
         // $0.apiController = apiController
-        $0.auth = .live(on: request)
         $0.database = database
+        $0.auth = .live(
+          on: request,
+          isAdministrator: { id in
+            await adminAccess?.allows(id) ?? false
+          })
         $0.environment = environment
         $0.fittingClient = fittingClient
         $0.templateFittingClient = .live(using: fittingClient)

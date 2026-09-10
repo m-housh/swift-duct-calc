@@ -1,3 +1,4 @@
+import ManualDCore
 import URLRouting
 import Vapor
 import VaporRouting
@@ -74,7 +75,7 @@ where
         return try await next.respond(to: request)
       } catch {
         // Parser errors may include the submitted body; do not log uploaded documents or form data.
-        request.logger.debug("No route matched request", metadata: ["path": "\(request.url.path)"])
+        request.logger.debug("No route matched request")
 
         guard request.application.environment == .development
         else { throw error }
@@ -82,6 +83,8 @@ where
         return Response(status: .notFound, body: .init(string: "Routing \(routingError)"))
       }
     }
+
+    request.storage[MetricFeatureKey.self] = (route as? SiteRoute)?.metricFeature
 
     if let middleware = middleware(route) {
       return try await middleware.makeResponder(

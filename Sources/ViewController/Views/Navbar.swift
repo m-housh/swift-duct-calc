@@ -2,6 +2,11 @@ import Elementary
 import ManualDCore
 import Styleguide
 
+/// Carries AuthClient's resolved decision into HTML streamed outside the request dependency scope.
+public enum AdminViewValue {
+  @TaskLocal public static var isAdministrator = false
+}
+
 struct Navbar: HTML, Sendable {
   let showFittingsButton: Bool
   let showDuctulatorButton: Bool
@@ -25,6 +30,10 @@ struct Navbar: HTML, Sendable {
       return .project(.index)
     }
     return .home
+  }
+
+  private var isAdministrator: Bool {
+    AdminViewValue.isAdministrator
   }
 
   var body: some HTML<HTMLTag.nav> {
@@ -91,6 +100,9 @@ struct Navbar: HTML, Sendable {
                 .tabindex(-1),
                 .class("dropdown-content menu bg-base-200 rounded-box z-1 w-52 py-2 shadow-sm")
               ) {
+                if isAdministrator {
+                  li { a(.href("/admin")) { "Admin" } }
+                }
                 li {
                   a(
                     .href(route: .user(.profile(.index)))

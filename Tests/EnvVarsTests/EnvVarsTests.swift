@@ -7,6 +7,22 @@ import Testing
 @Suite
 struct EnvVarsTests {
 
+  @Test
+  func administratorConfiguration() async throws {
+    let environment = try await EnvVars.live([
+      "ADMIN_EMAILS": " Admin@Example.com , owner@example.com ",
+      "AGGREGATE_METRICS_ENABLED": "false",
+    ])
+    #expect(try environment.administratorEmails() == ["admin@example.com", "owner@example.com"])
+    #expect(environment.aggregateMetricsEnabled == "false")
+    #expect(try EnvVars().administratorEmails().isEmpty)
+    for invalid in ["not-an-email", "admin@example.com,", "admin@example.com,invalid"] {
+      #expect(throws: AdminConfigurationError.self) {
+        try EnvVars(adminEmails: invalid).administratorEmails()
+      }
+    }
+  }
+
   let envDict = [
     "PANDOC_PATH": "/custom/path",
     "PDF_ENGINE": "custom-engine",

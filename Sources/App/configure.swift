@@ -23,6 +23,10 @@ public func configure(
   makeDatabaseClient: @escaping (any Database) -> DatabaseClient = { .live(database: $0) },
   makeFittingClient: (() async throws -> FittingClient)? = nil
 ) async throws {
+  let administratorEmails = try environment.administratorEmails()
+  guard ["true", "false"].contains(environment.aggregateMetricsEnabled) else {
+    throw EnvError("AGGREGATE_METRICS_ENABLED must be true or false")
+  }
   // Read the catalog before installing routes. A load failure prevents startup.
   var startupFiles = FileClient()
   startupFiles.readFile = { path in
@@ -55,6 +59,9 @@ public func configure(
   app.routes.defaultMaxBodySize = "2mb"
   // Add our route handlers.
   addRoutes(to: app)
+  addAdminRoutes(
+    to: app, database: databaseClient, administratorEmails: administratorEmails,
+    metricsEnabled: environment.aggregateMetricsEnabled == "true")
   if app.environment != .testing {
     try await app.autoMigrate()
   }
@@ -81,6 +88,15 @@ private func addMiddleware(
   app.middleware.use(cors, at: .beginning)
 
   app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
+
+  let recorder = AggregateMetricsRecorder(
+    database: databaseClient.adminMetrics, logger: app.logger,
+    enabled: environment.aggregateMetricsEnabled == "true")
+  app.storage[MetricsRecorderKey.self] = recorder
+  app.lifecycle.use(AggregateMetricsLifecycle(recorder: recorder))
+  if environment.aggregateMetricsEnabled == "true" {
+    app.middleware.use(AggregateMetricsMiddleware(recorder: recorder))
+  }
 
   // Sessions.
   app.sessions.use(.fluent)

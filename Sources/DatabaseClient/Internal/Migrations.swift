@@ -22,6 +22,7 @@ extension DatabaseClient.Migrations: DependencyKey {
         PathTemplate.Migrate(),
         EquivalentLength.AddTemplateSnapshot(),
         EquivalentLength.AddRevision(),
+        AdminMetricsMigration(),
       ]
     }
   )

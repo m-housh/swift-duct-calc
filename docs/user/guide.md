@@ -143,3 +143,19 @@ Open Ductulator for a quick calculation outside a project. Enter CFM and frictio
 rate; optionally enter a height for a rectangular size. The result includes round,
 flex, and any requested rectangular size, plus velocity. This calculation does
 not save or change a project.
+
+## Admin dashboard
+
+Administrators can open Account > Admin or `/admin` to check registered accounts,
+saved projects, signups, request volume, server errors, and average response time.
+Instance owners grant access through the [self-hosting configuration](../self-hosting.md#admin-dashboard).
+
+Account and project totals reflect records that exist now. Signup history starts
+when collection is enabled and keeps its counts after accounts are deleted.
+Requests include automated traffic and partial page updates, so they are not a
+count of visitors. Visitor estimates remain in Cloudflare.
+
+Activity updates about once a minute. Dates use UTC and today is incomplete.
+A dash means no collection was recorded that day. Counts are approximate and may
+have gaps during outages or restarts; check the last-saved time before interpreting
+a quiet period. Historical activity is retained for 12 months.

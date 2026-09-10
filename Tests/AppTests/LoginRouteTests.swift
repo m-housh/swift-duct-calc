@@ -1,10 +1,12 @@
 import App
 import DatabaseClient
+import DependenciesTestSupport
 import EnvVars
+import Foundation
 import Testing
 import VaporTesting
 
-@Suite
+@Suite(.dependencies { $0.date.now = Date(timeIntervalSince1970: 1_709_251_200) })
 struct LoginRouteTests {
   @Test(arguments: [false, true])
   func loginRespectsSession(isHtmxRequest: Bool) async throws {

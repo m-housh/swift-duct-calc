@@ -71,6 +71,7 @@ let package = Package(
       name: "AppTests",
       dependencies: [
         .target(name: "App"),
+        .product(name: "DependenciesTestSupport", package: "swift-dependencies"),
         .product(name: "VaporTesting", package: "vapor"),
       ]
     ),

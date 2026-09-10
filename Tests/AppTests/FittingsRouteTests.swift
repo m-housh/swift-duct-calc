@@ -1,5 +1,6 @@
 import App
 import DatabaseClient
+import DependenciesTestSupport
 import EnvVars
 import Foundation
 import ManualDCore
@@ -7,7 +8,7 @@ import Testing
 import URLRouting
 import VaporTesting
 
-@Suite
+@Suite(.dependencies { $0.date.now = Date(timeIntervalSince1970: 1_709_251_200) })
 struct FittingsRouteTests {
   private func configuredApp(_ app: Application) async throws {
     app.logger.logLevel = .warning
