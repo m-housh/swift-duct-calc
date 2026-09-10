@@ -19,3 +19,5 @@ postgres/
 __pycache__/
 *.pyc
 .plans/
+.dev-port
+/docker/data/

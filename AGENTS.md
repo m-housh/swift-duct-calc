@@ -34,18 +34,6 @@ Of note: Most contributions are often through coding agents that are controlled 
 you should be careful about accessing data, killing dev servers, and other things that may damage
 the instance that the contributor is using.
 
-## A small glossary
-
-We need to be on the same page with terminology. When communicating, use this language:
-
-- **you** means the agent reading this file and changing DuctCalc.
-- **we, us, and maintainers** mean Michael and the people building DuctCalc. These are who you are
-  talking to now.
-- **user** means the person using DuctCalc to direct coding agents.
-- **project** means an environment-local workspace record rooted at a directory.
-- **thread** means the durable conversation and work history for a project.
-- **turn** means one user-to-agent cycle, including follow-up work such as checkpointing.
-
 ## Dev Servers
 
 Run development servers using podman (if available) and docker if not. You should build the image
@@ -62,8 +50,7 @@ Most code changes do not need an internal documentation change. Agents can read 
   paragraph, ask what a maintainer would get wrong without it. If reading the relevant code answers
   the question, leave it out.
 - Do not document every feature, enumerate fields or methods, narrate control flow, maintain file
-  catalogs, or append PR summaries. Types, tests, and code already record the implementation. The
-  glossary defines shared vocabulary; it is not a feature index.
+  catalogs, or append PR summaries. Types, tests, and code already record the implementation.
 - Keep a local implementation explanation in a nearby code comment. Use an internal doc when the
   reasoning crosses boundaries or needs context the code cannot carry well. Link to the relevant
   source instead of copying it.
@@ -82,8 +69,7 @@ Most code changes do not need an internal documentation change. Agents can read 
 
 - Do not commit implementation plans, research notes, or agent scratch files. Keep temporary working
   material outside the worktree. `.plans/` is gitignored only as a safety net for legacy tooling.
-- Track active maintainer work in the GitHub issue or project item that owns it. External proposals
-  follow `CONTRIBUTING.md` and belong in Ideas discussions.
+- Track active maintainer work in the GitHub issue or project item that owns it.
 - A merged PR is the implementation record. Close or update its tracking item when the work lands;
   do not preserve a second checklist in the repository.
 

@@ -1,9 +1,0 @@
-{
-  "fitting": "4Y",
-  "status": "passed-internal-overlay-review",
-  "inspectedAt": "2026-09-04T16:01:18-04:00",
-  "revision": "6c52f321b2279830b6f61018e3cd3e96cd1be25feb0974623552535c42c3f237",
-  "method": "Manual SVG drawn in the original source-cell coordinate system and inspected as a registered red-line overlay against the workbook raster.",
-  "overlay": "docs/fitting-preflight/4Y-registered-overlay.png",
-  "result": "Main collar, housing, frame, and grille boundaries align with the source. Crossing right-edge construction lines from the rejected pilot were removed."
-}
