@@ -61,6 +61,8 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     script(.src("https://unpkg.com/htmx.org@2.0.8")) {}
     script(.src("/js/htmx-download.js")) {}
     script(.src("/js/main.js")) {}
+    // Wait for option children to be parsed, and keep registration across HTMX page swaps.
+    script(.src("/js/daisy-multiselect.js"), .init(name: "defer", value: "")) {}
     script(.src("https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4")) {}
     link(.rel(.stylesheet), .href("/css/output.css?v=navbar-reference-1"))
     link(.rel(.stylesheet), .href("/css/htmx.css"))

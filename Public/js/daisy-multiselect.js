@@ -1,5 +1,9 @@
 // from: https://github.com/Mashiane/DaisyUI-MultiSelect-with-CheckBoxes
 // Daisy Multi-Select Component
+(() => {
+// Keep repeated script loads from redeclaring the class or registering it twice.
+if (customElements.get('daisy-multiselect')) return;
+
 // Auto-inject styles
 if (!document.getElementById('daisy-multiselect-styles')) {
   const style = document.createElement('style');
@@ -3086,5 +3090,4 @@ class DaisyMultiSelect extends HTMLElement {
     }
   // Register the custom element
   customElements.define('daisy-multiselect', DaisyMultiSelect);
-
-
+})();
