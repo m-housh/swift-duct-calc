@@ -28,7 +28,7 @@ struct ProjectView<Inner: HTML & Sendable>: HTML, Sendable {
   }
 
   var body: some HTML {
-    Navbar(showProjectShortcuts: true)
+    Navbar(shortcutsDialogID: ProjectShortcutsDialog.id)
     div(.class("project-layout")) {
       details(.class("project-navigation"), .init(name: "open", value: "")) {
         summary { "Project navigation" }

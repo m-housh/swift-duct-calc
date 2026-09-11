@@ -1,0 +1,167 @@
+<nav class="app-navbar" aria-label="Main">
+  <a class="app-brand" href="/">
+  <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
+  Duct Calc<span></span></a>
+  <div class="app-nav-actions">
+    <button type="button" class="btn" aria-label="Keyboard shortcuts" aria-haspopup="dialog" aria-controls="fittingsShortcuts" data-open-dialog="fittingsShortcuts"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 15h12"/></svg></button>
+    Ductulator<a class="btn btn-outline btn-primary" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span></span></a>
+  </div>
+</nav>
+<dialog id="fittingsShortcuts" class="modal" aria-labelledby="fittingsShortcuts-title">
+  <div class="modal-box">
+    <h2 id="fittingsShortcuts-title" class="text-2xl font-bold mb-6 pe-10">Keyboard shortcuts</h2>
+    <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Keyboard shortcuts" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    <p class="text-sm mt-2">Press Ctrl+K to focus search. For navigation, hold Ctrl+Alt and press a key below.</p>
+    <table class="table table-sm mt-4">
+      <caption class="text-left font-bold p-2">Group navigation</caption>
+      <tbody>
+        <tr>
+          <th scope="row">Groups 1–9</th>
+          <td class="text-right"><kbd class="kbd kbd-sm">1–9</kbd></td>
+        </tr>
+        <tr>
+          <th scope="row">Group 10</th>
+          <td class="text-right"><kbd class="kbd kbd-sm">0</kbd></td>
+        </tr>
+        <tr>
+          <th scope="row">Next group</th>
+          <td class="text-right"><kbd class="kbd kbd-sm">N</kbd></td>
+        </tr>
+        <tr>
+          <th scope="row">Previous group</th>
+          <td class="text-right"><kbd class="kbd kbd-sm">P</kbd></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="text-sm mt-2">Number keys select a group. N and P follow the current air path filter, including All groups, and stop at either end.</p>
+    <table class="table table-sm mt-4">
+      <caption class="text-left font-bold p-2">Fitting navigation</caption>
+      <tbody>
+        <tr>
+          <th scope="row">Next fitting</th>
+          <td class="text-right"><kbd class="kbd kbd-sm">J</kbd></td>
+        </tr>
+        <tr>
+          <th scope="row">Previous fitting</th>
+          <td class="text-right"><kbd class="kbd kbd-sm">K</kbd></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="text-sm mt-2">J and K move through the filtered fitting list and stop at either end.</p>
+    <table class="table table-sm mt-4">
+      <caption class="text-left font-bold p-2">App navigation</caption>
+      <tbody>
+        <tr>
+          <th scope="row">Ductulator</th>
+          <td class="text-right"><kbd class="kbd kbd-sm">D</kbd></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="text-sm mt-2">Ductulator opens in a new tab. Shortcuts pause while editing a field or when a dialog is open.</p>
+  </div>
+</dialog>
+<div id="fittings-page" data-tools="disabled" data-url="/fittings?system=supply&amp;group=1&amp;q=no-such-fitting">
+  <a class="skip" href="#workspace">Skip to fittings</a>
+  <section class="intro">
+    <div>
+      <h1>Fitting reference</h1>
+      <p>Drawings, reference values, and conditions for your duct path.</p>
+    </div>
+    <div class="catalog-stat"><strong>230<span> + 1</span></strong><span>approved drawings + concept</span></div>
+  </section>
+  <form class="toolbar" role="search" id="filters" action="/fittings" method="get">
+    <div class="system-toggle" role="group" aria-label="Filter fitting groups by air path"><a href="/fittings?system=all&amp;group=1&amp;q=no-such-fitting" data-reference-nav="" data-system="all" aria-current="false">All</a><a href="/fittings?system=supply&amp;group=1&amp;q=no-such-fitting" data-reference-nav="" data-system="supply" aria-current="true">Supply</a><a href="/fittings?system=return&amp;group=1&amp;q=no-such-fitting" data-reference-nav="" data-system="return" aria-current="false">Return</a></div>
+    <input type="hidden" name="system" value="supply">
+    <input type="hidden" name="fitting" value="">
+    ⌕<label class="search"><span aria-hidden="true"></span>
+    <input id="search" name="q" type="search" value="no-such-fitting" placeholder="Search supply groups by ID, name, or shape…" aria-label="Search supply groups by ID, name, or shape" aria-keyshortcuts="Control+K" autocomplete="off">
+    Ctrl+K
+    Fitting group<kbd></kbd></label><label class="select-label group-control"><span></span>
+    <select id="group-filter" name="group" form="filters" aria-label="Fitting group">
+      <option value="all">All supply groups</option>
+      <option value="1" selected>1 · Supply at equipment</option>
+      <option value="2">2 · Supply branch takeoffs</option>
+      <option value="3">3 · Reducing trunk takeoffs</option>
+      <option value="4">4 · Supply boots &amp; heads</option>
+      <option value="8">8 · Elbows &amp; offsets</option>
+      <option value="9">9 · Supply junctions</option>
+      <option value="11">11 · Flex junctions &amp; bends</option>
+      <option value="12">12 · Transitions &amp; squeezes</option>
+    </select>
+    Values</label><label class="select-label">
+    <select id="value-filter" name="type">
+      <option value="all" selected>All reference types</option>
+      <option value="fixed">Fixed reference</option>
+      <option value="conditional">Requires conditions</option>
+    </select></label>
+    <button type="submit" class="text-button">Search</button>
+    Reset
+    0 fittings<a href="/fittings?group=all" class="text-button" data-reference-nav="" data-action="reset"></a><span id="result-count" class="result-count" aria-live="polite"></span>
+  </form>
+  <div class="mobile-group-navigation"></div>
+  <div id="workspace" tabindex="-1">
+    <div class="explorer combined">
+      <aside class="group-sidebar" aria-label="Fitting groups">
+        <div class="group-sidebar-header"></div>
+        <div class="panel-caption">SUPPLY GROUPS<span>8</span></div>
+        ∑
+        All supply groups
+        0
+        01
+        Supply at equipment
+        0
+        02
+        Supply branch takeoffs
+        0
+        03
+        Reducing trunk takeoffs
+        0
+        04
+        Supply boots &amp; heads
+        0
+        08
+        Elbows &amp; offsets
+        0
+        09
+        Supply junctions
+        0
+        11
+        Flex junctions &amp; bends
+        0
+        12
+        Transitions &amp; squeezes
+        0<a class="group-item " href="/fittings?system=supply&amp;group=all&amp;q=no-such-fitting" data-reference-nav="" data-group="all"><span class="group-number"></span><span></span><small></small></a><a class="group-item active" href="/fittings?system=supply&amp;group=1&amp;q=no-such-fitting" data-reference-nav="" data-group="1" aria-current="true" aria-keyshortcuts="Control+Alt+1" title="Group 1: Supply at equipment, Ctrl+Alt+1"><span class="group-number"></span><span></span><small></small></a><a class="group-item " href="/fittings?system=supply&amp;group=2&amp;q=no-such-fitting" data-reference-nav="" data-group="2" aria-keyshortcuts="Control+Alt+2" title="Group 2: Supply branch takeoffs, Ctrl+Alt+2"><span class="group-number"></span><span></span><small></small></a><a class="group-item " href="/fittings?system=supply&amp;group=3&amp;q=no-such-fitting" data-reference-nav="" data-group="3" aria-keyshortcuts="Control+Alt+3" title="Group 3: Reducing trunk takeoffs, Ctrl+Alt+3"><span class="group-number"></span><span></span><small></small></a><a class="group-item " href="/fittings?system=supply&amp;group=4&amp;q=no-such-fitting" data-reference-nav="" data-group="4" aria-keyshortcuts="Control+Alt+4" title="Group 4: Supply boots &amp; heads, Ctrl+Alt+4"><span class="group-number"></span><span></span><small></small></a><a class="group-item " href="/fittings?system=supply&amp;group=8&amp;q=no-such-fitting" data-reference-nav="" data-group="8" aria-keyshortcuts="Control+Alt+8" title="Group 8: Elbows &amp; offsets, Ctrl+Alt+8"><span class="group-number"></span><span></span><small></small></a><a class="group-item " href="/fittings?system=supply&amp;group=9&amp;q=no-such-fitting" data-reference-nav="" data-group="9" aria-keyshortcuts="Control+Alt+9" title="Group 9: Supply junctions, Ctrl+Alt+9"><span class="group-number"></span><span></span><small></small></a><a class="group-item " href="/fittings?system=supply&amp;group=11&amp;q=no-such-fitting" data-reference-nav="" data-group="11"><span class="group-number"></span><span></span><small></small></a><a class="group-item " href="/fittings?system=supply&amp;group=12&amp;q=no-such-fitting" data-reference-nav="" data-group="12"><span class="group-number"></span><span></span><small></small></a>
+        <div class="sidebar-note">Group 11 uses a concept drawing.</div>
+      </aside>
+      <aside class="fitting-sidebar" aria-label="Fittings">
+        <div class="panel-caption">FITTINGS<span>0</span></div>
+        <p class="sidebar-note">No matching drawings.</p>
+      </aside>
+      <section class="combined-panel" aria-label="Fitting reference and data">
+        <div class="combined-toolbar">
+          <div><strong>Fitting details</strong><code></code></div>
+          Sign in for CSV / JSON<a class="sign-in-data" href="/login?next=/fittings?system%3Dsupply%26group%3D1%26q%3Dno-such-fitting%26data%3Djson" data-login=""></a>
+        </div>
+        <div class="combined-content ">
+          <div class="detail-panel">
+            <div class="empty">
+              <span class="empty-symbol">⌕</span>
+              <h2>No matching fittings</h2>
+              <p>Try a shorter name, another group, or a fitting ID such as 8A.</p>
+              Show all fittings<a href="/fittings?group=all" data-reference-nav="" class="button"></a>
+            </div>
+          </div>
+          <div id="combined-data" hidden></div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <footer class="reference-footer"><span>Reference values · calculation rules remain under review.</span></footer>
+  <dialog id="copy-dialog" aria-labelledby="copy-title">
+    <h2 id="copy-title">Copy reference data</h2>
+    <p>Automatic copying is unavailable. Select and copy the text below.</p>
+    <textarea aria-label="Text to copy" readonly=""></textarea>
+    <button data-action="close-copy">Done</button>
+  </dialog>
+  <div class="reference-toast" id="toast" role="status"></div>
+</div>

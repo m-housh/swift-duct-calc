@@ -11,7 +11,8 @@ struct Navbar: HTML, Sendable {
   var showFittingsButton = true
   var showDuctulatorButton = true
   var isLoggedIn = true
-  var showProjectShortcuts = false
+  var shortcutsDialogID: String? = nil
+  var showProjectsShortcut = true
 
   var body: some HTML {
     nav(.class("app-navbar"), .init(name: "aria-label", value: "Main")) {
@@ -20,18 +21,19 @@ struct Navbar: HTML, Sendable {
         span { "Duct Calc" }
       }
       div(.class("app-nav-actions")) {
-        if showProjectShortcuts {
+        if let shortcutsDialogID {
           button(
             .type(.button), .class("btn"),
             .init(name: "aria-label", value: "Keyboard shortcuts"),
             .init(name: "aria-haspopup", value: "dialog"),
-            .init(name: "aria-controls", value: ProjectShortcutsDialog.id),
-            .showModal(id: ProjectShortcutsDialog.id)
+            .init(name: "aria-controls", value: shortcutsDialogID),
+            .showModal(id: shortcutsDialogID)
           ) { SVG(.keyboard) }
         }
         if showFittingsButton {
           a(
-            .class("btn btn-outline"), .href(route: .fittingReference(.init())), .target(.blank),
+            .class("btn btn-outline btn-secondary"), .href(route: .fittingReference(.init())),
+            .target(.blank),
             .title("Fitting reference, Ctrl+Alt+F"),
             .init(name: "aria-keyshortcuts", value: "Control+Alt+F")
           ) {
@@ -40,7 +42,7 @@ struct Navbar: HTML, Sendable {
         }
         if showDuctulatorButton {
           DuctulatorButton().attributes(
-            .class("btn-outline"), .title("Ductulator, Ctrl+Alt+D"),
+            .class("btn-outline btn-primary"), .title("Ductulator, Ctrl+Alt+D"),
             .init(name: "aria-keyshortcuts", value: "Control+Alt+D")
           )
         }
@@ -67,14 +69,17 @@ struct Navbar: HTML, Sendable {
               }
               li {
                 a(
-                  .href(route: .project(.index)),
-                  .init(name: "aria-keyshortcuts", value: "Control+Alt+P")
+                  .href(route: .project(.index))
                 ) {
                   span { "Projects" }
-                  span(.class("text-xs"), .init(name: "aria-hidden", value: "true")) {
-                    "Ctrl+Alt+P"
+                  if showProjectsShortcut {
+                    span(.class("text-xs"), .init(name: "aria-hidden", value: "true")) {
+                      "Ctrl+Alt+P"
+                    }
                   }
-                }
+                }.attributes(
+                  .init(name: "aria-keyshortcuts", value: "Control+Alt+P"),
+                  when: showProjectsShortcut)
               }
               li {
                 form(.action(SiteRoute.View.router.path(for: .user(.logout))), .method(.get)) {

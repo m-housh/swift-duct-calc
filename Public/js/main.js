@@ -135,7 +135,7 @@ document.addEventListener('keydown', (event) => {
   const key = event.key.toLowerCase();
   if (event.defaultPrevented || event.repeat || event.isComposing
       || !event.ctrlKey || !event.altKey || event.shiftKey || event.metaKey
-      || event.getModifierState('AltGraph') || !/^[1-6jkdfpu]$/.test(key)) return;
+      || event.getModifierState('AltGraph') || !/^[0-9njkdfpu]$/.test(key)) return;
 
   const editing = event.composedPath().some(node => node instanceof Element && (
     node.isContentEditable
@@ -143,23 +143,28 @@ document.addEventListener('keydown', (event) => {
   ));
   if (editing || document.querySelector('dialog[open], [role="dialog"][aria-modal="true"]')) return;
 
-  const buttons = [...document.querySelectorAll('#project-sidebar a[aria-keyshortcuts]')];
+  const fittings = document.getElementById('fittings-page');
+  const groupNavigation = fittings && (key === 'n' || key === 'p');
+  const buttons = [...document.querySelectorAll(groupNavigation
+    ? '#fittings-page a[data-group]'
+    : fittings ? '#fittings-page a[data-select]' : '#project-sidebar a[aria-keyshortcuts]')];
+  const isCurrent = button => ['page', 'true'].includes(button.getAttribute('aria-current'));
   let control;
-  if (key === 'j' || key === 'k') {
-    const current = buttons.findIndex(button => button.getAttribute('aria-current') === 'page');
+  if (groupNavigation || key === 'j' || key === 'k') {
+    const current = buttons.findIndex(isCurrent);
     if (current === -1) return;
-    const next = Math.max(0, Math.min(buttons.length - 1, current + (key === 'j' ? 1 : -1)));
+    const next = Math.max(0, Math.min(buttons.length - 1, current + (key === 'j' || key === 'n' ? 1 : -1)));
     control = buttons[next];
   } else {
     const shortcut = `Control+Alt+${key.toUpperCase()}`;
     control = document.querySelector(
-      `#project-sidebar a[aria-keyshortcuts="${shortcut}"], nav a[aria-keyshortcuts="${shortcut}"]`
+      `#project-sidebar a[aria-keyshortcuts="${shortcut}"], #fittings-page a[data-group][aria-keyshortcuts="${shortcut}"], nav a[aria-keyshortcuts="${shortcut}"]`
     );
   }
   if (!control || control.matches(':disabled, [aria-disabled="true"]') || control.closest('[inert]')) return;
 
   event.preventDefault();
-  if (control.getAttribute('aria-current') !== 'page') control.click();
+  if (!isCurrent(control)) control.click();
 });
 
 }

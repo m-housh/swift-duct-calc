@@ -8,7 +8,10 @@ struct FittingsView: HTML, Sendable {
   let page: FittingReferencePage
 
   var body: some HTML {
-    Navbar(showFittingsButton: false, isLoggedIn: page.isLoggedIn)
+    Navbar(
+      showFittingsButton: false, isLoggedIn: page.isLoggedIn,
+      shortcutsDialogID: FittingsShortcutsDialog.id, showProjectsShortcut: false)
+    FittingsShortcutsDialog(isLoggedIn: page.isLoggedIn)
     div(
       .id("fittings-page"), .data("tools", value: page.isLoggedIn ? "enabled" : "disabled"),
       .data("url", value: page.path())
@@ -77,8 +80,9 @@ struct FittingsView: HTML, Sendable {
           .id("search"), .name("q"), .type(.search), .value(page.search),
           .placeholder("Search \(page.system) groups by ID, name, or shape…"),
           .custom(name: "aria-label", value: "Search \(page.system) groups by ID, name, or shape"),
+          .custom(name: "aria-keyshortcuts", value: "Control+K"),
           .custom(name: "autocomplete", value: "off"))
-        kbd { "/" }
+        kbd { "Ctrl+K" }
       }
       label(.class("select-label group-control")) {
         span { "Fitting group" }
@@ -305,6 +309,14 @@ private struct FittingReferenceGroupLink: HTML, Sendable {
   let page: FittingReferencePage
   let id: String
   let name: String
+  private var shortcut: String? {
+    switch id {
+    case "1", "2", "3", "4", "5", "6", "7", "8", "9": id
+    case "10": "0"
+    default: nil
+    }
+  }
+
   var body: some HTML {
     a(
       .class("group-item \(page.group == id ? "active" : "")"), .href(page.path(["group": id])),
@@ -317,7 +329,11 @@ private struct FittingReferenceGroupLink: HTML, Sendable {
           page.catalog.filter(group: id, query: page.search, type: page.type, system: page.system)
             .count)
       }
-    }.attributes(.custom(name: "aria-current", value: "true"), when: page.group == id)
+    }
+    .attributes(.custom(name: "aria-current", value: "true"), when: page.group == id)
+    .attributes(
+      .custom(name: "aria-keyshortcuts", value: "Control+Alt+\(shortcut ?? "")"),
+      .title("Group \(id): \(name), Ctrl+Alt+\(shortcut ?? "")"), when: shortcut != nil)
   }
 
 }
