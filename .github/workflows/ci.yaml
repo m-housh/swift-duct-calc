@@ -36,6 +36,7 @@ jobs:
         cache: npm
     - run: npm ci
     - run: npm run test:project-shortcuts
+    - run: npm run test:fitting-shortcuts
     - run: npx playwright install --with-deps chromium
     - name: Start isolated accessibility test app
       run: |
@@ -51,6 +52,8 @@ jobs:
         exit 1
     - name: Check accessibility and keyboard workflows
       run: npm run test:accessibility
+    - name: Check fitting reference and shortcuts
+      run: FITTING_APP_URL=http://127.0.0.1:58681 node scripts/check_fitting_reference_browser.cjs
     - name: Stop accessibility test app
       if: always()
       run: docker stop ductcalc-accessibility || true

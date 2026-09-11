@@ -53,6 +53,7 @@
       }
       const active = focus && next.querySelector(focus);
       active?.focus({ preventScroll: true });
+      if (active?.matches('[data-select], [data-group]')) active.scrollIntoView({ block: 'nearest', inline: 'nearest' });
       if (selection && active?.id === 'search') active.setSelectionRange(...selection);
     } catch (error) {
       if (error.name !== 'AbortError') location.assign(url);
@@ -102,9 +103,15 @@
     if (root()?.contains(event.target) && event.target.matches('select')) submit(event.target.form);
   });
   document.addEventListener('keydown', event => {
-    if (root() && event.key === '/' && !event.ctrlKey && !event.metaKey && !/INPUT|TEXTAREA|SELECT/.test(event.target.tagName) && !document.querySelector('dialog[open]')) {
-      event.preventDefault(); root().querySelector('#search').focus();
-    }
+    if (!root() || event.defaultPrevented || event.repeat || event.isComposing
+        || event.key.toLowerCase() !== 'k' || !event.ctrlKey
+        || event.altKey || event.shiftKey || event.metaKey) return;
+    const editing = event.composedPath().some(node => node instanceof Element && (
+      node.isContentEditable
+      || node.matches('input, textarea, select, [contenteditable]:not([contenteditable="false"]), [role="textbox"], [role="combobox"], [role="spinbutton"]')
+    ));
+    if (editing || document.querySelector('dialog[open], [role="dialog"][aria-modal="true"]')) return;
+    event.preventDefault(); root().querySelector('#search').focus();
   });
   window.addEventListener('popstate', () => { if (root()) navigate(location.href, { history: false }); });
   narrow.addEventListener('change', () => { if (root()) enhance(); });

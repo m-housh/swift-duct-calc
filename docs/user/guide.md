@@ -21,8 +21,9 @@ Ctrl+Alt+D opens the ductulator in a new tab. Ctrl+Alt+F opens the fitting
 reference in a new tab. These shortcuts work wherever the corresponding
 navigation links appear, with the same field and dialog restrictions.
 
-While signed in, Ctrl+Alt+P returns to Projects and Ctrl+Alt+U opens your Profile
-in the current tab. These shortcuts also pause in form fields and dialogs.
+While signed in, Ctrl+Alt+P returns to Projects, except on the fitting reference
+where it selects the previous group. Ctrl+Alt+U opens your Profile in the current
+tab. These shortcuts also pause in form fields and dialogs.
 
 ## Room loads
 
@@ -143,7 +144,16 @@ Incompatible fittings or unsupported file versions must be resolved before impor
 
 Open Fitting reference from the navigation to browse drawings, tables, and source
 conditions. Filter by supply or return, choose a group, or search for a fitting.
+Press Ctrl+K to focus the search field.
 Check the illustrated arrangement and its conditions when choosing an entry.
+
+Ctrl+Alt+1 through 9 open those group numbers; Ctrl+Alt+0 opens group 10.
+Ctrl+Alt+N selects the next group; Ctrl+Alt+P selects the previous group.
+These follow the group list, including All groups, within the current air path
+filter. Ctrl+Alt+J selects the next fitting in the filtered list; Ctrl+Alt+K
+selects the previous fitting. Navigation stops at either end and pauses while
+editing a field or when a dialog is open. Open Keyboard shortcuts in the
+navigation to see the bindings.
 
 Sign in to inspect or download JSON and CSV for a fitting or filtered selection.
 These export formats are experimental. Reference exports are separate from the

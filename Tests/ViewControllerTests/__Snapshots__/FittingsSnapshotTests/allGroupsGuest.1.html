@@ -1,0 +1,348 @@
+<nav class="app-navbar" aria-label="Main">
+  <a class="app-brand" href="/">
+  <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
+  Duct Calc<span></span></a>
+  <div class="app-nav-actions">
+    <button type="button" class="btn" aria-label="Keyboard shortcuts" aria-haspopup="dialog" aria-controls="fittingsShortcuts" data-open-dialog="fittingsShortcuts"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 15h12"/></svg></button>
+    Ductulator<a class="btn btn-outline btn-primary" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span></span></a>
+  </div>
+</nav>
+<dialog id="fittingsShortcuts" class="modal" aria-labelledby="fittingsShortcuts-title">
+  <div class="modal-box">
+    <h2 id="fittingsShortcuts-title" class="text-2xl font-bold mb-6 pe-10">Keyboard shortcuts</h2>
+    <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Keyboard shortcuts" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    <p class="text-sm mt-2">Press Ctrl+K to focus search. For navigation, hold Ctrl+Alt and press a key below.</p>
+    <table class="table table-sm mt-4">
+      <caption class="text-left font-bold p-2">Group navigation</caption>
+      <tbody>
+        <tr>
+          <th scope="row">Groups 1–9</th>
+          <td class="text-right"><kbd class="kbd kbd-sm">1–9</kbd></td>
+        </tr>
+        <tr>
+          <th scope="row">Group 10</th>
+          <td class="text-right"><kbd class="kbd kbd-sm">0</kbd></td>
+        </tr>
+        <tr>
+          <th scope="row">Next group</th>
+          <td class="text-right"><kbd class="kbd kbd-sm">N</kbd></td>
+        </tr>
+        <tr>
+          <th scope="row">Previous group</th>
+          <td class="text-right"><kbd class="kbd kbd-sm">P</kbd></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="text-sm mt-2">Number keys select a group. N and P follow the current air path filter, including All groups, and stop at either end.</p>
+    <table class="table table-sm mt-4">
+      <caption class="text-left font-bold p-2">Fitting navigation</caption>
+      <tbody>
+        <tr>
+          <th scope="row">Next fitting</th>
+          <td class="text-right"><kbd class="kbd kbd-sm">J</kbd></td>
+        </tr>
+        <tr>
+          <th scope="row">Previous fitting</th>
+          <td class="text-right"><kbd class="kbd kbd-sm">K</kbd></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="text-sm mt-2">J and K move through the filtered fitting list and stop at either end.</p>
+    <table class="table table-sm mt-4">
+      <caption class="text-left font-bold p-2">App navigation</caption>
+      <tbody>
+        <tr>
+          <th scope="row">Ductulator</th>
+          <td class="text-right"><kbd class="kbd kbd-sm">D</kbd></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="text-sm mt-2">Ductulator opens in a new tab. Shortcuts pause while editing a field or when a dialog is open.</p>
+  </div>
+</dialog>
+<div id="fittings-page" data-tools="disabled" data-url="/fittings?group=all&amp;fitting=8A-smooth&amp;q=8a%20smooth">
+  <a class="skip" href="#workspace">Skip to fittings</a>
+  <section class="intro">
+    <div>
+      <h1>Fitting reference</h1>
+      <p>Drawings, reference values, and conditions for your duct path.</p>
+    </div>
+    <div class="catalog-stat"><strong>230<span> + 1</span></strong><span>approved drawings + concept</span></div>
+  </section>
+  <form class="toolbar" role="search" id="filters" action="/fittings" method="get">
+    <div class="system-toggle" role="group" aria-label="Filter fitting groups by air path"><a href="/fittings?system=all&amp;group=all&amp;fitting=8A-smooth&amp;q=8a%20smooth" data-reference-nav="" data-system="all" aria-current="true">All</a><a href="/fittings?system=supply&amp;group=all&amp;fitting=8A-smooth&amp;q=8a%20smooth" data-reference-nav="" data-system="supply" aria-current="false">Supply</a><a href="/fittings?system=return&amp;group=all&amp;fitting=8A-smooth&amp;q=8a%20smooth" data-reference-nav="" data-system="return" aria-current="false">Return</a></div>
+    <input type="hidden" name="system" value="all">
+    <input type="hidden" name="fitting" value="8A-smooth">
+    ⌕<label class="search"><span aria-hidden="true"></span>
+    <input id="search" name="q" type="search" value="8a smooth" placeholder="Search all groups by ID, name, or shape…" aria-label="Search all groups by ID, name, or shape" aria-keyshortcuts="Control+K" autocomplete="off">
+    Ctrl+K
+    Fitting group<kbd></kbd></label><label class="select-label group-control"><span></span>
+    <select id="group-filter" name="group" form="filters" aria-label="Fitting group">
+      <option value="all" selected>All groups</option>
+      <option value="1">1 · Supply at equipment</option>
+      <option value="2">2 · Supply branch takeoffs</option>
+      <option value="3">3 · Reducing trunk takeoffs</option>
+      <option value="4">4 · Supply boots &amp; heads</option>
+      <option value="5">5 · Return at equipment</option>
+      <option value="6">6 · Return branches &amp; boots</option>
+      <option value="7">7 · Joist &amp; stud returns</option>
+      <option value="8">8 · Elbows &amp; offsets</option>
+      <option value="9">9 · Supply junctions</option>
+      <option value="10">10 · Return junctions</option>
+      <option value="11">11 · Flex junctions &amp; bends</option>
+      <option value="12">12 · Transitions &amp; squeezes</option>
+    </select>
+    Values</label><label class="select-label">
+    <select id="value-filter" name="type">
+      <option value="all" selected>All reference types</option>
+      <option value="fixed">Fixed reference</option>
+      <option value="conditional">Requires conditions</option>
+    </select></label>
+    <button type="submit" class="text-button">Search</button>
+    Reset
+    2 fittings<a href="/fittings?group=all" class="text-button" data-reference-nav="" data-action="reset"></a><span id="result-count" class="result-count" aria-live="polite"></span>
+  </form>
+  <div class="mobile-group-navigation"></div>
+  <div id="workspace" tabindex="-1">
+    <div class="explorer combined">
+      <aside class="group-sidebar" aria-label="Fitting groups">
+        <div class="group-sidebar-header"></div>
+        <div class="panel-caption">GROUPS<span>12</span></div>
+        ∑
+        All groups
+        2
+        01
+        Supply at equipment
+        0
+        02
+        Supply branch takeoffs
+        0
+        03
+        Reducing trunk takeoffs
+        0
+        04
+        Supply boots &amp; heads
+        0
+        05
+        Return at equipment
+        0
+        06
+        Return branches &amp; boots
+        0
+        07
+        Joist &amp; stud returns
+        0
+        08
+        Elbows &amp; offsets
+        2
+        09
+        Supply junctions
+        0
+        10
+        Return junctions
+        0
+        11
+        Flex junctions &amp; bends
+        0
+        12
+        Transitions &amp; squeezes
+        0<a class="group-item active" href="/fittings?group=all&amp;fitting=8A-smooth&amp;q=8a%20smooth" data-reference-nav="" data-group="all" aria-current="true"><span class="group-number"></span><span></span><small></small></a><a class="group-item " href="/fittings?group=1&amp;fitting=8A-smooth&amp;q=8a%20smooth" data-reference-nav="" data-group="1" aria-keyshortcuts="Control+Alt+1" title="Group 1: Supply at equipment, Ctrl+Alt+1"><span class="group-number"></span><span></span><small></small></a><a class="group-item " href="/fittings?group=2&amp;fitting=8A-smooth&amp;q=8a%20smooth" data-reference-nav="" data-group="2" aria-keyshortcuts="Control+Alt+2" title="Group 2: Supply branch takeoffs, Ctrl+Alt+2"><span class="group-number"></span><span></span><small></small></a><a class="group-item " href="/fittings?group=3&amp;fitting=8A-smooth&amp;q=8a%20smooth" data-reference-nav="" data-group="3" aria-keyshortcuts="Control+Alt+3" title="Group 3: Reducing trunk takeoffs, Ctrl+Alt+3"><span class="group-number"></span><span></span><small></small></a><a class="group-item " href="/fittings?group=4&amp;fitting=8A-smooth&amp;q=8a%20smooth" data-reference-nav="" data-group="4" aria-keyshortcuts="Control+Alt+4" title="Group 4: Supply boots &amp; heads, Ctrl+Alt+4"><span class="group-number"></span><span></span><small></small></a><a class="group-item " href="/fittings?group=5&amp;fitting=8A-smooth&amp;q=8a%20smooth" data-reference-nav="" data-group="5" aria-keyshortcuts="Control+Alt+5" title="Group 5: Return at equipment, Ctrl+Alt+5"><span class="group-number"></span><span></span><small></small></a><a class="group-item " href="/fittings?group=6&amp;fitting=8A-smooth&amp;q=8a%20smooth" data-reference-nav="" data-group="6" aria-keyshortcuts="Control+Alt+6" title="Group 6: Return branches &amp; boots, Ctrl+Alt+6"><span class="group-number"></span><span></span><small></small></a><a class="group-item " href="/fittings?group=7&amp;fitting=8A-smooth&amp;q=8a%20smooth" data-reference-nav="" data-group="7" aria-keyshortcuts="Control+Alt+7" title="Group 7: Joist &amp; stud returns, Ctrl+Alt+7"><span class="group-number"></span><span></span><small></small></a><a class="group-item " href="/fittings?group=8&amp;fitting=8A-smooth&amp;q=8a%20smooth" data-reference-nav="" data-group="8" aria-keyshortcuts="Control+Alt+8" title="Group 8: Elbows &amp; offsets, Ctrl+Alt+8"><span class="group-number"></span><span></span><small></small></a><a class="group-item " href="/fittings?group=9&amp;fitting=8A-smooth&amp;q=8a%20smooth" data-reference-nav="" data-group="9" aria-keyshortcuts="Control+Alt+9" title="Group 9: Supply junctions, Ctrl+Alt+9"><span class="group-number"></span><span></span><small></small></a><a class="group-item " href="/fittings?group=10&amp;fitting=8A-smooth&amp;q=8a%20smooth" data-reference-nav="" data-group="10" aria-keyshortcuts="Control+Alt+0" title="Group 10: Return junctions, Ctrl+Alt+0"><span class="group-number"></span><span></span><small></small></a><a class="group-item " href="/fittings?group=11&amp;fitting=8A-smooth&amp;q=8a%20smooth" data-reference-nav="" data-group="11"><span class="group-number"></span><span></span><small></small></a><a class="group-item " href="/fittings?group=12&amp;fitting=8A-smooth&amp;q=8a%20smooth" data-reference-nav="" data-group="12"><span class="group-number"></span><span></span><small></small></a>
+        <div class="sidebar-note">Group 11 uses a concept drawing.</div>
+      </aside>
+      <aside class="fitting-sidebar" aria-label="Fittings">
+        <div class="panel-caption">FITTINGS<span>2</span></div><a class="fitting-item active" href="/fittings?group=all&amp;fitting=8A-smooth&amp;q=8a%20smooth" data-reference-nav="" data-select="8A-smooth" aria-current="true">
+        <img class="drawing" src="/images/fittings/group-8/8A-smooth.svg" alt="8A · Smooth round radius elbow" loading="lazy" decoding="async">
+        8A
+        Smooth round radius elbow
+        smooth
+        ›<span><strong></strong><span></span><small></small></span><span class="item-arrow" aria-hidden="true"></span></a><a class="fitting-item " href="/fittings?group=all&amp;fitting=8A-mitered&amp;q=8a%20smooth" data-reference-nav="" data-select="8A-mitered">
+        <img class="drawing" src="/images/fittings/group-8/8A-mitered.svg" alt="8A · Smooth mitered round elbow" loading="lazy" decoding="async">
+        8A
+        Smooth mitered round elbow
+        mitered
+        ›<span><strong></strong><span></span><small></small></span><span class="item-arrow" aria-hidden="true"></span></a>
+      </aside>
+      <section class="combined-panel" aria-label="Fitting reference and data">
+        <div class="combined-toolbar">
+          <div><strong>Fitting details</strong><code>8A-smooth</code></div>
+          Sign in for CSV / JSON<a class="sign-in-data" href="/login?next=/fittings?group%3Dall%26fitting%3D8A-smooth%26q%3D8a%2520smooth%26data%3Djson" data-login=""></a>
+        </div>
+        <div class="combined-content ">
+          <div class="detail-panel">
+            <article class="detail">
+              <div class="breadcrumb">GROUP 08<span>/</span>Elbows &amp; offsets</div>
+              <div class="detail-heading">
+                <div>
+                  <span class="fitting-code">8A</span>
+                  <h2>Smooth round radius elbow</h2>
+                </div>
+                Requires conditions<span class="reference-badge conditional"></span>
+              </div>
+              <div class="artboard">
+                <img class="drawing" src="/images/fittings/group-8/8A-smooth.svg" alt="8A · Smooth round radius elbow" loading="lazy" decoding="async">
+                INDIVIDUAL FITTING DRAWING<span class="art-label"></span>
+              </div>
+              <div class="identity">
+                <div><span class="eyebrow">CATALOG ID</span><code>8A-smooth</code></div>
+                <button class="text-button browser-only" data-copy-id="8A-smooth">Copy ID</button>
+                <button class="text-button browser-only" data-action="share" data-share-path="/fittings?group=8&amp;fitting=8A-smooth">Copy link ↗</button>
+              </div>
+              <div class="detail-columns">
+                <section>
+                  <h3>Reference values</h3>
+                  <div class="source-table-wrap">
+                    <table class="source-table">
+                      <caption>Equivalent length at listed conditions</caption>
+                      <thead>
+                        <tr>
+                          <th scope="col">R/D</th>
+                          <th scope="col">Bend angle (degrees)</th>
+                          <th scope="col">EL (ft)</th>
+                          <th scope="col">Note</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>0.75</td>
+                          <td>20</td>
+                          <td class="numeric">6.2</td>
+                          <td>20 ft at 90° × 0.31</td>
+                        </tr>
+                        <tr>
+                          <td>0.75</td>
+                          <td>30</td>
+                          <td class="numeric">9</td>
+                          <td>20 ft at 90° × 0.45</td>
+                        </tr>
+                        <tr>
+                          <td>0.75</td>
+                          <td>45</td>
+                          <td class="numeric">12</td>
+                          <td>20 ft at 90° × 0.6</td>
+                        </tr>
+                        <tr>
+                          <td>0.75</td>
+                          <td>60</td>
+                          <td class="numeric">15.600000000000001</td>
+                          <td>20 ft at 90° × 0.78</td>
+                        </tr>
+                        <tr>
+                          <td>0.75</td>
+                          <td>75</td>
+                          <td class="numeric">18</td>
+                          <td>20 ft at 90° × 0.9</td>
+                        </tr>
+                        <tr>
+                          <td>0.75</td>
+                          <td>90</td>
+                          <td class="numeric">20</td>
+                          <td>20 ft at 90° × 1</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>20</td>
+                          <td class="numeric">4.65</td>
+                          <td>15 ft at 90° × 0.31</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>30</td>
+                          <td class="numeric">6.75</td>
+                          <td>15 ft at 90° × 0.45</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>45</td>
+                          <td class="numeric">9</td>
+                          <td>15 ft at 90° × 0.6</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>60</td>
+                          <td class="numeric">11.700000000000001</td>
+                          <td>15 ft at 90° × 0.78</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>75</td>
+                          <td class="numeric">13.5</td>
+                          <td>15 ft at 90° × 0.9</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>90</td>
+                          <td class="numeric">15</td>
+                          <td>15 ft at 90° × 1</td>
+                        </tr>
+                        <tr>
+                          <td>≥ 1.5</td>
+                          <td>20</td>
+                          <td class="numeric">3.1</td>
+                          <td>10 ft at 90° × 0.31</td>
+                        </tr>
+                        <tr>
+                          <td>≥ 1.5</td>
+                          <td>30</td>
+                          <td class="numeric">4.5</td>
+                          <td>10 ft at 90° × 0.45</td>
+                        </tr>
+                        <tr>
+                          <td>≥ 1.5</td>
+                          <td>45</td>
+                          <td class="numeric">6</td>
+                          <td>10 ft at 90° × 0.6</td>
+                        </tr>
+                        <tr>
+                          <td>≥ 1.5</td>
+                          <td>60</td>
+                          <td class="numeric">7.800000000000001</td>
+                          <td>10 ft at 90° × 0.78</td>
+                        </tr>
+                        <tr>
+                          <td>≥ 1.5</td>
+                          <td>75</td>
+                          <td class="numeric">9</td>
+                          <td>10 ft at 90° × 0.9</td>
+                        </tr>
+                        <tr>
+                          <td>≥ 1.5</td>
+                          <td>90</td>
+                          <td class="numeric">10</td>
+                          <td>10 ft at 90° × 1</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+                <section>
+                  <h3>Conditions</h3>
+                  <dl class="conditions">
+                    <div>
+                      <dt>Friction rate (IWC / 100 ft)</dt>
+                      <dd>0.08</dd>
+                    </div>
+                    <div>
+                      <dt>Reference velocity (FPM)</dt>
+                      <dd>900</dd>
+                    </div>
+                  </dl>
+                </section>
+              </div>
+              <div class="source-line"><span>ACCA Manual D · printed page 176</span></div>
+              <p class="audit-note">Visually approved artwork · reference transcription, not an audited calculation rule.</p>
+            </article>
+          </div>
+          <div id="combined-data" hidden></div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <footer class="reference-footer"><span>Reference values · calculation rules remain under review.</span></footer>
+  <dialog id="copy-dialog" aria-labelledby="copy-title">
+    <h2 id="copy-title">Copy reference data</h2>
+    <p>Automatic copying is unavailable. Select and copy the text below.</p>
+    <textarea aria-label="Text to copy" readonly=""></textarea>
+    <button data-action="close-copy">Done</button>
+  </dialog>
+  <div class="reference-toast" id="toast" role="status"></div>
+</div>
