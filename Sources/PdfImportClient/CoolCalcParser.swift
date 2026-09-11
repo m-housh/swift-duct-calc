@@ -1,5 +1,6 @@
 import Foundation
 import ManualDCore
+import Parsing
 
 /// Parser for Cool Calc MJ8 Individual Room Analysis and Room Detail exports.
 /// Both layouts report total cooling in their per-room load fields.
@@ -61,11 +62,8 @@ enum CoolCalcParser {
       )
     }
 
-    let number = #"(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?"#
     let header = try NSRegularExpression(
       pattern: #"^(.+?)\s+-\s+Level:\s*(Basement|Level\s+\d+)\s*$"#)
-    let loads = try NSRegularExpression(
-      pattern: "^Heating Load:\\s*(\(number))\\s*BTU/h\\s+Cooling Load:\\s*(\(number))\\s*BTU/h$")
 
     struct Draft {
       let name: String
@@ -95,14 +93,12 @@ enum CoolCalcParser {
         drafts.append(.init(name: fields[0], level: .init(rawValue: level)))
       } else if line.hasPrefix("Heating Load:") || line.hasPrefix("Cooling Load:") {
         guard !drafts.isEmpty, drafts[drafts.count - 1].heating == nil,
-          let fields = captures(loads, in: line),
-          let heating = value(fields[0]), let cooling = value(fields[1]),
-          heating >= 0, cooling > 0
+          let loads = try? RoomLoads().parse(line), loads.cooling > 0
         else {
           throw RoomImportError("A room has an unreadable or invalid load. No rooms were imported.")
         }
-        drafts[drafts.count - 1].heating = heating
-        drafts[drafts.count - 1].cooling = cooling
+        drafts[drafts.count - 1].heating = loads.heating
+        drafts[drafts.count - 1].cooling = loads.cooling
       } else if line.hasPrefix("Airflow:") || line.hasPrefix("Area:")
         || line.hasPrefix("Exposed Wall Area:")
       {

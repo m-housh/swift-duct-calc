@@ -1,5 +1,6 @@
 import Foundation
 import ManualDCore
+import Parsing
 
 /// Cool Calc's Room Detail export reports total loads without room levels.
 enum RoomDetailParser {
@@ -51,9 +52,7 @@ enum RoomDetailParser {
 
   private static func number(_ label: String, in text: String) throws -> Double {
     let raw = try field(label, in: text)
-    guard
-      raw.range(of: #"^(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?$"#, options: .regularExpression) != nil,
-      let value = Double(raw.replacingOccurrences(of: ",", with: "")), value.isFinite
+    guard let value = try? ReportNumber().parse(raw)
     else { throw RoomImportError("Could not read \(label) in the Room Detail report.") }
     return value
   }
@@ -61,14 +60,11 @@ enum RoomDetailParser {
   private static func field(_ label: String, in text: String, wholeLine: Bool = false) throws
     -> String
   {
-    let pattern =
-      NSRegularExpression.escapedPattern(for: label)
-      + (wholeLine ? #"[ \t]*([^\r\n]+)"# : #"[ \t]*(\S+)"#)
-    let matches = try NSRegularExpression(pattern: pattern).matches(
-      in: text, range: NSRange(text.startIndex..., in: text))
-    guard matches.count == 1, let range = Range(matches[0].range(at: 1), in: text) else {
+    let parser = ReportField(label: label, wholeLine: wholeLine)
+    var input = text[...].utf8
+    guard let value = try? parser.parse(&input), (try? parser.parse(&input)) == nil else {
       throw RoomImportError("Expected one \(label) field in each Room Detail section.")
     }
-    return String(text[range]).trimmingCharacters(in: .whitespacesAndNewlines)
+    return value
   }
 }
