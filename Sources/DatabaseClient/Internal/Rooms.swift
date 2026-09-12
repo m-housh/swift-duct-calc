@@ -80,6 +80,11 @@ extension DatabaseClient.Rooms: TestDependencyKey {
         guard let model = try await RoomModel.find(id, on: database) else {
           throw NotFoundError()
         }
+        guard size.height > 0,
+          size.register.map({ $0 > 0 && $0 <= model.registerCount }) ?? true
+        else {
+          throw ValidationError("Choose a valid register and a positive height.")
+        }
         var rectangularSizes = model.rectangularSizes ?? []
         rectangularSizes.removeAll {
           $0.id == size.id
@@ -291,6 +296,7 @@ final class RoomModel: Model, @unchecked Sendable, Validatable {
           .query(on: database)
           .with(\.$room)
           .filter(\.$id == delegateTo)
+          .filter(\.$project.$id == $project.id)
           .first()
       else {
         throw ValidationError("Can not find room: \(delegateTo), to delegate airflow to.")

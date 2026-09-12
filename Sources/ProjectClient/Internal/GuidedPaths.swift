@@ -68,7 +68,8 @@ extension ProjectClient {
     }
     for step in configuration.steps {
       let rows = request.rows.filter { $0.stepID == step.id }
-      guard step.allowsSkipping || !rows.isEmpty else {
+      // Required sections guide creation; an existing path can omit fittings without editing its template.
+      guard existing != nil || step.allowsSkipping || !rows.isEmpty else {
         throw ValidationError("Complete \(step.title) before saving.")
       }
       guard step.behavior != .chooseOne || rows.count <= 1 else {

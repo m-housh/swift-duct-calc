@@ -9,12 +9,52 @@ import Testing
 @Suite
 struct GuidedPathTests {
   @Test
+  func savedPathCanRemoveRequiredAndOptionalFittingsWithoutChangingTemplate() async throws {
+    try await withTestUserAndProject(setupDependencies: { $0.templateFittingClient = .liveValue }) {
+      user, project in
+      @Dependency(\.database) var database
+      let client = ProjectClient.liveValue
+      let template = try await client.createPathTemplate(
+        userID: user.id, configuration: Self.configuration)
+      let snapshot = PathTemplate.Snapshot(template: template)
+      await #expect(throws: ValidationError.self) {
+        try await client.saveGuidedPath(
+          userID: user.id, projectID: project.id,
+          request: .init(
+            name: "Incomplete new path", straightLengths: [10], snapshot: snapshot,
+            rows: [Self.rows[1]]))
+      }
+      let saved = try await client.saveGuidedPath(
+        userID: user.id, projectID: project.id,
+        request: .init(
+          name: "Editable path", straightLengths: [10], snapshot: snapshot, rows: Self.rows))
+      let removedRequired = try await client.saveGuidedPath(
+        userID: user.id, projectID: project.id,
+        request: .init(
+          id: saved.id, name: saved.name, straightLengths: [10], snapshot: snapshot,
+          rows: [Self.rows[1]], revision: saved.revision))
+      #expect(removedRequired.groups == [saved.groups[1]])
+      #expect(abs(removedRequired.totalEquivalentLength - 28.6) < 1e-9)
+      let removedAll = try await client.saveGuidedPath(
+        userID: user.id, projectID: project.id,
+        request: .init(
+          id: saved.id, name: saved.name, straightLengths: [10], snapshot: snapshot,
+          rows: [], revision: removedRequired.revision))
+      #expect(removedAll.groups.isEmpty)
+      #expect(removedAll.totalEquivalentLength == 10)
+      #expect(removedAll.templateSnapshot == snapshot)
+      #expect(try await database.equivalentLengths.get(saved.id) == removedAll)
+      #expect(try await database.pathTemplates.get(user.id, template.id) == template)
+    }
+  }
+
+  @Test
   func duplicateNamesKeepExistingPathsAndAllowRenameRetry() async throws {
     try await withTestUserAndProject(setupDependencies: { $0.templateFittingClient = .liveValue }) {
       user, project in
       @Dependency(\.database) var database
       let client = ProjectClient.liveValue
-      let configuration = PathTemplate.starterConfigurations().first { $0.type == .supply }!
+      let configuration = PathTemplate.defaultConfigurations().first { $0.type == .supply }!
       let template = try await client.createPathTemplate(
         userID: user.id, configuration: configuration)
       let snapshot = PathTemplate.Snapshot(template: template)
@@ -106,16 +146,6 @@ struct GuidedPathTests {
       #expect(
         saved.groups[1].fitting?.calculation == saved.groups[1].calculation?.catalogCalculation)
       #expect(saved.groups[1].fitting?.calculation?.catalogRevision == "fitting-catalog-v14")
-      await #expect(throws: FittingPathError.self) {
-        try await client.saveFittingPath(
-          user.id, project.id,
-          .init(
-            baseline: saved, name: saved.name, pathType: .supply,
-            straightLengths: saved.straightLengths,
-            entries: saved.groups.indices.map {
-              .saved(index: $0, quantity: saved.groups[$0].quantity)
-            }))
-      }
       #expect(try await database.equivalentLengths.get(saved.id) == saved)
       var changed = template.configuration
       changed.steps.reverse()

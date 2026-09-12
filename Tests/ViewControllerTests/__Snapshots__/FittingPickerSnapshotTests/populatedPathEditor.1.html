@@ -1,12 +1,12 @@
 <link rel="stylesheet" href="/css/fitting-path.css?v=app-theme-1">
 <link rel="stylesheet" href="/css/picker-preference.css">
 <link rel="stylesheet" href="/css/fitting-favorites.css">
-<link rel="stylesheet" href="/css/fitting-path-modal.css?v=2">
+<link rel="stylesheet" href="/css/fitting-path-modal.css?v=close-button-3">
 <script src="/js/group-carousel.js" defer></script>
-<script src="/js/path-templates.js?v=path-revisions-3" defer></script>
+<script src="/js/path-templates.js?v=path-revisions-4" defer></script>
 <script src="/js/template-modal.js?v=template-modal-2" defer></script>
-<script src="/js/fitting-path.js?v=template-path-type-3" defer></script>
-<dialog id="fitting-path" class="editor-dialog fitting-path" aria-labelledby="path-title" data-endpoint="/projects/00000000-0000-0000-0000-000000000000/effective-lengths" data-baseline="{&quot;createdAt&quot;:-978307200,&quot;groups&quot;:[],&quot;id&quot;:&quot;00000000-0000-0000-0000-000000000001&quot;,&quot;name&quot;:&quot;Bedroom return&quot;,&quot;projectID&quot;:&quot;00000000-0000-0000-0000-000000000000&quot;,&quot;straightLengths&quot;:[10,25],&quot;type&quot;:&quot;return&quot;,&quot;updatedAt&quot;:-978307200}" data-rows="[{&quot;id&quot;:&quot;catalog-row&quot;,&quot;quantity&quot;:2,&quot;row&quot;:{&quot;artwork&quot;:&quot;\/images\/fittings\/group-8\/8A-smooth.svg&quot;,&quot;details&quot;:[&quot;Angle: 90°&quot;,&quot;Radius ratio: 1.5&quot;],&quot;feet&quot;:10,&quot;fields&quot;:{&quot;angle&quot;:&quot;90&quot;,&quot;radiusRatio&quot;:&quot;1.5&quot;},&quot;fittingID&quot;:&quot;8A-smooth&quot;,&quot;groupID&quot;:8,&quot;name&quot;:&quot;Smooth round radius elbow&quot;,&quot;origin&quot;:&quot;catalog&quot;,&quot;sourceCode&quot;:&quot;8A&quot;},&quot;savedIndex&quot;:0},{&quot;id&quot;:&quot;reference-row&quot;,&quot;quantity&quot;:1,&quot;row&quot;:{&quot;details&quot;:[],&quot;feet&quot;:61.375,&quot;groupID&quot;:6,&quot;name&quot;:&quot;Reference entry&quot;,&quot;origin&quot;:&quot;referenceEntry&quot;,&quot;sourceCode&quot;:&quot;6A&quot;},&quot;savedIndex&quot;:1},{&quot;id&quot;:&quot;legacy-row&quot;,&quot;quantity&quot;:1,&quot;row&quot;:{&quot;details&quot;:[],&quot;feet&quot;:30,&quot;groupID&quot;:5,&quot;name&quot;:&quot;Previously saved fitting&quot;,&quot;origin&quot;:&quot;legacy&quot;},&quot;savedIndex&quot;:2}]" data-favorites="[&quot;8A-smooth&quot;]">
+<script src="/js/fitting-path.js?v=duplicate-path-5" defer></script>
+<dialog id="fitting-path" class="editor-dialog fitting-path" aria-labelledby="path-title" data-endpoint="/projects/00000000-0000-0000-0000-000000000000/effective-lengths" data-baseline="{&quot;createdAt&quot;:-978307200,&quot;groups&quot;:[],&quot;id&quot;:&quot;00000000-0000-0000-0000-000000000001&quot;,&quot;name&quot;:&quot;Bedroom return&quot;,&quot;projectID&quot;:&quot;00000000-0000-0000-0000-000000000000&quot;,&quot;straightLengths&quot;:[10,25],&quot;type&quot;:&quot;return&quot;,&quot;updatedAt&quot;:-978307200}" data-rows="[{&quot;id&quot;:&quot;catalog-row&quot;,&quot;quantity&quot;:2,&quot;row&quot;:{&quot;artwork&quot;:&quot;\/images\/fittings\/group-8\/8A-smooth.svg&quot;,&quot;details&quot;:[&quot;Angle: 90°&quot;,&quot;Radius ratio: 1.5&quot;],&quot;feet&quot;:10,&quot;fields&quot;:{&quot;angle&quot;:&quot;90&quot;,&quot;radiusRatio&quot;:&quot;1.5&quot;},&quot;fittingID&quot;:&quot;8A-smooth&quot;,&quot;groupID&quot;:8,&quot;name&quot;:&quot;Smooth round radius elbow&quot;,&quot;origin&quot;:&quot;catalog&quot;,&quot;sourceCode&quot;:&quot;8A&quot;},&quot;savedIndex&quot;:0},{&quot;id&quot;:&quot;reference-row&quot;,&quot;quantity&quot;:1,&quot;row&quot;:{&quot;details&quot;:[],&quot;feet&quot;:61.375,&quot;groupID&quot;:6,&quot;name&quot;:&quot;Reference entry&quot;,&quot;origin&quot;:&quot;referenceEntry&quot;,&quot;sourceCode&quot;:&quot;6A&quot;},&quot;savedIndex&quot;:1},{&quot;id&quot;:&quot;legacy-row&quot;,&quot;quantity&quot;:1,&quot;row&quot;:{&quot;details&quot;:[],&quot;feet&quot;:30,&quot;groupID&quot;:5,&quot;name&quot;:&quot;Previously saved fitting&quot;,&quot;origin&quot;:&quot;legacy&quot;},&quot;savedIndex&quot;:2}]" data-duplicate="false" data-favorites="[&quot;8A-smooth&quot;]">
   <section class="path-sheet">
     <header>
       <div>
@@ -14,7 +14,7 @@
         <h1 id="path-title">Fittings in this path</h1>
         <p class="muted">Build and review your path, one fitting at a time.</p>
       </div>
-      <button type="button" id="close-path">Cancel</button>
+      <button type="button" id="close-path" aria-label="Close path editor" title="Close"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
     </header>
     <div class="path-fields">
       <label>Path name
@@ -35,27 +35,22 @@
     <section class="path-table" aria-label="Fitting path entries">
       <div class="sheet-columns" aria-hidden="true"><span>#</span><span>Drawing</span><span>Fitting / group</span><span>EL each</span><span>Quantity</span><span>Subtotal</span><span></span></div>
       <div id="path-rows">
-        <article class="path-row sheet-row" data-row-id="catalog-row">
+        <article class="path-row sheet-row" data-row-id="legacy-row">
           <span class="row-number">1</span>
-          <img src="/images/fittings/group-8/8A-smooth.svg" alt="Smooth round radius elbow" class="sheet-art">
+          <div class="sheet-art"><span>Group 5</span></div>
           <div class="sheet-description">
-            <strong class="code">8A</strong>
-            <h3>Smooth round radius elbow</h3>
-            <p class="sheet-group">Group 8</p>
-            Calculated<small></small>
-            <details>
-              <summary>Selected inputs</summary>
-              <p>Angle: 90°</p>
-              <p>Radius ratio: 1.5</p>
-            </details>
+            <strong class="code">Group 5</strong>
+            <h3>Previously saved fitting</h3>
+            <p class="sheet-group">Group 5</p>
+            Previously saved value<small></small>
           </div>
-          10 ft
-          Quantity for 8A<span class="sheet-unit"></span><label class="row-quantity-label"><span class="visually-hidden"></span>
-          <input type="number" min="1" max="1000000" step="1" value="2" data-quantity="catalog-row">
-          20 ft</label><strong class="sheet-subtotal"></strong>
+          30 ft
+          Quantity for Previously saved fitting<span class="sheet-unit"></span><label class="row-quantity-label"><span class="visually-hidden"></span>
+          <input type="number" min="1" max="1000000" step="1" value="1" data-quantity="legacy-row">
+          30 ft</label><strong class="sheet-subtotal"></strong>
           <div class="sheet-actions">
-            <button type="button" data-edit-row="catalog-row">Edit</button>
-            <button type="button" data-remove-row="catalog-row">Remove</button>
+            <button type="button" data-edit-row="legacy-row">Edit</button>
+            <button type="button" data-remove-row="legacy-row">Remove</button>
           </div>
         </article>
         <article class="path-row sheet-row" data-row-id="reference-row">
@@ -76,22 +71,27 @@
             <button type="button" data-remove-row="reference-row">Remove</button>
           </div>
         </article>
-        <article class="path-row sheet-row" data-row-id="legacy-row">
+        <article class="path-row sheet-row" data-row-id="catalog-row">
           <span class="row-number">3</span>
-          <div class="sheet-art"><span>Group 5</span></div>
+          <img src="/images/fittings/group-8/8A-smooth.svg" alt="Smooth round radius elbow" class="sheet-art">
           <div class="sheet-description">
-            <strong class="code">Group 5</strong>
-            <h3>Previously saved fitting</h3>
-            <p class="sheet-group">Group 5</p>
-            Previously saved value<small></small>
+            <strong class="code">8A</strong>
+            <h3>Smooth round radius elbow</h3>
+            <p class="sheet-group">Group 8</p>
+            Calculated<small></small>
+            <details>
+              <summary>Selected inputs</summary>
+              <p>Angle: 90°</p>
+              <p>Radius ratio: 1.5</p>
+            </details>
           </div>
-          30 ft
-          Quantity for Previously saved fitting<span class="sheet-unit"></span><label class="row-quantity-label"><span class="visually-hidden"></span>
-          <input type="number" min="1" max="1000000" step="1" value="1" data-quantity="legacy-row">
-          30 ft</label><strong class="sheet-subtotal"></strong>
+          10 ft
+          Quantity for 8A<span class="sheet-unit"></span><label class="row-quantity-label"><span class="visually-hidden"></span>
+          <input type="number" min="1" max="1000000" step="1" value="2" data-quantity="catalog-row">
+          20 ft</label><strong class="sheet-subtotal"></strong>
           <div class="sheet-actions">
-            <button type="button" data-edit-row="legacy-row">Edit</button>
-            <button type="button" data-remove-row="legacy-row">Remove</button>
+            <button type="button" data-edit-row="catalog-row">Edit</button>
+            <button type="button" data-remove-row="catalog-row">Remove</button>
           </div>
         </article>
       </div>

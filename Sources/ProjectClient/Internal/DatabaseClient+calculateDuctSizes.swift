@@ -69,11 +69,15 @@ extension DatabaseClient {
 
     let availableStaticPressure = equipment.staticPressure - details.componentLosses.total
     let tel = supply.totalEquivalentLength + returnLength.totalEquivalentLength
+    let frictionRate = FrictionRate(
+      availableStaticPressure: availableStaticPressure, value: (availableStaticPressure * 100) / tel
+    )
+    if let error = frictionRate.error { throw ValidationError(error.reason) }
     return .init(
       equipmentInfo: equipment,
       maxSupplyLength: supply,
       maxReturnLenght: returnLength,
-      designFrictionRate: (availableStaticPressure * 100) / tel,
+      designFrictionRate: frictionRate.value,
       projectSHR: shr
     )
   }

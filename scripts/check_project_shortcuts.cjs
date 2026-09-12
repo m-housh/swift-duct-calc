@@ -33,7 +33,7 @@ function setup(t, html = snapshot(1)) {
 }
 
 test('all six project pages expose the correct shortcuts and use the navigation links', t => {
-  const titles = ['Project', 'Rooms', 'Equipment', 'T.E.L.', 'Friction Rate', 'Duct Sizes'];
+  const titles = ['Project', 'Rooms', 'Equipment', 'Total effective length', 'Friction rate', 'Duct sizes'];
   for (let page = 1; page <= 6; page++) {
     const { document, clicks, press } = setup(t, snapshot(page));
     const buttons = [...document.querySelectorAll('#project-sidebar a')];
@@ -41,7 +41,6 @@ test('all six project pages expose the correct shortcuts and use the navigation 
     buttons.forEach((button, index) => {
       const key = String(index + 1);
       assert.equal(button.querySelector('span').textContent, titles[index]);
-      assert.equal(button.querySelector('.text-xs').textContent, `Ctrl+Alt+${key}`);
       assert.equal(button.getAttribute('title'), `${titles[index]}, Ctrl+Alt+${key}`);
       assert.equal(button.getAttribute('aria-keyshortcuts'), `Control+Alt+${key}`);
       assert(button.getAttribute('href').startsWith('/projects/'));
@@ -68,24 +67,10 @@ test('plain keys, browser shortcuts, extra modifiers, repeats, composition and A
   assert.deepEqual(clicks, []);
 });
 
-test('J and K open adjacent sections and stop at the ends, including with Caps Lock', t => {
-  for (let page = 1; page <= 6; page++) {
-    const { document, clicks, press } = setup(t, snapshot(page));
-    const buttons = [...document.querySelectorAll('#project-sidebar a')];
-    for (const key of ['j', 'k', 'J', 'K']) {
-      const before = clicks.length;
-      const next = page - 1 + (key.toLowerCase() === 'j' ? 1 : -1);
-      assert(press(key).defaultPrevented);
-      if (next < 0 || next >= buttons.length) assert.equal(clicks.length, before);
-      else {
-        assert.equal(clicks.length, before + 1);
-        assert.equal(clicks.at(-1), buttons[next].getAttribute('href'));
-      }
-    }
-    document.querySelector('#project-sidebar [aria-current="page"]').removeAttribute('aria-current');
-    assert.equal(press('j').defaultPrevented, false);
-    assert.equal(press('k').defaultPrevented, false);
-  }
+test('J and K no longer navigate between sections', t => {
+  const { clicks, press } = setup(t, snapshot(1));
+  for (const key of ['j', 'k', 'J', 'K']) assert.equal(press(key).defaultPrevented, false);
+  assert.deepEqual(clicks, []);
 });
 
 test('form controls, editable descendants and shadow DOM editors keep their keystrokes', t => {
@@ -203,7 +188,7 @@ test('every project page lists its shortcuts in an accessible help dialog', t =>
     assert.equal(trigger.getAttribute('aria-label'), 'Keyboard shortcuts');
     assert(trigger.querySelector('svg[aria-hidden="true"]'));
     assert.deepEqual([...dialog.querySelectorAll('caption')].map(node => node.textContent), ['Project sections', 'App navigation']);
-    const expected = { J: 'Next section', K: 'Previous section' };
+    const expected = { J: 'Next room row', K: 'Previous room row' };
     for (const control of document.querySelectorAll('#project-sidebar [aria-keyshortcuts], nav [aria-keyshortcuts]')) {
       const key = control.getAttribute('aria-keyshortcuts').split('+').at(-1);
       // The formatted snapshot renderer can hoist inline text; live browser tests check control names.

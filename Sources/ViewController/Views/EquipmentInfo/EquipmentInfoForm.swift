@@ -10,6 +10,7 @@ struct EquipmentInfoForm: HTML, Sendable {
 
   let dismiss: Bool
   let equipmentInfo: EquipmentInfo?
+  var inline = false
 
   var staticPressure: String {
     guard let staticPressure = equipmentInfo?.staticPressure else {
@@ -26,57 +27,63 @@ struct EquipmentInfoForm: HTML, Sendable {
   }
 
   var body: some HTML {
-    ModalForm(id: Self.id, title: "Equipment", dismiss: dismiss) {
-      form(
-        .data("success-message", value: "Changes saved."),
-        .class("grid grid-cols-1 gap-4"),
-        equipmentInfo != nil
-          ? .hx.patch(route)
-          : .hx.post(route),
-        .hx.target("body"),
-        .hx.swap(.outerHTML)
-      ) {
-        input(.class("hidden"), .name("projectID"), .value("\(projectID)"))
+    if inline {
+      fields
+    } else {
+      ModalForm(id: Self.id, title: "Equipment", dismiss: dismiss) { fields }
+    }
+  }
 
-        if let equipmentInfo {
-          input(.class("hidden"), .name("id"), .value("\(equipmentInfo.id)"))
-        }
+  var fields: some HTML & Sendable {
+    form(
+      .data("success-message", value: "Changes saved."),
+      .class("grid grid-cols-1 gap-4"),
+      equipmentInfo != nil
+        ? .hx.patch(route)
+        : .hx.post(route),
+      .hx.target("body"),
+      .hx.swap(.outerHTML)
+    ) {
+      input(.class("hidden"), .name("projectID"), .value("\(projectID)"))
 
-        LabeledInput(
-          "Static Pressure",
-          .name("staticPressure"),
-          .type(.number),
-          .value(staticPressure),
-          .min("0"),
-          .max("1.0"),
-          .step("0.1"),
-          .required
-        )
-
-        LabeledInput(
-          "Heating CFM",
-          .name("heatingCFM"),
-          .type(.number),
-          .value(equipmentInfo?.heatingCFM),
-          .placeholder("1000"),
-          .min("0"),
-          .required,
-          .autofocus
-        )
-
-        LabeledInput(
-          "Cooling CFM",
-          .name("coolingCFM"),
-          .type(.number),
-          .value(equipmentInfo?.coolingCFM),
-          .placeholder("1000"),
-          .min("0"),
-          .required
-        )
-
-        SubmitButton(title: "Save")
-          .attributes(.class("btn-block my-6"))
+      if let equipmentInfo {
+        input(.class("hidden"), .name("id"), .value("\(equipmentInfo.id)"))
       }
+
+      LabeledInput(
+        "Static Pressure",
+        .name("staticPressure"),
+        .type(.number),
+        .value(staticPressure),
+        .min("0"),
+        .max("1.0"),
+        .step("0.01"),
+        .required
+      )
+
+      LabeledInput(
+        "Heating CFM",
+        .name("heatingCFM"),
+        .type(.number),
+        .value(equipmentInfo?.heatingCFM),
+        .placeholder("e.g. 1000"),
+        .min("0"),
+        .required,
+        .autofocus
+      )
+
+      LabeledInput(
+        "Cooling CFM",
+        .name("coolingCFM"),
+        .type(.number),
+        .value(equipmentInfo?.coolingCFM),
+        .placeholder("e.g. 1000"),
+        .min("0"),
+        .required
+      )
+
+      SubmitButton(title: "Save")
+        .attributes(.class("btn-block my-6"))
     }
   }
 }

@@ -23,6 +23,8 @@ extension DatabaseClient.Migrations: DependencyKey {
         EquivalentLength.AddTemplateSnapshot(),
         EquivalentLength.AddRevision(),
         AdminMetricsMigration(),
+        Project.AddLastOpenedAt(),
+        PathTemplate.AddDefaults(),
       ]
     }
   )

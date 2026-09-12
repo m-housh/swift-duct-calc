@@ -145,6 +145,12 @@ struct ViewControllerTests {
 
     try await withDefaultDependencies {
       $0.database.projects.get = { _ in project }
+      $0.database.projects.detail = { _ in
+        .init(
+          project: project, componentLosses: componentLosses, equipmentInfo: equipment,
+          equivalentLengths: tels, rooms: rooms, trunks: trunks)
+      }
+      $0.database.projects.recent = { _ in [project] }
       $0.database.projects.getForUser = { _, _ in project }
       $0.database.projects.getCompletedSteps = { _ in
         .init(equipmentInfo: true, rooms: true, equivalentLength: true, frictionRate: true)
@@ -210,8 +216,12 @@ struct ViewControllerTests {
 
     return try await withDependencies {
       $0.viewController = .liveValue
+      $0.date = .constant(.mock)
       $0.auth.currentUser = { user }
       $0.database.userProfiles.fetch = { _ in profile }
+      $0.database.projects.getForUser = { _, _ in nil }
+      $0.database.projects.recent = { _ in [] }
+      $0.database.projects.recordOpen = { _, _, _ in }
       $0.manualD = .liveValue
       try await updateDependencies(&$0)
     } operation: {

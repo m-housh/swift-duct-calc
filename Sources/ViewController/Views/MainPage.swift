@@ -60,11 +60,12 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     meta(.content(keywords), .name(.keywords))
     script(.src("https://unpkg.com/htmx.org@2.0.8")) {}
     script(.src("/js/htmx-download.js")) {}
-    script(.src("/js/main.js")) {}
+    script(.src("/js/main.js?v=workspace-fixes-6")) {}
     script(.src("https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4")) {}
     link(.rel(.stylesheet), .href("/css/output.css?v=navbar-reference-1"))
     link(.rel(.stylesheet), .href("/css/htmx.css"))
-    link(.rel(.stylesheet), .href("/css/accessibility.css?v=1"))
+    link(.rel(.stylesheet), .href("/css/accessibility.css?v=request-toast-2"))
+    link(.rel(.stylesheet), .href("/css/project-workspace.css?v=friction-errors-5"))
     link(
       .rel(.icon),
       .href("/images/favicon.ico"),

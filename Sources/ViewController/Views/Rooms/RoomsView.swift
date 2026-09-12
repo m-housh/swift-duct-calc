@@ -10,239 +10,184 @@ struct RoomsView: HTML, Sendable {
   let rooms: [Room]
   let sensibleHeatRatio: Double?
 
-  // Sort the rooms based on level, they should already be sorted by name,
-  // so this puts lower level rooms towards the top in alphabetical order.
-  //
-  // If rooms do not have a level we shove those all the way to the bottom.
   private var sortedRooms: [Room] {
-    rooms.sorted { ($0.level?.rawValue ?? 20) < ($1.level?.rawValue ?? 20) }
+    rooms.sorted {
+      let lhs = $0.level?.rawValue ?? 20
+      let rhs = $1.level?.rawValue ?? 20
+      return lhs == rhs ? $0.name.localizedStandardCompare($1.name) == .orderedAscending : lhs < rhs
+    }
   }
 
   var body: some HTML {
-    div(.class("flex w-full flex-col")) {
+    div(.data("room-workspace", value: "")) {
       PageTitleRow {
-        div(.class("room-load-summary")) {
-
-          div(.class("col-span-2")) {
-            PageTitle { "Room Loads" }
+        div {
+          PageTitle { "Room loads" }
+          p(.class("muted")) { "Heating and cooling loads, organized by room." }
+        }
+        div(.class("row-actions")) {
+          button(.type(.button), .class("btn btn-outline"), .showModal(id: UploadRoomsForm.id)) {
+            SVG(.filePlusCorner)
+            "Import loads"
           }
-
-          div(.class("flex justify-end grow space-x-4")) {
-            Tooltip("Set sensible heat ratio", position: .left) {
-              button(
-                .class(
-                  """
-                  btn btn-primary text-lg font-bold py-2 
-                  """
-                ),
-                .showModal(id: SHRForm.id)
-              ) {
-                div(.class("flex flex-wrap grow justify-end items-end gap-2")) {
-                  span {
-                    "Sensible Heat Ratio"
-                  }
-                  if let sensibleHeatRatio {
-                    Badge(number: sensibleHeatRatio)
-                    // .attributes("badge-outline")
-                  } else {
-                    Badge { "set" }
-                    // .attributes("badge-outline")
-                  }
-                }
-              }
-              .attributes(.class("border border-error"), when: sensibleHeatRatio == nil)
-            }
-            .attributes(.class("tooltip-open"), when: sensibleHeatRatio == nil)
-
-          }
-
-          div(.class("flex items-end space-x-4 font-bold")) {
-            span(.class("text-lg")) { "Heating Total" }
-            Badge(number: rooms.totalHeatingLoad, digits: 0)
-              .attributes(.class("badge-error"))
-          }
-
-          div(.class("flex justify-center items-end space-x-4 my-auto font-bold")) {
-            span(.class("text-lg")) { "Cooling Total" }
-            // TODO: ResultView ??
-            Badge(number: try! rooms.totalCoolingLoad(shr: sensibleHeatRatio ?? 1.0), digits: 0)
-              .attributes(.class("badge-success"))
-          }
-
-          div(.class("flex flex-wrap grow justify-end items-end gap-2 me-4 my-auto font-bold")) {
-            span(.class("text-lg")) { "Cooling Sensible" }
-            // TODO: ResultView ??
-            Badge(number: try! rooms.totalCoolingSensible(shr: sensibleHeatRatio ?? 1.0), digits: 0)
-              .attributes(.class("badge-info"))
+          button(.type(.button), .class("btn btn-primary"), .showModal(id: RoomForm.id())) {
+            SVG(.circlePlus)
+            "Add room"
           }
         }
       }
-
-      SHRForm(
-        sensibleHeatRatio: sensibleHeatRatio,
-        dismiss: true
-      )
-
-      div(
-        .class("table-scroll"), .tabindex(0), .role("region"),
-        .init(name: "aria-label", value: "Room loads")
-      ) {
-        table(.class("table table-zebra text-lg"), .id("roomsTable")) {
-          thead {
-            tr(.class("text-lg font-bold")) {
-              th { "Name" }
-              th {
-                div(.class("flex justify-center")) {
-                  "Heating Load"
+      div(.class("design-metrics")) {
+        DesignMetric(
+          "Heating total", value: String(format: "%.0f", rooms.totalHeatingLoad), unit: "BTU/h")
+        DesignMetric(
+          "Cooling total",
+          value: (try? rooms.totalCoolingLoad(shr: sensibleHeatRatio ?? 1)).map {
+            String(format: "%.0f", $0)
+          } ?? "Not set", unit: "BTU/h")
+        DesignMetric(
+          "Cooling sensible",
+          value: (try? rooms.totalCoolingSensible(shr: sensibleHeatRatio ?? 1)).map {
+            String(format: "%.0f", $0)
+          } ?? "Not set", unit: "BTU/h")
+        div(.class("design-metric shr-metric")) {
+          span { "Project SHR" }
+          strong { sensibleHeatRatio.map { String(format: "%.2f", $0) } ?? "Not set" }
+          EditButton(accessibilityLabel: "Edit project SHR").attributes(
+            .class("btn-ghost"), .showModal(id: SHRForm.id))
+        }
+      }
+      div(.class("project-toolbar")) {
+        label {
+          span(.class("sr-only")) { "Filter rooms by level" }
+          select(.class("select"), .data("room-level", value: "")) {
+            option(.value("all")) { "All rooms" }
+            for level in Array(Set(rooms.compactMap { $0.level?.rawValue })).sorted() {
+              option(.value("\(level)")) { "Level \(level)" }
+            }
+            if rooms.contains(where: { $0.level == nil }) { option(.value("none")) { "No level" } }
+          }
+        }
+        label(.class("project-search")) {
+          span(.class("sr-only")) { "Find a room" }
+          input(
+            .type(.search), .id("room-search"), .class("input"), .placeholder("Find a room…"),
+            .init(name: "aria-keyshortcuts", value: "Control+K"))
+          kbd { "Ctrl+K" }
+        }
+      }
+      div(.class("rooms-layout")) {
+        div(.class("project-panel")) {
+          div(
+            .class("table-scroll"), .tabindex(0), .role("region"),
+            .init(name: "aria-label", value: "Room loads")
+          ) {
+            table(
+              .class("table project-table"), .id("roomsTable"),
+              .data("selectable-table", value: "rooms")
+            ) {
+              thead {
+                tr {
+                  th { "Room" }
+                  th { "Heating" }
+                  th { "Cooling total" }
+                  th { "Cooling sensible" }
+                  th { "Registers" }
+                  th { "Delegated to" }
+                  th { span(.class("sr-only")) { "Actions" } }
                 }
               }
-              th {
-                div(.class("flex justify-center")) {
-                  "Cooling Total"
-                }
-              }
-              th {
-                div(.class("flex justify-center")) {
-                  "Cooling Sensible"
-                }
-              }
-              th {
-                div(.class("flex justify-center")) {
-                  "Register Count"
-                }
-              }
-              th {
-                div(.class("flex justify-center")) {
-                  "Delegated To"
-                }
-              }
-              th {
-                div(.class("flex justify-end me-2 space-x-4")) {
-
-                  Tooltip("Import room loads", position: .left) {
-                    button(
-                      .class("btn btn-secondary"),
-                      .init(name: "aria-label", value: "Import room loads"),
-                      .showModal(id: UploadRoomsForm.id)
-                    ) {
-                      SVG(.filePlusCorner)
-                    }
-                  }
-
-                  Tooltip("Add Room") {
-                    PlusButton("Add room")
-                      .attributes(
-                        .class("btn-primary mx-auto"),
-                        .showModal(id: RoomForm.id())
-                      )
-                      .attributes(.class("tooltip-left"))
-                  }
-
+              tbody {
+                for room in sortedRooms {
+                  RoomRow(room: room, shr: sensibleHeatRatio, rooms: rooms)
                 }
               }
             }
           }
-          tbody {
-            for room in sortedRooms {
-              RoomRow(room: room, shr: sensibleHeatRatio, rooms: rooms)
+          p(.class("empty-state"), .data("no-rooms", value: "")) {
+            rooms.isEmpty ? "Add or import rooms to get started." : "No rooms match this filter."
+          }
+          .attributes(.hidden, when: !rooms.isEmpty)
+          p(.class("table-note")) { "Select a room to inspect it. Use the pencil to edit." }
+        }
+        aside(
+          .class("room-inspector project-panel"), .init(name: "aria-label", value: "Selected room")
+        ) {
+          p(.class("muted"), .data("inspector-empty", value: "")) {
+            "Select a room to inspect its loads."
+          }
+          for room in sortedRooms {
+            div(.data("room-inspector", value: room.id.idString), .hidden) {
+              span(.class("eyebrow")) { room.level?.label ?? "No level" }
+              h2 { room.name }
+              DesignMetric("Heating load", value: "\(room.heatingLoad)", unit: "BTU/h")
+              DesignMetric(
+                "Cooling sensible",
+                value: (try? room.coolingLoad.ensured(shr: sensibleHeatRatio ?? 1).sensible).map {
+                  String(format: "%.0f", $0)
+                } ?? "Not set", unit: "BTU/h")
+              DesignMetric(
+                "Registers", value: "\(room.delegatedTo == nil ? room.registerCount : 0)")
+              if let delegated = rooms.first(where: { $0.id == room.delegatedTo }) {
+                p(.class("muted")) { "Airflow delegated to \(delegated.name)" }
+              }
+              button(.type(.button), .class("btn btn-outline"), .showModal(id: RoomForm.id(room))) {
+                SVG(.squarePen)
+                "Edit room"
+              }
             }
           }
         }
       }
+      SHRForm(sensibleHeatRatio: sensibleHeatRatio, dismiss: true)
       RoomForm(dismiss: true, projectID: projectID, rooms: rooms, room: nil)
       UploadRoomsForm(hasExistingRooms: !rooms.isEmpty)
     }
   }
 
-  public struct RoomRow: HTML, Sendable {
-
-    let rooms: [Room]
+  struct RoomRow: HTML, Sendable {
     let room: Room
-    let shr: Double
-
-    var coolingSensible: Double {
-      try! room.coolingLoad.ensured(shr: shr).sensible
-    }
-
-    var delegatedToRoomName: String? {
-      guard let delegatedToID = room.delegatedTo else { return nil }
-      return rooms.first(where: { $0.id == delegatedToID })?.name
-    }
-
-    init(room: Room, shr: Double?, rooms: [Room]) {
-      self.room = room
-      self.shr = shr ?? 1.0
-      self.rooms = rooms
-    }
-
-    public var body: some HTML {
-      tr(.id("roomRow_\(room.id.idString)")) {
+    let shr: Double?
+    let rooms: [Room]
+    var body: some HTML {
+      tr(
+        .id("roomRow_\(room.id.idString)"), .data("record", value: room.id.idString),
+        .data("search", value: room.name),
+        .data("level", value: room.level.map { "\($0.rawValue)" } ?? "none")
+      ) {
         td {
-          if let level = room.level {
-            "\(level.label) - \(room.name)"
-          } else {
+          button(.type(.button), .class("row-select"), .init(name: "aria-pressed", value: "false"))
+          {
             room.name
+            small { room.level?.label ?? "No level" }
+          }
+        }
+        td { Number(room.heatingLoad, digits: 0) }
+        td {
+          if let load = try? room.coolingLoad.ensured(shr: shr ?? 1) {
+            Number(load.total, digits: 0)
+          } else {
+            "Not set"
           }
         }
         td {
-          div(.class("flex justify-center")) {
-            Number(room.heatingLoad, digits: 0)
-            // .attributes(.class("text-error"))
+          if let load = try? room.coolingLoad.ensured(shr: shr ?? 1) {
+            Number(load.sensible, digits: 0)
+          } else {
+            "Not set"
           }
         }
+        td { Number(room.delegatedTo == nil ? room.registerCount : 0) }
+        td { rooms.first(where: { $0.id == room.delegatedTo })?.name ?? "—" }
         td {
-          div(.class("flex justify-center")) {
-            Number(try! room.coolingLoad.ensured(shr: shr).total, digits: 0)
-            // .attributes(.class("text-success"))
+          div(.class("row-actions")) {
+            TrashButton("Delete \(room.name)").attributes(
+              .class("btn-ghost"),
+              .hx.delete(route: .project(.detail(room.projectID, .rooms(.delete(id: room.id))))),
+              .hx.target("body"), .hx.swap(.outerHTML), .hx.confirm("Delete this room?"))
+            EditButton(accessibilityLabel: "Edit \(room.name)").attributes(
+              .class("btn-ghost"), .showModal(id: RoomForm.id(room)))
           }
-        }
-        td {
-          div(.class("flex justify-center")) {
-            Number(coolingSensible, digits: 0)
-            // .attributes(.class("text-info"))
-          }
-        }
-        td {
-          div(.class("flex justify-center")) {
-            Number(delegatedToRoomName != nil ? 0 : room.registerCount)
-          }
-        }
-        td {
-          if let name = delegatedToRoomName {
-            div(.class("flex justify-center")) {
-              name
-            }
-          }
-        }
-        td {
-          div(.class("flex justify-end")) {
-            div(.class("join")) {
-              Tooltip("Delete room", position: .bottom) {
-                TrashButton("Delete \(room.name)")
-                  .attributes(
-                    .class("join-item btn-ghost"),
-                    .hx.delete(
-                      route: .project(.detail(room.projectID, .rooms(.delete(id: room.id))))),
-                    .hx.target("closest tr"),
-                    .hx.confirm("Are you sure?")
-                  )
-              }
-
-              Tooltip("Edit room", position: .bottom) {
-                EditButton(accessibilityLabel: "Edit \(room.name)")
-                  .attributes(
-                    .class("join-item btn-ghost"),
-                    .showModal(id: RoomForm.id(room))
-                  )
-              }
-            }
-          }
-          RoomForm(
-            dismiss: true,
-            projectID: room.projectID,
-            rooms: rooms,
-            room: room
-          )
+          RoomForm(dismiss: true, projectID: room.projectID, rooms: rooms, room: room)
         }
       }
     }

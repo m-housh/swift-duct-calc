@@ -53,13 +53,9 @@ struct PathTemplatesView: HTML, Sendable {
               }
             }
             if !templates.contains(where: { $0.configuration.type == type }) {
-              PathTemplateCard(
-                title: "Starter \(type.rawValue) path",
-                summary:
-                  "A ready-to-use set of \(type.rawValue) fittings. Adjust it as you build your path.",
-                configureURL: nil,
-                useURL: withDraft("\(guidedPathURL(projectID))/starter/\(type.rawValue)"),
-                starterType: type, emphasized: preferredType == nil || type == preferredType)
+              p(.class("muted")) {
+                "No \(type.rawValue) templates. Add a template to use this workflow."
+              }
             }
             for template in templates where template.configuration.type == type {
               templateCard(template)
@@ -69,6 +65,9 @@ struct PathTemplatesView: HTML, Sendable {
       } else {
         a(.class("btn"), .href(pathTemplatesURL(projectID, suffix: "/import"))) {
           "Import JSON template"
+        }
+        if templates.isEmpty {
+          p { "No saved templates. Add a template to get started." }
         }
         for template in templates { templateCard(template) }
       }
@@ -110,7 +109,6 @@ private struct PathTemplateCard: HTML, Sendable {
   let summary: String
   let configureURL: String?
   let useURL: String?
-  var starterType: EquivalentLength.EffectiveLengthType? = nil
   var emphasized: Bool = true
 
   private var actionClass: String { emphasized ? "btn btn-secondary" : "btn btn-outline" }
@@ -125,15 +123,7 @@ private struct PathTemplateCard: HTML, Sendable {
             a(.class("btn btn-ghost"), .href(configureURL)) { "Configure" }
           }
           if let useURL {
-            if let starterType {
-              form(.method(.post), .action(useURL)) {
-                button(.type(.submit), .class(actionClass)) {
-                  "Use starter \(starterType.rawValue)"
-                }
-              }
-            } else {
-              a(.class(actionClass), .href(useURL)) { "Use template" }
-            }
+            a(.class(actionClass), .href(useURL)) { "Use template" }
           }
         }
       }
@@ -183,7 +173,7 @@ struct PathTemplateWorkspace: HTML, Sendable {
       script(.id("path-template-data"), .init(name: "type", value: "application/json")) {
         HTMLRaw(encoded)
       }
-      script(.src("/js/path-templates.js?v=path-revisions-3"), .init(name: "defer", value: "")) {}
+      script(.src("/js/path-templates.js?v=path-revisions-4"), .init(name: "defer", value: "")) {}
     }
   }
 }

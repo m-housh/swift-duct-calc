@@ -1,63 +1,46 @@
 import Elementary
+import Foundation
 import ManualDCore
 import Styleguide
 
 struct EquipmentInfoView: HTML, Sendable {
   let equipmentInfo: EquipmentInfo?
   var projectID: Project.ID
-
   var body: some HTML {
-    div(
-      .class("space-y-4"),
-      .id("equipmentInfo")
-    ) {
-
+    div {
       PageTitleRow {
-        PageTitle { "Equipment Details" }
-
-        EditButton(accessibilityLabel: "Edit equipment")
-          .attributes(
-            .class("btn-primary"),
-            .showModal(id: EquipmentInfoForm.id)
-          )
-          .tooltip("Edit equipment details")
+        div {
+          PageTitle { "Equipment" }
+          p(.class("muted")) { "Set the airflow and external static pressure for this system." }
+        }
       }
-
-      if let equipmentInfo {
-
-        table(.class("table details-table table-zebra")) {
-          tbody(.class("text-lg")) {
-            tr {
-              th(.init(name: "scope", value: "row")) { Label { "Static Pressure" } }
-              td {
-                div(.class("flex justify-end")) {
-                  Number(equipmentInfo.staticPressure)
-                }
-              }
-            }
-            tr {
-              th(.init(name: "scope", value: "row")) { Label { "Heating CFM" } }
-              td {
-                div(.class("flex justify-end")) {
-                  Number(equipmentInfo.heatingCFM)
-                }
-              }
-            }
-            tr {
-              th(.init(name: "scope", value: "row")) { Label { "Cooling CFM" } }
-              td {
-                div(.class("flex justify-end")) {
-                  Number(equipmentInfo.coolingCFM)
-                }
-              }
-            }
+      section(.class("project-panel equipment-panel")) {
+        div(.class("equipment-heading")) {
+          SVG(.fan)
+          div {
+            h2 { "Main system" }
+            p(.class("muted")) { "Heating & cooling airflow" }
+          }
+        }
+        div(.class("design-metrics equipment-metrics")) {
+          DesignMetric(
+            "Heating airflow", value: equipmentInfo.map { "\($0.heatingCFM)" } ?? "Not set",
+            unit: "CFM")
+          DesignMetric(
+            "Cooling airflow", value: equipmentInfo.map { "\($0.coolingCFM)" } ?? "Not set",
+            unit: "CFM")
+          DesignMetric(
+            "External static pressure",
+            value: equipmentInfo.map { String(format: "%.2f", $0.staticPressure) } ?? "Not set",
+            unit: "in. w.c.")
+        }
+        div(.class("equipment-editor")) {
+          EquipmentInfoForm(dismiss: false, equipmentInfo: equipmentInfo, inline: true)
+          p(.class("muted")) {
+            "Use the blower's rated airflow at the selected external static pressure."
           }
         }
       }
-      EquipmentInfoForm(
-        dismiss: true,
-        equipmentInfo: equipmentInfo
-      )
     }
   }
 }

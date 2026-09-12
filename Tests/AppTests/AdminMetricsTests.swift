@@ -11,7 +11,11 @@ import VaporTesting
 @testable import App
 @testable import DatabaseClient
 
-@Suite(.dependencies { $0.date.now = metricsTestDate })
+@Suite(
+  .dependencies {
+    $0.date.now = metricsTestDate
+    $0.uuid = .incrementing
+  })
 struct AdminMetricsTests {
   private let adminID = UUID(uuidString: "00000000-0000-0000-0000-000000000123")!
 

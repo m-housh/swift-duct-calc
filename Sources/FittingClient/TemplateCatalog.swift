@@ -1,6 +1,13 @@
 import Foundation
 import ManualDCore
 
+extension TemplateFitting.Inputs {
+  /// Restores older template inputs in the fitting editor without recalculating saved lengths.
+  public func catalogInputs(for requirement: Fitting.InputRequirement) -> Fitting.Inputs? {
+    TemplateCatalog.runtimeInputs(self, requirement: requirement)
+  }
+}
+
 /// Adapts current catalog inputs to the saved template transport format.
 /// Fitting identities, artwork, conditions, and numeric tables belong to FittingClient.
 enum TemplateCatalog {

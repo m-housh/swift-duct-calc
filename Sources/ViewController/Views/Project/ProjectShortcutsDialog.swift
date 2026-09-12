@@ -13,11 +13,11 @@ struct ProjectShortcutsDialog: HTML, Sendable {
           row("Project", key: "1")
           row("Rooms", key: "2")
           row("Equipment", key: "3")
-          row("T.E.L.", key: "4")
-          row("Friction Rate", key: "5")
-          row("Duct Sizes", key: "6")
-          row("Next section", key: "J")
-          row("Previous section", key: "K")
+          row("Total effective length", key: "4")
+          row("Friction rate", key: "5")
+          row("Duct sizes", key: "6")
+          row("Next room row", key: "J")
+          row("Previous room row", key: "K")
         }
       }
       table(.class("table table-sm mt-4")) {
@@ -30,7 +30,7 @@ struct ProjectShortcutsDialog: HTML, Sendable {
         }
       }
       p(.class("text-sm mt-2")) {
-        "Ductulator and fitting reference open in new tabs. Shortcuts pause while editing a field or when a dialog is open."
+        "Ctrl+K focuses room or register search. Ductulator and fitting reference open in new tabs. Shortcuts pause while editing a field or when a dialog is open."
       }
     }
   }

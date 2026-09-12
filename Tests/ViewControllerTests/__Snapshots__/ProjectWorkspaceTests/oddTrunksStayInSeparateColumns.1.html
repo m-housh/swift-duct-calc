@@ -1,0 +1,223 @@
+<div class="trunk-columns">
+  <section class="trunk-column supply">
+    <h3 class="system-label supply">Supply · 3</h3>
+    <article class="trunk-card">
+      <div class="trunk-card-main">
+        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>
+        <div><strong>Trunk 0</strong><small>0 associated runs</small><b>12 × 8 in.</b></div>
+        400
+        CFM<span><span></span><small></small></span>
+        <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Trunk 0" title="Delete trunk" hx-delete="/projects/00000000-0000-0000-0000-000000000001/duct-sizing/trunk/00000000-0000-0000-0000-000000000014" hx-confirm="Delete this trunk?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+        <button class="btn btn-ghost" type="button" aria-label="Edit Trunk 0" data-open-dialog="trunkSizeForm_00000000000000000000000000000014">
+          <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+        </button>
+      </div>
+      <details>
+        <summary>Sizes and associated runs</summary>
+        <p>Round 10″ · Flex 11″ · 700 FPM</p>
+        <p>Calculated diameter: <span>9.8</span> in.</p>
+        <ul></ul>
+      </details>
+      <dialog id="trunkSizeForm_00000000000000000000000000000014" class="modal" aria-labelledby="trunkSizeForm_00000000000000000000000000000014-title">
+        <div class="modal-box">
+          <h2 id="trunkSizeForm_00000000000000000000000000000014-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
+          <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Trunk / Runout Size" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+          <form data-success-message="Changes saved." class="space-y-4" hx-patch="/projects/00000000-0000-0000-0000-000000000001/duct-sizing/trunk/00000000-0000-0000-0000-000000000014" hx-target="body" hx-swap="outerHTML">
+            <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000001">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <label class="select w-full"><span class="label">Type</span>
+              <select name="type">
+                <option value="supply" selected>Supply</option>
+                <option value="return">Return</option>
+              </select>
+              Height</label><label class="input w-full"><span class="label"></span>
+              <input type="text" name="height" value="8" placeholder="8 (Optional)"></label>
+            </div>
+            Name<label class="input w-full"><span class="label"></span>
+            <input type="text" name="name" value="Trunk 0" placeholder="Trunk-1" required></label>
+            <fieldset class="checkbox-group">
+              <legend class="font-bold">Associated Supply Runs</legend>
+              <p>No supply runs available.</p>
+            </fieldset>
+            <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
+          </form>
+        </div>
+      </dialog>
+    </article>
+    <article class="trunk-card">
+      <div class="trunk-card-main">
+        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>
+        <div><strong>Trunk 2</strong><small>0 associated runs</small><b>12 × 8 in.</b></div>
+        400
+        CFM<span><span></span><small></small></span>
+        <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Trunk 2" title="Delete trunk" hx-delete="/projects/00000000-0000-0000-0000-000000000001/duct-sizing/trunk/00000000-0000-0000-0000-000000000016" hx-confirm="Delete this trunk?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+        <button class="btn btn-ghost" type="button" aria-label="Edit Trunk 2" data-open-dialog="trunkSizeForm_00000000000000000000000000000016">
+          <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+        </button>
+      </div>
+      <details>
+        <summary>Sizes and associated runs</summary>
+        <p>Round 10″ · Flex 11″ · 700 FPM</p>
+        <p>Calculated diameter: <span>9.8</span> in.</p>
+        <ul></ul>
+      </details>
+      <dialog id="trunkSizeForm_00000000000000000000000000000016" class="modal" aria-labelledby="trunkSizeForm_00000000000000000000000000000016-title">
+        <div class="modal-box">
+          <h2 id="trunkSizeForm_00000000000000000000000000000016-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
+          <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Trunk / Runout Size" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+          <form data-success-message="Changes saved." class="space-y-4" hx-patch="/projects/00000000-0000-0000-0000-000000000001/duct-sizing/trunk/00000000-0000-0000-0000-000000000016" hx-target="body" hx-swap="outerHTML">
+            <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000001">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <label class="select w-full"><span class="label">Type</span>
+              <select name="type">
+                <option value="supply" selected>Supply</option>
+                <option value="return">Return</option>
+              </select>
+              Height</label><label class="input w-full"><span class="label"></span>
+              <input type="text" name="height" value="8" placeholder="8 (Optional)"></label>
+            </div>
+            Name<label class="input w-full"><span class="label"></span>
+            <input type="text" name="name" value="Trunk 2" placeholder="Trunk-1" required></label>
+            <fieldset class="checkbox-group">
+              <legend class="font-bold">Associated Supply Runs</legend>
+              <p>No supply runs available.</p>
+            </fieldset>
+            <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
+          </form>
+        </div>
+      </dialog>
+    </article>
+    <article class="trunk-card">
+      <div class="trunk-card-main">
+        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>
+        <div><strong>Trunk 4</strong><small>0 associated runs</small><b>12 × 8 in.</b></div>
+        400
+        CFM<span><span></span><small></small></span>
+        <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Trunk 4" title="Delete trunk" hx-delete="/projects/00000000-0000-0000-0000-000000000001/duct-sizing/trunk/00000000-0000-0000-0000-000000000018" hx-confirm="Delete this trunk?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+        <button class="btn btn-ghost" type="button" aria-label="Edit Trunk 4" data-open-dialog="trunkSizeForm_00000000000000000000000000000018">
+          <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+        </button>
+      </div>
+      <details>
+        <summary>Sizes and associated runs</summary>
+        <p>Round 10″ · Flex 11″ · 700 FPM</p>
+        <p>Calculated diameter: <span>9.8</span> in.</p>
+        <ul></ul>
+      </details>
+      <dialog id="trunkSizeForm_00000000000000000000000000000018" class="modal" aria-labelledby="trunkSizeForm_00000000000000000000000000000018-title">
+        <div class="modal-box">
+          <h2 id="trunkSizeForm_00000000000000000000000000000018-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
+          <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Trunk / Runout Size" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+          <form data-success-message="Changes saved." class="space-y-4" hx-patch="/projects/00000000-0000-0000-0000-000000000001/duct-sizing/trunk/00000000-0000-0000-0000-000000000018" hx-target="body" hx-swap="outerHTML">
+            <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000001">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <label class="select w-full"><span class="label">Type</span>
+              <select name="type">
+                <option value="supply" selected>Supply</option>
+                <option value="return">Return</option>
+              </select>
+              Height</label><label class="input w-full"><span class="label"></span>
+              <input type="text" name="height" value="8" placeholder="8 (Optional)"></label>
+            </div>
+            Name<label class="input w-full"><span class="label"></span>
+            <input type="text" name="name" value="Trunk 4" placeholder="Trunk-1" required></label>
+            <fieldset class="checkbox-group">
+              <legend class="font-bold">Associated Supply Runs</legend>
+              <p>No supply runs available.</p>
+            </fieldset>
+            <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
+          </form>
+        </div>
+      </dialog>
+    </article>
+  </section>
+  <section class="trunk-column return">
+    <h3 class="system-label return">Return · 2</h3>
+    <article class="trunk-card">
+      <div class="trunk-card-main">
+        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>
+        <div><strong>Trunk 1</strong><small>0 associated runs</small><b>12 × 8 in.</b></div>
+        400
+        CFM<span><span></span><small></small></span>
+        <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Trunk 1" title="Delete trunk" hx-delete="/projects/00000000-0000-0000-0000-000000000001/duct-sizing/trunk/00000000-0000-0000-0000-000000000015" hx-confirm="Delete this trunk?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+        <button class="btn btn-ghost" type="button" aria-label="Edit Trunk 1" data-open-dialog="trunkSizeForm_00000000000000000000000000000015">
+          <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+        </button>
+      </div>
+      <details>
+        <summary>Sizes and associated runs</summary>
+        <p>Round 10″ · Flex 11″ · 700 FPM</p>
+        <p>Calculated diameter: <span>9.8</span> in.</p>
+        <ul></ul>
+      </details>
+      <dialog id="trunkSizeForm_00000000000000000000000000000015" class="modal" aria-labelledby="trunkSizeForm_00000000000000000000000000000015-title">
+        <div class="modal-box">
+          <h2 id="trunkSizeForm_00000000000000000000000000000015-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
+          <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Trunk / Runout Size" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+          <form data-success-message="Changes saved." class="space-y-4" hx-patch="/projects/00000000-0000-0000-0000-000000000001/duct-sizing/trunk/00000000-0000-0000-0000-000000000015" hx-target="body" hx-swap="outerHTML">
+            <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000001">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <label class="select w-full"><span class="label">Type</span>
+              <select name="type">
+                <option value="supply">Supply</option>
+                <option value="return" selected>Return</option>
+              </select>
+              Height</label><label class="input w-full"><span class="label"></span>
+              <input type="text" name="height" value="8" placeholder="8 (Optional)"></label>
+            </div>
+            Name<label class="input w-full"><span class="label"></span>
+            <input type="text" name="name" value="Trunk 1" placeholder="Trunk-1" required></label>
+            <fieldset class="checkbox-group">
+              <legend class="font-bold">Associated Supply Runs</legend>
+              <p>No supply runs available.</p>
+            </fieldset>
+            <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
+          </form>
+        </div>
+      </dialog>
+    </article>
+    <article class="trunk-card">
+      <div class="trunk-card-main">
+        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>
+        <div><strong>Trunk 3</strong><small>0 associated runs</small><b>12 × 8 in.</b></div>
+        400
+        CFM<span><span></span><small></small></span>
+        <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Trunk 3" title="Delete trunk" hx-delete="/projects/00000000-0000-0000-0000-000000000001/duct-sizing/trunk/00000000-0000-0000-0000-000000000017" hx-confirm="Delete this trunk?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+        <button class="btn btn-ghost" type="button" aria-label="Edit Trunk 3" data-open-dialog="trunkSizeForm_00000000000000000000000000000017">
+          <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+        </button>
+      </div>
+      <details>
+        <summary>Sizes and associated runs</summary>
+        <p>Round 10″ · Flex 11″ · 700 FPM</p>
+        <p>Calculated diameter: <span>9.8</span> in.</p>
+        <ul></ul>
+      </details>
+      <dialog id="trunkSizeForm_00000000000000000000000000000017" class="modal" aria-labelledby="trunkSizeForm_00000000000000000000000000000017-title">
+        <div class="modal-box">
+          <h2 id="trunkSizeForm_00000000000000000000000000000017-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
+          <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Trunk / Runout Size" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+          <form data-success-message="Changes saved." class="space-y-4" hx-patch="/projects/00000000-0000-0000-0000-000000000001/duct-sizing/trunk/00000000-0000-0000-0000-000000000017" hx-target="body" hx-swap="outerHTML">
+            <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000001">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <label class="select w-full"><span class="label">Type</span>
+              <select name="type">
+                <option value="supply">Supply</option>
+                <option value="return" selected>Return</option>
+              </select>
+              Height</label><label class="input w-full"><span class="label"></span>
+              <input type="text" name="height" value="8" placeholder="8 (Optional)"></label>
+            </div>
+            Name<label class="input w-full"><span class="label"></span>
+            <input type="text" name="name" value="Trunk 3" placeholder="Trunk-1" required></label>
+            <fieldset class="checkbox-group">
+              <legend class="font-bold">Associated Supply Runs</legend>
+              <p>No supply runs available.</p>
+            </fieldset>
+            <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
+          </form>
+        </div>
+      </dialog>
+    </article>
+  </section>
+</div>

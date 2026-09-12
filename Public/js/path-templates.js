@@ -306,7 +306,7 @@
       return rows
         .map(
           (row) =>
-            `<div class="flex items-center justify-between gap-2 border-b border-base-300 py-2"><span>${esc(definitions.get(row.fittingID)?.name || row.fittingID)} × ${row.quantity} · ${Number((row.value * row.quantity).toFixed(3))} ft</span>${button('edit-row', 'Edit', `data-row="${row.id}"`, 'btn-sm')}${row.stepID === null ? button('remove-row', 'Remove', `data-row="${row.id}"`, 'btn-sm btn-ghost') : ''}</div>`
+            `<div class="flex items-center justify-between gap-2 border-b border-base-300 py-2"><span>${esc(definitions.get(row.fittingID)?.name || row.fittingID)} × ${row.quantity} · ${Number((row.value * row.quantity).toFixed(3))} ft</span>${button('edit-row', 'Edit', `data-row="${row.id}"`, 'btn-sm')}${button('remove-row', 'Remove', `data-row="${row.id}"`, 'btn-sm btn-ghost')}</div>`
         )
         .join('');
     }
@@ -336,7 +336,7 @@
               }<div id="step-fitting-rows">${rowList(stepRows(step))}</div>`
             : `<label class="block">Path name<input class="input w-full" maxlength="200" data-path="name" value="${esc(path.name)}"></label><label class="block">Straight duct lengths (ft)<input class="input w-full" data-path="straight" placeholder="10, 25, 5" value="${esc(path.straight)}"></label><p class="text-sm">Separate whole-foot lengths with commas. Leave blank if there are none.</p>${rowList(path.rows)}<p class="font-bold">Fittings: ${Number(total.toFixed(3))} ft</p>`
         }
-        ${button('browse', 'Browse all fittings')}<div class="sticky bottom-0 bg-base-100 border-t border-base-300 p-3 flex flex-wrap gap-2 justify-end">${button('back', 'Back', path.cursor === 0 ? 'disabled' : '')}${step?.allowsSkipping ? button('skip', stepRows(step).length ? 'Clear and skip' : 'Skip') : ''}${step ? button('done', step.behavior === 'chooseOne' ? 'Continue' : `Done with ${esc(step.title)}`, '', 'btn-secondary') : path.trial ? button('exit-trial', 'Back to template', '', 'btn-secondary') : button('save-path', 'Save path', '', 'btn-secondary')}</div></section></div>`;
+        ${button('browse', 'Browse all fittings')}<div class="sticky bottom-0 bg-base-100 border-t border-base-300 p-3 flex flex-wrap gap-2 justify-end">${button('back', 'Back', path.cursor === 0 ? 'disabled' : '')}${step && canSkip(step) ? button('skip', stepRows(step).length ? 'Clear and skip' : 'Skip') : ''}${step ? button('done', step.behavior === 'chooseOne' ? 'Continue' : `Done with ${esc(step.title)}`, '', 'btn-secondary') : path.trial ? button('exit-trial', 'Back to template', '', 'btn-secondary') : button('save-path', 'Save path', '', 'btn-secondary')}</div></section></div>`;
     }
     function render(focus = false) {
       const fileInput = mode === 'import' ? root.querySelector('#import-template-file') : null;
@@ -446,6 +446,9 @@
         { once: true }
       );
     }
+    function canSkip(step) {
+      return step.allowsSkipping || (Boolean(data.path) && !path.trial);
+    }
     function sectionReady(step) {
       const rows = stepRows(step);
       if (step.behavior === 'quantities') {
@@ -463,7 +466,7 @@
       }
       return (
         rows.length > 0 ||
-        (step.allowsSkipping && (step.behavior === 'quantities' || path.completed[step.id]))
+        (canSkip(step) && (step.behavior === 'quantities' || path.completed[step.id]))
       );
     }
     async function act(action, target) {
@@ -642,7 +645,13 @@
         return;
       }
       if (action === 'remove-row') {
+        const row = path.rows.find((r) => r.id === target.dataset.row);
         path.rows = path.rows.filter((r) => r.id !== target.dataset.row);
+        if (row?.stepID) {
+          const step = path.config.steps.find((s) => s.id === row.stepID);
+          path.quantities[`${row.stepID}:${row.fittingID}`] = '0';
+          path.completed[step.id] = stepRows(step).length > 0 || canSkip(step);
+        }
         dirty = true;
         render();
         return;

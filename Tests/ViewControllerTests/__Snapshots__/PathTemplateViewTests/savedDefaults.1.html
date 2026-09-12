@@ -1,0 +1,53 @@
+<nav class="app-navbar" aria-label="Main">
+  <a class="app-brand" href="/projects">
+  <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
+  Duct Calc<span></span></a>
+  <div class="app-nav-actions">
+    <a class="btn btn-outline btn-secondary" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span>Fitting reference</span></a><a class="btn btn-outline btn-primary" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span>Ductulator</span></a>
+    <details class="account-menu">
+      <summary class="btn"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>Account</summary>
+      <ul class="menu bg-base-200 rounded-box shadow-lg">
+        <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
+        <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
+        <li>
+          <form action="/logout" method="get">
+            <button type="submit">Logout</button>
+          </form>
+        </li>
+      </ul>
+    </details>
+  </div>
+</nav>
+<div id="path-template-list" class="w-full p-4 space-y-6">
+  <link rel="stylesheet" href="/css/path-template-chooser.css?v=1">
+  ← Back to project<a class="btn btn-ghost" href="/projects/00000000-0000-0000-0000-00000000000A/effective-lengths"></a>
+  <div class="page-title-row">
+    <h1 class="text-3xl font-bold">Path templates</h1>
+    <div class="tooltip tooltip-left" data-tip="Add path template">
+      <button type="button" class="btn btn-primary" aria-label="Add path template" data-open-dialog="newPathTemplate"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></button>
+    </div>
+  </div>
+  <dialog id="newPathTemplate" class="modal" aria-labelledby="newPathTemplate-title">
+    <div class="modal-box">
+      <h2 id="newPathTemplate-title" class="text-2xl font-bold mb-6 pe-10">Add path template</h2>
+      <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Add path template" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+      <div class="space-y-3 mt-4"><a class="btn btn-primary w-full" href="/path-templates/new/return?project=00000000-0000-0000-0000-00000000000A">New return template</a><a class="btn btn-primary w-full" href="/path-templates/new/supply?project=00000000-0000-0000-0000-00000000000A">New supply template</a><a class="btn w-full" href="/path-templates/import?project=00000000-0000-0000-0000-00000000000A">Import JSON template</a></div>
+    </div>
+  </dialog>
+  <p>Use your usual fittings, with the choices and defaults you prefer.</p>
+  Import JSON template<a class="btn" href="/path-templates/import?project=00000000-0000-0000-0000-00000000000A"></a>
+  <div class="card bg-base-200 border border-base-300">
+    <div class="card-body">
+      <h3 class="card-title">Default supply</h3>
+      <p>Supply · 5 sections</p>
+      <div class="card-actions justify-end"><a class="btn btn-ghost" href="/path-templates/00000000-0000-0000-0000-000000000064?project=00000000-0000-0000-0000-00000000000A">Configure</a></div>
+    </div>
+  </div>
+  <div class="card bg-base-200 border border-base-300">
+    <div class="card-body">
+      <h3 class="card-title">Default return</h3>
+      <p>Return · 4 sections</p>
+      <div class="card-actions justify-end"><a class="btn btn-ghost" href="/path-templates/00000000-0000-0000-0000-000000000065?project=00000000-0000-0000-0000-00000000000A">Configure</a></div>
+    </div>
+  </div>
+</div>

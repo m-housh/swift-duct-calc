@@ -1,48 +1,34 @@
 import Elementary
 import ElementaryHTMX
-import Foundation
 import ManualDCore
 import Styleguide
 
 extension DuctSizingView {
-  // TODO: Remove register ID.
   struct RoomsTable: HTML, Sendable {
-    @Environment(ProjectViewValue.$projectID) var projectID
-
     let rooms: [DuctSizes.RoomContainer]
-
     var body: some HTML<HTMLTag.table> {
-
-      table(.class("table table-zebra text-lg")) {
+      table(.class("table project-table"), .data("selectable-table", value: "registers")) {
         thead {
-          tr(.class("text-lg")) {
-            th { "Name" }
-            th { "BTU" }
-            th { "CFM" }
+          tr {
+            th { "Room / register" }
+            th { "Design CFM" }
             th { "Velocity" }
-            th(.class("w-[330px]")) { "Size" }
+            th { "Round" }
+            th { "Flex" }
+            th { "Rectangular" }
+            th { span(.class("sr-only")) { "Actions" } }
           }
         }
-        tbody {
-          for room in rooms {
-            RoomRow(room: room)
-          }
-        }
+        tbody { for room in rooms { RoomRow(room: room) } }
       }
     }
   }
-
   struct RoomRow: HTML, Sendable {
-
     static func id(_ room: DuctSizes.RoomContainer) -> String {
       "roomRow_\(room.roomID.idString)_\(room.roomRegister)"
     }
-
     @Environment(ProjectViewValue.$projectID) var projectID
-
     let room: DuctSizes.RoomContainer
-    let formID = UUID().idString
-
     var deleteRoute: String {
       guard let id = room.rectangularID else { return "" }
 
@@ -63,107 +49,63 @@ extension DuctSizingView {
     var rowID: String { Self.id(room) }
 
     var body: some HTML<HTMLTag.tr> {
-      tr(.class("text-lg"), .id(rowID)) {
+      tr(.id(rowID), .data("record", value: rowID), .data("search", value: room.roomName)) {
         td {
-          room.label
-        }
-        td {
-          div(.class("flex flex-wrap grid grid-cols-2 gap-2")) {
-            span(.class("label")) { "Heating" }
-            Number(room.heatingLoad, digits: 0)
-
-            span(.class("label")) { "Cooling" }
-            Number(room.coolingLoad, digits: 0)
+          button(.type(.button), .class("row-select"), .init(name: "aria-pressed", value: "false"))
+          {
+            room.roomName
+            small { "\(room.roomLevel?.label ?? "No level") · Register \(room.roomRegister)" }
           }
         }
-
         td {
-          div(.class("flex flex-wrap grid grid-cols-2 gap-2")) {
-
-            span(.class("label")) { "Design" }
-            div(.class("flex justify-center")) {
-              Badge(number: room.ductSize.designCFM.value, digits: 0)
-            }
-
-            span(.class("label")) { "Heating" }
-            div(.class("flex justify-center")) {
+          details(.data("expansion", value: "airflow-\(rowID)")) {
+            summary { Number(room.designCFM.value, digits: 0) }
+            p {
+              "Heating: "
               Number(room.heatingCFM, digits: 0)
+              " CFM · "
+              Number(room.heatingLoad, digits: 0)
+              " BTU/h"
             }
-
-            span(.class("label")) { "Cooling" }
-            div(.class("flex justify-center")) {
+            p {
+              "Cooling: "
               Number(room.coolingCFM, digits: 0)
+              " CFM · "
+              Number(room.coolingLoad, digits: 0)
+              " BTU/h"
             }
-
           }
         }
-
-        td { Number(room.velocity) }
-
         td {
-          div(.class("grid grid-cols-3 gap-2 w-[330px]")) {
-
-            div(.class("label")) { "Calculated" }
-            div(.class("flex justify-center")) {
-              Badge(number: room.ductSize.roundSize, digits: 2)
-            }
-            div {}
-
-            div(.class("label")) { "Final" }
-            div(.class("flex justify-center")) {
-              Badge(number: room.ductSize.finalSize)
-                .attributes(.class("badge-secondary"))
-            }
-            div {}
-
-            div(.class("label")) { "Flex" }
-            div(.class("flex justify-center")) {
-              Badge(number: room.ductSize.flexSize)
-                .attributes(.class("badge-primary"))
-            }
-            div {}
-
-            div(.class("label")) { "Rectangular" }
-            div(.class("flex justify-center")) {
-              if let width = room.ductSize.width,
-                let height = room.ductSize.height
-              {
-                Badge {
-                  span { "\(width) x \(height)" }
-                }
-                .attributes(.class("badge-info"))
-              }
-            }
-            div(.class("flex justify-end")) {
-              div(.class("join")) {
-                if room.ductSize.width != nil {
-                  Tooltip("Delete Size", position: .bottom) {
-                    TrashButton("Delete rectangular size for \(room.label)")
-                      .attributes(.class("join-item btn-ghost"))
-                      .attributes(
-                        .hx.delete(deleteRoute),
-                        .hx.target("#\(rowID)"),
-                        .hx.swap(.outerHTML),
-                        when: room.ductSize.width != nil
-                      )
-                  }
-                }
-
-                Tooltip("Edit Size", position: .bottom) {
-                  EditButton(accessibilityLabel: "Edit rectangular size for \(room.label)")
-                    .attributes(
-                      .class("join-item btn-ghost"),
-                      .showModal(id: RectangularSizeForm.id(room))
-                    )
-                }
-
-              }
-            }
-            RectangularSizeForm(room: room)
+          Number(room.velocity)
+          " FPM"
+        }
+        td {
+          span(.title("Calculated diameter: \(room.roundSize) in."), .class("size-chip")) {
+            "\(room.finalSize)″"
           }
+        }
+        td { "\(room.flexSize)″" }
+        td {
+          if let width = room.width, let height = room.height {
+            "\(width) × \(height) in."
+          } else {
+            "—"
+          }
+        }
+        td {
+          div(.class("row-actions")) {
+            if room.width != nil {
+              TrashButton("Clear rectangular size for \(room.label)").attributes(
+                .class("btn-ghost"), .hx.delete(deleteRoute), .hx.target("#\(rowID)"),
+                .hx.swap(.outerHTML))
+            }
+            EditButton(accessibilityLabel: "Edit rectangular size for \(room.label)").attributes(
+              .class("btn-ghost"), .showModal(id: RectangularSizeForm.id(room)))
+          }
+          RectangularSizeForm(room: room)
         }
       }
     }
   }
-
 }

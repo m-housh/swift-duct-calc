@@ -1,0 +1,35 @@
+<div>
+  <div class="page-title-row">
+    <div>
+      <h1 class="text-3xl font-bold">Equipment</h1>
+      <p class="muted">Set the airflow and external static pressure for this system.</p>
+    </div>
+  </div>
+  <section class="project-panel equipment-panel">
+    <div class="equipment-heading">
+      <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fan-icon lucide-fan"><path d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.002l5.412 1.45a6.082 6.082 0 0 1 7.002-8.618l-1.45 5.412a6.082 6.082 0 0 1 8.618 7.002l-5.412-1.45a6.082 6.082 0 0 1-7.002 8.618l1.45-5.412Z"/><path d="M12 12v.01"/></svg>
+      <div>
+        <h2>Main system</h2>
+        <p class="muted">Heating &amp; cooling airflow</p>
+      </div>
+    </div>
+    <div class="design-metrics equipment-metrics">
+      <div class="design-metric"><span>Heating airflow</span><strong>Not set<small>CFM</small></strong></div>
+      <div class="design-metric"><span>Cooling airflow</span><strong>Not set<small>CFM</small></strong></div>
+      <div class="design-metric"><span>External static pressure</span><strong>Not set<small>in. w.c.</small></strong></div>
+    </div>
+    <div class="equipment-editor">
+      <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4" hx-post="/projects/00000000-0000-0000-0000-000000000001/equipment" hx-target="body" hx-swap="outerHTML">
+        <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000001">
+        Static Pressure<label class="input w-full"><span class="label"></span>
+        <input name="staticPressure" type="number" value="0.5" min="0" max="1.0" step="0.01" required>
+        Heating CFM</label><label class="input w-full"><span class="label"></span>
+        <input name="heatingCFM" type="number" value="" placeholder="e.g. 1000" min="0" required autofocus>
+        Cooling CFM</label><label class="input w-full"><span class="label"></span>
+        <input name="coolingCFM" type="number" value="" placeholder="e.g. 1000" min="0" required></label>
+        <button class="btn btn-secondary btn-block my-6" type="submit">Save</button>
+      </form>
+      <p class="muted">Use the blower's rated airflow at the selected external static pressure.</p>
+    </div>
+  </section>
+</div>

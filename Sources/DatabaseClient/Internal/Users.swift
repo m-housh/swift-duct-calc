@@ -28,8 +28,14 @@ extension DatabaseClient.Users: TestDependencyKey {
       create: { request in
         try request.validate()
         let model = try request.toModel()
-        try await model.save(on: database)
-        return try model.toDTO()
+        let dependencies = withEscapedDependencies { $0 }
+        return try await database.transaction { transaction in
+          try await dependencies.yield {
+            try await model.save(on: transaction)
+            try await PathTemplateModel.addMissingDefaults(for: model.requireID(), on: transaction)
+            return try model.toDTO()
+          }
+        }
       },
       delete: { id in
         guard let model = try await UserModel.find(id, on: database) else {

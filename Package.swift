@@ -204,8 +204,11 @@ let package = Package(
     .testTarget(
       name: "PdfClientTests",
       dependencies: [
+        .target(name: "EnvVars"),
+        .target(name: "FileClient"),
         .target(name: "HTMLSnapshotTesting"),
         .target(name: "PdfClient"),
+        .product(name: "Elementary", package: "elementary"),
         .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
       ],
       resources: [

@@ -7,7 +7,6 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-red-800: oklch(44.4% 0.177 26.899);
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -4826,9 +4825,6 @@
       }
     }
   }
-  .col-span-2 {
-    grid-column: span 2 / span 2;
-  }
   .col-span-3 {
     grid-column: span 3 / span 3;
   }
@@ -5253,9 +5249,6 @@
   .m-4 {
     margin: calc(var(--spacing) * 4);
   }
-  .m-6 {
-    margin: calc(var(--spacing) * 6);
-  }
   .filter {
     @layer daisyui.l1.l2.l3 {
       display: flex;
@@ -5620,14 +5613,8 @@
   .me-2 {
     margin-inline-end: calc(var(--spacing) * 2);
   }
-  .me-4 {
-    margin-inline-end: calc(var(--spacing) * 4);
-  }
   .me-10 {
     margin-inline-end: calc(var(--spacing) * 10);
-  }
-  .me-\[140px\] {
-    margin-inline-end: 140px;
   }
   .modal-action {
     @layer daisyui.l1.l2.l3 {
@@ -6646,9 +6633,6 @@
   .w-\[250px\] {
     width: 250px;
   }
-  .w-\[330px\] {
-    width: 330px;
-  }
   .w-fit {
     width: fit-content;
   }
@@ -6666,9 +6650,6 @@
   }
   .min-w-0 {
     min-width: calc(var(--spacing) * 0);
-  }
-  .min-w-\[220px\] {
-    min-width: 220px;
   }
   .min-w-full {
     min-width: 100%;
@@ -6877,12 +6858,6 @@
   }
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
-  .grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .grid-cols-\[minmax\(0\,1fr\)_auto_auto\] {
     grid-template-columns: minmax(0,1fr) auto auto;
@@ -7399,12 +7374,6 @@
   }
   .border-base-300 {
     border-color: var(--color-base-300);
-  }
-  .border-error {
-    border-color: var(--color-error);
-  }
-  .border-red-800 {
-    border-color: var(--color-red-800);
   }
   .menu-active {
     :where(:not(ul, details, .menu-title, .btn))& {
@@ -8029,9 +7998,6 @@
   }
   .pt-2 {
     padding-top: calc(var(--spacing) * 2);
-  }
-  .pb-6 {
-    padding-bottom: calc(var(--spacing) * 6);
   }
   .pl-6 {
     padding-left: calc(var(--spacing) * 6);
@@ -8679,20 +8645,11 @@
   .text-error {
     color: var(--color-error);
   }
-  .text-error-content {
-    color: var(--color-error-content);
-  }
-  .text-info {
-    color: var(--color-info);
-  }
   .text-primary {
     color: var(--color-primary);
   }
   .text-secondary-content {
     color: var(--color-secondary-content);
-  }
-  .text-success {
-    color: var(--color-success);
   }
   .text-warning {
     color: var(--color-warning);

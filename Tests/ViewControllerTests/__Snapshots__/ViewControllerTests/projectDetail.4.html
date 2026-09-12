@@ -17,11 +17,12 @@
     <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
     <script src="/js/htmx-download.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="/js/main.js?v=workspace-fixes-6"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="/css/output.css?v=navbar-reference-1">
     <link rel="stylesheet" href="/css/htmx.css">
-    <link rel="stylesheet" href="/css/accessibility.css?v=1">
+    <link rel="stylesheet" href="/css/accessibility.css?v=request-toast-2">
+    <link rel="stylesheet" href="/css/project-workspace.css?v=friction-errors-5">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
     <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
@@ -33,215 +34,263 @@
     <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
       <a class="skip-link" href="#main-content">Skip to content</a>
       <main id="main-content" tabindex="-1" class="flex flex-col min-h-screen min-w-full grow mb-auto">
-        <nav class="app-navbar" aria-label="Main">
-          <a class="app-brand" href="/projects">
-          <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
-          Duct Calc<span></span></a>
-          <div class="app-nav-actions">
-            <button type="button" class="btn" aria-label="Keyboard shortcuts" aria-haspopup="dialog" aria-controls="projectShortcuts" data-open-dialog="projectShortcuts"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 15h12"/></svg></button>
-            Fitting reference
-            Ductulator<a class="btn btn-outline btn-secondary" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span></span></a><a class="btn btn-outline btn-primary" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span></span></a>
-            <details class="account-menu">
-              <summary class="btn"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>Account</summary>
-              <ul class="menu bg-base-200 rounded-box shadow-lg">
-                <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
-                <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
-                <li>
-                  <form action="/logout" method="get">
-                    <button type="submit">Logout</button>
-                  </form>
-                </li>
-              </ul>
-            </details>
-          </div>
-        </nav>
-        <div class="project-layout">
-          <details class="project-navigation" open="">
-            <summary>Project navigation</summary>
-            <nav aria-label="Project">
-              <ul id="project-sidebar">
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000" title="Project, Ctrl+Alt+1" aria-keyshortcuts="Control+Alt+1"><span>Project</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+1</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/rooms" title="Rooms, Ctrl+Alt+2" aria-keyshortcuts="Control+Alt+2"><span>Rooms</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+2</span><span class="project-step-status">Complete</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/equipment" title="Equipment, Ctrl+Alt+3" aria-keyshortcuts="Control+Alt+3"><span>Equipment</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+3</span><span class="project-step-status">Complete</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths" title="T.E.L., Ctrl+Alt+4" aria-keyshortcuts="Control+Alt+4" aria-current="page"><span>T.E.L.</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+4</span><span class="project-step-status">Complete</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/friction-rate" title="Friction Rate, Ctrl+Alt+5" aria-keyshortcuts="Control+Alt+5"><span>Friction Rate</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+5</span><span class="project-step-status">Complete</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/duct-sizing" title="Duct Sizes, Ctrl+Alt+6" aria-keyshortcuts="Control+Alt+6"><span>Duct Sizes</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+6</span></a></li>
-              </ul>
-            </nav>
-          </details>
-          <div class="project-content" id="project-content" tabindex="-1">
-            <div class="space-y-4">
-              <div class="page-title-row pb-6">
-                <h1 class="text-3xl font-bold">Equivalent Lengths</h1>
-                <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg><a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/editor" class="btn btn-primary" aria-label="Add equivalent length" title="Add equivalent length"></a>
-              </div>
-              Manage path templates<a class="link" href="/path-templates?project=00000000-0000-0000-0000-000000000000"></a>
-              <div class="table-scroll" tabindex="0" role="region" aria-label="Equivalent lengths">
-                <table class="table table-zebra text-lg">
-                  <thead>
-                    <tr class="text-lg">
-                      <th>Type</th>
-                      <th>Name</th>
-                      <th>Straight Lengths</th>
-                      <th>
-                        <div class="grid grid-cols-3 gap-2 min-w-[220px]">
-                          <div class="flex justify-center col-span-3">Groups</div>
-                          <div>Group</div>
-                          <div class="flex justify-center">T.E.L.</div>
-                          <div class="flex justify-end">Quantity</div>
+        <div class="project-workspace" data-project-id="00000000-0000-0000-0000-000000000000">
+          <nav class="app-navbar" aria-label="Main">
+            <a class="app-brand" href="/projects">
+            <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
+            Duct Calc<span></span></a>
+            <div class="app-nav-actions">
+              <button type="button" class="btn" aria-label="Keyboard shortcuts" aria-haspopup="dialog" aria-controls="projectShortcuts" data-open-dialog="projectShortcuts"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 15h12"/></svg></button>
+              Fitting reference
+              Ductulator<a class="btn btn-outline btn-secondary" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span></span></a><a class="btn btn-outline btn-primary" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span></span></a>
+              <details class="account-menu">
+                <summary class="btn"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>Account</summary>
+                <ul class="menu bg-base-200 rounded-box shadow-lg">
+                  <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
+                  <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
+                  <li>
+                    <form action="/logout" method="get">
+                      <button type="submit">Logout</button>
+                    </form>
+                  </li>
+                </ul>
+              </details>
+            </div>
+          </nav>
+          <div class="project-layout">
+            <aside class="project-navigation">
+              <button type="button" class="project-switch" data-open-dialog="recentProjects" aria-label="Switch project"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span><strong>Testy McTestface</strong><small>1234 Sesame Street</small></span><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg></button>
+              <nav aria-label="Project">
+                <ul id="project-sidebar">
+                  <li><a href="/projects/00000000-0000-0000-0000-000000000000" title="Project, Ctrl+Alt+1" aria-keyshortcuts="Control+Alt+1"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span class="nav-label">Project</span></a></li>
+                  <li><a href="/projects/00000000-0000-0000-0000-000000000000/rooms" title="Rooms, Ctrl+Alt+2" aria-keyshortcuts="Control+Alt+2"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-door-closed-icon lucide-door-closed"><path d="M10 12h.01"/><path d="M18 20V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14"/><path d="M2 20h20"/></svg><span class="nav-label">Rooms</span><span class="project-step-status" aria-label="Complete">✓</span></a></li>
+                  <li><a href="/projects/00000000-0000-0000-0000-000000000000/equipment" title="Equipment, Ctrl+Alt+3" aria-keyshortcuts="Control+Alt+3"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fan-icon lucide-fan"><path d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.002l5.412 1.45a6.082 6.082 0 0 1 7.002-8.618l-1.45 5.412a6.082 6.082 0 0 1 8.618 7.002l-5.412-1.45a6.082 6.082 0 0 1-7.002 8.618l1.45-5.412Z"/><path d="M12 12v.01"/></svg><span class="nav-label">Equipment</span><span class="project-step-status" aria-label="Complete">✓</span></a></li>
+                  <li><a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths" title="Total effective length, Ctrl+Alt+4" aria-keyshortcuts="Control+Alt+4" aria-current="page"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ruler-dimension-line-icon lucide-ruler-dimension-line"><path d="M10 15v-3"/><path d="M14 15v-3"/><path d="M18 15v-3"/><path d="M2 8V4"/><path d="M22 6H2"/><path d="M22 8V4"/><path d="M6 15v-3"/><rect x="2" y="12" width="20" height="8" rx="2"/></svg><span class="nav-label">Total effective length</span><span class="project-step-status" aria-label="Complete">✓</span></a></li>
+                  <li><a href="/projects/00000000-0000-0000-0000-000000000000/friction-rate" title="Friction rate, Ctrl+Alt+5" aria-keyshortcuts="Control+Alt+5"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-function-icon lucide-square-function"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M9 17c2 0 2.8-1 2.8-2.8V10c0-2 1-3.3 3.2-3"/><path d="M9 11.2h5.7"/></svg><span class="nav-label">Friction rate</span><span class="project-step-status" aria-label="Complete">✓</span></a></li>
+                  <li><a href="/projects/00000000-0000-0000-0000-000000000000/duct-sizing" title="Duct sizes, Ctrl+Alt+6" aria-keyshortcuts="Control+Alt+6"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg><span class="nav-label">Duct sizes</span></a></li>
+                </ul>
+              </nav>
+              All projects<a class="all-projects-link" href="/projects"></a>
+            </aside>
+            <div class="project-content" id="project-content" tabindex="-1">
+              <div data-tel-workspace="">
+                <div class="page-title-row">
+                  <div>
+                    <h1 class="text-3xl font-bold">Total effective length</h1>
+                    <p class="muted">The longest supply and return paths set TEL. Expand fittings in the table to inspect each path.</p>
+                  </div>
+                  <div class="row-actions"><a class="btn btn-outline" href="/path-templates?project=00000000-0000-0000-0000-000000000000">Manage templates</a><a class="btn btn-primary" aria-label="Add path" href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/editor"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add path</a></div>
+                </div>
+                <div class="project-panel tel-equation">
+                  <div><strong><span>80</span></strong><small>ft · longest return path</small></div>
+                  +<span></span>
+                  <div><strong><span>105</span></strong><small>ft · longest supply path</small></div>
+                  =<span></span>
+                  <div><strong class="tel-result"><span>185</span></strong><small>ft · total effective length</small></div>
+                </div>
+                <details class="project-panel path-canvas" open="" data-expansion="path-network">
+                  <summary class="canvas-legend"><span class="network-toggle"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>PATH NETWORK</span><span>Longest supply and return · All 2 paths in the table below</span></summary>
+                  <div class="path-network">
+                    <svg class="network-wires" viewBox="0 0 1200 480" preserveAspectRatio="none" aria-hidden="true"><path class="return missing-wire" d="M600 240 C430 240,430 360,192 360"/><path class="return" data-path-wire="00000000000000000000000000000009" d="M600 240 C430 240,430 144,192 144"/><path class="supply missing-wire" d="M600 240 C770 240,770 360,1008 360"/><path class="supply selected-wire" data-path-wire="00000000000000000000000000000008" d="M600 240 C770 240,770 144,1008 144"/></svg><a class="network-handler" href="/projects/00000000-0000-0000-0000-000000000000/equipment"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fan-icon lucide-fan"><path d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.002l5.412 1.45a6.082 6.082 0 0 1 7.002-8.618l-1.45 5.412a6.082 6.082 0 0 1 8.618 7.002l-5.412-1.45a6.082 6.082 0 0 1-7.002 8.618l1.45-5.412Z"/><path d="M12 12v.01"/></svg><strong>Air handler</strong><span><span>1,000</span> CFM</span></a><a class="network-endpoint missing-path return" href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/editor?type=return" style="left:16%;top:75%" aria-label="Add return path"><span>Return path</span><strong>Add another path</strong><span class="missing-path-action"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add return</span></a>
+                    <article class="network-endpoint return governing" style="left:16%;top:30%">
+                      <button type="button" class="network-path-select" data-select-path="00000000000000000000000000000009" aria-pressed="false"><span>Longest return path</span><strong>Return - 1</strong><b><span>80</span><small> ft</small></b><small class="path-selection">Selected</small></button>
+                      <div class="network-path-actions">
+                        <div class="row-actions">
+                          <a class="btn btn-ghost" title="Duplicate path" aria-label="Duplicate Return - 1" href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000009/duplicate"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></a>
+                          <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Return - 1" title="Delete path" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000009" hx-confirm="Delete this path?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                          <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg><a class="btn btn-ghost" title="Edit path" aria-label="Edit Return - 1" href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/editor?id=00000000-0000-0000-0000-000000000009"></a>
                         </div>
-                      </th>
-                      <th>
-                        <div class="flex justify-end me-[140px]">T.E.L.</div>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr id="00000000000000000000000000000008">
-                      <td>
-                        <div class="badge badge-lg badge-info"><span>supply</span></div>
-                      </td>
-                      <td>Supply - 1</td>
-                      <td>
-                        <div class="grid grid-cols-1 gap-2"><span>10</span><span>25</span></div>
-                      </td>
-                      <td>
-                        <div class="grid grid-cols-3 gap-2 min-w-[220px]">
-                          <span>1-a</span>
-                          <div class="flex justify-center"><span>20</span></div>
-                          <div class="flex justify-end"><span>1</span></div>
-                          2-b<span></span>
-                          <div class="flex justify-center"><span>30</span></div>
-                          <div class="flex justify-end"><span>1</span></div>
-                          3-a<span></span>
-                          <div class="flex justify-center"><span>10</span></div>
-                          <div class="flex justify-end"><span>1</span></div>
-                          12-a<span></span>
-                          <div class="flex justify-center"><span>10</span></div>
-                          <div class="flex justify-end"><span>1</span></div>
+                      </div>
+                    </article>
+                    Supply path
+                    Add another path
+                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+                    Add supply<a class="network-endpoint missing-path supply" href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/editor?type=supply" style="left:84%;top:75%" aria-label="Add supply path"><span></span><strong></strong><span class="missing-path-action"></span></a>
+                    <article class="network-endpoint supply governing" style="left:84%;top:30%">
+                      <button type="button" class="network-path-select" data-select-path="00000000000000000000000000000008" aria-pressed="true"><span>Longest supply path</span><strong>Supply - 1</strong><b><span>105</span><small> ft</small></b><small class="path-selection">Selected</small></button>
+                      <div class="network-path-actions">
+                        <div class="row-actions">
+                          <a class="btn btn-ghost" title="Duplicate path" aria-label="Duplicate Supply - 1" href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000008/duplicate"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></a>
+                          <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Supply - 1" title="Delete path" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000008" hx-confirm="Delete this path?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                          <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg><a class="btn btn-ghost" title="Edit path" aria-label="Edit Supply - 1" href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/editor?id=00000000-0000-0000-0000-000000000008"></a>
                         </div>
-                      </td>
-                      <td>
-                        <div class="flex items-center justify-end gap-4">
-                          <div class="badge badge-lg badge-primary"><span>105</span></div>
-                          <div class="flex items-center justify-end">
-                            <div class="join">
-                              <div class="tooltip tooltip-bottom" data-tip="Delete">
-                                <button type="button" class="btn btn-error join-item btn-ghost" aria-label="Delete Supply - 1" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000008" hx-confirm="Are you sure?" hx-target="closest tr" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-                              </div>
-                              Edit<a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/editor?id=00000000-0000-0000-0000-000000000008" class="btn btn-ghost join-item"></a>
+                      </div>
+                    </article>
+                  </div>
+                </details>
+                <section class="project-panel path-schedule">
+                  <div class="path-schedule-heading">
+                    <h2>All paths<span>2</span></h2>
+                    <div><span>Select a row · Expand fittings to compare</span></div>
+                  </div>
+                  <div class="table-scroll" tabindex="0" role="region" aria-label="Equivalent lengths">
+                    <table class="table project-table path-table" data-selectable-table="paths">
+                      <thead>
+                        <tr>
+                          <th>Path</th>
+                          <th>System</th>
+                          <th>Straight · ft</th>
+                          <th>Fittings · ft</th>
+                          <th>Total · ft</th>
+                          <th>Fitting breakdown</th>
+                          <th><span class="sr-only">Actions</span></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr id="00000000000000000000000000000008" data-record="00000000000000000000000000000008">
+                          <td>
+                            <button type="button" class="row-select" aria-pressed="false">Supply - 1</button>
+                            Longest<span class="longest-badge supply"></span>
+                          </td>
+                          <td><span class="system-label supply">Supply</span></td>
+                          <td>
+                            <details data-expansion="straight-00000000000000000000000000000008">
+                              <summary><span>35</span></summary>
+                              <p>10 ft</p>
+                              <p>25 ft</p>
+                            </details>
+                          </td>
+                          <td><span>70</span></td>
+                          <td><strong><span>105</span></strong></td>
+                          <td>
+                            <details class="fitting-breakdown" data-expansion="fittings-00000000000000000000000000000008">
+                              <summary>4 fittings · 4 groups</summary>
+                              <h3>Group 1</h3>
+                              <div class="fitting-line"><span><span>1-a</span></span><span><span>20</span> ft × 1</span><strong><span>20</span> ft</strong></div>
+                              <h3>Group 2</h3>
+                              <div class="fitting-line"><span><span>2-b</span></span><span><span>30</span> ft × 1</span><strong><span>30</span> ft</strong></div>
+                              <h3>Group 3</h3>
+                              <div class="fitting-line"><span><span>3-a</span></span><span><span>10</span> ft × 1</span><strong><span>10</span> ft</strong></div>
+                              <h3>Group 12</h3>
+                              <div class="fitting-line"><span><span>12-a</span></span><span><span>10</span> ft × 1</span><strong><span>10</span> ft</strong></div>
+                            </details>
+                          </td>
+                          <td>
+                            <div class="row-actions">
+                              <a class="btn btn-ghost" title="Duplicate path" aria-label="Duplicate Supply - 1" href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000008/duplicate"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></a>
+                              <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Supply - 1" title="Delete path" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000008" hx-confirm="Delete this path?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg><a class="btn btn-ghost" title="Edit path" aria-label="Edit Supply - 1" href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/editor?id=00000000-0000-0000-0000-000000000008"></a>
                             </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr id="00000000000000000000000000000009">
-                      <td>
-                        <div class="badge badge-lg badge-error"><span>return</span></div>
-                      </td>
-                      <td>Return - 1</td>
-                      <td>
-                        <div class="grid grid-cols-1 gap-2"><span>10</span><span>20</span><span>5</span></div>
-                      </td>
-                      <td>
-                        <div class="grid grid-cols-3 gap-2 min-w-[220px]">
-                          <span>5-a</span>
-                          <div class="flex justify-center"><span>10</span></div>
-                          <div class="flex justify-end"><span>1</span></div>
-                          6-a<span></span>
-                          <div class="flex justify-center"><span>15</span></div>
-                          <div class="flex justify-end"><span>1</span></div>
-                          7-a<span></span>
-                          <div class="flex justify-center"><span>20</span></div>
-                          <div class="flex justify-end"><span>1</span></div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="flex items-center justify-end gap-4">
-                          <div class="badge badge-lg badge-primary"><span>80</span></div>
-                          <div class="flex items-center justify-end">
-                            <div class="join">
-                              <div class="tooltip tooltip-bottom" data-tip="Delete">
-                                <button type="button" class="btn btn-error join-item btn-ghost" aria-label="Delete Return - 1" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000009" hx-confirm="Are you sure?" hx-target="closest tr" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-                              </div>
-                              Edit<a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/editor?id=00000000-0000-0000-0000-000000000009" class="btn btn-ghost join-item"></a>
+                          </td>
+                        </tr>
+                        <tr id="00000000000000000000000000000009" data-record="00000000000000000000000000000009">
+                          <td>
+                            <button type="button" class="row-select" aria-pressed="false">Return - 1</button>
+                            Longest<span class="longest-badge return"></span>
+                          </td>
+                          <td><span class="system-label return">Return</span></td>
+                          <td>
+                            <details data-expansion="straight-00000000000000000000000000000009">
+                              <summary><span>35</span></summary>
+                              <p>10 ft</p>
+                              <p>20 ft</p>
+                              <p>5 ft</p>
+                            </details>
+                          </td>
+                          <td><span>45</span></td>
+                          <td><strong><span>80</span></strong></td>
+                          <td>
+                            <details class="fitting-breakdown" data-expansion="fittings-00000000000000000000000000000009">
+                              <summary>3 fittings · 3 groups</summary>
+                              <h3>Group 5</h3>
+                              <div class="fitting-line"><span><span>5-a</span></span><span><span>10</span> ft × 1</span><strong><span>10</span> ft</strong></div>
+                              <h3>Group 6</h3>
+                              <div class="fitting-line"><span><span>6-a</span></span><span><span>15</span> ft × 1</span><strong><span>15</span> ft</strong></div>
+                              <h3>Group 7</h3>
+                              <div class="fitting-line"><span><span>7-a</span></span><span><span>20</span> ft × 1</span><strong><span>20</span> ft</strong></div>
+                            </details>
+                          </td>
+                          <td>
+                            <div class="row-actions">
+                              <a class="btn btn-ghost" title="Duplicate path" aria-label="Duplicate Return - 1" href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000009/duplicate"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></a>
+                              <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Return - 1" title="Delete path" hx-delete="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/00000000-0000-0000-0000-000000000009" hx-confirm="Delete this path?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg><a class="btn btn-ghost" title="Edit path" aria-label="Edit Return - 1" href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths/editor?id=00000000-0000-0000-0000-000000000009"></a>
                             </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
               </div>
             </div>
           </div>
+          <dialog id="recentProjects" class="modal" aria-labelledby="recentProjects-title">
+            <div class="modal-box">
+              <h2 id="recentProjects-title" class="text-2xl font-bold mb-6 pe-10">Switch project</h2>
+              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Switch project" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+              <p class="muted">Recently opened</p>
+              <div class="recent-projects"><a class="recent-project" href="/projects/00000000-0000-0000-0000-000000000000" aria-current="page"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span><strong>Testy McTestface</strong><small>1234 Sesame Street · Monroe, OH</small></span><span class="current-project">Current ✓</span></a></div>
+              View all projects<a class="btn btn-outline mt-4" href="/projects"></a>
+            </div>
+          </dialog>
+          <dialog id="projectShortcuts" class="modal" aria-labelledby="projectShortcuts-title">
+            <div class="modal-box">
+              <h2 id="projectShortcuts-title" class="text-2xl font-bold mb-6 pe-10">Keyboard shortcuts</h2>
+              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Keyboard shortcuts" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+              <p class="text-sm mt-2">Hold Ctrl+Alt and press a key below.</p>
+              <table class="table table-sm mt-4">
+                <caption class="text-left font-bold p-2">Project sections</caption>
+                <tbody>
+                  <tr>
+                    <th scope="row">Project</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">1</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Rooms</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">2</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Equipment</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">3</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Total effective length</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">4</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Friction rate</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">5</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Duct sizes</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">6</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Next room row</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">J</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Previous room row</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">K</kbd></td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="table table-sm mt-4">
+                <caption class="text-left font-bold p-2">App navigation</caption>
+                <tbody>
+                  <tr>
+                    <th scope="row">Ductulator</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">D</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Fitting reference</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">F</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Projects</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">P</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Profile</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">U</kbd></td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="text-sm mt-2">Ctrl+K focuses room or register search. Ductulator and fitting reference open in new tabs. Shortcuts pause while editing a field or when a dialog is open.</p>
+            </div>
+          </dialog>
         </div>
-        <dialog id="projectShortcuts" class="modal" aria-labelledby="projectShortcuts-title">
-          <div class="modal-box">
-            <h2 id="projectShortcuts-title" class="text-2xl font-bold mb-6 pe-10">Keyboard shortcuts</h2>
-            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Keyboard shortcuts" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-            <p class="text-sm mt-2">Hold Ctrl+Alt and press a key below.</p>
-            <table class="table table-sm mt-4">
-              <caption class="text-left font-bold p-2">Project sections</caption>
-              <tbody>
-                <tr>
-                  <th scope="row">Project</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">1</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Rooms</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">2</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Equipment</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">3</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">T.E.L.</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">4</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Friction Rate</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">5</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Duct Sizes</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">6</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Next section</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">J</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Previous section</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">K</kbd></td>
-                </tr>
-              </tbody>
-            </table>
-            <table class="table table-sm mt-4">
-              <caption class="text-left font-bold p-2">App navigation</caption>
-              <tbody>
-                <tr>
-                  <th scope="row">Ductulator</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">D</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Fitting reference</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">F</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Projects</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">P</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Profile</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">U</kbd></td>
-                </tr>
-              </tbody>
-            </table>
-            <p class="text-sm mt-2">Ductulator and fitting reference open in new tabs. Shortcuts pause while editing a field or when a dialog is open.</p>
-          </div>
-        </dialog>
       </main>
       <div id="app-status" class="sr-only" role="status" aria-atomic="true"></div>
       <div id="app-error" class="request-error" role="alert"></div>
@@ -250,7 +299,7 @@
 bg-base-300 text-base-content p-4">
           <div class="grid-flow-row items-center">
             <div class="flex mx-auto">
-              <a class="btn btn-ghost" href="mailto:support@ductcalc.pro">  <svg aria-hidden="true" focusable="false" class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <a class="btn btn-ghost" href="mailto:support@ductcalc.pro"><svg aria-hidden="true" focusable="false" class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g
                   stroke-linejoin="round"
                   stroke-linecap="round"

@@ -1,0 +1,62 @@
+<div data-pressure-workspace="">
+  <div class="page-title-row">
+    <div>
+      <h1 class="text-3xl font-bold">Where the pressure goes</h1>
+      <p class="muted">The width of each stream represents its share of blower static.</p>
+    </div>
+    <button type="button" class="btn btn-outline" data-open-dialog="componentLossForm"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add component</button>
+  </div>
+  <div class="design-metrics pressure-summary">
+    <div class="design-metric"><span>Blower static</span><strong>0.30<small>in. w.c.</small></strong></div>
+    <div class="design-metric"><span>Total effective length</span><strong>Not set<small>ft</small></strong></div>
+    <div class="design-metric invalid-metric">
+      <span>Design friction rate</span><strong>Invalid<small>in. w.c. / 100 ft</small></strong>
+      <p class="metric-error" role="alert">Friction rate could not be calculated.</p>
+    </div>
+  </div>
+  <details class="project-panel pressure-canvas" open="" data-expansion="pressure-flow">
+    <summary class="canvas-legend"><span class="network-toggle"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>PRESSURE FLOW</span><span>Select a component · All losses in the table below</span></summary>
+    <div class="pressure-river" style="--river-height: 500px">
+      <svg class="river-wires" viewBox="0 0 1000 490" preserveAspectRatio="none" aria-hidden="true"><path class="pressure-source-line" d="M100 50V445"/></svg>
+      <div class="pressure-source"><span>BLOWER STATIC</span><strong>0.30</strong><small>in. w.c.</small></div>
+      <p class="empty-state">Add component pressure losses to complete this section.</p>
+    </div>
+  </details>
+  <section class="project-panel loss-schedule">
+    <div class="path-schedule-heading">
+      <h2>Component losses<span>0</span></h2>
+      Highest share first · Edit pressure losses inline<span class="muted"></span>
+    </div>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Component pressure losses">
+      <table class="table project-table loss-table" data-selectable-table="loss">
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Pressure loss · in. w.c.</th>
+            <th>% of blower static</th>
+            <th><span class="sr-only">Actions</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="4" class="empty-state">Add a component to enter its pressure loss.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <dialog id="componentLossForm" class="modal" aria-labelledby="componentLossForm-title">
+    <div class="modal-box">
+      <h2 id="componentLossForm-title" class="text-2xl font-bold mb-6 pe-10">Component Loss</h2>
+      <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Component Loss" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+      <form data-success-message="Changes saved." class="space-y-4 p-4" hx-post="/projects/00000000-0000-0000-0000-000000000001/component-loss" hx-target="body" hx-swap="outerHTML">
+        <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000001">
+        Name<label class="input w-full"><span class="label"></span>
+        <input name="name" type="text" value="" placeholder="Name" required autofocus>
+        Value</label><label class="input w-full"><span class="label"></span>
+        <input name="value" type="number" value="" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
+        <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+      </form>
+    </div>
+  </dialog>
+</div>

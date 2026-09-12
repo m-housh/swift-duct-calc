@@ -4,138 +4,135 @@ import ManualDCore
 import Styleguide
 
 struct EffectiveLengthsTable: HTML, Sendable {
-
   let effectiveLengths: [EquivalentLength]
-
-  private var sortedLengths: [EquivalentLength] {
-    effectiveLengths.sorted {
-      $0.totalEquivalentLength > $1.totalEquivalentLength
-    }
-    .sorted {
-      $0.type.rawValue > $1.type.rawValue
-    }
-  }
-
   var body: some HTML<HTMLTag.table> {
-    table(.class("table table-zebra text-lg")) {
+    table(.class("table project-table path-table"), .data("selectable-table", value: "paths")) {
       thead {
-        tr(.class("text-lg")) {
-          th { "Type" }
-          th { "Name" }
-          th { "Straight Lengths" }
-          th {
-            div(.class("grid grid-cols-3 gap-2 min-w-[220px]")) {
-              div(.class("flex justify-center col-span-3")) {
-                "Groups"
-              }
-              div { "Group" }
-              div(.class("flex justify-center")) {
-                "T.E.L."
-              }
-              div(.class("flex justify-end")) {
-                "Quantity"
-              }
-            }
-          }
-          th {
-            div(.class("flex justify-end me-[140px]")) {
-              "T.E.L."
-            }
-          }
+        tr {
+          th { "Path" }
+          th { "System" }
+          th { "Straight · ft" }
+          th { "Fittings · ft" }
+          th { "Total · ft" }
+          th { "Fitting breakdown" }
+          th { span(.class("sr-only")) { "Actions" } }
         }
       }
       tbody {
-        for row in sortedLengths {
-          EffectiveLengthRow(effectiveLength: row)
+        for type in [EquivalentLength.EffectiveLengthType.supply, .return] {
+          let paths = EffectiveLengthsView.ranked(effectiveLengths.filter { $0.type == type })
+          for path in paths {
+            EffectiveLengthRow(
+              effectiveLength: path,
+              longest: path.totalEquivalentLength == paths.first?.totalEquivalentLength)
+          }
         }
       }
-
     }
   }
 
   struct EffectiveLengthRow: HTML, Sendable {
-
     let effectiveLength: EquivalentLength
-
-    private var deleteRoute: SiteRoute.View {
-      .project(
-        .detail(
-          effectiveLength.projectID,
-          .equivalentLength(.delete(id: effectiveLength.id))
-        )
-      )
-    }
-
+    var longest = false
     var body: some HTML<HTMLTag.tr> {
-      tr(.id(effectiveLength.id.idString)) {
+      tr(.id(effectiveLength.id.idString), .data("record", value: effectiveLength.id.idString)) {
         td {
-          // Type
-          Badge {
-            span { effectiveLength.type.rawValue }
+          button(.type(.button), .class("row-select"), .init(name: "aria-pressed", value: "false"))
+          {
+            effectiveLength.name
           }
-          .attributes(.class("badge-info"), when: effectiveLength.type == .supply)
-          .attributes(.class("badge-error"), when: effectiveLength.type == .return)
-
+          if longest {
+            span(.class("longest-badge \(effectiveLength.type.rawValue)")) { "Longest" }
+          }
         }
-        td { effectiveLength.name }
         td {
-          // Lengths
-          div(.class("grid grid-cols-1 gap-2")) {
-            for length in effectiveLength.straightLengths {
-              Number(length)
+          span(.class("system-label \(effectiveLength.type.rawValue)")) {
+            effectiveLength.type.rawValue.capitalized
+          }
+        }
+        td {
+          if effectiveLength.straightLengths.count > 1 {
+            details(.data("expansion", value: "straight-\(effectiveLength.id.idString)")) {
+              summary { Number(effectiveLength.straightLengths.reduce(0, +)) }
+              for length in effectiveLength.straightLengths { p { "\(length) ft" } }
+            }
+          } else {
+            Number(effectiveLength.straightLengths.reduce(0, +))
+          }
+        }
+        td { Number(effectiveLength.groups.totalEquivalentLength, digits: 1) }
+        td { strong { Number(effectiveLength.totalEquivalentLength, digits: 1) } }
+        td {
+          details(
+            .class("fitting-breakdown"),
+            .data("expansion", value: "fittings-\(effectiveLength.id.idString)")
+          ) {
+            summary {
+              "\(effectiveLength.groups.reduce(0) { $0 + $1.quantity }) fittings · \(Set(effectiveLength.groups.map(\.group)).count) groups"
+            }
+            for groupNumber in Set(effectiveLength.groups.map(\.group)).sorted() {
+              h3 { "Group \(groupNumber)" }
+              for fitting in effectiveLength.groups.filter({ $0.group == groupNumber }) {
+                div(.class("fitting-line")) {
+                  span {
+                    if let name = fitting.fitting?.name {
+                      span { name }
+                      br()
+                    }
+                    span {
+                      fitting.letter.isEmpty
+                        ? "Group \(fitting.group)" : "\(fitting.group)-\(fitting.letter)"
+                    }
+                  }
+                  span {
+                    Number(fitting.value, digits: 2)
+                    " ft × \(fitting.quantity)"
+                  }
+                  strong {
+                    Number(fitting.value * Double(fitting.quantity), digits: 2)
+                    " ft"
+                  }
+                }
+              }
             }
           }
         }
         td {
-          div(.class("grid grid-cols-3 gap-2 min-w-[220px]")) {
-            for group in effectiveLength.groups {
-              span {
-                group.letter.isEmpty ? "Group \(group.group)" : "\(group.group)-\(group.letter)"
-              }
-              div(.class("flex justify-center")) {
-                Number(group.value)
-              }
-              div(.class("flex justify-end")) {
-                Number(group.quantity)
-              }
-            }
-          }
-
-        }
-        td {
-          // Total
-          div(.class("flex items-center justify-end gap-4")) {
-            Badge(number: effectiveLength.totalEquivalentLength, digits: 0)
-              .attributes(.class("badge-primary"))
-
-            // Buttons
-            div(.class("flex items-center justify-end")) {
-              div(.class("join")) {
-                TrashButton("Delete \(effectiveLength.name)")
-                  .attributes(
-                    .class("join-item btn-ghost"),
-                    .hx.delete(route: deleteRoute),
-                    .hx.confirm("Are you sure?"),
-                    .hx.target("closest tr"),
-                    .hx.swap(.outerHTML)
-                  )
-                  .tooltip("Delete", position: .bottom)
-
-                a(
-                  .href(
-                    effectiveLength.templateSnapshot != nil
-                      ? "\(guidedPathURL(effectiveLength.projectID))/edit/\(effectiveLength.id)"
-                      : "/projects/\(effectiveLength.projectID)/effective-lengths/editor?id=\(effectiveLength.id)"
-                  ), .class("btn btn-ghost join-item")
-                ) { "Edit" }
-
-              }
-            }
-          }
-
+          PathActions(effectiveLength: effectiveLength)
         }
       }
     }
   }
 
+  struct PathActions: HTML, Sendable {
+    let effectiveLength: EquivalentLength
+    var body: some HTML {
+      div(.class("row-actions")) {
+        a(
+          .class("btn btn-ghost"),
+          .title("Duplicate path"),
+          .init(name: "aria-label", value: "Duplicate \(effectiveLength.name)"),
+          .href(
+            route: .project(
+              .detail(
+                effectiveLength.projectID, .equivalentLength(.duplicate(effectiveLength.id)))))
+        ) { SVG(.copy) }
+        TrashButton("Delete \(effectiveLength.name)").attributes(
+          .class("btn-ghost"), .title("Delete path"),
+          .hx.delete(
+            route: .project(
+              .detail(
+                effectiveLength.projectID, .equivalentLength(.delete(id: effectiveLength.id))))),
+          .hx.confirm("Delete this path?"), .hx.target("body"), .hx.swap(.outerHTML))
+        a(
+          .class("btn btn-ghost"),
+          .title("Edit path"),
+          .init(name: "aria-label", value: "Edit \(effectiveLength.name)"),
+          .href(
+            "/projects/\(effectiveLength.projectID)/effective-lengths/editor?id=\(effectiveLength.id)"
+          )
+        ) { SVG(.squarePen) }
+      }
+    }
+  }
 }

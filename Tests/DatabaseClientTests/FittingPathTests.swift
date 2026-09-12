@@ -9,6 +9,113 @@ import Testing
 @testable import DatabaseClient
 
 struct FittingPathTests {
+  @Test(arguments: [false, true])
+  func templatePathsUseTheFittingEditorWithoutChangingUntouchedValues(legacyMetadata: Bool)
+    async throws
+  {
+    let fittings = try await client()
+    try await withTestUserAndProject(setupDependencies: {
+      $0.fittingClient = fittings
+      $0.templateFittingClient = .live(using: fittings)
+    }) { user, project in
+      @Dependency(\.database) var database
+      let client = ProjectClient.liveValue
+      let template = try await client.createPathTemplate(
+        userID: user.id, configuration: GuidedPathTests.configuration)
+      let snapshot = PathTemplate.Snapshot(template: template)
+      var original = try await client.saveGuidedPath(
+        userID: user.id, projectID: project.id,
+        request: .init(
+          name: "Template supply", straightLengths: [10, 25], snapshot: snapshot,
+          rows: GuidedPathTests.rows))
+      if legacyMetadata {
+        let groups = original.groups.map { group in
+          EquivalentLength.FittingGroup(
+            group: group.group, letter: group.letter, value: group.value, quantity: group.quantity,
+            rowID: group.rowID, stepID: group.stepID,
+            calculation: group.calculation.map {
+              .init(
+                fittingID: $0.fittingID, inputs: $0.inputs,
+                equivalentLengthFeet: $0.equivalentLengthFeet, ruleRevision: "historical")
+            })
+        }
+        original = try await database.equivalentLengths.updateIfUnchanged(
+          original, .init(groups: groups))
+      }
+      let unchanged = try await client.saveFittingPath(
+        user.id, project.id,
+        .init(
+          baseline: original, name: original.name, pathType: .supply, straightLengths: [10, 25],
+          entries: original.groups.indices.map {
+            .saved(index: $0, quantity: original.groups[$0].quantity)
+          }))
+      #expect(unchanged.groups == original.groups)
+      #expect(unchanged.templateSnapshot == snapshot)
+      let copy = try await client.saveFittingPath(
+        user.id, project.id,
+        .init(
+          baseline: unchanged, name: "Supply copy", pathType: unchanged.type,
+          straightLengths: unchanged.straightLengths,
+          entries: unchanged.groups.indices.map {
+            .saved(index: $0, quantity: unchanged.groups[$0].quantity)
+          }, duplicate: true))
+      #expect(copy.id != unchanged.id)
+      #expect(copy.groups == unchanged.groups)
+      #expect(copy.straightLengths == unchanged.straightLengths)
+      #expect(copy.templateSnapshot == snapshot)
+      _ = try await client.saveFittingPath(
+        user.id, project.id,
+        .init(
+          baseline: copy, name: "Edited copy", pathType: copy.type, straightLengths: [5],
+          entries: [.saved(index: 0, quantity: 3)]))
+      #expect(try await database.equivalentLengths.get(unchanged.id) == unchanged)
+      await #expect(throws: FittingPathError.self) {
+        try await client.saveFittingPath(
+          UUID(), project.id,
+          .init(
+            baseline: unchanged, name: "Unauthorized copy", pathType: unchanged.type,
+            straightLengths: [], entries: [], duplicate: true))
+      }
+      await #expect(throws: FittingPathError.self) {
+        try await client.saveFittingPath(
+          user.id, project.id,
+          .init(
+            baseline: nil, name: "Missing source", pathType: .supply,
+            straightLengths: [], entries: [], duplicate: true))
+      }
+      let edited = try await client.saveFittingPath(
+        user.id, project.id,
+        .init(
+          baseline: unchanged, name: "Edited supply", pathType: .supply, straightLengths: [30],
+          entries: [
+            .catalog(id: "1B", inputs: .fixed, column: nil, quantity: 2, replacing: 0),
+            .saved(index: 1, quantity: 1),
+            .reference(code: "4AG", feet: 12.5, quantity: 1),
+          ]))
+      #expect(
+        edited.groups[0].fitting?.id == (original.groups[0].fitting?.id ?? original.groups[0].rowID)
+      )
+      #expect(edited.groups[1].calculation == original.groups[1].calculation)
+      #expect(abs(edited.totalEquivalentLength - 68.7) < 1e-9)
+      let removed = try await client.saveFittingPath(
+        user.id, project.id,
+        .init(
+          baseline: edited, name: edited.name, pathType: .supply, straightLengths: [30],
+          entries: [.saved(index: 1, quantity: 1)]))
+      #expect(removed.groups == [edited.groups[1]])
+      #expect(removed.templateSnapshot == snapshot)
+      #expect(try await database.pathTemplates.get(user.id, template.id) == template)
+      #expect(try await database.equivalentLengths.get(removed.id) == removed)
+      await #expect(throws: FittingPathError.self) {
+        try await client.saveFittingPath(
+          user.id, project.id,
+          .init(
+            baseline: edited, name: "Stale overwrite", pathType: .supply, straightLengths: [],
+            entries: []))
+      }
+    }
+  }
+
   func client() async throws -> FittingClient {
     try await withDependencies {
       $0.fileClient.readFile = { try Data(contentsOf: URL(fileURLWithPath: $0)) }

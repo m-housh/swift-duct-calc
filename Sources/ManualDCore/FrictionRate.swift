@@ -21,7 +21,17 @@ public struct FrictionRate: Codable, Equatable, Sendable {
 
   /// The error if the design friction rate is out of a valid range.
   public var error: FrictionRateError? {
-    if value >= 0.18 {
+    if !value.isFinite || !availableStaticPressure.isFinite {
+      return .init(
+        "Friction rate could not be calculated.",
+        resolutions: ["Review blower static, component losses, and total effective length."])
+    } else if availableStaticPressure <= 0 || value <= 0 {
+      return .init(
+        "Component pressure losses meet or exceed blower static.",
+        resolutions: [
+          "Review blower static pressure and component pressure losses before sizing ducts."
+        ])
+    } else if value >= 0.18 {
       return .init(
         "Friction rate should be lower than 0.18",
         resolutions: [

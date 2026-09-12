@@ -17,11 +17,12 @@
     <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
     <script src="/js/htmx-download.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="/js/main.js?v=workspace-fixes-6"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="/css/output.css?v=navbar-reference-1">
     <link rel="stylesheet" href="/css/htmx.css">
-    <link rel="stylesheet" href="/css/accessibility.css?v=1">
+    <link rel="stylesheet" href="/css/accessibility.css?v=request-toast-2">
+    <link rel="stylesheet" href="/css/project-workspace.css?v=friction-errors-5">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
     <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
@@ -59,10 +60,7 @@
             <div class="flex flex-wrap items-center justify-between gap-3">
               <h1 class="text-2xl font-bold">Account</h1>
               <button class="btn" type="button" aria-label="Edit profile" data-open-dialog="userProfileForm_00000000000000000000000000000001">
-                <div class="flex">
-                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                  
-                </div>
+                <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
               </button>
             </div>
             <table class="table details-table table-zebra border rounded-lg">
@@ -98,7 +96,7 @@
             <dialog id="userProfileForm_00000000000000000000000000000001" class="modal" aria-labelledby="userProfileForm_00000000000000000000000000000001-title">
               <div class="modal-box">
                 <h2 id="userProfileForm_00000000000000000000000000000001-title" class="text-2xl font-bold mb-6 pe-10">Profile</h2>
-                <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Profile" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Profile" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
                 <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4 p-4" hx-patch="/profile/00000000-0000-0000-0000-000000000001" hx-target="body" hx-swap="outerHTML">
                   <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000001">
                   <input class="hidden" name="userID" value="00000000-0000-0000-0000-000000000000">
@@ -148,7 +146,7 @@
 bg-base-300 text-base-content p-4">
           <div class="grid-flow-row items-center">
             <div class="flex mx-auto">
-              <a class="btn btn-ghost" href="mailto:support@ductcalc.pro">  <svg aria-hidden="true" focusable="false" class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <a class="btn btn-ghost" href="mailto:support@ductcalc.pro"><svg aria-hidden="true" focusable="false" class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g
                   stroke-linejoin="round"
                   stroke-linecap="round"

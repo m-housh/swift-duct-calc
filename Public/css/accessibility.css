@@ -42,7 +42,19 @@
 .ductulator-result { border:2px solid currentColor; border-radius:.5rem; padding:1rem; margin:1.5rem 0; }
 .ductulator-values > div { display:flex; flex-wrap:wrap; justify-content:space-between; gap:.5rem 1rem; padding:.75rem 0; border-bottom:1px solid currentColor; }
 .ductulator-values dd { font-weight:700; }
-.request-error:not(:empty) { padding:1rem; margin:1rem; border:2px solid currentColor; }
+.request-error:not(:empty) {
+  position:fixed; top:16px; right:16px; z-index:10000;
+  display:flex; align-items:center; gap:16px;
+  width:min(480px,calc(100vw - 32px)); padding:16px;
+  background:var(--color-base-100); color:var(--color-base-content);
+  border:1px solid var(--color-error); border-left-width:4px; border-radius:8px;
+  box-shadow:0 8px 30px #0004;
+}
+.request-error > button {
+  flex:0 0 32px; margin-left:auto; width:32px; height:32px; padding:0;
+  border:0; border-radius:4px; background:transparent; color:inherit;
+  font-size:24px; cursor:pointer;
+}
 /* Labels and placeholder text must remain legible on the selected theme's surface. */
 .label, .input .label, .select .label, .table thead, .table tfoot { color:inherit; opacity:1; }
 input::placeholder, textarea::placeholder { color:inherit; opacity:1; }

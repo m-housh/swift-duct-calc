@@ -12,6 +12,10 @@ extension ViewController {
     -> any AsyncResponseEncodable
   {
     var route = route
+    if case .project(.search(var query)) = route {
+      query.query = (try? request.query.get(String.self, at: "q")) ?? ""
+      route = .project(.search(query))
+    }
     if case .fittingReference(var query) = route, query.q != nil {
       // HTML GET forms encode spaces as '+'. Decode with Vapor's form-query decoder
       // before rendering; URLRouting's query parser preserves a literal '+'.

@@ -109,6 +109,9 @@ public struct DatabaseClient: Sendable {
 
   @DependencyClient
   public struct Projects: Sendable {
+    public var recent: @Sendable (User.ID) async throws -> [Project]
+    public var recordOpen: @Sendable (Project.ID, User.ID, Date) async throws -> Void
+    public var search: @Sendable (User.ID, String, PageRequest) async throws -> Page<Project>
     public var importPDF: @Sendable (User.ID, Project.PDFImport, Bool) async throws -> Project
     public var create: @Sendable (User.ID, Project.Create) async throws -> Project
     public var delete: @Sendable (Project.ID) async throws -> Void

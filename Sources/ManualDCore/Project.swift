@@ -205,3 +205,14 @@ extension Project {
   }
 
 #endif
+
+extension Project {
+  public struct Search: Equatable, Sendable {
+    public var query: String
+    public var page: Int
+    public init(query: String = "", page: Int = 1) {
+      self.query = query
+      self.page = page
+    }
+  }
+}

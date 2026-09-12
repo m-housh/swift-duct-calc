@@ -7,10 +7,14 @@ import ManualDCore
 import Testing
 import VaporTesting
 
-@Suite(.dependencies { $0.date.now = Date(timeIntervalSince1970: 1_709_251_200) })
+@Suite(
+  .dependencies {
+    $0.date.now = Date(timeIntervalSince1970: 1_709_251_200)
+    $0.uuid = .incrementing
+  })
 struct EquivalentLengthAuthorizationTests {
   @Test
-  func legacyRoutesEnforceOwnershipAndPathMembership() async throws {
+  func routesEnforceOwnershipAndPathMembership() async throws {
     try await withApp(configure: { app in
       app.logger.logLevel = .warning
       try await configure(app, in: .live())
@@ -46,22 +50,13 @@ struct EquivalentLengthAuthorizationTests {
       let headers: HTTPHeaders = [
         "Cookie": String(cookie), "Content-Type": "application/x-www-form-urlencoded",
       ]
-      let form =
-        "name=Stolen&type=supply&straightLengths=10&group%5Bgroup%5D=1&group%5Bletter%5D=B&group%5Blength%5D=10&group%5Bquantity%5D=1"
       for projectID in [project.id, otherProject.id] {
         let base = "/projects/\(projectID)/effective-lengths"
-        let requests: [(HTTPMethod, String, String)] = [
-          (.DELETE, "\(base)/\(path.id)", ""),
-          (.PATCH, "\(base)/\(path.id)", form),
-          (.POST, "\(base)/stepOne", "id=\(path.id)&name=Stolen&type=supply"),
-          (.POST, "\(base)/stepTwo", "id=\(path.id)&name=Stolen&type=supply&straightLengths=10"),
-        ]
-        for (method, url, body) in requests {
-          let response = try await client.sendRequest(
-            method, url, headers: headers, body: .init(string: body))
-          #expect(
-            response.status == .notFound
-              || response.body.string.contains("This project or path is unavailable."))
+        for (method, url) in [
+          (HTTPMethod.DELETE, "\(base)/\(path.id)"), (.GET, "\(base)/\(path.id)/duplicate"),
+          (.GET, "\(base)/editor?id=\(path.id)"),
+        ] {
+          let response = try await client.sendRequest(method, url, headers: headers)
           #expect(!response.body.string.contains("Private path"))
           #expect(try await database.equivalentLengths.get(path.id) == path)
         }
@@ -72,10 +67,6 @@ struct EquivalentLengthAuthorizationTests {
         #expect(response.status == .notFound || response.body.string.contains("unavailable"))
         #expect(!response.body.string.contains("Private path"))
       }
-      let create = try await client.sendRequest(
-        .POST, base + "/stepThree", headers: headers, body: .init(string: form))
-      #expect(create.status == .notFound)
-      #expect(try await database.equivalentLengths.fetch(project.id) == [path])
       for url in [
         "/projects/\(project.id)", "/projects/\(project.id)/pdf",
         "/projects/\(project.id)/friction-rate",

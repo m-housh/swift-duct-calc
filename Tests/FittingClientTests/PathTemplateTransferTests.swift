@@ -6,12 +6,28 @@ import Testing
 
 @Suite
 struct PathTemplateTransferTests {
+  @Test func olderTemplateInputsRestoreFittingEditorSelections() {
+    #expect(
+      TemplateFitting.Inputs.sourceTable(choices: ["1.5 or larger", "45"])
+        .catalogInputs(
+          for: .roundElbow(radiusRatios: [.init(rawValue: 1.5)!], angles: [.degrees45]))
+        == .roundElbow(radiusRatio: .init(rawValue: 1.5), angle: .degrees45))
+    #expect(
+      TemplateFitting.Inputs.dimensions(numeratorInches: 8, denominatorInches: 12)
+        .catalogInputs(for: .heightWidth(exactRatios: [0.5, 1]))
+        == .heightWidth(heightInches: 8, widthInches: 12))
+    #expect(
+      TemplateFitting.Inputs.downstreamBranches(3)
+        .catalogInputs(for: .downstreamBranches(finalBucketMinimum: 5))
+        == .downstreamBranches(count: 3))
+  }
+
   @Test
   func portableRoundTripKeepsConfigurationAndCreatesNewSectionIDs() async throws {
     try await withDependencies {
       $0.uuid = .incrementing
     } operation: {
-      for original in PathTemplate.starterConfigurations() {
+      for original in PathTemplate.defaultConfigurations() {
         let file = PathTemplate.Transfer(configuration: original)
         let encoded = try JSONEncoder().encode(file)
         let json = String(decoding: encoded, as: UTF8.self)
@@ -51,7 +67,7 @@ struct PathTemplateTransferTests {
     try withDependencies {
       $0.uuid = .incrementing
     } operation: {
-      let file = PathTemplate.Transfer(configuration: PathTemplate.starterConfigurations()[0])
+      let file = PathTemplate.Transfer(configuration: PathTemplate.defaultConfigurations()[0])
       var json = try #require(
         JSONSerialization.jsonObject(with: JSONEncoder().encode(file)) as? [String: Any])
       json["version"] = 99
@@ -73,7 +89,7 @@ struct PathTemplateTransferTests {
     try await withDependencies {
       $0.uuid = .incrementing
     } operation: {
-      var original = PathTemplate.starterConfigurations()[0]
+      var original = PathTemplate.defaultConfigurations()[0]
       original.steps[0].choices = [.init(fittingID: "missing-fitting")]
       let missing = try PathTemplate.Transfer(configuration: original).configuration()
       await #expect(

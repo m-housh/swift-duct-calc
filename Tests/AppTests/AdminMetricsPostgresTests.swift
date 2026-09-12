@@ -1,4 +1,5 @@
 import DatabaseClient
+import DependenciesTestSupport
 import EnvVars
 import Foundation
 import ManualDCore
@@ -7,7 +8,7 @@ import Vapor
 
 @testable import App
 
-@Suite
+@Suite(.dependencies { $0.uuid = .incrementing })
 struct AdminMetricsPostgresTests {
   /// Opt in only with a disposable PostgreSQL database; all migrations are reverted afterward.
   @Test(.enabled(if: ProcessInfo.processInfo.environment["METRICS_TEST_POSTGRES_HOST"] != nil))

@@ -2,7 +2,7 @@ import Dependencies
 import Foundation
 
 extension PathTemplate {
-  public static func starterConfigurations() -> [Configuration] {
+  public static func defaultConfigurations() -> [Configuration] {
     @Dependency(\.uuid) var uuid
     func step(
       _ title: String, _ group: TemplateFitting.Group, _ ids: [TemplateFitting.ID],
@@ -31,7 +31,7 @@ extension PathTemplate {
     }
     return [
       .init(
-        name: "My usual supply path", type: .supply,
+        name: "Default supply", type: .supply,
         steps: [
           step("Equipment connection", .supplyConnection, ["1A", "1B", "1C", "1D", "1E"]),
           step(
@@ -42,7 +42,7 @@ extension PathTemplate {
           elbows(), transitions(),
         ]),
       .init(
-        name: "My usual return path", type: .return,
+        name: "Default return", type: .return,
         steps: [
           step(
             "Equipment connection", .returnConnection,

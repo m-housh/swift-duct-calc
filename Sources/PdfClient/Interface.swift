@@ -48,29 +48,53 @@ extension PdfClient: DependencyKey {
       @Dependency(\.fileClient) var fileClient
       @Dependency(\.environment) var environment
 
-      let baseUrl = "/tmp/\(projectID)"
-      try await fileClient.writeFile(html.render(), "\(baseUrl).html")
-
-      let process = Process()
-      let standardInput = Pipe()
-      let standardOutput = Pipe()
-      process.standardInput = standardInput
-      process.standardOutput = standardOutput
-      process.executableURL = URL(fileURLWithPath: environment.pandocPath)
-      process.arguments = [
-        "\(baseUrl).html",
-        "--pdf-engine=\(environment.pdfEngine)",
-        "--from=html",
-        "--css=Public/css/pdf.css",
-        "--output=\(baseUrl).pdf",
-      ]
-      try process.run()
-      process.waitUntilExit()
-
-      return .init(htmlPath: "\(baseUrl).html", pdfPath: "\(baseUrl).pdf")
+      let temporaryDirectory = FileManager.default.temporaryDirectory
+      let baseUrl = temporaryDirectory.appendingPathComponent("\(projectID)-\(UUID())").path
+      let stylesheet = URL(fileURLWithPath: "Public/css/pdf.css").path
+      do {
+        try await fileClient.writeFile(html.render(), "\(baseUrl).html")
+        let process = Process()
+        // Pandoc creates intermediate files in its working directory; the app directory is read-only.
+        process.currentDirectoryURL = temporaryDirectory
+        process.standardInput = FileHandle.nullDevice
+        process.standardOutput = FileHandle.nullDevice
+        process.executableURL = URL(fileURLWithPath: environment.pandocPath)
+        process.arguments = [
+          "\(baseUrl).html",
+          "--pdf-engine=\(environment.pdfEngine)",
+          "--from=html",
+          "--css=\(stylesheet)",
+          "--output=\(baseUrl).pdf",
+        ]
+        try process.run()
+        process.waitUntilExit()
+        guard process.terminationStatus == 0 else {
+          throw PdfGenerationError.conversionFailed(process.terminationStatus)
+        }
+        guard FileManager.default.fileExists(atPath: "\(baseUrl).pdf") else {
+          throw PdfGenerationError.missingOutput
+        }
+        return .init(htmlPath: "\(baseUrl).html", pdfPath: "\(baseUrl).pdf")
+      } catch {
+        try? await fileClient.removeFile("\(baseUrl).html")
+        try? await fileClient.removeFile("\(baseUrl).pdf")
+        throw error
+      }
 
     }
   )
+}
+
+public enum PdfGenerationError: Error, LocalizedError, Equatable {
+  case conversionFailed(Int32)
+  case missingOutput
+
+  public var errorDescription: String? {
+    switch self {
+    case .conversionFailed(let status): "PDF conversion failed with exit status \(status)."
+    case .missingOutput: "The PDF converter did not produce a file."
+    }
+  }
 }
 
 extension PdfClient {

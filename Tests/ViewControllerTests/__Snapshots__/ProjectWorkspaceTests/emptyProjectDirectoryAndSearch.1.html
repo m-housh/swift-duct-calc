@@ -1,0 +1,140 @@
+<div class="project-workspace project-directory">
+  <nav class="app-navbar" aria-label="Main">
+    <a class="app-brand" href="/projects">
+    <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
+    Duct Calc<span></span></a>
+    <div class="app-nav-actions">
+      <a class="btn btn-outline btn-secondary" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span>Fitting reference</span></a><a class="btn btn-outline btn-primary" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span>Ductulator</span></a>
+      <details class="account-menu">
+        <summary class="btn"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>Account</summary>
+        <ul class="menu bg-base-200 rounded-box shadow-lg">
+          <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
+          <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
+          <li>
+            <form action="/logout" method="get">
+              <button type="submit">Logout</button>
+            </form>
+          </li>
+        </ul>
+      </details>
+    </div>
+  </nav>
+  <div class="directory-content">
+    <div class="page-title-row">
+      <div>
+        <h1 class="text-3xl font-bold">Projects</h1>
+        <p class="muted">Your residential duct designs.</p>
+      </div>
+      <button type="button" class="btn btn-primary" data-open-dialog="projectForm"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add Project</button>
+    </div>
+    <div class="project-panel">
+      <form method="get" action="/projects/search" class="project-toolbar">
+        <h2>All projects · 0</h2>
+        Find a project<label class="project-search"><span class="sr-only"></span>
+        <input type="search" id="project-search" name="q" value="" placeholder="Find a project…" class="input" aria-keyshortcuts="Control+K">
+        Ctrl+K<kbd></kbd></label>
+        <button type="submit" class="btn btn-outline">Search</button>
+      </form>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Projects">
+        <table class="table project-table">
+          <thead>
+            <tr>
+              <th>Project</th>
+              <th>Address</th>
+              <th>City</th>
+              <th>Created</th>
+              <th><span class="sr-only">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="empty-state">No projects yet. Add a project to start designing.</p>
+    </div>
+  </div>
+  <dialog id="projectForm" class="modal" aria-labelledby="projectForm-title">
+    <div class="modal-box">
+      <h2 id="projectForm-title" class="text-2xl font-bold mb-6 pe-10">Project</h2>
+      <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Project" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+      <button type="button" class="btn btn-primary btn-block mb-4" aria-controls="newProjectPDF" aria-expanded="false" onclick="const upload = document.getElementById('newProjectPDF');
+upload.hidden = !upload.hidden;
+document.getElementById('projectDetailsForm').hidden = !upload.hidden;
+this.textContent = upload.hidden ? 'Import from Cool Calc PDF' : 'Enter project manually';
+this.setAttribute('aria-expanded', String(!upload.hidden));">Import from Cool Calc PDF</button>
+      <div id="newProjectPDF" hidden>
+        <p class="mb-4">Create a project using the name, address, sensible heat ratio, and room loads from a Cool Calc MJ8 report. You can edit them after import.</p>
+        <p class="text-sm mb-4">Maximum 10 MB and 200 pages.</p>
+        <form data-success-message="Import complete." hx-post="/projects/import/pdf" hx-target="body" hx-swap="outerHTML" hx-encoding="multipart/form-data" hx-disabled-elt="find button" hx-on::response-error="const error = this.querySelector('[role=alert]');
+error.textContent = event.detail.xhr.status === 413
+  ? 'The file is too large. Choose a file smaller than 10 MB.'
+  : 'The server could not complete the upload. Please try again.';
+error.hidden = false;" hx-on::send-error="const error = this.querySelector('[role=alert]');
+error.textContent = 'The connection to the server was lost. Check your connection and try again.';
+error.hidden = false;" hx-on::before-request="this.querySelector('[role=alert]').hidden = true;" enctype="multipart/form-data" hx-on::before-on-load="const response = new DOMParser().parseFromString(event.detail.xhr.responseText, 'text/html');
+const missingZIP = response.querySelector('[data-project-import-missing-zip]');
+if (missingZIP) {
+  event.preventDefault();
+  this.querySelector('[data-missing-zip]').hidden = false;
+  this.querySelector('[data-zip-message]').textContent = missingZIP.textContent;
+  this.elements.zipCode.disabled = false;
+  this.elements.zipCode.required = true;
+  this.elements.zipCode.focus();
+}
+const conflict = response.querySelector('[data-project-import-conflict]');
+if (conflict) {
+  event.preventDefault();
+  const warning = this.querySelector('[data-duplicate-warning]');
+  warning.querySelector('[data-duplicate-details]').replaceChildren(conflict);
+  warning.hidden = false;
+  this.querySelector('[data-import-submit]').hidden = true;
+  warning.querySelector('button').focus();
+}" hx-on::after-request="this.elements.confirmDuplicate.value = 'false';">
+          <input type="hidden" name="confirmDuplicate" value="false">
+          <input type="file" name="file" accept=".pdf,application/pdf" aria-label="Cool Calc PDF" required onchange="this.form.elements.confirmDuplicate.value = 'false';
+this.form.querySelector('[data-duplicate-warning]').hidden = true;
+this.form.querySelector('[data-import-submit]').hidden = false;
+this.form.querySelector('[data-missing-zip]').hidden = true;
+this.form.elements.zipCode.disabled = true;
+this.form.elements.zipCode.required = false;
+this.form.elements.zipCode.value = '';">
+          <div data-missing-zip="" class="mt-6" hidden>
+            <p class="mb-4" data-zip-message="" aria-live="polite"></p>
+            ZIP code<label class="input w-full"><span class="label"></span>
+            <input name="zipCode" type="text" placeholder="ZIP code" pattern="[0-9]{5}(-[0-9]{4})?" disabled></label>
+          </div>
+          <div data-import-submit="">
+            <button class="btn btn-secondary btn-block mt-6" type="submit">Create project from PDF</button>
+          </div>
+          <div data-duplicate-warning="" class="mt-6" hidden aria-live="polite">
+            <div data-duplicate-details=""></div>
+            <div class="flex gap-4 mt-6">
+              <button type="button" class="btn btn-outline" onclick="this.form.elements.confirmDuplicate.value = 'false';
+this.form.querySelector('[data-duplicate-warning]').hidden = true;
+this.form.querySelector('[data-import-submit]').hidden = false;
+this.form.querySelector('input[type=file]').focus();">Cancel</button>
+              <button class="btn btn-secondary" type="submit" onclick="this.form.elements.confirmDuplicate.value = 'true';">Create another project</button>
+            </div>
+          </div>
+          <p class="htmx-indicator text-sm mt-2">Reading project and room loads…</p>
+          <p class="text-error mt-2" role="alert" hidden></p>
+        </form>
+      </div>
+      <div id="projectDetailsForm">
+        <div class="divider mt-2 mb-6 text-sm">or enter details manually</div>
+        <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4" hx-post="/projects" hx-target="body" hx-swap="outerHTML">
+          <label class="input w-full"><span class="label">Name</span>
+          <input name="name" type="text" value="" placeholder="Project Name" required autofocus>
+          Address</label><label class="input w-full"><span class="label"></span>
+          <input name="streetAddress" type="text" value="" placeholder="Street Address" required>
+          City</label><label class="input w-full"><span class="label"></span>
+          <input name="city" type="text" value="" placeholder="City" required>
+          State</label><label class="input w-full"><span class="label"></span>
+          <input name="state" type="text" value="" placeholder="State" required>
+          Zip</label><label class="input w-full"><span class="label"></span>
+          <input name="zipCode" type="text" value="" placeholder="Zip Code" required></label>
+          <button class="btn btn-secondary btn-block my-6" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+</div>
