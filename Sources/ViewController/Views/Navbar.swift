@@ -12,7 +12,6 @@ struct Navbar: HTML, Sendable {
   var showDuctulatorButton = true
   var isLoggedIn = true
   var shortcutsDialogID: String? = nil
-  var showProjectsShortcut = true
 
   var body: some HTML {
     nav(.class("app-navbar"), .init(name: "aria-label", value: "Main")) {
@@ -71,14 +70,11 @@ struct Navbar: HTML, Sendable {
                   .href(route: .project(.index))
                 ) {
                   span { "Projects" }
-                  if showProjectsShortcut {
-                    span(.class("text-xs"), .init(name: "aria-hidden", value: "true")) {
-                      "Ctrl+Alt+P"
-                    }
+                  span(.class("text-xs"), .init(name: "aria-hidden", value: "true")) {
+                    "Ctrl+Alt+P"
                   }
                 }.attributes(
-                  .init(name: "aria-keyshortcuts", value: "Control+Alt+P"),
-                  when: showProjectsShortcut)
+                  .init(name: "aria-keyshortcuts", value: "Control+Alt+P"))
               }
               li {
                 form(.action(SiteRoute.View.router.path(for: .user(.logout))), .method(.get)) {

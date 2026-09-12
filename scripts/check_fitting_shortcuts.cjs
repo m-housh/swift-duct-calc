@@ -29,14 +29,14 @@ function setup(t, name = 'allGroupsGuest') {
   return { dom, document, clicks, press };
 }
 
-test('N/P traverse filtered groups including All groups and stop at the ends', t => {
+test('N/B traverse filtered groups including All groups and stop at the ends', t => {
   for (const name of ['allGroupsGuest', 'returnGroupSignedIn', 'emptySupplyGroup']) {
     const { document, clicks, press } = setup(t, name);
     const links = [...document.querySelectorAll('[data-group]')];
     links.forEach((link, index) => {
       links.forEach(item => item.removeAttribute('aria-current'));
       link.setAttribute('aria-current', 'true');
-      for (const key of ['n', 'p', 'N', 'P']) {
+      for (const key of ['n', 'b', 'N', 'B']) {
         const before = clicks.length;
         const next = index + (key.toLowerCase() === 'n' ? 1 : -1);
         assert(press(key).defaultPrevented);
@@ -53,12 +53,11 @@ test('N/P traverse filtered groups including All groups and stop at the ends', t
     for (const key of '-=') assert.equal(press(key).defaultPrevented, false);
     links.at(-1).removeAttribute('aria-current');
     assert.equal(press('n').defaultPrevented, false);
-    assert.equal(press('p').defaultPrevented, false);
-    assert.equal(document.querySelector('nav [aria-keyshortcuts="Control+Alt+P"]'), null);
+    assert.equal(press('b').defaultPrevented, false);
   }
 });
 
-test('number shortcuts open groups 1–10 while N/P also reach groups 11 and 12', t => {
+test('number shortcuts open groups 1–10 while N/B also reach groups 11 and 12', t => {
   for (const name of ['allGroupsGuest', 'returnGroupSignedIn', 'emptySupplyGroup']) {
     const { document, clicks, press } = setup(t, name);
     [...'1234567890'].forEach((key, index) => {
@@ -101,8 +100,8 @@ test('J/K use the current filtered list, accept Caps Lock, and stop at the ends'
 });
 
 test('fitting shortcuts pause in editors and dialogs and ignore extra modifiers', t => {
-  const { document, clicks, press } = setup(t);
-  for (const key of ['1', '0', 'n', 'p', 'j', 'k']) {
+  const { document, clicks, press } = setup(t, 'returnGroupSignedIn');
+  for (const key of ['1', '0', 'n', 'b', 'p', 'j', 'k']) {
     for (const options of [
       { ctrlKey: false }, { altKey: false }, { shiftKey: true }, { metaKey: true },
       { repeat: true }, { isComposing: true }, { modifierAltGraph: true },
@@ -120,13 +119,32 @@ test('fitting shortcuts pause in editors and dialogs and ignore extra modifiers'
     assert.equal(press(key).defaultPrevented, false);
     dialog.removeAttribute('open');
   }
-  document.querySelector('[data-group="1"]').setAttribute('aria-disabled', 'true');
+  document.querySelector('[data-group="10"]').setAttribute('aria-disabled', 'true');
   assert.equal(press('n').defaultPrevented, false);
   document.querySelector('.group-sidebar').setAttribute('inert', '');
-  assert.equal(press('p').defaultPrevented, false);
+  assert.equal(press('b').defaultPrevented, false);
   document.body.addEventListener('keydown', event => event.preventDefault(), { once: true });
   press('j');
   assert.deepEqual(clicks, []);
+});
+
+test('P opens Projects from the closed account menu only for signed-in visitors', t => {
+  for (const name of ['allGroupsGuest', 'returnGroupSignedIn']) {
+    const { document, clicks, press } = setup(t, name);
+    const projects = document.querySelector('nav [aria-keyshortcuts="Control+Alt+P"]');
+    const signedIn = name === 'returnGroupSignedIn';
+    assert.equal(Boolean(projects), signedIn);
+    if (signedIn) {
+      assert.equal(projects.getAttribute('href'), '/projects');
+      assert(projects.textContent.includes('Ctrl+Alt+P'));
+      assert.equal(projects.closest('details').open, false);
+    }
+    for (const key of ['p', 'P']) {
+      assert.equal(press(key).defaultPrevented, signedIn);
+      if (signedIn) assert.equal(clicks.at(-1), projects);
+      else assert.equal(clicks.length, 0);
+    }
+  }
 });
 
 test('help dialog describes fitting bindings and only available app shortcuts', t => {
@@ -141,9 +159,9 @@ test('help dialog describes fitting bindings and only available app shortcuts', 
       row.querySelector('kbd').textContent.trim(), row.querySelector('th').textContent.trim(),
     ]));
     assert.deepEqual(rows, {
-      '1–9': 'Groups 1–9', '0': 'Group 10', N: 'Next group', P: 'Previous group',
+      '1–9': 'Groups 1–9', '0': 'Group 10', N: 'Next group', B: 'Previous group',
       J: 'Next fitting', K: 'Previous fitting', D: 'Ductulator',
-      ...(name === 'returnGroupSignedIn' ? { U: 'Profile' } : {}),
+      ...(name === 'returnGroupSignedIn' ? { P: 'Projects', U: 'Profile' } : {}),
     });
   }
 });
@@ -158,10 +176,10 @@ test('navigation replacements resolve new controls without duplicate handlers', 
   press('n');
   assert.equal(clicks.length, 2);
   assert.equal(clicks.at(-1).dataset.group, '10');
-  press('p');
+  press('b');
   assert.equal(clicks.at(-1).dataset.group, '7');
   document.body.innerHTML = '<main>Another page</main>';
-  for (const key of ['1', '0', 'n', 'p', 'j', 'k']) assert.equal(press(key).defaultPrevented, false);
+  for (const key of ['1', '0', 'n', 'b', 'j', 'k']) assert.equal(press(key).defaultPrevented, false);
   document.body.innerHTML = snapshot('allGroupsGuest');
   press('j');
   assert.equal(clicks.length, 4);
