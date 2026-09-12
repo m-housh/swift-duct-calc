@@ -65,28 +65,10 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     link(.rel(.stylesheet), .href("/css/output.css?v=navbar-reference-1"))
     link(.rel(.stylesheet), .href("/css/htmx.css"))
     link(.rel(.stylesheet), .href("/css/accessibility.css?v=request-toast-2"))
-    link(.rel(.stylesheet), .href("/css/project-workspace.css?v=friction-errors-5"))
-    link(
-      .rel(.icon),
-      .href("/images/favicon.ico"),
-      .init(name: "type", value: "image/x-icon")
-    )
-    link(
-      .rel(.icon),
-      .href("/images/favicon-32x32.png"),
-      .init(name: "type", value: "image/png")
-    )
-    link(
-      .rel(.icon),
-      .href("/images/favicon-16x16.png"),
-      .init(name: "type", value: "image/png")
-    )
-    link(
-      .rel(.init(rawValue: "apple-touch-icon")),
-      .init(name: "sizes", value: "180x180"),
-      .href("/images/apple-touch-icon.png")
-    )
-    link(.rel(.init(rawValue: "manifest")), .href("/site.webmanifest"))
+    link(.rel(.stylesheet), .href("/css/project-workspace.css?v=navbar-6"))
+    AppIcons()
+    link(.rel(.stylesheet), .href("/css/ductcalc-wordmark.css?v=2"))
+    link(.rel(.stylesheet), .href("/css/navbar.css?v=1"))
     script(
       .src("https://unpkg.com/htmx-remove@latest"),
       .crossorigin(.anonymous),

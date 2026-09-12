@@ -72,6 +72,7 @@ assert(['localhost', '127.0.0.1'].includes(new URL(origin).hostname), 'Use a loc
       await page.getByRole('link', { name: label, exact: true }).click();
       await page.waitForURL(url => url.pathname === destination);
     }
+    await require('./check_brand_browser.cjs')(page, origin);
     assert.deepEqual(errors, []);
     console.log('Home browser checks passed: autoplay, sidebar order, pause, reduced motion, responsive layouts, themes, accessibility, and navigation.');
   } finally {

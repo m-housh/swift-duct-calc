@@ -17,8 +17,7 @@ struct Navbar: HTML, Sendable {
   var body: some HTML {
     nav(.class("app-navbar"), .init(name: "aria-label", value: "Main")) {
       a(.class("app-brand"), .href(route: isLoggedIn ? .project(.index) : .home)) {
-        img(.src("/images/mand_logo_sm.webp"), .alt(""), .width(48), .height(48))
-        span { "Duct Calc" }
+        DuctCalcWordmark(appTheme: true)
       }
       div(.class("app-nav-actions")) {
         if let shortcutsDialogID {
@@ -32,7 +31,7 @@ struct Navbar: HTML, Sendable {
         }
         if showFittingsButton {
           a(
-            .class("btn btn-outline btn-secondary"), .href(route: .fittingReference(.init())),
+            .class("btn app-nav-link"), .href(route: .fittingReference(.init())),
             .target(.blank),
             .title("Fitting reference, Ctrl+Alt+F"),
             .init(name: "aria-keyshortcuts", value: "Control+Alt+F")
@@ -42,7 +41,7 @@ struct Navbar: HTML, Sendable {
         }
         if showDuctulatorButton {
           DuctulatorButton().attributes(
-            .class("btn-outline btn-primary"), .title("Ductulator, Ctrl+Alt+D"),
+            .class("app-nav-ductulator"), .title("Ductulator, Ctrl+Alt+D"),
             .init(name: "aria-keyshortcuts", value: "Control+Alt+D")
           )
         }

@@ -22,12 +22,14 @@
     <link rel="stylesheet" href="/css/output.css?v=navbar-reference-1">
     <link rel="stylesheet" href="/css/htmx.css">
     <link rel="stylesheet" href="/css/accessibility.css?v=request-toast-2">
-    <link rel="stylesheet" href="/css/project-workspace.css?v=friction-errors-5">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
-    <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="/css/project-workspace.css?v=navbar-6">
+    <link rel="icon" href="/images/favicon.ico?v=ductcalc-2" sizes="16x16 32x32 48x48">
+    <link rel="icon" href="/images/favicon-32x32.png?v=ductcalc-2" type="image/png" sizes="32x32">
+    <link rel="icon" href="/images/brand/favicon.svg" type="image/svg+xml" sizes="any">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=ductcalc-2" sizes="180x180">
+    <link rel="manifest" href="/site.webmanifest?v=ductcalc-2">
+    <link rel="stylesheet" href="/css/ductcalc-wordmark.css?v=2">
+    <link rel="stylesheet" href="/css/navbar.css?v=1">
     <script src="https://unpkg.com/htmx-remove@latest" crossorigin="anonymous" integrity="sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT"></script>
   </head>
   <body>
@@ -36,10 +38,14 @@
       <main id="main-content" tabindex="-1" class="flex flex-col min-h-screen min-w-full grow mb-auto">
         <div>
           <nav class="app-navbar" aria-label="Main">
-            <a class="app-brand" href="/">
-            <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
-            Duct Calc<span></span></a>
-            <div class="app-nav-actions"><a class="btn btn-outline btn-secondary" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span>Fitting reference</span></a></div>
+            <a class="app-brand" href="/"><span class="dc-wordmark" role="img" aria-label="DuctCalc, residential duct design"><span class="dc-wordmark-name" aria-hidden="true"><span class="dc-wordmark-icon">
+            <img class="dc-mark-light" src="/images/brand/ductcalc-mark-light.webp" alt="" width="50" height="50">
+            <img class="dc-mark-dark" src="/images/brand/ductcalc-mark-dark.webp" alt="" width="50" height="50">
+            uct
+            C
+            alc
+            Residential duct design</span><span></span><span class="dc-wordmark-c"></span><span></span></span><span class="dc-wordmark-description" aria-hidden="true"></span></span></a>
+            <div class="app-nav-actions"><a class="btn app-nav-link" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span>Fitting reference</span></a></div>
           </nav>
           <div class="ductulator-shell">
             <div class="ductulator-panel">

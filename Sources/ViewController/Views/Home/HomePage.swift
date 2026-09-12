@@ -22,12 +22,9 @@ struct HomePage: SendableHTMLDocument {
     meta(.name("twitter:title"), .content(title))
     meta(.name("twitter:description"), .content(description))
     meta(.name("twitter:image"), .content("/images/mand_logo.png"))
-    link(.rel(.icon), .href("/images/favicon.ico"))
-    link(.rel(.icon), .href("/images/favicon-32x32.png"), .custom(name: "sizes", value: "32x32"))
-    link(.rel(.init(rawValue: "apple-touch-icon")), .href("/images/apple-touch-icon.png"))
-    link(.rel(.init(rawValue: "manifest")), .href("/site.webmanifest"))
+    AppIcons()
     link(.rel(.stylesheet), .href("/css/home.css?v=1"))
-    link(.rel(.stylesheet), .href("/css/ductcalc-wordmark.css?v=1"))
+    link(.rel(.stylesheet), .href("/css/ductcalc-wordmark.css?v=2"))
     script(.src("/js/home.js?v=1"), .custom(name: "defer", value: "")) {}
   }
 
