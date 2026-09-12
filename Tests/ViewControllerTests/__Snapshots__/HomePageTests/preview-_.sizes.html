@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Duct sizes · DuctCalc sample project</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="/css/htmx.css">
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <link rel="stylesheet" href="/css/project-workspace.css">
+    <style>
+      html, body { margin: 0; overflow: hidden; }
+      .project-workspace .app-navbar { display: none; }
+      .project-workspace .project-layout { min-height: 100vh; }
+    </style>
+  </head>
+  <body>
+    <div inert="">
+      <div class="project-workspace" data-project-id="00000000-0000-0000-0000-000000002328">
+        <nav class="app-navbar" aria-label="Main">
+          <a class="app-brand" href="/projects">
+          <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
+          Duct Calc<span></span></a>
+          <div class="app-nav-actions">
+            <button type="button" class="btn" aria-label="Keyboard shortcuts" aria-haspopup="dialog" aria-controls="projectShortcuts" data-open-dialog="projectShortcuts"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 15h12"/></svg></button>
+            Fitting reference
+            Ductulator<a class="btn btn-outline btn-secondary" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span></span></a><a class="btn btn-outline btn-primary" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span></span></a>
+            <details class="account-menu">
+              <summary class="btn"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>Account</summary>
+              <ul class="menu bg-base-200 rounded-box shadow-lg">
+                <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
+                <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
+                <li>
+                  <form action="/logout" method="get">
+                    <button type="submit">Logout</button>
+                  </form>
+                </li>
+              </ul>
+            </details>
+          </div>
+        </nav>
+        <div class="project-layout">
+          <aside class="project-navigation">
+            <button type="button" class="project-switch" data-open-dialog="recentProjects" aria-label="Switch project"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span><strong>Maple Avenue</strong><small>24 Maple Avenue</small></span><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg></button>
+            <nav aria-label="Project">
+              <ul id="project-sidebar">
+                <li><a href="/projects/00000000-0000-0000-0000-000000002328" title="Project, Ctrl+Alt+1" aria-keyshortcuts="Control+Alt+1"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span class="nav-label">Project</span></a></li>
+                <li><a href="/projects/00000000-0000-0000-0000-000000002328/rooms" title="Rooms, Ctrl+Alt+2" aria-keyshortcuts="Control+Alt+2"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-door-closed-icon lucide-door-closed"><path d="M10 12h.01"/><path d="M18 20V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14"/><path d="M2 20h20"/></svg><span class="nav-label">Rooms</span><span class="project-step-status" aria-label="Complete">✓</span></a></li>
+                <li><a href="/projects/00000000-0000-0000-0000-000000002328/equipment" title="Equipment, Ctrl+Alt+3" aria-keyshortcuts="Control+Alt+3"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fan-icon lucide-fan"><path d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.002l5.412 1.45a6.082 6.082 0 0 1 7.002-8.618l-1.45 5.412a6.082 6.082 0 0 1 8.618 7.002l-5.412-1.45a6.082 6.082 0 0 1-7.002 8.618l1.45-5.412Z"/><path d="M12 12v.01"/></svg><span class="nav-label">Equipment</span><span class="project-step-status" aria-label="Complete">✓</span></a></li>
+                <li><a href="/projects/00000000-0000-0000-0000-000000002328/effective-lengths" title="Total effective length, Ctrl+Alt+4" aria-keyshortcuts="Control+Alt+4"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ruler-dimension-line-icon lucide-ruler-dimension-line"><path d="M10 15v-3"/><path d="M14 15v-3"/><path d="M18 15v-3"/><path d="M2 8V4"/><path d="M22 6H2"/><path d="M22 8V4"/><path d="M6 15v-3"/><rect x="2" y="12" width="20" height="8" rx="2"/></svg><span class="nav-label">Total effective length</span><span class="project-step-status" aria-label="Complete">✓</span></a></li>
+                <li><a href="/projects/00000000-0000-0000-0000-000000002328/friction-rate" title="Friction rate, Ctrl+Alt+5" aria-keyshortcuts="Control+Alt+5"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-function-icon lucide-square-function"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M9 17c2 0 2.8-1 2.8-2.8V10c0-2 1-3.3 3.2-3"/><path d="M9 11.2h5.7"/></svg><span class="nav-label">Friction rate</span><span class="project-step-status" aria-label="Complete">✓</span></a></li>
+                <li><a href="/projects/00000000-0000-0000-0000-000000002328/duct-sizing" title="Duct sizes, Ctrl+Alt+6" aria-keyshortcuts="Control+Alt+6" aria-current="page"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg><span class="nav-label">Duct sizes</span></a></li>
+              </ul>
+            </nav>
+            All projects<a class="all-projects-link" href="/projects"></a>
+          </aside>
+          <div class="project-content" id="project-content" tabindex="-1">
+            <div class="space-y-4">
+              <div class="page-title-row">
+                <div>
+                  <h1 class="text-3xl font-bold">Duct Sizes</h1>
+                </div>
+                <div>
+                  <button class="btn btn-primary" hx-get="/projects/00000000-0000-0000-0000-000000002328/pdf" hx-ext="htmx-download" hx-swap="none" hx-indicator=".htmx-indicator"><span>PDF</span><span class="loading loading-spinner loading-lg htmx-indicator"></span></button>
+                </div>
+              </div>
+              <section class="project-panel trunk-panel">
+                <div class="project-toolbar">
+                  <h2>Supply &amp; return trunks</h2>
+                  <button type="button" class="btn btn-primary" data-open-dialog="trunkSizeForm"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add trunk</button>
+                </div>
+                <div class="trunk-columns">
+                  <section class="trunk-column supply">
+                    <h3 class="system-label supply">Supply · 1</h3>
+                    <article class="trunk-card">
+                      <div class="trunk-card-main">
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>
+                        <div><strong>Main supply</strong><small>7 associated runs</small><b>16″ round</b></div>
+                        1,200
+                        CFM<span><span></span><small></small></span>
+                        <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Main supply" title="Delete trunk" hx-delete="/projects/00000000-0000-0000-0000-000000002328/duct-sizing/trunk/00000000-0000-0000-0000-000000002350" hx-confirm="Delete this trunk?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                        <button class="btn btn-ghost" type="button" aria-label="Edit Main supply" data-open-dialog="trunkSizeForm_00000000000000000000000000002350">
+                          <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                        </button>
+                      </div>
+                      <details>
+                        <summary>Sizes and associated runs</summary>
+                        <p>Round 16″ · Flex 17″ · 859 FPM</p>
+                        <p>Calculated diameter: <span>16</span> in.</p>
+                        <ul>
+                          <li>Living room - SR.1</li>
+                          <li>Living room - SR.2</li>
+                          <li>Kitchen - SR.1</li>
+                          <li>Primary bedroom - SR.1</li>
+                          <li>Bedroom 2 - SR.1</li>
+                          <li>Dining room - SR.1</li>
+                          <li>Study - SR.1</li>
+                        </ul>
+                      </details>
+                      <dialog id="trunkSizeForm_00000000000000000000000000002350" class="modal" aria-labelledby="trunkSizeForm_00000000000000000000000000002350-title">
+                        <div class="modal-box">
+                          <h2 id="trunkSizeForm_00000000000000000000000000002350-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
+                          <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Trunk / Runout Size" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                          <form data-success-message="Changes saved." class="space-y-4" hx-patch="/projects/00000000-0000-0000-0000-000000002328/duct-sizing/trunk/00000000-0000-0000-0000-000000002350" hx-target="body" hx-swap="outerHTML">
+                            <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000002328">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <label class="select w-full"><span class="label">Type</span>
+                              <select name="type">
+                                <option value="supply" selected>Supply</option>
+                                <option value="return">Return</option>
+                              </select>
+                              Height</label><label class="input w-full"><span class="label"></span>
+                              <input type="text" name="height" value="" placeholder="8 (Optional)"></label>
+                            </div>
+                            Name<label class="input w-full"><span class="label"></span>
+                            <input type="text" name="name" value="Main supply" placeholder="Trunk-1" required></label>
+                            <fieldset class="checkbox-group">
+                              <legend class="font-bold">Associated Supply Runs</legend>
+                              <div class="flex flex-wrap gap-2 my-2">
+                                <button type="button" class="btn btn-sm" data-check-all="true">Select all</button>
+                                <button type="button" class="btn btn-sm" data-check-all="false">Clear selection</button>
+                              </div>
+                              <div class="checkbox-options">
+                                <label>
+                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002332_1" checked>
+                                Living room - SR.1<span></span></label><label>
+                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002332_2" checked>
+                                Living room - SR.2<span></span></label><label>
+                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002333_1" checked>
+                                Kitchen - SR.1<span></span></label><label>
+                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002334_1" checked>
+                                Primary bedroom - SR.1<span></span></label><label>
+                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002335_1" checked>
+                                Bedroom 2 - SR.1<span></span></label><label>
+                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002336_1" checked>
+                                Dining room - SR.1<span></span></label><label>
+                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002337_1" checked>
+                                Study - SR.1<span></span></label>
+                              </div>
+                            </fieldset>
+                            <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
+                          </form>
+                        </div>
+                      </dialog>
+                    </article>
+                  </section>
+                  <section class="trunk-column return">
+                    <h3 class="system-label return">Return · 1</h3>
+                    <article class="trunk-card">
+                      <div class="trunk-card-main">
+                        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>
+                        <div><strong>Main return</strong><small>7 associated runs</small><b>16″ round</b></div>
+                        1,200
+                        CFM<span><span></span><small></small></span>
+                        <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Main return" title="Delete trunk" hx-delete="/projects/00000000-0000-0000-0000-000000002328/duct-sizing/trunk/00000000-0000-0000-0000-000000002351" hx-confirm="Delete this trunk?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                        <button class="btn btn-ghost" type="button" aria-label="Edit Main return" data-open-dialog="trunkSizeForm_00000000000000000000000000002351">
+                          <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                        </button>
+                      </div>
+                      <details>
+                        <summary>Sizes and associated runs</summary>
+                        <p>Round 16″ · Flex 17″ · 859 FPM</p>
+                        <p>Calculated diameter: <span>16</span> in.</p>
+                        <ul>
+                          <li>Living room - SR.1</li>
+                          <li>Living room - SR.2</li>
+                          <li>Kitchen - SR.1</li>
+                          <li>Primary bedroom - SR.1</li>
+                          <li>Bedroom 2 - SR.1</li>
+                          <li>Dining room - SR.1</li>
+                          <li>Study - SR.1</li>
+                        </ul>
+                      </details>
+                      <dialog id="trunkSizeForm_00000000000000000000000000002351" class="modal" aria-labelledby="trunkSizeForm_00000000000000000000000000002351-title">
+                        <div class="modal-box">
+                          <h2 id="trunkSizeForm_00000000000000000000000000002351-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
+                          <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Trunk / Runout Size" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                          <form data-success-message="Changes saved." class="space-y-4" hx-patch="/projects/00000000-0000-0000-0000-000000002328/duct-sizing/trunk/00000000-0000-0000-0000-000000002351" hx-target="body" hx-swap="outerHTML">
+                            <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000002328">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <label class="select w-full"><span class="label">Type</span>
+                              <select name="type">
+                                <option value="supply">Supply</option>
+                                <option value="return" selected>Return</option>
+                              </select>
+                              Height</label><label class="input w-full"><span class="label"></span>
+                              <input type="text" name="height" value="" placeholder="8 (Optional)"></label>
+                            </div>
+                            Name<label class="input w-full"><span class="label"></span>
+                            <input type="text" name="name" value="Main return" placeholder="Trunk-1" required></label>
+                            <fieldset class="checkbox-group">
+                              <legend class="font-bold">Associated Supply Runs</legend>
+                              <div class="flex flex-wrap gap-2 my-2">
+                                <button type="button" class="btn btn-sm" data-check-all="true">Select all</button>
+                                <button type="button" class="btn btn-sm" data-check-all="false">Clear selection</button>
+                              </div>
+                              <div class="checkbox-options">
+                                <label>
+                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002332_1" checked>
+                                Living room - SR.1<span></span></label><label>
+                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002332_2" checked>
+                                Living room - SR.2<span></span></label><label>
+                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002333_1" checked>
+                                Kitchen - SR.1<span></span></label><label>
+                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002334_1" checked>
+                                Primary bedroom - SR.1<span></span></label><label>
+                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002335_1" checked>
+                                Bedroom 2 - SR.1<span></span></label><label>
+                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002336_1" checked>
+                                Dining room - SR.1<span></span></label><label>
+                                <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002337_1" checked>
+                                Study - SR.1<span></span></label>
+                              </div>
+                            </fieldset>
+                            <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
+                          </form>
+                        </div>
+                      </dialog>
+                    </article>
+                  </section>
+                </div>
+              </section>
+              <div class="project-toolbar">
+                <h2>Branch schedule</h2>
+                Find a register<label class="project-search"><span class="sr-only"></span>
+                <input type="search" class="input" id="register-search" placeholder="Find a room…" aria-keyshortcuts="Control+K"></label>
+              </div>
+              <div class="table-scroll" tabindex="0" role="region" aria-label="Room duct sizes">
+                <table class="table project-table" data-selectable-table="registers">
+                  <thead>
+                    <tr>
+                      <th>Room / register</th>
+                      <th>Design CFM</th>
+                      <th>Velocity</th>
+                      <th>Round</th>
+                      <th>Flex</th>
+                      <th>Rectangular</th>
+                      <th><span class="sr-only">Actions</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr id="roomRow_00000000000000000000000000002335_1" data-record="roomRow_00000000000000000000000000002335_1" data-search="Bedroom 2">
+                      <td>
+                        <button type="button" class="row-select" aria-pressed="false">Bedroom 2<small>No level · Register 1</small></button>
+                      </td>
+                      <td>
+                        <details data-expansion="airflow-roomRow_00000000000000000000000000002335_1">
+                          <summary><span>180</span></summary>
+                          <p>Heating: <span>180</span> CFM · <span>9,000</span> BTU/h</p>
+                          <p>Cooling: <span>180</span> CFM · <span>3,735</span> BTU/h</p>
+                        </details>
+                      </td>
+                      <td><span>515</span> FPM</td>
+                      <td><span title="Calculated diameter: 8.0 in." class="size-chip">8″</span></td>
+                      <td>9″</td>
+                      <td>—</td>
+                      <td>
+                        <div class="row-actions">
+                          <button class="btn btn-ghost" type="button" aria-label="Edit rectangular size for Bedroom 2 - SR.1" data-open-dialog="rectangularSize_00000000000000000000000000002335_1">
+                            <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                          </button>
+                        </div>
+                        <dialog id="rectangularSize_00000000000000000000000000002335_1" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000002335_1-title">
+                          <div class="modal-box">
+                            <h2 id="rectangularSize_00000000000000000000000000002335_1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                            <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000002328/duct-sizing/room/00000000-0000-0000-0000-000000002335" hx-target="#roomRow_00000000000000000000000000002335_1" hx-swap="outerHTML">
+                              <input class="hidden" name="register" value="1">
+                              <input class="hidden" name="id" value="">
+                              Height<label class="input w-full"><span class="label"></span>
+                              <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                              <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                            </form>
+                          </div>
+                        </dialog>
+                      </td>
+                    </tr>
+                    <tr id="roomRow_00000000000000000000000000002336_1" data-record="roomRow_00000000000000000000000000002336_1" data-search="Dining room">
+                      <td>
+                        <button type="button" class="row-select" aria-pressed="false">Dining room<small>No level · Register 1</small></button>
+                      </td>
+                      <td>
+                        <details data-expansion="airflow-roomRow_00000000000000000000000000002336_1">
+                          <summary><span>180</span></summary>
+                          <p>Heating: <span>180</span> CFM · <span>9,000</span> BTU/h</p>
+                          <p>Cooling: <span>180</span> CFM · <span>3,735</span> BTU/h</p>
+                        </details>
+                      </td>
+                      <td><span>515</span> FPM</td>
+                      <td><span title="Calculated diameter: 8.0 in." class="size-chip">8″</span></td>
+                      <td>9″</td>
+                      <td>—</td>
+                      <td>
+                        <div class="row-actions">
+                          <button class="btn btn-ghost" type="button" aria-label="Edit rectangular size for Dining room - SR.1" data-open-dialog="rectangularSize_00000000000000000000000000002336_1">
+                            <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                          </button>
+                        </div>
+                        <dialog id="rectangularSize_00000000000000000000000000002336_1" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000002336_1-title">
+                          <div class="modal-box">
+                            <h2 id="rectangularSize_00000000000000000000000000002336_1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                            <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000002328/duct-sizing/room/00000000-0000-0000-0000-000000002336" hx-target="#roomRow_00000000000000000000000000002336_1" hx-swap="outerHTML">
+                              <input class="hidden" name="register" value="1">
+                              <input class="hidden" name="id" value="">
+                              Height<label class="input w-full"><span class="label"></span>
+                              <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                              <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                            </form>
+                          </div>
+                        </dialog>
+                      </td>
+                    </tr>
+                    <tr id="roomRow_00000000000000000000000000002333_1" data-record="roomRow_00000000000000000000000000002333_1" data-search="Kitchen">
+                      <td>
+                        <button type="button" class="row-select" aria-pressed="false">Kitchen<small>No level · Register 1</small></button>
+                      </td>
+                      <td>
+                        <details data-expansion="airflow-roomRow_00000000000000000000000000002333_1">
+                          <summary><span>150</span></summary>
+                          <p>Heating: <span>150</span> CFM · <span>7,500</span> BTU/h</p>
+                          <p>Cooling: <span>150</span> CFM · <span>3,112</span> BTU/h</p>
+                        </details>
+                      </td>
+                      <td><span>561</span> FPM</td>
+                      <td><span title="Calculated diameter: 7.0 in." class="size-chip">7″</span></td>
+                      <td>8″</td>
+                      <td>—</td>
+                      <td>
+                        <div class="row-actions">
+                          <button class="btn btn-ghost" type="button" aria-label="Edit rectangular size for Kitchen - SR.1" data-open-dialog="rectangularSize_00000000000000000000000000002333_1">
+                            <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                          </button>
+                        </div>
+                        <dialog id="rectangularSize_00000000000000000000000000002333_1" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000002333_1-title">
+                          <div class="modal-box">
+                            <h2 id="rectangularSize_00000000000000000000000000002333_1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                            <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000002328/duct-sizing/room/00000000-0000-0000-0000-000000002333" hx-target="#roomRow_00000000000000000000000000002333_1" hx-swap="outerHTML">
+                              <input class="hidden" name="register" value="1">
+                              <input class="hidden" name="id" value="">
+                              Height<label class="input w-full"><span class="label"></span>
+                              <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                              <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                            </form>
+                          </div>
+                        </dialog>
+                      </td>
+                    </tr>
+                    <tr id="roomRow_00000000000000000000000000002332_1" data-record="roomRow_00000000000000000000000000002332_1" data-search="Living room">
+                      <td>
+                        <button type="button" class="row-select" aria-pressed="false">Living room<small>No level · Register 1</small></button>
+                      </td>
+                      <td>
+                        <details data-expansion="airflow-roomRow_00000000000000000000000000002332_1">
+                          <summary><span>150</span></summary>
+                          <p>Heating: <span>150</span> CFM · <span>7,500</span> BTU/h</p>
+                          <p>Cooling: <span>150</span> CFM · <span>3,112</span> BTU/h</p>
+                        </details>
+                      </td>
+                      <td><span>561</span> FPM</td>
+                      <td><span title="Calculated diameter: 7.0 in." class="size-chip">7″</span></td>
+                      <td>8″</td>
+                      <td>—</td>
+                      <td>
+                        <div class="row-actions">
+                          <button class="btn btn-ghost" type="button" aria-label="Edit rectangular size for Living room - SR.1" data-open-dialog="rectangularSize_00000000000000000000000000002332_1">
+                            <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                          </button>
+                        </div>
+                        <dialog id="rectangularSize_00000000000000000000000000002332_1" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000002332_1-title">
+                          <div class="modal-box">
+                            <h2 id="rectangularSize_00000000000000000000000000002332_1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                            <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000002328/duct-sizing/room/00000000-0000-0000-0000-000000002332" hx-target="#roomRow_00000000000000000000000000002332_1" hx-swap="outerHTML">
+                              <input class="hidden" name="register" value="1">
+                              <input class="hidden" name="id" value="">
+                              Height<label class="input w-full"><span class="label"></span>
+                              <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                              <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                            </form>
+                          </div>
+                        </dialog>
+                      </td>
+                    </tr>
+                    <tr id="roomRow_00000000000000000000000000002332_2" data-record="roomRow_00000000000000000000000000002332_2" data-search="Living room">
+                      <td>
+                        <button type="button" class="row-select" aria-pressed="false">Living room<small>No level · Register 2</small></button>
+                      </td>
+                      <td>
+                        <details data-expansion="airflow-roomRow_00000000000000000000000000002332_2">
+                          <summary><span>150</span></summary>
+                          <p>Heating: <span>150</span> CFM · <span>7,500</span> BTU/h</p>
+                          <p>Cooling: <span>150</span> CFM · <span>3,112</span> BTU/h</p>
+                        </details>
+                      </td>
+                      <td><span>561</span> FPM</td>
+                      <td><span title="Calculated diameter: 7.0 in." class="size-chip">7″</span></td>
+                      <td>8″</td>
+                      <td>—</td>
+                      <td>
+                        <div class="row-actions">
+                          <button class="btn btn-ghost" type="button" aria-label="Edit rectangular size for Living room - SR.2" data-open-dialog="rectangularSize_00000000000000000000000000002332_2">
+                            <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                          </button>
+                        </div>
+                        <dialog id="rectangularSize_00000000000000000000000000002332_2" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000002332_2-title">
+                          <div class="modal-box">
+                            <h2 id="rectangularSize_00000000000000000000000000002332_2-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                            <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000002328/duct-sizing/room/00000000-0000-0000-0000-000000002332" hx-target="#roomRow_00000000000000000000000000002332_2" hx-swap="outerHTML">
+                              <input class="hidden" name="register" value="2">
+                              <input class="hidden" name="id" value="">
+                              Height<label class="input w-full"><span class="label"></span>
+                              <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                              <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                            </form>
+                          </div>
+                        </dialog>
+                      </td>
+                    </tr>
+                    <tr id="roomRow_00000000000000000000000000002334_1" data-record="roomRow_00000000000000000000000000002334_1" data-search="Primary bedroom">
+                      <td>
+                        <button type="button" class="row-select" aria-pressed="false">Primary bedroom<small>No level · Register 1</small></button>
+                      </td>
+                      <td>
+                        <details data-expansion="airflow-roomRow_00000000000000000000000000002334_1">
+                          <summary><span>240</span></summary>
+                          <p>Heating: <span>240</span> CFM · <span>12,000</span> BTU/h</p>
+                          <p>Cooling: <span>240</span> CFM · <span>4,980</span> BTU/h</p>
+                        </details>
+                      </td>
+                      <td><span>543</span> FPM</td>
+                      <td><span title="Calculated diameter: 9.0 in." class="size-chip">9″</span></td>
+                      <td>10″</td>
+                      <td>—</td>
+                      <td>
+                        <div class="row-actions">
+                          <button class="btn btn-ghost" type="button" aria-label="Edit rectangular size for Primary bedroom - SR.1" data-open-dialog="rectangularSize_00000000000000000000000000002334_1">
+                            <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                          </button>
+                        </div>
+                        <dialog id="rectangularSize_00000000000000000000000000002334_1" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000002334_1-title">
+                          <div class="modal-box">
+                            <h2 id="rectangularSize_00000000000000000000000000002334_1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                            <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000002328/duct-sizing/room/00000000-0000-0000-0000-000000002334" hx-target="#roomRow_00000000000000000000000000002334_1" hx-swap="outerHTML">
+                              <input class="hidden" name="register" value="1">
+                              <input class="hidden" name="id" value="">
+                              Height<label class="input w-full"><span class="label"></span>
+                              <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                              <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                            </form>
+                          </div>
+                        </dialog>
+                      </td>
+                    </tr>
+                    <tr id="roomRow_00000000000000000000000000002337_1" data-record="roomRow_00000000000000000000000000002337_1" data-search="Study">
+                      <td>
+                        <button type="button" class="row-select" aria-pressed="false">Study<small>No level · Register 1</small></button>
+                      </td>
+                      <td>
+                        <details data-expansion="airflow-roomRow_00000000000000000000000000002337_1">
+                          <summary><span>150</span></summary>
+                          <p>Heating: <span>150</span> CFM · <span>7,500</span> BTU/h</p>
+                          <p>Cooling: <span>150</span> CFM · <span>3,112</span> BTU/h</p>
+                        </details>
+                      </td>
+                      <td><span>561</span> FPM</td>
+                      <td><span title="Calculated diameter: 7.0 in." class="size-chip">7″</span></td>
+                      <td>8″</td>
+                      <td>—</td>
+                      <td>
+                        <div class="row-actions">
+                          <button class="btn btn-ghost" type="button" aria-label="Edit rectangular size for Study - SR.1" data-open-dialog="rectangularSize_00000000000000000000000000002337_1">
+                            <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                          </button>
+                        </div>
+                        <dialog id="rectangularSize_00000000000000000000000000002337_1" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000002337_1-title">
+                          <div class="modal-box">
+                            <h2 id="rectangularSize_00000000000000000000000000002337_1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+                            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                            <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000002328/duct-sizing/room/00000000-0000-0000-0000-000000002337" hx-target="#roomRow_00000000000000000000000000002337_1" hx-swap="outerHTML">
+                              <input class="hidden" name="register" value="1">
+                              <input class="hidden" name="id" value="">
+                              Height<label class="input w-full"><span class="label"></span>
+                              <input name="height" type="number" value="" placeholder="8" min="0" required autofocus></label>
+                              <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                            </form>
+                          </div>
+                        </dialog>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <dialog id="trunkSizeForm" class="modal" aria-labelledby="trunkSizeForm-title">
+                <div class="modal-box">
+                  <h2 id="trunkSizeForm-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
+                  <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Trunk / Runout Size" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                  <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000002328/duct-sizing/trunk" hx-target="body" hx-swap="outerHTML">
+                    <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000002328">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <label class="select w-full"><span class="label">Type</span>
+                      <select name="type">
+                        <option value="supply">Supply</option>
+                        <option value="return">Return</option>
+                      </select>
+                      Height</label><label class="input w-full"><span class="label"></span>
+                      <input type="text" name="height" value="" placeholder="8 (Optional)"></label>
+                    </div>
+                    Name<label class="input w-full"><span class="label"></span>
+                    <input type="text" name="name" value="" placeholder="Trunk-1" required></label>
+                    <fieldset class="checkbox-group">
+                      <legend class="font-bold">Associated Supply Runs</legend>
+                      <div class="flex flex-wrap gap-2 my-2">
+                        <button type="button" class="btn btn-sm" data-check-all="true">Select all</button>
+                        <button type="button" class="btn btn-sm" data-check-all="false">Clear selection</button>
+                      </div>
+                      <div class="checkbox-options">
+                        <label>
+                        <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002335_1">
+                        Bedroom 2 - SR.1<span></span></label><label>
+                        <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002336_1">
+                        Dining room - SR.1<span></span></label><label>
+                        <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002333_1">
+                        Kitchen - SR.1<span></span></label><label>
+                        <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002332_1">
+                        Living room - SR.1<span></span></label><label>
+                        <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002332_2">
+                        Living room - SR.2<span></span></label><label>
+                        <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002334_1">
+                        Primary bedroom - SR.1<span></span></label><label>
+                        <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000002337_1">
+                        Study - SR.1<span></span></label>
+                      </div>
+                    </fieldset>
+                    <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
+                  </form>
+                </div>
+              </dialog>
+            </div>
+          </div>
+        </div>
+        <dialog id="recentProjects" class="modal" aria-labelledby="recentProjects-title">
+          <div class="modal-box">
+            <h2 id="recentProjects-title" class="text-2xl font-bold mb-6 pe-10">Switch project</h2>
+            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Switch project" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+            <p class="muted">Recently opened</p>
+            <div class="recent-projects"><a class="recent-project" href="/projects/00000000-0000-0000-0000-000000002328" aria-current="page"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span><strong>Maple Avenue</strong><small>24 Maple Avenue · Columbus, OH</small></span><span class="current-project">Current ✓</span></a></div>
+            View all projects<a class="btn btn-outline mt-4" href="/projects"></a>
+          </div>
+        </dialog>
+        <dialog id="projectShortcuts" class="modal" aria-labelledby="projectShortcuts-title">
+          <div class="modal-box">
+            <h2 id="projectShortcuts-title" class="text-2xl font-bold mb-6 pe-10">Keyboard shortcuts</h2>
+            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Keyboard shortcuts" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+            <p class="text-sm mt-2">Hold Ctrl+Alt and press a key below.</p>
+            <table class="table table-sm mt-4">
+              <caption class="text-left font-bold p-2">Project sections</caption>
+              <tbody>
+                <tr>
+                  <th scope="row">Project</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">1</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">Rooms</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">2</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">Equipment</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">3</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">Total effective length</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">4</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">Friction rate</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">5</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">Duct sizes</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">6</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">Next room row</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">J</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">Previous room row</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">K</kbd></td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="table table-sm mt-4">
+              <caption class="text-left font-bold p-2">App navigation</caption>
+              <tbody>
+                <tr>
+                  <th scope="row">Ductulator</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">D</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">Fitting reference</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">F</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">Projects</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">P</kbd></td>
+                </tr>
+                <tr>
+                  <th scope="row">Profile</th>
+                  <td class="text-right"><kbd class="kbd kbd-sm">U</kbd></td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="text-sm mt-2">Ctrl+K focuses room or register search. Ductulator and fitting reference open in new tabs. Shortcuts pause while editing a field or when a dialog is open.</p>
+          </div>
+        </dialog>
+      </div>
+    </div>
+  </body>
+</html>

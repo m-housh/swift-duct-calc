@@ -5,6 +5,7 @@ extension SiteRoute.View {
     let title: String
     switch self {
     case .home: title = "Home"
+    case .homePreview(let step): title = step.title
     case .privacyPolicy: title = "Privacy policy"
     case .login: title = "Login"
     case .signup: title = "Sign up"

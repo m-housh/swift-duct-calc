@@ -9,6 +9,7 @@ extension SiteRoute {
   /// The routes return html.
   public enum View: Equatable, Sendable {
     case home
+    case homePreview(HomePreviewStep)
     case privacyPolicy
     case fittings(FittingPickerRoute)
     case login(LoginRoute)
@@ -21,6 +22,13 @@ extension SiteRoute {
     case test
 
     public static let router = OneOf {
+      Route(.case(Self.homePreview)) {
+        Path {
+          "home-preview"
+          HomePreviewStep.parser()
+        }
+        Method.get
+      }
       Route(.case(Self.fittings)) {
         Path { "fittings" }
         FittingPickerRoute.router

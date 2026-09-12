@@ -42,7 +42,9 @@ struct LoginRouteTests {
 
       let home = try await client.sendRequest(.GET, "/", headers: headers)
       #expect(home.status == .ok)
-      #expect(home.body.string.contains("hx-get=\"/login\""))
+      #expect(home.body.string.contains("Open your projects"))
+      #expect(home.body.string.contains("href=\"/projects\""))
+      #expect(!home.body.string.contains("href=\"/login\""))
 
       for (path, destination) in [
         ("/login", "/projects"),
