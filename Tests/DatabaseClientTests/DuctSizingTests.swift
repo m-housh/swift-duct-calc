@@ -42,13 +42,13 @@ struct DuctSizingTests {
         _ = try await database.equivalentLengths.create(
           .init(
             projectID: project.id, name: "Supply", type: .supply,
-            straightLengths: [100], groups: []))
+            straightLengths: [150], groups: []))
       }
       if !missing.contains(.returnPath) {
         _ = try await database.equivalentLengths.create(
           .init(
             projectID: project.id, name: "Return", type: .return,
-            straightLengths: [100], groups: []))
+            straightLengths: [150], groups: []))
       }
       if !missing.contains(.componentLosses) {
         for loss in ComponentPressureLoss.Create.default(projectID: project.id) {
@@ -65,6 +65,13 @@ struct DuctSizingTests {
         #expect(room.ductSize.finalSize > 0)
         #expect(sizes.trunks.count == 1)
         #expect(sizes.trunks.first?.ductSize.finalSize == room.ductSize.finalSize)
+        let equipment = try #require(try await database.equipment.fetch(project.id))
+        for pressure in [0.01, 0.09, 0.14, 0.9] {
+          _ = try await database.equipment.update(equipment.id, .init(staticPressure: pressure))
+          await #expect(throws: ValidationError.self) {
+            try await client.calculateDuctSizes(project.id)
+          }
+        }
       } else {
         for trunks in [false, true] {
           do {

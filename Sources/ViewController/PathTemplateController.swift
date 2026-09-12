@@ -38,7 +38,8 @@ extension SiteRoute.View.UserRoute.PathTemplateRoute {
         let saved = try await templates.fetch(user.id)
         return await request.view { PathTemplatesView(templates: saved, projectID: projectID) }
       case .new(let type, _):
-        let configuration = PathTemplate.starterConfigurations().first { $0.type == type }!
+        var configuration = PathTemplate.defaultConfigurations().first { $0.type == type }!
+        configuration.name = "New \(type.rawValue) template"
         let workspace = try await PathTemplateWorkspace(
           data: .init(
             mode: "editor", configuration: configuration, template: nil,
@@ -138,24 +139,9 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute.GuidedRoute {
         }
         return try await workspace(
           on: request, projectID: projectID, template: template, draft: draft)
-      case .starter(let type, let draft):
-        _ = try draft.map(GuidedPath.InitialValues.init(draft:))
-        let configuration = PathTemplate.starterConfigurations().first { $0.type == type }!
-        let template = try await project.createPathTemplate(
-          userID: user.id, configuration: configuration)
-        return try await workspace(
-          on: request, projectID: projectID, template: template, draft: draft)
       case .edit(let id):
-        guard let path = try await database.equivalentLengths.get(id), path.projectID == projectID,
-          let snapshot = path.templateSnapshot
-        else { throw NotFoundError() }
-        let view = try await PathTemplateWorkspace(
-          data: .init(
-            mode: "path", configuration: snapshot.configuration, template: nil,
-            definitions: allFittings(), projectID: projectID, path: path,
-            saveURL: guidedPathURL(projectID), backURL: effectiveLengthsURL(projectID)
-          ))
-        return await request.view { view }
+        return await SiteRoute.View.ProjectRoute.EquivalentLengthRoute.editor(id)
+          .renderPathEditor(on: request, projectID: projectID)
       case .save(let form):
         _ = try await project.saveGuidedPath(userID: user.id, projectID: projectID, request: form)
         return div(.data("redirect", value: effectiveLengthsURL(projectID))) { "Path saved." }

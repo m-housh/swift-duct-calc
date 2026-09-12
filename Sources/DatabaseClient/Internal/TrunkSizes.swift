@@ -11,37 +11,39 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
   public static func live(database: any Database) -> Self {
     .init(
       create: { request in
-        // try request.validate()
+        try await TrunkModel.validateRooms(
+          request.rooms, projectID: request.projectID, on: database)
+        return try await database.transaction { database in
+          let trunk = request.toModel()
+          var roomProxies = [TrunkSize.RoomProxy]()
 
-        let trunk = request.toModel()
-        var roomProxies = [TrunkSize.RoomProxy]()
+          try await trunk.validateAndSave(on: database)
 
-        try await trunk.validateAndSave(on: database)
-
-        for (roomID, registers) in request.rooms {
-          guard let room = try await RoomModel.find(roomID, on: database) else {
-            throw NotFoundError()
+          for (roomID, registers) in request.rooms {
+            guard let room = try await RoomModel.find(roomID, on: database) else {
+              throw NotFoundError()
+            }
+            let model = try TrunkRoomModel(
+              trunkID: trunk.requireID(),
+              roomID: room.requireID(),
+              registers: registers,
+              type: request.type
+            )
+            try await model.validateAndSave(on: database)
+            roomProxies.append(
+              .init(room: try room.toDTO(), registers: registers)
+            )
           }
-          let model = try TrunkRoomModel(
-            trunkID: trunk.requireID(),
-            roomID: room.requireID(),
-            registers: registers,
-            type: request.type
-          )
-          try await model.validateAndSave(on: database)
-          roomProxies.append(
-            .init(room: try room.toDTO(), registers: registers)
+
+          return try .init(
+            id: trunk.requireID(),
+            projectID: trunk.$project.id,
+            type: .init(rawValue: trunk.type)!,
+            rooms: roomProxies,
+            height: trunk.height,
+            name: trunk.name
           )
         }
-
-        return try .init(
-          id: trunk.requireID(),
-          projectID: trunk.$project.id,
-          type: .init(rawValue: trunk.type)!,
-          rooms: roomProxies,
-          height: trunk.height,
-          name: trunk.name
-        )
       },
       delete: { id in
         guard let model = try await TrunkModel.find(id, on: database) else {
@@ -81,9 +83,13 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
         else {
           throw NotFoundError()
         }
-        // try updates.validate()
-        try await model.applyUpdates(updates, on: database)
-        return try model.toDTO()
+        if let rooms = updates.rooms {
+          try await TrunkModel.validateRooms(rooms, projectID: model.$project.id, on: database)
+        }
+        return try await database.transaction { database in
+          try await model.applyUpdates(updates, on: database)
+          return try model.toDTO()
+        }
       }
     )
   }
@@ -245,6 +251,23 @@ final class TrunkModel: Model, @unchecked Sendable {
       name: name
     )
 
+  }
+
+  static func validateRooms(
+    _ rooms: [Room.ID: [Int]], projectID: Project.ID, on database: any Database
+  ) async throws {
+    for (id, registers) in rooms {
+      guard let room = try await RoomModel.find(id, on: database), room.$project.id == projectID
+      else {
+        throw NotFoundError()
+      }
+      guard !registers.isEmpty, room.$room.id == nil,
+        Set(registers).count == registers.count,
+        registers.allSatisfy({ $0 > 0 && $0 <= room.registerCount })
+      else {
+        throw ValidationError("Choose valid registers from this project.")
+      }
+    }
   }
 
   func applyUpdates(

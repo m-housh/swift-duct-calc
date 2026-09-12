@@ -27,7 +27,7 @@ struct ProjectForm: HTML, Sendable {
     ModalForm(id: Self.id, title: "Project", dismiss: dismiss) {
       if project == nil {
         button(
-          .type(.button), .class("btn btn-outline btn-block mb-4"),
+          .type(.button), .class("btn btn-primary btn-block mb-4"),
           .custom(name: "aria-controls", value: "newProjectPDF"),
           .custom(name: "aria-expanded", value: "false"),
           .custom(
@@ -45,6 +45,9 @@ struct ProjectForm: HTML, Sendable {
         }
       }
       div(.id("projectDetailsForm")) {
+        if project == nil {
+          div(.class("divider mt-2 mb-6 text-sm")) { "or enter details manually" }
+        }
         form(
           .data("success-message", value: "Changes saved."),
           .class("grid grid-cols-1 gap-4"),

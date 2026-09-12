@@ -51,7 +51,7 @@ extension ProjectClient: DependencyKey {
           try await fileClient.removeFile(pdfResponse.pdfPath)
         }
 
-        response.headers.replaceOrAdd(name: .contentType, value: "application/octet-stream")
+        response.headers.replaceOrAdd(name: .contentType, value: "application/pdf")
         response.headers.replaceOrAdd(
           name: .contentDisposition, value: "attachment; filename=Duct-Calc.pdf"
         )

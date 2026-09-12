@@ -17,11 +17,12 @@
     <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
     <script src="/js/htmx-download.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="/js/main.js?v=workspace-fixes-6"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="/css/output.css?v=navbar-reference-1">
     <link rel="stylesheet" href="/css/htmx.css">
-    <link rel="stylesheet" href="/css/accessibility.css?v=1">
+    <link rel="stylesheet" href="/css/accessibility.css?v=request-toast-2">
+    <link rel="stylesheet" href="/css/project-workspace.css?v=friction-errors-5">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
     <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
@@ -33,180 +34,198 @@
     <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
       <a class="skip-link" href="#main-content">Skip to content</a>
       <main id="main-content" tabindex="-1" class="flex flex-col min-h-screen min-w-full grow mb-auto">
-        <nav class="app-navbar" aria-label="Main">
-          <a class="app-brand" href="/projects">
-          <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
-          Duct Calc<span></span></a>
-          <div class="app-nav-actions">
-            <button type="button" class="btn" aria-label="Keyboard shortcuts" aria-haspopup="dialog" aria-controls="projectShortcuts" data-open-dialog="projectShortcuts"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 15h12"/></svg></button>
-            Fitting reference
-            Ductulator<a class="btn btn-outline btn-secondary" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span></span></a><a class="btn btn-outline btn-primary" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span></span></a>
-            <details class="account-menu">
-              <summary class="btn"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>Account</summary>
-              <ul class="menu bg-base-200 rounded-box shadow-lg">
-                <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
-                <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
-                <li>
-                  <form action="/logout" method="get">
-                    <button type="submit">Logout</button>
-                  </form>
-                </li>
-              </ul>
-            </details>
-          </div>
-        </nav>
-        <div class="project-layout">
-          <details class="project-navigation" open="">
-            <summary>Project navigation</summary>
-            <nav aria-label="Project">
-              <ul id="project-sidebar">
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000" title="Project, Ctrl+Alt+1" aria-keyshortcuts="Control+Alt+1" aria-current="page"><span>Project</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+1</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/rooms" title="Rooms, Ctrl+Alt+2" aria-keyshortcuts="Control+Alt+2"><span>Rooms</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+2</span><span class="project-step-status">Complete</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/equipment" title="Equipment, Ctrl+Alt+3" aria-keyshortcuts="Control+Alt+3"><span>Equipment</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+3</span><span class="project-step-status">Complete</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths" title="T.E.L., Ctrl+Alt+4" aria-keyshortcuts="Control+Alt+4"><span>T.E.L.</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+4</span><span class="project-step-status">Complete</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/friction-rate" title="Friction Rate, Ctrl+Alt+5" aria-keyshortcuts="Control+Alt+5"><span>Friction Rate</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+5</span><span class="project-step-status">Complete</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/duct-sizing" title="Duct Sizes, Ctrl+Alt+6" aria-keyshortcuts="Control+Alt+6"><span>Duct Sizes</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+6</span></a></li>
-              </ul>
-            </nav>
-          </details>
-          <div class="project-content" id="project-content" tabindex="-1">
-            <div>
-              <div class="page-title-row">
-                <h1 class="text-3xl font-bold">Project</h1>
-                <div class="tooltip tooltip-left" data-tip="Edit project">
-                  <button class="btn btn-primary" type="button" aria-label="Edit project" data-open-dialog="projectForm">
-                    <div class="flex">
-                      <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                      
-                    </div>
-                  </button>
+        <div class="project-workspace" data-project-id="00000000-0000-0000-0000-000000000000">
+          <nav class="app-navbar" aria-label="Main">
+            <a class="app-brand" href="/projects">
+            <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
+            Duct Calc<span></span></a>
+            <div class="app-nav-actions">
+              <button type="button" class="btn" aria-label="Keyboard shortcuts" aria-haspopup="dialog" aria-controls="projectShortcuts" data-open-dialog="projectShortcuts"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 15h12"/></svg></button>
+              Fitting reference
+              Ductulator<a class="btn btn-outline btn-secondary" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span></span></a><a class="btn btn-outline btn-primary" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span></span></a>
+              <details class="account-menu">
+                <summary class="btn"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>Account</summary>
+                <ul class="menu bg-base-200 rounded-box shadow-lg">
+                  <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
+                  <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
+                  <li>
+                    <form action="/logout" method="get">
+                      <button type="submit">Logout</button>
+                    </form>
+                  </li>
+                </ul>
+              </details>
+            </div>
+          </nav>
+          <div class="project-layout">
+            <aside class="project-navigation">
+              <button type="button" class="project-switch" data-open-dialog="recentProjects" aria-label="Switch project"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span><strong>Testy McTestface</strong><small>1234 Sesame Street</small></span><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg></button>
+              <nav aria-label="Project">
+                <ul id="project-sidebar">
+                  <li><a href="/projects/00000000-0000-0000-0000-000000000000" title="Project, Ctrl+Alt+1" aria-keyshortcuts="Control+Alt+1" aria-current="page"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span class="nav-label">Project</span></a></li>
+                  <li><a href="/projects/00000000-0000-0000-0000-000000000000/rooms" title="Rooms, Ctrl+Alt+2" aria-keyshortcuts="Control+Alt+2"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-door-closed-icon lucide-door-closed"><path d="M10 12h.01"/><path d="M18 20V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14"/><path d="M2 20h20"/></svg><span class="nav-label">Rooms</span><span class="project-step-status" aria-label="Complete">✓</span></a></li>
+                  <li><a href="/projects/00000000-0000-0000-0000-000000000000/equipment" title="Equipment, Ctrl+Alt+3" aria-keyshortcuts="Control+Alt+3"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fan-icon lucide-fan"><path d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.002l5.412 1.45a6.082 6.082 0 0 1 7.002-8.618l-1.45 5.412a6.082 6.082 0 0 1 8.618 7.002l-5.412-1.45a6.082 6.082 0 0 1-7.002 8.618l1.45-5.412Z"/><path d="M12 12v.01"/></svg><span class="nav-label">Equipment</span><span class="project-step-status" aria-label="Complete">✓</span></a></li>
+                  <li><a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths" title="Total effective length, Ctrl+Alt+4" aria-keyshortcuts="Control+Alt+4"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ruler-dimension-line-icon lucide-ruler-dimension-line"><path d="M10 15v-3"/><path d="M14 15v-3"/><path d="M18 15v-3"/><path d="M2 8V4"/><path d="M22 6H2"/><path d="M22 8V4"/><path d="M6 15v-3"/><rect x="2" y="12" width="20" height="8" rx="2"/></svg><span class="nav-label">Total effective length</span><span class="project-step-status" aria-label="Complete">✓</span></a></li>
+                  <li><a href="/projects/00000000-0000-0000-0000-000000000000/friction-rate" title="Friction rate, Ctrl+Alt+5" aria-keyshortcuts="Control+Alt+5"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-function-icon lucide-square-function"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M9 17c2 0 2.8-1 2.8-2.8V10c0-2 1-3.3 3.2-3"/><path d="M9 11.2h5.7"/></svg><span class="nav-label">Friction rate</span><span class="project-step-status" aria-label="Complete">✓</span></a></li>
+                  <li><a href="/projects/00000000-0000-0000-0000-000000000000/duct-sizing" title="Duct sizes, Ctrl+Alt+6" aria-keyshortcuts="Control+Alt+6"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg><span class="nav-label">Duct sizes</span></a></li>
+                </ul>
+              </nav>
+              All projects<a class="all-projects-link" href="/projects"></a>
+            </aside>
+            <div class="project-content" id="project-content" tabindex="-1">
+              <div>
+                <div class="page-title-row">
+                  <div>
+                    <h1 class="text-3xl font-bold">The whole design, connected.</h1>
+                    <p class="muted">Select a part of the system to work on it.</p>
+                  </div>
+                  <button type="button" class="btn btn-outline" data-open-dialog="projectForm"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>Project details</button>
                 </div>
+                <section class="project-panel" aria-label="Project atlas">
+                  <div class="canvas-legend"><span>PROJECT ATLAS</span><span>Five connected design sections</span></div>
+                  <div class="project-atlas">
+                    <svg class="atlas-wires" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M500 294L200 168 M500 294L750 119 M500 294L840 413 M500 294L500 623 M500 294L170 455"/>
+                    </svg>
+                    <div class="atlas-house">
+                      <svg class="project-house-art" viewBox="0 0 360 320" preserveAspectRatio="none" aria-hidden="true">
+                      <path class="house-chimney" d="M270 106V76L288 66H316V144Z"/>
+                      <path class="house-chimney-side" d="M270 106V76L288 66V122Z"/>
+                      <path class="house-ground" d="M12 150L180 8L348 150V310H12Z"/>
+                      <path class="house-front" d="M12 150L132 49C185 101 208 156 225 198V310H12Z"/>
+                      <path class="house-roof-sweep" d="M140 42L180 8L348 150V252C284 237 249 211 228 180C199 120 182 83 140 42Z"/>
+                      <path class="house-warm-corner" d="M236 213C264 244 304 261 348 272V310H236Z"/>
+                      </svg>
+                    </div>
+                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-door-closed-icon lucide-door-closed"><path d="M10 12h.01"/><path d="M18 20V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14"/><path d="M2 20h20"/></svg>
+                    6 rooms
+                    Room loads
+                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fan-icon lucide-fan"><path d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.002l5.412 1.45a6.082 6.082 0 0 1 7.002-8.618l-1.45 5.412a6.082 6.082 0 0 1 8.618 7.002l-5.412-1.45a6.082 6.082 0 0 1-7.002 8.618l1.45-5.412Z"/><path d="M12 12v.01"/></svg>
+                    1,000
+                     CFM
+                    Equipment
+                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ruler-dimension-line-icon lucide-ruler-dimension-line"><path d="M10 15v-3"/><path d="M14 15v-3"/><path d="M18 15v-3"/><path d="M2 8V4"/><path d="M22 6H2"/><path d="M22 8V4"/><path d="M6 15v-3"/><rect x="2" y="12" width="20" height="8" rx="2"/></svg>
+                    185
+                     ft TEL
+                    Duct paths
+                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-function-icon lucide-square-function"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M9 17c2 0 2.8-1 2.8-2.8V10c0-2 1-3.3 3.2-3"/><path d="M9 11.2h5.7"/></svg>
+                    0.059
+                     FR
+                    Pressure
+                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>
+                    12 registers
+                    Duct sizes<a class="atlas-node atlas-rooms" href="/projects/00000000-0000-0000-0000-000000000000/rooms"><span class="node-icon"></span><strong></strong><small></small></a><a class="atlas-node atlas-equipment" href="/projects/00000000-0000-0000-0000-000000000000/equipment"><span class="node-icon"></span><strong><span></span></strong><small></small></a><a class="atlas-node atlas-paths" href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths"><span class="node-icon"></span><strong><span></span></strong><small></small></a><a class="atlas-node atlas-friction" href="/projects/00000000-0000-0000-0000-000000000000/friction-rate"><span class="node-icon"></span><strong><span></span></strong><small></small></a><a class="atlas-node atlas-sizing" href="/projects/00000000-0000-0000-0000-000000000000/duct-sizing"><span class="node-icon"></span><strong></strong><small></small></a>
+                    <aside class="project-house-sign" aria-label="Project details">
+                      <h2>Testy McTestface</h2>
+                      <p>
+                        1234 Sesame Street
+                        <br>
+                        Monroe, OH 55555
+                      </p>
+                    </aside>
+                  </div>
+                </section>
+                <dialog id="projectForm" class="modal" aria-labelledby="projectForm-title">
+                  <div class="modal-box">
+                    <h2 id="projectForm-title" class="text-2xl font-bold mb-6 pe-10">Project</h2>
+                    <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Project" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                    <div id="projectDetailsForm">
+                      <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000" hx-target="body" hx-swap="outerHTML">
+                        <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000000">
+                        Name<label class="input w-full"><span class="label"></span>
+                        <input name="name" type="text" value="Testy McTestface" placeholder="Project Name" required autofocus>
+                        Address</label><label class="input w-full"><span class="label"></span>
+                        <input name="streetAddress" type="text" value="1234 Sesame Street" placeholder="Street Address" required>
+                        City</label><label class="input w-full"><span class="label"></span>
+                        <input name="city" type="text" value="Monroe" placeholder="City" required>
+                        State</label><label class="input w-full"><span class="label"></span>
+                        <input name="state" type="text" value="OH" placeholder="State" required>
+                        Zip</label><label class="input w-full"><span class="label"></span>
+                        <input name="zipCode" type="text" value="55555" placeholder="Zip Code" required></label>
+                        <button class="btn btn-secondary btn-block my-6" type="submit">Submit</button>
+                      </form>
+                    </div>
+                  </div>
+                </dialog>
               </div>
-              <table class="table details-table table-zebra text-lg">
+            </div>
+          </div>
+          <dialog id="recentProjects" class="modal" aria-labelledby="recentProjects-title">
+            <div class="modal-box">
+              <h2 id="recentProjects-title" class="text-2xl font-bold mb-6 pe-10">Switch project</h2>
+              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Switch project" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+              <p class="muted">Recently opened</p>
+              <div class="recent-projects"><a class="recent-project" href="/projects/00000000-0000-0000-0000-000000000000" aria-current="page"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span><strong>Testy McTestface</strong><small>1234 Sesame Street · Monroe, OH</small></span><span class="current-project">Current ✓</span></a></div>
+              View all projects<a class="btn btn-outline mt-4" href="/projects"></a>
+            </div>
+          </dialog>
+          <dialog id="projectShortcuts" class="modal" aria-labelledby="projectShortcuts-title">
+            <div class="modal-box">
+              <h2 id="projectShortcuts-title" class="text-2xl font-bold mb-6 pe-10">Keyboard shortcuts</h2>
+              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Keyboard shortcuts" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+              <p class="text-sm mt-2">Hold Ctrl+Alt and press a key below.</p>
+              <table class="table table-sm mt-4">
+                <caption class="text-left font-bold p-2">Project sections</caption>
                 <tbody>
                   <tr>
-                    <th class="font-bold" scope="row">Name</th>
-                    <td>
-                      <div class="flex justify-end">Testy McTestface</div>
-                    </td>
+                    <th scope="row">Project</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">1</kbd></td>
                   </tr>
                   <tr>
-                    <th class="font-bold" scope="row">Street Address</th>
-                    <td>
-                      <div class="flex justify-end">1234 Sesame Street</div>
-                    </td>
+                    <th scope="row">Rooms</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">2</kbd></td>
                   </tr>
                   <tr>
-                    <th class="font-bold" scope="row">City</th>
-                    <td>
-                      <div class="flex justify-end">Monroe</div>
-                    </td>
+                    <th scope="row">Equipment</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">3</kbd></td>
                   </tr>
                   <tr>
-                    <th class="font-bold" scope="row">State</th>
-                    <td>
-                      <div class="flex justify-end">OH</div>
-                    </td>
+                    <th scope="row">Total effective length</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">4</kbd></td>
                   </tr>
                   <tr>
-                    <th class="font-bold" scope="row">Zip</th>
-                    <td>
-                      <div class="flex justify-end">55555</div>
-                    </td>
+                    <th scope="row">Friction rate</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">5</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Duct sizes</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">6</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Next room row</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">J</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Previous room row</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">K</kbd></td>
                   </tr>
                 </tbody>
               </table>
-              <dialog id="projectForm" class="modal" aria-labelledby="projectForm-title">
-                <div class="modal-box">
-                  <h2 id="projectForm-title" class="text-2xl font-bold mb-6 pe-10">Project</h2>
-                  <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Project" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                  <div id="projectDetailsForm">
-                    <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000" hx-target="body" hx-swap="outerHTML">
-                      <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000000">
-                      Name<label class="input w-full"><span class="label"></span>
-                      <input name="name" type="text" value="Testy McTestface" placeholder="Project Name" required autofocus>
-                      Address</label><label class="input w-full"><span class="label"></span>
-                      <input name="streetAddress" type="text" value="1234 Sesame Street" placeholder="Street Address" required>
-                      City</label><label class="input w-full"><span class="label"></span>
-                      <input name="city" type="text" value="Monroe" placeholder="City" required>
-                      State</label><label class="input w-full"><span class="label"></span>
-                      <input name="state" type="text" value="OH" placeholder="State" required>
-                      Zip</label><label class="input w-full"><span class="label"></span>
-                      <input name="zipCode" type="text" value="55555" placeholder="Zip Code" required></label>
-                      <button class="btn btn-secondary btn-block my-6" type="submit">Submit</button>
-                    </form>
-                  </div>
-                </div>
-              </dialog>
+              <table class="table table-sm mt-4">
+                <caption class="text-left font-bold p-2">App navigation</caption>
+                <tbody>
+                  <tr>
+                    <th scope="row">Ductulator</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">D</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Fitting reference</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">F</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Projects</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">P</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Profile</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">U</kbd></td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="text-sm mt-2">Ctrl+K focuses room or register search. Ductulator and fitting reference open in new tabs. Shortcuts pause while editing a field or when a dialog is open.</p>
             </div>
-          </div>
+          </dialog>
         </div>
-        <dialog id="projectShortcuts" class="modal" aria-labelledby="projectShortcuts-title">
-          <div class="modal-box">
-            <h2 id="projectShortcuts-title" class="text-2xl font-bold mb-6 pe-10">Keyboard shortcuts</h2>
-            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Keyboard shortcuts" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-            <p class="text-sm mt-2">Hold Ctrl+Alt and press a key below.</p>
-            <table class="table table-sm mt-4">
-              <caption class="text-left font-bold p-2">Project sections</caption>
-              <tbody>
-                <tr>
-                  <th scope="row">Project</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">1</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Rooms</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">2</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Equipment</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">3</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">T.E.L.</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">4</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Friction Rate</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">5</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Duct Sizes</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">6</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Next section</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">J</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Previous section</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">K</kbd></td>
-                </tr>
-              </tbody>
-            </table>
-            <table class="table table-sm mt-4">
-              <caption class="text-left font-bold p-2">App navigation</caption>
-              <tbody>
-                <tr>
-                  <th scope="row">Ductulator</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">D</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Fitting reference</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">F</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Projects</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">P</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Profile</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">U</kbd></td>
-                </tr>
-              </tbody>
-            </table>
-            <p class="text-sm mt-2">Ductulator and fitting reference open in new tabs. Shortcuts pause while editing a field or when a dialog is open.</p>
-          </div>
-        </dialog>
       </main>
       <div id="app-status" class="sr-only" role="status" aria-atomic="true"></div>
       <div id="app-error" class="request-error" role="alert"></div>
@@ -215,7 +234,7 @@
 bg-base-300 text-base-content p-4">
           <div class="grid-flow-row items-center">
             <div class="flex mx-auto">
-              <a class="btn btn-ghost" href="mailto:support@ductcalc.pro">  <svg aria-hidden="true" focusable="false" class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <a class="btn btn-ghost" href="mailto:support@ductcalc.pro"><svg aria-hidden="true" focusable="false" class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g
                   stroke-linejoin="round"
                   stroke-linecap="round"

@@ -8,7 +8,11 @@ import Testing
 import URLRouting
 import VaporTesting
 
-@Suite(.dependencies { $0.date.now = Date(timeIntervalSince1970: 1_709_251_200) })
+@Suite(
+  .dependencies {
+    $0.date.now = Date(timeIntervalSince1970: 1_709_251_200)
+    $0.uuid = .incrementing
+  })
 struct FittingsRouteTests {
   private func configuredApp(_ app: Application) async throws {
     app.logger.logLevel = .warning

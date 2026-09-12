@@ -88,7 +88,7 @@ const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'nig
     await page.keyboard.press('Escape');
     await page.setViewportSize({ width: 1280, height: 900 });
 
-    const addProject = page.getByRole('button', { name: 'Add project', exact: true });
+    const addProject = page.getByRole('button', { name: 'Add Project', exact: true });
     await addProject.click();
     let dialog = page.getByRole('dialog', { name: 'Project', exact: true });
     await dialog.waitFor();
@@ -102,14 +102,9 @@ const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'nig
     await addProject.click();
     await fill({ name: 'Accessibility test', streetAddress: '123 Test St', city: 'Test', state: 'OH', zipCode: '45040' }, dialog);
     await dialog.getByRole('button', { name: 'Submit', exact: true }).click();
-    await page.getByRole('heading', { name: 'Room Loads', exact: true }).waitFor();
+    await page.getByRole('heading', { name: 'Room loads', exact: true }).waitFor();
     const projectPath = await page.getByRole('navigation', { name: 'Project', exact: true }).getByRole('link', { name: 'Project', exact: true }).getAttribute('href');
     const projectID = projectPath.split('/').at(-1);
-    const sidebar = page.locator('.project-navigation > summary');
-    await sidebar.focus();
-    await page.keyboard.press('Enter');
-    assert.equal(await page.getByRole('navigation', { name: 'Project', exact: true }).isVisible(), false);
-    await page.keyboard.press('Enter');
     assert.equal(await page.getByRole('navigation', { name: 'Project', exact: true }).isVisible(), true);
 
     await page.getByRole('button', { name: 'Add room', exact: true }).click();
@@ -131,7 +126,7 @@ const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'nig
     await post(`${projectPath}/equipment`, { projectID, staticPressure: '0.5', heatingCFM: '1000', coolingCFM: '1200' });
     await post(`${projectPath}/component-loss`, { projectID, name: 'Filter', value: '0.1' });
     for (const type of ['supply', 'return']) {
-      await post(`${projectPath}/effective-lengths/stepThree`, { name: `${type} path`, type, straightLengths: '100' });
+      await post(`${projectPath}/effective-lengths/save-path`, { payload: JSON.stringify({baseline:null, name:`${type} path`, pathType:type, straightLengths:[150], entries:[]}) });
     }
     for (const path of ['', '/rooms', '/equipment', '/effective-lengths', '/friction-rate', '/duct-sizing']) {
       await page.goto(origin + projectPath + path);
@@ -152,7 +147,7 @@ const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'nig
     await page.keyboard.press('Escape');
     await focused(page.getByRole('button', { name: 'Keyboard shortcuts', exact: true }));
     await page.keyboard.press('Control+Alt+2');
-    await page.getByRole('heading', { name: 'Room Loads', exact: true }).waitFor();
+    await page.getByRole('heading', { name: 'Room loads', exact: true }).waitFor();
     await page.keyboard.press('Control+Alt+6');
     await page.getByRole('heading', { name: 'Duct Sizes', exact: true }).waitFor();
     const editors = page.getByRole('button', { name: /Edit rectangular size for Kitchen/ });
@@ -166,7 +161,7 @@ const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'nig
     await page.locator('#app-status').filter({ hasText: 'Changes saved.' }).waitFor();
     await focused(editors.nth(1));
 
-    await page.getByRole('button', { name: 'Add trunk or runout', exact: true }).click();
+    await page.getByRole('button', { name: 'Add trunk', exact: true }).click();
     dialog = page.getByRole('dialog', { name: 'Trunk / Runout Size', exact: true });
     await audit('Trunk checkbox group', true);
     const options = dialog.locator('input[name=rooms]');
@@ -192,7 +187,7 @@ const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'nig
     page.once('dialog', confirmation => confirmation.accept());
     await page.getByRole('button', { name: 'Delete Kitchen', exact: true }).click();
     await page.locator('#app-status').filter({ hasText: 'Item deleted.' }).waitFor();
-    await focused(page.getByRole('heading', { name: 'Room Loads', exact: true }));
+    await focused(page.getByRole('heading', { name: 'Room loads', exact: true }));
     assert.deepEqual(failures, [], JSON.stringify(failures, null, 2));
     console.log('Accessibility and keyboard checks passed.');
   } finally {

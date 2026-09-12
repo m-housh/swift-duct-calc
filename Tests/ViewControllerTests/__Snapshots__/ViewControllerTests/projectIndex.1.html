@@ -17,11 +17,12 @@
     <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
     <script src="/js/htmx-download.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="/js/main.js?v=workspace-fixes-6"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="/css/output.css?v=navbar-reference-1">
     <link rel="stylesheet" href="/css/htmx.css">
-    <link rel="stylesheet" href="/css/accessibility.css?v=1">
+    <link rel="stylesheet" href="/css/accessibility.css?v=request-toast-2">
+    <link rel="stylesheet" href="/css/project-workspace.css?v=friction-errors-5">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
     <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
@@ -33,7 +34,7 @@
     <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
       <a class="skip-link" href="#main-content">Skip to content</a>
       <main id="main-content" tabindex="-1" class="flex flex-col min-h-screen min-w-full grow mb-auto">
-        <div>
+        <div class="project-workspace project-directory">
           <nav class="app-navbar" aria-label="Main">
             <a class="app-brand" href="/projects">
             <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
@@ -54,48 +55,53 @@
               </details>
             </div>
           </nav>
-          <div class="m-6">
-            <div class="page-title-row pb-6">
-              <h1 class="text-3xl font-bold">Projects</h1>
-              <div class="tooltip tooltip-left" data-tip="Add project">
-                <button type="button" class="btn btn-primary" aria-label="Add project" data-open-dialog="projectForm"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></button>
+          <div class="directory-content">
+            <div class="page-title-row">
+              <div>
+                <h1 class="text-3xl font-bold">Projects</h1>
+                <p class="muted">Your residential duct designs.</p>
               </div>
+              <button type="button" class="btn btn-primary" data-open-dialog="projectForm"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add Project</button>
             </div>
-            <div class="table-scroll" tabindex="0" role="region" aria-label="Projects">
-              <table class="table table-zebra">
-                <thead>
-                  <tr>
-                    <th><span class="text-lg font-bold">Date</span></th>
-                    <th><span class="text-lg font-bold">Name</span></th>
-                    <th><span class="text-lg font-bold">Address</span></th>
-                    <th><span class="sr-only">Actions</span></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr id="00000000-0000-0000-0000-000000000000">
-                    <td><span>02/13/2009</span></td>
-                    <td>Testy McTestface</td>
-                    <td>1234 Sesame Street</td>
-                    <td>
-                      <div class="flex justify-end space-x-6">
-                        <div class="join">
-                          <div class="tooltip tooltip-left" data-tip="Delete project">
-                            <button type="button" class="btn btn-error join-item btn-ghost" aria-label="Delete Testy McTestface" hx-delete="/projects/00000000-0000-0000-0000-000000000000" hx-confirm="Are you sure?" hx-target="closest tr"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-                          </div>
-                          <div class="tooltip tooltip-left" data-tip="View project"><a class="join-item btn btn-success btn-ghost" aria-label="View Testy McTestface" href="/projects/00000000-0000-0000-0000-000000000000/rooms"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg></a></div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="project-panel">
+              <form method="get" action="/projects/search" class="project-toolbar">
+                <h2>All projects · 1</h2>
+                Find a project<label class="project-search"><span class="sr-only"></span>
+                <input type="search" id="project-search" name="q" value="" placeholder="Find a project…" class="input" aria-keyshortcuts="Control+K">
+                Ctrl+K<kbd></kbd></label>
+                <button type="submit" class="btn btn-outline">Search</button>
+              </form>
+              <div class="table-scroll" tabindex="0" role="region" aria-label="Projects">
+                <table class="table project-table">
+                  <thead>
+                    <tr>
+                      <th>Project</th>
+                      <th>Address</th>
+                      <th>City</th>
+                      <th>Created</th>
+                      <th><span class="sr-only">Actions</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr id="00000000-0000-0000-0000-000000000000" data-project-row="">
+                      <td><a class="project-name" href="/projects/00000000-0000-0000-0000-000000000000">Testy McTestface</a></td>
+                      <td>1234 Sesame Street</td>
+                      <td>Monroe, OH</td>
+                      <td><span>02/13/2009</span></td>
+                      <td>
+                        <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Testy McTestface" hx-delete="/projects/00000000-0000-0000-0000-000000000000" hx-confirm="Delete this project and all of its design data?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
           <dialog id="projectForm" class="modal" aria-labelledby="projectForm-title">
             <div class="modal-box">
               <h2 id="projectForm-title" class="text-2xl font-bold mb-6 pe-10">Project</h2>
-              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Project" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-              <button type="button" class="btn btn-outline btn-block mb-4" aria-controls="newProjectPDF" aria-expanded="false" onclick="const upload = document.getElementById('newProjectPDF');
+              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Project" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+              <button type="button" class="btn btn-primary btn-block mb-4" aria-controls="newProjectPDF" aria-expanded="false" onclick="const upload = document.getElementById('newProjectPDF');
 upload.hidden = !upload.hidden;
 document.getElementById('projectDetailsForm').hidden = !upload.hidden;
 this.textContent = upload.hidden ? 'Import from Cool Calc PDF' : 'Enter project manually';
@@ -159,6 +165,7 @@ this.form.querySelector('input[type=file]').focus();">Cancel</button>
                 </form>
               </div>
               <div id="projectDetailsForm">
+                <div class="divider mt-2 mb-6 text-sm">or enter details manually</div>
                 <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4" hx-post="/projects" hx-target="body" hx-swap="outerHTML">
                   <label class="input w-full"><span class="label">Name</span>
                   <input name="name" type="text" value="" placeholder="Project Name" required autofocus>
@@ -184,7 +191,7 @@ this.form.querySelector('input[type=file]').focus();">Cancel</button>
 bg-base-300 text-base-content p-4">
           <div class="grid-flow-row items-center">
             <div class="flex mx-auto">
-              <a class="btn btn-ghost" href="mailto:support@ductcalc.pro">  <svg aria-hidden="true" focusable="false" class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <a class="btn btn-ghost" href="mailto:support@ductcalc.pro"><svg aria-hidden="true" focusable="false" class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g
                   stroke-linejoin="round"
                   stroke-linecap="round"

@@ -1,0 +1,42 @@
+<div data-tel-workspace="">
+  <div class="page-title-row">
+    <div>
+      <h1 class="text-3xl font-bold">Total effective length</h1>
+      <p class="muted">The longest supply and return paths set TEL. Expand fittings in the table to inspect each path.</p>
+    </div>
+    <div class="row-actions"><a class="btn btn-outline" href="/path-templates?project=00000000-0000-0000-0000-000000000001">Manage templates</a><a class="btn btn-primary" aria-label="Add path" href="/projects/00000000-0000-0000-0000-000000000001/effective-lengths/editor"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add path</a></div>
+  </div>
+  <div class="project-panel tel-equation">
+    <div><strong>—</strong><small>ft · longest return path</small></div>
+    +<span></span>
+    <div><strong>—</strong><small>ft · longest supply path</small></div>
+    =<span></span>
+    <div><strong class="tel-result">Not set</strong><small>ft · total effective length</small></div>
+  </div>
+  <details class="project-panel path-canvas" open="" data-expansion="path-network">
+    <summary class="canvas-legend"><span class="network-toggle"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>PATH NETWORK</span><span>Longest supply and return · All 0 paths in the table below</span></summary>
+    <div class="path-network"><svg class="network-wires" viewBox="0 0 1200 480" preserveAspectRatio="none" aria-hidden="true"><path class="return missing-wire" d="M600 240 C430 240,430 144,192 144"/><path class="supply missing-wire" d="M600 240 C770 240,770 144,1008 144"/></svg><a class="network-handler" href="/projects/00000000-0000-0000-0000-000000000001/equipment"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fan-icon lucide-fan"><path d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.002l5.412 1.45a6.082 6.082 0 0 1 7.002-8.618l-1.45 5.412a6.082 6.082 0 0 1 8.618 7.002l-5.412-1.45a6.082 6.082 0 0 1-7.002 8.618l1.45-5.412Z"/><path d="M12 12v.01"/></svg><strong>Air handler</strong><span>Equipment not set</span></a><a class="network-endpoint missing-path return" href="/projects/00000000-0000-0000-0000-000000000001/effective-lengths/editor?type=return" style="left:16%;top:30%" aria-label="Add return path"><span>Return path</span><strong>Required for TEL</strong><span class="missing-path-action"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add return</span></a><a class="network-endpoint missing-path supply" href="/projects/00000000-0000-0000-0000-000000000001/effective-lengths/editor?type=supply" style="left:84%;top:30%" aria-label="Add supply path"><span>Supply path</span><strong>Required for TEL</strong><span class="missing-path-action"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add supply</span></a></div>
+  </details>
+  <section class="project-panel path-schedule">
+    <div class="path-schedule-heading">
+      <h2>All paths<span>0</span></h2>
+      <div><span>Select a row · Expand fittings to compare</span></div>
+    </div>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Equivalent lengths">
+      <table class="table project-table path-table" data-selectable-table="paths">
+        <thead>
+          <tr>
+            <th>Path</th>
+            <th>System</th>
+            <th>Straight · ft</th>
+            <th>Fittings · ft</th>
+            <th>Total · ft</th>
+            <th>Fitting breakdown</th>
+            <th><span class="sr-only">Actions</span></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+</div>

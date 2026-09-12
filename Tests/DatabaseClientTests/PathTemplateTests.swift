@@ -51,7 +51,7 @@ struct PathTemplateTests {
         ) == snapshot
       )
       try await templates.delete(user.id, created.id)
-      #expect(try await templates.fetch(user.id).isEmpty)
+      #expect(try await templates.fetch(user.id).count == 2)
       #expect(snapshot.configuration.steps.count == 2)
     }
   }
@@ -81,7 +81,7 @@ struct PathTemplateTests {
       let templates = database.pathTemplates
       let created = try await templates.create(user.id, Self.configuration)
       #expect(try await templates.get(other.id, created.id) == nil)
-      #expect(try await templates.fetch(other.id).isEmpty)
+      #expect(try await templates.fetch(other.id).count == 2)
       await #expect(throws: NotFoundError.self) {
         try await templates.update(other.id, created.id, created.revision, Self.configuration)
       }
@@ -131,7 +131,7 @@ struct PathTemplateTests {
         try await templates.create(user.id, invalid)
       }
       let saved = try await templates.fetch(user.id)
-      #expect(saved.isEmpty)
+      #expect(saved.count == 2)
     }
   }
 
@@ -178,7 +178,8 @@ struct PathTemplateTests {
         == unanswered
     )
     #expect(
-      try JSONDecoder().decode(TemplateFitting.Inputs.self, from: JSONEncoder().encode(zero)) == zero
+      try JSONDecoder().decode(TemplateFitting.Inputs.self, from: JSONEncoder().encode(zero))
+        == zero
     )
   }
 }

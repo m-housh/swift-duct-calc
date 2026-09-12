@@ -3,6 +3,7 @@ import DependenciesMacros
 import Fluent
 import Foundation
 import ManualDCore
+import SQLKit
 import Validations
 
 extension DatabaseClient.Projects: TestDependencyKey {
@@ -10,6 +11,48 @@ extension DatabaseClient.Projects: TestDependencyKey {
 
   public static func live(database: any Database) -> Self {
     .init(
+      recent: { userID in
+        let opened = try await ProjectModel.query(on: database)
+          .filter(\.$user.$id == userID).filter(\.$lastOpenedAt != nil)
+          .sort(\.$lastOpenedAt, .descending).sort(\.$id).limit(5).all()
+        let fallback = try await ProjectModel.query(on: database)
+          .filter(\.$user.$id == userID).filter(\.$lastOpenedAt == nil)
+          .sort(\.$createdAt, .descending).sort(\.$id).limit(5).all()
+        return try Array((opened + fallback).prefix(5)).map { try $0.toDTO() }
+      },
+      recordOpen: { projectID, userID, date in
+        // QueryBuilder.update also advances updatedAt. Opening a project is not a design edit.
+        guard let sql = database as? any SQLDatabase else { throw NotFoundError() }
+        try await sql.raw(
+          """
+          UPDATE \(ident: ProjectModel.schema) SET \(ident: "lastOpenedAt") = \(bind: date.timeIntervalSince1970)
+          WHERE \(ident: "id") = \(bind: projectID) AND \(ident: "userID") = \(bind: userID)
+          """
+        ).run()
+      },
+      search: { userID, search, page in
+        let query = ProjectModel.query(on: database).filter(\.$user.$id == userID)
+        let term = search.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !term.isEmpty {
+          // Match literal text consistently on both SQLite and PostgreSQL.
+          let pattern =
+            "%"
+            + term.lowercased()
+            .replacingOccurrences(of: "!", with: "!!")
+            .replacingOccurrences(of: "%", with: "!%")
+            .replacingOccurrences(of: "_", with: "!_") + "%"
+          query.filter(
+            .custom(
+              SQLQueryString(
+                """
+                (LOWER(\(ident: "name")) LIKE \(bind: pattern) ESCAPE '!'
+                OR LOWER(\(ident: "streetAddress")) LIKE \(bind: pattern) ESCAPE '!'
+                OR LOWER(\(ident: "city")) LIKE \(bind: pattern) ESCAPE '!')
+                """)))
+        }
+        return try await query.sort(\.$createdAt, .descending).sort(\.$id)
+          .paginate(page).map { try $0.toDTO() }
+      },
       importPDF: { userID, report, confirmDuplicate in
         try await database.transaction { transaction in
           guard !report.rooms.isEmpty else {
@@ -130,7 +173,7 @@ extension DatabaseClient.Projects: TestDependencyKey {
       },
       fetch: { userID, request in
         try await ProjectModel.query(on: database)
-          .sort(\.$createdAt, .descending)
+          .sort(\.$createdAt, .descending).sort(\.$id)
           .with(\.$user)
           .filter(\.$user.$id == userID)
           .paginate(request)
@@ -222,6 +265,9 @@ final class ProjectModel: Model, @unchecked Sendable {
 
   @Timestamp(key: "updatedAt", on: .update, format: .iso8601)
   var updatedAt: Date?
+
+  @OptionalField(key: "lastOpenedAt")
+  var lastOpenedAt: Double?
 
   @Children(for: \.$project)
   var componentLosses: [ComponentLossModel]
@@ -358,6 +404,17 @@ extension ProjectModel: Validatable {
       }
       .errorLabel("Sensible Heat Ratio", inline: true)
 
+    }
+  }
+}
+
+extension Project {
+  struct AddLastOpenedAt: AsyncMigration {
+    func prepare(on database: any Database) async throws {
+      try await database.schema(ProjectModel.schema).field("lastOpenedAt", .double).update()
+    }
+    func revert(on database: any Database) async throws {
+      try await database.schema(ProjectModel.schema).deleteField("lastOpenedAt").update()
     }
   }
 }

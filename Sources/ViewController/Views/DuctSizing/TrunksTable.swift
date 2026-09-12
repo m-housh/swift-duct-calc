@@ -4,149 +4,72 @@ import ManualDCore
 import Styleguide
 
 extension DuctSizingView {
-
   struct TrunkTable: HTML, Sendable {
-
     let ductSizes: DuctSizes
-
-    private var sortedTrunks: [DuctSizes.TrunkContainer] {
-      ductSizes.trunks
-        .sorted(by: { $0.designCFM.value > $1.designCFM.value })
-        .sorted(by: { $0.type.rawValue > $1.type.rawValue })
-    }
-
     var body: some HTML {
-      table(.class("table table-zebra text-lg")) {
-        thead {
-          tr(.class("text-lg")) {
-            th { "Name / Type" }
-            th { "Associated Supplies" }
-            th { "Dsn CFM" }
-            th { "Velocity" }
-            th(.class("w-[330px]")) { "Size" }
+      div(.class("trunk-columns")) {
+        for type in [TrunkSize.TrunkType.supply, .return] {
+          let trunks = ductSizes.trunks.filter { $0.type == type }.sorted {
+            $0.id.uuidString < $1.id.uuidString
           }
-        }
-        tbody {
-          for trunk in sortedTrunks {
-            TrunkRow(trunk: trunk, rooms: ductSizes.rooms)
+          section(.class("trunk-column \(type.rawValue)")) {
+            h3(.class("system-label \(type.rawValue)")) {
+              "\(type.rawValue.capitalized) · \(trunks.count)"
+            }
+            for trunk in trunks { TrunkRow(trunk: trunk, rooms: ductSizes.rooms) }
+            if trunks.isEmpty { p(.class("empty-state")) { "No \(type.rawValue) trunks yet." } }
           }
         }
       }
     }
-
   }
-
   struct TrunkRow: HTML, Sendable {
-
     @Environment(ProjectViewValue.$projectID) var projectID
-
     let trunk: DuctSizes.TrunkContainer
     let rooms: [DuctSizes.RoomContainer]
-
-    var body: some HTML<HTMLTag.tr> {
-      tr {
-        td {
-          div(.class("grid grid-cols-1 space-y-2")) {
-            if let name = trunk.name {
-              p(.class("w-fit")) { name }
-            }
-
-            Badge {
-              trunk.trunk.type.rawValue
-            }
-            .attributes(.class("badge-info"), when: trunk.type == .supply)
-            .attributes(.class("badge-error"), when: trunk.type == .return)
-          }
-        }
-        td {
-          div(.class("flex flex-wrap space-x-2 space-y-2")) {
-            for id in registerIDS {
-              Badge { id }
-            }
-          }
-        }
-        td {
-          Number(trunk.designCFM.value, digits: 0)
-        }
-        td {
-          Number(trunk.velocity)
-        }
-        td {
-          div(.class("grid grid-cols-3 gap-2 w-[330px]")) {
-            div(.class("label")) { "Calculated" }
-            div(.class("flex justify-center")) {
-              Badge(number: trunk.roundSize, digits: 1)
-            }
-            div {}
-
-            div(.class("label")) { "Final" }
-            div(.class("flex justify-center")) {
-              Badge(number: trunk.finalSize)
-                .attributes(.class("badge-secondary"))
-            }
-            div {}
-
-            div(.class("label")) { "Flex" }
-            div(.class("flex justify-center")) {
-              Badge(number: trunk.flexSize)
-                .attributes(.class("badge-primary"))
-            }
-            div {}
-
-            div(.class("label")) { "Rectangular" }
-            div(.class("flex justify-center")) {
-              if let width = trunk.width,
-                let height = trunk.ductSize.height
-              {
-                Badge {
-                  span { "\(width) x \(height)" }
-                }
-                .attributes(.class("badge-info"))
-              }
-            }
-            div(.class("flex justify-end items-end")) {
-              div(.class("join")) {
-                if trunk.width != nil {
-                  TrashButton("Delete \(trunk.name ?? "trunk")")
-                    .attributes(.class("join-item btn-ghost"))
-                    .attributes(
-                      .hx.delete(route: deleteRoute),
-                      .hx.target("closest tr"),
-                      .hx.swap(.outerHTML)
-                    )
-                }
-
-                EditButton(accessibilityLabel: "Edit \(trunk.name ?? "trunk")")
-                  .attributes(
-                    .class("join-item btn-ghost"),
-                    .showModal(id: TrunkSizeForm.id(trunk))
-                  )
-              }
-            }
-          }
-          TrunkSizeForm(trunk: trunk, rooms: rooms, dismiss: true)
-        }
+    private var associated: [DuctSizes.RoomContainer] {
+      rooms.filter { room in
+        trunk.rooms.contains { $0.id == room.roomID && $0.registers.contains(room.roomRegister) }
       }
     }
-
-    private var deleteRoute: SiteRoute.View {
-      .project(.detail(projectID, .ductSizing(.trunk(.delete(trunk.id)))))
+    var body: some HTML {
+      article(.class("trunk-card")) {
+        div(.class("trunk-card-main")) {
+          SVG(.wind)
+          div {
+            strong { trunk.name ?? "\(trunk.type.rawValue.capitalized) trunk" }
+            small { "\(associated.count) associated runs" }
+            b {
+              if let width = trunk.width, let height = trunk.ductSize.height {
+                "\(width) × \(height) in."
+              } else {
+                "\(trunk.finalSize)″ round"
+              }
+            }
+          }
+          span {
+            Number(trunk.designCFM.value, digits: 0)
+            small { "CFM" }
+          }
+          TrashButton("Delete \(trunk.name ?? "trunk")").attributes(
+            .class("btn-ghost"), .title("Delete trunk"),
+            .hx.delete(route: .project(.detail(projectID, .ductSizing(.trunk(.delete(trunk.id)))))),
+            .hx.confirm("Delete this trunk?"), .hx.target("body"), .hx.swap(.outerHTML))
+          EditButton(accessibilityLabel: "Edit \(trunk.name ?? "trunk")").attributes(
+            .class("btn-ghost"), .showModal(id: TrunkSizeForm.id(trunk)))
+        }
+        details {
+          summary { "Sizes and associated runs" }
+          p { "Round \(trunk.finalSize)″ · Flex \(trunk.flexSize)″ · \(trunk.velocity) FPM" }
+          p {
+            "Calculated diameter: "
+            Number(trunk.roundSize, digits: 2)
+            " in."
+          }
+          ul { for room in associated { li { room.label } } }
+        }
+        TrunkSizeForm(trunk: trunk, rooms: rooms, dismiss: true)
+      }
     }
-
-    private var registerIDS: [String] {
-      trunk.registerIDS(rooms: rooms)
-      // trunk.rooms.reduce(into: []) { array, room in
-      //   array = room.registers.reduce(into: array) { array, register in
-      //     if let room =
-      //       rooms
-      //       .first(where: { $0.roomID == room.id && $0.roomRegister == register })
-      //     {
-      //       array.append(room.roomName)
-      //     }
-      //   }
-      // }
-      // .sorted()
-    }
-
   }
 }

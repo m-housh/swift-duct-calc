@@ -10,16 +10,19 @@ struct ProjectFittingPathView: HTML, Sendable {
   let favorites: [Fitting.ID]
   var catalogReviewEnabled: Bool = false
   let carousels: [(Fitting.PathType, [GroupCarousel.Item])]
+  var initialType: Fitting.PathType = .supply
+  var duplicating = false
+  private var pathType: Fitting.PathType { baseline?.type ?? initialType }
   var root: String { "/projects/\(project.id)/effective-lengths" }
   var body: some HTML {
     link(.rel(.stylesheet), .href("/css/fitting-path.css?v=app-theme-1"))
     link(.rel(.stylesheet), .href("/css/picker-preference.css"))
     link(.rel(.stylesheet), .href("/css/fitting-favorites.css"))
-    link(.rel(.stylesheet), .href("/css/fitting-path-modal.css?v=2"))
+    link(.rel(.stylesheet), .href("/css/fitting-path-modal.css?v=close-button-3"))
     script(.src("/js/group-carousel.js"), .defer) {}
-    script(.src("/js/path-templates.js?v=path-revisions-3"), .defer) {}
+    script(.src("/js/path-templates.js?v=path-revisions-4"), .defer) {}
     script(.src("/js/template-modal.js?v=template-modal-2"), .defer) {}
-    script(.src("/js/fitting-path.js?v=template-path-type-3"), .defer) {}
+    script(.src("/js/fitting-path.js?v=duplicate-path-5"), .defer) {}
     EditorDialog(id: "fitting-path", titleID: "path-title") {
       section(.class("path-sheet")) {
         header {
@@ -28,13 +31,16 @@ struct ProjectFittingPathView: HTML, Sendable {
             h1(.id("path-title")) { "Fittings in this path" }
             p(.class("muted")) { "Build and review your path, one fitting at a time." }
           }
-          button(.type(.button), .id("close-path")) { "Cancel" }
+          button(
+            .type(.button), .id("close-path"),
+            .init(name: "aria-label", value: "Close path editor"), .title("Close")
+          ) { SVG(.close) }
         }
         div(.class("path-fields")) {
           label {
             "Path name"
             input(
-              .id("path-name"), .value(baseline?.name ?? ""), .required,
+              .id("path-name"), .value(duplicating ? "" : baseline?.name ?? ""), .required,
               .init(name: "maxlength", value: "200"))
           }
           label {
@@ -42,7 +48,7 @@ struct ProjectFittingPathView: HTML, Sendable {
             select(.id("path-type")) {
               for path in Fitting.PathType.allCases.reversed() {
                 option(.value(path.rawValue)) { path.rawValue.capitalized }.attributes(
-                  .selected, when: path == (baseline?.type ?? .supply))
+                  .selected, when: path == pathType)
               }
             }
           }
@@ -86,7 +92,7 @@ struct ProjectFittingPathView: HTML, Sendable {
           button(.type(.button), .id("quick-entry-open")) { "Quick reference entry" }
           a(
             .id("path-fitting-reference"),
-            .href(route: .fittingReference(.init(system: (baseline?.type ?? .supply).rawValue))),
+            .href(route: .fittingReference(.init(system: pathType.rawValue))),
             .target("_blank"), .rel("noopener"), .class("link-button")
           ) { "Open fitting reference ↗" }
         }
@@ -159,6 +165,7 @@ struct ProjectFittingPathView: HTML, Sendable {
     .attributes(
       .class("fitting-path"), .data("endpoint", value: root),
       .data("baseline", value: pickerJSON(baseline)), .data("rows", value: pickerJSON(rows)),
+      .data("duplicate", value: String(duplicating)),
       .data("favorites", value: pickerJSON(favorites)))
   }
 }
@@ -181,7 +188,7 @@ struct PathRowsView: HTML, Sendable {
         p { "Choose a drawing or enter a value from your reference." }
       }
     }
-    for (index, entry) in rows.enumerated() {
+    for (index, entry) in rows.sorted(by: { $0.row.groupID < $1.row.groupID }).enumerated() {
       let row = entry.row
       article(.class("path-row sheet-row"), .data("row-id", value: entry.id)) {
         span(.class("row-number")) { "\(index + 1)" }

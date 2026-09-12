@@ -37,6 +37,8 @@ jobs:
     - run: npm ci
     - run: npm run test:project-shortcuts
     - run: npm run test:fitting-shortcuts
+    - run: npm run test:project-workspace
+    - run: npm run test:login-form
     - run: npx playwright install --with-deps chromium
     - name: Start isolated accessibility test app
       run: |

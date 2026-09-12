@@ -626,15 +626,17 @@ extension Fitting {
   }
   public struct PathSave: Equatable, Sendable {
     public let baseline: EquivalentLength?
+    public let duplicate: Bool
     public let name: String
     public let pathType: PathType
     public let straightLengths: [Int]
     public let entries: [PathEntry]
     public init(
       baseline: EquivalentLength?, name: String, pathType: PathType, straightLengths: [Int],
-      entries: [PathEntry]
+      entries: [PathEntry], duplicate: Bool = false
     ) {
       self.baseline = baseline
+      self.duplicate = duplicate
       self.name = name
       self.pathType = pathType
       self.straightLengths = straightLengths

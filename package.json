@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test:login-form": "node --test scripts/check_login_form.cjs",
+    "test:project-workspace": "node --test scripts/check_project_workspace.cjs",
     "test:project-shortcuts": "node --test scripts/check_project_shortcuts.cjs",
     "test:fitting-shortcuts": "node --test scripts/check_fitting_shortcuts.cjs",
     "test:path-templates": "node scripts/check_swift_path_templates.cjs",

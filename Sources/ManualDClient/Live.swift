@@ -8,6 +8,9 @@ extension ManualDClient: DependencyKey {
       guard cfm > 0 else {
         throw ManualDError(message: "Design CFM should be greater than 0.")
       }
+      guard frictionRate.rawValue.isFinite, frictionRate.rawValue > 0 else {
+        throw ManualDError(message: "Design friction rate must be a positive, finite number.")
+      }
       let fr = pow(frictionRate.rawValue, 0.5)
       let ductulatorSize = pow(Double(cfm.rawValue) / (3.12 * fr), 0.38)
       let finalSize = try roundSize(ductulatorSize)

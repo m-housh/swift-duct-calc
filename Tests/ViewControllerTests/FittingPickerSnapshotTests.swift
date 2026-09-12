@@ -121,6 +121,11 @@ struct FittingPickerSnapshotTests {
           origin: "legacy", feet: 30)),
     ]
     assertSnapshot(of: pathEditor(baseline: baseline, rows: rows), as: .html)
+    var duplicate = pathEditor(baseline: baseline, rows: rows)
+    duplicate.duplicating = true
+    #expect(duplicate.render().contains("id=\"path-name\" value=\"\" required"))
+    #expect(duplicate.render().contains("data-duplicate=\"true\""))
+    assertSnapshot(of: duplicate, as: .html, named: "duplicate")
   }
 
   private func pathEditor(baseline: EquivalentLength? = nil, rows: [PathEditorRow] = [])

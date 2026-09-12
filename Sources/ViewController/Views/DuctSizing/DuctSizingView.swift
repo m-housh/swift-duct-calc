@@ -38,34 +38,30 @@ struct DuctSizingView: HTML, Sendable {
 
       }
 
-      if ductSizes.rooms.count != 0 {
-        div(
-          .class("table-scroll"), .tabindex(0), .role("region"),
-          .init(name: "aria-label", value: "Room duct sizes")
-        ) {
-          RoomsTable(rooms: sortedRooms)
-        }
-
-        PageTitleRow {
-          h2(.class("text-2xl font-bold")) { "Trunk / Runout Sizes" }
-
-          PlusButton("Add trunk or runout")
-            .attributes(
-              .class("btn-primary"),
-              .showModal(id: TrunkSizeForm.id())
-            )
-            .tooltip("Add trunk / runout")
-        }
-
-        if ductSizes.trunks.count > 0 {
-          div(
-            .class("table-scroll"), .tabindex(0), .role("region"),
-            .init(name: "aria-label", value: "Trunk duct sizes")
-          ) {
-            TrunkTable(ductSizes: ductSizes)
+      section(.class("project-panel trunk-panel")) {
+        div(.class("project-toolbar")) {
+          h2 { "Supply & return trunks" }
+          button(.type(.button), .class("btn btn-primary"), .showModal(id: TrunkSizeForm.id())) {
+            SVG(.circlePlus)
+            "Add trunk"
           }
         }
-
+        TrunkTable(ductSizes: ductSizes)
+      }
+      div(.class("project-toolbar")) {
+        h2 { "Branch schedule" }
+        label(.class("project-search")) {
+          span(.class("sr-only")) { "Find a register" }
+          input(
+            .type(.search), .class("input"), .id("register-search"), .placeholder("Find a room…"),
+            .init(name: "aria-keyshortcuts", value: "Control+K"))
+        }
+      }
+      div(
+        .class("table-scroll"), .tabindex(0), .role("region"),
+        .init(name: "aria-label", value: "Room duct sizes")
+      ) {
+        RoomsTable(rooms: sortedRooms)
       }
 
       TrunkSizeForm(rooms: sortedRooms, dismiss: true)

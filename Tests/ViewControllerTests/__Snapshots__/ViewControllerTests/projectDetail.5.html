@@ -17,11 +17,12 @@
     <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
     <script src="/js/htmx-download.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="/js/main.js?v=workspace-fixes-6"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="/css/output.css?v=navbar-reference-1">
     <link rel="stylesheet" href="/css/htmx.css">
-    <link rel="stylesheet" href="/css/accessibility.css?v=1">
+    <link rel="stylesheet" href="/css/accessibility.css?v=request-toast-2">
+    <link rel="stylesheet" href="/css/project-workspace.css?v=friction-errors-5">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
     <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
@@ -33,373 +34,418 @@
     <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
       <a class="skip-link" href="#main-content">Skip to content</a>
       <main id="main-content" tabindex="-1" class="flex flex-col min-h-screen min-w-full grow mb-auto">
-        <nav class="app-navbar" aria-label="Main">
-          <a class="app-brand" href="/projects">
-          <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
-          Duct Calc<span></span></a>
-          <div class="app-nav-actions">
-            <button type="button" class="btn" aria-label="Keyboard shortcuts" aria-haspopup="dialog" aria-controls="projectShortcuts" data-open-dialog="projectShortcuts"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 15h12"/></svg></button>
-            Fitting reference
-            Ductulator<a class="btn btn-outline btn-secondary" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span></span></a><a class="btn btn-outline btn-primary" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span></span></a>
-            <details class="account-menu">
-              <summary class="btn"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>Account</summary>
-              <ul class="menu bg-base-200 rounded-box shadow-lg">
-                <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
-                <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
-                <li>
-                  <form action="/logout" method="get">
-                    <button type="submit">Logout</button>
-                  </form>
-                </li>
-              </ul>
-            </details>
-          </div>
-        </nav>
-        <div class="project-layout">
-          <details class="project-navigation" open="">
-            <summary>Project navigation</summary>
-            <nav aria-label="Project">
-              <ul id="project-sidebar">
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000" title="Project, Ctrl+Alt+1" aria-keyshortcuts="Control+Alt+1"><span>Project</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+1</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/rooms" title="Rooms, Ctrl+Alt+2" aria-keyshortcuts="Control+Alt+2"><span>Rooms</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+2</span><span class="project-step-status">Complete</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/equipment" title="Equipment, Ctrl+Alt+3" aria-keyshortcuts="Control+Alt+3"><span>Equipment</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+3</span><span class="project-step-status">Complete</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths" title="T.E.L., Ctrl+Alt+4" aria-keyshortcuts="Control+Alt+4"><span>T.E.L.</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+4</span><span class="project-step-status">Complete</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/friction-rate" title="Friction Rate, Ctrl+Alt+5" aria-keyshortcuts="Control+Alt+5" aria-current="page"><span>Friction Rate</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+5</span><span class="project-step-status">Complete</span></a></li>
-                <li><a href="/projects/00000000-0000-0000-0000-000000000000/duct-sizing" title="Duct Sizes, Ctrl+Alt+6" aria-keyshortcuts="Control+Alt+6"><span>Duct Sizes</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+6</span></a></li>
-              </ul>
-            </nav>
-          </details>
-          <div class="project-content" id="project-content" tabindex="-1">
-            <div class="space-y-6">
-              <div class="page-title-row">
-                <div class="flex flex-wrap justify-between gap-4 w-full">
-                  <h1 class="text-3xl font-bold">Friction Rate</h1>
-                  <div class="space-y-2 justify-end font-bold text-lg">
-                    <div class="flex flex-wrap gap-3 justify-end mx-auto">
-                      <span>Friction Rate Design Value</span>
-                      <div class="badge badge-lg badge-info badge-lg font-bold"><span>0.06</span></div>
-                    </div>
-                    <div class="flex flex-wrap gap-3 justify-end mx-auto">
-                      <span>Available Static Pressure</span>
-                      <div class="badge badge-lg"><span>0.11</span></div>
-                    </div>
-                    <div class="flex flex-wrap gap-3 justify-end mx-auto">
-                      <span>Component Pressure Losses</span>
-                      <div class="badge badge-lg"><span>0.39</span></div>
-                    </div>
+        <div class="project-workspace" data-project-id="00000000-0000-0000-0000-000000000000">
+          <nav class="app-navbar" aria-label="Main">
+            <a class="app-brand" href="/projects">
+            <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
+            Duct Calc<span></span></a>
+            <div class="app-nav-actions">
+              <button type="button" class="btn" aria-label="Keyboard shortcuts" aria-haspopup="dialog" aria-controls="projectShortcuts" data-open-dialog="projectShortcuts"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 15h12"/></svg></button>
+              Fitting reference
+              Ductulator<a class="btn btn-outline btn-secondary" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span></span></a><a class="btn btn-outline btn-primary" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span></span></a>
+              <details class="account-menu">
+                <summary class="btn"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>Account</summary>
+                <ul class="menu bg-base-200 rounded-box shadow-lg">
+                  <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
+                  <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
+                  <li>
+                    <form action="/logout" method="get">
+                      <button type="submit">Logout</button>
+                    </form>
+                  </li>
+                </ul>
+              </details>
+            </div>
+          </nav>
+          <div class="project-layout">
+            <aside class="project-navigation">
+              <button type="button" class="project-switch" data-open-dialog="recentProjects" aria-label="Switch project"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span><strong>Testy McTestface</strong><small>1234 Sesame Street</small></span><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg></button>
+              <nav aria-label="Project">
+                <ul id="project-sidebar">
+                  <li><a href="/projects/00000000-0000-0000-0000-000000000000" title="Project, Ctrl+Alt+1" aria-keyshortcuts="Control+Alt+1"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span class="nav-label">Project</span></a></li>
+                  <li><a href="/projects/00000000-0000-0000-0000-000000000000/rooms" title="Rooms, Ctrl+Alt+2" aria-keyshortcuts="Control+Alt+2"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-door-closed-icon lucide-door-closed"><path d="M10 12h.01"/><path d="M18 20V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14"/><path d="M2 20h20"/></svg><span class="nav-label">Rooms</span><span class="project-step-status" aria-label="Complete">✓</span></a></li>
+                  <li><a href="/projects/00000000-0000-0000-0000-000000000000/equipment" title="Equipment, Ctrl+Alt+3" aria-keyshortcuts="Control+Alt+3"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fan-icon lucide-fan"><path d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.002l5.412 1.45a6.082 6.082 0 0 1 7.002-8.618l-1.45 5.412a6.082 6.082 0 0 1 8.618 7.002l-5.412-1.45a6.082 6.082 0 0 1-7.002 8.618l1.45-5.412Z"/><path d="M12 12v.01"/></svg><span class="nav-label">Equipment</span><span class="project-step-status" aria-label="Complete">✓</span></a></li>
+                  <li><a href="/projects/00000000-0000-0000-0000-000000000000/effective-lengths" title="Total effective length, Ctrl+Alt+4" aria-keyshortcuts="Control+Alt+4"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ruler-dimension-line-icon lucide-ruler-dimension-line"><path d="M10 15v-3"/><path d="M14 15v-3"/><path d="M18 15v-3"/><path d="M2 8V4"/><path d="M22 6H2"/><path d="M22 8V4"/><path d="M6 15v-3"/><rect x="2" y="12" width="20" height="8" rx="2"/></svg><span class="nav-label">Total effective length</span><span class="project-step-status" aria-label="Complete">✓</span></a></li>
+                  <li><a href="/projects/00000000-0000-0000-0000-000000000000/friction-rate" title="Friction rate, Ctrl+Alt+5" aria-keyshortcuts="Control+Alt+5" aria-current="page"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-function-icon lucide-square-function"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M9 17c2 0 2.8-1 2.8-2.8V10c0-2 1-3.3 3.2-3"/><path d="M9 11.2h5.7"/></svg><span class="nav-label">Friction rate</span><span class="project-step-status" aria-label="Complete">✓</span></a></li>
+                  <li><a href="/projects/00000000-0000-0000-0000-000000000000/duct-sizing" title="Duct sizes, Ctrl+Alt+6" aria-keyshortcuts="Control+Alt+6"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg><span class="nav-label">Duct sizes</span></a></li>
+                </ul>
+              </nav>
+              All projects<a class="all-projects-link" href="/projects"></a>
+            </aside>
+            <div class="project-content" id="project-content" tabindex="-1">
+              <div data-pressure-workspace="">
+                <div class="page-title-row">
+                  <div>
+                    <h1 class="text-3xl font-bold">Where the pressure goes</h1>
+                    <p class="muted">The width of each stream represents its share of blower static.</p>
                   </div>
-                  <div class="font-bold italic col-span-2 p-4">
-                    <div class="flex space-x-2 hidden">
-                      <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-                      <p>Must complete previous sections.</p>
-                    </div>
-                    <div class="flex space-x-2 hidden">
-                      <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-                      <p>No component pressures losses</p>
-                    </div>
-                    <div class="flex space-x-2 hidden">
-                      <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-                      <p class="block">
-                        Calculated friction rate is below 0.02. The fan may not deliver the required CFM.
-                        <br>
-                         * Increase the blower speed
-                        <br>
-                         * Increase the blower size
-                        <br>
-                         * Decrease the Total Effective Length (TEL)
-                      </p>
-                    </div>
-                    <div class="flex space-x-2 hidden">
-                      <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-                      <p class="block">
-                        Calculated friction rate is above 0.18. The fan may deliver too many CFM.
-                        <br>
-                         * Make sure all component pressure losses are accounted for
-                        <br>
-                         * Decrease the blower speed
-                        <br>
-                         * Decreae the blower size
-                        <br>
-                         * Increase the Total Effective Length (TEL)
-                      </p>
-                    </div>
-                  </div>
+                  <button type="button" class="btn btn-outline" data-open-dialog="componentLossForm"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add component</button>
                 </div>
+                <div class="design-metrics pressure-summary">
+                  <div class="design-metric"><span>Blower static</span><strong>0.50<small>in. w.c.</small></strong></div>
+                  <div class="design-metric"><span>Total effective length</span><strong>185<small>ft</small></strong></div>
+                  <div class="design-metric"><span>Design friction rate</span><strong>0.059<small>in. w.c. / 100 ft</small></strong></div>
+                </div>
+                <details class="project-panel pressure-canvas" open="" data-expansion="pressure-flow">
+                  <summary class="canvas-legend"><span class="network-toggle"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>PRESSURE FLOW</span><span>Select a component · All losses in the table below</span></summary>
+                  <div class="pressure-river" style="--river-height: 800px">
+                    <svg class="river-wires" viewBox="0 0 1000 490" preserveAspectRatio="none" aria-hidden="true"><path class="pressure-source-line" d="M100 50V445"/><path class="loss-stream active" data-loss-stream="0000000000000000000000000000000A" d="M115 245 C420 245,430 60.0,770 60.0" style="stroke-width:64.0"/><path class="loss-stream" data-loss-stream="0000000000000000000000000000000B" d="M115 245 C420 245,430 150.0,770 150.0" style="stroke-width:32.0"/><path class="loss-stream" data-loss-stream="0000000000000000000000000000000C" d="M115 245 C420 245,430 240.0,770 240.0" style="stroke-width:9.600000000000001"/><path class="loss-stream" data-loss-stream="0000000000000000000000000000000D" d="M115 245 C420 245,430 330.0,770 330.0" style="stroke-width:9.600000000000001"/><path class="loss-stream" data-loss-stream="0000000000000000000000000000000E" d="M115 245 C420 245,430 420.0,770 420.0" style="stroke-width:9.600000000000001"/></svg>
+                    <div class="pressure-source"><span>BLOWER STATIC</span><strong>0.50</strong><small>in. w.c.</small></div>
+                    <article class="river-endpoint" style="top: 12.244897959183673%">
+                      <button type="button" class="loss-card-select" data-select-loss="0000000000000000000000000000000A" aria-pressed="true"><span>evaporator-coil<small><span>40</span>% of blower static</small></span><strong>0.20</strong></button>
+                      <div class="loss-card-actions row-actions">
+                        <div class="row-actions">
+                          <button class="btn btn-ghost" type="button" aria-label="Edit evaporator-coil" title="Edit component" data-open-dialog="componentLossForm_0000000000000000000000000000000A">
+                            <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                          </button>
+                          <button type="button" class="btn btn-error btn-ghost" aria-label="Delete evaporator-coil" title="Delete component" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000A" hx-confirm="Delete this component loss?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                        </div>
+                      </div>
+                    </article>
+                    <article class="river-endpoint" style="top: 30.612244897959183%">
+                      <button type="button" class="loss-card-select" data-select-loss="0000000000000000000000000000000B" aria-pressed="false"><span>filter<small><span>20</span>% of blower static</small></span><strong>0.10</strong></button>
+                      <div class="loss-card-actions row-actions">
+                        <div class="row-actions">
+                          <button class="btn btn-ghost" type="button" aria-label="Edit filter" title="Edit component" data-open-dialog="componentLossForm_0000000000000000000000000000000B">
+                            <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                          </button>
+                          <button type="button" class="btn btn-error btn-ghost" aria-label="Delete filter" title="Delete component" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000B" hx-confirm="Delete this component loss?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                        </div>
+                      </div>
+                    </article>
+                    <article class="river-endpoint" style="top: 48.97959183673469%">
+                      <button type="button" class="loss-card-select" data-select-loss="0000000000000000000000000000000C" aria-pressed="false"><span>supply-outlet<small><span>6</span>% of blower static</small></span><strong>0.03</strong></button>
+                      <div class="loss-card-actions row-actions">
+                        <div class="row-actions">
+                          <button class="btn btn-ghost" type="button" aria-label="Edit supply-outlet" title="Edit component" data-open-dialog="componentLossForm_0000000000000000000000000000000C">
+                            <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                          </button>
+                          <button type="button" class="btn btn-error btn-ghost" aria-label="Delete supply-outlet" title="Delete component" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000C" hx-confirm="Delete this component loss?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                        </div>
+                      </div>
+                    </article>
+                    <article class="river-endpoint" style="top: 67.3469387755102%">
+                      <button type="button" class="loss-card-select" data-select-loss="0000000000000000000000000000000D" aria-pressed="false"><span>return-grille<small><span>6</span>% of blower static</small></span><strong>0.03</strong></button>
+                      <div class="loss-card-actions row-actions">
+                        <div class="row-actions">
+                          <button class="btn btn-ghost" type="button" aria-label="Edit return-grille" title="Edit component" data-open-dialog="componentLossForm_0000000000000000000000000000000D">
+                            <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                          </button>
+                          <button type="button" class="btn btn-error btn-ghost" aria-label="Delete return-grille" title="Delete component" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000D" hx-confirm="Delete this component loss?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                        </div>
+                      </div>
+                    </article>
+                    <article class="river-endpoint" style="top: 85.71428571428571%">
+                      <button type="button" class="loss-card-select" data-select-loss="0000000000000000000000000000000E" aria-pressed="false"><span>balancing-damper<small><span>6</span>% of blower static</small></span><strong>0.03</strong></button>
+                      <div class="loss-card-actions row-actions">
+                        <div class="row-actions">
+                          <button class="btn btn-ghost" type="button" aria-label="Edit balancing-damper" title="Edit component" data-open-dialog="componentLossForm_0000000000000000000000000000000E">
+                            <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                          </button>
+                          <button type="button" class="btn btn-error btn-ghost" aria-label="Delete balancing-damper" title="Delete component" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000E" hx-confirm="Delete this component loss?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </details>
+                <section class="project-panel loss-schedule">
+                  <div class="path-schedule-heading">
+                    <h2>Component losses<span>5</span></h2>
+                    Highest share first · Edit pressure losses inline<span class="muted"></span>
+                  </div>
+                  <div class="table-scroll" tabindex="0" role="region" aria-label="Component pressure losses">
+                    <table class="table project-table loss-table" data-selectable-table="loss">
+                      <thead>
+                        <tr>
+                          <th>Component</th>
+                          <th>Pressure loss · in. w.c.</th>
+                          <th>% of blower static</th>
+                          <th><span class="sr-only">Actions</span></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr data-record="0000000000000000000000000000000A">
+                          <td>
+                            <button type="button" class="row-select" aria-pressed="false">evaporator-coil</button>
+                          </td>
+                          <td>
+                            <form class="loss-inline-form" data-loss-form="0000000000000000000000000000000A" data-success-message="Component loss saved." hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000A" hx-target="body" hx-swap="outerHTML">
+                              <input type="hidden" name="name" value="evaporator-coil">
+                              <input type="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                              <input class="input" type="number" name="value" value="0.20" aria-label="Pressure loss for evaporator-coil" min="0.03" max="1" step="0.01" required>
+                              <button type="submit" class="btn btn-primary">Apply loss</button>
+                            </form>
+                          </td>
+                          <td><span>40</span>%</td>
+                          <td>
+                            <div class="row-actions">
+                              <button class="btn btn-ghost" type="button" aria-label="Edit evaporator-coil" title="Edit component" data-open-dialog="componentLossForm_0000000000000000000000000000000A">
+                                <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                              </button>
+                              <button type="button" class="btn btn-error btn-ghost" aria-label="Delete evaporator-coil" title="Delete component" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000A" hx-confirm="Delete this component loss?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr data-record="0000000000000000000000000000000B">
+                          <td>
+                            <button type="button" class="row-select" aria-pressed="false">filter</button>
+                          </td>
+                          <td>
+                            <form class="loss-inline-form" data-loss-form="0000000000000000000000000000000B" data-success-message="Component loss saved." hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000B" hx-target="body" hx-swap="outerHTML">
+                              <input type="hidden" name="name" value="filter">
+                              <input type="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                              <input class="input" type="number" name="value" value="0.10" aria-label="Pressure loss for filter" min="0.03" max="1" step="0.01" required>
+                              <button type="submit" class="btn btn-primary">Apply loss</button>
+                            </form>
+                          </td>
+                          <td><span>20</span>%</td>
+                          <td>
+                            <div class="row-actions">
+                              <button class="btn btn-ghost" type="button" aria-label="Edit filter" title="Edit component" data-open-dialog="componentLossForm_0000000000000000000000000000000B">
+                                <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                              </button>
+                              <button type="button" class="btn btn-error btn-ghost" aria-label="Delete filter" title="Delete component" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000B" hx-confirm="Delete this component loss?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr data-record="0000000000000000000000000000000C">
+                          <td>
+                            <button type="button" class="row-select" aria-pressed="false">supply-outlet</button>
+                          </td>
+                          <td>
+                            <form class="loss-inline-form" data-loss-form="0000000000000000000000000000000C" data-success-message="Component loss saved." hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000C" hx-target="body" hx-swap="outerHTML">
+                              <input type="hidden" name="name" value="supply-outlet">
+                              <input type="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                              <input class="input" type="number" name="value" value="0.03" aria-label="Pressure loss for supply-outlet" min="0.03" max="1" step="0.01" required>
+                              <button type="submit" class="btn btn-primary">Apply loss</button>
+                            </form>
+                          </td>
+                          <td><span>6</span>%</td>
+                          <td>
+                            <div class="row-actions">
+                              <button class="btn btn-ghost" type="button" aria-label="Edit supply-outlet" title="Edit component" data-open-dialog="componentLossForm_0000000000000000000000000000000C">
+                                <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                              </button>
+                              <button type="button" class="btn btn-error btn-ghost" aria-label="Delete supply-outlet" title="Delete component" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000C" hx-confirm="Delete this component loss?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr data-record="0000000000000000000000000000000D">
+                          <td>
+                            <button type="button" class="row-select" aria-pressed="false">return-grille</button>
+                          </td>
+                          <td>
+                            <form class="loss-inline-form" data-loss-form="0000000000000000000000000000000D" data-success-message="Component loss saved." hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000D" hx-target="body" hx-swap="outerHTML">
+                              <input type="hidden" name="name" value="return-grille">
+                              <input type="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                              <input class="input" type="number" name="value" value="0.03" aria-label="Pressure loss for return-grille" min="0.03" max="1" step="0.01" required>
+                              <button type="submit" class="btn btn-primary">Apply loss</button>
+                            </form>
+                          </td>
+                          <td><span>6</span>%</td>
+                          <td>
+                            <div class="row-actions">
+                              <button class="btn btn-ghost" type="button" aria-label="Edit return-grille" title="Edit component" data-open-dialog="componentLossForm_0000000000000000000000000000000D">
+                                <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                              </button>
+                              <button type="button" class="btn btn-error btn-ghost" aria-label="Delete return-grille" title="Delete component" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000D" hx-confirm="Delete this component loss?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr data-record="0000000000000000000000000000000E">
+                          <td>
+                            <button type="button" class="row-select" aria-pressed="false">balancing-damper</button>
+                          </td>
+                          <td>
+                            <form class="loss-inline-form" data-loss-form="0000000000000000000000000000000E" data-success-message="Component loss saved." hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000E" hx-target="body" hx-swap="outerHTML">
+                              <input type="hidden" name="name" value="balancing-damper">
+                              <input type="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                              <input class="input" type="number" name="value" value="0.03" aria-label="Pressure loss for balancing-damper" min="0.03" max="1" step="0.01" required>
+                              <button type="submit" class="btn btn-primary">Apply loss</button>
+                            </form>
+                          </td>
+                          <td><span>6</span>%</td>
+                          <td>
+                            <div class="row-actions">
+                              <button class="btn btn-ghost" type="button" aria-label="Edit balancing-damper" title="Edit component" data-open-dialog="componentLossForm_0000000000000000000000000000000E">
+                                <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                              </button>
+                              <button type="button" class="btn btn-error btn-ghost" aria-label="Delete balancing-damper" title="Delete component" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000E" hx-confirm="Delete this component loss?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+                <dialog id="componentLossForm" class="modal" aria-labelledby="componentLossForm-title">
+                  <div class="modal-box">
+                    <h2 id="componentLossForm-title" class="text-2xl font-bold mb-6 pe-10">Component Loss</h2>
+                    <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Component Loss" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                    <form data-success-message="Changes saved." class="space-y-4 p-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/component-loss" hx-target="body" hx-swap="outerHTML">
+                      <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                      Name<label class="input w-full"><span class="label"></span>
+                      <input name="name" type="text" value="" placeholder="Name" required autofocus>
+                      Value</label><label class="input w-full"><span class="label"></span>
+                      <input name="value" type="number" value="" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
+                      <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                    </form>
+                  </div>
+                </dialog>
+                <dialog id="componentLossForm_0000000000000000000000000000000A" class="modal" aria-labelledby="componentLossForm_0000000000000000000000000000000A-title">
+                  <div class="modal-box">
+                    <h2 id="componentLossForm_0000000000000000000000000000000A-title" class="text-2xl font-bold mb-6 pe-10">Component Loss</h2>
+                    <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Component Loss" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                    <form data-success-message="Changes saved." class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000A" hx-target="body" hx-swap="outerHTML">
+                      <input class="hidden" name="id" value="00000000-0000-0000-0000-00000000000A">
+                      <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                      Name<label class="input w-full"><span class="label"></span>
+                      <input name="name" type="text" value="evaporator-coil" placeholder="Name" required autofocus>
+                      Value</label><label class="input w-full"><span class="label"></span>
+                      <input name="value" type="number" value="0.2" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
+                      <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                    </form>
+                  </div>
+                </dialog>
+                <dialog id="componentLossForm_0000000000000000000000000000000B" class="modal" aria-labelledby="componentLossForm_0000000000000000000000000000000B-title">
+                  <div class="modal-box">
+                    <h2 id="componentLossForm_0000000000000000000000000000000B-title" class="text-2xl font-bold mb-6 pe-10">Component Loss</h2>
+                    <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Component Loss" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                    <form data-success-message="Changes saved." class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000B" hx-target="body" hx-swap="outerHTML">
+                      <input class="hidden" name="id" value="00000000-0000-0000-0000-00000000000B">
+                      <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                      Name<label class="input w-full"><span class="label"></span>
+                      <input name="name" type="text" value="filter" placeholder="Name" required autofocus>
+                      Value</label><label class="input w-full"><span class="label"></span>
+                      <input name="value" type="number" value="0.1" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
+                      <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                    </form>
+                  </div>
+                </dialog>
+                <dialog id="componentLossForm_0000000000000000000000000000000C" class="modal" aria-labelledby="componentLossForm_0000000000000000000000000000000C-title">
+                  <div class="modal-box">
+                    <h2 id="componentLossForm_0000000000000000000000000000000C-title" class="text-2xl font-bold mb-6 pe-10">Component Loss</h2>
+                    <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Component Loss" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                    <form data-success-message="Changes saved." class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000C" hx-target="body" hx-swap="outerHTML">
+                      <input class="hidden" name="id" value="00000000-0000-0000-0000-00000000000C">
+                      <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                      Name<label class="input w-full"><span class="label"></span>
+                      <input name="name" type="text" value="supply-outlet" placeholder="Name" required autofocus>
+                      Value</label><label class="input w-full"><span class="label"></span>
+                      <input name="value" type="number" value="0.03" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
+                      <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                    </form>
+                  </div>
+                </dialog>
+                <dialog id="componentLossForm_0000000000000000000000000000000D" class="modal" aria-labelledby="componentLossForm_0000000000000000000000000000000D-title">
+                  <div class="modal-box">
+                    <h2 id="componentLossForm_0000000000000000000000000000000D-title" class="text-2xl font-bold mb-6 pe-10">Component Loss</h2>
+                    <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Component Loss" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                    <form data-success-message="Changes saved." class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000D" hx-target="body" hx-swap="outerHTML">
+                      <input class="hidden" name="id" value="00000000-0000-0000-0000-00000000000D">
+                      <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                      Name<label class="input w-full"><span class="label"></span>
+                      <input name="name" type="text" value="return-grille" placeholder="Name" required autofocus>
+                      Value</label><label class="input w-full"><span class="label"></span>
+                      <input name="value" type="number" value="0.03" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
+                      <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                    </form>
+                  </div>
+                </dialog>
+                <dialog id="componentLossForm_0000000000000000000000000000000E" class="modal" aria-labelledby="componentLossForm_0000000000000000000000000000000E-title">
+                  <div class="modal-box">
+                    <h2 id="componentLossForm_0000000000000000000000000000000E-title" class="text-2xl font-bold mb-6 pe-10">Component Loss</h2>
+                    <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Component Loss" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                    <form data-success-message="Changes saved." class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000E" hx-target="body" hx-swap="outerHTML">
+                      <input class="hidden" name="id" value="00000000-0000-0000-0000-00000000000E">
+                      <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                      Name<label class="input w-full"><span class="label"></span>
+                      <input name="name" type="text" value="balancing-damper" placeholder="Name" required autofocus>
+                      Value</label><label class="input w-full"><span class="label"></span>
+                      <input name="value" type="number" value="0.03" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
+                      <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                    </form>
+                  </div>
+                </dialog>
               </div>
-              <div class="space-y-4">
-                <div class="flex flex-wrap items-center justify-between gap-3 px-4">
-                  <h2 class="text-2xl font-bold">Component Pressure Losses</h2>
-                  <div class="tooltip tooltip-left" data-tip="Add component loss">
-                    <button type="button" class="btn btn-primary text-2xl me-2" aria-label="Add component loss" data-open-dialog="componentLossForm"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></button>
-                  </div>
-                </div>
-                <div class="table-scroll" tabindex="0" role="region" aria-label="Component pressure losses">
-                  <table class="table table-zebra">
-                    <thead>
-                      <tr class="text-xl font-bold">
-                        <th>Name</th>
-                        <th>Value</th>
-                        <th><span class="sr-only">Actions</span></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr class="text-lg">
-                        <td>evaporator-coil</td>
-                        <td><span>0.2</span></td>
-                        <td>
-                          <div class="flex join items-end justify-end mx-auto">
-                            <div class="tooltip tooltip-bottom" data-tip="Delete">
-                              <button type="button" class="btn btn-error join-item btn-ghost" aria-label="Delete evaporator-coil" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000A" hx-target="body" hx-swap="outerHTML" hx-confirm="Are your sure?"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-                            </div>
-                            <div class="tooltip tooltip-bottom" data-tip="Edit">
-                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit evaporator-coil" data-open-dialog="componentLossForm_0000000000000000000000000000000A">
-                                <div class="flex">
-                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                  
-                                </div>
-                              </button>
-                            </div>
-                          </div>
-                          <dialog id="componentLossForm_0000000000000000000000000000000A" class="modal" aria-labelledby="componentLossForm_0000000000000000000000000000000A-title">
-                            <div class="modal-box">
-                              <h2 id="componentLossForm_0000000000000000000000000000000A-title" class="text-2xl font-bold mb-6 pe-10">Component Loss</h2>
-                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Component Loss" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                              <form data-success-message="Changes saved." class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000A" hx-target="body" hx-swap="outerHTML">
-                                <input class="hidden" name="id" value="00000000-0000-0000-0000-00000000000A">
-                                <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
-                                Name<label class="input w-full"><span class="label"></span>
-                                <input name="name" type="text" value="evaporator-coil" placeholder="Name" required autofocus>
-                                Value</label><label class="input w-full"><span class="label"></span>
-                                <input name="value" type="number" value="0.2" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
-                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                              </form>
-                            </div>
-                          </dialog>
-                        </td>
-                      </tr>
-                      <tr class="text-lg">
-                        <td>filter</td>
-                        <td><span>0.1</span></td>
-                        <td>
-                          <div class="flex join items-end justify-end mx-auto">
-                            <div class="tooltip tooltip-bottom" data-tip="Delete">
-                              <button type="button" class="btn btn-error join-item btn-ghost" aria-label="Delete filter" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000B" hx-target="body" hx-swap="outerHTML" hx-confirm="Are your sure?"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-                            </div>
-                            <div class="tooltip tooltip-bottom" data-tip="Edit">
-                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit filter" data-open-dialog="componentLossForm_0000000000000000000000000000000B">
-                                <div class="flex">
-                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                  
-                                </div>
-                              </button>
-                            </div>
-                          </div>
-                          <dialog id="componentLossForm_0000000000000000000000000000000B" class="modal" aria-labelledby="componentLossForm_0000000000000000000000000000000B-title">
-                            <div class="modal-box">
-                              <h2 id="componentLossForm_0000000000000000000000000000000B-title" class="text-2xl font-bold mb-6 pe-10">Component Loss</h2>
-                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Component Loss" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                              <form data-success-message="Changes saved." class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000B" hx-target="body" hx-swap="outerHTML">
-                                <input class="hidden" name="id" value="00000000-0000-0000-0000-00000000000B">
-                                <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
-                                Name<label class="input w-full"><span class="label"></span>
-                                <input name="name" type="text" value="filter" placeholder="Name" required autofocus>
-                                Value</label><label class="input w-full"><span class="label"></span>
-                                <input name="value" type="number" value="0.1" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
-                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                              </form>
-                            </div>
-                          </dialog>
-                        </td>
-                      </tr>
-                      <tr class="text-lg">
-                        <td>supply-outlet</td>
-                        <td><span>0.03</span></td>
-                        <td>
-                          <div class="flex join items-end justify-end mx-auto">
-                            <div class="tooltip tooltip-bottom" data-tip="Delete">
-                              <button type="button" class="btn btn-error join-item btn-ghost" aria-label="Delete supply-outlet" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000C" hx-target="body" hx-swap="outerHTML" hx-confirm="Are your sure?"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-                            </div>
-                            <div class="tooltip tooltip-bottom" data-tip="Edit">
-                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit supply-outlet" data-open-dialog="componentLossForm_0000000000000000000000000000000C">
-                                <div class="flex">
-                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                  
-                                </div>
-                              </button>
-                            </div>
-                          </div>
-                          <dialog id="componentLossForm_0000000000000000000000000000000C" class="modal" aria-labelledby="componentLossForm_0000000000000000000000000000000C-title">
-                            <div class="modal-box">
-                              <h2 id="componentLossForm_0000000000000000000000000000000C-title" class="text-2xl font-bold mb-6 pe-10">Component Loss</h2>
-                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Component Loss" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                              <form data-success-message="Changes saved." class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000C" hx-target="body" hx-swap="outerHTML">
-                                <input class="hidden" name="id" value="00000000-0000-0000-0000-00000000000C">
-                                <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
-                                Name<label class="input w-full"><span class="label"></span>
-                                <input name="name" type="text" value="supply-outlet" placeholder="Name" required autofocus>
-                                Value</label><label class="input w-full"><span class="label"></span>
-                                <input name="value" type="number" value="0.03" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
-                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                              </form>
-                            </div>
-                          </dialog>
-                        </td>
-                      </tr>
-                      <tr class="text-lg">
-                        <td>return-grille</td>
-                        <td><span>0.03</span></td>
-                        <td>
-                          <div class="flex join items-end justify-end mx-auto">
-                            <div class="tooltip tooltip-bottom" data-tip="Delete">
-                              <button type="button" class="btn btn-error join-item btn-ghost" aria-label="Delete return-grille" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000D" hx-target="body" hx-swap="outerHTML" hx-confirm="Are your sure?"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-                            </div>
-                            <div class="tooltip tooltip-bottom" data-tip="Edit">
-                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit return-grille" data-open-dialog="componentLossForm_0000000000000000000000000000000D">
-                                <div class="flex">
-                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                  
-                                </div>
-                              </button>
-                            </div>
-                          </div>
-                          <dialog id="componentLossForm_0000000000000000000000000000000D" class="modal" aria-labelledby="componentLossForm_0000000000000000000000000000000D-title">
-                            <div class="modal-box">
-                              <h2 id="componentLossForm_0000000000000000000000000000000D-title" class="text-2xl font-bold mb-6 pe-10">Component Loss</h2>
-                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Component Loss" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                              <form data-success-message="Changes saved." class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000D" hx-target="body" hx-swap="outerHTML">
-                                <input class="hidden" name="id" value="00000000-0000-0000-0000-00000000000D">
-                                <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
-                                Name<label class="input w-full"><span class="label"></span>
-                                <input name="name" type="text" value="return-grille" placeholder="Name" required autofocus>
-                                Value</label><label class="input w-full"><span class="label"></span>
-                                <input name="value" type="number" value="0.03" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
-                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                              </form>
-                            </div>
-                          </dialog>
-                        </td>
-                      </tr>
-                      <tr class="text-lg">
-                        <td>balancing-damper</td>
-                        <td><span>0.03</span></td>
-                        <td>
-                          <div class="flex join items-end justify-end mx-auto">
-                            <div class="tooltip tooltip-bottom" data-tip="Delete">
-                              <button type="button" class="btn btn-error join-item btn-ghost" aria-label="Delete balancing-damper" hx-delete="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000E" hx-target="body" hx-swap="outerHTML" hx-confirm="Are your sure?"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-                            </div>
-                            <div class="tooltip tooltip-bottom" data-tip="Edit">
-                              <button class="btn join-item btn-ghost" type="button" aria-label="Edit balancing-damper" data-open-dialog="componentLossForm_0000000000000000000000000000000E">
-                                <div class="flex">
-                                  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
-                                  
-                                </div>
-                              </button>
-                            </div>
-                          </div>
-                          <dialog id="componentLossForm_0000000000000000000000000000000E" class="modal" aria-labelledby="componentLossForm_0000000000000000000000000000000E-title">
-                            <div class="modal-box">
-                              <h2 id="componentLossForm_0000000000000000000000000000000E-title" class="text-2xl font-bold mb-6 pe-10">Component Loss</h2>
-                              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Component Loss" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                              <form data-success-message="Changes saved." class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000E" hx-target="body" hx-swap="outerHTML">
-                                <input class="hidden" name="id" value="00000000-0000-0000-0000-00000000000E">
-                                <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
-                                Name<label class="input w-full"><span class="label"></span>
-                                <input name="name" type="text" value="balancing-damper" placeholder="Name" required autofocus>
-                                Value</label><label class="input w-full"><span class="label"></span>
-                                <input name="value" type="number" value="0.03" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
-                                <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                              </form>
-                            </div>
-                          </dialog>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <dialog id="componentLossForm" class="modal" aria-labelledby="componentLossForm-title">
-                <div class="modal-box">
-                  <h2 id="componentLossForm-title" class="text-2xl font-bold mb-6 pe-10">Component Loss</h2>
-                  <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Component Loss" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                  <form data-success-message="Changes saved." class="space-y-4 p-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/component-loss" hx-target="body" hx-swap="outerHTML">
-                    <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
-                    Name<label class="input w-full"><span class="label"></span>
-                    <input name="name" type="text" value="" placeholder="Name" required autofocus>
-                    Value</label><label class="input w-full"><span class="label"></span>
-                    <input name="value" type="number" value="" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
-                    <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                  </form>
-                </div>
-              </dialog>
             </div>
           </div>
+          <dialog id="recentProjects" class="modal" aria-labelledby="recentProjects-title">
+            <div class="modal-box">
+              <h2 id="recentProjects-title" class="text-2xl font-bold mb-6 pe-10">Switch project</h2>
+              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Switch project" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+              <p class="muted">Recently opened</p>
+              <div class="recent-projects"><a class="recent-project" href="/projects/00000000-0000-0000-0000-000000000000" aria-current="page"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span><strong>Testy McTestface</strong><small>1234 Sesame Street · Monroe, OH</small></span><span class="current-project">Current ✓</span></a></div>
+              View all projects<a class="btn btn-outline mt-4" href="/projects"></a>
+            </div>
+          </dialog>
+          <dialog id="projectShortcuts" class="modal" aria-labelledby="projectShortcuts-title">
+            <div class="modal-box">
+              <h2 id="projectShortcuts-title" class="text-2xl font-bold mb-6 pe-10">Keyboard shortcuts</h2>
+              <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Keyboard shortcuts" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+              <p class="text-sm mt-2">Hold Ctrl+Alt and press a key below.</p>
+              <table class="table table-sm mt-4">
+                <caption class="text-left font-bold p-2">Project sections</caption>
+                <tbody>
+                  <tr>
+                    <th scope="row">Project</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">1</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Rooms</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">2</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Equipment</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">3</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Total effective length</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">4</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Friction rate</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">5</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Duct sizes</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">6</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Next room row</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">J</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Previous room row</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">K</kbd></td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="table table-sm mt-4">
+                <caption class="text-left font-bold p-2">App navigation</caption>
+                <tbody>
+                  <tr>
+                    <th scope="row">Ductulator</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">D</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Fitting reference</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">F</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Projects</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">P</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Profile</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">U</kbd></td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="text-sm mt-2">Ctrl+K focuses room or register search. Ductulator and fitting reference open in new tabs. Shortcuts pause while editing a field or when a dialog is open.</p>
+            </div>
+          </dialog>
         </div>
-        <dialog id="projectShortcuts" class="modal" aria-labelledby="projectShortcuts-title">
-          <div class="modal-box">
-            <h2 id="projectShortcuts-title" class="text-2xl font-bold mb-6 pe-10">Keyboard shortcuts</h2>
-            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Keyboard shortcuts" onclick="this.closest('dialog').close()">  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-            <p class="text-sm mt-2">Hold Ctrl+Alt and press a key below.</p>
-            <table class="table table-sm mt-4">
-              <caption class="text-left font-bold p-2">Project sections</caption>
-              <tbody>
-                <tr>
-                  <th scope="row">Project</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">1</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Rooms</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">2</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Equipment</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">3</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">T.E.L.</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">4</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Friction Rate</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">5</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Duct Sizes</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">6</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Next section</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">J</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Previous section</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">K</kbd></td>
-                </tr>
-              </tbody>
-            </table>
-            <table class="table table-sm mt-4">
-              <caption class="text-left font-bold p-2">App navigation</caption>
-              <tbody>
-                <tr>
-                  <th scope="row">Ductulator</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">D</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Fitting reference</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">F</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Projects</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">P</kbd></td>
-                </tr>
-                <tr>
-                  <th scope="row">Profile</th>
-                  <td class="text-right"><kbd class="kbd kbd-sm">U</kbd></td>
-                </tr>
-              </tbody>
-            </table>
-            <p class="text-sm mt-2">Ductulator and fitting reference open in new tabs. Shortcuts pause while editing a field or when a dialog is open.</p>
-          </div>
-        </dialog>
       </main>
       <div id="app-status" class="sr-only" role="status" aria-atomic="true"></div>
       <div id="app-error" class="request-error" role="alert"></div>
@@ -408,7 +454,7 @@
 bg-base-300 text-base-content p-4">
           <div class="grid-flow-row items-center">
             <div class="flex mx-auto">
-              <a class="btn btn-ghost" href="mailto:support@ductcalc.pro">  <svg aria-hidden="true" focusable="false" class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <a class="btn btn-ghost" href="mailto:support@ductcalc.pro"><svg aria-hidden="true" focusable="false" class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g
                   stroke-linejoin="round"
                   stroke-linecap="round"

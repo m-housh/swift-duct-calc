@@ -6,7 +6,11 @@ import Foundation
 import Testing
 import VaporTesting
 
-@Suite(.dependencies { $0.date.now = Date(timeIntervalSince1970: 1_709_251_200) })
+@Suite(
+  .dependencies {
+    $0.date.now = Date(timeIntervalSince1970: 1_709_251_200)
+    $0.uuid = .incrementing
+  })
 struct LoginRouteTests {
   @Test(arguments: [false, true])
   func loginRespectsSession(isHtmxRequest: Bool) async throws {

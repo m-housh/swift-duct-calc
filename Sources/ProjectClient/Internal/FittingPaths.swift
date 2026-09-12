@@ -24,15 +24,14 @@ func persistFittingPath(userID: User.ID, projectID: Project.ID, request: Fitting
       request.name, straightLengths: request.straightLengths, rowCount: request.entries.count)
   } catch let error as ValidationError { throw FittingPathError(error.message) }
   var saved: EquivalentLength?
+  guard !request.duplicate || request.baseline != nil else {
+    throw FittingPathError("Choose a saved path to duplicate.")
+  }
   if let baseline = request.baseline {
     guard baseline.projectID == projectID,
       let current = try await database.equivalentLengths.get(baseline.id),
       current.projectID == projectID
     else { throw FittingPathError("Path not found.") }
-    guard current.templateSnapshot == nil else {
-      throw FittingPathError(
-        "Open this path in the guided editor to keep its sections and fitting details.")
-    }
     guard current == baseline else {
       throw FittingPathError(
         "This path changed since you opened it. Reload it before saving; your draft has been kept.")
@@ -47,7 +46,7 @@ func persistFittingPath(userID: User.ID, projectID: Project.ID, request: Fitting
     guard let saved, saved.groups.indices.contains(index), usedSaved.insert(index).inserted else {
       throw FittingPathError("The edited row does not identify an existing fitting.")
     }
-    return saved.groups[index].fitting?.id ?? uuid()
+    return saved.groups[index].fitting?.id ?? saved.groups[index].rowID ?? uuid()
   }
   for (index, entry) in request.entries.enumerated() {
     let group: EquivalentLength.FittingGroup
@@ -64,7 +63,10 @@ func persistFittingPath(userID: User.ID, projectID: Project.ID, request: Fitting
       }
       group = .init(
         group: old.group, letter: old.letter, value: old.value, quantity: q,
-        fitting: old.fitting ?? .init(id: uuid(), origin: .legacy, name: "Saved reference entry"))
+        fitting: old.fitting
+          ?? (old.calculation == nil
+            ? .init(id: uuid(), origin: .legacy, name: "Saved reference entry") : nil),
+        rowID: old.rowID, stepID: old.stepID, calculation: old.calculation)
     case .reference(let code, let feet, let q, let replacing):
       guard feet.isFinite, feet > 0,
         case .recognized(let reference) = try await client.resolveReference(
@@ -119,7 +121,7 @@ func persistFittingPath(userID: User.ID, projectID: Project.ID, request: Fitting
   do { try PathValidation.validate(groups) } catch let error as ValidationError {
     throw FittingPathError(error.message)
   }
-  if let saved {
+  if let saved, !request.duplicate {
     return try await database.equivalentLengths.updateIfUnchanged(
       saved,
       .init(
@@ -129,5 +131,6 @@ func persistFittingPath(userID: User.ID, projectID: Project.ID, request: Fitting
   return try await database.equivalentLengths.create(
     .init(
       projectID: projectID, name: name, type: request.pathType,
-      straightLengths: request.straightLengths, groups: groups))
+      straightLengths: request.straightLengths, groups: groups,
+      templateSnapshot: request.duplicate ? saved?.templateSnapshot : nil))
 }

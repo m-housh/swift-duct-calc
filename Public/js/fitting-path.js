@@ -7,6 +7,8 @@
     const $ = selector => root.querySelector(selector);
     const baseline = JSON.parse(root.dataset.baseline), endpoint = root.dataset.endpoint;
     let entries = JSON.parse(root.dataset.rows), favorites = new Set(JSON.parse(root.dataset.favorites));
+    const sortEntries = () => entries.sort((a, b) => a.row.groupID - b.row.groupID);
+    sortEntries();
     let editing = null, dirty = false, busy = false, browserRequest = 0, rowsRequest = 0, editRequest = 0;
     const requests = new WeakMap(), timers = new WeakMap(), favoriteRequests = new Set();
     let favoriteTemplates = new Map();
@@ -61,6 +63,7 @@
       });
     }
     async function renderRows() {
+      sortEntries();
       updateTotals(); const current = ++rowsRequest;
       try {
         const html = await post('/fittings/rows', entries);
@@ -292,7 +295,7 @@
         if (!$('#path-name').reportValidity()) return;
         busy = true; button.disabled = true; status('Saving path…'); root.inert = true;
         try {
-          const html = await post(`${endpoint}/save-path`, { baseline, name: $('#path-name').value, pathType: pathType(), straightLengths, entries });
+          const html = await post(`${endpoint}/save-path`, { baseline, duplicate: root.dataset.duplicate === 'true', name: $('#path-name').value, pathType: pathType(), straightLengths, entries });
           const template = document.createElement('template'); template.innerHTML = html;
           const saved = template.content.querySelector('[data-saved-path]');
           if (saved) { dirty = false; location.assign(endpoint); }

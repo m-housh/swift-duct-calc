@@ -63,6 +63,25 @@ public struct PathTemplateConflictError: Error, Sendable {
 }
 
 extension PathTemplate {
+  struct AddDefaults: AsyncMigration {
+    let name = "AddDefaultPathTemplates"
+
+    func prepare(on database: any Database) async throws {
+      let dependencies = withEscapedDependencies { $0 }
+      try await database.transaction { transaction in
+        try await dependencies.yield {
+          for user in try await UserModel.query(on: transaction).all() {
+            try await PathTemplateModel.addMissingDefaults(for: user.requireID(), on: transaction)
+          }
+        }
+      }
+    }
+
+    func revert(on database: any Database) async throws {
+      // These are user-owned templates after creation; rollback must preserve any edits and paths.
+    }
+  }
+
   struct Migrate: AsyncMigration {
     let name = "CreatePathTemplate"
 
@@ -105,6 +124,22 @@ final class PathTemplateModel: Model, @unchecked Sendable {
     -> QueryBuilder<PathTemplateModel>
   {
     query(on: database).filter(\.$id == id).filter(\.$user.$id == userID)
+  }
+
+  static func addMissingDefaults(for userID: User.ID, on database: any Database) async throws {
+    let saved = try await query(on: database).filter(\.$user.$id == userID).all()
+    let types = try Set(
+      saved.map {
+        try JSONDecoder().decode(PathTemplate.Configuration.self, from: $0.configuration).type
+      })
+    @Dependency(\.uuid) var uuid
+    for configuration in PathTemplate.defaultConfigurations()
+    where !types.contains(configuration.type) {
+      try configuration.validate()
+      let template = try PathTemplateModel(
+        userID: userID, revision: uuid(), configuration: JSONEncoder().encode(configuration))
+      try await template.save(on: database)
+    }
   }
 
   func toDTO() throws -> PathTemplate {

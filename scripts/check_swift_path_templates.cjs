@@ -178,7 +178,27 @@ async function mount(html, http) {
   const projectID = projectHtml.match(/\/projects\/([A-Fa-f0-9-]{36})/)?.[1];
   assert(projectID, 'New project should be linked');
   const base = `/projects/${projectID}/effective-lengths/guided`;
-  const start = await http(`${base}/starter/supply`, { method: 'POST' });
+  const telDOM = new JSDOM(await (await http(`/projects/${projectID}/effective-lengths`)).text());
+  const templateLink = [...telDOM.window.document.querySelectorAll('a')]
+    .find(link => link.textContent.trim() === 'Manage templates');
+  assert(templateLink, 'TEL must provide a Manage templates action');
+  assert.equal(templateLink.getAttribute('href'), `/path-templates?project=${projectID}`);
+  assert.equal(telDOM.window.document.querySelector(`a[href="${base}"]`), null);
+  const entryURL = telDOM.window.document.querySelector('a[aria-label="Add path"]').getAttribute('href');
+  telDOM.window.close();
+  const entryDOM = new JSDOM(await (await http(entryURL)).text());
+  const chooserURL = entryDOM.window.document.querySelector('#fitting-path button[data-template-url]')?.dataset.templateUrl;
+  assert.equal(chooserURL, base, 'Add path must provide the template workflow');
+  entryDOM.window.close();
+  const chooserDOM = new JSDOM(await (await http(chooserURL)).text());
+  const supplyLink = chooserDOM.window.document.querySelector('[data-template-type="supply"] .card a[href*="/start/"]');
+  const returnLink = chooserDOM.window.document.querySelector('[data-template-type="return"] .card a[href*="/start/"]');
+  assert(supplyLink, 'New accounts must have a saved default supply template');
+  assert(returnLink, 'New accounts must have a saved default return template');
+  assert.equal(chooserDOM.window.document.querySelector('form[action*="/starter/"]'), null);
+  const returnURL = returnLink.getAttribute('href');
+  const start = await http(supplyLink.getAttribute('href'));
+  chooserDOM.window.close();
   const html = await start.text(),
     data = payload(html);
   assert(
@@ -280,20 +300,25 @@ async function mount(html, http) {
   const list = await (await http(ui.redirects.at(-1))).text();
   const listDocument = new JSDOM(list).window.document;
   assert.equal(listDocument.querySelector(`a[href="${base}"]`), null);
-  const addURL = listDocument.querySelector('a[aria-label="Add equivalent length"]').getAttribute('href');
+  const addURL = listDocument.querySelector('a[aria-label="Add path"]').getAttribute('href');
   const addPage = await (await http(addURL)).text();
   assert.equal(new JSDOM(addPage).window.document.querySelector(`#fitting-path button[data-template-url="${base}"]`)?.textContent, 'From template');
-  const editURL = list.match(/\/projects\/[^" ]+\/guided\/edit\/[A-Fa-f0-9-]{36}/)?.[0];
-  assert(editURL, 'Saved guided path should reopen in the guided editor');
+  const editURL = list.match(/\/projects\/[^" ]+\/editor\?id=[A-Fa-f0-9-]{36}/)?.[0];
+  assert(editURL, 'Saved template path should reopen in the fitting editor');
   assert.equal(
     new JSDOM(list).window.document
-      .querySelector(`a[href="${editURL}"]`)
+      .querySelector(`tr a[href="${editURL}"]`)
       .closest('tr')
       .querySelector('dialog'),
     null,
     'Guided paths should not render an unused manual editor'
   );
-  const saved = payload(await (await http(editURL)).text()).path;
+  const savedEditor = new JSDOM(await (await http(editURL)).text()).window.document.querySelector('#fitting-path');
+  const saved = JSON.parse(savedEditor.dataset.baseline);
+  assert.equal(savedEditor.querySelector('#path-name').value, saved.name);
+  assert.equal(savedEditor.querySelector('#path-type').value, saved.type);
+  assert.equal(savedEditor.querySelector('#path-straight').value, saved.straightLengths.join(', '));
+  assert.equal(JSON.parse(savedEditor.dataset.rows).length, saved.groups.length);
   assert.equal(
     saved.groups.reduce((sum, g) => sum + g.value * g.quantity, 35),
     180
@@ -304,7 +329,7 @@ async function mount(html, http) {
   );
   assert.equal(saved.templateSnapshot.configuration.steps.length, 5);
 
-  const returnHtml = await (await http(`${base}/starter/return`, { method: 'POST' })).text();
+  const returnHtml = await (await http(returnURL)).text();
   const returns = await mount(returnHtml, http);
   await returns.click('choose', '[data-id="5A-round"]');
   await returns.click('choose', '[data-id="6F"]');
@@ -351,8 +376,19 @@ async function mount(html, http) {
   assert.equal(updated.configuration.steps[4].group, 3);
   assert.equal(updated.configuration.steps[4].behavior, 'chooseMultiple');
   assert.equal(updated.configuration.steps[4].allowsSkipping, true);
-  const unchanged = payload(await (await http(editURL)).text()).path;
+  const manualEditor = new JSDOM(await (await http(editURL)).text()).window.document.querySelector('#fitting-path');
+  const unchanged = JSON.parse(manualEditor.dataset.baseline);
   assert.deepEqual(unchanged, saved, 'Template edits must not affect saved paths');
+  const entries = JSON.parse(manualEditor.dataset.rows);
+  const revisedEntries = entries.slice(1).map((entry, index) => ({...entry, quantity: index === 0 ? 2 : entry.quantity}));
+  const saveResponse = await http(`/projects/${projectID}/effective-lengths/save-path`, form({payload: JSON.stringify({baseline: saved, name: saved.name, pathType: saved.type, straightLengths: saved.straightLengths, entries: revisedEntries})}));
+  assert((await saveResponse.text()).includes('data-saved-path'));
+  const reopened = new JSDOM(await (await http(editURL)).text()).window.document.querySelector('#fitting-path');
+  const revisedPath = JSON.parse(reopened.dataset.baseline);
+  assert.equal(revisedPath.groups.length, saved.groups.length - 1);
+  assert.equal(revisedPath.groups[0].quantity, 2);
+  assert.deepEqual(revisedPath.templateSnapshot, saved.templateSnapshot);
+  assert.deepEqual(payload(await (await http(`/path-templates/${data.template.id}`)).text()).template, updated.template);
   await stale.set('[data-config="name"]', 'Stale overwrite');
   await stale.click('save-template');
   assert(stale.root.textContent.includes('changed in another tab'));

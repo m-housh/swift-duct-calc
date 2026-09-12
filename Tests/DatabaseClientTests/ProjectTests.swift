@@ -282,3 +282,60 @@ struct ProjectTests {
     }
   }
 }
+
+extension ProjectTests {
+  @Test func recentsAreOwnedBoundedAndDoNotModifyDesigns() async throws {
+    try await withTestUser { user in
+      @Dependency(\.database) var database
+      var projects: [Project] = []
+      for index in 0..<7 {
+        projects.append(
+          try await database.projects.create(
+            user.id,
+            .init(
+              name: "House \(index)", streetAddress: "\(index) Cedar Lane", city: "Loveland",
+              state: "OH", zipCode: "45140")))
+      }
+      for (index, project) in projects.enumerated() {
+        try await database.projects.recordOpen(
+          project.id, user.id, Date(timeIntervalSince1970: Double(100 + index)))
+      }
+      let recent = try await database.projects.recent(user.id)
+      #expect(recent.map(\.id) == projects.reversed().prefix(5).map(\.id))
+      #expect(try await database.projects.get(projects[0].id) == projects[0])
+      let other = try await database.users.create(
+        .init(email: "other@example.com", password: "super-secret", confirmPassword: "super-secret")
+      )
+      try await database.projects.recordOpen(
+        projects[0].id, other.id, Date(timeIntervalSince1970: 999))
+      #expect(try await database.projects.recent(other.id).isEmpty)
+      #expect(try await database.projects.recent(user.id).map(\.id) == recent.map(\.id))
+      try await database.projects.delete(projects[6].id)
+      #expect(try await !database.projects.recent(user.id).contains { $0.id == projects[6].id })
+    }
+  }
+
+  @Test func searchMatchesAcrossPagesWithinTheAccount() async throws {
+    try await withTestUser { user in
+      @Dependency(\.database) var database
+      for index in 0..<28 {
+        _ = try await database.projects.create(
+          user.id,
+          .init(
+            name: "House \(index)", streetAddress: "\(index) Cedar Lane",
+            city: index == 0 ? "Uniqueville" : "Loveland", state: "OH", zipCode: "45140"))
+      }
+      let first = try await database.projects.search(user.id, "Cedar", .init(page: 1, per: 25))
+      let second = try await database.projects.search(user.id, "Cedar", .init(page: 2, per: 25))
+      #expect(first.metadata.total == 28 && first.items.count == 25 && second.items.count == 3)
+      #expect(Set(first.items.map(\.id)).isDisjoint(with: second.items.map(\.id)))
+      #expect(try await database.projects.search(user.id, "Uniqueville", .first).items.count == 1)
+      #expect(try await database.projects.search(user.id, "  house 27  ", .first).items.count == 1)
+      #expect(try await database.projects.search(user.id, "Nothing", .first).items.isEmpty)
+      let other = try await database.users.create(
+        .init(email: "other@example.com", password: "super-secret", confirmPassword: "super-secret")
+      )
+      #expect(try await database.projects.search(other.id, "Cedar", .first).items.isEmpty)
+    }
+  }
+}

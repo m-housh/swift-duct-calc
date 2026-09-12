@@ -10,10 +10,10 @@ Open Keyboard shortcuts in the project navigation to see the project and app sho
 Close the dialog with Close or Escape.
 
 Use Ctrl+Alt+1 through Ctrl+Alt+6 to open Project, Rooms, Equipment, T.E.L.,
-Friction Rate, and Duct Sizes in sidebar order. Ctrl+Alt+J opens the next section;
-Ctrl+Alt+K opens the previous section. Navigation stops at the first and last
-sections. The sidebar displays the shortcuts beside their sections.
-These shortcuts are fixed and work with the sidebar open or closed.
+Friction Rate, and Duct Sizes in sidebar order. In Rooms, Ctrl+Alt+J selects the
+next visible row and Ctrl+Alt+K selects the previous one. Row navigation stops at
+the first and last visible rows. Ctrl+K focuses search in Rooms and Duct Sizes.
+Clicking a room row selects it; the pencil opens its editor.
 They pause while a form field has focus or a dialog is open. Save your changes
 before switching sections.
 
@@ -88,9 +88,11 @@ matched rooms. Invalid or incomplete imports leave the project unchanged.
 
 Enter the equipment's static pressure and heating and cooling airflow under
 Equipment. Add supply and return paths under T.E.L., the Equivalent Lengths page.
-Then open Friction Rate to enter component pressure losses and review available
-static pressure and the resulting design friction rate. Complete missing inputs
-before moving on to duct sizing.
+Then open Friction Rate to enter component pressure losses and review the resulting
+design friction rate. If the rate is invalid, resolve the warning beside the summary
+before sizing ducts. When losses meet or exceed blower static, review those inputs;
+there is no positive pressure left for the duct calculation. Applying one loss keeps
+any unsaved values in other rows so you can apply them separately.
 
 ## Equivalent-length paths
 
@@ -113,12 +115,18 @@ changing quantities does not update those lengths to newer catalog values.
 Explicitly editing a calculated fitting evaluates its inputs again. If another
 edit has already been saved, resolve the stale-save message before continuing.
 
+To reuse a path in the same project, choose Duplicate in its table row. The fitting
+editor opens with its fittings and straight lengths copied and the name empty.
+Enter a new name and make any changes before saving. Cancel discards the draft;
+saving creates a separate path and leaves the original unchanged.
+
 ## Path templates
 
 Choose From template while adding an equivalent-length path to follow a guided
-sequence of fittings. Start with a supply or return starter template, or one of
-your own templates. The path name and straight duct lengths carry into the guided
-flow. Back to path restores the original path form.
+sequence of fittings. Each account starts with editable Default supply and Default
+return templates. Customize or rename these for your usual designs, or add more.
+Deleted templates are not automatically replaced. The path name and straight duct
+lengths carry into the guided flow. Back to path restores the original path form.
 
 Manage templates through Account > Path templates or from a project. Configure
 sections to choose one fitting, choose several, or enter quantities. Allow skipping
@@ -126,8 +134,10 @@ for optional sections. Each required section needs a supported fitting choice;
 unavailable calculations cannot be used to save a path. Try lets you exercise the
 template before using it in a design.
 
-Saved paths retain a copy of their template. Editing or deleting the template
-does not change those paths.
+Saved paths open in the fitting editor with their name, type, straight lengths,
+and fittings populated. Add, edit, or remove fittings there, whether the path was
+created manually or from a template. Saved paths retain a copy of their original
+template; changes to the path and template do not affect each other.
 
 ### Sharing templates
 

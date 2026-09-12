@@ -14,7 +14,21 @@
 .editor-dialog:is(.fitting-path, .template-path-active)::backdrop { background: var(--backdrop, #12233399); }
 @scope (.fitting-path) {
   .path-sheet { max-width: none; margin: 0; padding: 20px 28px; }
-  .path-sheet > header { padding-top: 0; }
+  .path-sheet > header { position: relative; padding-top: 0; padding-right: 44px; }
+  #close-path {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+  }
+  #close-path:hover { background: var(--tint); }
 }
 @media (max-width: 700px) {
   .editor-dialog:is(.fitting-path, .template-path-active) { width: 96vw; height: 94dvh; }

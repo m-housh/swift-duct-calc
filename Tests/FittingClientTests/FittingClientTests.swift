@@ -169,7 +169,7 @@ struct FittingClientTests {
     withDependencies {
       $0.uuid = .incrementing
     } operation: {
-      PathTemplate.starterConfigurations()
+      PathTemplate.defaultConfigurations()
     }
   }
 }

@@ -58,11 +58,14 @@ struct LoginForm: HTML, Sendable {
             span(.class("label")) { "Password" }
             input(
               .type(.password), .placeholder("Password"), .required,
-              .pattern(.password), .minlength("8"),
               .name("password"), .id("password"),
               .init(
                 name: "autocomplete", value: style == .signup ? "new-password" : "current-password"),
+            )
+            .attributes(
+              .pattern(.password), .minlength("8"),
               .init(name: "aria-describedby", value: "password-help"),
+              when: style == .signup
             )
           }
         }
@@ -82,8 +85,10 @@ struct LoginForm: HTML, Sendable {
           }
         }
 
-        p(.id("password-help"), .class("text-sm")) {
-          "Use at least 8 characters, including an uppercase letter, a lowercase letter, and a number."
+        if style == .signup {
+          p(.id("password-help"), .class("text-sm")) {
+            "Use at least 8 characters, including an uppercase letter, a lowercase letter, and a number."
+          }
         }
 
         div(.class("flex")) {

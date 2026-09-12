@@ -9,6 +9,7 @@ import Styleguide
 
 struct PathEditorSubmission: Decodable {
   let baseline: EquivalentLength?
+  let duplicate: Bool?
   let name: String
   let pathType: Fitting.PathType
   let straightLengths: [Int]
@@ -24,7 +25,9 @@ struct GroupBrowserSubmission: Decodable {
 }
 
 extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
-  func renderPathEditor(on request: ViewController.Request, projectID: Project.ID) async
+  func renderPathEditor(
+    on request: ViewController.Request, projectID: Project.ID, duplicating: Bool = false
+  ) async
     -> AnySendableHTML
   {
     @Dependency(\.database) var database
@@ -36,33 +39,35 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
         throw PickerError("Project not found.")
       }
       switch self {
-      case .editor(let id):
+      case .editor(let id, let type):
         var saved: EquivalentLength?
         if let id {
           guard let path = try await database.equivalentLengths.get(id), path.projectID == projectID
           else { throw PickerError("Path not found.") }
-          if path.templateSnapshot != nil {
-            return await request.view {
-              div(.class("p-6 space-y-4")) {
-                p {
-                  "This path uses a template. Open its guided editor to keep the section layout."
-                }
-                a(.class("btn btn-primary"), .href("\(guidedPathURL(projectID))/edit/\(path.id)")) {
-                  "Edit template path"
-                }
-              }
-            }
-          }
           saved = path
         }
         var rows: [PathEditorRow] = []
         for (index, group) in (saved?.groups ?? []).enumerated() {
           let metadata = group.fitting
-          let calculation = metadata?.calculation
+          let calculation = metadata?.calculation ?? group.calculation?.catalogCalculation
           let junction = metadata?.returnJunction
-          let fittingID = calculation?.fittingID ?? junction?.fittingID
+          let fittingID =
+            calculation?.fittingID ?? junction?.fittingID
+            ?? group.calculation.map { Fitting.ID(rawValue: $0.fittingID.rawValue) }
+          var definition: Fitting.Definition?
+          if let fittingID, let groupID = Fitting.Group.ID(rawValue: group.group),
+            let type = saved?.type
+          {
+            definition = try await client.fittings(.init(pathType: type, groupID: groupID))
+              .first { $0.id == fittingID }
+          }
+          let inputs =
+            calculation?.inputs ?? junction?.inputs
+            ?? definition.flatMap {
+              group.calculation?.inputs.catalogInputs(for: $0.inputRequirement)
+            }
           var art: Fitting.Artwork?
-          let fields = (calculation?.inputs ?? junction?.inputs).map(PickerFields.defaults) ?? [:]
+          let fields = inputs.map(PickerFields.defaults) ?? [:]
           if let fittingID,
             case .available(let image) = try await client.artwork(
               .init(
@@ -72,21 +77,19 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
             art = image
           }
           var details: [String] = []
-          if let fittingID, let groupID = Fitting.Group.ID(rawValue: group.group),
-            let pathType = saved?.type,
-            let definition = try await client.fittings(.init(pathType: pathType, groupID: groupID))
-              .first(where: { $0.id == fittingID })
-          {
+          if let definition {
             details = pickerInputDetails(definition, fields: fields)
           }
           rows.append(
             .init(
-              id: metadata?.id.uuidString ?? "saved-\(index)", quantity: group.quantity,
+              id: metadata?.id.uuidString ?? group.rowID?.uuidString ?? "saved-\(index)",
+              quantity: group.quantity,
               savedIndex: index,
               row: .init(
-                name: metadata?.name ?? "Saved reference entry",
+                name: metadata?.name ?? definition?.name ?? "Saved reference entry",
                 sourceCode: group.letter.isEmpty ? nil : "\(group.group)\(group.letter)",
-                groupID: group.group, origin: metadata?.origin.rawValue ?? "legacy",
+                groupID: group.group,
+                origin: metadata?.origin.rawValue ?? (inputs != nil ? "catalog" : "legacy"),
                 feet: group.value, fittingID: fittingID?.rawValue, artwork: art?.versionedPath,
                 fields: fields, calculation: calculation, returnJunction: junction,
                 column: metadata?.column?.rawValue, details: details)))
@@ -111,12 +114,14 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
         let page = ProjectFittingPathView(
           project: project, baseline: saved, rows: rows,
           favorites: try await database.fittingFavorites.fetch(user.id),
-          catalogReviewEnabled: client.catalogReviewEnabled(), carousels: carousels)
+          catalogReviewEnabled: client.catalogReviewEnabled(), carousels: carousels,
+          initialType: type ?? .supply, duplicating: duplicating)
         let steps = try await database.projects.getCompletedSteps(projectID)
         let paths = try await database.equivalentLengths.fetch(projectID)
+        let coolingCFM = try await database.equipment.fetch(projectID)?.coolingCFM
         return await request.view {
           ProjectView(projectID: projectID, activeTab: .equivalentLength, completedSteps: steps) {
-            EffectiveLengthsView(effectiveLengths: paths)
+            EffectiveLengthsView(effectiveLengths: paths, coolingCFM: coolingCFM)
             page
           }
         }
@@ -164,7 +169,8 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
           user.id, projectID,
           .init(
             baseline: submission.baseline, name: submission.name, pathType: submission.pathType,
-            straightLengths: submission.straightLengths, entries: entries))
+            straightLengths: submission.straightLengths, entries: entries,
+            duplicate: submission.duplicate ?? false))
         return div(.data("saved-path", value: saved.id.uuidString)) { "Path saved." }
       case .favorite(let payload):
         let submission = try SiteRoute.View.FittingPickerRoute.decode(
