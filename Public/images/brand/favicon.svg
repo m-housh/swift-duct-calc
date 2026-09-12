@@ -1,9 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <style>
-    svg { color: #202a35; }
-    @media (prefers-color-scheme: dark) { svg { color: #e8edf4; } }
-  </style>
-  <g fill="none" stroke="currentColor" stroke-width="2.5">
+  <g fill="none" stroke="#fff" stroke-width="2.5">
     <path d="M2 2H16C24 2 30 8 30 16S24 30 16 30H2"/>
     <path d="M2 5.5H16C22 5.5 26.5 10 26.5 16S22 26.5 16 26.5H2"/>
     <path d="M3.25 9H16A7 7 0 0 1 16 23H3.25Z"/>

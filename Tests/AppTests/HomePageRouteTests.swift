@@ -16,6 +16,8 @@ struct HomePageRouteTests {
       let client = try app.testing()
       let home = try await client.sendRequest(.GET, "/")
       #expect(home.status == .ok)
+      #expect(home.headers.first(name: .cacheControl) == "private, no-store")
+      #expect(home.headers.first(name: .vary) == "Cookie, HX-Request")
       #expect(home.body.string.contains("Your next duct design,"))
       #expect(home.body.string.contains("href=\"/signup\""))
       #expect(home.body.string.contains("href=\"/login\""))

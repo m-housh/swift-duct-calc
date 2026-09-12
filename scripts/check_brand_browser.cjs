@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 module.exports = async function checkBrand(page, origin) {
   for (const path of ['/', '/ductulator']) {
     await page.goto(`${origin}${path}`, { waitUntil: 'networkidle' });
-    assert.equal(await page.locator('link[rel="icon"][type="image/svg+xml"]').getAttribute('href'), '/images/brand/favicon.svg');
+    assert.equal(await page.locator('link[rel="icon"][type="image/svg+xml"]').getAttribute('href'), '/images/brand/favicon.svg?v=white-3');
     const assets = await page.locator('link[rel="icon"], link[rel="apple-touch-icon"], link[rel="manifest"]').evaluateAll(links => links.map(link => link.href));
     for (const url of assets) assert.equal((await page.request.get(url)).status(), 200, url);
   }
@@ -12,10 +12,15 @@ module.exports = async function checkBrand(page, origin) {
   for (const icon of manifest.icons) {
     assert.equal((await page.request.get(`${origin}${icon.src}`)).status(), 200);
   }
-  for (const [scheme, color] of [['light', 'rgb(32, 42, 53)'], ['dark', 'rgb(232, 237, 244)']]) {
+  for (const scheme of ['light', 'dark']) {
+    const logo = await page.request.get(`${origin}/images/brand/ductcalc-mark-${scheme}.webp`);
+    assert.equal(logo.status(), 200);
+    assert((await logo.body()).length < 20_000, `${scheme}: oversized wordmark asset`);
+  }
+  for (const scheme of ['light', 'dark']) {
     await page.emulateMedia({ colorScheme: scheme });
     await page.goto(`${origin}/images/brand/favicon.svg`);
-    assert.equal(await page.locator('g').evaluate(el => getComputedStyle(el).stroke), color);
+    assert.equal(await page.locator('g').evaluate(el => getComputedStyle(el).stroke), 'rgb(255, 255, 255)');
   }
 
   await page.goto(`${origin}/fittings`, { waitUntil: 'networkidle' });
@@ -50,5 +55,5 @@ module.exports = async function checkBrand(page, origin) {
   }
   await navbar.getByRole('link', { name: 'DuctCalc, residential duct design' }).click();
   await page.waitForURL(url => url.pathname === '/');
-  console.log('Brand checks passed: adaptive favicon, icon assets, navbar themes, mobile layouts, accessibility, and home link.');
+  console.log('Brand checks passed: white favicon, icon assets, navbar themes, mobile layouts, accessibility, and home link.');
 };

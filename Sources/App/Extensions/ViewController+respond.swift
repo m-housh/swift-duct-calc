@@ -60,13 +60,15 @@ extension ViewController {
     )
     @Dependency(\.auth.isAdministrator) var isAdministrator
     let html = withAdminVisibility(content, isAdministrator: await isAdministrator())
-    if case .fittingReference = route {
+    switch route {
+    case .home, .fittingReference:
       return AnyHTMLResponse(
         additionalHeaders: [
           "Cache-Control": "private, no-store", "Vary": "Cookie, HX-Request",
         ], value: html)
+    default:
+      return AnyHTMLResponse(value: html)
     }
-    return AnyHTMLResponse(value: html)
   }
 }
 
