@@ -56,7 +56,9 @@ struct FrictionRateView: HTML, Sendable {
       pressureFlow
       if !componentLosses.isEmpty { componentTable }
       if frictionRate == nil {
-        Alert { "Complete equipment and supply/return paths to calculate friction rate." }
+        Alert {
+          "Complete equipment, supply/return paths, and component losses to calculate friction rate."
+        }
       }
       ComponentLossForm(dismiss: true, projectID: projectID, componentLoss: nil)
       FrictionRateTemplatesView(projectID: projectID, hasComponents: !componentLosses.isEmpty)
