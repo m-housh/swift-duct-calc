@@ -30,7 +30,6 @@
 .project-search { display:flex; align-items:center; margin-left:auto; position:relative; }
 .project-search kbd { position:absolute; right:8px; color:var(--muted); border:1px solid var(--line); padding:1px 3px; font-size:10px; }
 .project-workspace .input,.project-workspace .select { min-height:32px; height:34px; font-size:12px; border-color:var(--line); border-radius:5px; }
-.project-workspace :is(input,textarea)::placeholder { color:var(--muted); opacity:1; font-style:italic; }
 .project-search input { padding-right:55px; }
 .project-workspace .project-table { font-size:12px; border-collapse:collapse; width:100%; }
 .project-table th { color:var(--muted); font-weight:400; font-size:11px; white-space:nowrap; }
