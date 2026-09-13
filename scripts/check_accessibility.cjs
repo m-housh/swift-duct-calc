@@ -150,7 +150,8 @@ const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'nig
       }
       await page.setViewportSize({ width: 1280, height: 900 });
     }
-    await page.getByRole('button', { name: 'Keyboard shortcuts', exact: true }).click();
+    await page.keyboard.press('Control+Alt+Shift+?');
+    await page.locator('#projectShortcuts[open]').waitFor();
     await audit('Keyboard shortcuts dialog', true);
     await page.keyboard.press('Escape');
     await focused(page.getByRole('button', { name: 'Keyboard shortcuts', exact: true }));

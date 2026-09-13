@@ -111,7 +111,7 @@ const fs = require('node:fs');
     }));
     await page.goBack();
     await page.locator(`[data-select="${fittingIDs[10]}"][aria-current="true"]`).waitFor();
-    await page.getByRole('button', { name: 'Keyboard shortcuts', exact: true }).click();
+    await page.keyboard.press('Control+Alt+/');
     await page.locator('#fittingsShortcuts[open]').waitFor();
     const beforeDialogKey = page.url();
     await page.keyboard.press('Control+k');

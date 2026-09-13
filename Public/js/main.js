@@ -147,9 +147,10 @@ if (!window.ductCalcShortcutsInitialized) {
 // Resolve the current controls on each press because HTMX replaces the body during navigation.
 document.addEventListener('keydown', (event) => {
   const key = event.key.toLowerCase();
+  const showHelp = key === '?' || key === '/';
   if (event.defaultPrevented || event.repeat || event.isComposing
-      || !event.ctrlKey || !event.altKey || event.shiftKey || event.metaKey
-      || event.getModifierState('AltGraph') || !/^[0-9bnjkdfpu]$/.test(key)) return;
+      || !event.ctrlKey || !event.altKey || (event.shiftKey && !showHelp) || event.metaKey
+      || event.getModifierState('AltGraph') || (!showHelp && !/^[0-9bnjkdfpu]$/.test(key))) return;
 
   const editing = event.composedPath().some(node => node instanceof Element && (
     node.isContentEditable
@@ -165,7 +166,9 @@ document.addEventListener('keydown', (event) => {
     : fittings ? '#fittings-page a[data-select]' : '#project-sidebar a[aria-keyshortcuts]')];
   const isCurrent = button => ['page', 'true'].includes(button.getAttribute('aria-current'));
   let control;
-  if (groupNavigation || key === 'j' || key === 'k') {
+  if (showHelp) {
+    control = document.querySelector('nav button[data-open-dialog][aria-keyshortcuts~="Control+Alt+/"]');
+  } else if (groupNavigation || key === 'j' || key === 'k') {
     const current = buttons.findIndex(isCurrent);
     if (current === -1) return;
     const next = Math.max(0, Math.min(buttons.length - 1, current + (key === 'j' || key === 'n' ? 1 : -1)));
