@@ -59,7 +59,7 @@ test('plain keys, browser shortcuts, extra modifiers, repeats, composition and A
     { shiftKey: true }, { metaKey: true }, { repeat: true }, { isComposing: true },
     { modifierAltGraph: true },
   ]) {
-    for (const key of ['2', 'j', 'k', 'd', 'f', 'p', 'u']) assert.equal(press(key, options).defaultPrevented, false);
+    for (const key of ['2', 'j', 'k', 'd', 'f', 'p', 'u', '/']) assert.equal(press(key, options).defaultPrevented, false);
   }
   for (const key of ['0', '7', 'g', 'F1']) assert.equal(press(key).defaultPrevented, false);
   document.body.addEventListener('keydown', event => event.preventDefault(), { once: true });
@@ -85,7 +85,7 @@ test('form controls, editable descendants and shadow DOM editors keep their keys
     const wrapper = document.createElement('div');
     wrapper.innerHTML = html;
     document.body.append(wrapper);
-    for (const key of ['2', 'j', 'k', 'd', 'f', 'p', 'u']) {
+    for (const key of ['2', 'j', 'k', 'd', 'f', 'p', 'u', '/']) {
       assert.equal(press(key, {}, wrapper.querySelector('span') || wrapper.firstChild).defaultPrevented, false);
     }
     wrapper.remove();
@@ -103,13 +103,13 @@ test('open dialogs prevent navigation even when focus is outside them', t => {
   const dialog = document.createElement('dialog');
   document.body.append(dialog);
   dialog.setAttribute('open', '');
-  for (const key of ['2', 'j', 'k', 'd', 'f', 'p', 'u']) assert.equal(press(key).defaultPrevented, false);
+  for (const key of ['2', 'j', 'k', 'd', 'f', 'p', 'u', '/']) assert.equal(press(key).defaultPrevented, false);
   dialog.remove();
   const customDialog = document.createElement('div');
   customDialog.setAttribute('role', 'dialog');
   customDialog.setAttribute('aria-modal', 'true');
   document.body.append(customDialog);
-  for (const key of ['2', 'j', 'k', 'd', 'f', 'p', 'u']) assert.equal(press(key).defaultPrevented, false);
+  for (const key of ['2', 'j', 'k', 'd', 'f', 'p', 'u', '/']) assert.equal(press(key).defaultPrevented, false);
   assert.deepEqual(clicks, []);
 });
 
@@ -189,7 +189,7 @@ test('every project page lists its shortcuts in an accessible help dialog', t =>
     assert(trigger.querySelector('svg[aria-hidden="true"]'));
     assert.deepEqual([...dialog.querySelectorAll('caption')].map(node => node.textContent), ['Project sections', 'App navigation']);
     const expected = { J: 'Next room row', K: 'Previous room row' };
-    for (const control of document.querySelectorAll('#project-sidebar [aria-keyshortcuts], nav [aria-keyshortcuts]')) {
+    for (const control of document.querySelectorAll('#project-sidebar [aria-keyshortcuts], nav a[aria-keyshortcuts]')) {
       const key = control.getAttribute('aria-keyshortcuts').split('+').at(-1);
       // The formatted snapshot renderer can hoist inline text; live browser tests check control names.
       expected[key] = (control.querySelector('span') || control).textContent.trim()
@@ -200,6 +200,61 @@ test('every project page lists its shortcuts in an accessible help dialog', t =>
     ]));
     assert.deepEqual(listed, expected);
   }
+});
+
+test('help shortcuts open the current dialog after body replacement and restore the opener on close', t => {
+  const { dom, document, press } = setup(t);
+  const fixtures = [
+    ...Array.from({ length: 6 }, (_, index) => snapshot(index + 1)),
+    ...['allGroupsGuest', 'returnGroupSignedIn'].map(name => fs.readFileSync(path.join(root,
+      `Tests/ViewControllerTests/__Snapshots__/FittingsSnapshotTests/${name}.1.html`), 'utf8')),
+  ];
+  for (const html of fixtures) {
+    document.body.outerHTML = new dom.window.DOMParser().parseFromString(html, 'text/html').body.outerHTML;
+    dom.window.eval(script);
+    const trigger = document.querySelector('nav button[data-open-dialog]');
+    const dialog = document.getElementById(trigger.dataset.openDialog);
+    assert.equal(trigger.getAttribute('aria-keyshortcuts'), 'Control+Alt+/ Control+Alt+Shift+/');
+    assert.match(trigger.title, /Ctrl\+Alt\+\?/);
+    assert.match(dialog.textContent, /Ctrl\+Alt\+\? or Ctrl\+Alt\+\//);
+    let opens = 0;
+    dialog.showModal = () => { opens++; dialog.setAttribute('open', ''); };
+    trigger.getClientRects = () => [{}];
+    for (const [key, options] of [['/', {}], ['?', { shiftKey: true }], ['?', {}]]) {
+      const before = opens;
+      assert.equal(press(key, options).defaultPrevented, true);
+      assert.equal(opens, before + 1, 'The existing dialog opener runs exactly once');
+      assert.equal(press(key, options).defaultPrevented, false, 'An open dialog pauses help');
+      dialog.removeAttribute('open');
+      dialog.dispatchEvent(new dom.window.Event('close'));
+      assert.equal(document.activeElement, trigger);
+    }
+    for (const attribute of ['disabled', 'inert', 'aria-disabled']) {
+      trigger.setAttribute(attribute, 'true');
+      assert.equal(press('/').defaultPrevented, false);
+      trigger.removeAttribute(attribute);
+    }
+  }
+  document.body.outerHTML = '<body><main>No shortcut help on this page</main></body>';
+  assert.equal(press('/').defaultPrevented, false);
+  assert.equal(press('?', { shiftKey: true }).defaultPrevented, false);
+});
+
+test('shifted help respects modifiers, editors and canceled events', t => {
+  const { document, press } = setup(t);
+  for (const options of [
+    { ctrlKey: false }, { altKey: false }, { metaKey: true },
+    { repeat: true }, { isComposing: true }, { modifierAltGraph: true },
+  ]) assert.equal(press('?', { shiftKey: true, ...options }).defaultPrevented, false);
+  const input = document.createElement('input');
+  document.body.append(input);
+  assert.equal(press('?', { shiftKey: true }, input).defaultPrevented, false);
+  const dialog = document.querySelector('#projectShortcuts');
+  let opens = 0;
+  dialog.showModal = () => { opens++; };
+  document.body.addEventListener('keydown', event => event.preventDefault(), { once: true });
+  press('?', { shiftKey: true });
+  assert.equal(opens, 0);
 });
 
 test('body replacement and history restoration use the current project without duplicate clicks', t => {

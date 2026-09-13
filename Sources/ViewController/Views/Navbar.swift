@@ -25,6 +25,8 @@ struct Navbar: HTML, Sendable {
           button(
             .type(.button), .class("btn"),
             .init(name: "aria-label", value: "Keyboard shortcuts"),
+            .title("Keyboard shortcuts, Ctrl+Alt+? or Ctrl+Alt+/"),
+            .init(name: "aria-keyshortcuts", value: "Control+Alt+/ Control+Alt+Shift+/"),
             .init(name: "aria-haspopup", value: "dialog"),
             .init(name: "aria-controls", value: shortcutsDialogID),
             .showModal(id: shortcutsDialogID)

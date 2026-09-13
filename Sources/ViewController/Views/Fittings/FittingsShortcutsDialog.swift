@@ -8,7 +8,7 @@ struct FittingsShortcutsDialog: HTML, Sendable {
   var body: some HTML {
     ModalForm(id: Self.id, title: "Keyboard shortcuts", dismiss: true) {
       p(.class("text-sm mt-2")) {
-        "Press Ctrl+K to focus search. For navigation, hold Ctrl+Alt and press a key below."
+        "Press Ctrl+Alt+? or Ctrl+Alt+/ to open this help. Press Ctrl+K to focus search. For navigation, hold Ctrl+Alt and press a key below."
       }
       table(.class("table table-sm mt-4")) {
         caption(.class("text-left font-bold p-2")) { "Group navigation" }

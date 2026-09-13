@@ -6,7 +6,9 @@ struct ProjectShortcutsDialog: HTML, Sendable {
 
   var body: some HTML {
     ModalForm(id: Self.id, title: "Keyboard shortcuts", dismiss: true) {
-      p(.class("text-sm mt-2")) { "Hold Ctrl+Alt and press a key below." }
+      p(.class("text-sm mt-2")) {
+        "Press Ctrl+Alt+? or Ctrl+Alt+/ to open this help. Hold Ctrl+Alt and press a key below."
+      }
       table(.class("table table-sm mt-4")) {
         caption(.class("text-left font-bold p-2")) { "Project sections" }
         tbody {
