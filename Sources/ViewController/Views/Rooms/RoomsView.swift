@@ -38,16 +38,16 @@ struct RoomsView: HTML, Sendable {
       }
       div(.class("design-metrics")) {
         DesignMetric(
-          "Heating total", value: String(format: "%.0f", rooms.totalHeatingLoad), unit: "BTU/h")
+          "Heating total", value: rooms.totalHeatingLoad.string(digits: 0), unit: "BTU/h")
         DesignMetric(
           "Cooling total",
           value: (try? rooms.totalCoolingLoad(shr: sensibleHeatRatio ?? 1)).map {
-            String(format: "%.0f", $0)
+            $0.string(digits: 0)
           } ?? "Not set", unit: "BTU/h")
         DesignMetric(
           "Cooling sensible",
           value: (try? rooms.totalCoolingSensible(shr: sensibleHeatRatio ?? 1)).map {
-            String(format: "%.0f", $0)
+            $0.string(digits: 0)
           } ?? "Not set", unit: "BTU/h")
         div(.class("design-metric shr-metric")) {
           span { "Project SHR" }
@@ -119,11 +119,11 @@ struct RoomsView: HTML, Sendable {
             div(.data("room-inspector", value: room.id.idString), .hidden) {
               span(.class("eyebrow")) { room.level?.label ?? "No level" }
               h2 { room.name }
-              DesignMetric("Heating load", value: "\(room.heatingLoad)", unit: "BTU/h")
+              DesignMetric("Heating load", value: room.heatingLoad.string(digits: 0), unit: "BTU/h")
               DesignMetric(
                 "Cooling sensible",
                 value: (try? room.coolingLoad.ensured(shr: sensibleHeatRatio ?? 1).sensible).map {
-                  String(format: "%.0f", $0)
+                  $0.string(digits: 0)
                 } ?? "Not set", unit: "BTU/h")
               DesignMetric(
                 "Registers", value: "\(room.delegatedTo == nil ? room.registerCount : 0)")
