@@ -41,8 +41,13 @@ jobs:
         cache-to: type=gha,mode=max
     - name: Run Tests
       run: |
+        docker run --rm -v ductcalc-build:/app/.build ${{ github.repository_owner }}/ductcalc:test swift test
+    - name: Check concurrent template replacement on PostgreSQL
+      # Run separately so the full parallel suite cannot starve the timed connection pools.
+      run: |
         docker run --rm --network host -e TEMPLATE_TEST_POSTGRES_HOST=127.0.0.1 \
-          -v ductcalc-build:/app/.build ${{ github.repository_owner }}/ductcalc:test swift test
+          -v ductcalc-build:/app/.build ${{ github.repository_owner }}/ductcalc:test \
+          swift test --skip-build --filter ComponentLossTemplatePostgresTests
     - uses: actions/setup-node@v4
       with:
         node-version: 22
