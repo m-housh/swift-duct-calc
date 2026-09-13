@@ -49,6 +49,11 @@
 .design-metric small { margin-left:7px; font-weight:400; color:var(--muted); font-size:10px; }
 .design-metrics > * + * { border-left:1px solid var(--line); }
 .shr-metric > button { position:absolute; right:12px; top:35px; }
+[data-room-workspace] > .design-metrics { overflow:hidden; }
+[data-room-workspace] > .design-metrics > .design-metric { --metric-accent:var(--color-primary); box-shadow:inset 3px 0 var(--metric-accent); }
+[data-room-workspace] > .design-metrics > :nth-child(1) { --metric-accent:var(--color-warning); }
+[data-room-workspace] > .design-metrics > :nth-child(2) { --metric-accent:var(--color-info); }
+[data-room-workspace] > .design-metrics > :nth-child(3) { --metric-accent:var(--color-success); }
 .rooms-layout { display:grid; grid-template-columns:minmax(0,1fr) 245px; gap:20px; align-items:start; }
 .room-inspector { padding:20px; }
 .room-inspector .design-metric { padding:15px 0; border-bottom:1px solid var(--line); }
