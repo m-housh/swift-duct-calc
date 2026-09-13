@@ -10,7 +10,7 @@ struct FittingsView: HTML, Sendable {
   var body: some HTML {
     Navbar(
       showFittingsButton: false, isLoggedIn: page.isLoggedIn,
-      shortcutsDialogID: FittingsShortcutsDialog.id, showProjectsShortcut: false)
+      shortcutsDialogID: FittingsShortcutsDialog.id)
     FittingsShortcutsDialog(isLoggedIn: page.isLoggedIn)
     div(
       .id("fittings-page"), .data("tools", value: page.isLoggedIn ? "enabled" : "disabled"),

@@ -16,11 +16,11 @@ struct FittingsShortcutsDialog: HTML, Sendable {
           row("Groups 1–9", key: "1–9")
           row("Group 10", key: "0")
           row("Next group", key: "N")
-          row("Previous group", key: "P")
+          row("Previous group", key: "B")
         }
       }
       p(.class("text-sm mt-2")) {
-        "Number keys select a group. N and P follow the current air path filter, including All groups, and stop at either end."
+        "Number keys select a group. N and B follow the current air path filter, including All groups, and stop at either end."
       }
       table(.class("table table-sm mt-4")) {
         caption(.class("text-left font-bold p-2")) { "Fitting navigation" }
@@ -37,6 +37,7 @@ struct FittingsShortcutsDialog: HTML, Sendable {
         tbody {
           row("Ductulator", key: "D")
           if isLoggedIn {
+            row("Projects", key: "P")
             row("Profile", key: "U")
           }
         }

@@ -1,12 +1,10 @@
 /* Project screens share the existing DaisyUI theme, with compact desktop spacing. */
 .project-workspace { --line:color-mix(in srgb,var(--color-base-content) 15%,transparent); --muted:color-mix(in srgb,var(--color-base-content) 85%,var(--color-base-100)); --accent:var(--color-primary); --accent-text:color-mix(in srgb,var(--color-primary) 15%,var(--color-base-content)); --accent-soft:color-mix(in srgb,var(--color-primary) 13%,var(--color-base-100)); font-size:13px; min-height:100vh; background:var(--color-base-100); color:var(--color-base-content); }
-.project-workspace .app-navbar { margin:0; padding:10px 22px; min-height:58px; border-bottom:1px solid var(--line); background:var(--color-base-200); }
-.project-workspace .app-brand { font-size:17px; }
-.project-workspace .app-brand img { width:30px; height:30px; }
+.project-workspace .app-navbar { margin:0; padding:10px 22px; min-height:72px; }
 .project-workspace .app-nav-actions { gap:8px; }
 .project-workspace .btn { min-height:32px; height:auto; padding:6px 11px; font-size:12px; border-radius:5px; box-shadow:none; }
 .project-workspace svg { width:17px; height:17px; flex-shrink:0; }
-.project-workspace .project-layout { grid-template-columns:220px minmax(0,1fr); gap:0; align-items:stretch; min-height:calc(100vh - 58px); }
+.project-workspace .project-layout { grid-template-columns:220px minmax(0,1fr); gap:0; align-items:stretch; min-height:calc(100vh - 72px); }
 .project-workspace .project-navigation { padding:20px 10px; margin:0; border-radius:0; border-right:1px solid var(--line); background:var(--color-base-200); }
 .project-switch { display:flex; width:100%; gap:9px; align-items:center; text-align:left; padding:10px 8px 24px; cursor:pointer; }
 .project-switch span { min-width:0; flex:1; }
@@ -30,7 +28,6 @@
 .project-search { display:flex; align-items:center; margin-left:auto; position:relative; }
 .project-search kbd { position:absolute; right:8px; color:var(--muted); border:1px solid var(--line); padding:1px 3px; font-size:10px; }
 .project-workspace .input,.project-workspace .select { min-height:32px; height:34px; font-size:12px; border-color:var(--line); border-radius:5px; }
-.project-workspace :is(input,textarea)::placeholder { color:var(--muted); opacity:1; font-style:italic; }
 .project-search input { padding-right:55px; }
 .project-workspace .project-table { font-size:12px; border-collapse:collapse; width:100%; }
 .project-table th { color:var(--muted); font-weight:400; font-size:11px; white-space:nowrap; }

@@ -39,6 +39,7 @@ jobs:
     - run: npm run test:fitting-shortcuts
     - run: npm run test:project-workspace
     - run: npm run test:login-form
+    - run: npm run test:home-preview
     - run: npx playwright install --with-deps chromium
     - name: Start isolated accessibility test app
       run: |
@@ -52,6 +53,8 @@ jobs:
         done
         docker logs ductcalc-accessibility
         exit 1
+    - name: Check home page and animated preview
+      run: DUCTCALC_HOME_ORIGIN=http://127.0.0.1:58681 npm run test:home-browser
     - name: Check accessibility and keyboard workflows
       run: npm run test:accessibility
     - name: Check fitting reference and shortcuts

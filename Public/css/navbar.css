@@ -1,0 +1,48 @@
+.app-navbar {
+  --nav-paper: light-dark(#f5f6f8, #111923);
+  --nav-ink: light-dark(#202a35, #e8edf4);
+  --nav-accent: light-dark(#244bc4, #91b0ff);
+  --nav-line: light-dark(#d9dfe5, #344353);
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--nav-line);
+  background: var(--nav-paper);
+  color: var(--nav-ink);
+  font-family: system-ui, sans-serif;
+}
+.app-navbar .app-brand { text-decoration: none; }
+.app-navbar .dc-wordmark { --wordmark-ink: var(--nav-ink); --wordmark-accent: var(--nav-accent); gap: 6px; }
+.app-navbar .dc-wordmark-name { font-size: 28px; letter-spacing: -.04em; }
+.app-navbar .dc-wordmark-description { font-size: 7px; letter-spacing: .175em; }
+.app-navbar .dc-wordmark-icon img { width: 100%; height: 100%; }
+.app-navbar .dc-mark-dark { display: none; }
+@media (prefers-color-scheme: dark) {
+  .app-navbar .dc-mark-light { display: none; }
+  .app-navbar .dc-mark-dark { display: block; }
+}
+:is([data-theme="light"], [data-theme="cupcake"], [data-theme="cyberpunk"], [data-theme="nord"], [data-theme="retro"]) .app-navbar .dc-mark-light { display: block; }
+:is([data-theme="light"], [data-theme="cupcake"], [data-theme="cyberpunk"], [data-theme="nord"], [data-theme="retro"]) .app-navbar .dc-mark-dark { display: none; }
+:is([data-theme="dark"], [data-theme="aqua"], [data-theme="dracula"], [data-theme="night"], [data-theme="synthwave"]) .app-navbar .dc-mark-light { display: none; }
+:is([data-theme="dark"], [data-theme="aqua"], [data-theme="dracula"], [data-theme="night"], [data-theme="synthwave"]) .app-navbar .dc-mark-dark { display: block; }
+.app-navbar .btn {
+  min-height: 36px;
+  height: auto;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--nav-ink);
+  box-shadow: none;
+  font-size: 12px;
+  font-weight: 500;
+  /* Keep text and background in sync when the surrounding theme changes. */
+  transition: none;
+}
+.app-navbar .btn:hover { background: light-dark(#e7ecfa, #2b3d5b); }
+.app-navbar .app-nav-ductulator { border-color: var(--nav-line); color: var(--nav-accent); }
+.app-navbar :is(a, button, summary):focus-visible { outline: 3px solid var(--nav-accent); outline-offset: 3px; }
+.app-navbar .account-menu > ul { border: 1px solid var(--nav-line); background: var(--nav-paper); color: var(--nav-ink); }
+@media (max-width: 480px) {
+  .app-navbar { padding: 12px; gap: 14px; }
+  .app-navbar .app-nav-actions { gap: 6px; }
+  .app-navbar .btn { padding: 8px; }
+}

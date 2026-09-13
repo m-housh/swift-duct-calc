@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DuctCalc · Residential duct design</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="Residential duct design based on the Manual-D workflow. Import room loads, trace duct paths, calculate friction rate, and size ducts in your browser.">
+    <meta property="og:site_name" content="DuctCalc">
+    <meta property="og:title" content="DuctCalc · Residential duct design">
+    <meta property="og:description" content="Residential duct design based on the Manual-D workflow. Import room loads, trace duct paths, calculate friction rate, and size ducts in your browser.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/images/mand_logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DuctCalc · Residential duct design">
+    <meta name="twitter:description" content="Residential duct design based on the Manual-D workflow. Import room loads, trace duct paths, calculate friction rate, and size ducts in your browser.">
+    <meta name="twitter:image" content="/images/mand_logo.png">
+    <link rel="icon" href="/images/favicon.ico?v=ductcalc-white-3" sizes="16x16 32x32 48x48">
+    <link rel="icon" href="/images/favicon-32x32.png?v=ductcalc-white-3" type="image/png" sizes="32x32">
+    <link rel="icon" href="/images/brand/favicon.svg?v=white-3" type="image/svg+xml" sizes="any">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=ductcalc-2" sizes="180x180">
+    <link rel="manifest" href="/site.webmanifest?v=ductcalc-2">
+    <link rel="stylesheet" href="/css/home.css?v=1">
+    <link rel="stylesheet" href="/css/ductcalc-wordmark.css?v=2">
+    <script src="/js/home.js?v=1" defer=""></script>
+  </head>
+  <body>
+    <div class="landing workspace">
+      <a class="landing-skip" href="#landing-content">Skip to content</a>
+      <header class="landing-header wrap">
+        <a class="landing-brand" href="/"><span class="dc-wordmark" role="img" aria-label="DuctCalc, residential duct design"><span class="dc-wordmark-name" aria-hidden="true">
+        <picture class="dc-wordmark-icon">
+          <source media="(prefers-color-scheme: dark)" srcset="/images/brand/ductcalc-mark-dark.webp">
+          <img src="/images/brand/ductcalc-mark-light.webp" alt="" width="50" height="50">
+        </picture>
+        uct
+        C
+        alc
+        Residential duct design
+        BETA<span></span><span class="dc-wordmark-c"></span><span></span></span><span class="dc-wordmark-description" aria-hidden="true"></span></span><span class="brand-beta"></span></a>
+        <nav aria-label="Main navigation"><a href="/fittings">Fitting reference</a><a href="/projects">Projects ↗</a></nav>
+      </header>
+      <main id="landing-content" tabindex="-1" class="wrap workspace-main">
+        <section class="workspace-intro">
+          <div>
+            <h1>
+              Your next duct design,
+              <br>
+              all in one place.<em></em>
+            </h1>
+          </div>
+          <div class="workspace-pitch"><a class="landing-cta" href="/projects">Open your projects<span aria-hidden="true">↗</span></a><a class="text-link" href="/ductulator">Just need a duct size? Try the ductulator →</a></div>
+        </section>
+        <section class="workspace-demo" aria-label="Project preview with sample data">
+          <div class="demo-top">
+            <span>PROJECT PREVIEW</span><span>Sample data · Maple Avenue</span>
+            <button type="button" class="demo-playback" disabled>Play preview</button>
+          </div>
+          <div class="demo-stage">
+            <div class="demo-panel" id="preview-panel-0" data-preview-panel="0" aria-hidden="false">
+              <iframe class="demo-app-frame" title="Room loads · sample project" tabindex="-1" sandbox="allow-same-origin" loading="lazy" src="/home-preview/rooms"></iframe>
+            </div>
+            <div class="demo-panel" id="preview-panel-1" data-preview-panel="1" aria-hidden="true">
+              <iframe class="demo-app-frame" title="Equipment · sample project" tabindex="-1" sandbox="allow-same-origin" loading="lazy" src="/home-preview/equipment"></iframe>
+            </div>
+            <div class="demo-panel" id="preview-panel-2" data-preview-panel="2" aria-hidden="true">
+              <iframe class="demo-app-frame" title="Duct paths · sample project" tabindex="-1" sandbox="allow-same-origin" loading="lazy" src="/home-preview/paths"></iframe>
+            </div>
+            <div class="demo-panel" id="preview-panel-3" data-preview-panel="3" aria-hidden="true">
+              <iframe class="demo-app-frame" title="Friction rate · sample project" tabindex="-1" sandbox="allow-same-origin" loading="lazy" src="/home-preview/pressure"></iframe>
+            </div>
+            <div class="demo-panel" id="preview-panel-4" data-preview-panel="4" aria-hidden="true">
+              <iframe class="demo-app-frame" title="Duct sizes · sample project" tabindex="-1" sandbox="allow-same-origin" loading="lazy" src="/home-preview/sizes"></iframe>
+            </div>
+          </div>
+          <nav class="demo-steps" aria-label="Preview steps">
+            <button type="button" disabled data-preview-step="0" aria-controls="preview-panel-0" aria-pressed="true"><small>01</small><span>Room loads</span></button>
+            <button type="button" disabled data-preview-step="1" aria-controls="preview-panel-1" aria-pressed="false"><small>02</small><span>Equipment</span></button>
+            <button type="button" disabled data-preview-step="2" aria-controls="preview-panel-2" aria-pressed="false"><small>03</small><span>Duct paths</span></button>
+            <button type="button" disabled data-preview-step="3" aria-controls="preview-panel-3" aria-pressed="false"><small>04</small><span>Friction rate</span></button>
+            <button type="button" disabled data-preview-step="4" aria-controls="preview-panel-4" aria-pressed="false"><small>05</small><span>Duct sizes</span></button>
+          </nav>
+        </section>
+        <p class="workspace-summary">Bring your room loads. Work through the paths, pressure losses, and duct sizes. Keep the whole job together.</p>
+        <section class="workspace-bottom">
+          <h2>The speed sheet grew up.</h2>
+          <p>The familiar Manual-D workflow, with CoolCalc imports, reusable path templates, and a PDF to take to the job.</p>
+          See how it's built ↗<a class="text-link" href="https://github.com/m-housh/swift-duct-calc"></a>
+        </section>
+      </main>
+      <footer class="landing-footer wrap">
+        <a href="https://github.com/m-housh/swift-duct-calc">Source available ↗</a><a href="mailto:support@ductcalc.pro">Contact Michael</a><a href="/privacy-policy">Privacy</a>
+        <p>Manual-D™ is a trademark of ACCA. DuctCalc is not affiliated with or endorsed by ACCA.</p>
+      </footer>
+    </div>
+  </body>
+</html>
