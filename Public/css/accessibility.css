@@ -55,9 +55,10 @@
   border:0; border-radius:4px; background:transparent; color:inherit;
   font-size:24px; cursor:pointer;
 }
-/* Labels and placeholder text must remain legible on the selected theme's surface. */
+/* Labels retain full contrast; placeholders share a muted style across all forms. */
 .label, .input .label, .select .label, .table thead, .table tfoot { color:inherit; opacity:1; }
-input::placeholder, textarea::placeholder { color:inherit; opacity:1; }
+/* Keep 85% foreground so Retro placeholders retain 4.5:1 contrast, including fitting dialogs. */
+input::placeholder, textarea::placeholder { color:color-mix(in srgb,currentColor 85%,transparent); opacity:1; font-style:italic; }
 .input, .select { min-width:0; }
 .input input { min-width:0; }
 @media (max-width: 800px) {
