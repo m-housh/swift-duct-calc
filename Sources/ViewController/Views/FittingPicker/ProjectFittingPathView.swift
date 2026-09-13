@@ -15,14 +15,14 @@ struct ProjectFittingPathView: HTML, Sendable {
   private var pathType: Fitting.PathType { baseline?.type ?? initialType }
   var root: String { "/projects/\(project.id)/effective-lengths" }
   var body: some HTML {
-    link(.rel(.stylesheet), .href("/css/fitting-path.css?v=app-theme-1"))
+    link(.rel(.stylesheet), .href("/css/fitting-path.css?v=reference-import-2"))
     link(.rel(.stylesheet), .href("/css/picker-preference.css"))
     link(.rel(.stylesheet), .href("/css/fitting-favorites.css"))
     link(.rel(.stylesheet), .href("/css/fitting-path-modal.css?v=close-button-3"))
     script(.src("/js/group-carousel.js"), .defer) {}
     script(.src("/js/path-templates.js?v=path-revisions-4"), .defer) {}
     script(.src("/js/template-modal.js?v=template-modal-2"), .defer) {}
-    script(.src("/js/fitting-path.js?v=duplicate-path-5"), .defer) {}
+    script(.src("/js/fitting-path.js?v=reference-import-6"), .defer) {}
     EditorDialog(id: "fitting-path", titleID: "path-title") {
       section(.class("path-sheet")) {
         header {
@@ -90,6 +90,7 @@ struct ProjectFittingPathView: HTML, Sendable {
         }
         div(.class("path-entry-actions")) {
           button(.type(.button), .id("quick-entry-open")) { "Quick reference entry" }
+          button(.type(.button), .id("reference-import-open")) { "Import CSV" }
           a(
             .id("path-fitting-reference"),
             .href(route: .fittingReference(.init(system: pathType.rawValue))),
@@ -161,6 +162,7 @@ struct ProjectFittingPathView: HTML, Sendable {
         }
         div(.id("reference-result"), .init(name: "aria-live", value: "polite")) {}
       }
+      ReferenceImportView()
     }
     .attributes(
       .class("fitting-path"), .data("endpoint", value: root),

@@ -326,6 +326,75 @@
     $('#path-name').addEventListener('input', () => { dirty = true; });
     $('#path-straight').addEventListener('input', () => { dirty = true; updateTotals(); });
     $('#edit-dialog').addEventListener('close', () => { editRequest++; });
+    const importDialog = $('#reference-import-dialog'), importForm = $('#reference-import-form');
+    const importCSV = $('#reference-import-csv'), importResult = $('#reference-import-result');
+    const importFile = $('#reference-import-file'), importSubmit = importForm.querySelector('[type=submit]');
+    let importRequest = 0, importController, importDraft = null;
+    const draftSignature = () => JSON.stringify({ entries, type: pathType(), straight: $('#path-straight').value });
+    function invalidateImport() {
+      importRequest++; importController?.abort(); importDraft = null;
+      importResult.replaceChildren(); importSubmit.disabled = false;
+    }
+    $('#reference-import-open').addEventListener('click', () => {
+      invalidateImport(); importDialog.showModal(); importCSV.focus();
+    });
+    importDialog.addEventListener('close', invalidateImport);
+    importCSV.addEventListener('input', invalidateImport);
+    importFile.addEventListener('change', async () => {
+      invalidateImport();
+      const file = importFile.files[0], current = importRequest;
+      if (!file) return;
+      importSubmit.disabled = true;
+      try {
+        if (file.size > 65536) throw Error('Use a CSV of at most 64 KiB.');
+        const bytes = await file.arrayBuffer();
+        if (current !== importRequest || !importDialog.open) return;
+        try { importCSV.value = new TextDecoder('utf-8', { fatal: true }).decode(bytes); }
+        catch { throw Error('Use a UTF-8 CSV file.'); }
+        importResult.textContent = 'File loaded. Review or edit the CSV, then preview it.';
+      } catch (error) {
+        if (current === importRequest) importResult.textContent = error.message;
+      } finally {
+        if (current === importRequest) importSubmit.disabled = false;
+        importFile.value = '';
+      }
+    });
+    importForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (importSubmit.disabled) return;
+      invalidateImport();
+      const current = importRequest, signature = draftSignature();
+      importController = new AbortController(); importSubmit.disabled = true;
+      importResult.textContent = 'Checking CSV…';
+      try {
+        if (new TextEncoder().encode(importCSV.value).length > 65536) throw Error('Use a CSV of at most 64 KiB.');
+        const straightFeet = parseStraight().reduce((sum, length) => sum + length, 0);
+        const html = await post('/fittings/import-references', { csv: importCSV.value, pathType: pathType(), entries, straightFeet }, importController.signal);
+        if (current !== importRequest || !importDialog.open) return;
+        if (signature !== draftSignature()) throw Error('The path changed. Preview the CSV again.');
+        importDraft = signature; importResult.innerHTML = html;
+      } catch (error) {
+        if (current === importRequest && error.name !== 'AbortError') importResult.textContent = error.message;
+      } finally { if (current === importRequest) importSubmit.disabled = false; }
+    });
+    importResult.addEventListener('click', async event => {
+      const button = event.target.closest('[data-import-rows]');
+      if (!button || button.disabled || !importDraft) return;
+      if (importDraft !== draftSignature()) { invalidateImport(); importResult.textContent = 'The path changed. Preview the CSV again.'; return; }
+      const imported = JSON.parse(button.dataset.importRows).map(entry => ({
+        ...entry, id: globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`
+      }));
+      const next = [...entries, ...imported];
+      if (next.length > 500 || !Number.isFinite(next.reduce((sum, entry) => sum + entry.row.feet * entry.quantity, 0))) {
+        invalidateImport(); importResult.textContent = 'This path exceeds the supported limit.'; return;
+      }
+      button.disabled = true; importDraft = null;
+      entries = next; dirty = true;
+      importCSV.value = ''; importDialog.close();
+      await renderRows();
+      status(`${imported.length} reference rows added. Save the path to keep them.`);
+      $('#reference-import-open').focus();
+    });
     let referenceController;
     $('#reference-form').addEventListener('input', () => { referenceController?.abort(); $('#reference-result').replaceChildren(); });
     $('#reference-form').addEventListener('submit', async event => {

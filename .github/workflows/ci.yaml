@@ -59,6 +59,8 @@ jobs:
       run: npm run test:accessibility
     - name: Check fitting reference and shortcuts
       run: FITTING_APP_URL=http://127.0.0.1:58681 node scripts/check_fitting_reference_browser.cjs
+    - name: Check fitting CSV import
+      run: FITTING_APP_URL=http://127.0.0.1:58681 node scripts/check_fitting_csv_browser.cjs
     - name: Stop accessibility test app
       if: always()
       run: docker stop ductcalc-accessibility || true

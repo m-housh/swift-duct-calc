@@ -95,6 +95,68 @@ struct FittingPickerSnapshotTests {
     assertSnapshot(of: pathEditor(), as: .html)
   }
 
+  @Test func referenceImportPreview() async throws {
+    let payload =
+      #"{"csv":"code,length_ft,quantity\n8a-SMOOTH,12.25,\n1a,35,2\n8A,6,1","pathType":"supply","entries":[],"straightFeet":25}"#
+    let preview = try await withDependencies {
+      $0.fittingClient = client
+    } operation: {
+      try await SiteRoute.View.FittingPickerRoute.importReferences(payload).previewReferenceImport(
+        payload)
+    }
+    #expect(preview.issues.isEmpty)
+    #expect(preview.rows.map { $0.entry.row.sourceCode } == ["8A", "1A", "8A"])
+    #expect(preview.rows.map { $0.entry.quantity } == [1, 2, 1])
+    #expect(
+      preview.rows.allSatisfy { $0.entry.row.fittingID == nil && $0.entry.row.calculation == nil })
+    #expect(preview.proposedTotal == 113.25)
+    #expect(preview.repeatedGroups == [1])
+    assertSnapshot(of: preview, as: .html)
+  }
+
+  @Test func referenceImportErrors() async {
+    let view = await render(
+      .importReferences(
+        #"{"csv":"code,length_ft\n4ag,30.5\n5B,10\nunknown,20\n11-junction-box,50\n1A,-2","pathType":"supply","entries":[],"straightFeet":0}"#
+      ))
+    let html = view.render()
+    #expect(html.contains("Line 3, code:"))
+    #expect(html.contains("Line 4, code:"))
+    #expect(html.contains("Line 5, code:"))
+    #expect(html.contains("Line 6, length_ft:"))
+    #expect(!html.contains("data-import-rows"))
+    assertSnapshot(of: view, as: .html)
+  }
+
+  @Test func referenceImportCombinedDraftAndLimits() async throws {
+    let entry = PathEditorRow(
+      id: "existing", quantity: 1, savedIndex: 0,
+      row: .init(
+        name: "Reference entry", sourceCode: "1A", groupID: 1, origin: "referenceEntry", feet: 20))
+    func preview(_ entries: [PathEditorRow], csv: String = "code,length_ft\n1A,10") async throws
+      -> ReferenceImportPreview
+    {
+      let payload =
+        "{\"csv\":\(pickerJSON(csv)),\"pathType\":\"supply\",\"entries\":\(pickerJSON(entries)),\"straightFeet\":25}"
+      return try await withDependencies {
+        $0.fittingClient = client
+      } operation: {
+        try await SiteRoute.View.FittingPickerRoute.importReferences(payload)
+          .previewReferenceImport(payload)
+      }
+    }
+    let combined = try await preview([entry])
+    #expect(combined.proposedTotal == 55)
+    #expect(combined.repeatedGroups == [1])
+    #expect(combined.issues.isEmpty)
+    let oversized = try await preview(Array(repeating: entry, count: 500))
+    #expect(!oversized.issues.isEmpty)
+    #expect(!oversized.render().contains("data-import-rows"))
+    let overflow = try await preview([], csv: "code,length_ft\n1A,1e308\n1A,1e308")
+    #expect(!overflow.issues.isEmpty)
+    #expect(!overflow.render().contains("data-import-rows"))
+  }
+
   @Test func populatedPathEditor() {
     let baseline = EquivalentLength(
       id: UUID(1), projectID: UUID(0), name: "Bedroom return", type: .return,

@@ -12,6 +12,7 @@ extension SiteRoute.View {
     case configure(String)
     case evaluate(String)
     case reference(String)
+    case importReferences(String)
 
     static let router = OneOf {
       Route(.case(Self.review)) {
@@ -46,6 +47,11 @@ extension SiteRoute.View {
       }
       Route(.case(Self.reference)) {
         Path { "reference" }
+        Method.post
+        Body { SafeFormData { Field("payload", .string) } }
+      }
+      Route(.case(Self.importReferences)) {
+        Path { "import-references" }
         Method.post
         Body { SafeFormData { Field("payload", .string) } }
       }

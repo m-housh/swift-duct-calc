@@ -48,7 +48,14 @@ struct FittingCatalogTests {
     #expect(
       wrongPath
         == .ineligible(.init(code: "5B", groupID: .returnEquipment, fittingIDs: ["5A-round"])))
-    for code in ["5A-round", "11A", "", "../../1F", "4AS"] {
+    #expect(
+      try await client.resolveReference(.init(code: " 5a-ROUND ", pathType: .return)) == match)
+    #expect(
+      try await client.resolveReference(.init(code: "5A-round", pathType: .supply)) == wrongPath)
+    let family = try await client.resolveReference(.init(code: "8A", pathType: .supply))
+    #expect(
+      try await client.resolveReference(.init(code: "8a-SMOOTH", pathType: .supply)) == family)
+    for code in ["11A", "", "../../1F", "4AS"] {
       // Group 4 ends at 4AR; an unlisted reference must stay unknown.
       let result = try await client.resolveReference(.init(code: code, pathType: .supply))
       #expect(result == .unknown)
