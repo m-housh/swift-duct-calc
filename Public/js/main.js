@@ -149,7 +149,7 @@ document.addEventListener('keydown', (event) => {
   const key = event.key.toLowerCase();
   const showHelp = key === '?' || key === '/';
   if (event.defaultPrevented || event.repeat || event.isComposing
-      || !event.ctrlKey || !event.altKey || (event.shiftKey && key !== '?') || event.metaKey
+      || !event.ctrlKey || !event.altKey || (event.shiftKey && !showHelp) || event.metaKey
       || event.getModifierState('AltGraph') || (!showHelp && !/^[0-9bnjkdfpu]$/.test(key))) return;
 
   const editing = event.composedPath().some(node => node instanceof Element && (

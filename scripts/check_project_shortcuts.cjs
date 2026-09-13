@@ -56,12 +56,15 @@ test('plain keys, browser shortcuts, extra modifiers, repeats, composition and A
   const { document, clicks, press } = setup(t);
   for (const options of [
     { ctrlKey: false, altKey: false }, { ctrlKey: false }, { altKey: false },
-    { shiftKey: true }, { metaKey: true }, { repeat: true }, { isComposing: true },
+    { metaKey: true }, { repeat: true }, { isComposing: true },
     { modifierAltGraph: true },
   ]) {
     for (const key of ['2', 'j', 'k', 'd', 'f', 'p', 'u', '/']) assert.equal(press(key, options).defaultPrevented, false);
   }
   for (const key of ['0', '7', 'g', 'F1']) assert.equal(press(key).defaultPrevented, false);
+  for (const key of ['2', 'j', 'k', 'd', 'f', 'p', 'u']) {
+    assert.equal(press(key, { shiftKey: true }).defaultPrevented, false);
+  }
   document.body.addEventListener('keydown', event => event.preventDefault(), { once: true });
   press();
   assert.deepEqual(clicks, []);
@@ -220,7 +223,7 @@ test('help shortcuts open the current dialog after body replacement and restore 
     let opens = 0;
     dialog.showModal = () => { opens++; dialog.setAttribute('open', ''); };
     trigger.getClientRects = () => [{}];
-    for (const [key, options] of [['/', {}], ['?', { shiftKey: true }], ['?', {}]]) {
+    for (const [key, options] of [['/', {}], ['/', { shiftKey: true }], ['?', { shiftKey: true }], ['?', {}]]) {
       const before = opens;
       assert.equal(press(key, options).defaultPrevented, true);
       assert.equal(opens, before + 1, 'The existing dialog opener runs exactly once');
