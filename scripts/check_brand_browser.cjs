@@ -32,7 +32,18 @@ module.exports = async function checkBrand(page, origin) {
   for (const [theme, scheme] of Object.entries(themes)) {
     await page.emulateMedia({ colorScheme: scheme === 'light' ? 'dark' : 'light' });
     // Simulate the saved profile theme on the same wrapper used by MainPage.
-    await page.locator('body > div').first().evaluate((el, theme) => el.dataset.theme = theme, theme);
+    const buttonColors = await page.locator('body > div').first().evaluate((el, theme) => {
+      el.dataset.theme = theme;
+      return [...el.querySelectorAll('.app-navbar .btn')].map(button => ({
+        accent: button.matches('.app-nav-ductulator'), color: getComputedStyle(button).color,
+      }));
+    }, theme);
+    for (const button of buttonColors) {
+      const expected = button.accent
+        ? (scheme === 'dark' ? 'rgb(145, 176, 255)' : 'rgb(36, 75, 196)')
+        : (scheme === 'dark' ? 'rgb(232, 237, 244)' : 'rgb(32, 42, 53)');
+      assert.equal(button.color, expected, `${theme}: button colors must switch with the background`);
+    }
     const logo = navbar.locator('.dc-wordmark-icon img:visible');
     assert.equal(await logo.count(), 1, theme);
     assert((await logo.getAttribute('src')).endsWith(`ductcalc-mark-${scheme}.webp`), theme);

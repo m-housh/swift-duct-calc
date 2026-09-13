@@ -34,6 +34,8 @@
   box-shadow: none;
   font-size: 12px;
   font-weight: 500;
+  /* Keep text and background in sync when the surrounding theme changes. */
+  transition: none;
 }
 .app-navbar .btn:hover { background: light-dark(#e7ecfa, #2b3d5b); }
 .app-navbar .app-nav-ductulator { border-color: var(--nav-line); color: var(--nav-accent); }

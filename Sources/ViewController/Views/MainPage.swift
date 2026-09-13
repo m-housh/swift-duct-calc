@@ -68,7 +68,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     link(.rel(.stylesheet), .href("/css/project-workspace.css?v=navbar-6"))
     AppIcons()
     link(.rel(.stylesheet), .href("/css/ductcalc-wordmark.css?v=2"))
-    link(.rel(.stylesheet), .href("/css/navbar.css?v=1"))
+    link(.rel(.stylesheet), .href("/css/navbar.css?v=2"))
     script(
       .src("https://unpkg.com/htmx-remove@latest"),
       .crossorigin(.anonymous),
