@@ -40,7 +40,8 @@ struct FittingsRouteTests {
         #expect(removed.status == .notFound)
       }
       #expect(response.body.string.contains("/css/output.css"))
-      #expect(response.body.string.contains("/images/mand_logo_sm.webp"))
+      #expect(response.body.string.contains("/images/brand/ductcalc-mark-light.webp"))
+      #expect(response.body.string.contains("/images/brand/ductcalc-mark-dark.webp"))
       #expect(response.body.string.contains("support@ductcalc.pro"))
       #expect(response.body.string.contains("data-theme=\"default\""))
       #expect(!response.body.string.contains("DESIGN LAB"))

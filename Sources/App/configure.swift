@@ -133,11 +133,6 @@ private func setupDatabase(
 }
 
 private func addRoutes(to app: Application) {
-  // Redirect the index path to project route.
-  app.get { req in
-    req.redirect(to: SiteRoute.View.router.path(for: .project(.index)))
-  }
-
   app.mount(
     SiteRoute.router,
     middleware: { $0.middleware() },
