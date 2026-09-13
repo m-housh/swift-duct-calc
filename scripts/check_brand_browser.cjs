@@ -29,26 +29,39 @@ module.exports = async function checkBrand(page, origin) {
     light: 'light', cupcake: 'light', cyberpunk: 'light', nord: 'light', retro: 'light',
     dark: 'dark', aqua: 'dark', dracula: 'dark', night: 'dark', synthwave: 'dark',
   };
-  for (const [theme, scheme] of Object.entries(themes)) {
-    await page.emulateMedia({ colorScheme: scheme === 'light' ? 'dark' : 'light' });
+  for (const [theme, scheme] of [...Object.entries(themes), ['default', 'light'], ['default', 'dark']]) {
+    await page.emulateMedia({ colorScheme: theme === 'default' ? scheme : scheme === 'light' ? 'dark' : 'light' });
     // Simulate the saved profile theme on the same wrapper used by MainPage.
-    const buttonColors = await page.locator('body > div').first().evaluate((el, theme) => {
+    const colors = await page.locator('body > div').first().evaluate((el, theme) => {
       el.dataset.theme = theme;
-      return [...el.querySelectorAll('.app-navbar .btn')].map(button => ({
-        accent: button.matches('.app-nav-ductulator'), color: getComputedStyle(button).color,
-      }));
+      const probe = document.createElement('span');
+      el.append(probe);
+      const resolve = value => {
+        probe.style.color = value;
+        return getComputedStyle(probe).color;
+      };
+      const colors = {
+        background: resolve('var(--color-base-200)'),
+        ink: resolve('var(--color-base-content)'),
+        hover: resolve('var(--color-base-300)'),
+        buttons: [...el.querySelectorAll('.app-navbar .btn:not(.app-nav-ductulator)')]
+          .map(button => getComputedStyle(button).color),
+      };
+      probe.remove();
+      return colors;
     }, theme);
-    for (const button of buttonColors) {
-      const expected = button.accent
-        ? (scheme === 'dark' ? 'rgb(145, 176, 255)' : 'rgb(36, 75, 196)')
-        : (scheme === 'dark' ? 'rgb(232, 237, 244)' : 'rgb(32, 42, 53)');
-      assert.equal(button.color, expected, `${theme}: button colors must switch with the background`);
+    for (const color of colors.buttons) {
+      assert.equal(color, colors.ink, `${theme}: buttons must use the theme's text color`);
     }
     const logo = navbar.locator('.dc-wordmark-icon img:visible');
     assert.equal(await logo.count(), 1, theme);
     assert((await logo.getAttribute('src')).endsWith(`ductcalc-mark-${scheme}.webp`), theme);
     assert(await logo.evaluate(el => el.complete && el.naturalWidth > 0));
-    assert.equal(await navbar.evaluate(el => getComputedStyle(el).backgroundColor), scheme === 'dark' ? 'rgb(17, 25, 35)' : 'rgb(245, 246, 248)');
+    assert.equal(await navbar.evaluate(el => getComputedStyle(el).backgroundColor), colors.background, `${theme}: navbar must use the theme's surface color`);
+    const button = navbar.locator('.btn').first();
+    await button.hover();
+    assert.equal(await button.evaluate(el => getComputedStyle(el).backgroundColor), colors.hover, `${theme}: hover must use the theme's surface color`);
+    await page.mouse.move(0, 0);
     for (const width of [320, 375, 768, 1440]) {
       await page.setViewportSize({ width, height: 1000 });
       assert(await navbar.evaluate(el => el.scrollWidth <= el.clientWidth), `${theme}: navbar overflow at ${width}`);
@@ -58,7 +71,7 @@ module.exports = async function checkBrand(page, origin) {
       runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'] },
     })).violations.map(rule => rule.id));
     assert.deepEqual(violations, [], `${theme}: navbar accessibility`);
-    if (theme === 'light' || theme === 'dark') {
+    if (theme === 'light' || theme === 'dark' || theme === 'dracula') {
       await navbar.screenshot({ path: `/tmp/ductcalc-navbar-${theme}.png` });
       await page.setViewportSize({ width: 375, height: 1000 });
       await navbar.screenshot({ path: `/tmp/ductcalc-navbar-mobile-${theme}.png` });

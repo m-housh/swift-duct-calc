@@ -1,8 +1,8 @@
 .app-navbar {
-  --nav-paper: light-dark(#f5f6f8, #111923);
-  --nav-ink: light-dark(#202a35, #e8edf4);
-  --nav-accent: light-dark(#244bc4, #91b0ff);
-  --nav-line: light-dark(#d9dfe5, #344353);
+  --nav-paper: var(--color-base-200);
+  --nav-ink: var(--color-base-content);
+  --nav-accent: color-mix(in srgb, var(--color-primary) 15%, var(--color-base-content));
+  --nav-line: color-mix(in srgb, var(--color-base-content) 15%, transparent);
   padding: 14px 22px;
   border-bottom: 1px solid var(--nav-line);
   background: var(--nav-paper);
@@ -10,7 +10,8 @@
   font-family: system-ui, sans-serif;
 }
 .app-navbar .app-brand { text-decoration: none; }
-.app-navbar .dc-wordmark { --wordmark-ink: var(--nav-ink); --wordmark-accent: var(--nav-accent); gap: 6px; }
+/* Keep the C's blue matched to the raster mark's middle band. */
+.app-navbar .dc-wordmark { --wordmark-ink: var(--nav-ink); --wordmark-accent: light-dark(#244bc4, #91b0ff); gap: 6px; }
 .app-navbar .dc-wordmark-name { font-size: 28px; letter-spacing: -.04em; }
 .app-navbar .dc-wordmark-description { font-size: 7px; letter-spacing: .175em; }
 .app-navbar .dc-wordmark-icon img { width: 100%; height: 100%; }
@@ -37,7 +38,7 @@
   /* Keep text and background in sync when the surrounding theme changes. */
   transition: none;
 }
-.app-navbar .btn:hover { background: light-dark(#e7ecfa, #2b3d5b); }
+.app-navbar .btn:hover { background: var(--color-base-300); }
 .app-navbar .app-nav-ductulator { border-color: var(--nav-line); color: var(--nav-accent); }
 .app-navbar :is(a, button, summary):focus-visible { outline: 3px solid var(--nav-accent); outline-offset: 3px; }
 .app-navbar .account-menu > ul { border: 1px solid var(--nav-line); background: var(--nav-paper); color: var(--nav-ink); }
