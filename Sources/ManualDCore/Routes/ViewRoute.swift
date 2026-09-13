@@ -442,10 +442,19 @@ extension SiteRoute.View.ProjectRoute {
 
   public enum FrictionRateRoute: Equatable, Sendable {
     case index
+    case applyTemplate(FrictionRateTemplate)
 
     static let rootPath = "friction-rate"
 
     public static let router = OneOf {
+      Route(.case(Self.applyTemplate)) {
+        Path {
+          rootPath
+          "templates"
+          FrictionRateTemplate.parser()
+        }
+        Method.post
+      }
       Route(.case(Self.index)) {
         Path { rootPath }
         Method.get

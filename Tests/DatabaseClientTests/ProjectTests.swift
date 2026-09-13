@@ -26,13 +26,13 @@ struct ProjectTests {
       let rooms = try await database.rooms.fetch(project.id)
       #expect(rooms.count == 2)
       #expect(rooms.allSatisfy { $0.registerCount == 1 && $0.delegatedTo == nil })
-      #expect(try await !database.componentLosses.fetch(project.id).isEmpty)
+      #expect(try await database.componentLosses.fetch(project.id).isEmpty)
       let steps = try await database.projects.getCompletedSteps(project.id)
-      #expect(steps.rooms && steps.frictionRate && !steps.equipmentInfo && !steps.equivalentLength)
+      #expect(steps.rooms && !steps.frictionRate && !steps.equipmentInfo && !steps.equivalentLength)
       let second = try await database.projects.importPDF(user.id, report, true)
       #expect(second.id != project.id)
       #expect(second.name == "\(project.name) (2)")
-      // Fail after the first room has been saved: the project, rooms and defaults roll back.
+      // Fail after the first room has been saved: the project and rooms roll back.
       await #expect(throws: (any Error).self) {
         try await database.projects.importPDF(
           user.id,

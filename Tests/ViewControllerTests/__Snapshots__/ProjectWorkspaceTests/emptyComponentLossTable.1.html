@@ -2,9 +2,8 @@
   <div class="page-title-row">
     <div>
       <h1 class="text-3xl font-bold">Where the pressure goes</h1>
-      <p class="muted">The width of each stream represents its share of blower static.</p>
+      <p class="muted">Choose component pressure losses for your system.</p>
     </div>
-    <button type="button" class="btn btn-outline" data-open-dialog="componentLossForm"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add component</button>
   </div>
   <div class="design-metrics pressure-summary">
     <div class="design-metric"><span>Blower static</span><strong>Not set<small>in. w.c.</small></strong></div>
@@ -12,49 +11,138 @@
     <div class="design-metric"><span>Design friction rate</span><strong>Not set<small>in. w.c. / 100 ft</small></strong></div>
   </div>
   <details class="project-panel pressure-canvas" open="" data-expansion="pressure-flow">
-    <summary class="canvas-legend"><span class="network-toggle"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>PRESSURE FLOW</span><span>Select a component · All losses in the table below</span></summary>
-    <div class="pressure-river" style="--river-height: 500px">
-      <svg class="river-wires" viewBox="0 0 1000 490" preserveAspectRatio="none" aria-hidden="true"><path class="pressure-source-line" d="M100 50V445"/></svg>
+    <summary class="canvas-legend"><span class="network-toggle"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>PRESSURE FLOW</span><span>Add component losses to your system</span></summary>
+    <div class="pressure-river pressure-river-empty" style="--river-height: 500px">
       <div class="pressure-source"><span>BLOWER STATIC</span><strong>Not set</strong><small>in. w.c.</small></div>
-      <p class="empty-state">Add component pressure losses to complete this section.</p>
+      <section class="pressure-start-card space-y-4">
+        <h2>Choose your starting point</h2>
+        <p class="muted">Use a template for common component losses, or start from scratch and add your own.</p>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" class="btn btn-secondary" data-open-dialog="frictionRateTemplates">From template</button>
+          <button type="button" class="btn btn-outline" data-open-dialog="componentLossForm">Start from scratch</button>
+        </div>
+      </section>
     </div>
   </details>
-  <section class="project-panel loss-schedule">
-    <div class="path-schedule-heading">
-      <h2>Component losses<span>0</span></h2>
-      Highest share first · Edit pressure losses inline<span class="muted"></span>
-    </div>
-    <div class="table-scroll" tabindex="0" role="region" aria-label="Component pressure losses">
-      <table class="table project-table loss-table" data-selectable-table="loss">
-        <thead>
-          <tr>
-            <th>Component</th>
-            <th>Pressure loss · in. w.c.</th>
-            <th>% of blower static</th>
-            <th><span class="sr-only">Actions</span></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td colspan="4" class="empty-state">Add a component to enter its pressure loss.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-  <div class="flex space-x-2"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>Complete equipment and supply/return paths to calculate friction rate.</div>
+  <div class="flex items-start gap-3 py-2 leading-relaxed">
+    <span class="mt-0.5 shrink-0 text-warning"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
+    <div class="min-w-0">Complete equipment, supply/return paths, and component losses to calculate friction rate.</div>
+  </div>
   <dialog id="componentLossForm" class="modal" aria-labelledby="componentLossForm-title">
     <div class="modal-box">
       <h2 id="componentLossForm-title" class="text-2xl font-bold mb-6 pe-10">Component Loss</h2>
       <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Component Loss" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
       <form data-success-message="Changes saved." class="space-y-4 p-4" hx-post="/projects/00000000-0000-0000-0000-000000000001/component-loss" hx-target="body" hx-swap="outerHTML">
         <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000001">
-        Name<label class="input w-full"><span class="label"></span>
-        <input name="name" type="text" value="" placeholder="Name" required autofocus>
+        Component<label class="input w-full"><span class="label"></span>
+        <input name="name" type="text" value="" placeholder="e.g. Filter" autocomplete="off" data-1p-ignore="true" data-bwignore="true" data-lpignore="true" data-protonpass-ignore="true" required autofocus>
         Value</label><label class="input w-full"><span class="label"></span>
         <input name="value" type="number" value="" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
         <button class="btn btn-secondary btn-block" type="submit">Submit</button>
       </form>
+    </div>
+  </dialog>
+  <dialog id="frictionRateTemplates" class="modal" aria-labelledby="frictionRateTemplates-title">
+    <div class="modal-box">
+      <h2 id="frictionRateTemplates-title" class="text-2xl font-bold mb-6 pe-10">Choose a system template</h2>
+      <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Choose a system template" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+      <div class="space-y-4">
+        <p class="muted">Start with common component losses, then edit them to match your equipment. Values are in inches of water column.</p>
+        <p class="muted">The shortcuts below apply a template while this chooser is open.</p>
+        <div class="card bg-base-200 border border-base-300">
+          <div class="card-body">
+            <div class="template-card-heading">
+              <h3 class="card-title">Shared defaults</h3>
+              <div class="template-card-shortcut"><kbd class="kbd kbd-sm">Ctrl+Alt+D</kbd></div>
+            </div>
+            <dl>
+              <div class="flex justify-between gap-4">
+                <dt>Supply Outlet</dt>
+                <dd>0.03</dd>
+              </div>
+              <div class="flex justify-between gap-4">
+                <dt>Return Grille</dt>
+                <dd>0.03</dd>
+              </div>
+              <div class="flex justify-between gap-4">
+                <dt>Balancing Damper</dt>
+                <dd>0.03</dd>
+              </div>
+            </dl>
+            <div class="card-actions justify-end">
+              <form hx-post="/projects/00000000-0000-0000-0000-000000000001/friction-rate/templates/shared" hx-target="body" hx-swap="outerHTML" data-success-message="System template applied." hx-disabled-elt="find button">
+                <button type="submit" class="btn btn-secondary" aria-keyshortcuts="Control+Alt+D" aria-label="Use Shared defaults template">Use template</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="card bg-base-200 border border-base-300">
+          <div class="card-body">
+            <div class="template-card-heading">
+              <h3 class="card-title">Furnace + evaporator coil</h3>
+              <div class="template-card-shortcut"><kbd class="kbd kbd-sm">Ctrl+Alt+F</kbd></div>
+            </div>
+            <dl>
+              <div class="flex justify-between gap-4">
+                <dt>Supply Outlet</dt>
+                <dd>0.03</dd>
+              </div>
+              <div class="flex justify-between gap-4">
+                <dt>Return Grille</dt>
+                <dd>0.03</dd>
+              </div>
+              <div class="flex justify-between gap-4">
+                <dt>Balancing Damper</dt>
+                <dd>0.03</dd>
+              </div>
+              <div class="flex justify-between gap-4">
+                <dt>Evaporator Coil</dt>
+                <dd>0.20</dd>
+              </div>
+              <div class="flex justify-between gap-4">
+                <dt>Filter</dt>
+                <dd>0.10</dd>
+              </div>
+            </dl>
+            <div class="card-actions justify-end">
+              <form hx-post="/projects/00000000-0000-0000-0000-000000000001/friction-rate/templates/furnace" hx-target="body" hx-swap="outerHTML" data-success-message="System template applied." hx-disabled-elt="find button">
+                <button type="submit" class="btn btn-secondary" aria-keyshortcuts="Control+Alt+F" aria-label="Use Furnace + evaporator coil template">Use template</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="card bg-base-200 border border-base-300">
+          <div class="card-body">
+            <div class="template-card-heading">
+              <h3 class="card-title">Air handler</h3>
+              <div class="template-card-shortcut"><kbd class="kbd kbd-sm">Ctrl+Alt+A</kbd></div>
+            </div>
+            <dl>
+              <div class="flex justify-between gap-4">
+                <dt>Supply Outlet</dt>
+                <dd>0.03</dd>
+              </div>
+              <div class="flex justify-between gap-4">
+                <dt>Return Grille</dt>
+                <dd>0.03</dd>
+              </div>
+              <div class="flex justify-between gap-4">
+                <dt>Balancing Damper</dt>
+                <dd>0.03</dd>
+              </div>
+              <div class="flex justify-between gap-4">
+                <dt>Filter</dt>
+                <dd>0.10</dd>
+              </div>
+            </dl>
+            <div class="card-actions justify-end">
+              <form hx-post="/projects/00000000-0000-0000-0000-000000000001/friction-rate/templates/air-handler" hx-target="body" hx-swap="outerHTML" data-success-message="System template applied." hx-disabled-elt="find button">
+                <button type="submit" class="btn btn-secondary" aria-keyshortcuts="Control+Alt+A" aria-label="Use Air handler template">Use template</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </dialog>
 </div>

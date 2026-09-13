@@ -93,6 +93,14 @@ before sizing ducts. When losses meet or exceed blower static, review those inpu
 there is no positive pressure left for the duct calculation. Applying one loss keeps
 any unsaved values in other rows so you can apply them separately.
 
+New projects start with no component losses. On Friction Rate, choose a template
+or start from scratch. Shared defaults includes the supply outlet, return grille,
+and balancing damper. The furnace and air handler templates add their equipment
+losses. Applying a template replaces all current component losses. Edit the values
+afterward to match your equipment.
+With the template chooser open, Ctrl+Alt+D applies Shared defaults, Ctrl+Alt+F
+applies Furnace + evaporator coil, and Ctrl+Alt+A applies Air handler.
+
 ## Equivalent-length paths
 
 Add a path on Equivalent Lengths, choose supply or return, and enter its name and

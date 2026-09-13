@@ -65,6 +65,7 @@ public struct DatabaseClient: Sendable {
 
   @DependencyClient
   public struct ComponentLosses: Sendable {
+    public var applyTemplate: @Sendable (Project.ID, FrictionRateTemplate) async throws -> Void
     public var create:
       @Sendable (ComponentPressureLoss.Create) async throws -> ComponentPressureLoss
     public var delete: @Sendable (ComponentPressureLoss.ID) async throws -> Void

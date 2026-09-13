@@ -6,17 +6,14 @@
     </div>
   </div>
   <div class="design-metrics pressure-summary">
-    <div class="design-metric"><span>Blower static</span><strong>0.30<small>in. w.c.</small></strong></div>
-    <div class="design-metric"><span>Total effective length</span><strong>Not set<small>ft</small></strong></div>
-    <div class="design-metric invalid-metric">
-      <span>Design friction rate</span><strong>0.180<small>in. w.c. / 100 ft</small></strong>
-      <p class="metric-error" role="alert">Friction rate should be lower than 0.18</p>
-    </div>
+    <div class="design-metric"><span>Blower static</span><strong>0.50<small>in. w.c.</small></strong></div>
+    <div class="design-metric"><span>Total effective length</span><strong>185<small>ft</small></strong></div>
+    <div class="design-metric"><span>Design friction rate</span><strong>Not set<small>in. w.c. / 100 ft</small></strong></div>
   </div>
   <details class="project-panel pressure-canvas" open="" data-expansion="pressure-flow">
     <summary class="canvas-legend"><span class="network-toggle"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>PRESSURE FLOW</span><span>Add component losses to your system</span></summary>
     <div class="pressure-river pressure-river-empty" style="--river-height: 500px">
-      <div class="pressure-source"><span>BLOWER STATIC</span><strong>0.30</strong><small>in. w.c.</small></div>
+      <div class="pressure-source"><span>BLOWER STATIC</span><strong>0.50</strong><small>in. w.c.</small></div>
       <section class="pressure-start-card space-y-4">
         <h2>Choose your starting point</h2>
         <p class="muted">Use a template for common component losses, or start from scratch and add your own.</p>
@@ -27,12 +24,16 @@
       </section>
     </div>
   </details>
+  <div class="flex items-start gap-3 py-2 leading-relaxed">
+    <span class="mt-0.5 shrink-0 text-warning"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
+    <div class="min-w-0">Complete equipment, supply/return paths, and component losses to calculate friction rate.</div>
+  </div>
   <dialog id="componentLossForm" class="modal" aria-labelledby="componentLossForm-title">
     <div class="modal-box">
       <h2 id="componentLossForm-title" class="text-2xl font-bold mb-6 pe-10">Component Loss</h2>
       <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Component Loss" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-      <form data-success-message="Changes saved." class="space-y-4 p-4" hx-post="/projects/00000000-0000-0000-0000-000000000001/component-loss" hx-target="body" hx-swap="outerHTML">
-        <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000001">
+      <form data-success-message="Changes saved." class="space-y-4 p-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/component-loss" hx-target="body" hx-swap="outerHTML">
+        <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
         Component<label class="input w-full"><span class="label"></span>
         <input name="name" type="text" value="" placeholder="e.g. Filter" autocomplete="off" data-1p-ignore="true" data-bwignore="true" data-lpignore="true" data-protonpass-ignore="true" required autofocus>
         Value</label><label class="input w-full"><span class="label"></span>
@@ -69,7 +70,7 @@
               </div>
             </dl>
             <div class="card-actions justify-end">
-              <form hx-post="/projects/00000000-0000-0000-0000-000000000001/friction-rate/templates/shared" hx-target="body" hx-swap="outerHTML" data-success-message="System template applied." hx-disabled-elt="find button">
+              <form hx-post="/projects/00000000-0000-0000-0000-000000000000/friction-rate/templates/shared" hx-target="body" hx-swap="outerHTML" data-success-message="System template applied." hx-disabled-elt="find button">
                 <button type="submit" class="btn btn-secondary" aria-keyshortcuts="Control+Alt+D" aria-label="Use Shared defaults template">Use template</button>
               </form>
             </div>
@@ -104,7 +105,7 @@
               </div>
             </dl>
             <div class="card-actions justify-end">
-              <form hx-post="/projects/00000000-0000-0000-0000-000000000001/friction-rate/templates/furnace" hx-target="body" hx-swap="outerHTML" data-success-message="System template applied." hx-disabled-elt="find button">
+              <form hx-post="/projects/00000000-0000-0000-0000-000000000000/friction-rate/templates/furnace" hx-target="body" hx-swap="outerHTML" data-success-message="System template applied." hx-disabled-elt="find button">
                 <button type="submit" class="btn btn-secondary" aria-keyshortcuts="Control+Alt+F" aria-label="Use Furnace + evaporator coil template">Use template</button>
               </form>
             </div>
@@ -135,7 +136,7 @@
               </div>
             </dl>
             <div class="card-actions justify-end">
-              <form hx-post="/projects/00000000-0000-0000-0000-000000000001/friction-rate/templates/air-handler" hx-target="body" hx-swap="outerHTML" data-success-message="System template applied." hx-disabled-elt="find button">
+              <form hx-post="/projects/00000000-0000-0000-0000-000000000000/friction-rate/templates/air-handler" hx-target="body" hx-swap="outerHTML" data-success-message="System template applied." hx-disabled-elt="find button">
                 <button type="submit" class="btn btn-secondary" aria-keyshortcuts="Control+Alt+A" aria-label="Use Air handler template">Use template</button>
               </form>
             </div>

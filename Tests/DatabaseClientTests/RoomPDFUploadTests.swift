@@ -153,7 +153,7 @@ struct RoomPDFUploadTests {
             && !project.state.isEmpty && !project.zipCode.isEmpty)
         #expect(project.sensibleHeatRatio == (useLiveParser ? 0.833 : 0.83))
         #expect(try await database.rooms.fetch(project.id).count == expectedRooms)
-        #expect(try await !database.componentLosses.fetch(project.id).isEmpty)
+        #expect(try await database.componentLosses.fetch(project.id).isEmpty)
         if useLiveParser {
           #expect(project.name == "Example House")
           #expect(project.streetAddress == "16 South Main Street")

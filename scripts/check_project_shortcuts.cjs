@@ -278,3 +278,78 @@ test('body replacement and history restoration use the current project without d
   press();
   assert.deepEqual(clicks, [originalURL, clicks[1], originalURL]);
 });
+
+test('template shortcuts apply only in the chooser and preserve navigation elsewhere', t => {
+  const { document, clicks, press } = setup(t, snapshot(5));
+  const dialog = document.getElementById('frictionRateTemplates');
+  const applied = [];
+  dialog.addEventListener('click', event => {
+    const button = event.target.closest('button[aria-keyshortcuts]');
+    if (!button) return;
+    applied.push(button.closest('form').getAttribute('hx-post').split('/').at(-1));
+    event.preventDefault();
+  });
+  for (const [key, template] of [['d', 'shared'], ['f', 'furnace'], ['a', 'air-handler']]) {
+    dialog.setAttribute('open', '');
+    assert(press(key).defaultPrevented);
+    assert.equal(applied.at(-1), template);
+    assert(press(key.toUpperCase()).defaultPrevented);
+    assert.equal(applied.at(-1), template);
+    assert.deepEqual(clicks, []);
+  }
+  dialog.removeAttribute('open');
+  assert(press('d').defaultPrevented);
+  assert.equal(clicks.at(-1), '/ductulator');
+  assert(press('f').defaultPrevented);
+  assert.equal(clicks.at(-1), '/fittings');
+  assert.equal(press('a').defaultPrevented, false);
+  assert.equal(applied.length, 6);
+});
+
+test('template shortcuts respect editing, modifiers, unavailable controls and other dialogs', t => {
+  const { document, clicks, press } = setup(t, snapshot(5));
+  const dialog = document.getElementById('frictionRateTemplates');
+  dialog.setAttribute('open', '');
+  let applied = 0;
+  dialog.addEventListener('click', event => { applied++; event.preventDefault(); });
+  for (const options of [
+    { ctrlKey: false }, { altKey: false }, { metaKey: true }, { shiftKey: true },
+    { repeat: true }, { isComposing: true }, { modifierAltGraph: true },
+  ]) {
+    for (const key of ['d', 'f', 'a']) assert.equal(press(key, options).defaultPrevented, false);
+  }
+  const input = document.createElement('input');
+  dialog.append(input);
+  assert.equal(press('d', {}, input).defaultPrevented, false);
+  input.remove();
+  const button = dialog.querySelector('[aria-keyshortcuts="Control+Alt+D"]');
+  button.disabled = true;
+  assert.equal(press('d').defaultPrevented, false);
+  button.disabled = false;
+  dialog.setAttribute('inert', '');
+  assert.equal(press('d').defaultPrevented, false);
+  dialog.removeAttribute('inert');
+  const other = document.createElement('dialog');
+  other.setAttribute('open', '');
+  document.body.append(other);
+  assert.equal(press('d').defaultPrevented, false);
+  other.remove();
+  document.body.addEventListener('keydown', event => event.preventDefault(), { once: true });
+  press('d');
+  assert.equal(applied, 0);
+  assert.deepEqual(clicks, []);
+});
+
+test('template shortcuts resolve buttons after body replacement without duplicate handlers', t => {
+  const { document, dom, press } = setup(t, snapshot(5));
+  for (let replacement = 0; replacement < 2; replacement++) {
+    document.body.innerHTML = snapshot(5);
+    dom.window.eval(script);
+    const dialog = document.getElementById('frictionRateTemplates');
+    dialog.setAttribute('open', '');
+    let applied = 0;
+    dialog.addEventListener('click', event => { applied++; event.preventDefault(); });
+    assert(press('a').defaultPrevented);
+    assert.equal(applied, 1);
+  }
+});

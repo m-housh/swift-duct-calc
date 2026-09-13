@@ -100,9 +100,6 @@ extension DatabaseClient.Projects: TestDependencyKey {
               registerCount: 1, projectID: projectID)
             try await roomModel.validateAndSave(on: transaction)
           }
-          for loss in ComponentPressureLoss.Create.default(projectID: projectID) {
-            try await loss.toModel().validateAndSave(on: transaction)
-          }
           return try model.toDTO()
         }
       },
