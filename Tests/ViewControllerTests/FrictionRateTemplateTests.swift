@@ -17,6 +17,11 @@ struct FrictionRateTemplateViewTests {
     #expect(html.contains("/friction-rate/templates/shared"))
     #expect(html.contains("/friction-rate/templates/furnace"))
     #expect(html.contains("/friction-rate/templates/air-handler"))
+    for key in ["D", "F", "A"] {
+      let keycap = "<kbd class=\"kbd kbd-sm\">Ctrl+Alt+\(key)</kbd>"
+      #expect(html.contains(keycap))
+      #expect(view.renderFormatted().contains(keycap))
+    }
     assertSnapshot(of: view, as: .html, named: hasComponents ? "existing" : "empty")
   }
 }

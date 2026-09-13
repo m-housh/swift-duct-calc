@@ -37,11 +37,12 @@ const fs = require('node:fs');
         probe.style.color = 'var(--accent-text)';
         const accentText = color(getComputedStyle(probe).color);
         document.querySelector('nav').append(probe);
-        probe.style.color = 'var(--nav-accent)';
-        const navAccent = color(getComputedStyle(probe).color);
+        probe.style.color = 'var(--nav-ink)';
+        const navInk = color(getComputedStyle(probe).color);
         probe.remove();
         const controls = document.querySelectorAll('.system-toggle [aria-current="true"], .group-item.active .group-number, [data-action="toggle-data"][aria-expanded="true"], .format-tabs [aria-current="true"]');
-        return color(getComputedStyle(button).color) === navAccent
+        return color(getComputedStyle(button).color) === navInk
+          && getComputedStyle(button).borderTopColor === 'rgba(0, 0, 0, 0)'
           && [...document.querySelectorAll('.text-button')].every(control => color(getComputedStyle(control).color) === accentText)
           && [...controls].every(control =>
           color(getComputedStyle(control).backgroundColor) === primary && color(getComputedStyle(control).color) === foreground);

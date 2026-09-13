@@ -34,7 +34,10 @@ struct FrictionRateTemplatesView: HTML, Sendable {
             div(.class("card-body")) {
               div(.class("template-card-heading")) {
                 h3(.class("card-title")) { template.name }
-                kbd(.class("kbd kbd-sm")) { "Ctrl+Alt+\(shortcut(for: template))" }
+                // A block wrapper keeps Elementary's formatted snapshots from moving inline text.
+                div(.class("template-card-shortcut")) {
+                  kbd(.class("kbd kbd-sm")) { "Ctrl+Alt+\(shortcut(for: template))" }
+                }
               }
               dl {
                 for component in template.components(projectID: projectID) {

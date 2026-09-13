@@ -15,6 +15,12 @@ extension DatabaseClient.ComponentLosses {
     .init(
       applyTemplate: { projectID, template in
         try await database.transaction { transaction in
+          // Lock the project before deleting, even when it has no losses yet.
+          // A no-op update serializes writers on both SQLite and PostgreSQL.
+          try await ProjectModel.query(on: transaction)
+            .filter(\.$id == projectID)
+            .set(\.$id, to: projectID)
+            .update()
           try await ComponentLossModel.query(on: transaction)
             .filter(\.$project.$id, .equal, projectID)
             .delete()

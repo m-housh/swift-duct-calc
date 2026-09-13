@@ -185,5 +185,5 @@
 .pressure-start-card { position:relative; width:100%; max-width:340px; padding:20px; border:1px dashed var(--accent); border-radius:8px; background:var(--color-base-100); }
 .template-card-heading { display:flex; flex-wrap:wrap-reverse; align-items:start; gap:8px; }
 .template-card-heading h3 { flex:1 1 180px; }
-.template-card-heading kbd { flex-shrink:0; margin-left:auto; }
+.template-card-shortcut { flex-shrink:0; margin-left:auto; }
 @media(max-width:600px) { .pressure-river-empty { grid-template-columns:minmax(0,1fr); gap:48px; padding:20px 0; margin:16px; }.pressure-river-empty::before { top:20%; bottom:20%; left:50%; right:auto; border-top:0; border-left:2px dashed var(--accent); }.pressure-start-card { padding:16px; } }
