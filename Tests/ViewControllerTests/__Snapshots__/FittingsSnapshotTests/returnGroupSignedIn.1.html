@@ -1,15 +1,19 @@
 <nav class="app-navbar" aria-label="Main">
-  <a class="app-brand" href="/projects">
-  <img src="/images/mand_logo_sm.webp" alt="" width="48" height="48">
-  Duct Calc<span></span></a>
+  <a class="app-brand" href="/projects"><span class="dc-wordmark" role="img" aria-label="DuctCalc, residential duct design"><span class="dc-wordmark-name" aria-hidden="true"><span class="dc-wordmark-icon">
+  <img class="dc-mark-light" src="/images/brand/ductcalc-mark-light.webp" alt="" width="50" height="50">
+  <img class="dc-mark-dark" src="/images/brand/ductcalc-mark-dark.webp" alt="" width="50" height="50">
+  uct
+  C
+  alc
+  Residential duct design</span><span></span><span class="dc-wordmark-c"></span><span></span></span><span class="dc-wordmark-description" aria-hidden="true"></span></span></a>
   <div class="app-nav-actions">
     <button type="button" class="btn" aria-label="Keyboard shortcuts" title="Keyboard shortcuts, Ctrl+Alt+? or Ctrl+Alt+/" aria-keyshortcuts="Control+Alt+/ Control+Alt+Shift+/" aria-haspopup="dialog" aria-controls="fittingsShortcuts" data-open-dialog="fittingsShortcuts"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 15h12"/></svg></button>
-    Ductulator<a class="btn btn-outline btn-primary" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span></span></a>
+    Ductulator<a class="btn app-nav-ductulator" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span></span></a>
     <details class="account-menu">
       <summary class="btn"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>Account</summary>
       <ul class="menu bg-base-200 rounded-box shadow-lg">
         <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
-        <li><a href="/projects"><span>Projects</span></a></li>
+        <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
         <li>
           <form action="/logout" method="get">
             <button type="submit">Logout</button>
@@ -41,11 +45,11 @@
         </tr>
         <tr>
           <th scope="row">Previous group</th>
-          <td class="text-right"><kbd class="kbd kbd-sm">P</kbd></td>
+          <td class="text-right"><kbd class="kbd kbd-sm">B</kbd></td>
         </tr>
       </tbody>
     </table>
-    <p class="text-sm mt-2">Number keys select a group. N and P follow the current air path filter, including All groups, and stop at either end.</p>
+    <p class="text-sm mt-2">Number keys select a group. N and B follow the current air path filter, including All groups, and stop at either end.</p>
     <table class="table table-sm mt-4">
       <caption class="text-left font-bold p-2">Fitting navigation</caption>
       <tbody>
@@ -66,6 +70,10 @@
         <tr>
           <th scope="row">Ductulator</th>
           <td class="text-right"><kbd class="kbd kbd-sm">D</kbd></td>
+        </tr>
+        <tr>
+          <th scope="row">Projects</th>
+          <td class="text-right"><kbd class="kbd kbd-sm">P</kbd></td>
         </tr>
         <tr>
           <th scope="row">Profile</th>

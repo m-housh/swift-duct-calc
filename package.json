@@ -11,7 +11,9 @@
     "test:path-templates": "node scripts/check_swift_path_templates.cjs",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:css": "npx @tailwindcss/cli -i Public/css/main.css -o Public/css/output.css",
-    "test:accessibility": "node scripts/check_accessibility.cjs"
+    "test:accessibility": "node scripts/check_accessibility.cjs",
+    "test:home-preview": "node --test scripts/check_home_preview.cjs",
+    "test:home-browser": "node scripts/check_home_browser.cjs"
   },
   "repository": {
     "type": "git",

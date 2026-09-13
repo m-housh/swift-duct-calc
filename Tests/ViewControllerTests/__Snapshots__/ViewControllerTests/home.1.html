@@ -1,134 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home · Duct Calc</title>
+    <title>DuctCalc · Residential duct design</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="ductcalc.com" name="og:site_name">
-    <meta content="Duct Calc" name="og:title">
-    <meta content="Duct sizing based on ACCA, Manual-D." name="description">
-    <meta content="Duct sizing based on ACCA, Manual-D." name="og:description">
-    <meta content="/images/mand_logo.png" name="og:image">
-    <meta content="/images/mand_logo.png" name="twitter:image">
-    <meta content="Duct Calc" name="twitter:image:alt">
-    <meta content="summary_large_image" name="twitter:card">
-    <meta content="1536" name="og:image:width">
-    <meta content="1024" name="og:image:height">
-    <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
-    <script src="https://unpkg.com/htmx.org@2.0.8"></script>
-    <script src="/js/htmx-download.js"></script>
-    <script src="/js/main.js?v=workspace-fixes-6"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="/css/output.css?v=navbar-reference-1">
-    <link rel="stylesheet" href="/css/htmx.css">
-    <link rel="stylesheet" href="/css/accessibility.css?v=request-toast-2">
-    <link rel="stylesheet" href="/css/project-workspace.css?v=friction-errors-5">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
-    <link rel="icon" href="/images/favicon-16x16.png" type="image/png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <script src="https://unpkg.com/htmx-remove@latest" crossorigin="anonymous" integrity="sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="Residential duct design based on the Manual-D workflow. Import room loads, trace duct paths, calculate friction rate, and size ducts in your browser.">
+    <meta property="og:site_name" content="DuctCalc">
+    <meta property="og:title" content="DuctCalc · Residential duct design">
+    <meta property="og:description" content="Residential duct design based on the Manual-D workflow. Import room loads, trace duct paths, calculate friction rate, and size ducts in your browser.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/images/mand_logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DuctCalc · Residential duct design">
+    <meta name="twitter:description" content="Residential duct design based on the Manual-D workflow. Import room loads, trace duct paths, calculate friction rate, and size ducts in your browser.">
+    <meta name="twitter:image" content="/images/mand_logo.png">
+    <link rel="icon" href="/images/favicon.ico?v=ductcalc-white-3" sizes="16x16 32x32 48x48">
+    <link rel="icon" href="/images/favicon-32x32.png?v=ductcalc-white-3" type="image/png" sizes="32x32">
+    <link rel="icon" href="/images/brand/favicon.svg?v=white-3" type="image/svg+xml" sizes="any">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=ductcalc-2" sizes="180x180">
+    <link rel="manifest" href="/site.webmanifest?v=ductcalc-2">
+    <link rel="stylesheet" href="/css/home.css?v=1">
+    <link rel="stylesheet" href="/css/ductcalc-wordmark.css?v=2">
+    <script src="/js/home.js?v=1" defer=""></script>
   </head>
   <body>
-    <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
-      <a class="skip-link" href="#main-content">Skip to content</a>
-      <main id="main-content" tabindex="-1" class="flex flex-col min-h-screen min-w-full grow mb-auto">
-        <div>
-          <div class="flex flex-wrap justify-end gap-3 m-4">
-            <div class="tooltip tooltip-bottom" data-tip="Browse fitting references"><a class="btn btn-outline btn-secondary" href="/fittings" aria-describedby="fitting-reference-help">Fitting reference</a></div>
-            Browse fitting references<span id="fitting-reference-help" class="sr-only"></span>
-            <div class="tooltip tooltip-bottom" data-tip="Duct size calculator"><a class="btn btn-outline btn-primary" href="/ductulator" target="_blank"><span>Ductulator</span></a></div>
-            <button class="btn btn-ghost btn-secondary text-lg" hx-get="/login" hx-target="body" hx-swap="outerHTML" hx-push-url="true">Login</button>
+    <div class="landing workspace">
+      <a class="landing-skip" href="#landing-content">Skip to content</a>
+      <header class="landing-header wrap">
+        <a class="landing-brand" href="/"><span class="dc-wordmark" role="img" aria-label="DuctCalc, residential duct design"><span class="dc-wordmark-name" aria-hidden="true">
+        <picture class="dc-wordmark-icon">
+          <source media="(prefers-color-scheme: dark)" srcset="/images/brand/ductcalc-mark-dark.webp">
+          <img src="/images/brand/ductcalc-mark-light.webp" alt="" width="50" height="50">
+        </picture>
+        uct
+        C
+        alc
+        Residential duct design
+        BETA<span></span><span class="dc-wordmark-c"></span><span></span></span><span class="dc-wordmark-description" aria-hidden="true"></span></span><span class="brand-beta"></span></a>
+        <nav aria-label="Main navigation"><a href="/fittings">Fitting reference</a><a href="/login">Log in ↗</a></nav>
+      </header>
+      <main id="landing-content" tabindex="-1" class="wrap workspace-main">
+        <section class="workspace-intro">
+          <div>
+            <h1>
+              Your next duct design,
+              <br>
+              all in one place.<em></em>
+            </h1>
           </div>
-          <div class="mx-4 sm:mx-10 lg:mx-20">
-            <div class="relative text-center bg-base-300
-rounded-3xl shadow-3xl overflow-hidden">
-              <div class="bg-secondary text-secondary-content text-xl font-bold
-absolute top-10 -left-15
-px-6 py-2 w-[250px] -rotate-45">BETA</div>
-              <div>
-                <div class="flex justify-center mt-30 md:mt-15 lg:mt-6">
-                  <div class="flex items-end border-b-6 border-accent
-text-4xl sm:text-6xl lg:text-8xl font-bold my-auto space-2">
-                    <h1 class="me-2">Duct Calc</h1>
-                    <div>
-                      <span class="bg-secondary text-secondary-content rounded-md
-                      text-2xl sm:text-4xl lg:text-5xl rotate-180 p-2 -mx-2" style="writing-mode: vertical-rl">Pro</span>
-                    </div>
-                  </div>
-                </div>
-                Source-available residential duct design program<a class="btn btn-ghost text-md text-primary font-bold italic" href="https://github.com/m-housh/swift-duct-calc" target="_blank"></a>
-                <p class="text-3xl py-6">Manual-D™ speed sheet, but on the web!</p>
-                <button class="btn btn-xl btn-primary mt-6" hx-get="/signup" hx-target="body" hx-swap="outerHTML" hx-push-url="true">Get Started</button>
-                <p class="text-xs italic my-6">
-                  Manual-D™ is a trademark of Air Conditioning Contractors of America (ACCA).
-                  
-                  This site is not designed by or affiliated with ACCA.
-                </p>
-              </div>
+          <div class="workspace-pitch"><a class="landing-cta" href="/signup">Start a project<span aria-hidden="true">↗</span></a><a class="text-link" href="/ductulator">Just need a duct size? Try the ductulator →</a></div>
+        </section>
+        <section class="workspace-demo" aria-label="Project preview with sample data">
+          <div class="demo-top">
+            <span>PROJECT PREVIEW</span><span>Sample data · Maple Avenue</span>
+            <button type="button" class="demo-playback" disabled>Play preview</button>
+          </div>
+          <div class="demo-stage">
+            <div class="demo-panel" id="preview-panel-0" data-preview-panel="0" aria-hidden="false">
+              <iframe class="demo-app-frame" title="Room loads · sample project" tabindex="-1" sandbox="allow-same-origin" loading="lazy" src="/home-preview/rooms"></iframe>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
-              <div class="border-3 border-accent rounded-lg shadow-lg p-4">
-                <div class="flex items-center space-x-4">
-                  <div class="text-3xl sm:text-5xl font-bold">Features</div>
-                </div>
-                <div class="text-xl ms-10 mt-10">
-                  <ul class="list-disc">
-                    <li>
-                      <div class="font-bold italic bg-secondary text-secondary-content rounded-lg shadow-lg px-4 w-fit">Built by humans</div>
-                    </li>
-                    <li>Source available for transparency and self-hosting.</li>
-                    <li>Great replacement for speed sheet users.</li>
-                    <li>Great for classrooms.</li>
-                    <li>Store your projects in one place.</li>
-                    <li>Export final project to pdf.</li>
-                    <li>Import room loads via CSV file.</li>
-                    <li>Web based.</li>
-                    <li>Self host (run on your own infrastructure).</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="border-3 border-accent rounded-lg shadow-lg p-4">
-                <div class="text-3xl sm:text-5xl font-bold">Coming Soon</div>
-                <div class="text-xl ms-10 mt-10">
-                  <ul class="list-disc">
-                    <li>API integration.</li>
-                    <li>Command line interface.</li>
-                    <li>Fitting selection tool. <span class="badge badge-outline"><span aria-hidden="true">✓</span>Available now</span></li>
-                    <li>Room load import from Cool Calc PDF. <span class="badge badge-outline"><span aria-hidden="true">✓</span>Available now</span></li>
-                  </ul>
-                </div>
-              </div>
+            <div class="demo-panel" id="preview-panel-1" data-preview-panel="1" aria-hidden="true">
+              <iframe class="demo-app-frame" title="Equipment · sample project" tabindex="-1" sandbox="allow-same-origin" loading="lazy" src="/home-preview/equipment"></iframe>
+            </div>
+            <div class="demo-panel" id="preview-panel-2" data-preview-panel="2" aria-hidden="true">
+              <iframe class="demo-app-frame" title="Duct paths · sample project" tabindex="-1" sandbox="allow-same-origin" loading="lazy" src="/home-preview/paths"></iframe>
+            </div>
+            <div class="demo-panel" id="preview-panel-3" data-preview-panel="3" aria-hidden="true">
+              <iframe class="demo-app-frame" title="Friction rate · sample project" tabindex="-1" sandbox="allow-same-origin" loading="lazy" src="/home-preview/pressure"></iframe>
+            </div>
+            <div class="demo-panel" id="preview-panel-4" data-preview-panel="4" aria-hidden="true">
+              <iframe class="demo-app-frame" title="Duct sizes · sample project" tabindex="-1" sandbox="allow-same-origin" loading="lazy" src="/home-preview/sizes"></iframe>
             </div>
           </div>
-        </div>
+          <nav class="demo-steps" aria-label="Preview steps">
+            <button type="button" disabled data-preview-step="0" aria-controls="preview-panel-0" aria-pressed="true"><small>01</small><span>Room loads</span></button>
+            <button type="button" disabled data-preview-step="1" aria-controls="preview-panel-1" aria-pressed="false"><small>02</small><span>Equipment</span></button>
+            <button type="button" disabled data-preview-step="2" aria-controls="preview-panel-2" aria-pressed="false"><small>03</small><span>Duct paths</span></button>
+            <button type="button" disabled data-preview-step="3" aria-controls="preview-panel-3" aria-pressed="false"><small>04</small><span>Friction rate</span></button>
+            <button type="button" disabled data-preview-step="4" aria-controls="preview-panel-4" aria-pressed="false"><small>05</small><span>Duct sizes</span></button>
+          </nav>
+        </section>
+        <p class="workspace-summary">Bring your room loads. Work through the paths, pressure losses, and duct sizes. Keep the whole job together.</p>
+        <section class="workspace-bottom">
+          <h2>The speed sheet grew up.</h2>
+          <p>The familiar Manual-D workflow, with CoolCalc imports, reusable path templates, and a PDF to take to the job.</p>
+          See how it's built ↗<a class="text-link" href="https://github.com/m-housh/swift-duct-calc"></a>
+        </section>
       </main>
-      <div id="app-status" class="sr-only" role="status" aria-atomic="true"></div>
-      <div id="app-error" class="request-error" role="alert"></div>
-      <div>
-        <footer class="footer footer-horizontal footer-center
-bg-base-300 text-base-content p-4">
-          <div class="grid-flow-row items-center">
-            <div class="flex mx-auto">
-              <a class="btn btn-ghost" href="mailto:support@ductcalc.pro"><svg aria-hidden="true" focusable="false" class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <g
-                  stroke-linejoin="round"
-                  stroke-linecap="round"
-                  stroke-width="2.5"
-                  fill="none"
-                  stroke="currentColor"
-                >
-                  <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                </g>
-              </svg><span>support@ductcalc.pro</span></a>
-            </div>
-            Source available via PolyForm Perimeter 1.0.1<a class="btn btn-ghost mx-auto" href="https://github.com/m-housh/swift-duct-calc/src/branch/main/LICENSE" target="_blank"><span></span></a>
-            <p class="">Copyright © 2026 - All rights reserved by Michael Housh</p>
-          </div>
-        </footer>
-      </div>
+      <footer class="landing-footer wrap">
+        <a href="https://github.com/m-housh/swift-duct-calc">Source available ↗</a><a href="mailto:support@ductcalc.pro">Contact Michael</a><a href="/privacy-policy">Privacy</a>
+        <p>Manual-D™ is a trademark of ACCA. DuctCalc is not affiliated with or endorsed by ACCA.</p>
+      </footer>
     </div>
   </body>
 </html>

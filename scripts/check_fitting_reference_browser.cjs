@@ -36,9 +36,12 @@ const fs = require('node:fs');
         const foreground = color(getComputedStyle(probe).backgroundColor);
         probe.style.color = 'var(--accent-text)';
         const accentText = color(getComputedStyle(probe).color);
+        document.querySelector('nav').append(probe);
+        probe.style.color = 'var(--nav-accent)';
+        const navAccent = color(getComputedStyle(probe).color);
         probe.remove();
         const controls = document.querySelectorAll('.system-toggle [aria-current="true"], .group-item.active .group-number, [data-action="toggle-data"][aria-expanded="true"], .format-tabs [aria-current="true"]');
-        return color(getComputedStyle(button).color) === primary
+        return color(getComputedStyle(button).color) === navAccent
           && [...document.querySelectorAll('.text-button')].every(control => color(getComputedStyle(control).color) === accentText)
           && [...controls].every(control =>
           color(getComputedStyle(control).backgroundColor) === primary && color(getComputedStyle(control).color) === foreground);
@@ -92,7 +95,7 @@ const fs = require('node:fs');
     }
     await shortcut('n');
     assert.equal(new URL(page.url()).searchParams.get('group'), '12');
-    for (let index = 0; index < 4; index++) await shortcut('p');
+    for (let index = 0; index < 4; index++) await shortcut('b');
     const fittingIDs = await page.locator('[data-select]').evaluateAll(links => links.map(link => link.dataset.select));
     await shortcut('k');
     assert.equal(await page.locator('[data-select][aria-current="true"]').getAttribute('data-select'), fittingIDs[0]);
@@ -223,13 +226,21 @@ const fs = require('node:fs');
     assert.equal(JSON.parse(fs.readFileSync(await (await plainDownload).path(), 'utf8')).fittings.length, 1);
     await plain.close();
     await page.goto(base + '/fittings?system=return&group=8');
-    await shortcut('p');
+    await shortcut('b');
     assert.equal(new URL(page.url()).pathname, '/fittings');
     assert.equal(new URL(page.url()).searchParams.get('group'), '7');
-    assert.equal(await page.locator('nav [aria-keyshortcuts="Control+Alt+P"]').count(), 0);
+    const projects = page.locator('nav [aria-keyshortcuts="Control+Alt+P"]');
+    assert.equal(await projects.count(), 1);
+    assert((await projects.textContent()).includes('Ctrl+Alt+P'));
+    await page.keyboard.press('Control+Alt+p');
+    await page.waitForURL(url => url.pathname === '/projects');
     await page.goto(base + '/logout');
     await page.goto(base + '/fittings?data=json');
     await page.locator('#fittings-page[data-tools="disabled"]').waitFor();
+    assert.equal(await page.locator('nav [aria-keyshortcuts="Control+Alt+P"]').count(), 0);
+    const guestURL = page.url();
+    await page.keyboard.press('Control+Alt+p');
+    assert.equal(page.url(), guestURL);
     assert.equal(await page.locator('[data-action="download-data"]').count(), 0);
     assert.deepEqual(errors, []);
     console.log('PASS: guest reference, actual login/HTMX return state, saved theme, CSV/JSON downloads, filtered export, path example, navigation/history, search focus, no-JavaScript browsing/downloads, mobile layout, and logout.');

@@ -23,9 +23,9 @@ extension ViewController.Request {
     case .fittings(let picker):
       return await picker.renderView(on: self)
     case .home:
-      return await view {
-        HomeView()
-      }
+      return HomePage(isLoggedIn: isLoggedIn)
+    case .homePreview(let step):
+      return HomePreviewPage(step: step)
     case .fittingReference(let query):
       @Dependency(\.fittingClient) var fittingClient
       return await ResultView {

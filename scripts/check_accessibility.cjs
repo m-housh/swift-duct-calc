@@ -46,7 +46,15 @@ const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'nig
   try {
     for (const path of ['/', '/login', '/signup', '/ductulator', '/fittings']) {
       await page.goto(origin + path);
-      await audit(path, path === '/' || path === '/signup' || path === '/fittings');
+      if (path === '/') {
+        for (const colorScheme of ['light', 'dark']) {
+          await page.emulateMedia({ colorScheme, reducedMotion: 'reduce' });
+          await audit(`Home · ${colorScheme}`);
+        }
+        await page.emulateMedia({ colorScheme: 'light', reducedMotion: 'no-preference' });
+      } else {
+        await audit(path, path === '/signup' || path === '/fittings');
+      }
     }
     await page.goto(origin + '/ductulator');
     await fill({ cfm: 1000 });

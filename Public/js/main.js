@@ -150,7 +150,7 @@ document.addEventListener('keydown', (event) => {
   const showHelp = key === '?' || key === '/';
   if (event.defaultPrevented || event.repeat || event.isComposing
       || !event.ctrlKey || !event.altKey || (event.shiftKey && key !== '?') || event.metaKey
-      || event.getModifierState('AltGraph') || (!showHelp && !/^[0-9njkdfpu]$/.test(key))) return;
+      || event.getModifierState('AltGraph') || (!showHelp && !/^[0-9bnjkdfpu]$/.test(key))) return;
 
   const editing = event.composedPath().some(node => node instanceof Element && (
     node.isContentEditable
@@ -160,7 +160,7 @@ document.addEventListener('keydown', (event) => {
 
   const fittings = document.getElementById('fittings-page');
   if (!fittings && (key === 'j' || key === 'k')) return;
-  const groupNavigation = fittings && (key === 'n' || key === 'p');
+  const groupNavigation = fittings && (key === 'n' || key === 'b');
   const buttons = [...document.querySelectorAll(groupNavigation
     ? '#fittings-page a[data-group]'
     : fittings ? '#fittings-page a[data-select]' : '#project-sidebar a[aria-keyshortcuts]')];
