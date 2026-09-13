@@ -97,8 +97,11 @@ struct ProjectWorkspaceTests {
     )
     .environment(ProjectViewValue.$projectID, projectID)
     let html = view.render()
-    #expect(html.contains("Add a component to enter its pressure loss."))
+    #expect(html.contains("Choose your starting point"))
+    #expect(html.contains("Start from scratch"))
     #expect(html.contains("data-expansion=\"pressure-flow\""))
+    #expect(html.contains("pressure-river-empty"))
+    #expect(html.contains("From template"))
     #expect(!html.contains("SELECTED LOSS"))
     assertSnapshot(of: view, as: .html)
   }

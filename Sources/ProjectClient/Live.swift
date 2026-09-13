@@ -30,7 +30,6 @@ extension ProjectClient: DependencyKey {
       },
       createProject: { userID, request in
         let project = try await database.projects.create(userID, request)
-        try await database.componentLosses.createDefaults(projectID: project.id)
         return try await .init(
           projectID: project.id,
           rooms: database.rooms.fetch(project.id),

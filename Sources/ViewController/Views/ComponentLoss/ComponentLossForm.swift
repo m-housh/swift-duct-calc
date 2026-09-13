@@ -43,11 +43,16 @@ struct ComponentLossForm: HTML, Sendable {
         input(.class("hidden"), .name("projectID"), .value("\(projectID)"))
 
         LabeledInput(
-          "Name",
+          "Component",
           .name("name"),
           .type(.text),
           .value(componentLoss?.name),
-          .placeholder("Name"),
+          .placeholder("e.g. Filter"),
+          .init(name: "autocomplete", value: "off"),
+          .data("1p-ignore", value: "true"),
+          .data("bwignore", value: "true"),
+          .data("lpignore", value: "true"),
+          .data("protonpass-ignore", value: "true"),
           .required,
           .autofocus
         )

@@ -13,6 +13,16 @@ extension DatabaseClient.ComponentLosses: TestDependencyKey {
 extension DatabaseClient.ComponentLosses {
   public static func live(database: any Database) -> Self {
     .init(
+      applyTemplate: { projectID, template in
+        try await database.transaction { transaction in
+          try await ComponentLossModel.query(on: transaction)
+            .filter(\.$project.$id, .equal, projectID)
+            .delete()
+          for component in template.components(projectID: projectID) {
+            try await component.toModel().validateAndSave(on: transaction)
+          }
+        }
+      },
       create: { request in
         let model = request.toModel()
         try await model.validateAndSave(on: database)

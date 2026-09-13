@@ -32,7 +32,7 @@ struct ProjectShortcutsDialog: HTML, Sendable {
         }
       }
       p(.class("text-sm mt-2")) {
-        "Ctrl+K focuses room or register search. Ductulator and fitting reference open in new tabs. Shortcuts pause while editing a field or when a dialog is open."
+        "Ctrl+K focuses room or register search. Ductulator and fitting reference open in new tabs. Navigation shortcuts pause while editing a field or when a dialog is open."
       }
     }
   }

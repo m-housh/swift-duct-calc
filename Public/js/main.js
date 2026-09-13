@@ -150,13 +150,22 @@ document.addEventListener('keydown', (event) => {
   const showHelp = key === '?' || key === '/';
   if (event.defaultPrevented || event.repeat || event.isComposing
       || !event.ctrlKey || !event.altKey || (event.shiftKey && !showHelp) || event.metaKey
-      || event.getModifierState('AltGraph') || (!showHelp && !/^[0-9bnjkdfpu]$/.test(key))) return;
+      || event.getModifierState('AltGraph') || (!showHelp && !/^[0-9abnjkdfpu]$/.test(key))) return;
 
   const editing = event.composedPath().some(node => node instanceof Element && (
     node.isContentEditable
     || node.matches('input, textarea, select, [contenteditable]:not([contenteditable="false"]), [role="textbox"], [role="combobox"], [role="spinbutton"]')
   ));
-  if (editing || document.querySelector('dialog[open], [role="dialog"][aria-modal="true"]')) return;
+  if (editing) return;
+  const dialogs = document.querySelectorAll('dialog[open], [role="dialog"][aria-modal="true"]');
+  if (dialogs.length) {
+    if (dialogs.length !== 1 || dialogs[0].id !== 'frictionRateTemplates') return;
+    const button = dialogs[0].querySelector(`button[aria-keyshortcuts="Control+Alt+${key.toUpperCase()}"]`);
+    if (!button || button.matches(':disabled, [aria-disabled="true"]') || button.closest('[inert]')) return;
+    event.preventDefault();
+    button.click();
+    return;
+  }
 
   const fittings = document.getElementById('fittings-page');
   if (!fittings && (key === 'j' || key === 'k')) return;

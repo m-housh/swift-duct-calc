@@ -500,6 +500,10 @@ extension SiteRoute.View.ProjectRoute.FrictionRateRoute {
     switch self {
     case .index:
       return await view(on: request, projectID: projectID)
+    case .applyTemplate(let template):
+      return await view(on: request, projectID: projectID) {
+        try await database.componentLosses.applyTemplate(projectID, template)
+      }
     }
   }
 
@@ -514,6 +518,7 @@ extension SiteRoute.View.ProjectRoute.FrictionRateRoute {
 
     return await request.view(projectID: projectID) {
       await ResultView {
+        try await catching()
         let equipment = try await database.equipment.fetch(projectID)
         let componentLosses = try await database.componentLosses.fetch(projectID)
         let lengths = try await database.equivalentLengths.fetchMax(projectID)

@@ -39,7 +39,6 @@
   transition: none;
 }
 .app-navbar .btn:hover { background: var(--color-base-300); }
-.app-navbar .app-nav-ductulator { border-color: var(--nav-line); color: var(--nav-accent); }
 .app-navbar :is(a, button, summary):focus-visible { outline: 3px solid var(--nav-accent); outline-offset: 3px; }
 .app-navbar .account-menu > ul { border: 1px solid var(--nav-line); background: var(--nav-paper); color: var(--nav-ink); }
 @media (max-width: 480px) {

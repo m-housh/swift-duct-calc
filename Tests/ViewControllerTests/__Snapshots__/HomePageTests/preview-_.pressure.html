@@ -66,7 +66,10 @@
                   <h1 class="text-3xl font-bold">Where the pressure goes</h1>
                   <p class="muted">The width of each stream represents its share of blower static.</p>
                 </div>
-                <button type="button" class="btn btn-outline" data-open-dialog="componentLossForm"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add component</button>
+                <div class="flex flex-wrap gap-2">
+                  <button type="button" class="btn btn-secondary" data-open-dialog="frictionRateTemplates">Use template</button>
+                  <button type="button" class="btn btn-outline" data-open-dialog="componentLossForm"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add component</button>
+                </div>
               </div>
               <div class="design-metrics pressure-summary">
                 <div class="design-metric"><span>Blower static</span><strong>0.50<small>in. w.c.</small></strong></div>
@@ -271,12 +274,119 @@
                   <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Component Loss" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
                   <form data-success-message="Changes saved." class="space-y-4 p-4" hx-post="/projects/00000000-0000-0000-0000-000000002328/component-loss" hx-target="body" hx-swap="outerHTML">
                     <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000002328">
-                    Name<label class="input w-full"><span class="label"></span>
-                    <input name="name" type="text" value="" placeholder="Name" required autofocus>
+                    Component<label class="input w-full"><span class="label"></span>
+                    <input name="name" type="text" value="" placeholder="e.g. Filter" autocomplete="off" data-1p-ignore="true" data-bwignore="true" data-lpignore="true" data-protonpass-ignore="true" required autofocus>
                     Value</label><label class="input w-full"><span class="label"></span>
                     <input name="value" type="number" value="" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
                     <button class="btn btn-secondary btn-block" type="submit">Submit</button>
                   </form>
+                </div>
+              </dialog>
+              <dialog id="frictionRateTemplates" class="modal" aria-labelledby="frictionRateTemplates-title">
+                <div class="modal-box">
+                  <h2 id="frictionRateTemplates-title" class="text-2xl font-bold mb-6 pe-10">Choose a system template</h2>
+                  <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Choose a system template" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                  <div class="space-y-4">
+                    <p class="muted">Start with common component losses, then edit them to match your equipment. Values are in inches of water column.</p>
+                    <p class="muted">The shortcuts below apply a template while this chooser is open.</p>
+                    <div class="flex items-start gap-3 py-2 leading-relaxed">
+                      <span class="mt-0.5 shrink-0 text-warning"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
+                      <div class="min-w-0">Using a template replaces all current component losses, including custom components and edited values.</div>
+                    </div>
+                    <div class="card bg-base-200 border border-base-300">
+                      <div class="card-body">
+                        <div class="template-card-heading">
+                          <h3 class="card-title">Shared defaults</h3>
+                          Ctrl+Alt+D<kbd class="kbd kbd-sm"></kbd>
+                        </div>
+                        <dl>
+                          <div class="flex justify-between gap-4">
+                            <dt>Supply Outlet</dt>
+                            <dd>0.03</dd>
+                          </div>
+                          <div class="flex justify-between gap-4">
+                            <dt>Return Grille</dt>
+                            <dd>0.03</dd>
+                          </div>
+                          <div class="flex justify-between gap-4">
+                            <dt>Balancing Damper</dt>
+                            <dd>0.03</dd>
+                          </div>
+                        </dl>
+                        <div class="card-actions justify-end">
+                          <form hx-post="/projects/00000000-0000-0000-0000-000000002328/friction-rate/templates/shared" hx-target="body" hx-swap="outerHTML" data-success-message="System template applied." hx-disabled-elt="find button">
+                            <button type="submit" class="btn btn-secondary" aria-keyshortcuts="Control+Alt+D" aria-label="Use Shared defaults template">Use template</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card bg-base-200 border border-base-300">
+                      <div class="card-body">
+                        <div class="template-card-heading">
+                          <h3 class="card-title">Furnace + evaporator coil</h3>
+                          Ctrl+Alt+F<kbd class="kbd kbd-sm"></kbd>
+                        </div>
+                        <dl>
+                          <div class="flex justify-between gap-4">
+                            <dt>Supply Outlet</dt>
+                            <dd>0.03</dd>
+                          </div>
+                          <div class="flex justify-between gap-4">
+                            <dt>Return Grille</dt>
+                            <dd>0.03</dd>
+                          </div>
+                          <div class="flex justify-between gap-4">
+                            <dt>Balancing Damper</dt>
+                            <dd>0.03</dd>
+                          </div>
+                          <div class="flex justify-between gap-4">
+                            <dt>Evaporator Coil</dt>
+                            <dd>0.20</dd>
+                          </div>
+                          <div class="flex justify-between gap-4">
+                            <dt>Filter</dt>
+                            <dd>0.10</dd>
+                          </div>
+                        </dl>
+                        <div class="card-actions justify-end">
+                          <form hx-post="/projects/00000000-0000-0000-0000-000000002328/friction-rate/templates/furnace" hx-target="body" hx-swap="outerHTML" data-success-message="System template applied." hx-disabled-elt="find button">
+                            <button type="submit" class="btn btn-secondary" aria-keyshortcuts="Control+Alt+F" aria-label="Use Furnace + evaporator coil template">Use template</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card bg-base-200 border border-base-300">
+                      <div class="card-body">
+                        <div class="template-card-heading">
+                          <h3 class="card-title">Air handler</h3>
+                          Ctrl+Alt+A<kbd class="kbd kbd-sm"></kbd>
+                        </div>
+                        <dl>
+                          <div class="flex justify-between gap-4">
+                            <dt>Supply Outlet</dt>
+                            <dd>0.03</dd>
+                          </div>
+                          <div class="flex justify-between gap-4">
+                            <dt>Return Grille</dt>
+                            <dd>0.03</dd>
+                          </div>
+                          <div class="flex justify-between gap-4">
+                            <dt>Balancing Damper</dt>
+                            <dd>0.03</dd>
+                          </div>
+                          <div class="flex justify-between gap-4">
+                            <dt>Filter</dt>
+                            <dd>0.10</dd>
+                          </div>
+                        </dl>
+                        <div class="card-actions justify-end">
+                          <form hx-post="/projects/00000000-0000-0000-0000-000000002328/friction-rate/templates/air-handler" hx-target="body" hx-swap="outerHTML" data-success-message="System template applied." hx-disabled-elt="find button">
+                            <button type="submit" class="btn btn-secondary" aria-keyshortcuts="Control+Alt+A" aria-label="Use Air handler template">Use template</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </dialog>
               <dialog id="componentLossForm_00000000000000000000000000002347" class="modal" aria-labelledby="componentLossForm_00000000000000000000000000002347-title">
@@ -286,8 +396,8 @@
                   <form data-success-message="Changes saved." class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000002328/component-loss/00000000-0000-0000-0000-000000002347" hx-target="body" hx-swap="outerHTML">
                     <input class="hidden" name="id" value="00000000-0000-0000-0000-000000002347">
                     <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000002328">
-                    Name<label class="input w-full"><span class="label"></span>
-                    <input name="name" type="text" value="Coil" placeholder="Name" required autofocus>
+                    Component<label class="input w-full"><span class="label"></span>
+                    <input name="name" type="text" value="Coil" placeholder="e.g. Filter" autocomplete="off" data-1p-ignore="true" data-bwignore="true" data-lpignore="true" data-protonpass-ignore="true" required autofocus>
                     Value</label><label class="input w-full"><span class="label"></span>
                     <input name="value" type="number" value="0.11" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
                     <button class="btn btn-secondary btn-block" type="submit">Submit</button>
@@ -301,8 +411,8 @@
                   <form data-success-message="Changes saved." class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000002328/component-loss/00000000-0000-0000-0000-000000002346" hx-target="body" hx-swap="outerHTML">
                     <input class="hidden" name="id" value="00000000-0000-0000-0000-000000002346">
                     <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000002328">
-                    Name<label class="input w-full"><span class="label"></span>
-                    <input name="name" type="text" value="Filter" placeholder="Name" required autofocus>
+                    Component<label class="input w-full"><span class="label"></span>
+                    <input name="name" type="text" value="Filter" placeholder="e.g. Filter" autocomplete="off" data-1p-ignore="true" data-bwignore="true" data-lpignore="true" data-protonpass-ignore="true" required autofocus>
                     Value</label><label class="input w-full"><span class="label"></span>
                     <input name="value" type="number" value="0.1" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
                     <button class="btn btn-secondary btn-block" type="submit">Submit</button>
@@ -316,8 +426,8 @@
                   <form data-success-message="Changes saved." class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000002328/component-loss/00000000-0000-0000-0000-000000002348" hx-target="body" hx-swap="outerHTML">
                     <input class="hidden" name="id" value="00000000-0000-0000-0000-000000002348">
                     <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000002328">
-                    Name<label class="input w-full"><span class="label"></span>
-                    <input name="name" type="text" value="Supply outlet" placeholder="Name" required autofocus>
+                    Component<label class="input w-full"><span class="label"></span>
+                    <input name="name" type="text" value="Supply outlet" placeholder="e.g. Filter" autocomplete="off" data-1p-ignore="true" data-bwignore="true" data-lpignore="true" data-protonpass-ignore="true" required autofocus>
                     Value</label><label class="input w-full"><span class="label"></span>
                     <input name="value" type="number" value="0.03" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
                     <button class="btn btn-secondary btn-block" type="submit">Submit</button>
@@ -331,8 +441,8 @@
                   <form data-success-message="Changes saved." class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000002328/component-loss/00000000-0000-0000-0000-000000002349" hx-target="body" hx-swap="outerHTML">
                     <input class="hidden" name="id" value="00000000-0000-0000-0000-000000002349">
                     <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000002328">
-                    Name<label class="input w-full"><span class="label"></span>
-                    <input name="name" type="text" value="Return grille" placeholder="Name" required autofocus>
+                    Component<label class="input w-full"><span class="label"></span>
+                    <input name="name" type="text" value="Return grille" placeholder="e.g. Filter" autocomplete="off" data-1p-ignore="true" data-bwignore="true" data-lpignore="true" data-protonpass-ignore="true" required autofocus>
                     Value</label><label class="input w-full"><span class="label"></span>
                     <input name="value" type="number" value="0.03" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
                     <button class="btn btn-secondary btn-block" type="submit">Submit</button>
@@ -346,8 +456,8 @@
                   <form data-success-message="Changes saved." class="space-y-4 p-4" hx-patch="/projects/00000000-0000-0000-0000-000000002328/component-loss/00000000-0000-0000-0000-00000000234A" hx-target="body" hx-swap="outerHTML">
                     <input class="hidden" name="id" value="00000000-0000-0000-0000-00000000234A">
                     <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000002328">
-                    Name<label class="input w-full"><span class="label"></span>
-                    <input name="name" type="text" value="Balancing damper" placeholder="Name" required autofocus>
+                    Component<label class="input w-full"><span class="label"></span>
+                    <input name="name" type="text" value="Balancing damper" placeholder="e.g. Filter" autocomplete="off" data-1p-ignore="true" data-bwignore="true" data-lpignore="true" data-protonpass-ignore="true" required autofocus>
                     Value</label><label class="input w-full"><span class="label"></span>
                     <input name="value" type="number" value="0.03" placeholder="0.2" min="0.03" max="1.0" step="0.01" required></label>
                     <button class="btn btn-secondary btn-block" type="submit">Submit</button>
@@ -429,7 +539,7 @@
                 </tr>
               </tbody>
             </table>
-            <p class="text-sm mt-2">Ctrl+K focuses room or register search. Ductulator and fitting reference open in new tabs. Shortcuts pause while editing a field or when a dialog is open.</p>
+            <p class="text-sm mt-2">Ctrl+K focuses room or register search. Ductulator and fitting reference open in new tabs. Navigation shortcuts pause while editing a field or when a dialog is open.</p>
           </div>
         </dialog>
       </div>

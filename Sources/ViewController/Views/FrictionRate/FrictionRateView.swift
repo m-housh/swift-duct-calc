@@ -29,22 +29,57 @@ struct FrictionRateView: HTML, Sendable {
       PageTitleRow {
         div {
           PageTitle { "Where the pressure goes" }
-          p(.class("muted")) { "The width of each stream represents its share of blower static." }
+          p(.class("muted")) {
+            if componentLosses.isEmpty {
+              "Choose component pressure losses for your system."
+            } else {
+              "The width of each stream represents its share of blower static."
+            }
+          }
         }
-        button(.type(.button), .class("btn btn-outline"), .showModal(id: ComponentLossForm.id())) {
-          SVG(.circlePlus)
-          "Add component"
+        if !componentLosses.isEmpty {
+          div(.class("flex flex-wrap gap-2")) {
+            button(
+              .type(.button), .class("btn btn-secondary"),
+              .showModal(id: FrictionRateTemplatesView.id)
+            ) { "Use template" }
+            button(
+              .type(.button), .class("btn btn-outline"), .showModal(id: ComponentLossForm.id())
+            ) {
+              SVG(.circlePlus)
+              "Add component"
+            }
+          }
         }
       }
       summaryMetrics
       pressureFlow
-      componentTable
+      if !componentLosses.isEmpty { componentTable }
       if frictionRate == nil {
         Alert { "Complete equipment and supply/return paths to calculate friction rate." }
       }
       ComponentLossForm(dismiss: true, projectID: projectID, componentLoss: nil)
+      FrictionRateTemplatesView(projectID: projectID, hasComponents: !componentLosses.isEmpty)
       for loss in sortedLosses {
         ComponentLossForm(dismiss: true, projectID: projectID, componentLoss: loss)
+      }
+    }
+  }
+
+  private var startingCard: some HTML {
+    section(.class("pressure-start-card space-y-4")) {
+      h2 { "Choose your starting point" }
+      p(.class("muted")) {
+        "Use a template for common component losses, or start from scratch and add your own."
+      }
+      div(.class("flex flex-wrap gap-2")) {
+        button(
+          .type(.button), .class("btn btn-secondary"),
+          .showModal(id: FrictionRateTemplatesView.id)
+        ) { "From template" }
+        button(
+          .type(.button), .class("btn btn-outline"), .showModal(id: ComponentLossForm.id())
+        ) { "Start from scratch" }
       }
     }
   }
@@ -77,21 +112,28 @@ struct FrictionRateView: HTML, Sendable {
           SVG(.chevronRight)
           "PRESSURE FLOW"
         }
-        span { "Select a component · All losses in the table below" }
+        span {
+          componentLosses.isEmpty
+            ? "Add component losses to your system"
+            : "Select a component · All losses in the table below"
+        }
       }
       div(
-        .class("pressure-river"), .style("--river-height: \(max(500, sortedLosses.count * 160))px")
+        .class(componentLosses.isEmpty ? "pressure-river pressure-river-empty" : "pressure-river"),
+        .style("--river-height: \(max(500, sortedLosses.count * 160))px")
       ) {
-        HTMLRaw(
-          "<svg class=\"river-wires\" viewBox=\"0 0 1000 490\" preserveAspectRatio=\"none\" aria-hidden=\"true\">"
-        )
-        HTMLRaw("<path class=\"pressure-source-line\" d=\"M100 50V445\"/>")
-        for (index, loss) in sortedLosses.enumerated() {
+        if !componentLosses.isEmpty {
           HTMLRaw(
-            "<path class=\"loss-stream\(index == 0 ? " active" : "")\" data-loss-stream=\"\(loss.id.idString)\" d=\"M115 245 C420 245,430 \(y(index)),770 \(y(index))\" style=\"stroke-width:\(min(160, max(1, (share(loss) ?? 0) * 1.6)))\"/>"
+            "<svg class=\"river-wires\" viewBox=\"0 0 1000 490\" preserveAspectRatio=\"none\" aria-hidden=\"true\">"
           )
+          HTMLRaw("<path class=\"pressure-source-line\" d=\"M100 50V445\"/>")
+          for (index, loss) in sortedLosses.enumerated() {
+            HTMLRaw(
+              "<path class=\"loss-stream\(index == 0 ? " active" : "")\" data-loss-stream=\"\(loss.id.idString)\" d=\"M115 245 C420 245,430 \(y(index)),770 \(y(index))\" style=\"stroke-width:\(min(160, max(1, (share(loss) ?? 0) * 1.6)))\"/>"
+            )
+          }
+          HTMLRaw("</svg>")
         }
-        HTMLRaw("</svg>")
         div(.class("pressure-source")) {
           span { "BLOWER STATIC" }
           strong {
@@ -103,6 +145,7 @@ struct FrictionRateView: HTML, Sendable {
           }
           small { "in. w.c." }
         }
+        if componentLosses.isEmpty { startingCard }
         for (index, loss) in sortedLosses.enumerated() {
           article(
             .class("river-endpoint"), .style("top: \(y(index) / 490 * 100)%")
@@ -129,9 +172,6 @@ struct FrictionRateView: HTML, Sendable {
               LossActions(projectID: projectID, loss: loss)
             }
           }
-        }
-        if sortedLosses.isEmpty {
-          p(.class("empty-state")) { "Add component pressure losses to complete this section." }
         }
       }
     }
@@ -199,13 +239,6 @@ struct FrictionRateView: HTML, Sendable {
                   }
                 }
                 td { LossActions(projectID: projectID, loss: loss) }
-              }
-            }
-            if sortedLosses.isEmpty {
-              tr {
-                td(.init(name: "colspan", value: "4"), .class("empty-state")) {
-                  "Add a component to enter its pressure loss."
-                }
               }
             }
           }
