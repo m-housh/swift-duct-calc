@@ -1,11 +1,11 @@
-<link rel="stylesheet" href="/css/fitting-path.css?v=app-theme-1">
+<link rel="stylesheet" href="/css/fitting-path.css?v=reference-import-2">
 <link rel="stylesheet" href="/css/picker-preference.css">
 <link rel="stylesheet" href="/css/fitting-favorites.css">
 <link rel="stylesheet" href="/css/fitting-path-modal.css?v=close-button-3">
 <script src="/js/group-carousel.js" defer></script>
 <script src="/js/path-templates.js?v=path-revisions-4" defer></script>
 <script src="/js/template-modal.js?v=template-modal-2" defer></script>
-<script src="/js/fitting-path.js?v=duplicate-path-5" defer></script>
+<script src="/js/fitting-path.js?v=reference-import-6" defer></script>
 <dialog id="fitting-path" class="editor-dialog fitting-path" aria-labelledby="path-title" data-endpoint="/projects/00000000-0000-0000-0000-000000000000/effective-lengths" data-baseline="null" data-rows="[]" data-duplicate="false" data-favorites="[&quot;8A-smooth&quot;]">
   <section class="path-sheet">
     <header>
@@ -47,6 +47,7 @@
     </section>
     <div class="path-entry-actions">
       <button type="button" id="quick-entry-open">Quick reference entry</button>
+      <button type="button" id="reference-import-open">Import CSV</button>
       Open fitting reference ↗<a id="path-fitting-reference" href="/fittings?system=supply" target="_blank" rel="noopener" class="link-button"></a>
     </div>
     <footer class="sheet-total">
@@ -155,5 +156,24 @@
       <button type="submit" class="primary">Check entry</button>
     </form>
     <div id="reference-result" aria-live="polite"></div>
+  </dialog>
+  <dialog id="reference-import-dialog" class="path-picker-dialog" aria-labelledby="reference-import-dialog-title">
+    <div class="picker-top">
+      <h2 id="reference-import-dialog-title">Import reference fittings</h2>
+      <button type="button" data-close-dialog="reference-import-dialog">Close</button>
+    </div>
+    <p>Paste CSV or load a CSV file, then review before adding to this path.</p>
+    <p>Enter equivalent length per fitting in feet. Quantity defaults to 1. Your supplied lengths are preserved.</p>
+    <form id="reference-import-form">
+      <label>Upload CSV
+      <input type="file" id="reference-import-file" accept=".csv,text/csv">
+      Paste or edit CSV</label><label>
+      <textarea id="reference-import-csv" name="csv" required rows="7" spellcheck="false" placeholder="code,length_ft,quantity
+1A,35,
+4AG,30.5,2"></textarea>
+      UTF-8 CSV, up to 64 KiB and 500 rows including the current path. Headers: code,length_ft with optional quantity. Group 11 uses the fitting picker.</label><small></small>
+      <button type="submit" class="primary">Preview import</button>
+    </form>
+    <div id="reference-import-result" aria-live="polite"></div>
   </dialog>
 </dialog>

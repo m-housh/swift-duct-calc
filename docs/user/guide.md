@@ -104,7 +104,28 @@ trunk contribution appropriate to the path being entered.
 
 Use quick reference entry when supplying a fitting code and an equivalent length
 from your own reference. Enter length per fitting; quantity is applied separately.
-The supplied length is retained. Bulk fitting CSV import is not available.
+The supplied length is retained.
+
+For multiple reference entries, choose **Import CSV** in the path editor. Paste
+CSV or load a UTF-8 CSV file, then preview the rows before adding them. Use
+`code,length_ft` headers with an optional `quantity` column:
+
+```csv
+code,length_ft,quantity
+1A,35,
+4AG,30.5,2
+```
+
+Lengths are feet per fitting, with a decimal point for fractional feet. Omitted
+or empty quantities mean 1. The example illustrates syntax, not a recommended
+path. Codes are case-insensitive; recognized variant IDs such as `8A-smooth`
+become family reference codes such as `8A`. Use the fitting picker for Group 11.
+
+Correct any reported errors in the CSV and preview again. Imports append to the
+unsaved path; repeated entries are kept, and the editor groups rows by fitting
+group while retaining their order within each group. Review repeated-use warnings
+and choose **Save path** to keep the changes. Cancelling an import leaves the path
+intact. Files are limited to 64 KiB, with at most 500 rows in the combined path.
 
 Round and rectangular preferences change fitting order without hiding choices.
 Favorites belong to your account and are available across projects, but do not

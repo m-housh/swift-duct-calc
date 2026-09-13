@@ -78,7 +78,8 @@ struct Catalog: Sendable {
 
   func resolveReference(_ request: Fitting.ReferenceRequest) -> Fitting.ReferenceMatch {
     let code = request.code.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-    let candidates = records.filter { $0.sourceCode?.rawValue == code }
+    let source = records.first { $0.id.rawValue.uppercased() == code }?.sourceCode?.rawValue ?? code
+    let candidates = records.filter { $0.sourceCode?.rawValue == source }
     guard let first = candidates.first, let sourceCode = first.sourceCode else { return .unknown }
     let reference = Fitting.Reference(
       code: sourceCode, groupID: first.groupID, fittingIDs: candidates.map(\.id)

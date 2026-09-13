@@ -9,6 +9,8 @@ extension SiteRoute.View.FittingPickerRoute {
     @Dependency(\.fittingClient) var client
     do {
       switch self {
+      case .importReferences(let payload):
+        return try await previewReferenceImport(payload)
       case .review, .saveReview:
         return await renderCatalogReview(on: request)
       case .index:
