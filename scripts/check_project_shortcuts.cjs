@@ -190,8 +190,8 @@ test('every project page lists its shortcuts in an accessible help dialog', t =>
     const trigger = document.querySelector('nav button[aria-haspopup="dialog"][aria-controls="projectShortcuts"]');
     assert.equal(trigger.getAttribute('aria-label'), 'Keyboard shortcuts');
     assert(trigger.querySelector('svg[aria-hidden="true"]'));
-    assert.deepEqual([...dialog.querySelectorAll('caption')].map(node => node.textContent), ['Project sections', 'App navigation']);
-    const expected = { J: 'Next room row', K: 'Previous room row' };
+    assert.deepEqual([...dialog.querySelectorAll('caption')].map(node => node.textContent), ['Project sections', 'Equipment editing', 'App navigation']);
+    const expected = { J: 'Next room row', K: 'Previous room row', H: 'Heating airflow', C: 'Cooling airflow', S: 'Static pressure', E: 'Edit equipment' };
     for (const control of document.querySelectorAll('#project-sidebar [aria-keyshortcuts], nav a[aria-keyshortcuts]')) {
       const key = control.getAttribute('aria-keyshortcuts').split('+').at(-1);
       // The formatted snapshot renderer can hoist inline text; live browser tests check control names.
@@ -352,4 +352,28 @@ test('template shortcuts resolve buttons after body replacement without duplicat
     assert(press('a').defaultPrevented);
     assert.equal(applied, 1);
   }
+});
+
+test('equipment shortcuts open each editor, pause inside dialogs and survive body replacement', t => {
+  const { dom, document, press } = setup(t, snapshot(3));
+  dom.window.HTMLDialogElement.prototype.showModal = function () { this.open = true; };
+  for (let pass = 0; pass < 2; pass++) {
+    for (const [key, field] of [['h', 'heating'], ['c', 'cooling'], ['s', 'pressure'], ['e', 'all']]) {
+      const dialog = document.getElementById(`equipmentForm-${field}`);
+      assert(dialog);
+      assert(press(key).defaultPrevented);
+      assert(dialog.open);
+      for (const other of ['h', 'c', 's', 'e']) assert.equal(press(other).defaultPrevented, false);
+      dialog.open = false;
+      for (const options of [{ctrlKey:false}, {altKey:false}, {shiftKey:true}, {metaKey:true},
+        {repeat:true}, {isComposing:true}, {modifierAltGraph:true}]) {
+        assert.equal(press(key, options).defaultPrevented, false);
+      }
+      assert.equal(press(key, {}, dialog.querySelector('input[type=number]')).defaultPrevented, false);
+    }
+    document.body.outerHTML = snapshot(3).match(/<body[\s\S]*<\/body>/)[0];
+    dom.window.eval(script);
+  }
+  document.body.innerHTML = '<main>Another page</main>';
+  for (const key of ['h', 'c', 's', 'e']) assert.equal(press(key).defaultPrevented, false);
 });

@@ -138,7 +138,7 @@ test('the preview embeds the actual app screens with shared CSS and blocked edit
   const p = setup(t);
   const frames = [...p.doc.querySelectorAll('.demo-app-frame')];
   assert.equal(frames.length, 5);
-  const markers = ['[data-room-workspace]', '.equipment-panel', '[data-tel-workspace]', '[data-pressure-workspace]', '.trunk-panel'];
+  const markers = ['[data-room-workspace]', '.equipment-network', '[data-tel-workspace]', '[data-pressure-workspace]', '.trunk-panel'];
   frames.forEach((frame, index) => {
     assert.equal(frame.getAttribute('sandbox'), 'allow-same-origin');
     assert.equal(frame.tabIndex, -1);
@@ -147,7 +147,7 @@ test('the preview embeds the actual app screens with shared CSS and blocked edit
     assert.equal(frame.getAttribute('loading'), 'lazy');
     const content = child.window.document;
     assert(content.querySelector('[inert] .project-workspace'));
-    assert(content.querySelector(markers[index]));
+    assert(content.querySelector(markers[index]), `${step} preview should contain ${markers[index]}`);
     assert(content.querySelector('.project-navigation'));
     const sidebarSteps = [...content.querySelectorAll('#project-sidebar a')].slice(1);
     assert.equal(sidebarSteps[index].getAttribute('aria-current'), 'page');

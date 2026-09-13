@@ -150,7 +150,7 @@ extension DatabaseClient.Projects: TestDependencyKey {
         }
 
         return .init(
-          equipmentInfo: model.equipment != nil,
+          equipmentInfo: try model.equipment?.toDTO().isComplete == true,
           rooms: model.rooms.count > 0,
           equivalentLength: equivalentLengthsCompleted,
           frictionRate: model.componentLosses.count > 0

@@ -480,9 +480,18 @@ extension SiteRoute.View.ProjectRoute {
         Body {
           SafeFormData {
             Field("projectID") { Project.ID.parser() }
-            Field("staticPressure") { Double.parser() }
-            Field("heatingCFM") { Int.parser() }
-            Field("coolingCFM") { Int.parser() }
+            Field("staticPressure") {
+              Double.parser()
+              End()
+            }
+            Field("heatingCFM", default: .some(nil)) {
+              Optionally { Int.parser() }
+              End()
+            }
+            Field("coolingCFM", default: .some(nil)) {
+              Optionally { Int.parser() }
+              End()
+            }
           }
           .map(.memberwise(EquipmentInfo.Create.init))
         }
@@ -495,14 +504,17 @@ extension SiteRoute.View.ProjectRoute {
         Method.patch
         Body {
           SafeFormData {
-            Optionally {
-              Field("staticPressure", default: nil) { Double.parser() }
+            Field("staticPressure", default: .some(nil)) {
+              Optionally { Double.parser() }
+              End()
             }
-            Optionally {
-              Field("heatingCFM", default: nil) { Int.parser() }
+            Field("heatingCFM", default: .some(nil)) {
+              Optionally { Int.parser() }
+              End()
             }
-            Optionally {
-              Field("coolingCFM", default: nil) { Int.parser() }
+            Field("coolingCFM", default: .some(nil)) {
+              Optionally { Int.parser() }
+              End()
             }
           }
           .map(.memberwise(EquipmentInfo.Update.init))

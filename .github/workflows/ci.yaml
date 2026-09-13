@@ -48,6 +48,11 @@ jobs:
         docker run --rm --network host -e TEMPLATE_TEST_POSTGRES_HOST=127.0.0.1 \
           -v ductcalc-build:/app/.build ${{ github.repository_owner }}/ductcalc:test \
           swift test --skip-build --filter ComponentLossTemplatePostgresTests
+    - name: Check equipment migration on PostgreSQL
+      run: |
+        docker run --rm --network host -e EQUIPMENT_TEST_POSTGRES_HOST=127.0.0.1 \
+          -v ductcalc-build:/app/.build ${{ github.repository_owner }}/ductcalc:test \
+          swift test --skip-build --filter EquipmentMigrationTests
     - uses: actions/setup-node@v4
       with:
         node-version: 22
@@ -55,6 +60,7 @@ jobs:
     - run: npm ci
     - run: npm run test:project-shortcuts
     - run: npm run test:fitting-shortcuts
+    - run: npm run test:equipment
     - run: npm run test:project-workspace
     - run: npm run test:login-form
     - run: npm run test:home-preview

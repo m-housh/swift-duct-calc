@@ -28,7 +28,8 @@ struct HomePreviewPage: SendableHTMLDocument {
     div(.custom(name: "inert", value: "")) {
       ProjectView(
         projectID: HomePreviewData.project.id, activeTab: activeTab,
-        completedSteps: .init(equipmentInfo: true, rooms: true, equivalentLength: true, frictionRate: true),
+        completedSteps: .init(
+          equipmentInfo: true, rooms: true, equivalentLength: true, frictionRate: true),
         project: HomePreviewData.project
       ) { previewContent }
       .environment(ProjectViewValue.$navigation, nil)
@@ -52,13 +53,16 @@ struct HomePreviewPage: SendableHTMLDocument {
     case .rooms:
       RoomsView(rooms: HomePreviewData.rooms, sensibleHeatRatio: 0.83)
     case .equipment:
-      EquipmentInfoView(equipmentInfo: HomePreviewData.equipment, projectID: HomePreviewData.project.id)
+      EquipmentInfoView(
+        equipmentInfo: HomePreviewData.equipment, projectID: HomePreviewData.project.id,
+        readOnly: true)
     case .paths:
       EffectiveLengthsView(effectiveLengths: HomePreviewData.paths, coolingCFM: 1200)
     case .pressure:
       FrictionRateView(
         componentLosses: HomePreviewData.losses,
-        equivalentLengths: .init(supply: HomePreviewData.paths[0], return: HomePreviewData.paths[1]),
+        equivalentLengths: .init(
+          supply: HomePreviewData.paths[0], return: HomePreviewData.paths[1]),
         frictionRate: HomePreviewData.frictionRate, blowerStatic: 0.5)
     case .sizes:
       DuctSizingView(ductSizes: HomePreviewData.ductSizes)

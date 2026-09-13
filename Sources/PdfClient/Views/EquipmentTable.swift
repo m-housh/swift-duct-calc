@@ -26,11 +26,11 @@ struct EquipmentTable: HTML, Sendable {
         }
         tr {
           td { "Heating CFM" }
-          td(.class("justify-end")) { equipmentInfo.heatingCFM.string() }
+          td(.class("justify-end")) { equipmentInfo.heatingCFM?.string() ?? "—" }
         }
         tr {
           td { "Cooling CFM" }
-          td(.class("justify-end")) { equipmentInfo.coolingCFM.string() }
+          td(.class("justify-end")) { equipmentInfo.coolingCFM?.string() ?? "—" }
         }
       }
     }
