@@ -85,8 +85,13 @@ matched rooms. Invalid or incomplete imports leave the project unchanged.
 
 ## Equipment and friction rate
 
-Enter the equipment's static pressure and heating and cooling airflow under
-Equipment. Add supply and return paths under T.E.L., the Equivalent Lengths page.
+Select the heating card, cooling card, or air handler under Equipment to enter its
+value. You can save either airflow first; both are required before equipment is
+complete and duct sizing or PDF export is available. Use Edit equipment to enter
+all three values together. On this page, Ctrl+Alt+H, C, S, and E open heating,
+cooling, static pressure, and the full form, respectively.
+
+Add supply and return paths under T.E.L., the Equivalent Lengths page.
 Then open Friction Rate to enter component pressure losses and review the resulting
 design friction rate. If the rate is invalid, resolve the warning beside the summary
 before sizing ducts. When losses meet or exceed blower static, review those inputs;

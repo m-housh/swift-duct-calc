@@ -25,6 +25,7 @@ extension DatabaseClient.Migrations: DependencyKey {
         AdminMetricsMigration(),
         Project.AddLastOpenedAt(),
         PathTemplate.AddDefaults(),
+        EquipmentInfo.AllowMissingAirflow(),
       ]
     }
   )

@@ -112,6 +112,25 @@ struct ProjectWorkspaceTests {
         .environment(ProjectViewValue.$projectID, projectID), as: .html)
   }
 
+  @Test(arguments: ["heating", "cooling", "complete"])
+  func equipmentWithSavedAirflow(state: String) {
+    let equipment = EquipmentInfo(
+      id: UUID(2), projectID: projectID,
+      heatingCFM: state == "cooling" ? nil : 900,
+      coolingCFM: state == "heating" ? nil : 1200,
+      createdAt: date, updatedAt: date)
+    let view = EquipmentInfoView(equipmentInfo: equipment, projectID: projectID)
+      .environment(ProjectViewValue.$projectID, projectID)
+    let html = view.render()
+    #expect(!html.contains("Not set"))
+    #expect(html.contains("Add heating") == (state == "cooling"))
+    #expect(html.contains("Add cooling") == (state == "heating"))
+    #expect(html.contains("<span>Heating airflow (CFM)</span>"))
+    #expect(html.components(separatedBy: "hx-patch=").count - 1 == 4)
+    #expect(!html.contains("hx-post="))
+    assertSnapshot(of: view, as: .html, named: state)
+  }
+
   @Test func projectPaginationReturnsOnlyRows() async throws {
     let html = try await ViewControllerTests().withDefaultDependencies {
       $0.database.projects.fetch = { _, _ in

@@ -167,6 +167,7 @@ extension DuctSizes {
       shr: Double
     ) -> Self {
 
+      let airflow = try! equipmentInfo.validatedAirflow()
       let totalHeatingLoad = rooms.totalHeatingLoad
       let totalCoolingLoad = try! rooms.totalCoolingLoad(shr: shr)
 
@@ -175,8 +176,8 @@ extension DuctSizes {
           room: room,
           totalHeatingLoad: totalHeatingLoad,
           totalCoolingLoad: totalCoolingLoad,
-          totalHeatingCFM: Double(equipmentInfo.heatingCFM),
-          totalCoolingCFM: Double(equipmentInfo.coolingCFM),
+          totalHeatingCFM: Double(airflow.heatingCFM),
+          totalCoolingCFM: Double(airflow.coolingCFM),
           shr: shr
         )
       }
@@ -187,8 +188,8 @@ extension DuctSizes {
           trunks: trunks,
           totalHeatingLoad: totalHeatingLoad,
           totalCoolingLoad: totalCoolingLoad,
-          totalHeatingCFM: Double(equipmentInfo.heatingCFM),
-          totalCoolingCFM: Double(equipmentInfo.coolingCFM)
+          totalHeatingCFM: Double(airflow.heatingCFM),
+          totalCoolingCFM: Double(airflow.coolingCFM)
         )
       )
     }

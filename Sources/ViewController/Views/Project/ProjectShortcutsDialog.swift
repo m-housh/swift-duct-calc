@@ -23,6 +23,15 @@ struct ProjectShortcutsDialog: HTML, Sendable {
         }
       }
       table(.class("table table-sm mt-4")) {
+        caption(.class("text-left font-bold p-2")) { "Equipment editing" }
+        tbody {
+          row("Heating airflow", key: "H")
+          row("Cooling airflow", key: "C")
+          row("Static pressure", key: "S")
+          row("Edit equipment", key: "E")
+        }
+      }
+      table(.class("table table-sm mt-4")) {
         caption(.class("text-left font-bold p-2")) { "App navigation" }
         tbody {
           row("Ductulator", key: "D")

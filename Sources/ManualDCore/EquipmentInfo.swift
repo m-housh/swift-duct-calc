@@ -9,8 +9,8 @@ public struct EquipmentInfo: Codable, Equatable, Identifiable, Sendable {
   public let id: UUID
   public let projectID: Project.ID
   public let staticPressure: Double
-  public let heatingCFM: Int
-  public let coolingCFM: Int
+  public let heatingCFM: Int?
+  public let coolingCFM: Int?
   public let createdAt: Date
   public let updatedAt: Date
 
@@ -18,8 +18,8 @@ public struct EquipmentInfo: Codable, Equatable, Identifiable, Sendable {
     id: UUID,
     projectID: Project.ID,
     staticPressure: Double = 0.5,
-    heatingCFM: Int,
-    coolingCFM: Int,
+    heatingCFM: Int? = nil,
+    coolingCFM: Int? = nil,
     createdAt: Date,
     updatedAt: Date
   ) {
@@ -35,18 +35,34 @@ public struct EquipmentInfo: Codable, Equatable, Identifiable, Sendable {
 
 extension EquipmentInfo {
 
+  /// Missing airflow is a saved draft, never a zero used in calculations.
+  public func validatedAirflow() throws -> (heatingCFM: Int, coolingCFM: Int) {
+    guard staticPressure > 0, staticPressure < 1,
+      let heatingCFM, heatingCFM > 0, let coolingCFM, coolingCFM > 0
+    else { throw Incomplete() }
+    return (heatingCFM, coolingCFM)
+  }
+
+  public struct Incomplete: LocalizedError, Sendable {
+    public var errorDescription: String? {
+      "Enter positive heating and cooling airflow and valid static pressure."
+    }
+  }
+
+  public var isComplete: Bool { (try? validatedAirflow()) != nil }
+
   // TODO: Remove projectID and use dependency to lookup current project ??
   public struct Create: Codable, Equatable, Sendable {
     public let projectID: Project.ID
     public let staticPressure: Double
-    public let heatingCFM: Int
-    public let coolingCFM: Int
+    public let heatingCFM: Int?
+    public let coolingCFM: Int?
 
     public init(
       projectID: Project.ID,
       staticPressure: Double = 0.5,
-      heatingCFM: Int,
-      coolingCFM: Int
+      heatingCFM: Int? = nil,
+      coolingCFM: Int? = nil
     ) {
       self.projectID = projectID
       self.staticPressure = staticPressure

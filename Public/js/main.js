@@ -150,7 +150,7 @@ document.addEventListener('keydown', (event) => {
   const showHelp = key === '?' || key === '/';
   if (event.defaultPrevented || event.repeat || event.isComposing
       || !event.ctrlKey || !event.altKey || (event.shiftKey && !showHelp) || event.metaKey
-      || event.getModifierState('AltGraph') || (!showHelp && !/^[0-9abnjkdfpu]$/.test(key))) return;
+      || event.getModifierState('AltGraph') || (!showHelp && !/^[0-9abnjkdfpuhcse]$/.test(key))) return;
 
   const editing = event.composedPath().some(node => node instanceof Element && (
     node.isContentEditable
@@ -185,7 +185,7 @@ document.addEventListener('keydown', (event) => {
   } else {
     const shortcut = `Control+Alt+${key.toUpperCase()}`;
     control = document.querySelector(
-      `#project-sidebar a[aria-keyshortcuts="${shortcut}"], #fittings-page a[data-group][aria-keyshortcuts="${shortcut}"], nav a[aria-keyshortcuts="${shortcut}"]`
+      `.equipment-visual button[aria-keyshortcuts="${shortcut}"], #project-sidebar a[aria-keyshortcuts="${shortcut}"], #fittings-page a[data-group][aria-keyshortcuts="${shortcut}"], nav a[aria-keyshortcuts="${shortcut}"]`
     );
   }
   if (!control || control.matches(':disabled, [aria-disabled="true"]') || control.closest('[inert]')) return;
@@ -381,6 +381,7 @@ if (!window.ductCalcDraftGuardInitialized) {
     const form = event.target.closest('.project-workspace form');
     if (form && (form.hasAttribute('hx-post') || form.hasAttribute('hx-patch'))) dirtyForms.add(form);
   });
+  document.addEventListener('reset', event => dirtyForms.delete(event.target));
   window.addEventListener('beforeunload', event => {
     prune();
     if (dirtyForms.size) { event.preventDefault(); event.returnValue = ''; }

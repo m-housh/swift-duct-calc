@@ -148,8 +148,7 @@
 @media(max-width:800px) { .network-endpoint { width:140px; padding:13px; }.network-endpoint strong { font-size:11.2px; }.network-path-select > b { font-size:18.9px; margin-top:10px; }.network-handler { width:110px; height:110px; box-shadow:0 0 0 7px var(--accent-soft); }.project-workspace .network-handler svg { width:24px; height:24px; margin-bottom:7px; }.network-handler strong { font-size:10.92px; }.network-handler > span { font-size:9.1px; }.tel-equation { gap:18px; }.tel-equation > div { min-width:75px; }.tel-equation strong { font-size:22.4px; }.tel-equation small { font-size:8.68px; } }
 @media(max-width:540px) { .network-endpoint { width:118px; padding:10px; }.network-endpoint strong { font-size:9.94px; }.network-endpoint > span,.network-path-select > span { font-size:8.4px; }.network-path-select > b { font-size:16.1px; }.network-endpoint.return { left:19%!important; }.network-endpoint.supply { left:81%!important; }.network-handler { width:85px; height:85px; box-shadow:0 0 0 5px var(--accent-soft); }.project-workspace .network-handler svg { width:20px; height:20px; margin-bottom:5px; }.network-handler strong { font-size:8.82px; }.network-handler > span { font-size:7.7px; }.path-selection { bottom:12px; right:8px; font-size:7.7px; }.tel-equation { gap:10px; padding:15px 12px; }.tel-equation > div { min-width:60px; }.tel-equation strong { font-size:20.3px; }.tel-equation small { font-size:7.7px; }.path-schedule { padding:12px; } }
 .trunk-columns { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; padding:0 20px 20px; }.trunk-column > h3 { font-size:12px; margin-bottom:12px; }.trunk-card { border:1px solid color-mix(in srgb,var(--accent) 40%,var(--line)); border-left:3px solid var(--accent); border-radius:6px; margin-bottom:12px; }.trunk-column.return .trunk-card { border-color:color-mix(in srgb,var(--color-secondary) 40%,var(--line)); border-left-color:var(--color-secondary); }.trunk-card-main { display:flex; gap:14px; align-items:center; padding:16px; }.trunk-card-main > div { flex:1; }.trunk-card-main strong { font-weight:500; font-size:12px; }.trunk-card-main small { display:block; font-size:10px; margin:6px 0; color:var(--muted); }.trunk-card-main b { font-size:18px; font-weight:500; }.trunk-card > details { border-top:1px solid var(--line); padding:10px 16px; color:var(--muted); font-size:11px; }.trunk-card > details p,.trunk-card > details ul { margin:10px 0; }.trunk-panel .project-toolbar { justify-content:space-between; }.size-chip { display:inline-block; padding:3px 7px; border:1px solid var(--line); border-radius:4px; background:var(--accent-soft); }
-.equipment-panel { max-width:1000px; }.equipment-heading { display:flex; align-items:center; gap:15px; padding:25px; }.project-workspace .equipment-heading svg { height:35px; width:35px; color:var(--accent); }.equipment-metrics { grid-template-columns:repeat(3,minmax(0,1fr)); margin:0 25px; border:0; border-block:1px solid var(--line); border-radius:0; }.equipment-editor { max-width:540px; padding:25px; }.equipment-editor .input { width:100%; }.project-workspace .equipment-editor .label { font-size:12px; }
-@media(max-width:650px) { .trunk-columns { grid-template-columns:1fr; }.equipment-metrics { grid-template-columns:1fr; }.equipment-metrics > * { border-left:0; }.trunk-card-main { padding:12px; } }
+@media(max-width:650px) { .trunk-columns { grid-template-columns:1fr; }.trunk-card-main { padding:12px; } }
 @media(max-width:480px) { .project-workspace .account-menu > ul { right:0; left:auto; } }
 
 .network-endpoint.governing { cursor:default; }
@@ -192,3 +191,77 @@
 .template-card-heading h3 { flex:1 1 180px; }
 .template-card-shortcut { display:flex; flex-shrink:0; margin-left:auto; }
 @media(max-width:600px) { .pressure-river-empty { grid-template-columns:minmax(0,1fr); gap:48px; padding:20px 0; margin:16px; }.pressure-river-empty::before { top:20%; bottom:20%; left:50%; right:auto; border-top:0; border-left:2px dashed var(--accent); }.pressure-start-card { padding:16px; } }
+
+.equipment-visual {
+  container-type:inline-size; container-name:equipment;
+  --bg:var(--color-base-100); --fg:var(--color-base-content);
+  --muted:color-mix(in srgb,var(--fg) 85%,var(--bg));
+  --line:color-mix(in srgb,var(--fg) 15%,transparent);
+  --primary:var(--color-primary); --heating:var(--color-warning); --cooling:var(--color-info);
+}
+.equipment-canvas { overflow:hidden; }
+.equipment-canvas[open] > summary { border-bottom:1px solid var(--line); }
+.equipment-canvas[open] .network-toggle svg { transform:rotate(90deg); }
+.equipment-visual .equipment-network { height:540px; position:relative; background-image:radial-gradient(var(--line) .7px,transparent .7px); background-size:18px 18px; }
+.equipment-visual .airflow-lines { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+.equipment-visual .airflow-lines path { fill:none; stroke-linecap:round; }
+.equipment-visual .equipment-network { --duct-face:color-mix(in srgb,var(--fg) 7%,var(--bg)); --duct-edge:color-mix(in srgb,var(--fg) 36%,var(--bg)); --duct-seam:color-mix(in srgb,var(--fg) 22%,var(--bg)); }
+.equipment-visual .equipment-network .port { opacity:0; }
+.equipment-visual .airflow-lines .duct-edge, .equipment-visual .airflow-lines .duct-face { stroke-linecap:butt; stroke-linejoin:round; }
+.equipment-visual .airflow-lines .duct-edge { stroke:var(--duct-edge); }
+.equipment-visual .airflow-lines .duct-face { stroke:var(--duct-face); }
+.equipment-visual .airflow-lines .duct-seam { stroke:var(--duct-seam); stroke-width:1; stroke-linecap:butt; }
+.equipment-visual .airflow-lines .plenum { fill:var(--duct-face); stroke:var(--duct-edge); stroke-width:1.5; stroke-linejoin:round; }
+.equipment-visual .airflow-lines .plenum-side { fill:color-mix(in srgb,var(--fg) 12%,var(--bg)); stroke:var(--duct-seam); stroke-width:1; }
+.equipment-visual .mode-card { --mode:var(--heating); position:absolute; left:16%; top:40%; transform:translate(-50%,-50%); width:clamp(156px,19%,224px); padding:21px 23px; background:var(--bg); color:var(--fg); font:inherit; text-align:left; border:1px solid color-mix(in srgb,var(--mode) 40%,var(--line)); border-left:3px solid var(--mode); border-radius:9px; }
+.equipment-visual .mode-card:hover { background:color-mix(in srgb,var(--mode) 7%,var(--bg)); border-color:var(--mode); }
+.equipment-visual .edit-hint { display:inline-flex; align-items:center; gap:5px; font-size:11px; color:var(--muted); }
+.equipment-visual .edit-hint svg { width:12px; height:12px; }
+.equipment-visual .mode-card.cooling { --mode:var(--cooling); left:84%; }
+.equipment-visual .mode-label { display:flex; align-items:center; gap:9px; color:var(--muted); font-size:13px; }
+.equipment-visual .mode-label svg { height:18px; width:18px; color:var(--mode); }
+.equipment-visual .airflow-value { display:block; font-size:35px; font-weight:450; letter-spacing:-1px; line-height:1.3; margin:12px 0 3px; font-variant-numeric:tabular-nums; }
+.equipment-visual .airflow-value small { color:var(--muted); font-size:12px; letter-spacing:0; margin-left:4px; }
+.equipment-visual .mode-card.is-empty .edit-hint { margin-top:18px; font-size:15px; font-weight:600; color:color-mix(in srgb,var(--mode) 20%,var(--fg)); }
+.equipment-visual .mode-card.is-empty .edit-hint svg { width:18px; height:18px; }
+.equipment-visual .port { position:absolute; width:8px; height:8px; border-radius:50%; background:var(--bg); border:1.5px solid var(--mode); top:-5px; left:50%; transform:translateX(-50%); }
+.equipment-visual .blower { position:absolute; left:50%; top:70%; transform:translate(-50%,-50%); width:190px; height:260px; padding:0; border:0; background:transparent; color:var(--fg); font:inherit; }
+.equipment-visual .blower:hover .housing-body { fill:color-mix(in srgb,var(--primary) 7%,var(--bg)); stroke:var(--primary); }
+.equipment-visual .blower-housing { width:100%; height:100%; overflow:visible; }
+.equipment-visual .housing-body { fill:var(--bg); stroke:color-mix(in srgb,var(--primary) 65%,var(--fg)); stroke-width:1.5; }
+.equipment-visual .housing-shadow { fill:color-mix(in srgb,var(--primary) 10%,var(--bg)); stroke:var(--line); }
+.equipment-visual .outlet { fill:color-mix(in srgb,var(--primary) 7%,var(--bg)); stroke:color-mix(in srgb,var(--primary) 65%,var(--fg)); stroke-width:1.5; }
+.equipment-visual .cabinet-detail { fill:none; stroke:var(--line); stroke-width:1.5; stroke-linecap:round; }
+.equipment-visual .cabinet-fan { fill:none; stroke:color-mix(in srgb,var(--primary) 65%,var(--fg)); stroke-width:1.5; stroke-linejoin:round; stroke-linecap:round; }
+.equipment-visual .pressure-readout { position:absolute; left:50%; top:41%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; width:128px; text-align:center; }
+.equipment-visual .pressure-value { font-size:30px; line-height:1.2; font-weight:450; letter-spacing:-.6px; font-variant-numeric:tabular-nums; }
+.equipment-visual .pressure-unit { font-size:11px; color:var(--muted); margin-top:2px; }
+.equipment-visual .pressure-label { color:var(--muted); font-size:10px; margin-top:5px; max-width:110px; }
+.equipment-visual .blower-label { position:absolute; top:98%; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:12px; font-size:12px; color:var(--muted); white-space:nowrap; }
+.equipment-visual .blower-label .edit-hint { padding-left:12px; border-left:1px solid var(--line); }
+.equipment-visual .blower:hover .edit-hint, .equipment-visual .blower:focus-visible .edit-hint { color:var(--fg); }
+
+.equipment-visual button:focus-visible { outline:2px solid var(--primary); outline-offset:4px; }
+.equipment-visual .mode-card,.equipment-visual .blower { cursor:pointer; }
+@container equipment (min-width:1200px) { .equipment-visual .equipment-network { height:560px; } }
+@container equipment (max-width:800px) {
+ .equipment-visual .equipment-network { height:520px; }
+ .equipment-visual .mode-card { width:154px; left:17%; padding:18px 16px; }
+ .equipment-visual .mode-card.cooling { left:83%; }
+ .equipment-visual .blower { width:180px; height:250px; top:70%; }
+ .equipment-visual .pressure-value { font-size:28px; }
+ .equipment-visual .airflow-value { font-size:29px; }
+}
+@container equipment (max-width:560px) {
+ .equipment-summary-note { display:none; }
+ .equipment-visual .equipment-network { height:550px; }
+ .equipment-visual .mode-card { left:25%; top:22%; width:calc(50% - 24px); max-width:180px; padding:15px 12px; }
+ .equipment-visual .mode-card.cooling { left:75%; }
+ .equipment-visual .port { top:auto; bottom:-5px; }
+ .equipment-visual .mode-label { font-size:12px; gap:6px; }
+ .equipment-visual .mode-label svg { width:15px; height:15px; }
+ .equipment-visual .airflow-value { font-size:27px; }
+ .equipment-visual .airflow-value small { font-size:11px; margin-left:0; }
+ .equipment-visual .mode-card.is-empty .edit-hint { font-size:12px; }
+ .equipment-visual .blower { top:73%; width:180px; height:250px; }
+}

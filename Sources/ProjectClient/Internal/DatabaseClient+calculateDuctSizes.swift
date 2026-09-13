@@ -51,7 +51,7 @@ extension DatabaseClient {
   func sharedDuctRequest(details: Project.Detail) throws -> DuctSizeSharedRequest {
     let lengths = details.maxContainer
     var missing: [Project.DuctSizingUnavailable.Input] = []
-    if details.equipmentInfo == nil { missing.append(.equipment) }
+    if details.equipmentInfo?.isComplete != true { missing.append(.equipment) }
     if details.project.sensibleHeatRatio == nil { missing.append(.sensibleHeatRatio) }
     if details.rooms.isEmpty { missing.append(.rooms) }
     if lengths.supply == nil { missing.append(.supplyPath) }
@@ -75,6 +75,7 @@ extension DatabaseClient {
     if let error = frictionRate.error { throw ValidationError(error.reason) }
     return .init(
       equipmentInfo: equipment,
+      airflow: try equipment.validatedAirflow(),
       maxSupplyLength: supply,
       maxReturnLenght: returnLength,
       designFrictionRate: frictionRate.value,

@@ -47,11 +47,13 @@ struct ProjectDetail: HTML, Sendable {
             "\(detail?.rooms.count ?? 0) rooms"
           }
           node("Equipment", icon: .fan, position: "equipment", route: .equipment(.index)) {
-            if let equipment = detail?.equipmentInfo {
-              Number(equipment.coolingCFM)
+            if let equipment = detail?.equipmentInfo, equipment.isComplete,
+              let coolingCFM = equipment.coolingCFM
+            {
+              Number(coolingCFM)
               " CFM"
             } else {
-              "Not set"
+              "Add equipment values"
             }
           }
           node(

@@ -91,6 +91,34 @@ struct DuctSizingTests {
     }
   }
 
+  @Test(arguments: ["heating", "cooling", "pressure"])
+  func partialEquipmentBlocksCalculations(first: String) async throws {
+    try await withTestUserAndProject(setupDependencies: { $0.projectClient = .liveValue }) {
+      _, project in
+      @Dependency(\.database) var database
+      @Dependency(\.projectClient) var client
+      let draft = try await database.equipment.create(
+        .init(
+          projectID: project.id,
+          heatingCFM: first == "heating" ? 900 : nil,
+          coolingCFM: first == "cooling" ? 1200 : nil))
+      for operation in 0..<4 {
+        do {
+          switch operation {
+          case 0: _ = try await client.calculateRoomDuctSizes(project.id)
+          case 1: _ = try await client.calculateTrunkDuctSizes(project.id)
+          case 2: _ = try await client.calculateDuctSizes(project.id)
+          default: _ = try await client.generatePdf(project.id)
+          }
+          Issue.record("Expected incomplete equipment to block calculation")
+        } catch let error as Project.DuctSizingUnavailable {
+          #expect(error.missingInputs.contains(.equipment))
+        }
+      }
+      try await database.equipment.delete(draft.id)
+    }
+  }
+
   @Test func missingProject() async throws {
     try await withDatabase(setupDependencies: { $0.projectClient = .liveValue }) {
       @Dependency(\.projectClient) var client

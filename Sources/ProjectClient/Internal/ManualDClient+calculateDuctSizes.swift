@@ -4,6 +4,7 @@ import ManualDCore
 
 struct DuctSizeSharedRequest {
   let equipmentInfo: EquipmentInfo
+  let airflow: (heatingCFM: Int, coolingCFM: Int)
   let maxSupplyLength: EquivalentLength
   let maxReturnLenght: EquivalentLength
   let designFrictionRate: Double
@@ -54,8 +55,8 @@ extension ManualDClient {
 
       let heatingPercent = heatingLoad / totalHeatingLoad
       let coolingPercent = coolingLoad / totalCoolingSensible
-      let heatingCFM = heatingPercent * Double(sharedRequest.equipmentInfo.heatingCFM)
-      let coolingCFM = coolingPercent * Double(sharedRequest.equipmentInfo.coolingCFM)
+      let heatingCFM = heatingPercent * Double(sharedRequest.airflow.heatingCFM)
+      let coolingCFM = coolingPercent * Double(sharedRequest.airflow.coolingCFM)
       let designCFM = DuctSizes.DesignCFM(heating: heatingCFM, cooling: coolingCFM)
       let sizes = try await self.ductSize(
         cfm: designCFM.value,
@@ -116,8 +117,8 @@ extension ManualDClient {
       let coolingLoad = try trunk.totalCoolingSensible(projectSHR: sharedRequest.projectSHR)
       let heatingPercent = heatingLoad / totalHeatingLoad
       let coolingPercent = coolingLoad / totalCoolingSensible
-      let heatingCFM = heatingPercent * Double(sharedRequest.equipmentInfo.heatingCFM)
-      let coolingCFM = coolingPercent * Double(sharedRequest.equipmentInfo.coolingCFM)
+      let heatingCFM = heatingPercent * Double(sharedRequest.airflow.heatingCFM)
+      let coolingCFM = coolingPercent * Double(sharedRequest.airflow.coolingCFM)
       let designCFM = DuctSizes.DesignCFM(heating: heatingCFM, cooling: coolingCFM)
       let sizes = try await self.ductSize(
         cfm: designCFM.value,

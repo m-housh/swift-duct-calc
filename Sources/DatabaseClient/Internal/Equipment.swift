@@ -99,11 +99,11 @@ final class EquipmentModel: Model, @unchecked Sendable {
   @Field(key: "staticPressure")
   var staticPressure: Double
 
-  @Field(key: "heatingCFM")
-  var heatingCFM: Int
+  @OptionalField(key: "heatingCFM")
+  var heatingCFM: Int?
 
-  @Field(key: "coolingCFM")
-  var coolingCFM: Int
+  @OptionalField(key: "coolingCFM")
+  var coolingCFM: Int?
 
   @Timestamp(key: "createdAt", on: .create, format: .iso8601)
   var createdAt: Date?
@@ -119,8 +119,8 @@ final class EquipmentModel: Model, @unchecked Sendable {
   init(
     id: UUID? = nil,
     staticPressure: Double,
-    heatingCFM: Int,
-    coolingCFM: Int,
+    heatingCFM: Int?,
+    coolingCFM: Int?,
     createdAt: Date? = nil,
     updatedAt: Date? = nil,
     projectID: Project.ID
@@ -169,10 +169,10 @@ extension EquipmentModel: Validatable {
       }
       .errorLabel("Static Pressure", inline: true)
 
-      Validator.validate(\.heatingCFM, with: .greaterThan(0))
+      Validator.validate(\.heatingCFM, with: Int.greaterThan(0).optional())
         .errorLabel("Heating CFM", inline: true)
 
-      Validator.validate(\.coolingCFM, with: .greaterThan(0))
+      Validator.validate(\.coolingCFM, with: Int.greaterThan(0).optional())
         .errorLabel("Cooling CFM", inline: true)
     }
   }

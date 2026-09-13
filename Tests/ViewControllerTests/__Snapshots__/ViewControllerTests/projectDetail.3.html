@@ -17,12 +17,12 @@
     <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
     <script src="/js/htmx-download.js"></script>
-    <script src="/js/main.js?v=fittings-projects-7"></script>
+    <script src="/js/main.js?v=equipment-8"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="/css/output.css?v=navbar-reference-1">
     <link rel="stylesheet" href="/css/htmx.css">
     <link rel="stylesheet" href="/css/accessibility.css?v=request-toast-2">
-    <link rel="stylesheet" href="/css/project-workspace.css?v=navbar-6">
+    <link rel="stylesheet" href="/css/project-workspace.css?v=equipment-7">
     <link rel="icon" href="/images/favicon.ico?v=ductcalc-white-3" sizes="16x16 32x32 48x48">
     <link rel="icon" href="/images/favicon-32x32.png?v=ductcalc-white-3" type="image/png" sizes="32x32">
     <link rel="icon" href="/images/brand/favicon.svg?v=white-3" type="image/svg+xml" sizes="any">
@@ -79,42 +79,103 @@
               All projects<a class="all-projects-link" href="/projects"></a>
             </aside>
             <div class="project-content" id="project-content" tabindex="-1">
-              <div>
+              <div class="equipment-visual">
                 <div class="page-title-row">
                   <div>
                     <h1 class="text-3xl font-bold">Equipment</h1>
-                    <p class="muted">Set the airflow and external static pressure for this system.</p>
+                    <p class="muted">Select heating, cooling, or the air handler to edit its value.</p>
                   </div>
+                  <button type="button" class="btn btn-primary" data-open-dialog="equipmentForm-all" aria-keyshortcuts="Control+Alt+E" title="Edit equipment, Ctrl+Alt+E"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>Edit equipment</button>
                 </div>
-                <section class="project-panel equipment-panel">
-                  <div class="equipment-heading">
-                    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-fan-icon lucide-fan"><path d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.002l5.412 1.45a6.082 6.082 0 0 1 7.002-8.618l-1.45 5.412a6.082 6.082 0 0 1 8.618 7.002l-5.412-1.45a6.082 6.082 0 0 1-7.002 8.618l1.45-5.412Z"/><path d="M12 12v.01"/></svg>
-                    <div>
-                      <h2>Main system</h2>
-                      <p class="muted">Heating &amp; cooling airflow</p>
-                    </div>
+                <details class="project-panel equipment-canvas" open="" data-expansion="equipment-airflow">
+                  <summary class="canvas-legend"><span class="network-toggle"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>SYSTEM AIRFLOW</span><span class="equipment-summary-note">Main system · Heating &amp; cooling</span></summary>
+                  <div class="equipment-network">
+                    <svg class="airflow-lines" aria-hidden="true"></svg>
+                    <button type="button" class="mode-card heating" data-equipment-mode="heating" data-open-dialog="equipmentForm-heating" aria-keyshortcuts="Control+Alt+H" aria-label="Edit heating airflow, 900 CFM" title="Heating airflow, Ctrl+Alt+H"><span class="mode-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>Heating</span><strong class="airflow-value"><span>900</span><small> CFM</small></strong><span class="edit-hint"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>Edit airflow</span><span class="port" aria-hidden="true"></span></button>
+                    <button type="button" class="blower" data-open-dialog="equipmentForm-pressure" aria-keyshortcuts="Control+Alt+S" aria-label="Edit external static pressure, 0.50 inches of water column" title="External static pressure, Ctrl+Alt+S">
+                      <svg class="blower-housing" viewBox="0 0 200 280" aria-hidden="true">
+                          <path class="housing-shadow" d="M24 36 L36 28 H188 V246 L176 254 H24 Z"/>
+                          <path class="outlet" d="M50 36 V10 H150 V36"/>
+                          <rect class="housing-body" x="24" y="36" width="152" height="218" rx="4"/>
+                          <path class="cabinet-detail" d="M25 178 H175 M38 51 H45 M155 51 H162 M38 164 H45 M155 164 H162 M48 200 H64 M48 209 H64 M48 218 H64 M136 200 H152 M136 209 H152 M136 218 H152"/>
+                          <circle class="cabinet-detail" cx="100" cy="211" r="24"/>
+                          <g class="cabinet-fan" transform="translate(88 199)"><path d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.002l5.412 1.45a6.082 6.082 0 0 1 7.002-8.618l-1.45 5.412a6.082 6.082 0 0 1 8.618 7.002l-5.412-1.45a6.082 6.082 0 0 1-7.002 8.618l1.45-5.412Z"/></g>
+                          <path class="cabinet-detail" d="M36 255 V261 H59 V255 M141 255 V261 H164 V255"/>
+                        </svg><span class="pressure-readout"><strong class="pressure-value">0.50</strong><span class="pressure-unit">in. w.c.</span><span class="pressure-label">External static pressure</span></span><span class="blower-label"><span>Air handler</span><span class="edit-hint"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>Edit</span></span>
+                    </button>
+                    <button type="button" class="mode-card cooling" data-equipment-mode="cooling" data-open-dialog="equipmentForm-cooling" aria-keyshortcuts="Control+Alt+C" aria-label="Edit cooling airflow, 1000 CFM" title="Cooling airflow, Ctrl+Alt+C"><span class="mode-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M3.34 7l17.32 10M3.34 17L20.66 7M9 4l3 3 3-3M9 20l3-3 3 3M3.5 10l4.1-1.1L6.5 4.8M17.5 19.2l-1.1-4.1 4.1-1.1M3.5 14l4.1 1.1-1.1 4.1M17.5 4.8l-1.1 4.1 4.1 1.1"/></svg>Cooling</span><strong class="airflow-value"><span>1,000</span><small> CFM</small></strong><span class="edit-hint"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>Edit airflow</span><span class="port" aria-hidden="true"></span></button>
                   </div>
-                  <div class="design-metrics equipment-metrics">
-                    <div class="design-metric"><span>Heating airflow</span><strong>900<small>CFM</small></strong></div>
-                    <div class="design-metric"><span>Cooling airflow</span><strong>1000<small>CFM</small></strong></div>
-                    <div class="design-metric"><span>External static pressure</span><strong>0.50<small>in. w.c.</small></strong></div>
-                  </div>
-                  <div class="equipment-editor">
-                    <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/equipment/00000000-0000-0000-0000-000000000007" hx-target="body" hx-swap="outerHTML">
-                      <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
-                      <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000007">
-                      Static Pressure<label class="input w-full"><span class="label"></span>
-                      <input name="staticPressure" type="number" value="0.5" min="0" max="1.0" step="0.01" required>
-                      Heating CFM</label><label class="input w-full"><span class="label"></span>
-                      <input name="heatingCFM" type="number" value="900" placeholder="e.g. 1000" min="0" required autofocus>
-                      Cooling CFM</label><label class="input w-full"><span class="label"></span>
-                      <input name="coolingCFM" type="number" value="1000" placeholder="e.g. 1000" min="0" required></label>
-                      <button class="btn btn-secondary btn-block my-6" type="submit">Save</button>
+                </details>
+                <dialog id="equipmentForm-all" class="modal" aria-labelledby="equipmentForm-all-title">
+                  <div class="modal-box">
+                    <h2 id="equipmentForm-all-title" class="text-2xl font-bold mb-6 pe-10">Edit equipment</h2>
+                    <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Edit equipment" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                    <form data-equipment-form="all" data-success-message="Equipment saved." class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/equipment/00000000-0000-0000-0000-000000000007" hx-target="body" hx-swap="outerHTML">
+                      <input type="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                      Heating airflow (CFM)<label class="grid gap-2"><span></span>
+                      <input class="input w-full" name="heatingCFM" type="number" value="900" min="1" step="1" required placeholder="e.g. 1000" autofocus>
+                      Cooling airflow (CFM)</label><label class="grid gap-2"><span></span>
+                      <input class="input w-full" name="coolingCFM" type="number" value="1000" min="1" step="1" required placeholder="e.g. 1000">
+                      External static pressure (in. w.c.)</label><label class="grid gap-2"><span></span>
+                      <input class="input w-full" name="staticPressure" type="number" value="0.5" min="0.01" step="0.01" required max="0.99"></label>
+                      <p class="muted">Use the blower's rated airflow at the selected external static pressure.</p>
+                      <div class="flex justify-end gap-2">
+                        <button type="button" class="btn btn-ghost" onclick="this.closest('dialog').close()">Cancel</button>
+                        <button class="btn btn-secondary" type="submit">Save equipment</button>
+                      </div>
                     </form>
-                    <p class="muted">Use the blower's rated airflow at the selected external static pressure.</p>
                   </div>
-                </section>
+                </dialog>
+                <dialog id="equipmentForm-heating" class="modal" aria-labelledby="equipmentForm-heating-title">
+                  <div class="modal-box">
+                    <h2 id="equipmentForm-heating-title" class="text-2xl font-bold mb-6 pe-10">Heating airflow</h2>
+                    <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Heating airflow" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                    <form data-equipment-form="heating" data-success-message="Equipment saved." class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/equipment/00000000-0000-0000-0000-000000000007" hx-target="body" hx-swap="outerHTML">
+                      <input type="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                      Heating airflow (CFM)<label class="grid gap-2"><span></span>
+                      <input class="input w-full" name="heatingCFM" type="number" value="900" min="1" step="1" required placeholder="e.g. 1000" autofocus></label>
+                      <p class="muted">Use the blower's rated airflow at the selected external static pressure.</p>
+                      <div class="flex justify-end gap-2">
+                        <button type="button" class="btn btn-ghost" onclick="this.closest('dialog').close()">Cancel</button>
+                        <button class="btn btn-secondary" type="submit">Save</button>
+                      </div>
+                    </form>
+                  </div>
+                </dialog>
+                <dialog id="equipmentForm-cooling" class="modal" aria-labelledby="equipmentForm-cooling-title">
+                  <div class="modal-box">
+                    <h2 id="equipmentForm-cooling-title" class="text-2xl font-bold mb-6 pe-10">Cooling airflow</h2>
+                    <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Cooling airflow" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                    <form data-equipment-form="cooling" data-success-message="Equipment saved." class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/equipment/00000000-0000-0000-0000-000000000007" hx-target="body" hx-swap="outerHTML">
+                      <input type="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                      Cooling airflow (CFM)<label class="grid gap-2"><span></span>
+                      <input class="input w-full" name="coolingCFM" type="number" value="1000" min="1" step="1" required placeholder="e.g. 1000" autofocus></label>
+                      <p class="muted">Use the blower's rated airflow at the selected external static pressure.</p>
+                      <div class="flex justify-end gap-2">
+                        <button type="button" class="btn btn-ghost" onclick="this.closest('dialog').close()">Cancel</button>
+                        <button class="btn btn-secondary" type="submit">Save</button>
+                      </div>
+                    </form>
+                  </div>
+                </dialog>
+                <dialog id="equipmentForm-pressure" class="modal" aria-labelledby="equipmentForm-pressure-title">
+                  <div class="modal-box">
+                    <h2 id="equipmentForm-pressure-title" class="text-2xl font-bold mb-6 pe-10">External static pressure</h2>
+                    <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close External static pressure" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                    <form data-equipment-form="pressure" data-success-message="Equipment saved." class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/equipment/00000000-0000-0000-0000-000000000007" hx-target="body" hx-swap="outerHTML">
+                      <input type="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+                      External static pressure (in. w.c.)<label class="grid gap-2"><span></span>
+                      <input class="input w-full" name="staticPressure" type="number" value="0.5" min="0.01" step="0.01" required max="0.99" autofocus></label>
+                      <p class="muted">Use the blower's rated airflow at the selected external static pressure.</p>
+                      <div class="flex justify-end gap-2">
+                        <button type="button" class="btn btn-ghost" onclick="this.closest('dialog').close()">Cancel</button>
+                        <button class="btn btn-secondary" type="submit">Save</button>
+                      </div>
+                    </form>
+                  </div>
+                </dialog>
               </div>
+              <script src="/js/equipment.js?v=1" defer></script>
             </div>
           </div>
           <dialog id="recentProjects" class="modal" aria-labelledby="recentProjects-title">
@@ -165,6 +226,27 @@
                   <tr>
                     <th scope="row">Previous room row</th>
                     <td class="text-right"><kbd class="kbd kbd-sm">K</kbd></td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="table table-sm mt-4">
+                <caption class="text-left font-bold p-2">Equipment editing</caption>
+                <tbody>
+                  <tr>
+                    <th scope="row">Heating airflow</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">H</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Cooling airflow</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">C</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Static pressure</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">S</kbd></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Edit equipment</th>
+                    <td class="text-right"><kbd class="kbd kbd-sm">E</kbd></td>
                   </tr>
                 </tbody>
               </table>

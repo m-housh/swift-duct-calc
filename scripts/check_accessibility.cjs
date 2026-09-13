@@ -3,6 +3,7 @@
 const assert = require('node:assert/strict');
 const { randomUUID } = require('node:crypto');
 const { chromium } = require('playwright');
+const { expect } = require('playwright/test');
 const origin = process.env.DUCTCALC_A11Y_ORIGIN || 'http://127.0.0.1:58681';
 assert(['localhost', '127.0.0.1'].includes(new URL(origin).hostname), 'Use an isolated local app');
 const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'night', 'nord', 'retro', 'synthwave'];
@@ -32,7 +33,7 @@ const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'nig
     }
     console.log(`Checked ${label}${allThemes ? ' in all themes' : ''}`);
   }
-  async function focused(locator) { assert(await locator.evaluate(node => node === document.activeElement), 'Expected keyboard focus'); }
+  async function focused(locator) { await expect(locator).toBeFocused(); }
   async function fill(fields, container = page) {
     for (const [name, value] of Object.entries(fields)) await container.locator(`[name="${name}"]:visible`).fill(String(value));
   }
@@ -131,7 +132,58 @@ const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'nig
     await focused(page.getByRole('button', { name: 'Add room', exact: true }));
     await audit('Room loads', true);
     await post(`${projectPath}/rooms/update-shr`, { projectID, sensibleHeatRatio: '0.83' }, 'PATCH');
-    await post(`${projectPath}/equipment`, { projectID, staticPressure: '0.5', heatingCFM: '1000', coolingCFM: '1200' });
+    await page.goto(origin + projectPath + '/equipment');
+    await audit('Empty equipment', true);
+    assert.equal(await page.getByRole('button', { name: 'Add heating', exact: true }).count(), 1);
+    assert.equal(await page.getByRole('button', { name: 'Add cooling', exact: true }).count(), 1);
+    await page.keyboard.press('Control+Alt+h');
+    dialog = page.locator('#equipmentForm-heating[open]');
+    await dialog.waitFor();
+    await fill({ heatingCFM: 850 }, dialog);
+    await page.keyboard.press('Escape');
+    await page.waitForFunction(() => document.activeElement?.dataset.equipmentMode === 'heating');
+    await page.keyboard.press('Control+Alt+h');
+    await dialog.waitFor();
+    assert.equal(await dialog.locator('[name=heatingCFM]').inputValue(), '');
+    await fill({ heatingCFM: 900 }, dialog);
+    await dialog.getByRole('button', { name: 'Save', exact: true }).click();
+    await page.locator('.heating .airflow-value').waitFor();
+    assert.equal(await page.locator('#project-sidebar a[aria-current=page] .project-step-status').getAttribute('aria-label'), 'Incomplete');
+    assert.equal(await page.getByRole('button', { name: 'Add cooling', exact: true }).count(), 1);
+    await page.keyboard.press('Control+Alt+c');
+    dialog = page.locator('#equipmentForm-cooling[open]');
+    await dialog.waitFor();
+    await audit('Cooling airflow dialog', true);
+    await fill({ coolingCFM: 1200 }, dialog);
+    await dialog.getByRole('button', { name: 'Save', exact: true }).click();
+    await page.locator('.cooling .airflow-value').waitFor();
+    assert.equal(await page.locator('.heating .airflow-value').innerText(), '900 CFM');
+    await page.keyboard.press('Control+Alt+s');
+    dialog = page.locator('#equipmentForm-pressure[open]');
+    await dialog.waitFor();
+    await fill({ staticPressure: '0.65' }, dialog);
+    await dialog.getByRole('button', { name: 'Save', exact: true }).click();
+    await page.getByText('0.65', { exact: true }).waitFor();
+    await page.keyboard.press('Control+Alt+e');
+    dialog = page.locator('#equipmentForm-all[open]');
+    await dialog.waitFor();
+    await audit('Edit equipment dialog', true);
+    assert.equal(await dialog.locator('[name=heatingCFM]').inputValue(), '900');
+    assert.equal(await dialog.locator('[name=coolingCFM]').inputValue(), '1200');
+    await fill({ heatingCFM: 1000, coolingCFM: 1200, staticPressure: '0.5' }, dialog);
+    await dialog.getByRole('button', { name: 'Save equipment', exact: true }).click();
+    await page.waitForFunction(() => document.querySelector('.heating .airflow-value')?.textContent.includes('1,000'));
+    await page.reload();
+    assert.match(await page.locator('.heating .airflow-value').innerText(), /1,000/);
+    for (const width of [1440, 900, 768, 560, 390, 320]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.waitForFunction(() => {
+        const network = document.querySelector('.equipment-network');
+        return !!network.querySelector('.mobile-wye') === (network.clientWidth <= 560);
+      });
+      assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    }
+    await page.setViewportSize({ width: 1280, height: 900 });
     await post(`${projectPath}/component-loss`, { projectID, name: 'Filter', value: '0.1' });
     for (const type of ['supply', 'return']) {
       await post(`${projectPath}/effective-lengths/save-path`, { payload: JSON.stringify({baseline:null, name:`${type} path`, pathType:type, straightLengths:[150], entries:[]}) });
