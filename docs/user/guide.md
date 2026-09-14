@@ -207,8 +207,15 @@ or guided templates.
 ## Duct sizes and reports
 
 Once room loads, equipment, paths, and component losses are complete, open Duct
-Sizes to review room duct sizes. Add trunks or runouts and select the rooms they
-serve. Use Rectangular sizes to select registers and set a shared height or clear
+Sizes to review room duct sizes. In Add trunk, choose a main supply or return
+template to select all runs, or a level template to select that level's runs.
+Level templates appear when rooms have levels assigned. Review the selected
+runs, adjust the name if needed, and optionally enter a rectangular height before
+saving. Templates add one trunk at a time and can be edited afterward. You can
+also start with No template and select runs yourself. Choosing No template after
+using a template clears the name and selected runs, keeping the type and height.
+
+Use Rectangular sizes to select registers and set a shared height or clear
 their rectangular sizes. Clearing leaves unselected registers unchanged and does
 not require a height. Use PDF on this page to download a report of the design.
 

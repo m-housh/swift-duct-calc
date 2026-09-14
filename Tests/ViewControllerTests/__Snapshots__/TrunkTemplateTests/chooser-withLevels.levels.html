@@ -1,0 +1,96 @@
+<dialog id="trunkSizeForm" class="modal" aria-labelledby="trunkSizeForm-title">
+  <div class="modal-box">
+    <h2 id="trunkSizeForm-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
+    <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Trunk / Runout Size" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk" hx-target="body" hx-swap="outerHTML">
+      <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+      <div class="trunk-template-picker">
+        <div class="trunk-template-heading"><span id="trunk-template-label">Start from template</span><small>Optional</small></div>
+        <button type="button" class="trunk-template-trigger" data-trunk-template-toggle="" aria-labelledby="trunk-template-label trunk-template-selection" aria-expanded="false" aria-controls="trunk-template-options"><span class="trunk-template-dot" aria-hidden="true"></span><span id="trunk-template-selection" data-trunk-template-summary="">No template</span><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div id="trunk-template-options" class="trunk-template-panel" hidden role="group" aria-label="Trunk templates">
+          <button type="button" class="trunk-template-none" value="" data-trunk-template="" data-runs="" aria-label="No template" aria-pressed="true"><span><strong>No template</strong><small>Choose runs manually</small></span><span class="trunk-template-none-check" aria-hidden="true">✓</span></button>
+          <table class="trunk-template-table" aria-label="Templates by scope and type">
+            <thead>
+              <tr>
+                <th scope="col">Scope</th>
+                <th scope="col">Supply</th>
+                <th scope="col">Return</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><span>Main trunks</span><small>All 5 runs</small></th>
+                <td>
+                  <button type="button" class="trunk-template-choice supply" value="Main supply trunk" data-trunk-template="" data-type="supply" data-runs="00000000-0000-0000-0000-000000000001_1,00000000-0000-0000-0000-000000000001_2,00000000-0000-0000-0000-000000000002_1,00000000-0000-0000-0000-000000000003_1,00000000-0000-0000-0000-000000000004_1" aria-label="Main supply trunk" aria-pressed="false"><span class="trunk-template-radio" aria-hidden="true">✓</span></button>
+                </td>
+                <td>
+                  <button type="button" class="trunk-template-choice return" value="Main return trunk" data-trunk-template="" data-type="return" data-runs="00000000-0000-0000-0000-000000000001_1,00000000-0000-0000-0000-000000000001_2,00000000-0000-0000-0000-000000000002_1,00000000-0000-0000-0000-000000000003_1,00000000-0000-0000-0000-000000000004_1" aria-label="Main return trunk" aria-pressed="false"><span class="trunk-template-radio" aria-hidden="true">✓</span></button>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span>Basement</span><small>1 run</small></th>
+                <td>
+                  <button type="button" class="trunk-template-choice supply" value="Basement supply trunk" data-trunk-template="" data-type="supply" data-runs="00000000-0000-0000-0000-000000000002_1" aria-label="Basement supply trunk" aria-pressed="false"><span class="trunk-template-radio" aria-hidden="true">✓</span></button>
+                </td>
+                <td>
+                  <button type="button" class="trunk-template-choice return" value="Basement return trunk" data-trunk-template="" data-type="return" data-runs="00000000-0000-0000-0000-000000000002_1" aria-label="Basement return trunk" aria-pressed="false"><span class="trunk-template-radio" aria-hidden="true">✓</span></button>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span>Level-1</span><small>2 runs</small></th>
+                <td>
+                  <button type="button" class="trunk-template-choice supply" value="Level-1 supply trunk" data-trunk-template="" data-type="supply" data-runs="00000000-0000-0000-0000-000000000001_1,00000000-0000-0000-0000-000000000001_2" aria-label="Level-1 supply trunk" aria-pressed="false"><span class="trunk-template-radio" aria-hidden="true">✓</span></button>
+                </td>
+                <td>
+                  <button type="button" class="trunk-template-choice return" value="Level-1 return trunk" data-trunk-template="" data-type="return" data-runs="00000000-0000-0000-0000-000000000001_1,00000000-0000-0000-0000-000000000001_2" aria-label="Level-1 return trunk" aria-pressed="false"><span class="trunk-template-radio" aria-hidden="true">✓</span></button>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><span>Level-2</span><small>1 run</small></th>
+                <td>
+                  <button type="button" class="trunk-template-choice supply" value="Level-2 supply trunk" data-trunk-template="" data-type="supply" data-runs="00000000-0000-0000-0000-000000000003_1" aria-label="Level-2 supply trunk" aria-pressed="false"><span class="trunk-template-radio" aria-hidden="true">✓</span></button>
+                </td>
+                <td>
+                  <button type="button" class="trunk-template-choice return" value="Level-2 return trunk" data-trunk-template="" data-type="return" data-runs="00000000-0000-0000-0000-000000000003_1" aria-label="Level-2 return trunk" aria-pressed="false"><span class="trunk-template-radio" aria-hidden="true">✓</span></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <label class="select w-full"><span class="label">Type</span>
+        <select name="type">
+          <option value="supply">Supply</option>
+          <option value="return">Return</option>
+        </select>
+        Height (in.)</label><label class="input w-full"><span class="label"></span>
+        <input type="text" name="height" value="" placeholder="8 (Optional)"></label>
+      </div>
+      <p class="muted">Enter a height for rectangular sizing, or leave blank for round sizing.</p>
+      Name<label class="input w-full"><span class="label"></span>
+      <input type="text" name="name" value="" placeholder="Trunk-1" required></label>
+      <fieldset class="checkbox-group">
+        <legend class="font-bold">Associated Supply Runs</legend>
+        <div class="flex flex-wrap gap-2 my-2">
+          <button type="button" class="btn btn-sm" data-check-all="true">Select all</button>
+          <button type="button" class="btn btn-sm" data-check-all="false">Clear selection</button>
+        </div>
+        <div class="checkbox-options">
+          <label>
+          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000001_1">
+          Level-1 - Room 1 - SR.1<span></span></label><label>
+          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000001_2">
+          Level-1 - Room 1 - SR.2<span></span></label><label>
+          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_1">
+          Basement - Room 2 - SR.1<span></span></label><label>
+          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_1">
+          Level-2 - Room 3 - SR.1<span></span></label><label>
+          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_1">
+          Room 4 - SR.1<span></span></label>
+        </div>
+      </fieldset>
+      <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
+    </form>
+  </div>
+</dialog>

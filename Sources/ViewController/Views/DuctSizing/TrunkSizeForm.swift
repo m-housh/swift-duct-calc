@@ -52,6 +52,10 @@ struct TrunkSizeForm: HTML, Sendable {
 
         input(.class("hidden"), .name("projectID"), .value(projectID))
 
+        if trunk == nil && !rooms.isEmpty {
+          TrunkTemplatesView(rooms: rooms)
+        }
+
         div(.class("grid grid-cols-1 md:grid-cols-2 gap-4")) {
           label(.class("select w-full")) {
             span(.class("label")) { "Type" }
@@ -64,12 +68,16 @@ struct TrunkSizeForm: HTML, Sendable {
           }
 
           LabeledInput(
-            "Height",
+            "Height (in.)",
             .type(.text),
             .name("height"),
             .value(trunk?.height),
             .placeholder("8 (Optional)"),
           )
+        }
+
+        if trunk == nil {
+          p(.class("muted")) { "Enter a height for rectangular sizing, or leave blank for round sizing." }
         }
 
         LabeledInput(

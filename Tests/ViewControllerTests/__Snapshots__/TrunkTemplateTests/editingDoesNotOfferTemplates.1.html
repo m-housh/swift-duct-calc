@@ -1,0 +1,41 @@
+<dialog id="trunkSizeForm_0000000000000000000000000000000A" class="modal" aria-labelledby="trunkSizeForm_0000000000000000000000000000000A-title">
+  <div class="modal-box">
+    <h2 id="trunkSizeForm_0000000000000000000000000000000A-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
+    <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Trunk / Runout Size" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    <form data-success-message="Changes saved." class="space-y-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk/00000000-0000-0000-0000-00000000000A" hx-target="body" hx-swap="outerHTML">
+      <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <label class="select w-full"><span class="label">Type</span>
+        <select name="type">
+          <option value="supply">Supply</option>
+          <option value="return" selected>Return</option>
+        </select>
+        Height (in.)</label><label class="input w-full"><span class="label"></span>
+        <input type="text" name="height" value="8" placeholder="8 (Optional)"></label>
+      </div>
+      Name<label class="input w-full"><span class="label"></span>
+      <input type="text" name="name" value="Existing return" placeholder="Trunk-1" required></label>
+      <fieldset class="checkbox-group">
+        <legend class="font-bold">Associated Supply Runs</legend>
+        <div class="flex flex-wrap gap-2 my-2">
+          <button type="button" class="btn btn-sm" data-check-all="true">Select all</button>
+          <button type="button" class="btn btn-sm" data-check-all="false">Clear selection</button>
+        </div>
+        <div class="checkbox-options">
+          <label>
+          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000001_1">
+          Level-1 - Room 1 - SR.1<span></span></label><label>
+          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000001_2">
+          Level-1 - Room 1 - SR.2<span></span></label><label>
+          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_1">
+          Basement - Room 2 - SR.1<span></span></label><label>
+          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_1">
+          Level-2 - Room 3 - SR.1<span></span></label><label>
+          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_1">
+          Room 4 - SR.1<span></span></label>
+        </div>
+      </fieldset>
+      <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
+    </form>
+  </div>
+</dialog>

@@ -80,7 +80,7 @@
                     <article class="trunk-card">
                       <div class="trunk-card-main">
                         <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>
-                        <div><strong>Main supply</strong><small>7 associated runs</small><b>16″ round</b></div>
+                        <div><strong>Main supply</strong><small>7 associated runs</small></div>
                         1,200
                         CFM<span><span></span><small></small></span>
                         <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Main supply" title="Delete trunk" hx-delete="/projects/00000000-0000-0000-0000-000000002328/duct-sizing/trunk/00000000-0000-0000-0000-000000002350" hx-confirm="Delete this trunk?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
@@ -88,9 +88,19 @@
                           <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
                         </button>
                       </div>
+                      <dl class="trunk-card-sizes">
+                        <div>
+                          <dt>Round</dt>
+                          <dd><span class="size-chip">16″</span></dd>
+                        </div>
+                        <div>
+                          <dt>Flex</dt>
+                          <dd>17″</dd>
+                        </div>
+                      </dl>
                       <details>
-                        <summary>Sizes and associated runs</summary>
-                        <p>Round 16″ · Flex 17″ · 859 FPM</p>
+                        <summary>Calculation details and associated runs</summary>
+                        <p>Velocity: 859 FPM</p>
                         <p>Calculated diameter: <span>16</span> in.</p>
                         <ul>
                           <li>Living room - SR.1</li>
@@ -114,7 +124,7 @@
                                 <option value="supply" selected>Supply</option>
                                 <option value="return">Return</option>
                               </select>
-                              Height</label><label class="input w-full"><span class="label"></span>
+                              Height (in.)</label><label class="input w-full"><span class="label"></span>
                               <input type="text" name="height" value="" placeholder="8 (Optional)"></label>
                             </div>
                             Name<label class="input w-full"><span class="label"></span>
@@ -154,7 +164,7 @@
                     <article class="trunk-card">
                       <div class="trunk-card-main">
                         <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>
-                        <div><strong>Main return</strong><small>7 associated runs</small><b>16″ round</b></div>
+                        <div><strong>Main return</strong><small>7 associated runs</small></div>
                         1,200
                         CFM<span><span></span><small></small></span>
                         <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Main return" title="Delete trunk" hx-delete="/projects/00000000-0000-0000-0000-000000002328/duct-sizing/trunk/00000000-0000-0000-0000-000000002351" hx-confirm="Delete this trunk?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
@@ -162,9 +172,19 @@
                           <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
                         </button>
                       </div>
+                      <dl class="trunk-card-sizes">
+                        <div>
+                          <dt>Round</dt>
+                          <dd><span class="size-chip">16″</span></dd>
+                        </div>
+                        <div>
+                          <dt>Flex</dt>
+                          <dd>17″</dd>
+                        </div>
+                      </dl>
                       <details>
-                        <summary>Sizes and associated runs</summary>
-                        <p>Round 16″ · Flex 17″ · 859 FPM</p>
+                        <summary>Calculation details and associated runs</summary>
+                        <p>Velocity: 859 FPM</p>
                         <p>Calculated diameter: <span>16</span> in.</p>
                         <ul>
                           <li>Living room - SR.1</li>
@@ -188,7 +208,7 @@
                                 <option value="supply">Supply</option>
                                 <option value="return" selected>Return</option>
                               </select>
-                              Height</label><label class="input w-full"><span class="label"></span>
+                              Height (in.)</label><label class="input w-full"><span class="label"></span>
                               <input type="text" name="height" value="" placeholder="8 (Optional)"></label>
                             </div>
                             Name<label class="input w-full"><span class="label"></span>
@@ -506,15 +526,43 @@
                   <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Trunk / Runout Size" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
                   <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000002328/duct-sizing/trunk" hx-target="body" hx-swap="outerHTML">
                     <input class="hidden" name="projectID" value="00000000-0000-0000-0000-000000002328">
+                    <div class="trunk-template-picker">
+                      <div class="trunk-template-heading"><span id="trunk-template-label">Start from template</span><small>Optional</small></div>
+                      <button type="button" class="trunk-template-trigger" data-trunk-template-toggle="" aria-labelledby="trunk-template-label trunk-template-selection" aria-expanded="false" aria-controls="trunk-template-options"><span class="trunk-template-dot" aria-hidden="true"></span><span id="trunk-template-selection" data-trunk-template-summary="">No template</span><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg></button>
+                      <div id="trunk-template-options" class="trunk-template-panel" hidden role="group" aria-label="Trunk templates">
+                        <button type="button" class="trunk-template-none" value="" data-trunk-template="" data-runs="" aria-label="No template" aria-pressed="true"><span><strong>No template</strong><small>Choose runs manually</small></span><span class="trunk-template-none-check" aria-hidden="true">✓</span></button>
+                        <table class="trunk-template-table" aria-label="Templates by scope and type">
+                          <thead>
+                            <tr>
+                              <th scope="col">Scope</th>
+                              <th scope="col">Supply</th>
+                              <th scope="col">Return</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row"><span>Main trunks</span><small>All 7 runs</small></th>
+                              <td>
+                                <button type="button" class="trunk-template-choice supply" value="Main supply trunk" data-trunk-template="" data-type="supply" data-runs="00000000-0000-0000-0000-000000002335_1,00000000-0000-0000-0000-000000002336_1,00000000-0000-0000-0000-000000002333_1,00000000-0000-0000-0000-000000002332_1,00000000-0000-0000-0000-000000002332_2,00000000-0000-0000-0000-000000002334_1,00000000-0000-0000-0000-000000002337_1" aria-label="Main supply trunk" aria-pressed="false"><span class="trunk-template-radio" aria-hidden="true">✓</span></button>
+                              </td>
+                              <td>
+                                <button type="button" class="trunk-template-choice return" value="Main return trunk" data-trunk-template="" data-type="return" data-runs="00000000-0000-0000-0000-000000002335_1,00000000-0000-0000-0000-000000002336_1,00000000-0000-0000-0000-000000002333_1,00000000-0000-0000-0000-000000002332_1,00000000-0000-0000-0000-000000002332_2,00000000-0000-0000-0000-000000002334_1,00000000-0000-0000-0000-000000002337_1" aria-label="Main return trunk" aria-pressed="false"><span class="trunk-template-radio" aria-hidden="true">✓</span></button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <label class="select w-full"><span class="label">Type</span>
                       <select name="type">
                         <option value="supply">Supply</option>
                         <option value="return">Return</option>
                       </select>
-                      Height</label><label class="input w-full"><span class="label"></span>
+                      Height (in.)</label><label class="input w-full"><span class="label"></span>
                       <input type="text" name="height" value="" placeholder="8 (Optional)"></label>
                     </div>
+                    <p class="muted">Enter a height for rectangular sizing, or leave blank for round sizing.</p>
                     Name<label class="input w-full"><span class="label"></span>
                     <input type="text" name="name" value="" placeholder="Trunk-1" required></label>
                     <fieldset class="checkbox-group">

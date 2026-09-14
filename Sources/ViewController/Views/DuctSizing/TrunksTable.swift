@@ -39,13 +39,6 @@ extension DuctSizingView {
           div {
             strong { trunk.name ?? "\(trunk.type.rawValue.capitalized) trunk" }
             small { "\(associated.count) associated runs" }
-            b {
-              if let width = trunk.width, let height = trunk.ductSize.height {
-                "\(width) × \(height) in."
-              } else {
-                "\(trunk.finalSize)″ round"
-              }
-            }
           }
           span {
             Number(trunk.designCFM.value, digits: 0)
@@ -58,9 +51,25 @@ extension DuctSizingView {
           EditButton(accessibilityLabel: "Edit \(trunk.name ?? "trunk")").attributes(
             .class("btn-ghost"), .showModal(id: TrunkSizeForm.id(trunk)))
         }
+        dl(.class("trunk-card-sizes")) {
+          div {
+            dt { "Round" }
+            dd { span(.class("size-chip")) { "\(trunk.finalSize)″" } }
+          }
+          div {
+            dt { "Flex" }
+            dd { "\(trunk.flexSize)″" }
+          }
+          if let width = trunk.width, let height = trunk.ductSize.height {
+            div {
+              dt { "Rectangular" }
+              dd { "\(width) × \(height) in." }
+            }
+          }
+        }
         details {
-          summary { "Sizes and associated runs" }
-          p { "Round \(trunk.finalSize)″ · Flex \(trunk.flexSize)″ · \(trunk.velocity) FPM" }
+          summary { "Calculation details and associated runs" }
+          p { "Velocity: \(trunk.velocity) FPM" }
           p {
             "Calculated diameter: "
             Number(trunk.roundSize, digits: 2)

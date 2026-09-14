@@ -61,6 +61,7 @@ jobs:
     - run: npm run test:project-shortcuts
     - run: npm run test:fitting-shortcuts
     - run: npm run test:equipment
+    - run: npm run test:trunk-templates
     - run: npm run test:project-workspace
     - run: npm run test:file-import
     - run: npm run test:login-form
