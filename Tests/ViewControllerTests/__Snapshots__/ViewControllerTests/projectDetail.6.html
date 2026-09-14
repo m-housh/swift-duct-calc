@@ -280,6 +280,7 @@
                   <h2>Branch schedule</h2>
                   Find a register<label class="project-search"><span class="sr-only"></span>
                   <input type="search" class="input" id="register-search" placeholder="Find a room…" aria-keyshortcuts="Control+K"></label>
+                  <button type="button" class="btn btn-primary" data-open-dialog="rectangularSizesForm">Rectangular sizes</button>
                 </div>
                 <div class="table-scroll" tabindex="0" role="region" aria-label="Room duct sizes">
                   <table class="table project-table" data-selectable-table="registers">
@@ -782,6 +783,54 @@
                         </div>
                       </fieldset>
                       <button class="btn btn-secondary btn-block mt-6" type="submit">Submit</button>
+                    </form>
+                  </div>
+                </dialog>
+                <dialog id="rectangularSizesForm" class="modal" aria-labelledby="rectangularSizesForm-title">
+                  <div class="modal-box">
+                    <h2 id="rectangularSizesForm-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Sizes</h2>
+                    <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Sizes" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                    <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/rectangular-sizes" hx-target="body" hx-swap="outerHTML">
+                      <label class="input w-full"><span class="label">Height</span>
+                      <input name="height" type="number" placeholder="8" min="1" required autofocus></label>
+                      <fieldset class="checkbox-group" id="rectangularSizesSupplyRuns">
+                        <legend class="font-bold">Supply Runs</legend>
+                        <div class="flex flex-wrap gap-2 my-2">
+                          <button type="button" class="btn btn-sm" data-check-all="true">Select all</button>
+                          <button type="button" class="btn btn-sm" data-check-all="false">Clear selection</button>
+                        </div>
+                        <div class="checkbox-options">
+                          <label>
+                          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000001_1">
+                          Bed-1 - SR.1<span></span></label><label>
+                          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_1">
+                          Entry - SR.1<span></span></label><label>
+                          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000002_2">
+                          Entry - SR.2<span></span></label><label>
+                          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_1">
+                          Family Room - SR.1<span></span></label><label>
+                          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_2">
+                          Family Room - SR.2<span></span></label><label>
+                          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000003_3">
+                          Family Room - SR.3<span></span></label><label>
+                          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_1">
+                          Kitchen - SR.1<span></span></label><label>
+                          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000004_2">
+                          Kitchen - SR.2<span></span></label><label>
+                          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_1">
+                          Living Room - SR.1<span></span></label><label>
+                          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000005_2">
+                          Living Room - SR.2<span></span></label><label>
+                          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_1">
+                          Master - SR.1<span></span></label><label>
+                          <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000006_2">
+                          Master - SR.2<span></span></label>
+                        </div>
+                      </fieldset>
+                      <div class="flex flex-wrap gap-2 mt-6">
+                        <button type="submit" class="btn btn-secondary">Set height</button>
+                        <button type="button" class="btn btn-error btn-outline" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/rectangular-sizes/clear" hx-include="closest form" hx-params="rooms">Clear rectangular sizes</button>
+                      </div>
                     </form>
                   </div>
                 </dialog>

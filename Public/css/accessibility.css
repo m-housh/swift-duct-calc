@@ -20,6 +20,7 @@
 .checkbox-options { max-height:18rem; overflow:auto; border:1px solid currentColor; border-radius:.5rem; }
 .checkbox-options label { display:flex; align-items:center; gap:.75rem; padding:.75rem; cursor:pointer; }
 .checkbox-options input { flex-shrink:0; }
+.checkbox-options .size-chip { margin-left:auto; flex-shrink:0; white-space:nowrap; }
 :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible { outline:3px solid var(--color-base-content); outline-offset:3px; }
 .modal:not([open]) { display:none; }
 @media (max-width: 800px) {

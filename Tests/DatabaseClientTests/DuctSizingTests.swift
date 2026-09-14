@@ -9,6 +9,62 @@ import Testing
 struct DuctSizingTests {
   typealias Input = Project.DuctSizingUnavailable.Input
 
+  @Test(arguments: [false, true])
+  func roomWideRectangularSizesPreserveUnselectedRegisters(clearing: Bool) async throws {
+    try await withTestUserAndProject(setupDependencies: {
+      $0.projectClient = .liveValue
+      $0.manualD = .liveValue
+    }) { _, project in
+      @Dependency(\.database) var database
+      @Dependency(\.projectClient) var client
+      _ = try await database.projects.update(project.id, .init(sensibleHeatRatio: 0.83))
+      _ = try await database.equipment.create(
+        .init(projectID: project.id, heatingCFM: 900, coolingCFM: 900))
+      for type in [EquivalentLength.EffectiveLengthType.supply, .return] {
+        _ = try await database.equivalentLengths.create(
+          .init(projectID: project.id, name: type.rawValue, type: type,
+            straightLengths: [150], groups: []))
+      }
+      for loss in ComponentPressureLoss.Create.default(projectID: project.id) {
+        _ = try await database.componentLosses.create(loss)
+      }
+      let room = try await database.rooms.create(
+        project.id, .init(name: "Living Room", heatingLoad: 9000, coolingTotal: 6000, registerCount: 3))
+      let specific = Room.RectangularSize(id: UUID(10), register: 1, height: 8)
+      let legacy = Room.RectangularSize(id: UUID(11), height: 10)
+      let stored = try await database.rooms.update(room.id, .init(rectangularSizes: [
+        specific, legacy, .init(id: UUID(12), register: 3, height: 6),
+      ]))
+      #expect(try await client.calculateRoomDuctSizes(project.id).map(\.height) == [8, 10, 10])
+      for register in [0, 4] {
+        await #expect(throws: ValidationError.self) {
+          try await database.rooms.clearRectangularSize(room.id, register)
+        }
+        #expect(try await database.rooms.get(room.id) == stored)
+      }
+
+      let changed: Room
+      if clearing {
+        changed = try await database.rooms.clearRectangularSize(room.id, 2)
+      } else {
+        changed = try await database.rooms.updateRectangularSize(
+          room.id, .init(id: legacy.id, register: 2, height: 12))
+      }
+      let sizes = try #require(changed.rectangularSizes)
+      #expect(sizes.allSatisfy { $0.register != nil })
+      #expect(Set(sizes.map(\.id)).count == sizes.count)
+      #expect(sizes.first(where: { $0.register == 1 }) == specific)
+      let calculated = try await client.calculateRoomDuctSizes(project.id)
+      #expect(calculated.map(\.height) == [8, clearing ? nil : 12, 10])
+
+      for register in 1...3 {
+        _ = try await database.rooms.clearRectangularSize(room.id, register)
+      }
+      #expect(try await database.rooms.get(room.id)?.rectangularSizes == nil)
+      #expect(try await client.calculateRoomDuctSizes(project.id).allSatisfy { $0.height == nil })
+    }
+  }
+
   @Test(
     arguments: Input.allCases.map { [$0] } + [
       [.supplyPath, .returnPath], [.equipment, .supplyPath, .returnPath], Input.allCases, [],

@@ -11,6 +11,41 @@ import Testing
 @Suite
 struct RoomTests {
 
+  @Test(arguments: [8, nil] as [Int?])
+  func bulkRectangularSizesRollBackOnFailure(height: Int?) async throws {
+    try await withTestUserAndProject { _, project in
+      @Dependency(\.database.rooms) var rooms
+      var saved: [Room.ID: Room] = [:]
+      for name in ["First room", "Second room"] {
+        let room = try await rooms.create(
+          project.id, .init(name: name, heatingLoad: 1000, coolingTotal: 800, registerCount: 3))
+        saved[room.id] = try await rooms.update(
+          room.id, .init(rectangularSizes: [.init(height: 10)]))
+      }
+      let selection = saved.mapValues { _ in [1, 3] }
+      // Fail on the last room after the earlier room's writes have completed.
+      let firstID = try #require(selection.keys.first)
+      let lastID = try #require(Array(selection.keys).last)
+      try await rooms.delete(lastID)
+      await #expect(throws: NotFoundError.self) {
+        try await rooms.setRectangularSizes(selection, height)
+      }
+      #expect(try await rooms.get(firstID) == saved[firstID])
+
+      await #expect(throws: ValidationError.self) {
+        try await rooms.setRectangularSizes([firstID: [1, 99]], height)
+      }
+      #expect(try await rooms.get(firstID) == saved[firstID])
+
+      try await rooms.setRectangularSizes([firstID: [1, 3]], height)
+      let changed = try #require(try await rooms.get(firstID)?.rectangularSizes)
+      #expect(changed.first(where: { $0.register == 2 })?.height == 10)
+      #expect(changed.first(where: { $0.register == 1 })?.height == height)
+      #expect(changed.first(where: { $0.register == 3 })?.height == height)
+      #expect(changed.allSatisfy { $0.register != nil })
+    }
+  }
+
   @Test
   func happyPath() async throws {
     try await withTestUserAndProject { _, project in
@@ -38,7 +73,12 @@ struct RoomTests {
       )
       #expect(updatedSize.id == room.id)
 
-      let deletedSize = try await rooms.deleteRectangularSize(room.id, UUID(0))
+      let replacedSize = try await rooms.updateRectangularSize(
+        room.id, .init(id: UUID(1), register: 1, height: 12)
+      )
+      #expect(replacedSize.rectangularSizes == [.init(id: UUID(1), register: 1, height: 12)])
+
+      let deletedSize = try await rooms.deleteRectangularSize(room.id, UUID(1))
       #expect(deletedSize.rectangularSizes == nil)
 
       try await rooms.delete(room.id)

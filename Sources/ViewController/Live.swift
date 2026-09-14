@@ -720,16 +720,18 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
 
     case .deleteRectangularSize(let roomID, let request):
       return await ResultView {
-        let room = try await database.rooms.deleteRectangularSize(roomID, request.rectangularSizeID)
+        let room = try await database.rooms.clearRectangularSize(roomID, request.register)
+        let rooms = try await projectClient.calculateRoomDuctSizes(projectID)
         guard
-          let result = try await projectClient.calculateRoomDuctSizes(projectID)
+          let result = rooms
             .first(where: { $0.roomID == room.id && $0.roomRegister == request.register })
         else {
           throw ValidationError("This register is no longer available. Reload the duct sizes.")
         }
-        return result
-      } onSuccess: { room in
-        DuctSizingView.RoomRow(room: room).environment(ProjectViewValue.$projectID, projectID)
+        return (room: result, rooms: rooms)
+      } onSuccess: { result in
+        DuctSizingView.RoomUpdate(room: result.room, rooms: result.rooms)
+          .environment(ProjectViewValue.$projectID, projectID)
       }
 
     case .roomRectangularForm(let roomID, let form):
@@ -738,15 +740,30 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
           roomID,
           .init(id: form.id ?? .init(), register: form.register, height: form.height)
         )
+        let rooms = try await projectClient.calculateRoomDuctSizes(projectID)
         guard
-          let result = try await projectClient.calculateRoomDuctSizes(projectID)
+          let result = rooms
             .first(where: { $0.roomID == room.id && $0.roomRegister == form.register })
         else {
           throw ValidationError("This register is no longer available. Reload the duct sizes.")
         }
-        return result
-      } onSuccess: { room in
-        DuctSizingView.RoomRow(room: room).environment(ProjectViewValue.$projectID, projectID)
+        return (room: result, rooms: rooms)
+      } onSuccess: { result in
+        DuctSizingView.RoomUpdate(room: result.room, rooms: result.rooms)
+          .environment(ProjectViewValue.$projectID, projectID)
+      }
+
+    case .rectangularSizes(let form):
+      return await view(on: request, projectID: projectID) {
+        try await database.rooms.setRectangularSizes(
+          Dictionary(grouping: form.rooms, by: \.roomID).mapValues { $0.map(\.register) },
+          form.height)
+      }
+
+    case .clearRectangularSizes(let rooms):
+      return await view(on: request, projectID: projectID) {
+        try await database.rooms.setRectangularSizes(
+          Dictionary(grouping: rooms, by: \.roomID).mapValues { $0.map(\.register) }, nil)
       }
 
     case .trunk(let route):

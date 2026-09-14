@@ -56,6 +56,11 @@ struct DuctSizingView: HTML, Sendable {
             .type(.search), .class("input"), .id("register-search"), .placeholder("Find a room…"),
             .init(name: "aria-keyshortcuts", value: "Control+K"))
         }
+        button(
+          .type(.button), .class("btn btn-primary"), .showModal(id: RectangularSizesForm.id)
+        ) {
+          "Rectangular sizes"
+        }
       }
       div(
         .class("table-scroll"), .tabindex(0), .role("region"),
@@ -65,6 +70,7 @@ struct DuctSizingView: HTML, Sendable {
       }
 
       TrunkSizeForm(rooms: sortedRooms, dismiss: true)
+      RectangularSizesForm(rooms: sortedRooms)
     }
   }
 

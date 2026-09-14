@@ -4,6 +4,25 @@ import ManualDCore
 import Styleguide
 
 extension DuctSizingView {
+  /// Refreshes sibling forms too because expanding a room-wide size changes their saved IDs.
+  struct RoomUpdate: HTML, Sendable {
+    let room: DuctSizes.RoomContainer
+    let rooms: [DuctSizes.RoomContainer]
+
+    var body: some HTML {
+      RoomRow(room: room)
+      for sibling in rooms
+      where sibling.roomID == room.roomID && sibling.roomRegister != room.roomRegister {
+        template {
+          RoomRow(room: sibling).attributes(.hx.swapOOB(.outerHTML))
+        }
+      }
+      RectangularSizesForm(rooms: rooms.sorted { $0.label < $1.label })
+        .supplyRuns
+        .attributes(.hx.swapOOB(.outerHTML))
+    }
+  }
+
   struct RoomsTable: HTML, Sendable {
     let rooms: [DuctSizes.RoomContainer]
     var body: some HTML<HTMLTag.table> {

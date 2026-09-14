@@ -55,6 +55,28 @@ extension DatabaseClient.Rooms: TestDependencyKey {
         }
         return try model.toDTO()
       },
+      clearRectangularSize: { roomID, register in
+        guard let model = try await RoomModel.find(roomID, on: database) else {
+          throw NotFoundError()
+        }
+        guard register > 0, register <= model.registerCount else {
+          throw ValidationError("Choose a valid register.")
+        }
+        guard model.rectangularSizes?.contains(where: {
+          $0.register == nil || $0.register == register
+        }) == true else {
+          return try model.toDTO()
+        }
+        model.normalizeRectangularSizes()
+        model.rectangularSizes?.removeAll { $0.register == register }
+        if model.rectangularSizes?.isEmpty == true {
+          model.rectangularSizes = nil
+        }
+        if model.hasChanges {
+          try await model.validateAndSave(on: database)
+        }
+        return try model.toDTO()
+      },
       get: { id in
         try await RoomModel.find(id, on: database).map { try $0.toDTO() }
       },
@@ -85,20 +107,60 @@ extension DatabaseClient.Rooms: TestDependencyKey {
         else {
           throw ValidationError("Choose a valid register and a positive height.")
         }
+        if size.register != nil {
+          model.normalizeRectangularSizes()
+        }
         var rectangularSizes = model.rectangularSizes ?? []
+        // A register has one rectangular size, so a new size replaces the register's old one.
         rectangularSizes.removeAll {
-          $0.id == size.id
+          $0.id == size.id || (size.register != nil && $0.register == size.register)
         }
         rectangularSizes.append(size)
         model.rectangularSizes = rectangularSizes
         try await model.save(on: database)
         return try model.toDTO()
+      },
+      setRectangularSizes: { selection, height in
+        guard selection.values.contains(where: { !$0.isEmpty }) else {
+          throw ValidationError("Select at least one register.")
+        }
+        let dependencies = withEscapedDependencies { $0 }
+        try await database.transaction { transaction in
+          try await dependencies.yield {
+            let rooms = Self.live(database: transaction)
+            for (roomID, registers) in selection {
+              for register in registers {
+                if let height {
+                  _ = try await rooms.updateRectangularSize(
+                    roomID, .init(register: register, height: height))
+                } else {
+                  _ = try await rooms.clearRectangularSize(roomID, register)
+                }
+              }
+            }
+          }
+        }
       }
     )
   }
 }
 
 extension RoomModel {
+  /// Expands room-wide sizes while preserving the calculator's first match for each register.
+  fileprivate func normalizeRectangularSizes() {
+    guard let sizes = rectangularSizes, sizes.contains(where: { $0.register == nil }),
+      registerCount > 0
+    else { return }
+    @Dependency(\.uuid) var uuid
+    rectangularSizes = (1...registerCount).compactMap { register in
+      guard let size = sizes.first(where: { $0.register == nil || $0.register == register }) else {
+        return nil
+      }
+      return .init(
+        id: size.register == nil ? uuid() : size.id, register: register, height: size.height)
+    }
+  }
+
   fileprivate static func createMany(
     projectID: Project.ID,
     rooms: [Room.Create],

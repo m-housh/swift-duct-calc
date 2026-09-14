@@ -108,6 +108,64 @@ struct ProjectMutationAuthorizationTests {
         body: .init(string: "register=1&height=8"))
       #expect(foreignRectangle.status == .notFound)
       #expect(try await db.rooms.get(room.id) == room)
+      for (body, status) in [
+        ("height=8&rooms=\(ownRoom.id)_1&rooms=\(room.id)_1", HTTPStatus.notFound),
+        ("height=8&rooms=\(ownRoom.id)_2", .badRequest),
+        ("height=0&rooms=\(ownRoom.id)_1", .badRequest),
+      ] {
+        let response = try await client.sendRequest(
+          .POST, base + "/duct-sizing/rectangular-sizes", headers: headers,
+          body: .init(string: body))
+        #expect(response.status == status)
+        #expect(try await db.rooms.get(ownRoom.id) == ownRoom)
+        #expect(try await db.rooms.get(room.id) == room)
+      }
+      let clearRoom = try await db.rooms.create(
+        ownProject.id,
+        .init(name: "Clear sizes", heatingLoad: 1000, coolingTotal: 800, registerCount: 3))
+      _ = try await db.rooms.updateRectangularSize(clearRoom.id, .init(register: 1, height: 8))
+      let sizedRoom = try await db.rooms.updateRectangularSize(
+        clearRoom.id, .init(register: 2, height: 6))
+      let foreignSizedRoom = try await db.rooms.updateRectangularSize(
+        room.id, .init(register: 1, height: 8))
+      for (body, status) in [
+        ("rooms=\(clearRoom.id)_1&rooms=\(room.id)_1", HTTPStatus.notFound),
+        ("rooms=\(clearRoom.id)_1&rooms=\(clearRoom.id)_4", .badRequest),
+        ("rooms=\(clearRoom.id)_0", .badRequest),
+      ] {
+        let response = try await client.sendRequest(
+          .POST, base + "/duct-sizing/rectangular-sizes/clear", headers: headers,
+          body: .init(string: body))
+        #expect(response.status == status)
+        #expect(try await db.rooms.get(clearRoom.id) == sizedRoom)
+        #expect(try await db.rooms.get(room.id) == foreignSizedRoom)
+      }
+      _ = try await client.sendRequest(
+        .POST, base + "/duct-sizing/rectangular-sizes/clear", headers: headers,
+        body: .init(
+          string: "rooms=\(clearRoom.id)_1&rooms=\(clearRoom.id)_3&rooms=\(ownRoom.id)_1"))
+      #expect(try await db.rooms.get(clearRoom.id)?.rectangularSizes
+        == sizedRoom.rectangularSizes?.filter { $0.register == 2 })
+      #expect(try await db.rooms.get(ownRoom.id) == ownRoom)
+      #expect(try await db.rooms.get(room.id) == foreignSizedRoom)
+
+      _ = try await db.rooms.update(clearRoom.id, .init(rectangularSizes: [.init(height: 10)]))
+      _ = try await client.sendRequest(
+        .POST, base + "/duct-sizing/rectangular-sizes", headers: headers,
+        body: .init(string: "height=12&rooms=\(clearRoom.id)_1&rooms=\(clearRoom.id)_3"))
+      let bulkSet = try #require(try await db.rooms.get(clearRoom.id)?.rectangularSizes)
+      #expect(bulkSet.sorted { ($0.register ?? 0) < ($1.register ?? 0) }.map(\.height) == [12, 10, 12])
+      #expect(bulkSet.allSatisfy { $0.register != nil })
+
+      _ = try await db.rooms.update(clearRoom.id, .init(rectangularSizes: [.init(height: 10)]))
+      _ = try await client.sendRequest(
+        .POST, base + "/duct-sizing/rectangular-sizes/clear", headers: headers,
+        body: .init(string: "rooms=\(clearRoom.id)_1&rooms=\(clearRoom.id)_3"))
+      let bulkCleared = try #require(try await db.rooms.get(clearRoom.id)?.rectangularSizes)
+      #expect(bulkCleared.count == 1)
+      #expect(bulkCleared.first?.register == 2)
+      #expect(bulkCleared.first?.height == 10)
+
       let profileResponse = try await client.sendRequest(
         .POST, "/signup/profile", headers: ["Content-Type": "application/x-www-form-urlencoded"],
         body: .init(
