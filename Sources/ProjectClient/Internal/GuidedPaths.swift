@@ -98,8 +98,8 @@ extension ProjectClient {
       else { throw ValidationError("Check the fitting and its quantity.") }
       if let stepID = row.stepID {
         guard let step = configuration.steps.first(where: { $0.id == stepID }),
-          step.choices.contains(where: { $0.fittingID == row.fittingID })
-        else { throw ValidationError("This fitting is not a choice in its section.") }
+          step.group == definition.group
+        else { throw ValidationError("This fitting does not belong to its section's group.") }
       }
       let calculation: TemplateFitting.Calculation
       if let stored = existing?.groups.first(where: { $0.rowID == row.id })?.calculation,

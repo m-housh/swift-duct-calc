@@ -6794,6 +6794,9 @@
   .list-disc {
     list-style-type: disc;
   }
+  .appearance-auto {
+    appearance: auto;
+  }
   .alert-horizontal {
     @layer daisyui.l1.l2 {
       justify-content: start;
@@ -7385,6 +7388,12 @@
   .border-base-300 {
     border-color: var(--color-base-300);
   }
+  .border-base-content\/50 {
+    border-color: var(--color-base-content);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-base-content) 50%, transparent);
+    }
+  }
   .menu-active {
     :where(:not(ul, details, .menu-title, .btn))& {
       @layer daisyui.l1.l2 {
@@ -7636,6 +7645,9 @@
       box-shadow: none;
       background-image: none;
     }
+  }
+  .bg-none {
+    background-image: none;
   }
   .loading-ball {
     @layer daisyui.l1.l2 {

@@ -134,8 +134,7 @@
           path.completed[s.id] = true;
         });
         for (const row of path.rows) {
-          path.inputs[`${row.stepID}:${row.fittingID}`] = clone(row.inputs);
-          path.quantities[`${row.stepID}:${row.fittingID}`] = String(row.quantity);
+          rememberChoice(row);
         }
       }
       mode = 'path';
@@ -147,6 +146,15 @@
     }
     function stepRows(step) {
       return path.rows.filter((r) => r.stepID === step.id);
+    }
+    // Keep browsed choices in this path's working copy, including when revisiting a saved path.
+    function rememberChoice(row) {
+      const step = path.config.steps.find((s) => s.id === row.stepID);
+      if (!step) return;
+      if (!step.choices.some((c) => c.fittingID === row.fittingID))
+        step.choices.push({ fittingID: row.fittingID, defaults: null });
+      path.inputs[`${step.id}:${row.fittingID}`] = clone(row.inputs);
+      path.quantities[`${step.id}:${row.fittingID}`] = String(row.quantity);
     }
     function inputsFor(step, choice) {
       const key = `${step.id}:${choice.fittingID}`;
@@ -421,7 +429,7 @@
       path.rows.sort(
         (a, b) => (order.get(a.stepID) ?? order.size) - (order.get(b.stepID) ?? order.size)
       );
-      if (step) path.inputs[`${step.id}:${row.fittingID}`] = clone(row.inputs);
+      rememberChoice(row);
       dirty = true;
       if (advanceAfter) {
         path.completed[step.id] = true;
@@ -610,17 +618,18 @@
         return;
       }
       if (action === 'choose' || action === 'quantity-details' || action === 'extra') {
-        const step = currentStep(),
-          choice = action === 'extra' ? null : step.choices.find((c) => c.fittingID === id),
-          d = definitions.get(id);
+        const d = definitions.get(id),
+          step = currentStep()?.group === d.group ? currentStep() : null,
+          choice = step?.choices.find((c) => c.fittingID === id),
+          advanceAfter = step?.behavior === 'chooseOne';
+        const existing =
+          step?.behavior === 'quantities' ? stepRows(step).find((r) => r.fittingID === id) : null;
         const inputs = choice ? inputsFor(step, choice) : emptyInputs(d),
           quantity =
-            action === 'quantity-details' ? Number(path.quantities[`${step.id}:${id}`] ?? 0) : 1;
-        const existing =
-          action === 'quantity-details' ? stepRows(step).find((r) => r.fittingID === id) : null;
+            action === 'quantity-details' ? Number(path.quantities[`${step.id}:${id}`] ?? 0) : existing?.quantity ?? 1;
         const row = {
           id: existing?.id || uuid(),
-          stepID: choice ? step.id : null,
+          stepID: step?.id ?? null,
           fittingID: id,
           inputs: clone(inputs),
           quantity,
@@ -629,10 +638,10 @@
         if (action === 'quantity-details' || missing(d, inputs))
           openDetails(
             row,
-            action === 'choose' && step.behavior === 'chooseOne',
+            advanceAfter,
             action === 'quantity-details'
           );
-        else await use(row, action === 'choose' && step.behavior === 'chooseOne');
+        else await use(row, advanceAfter);
         return;
       }
       if (action === 'edit-row') {
@@ -686,13 +695,16 @@
         return;
       }
       if (action === 'browse') {
+        const group = currentStep()?.group ?? allowed[path.config.type][0];
         const dialog = document.createElement('dialog');
         dialog.className = 'modal';
         dialog.id = 'browse-fittings';
-        dialog.innerHTML = `<div class="modal-box max-w-4xl space-y-4"><h2 class="text-xl font-bold">Add a fitting to this path</h2><p>This adds an exception without changing your template.</p><label>Fitting group<select class="select w-full" id="browse-group">${allowed[path.config.type].map((g) => `<option value="${g}">${g} · ${groups[g]}</option>`).join('')}</select></label><div id="browse-choices" class="grid sm:grid-cols-2 gap-3"></div><div class="modal-action">${button('close-browse', 'Close')}</div></div>`;
+        dialog.setAttribute('aria-labelledby', 'browse-heading');
+        dialog.innerHTML = `<div class="modal-box max-w-4xl space-y-4"><h2 id="browse-heading" class="text-xl font-bold">Add a fitting to this path</h2><p>Choose a fitting for this section, or switch groups to add an extra fitting to the path. Your saved template stays the same.</p><div class="flex flex-col gap-2"><label for="browse-group">Fitting group</label><select class="select w-full appearance-auto bg-none border-base-content/50 cursor-pointer" id="browse-group">${allowed[path.config.type].map((g) => `<option value="${g}" ${g === group ? 'selected' : ''}>${g} · ${groups[g]}</option>`).join('')}</select></div><div id="browse-choices" class="grid sm:grid-cols-2 gap-3"></div><div class="modal-action">${button('close-browse', 'Close')}</div></div>`;
         root.append(dialog);
         renderBrowse();
         dialog.showModal();
+        dialog.addEventListener('cancel', () => dialog.remove(), { once: true });
         return;
       }
       if (action === 'close-browse') {
@@ -708,7 +720,7 @@
         const snapshot = data.path?.templateSnapshot || {
           templateID: data.template.id,
           revision: data.template.revision,
-          configuration: path.config,
+          configuration,
         };
         const result = await request(data.saveURL, {
           id: data.path?.id,
@@ -802,10 +814,21 @@
       event.preventDefault();
       run(() => act('apply-details', event.submitter ?? event.target));
     });
+    root.addEventListener('pointerdown', (event) => {
+      // A quantity blur can add rows and move the pressed button before pointerup.
+      // Keep focus until click, then commit the quantity before running the action.
+      if (
+        event.button === 0 &&
+        document.activeElement?.matches('[data-quantity]') &&
+        event.target.closest('[data-action]')
+      ) event.preventDefault();
+    });
     root.addEventListener('click', (event) => {
       const target = event.target.closest('[data-action]');
-      if (target && !target.disabled && target.type !== 'submit')
+      if (target && !target.disabled && target.type !== 'submit') {
+        if (document.activeElement?.matches('[data-quantity]')) document.activeElement.blur();
         run(() => act(target.dataset.action, target));
+      }
     });
     root.addEventListener('input', (event) => {
       const t = event.target;

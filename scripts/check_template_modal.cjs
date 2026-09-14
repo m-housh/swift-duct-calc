@@ -47,7 +47,7 @@ const fs = require('node:fs');
     await page.locator('#browse-fittings').waitFor();
     await page.keyboard.press('Escape');
     assert(await modal.evaluate(dialog => dialog.matches(':modal')));
-    assert.equal(await page.locator('#browse-fittings').evaluate(dialog => dialog.open), false);
+    assert.equal(await page.locator('#browse-fittings').count(), 0);
     await modal.locator('[data-action=choose][data-id="1B"]').click();
     await page.waitForFunction(() => document.querySelector("#section-heading").textContent === "Supply trunk branch takeoff");
     await modal.getByRole('button', { name: 'Cancel', exact: true }).click();
