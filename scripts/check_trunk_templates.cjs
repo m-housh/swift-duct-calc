@@ -53,6 +53,19 @@ test('level templates replace the selection and support multiple registers and t
   assert.deepEqual(data().getAll('rooms'), [run(3)]);
 });
 
+test('one basement template selects runs from all nonpositive levels', t => {
+  const { document, choose } = setup(t);
+  document.body.innerHTML = snapshot('equivalentBasementLevelsShareOneTemplate.1');
+  for (const type of ['supply', 'return']) {
+    const name = `Basement ${type} trunk`;
+    assert.equal(document.querySelectorAll(`[data-trunk-template][value="${name}"]`).length, 1);
+    choose(name);
+    const formData = new document.defaultView.FormData(document.querySelector('form[hx-post]'));
+    assert.deepEqual(formData.getAll('rooms'), [run(2), run(5), run(5, 2), run(6)]);
+    assert.equal(formData.get('type'), type);
+  }
+});
+
 test('templates allow manual changes and preserve the optional rectangular height', t => {
   const { form, choose, data } = setup(t);
   form.elements.namedItem('height').value = '8';

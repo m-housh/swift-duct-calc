@@ -10,8 +10,10 @@ import Testing
 
 @Suite(.snapshots(record: .failed))
 struct TrunkTemplateTests {
-  private func rooms(withLevels: Bool) -> [DuctSizes.RoomContainer] {
-    [(1, 1, 1), (1, 2, 1), (2, 1, 0), (3, 1, 2), (4, 1, nil)].map {
+  private func rooms(withLevels: Bool, mixedBasements: Bool = false) -> [DuctSizes.RoomContainer] {
+    let runs: [(Int, Int, Int?)] = [(1, 1, 1), (1, 2, 1), (2, 1, 0), (3, 1, 2), (4, 1, nil)]
+      + (mixedBasements ? [(5, 1, -1), (5, 2, -1), (6, 1, -2)] : [])
+    return runs.map {
       (id: Int, register: Int, level: Int?) in
       .init(
         roomID: UUID(id), roomName: "Room \(id)",
@@ -40,6 +42,16 @@ struct TrunkTemplateTests {
   @Test func emptyRoomsDoNotOfferTemplates() {
     let view = TrunkSizeForm(rooms: []).environment(ProjectViewValue.$projectID, UUID(0))
     #expect(!view.render().contains("data-trunk-template"))
+    assertSnapshot(of: view, as: .html)
+  }
+
+  @Test func equivalentBasementLevelsShareOneTemplate() {
+    let view = TrunkSizeForm(rooms: rooms(withLevels: true, mixedBasements: true))
+      .environment(ProjectViewValue.$projectID, UUID(0))
+    let html = view.render()
+    for type in ["supply", "return"] {
+      #expect(html.components(separatedBy: "aria-label=\"Basement \(type) trunk\"").count == 2)
+    }
     assertSnapshot(of: view, as: .html)
   }
 

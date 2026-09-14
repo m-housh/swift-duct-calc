@@ -6,7 +6,12 @@ struct TrunkTemplatesView: HTML, Sendable {
   let rooms: [DuctSizes.RoomContainer]
 
   private var levels: [Room.Level?] {
-    [nil] + Set(rooms.compactMap(\.roomLevel)).sorted().map { Optional($0) }
+    [nil] + Set(rooms.compactMap { templateLevel($0.roomLevel) }).sorted().map { Optional($0) }
+  }
+
+  // Nonpositive levels all display as Basement and must select the same scope.
+  private func templateLevel(_ level: Room.Level?) -> Room.Level? {
+    level.map { .init(rawValue: max(0, $0.rawValue)) }
   }
 
   var body: some HTML {
@@ -56,7 +61,7 @@ struct TrunkTemplatesView: HTML, Sendable {
           }
           tbody {
             for level in levels {
-              TemplateRow(level: level, rooms: rooms.filter { level == nil || $0.roomLevel == level })
+              TemplateRow(level: level, rooms: rooms.filter { level == nil || templateLevel($0.roomLevel) == level })
             }
           }
         }
