@@ -170,6 +170,38 @@ struct GuidedPathTests {
   }
 
   @Test
+  func browsedFittingsSaveAndEditWithoutChangingTheTemplate() async throws {
+    try await withTestUserAndProject(setupDependencies: { $0.templateFittingClient = .liveValue }) {
+      user, project in
+      @Dependency(\.database) var database
+      let client = ProjectClient.liveValue
+      let template = try await client.createPathTemplate(
+        userID: user.id, configuration: Self.configuration)
+      let snapshot = PathTemplate.Snapshot(template: template)
+      let rows = [
+        GuidedPath.Row(
+          id: UUID(60), stepID: UUID(50), fittingID: "1C", inputs: .fixed, quantity: 1)
+      ]
+      let saved = try await client.saveGuidedPath(
+        userID: user.id, projectID: project.id,
+        request: .init(name: "Browsed path", straightLengths: [], snapshot: snapshot, rows: rows))
+      #expect(saved.groups[0].stepID == UUID(50))
+      #expect(saved.groups[0].calculation?.fittingID == "1C")
+      #expect(saved.templateSnapshot == snapshot)
+
+      let updated = try await client.saveGuidedPath(
+        userID: user.id, projectID: project.id,
+        request: .init(
+          id: saved.id, name: saved.name, straightLengths: [10], snapshot: snapshot,
+          rows: [.init(id: UUID(60), stepID: UUID(50), fittingID: "1D", inputs: .fixed, quantity: 1)],
+          revision: saved.revision))
+      #expect(updated.groups[0].calculation?.fittingID == "1D")
+      #expect(updated.templateSnapshot == snapshot)
+      #expect(try await database.pathTemplates.get(user.id, template.id) == template)
+    }
+  }
+
+  @Test
   func invalidAndIncompleteRowsDoNotSaveAPath() async throws {
     try await withTestUserAndProject(setupDependencies: { $0.templateFittingClient = .liveValue }) {
       user, project in
@@ -182,7 +214,17 @@ struct GuidedPathTests {
         [], [Self.rows[0], Self.rows[0]],
         [
           GuidedPath.Row(
-            id: UUID(60), stepID: UUID(50), fittingID: "1A", inputs: .fixed, quantity: 1)
+            id: UUID(60), stepID: UUID(50), fittingID: "4G", inputs: .fixed, quantity: 1)
+        ],
+        [
+          GuidedPath.Row(
+            id: UUID(60), stepID: UUID(99), fittingID: "1B", inputs: .fixed, quantity: 1),
+          Self.rows[0]
+        ],
+        [
+          Self.rows[0],
+          GuidedPath.Row(
+            id: UUID(62), stepID: UUID(50), fittingID: "1C", inputs: .fixed, quantity: 1)
         ],
       ] {
         await #expect(throws: ValidationError.self) {
