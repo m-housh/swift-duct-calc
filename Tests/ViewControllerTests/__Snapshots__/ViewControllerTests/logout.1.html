@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Account · Duct Calc</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="ductcalc.com" name="og:site_name">
+    <meta content="Duct Calc" name="og:title">
+    <meta content="Duct sizing based on ACCA, Manual-D." name="description">
+    <meta content="Duct sizing based on ACCA, Manual-D." name="og:description">
+    <meta content="/images/mand_logo.png" name="og:image">
+    <meta content="/images/mand_logo.png" name="twitter:image">
+    <meta content="Duct Calc" name="twitter:image:alt">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="1536" name="og:image:width">
+    <meta content="1024" name="og:image:height">
+    <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
+    <script src="https://unpkg.com/htmx.org@2.0.8"></script>
+    <script src="/js/htmx-download.js"></script>
+    <script src="/js/request-errors.js?v=1"></script>
+    <script src="/js/main.js?v=errors-1"></script>
+    <script src="/js/file-import.js?v=1" defer></script>
+    <script src="/js/filters.js?v=1" defer></script>
+    <link rel="stylesheet" href="/css/filters.css?v=1">
+    <script src="/js/project-import.js?v=1" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/css/output.css?v=project-import-1">
+    <link rel="stylesheet" href="/css/htmx.css">
+    <link rel="stylesheet" href="/css/accessibility.css?v=errors-1">
+    <link rel="stylesheet" href="/css/project-workspace.css?v=trunk-sizes-2">
+    <link rel="icon" href="/images/favicon.ico?v=ductcalc-white-3" sizes="16x16 32x32 48x48">
+    <link rel="icon" href="/images/favicon-32x32.png?v=ductcalc-white-3" type="image/png" sizes="32x32">
+    <link rel="icon" href="/images/brand/favicon.svg?v=white-3" type="image/svg+xml" sizes="any">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=ductcalc-2" sizes="180x180">
+    <link rel="manifest" href="/site.webmanifest?v=ductcalc-2">
+    <link rel="stylesheet" href="/css/ductcalc-wordmark.css?v=2">
+    <link rel="stylesheet" href="/css/navbar.css?v=3">
+    <script src="https://unpkg.com/htmx-remove@latest" crossorigin="anonymous" integrity="sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT"></script>
+  </head>
+  <body>
+    <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
+      <a class="skip-link" href="#main-content">Skip to content</a>
+      <main id="main-content" tabindex="-1" class="flex flex-col min-h-screen min-w-full grow mb-auto">
+        <link rel="stylesheet" href="/css/auth.css?v=1">
+        <div class="auth-layout">
+          <header class="auth-header">
+            <a class="auth-brand" href="/"><span class="dc-wordmark" role="img" aria-label="DuctCalc, residential duct design"><span class="dc-wordmark-name" aria-hidden="true">
+            <picture class="dc-wordmark-icon">
+              <source media="(prefers-color-scheme: dark)" srcset="/images/brand/ductcalc-mark-dark.webp">
+              <img src="/images/brand/ductcalc-mark-light.webp" alt="" width="50" height="50">
+            </picture>
+            uct
+            C
+            alc
+            Residential duct design
+            Back to home<span></span><span class="dc-wordmark-c"></span><span></span></span><span class="dc-wordmark-description" aria-hidden="true"></span></span></a><a href="/"></a>
+          </header>
+          <section id="loginForm" class="auth-content" aria-labelledby="loginForm-title">
+            <div class="auth-heading">
+              <h1 id="loginForm-title">Welcome back</h1>
+              <p>Log in to continue your duct designs.</p>
+            </div>
+            <form method="post" hx-post="/login" hx-target="body" hx-swap="outerHTML" class="auth-form">
+              <div class="auth-field">
+                <label for="email">Email</label>
+                <input class="input validator" type="email" required name="email" id="email" autocomplete="username" autofocus>
+              </div>
+              <div class="auth-field">
+                <label for="password">Password</label>
+                <input class="input validator" type="password" required name="password" id="password" autocomplete="current-password">
+              </div>
+              <button type="submit" class="btn btn-primary auth-submit">Login</button>
+              <p class="auth-switch"><span>New to DuctCalc? </span><a href="/signup">Create an account</a></p>
+            </form>
+          </section>
+          <footer class="auth-footer"><a href="/privacy-policy" target="_blank">Privacy Policy</a><a href="mailto:support@ductcalc.pro">Contact Michael</a></footer>
+        </div>
+      </main>
+      <div id="app-status" class="sr-only" role="status" aria-atomic="true"></div>
+      <div id="app-error" class="request-error" role="alert"></div>
+      <div></div>
+    </div>
+  </body>
+</html>

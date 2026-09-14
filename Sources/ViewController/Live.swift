@@ -164,7 +164,7 @@ extension ViewController.Request {
 
   var displayFooter: Bool {
     switch route {
-    case .login, .signup:
+    case .login, .signup, .user(.logout):
       return false
     default:
       return true

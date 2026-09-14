@@ -69,6 +69,9 @@ struct LoginRouteTests {
 
       let logout = try await client.sendRequest(.GET, "/logout", headers: headers)
       #expect(logout.status == .ok)
+      #expect(logout.body.string.contains("id=\"loginForm\""))
+      #expect(logout.body.string.contains("<footer class=\"auth-footer\""))
+      #expect(logout.body.string.components(separatedBy: "<footer").count == 2)
       let afterLogout = try await client.sendRequest(.GET, "/login", headers: headers)
       #expect(afterLogout.status == .ok)
       #expect(afterLogout.body.string.contains("id=\"loginForm\""))

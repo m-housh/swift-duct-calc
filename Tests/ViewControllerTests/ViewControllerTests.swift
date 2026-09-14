@@ -64,6 +64,19 @@ struct ViewControllerTests {
   }
 
   @Test
+  func logout() async throws {
+    try await withDependencies {
+      $0.viewController = .liveValue
+      $0.auth = .failing
+      $0.auth.logout = {}
+    } operation: {
+      @Dependency(\.viewController) var viewController
+      let logout = try await viewController.view(.test(.user(.logout)))
+      assertSnapshot(of: logout, as: .html)
+    }
+  }
+
+  @Test
   func signup() async throws {
     try await withDependencies {
       $0.viewController = .liveValue
