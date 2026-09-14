@@ -23,7 +23,9 @@ struct FrictionRateTemplatesView: HTML, Sendable {
         p(.class("muted")) {
           "Start with common component losses, then edit them to match your equipment. Values are in inches of water column."
         }
-        p(.class("muted")) { "The shortcuts below apply a template while this chooser is open." }
+        p(.class("muted")) {
+          "After applying a template, add a filter from your library or skip that step. The shortcuts below apply a template while this chooser is open."
+        }
         if hasComponents {
           Alert {
             "Using a template replaces all current component losses, including custom components and edited values."
@@ -57,7 +59,8 @@ struct FrictionRateTemplatesView: HTML, Sendable {
                 ) {
                   button(
                     .type(.submit), .class("btn btn-secondary"),
-                    .init(name: "aria-keyshortcuts", value: "Control+Alt+\(shortcut(for: template))"),
+                    .init(
+                      name: "aria-keyshortcuts", value: "Control+Alt+\(shortcut(for: template))"),
                     .init(name: "aria-label", value: "Use \(template.name) template")
                   ) { "Use template" }
                 }

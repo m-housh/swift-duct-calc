@@ -26,6 +26,7 @@ extension DatabaseClient.Migrations: DependencyKey {
         Project.AddLastOpenedAt(),
         PathTemplate.AddDefaults(),
         EquipmentInfo.AllowMissingAirflow(),
+        FilterLibraryMigration(),
       ]
     }
   )

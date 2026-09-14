@@ -63,7 +63,8 @@ struct HomePreviewPage: SendableHTMLDocument {
         componentLosses: HomePreviewData.losses,
         equivalentLengths: .init(
           supply: HomePreviewData.paths[0], return: HomePreviewData.paths[1]),
-        frictionRate: HomePreviewData.frictionRate, blowerStatic: 0.5)
+        frictionRate: HomePreviewData.frictionRate, blowerStatic: 0.5,
+        airflow: HomePreviewData.equipment.largerAirflow)
     case .sizes:
       DuctSizingView(ductSizes: HomePreviewData.ductSizes, readOnly: true)
     }

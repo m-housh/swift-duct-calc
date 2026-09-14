@@ -17,9 +17,6 @@ public enum FrictionRateTemplate: String, CaseIterable, Codable, Sendable {
     if self == .furnace {
       components.append(.init(projectID: projectID, name: "evaporator-coil", value: 0.2))
     }
-    if self != .shared {
-      components.append(.init(projectID: projectID, name: "filter", value: 0.1))
-    }
     return components
   }
 }

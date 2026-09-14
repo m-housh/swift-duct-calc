@@ -100,11 +100,45 @@ any unsaved values in other rows so you can apply them separately.
 
 New projects start with no component losses. On Friction Rate, choose a template
 or start from scratch. Shared defaults includes the supply outlet, return grille,
-and balancing damper. The furnace and air handler templates add their equipment
-losses. Applying a template replaces all current component losses. Edit the values
-afterward to match your equipment.
+and balancing damper. The furnace template also includes an evaporator coil.
+Templates do not include a filter loss. After applying the furnace or air handler
+template, choose a filter or skip that step. Applying a template replaces all
+current component losses. Edit the values afterward to match your equipment.
 With the template chooser open, Ctrl+Alt+D applies Shared defaults, Ctrl+Alt+F
 applies Furnace + evaporator coil, and Ctrl+Alt+A applies Air handler.
+
+Look up filter uses your account's filter library at the larger heating or cooling
+airflow. Enter airflow under Equipment first. Values between chart points are
+interpolated and rounded up to 0.01 in. w.c. Values outside the chart extend its end
+segments; Over max CFM marks airflow above the filter's recommended maximum.
+
+If the equipment rating already includes a filter loss, enter that allowance in
+Filter loss included in equipment rating. Only the chart drop above the allowance
+is added. If the allowance covers the whole loss, no filter component is added;
+a filter selected for replacement is removed. The allowance is saved with the
+project when you choose a filter. A saved component is a copy, so look up the filter
+again after changing equipment airflow or the allowance.
+
+### Your filter library
+
+Open Account > Filter library to add, edit, duplicate, or delete filters. Each
+account starts with Aprilaire charts. Add a filter from any manufacturer using at
+least two airflow and pressure drop points. For evenly spaced chart columns,
+Fill from a chart row accepts the pressure drops in order. The highest chart
+airflow is treated as the filter's maximum recommended airflow.
+
+Star the filters you use, then open Design preferences to order your favorites
+and save an optional maximum pressure drop. Each favorite can also have a Suggest
+below cutoff. A cutoff of 1200 CFM skips that favorite at 1200 CFM and above;
+leave it blank for no additional cutoff. DuctCalc suggests the first favorite
+below its cutoff and within both the pressure limit and its maximum airflow.
+The pressure limit uses the full chart drop, before any equipment allowance.
+Try your preferences checks an example airflow and explains skipped favorites
+without changing a project. You can still choose any filter in the picker.
+
+Library changes affect future lookups. They do not change filter losses already
+saved in projects. Restore Aprilaire filters lets you choose deleted entries to
+bring back or edited entries to reset; custom filters are kept.
 
 ## Equivalent-length paths
 

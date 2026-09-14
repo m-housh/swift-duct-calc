@@ -4,7 +4,7 @@
     <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Choose a system template" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
     <div class="space-y-4">
       <p class="muted">Start with common component losses, then edit them to match your equipment. Values are in inches of water column.</p>
-      <p class="muted">The shortcuts below apply a template while this chooser is open.</p>
+      <p class="muted">After applying a template, add a filter from your library or skip that step. The shortcuts below apply a template while this chooser is open.</p>
       <div class="card bg-base-200 border border-base-300">
         <div class="card-body">
           <div class="template-card-heading">
@@ -55,10 +55,6 @@
               <dt>Evaporator Coil</dt>
               <dd>0.20</dd>
             </div>
-            <div class="flex justify-between gap-4">
-              <dt>Filter</dt>
-              <dd>0.10</dd>
-            </div>
           </dl>
           <div class="card-actions justify-end">
             <form hx-post="/projects/00000000-0000-0000-0000-000000000001/friction-rate/templates/furnace" hx-target="body" hx-swap="outerHTML" data-success-message="System template applied." hx-disabled-elt="find button">
@@ -85,10 +81,6 @@
             <div class="flex justify-between gap-4">
               <dt>Balancing Damper</dt>
               <dd>0.03</dd>
-            </div>
-            <div class="flex justify-between gap-4">
-              <dt>Filter</dt>
-              <dd>0.10</dd>
             </div>
           </dl>
           <div class="card-actions justify-end">

@@ -443,10 +443,37 @@ extension SiteRoute.View.ProjectRoute {
   public enum FrictionRateRoute: Equatable, Sendable {
     case index
     case applyTemplate(FrictionRateTemplate)
+    case applyFilter(AirFilter.Selection)
+    case filterResults(String)
 
     static let rootPath = "friction-rate"
 
     public static let router = OneOf {
+      Route(.case(Self.filterResults)) {
+        Path {
+          rootPath
+          "filter-results"
+        }
+        Method.get
+        Query { Field("allowance", .string, default: "") }
+      }
+      Route(.case(Self.applyFilter)) {
+        Path {
+          rootPath
+          "filters"
+        }
+        Method.post
+        Body {
+          SafeFormData {
+            Field("model", .string)
+            Optionally {
+              Field("replacing") { ComponentPressureLoss.ID.parser() }
+            }
+            Field("allowance", .string, default: "")
+          }
+          .map(.memberwise(AirFilter.Selection.init))
+        }
+      }
       Route(.case(Self.applyTemplate)) {
         Path {
           rootPath
@@ -922,11 +949,16 @@ extension SiteRoute.View {
 
 extension SiteRoute.View {
   public enum UserRoute: Equatable, Sendable {
+    case filters(FilterRoute)
     case templates(PathTemplateRoute)
     case profile(Profile)
     case logout
 
     static let router = OneOf {
+      Route(.case(Self.filters)) {
+        Path { "filters" }
+        FilterRoute.router
+      }
       Route(.case(Self.templates)) {
         Path { "path-templates" }
         PathTemplateRoute.router

@@ -22,6 +22,10 @@ extension ViewController {
       query.q = try request.query.get(String.self, at: "q")
       route = .fittingReference(query)
     }
+    if case .user(.filters(.index(var query))) = route {
+      query.q = try request.query.get(String?.self, at: "q") ?? ""
+      route = .user(.filters(.index(query)))
+    }
     if case .fittingReference(let query) = route, query.download == "1" {
       @Dependency(\.auth.currentUser) var currentUser
       guard (try? currentUser()) != nil else { throw Abort(.unauthorized) }

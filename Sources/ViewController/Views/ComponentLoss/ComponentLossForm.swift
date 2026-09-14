@@ -63,7 +63,7 @@ struct ComponentLossForm: HTML, Sendable {
           .type(.number),
           .value(componentLoss?.value),
           .placeholder("0.2"),
-          .min("0.03"),
+          .min("0.01"),
           .max("1.0"),
           .step("0.01"),
           .required

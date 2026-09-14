@@ -63,6 +63,8 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     script(.src("/js/request-errors.js?v=1")) {}
     script(.src("/js/main.js?v=errors-1")) {}
     script(.src("/js/file-import.js?v=1"), .defer) {}
+    script(.src("/js/filters.js?v=1"), .defer) {}
+    link(.rel(.stylesheet), .href("/css/filters.css?v=1"))
     script(.src("/js/project-import.js?v=1"), .defer) {}
     script(.src("https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4")) {}
     link(.rel(.stylesheet), .href("/css/output.css?v=project-import-1"))

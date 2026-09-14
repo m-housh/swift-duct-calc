@@ -11,7 +11,11 @@ struct UserView: HTML, Sendable {
       Navbar()
 
       div(.class("p-4")) {
-        a(.class("btn btn-secondary mb-4"), .href("/path-templates")) { "Path templates" }
+        div(.class("flex flex-wrap gap-2 mb-4")) {
+          a(.class("btn btn-secondary"), .href("/path-templates")) { "Path templates" }
+          a(.class("btn btn-secondary"), .href("/filters")) { "Filter library" }
+          a(.class("btn btn-outline"), .href("/filters?tab=preferences")) { "Design preferences" }
+        }
         Row {
           h1(.class("text-2xl font-bold")) { "Account" }
           EditButton(accessibilityLabel: "Edit profile")

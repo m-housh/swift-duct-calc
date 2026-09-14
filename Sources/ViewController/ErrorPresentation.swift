@@ -48,6 +48,9 @@ extension ViewController {
       return .init(
         title: title, message: "Check the following values and try again.", fields: fields)
     }
+    if let error = error as? FilterError {
+      return .init(title: title, message: error.message)
+    }
     if let error = error as? ValidationError {
       return .init(title: title, message: error.message)
     }

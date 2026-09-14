@@ -72,10 +72,10 @@ struct FrictionRateTemplateIntegrationTests {
           : template == .furnace
             ? [
               "supply-outlet": 0.03, "return-grille": 0.03, "balancing-damper": 0.03,
-              "evaporator-coil": 0.2, "filter": 0.1,
+              "evaporator-coil": 0.2,
             ]
             : [
-              "supply-outlet": 0.03, "return-grille": 0.03, "balancing-damper": 0.03, "filter": 0.1,
+              "supply-outlet": 0.03, "return-grille": 0.03, "balancing-damper": 0.03,
             ]
         #expect(losses.count == expected.count)
         #expect(losses.allSatisfy { expected[$0.name] == $0.value })
