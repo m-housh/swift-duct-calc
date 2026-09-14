@@ -2,39 +2,31 @@ import Elementary
 import ManualDCore
 
 struct TrunkTable: HTML, Sendable {
-  public let sizes: DuctSizes
-  public let type: TrunkSize.TrunkType
-
-  var trunks: [DuctSizes.TrunkContainer] {
-    sizes.trunks.filter { $0.type == type }
-  }
+  let sizes: DuctSizes
 
   var body: some HTML<HTMLTag.table> {
-    table {
-      thead(.class("bg-green")) {
+    table(.class("duct-sizes")) {
+      thead {
         tr {
-          th { "Name" }
-          th { "Dsn CFM" }
-          th { "Round Size" }
-          th { "Velocity" }
-          th { "Final Size" }
-          th { "Flex Size" }
-          th { "Height" }
-          th { "Width" }
+          ReportColumn("Duct")
+          DuctSizeColumns()
         }
       }
       tbody {
-        for row in trunks {
+        for row in sizes.trunks {
           tr {
-            td { row.name ?? "" }
-            td { row.designCFM.value.string(digits: 0) }
-            td { row.ductSize.roundSize.string() }
-            td { row.velocity.string() }
-            td { row.finalSize.string() }
-            td { row.flexSize.string() }
-            td { row.ductSize.height?.string() ?? "" }
-            td { row.width?.string() ?? "" }
+            td {
+              if let name = row.name, !name.isEmpty {
+                "\(row.type.rawValue.capitalized) · \(name)"
+              } else {
+                "\(row.type.rawValue.capitalized) trunk"
+              }
+            }
+            DuctSizeCells(size: row.ductSize)
           }
+        }
+        if sizes.trunks.isEmpty {
+          tr { td(.custom(name: "colspan", value: "8")) { "No trunks or runouts." } }
         }
       }
     }

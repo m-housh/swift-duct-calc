@@ -196,6 +196,7 @@ let package = Package(
         .target(name: "EnvVars"),
         .target(name: "FileClient"),
         .target(name: "ManualDCore"),
+        .target(name: "Styleguide"),
         .product(name: "Dependencies", package: "swift-dependencies"),
         .product(name: "DependenciesMacros", package: "swift-dependencies"),
         .product(name: "Elementary", package: "elementary"),

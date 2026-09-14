@@ -2,35 +2,33 @@ import Elementary
 import ManualDCore
 
 struct EquipmentTable: HTML, Sendable {
-  let title: String?
   let equipmentInfo: EquipmentInfo
-
-  init(title: String? = nil, equipmentInfo: EquipmentInfo) {
-    self.title = title
-    self.equipmentInfo = equipmentInfo
-  }
+  let projectSHR: Double
 
   var body: some HTML<HTMLTag.table> {
-
-    table {
+    table(.class("equipment-table")) {
       thead {
-        tr(.class("bg-green")) {
-          th { title ?? "" }
-          th(.class("justify-end")) { "Value" }
+        tr {
+          ReportColumn("Parameter")
+          ReportColumn("Value")
         }
       }
       tbody {
         tr {
-          td { "Static Pressure" }
-          td(.class("justify-end")) { equipmentInfo.staticPressure.string() }
+          td { "External static pressure" }
+          td { "\(equipmentInfo.staticPressure.string()) in. w.c." }
         }
         tr {
-          td { "Heating CFM" }
-          td(.class("justify-end")) { equipmentInfo.heatingCFM?.string() ?? "—" }
+          td { "Heating airflow" }
+          td { "\(equipmentInfo.heatingCFM?.string() ?? "—") CFM" }
         }
         tr {
-          td { "Cooling CFM" }
-          td(.class("justify-end")) { equipmentInfo.coolingCFM?.string() ?? "—" }
+          td { "Cooling airflow" }
+          td { "\(equipmentInfo.coolingCFM?.string() ?? "—") CFM" }
+        }
+        tr {
+          td { "Sensible heat ratio" }
+          td { projectSHR.string() }
         }
       }
     }

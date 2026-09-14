@@ -1,65 +1,44 @@
 import Elementary
 import ManualDCore
 
-struct EffectiveLengthsTable: HTML, Sendable {
-  let effectiveLengths: [EquivalentLength]
+struct EffectiveLengthTable: HTML, Sendable {
+  let path: EquivalentLength
 
-  var body: some HTML<HTMLTag.table> {
-    table {
-      thead {
-        tr(.class("bg-green")) {
-          th { "Name" }
-          th { "Type" }
-          th { "Straight Lengths" }
-          th { "Groups" }
-          th { "Total" }
-        }
+  var body: some HTML {
+    section {
+      h3(.class("path-heading")) {
+        "\(path.type.rawValue.capitalized) · \(path.name)"
+        span { "\(path.totalEquivalentLength.string()) ft TEL" }
       }
-      tbody {
-        for row in effectiveLengths {
+      table {
+        thead {
           tr {
-            td { row.name }
-            td { row.type.rawValue }
-            td {
-              ul {
-                for length in row.straightLengths {
-                  li { length.string() }
-                }
-              }
-            }
-            td {
-              EffectiveLengthGroupTable(groups: row.groups)
-                .attributes(.class("w-full"))
-            }
-            td { row.totalEquivalentLength.string(digits: 0) }
+            ReportColumn("Fitting")
+            ReportColumn("Length", unit: "ft")
+            ReportColumn("Qty.")
+            ReportColumn("Total", unit: "ft")
           }
         }
-      }
-    }
-  }
-
-}
-
-struct EffectiveLengthGroupTable: HTML, Sendable {
-  let groups: [EquivalentLength.FittingGroup]
-
-  var body: some HTML<HTMLTag.table> {
-    table {
-      thead {
-        tr(.class("effectiveLengthGroupHeader")) {
-          th { "Name" }
-          th { "Length" }
-          th { "Quantity" }
-          th { "Total" }
-        }
-      }
-      tbody {
-        for row in groups {
+        tbody {
+          for row in path.groups {
+            tr {
+              td { row.letter.isEmpty ? "Group \(row.group)" : "\(row.group)-\(row.letter)" }
+              td { row.value.string() }
+              td { row.quantity.string() }
+              td { (row.value * Double(row.quantity)).string() }
+            }
+          }
           tr {
-            td { row.letter.isEmpty ? "Group \(row.group)" : "\(row.group)-\(row.letter)" }
-            td { row.value.string(digits: 0) }
-            td { row.quantity.string() }
-            td { (row.value * Double(row.quantity)).string(digits: 0) }
+            td { "Straight duct" }
+            td { path.straightLengths.map { $0.string() }.joined(separator: " + ") }
+            td { "—" }
+            td { path.straightLengths.reduce(0, +).string() }
+          }
+          tr(.class("total")) {
+            td { "Path total" }
+            td { "—" }
+            td { "—" }
+            td { path.totalEquivalentLength.string() }
           }
         }
       }

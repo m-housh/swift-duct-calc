@@ -8,12 +8,12 @@ struct RoomsTable: HTML, Sendable {
   var body: some HTML<HTMLTag.table> {
     table {
       thead {
-        tr(.class("bg-green")) {
-          th { "Name" }
-          th { "Heating BTU" }
-          th { "Cooling Total BTU" }
-          th { "Cooling Sensible BTU" }
-          th { "Register Count" }
+        tr {
+          ReportColumn("Room")
+          ReportColumn("Heating", unit: "BTU/h")
+          ReportColumn("Cooling total", unit: "BTU/h")
+          ReportColumn("Cooling sensible", unit: "BTU/h")
+          ReportColumn("Registers")
         }
       }
       tbody {
@@ -28,20 +28,18 @@ struct RoomsTable: HTML, Sendable {
             td { room.registerCount.string() }
           }
         }
-        // Totals
-        // tr(.class("table-footer")) {
-        tr {
-          td(.class("label")) { "Totals" }
-          td(.class("heating label")) {
+        tr(.class("total")) {
+          td { "Totals" }
+          td {
             rooms.totalHeatingLoad.string(digits: 0)
           }
-          td(.class("coolingTotal label")) {
+          td {
             try! rooms.totalCoolingLoad(shr: projectSHR).string(digits: 0)
           }
-          td(.class("coolingSensible label")) {
+          td {
             try! rooms.totalCoolingSensible(shr: projectSHR).string(digits: 0)
           }
-          td {}
+          td { rooms.reduce(0) { $0 + $1.registerCount }.string() }
         }
       }
     }

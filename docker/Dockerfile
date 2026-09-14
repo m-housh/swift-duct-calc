@@ -67,7 +67,6 @@ RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
       poppler-utils util-linux \
       sqlite3 \
       curl \
-			pandoc \
 			weasyprint \
     && rm -r /var/lib/apt/lists/*
 

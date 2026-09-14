@@ -24,7 +24,6 @@ struct EnvVarsTests {
   }
 
   let envDict = [
-    "PANDOC_PATH": "/custom/path",
     "PDF_ENGINE": "custom-engine",
     "PDFTOTEXT_PATH": "/custom/pdftotext",
     "POSTGRES_HOSTNAME": "host",
@@ -42,7 +41,6 @@ struct EnvVarsTests {
     } operation: {
       let sut = try await EnvVars.live(envDict)
       let expected = EnvVars(
-        pandocPath: "/custom/path",
         pdfEngine: "custom-engine",
         pdfToTextPath: "/custom/pdftotext",
         postgresHostname: "host",
@@ -51,7 +49,6 @@ struct EnvVarsTests {
         postgresDatabase: "ductcalc",
         sqlitePath: "ductcalc.sqlite"
       )
-      #expect(sut.pandocPath == expected.pandocPath)
       #expect(sut.pdfEngine == expected.pdfEngine)
       #expect(sut.pdfToTextPath == expected.pdfToTextPath)
       #expect(sut.postgresHostname == expected.postgresHostname)
