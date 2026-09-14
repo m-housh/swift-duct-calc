@@ -41,25 +41,40 @@
     <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
       <a class="skip-link" href="#main-content">Skip to content</a>
       <main id="main-content" tabindex="-1" class="flex flex-col min-h-screen min-w-full grow mb-auto">
-        <section id="loginForm" class="page-form" aria-labelledby="loginForm-title">
-          <h1 id="loginForm-title" class="text-2xl font-bold mb-6">Login</h1>
-          <div class="flex flex-wrap items-center justify-between gap-3"><a class="btn btn-link" href="/privacy-policy" target="_blank">Privacy Policy</a></div>
-          <form method="post" hx-post="/login" hx-target="body" hx-swap="outerHTML" class="space-y-4">
-            <div>
-              <label class="input validator w-full"><span class="label">Email</span>
-              <input type="email" placeholder="Email" required name="email" id="email" autocomplete="username" autofocus></label>
-              <div class="validator-hint hidden">Enter valid email address.</div>
+        <link rel="stylesheet" href="/css/auth.css?v=1">
+        <div class="auth-layout">
+          <header class="auth-header">
+            <a class="auth-brand" href="/"><span class="dc-wordmark" role="img" aria-label="DuctCalc, residential duct design"><span class="dc-wordmark-name" aria-hidden="true">
+            <picture class="dc-wordmark-icon">
+              <source media="(prefers-color-scheme: dark)" srcset="/images/brand/ductcalc-mark-dark.webp">
+              <img src="/images/brand/ductcalc-mark-light.webp" alt="" width="50" height="50">
+            </picture>
+            uct
+            C
+            alc
+            Residential duct design
+            Back to home<span></span><span class="dc-wordmark-c"></span><span></span></span><span class="dc-wordmark-description" aria-hidden="true"></span></span></a><a href="/"></a>
+          </header>
+          <section id="loginForm" class="auth-content" aria-labelledby="loginForm-title">
+            <div class="auth-heading">
+              <h1 id="loginForm-title">Welcome back</h1>
+              <p>Log in to continue your duct designs.</p>
             </div>
-            <div>
-              <label class="input validator w-full"><span class="label">Password</span>
-              <input type="password" placeholder="Password" required name="password" id="password" autocomplete="current-password"></label>
-            </div>
-            <div class="flex">
-              <button class="btn btn-secondary mt-4 w-full">Login</button>
-            </div>
-            <div class="flex justify-center"><a class="btn btn-link" href="/signup">Sign Up</a></div>
-          </form>
-        </section>
+            <form method="post" hx-post="/login" hx-target="body" hx-swap="outerHTML" class="auth-form">
+              <div class="auth-field">
+                <label for="email">Email</label>
+                <input class="input validator" type="email" required name="email" id="email" autocomplete="username" autofocus>
+              </div>
+              <div class="auth-field">
+                <label for="password">Password</label>
+                <input class="input validator" type="password" required name="password" id="password" autocomplete="current-password">
+              </div>
+              <button type="submit" class="btn btn-primary auth-submit">Login</button>
+              <p class="auth-switch"><span>New to DuctCalc? </span><a href="/signup">Create an account</a></p>
+            </form>
+          </section>
+          <footer class="auth-footer"><a href="/privacy-policy" target="_blank">Privacy Policy</a><a href="mailto:support@ductcalc.pro">Contact Michael</a></footer>
+        </div>
       </main>
       <div id="app-status" class="sr-only" role="status" aria-atomic="true"></div>
       <div id="app-error" class="request-error" role="alert"></div>

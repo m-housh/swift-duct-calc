@@ -21,89 +21,77 @@ struct LoginForm: HTML, Sendable {
   }
 
   var body: some HTML {
-    ModalForm(id: "loginForm", title: style.title, dismiss: false) {
-      Row {
-        a(
-          .class("btn btn-link"),
-          .href(route: .privacyPolicy),
-          .target(.blank)
-        ) {
-          "Privacy Policy"
-        }
-      }
-
+    AuthLayout(
+      id: "loginForm",
+      title: style == .login ? "Welcome back" : "Create your account",
+      subtitle: style == .login
+        ? "Log in to continue your duct designs."
+        : "Save your projects and keep your designs together.",
+      step: style == .signup ? "Step 1 of 2 · Account" : nil
+    ) {
       form(
         .method(.post),
         .hx.post(route: route),
         .hx.target("body"),
         .hx.swap(.outerHTML),
-        .class("space-y-4")
+        .class("auth-form")
       ) {
 
         if let next {
-          input(.class("hidden"), .name("next"), .value(next))
+          input(.type(.hidden), .name("next"), .value(next))
         }
 
-        div {
-          label(.class("input validator w-full")) {
-            span(.class("label")) { "Email" }
-            input(
-              .type(.email), .placeholder("Email"), .required,
-              .name("email"), .id("email"), .init(name: "autocomplete", value: "username"),
-              .autofocus
-            )
-          }
-          div(.class("validator-hint hidden")) { "Enter valid email address." }
+        div(.class("auth-field")) {
+          label(.for("email")) { "Email" }
+          input(
+            .class("input validator"), .type(.email), .required,
+            .name("email"), .id("email"), .init(name: "autocomplete", value: "username"),
+            .autofocus
+          )
         }
 
-        div {
-          label(.class("input validator w-full")) {
-            span(.class("label")) { "Password" }
+        div(.class("auth-field")) {
+          label(.for("password")) { "Password" }
+          input(
+            .class("input validator"), .type(.password), .required,
+            .name("password"), .id("password"),
+            .init(
+              name: "autocomplete", value: style == .signup ? "new-password" : "current-password"),
+          )
+          .attributes(
+            .pattern(.password), .minlength("8"),
+            .init(name: "aria-describedby", value: "password-help"),
+            when: style == .signup
+          )
+        }
+
+        if style == .signup {
+          div(.class("auth-field")) {
+            label(.for("confirmPassword")) { "Confirm password" }
             input(
-              .type(.password), .placeholder("Password"), .required,
-              .name("password"), .id("password"),
-              .init(
-                name: "autocomplete", value: style == .signup ? "new-password" : "current-password"),
-            )
-            .attributes(
+              .class("input validator"), .type(.password), .required,
               .pattern(.password), .minlength("8"),
+              .name("confirmPassword"), .id("confirmPassword"),
+              .init(name: "autocomplete", value: "new-password"),
               .init(name: "aria-describedby", value: "password-help"),
-              when: style == .signup
             )
           }
         }
 
         if style == .signup {
-          div {
-            label(.class("input validator w-full")) {
-              span(.class("label")) { "Confirm password" }
-              input(
-                .type(.password), .placeholder("Confirm Password"), .required,
-                .pattern(.password), .minlength("8"),
-                .name("confirmPassword"), .id("confirmPassword"),
-                .init(name: "autocomplete", value: "new-password"),
-                .init(name: "aria-describedby", value: "password-help"),
-              )
-            }
-          }
-        }
-
-        if style == .signup {
-          p(.id("password-help"), .class("text-sm")) {
+          p(.id("password-help"), .class("auth-password-help")) {
             "Use at least 8 characters, including an uppercase letter, a lowercase letter, and a number."
           }
         }
 
-        div(.class("flex")) {
-          button(.class("btn btn-secondary mt-4 w-full")) { style.title }
-        }
+        button(.type(.submit), .class("btn btn-primary auth-submit")) { style.title }
 
-        div(.class("flex justify-center")) {
+        p(.class("auth-switch")) {
+          span { style == .login ? "New to DuctCalc? " : "Already have an account? " }
           a(
-            .class("btn btn-link"),
             .href(route: style == .signup ? .login(.index(next: next)) : .signup(.index))
           ) {
-            style == .login ? "Sign Up" : "Login"
+            style == .login ? "Create an account" : "Log in"
           }
         }
       }
