@@ -92,13 +92,9 @@ struct DuctSizingViewTests {
 
     let updates = LockIsolated<[Room.ID: [Int]]>([:])
     _ = await ViewControllerTests().withDefaultDependencies {
-      $0.database.rooms.updateRectangularSize = { roomID, size in
-        #expect(size.height == 8)
-        updates.withValue { $0[roomID, default: []].append(size.register ?? 0) }
-        return Room(
-          id: roomID, projectID: UUID(0), name: "Room", heatingLoad: 1,
-          coolingLoad: .init(total: 1, sensible: nil), createdAt: Date(timeIntervalSince1970: 0),
-          updatedAt: Date(timeIntervalSince1970: 0))
+      $0.database.rooms.setRectangularSizes = { selection, height in
+        #expect(height == 8)
+        updates.setValue(selection)
       }
       $0.database.projects.getCompletedSteps = { _ in
         .init(equipmentInfo: true, rooms: true, equivalentLength: true, frictionRate: true)
@@ -155,12 +151,11 @@ struct DuctSizingViewTests {
     #expect(request.url?.path == "/projects/\(UUID(0))/duct-sizing/rectangular-sizes/clear")
     #expect(try SiteRoute.View.router.match(request: request)
       == .project(.detail(UUID(0), .ductSizing(route))))
-    let deletions = LockIsolated<[Int]>([])
+    let deletions = LockIsolated<[Room.ID: [Int]]>([:])
     let response = await ViewControllerTests().withDefaultDependencies {
-      $0.database.rooms.clearRectangularSize = { id, register in
-        #expect(id == room.id)
-        deletions.withValue { $0.append(register) }
-        return room
+      $0.database.rooms.setRectangularSizes = { selection, height in
+        #expect(height == nil)
+        deletions.setValue(selection)
       }
       $0.database.projects.getCompletedSteps = { _ in
         .init(equipmentInfo: true, rooms: true, equivalentLength: true, frictionRate: true)
@@ -171,7 +166,7 @@ struct DuctSizingViewTests {
       await route.renderView(
         on: .test(.project(.detail(UUID(0), .ductSizing(route)))), projectID: UUID(0))
     }
-    #expect(deletions.value == [1, 3])
+    #expect(deletions.value == [room.id: [1, 3]])
     #expect(response.render().contains("Branch schedule"))
   }
 
@@ -186,8 +181,10 @@ struct DuctSizingViewTests {
         roomID: room.id, roomName: room.name, roomLevel: nil, roomRegister: register,
         heatingLoad: 1_000, coolingLoad: 800, heatingCFM: 100, coolingCFM: 80,
         ductSize: .init(
+          rectangularID: clearing && register == 1 ? nil : UUID(register + 1),
           designCFM: .heating(100), roundSize: 7, finalSize: 8, velocity: 400, flexSize: 8,
-          height: clearing ? nil : 8, width: clearing ? nil : 10))
+          height: clearing && register == 1 ? nil : 8,
+          width: clearing && register == 1 ? nil : 10))
     }
     let route: Route = clearing
       ? .deleteRectangularSize(room.id, .init(rectangularSizeID: UUID(2), register: 1))
@@ -207,8 +204,11 @@ struct DuctSizingViewTests {
     #expect(modal.contains("hx-swap-oob=\"outerHTML\""))
     #expect(modal.contains("Living Room - SR.1"))
     #expect(modal.contains("Living Room - SR.2"))
-    #expect(modal.contains("class=\"size-chip\"") == !clearing)
-    #expect(modal.contains("10 × 8 in.") == !clearing)
+    #expect(modal.components(separatedBy: "class=\"size-chip\"").count - 1 == (clearing ? 1 : 2))
+    let sibling = String(html.split(separator: "<template>").last ?? "")
+    #expect(sibling.contains("id=\"\(DuctSizingView.RoomRow.id(sizes[0]))\""))
+    #expect(sibling.contains("hx-swap-oob=\"outerHTML\""))
+    #expect(sibling.contains("name=\"id\" value=\"\(UUID(3))\""))
     #expect(!modal.contains("Not set"))
     if let first = modal.range(of: "Living Room - SR.1"),
       let second = modal.range(of: "Living Room - SR.2")

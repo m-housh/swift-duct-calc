@@ -62,6 +62,11 @@ extension DatabaseClient.Rooms: TestDependencyKey {
         guard register > 0, register <= model.registerCount else {
           throw ValidationError("Choose a valid register.")
         }
+        guard model.rectangularSizes?.contains(where: {
+          $0.register == nil || $0.register == register
+        }) == true else {
+          return try model.toDTO()
+        }
         model.normalizeRectangularSizes()
         model.rectangularSizes?.removeAll { $0.register == register }
         if model.rectangularSizes?.isEmpty == true {
@@ -114,6 +119,27 @@ extension DatabaseClient.Rooms: TestDependencyKey {
         model.rectangularSizes = rectangularSizes
         try await model.save(on: database)
         return try model.toDTO()
+      },
+      setRectangularSizes: { selection, height in
+        guard selection.values.contains(where: { !$0.isEmpty }) else {
+          throw ValidationError("Select at least one register.")
+        }
+        let dependencies = withEscapedDependencies { $0 }
+        try await database.transaction { transaction in
+          try await dependencies.yield {
+            let rooms = Self.live(database: transaction)
+            for (roomID, registers) in selection {
+              for register in registers {
+                if let height {
+                  _ = try await rooms.updateRectangularSize(
+                    roomID, .init(register: register, height: height))
+                } else {
+                  _ = try await rooms.clearRectangularSize(roomID, register)
+                }
+              }
+            }
+          }
+        }
       }
     )
   }

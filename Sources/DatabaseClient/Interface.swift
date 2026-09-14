@@ -139,6 +139,8 @@ public struct DatabaseClient: Sendable {
     public var fetch: @Sendable (Project.ID) async throws -> [Room]
     public var update: @Sendable (Room.ID, Room.Update) async throws -> Room
     public var updateRectangularSize: @Sendable (Room.ID, Room.RectangularSize) async throws -> Room
+    /// Applies a height to the selected registers in one transaction; nil clears their sizes.
+    public var setRectangularSizes: @Sendable ([Room.ID: [Int]], Int?) async throws -> Void
 
   }
 

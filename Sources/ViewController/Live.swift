@@ -734,24 +734,15 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
 
     case .rectangularSizes(let form):
       return await view(on: request, projectID: projectID) {
-        guard !form.rooms.isEmpty else {
-          throw ValidationError("Select at least one register.")
-        }
-        for room in form.rooms {
-          _ = try await database.rooms.updateRectangularSize(
-            room.roomID, .init(register: room.register, height: form.height)
-          )
-        }
+        try await database.rooms.setRectangularSizes(
+          Dictionary(grouping: form.rooms, by: \.roomID).mapValues { $0.map(\.register) },
+          form.height)
       }
 
     case .clearRectangularSizes(let rooms):
       return await view(on: request, projectID: projectID) {
-        guard !rooms.isEmpty else {
-          throw ValidationError("Select at least one register.")
-        }
-        for item in rooms {
-          _ = try await database.rooms.clearRectangularSize(item.roomID, item.register)
-        }
+        try await database.rooms.setRectangularSizes(
+          Dictionary(grouping: rooms, by: \.roomID).mapValues { $0.map(\.register) }, nil)
       }
 
     case .trunk(let route):
