@@ -183,7 +183,8 @@ private func siteHandler(
         .importPDF(
           .init(
             file: Data(buffer: upload.file.data),
-            confirmDuplicate: upload.confirmDuplicate == "true", zipCode: upload.zipCode))),
+            confirmDuplicate: upload.confirmDuplicate == "true", zipCode: upload.zipCode,
+            name: upload.name))),
       request: request)
   case .view(.project(.detail(let projectID, .rooms(.csv)))):
     let upload = try request.content.decode(RoomFileUpload.self)
@@ -242,6 +243,7 @@ private struct ProjectPDFUpload: Content {
   var file: File
   var confirmDuplicate: String?
   var zipCode: String?
+  var name: String?
 }
 
 private struct RoomFileUpload: Content {

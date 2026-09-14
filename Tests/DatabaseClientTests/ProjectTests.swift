@@ -29,19 +29,36 @@ struct ProjectTests {
       #expect(try await database.componentLosses.fetch(project.id).isEmpty)
       let steps = try await database.projects.getCompletedSteps(project.id)
       #expect(steps.rooms && !steps.frictionRate && !steps.equipmentInfo && !steps.equivalentLength)
-      let second = try await database.projects.importPDF(user.id, report, true)
+      // Confirming a duplicate still requires a name no other project uses.
+      do {
+        _ = try await database.projects.importPDF(user.id, report, true)
+        Issue.record("Expected the reused name to be rejected")
+      } catch let conflict as Project.ImportConflict {
+        #expect(conflict.projects.map(\.id) == [project.id])
+        #expect(conflict.suggestedName == "\(project.name) (2)")
+      }
+      let second = try await database.projects.importPDF(
+        user.id, report.renamed("\(project.name) (2)"), true)
       #expect(second.id != project.id)
       #expect(second.name == "\(project.name) (2)")
+      do {
+        _ = try await database.projects.importPDF(user.id, report, true)
+        Issue.record("Expected the reused name to be rejected")
+      } catch let conflict as Project.ImportConflict {
+        #expect(conflict.suggestedName == "\(project.name) (3)")
+      }
       // Fail after the first room has been saved: the project and rooms roll back.
       await #expect(throws: (any Error).self) {
         try await database.projects.importPDF(
           user.id,
-          .init(
+          Project.PDFImport(
             project: .mock,
             rooms: [
               report.rooms[0], .init(name: "Invalid", heatingLoad: -1, coolingTotal: 200),
-            ]), true)
+            ]
+          ).renamed("Rolled back"), true)
       }
+      #expect(try await database.projects.search(user.id, "Rolled back", .first).items.isEmpty)
       #expect(try await database.projects.fetch(user.id, .first).items.count == 2)
       #expect(try await database.rooms.fetch(project.id).count == 2)
     }
@@ -337,5 +354,16 @@ extension ProjectTests {
       )
       #expect(try await database.projects.search(other.id, "Cedar", .first).items.isEmpty)
     }
+  }
+}
+
+extension Project.PDFImport {
+  fileprivate func renamed(_ name: String) -> Self {
+    .init(
+      project: .init(
+        name: name, streetAddress: project.streetAddress, city: project.city,
+        state: project.state, zipCode: project.zipCode,
+        sensibleHeatRatio: project.sensibleHeatRatio),
+      rooms: rooms)
   }
 }

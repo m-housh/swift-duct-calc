@@ -34,18 +34,18 @@ load, and review the register counts before sizing.
 
 ### Import from CoolCalc
 
-To create a project from a report, choose Import from Cool Calc PDF when adding a
-project. Upload the report and review any requested information before creating
-it. The import fills in the project name, US address, SHR, and rooms. A missing
-ZIP code is requested before creation. Equipment and duct design settings still
-need to be entered separately.
+To create a project from a report, choose Add Project and drop the report on
+Import report, or browse for it. The import fills in the project name, US address,
+SHR, and rooms. A missing ZIP code is requested before creation. Equipment and duct
+design settings still need to be entered separately.
 
 If a project with a matching name or street address and ZIP code exists, you can
 cancel or create another project. Continuing creates a separate project; it does
-not merge into the existing one.
+not merge into the existing one. The new project needs its own name, so a numbered
+name is suggested, which you can change.
 
-To import into an existing project, open the upload form on Room Loads and choose
-Cool Calc PDF as the file type. This does not require a ZIP code in the report.
+To import into an existing project, open the upload form on Room Loads and drop the
+report on it. This does not require a ZIP code in the report.
 Use a text-based CoolCalc MJ8 report in Individual Room Analysis or Room Detail
 format. Scanned, locked, and multiple-system reports are unsupported. Include all
 room pages and keep the file within 10 MB and 200 pages.
@@ -62,7 +62,7 @@ sensible loads. This applies the same sensible/latent split to every imported ro
 
 ### Re-importing and CSV
 
-Room Loads also accepts room-load CSV files through the upload form. Use this
+Room Loads also accepts room-load CSV files through the same upload form. Use this
 column order, with loads in BTU/h and empty fields for optional values:
 
 ```csv
@@ -74,10 +74,10 @@ Kitchen,1,4000,2500,,2,
 Supply at least one cooling value. Delegated To, when used, names the room that
 will receive the airflow. Keep names free of commas.
 
-Re-importing into a project with rooms asks for confirmation. Continuing updates
-matching room names and adds new rooms. Matching ignores case and surrounding
-spaces. Rooms missing from the file are kept; renaming a room can cause a later import to add
-another room with the original name.
+When a project already has rooms, the upload form explains how the chosen file will
+update them before you import. Importing updates matching room names and adds new rooms.
+Matching ignores case and surrounding spaces. Rooms missing from the file are kept; renaming
+a room can cause a later import to add another room with the original name.
 
 PDF imports keep existing register counts and airflow delegation. CSV imports
 apply the values in the file. Both preserve existing trunk assignments for

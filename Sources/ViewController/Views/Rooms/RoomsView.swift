@@ -236,85 +236,42 @@ struct RoomsView: HTML, Sendable {
 
   struct UploadRoomsForm: HTML {
     static let id = "uploadRooms"
+    @Environment(ProjectViewValue.$projectID) var projectID
     let hasExistingRooms: Bool
+
+    private func action(_ format: String) -> String {
+      SiteRoute.router.path(for: .view(.project(.detail(projectID, .rooms(.index)))))
+        .appendingPath(format)
+    }
 
     var body: some HTML {
       ModalForm(id: Self.id, title: "Import room loads", dismiss: true) {
-        label(.for("roomImportFormat"), .class("label")) { "File type" }
-        select(
-          .id("roomImportFormat"), .class("select w-full mb-4"),
-          .on(
-            .change,
-            """
-            this.closest('dialog').querySelectorAll('[data-import-format]').forEach(panel => {
-              panel.hidden = panel.dataset.importFormat !== this.value;
-            });
-            """)
+        p(.class("mb-4")) {
+          "Import a room-load CSV with names, levels, heating and cooling loads, register counts, and optional airflow delegation, or a Cool Calc MJ8 report. Rooms from a report start with one register and no airflow delegation."
+        }
+        ImportFileForm(
+          action: action("csv"),
+          prompt: "Drop a room-load CSV or Cool Calc MJ8 report",
+          limits: "CSV, or PDF up to 10 MB and 200 pages",
+          accept: ".csv,text/csv,.pdf,application/pdf",
+          fileTypes: "room-load CSV or Cool Calc MJ8 report PDF",
+          reading: "Reading room loads…"
         ) {
-          option(.value("csv")) { "CSV" }
-          option(.value("pdf")) { "Cool Calc PDF" }
-        }
-        for format in UploadFileForm.Format.allCases {
-          div(.custom(name: "data-import-format", value: format.rawValue)) {
-            UploadFileForm(format: format, hasExistingRooms: hasExistingRooms)
+          div(.data("import-when", value: "chosen"), .hidden) {
+            if hasExistingRooms {
+              p(.class("mt-4 text-sm"), .data("import-format", value: "csv")) {
+                "This project already has rooms. Rooms are matched by name: matching rooms are updated with the CSV values, including register counts and airflow delegation, and missing rooms are added. Rooms absent from the file are kept."
+              }
+              p(.class("mt-4 text-sm"), .data("import-format", value: "pdf")) {
+                "This project already has rooms. Rooms are matched by name: matching rooms get the report's loads and levels, and missing rooms are added. Register counts, airflow delegation, and rooms absent from the report are kept."
+              }
+            }
+            SubmitButton(title: "Import rooms")
+              .attributes(.class("btn-block mt-4"))
           }
-          .attributes(.hidden, when: format == .pdf)
         }
+        .attributes(.data("import-action-pdf", value: action("pdf")))
       }
-    }
-  }
-
-  struct UploadFileForm: HTML {
-    enum Format: String, CaseIterable {
-      case csv
-      case pdf
-    }
-
-    @Environment(ProjectViewValue.$projectID) var projectID
-    let format: Format
-    let hasExistingRooms: Bool
-
-    private var confirmationMessage: String {
-      if format == .pdf {
-        return
-          "This project already has rooms. Update loads and levels for matching room names and add missing rooms? Register counts, airflow delegation, and rooms absent from the file will be kept."
-      }
-      return
-        "This project already has rooms. Update matching room names with the CSV values, including register counts and airflow delegation, and add missing rooms? Rooms absent from the file will be kept."
-    }
-
-    var body: some HTML {
-      p(.class("mb-4")) {
-        if format == .csv {
-          "Upload a room-load CSV with names, levels, heating and cooling loads, register counts, and optional airflow delegation."
-        } else {
-          "Upload a Cool Calc MJ8 report. New rooms start with one register and no airflow delegation. You can edit them after import."
-        }
-      }
-      if format == .pdf {
-        p(.class("text-sm mb-4")) {
-          "Maximum 10 MB and 200 pages."
-        }
-      }
-      if hasExistingRooms {
-        p(.class("text-sm mb-4")) {
-          "Rooms are matched by name. Matching rooms will be updated, missing rooms will be added, and rooms absent from the file will be kept."
-        }
-      }
-      ImportFileForm(
-        action: SiteRoute.router.path(for: .view(.project(.detail(projectID, .rooms(.index)))))
-          .appendingPath(format.rawValue)
-      ) {
-        input(
-          .type(.file), .name("file"),
-          .accept(format == .csv ? ".csv,text/csv" : ".pdf,application/pdf"),
-          .custom(name: "aria-label", value: format == .csv ? "Room loads CSV" : "Cool Calc PDF"),
-          .required)
-        SubmitButton(title: "Import rooms")
-          .attributes(.class("btn-block mt-6"))
-        p(.class("htmx-indicator text-sm mt-2")) { "Reading room loads…" }
-      }
-      .attributes(.hx.confirm(confirmationMessage), when: hasExistingRooms)
     }
   }
 }

@@ -3,94 +3,53 @@ import ElementaryHTMX
 import ManualDCore
 import Styleguide
 
+/// Creates a project from a report. `project-import.js` adds the server's follow-up questions,
+/// a missing ZIP code or a possible duplicate, to the shared import steps.
 struct ProjectPDFForm: HTML {
   var body: some HTML {
     p(.class("mb-4")) {
-      "Create a project using the name, address, sensible heat ratio, and room loads from a Cool Calc MJ8 report. You can edit them after import."
+      "Creates the project with its name, address, sensible heat ratio, and room loads from a Cool Calc MJ8 report. You can edit them after import."
     }
-    p(.class("text-sm mb-4")) { "Maximum 10 MB and 200 pages." }
     ImportFileForm(
-      action: SiteRoute.View.router.path(for: .project(.index)).appendingPath("import/pdf")
+      action: SiteRoute.View.router.path(for: .project(.index)).appendingPath("import/pdf"),
+      prompt: "Drop your Cool Calc MJ8 report",
+      limits: "PDF up to 10 MB and 200 pages",
+      accept: ".pdf,application/pdf",
+      fileTypes: "Cool Calc MJ8 report PDF",
+      reading: "Reading project and room loads…"
     ) {
       input(.type(.hidden), .name("confirmDuplicate"), .value("false"))
-      input(
-        .type(.file), .name("file"), .accept(".pdf,application/pdf"),
-        .custom(name: "aria-label", value: "Cool Calc PDF"), .required,
-        .custom(
-          name: "onchange",
-          value: """
-            this.form.elements.confirmDuplicate.value = 'false';
-            this.form.querySelector('[data-duplicate-warning]').hidden = true;
-            this.form.querySelector('[data-import-submit]').hidden = false;
-            this.form.querySelector('[data-missing-zip]').hidden = true;
-            this.form.elements.zipCode.disabled = true;
-            this.form.elements.zipCode.required = false;
-            this.form.elements.zipCode.value = '';
-            """))
-      div(.custom(name: "data-missing-zip", value: ""), .class("mt-6"), .hidden) {
+      div(.data("import-when", value: "missing-zip"), .hidden) {
         p(
-          .class("mb-4"), .custom(name: "data-zip-message", value: ""),
+          .class("mt-4 mb-4"), .data("zip-message", value: ""),
           .custom(name: "aria-live", value: "polite")
         ) {}
         LabeledInput(
           "ZIP code", .name("zipCode"), .type(.text), .placeholder("ZIP code"),
           .pattern(value: "[0-9]{5}(-[0-9]{4})?"), .disabled)
       }
-      div(.custom(name: "data-import-submit", value: "")) {
-        SubmitButton(title: "Create project from PDF")
-          .attributes(.class("btn-block mt-6"))
-      }
       div(
-        .custom(name: "data-duplicate-warning", value: ""), .class("mt-6"), .hidden,
+        .data("import-when", value: "duplicate"), .class("mt-4"), .hidden,
         .custom(name: "aria-live", value: "polite")
       ) {
-        div(.custom(name: "data-duplicate-details", value: "")) {}
-        div(.class("flex gap-4 mt-6")) {
-          button(
-            .type(.button), .class("btn btn-outline"),
-            .custom(
-              name: "onclick",
-              value: """
-                this.form.elements.confirmDuplicate.value = 'false';
-                this.form.querySelector('[data-duplicate-warning]').hidden = true;
-                this.form.querySelector('[data-import-submit]').hidden = false;
-                this.form.querySelector('input[type=file]').focus();
-                """)
-          ) { "Cancel" }
-          SubmitButton(title: "Create another project")
-            .attributes(
-              .custom(name: "onclick", value: "this.form.elements.confirmDuplicate.value = 'true';")
-            )
+        div(.data("duplicate-details", value: "")) {}
+        LabeledInput("Name", .name("name"), .type(.text), .placeholder("Project name"), .disabled)
+          .attributes(.class("mt-4"))
+        div(.class("mt-6 grid grid-cols-2 gap-2")) {
+          button(.type(.button), .class("btn btn-outline"), .data("import-cancel", value: "")) {
+            "Cancel"
+          }
+          SubmitButton(title: "Create project")
         }
       }
-      p(.class("htmx-indicator text-sm mt-2")) { "Reading project and room loads…" }
+      div(
+        .data("import-submit", value: ""), .data("import-when", value: "chosen missing-zip"),
+        .hidden
+      ) {
+        SubmitButton(title: "Create project")
+          .attributes(.class("btn-block mt-4"))
+      }
     }
-    .attributes(
-      .custom(
-        name: "hx-on::before-on-load",
-        value: """
-          const response = new DOMParser().parseFromString(event.detail.xhr.responseText, 'text/html');
-          const missingZIP = response.querySelector('[data-project-import-missing-zip]');
-          if (missingZIP) {
-            event.preventDefault();
-            this.querySelector('[data-missing-zip]').hidden = false;
-            this.querySelector('[data-zip-message]').textContent = missingZIP.textContent;
-            this.elements.zipCode.disabled = false;
-            this.elements.zipCode.required = true;
-            this.elements.zipCode.focus();
-          }
-          const conflict = response.querySelector('[data-project-import-conflict]');
-          if (conflict) {
-            event.preventDefault();
-            const warning = this.querySelector('[data-duplicate-warning]');
-            warning.querySelector('[data-duplicate-details]').replaceChildren(conflict);
-            warning.hidden = false;
-            this.querySelector('[data-import-submit]').hidden = true;
-            warning.querySelector('button').focus();
-          }
-          """),
-      .custom(
-        name: "hx-on::after-request", value: "this.elements.confirmDuplicate.value = 'false';")
-    )
+    .attributes(.data("project-import", value: ""))
   }
 }

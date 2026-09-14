@@ -173,22 +173,43 @@ struct RoomPDFUploadTests {
           #expect(response.body.string.contains("Possible duplicate project"))
         }
         #expect(try await database.projects.fetch(user.id, .first).items.count == 1)
-        var confirmed = ByteBuffer()
-        confirmed.writeString(
-          "--\(boundary)\r\nContent-Disposition: form-data; name=\"confirmDuplicate\"\r\n\r\ntrue\r\n"
-        )
-        confirmed.writeBytes(body.readableBytesView)
+        // Confirming keeps asking until the new project has a name of its own.
+        func confirmed(name: String?) -> ByteBuffer {
+          var confirmed = ByteBuffer()
+          confirmed.writeString(
+            "--\(boundary)\r\nContent-Disposition: form-data; name=\"confirmDuplicate\"\r\n\r\ntrue\r\n"
+          )
+          if let name {
+            confirmed.writeString(
+              "--\(boundary)\r\nContent-Disposition: form-data; name=\"name\"\r\n\r\n\(name)\r\n")
+          }
+          confirmed.writeBytes(body.readableBytesView)
+          return confirmed
+        }
         try await app.testing().test(
           .POST, "/projects/import/pdf",
           headers: [
             "Content-Type": "multipart/form-data; boundary=\(boundary)", "HX-Request": "true",
-          ], body: confirmed
+          ], body: confirmed(name: nil)
+        ) { response in
+          #expect(response.status == .ok)
+          #expect(response.body.string.contains("Project name already used"))
+          #expect(response.body.string.contains("data-suggested-name=\"\(project.name) (2)\""))
+        }
+        #expect(try await database.projects.fetch(user.id, .first).items.count == 1)
+        try await app.testing().test(
+          .POST, "/projects/import/pdf",
+          headers: [
+            "Content-Type": "multipart/form-data; boundary=\(boundary)", "HX-Request": "true",
+          ], body: confirmed(name: "  Basement system  ")
         ) { response in
           #expect(response.status == .ok)
           #expect(!response.body.string.contains("data-project-import-conflict"))
           #expect(response.body.string.contains(useLiveParser ? "Entry" : "Dining"))
         }
-        #expect(try await database.projects.fetch(user.id, .first).items.count == 2)
+        let imported = try await database.projects.fetch(user.id, .first).items
+        #expect(imported.count == 2)
+        #expect(imported.contains { $0.name == "Basement system" })
         #expect(try await database.projects.get(project.id) == project)
         #expect(try await database.rooms.fetch(project.id).count == expectedRooms)
 
@@ -279,7 +300,8 @@ struct RoomPDFUploadTests {
         ) { response in
           #expect(response.status == .ok)
           #expect(!response.body.string.contains("Oops: Error"))
-          #expect(response.body.string.contains("hx-confirm=\"This project already has rooms."))
+          #expect(response.body.string.contains("This project already has rooms."))
+          #expect(response.body.string.contains("data-import-action-pdf"))
         }
         let restored = try await database.rooms.fetch(project.id)
         #expect(restored.count == expectedCount)
