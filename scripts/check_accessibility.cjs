@@ -85,7 +85,7 @@ const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'nig
     const account = page.locator('.account-menu > summary');
     await account.focus();
     await page.keyboard.press('Enter');
-    for (const name of ['Profile', 'Projects', 'Logout']) {
+    for (const name of ['Profile', 'Projects', 'Filter library', 'Design preferences', 'Logout']) {
       await page.keyboard.press('Tab');
       await focused(page.getByRole(name === 'Logout' ? 'button' : 'link', { name, exact: true }));
     }
