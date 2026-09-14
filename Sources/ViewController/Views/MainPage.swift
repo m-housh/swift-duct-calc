@@ -67,7 +67,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     link(.rel(.stylesheet), .href("/css/output.css?v=project-import-1"))
     link(.rel(.stylesheet), .href("/css/htmx.css"))
     link(.rel(.stylesheet), .href("/css/accessibility.css?v=request-toast-2"))
-    link(.rel(.stylesheet), .href("/css/project-workspace.css?v=project-import-1"))
+    link(.rel(.stylesheet), .href("/css/project-workspace.css?v=project-import-2"))
     AppIcons()
     link(.rel(.stylesheet), .href("/css/ductcalc-wordmark.css?v=2"))
     link(.rel(.stylesheet), .href("/css/navbar.css?v=3"))

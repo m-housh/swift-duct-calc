@@ -73,8 +73,9 @@ struct ImportFileForm<Inner: HTML & Sendable>: HTML, Sendable {
         .class(
           """
           import-dropzone flex cursor-pointer flex-col items-center gap-2 rounded-box border-2
-          border-dashed border-base-content/25 px-6 py-8 text-center transition-colors
-          hover:border-primary hover:bg-primary/5 focus-within:outline-2
+          border-dashed border-base-content/25 px-6 py-8 text-center
+          transition-[border-color,background-color] hover:border-primary hover:bg-primary/5
+          focus-within:outline-2
           focus-within:outline-offset-2 focus-within:outline-primary
           data-[dragover]:border-primary data-[dragover]:bg-primary/10
           """)
@@ -85,7 +86,7 @@ struct ImportFileForm<Inner: HTML & Sendable>: HTML, Sendable {
         span(.class("mt-1 text-base font-medium")) { prompt }
         span(.class("text-sm")) {
           "or "
-          span(.class("link link-primary")) { "browse files" }
+          span(.class("link")) { "browse files" }
           " · \(limits)"
         }
         input(

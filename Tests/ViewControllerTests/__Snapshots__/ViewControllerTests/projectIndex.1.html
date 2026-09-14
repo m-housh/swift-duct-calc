@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="/css/output.css?v=project-import-1">
     <link rel="stylesheet" href="/css/htmx.css">
     <link rel="stylesheet" href="/css/accessibility.css?v=request-toast-2">
-    <link rel="stylesheet" href="/css/project-workspace.css?v=project-import-1">
+    <link rel="stylesheet" href="/css/project-workspace.css?v=project-import-2">
     <link rel="icon" href="/images/favicon.ico?v=ductcalc-white-3" sizes="16x16 32x32 48x48">
     <link rel="icon" href="/images/favicon-32x32.png?v=ductcalc-white-3" type="image/png" sizes="32x32">
     <link rel="icon" href="/images/brand/favicon.svg?v=white-3" type="image/svg+xml" sizes="any">
@@ -123,10 +123,11 @@ error.hidden = false;" hx-on::send-error="const error = this.querySelector('[rol
 error.textContent = 'The connection to the server was lost. Check your connection and try again.';
 error.hidden = false;" hx-on::before-request="this.querySelector('[role=alert]').hidden = true;" enctype="multipart/form-data" data-project-import="">
                   <label data-import-dropzone="" class="import-dropzone flex cursor-pointer flex-col items-center gap-2 rounded-box border-2
-                  border-dashed border-base-content/25 px-6 py-8 text-center transition-colors
-                  hover:border-primary hover:bg-primary/5 focus-within:outline-2
+                  border-dashed border-base-content/25 px-6 py-8 text-center
+                  transition-[border-color,background-color] hover:border-primary hover:bg-primary/5
+                  focus-within:outline-2
                   focus-within:outline-offset-2 focus-within:outline-primary
-                  data-[dragover]:border-primary data-[dragover]:bg-primary/10"><span class="grid size-14 place-items-center rounded-full bg-primary/10 text-primary"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload-icon lucide-upload"><path d="M12 3v12"/><path d="m17 8-5-5-5 5"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></svg></span><span class="mt-1 text-base font-medium">Drop your Cool Calc MJ8 report</span><span class="text-sm">or <span class="link link-primary">browse files</span> · PDF up to 10 MB and 200 pages</span>
+                  data-[dragover]:border-primary data-[dragover]:bg-primary/10"><span class="grid size-14 place-items-center rounded-full bg-primary/10 text-primary"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload-icon lucide-upload"><path d="M12 3v12"/><path d="m17 8-5-5-5 5"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></svg></span><span class="mt-1 text-base font-medium">Drop your Cool Calc MJ8 report</span><span class="text-sm">or <span class="link">browse files</span> · PDF up to 10 MB and 200 pages</span>
                   <input type="file" name="file" accept=".pdf,application/pdf" class="sr-only" aria-label="Choose a Cool Calc MJ8 report PDF" required></label>
                   <div data-import-file="" hidden class="flex items-center gap-3 rounded-box border border-base-content/15 bg-base-200 p-3">
                     <span class="grid size-9 shrink-0 place-items-center rounded-md bg-primary/10 text-primary"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text-icon lucide-file-text"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
