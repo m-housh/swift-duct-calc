@@ -18,12 +18,11 @@ struct PdfExportTests {
       test "$PWD" != "\(FileManager.default.currentDirectoryPath)" || exit 91
       probe=$(mktemp ./pdf-check.XXXXXX) || exit 92
       rm "$probe"
-      for argument in "$@"; do
-        case "$argument" in
-          --css=*) test -r "${argument#--css=}" || exit 93 ;;
-          --output=*) output="${argument#--output=}" ;;
-        esac
-      done
+      test "$1" = "--base-url" || exit 93
+      test -r "$2/css/pdf.css" || exit 94
+      test -r "$2/images/brand/ductcalc-mark-dark.webp" || exit 95
+      test -r "$3" || exit 96
+      output="$4"
       if [ \(status) -ne 8 ]; then printf '%%PDF-1.4\\n' > "$output"; fi
       if [ \(status) -eq 7 ]; then exit 7; fi
       """
@@ -31,7 +30,7 @@ struct PdfExportTests {
     try FileManager.default.setAttributes([.posixPermissions: 0o700], ofItemAtPath: executable.path)
     let files = ExportFiles()
     try await withDependencies {
-      $0.environment = .init(pandocPath: executable.path)
+      $0.environment = .init(pdfEngine: executable.path)
       $0.fileClient.writeFile = { contents, path in
         await files.record(path)
         try contents.write(toFile: path, atomically: true, encoding: .utf8)

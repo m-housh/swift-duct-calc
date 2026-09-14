@@ -44,7 +44,7 @@ To use the published image instead, set `DUCTCALC_IMAGE` in `docker/.env` to
 "$engine" compose --env-file docker/.env -f docker/docker-compose.yaml up -d --no-build
 ```
 
-The production image includes Poppler for CoolCalc imports and Pandoc/WeasyPrint
+The production image includes Poppler for CoolCalc imports and WeasyPrint
 for PDF reports. Production uses PostgreSQL. Setting `SQLITE_PATH` does not switch
 a production instance to SQLite; SQLite is used by the development environment.
 

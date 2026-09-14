@@ -50,21 +50,19 @@ extension PdfClient: DependencyKey {
 
       let temporaryDirectory = FileManager.default.temporaryDirectory
       let baseUrl = temporaryDirectory.appendingPathComponent("\(projectID)-\(UUID())").path
-      let stylesheet = URL(fileURLWithPath: "Public/css/pdf.css").path
+      let publicDirectory = URL(fileURLWithPath: "Public", isDirectory: true).path
       do {
         try await fileClient.writeFile(html.render(), "\(baseUrl).html")
         let process = Process()
-        // Pandoc creates intermediate files in its working directory; the app directory is read-only.
+        // Keep renderer scratch files out of the read-only app directory.
         process.currentDirectoryURL = temporaryDirectory
         process.standardInput = FileHandle.nullDevice
         process.standardOutput = FileHandle.nullDevice
-        process.executableURL = URL(fileURLWithPath: environment.pandocPath)
+        process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
         process.arguments = [
-          "\(baseUrl).html",
-          "--pdf-engine=\(environment.pdfEngine)",
-          "--from=html",
-          "--css=\(stylesheet)",
-          "--output=\(baseUrl).pdf",
+          environment.pdfEngine,
+          "--base-url", publicDirectory + "/",
+          "\(baseUrl).html", "\(baseUrl).pdf",
         ]
         try process.run()
         process.waitUntilExit()

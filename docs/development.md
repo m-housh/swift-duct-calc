@@ -26,8 +26,8 @@ node scripts/check_fitting_reference.cjs
 
 The native `just test` and `just code-coverage` recipes require a local Swift 6.2
 toolchain. PDF import uses Poppler's `pdftotext`. Native installations can override
-`PDFTOTEXT_PATH` when it is outside `/usr/bin`; container images include Poppler,
-Pandoc, and WeasyPrint for import and report generation.
+`PDFTOTEXT_PATH` when it is outside `/usr/bin`; container images include Poppler
+and WeasyPrint for import and report generation.
 
 ### Admin metrics checks
 
