@@ -23,9 +23,9 @@ struct FittingPickerSnapshotTests {
     }
   }
 
-  @Test func browser() async {
+  @Test func browser() async throws {
     // Keep both fixed and configurable cards without snapshotting the entire catalog.
-    let view = await withDependencies {
+    let view = try await withDependencies {
       $0.fittingClient = client
       $0.fittingClient.fittings = { request in
         try await client.fittings(request).filter {
@@ -33,7 +33,7 @@ struct FittingPickerSnapshotTests {
         }
       }
     } operation: {
-      await SiteRoute.View.FittingPickerRoute.group(
+      try await SiteRoute.View.FittingPickerRoute.group(
         #"{"pathType":"supply","groupID":8}"#
       ).renderView(on: .test(.home))
     }
@@ -224,7 +224,11 @@ struct FittingPickerSnapshotTests {
     await withDependencies {
       $0.fittingClient = client
     } operation: {
-      await route.renderView(on: .test(.fittings(route)))
+      do { return try await route.renderView(on: .test(.fittings(route))) } catch {
+        return ErrorMessage(
+          ViewController.present(
+            error, title: "Could not load fitting", reference: "test-reference"))
+      }
     }
   }
 }

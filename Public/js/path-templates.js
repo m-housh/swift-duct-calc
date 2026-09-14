@@ -364,9 +364,10 @@
       const response = await fetch(url, {
         method,
         credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'X-DuctCalc-Request': 'true' },
         ...(body === undefined ? {} : { body: JSON.stringify(body) }),
       });
+      await window.ductCalcRequestErrors.check(response, invalidMessage);
       const document = new DOMParser().parseFromString(await response.text(), 'text/html');
       const error = document.querySelector('[data-workspace-error]');
       if (error) throw new Error(error.dataset.workspaceError);

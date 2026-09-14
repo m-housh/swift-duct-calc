@@ -38,7 +38,8 @@
         const controller = new AbortController(); pending = controller;
         status.textContent = 'Loading templates…';
         try {
-          const response = await fetch(url, { ...options, signal: controller.signal, credentials: 'same-origin' });
+          const response = await fetch(url, { ...options, headers: { ...options.headers, 'X-DuctCalc-Request': 'true' }, signal: controller.signal, credentials: 'same-origin' });
+          await window.ductCalcRequestErrors.check(response);
           if (!response.ok || response.redirected) throw Error('Unable to load templates. Check your connection or sign in again.');
           const page = new DOMParser().parseFromString(await response.text(), 'text/html');
           const failure = page.querySelector('[data-workspace-error]');

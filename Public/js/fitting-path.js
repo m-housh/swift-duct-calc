@@ -34,7 +34,8 @@
       return values.map(Number);
     };
     async function post(url, payload, signal) {
-      const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ payload: JSON.stringify(payload) }), signal });
+      const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-DuctCalc-Request': 'true' }, body: new URLSearchParams({ payload: JSON.stringify(payload) }), signal });
+      await window.ductCalcRequestErrors.check(response);
       if (!response.ok || response.redirected) throw Error('Request failed. Check your connection or sign in again. Your draft is still on this page.');
       return response.text();
     }

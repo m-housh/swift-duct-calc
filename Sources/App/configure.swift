@@ -107,6 +107,7 @@ private func addMiddleware(
   app.middleware.use(
     DependenciesMiddleware(
       database: databaseClient, environment: environment, fittingClient: fittingClient))
+  app.middleware.use(RequestErrorMiddleware())
 }
 
 private func setupDatabase(
@@ -177,7 +178,7 @@ private func siteHandler(
   case .view(.project(.detail(let projectID, .pdf))):
     return try await projectClient.generatePdf(projectID)
   case .view(.project(.importPDF)):
-    let upload = try request.content.decode(ProjectPDFUpload.self)
+    let upload = try decodeUpload(ProjectPDFUpload.self, from: request)
     return try await viewController.respond(
       route: .project(
         .importPDF(
@@ -187,7 +188,7 @@ private func siteHandler(
             name: upload.name))),
       request: request)
   case .view(.project(.detail(let projectID, .rooms(.csv)))):
-    let upload = try request.content.decode(RoomFileUpload.self)
+    let upload = try decodeUpload(RoomFileUpload.self, from: request)
     let route = SiteRoute.View.project(
       .detail(
         projectID,
@@ -198,7 +199,7 @@ private func siteHandler(
     return try await viewController.respond(route: route, request: request)
   case .view(.project(.detail(let projectID, .rooms(.pdf)))):
     // The router consumes the multipart envelope; Vapor decodes the binary file part.
-    let upload = try request.content.decode(RoomFileUpload.self)
+    let upload = try decodeUpload(RoomFileUpload.self, from: request)
     let route = SiteRoute.View.project(
       .detail(
         projectID,
@@ -248,4 +249,9 @@ private struct ProjectPDFUpload: Content {
 
 private struct RoomFileUpload: Content {
   var file: File
+}
+
+// Only decoding submitted content is a client error; decoding stored data is a server failure.
+private func decodeUpload<T: Decodable>(_ type: T.Type, from request: Request) throws -> T {
+  do { return try request.content.decode(type) } catch is DecodingError { throw Abort(.badRequest) }
 }

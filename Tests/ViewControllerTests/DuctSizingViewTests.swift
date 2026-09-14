@@ -61,18 +61,25 @@ struct DuctSizingViewTests {
   @Test func calculationFailureKeepsNavigation() async {
     let view = await render(error: ProjectClientError("Unable to calculate duct sizes."))
     #expect(view.render().contains("aria-label=\"Project\""))
-    #expect(view.render().contains("Unable to calculate duct sizes."))
+    #expect(view.render().contains("Error reference"))
     assertSnapshot(of: view, as: .html)
   }
 
-  @Test func missingProjectDoesNotShowPrerequisites() async {
-    let view = await ViewControllerTests().withDefaultDependencies {
+  @Test func failedStepLookupDoesNotShowPrerequisites() async {
+    let view = try await ViewControllerTests().withDefaultDependencies {
       $0.database.projects.getCompletedSteps = { _ in throw NotFoundError() }
     } operation: {
-      await SiteRoute.View.ProjectRoute.DuctSizingRoute.index.renderView(
-        on: .test(.project(.detail(UUID(0), .ductSizing(.index)))), projectID: UUID(0))
+      let request = ViewController.Request.test(.project(.detail(UUID(0), .ductSizing(.index))))
+      do {
+        return try await SiteRoute.View.ProjectRoute.DuctSizingRoute.index.renderView(
+          on: request, projectID: UUID(0))
+      } catch {
+        return await request.errorPage(
+          ViewController.present(
+            error, title: "Could not load duct sizes", reference: "test-reference"))
+      }
     }
-    #expect(view.render().contains("Oops: Error"))
+    #expect(view.render().contains("Could not load duct sizes"))
     #expect(!view.render().contains("Complete these inputs"))
     #expect(!view.render().contains("aria-label=\"Project\""))
   }
@@ -81,8 +88,10 @@ struct DuctSizingViewTests {
     typealias Route = SiteRoute.View.ProjectRoute.DuctSizingRoute
     let form = Route.RectangularSizesForm(
       height: 8,
-      rooms: [.init(roomID: UUID(1), register: 1), .init(roomID: UUID(1), register: 2),
-        .init(roomID: UUID(2), register: 1)])
+      rooms: [
+        .init(roomID: UUID(1), register: 1), .init(roomID: UUID(1), register: 2),
+        .init(roomID: UUID(2), register: 1),
+      ])
     let request = try SiteRoute.View.router.request(
       for: .project(.detail(UUID(0), .ductSizing(.rectangularSizes(form)))))
     #expect(request.url?.path == "/projects/\(UUID(0))/duct-sizing/rectangular-sizes")
@@ -91,7 +100,7 @@ struct DuctSizingViewTests {
         == .project(.detail(UUID(0), .ductSizing(.rectangularSizes(form)))))
 
     let updates = LockIsolated<[Room.ID: [Int]]>([:])
-    _ = await ViewControllerTests().withDefaultDependencies {
+    _ = try await ViewControllerTests().withDefaultDependencies {
       $0.database.rooms.setRectangularSizes = { selection, height in
         #expect(height == 8)
         updates.setValue(selection)
@@ -102,7 +111,7 @@ struct DuctSizingViewTests {
       $0.projectClient.calculateRoomDuctSizes = { _ in [] }
       $0.projectClient.calculateTrunkDuctSizes = { _ in [] }
     } operation: {
-      await Route.rectangularSizes(form).renderView(
+      try await Route.rectangularSizes(form).renderView(
         on: .test(.project(.detail(UUID(0), .ductSizing(.rectangularSizes(form))))),
         projectID: UUID(0))
     }
@@ -149,10 +158,11 @@ struct DuctSizingViewTests {
     let request = try SiteRoute.View.router.request(
       for: .project(.detail(UUID(0), .ductSizing(route))))
     #expect(request.url?.path == "/projects/\(UUID(0))/duct-sizing/rectangular-sizes/clear")
-    #expect(try SiteRoute.View.router.match(request: request)
-      == .project(.detail(UUID(0), .ductSizing(route))))
+    #expect(
+      try SiteRoute.View.router.match(request: request)
+        == .project(.detail(UUID(0), .ductSizing(route))))
     let deletions = LockIsolated<[Room.ID: [Int]]>([:])
-    let response = await ViewControllerTests().withDefaultDependencies {
+    let response = try await ViewControllerTests().withDefaultDependencies {
       $0.database.rooms.setRectangularSizes = { selection, height in
         #expect(height == nil)
         deletions.setValue(selection)
@@ -163,7 +173,7 @@ struct DuctSizingViewTests {
       $0.projectClient.calculateRoomDuctSizes = { _ in [] }
       $0.projectClient.calculateTrunkDuctSizes = { _ in [] }
     } operation: {
-      await route.renderView(
+      try await route.renderView(
         on: .test(.project(.detail(UUID(0), .ductSizing(route)))), projectID: UUID(0))
     }
     #expect(deletions.value == [room.id: [1, 3]])
@@ -171,7 +181,7 @@ struct DuctSizingViewTests {
   }
 
   @Test(arguments: [false, true])
-  func individualRectangularSizeChangesRefreshBulkModal(clearing: Bool) async {
+  func individualRectangularSizeChangesRefreshBulkModal(clearing: Bool) async throws {
     typealias Route = SiteRoute.View.ProjectRoute.DuctSizingRoute
     let room = Room(
       id: UUID(1), projectID: UUID(0), name: "Living Room", heatingLoad: 1_000,
@@ -186,15 +196,16 @@ struct DuctSizingViewTests {
           height: clearing && register == 1 ? nil : 8,
           width: clearing && register == 1 ? nil : 10))
     }
-    let route: Route = clearing
+    let route: Route =
+      clearing
       ? .deleteRectangularSize(room.id, .init(rectangularSizeID: UUID(2), register: 1))
       : .roomRectangularForm(room.id, .init(register: 1, height: 8))
-    let response = await ViewControllerTests().withDefaultDependencies {
+    let response = try await ViewControllerTests().withDefaultDependencies {
       $0.database.rooms.updateRectangularSize = { _, _ in room }
       $0.database.rooms.clearRectangularSize = { _, _ in room }
       $0.projectClient.calculateRoomDuctSizes = { _ in sizes }
     } operation: {
-      await route.renderView(
+      try await route.renderView(
         on: .test(.project(.detail(UUID(0), .ductSizing(route))), isHtmxRequest: true),
         projectID: UUID(0))
     }
@@ -221,6 +232,8 @@ struct DuctSizingViewTests {
   private func render(error: any Error, htmx: Bool = false) async -> AnySendableHTML {
     let missing = Set((error as? Project.DuctSizingUnavailable)?.missingInputs ?? [])
     return await ViewControllerTests().withDefaultDependencies {
+      $0.uuid = .constant(UUID(0))
+      $0.database.projects.getForUser = { _, _ in Project.mock }
       $0.database.projects.getCompletedSteps = { _ in
         .init(
           equipmentInfo: !missing.contains(.equipment), rooms: !missing.contains(.rooms),
@@ -229,9 +242,16 @@ struct DuctSizingViewTests {
       }
       $0.projectClient.calculateRoomDuctSizes = { _ in throw error }
     } operation: {
-      await SiteRoute.View.ProjectRoute.DuctSizingRoute.index.renderView(
-        on: .test(.project(.detail(UUID(0), .ductSizing(.index))), isHtmxRequest: htmx),
-        projectID: UUID(0))
+      let request = ViewController.Request.test(
+        .project(.detail(UUID(0), .ductSizing(.index))), isHtmxRequest: htmx)
+      do {
+        return try await SiteRoute.View.ProjectRoute.DuctSizingRoute.index.renderView(
+          on: request, projectID: UUID(0))
+      } catch {
+        return await request.errorPage(
+          ViewController.present(
+            error, title: "Could not load duct sizes", reference: "test-reference"))
+      }
     }
   }
 }

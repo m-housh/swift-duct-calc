@@ -32,7 +32,7 @@ struct RoomPDFUploadTests {
           try await app.testing().test(
             .POST, path, headers: ["Content-Type": contentType], body: ByteBuffer(string: "&%ZZ")
           ) { response in
-            #expect(response.status == .notFound)
+            #expect(response.status == (path.hasSuffix("unknown") ? .notFound : .badRequest))
           }
         }
       }

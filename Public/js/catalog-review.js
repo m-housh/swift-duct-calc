@@ -69,7 +69,8 @@
       if (busy || !dirty) return;
       const edits = changes(); busy = true; root.inert = true; update(); status.textContent = 'Saving catalog review…';
       try {
-        const response = await fetch('/fittings/review', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ payload: JSON.stringify({ version, changes: edits }) }) });
+        const response = await fetch('/fittings/review', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-DuctCalc-Request': 'true' }, body: new URLSearchParams({ payload: JSON.stringify({ version, changes: edits }) }) });
+        await window.ductCalcRequestErrors.check(response);
         if (!response.ok || response.redirected) throw Error('Save failed. Check your connection or sign in again. Your choices are still on this page.');
         const template = document.createElement('template'); template.innerHTML = await response.text();
         const saved = template.content.querySelector('[data-review-saved]');

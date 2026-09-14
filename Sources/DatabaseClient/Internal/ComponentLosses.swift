@@ -169,7 +169,7 @@ extension ComponentLossModel: Validatable {
         Double.greaterThan(0.0)
         Double.lessThanOrEquals(1.0)
       }
-      .errorLabel("Value", inline: true)
+      .errorLabel("Component Pressure Loss", inline: true)
     }
   }
 }

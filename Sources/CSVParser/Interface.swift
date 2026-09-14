@@ -1,5 +1,6 @@
 import Dependencies
 import DependenciesMacros
+import Foundation
 import ManualDCore
 import Parsing
 
@@ -21,9 +22,16 @@ extension CSVParser: DependencyKey {
   public static let liveValue = Self(
     parseRooms: { csv in
       guard let string = String(data: csv.file, encoding: .utf8) else {
-        throw CSVParsingError("Unreadable file data")
+        throw CSVParsingError("Save the CSV file using UTF-8 encoding, then import it again.")
       }
-      let rows = try RoomCSVParser().parse(string[...].utf8)
+      let rows: [RoomRowType]
+      do {
+        rows = try RoomCSVParser().parse(string[...].utf8)
+      } catch {
+        throw CSVParsingError(
+          "The CSV does not match the room-load format. Check the column headings and numeric values, then import it again."
+        )
+      }
       return rows.reduce(into: [Room.CSV.Row]()) {
         if case .room(let room) = $1 {
           $0.append(room)
@@ -33,8 +41,10 @@ extension CSVParser: DependencyKey {
   )
 }
 
-public struct CSVParsingError: Error {
-  let reason: String
+public struct CSVParsingError: LocalizedError {
+  public let reason: String
+
+  public var errorDescription: String? { reason }
 
   public init(_ reason: String) {
     self.reason = reason

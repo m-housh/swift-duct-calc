@@ -42,7 +42,7 @@ function payload(html) {
   const node = document.querySelector('#path-template-data');
   assert(
     node,
-    document.querySelector('[data-workspace-error]')?.textContent || 'Workspace missing'
+    document.querySelector('[data-workspace-error], [data-error-message]')?.textContent || 'Workspace missing'
   );
   return JSON.parse(node.textContent);
 }
@@ -104,6 +104,7 @@ async function mount(html, http) {
     if (redirect) redirects.push(redirect);
     return response;
   };
+  window.eval(fs.readFileSync('Public/js/request-errors.js', 'utf8'));
   window.eval(script);
   window.document.dispatchEvent(new window.Event('DOMContentLoaded'));
   const root = window.document.querySelector('#path-template-workspace');
@@ -457,7 +458,7 @@ async function mount(html, http) {
   const other = session();
   await register(other, 'light');
   const forbidden = await (await other(`/path-templates/${data.template.id}`)).text();
-  assert(new JSDOM(forbidden).window.document.querySelector('[data-workspace-error]'));
+  assert(new JSDOM(forbidden).window.document.querySelector('[data-workspace-error], [data-error-message]'));
   assert(!forbidden.includes('Customized supply'));
   const transfer = {
     format: 'duct-calc-path-template',
@@ -556,7 +557,7 @@ async function mount(html, http) {
   });
   assert.equal(tooLarge.status, 413, 'Uploads over 1 MB must be rejected');
   const denied = await (await other(`/path-templates?project=${projectID}`)).text();
-  assert(new JSDOM(denied).window.document.querySelector('[data-workspace-error]'));
+  assert(new JSDOM(denied).window.document.querySelector('[data-workspace-error], [data-error-message]'));
   const contextual = await (await http(`/path-templates?project=${projectID}`)).text();
   assert(
     new JSDOM(contextual).window.document.querySelector(

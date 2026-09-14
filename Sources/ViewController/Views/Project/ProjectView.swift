@@ -20,12 +20,12 @@ struct ProjectView<Inner: HTML & Sendable>: HTML, Sendable {
   let projectID: Project.ID
   let activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab
   let inner: Inner
-  let completedSteps: Project.CompletedSteps
+  let completedSteps: Project.CompletedSteps?
   var project: Project?
 
   init(
     projectID: Project.ID, activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab,
-    completedSteps: Project.CompletedSteps, project: Project? = nil,
+    completedSteps: Project.CompletedSteps?, project: Project? = nil,
     @HTMLBuilder content: () -> Inner
   ) {
     self.projectID = projectID
@@ -60,17 +60,17 @@ struct ProjectView<Inner: HTML & Sendable>: HTML, Sendable {
               )
               row(
                 "Rooms", icon: .doorClosed, shortcut: "2", tab: .rooms, route: .rooms(.index),
-                complete: completedSteps.rooms)
+                complete: completedSteps?.rooms)
               row(
                 "Equipment", icon: .fan, shortcut: "3", tab: .equipment, route: .equipment(.index),
-                complete: completedSteps.equipmentInfo)
+                complete: completedSteps?.equipmentInfo)
               row(
                 "Total effective length", icon: .rulerDimensionLine, shortcut: "4",
                 tab: .equivalentLength, route: .equivalentLength(.index),
-                complete: completedSteps.equivalentLength)
+                complete: completedSteps?.equivalentLength)
               row(
                 "Friction rate", icon: .squareFunction, shortcut: "5", tab: .frictionRate,
-                route: .frictionRate(.index), complete: completedSteps.frictionRate)
+                route: .frictionRate(.index), complete: completedSteps?.frictionRate)
               row(
                 "Duct sizes", icon: .wind, shortcut: "6", tab: .ductSizing,
                 route: .ductSizing(.index), complete: nil)

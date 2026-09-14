@@ -5,14 +5,14 @@ import Foundation
 import ManualDCore
 
 extension SiteRoute.View.FittingPickerRoute {
-  func renderView(on request: ViewController.Request) async -> AnySendableHTML {
+  func renderView(on request: ViewController.Request) async throws -> AnySendableHTML {
     @Dependency(\.fittingClient) var client
     do {
       switch self {
       case .importReferences(let payload):
         return try await previewReferenceImport(payload)
       case .review, .saveReview:
-        return await renderCatalogReview(on: request)
+        return try await renderCatalogReview(on: request)
       case .index:
         return await request.view {
           div(.class("p-8")) {
@@ -112,12 +112,7 @@ extension SiteRoute.View.FittingPickerRoute {
         }
       }
     } catch let error as PickerError {
-      return p(.class("fp-error"), .init(name: "role", value: "alert")) { error.description }
-    } catch {
-      request.logger.error("Fitting picker: \(error)")
-      return p(.class("fp-error"), .init(name: "role", value: "alert")) {
-        "The fitting could not be loaded. Please try again."
-      }
+      throw PresentationError(title: "Could not load fitting", message: error.description)
     }
   }
 
