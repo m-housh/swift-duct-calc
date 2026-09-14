@@ -208,7 +208,9 @@ or guided templates.
 
 Once room loads, equipment, paths, and component losses are complete, open Duct
 Sizes to review room duct sizes. Add trunks or runouts and select the rooms they
-serve. Use PDF on this page to download a report of the design.
+serve. Use Rectangular sizes to select registers and set a shared height or clear
+their rectangular sizes. Clearing leaves unselected registers unchanged and does
+not require a height. Use PDF on this page to download a report of the design.
 
 ## Ductulator
 

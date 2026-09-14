@@ -4,6 +4,19 @@ import ManualDCore
 import Styleguide
 
 extension DuctSizingView {
+  /// Refreshes the schedule row and the bulk form's current sizes after an individual edit.
+  struct RoomUpdate: HTML, Sendable {
+    let room: DuctSizes.RoomContainer
+    let rooms: [DuctSizes.RoomContainer]
+
+    var body: some HTML {
+      RoomRow(room: room)
+      RectangularSizesForm(rooms: rooms.sorted { $0.label < $1.label })
+        .supplyRuns
+        .attributes(.hx.swapOOB(.outerHTML))
+    }
+  }
+
   struct RoomsTable: HTML, Sendable {
     let rooms: [DuctSizes.RoomContainer]
     var body: some HTML<HTMLTag.table> {

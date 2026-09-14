@@ -595,9 +595,12 @@ extension SiteRoute.View.ProjectRoute {
     case index
     case deleteRectangularSize(Room.ID, DeleteRectangularDuct)
     case roomRectangularForm(Room.ID, RoomRectangularForm)
+    case rectangularSizes(RectangularSizesForm)
+    case clearRectangularSizes([RoomRegister])
     case trunk(TrunkRoute)
 
     public static let roomPath = "room"
+    public static let rectangularSizesPath = "rectangular-sizes"
     static let rootPath = "duct-sizing"
 
     static let router = OneOf {
@@ -634,6 +637,49 @@ extension SiteRoute.View.ProjectRoute {
             Field("height") { Int.parser() }
           }
           .map(.memberwise(RoomRectangularForm.init))
+        }
+      }
+      Route(.case(Self.rectangularSizes)) {
+        Path {
+          rootPath
+          rectangularSizesPath
+        }
+        Method.post
+        Body {
+          SafeFormData {
+            Field("height") { Int.parser() }
+            Many {
+              Field("rooms") {
+                Parse(.memberwise(RoomRegister.init)) {
+                  Room.ID.parser()
+                  "_"
+                  Int.parser()
+                }
+              }
+            }
+          }
+          .map(.memberwise(RectangularSizesForm.init))
+        }
+      }
+      Route(.case(Self.clearRectangularSizes)) {
+        Path {
+          rootPath
+          rectangularSizesPath
+          "clear"
+        }
+        Method.post
+        Body {
+          SafeFormData {
+            Many {
+              Field("rooms") {
+                Parse(.memberwise(RoomRegister.init)) {
+                  Room.ID.parser()
+                  "_"
+                  Int.parser()
+                }
+              }
+            }
+          }
         }
       }
       Route(.case(Self.trunk)) {
@@ -731,6 +777,29 @@ extension SiteRoute.View.ProjectRoute {
         self.id = id
         self.register = register
         self.height = height
+      }
+    }
+
+    /// Sets one rectangular height on many registers, posted as `<roomID>_<register>` values.
+    public struct RectangularSizesForm: Equatable, Sendable {
+
+      public let height: Int
+      public let rooms: [RoomRegister]
+
+      public init(height: Int, rooms: [RoomRegister]) {
+        self.height = height
+        self.rooms = rooms
+      }
+    }
+
+    public struct RoomRegister: Equatable, Sendable {
+
+      public let roomID: Room.ID
+      public let register: Int
+
+      public init(roomID: Room.ID, register: Int) {
+        self.roomID = roomID
+        self.register = register
       }
     }
 

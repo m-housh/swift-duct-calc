@@ -700,15 +700,17 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
     case .deleteRectangularSize(let roomID, let request):
       return await ResultView {
         let room = try await database.rooms.deleteRectangularSize(roomID, request.rectangularSizeID)
+        let rooms = try await projectClient.calculateRoomDuctSizes(projectID)
         guard
-          let result = try await projectClient.calculateRoomDuctSizes(projectID)
+          let result = rooms
             .first(where: { $0.roomID == room.id && $0.roomRegister == request.register })
         else {
           throw ValidationError("This register is no longer available. Reload the duct sizes.")
         }
-        return result
-      } onSuccess: { room in
-        DuctSizingView.RoomRow(room: room).environment(ProjectViewValue.$projectID, projectID)
+        return (room: result, rooms: rooms)
+      } onSuccess: { result in
+        DuctSizingView.RoomUpdate(room: result.room, rooms: result.rooms)
+          .environment(ProjectViewValue.$projectID, projectID)
       }
 
     case .roomRectangularForm(let roomID, let form):
@@ -717,15 +719,44 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
           roomID,
           .init(id: form.id ?? .init(), register: form.register, height: form.height)
         )
+        let rooms = try await projectClient.calculateRoomDuctSizes(projectID)
         guard
-          let result = try await projectClient.calculateRoomDuctSizes(projectID)
+          let result = rooms
             .first(where: { $0.roomID == room.id && $0.roomRegister == form.register })
         else {
           throw ValidationError("This register is no longer available. Reload the duct sizes.")
         }
-        return result
-      } onSuccess: { room in
-        DuctSizingView.RoomRow(room: room).environment(ProjectViewValue.$projectID, projectID)
+        return (room: result, rooms: rooms)
+      } onSuccess: { result in
+        DuctSizingView.RoomUpdate(room: result.room, rooms: result.rooms)
+          .environment(ProjectViewValue.$projectID, projectID)
+      }
+
+    case .rectangularSizes(let form):
+      return await view(on: request, projectID: projectID) {
+        guard !form.rooms.isEmpty else {
+          throw ValidationError("Select at least one register.")
+        }
+        for room in form.rooms {
+          _ = try await database.rooms.updateRectangularSize(
+            room.roomID, .init(register: room.register, height: form.height)
+          )
+        }
+      }
+
+    case .clearRectangularSizes(let rooms):
+      return await view(on: request, projectID: projectID) {
+        guard !rooms.isEmpty else {
+          throw ValidationError("Select at least one register.")
+        }
+        for item in rooms {
+          guard let room = try await database.rooms.get(item.roomID) else {
+            throw NotFoundError()
+          }
+          for size in room.rectangularSizes ?? [] where size.register == item.register {
+            _ = try await database.rooms.deleteRectangularSize(room.id, size.id)
+          }
+        }
       }
 
     case .trunk(let route):

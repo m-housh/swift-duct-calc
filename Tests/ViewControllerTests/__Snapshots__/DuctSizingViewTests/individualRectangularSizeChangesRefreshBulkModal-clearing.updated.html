@@ -1,0 +1,53 @@
+<tr id="roomRow_00000000000000000000000000000001_1" data-record="roomRow_00000000000000000000000000000001_1" data-search="Living Room">
+  <td>
+    <button type="button" class="row-select" aria-pressed="false">Living Room<small>No level · Register 1</small></button>
+  </td>
+  <td>
+    <details data-expansion="airflow-roomRow_00000000000000000000000000000001_1">
+      <summary><span>100</span></summary>
+      <p>Heating: <span>100</span> CFM · <span>1,000</span> BTU/h</p>
+      <p>Cooling: <span>80</span> CFM · <span>800</span> BTU/h</p>
+    </details>
+  </td>
+  <td><span>400</span> FPM</td>
+  <td><span title="Calculated diameter: 7.0 in." class="size-chip">8″</span></td>
+  <td>8″</td>
+  <td>10 × 8 in.</td>
+  <td>
+    <div class="row-actions">
+      <button type="button" class="btn btn-error btn-ghost" aria-label="Clear rectangular size for Living Room - SR.1" hx-delete="" hx-target="#roomRow_00000000000000000000000000000001_1" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+      <button class="btn btn-ghost" type="button" aria-label="Edit rectangular size for Living Room - SR.1" data-open-dialog="rectangularSize_00000000000000000000000000000001_1">
+        <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+      </button>
+    </div>
+    <dialog id="rectangularSize_00000000000000000000000000000001_1" class="modal" aria-labelledby="rectangularSize_00000000000000000000000000000001_1-title">
+      <div class="modal-box">
+        <h2 id="rectangularSize_00000000000000000000000000000001_1-title" class="text-2xl font-bold mb-6 pe-10">Rectangular Size</h2>
+        <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Rectangular Size" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+        <form data-success-message="Changes saved." class="space-y-4" hx-post="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/room/00000000-0000-0000-0000-000000000001" hx-target="#roomRow_00000000000000000000000000000001_1" hx-swap="outerHTML">
+          <input class="hidden" name="register" value="1">
+          <input class="hidden" name="id" value="">
+          Height<label class="input w-full"><span class="label"></span>
+          <input name="height" type="number" value="8" placeholder="8" min="0" required autofocus></label>
+          <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+        </form>
+      </div>
+    </dialog>
+  </td>
+</tr>
+<fieldset class="checkbox-group" id="rectangularSizesSupplyRuns" hx-swap-oob="outerHTML">
+  <legend class="font-bold">Supply Runs</legend>
+  <div class="flex flex-wrap gap-2 my-2">
+    <button type="button" class="btn btn-sm" data-check-all="true">Select all</button>
+    <button type="button" class="btn btn-sm" data-check-all="false">Clear selection</button>
+  </div>
+  <div class="checkbox-options">
+    <label>
+    <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000001_1">
+    Living Room - SR.1
+    10 × 8 in.<span></span><span class="size-chip"></span></label><label>
+    <input type="checkbox" class="checkbox" name="rooms" value="00000000-0000-0000-0000-000000000001_2">
+    Living Room - SR.2
+    10 × 8 in.<span></span><span class="size-chip"></span></label>
+  </div>
+</fieldset>

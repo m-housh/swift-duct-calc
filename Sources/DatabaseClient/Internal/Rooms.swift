@@ -86,8 +86,9 @@ extension DatabaseClient.Rooms: TestDependencyKey {
           throw ValidationError("Choose a valid register and a positive height.")
         }
         var rectangularSizes = model.rectangularSizes ?? []
+        // A register has one rectangular size, so a new size replaces the register's old one.
         rectangularSizes.removeAll {
-          $0.id == size.id
+          $0.id == size.id || (size.register != nil && $0.register == size.register)
         }
         rectangularSizes.append(size)
         model.rectangularSizes = rectangularSizes

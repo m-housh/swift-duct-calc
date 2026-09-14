@@ -6,11 +6,13 @@ public struct CheckboxGroup: HTML, Sendable {
     let value: String
     let label: String
     let selected: Bool
+    let badge: String?
 
-    public init(value: String, label: String, selected: Bool = false) {
+    public init(value: String, label: String, selected: Bool = false, badge: String? = nil) {
       self.value = value
       self.label = label
       self.selected = selected
+      self.badge = badge
     }
   }
 
@@ -24,7 +26,7 @@ public struct CheckboxGroup: HTML, Sendable {
     self.options = options
   }
 
-  public var body: some HTML {
+  public var body: some HTML<HTMLTag.fieldset> {
     fieldset(.class("checkbox-group")) {
       legend(.class("font-bold")) { title }
       if options.isEmpty {
@@ -44,6 +46,9 @@ public struct CheckboxGroup: HTML, Sendable {
               input(.type(.checkbox), .class("checkbox"), .name(name), .value(option.value))
                 .attributes(.checked, when: option.selected)
               span { option.label }
+              if let badge = option.badge {
+                span(.class("size-chip")) { badge }
+              }
             }
           }
         }

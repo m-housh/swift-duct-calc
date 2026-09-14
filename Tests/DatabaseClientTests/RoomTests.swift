@@ -38,7 +38,12 @@ struct RoomTests {
       )
       #expect(updatedSize.id == room.id)
 
-      let deletedSize = try await rooms.deleteRectangularSize(room.id, UUID(0))
+      let replacedSize = try await rooms.updateRectangularSize(
+        room.id, .init(id: UUID(1), register: 1, height: 12)
+      )
+      #expect(replacedSize.rectangularSizes == [.init(id: UUID(1), register: 1, height: 12)])
+
+      let deletedSize = try await rooms.deleteRectangularSize(room.id, UUID(1))
       #expect(deletedSize.rectangularSizes == nil)
 
       try await rooms.delete(room.id)

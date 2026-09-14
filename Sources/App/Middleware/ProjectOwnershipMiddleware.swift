@@ -59,6 +59,15 @@ struct ProjectOwnershipMiddleware: AsyncMiddleware {
           }) == true
         else { throw Abort(.notFound) }
       }
+    case .ductSizing(.rectangularSizes(let form)):
+      guard form.height > 0 else {
+        throw Abort(.badRequest, reason: "Choose a positive height.")
+      }
+      for item in form.rooms {
+        let room = try await requireRoom(item.roomID)
+        guard room.delegatedTo == nil, item.register > 0, item.register <= room.registerCount
+        else { throw Abort(.badRequest, reason: "Choose a valid register.") }
+      }
     case .ductSizing(.deleteRectangularSize(let id, let form)):
       let room = try await requireRoom(id)
       guard form.register > 0, form.register <= room.registerCount,
@@ -66,6 +75,12 @@ struct ProjectOwnershipMiddleware: AsyncMiddleware {
           $0.id == form.rectangularSizeID && ($0.register == nil || $0.register == form.register)
         }) == true
       else { throw Abort(.notFound) }
+    case .ductSizing(.clearRectangularSizes(let rooms)):
+      for item in rooms {
+        let room = try await requireRoom(item.roomID)
+        guard room.delegatedTo == nil, item.register > 0, item.register <= room.registerCount
+        else { throw Abort(.badRequest, reason: "Choose a valid register.") }
+      }
     default: break
     }
     return try await next.respond(to: request)
