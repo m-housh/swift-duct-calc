@@ -101,18 +101,15 @@ extension ViewController.Request {
           }
         }
       case .submitProfile(let profile):
-        return try await view {
-          try await loadView {
-            _ = try await database.userProfiles.create(profile)
-            let userID = profile.userID
-            // let user = try currentUser()
-            return (
-              userID,
-              try await database.projects.fetch(userID, .init(page: 1, per: 25)),
-              profile.theme
-            )
-          } onSuccess: { (userID, projects, _) in
-            ProjectsTable(userID: userID, projects: projects)
+        return try await afterMutation({
+          _ = try await database.userProfiles.create(profile)
+        }) {
+          try await view {
+            try await loadView {
+              try await database.projects.fetch(profile.userID, .first)
+            } onSuccess: { projects in
+              ProjectsTable(userID: profile.userID, projects: projects)
+            }
           }
         }
       }

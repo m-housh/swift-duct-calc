@@ -102,6 +102,52 @@ struct RequestErrorTests {
     }
   }
 
+  @Test func profileCreationDistinguishesValidationFromRefreshFailure() async throws {
+    try await withApp(configure: { app in
+      app.logger.logLevel = .critical
+      try await configure(
+        app, in: .live(),
+        makeDatabaseClient: { database in
+          var client = DatabaseClient.live(database: database)
+          client.projects.fetch = { _, _ in throw PrivateFailure() }
+          return client
+        })
+      try await app.autoMigrate()
+    }) { app in
+      let database = DatabaseClient.live(database: app.db)
+      let user = try await database.users.create(
+        .init(
+          email: "profile@example.test", password: "super-secret", confirmPassword: "super-secret"))
+      let client = try app.testing()
+      let login = try await client.sendRequest(
+        .POST, "/login", headers: ["Content-Type": "application/x-www-form-urlencoded"],
+        body: .init(string: "email=profile%40example.test&password=super-secret"))
+      let cookie = try #require(login.headers.first(name: .setCookie)).split(separator: ";")[0]
+      let headers: HTTPHeaders = [
+        "Cookie": String(cookie), "HX-Request": "true",
+        "Content-Type": "application/x-www-form-urlencoded",
+      ]
+      let fields =
+        "userID=\(user.id)&lastName=Tester&companyName=HVAC&streetAddress=1+Main&city=Monroe&state=OH&zipCode=45050"
+      let invalid = try await client.sendRequest(
+        .POST, "/signup/profile", headers: headers, body: .init(string: fields + "&firstName="))
+      #expect(invalid.status == .unprocessableEntity)
+      #expect(!invalid.body.string.contains("Change saved"))
+      #expect(try await database.userProfiles.fetch(user.id) == nil)
+
+      let saved = try await client.sendRequest(
+        .POST, "/signup/profile", headers: headers, body: .init(string: fields + "&firstName=Test"))
+      #expect(saved.status == .internalServerError)
+      let failure = try JSONDecoder().decode(
+        PresentationError.self, from: Data(saved.body.readableBytesView))
+      #expect(failure.title == "Change saved")
+      #expect(failure.message.contains("Reload the page before making this change again"))
+      #expect(failure.reference != nil)
+      #expect(!saved.body.string.contains("private uploaded text"))
+      #expect(try await database.userProfiles.fetch(user.id)?.firstName == "Test")
+    }
+  }
+
   @Test func savedChangeSurvivesRefreshFailure() async throws {
     try await withApp(configure: { app in
       app.logger.logLevel = .critical
