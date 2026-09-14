@@ -38,7 +38,8 @@
         const controller = new AbortController(); pending = controller;
         status.textContent = 'Loading templates…';
         try {
-          const response = await fetch(url, { ...options, signal: controller.signal, credentials: 'same-origin' });
+          const response = await fetch(url, { ...options, headers: { ...options.headers, 'X-DuctCalc-Request': 'true' }, signal: controller.signal, credentials: 'same-origin' });
+          await window.ductCalcRequestErrors.check(response);
           if (!response.ok || response.redirected) throw Error('Unable to load templates. Check your connection or sign in again.');
           const page = new DOMParser().parseFromString(await response.text(), 'text/html');
           const failure = page.querySelector('[data-workspace-error]');
@@ -63,8 +64,7 @@
           dialog.scrollTop = 0;
         } catch (error) {
           if (error.name === 'AbortError') return;
-          if (active) status.textContent = error.message;
-          else dialog.querySelector('#path-status').textContent = error.message;
+          window.ductCalcRequestErrors.render(active ? status : dialog.querySelector('#path-status'), error);
         } finally { if (pending === controller) pending = null; }
       }
       host.addEventListener('click', event => {

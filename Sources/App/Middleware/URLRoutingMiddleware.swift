@@ -70,21 +70,42 @@ where
     let route: Router.Output
     do {
       route = try router.parse(requestData)
-    } catch let routingError {
+    } catch {
       do {
         return try await next.respond(to: request)
       } catch {
         // Parser errors may include the submitted body; do not log uploaded documents or form data.
         request.logger.debug("No route matched request")
-
-        guard request.application.environment == .development
-        else { throw error }
-
-        return Response(status: .notFound, body: .init(string: "Routing \(routingError)"))
+        // A malformed form can fail route parsing before it reaches the controller. Recognize
+        // its page without reading the body, including PATCH forms whose URL ends in a record ID.
+        if (error as? any AbortError)?.status == .notFound,
+          [.POST, .PATCH, .PUT].contains(request.method)
+        {
+          var page = requestData
+          page.method = "GET"
+          page.body = nil
+          var parsed = try? router.parse(page)
+          if parsed == nil, let last = page.path.last, UUID(uuidString: String(last)) != nil {
+            page.path.removeLast()
+            parsed = try? router.parse(page)
+          }
+          if case .view(let view) = parsed as? SiteRoute {
+            switch view {
+            case .project, .login, .signup, .user(.profile), .ductulator:
+              request.storage[ViewRouteKey.self] = view
+              throw Abort(.badRequest)
+            default: break
+            }
+          }
+        }
+        throw error
       }
     }
 
     request.storage[MetricFeatureKey.self] = (route as? SiteRoute)?.metricFeature
+    if case .view(let view) = route as? SiteRoute {
+      request.storage[ViewRouteKey.self] = view
+    }
 
     if let middleware = middleware(route) {
       return try await middleware.makeResponder(

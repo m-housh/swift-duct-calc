@@ -1,7 +1,7 @@
 import Foundation
 
-public struct ManualDError: Error {
+public struct ManualDError: LocalizedError {
   public let message: String
 
-  public var localizedDescription: String { message }
+  public var errorDescription: String? { message }
 }

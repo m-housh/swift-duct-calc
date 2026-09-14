@@ -45,9 +45,11 @@ extension AuthClient: TestDependencyKey {
       createAndLogin: { createForm in
         let user = try await database.users.create(createForm)
         request.storage[SignupMetricKey.self] = true
-        _ = try await database.users.login(
-          .init(email: createForm.email, password: createForm.password)
-        )
+        do {
+          _ = try await database.users.login(
+            .init(email: createForm.email, password: createForm.password)
+          )
+        } catch { throw AccountCreatedError(underlying: error) }
         request.auth.login(user)
         request.session.authenticate(user)
         return user

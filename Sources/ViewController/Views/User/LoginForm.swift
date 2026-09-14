@@ -34,6 +34,9 @@ struct LoginForm: HTML, Sendable {
 
       form(
         .method(.post),
+        .hx.post(route: route),
+        .hx.target("body"),
+        .hx.swap(.outerHTML),
         .class("space-y-4")
       ) {
 

@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { test } = require('node:test');
 const { JSDOM } = require('jsdom');
-const script = fs.readFileSync('Public/js/main.js', 'utf8');
+const script = fs.readFileSync('Public/js/request-errors.js', 'utf8') + '\n' + fs.readFileSync('Public/js/main.js', 'utf8');
 const row = (id, name, level) => `<tr data-record="${id}" data-search="${name}" data-level="${level}"><td><button class="row-select">${name}</button></td><td class="number">42</td><td><button class="pencil">Edit</button></td></tr>`;
 const fixture = `<div data-project-id="one"><input id="room-search"><select data-room-level><option value="all">All</option><option value="1">Level 1</option></select><table data-selectable-table="rooms"><tbody>${row('a','Kitchen','1')}${row('b','Living room','1')}${row('c','Bedroom','2')}</tbody></table><p data-no-rooms hidden></p><p data-inspector-empty></p><aside data-room-inspector="a"></aside><aside data-room-inspector="b"></aside><aside data-room-inspector="c"></aside></div>`;
 function setup(t, html = fixture) {
@@ -172,4 +172,96 @@ test('saving one loss preserves other drafts across body refreshes, including em
   doc.body.innerHTML=html('0.03','0.03').replace('data-project-id="one"','data-project-id="two"');
   doc.dispatchEvent(new dom.window.CustomEvent('htmx:afterSwap',{detail:{}}));
   assert.equal(input('b').value,'0.03','drafts stay within their project');
+});
+
+test('server validation keeps the dialog, draft, and file while describing the invalid field', async t => {
+  const {dom,doc}=setup(t,`<div id="app-error"></div><dialog open><form data-success-message="Saved."><input name="staticPressure" value="1" aria-describedby="pressure-help"><span id="pressure-help">Pressure help</span><input type="file" name="file"><button>Save</button></form></dialog>`);
+  const form=doc.querySelector('form'), input=form.elements.staticPressure, file=form.elements.file;
+  const selection=[new dom.window.File(['report'], 'report.pdf')];
+  Object.defineProperty(file,'files',{value:selection});
+  input.value='2';
+  const failure={title:'Could not save equipment',message:'Check these values.',fields:[{name:'staticPressure',message:'Use a pressure below 1 in. w.c.'}]};
+  const xhr={status:422,getResponseHeader:()=> 'application/vnd.ductcalc.error+json',responseText:JSON.stringify(failure)};
+  doc.dispatchEvent(new dom.window.CustomEvent('htmx:beforeRequest',{detail:{xhr,elt:form,target:doc.body}}));
+  doc.dispatchEvent(new dom.window.CustomEvent('htmx:responseError',{detail:{xhr,elt:form}}));
+  await new Promise(resolve=>dom.window.requestAnimationFrame(resolve));
+  assert.equal(doc.querySelector('form'),form);
+  assert.equal(input.value,'2');
+  assert.equal(file.files,selection);
+  assert(doc.querySelector('dialog').open);
+  assert.match(form.querySelector('[data-request-error]').textContent,/Could not save equipment/);
+  assert.equal(doc.getElementById('app-error').textContent,'');
+  assert.equal(input.getAttribute('aria-invalid'),'true');
+  assert.match(input.getAttribute('aria-describedby'),/^pressure-help server-field-error-/);
+  doc.dispatchEvent(new dom.window.CustomEvent('htmx:afterSettle',{detail:{xhr,elt:doc.body}}));
+  assert(!doc.body.textContent.includes('Saved.'));
+  input.value='0.5'; input.dispatchEvent(new dom.window.Event('input',{bubbles:true}));
+  assert.equal(input.getAttribute('aria-describedby'),'pressure-help');
+  assert(!input.hasAttribute('aria-invalid'));
+  assert(!form.querySelector('[data-server-field-error]'));
+});
+
+test('an error belongs to the originating form and never displays a proxy response body', async t => {
+  const {dom,doc}=setup(t,'<form id="first"><button>Save</button></form><dialog open><form id="second"><button>Save</button></form></dialog><div id="app-error"></div>');
+  const form=doc.getElementById('first');
+  const xhr={status:500,getResponseHeader:()=> 'text/html',responseText:'private SQL and uploaded text'};
+  doc.dispatchEvent(new dom.window.CustomEvent('htmx:responseError',{detail:{xhr,elt:form}}));
+  await new Promise(resolve=>dom.window.requestAnimationFrame(resolve));
+  assert(form.querySelector('[data-request-error]'));
+  assert(!doc.getElementById('second').querySelector('[data-request-error]'));
+  assert(!doc.body.textContent.includes('private SQL'));
+});
+
+test('timeouts explain uncertain completion without changing the draft', async t => {
+  const {dom,doc}=setup(t,'<form><input name="name" value="My new room"><button>Save</button></form><div id="app-error"></div>');
+  const form=doc.querySelector('form');
+  doc.dispatchEvent(new dom.window.CustomEvent('htmx:timeout',{detail:{elt:form}}));
+  await new Promise(resolve=>dom.window.requestAnimationFrame(resolve));
+  assert.match(form.querySelector('[data-request-error]').textContent,/could not confirm whether the request completed/);
+  assert.equal(form.elements.name.value,'My new room');
+});
+
+test('application messages are text and diagnostic references remain visible', async t => {
+  const {dom,doc}=setup(t,'<form><button>Save</button></form><div id="app-error"></div>');
+  const failure={title:'Could not save',message:'<img src=x onerror=alert(1)>',reference:'example-reference',fields:[]};
+  const xhr={status:500,getResponseHeader:()=> 'application/vnd.ductcalc.error+json',responseText:JSON.stringify(failure)};
+  doc.dispatchEvent(new dom.window.CustomEvent('htmx:responseError',{detail:{xhr,elt:doc.querySelector('form')}}));
+  await new Promise(resolve=>dom.window.requestAnimationFrame(resolve));
+  assert(!doc.querySelector('img'));
+  assert.match(doc.querySelector('[data-request-error]').textContent,/Error reference: example-reference/);
+});
+
+test('binary PDF errors use the application description', async t => {
+  const {dom,doc}=setup(t,'<button id="export" hx-ext="htmx-download">PDF</button><div id="app-error"></div>');
+  dom.window.TextDecoder=TextDecoder;
+  const failure={title:'Could not export PDF',message:'Add equipment airflow before exporting.',fields:[]};
+  const xhr={status:422,responseType:'arraybuffer',response:new TextEncoder().encode(JSON.stringify(failure)).buffer,getResponseHeader:()=> 'application/vnd.ductcalc.error+json'};
+  Object.defineProperty(xhr,'responseText',{get(){throw Error('Binary response cannot be read as text');}});
+  doc.dispatchEvent(new dom.window.CustomEvent('htmx:responseError',{detail:{xhr,elt:doc.getElementById('export')}}));
+  await new Promise(resolve=>dom.window.requestAnimationFrame(resolve));
+  assert.match(doc.getElementById('app-error').textContent,/Add equipment airflow/);
+});
+
+
+test('fetch errors retain safe recovery links and clear them with the next status', async t => {
+  const {dom,doc} = setup(t, '<p id="status"></p>');
+  const errors = dom.window.ductCalcRequestErrors;
+  let failure;
+  try {
+    await errors.check({ status: 401, headers: { get: () => 'application/vnd.ductcalc.error+json' },
+      json: async () => ({ message: 'Your session has ended.', actions: [
+        { label: 'Sign in in another tab', href: '/login' },
+        { label: 'External', href: '//example.com' },
+        { label: 'Unsafe', href: 'javascript:alert(1)' },
+      ] }) });
+  } catch (error) { failure = error; }
+  errors.render(doc.getElementById('status'), failure);
+  const links = [...doc.querySelectorAll('a')];
+  assert.equal(links.length, 1);
+  assert.equal(links[0].getAttribute('href'), '/login');
+  assert.equal(links[0].target, '_blank');
+  assert.equal(links[0].rel, 'noopener');
+  errors.render(doc.getElementById('status'), 'Saved.');
+  assert.equal(doc.getElementById('status').textContent, 'Saved.');
+  assert.equal(doc.querySelector('a'), null);
 });

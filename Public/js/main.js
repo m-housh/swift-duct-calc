@@ -47,17 +47,18 @@ if (!window.ductCalcFocusInitialized) {
     if (title) document.title = title === 'Duct Calc' ? title : `${title} · Duct Calc`;
   };
   document.addEventListener('DOMContentLoaded', updateTitle);
-  const announce = (message, error = false) => {
+  const announce = (message, error = false, origin = null, actions = []) => {
     let region = document.getElementById(error ? 'app-error' : 'app-status');
-    const dialog = document.querySelector('dialog[open]');
-    if (error && dialog) {
-      region = dialog.querySelector('[data-request-error]');
+    const owner = origin?.isConnected ? origin.closest('form') || origin.closest('dialog') : null;
+    if (error && owner) {
+      region = owner.querySelector('[data-request-error]');
       if (!region) {
         region = document.createElement('div');
         region.dataset.requestError = '';
         region.className = 'request-error';
         region.setAttribute('role', 'alert');
-        dialog.append(region);
+        region.tabIndex = -1;
+        owner.prepend(region);
       }
     }
     if (!region) return;
@@ -66,12 +67,21 @@ if (!window.ductCalcFocusInitialized) {
       if (!region.isConnected) return;
       region.textContent = message;
       if (error) {
+        const content = document.createElement('div');
+        content.className = 'request-error-content';
+        content.textContent = message;
+        region.replaceChildren(content);
+        window.ductCalcRequestErrors.appendActions(content, actions);
         const close = document.createElement('button');
         close.type = 'button';
         close.setAttribute('aria-label', 'Dismiss error');
         close.textContent = '×';
-        close.addEventListener('click', () => region.replaceChildren());
+        close.addEventListener('click', () => {
+          region.replaceChildren();
+          focus(origin?.querySelector('[aria-invalid="true"]') || origin);
+        });
         region.append(close);
+        focus(region);
       }
     });
   };
@@ -101,7 +111,9 @@ if (!window.ductCalcFocusInitialized) {
     const { xhr, elt, target } = event.detail;
     const active = document.activeElement;
     const dialog = elt.closest('dialog');
-    (dialog || document).querySelectorAll('[data-request-error], #app-error').forEach(node => { node.textContent = ''; });
+    const owner = elt.closest('form') || dialog;
+    (owner || document).querySelectorAll(owner ? '[data-request-error]' : '#app-error').forEach(node => { node.textContent = ''; });
+    clearFieldErrors(owner);
     requests.set(xhr, {
       active, dialog, target,
       next: target?.nextElementSibling,
@@ -114,6 +126,7 @@ if (!window.ductCalcFocusInitialized) {
     const state = requests.get(event.detail.xhr);
     if (!state) return;
     requests.delete(event.detail.xhr);
+    if (event.detail.xhr?.status >= 400) return;
     if (state.target?.tagName === 'BODY') updateTitle();
     const error = [...document.querySelectorAll('[data-error-message]')].find(visible);
     const result = document.querySelector('[data-result-summary]');
@@ -134,11 +147,69 @@ if (!window.ductCalcFocusInitialized) {
       }
     }
   });
+  let fieldErrorID = 0;
+  function clearFieldErrors(owner) {
+    owner?.querySelectorAll('[data-server-field-error]').forEach(message => {
+      owner.querySelectorAll('[aria-describedby]').forEach(input => {
+        if (!input.getAttribute('aria-describedby').split(/\s+/).includes(message.id)) return;
+        const ids = input.getAttribute('aria-describedby').split(/\s+/).filter(id => id !== message.id);
+        if (ids.length) input.setAttribute('aria-describedby', ids.join(' '));
+        else input.removeAttribute('aria-describedby');
+        input.removeAttribute('aria-invalid');
+      });
+      message.remove();
+    });
+  }
+  document.addEventListener('input', event => {
+    const input = event.target;
+    const owner = input.closest('form');
+    if (!owner) return;
+    for (const id of (input.getAttribute('aria-describedby') || '').split(/\s+/)) {
+      const message = document.getElementById(id);
+      if (!message?.hasAttribute('data-server-field-error')) continue;
+      message.remove();
+      const ids = input.getAttribute('aria-describedby').split(/\s+/).filter(value => value !== id);
+      if (ids.length) input.setAttribute('aria-describedby', ids.join(' '));
+      else input.removeAttribute('aria-describedby');
+      input.removeAttribute('aria-invalid');
+    }
+  });
   for (const name of ['htmx:responseError', 'htmx:sendError', 'htmx:timeout']) {
-    document.addEventListener(name, event => announce(
-      event.detail?.elt?.closest('[hx-ext~="htmx-download"]')
+    document.addEventListener(name, event => {
+      const {xhr, elt} = event.detail || {};
+      if (elt && !elt.isConnected) return;
+      const form = elt?.closest('form');
+      let failure;
+      if (name === 'htmx:responseError' && xhr?.getResponseHeader?.('Content-Type')?.startsWith('application/vnd.ductcalc.error+json')) {
+        try {
+          const text = xhr.responseType === 'arraybuffer' ? new TextDecoder().decode(xhr.response) : xhr.responseText;
+          failure = JSON.parse(text);
+        } catch { /* A proxy or interrupted response may not contain the application error. */ }
+      }
+      let message = elt?.closest('[hx-ext~="htmx-download"]')
         ? 'PDF export failed. Please try again.'
-        : 'The request could not be completed. Please try again.', true));
+        : name === 'htmx:responseError'
+          ? 'The request could not be completed. Your current form is still on this page.'
+          : 'The connection was interrupted. We could not confirm whether the request completed. Check your connection and the saved result before trying again.';
+      if (typeof failure?.message === 'string') {
+        const fields = Array.isArray(failure.fields) ? failure.fields : [];
+        message = window.ductCalcRequestErrors.message(failure);
+        for (const field of fields) {
+          const input = [...(form?.elements || [])].find(input => input.name === field?.name && input.type !== 'hidden');
+          if (!input || typeof field.message !== 'string') continue;
+          const error = document.createElement('span');
+          error.id = `server-field-error-${++fieldErrorID}`;
+          error.dataset.serverFieldError = '';
+          error.className = 'text-error text-sm';
+          error.textContent = field.message;
+          input.insertAdjacentElement('afterend', error);
+          input.setAttribute('aria-invalid', 'true');
+          input.setAttribute('aria-describedby', [input.getAttribute('aria-describedby'), error.id].filter(Boolean).join(' '));
+        }
+      }
+      announce(message, true, elt, Array.isArray(failure?.actions) ? failure.actions : []);
+      if (xhr) requests.delete(xhr);
+    });
   }
 }
 

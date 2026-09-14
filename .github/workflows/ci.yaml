@@ -80,6 +80,8 @@ jobs:
         exit 1
     - name: Check home page and animated preview
       run: DUCTCALC_HOME_ORIGIN=http://127.0.0.1:58681 npm run test:home-browser
+    - name: Check request errors and retained drafts
+      run: DUCTCALC_ERROR_ORIGIN=http://127.0.0.1:58681 npm run test:request-errors
     - name: Check accessibility and keyboard workflows
       run: npm run test:accessibility
     - name: Check fitting reference and shortcuts

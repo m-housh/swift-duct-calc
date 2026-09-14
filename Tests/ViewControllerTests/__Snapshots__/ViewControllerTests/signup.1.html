@@ -17,13 +17,14 @@
     <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
     <script src="/js/htmx-download.js"></script>
-    <script src="/js/main.js?v=equipment-8"></script>
+    <script src="/js/request-errors.js?v=1"></script>
+    <script src="/js/main.js?v=errors-1"></script>
     <script src="/js/file-import.js?v=1" defer></script>
     <script src="/js/project-import.js?v=1" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="/css/output.css?v=project-import-1">
     <link rel="stylesheet" href="/css/htmx.css">
-    <link rel="stylesheet" href="/css/accessibility.css?v=request-toast-2">
+    <link rel="stylesheet" href="/css/accessibility.css?v=errors-1">
     <link rel="stylesheet" href="/css/project-workspace.css?v=project-import-2">
     <link rel="icon" href="/images/favicon.ico?v=ductcalc-white-3" sizes="16x16 32x32 48x48">
     <link rel="icon" href="/images/favicon-32x32.png?v=ductcalc-white-3" type="image/png" sizes="32x32">
@@ -41,7 +42,7 @@
         <section id="loginForm" class="page-form" aria-labelledby="loginForm-title">
           <h1 id="loginForm-title" class="text-2xl font-bold mb-6">Sign Up</h1>
           <div class="flex flex-wrap items-center justify-between gap-3"><a class="btn btn-link" href="/privacy-policy" target="_blank">Privacy Policy</a></div>
-          <form method="post" class="space-y-4">
+          <form method="post" hx-post="/signup" hx-target="body" hx-swap="outerHTML" class="space-y-4">
             <div>
               <label class="input validator w-full"><span class="label">Email</span>
               <input type="email" placeholder="Email" required name="email" id="email" autocomplete="username" autofocus></label>

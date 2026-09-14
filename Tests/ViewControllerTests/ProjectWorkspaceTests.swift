@@ -137,7 +137,7 @@ struct ProjectWorkspaceTests {
         .init(items: [], metadata: .init(page: 2, per: 25, total: 30))
       }
     } operation: {
-      await SiteRoute.View.ProjectRoute.page(.init(page: 2, per: 25)).renderView(
+      try await SiteRoute.View.ProjectRoute.page(.init(page: 2, per: 25)).renderView(
         on: .test(.project(.page(.init(page: 2, per: 25))))
       ).render()
     }

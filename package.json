@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test:request-errors": "node scripts/check_request_errors_browser.cjs",
     "test:login-form": "node --test scripts/check_login_form.cjs",
     "test:project-workspace": "node --test scripts/check_project_workspace.cjs",
     "test:equipment": "node --test scripts/check_equipment.cjs",

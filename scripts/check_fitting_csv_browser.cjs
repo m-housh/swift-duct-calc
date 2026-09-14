@@ -95,7 +95,8 @@ assert(origin && ['localhost', '127.0.0.1'].includes(new URL(origin).hostname), 
     await page.waitForURL(endpoint);
     await page.getByRole('region', { name: 'Equivalent lengths', exact: true })
       .getByRole('link', { name: 'Edit CSV supply', exact: true }).click();
-    await page.locator('#fitting-path').waitFor({ state: 'visible' });
+    // The dialog can be visible before its deferred script initializes totals.
+    await page.locator('#fitting-path[open]').waitFor({ state: 'visible' });
     const saved = JSON.parse(await page.locator('#fitting-path').getAttribute('data-baseline'));
     assert.deepEqual(saved.groups.map(row => [row.group + row.letter, row.value, row.quantity]), [
       ['1A', 20, 1], ['1A', 35, 2], ['4AG', 31.75, 1], ['8A', 12.25, 1], ['8A', 6, 1],

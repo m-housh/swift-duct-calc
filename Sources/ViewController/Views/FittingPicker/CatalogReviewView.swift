@@ -6,7 +6,7 @@ import ManualDCore
 import Styleguide
 
 extension SiteRoute.View.FittingPickerRoute {
-  func renderCatalogReview(on request: ViewController.Request) async -> AnySendableHTML {
+  func renderCatalogReview(on request: ViewController.Request) async throws -> AnySendableHTML {
     @Dependency(\.fittingClient) var client
     do {
       _ = try request.currentUser()
@@ -18,27 +18,17 @@ extension SiteRoute.View.FittingPickerRoute {
         let catalog = try await client.catalogReview()
         return await request.view { CatalogReviewView(catalog: catalog, group: group) }
       case .saveReview(let payload):
-        guard payload.utf8.count <= 65_536, let data = payload.data(using: .utf8) else {
-          throw PickerError("Invalid review submission.")
-        }
-        let submission = try JSONDecoder().decode(Fitting.CatalogReviewSave.self, from: data)
+        let submission = try Self.decode(Fitting.CatalogReviewSave.self, payload)
         let saved = try await client.saveCatalogReview(submission)
         return div(.data("review-saved", value: saved.version)) {
           "Saved to catalog.json. Newly opened picker groups use these classifications."
         }
       default: throw CatalogReviewError.disabled
       }
-    } catch {
-      request.logger.error("Catalog review: \(error)")
-      return div(.class("p-6"), .init(name: "role", value: "alert")) {
-        if let error = error as? CatalogReviewError {
-          error.description
-        } else if let error = error as? PickerError {
-          error.description
-        } else {
-          "The catalog review could not be loaded or saved. Your selections are still on this page. Check the server log and try again."
-        }
-      }
+    } catch let error as CatalogReviewError {
+      throw PresentationError(title: "Could not update catalog review", message: error.description)
+    } catch let error as PickerError {
+      throw PresentationError(title: "Could not update catalog review", message: error.description)
     }
   }
 }

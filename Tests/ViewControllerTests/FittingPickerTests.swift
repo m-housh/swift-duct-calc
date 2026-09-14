@@ -5,6 +5,7 @@ import FittingClient
 import Foundation
 import Logging
 import ManualDCore
+import Styleguide
 import Testing
 
 @testable import ViewController
@@ -154,10 +155,17 @@ struct FittingPickerTests {
     await withDependencies {
       $0.fittingClient = client
     } operation: {
-      let view = await route.renderView(
-        on: .init(
-          route: .fittings(route), isHtmxRequest: false, logger: .init(label: "picker-test")))
-      return view.render()
+      do {
+        return try await route.renderView(
+          on: .init(
+            route: .fittings(route), isHtmxRequest: false, logger: .init(label: "picker-test"))
+        ).render()
+      } catch {
+        return ErrorMessage(
+          ViewController.present(
+            error, title: "Could not load fitting", reference: "test-reference")
+        ).render()
+      }
     }
   }
 }

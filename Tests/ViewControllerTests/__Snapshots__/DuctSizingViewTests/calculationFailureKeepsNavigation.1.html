@@ -17,13 +17,14 @@
     <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
     <script src="/js/htmx-download.js"></script>
-    <script src="/js/main.js?v=equipment-8"></script>
+    <script src="/js/request-errors.js?v=1"></script>
+    <script src="/js/main.js?v=errors-1"></script>
     <script src="/js/file-import.js?v=1" defer></script>
     <script src="/js/project-import.js?v=1" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="/css/output.css?v=project-import-1">
     <link rel="stylesheet" href="/css/htmx.css">
-    <link rel="stylesheet" href="/css/accessibility.css?v=request-toast-2">
+    <link rel="stylesheet" href="/css/accessibility.css?v=errors-1">
     <link rel="stylesheet" href="/css/project-workspace.css?v=project-import-2">
     <link rel="icon" href="/images/favicon.ico?v=ductcalc-white-3" sizes="16x16 32x32 48x48">
     <link rel="icon" href="/images/favicon-32x32.png?v=ductcalc-white-3" type="image/png" sizes="32x32">
@@ -67,7 +68,7 @@
           </nav>
           <div class="project-layout">
             <aside class="project-navigation">
-              <button type="button" class="project-switch" data-open-dialog="recentProjects" aria-label="Switch project"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span><strong>Project</strong><small>Switch project</small></span><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg></button>
+              <button type="button" class="project-switch" data-open-dialog="recentProjects" aria-label="Switch project"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span><strong>Testy McTestface</strong><small>1234 Sesame Street</small></span><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg></button>
               <nav aria-label="Project">
                 <ul id="project-sidebar">
                   <li><a href="/projects/00000000-0000-0000-0000-000000000000" title="Project, Ctrl+Alt+1" aria-keyshortcuts="Control+Alt+1"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span class="nav-label">Project</span></a></li>
@@ -81,12 +82,10 @@
               All projects<a class="all-projects-link" href="/projects"></a>
             </aside>
             <div class="project-content" id="project-content" tabindex="-1">
-              <div class="space-y-4">
-                <h1 class="text-3xl font-bold">Duct Sizes</h1>
-                <div role="alert" tabindex="-1" data-error-message="true">
-                  <h1 class="text-xl font-bold text-error">Oops: Error</h1>
-                  <p>Unable to calculate duct sizes.</p>
-                </div>
+              <div role="alert" tabindex="-1" class="error-message" data-error-message="true">
+                <h2 class="font-bold text-error">Could not load duct sizes</h2>
+                <p>The request could not be completed. Use the error reference when contacting support.</p>
+                <p class="text-sm">Error reference: test-reference</p>
               </div>
             </div>
           </div>

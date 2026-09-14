@@ -27,7 +27,7 @@ struct GroupBrowserSubmission: Decodable {
 extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
   func renderPathEditor(
     on request: ViewController.Request, projectID: Project.ID, duplicating: Bool = false
-  ) async
+  ) async throws
     -> AnySendableHTML
   {
     @Dependency(\.database) var database
@@ -182,16 +182,9 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
       default: throw PickerError("Unknown path operation.")
       }
     } catch let error as PickerError {
-      return p(.class("fp-error"), .init(name: "role", value: "alert")) { error.description }
-    } catch let error as PathConflictError {
-      return p(.class("fp-error"), .init(name: "role", value: "alert")) { error.message }
+      throw PresentationError(title: "Could not complete path request", message: error.description)
     } catch let error as FittingPathError {
-      return p(.class("fp-error"), .init(name: "role", value: "alert")) { error.description }
-    } catch {
-      request.logger.error("Fitting path: \(error)")
-      return p(.class("fp-error"), .init(name: "role", value: "alert")) {
-        "The path could not be saved or loaded. Your draft has been kept. Please try again."
-      }
+      throw PresentationError(title: "Could not save path", message: error.description)
     }
   }
 }

@@ -16,7 +16,7 @@ private func allFittings() async throws -> [TemplateFitting.Definition] {
 }
 
 extension SiteRoute.View.UserRoute.PathTemplateRoute {
-  func renderView(on request: ViewController.Request) async -> AnySendableHTML {
+  func renderView(on request: ViewController.Request) async throws -> AnySendableHTML {
     @Dependency(\.database.pathTemplates) var templates
     @Dependency(\.projectClient) var project
     @Dependency(\.templateFittingClient) var fittings
@@ -97,24 +97,12 @@ extension SiteRoute.View.UserRoute.PathTemplateRoute {
         case .unresolved(let message): return workspaceError(message)
         }
       }
-    } catch {
-      let failure = workspaceError(error)
-      switch self {
-      case .index, .new, .edit, .importing:
-        return await request.view {
-          div(.class("max-w-5xl mx-auto p-4 space-y-4")) {
-            failure
-            a(.class("link"), .href("/path-templates")) { "Back to templates" }
-          }
-        }
-      default: return failure
-      }
-    }
+    } catch { throw workspaceFailure(error) }
   }
 }
 
 extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute.GuidedRoute {
-  func renderView(on request: ViewController.Request, projectID: Project.ID) async
+  func renderView(on request: ViewController.Request, projectID: Project.ID) async throws
     -> AnySendableHTML
   {
     @Dependency(\.database) var database
@@ -140,22 +128,13 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute.GuidedRoute {
         return try await workspace(
           on: request, projectID: projectID, template: template, draft: draft)
       case .edit(let id):
-        return await SiteRoute.View.ProjectRoute.EquivalentLengthRoute.editor(id)
+        return try await SiteRoute.View.ProjectRoute.EquivalentLengthRoute.editor(id)
           .renderPathEditor(on: request, projectID: projectID)
       case .save(let form):
         _ = try await project.saveGuidedPath(userID: user.id, projectID: projectID, request: form)
         return div(.data("redirect", value: effectiveLengthsURL(projectID))) { "Path saved." }
       }
-    } catch {
-      let failure = workspaceError(error)
-      if case .save = self { return failure }
-      return await request.view {
-        div(.class("max-w-5xl mx-auto p-4 space-y-4")) {
-          failure
-          a(.class("link"), .href(effectiveLengthsURL(projectID))) { "Back to paths" }
-        }
-      }
-    }
+    } catch { throw workspaceFailure(error) }
   }
 
   private func workspace(
@@ -181,30 +160,24 @@ private func workspaceError(_ message: String) -> some HTML & Sendable {
   div(.class("alert alert-error"), .data("workspace-error", value: message)) { message }
 }
 
-private func workspaceError(_ error: any Error) -> some HTML & Sendable {
-  if let error = error as? ValidationError { return workspaceError(error.message) }
-  if error is NotFoundError {
-    return workspaceError("This project, path, or template is unavailable.")
+private func workspaceFailure(_ error: any Error) -> any Error {
+  func failure(_ message: String) -> PresentationError {
+    .init(title: "Could not complete template request", message: message)
   }
+  if let error = error as? ValidationError { return failure(error.message) }
   if error is GuidedPath.InitialValuesError {
-    return workspaceError("Check the path name and straight duct lengths.")
-  }
-  if let error = error as? PathConflictError { return workspaceError(error.message) }
-  if error is PathTemplateConflictError {
-    return workspaceError(
-      "This template changed in another tab. Your edits are still here; duplicate them or reload the saved template."
-    )
+    return failure("Check the path name and straight duct lengths.")
   }
   if let error = error as? PathTemplate.ConfigurationError, error == .unsupportedVersion {
-    return workspaceError(
+    return failure(
       "This template file format or version is not supported. Nothing was imported.")
   }
   if let error = error as? TemplateFittingClient.TemplateValidationError {
-    return workspaceError(error.message)
+    return failure(error.message)
   }
   if error is PathTemplate.ConfigurationError {
-    return workspaceError(
+    return failure(
       "Check section names, fitting choices, defaults, and supply/return compatibility.")
   }
-  return workspaceError("Unable to save or load this item. Your changes are still here; try again.")
+  return error
 }

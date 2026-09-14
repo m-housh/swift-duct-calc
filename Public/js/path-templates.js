@@ -220,7 +220,7 @@
         inputs.downstreamBranches._0 = value === '' ? null : Number(value);
     }
     function status() {
-      return `<p role="status" id="workspace-status" class="${message ? 'alert alert-warning' : ''}">${esc(message)}</p>`;
+      return `<p role="status" id="workspace-status" class="${message ? 'alert alert-warning' : ''}">${esc(message.message || message)}</p>`;
     }
     function templateURL(url) {
       const target = new URL(url, location.origin);
@@ -349,6 +349,7 @@
     function render(focus = false) {
       const fileInput = mode === 'import' ? root.querySelector('#import-template-file') : null;
       root.innerHTML = mode === 'editor' ? editor() : mode === 'import' ? importView() : flow();
+      window.ductCalcRequestErrors.appendActions(root.querySelector('#workspace-status'), message.actions);
       if (fileInput) root.querySelector('#import-template-file').replaceWith(fileInput);
       if (focus) focusNext = true;
     }
@@ -356,7 +357,7 @@
       message = text;
       const target = root.querySelector('#workspace-status');
       if (target) {
-        target.textContent = text;
+        window.ductCalcRequestErrors.render(target, text);
         target.className = text ? 'alert alert-warning' : '';
       }
     }
@@ -364,9 +365,10 @@
       const response = await fetch(url, {
         method,
         credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'X-DuctCalc-Request': 'true' },
         ...(body === undefined ? {} : { body: JSON.stringify(body) }),
       });
+      await window.ductCalcRequestErrors.check(response, invalidMessage);
       const document = new DOMParser().parseFromString(await response.text(), 'text/html');
       const error = document.querySelector('[data-workspace-error]');
       if (error) throw new Error(error.dataset.workspaceError);
@@ -745,8 +747,8 @@
     }
     function showError(error) {
       const detail = root.querySelector('#detail-error');
-      if (detail) detail.textContent = error.message;
-      else notify(error.message);
+      if (detail) window.ductCalcRequestErrors.render(detail, error);
+      else notify(error);
     }
     async function updateQuantity(step, id, value) {
       const n = Number(value),

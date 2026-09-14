@@ -25,7 +25,7 @@
     root.querySelectorAll('[name="shape-preference"]').forEach(input => { input.checked = input.value === shapePreference; });
     const pathType = () => $('#path-type').value;
     const number = value => new Intl.NumberFormat(undefined, { maximumFractionDigits: 12 }).format(value);
-    const status = text => { $('#path-status').textContent = text; };
+    const status = message => window.ductCalcRequestErrors.render($('#path-status'), message);
     const parseStraight = () => {
       const text = $('#path-straight').value.trim();
       if (!text) return [];
@@ -34,7 +34,8 @@
       return values.map(Number);
     };
     async function post(url, payload, signal) {
-      const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ payload: JSON.stringify(payload) }), signal });
+      const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-DuctCalc-Request': 'true' }, body: new URLSearchParams({ payload: JSON.stringify(payload) }), signal });
+      await window.ductCalcRequestErrors.check(response);
       if (!response.ok || response.redirected) throw Error('Request failed. Check your connection or sign in again. Your draft is still on this page.');
       return response.text();
     }
@@ -74,7 +75,7 @@
           $('#path-rows').innerHTML = html;
           if (focus) [...$('#path-rows').querySelectorAll('input,button')].find(node => node.dataset[focus] === value)?.focus({ preventScroll: true });
         }
-      } catch (error) { status(error.message); }
+      } catch (error) { status(error); }
     }
     function showGroups() {
       $('#group-selectors').hidden = false; $('#fitting-browser').hidden = true; $('#picker-dialog').scrollTop = 0;
@@ -108,7 +109,7 @@
       try {
         const html = await post('/fittings/evaluate', { pathType: pathType(), groupID: Number(form.dataset.group), fittingID: form.dataset.id, fields: formFields(form) }, controller.signal);
         if (requests.get(configuration) === controller && configuration.isConnected) configuration.querySelector('.fp-result').innerHTML = html;
-      } catch (error) { if (error.name !== 'AbortError') configuration.querySelector('.fp-result').textContent = error.message; }
+      } catch (error) { if (error.name !== 'AbortError') window.ductCalcRequestErrors.render(configuration.querySelector('.fp-result'), error); }
     }
     async function reconfigure(configuration, fields) {
       const form = configuration.querySelector('.fp-config-form'); invalidate(configuration);
@@ -120,7 +121,7 @@
         const next = template.content.querySelector('.fitting-configuration');
         if (!next) { configuration.querySelector('.fp-result').innerHTML = html; return; }
         configuration.replaceWith(next); bindConfiguration(next); evaluate(next);
-      } catch (error) { if (error.name !== 'AbortError') configuration.querySelector('.fp-result').textContent = error.message; }
+      } catch (error) { if (error.name !== 'AbortError') window.ductCalcRequestErrors.render(configuration.querySelector('.fp-result'), error); }
     }
     function bindConfiguration(configuration, initial = false) {
       const form = configuration.querySelector('.fp-config-form'); if (!form) return;
@@ -214,7 +215,7 @@
         target.querySelectorAll('.fitting-configuration').forEach(configuration => bindConfiguration(configuration, true));
         sortFittings();
         $('#catalog-search')?.addEventListener('input', filterFittings);
-      } catch (error) { target.textContent = error.message; }
+      } catch (error) { window.ductCalcRequestErrors.render(target, error); }
     }
     function openReference(entry) {
       const form = $('#reference-form'); form.elements.code.value = entry?.row.sourceCode || ''; form.elements.length.value = entry?.row.feet ?? '';
@@ -234,7 +235,7 @@
         url.search = `?draft=${encodeURIComponent(JSON.stringify(draft))}`;
         status('Loading templates…');
         templateModal.open(url.href);
-      } catch (error) { status(error.message); $('#path-straight').focus(); }
+      } catch (error) { status(error); $('#path-straight').focus(); }
     });
     root.addEventListener('cancel', event => {
       if (event.target !== root) return;
@@ -257,7 +258,7 @@
           if (!html.includes('data-favorite-saved')) throw Error('Favorite could not be saved. Please try again.');
           if (selected) favorites.add(id); else favorites.delete(id);
           syncFavorites(button.closest('[data-catalog-id]'));
-        } catch (error) { $('#picker-status').textContent = error.message; }
+        } catch (error) { window.ductCalcRequestErrors.render($('#picker-status'), error); }
         finally {
           favoriteRequests.delete(id); updateFavoriteButtons();
           if (hadFocus && [document.body, root, $('#picker-dialog')].includes(document.activeElement)) {
@@ -286,12 +287,12 @@
           if (currentEdit !== editRequest || !$('#edit-dialog').open) return;
           target.innerHTML = html;
           const configuration = target.querySelector('.fitting-configuration'); if (configuration) { bindConfiguration(configuration); evaluate(configuration); }
-        } catch (error) { target.textContent = error.message; } return;
+        } catch (error) { window.ductCalcRequestErrors.render(target, error); } return;
       }
       if (button.id === 'quick-entry-open') { editing = null; openReference(); return; }
       if (button.id === 'save-path' && !busy) {
         let straightLengths;
-        try { straightLengths = parseStraight(); } catch (error) { status(error.message); $('#path-straight').reportValidity(); return; }
+        try { straightLengths = parseStraight(); } catch (error) { status(error); $('#path-straight').reportValidity(); return; }
         if (!$('#path-name').reportValidity()) return;
         busy = true; button.disabled = true; status('Saving path…'); root.inert = true;
         try {
@@ -300,7 +301,7 @@
           const saved = template.content.querySelector('[data-saved-path]');
           if (saved) { dirty = false; location.assign(endpoint); }
           else $('#path-status').replaceChildren(template.content);
-        } catch (error) { status(error.message); }
+        } catch (error) { status(error); }
         finally { busy = false; root.inert = false; button.disabled = false; }
       }
     });
@@ -353,7 +354,7 @@
         catch { throw Error('Use a UTF-8 CSV file.'); }
         importResult.textContent = 'File loaded. Review or edit the CSV, then preview it.';
       } catch (error) {
-        if (current === importRequest) importResult.textContent = error.message;
+        if (current === importRequest) window.ductCalcRequestErrors.render(importResult, error);
       } finally {
         if (current === importRequest) importSubmit.disabled = false;
         importFile.value = '';
@@ -374,7 +375,7 @@
         if (signature !== draftSignature()) throw Error('The path changed. Preview the CSV again.');
         importDraft = signature; importResult.innerHTML = html;
       } catch (error) {
-        if (current === importRequest && error.name !== 'AbortError') importResult.textContent = error.message;
+        if (current === importRequest && error.name !== 'AbortError') window.ductCalcRequestErrors.render(importResult, error);
       } finally { if (current === importRequest) importSubmit.disabled = false; }
     });
     importResult.addEventListener('click', async event => {
@@ -403,7 +404,7 @@
       try {
         const html = await post('/fittings/reference', { pathType: pathType(), ...Object.fromEntries(new FormData(event.target)) }, controller.signal);
         if (referenceController === controller) $('#reference-result').innerHTML = html;
-      } catch (error) { if (error.name !== 'AbortError') $('#reference-result').textContent = error.message; }
+      } catch (error) { if (error.name !== 'AbortError') window.ductCalcRequestErrors.render($('#reference-result'), error); }
     });
     window.addEventListener('beforeunload', event => { if (dirty) { event.preventDefault(); event.returnValue = ''; } });
     showGroups(); updateTotals(); root.showModal(); $('#path-name').focus();

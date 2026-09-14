@@ -47,7 +47,6 @@
   position:fixed; top:16px; right:16px; z-index:10000;
   display:flex; align-items:center; gap:16px;
   width:min(480px,calc(100vw - 32px)); padding:16px;
-  background:var(--color-base-100); color:var(--color-base-content);
   border:1px solid var(--color-error); border-left-width:4px; border-radius:8px;
   box-shadow:0 8px 30px #0004;
 }
@@ -56,6 +55,8 @@
   border:0; border-radius:4px; background:transparent; color:inherit;
   font-size:24px; cursor:pointer;
 }
+.request-error-content { min-width:0; overflow-wrap:anywhere; white-space:pre-line; }
+.request-error-content > a { display:block; margin-top:.5rem; }
 /* Labels retain full contrast; placeholders share a muted style across all forms. */
 .label, .input .label, .select .label, .table thead, .table tfoot { color:inherit; opacity:1; }
 /* Keep 85% foreground so Retro placeholders retain 4.5:1 contrast, including fitting dialogs. */
@@ -87,3 +88,18 @@ input::placeholder, textarea::placeholder { color:color-mix(in srgb,currentColor
   .account-menu { position:static; }
   .account-menu > ul { left:auto; right:0; max-width:100%; }
 }
+
+/* Form errors remain beside the attempted action and preserve the dialog layout. */
+form .request-error:not(:empty), dialog .request-error:not(:empty) {
+  position:static; width:100%; margin-bottom:1rem; white-space:pre-line;
+}
+.request-error:not(:empty), .error-message {
+  background:color-mix(in srgb,var(--color-error) 18%,var(--color-base-100));
+  color:var(--color-base-content);
+}
+/* Alert focus announces the message; interactive controls retain their own focus rings. */
+.request-error:focus, .error-message:focus { outline:none; }
+.error-message { border:1px solid var(--color-error); border-left-width:4px; border-radius:8px; padding:1rem; }
+.error-message h2 { color:inherit; }
+.error-message p, .error-message ul { margin-top:.5rem; }
+.error-message ul { list-style:disc; padding-left:1.5rem; }
