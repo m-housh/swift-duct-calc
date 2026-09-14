@@ -69,7 +69,7 @@ public struct AirFilter: Codable, Equatable, Identifiable, Sendable {
   /// Interpolates chart points, extending the end segments outside the chart; rounds up to 0.01.
   public func pressureDrop(at airflow: Int) -> Double {
     guard airflow > 0, points.count >= 2 else { return 0 }
-    let chart = [Point(airflow: 0, pressureDrop: 0)] + points
+    let chart = points
     let upper = chart.firstIndex { $0.airflow >= airflow } ?? chart.count - 1
     let low = chart[max(1, upper) - 1]
     let high = chart[max(1, upper)]

@@ -23,13 +23,13 @@ public struct AprilaireFilter: Equatable, Identifiable, Sendable {
 
   /// Pressure drop at `cfm`, rounded up to 0.01 in. w.c. so it never understates the chart.
   ///
-  /// Airflow between chart columns is interpolated, below the first column it scales from zero,
-  /// and above `maxCFM` it follows the last chart segment.
+  /// Airflow between chart columns is interpolated; outside the chart it extends the end segments.
   public func pressureDrop(at cfm: Int) -> Double {
+    guard cfm > 0 else { return 0 }
     let chart = pressureDrops.enumerated().map {
       (cfm: firstCFM + $0.offset * Self.step, drop: $0.element)
     }
-    let points = [(cfm: 0, drop: 0.0)] + chart
+    let points = chart
     let upper = points.firstIndex { $0.cfm >= cfm }.map { max($0, 1) } ?? points.count - 1
     let (low, high) = (points[upper - 1], points[upper])
     let drop =

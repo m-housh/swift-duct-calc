@@ -148,6 +148,22 @@ struct FilterAccountTests {
         $0.components(projectID: UUID(0)).allSatisfy { $0.name != "filter" }
       })
   }
+  @Test func belowChartAirflowExtendsTheFirstSuppliedSegment() {
+    let filter = AirFilter(
+      id: "custom", manufacturer: "Example", model: "Media",
+      points: [.init(airflow: 1000, pressureDrop: 0.10), .init(airflow: 2000, pressureDrop: 0.11)])
+    #expect(filter.pressureDrop(at: 0) == 0)
+    #expect(filter.pressureDrop(at: 500) == 0.10)
+    #expect(filter.pressureDrop(at: 1000) == 0.10)
+    #expect(filter.pressureDrop(at: 1500) == 0.11)
+    #expect(filter.pressureDrop(at: 2500) == 0.12)
+    #expect(filter.additionalPressureDrop(at: 500, allowance: 0.03) == 0.07)
+    let library = FilterLibrary(
+      filters: [filter], favorites: [filter.id], maximumPressureDrop: 0.08)
+    #expect(library.suggestion(at: 500) == nil)
+    #expect(AprilaireFilter.named("913")?.pressureDrop(at: 200) == 0.01)
+    #expect(AirFilter.defaults.first { $0.id == "913" }?.pressureDrop(at: 200) == 0.01)
+  }
   @Test func favoriteOrderingAndRestoreConflicts() throws {
     var library = FilterLibrary(favorites: ["213", "513"])
     try library.apply(
