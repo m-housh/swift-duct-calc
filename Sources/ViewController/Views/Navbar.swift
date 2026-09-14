@@ -78,6 +78,8 @@ struct Navbar: HTML, Sendable {
                 }.attributes(
                   .init(name: "aria-keyshortcuts", value: "Control+Alt+P"))
               }
+              li { a(.href("/filters")) { "Filter library" } }
+              li { a(.href("/filters?tab=preferences")) { "Design preferences" } }
               li {
                 form(.action(SiteRoute.View.router.path(for: .user(.logout))), .method(.get)) {
                   button(.type(.submit)) { "Logout" }

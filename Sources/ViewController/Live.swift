@@ -524,8 +524,21 @@ extension SiteRoute.View.ProjectRoute.FrictionRateRoute {
     case .index:
       return try await view(on: request, projectID: projectID)
     case .applyTemplate(let template):
-      return try await view(on: request, projectID: projectID) {
+      return try await view(
+        on: request, projectID: projectID, filterStep: template == .shared ? nil : template
+      ) {
         try await database.componentLosses.applyTemplate(projectID, template)
+      }
+    case .filterResults(let allowance):
+      let user = try request.currentUser()
+      let value = try AirFilter.Selection(model: "", allowance: allowance).validatedAllowance()
+      return FilterLookupResults(
+        library: try await database.filters.fetch(user.id),
+        airflow: try await database.equipment.fetch(projectID)?.largerAirflow,
+        allowance: value)
+    case .applyFilter(let selection):
+      return try await view(on: request, projectID: projectID) {
+        try await database.filters.apply(try request.currentUser().id, projectID, selection)
       }
     }
   }
@@ -533,6 +546,7 @@ extension SiteRoute.View.ProjectRoute.FrictionRateRoute {
   func view(
     on request: ViewController.Request,
     projectID: Project.ID,
+    filterStep: FrictionRateTemplate? = nil,
     catching: (@Sendable () async throws -> Void)? = nil
   ) async throws -> AnySendableHTML {
 
@@ -542,6 +556,8 @@ extension SiteRoute.View.ProjectRoute.FrictionRateRoute {
     return try await afterMutation(catching) {
       return try await request.view(projectID: projectID) {
         try await loadView {
+          let library = try await database.filters.fetch(try request.currentUser().id)
+          let allowance = try await database.filters.allowance(projectID)
           let equipment = try await database.equipment.fetch(projectID)
           let componentLosses = try await database.componentLosses.fetch(projectID)
           let lengths = try await database.equivalentLengths.fetchMax(projectID)
@@ -550,19 +566,21 @@ extension SiteRoute.View.ProjectRoute.FrictionRateRoute {
             try await database.projects.getCompletedSteps(projectID),
             componentLosses,
             lengths,
-            equipment?.staticPressure,
+            equipment, library, allowance,
             try await manualD.frictionRate(
               equipmentInfo: equipment,
               componentLosses: componentLosses,
               effectiveLength: lengths
             )
           )
-        } onSuccess: { (steps, losses, lengths, blowerStatic, frictionRate) in
+        } onSuccess: { (steps, losses, lengths, equipment, library, allowance, frictionRate) in
           ProjectView(projectID: projectID, activeTab: .frictionRate, completedSteps: steps) {
             FrictionRateView(
               componentLosses: losses,
               equivalentLengths: lengths,
-              frictionRate: frictionRate, blowerStatic: blowerStatic
+              frictionRate: frictionRate, blowerStatic: equipment?.staticPressure,
+              airflow: equipment?.largerAirflow, filterLibrary: library,
+              filterAllowance: allowance, filterStep: filterStep
             )
           }
 
@@ -615,14 +633,17 @@ extension SiteRoute.View.ProjectRoute.ComponentLossRoute {
           return (
             try await database.projects.getCompletedSteps(projectID),
             try await projectClient.frictionRate(projectID),
-            try await database.equipment.fetch(projectID)?.staticPressure
+            try await database.equipment.fetch(projectID),
+            try await database.filters.fetch(try request.currentUser().id),
+            try await database.filters.allowance(projectID)
           )
-        } onSuccess: { (steps, response, blowerStatic) in
+        } onSuccess: { (steps, response, equipment, library, allowance) in
           ProjectView(projectID: projectID, activeTab: .frictionRate, completedSteps: steps) {
             FrictionRateView(
               componentLosses: response.componentLosses,
               equivalentLengths: response.equivalentLengths,
-              frictionRate: response.frictionRate, blowerStatic: blowerStatic
+              frictionRate: response.frictionRate, blowerStatic: equipment?.staticPressure,
+              airflow: equipment?.largerAirflow, filterLibrary: library, filterAllowance: allowance
             )
           }
 
@@ -841,6 +862,8 @@ extension SiteRoute.View.UserRoute {
     case .profile(let route):
       return try await route.renderView(on: request)
     case .templates(let route):
+      return try await route.renderView(on: request)
+    case .filters(let route):
       return try await route.renderView(on: request)
     }
   }

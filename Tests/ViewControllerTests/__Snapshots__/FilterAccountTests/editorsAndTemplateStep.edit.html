@@ -1,0 +1,140 @@
+<dialog id="filter-editor" class="modal" aria-labelledby="filter-editor-title">
+  <div class="modal-box">
+    <h2 id="filter-editor-title" class="text-2xl font-bold mb-6 pe-10">Edit filter</h2>
+    <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Edit filter" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    <form id="filter-editor-form" class="space-y-4" data-filter-draft="{&quot;description&quot;:&quot;MERV 16 · Allergy &amp; Asthma&quot;,&quot;id&quot;:&quot;216&quot;,&quot;manufacturer&quot;:&quot;Aprilaire&quot;,&quot;model&quot;:&quot;216&quot;,&quot;points&quot;:[{&quot;airflow&quot;:400,&quot;pressureDrop&quot;:0.06},{&quot;airflow&quot;:600,&quot;pressureDrop&quot;:0.09},{&quot;airflow&quot;:800,&quot;pressureDrop&quot;:0.13},{&quot;airflow&quot;:1000,&quot;pressureDrop&quot;:0.17},{&quot;airflow&quot;:1200,&quot;pressureDrop&quot;:0.23},{&quot;airflow&quot;:1400,&quot;pressureDrop&quot;:0.29},{&quot;airflow&quot;:1600,&quot;pressureDrop&quot;:0.36}],&quot;source&quot;:&quot;216&quot;}" data-filter-revision="00000000-0000-0000-0000-000000000000">
+      <p data-filter-editor-error="" role="alert"></p>
+      <div class="rounded-box bg-base-200 p-3 space-y-2">
+        <p>Shipped with DuctCalc from Aprilaire's chart.</p>
+        <button type="button" class="btn btn-sm btn-ghost" data-filter-reset="{&quot;description&quot;:&quot;MERV 16 · Allergy &amp; Asthma&quot;,&quot;id&quot;:&quot;216&quot;,&quot;manufacturer&quot;:&quot;Aprilaire&quot;,&quot;model&quot;:&quot;216&quot;,&quot;points&quot;:[{&quot;airflow&quot;:400,&quot;pressureDrop&quot;:0.06},{&quot;airflow&quot;:600,&quot;pressureDrop&quot;:0.09},{&quot;airflow&quot;:800,&quot;pressureDrop&quot;:0.13},{&quot;airflow&quot;:1000,&quot;pressureDrop&quot;:0.17},{&quot;airflow&quot;:1200,&quot;pressureDrop&quot;:0.23},{&quot;airflow&quot;:1400,&quot;pressureDrop&quot;:0.29},{&quot;airflow&quot;:1600,&quot;pressureDrop&quot;:0.36}],&quot;source&quot;:&quot;216&quot;}">Reset to Aprilaire chart</button>
+      </div><label class="flex items-center gap-2">
+      <input type="checkbox" class="checkbox checkbox-sm" name="favorite">
+      Add to favorite filters</label>
+      <div class="grid gap-3 sm:grid-cols-2">
+        <label class="grid gap-1"><span class="font-semibold">Manufacturer</span>
+        <input name="manufacturer" class="input w-full" value="Aprilaire" maxlength="100" placeholder="e.g. Honeywell">
+        Model or name</label><label class="grid gap-1"><span class="font-semibold"></span>
+        <input name="model" class="input w-full" value="216" required maxlength="100">
+        Description, optional</label><label class="grid gap-1 sm:col-span-2"><span class="font-semibold"></span>
+        <input name="description" class="input w-full" value="MERV 16 · Allergy &amp; Asthma" maxlength="300" placeholder="e.g. MERV 13 · 20 x 25 x 4 in."></label>
+      </div>
+      <h3 id="filter-chart-label" class="font-semibold">Pressure drop chart</h3>
+      <p class="muted text-sm">The highest airflow is the filter's maximum recommended airflow. Values between points are interpolated.</p>
+      <div class="table-scroll filter-chart" tabindex="0" role="region" aria-labelledby="filter-chart-label">
+        <table class="table project-table">
+          <thead>
+            <tr>
+              <th>Airflow · CFM</th>
+              <th>Pressure drop · in. w.c.</th>
+              <th><span class="sr-only">Actions</span></th>
+            </tr>
+          </thead>
+          <tbody data-filter-points="">
+            <tr>
+              <td>
+                <input type="number" class="input input-sm" name="pointAirflow" min="1" max="100000" step="1" required value="400" aria-label="Airflow for point 1">
+              </td>
+              <td>
+                <input type="number" class="input input-sm" name="pointDrop" min="0.001" max="1" step="any" required value="0.06" aria-label="Pressure drop for point 1">
+              </td>
+              <td>
+                <button type="button" class="btn btn-ghost btn-sm" data-filter-remove-point="" aria-label="Remove point 1"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input type="number" class="input input-sm" name="pointAirflow" min="1" max="100000" step="1" required value="600" aria-label="Airflow for point 2">
+              </td>
+              <td>
+                <input type="number" class="input input-sm" name="pointDrop" min="0.001" max="1" step="any" required value="0.09" aria-label="Pressure drop for point 2">
+              </td>
+              <td>
+                <button type="button" class="btn btn-ghost btn-sm" data-filter-remove-point="" aria-label="Remove point 2"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input type="number" class="input input-sm" name="pointAirflow" min="1" max="100000" step="1" required value="800" aria-label="Airflow for point 3">
+              </td>
+              <td>
+                <input type="number" class="input input-sm" name="pointDrop" min="0.001" max="1" step="any" required value="0.13" aria-label="Pressure drop for point 3">
+              </td>
+              <td>
+                <button type="button" class="btn btn-ghost btn-sm" data-filter-remove-point="" aria-label="Remove point 3"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input type="number" class="input input-sm" name="pointAirflow" min="1" max="100000" step="1" required value="1000" aria-label="Airflow for point 4">
+              </td>
+              <td>
+                <input type="number" class="input input-sm" name="pointDrop" min="0.001" max="1" step="any" required value="0.17" aria-label="Pressure drop for point 4">
+              </td>
+              <td>
+                <button type="button" class="btn btn-ghost btn-sm" data-filter-remove-point="" aria-label="Remove point 4"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input type="number" class="input input-sm" name="pointAirflow" min="1" max="100000" step="1" required value="1200" aria-label="Airflow for point 5">
+              </td>
+              <td>
+                <input type="number" class="input input-sm" name="pointDrop" min="0.001" max="1" step="any" required value="0.23" aria-label="Pressure drop for point 5">
+              </td>
+              <td>
+                <button type="button" class="btn btn-ghost btn-sm" data-filter-remove-point="" aria-label="Remove point 5"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input type="number" class="input input-sm" name="pointAirflow" min="1" max="100000" step="1" required value="1400" aria-label="Airflow for point 6">
+              </td>
+              <td>
+                <input type="number" class="input input-sm" name="pointDrop" min="0.001" max="1" step="any" required value="0.29" aria-label="Pressure drop for point 6">
+              </td>
+              <td>
+                <button type="button" class="btn btn-ghost btn-sm" data-filter-remove-point="" aria-label="Remove point 6"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input type="number" class="input input-sm" name="pointAirflow" min="1" max="100000" step="1" required value="1600" aria-label="Airflow for point 7">
+              </td>
+              <td>
+                <input type="number" class="input input-sm" name="pointDrop" min="0.001" max="1" step="any" required value="0.36" aria-label="Pressure drop for point 7">
+              </td>
+              <td>
+                <button type="button" class="btn btn-ghost btn-sm" data-filter-remove-point="" aria-label="Remove point 7"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button type="button" class="btn btn-outline btn-sm" data-filter-add-point=""><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add airflow point</button>
+      <details class="rounded-box border border-base-300 p-3">
+        <summary class="font-semibold">Fill from a chart row</summary>
+        <div class="grid gap-3 mt-3">
+          <p class="muted text-sm">For evenly spaced airflow columns. Filling replaces the points above.</p>
+          First airflow · CFM<label class="grid gap-1"><span></span>
+          <input name="firstAirflow" type="number" class="input w-full" value="400" min="1" max="100000" step="1">
+          Step · CFM</label><label class="grid gap-1"><span></span>
+          <input name="airflowStep" type="number" class="input w-full" value="200" min="1" max="100000" step="1">
+          Pressure drops, in order</label><label class="grid gap-1"><span></span>
+          <textarea name="chartValues" class="textarea w-full" rows="2" placeholder="0.06 0.09 0.13 0.17 0.23"></textarea></label>
+          <button type="button" class="btn btn-outline btn-sm" data-filter-fill-chart="">Fill chart</button>
+        </div>
+      </details>
+      <div class="flex flex-wrap gap-2 items-center">
+        <label class="flex items-center gap-2"><span>Check airflow</span>
+        <input name="checkAirflow" class="input w-28" type="number" min="1" max="100000" step="1" value="1200">
+        CFM<span></span></label>
+        <button type="button" class="btn btn-outline btn-sm" data-filter-preview="">Check chart</button>
+      </div>
+      <div id="filter-chart-preview" role="status">Complete the chart to check a value.</div>
+      <div class="flex justify-end gap-2">
+        <button type="button" class="btn btn-ghost" onclick="this.closest('dialog').close()">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save filter</button>
+      </div>
+    </form>
+  </div>
+</dialog>

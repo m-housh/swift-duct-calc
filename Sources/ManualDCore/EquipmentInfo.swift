@@ -115,3 +115,10 @@ extension EquipmentInfo {
     )
   }
 #endif
+
+extension EquipmentInfo {
+  /// The larger saved airflow, used to look up filter pressure drops.
+  public var largerAirflow: Int? {
+    [heatingCFM, coolingCFM].compactMap { $0 }.filter { $0 > 0 }.max()
+  }
+}

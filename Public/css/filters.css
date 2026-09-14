@@ -1,0 +1,35 @@
+.filter-account { max-width:960px; width:100%; min-width:0; margin:0 auto; padding:24px; }
+.filter-tabs { display:flex; gap:1.5rem; border-bottom:1px solid var(--color-base-300); }
+.filter-tabs a { padding:.75rem 0; border-bottom:3px solid transparent; font-weight:600; }
+.filter-tabs [aria-current] { color:var(--color-base-content); border-color:var(--color-primary); }
+.filter-library-tools { display:flex; gap:.75rem; flex-wrap:wrap; align-items:center; }
+.filter-library-tools > .input { flex:1; min-width:200px; }
+.filter-account .card-body { min-width:0; }
+.filter-preferences { border:1px solid var(--color-base-300); border-radius:8px; }
+.filter-preferences:empty { display:none; }
+.filter-preferences li { display:flex; gap:.5rem; align-items:center; padding:.65rem; border-bottom:1px solid var(--color-base-300); }
+.filter-preferences li:last-child { border-bottom:0; }
+.filter-preferences .grow { min-width:0; overflow-wrap:anywhere; }
+.filter-preferences button { flex-shrink:0; }
+.filter-cutoff { display:flex; flex-wrap:wrap; align-items:center; gap:.5rem; margin-top:.5rem; }
+.filter-preference-actions { display:flex; align-self:flex-start; }
+.filter-star { font-size:22px; }
+.filter-star[aria-pressed=true] { color:var(--color-warning-content); background:var(--color-warning); }
+#filterLookup .modal-box, #filter-editor .modal-box { width:calc(100% - 24px); max-width:768px; }
+#filter-editor .filter-chart { max-height:32vh; overflow:auto; }
+#filter-editor .filter-chart input { width:100%; }
+#filterLookup tr[hidden] { display:none; }
+@media(max-width:600px) {
+  .filter-account { padding:16px 12px; }
+  .filter-account .card-body { padding:16px; }
+  .filter-tabs { font-size:14px; gap:1rem; }
+  .filter-account .row-actions { flex-wrap:nowrap; }
+  .filter-preferences li { gap:2px; padding:8px 4px; }
+  .filter-preferences li { flex-wrap:wrap; }
+  .filter-preference-actions { margin-left:auto; }
+  #filter-editor .modal-box, #filterLookup .modal-box { padding:20px 16px; }
+  #filter-editor .project-table { table-layout:fixed; width:100%; }
+  #filter-editor .project-table th, #filter-editor .project-table td { padding:8px 4px; white-space:normal; }
+  #filter-editor .project-table th:last-child, #filter-editor .project-table td:last-child { width:40px; }
+  #filter-editor .filter-chart input { min-width:0; padding-inline:8px; }
+}

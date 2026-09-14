@@ -24,7 +24,15 @@ public struct DatabaseClient: Sendable {
     public var flush: @Sendable ([MetricBucket: MetricCount], Date) async throws -> Void
     public var prune: @Sendable (Date) async throws -> Void
   }
-  /// Database migrations.
+  /// Account filter libraries and project filter selections.
+  public var filters: Filters
+  @DependencyClient
+  public struct Filters: Sendable {
+    public var fetch: @Sendable (User.ID) async throws -> FilterLibrary
+    public var update: @Sendable (User.ID, FilterLibrary.Change) async throws -> FilterLibrary
+    public var allowance: @Sendable (Project.ID) async throws -> Double?
+    public var apply: @Sendable (User.ID, Project.ID, AirFilter.Selection) async throws -> Void
+  }
   public var fittingFavorites: FittingFavorites
   public var migrations: Migrations
   /// Interactions with the projects table.
@@ -181,6 +189,12 @@ public struct DatabaseClient: Sendable {
 extension DatabaseClient: TestDependencyKey {
   public static let testValue: DatabaseClient = Self(
     adminMetrics: .init(),
+    filters: {
+      var filters = Filters()
+      filters.fetch = { _ in .init() }
+      filters.allowance = { _ in nil }
+      return filters
+    }(),
     fittingFavorites: .init(),
     migrations: .testValue,
     projects: .testValue,
@@ -197,6 +211,7 @@ extension DatabaseClient: TestDependencyKey {
   public static func live(database: any Database) -> Self {
     .init(
       adminMetrics: .live(database: database),
+      filters: .live(database: database),
       fittingFavorites: .live(database: database),
       migrations: .liveValue,
       projects: .live(database: database),

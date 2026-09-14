@@ -35,6 +35,10 @@ struct ProjectOwnershipMiddleware: AsyncMiddleware {
       try requireProject(form.projectID)
     case .componentLoss(.submit(let form)):
       try requireProject(form.projectID)
+    case .frictionRate(.applyFilter(let selection)):
+      if let id = selection.replacing {
+        try await requireProject(database.componentLosses.get(id)?.projectID)
+      }
     case .componentLoss(.delete(let id)), .componentLoss(.update(let id, _)):
       try await requireProject(database.componentLosses.get(id)?.projectID)
     case .ductSizing(.trunk(let route)):

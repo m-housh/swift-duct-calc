@@ -1,0 +1,91 @@
+<dialog id="filterLookup" class="modal" aria-labelledby="filterLookup-title">
+  <div class="modal-box">
+    <h2 id="filterLookup-title" class="text-2xl font-bold mb-6 pe-10">Add a filter</h2>
+    <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Add a filter" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    <div data-filter-auto-open="true" data-filter-results-url="/projects/00000000-0000-0000-0000-000000000000/friction-rate/filter-results">
+      <p class="alert alert-success mb-4">Furnace + evaporator coil applied. Add a filter or skip this step.</p>
+      <form class="space-y-4" id="filter-lookup-form" hx-post="/projects/00000000-0000-0000-0000-000000000000/friction-rate/filters" hx-target="body" hx-swap="outerHTML" hx-sync="this:drop" data-success-message="Filter pressure loss saved.">
+        <p class="muted">Pressure drops from your filter library at 1,200 CFM, the larger heating or cooling airflow. Values are copied. Look up the filter again if airflow changes.</p>
+        Filter loss included in equipment rating<label class="grid gap-2"><span class="font-semibold"></span><span class="flex items-center gap-2">
+        <input type="number" name="allowance" class="input w-28" min="0.01" max="1" step="0.01" placeholder="None" value="0.03" data-filter-allowance="" aria-describedby="filter-allowance-help">
+        in. w.c.<span></span></span></label>
+        <p id="filter-allowance-help" class="muted text-sm">Optional. Leave blank if the rating doesn't include a filter. Only the filter loss above this is added.</p>
+        <div data-filter-results="">
+          <div data-filter-revision="00000000-0000-0000-0000-000000000000" class="space-y-4">
+            <div class="rounded-box bg-base-200 p-4 flex flex-wrap justify-between gap-3">
+              <div>
+                <small class="block muted">Suggested</small><strong>Aprilaire 516</strong>
+                <p class="text-sm">0.07 added · 0.10 chart</p>
+              </div>
+              <button type="submit" class="btn btn-sm btn-secondary" name="model" value="516" aria-label="Use Aprilaire 516, 0.07 inches of water column" data-filter-covered="false">Use Aprilaire 516</button>
+            </div><label class="flex items-center gap-2">
+            <input type="checkbox" class="toggle toggle-sm" data-filter-hide-over="">
+            Hide filters over 0.15 in. w.c. or max CFM</label>
+            <div class="table-scroll" tabindex="0" role="region" aria-label="Filter pressure drops">
+              <table class="table project-table">
+                <thead>
+                  <tr>
+                    <th><span class="sr-only">Favorite</span></th>
+                    <th>Filter</th>
+                    <th class="text-right">Added · in. w.c.</th>
+                    <th><span class="sr-only">Actions</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th colspan="4" scope="rowgroup" class="bg-base-200">Preferred</th>
+                  </tr>
+                  <tr data-filter-over="false" data-filter-favorite="true">
+                    <td>
+                      <button type="button" class="btn btn-ghost btn-sm filter-star" aria-label="Remove Aprilaire 516 from favorites" data-filter-change="{&quot;action&quot;:&quot;favorite&quot;,&quot;id&quot;:&quot;516&quot;,&quot;revision&quot;:&quot;00000000-0000-0000-0000-000000000000&quot;,&quot;selected&quot;:false}" aria-pressed="true">★</button>
+                    </td>
+                    <th scope="row"><span class="font-bold">Aprilaire 516</span><small class="block muted font-normal">MERV 16 · Allergy &amp; Asthma</small><small class="block muted font-normal">Up to 2,600 CFM</small></th>
+                    <td class="text-right tabular-nums">0.07<small class="block muted">0.10 chart</small></td>
+                    <td>
+                      <button type="submit" class="btn btn-sm btn-secondary" name="model" value="516" aria-label="Use Aprilaire 516, 0.07 inches of water column" data-filter-covered="false">Use</button>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr>
+                    <th colspan="4" scope="rowgroup" class="bg-base-200">Aprilaire · MERV 16 · Allergy &amp; Asthma</th>
+                  </tr>
+                  <tr data-filter-over="true" data-filter-favorite="false">
+                    <td>
+                      <button type="button" class="btn btn-ghost btn-sm filter-star" aria-label="Add Aprilaire 216 to favorites" data-filter-change="{&quot;action&quot;:&quot;favorite&quot;,&quot;id&quot;:&quot;216&quot;,&quot;revision&quot;:&quot;00000000-0000-0000-0000-000000000000&quot;,&quot;selected&quot;:true}" aria-pressed="false">☆</button>
+                    </td>
+                    <th scope="row"><span class="font-bold">Aprilaire 216</span><small class="block muted font-normal">MERV 16 · Allergy &amp; Asthma</small><small class="block muted font-normal">Up to 1,600 CFM</small></th>
+                    <td class="text-right tabular-nums">
+                      0.20<small class="block muted">0.23 chart</small>
+                      <div><span class="badge badge-ghost badge-sm">Over limit</span></div>
+                    </td>
+                    <td>
+                      <button type="submit" class="btn btn-sm btn-secondary" name="model" value="216" aria-label="Use Aprilaire 216, 0.20 inches of water column" data-filter-covered="false">Use</button>
+                    </td>
+                  </tr>
+                  <tr data-filter-over="true" data-filter-favorite="false">
+                    <td>
+                      <button type="button" class="btn btn-ghost btn-sm filter-star" aria-label="Add Aprilaire 416 to favorites" data-filter-change="{&quot;action&quot;:&quot;favorite&quot;,&quot;id&quot;:&quot;416&quot;,&quot;revision&quot;:&quot;00000000-0000-0000-0000-000000000000&quot;,&quot;selected&quot;:true}" aria-pressed="false">☆</button>
+                    </td>
+                    <th scope="row"><span class="font-bold">Aprilaire 416</span><small class="block muted font-normal">MERV 16 · Allergy &amp; Asthma</small><small class="block muted font-normal">Up to 1,400 CFM</small></th>
+                    <td class="text-right tabular-nums">
+                      0.21<small class="block muted">0.24 chart</small>
+                      <div><span class="badge badge-ghost badge-sm">Over limit</span></div>
+                    </td>
+                    <td>
+                      <button type="submit" class="btn btn-sm btn-secondary" name="model" value="416" aria-label="Use Aprilaire 416, 0.21 inches of water column" data-filter-covered="false">Use</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="flex flex-wrap justify-between gap-2 mt-4">
+        <a class="btn btn-ghost" href="/filters" target="_blank" rel="noopener">Manage filters</a>
+        <button type="button" class="btn btn-outline" onclick="this.closest('dialog').close()">Skip filter</button>
+      </div>
+    </div>
+  </div>
+</dialog>

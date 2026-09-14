@@ -10,6 +10,11 @@ struct FrictionRateView: HTML, Sendable {
   let equivalentLengths: EquivalentLength.MaxContainer
   let frictionRate: FrictionRate?
   var blowerStatic: Double?
+  /// Larger equipment airflow, used for filter pressure drop lookups.
+  var airflow: Int?
+  var filterLibrary = FilterLibrary()
+  var filterAllowance: Double?
+  var filterStep: FrictionRateTemplate?
 
   private var sortedLosses: [ComponentPressureLoss] {
     componentLosses.sorted {
@@ -44,6 +49,9 @@ struct FrictionRateView: HTML, Sendable {
               .showModal(id: FrictionRateTemplatesView.id)
             ) { "Use template" }
             button(
+              .type(.button), .class("btn btn-outline"), .showModal(id: FilterLookupView.id)
+            ) { "Look up filter" }
+            button(
               .type(.button), .class("btn btn-outline"), .showModal(id: ComponentLossForm.id())
             ) {
               SVG(.circlePlus)
@@ -62,6 +70,9 @@ struct FrictionRateView: HTML, Sendable {
       }
       ComponentLossForm(dismiss: true, projectID: projectID, componentLoss: nil)
       FrictionRateTemplatesView(projectID: projectID, hasComponents: !componentLosses.isEmpty)
+      FilterLookupView(
+        projectID: projectID, airflow: airflow, componentLosses: componentLosses,
+        library: filterLibrary, allowance: filterAllowance, template: filterStep)
       for loss in sortedLosses {
         ComponentLossForm(dismiss: true, projectID: projectID, componentLoss: loss)
       }
@@ -79,6 +90,9 @@ struct FrictionRateView: HTML, Sendable {
           .type(.button), .class("btn btn-secondary"),
           .showModal(id: FrictionRateTemplatesView.id)
         ) { "From template" }
+        button(
+          .type(.button), .class("btn btn-outline"), .showModal(id: FilterLookupView.id)
+        ) { "Look up filter" }
         button(
           .type(.button), .class("btn btn-outline"), .showModal(id: ComponentLossForm.id())
         ) { "Start from scratch" }
@@ -228,7 +242,7 @@ struct FrictionRateView: HTML, Sendable {
                       .class("input"), .type(.number), .name("value"),
                       .value(String(format: "%.2f", loss.value)),
                       .init(name: "aria-label", value: "Pressure loss for \(loss.name)"),
-                      .min("0.03"), .max("1"), .step("0.01"), .required)
+                      .min("0.01"), .max("1"), .step("0.01"), .required)
                     button(.type(.submit), .class("btn btn-primary")) { "Apply loss" }
                   }
                 }
