@@ -83,6 +83,8 @@ jobs:
       run: DUCTCALC_HOME_ORIGIN=http://127.0.0.1:58681 npm run test:home-browser
     - name: Check request errors and retained drafts
       run: DUCTCALC_ERROR_ORIGIN=http://127.0.0.1:58681 npm run test:request-errors
+    - name: Check account profile and navigation
+      run: DUCTCALC_ACCOUNT_ORIGIN=http://127.0.0.1:58681 npm run test:account
     - name: Check filter library and design preferences
       run: DUCTCALC_FILTER_ORIGIN=http://127.0.0.1:58681 npm run test:filters
     - name: Check accessibility and keyboard workflows

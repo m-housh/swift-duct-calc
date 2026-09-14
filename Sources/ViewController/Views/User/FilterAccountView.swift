@@ -18,14 +18,18 @@ struct FilterAccountView: HTML, Sendable {
     }.sorted { ($0.manufacturer, $0.model) < ($1.manufacturer, $1.model) }
   }
   var body: some HTML & Sendable {
-    Navbar(isLoggedIn: true)
+    AccountPage(selected: preferences ? .preferences : .filters) {
+      accountContent
+    }
+  }
+
+  @HTMLBuilder private var accountContent: some HTML & Sendable {
     div(
       .id("filter-account"), .class("filter-account space-y-6"),
       .data("filter-revision", value: library.revision.uuidString)
     ) {
-      a(.href("/profile"), .class("btn btn-ghost")) { "← Account" }
       PageTitleRow {
-        PageTitle { "Filters" }
+        PageTitle { preferences ? "Design preferences" : "Filter library" }
         button(
           .type(.button), .class("btn btn-primary"),
           .data("filter-editor", value: "/filters/editor")
@@ -34,14 +38,12 @@ struct FilterAccountView: HTML, Sendable {
           "Add filter"
         }
       }
-      p {
-        "Pressure drop charts used when you add a filter to a project. Your account starts with Aprilaire's chart. Edit or delete those entries, or add filters from any manufacturer."
-      }
-      nav(.class("filter-tabs"), .init(name: "aria-label", value: "Filter settings")) {
-        a(.href("/filters")) { "Filter library (\(library.filters.count))" }
-          .attributes(.init(name: "aria-current", value: "page"), when: !preferences)
-        a(.href("/filters?tab=preferences")) { "Design preferences" }
-          .attributes(.init(name: "aria-current", value: "page"), when: preferences)
+      p(.class("account-intro")) {
+        if preferences {
+          "Choose the filters DuctCalc suggests for your projects."
+        } else {
+          "Pressure drop charts used when you add a filter to a project. Your account starts with Aprilaire's chart. Edit or delete those entries, or add filters from any manufacturer."
+        }
       }
       p(.id("filter-status"), .role("status"), .init(name: "aria-live", value: "polite")) {}
       if preferences { preferencesPanel } else { libraryPanel }
@@ -188,7 +190,7 @@ struct FilterAccountView: HTML, Sendable {
   private var preferencesPanel: some HTML & Sendable {
     section(.class("card border border-base-300 bg-base-100")) {
       div(.class("card-body gap-5")) {
-        h2(.class("card-title")) { "Design preferences" }
+        h2(.class("card-title")) { "Filter suggestions" }
         p(.class("muted")) {
           "DuctCalc suggests the first favorite below its airflow cutoff and within your pressure drop limit and the filter's maximum airflow. You can still choose any filter in the picker."
         }

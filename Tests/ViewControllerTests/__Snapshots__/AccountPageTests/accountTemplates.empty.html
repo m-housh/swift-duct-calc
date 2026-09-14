@@ -1,0 +1,56 @@
+<div class="account-workspace">
+  <link rel="stylesheet" href="/css/account.css?v=1">
+  <nav class="app-navbar" aria-label="Main">
+    <a class="app-brand" href="/projects"><span class="dc-wordmark" role="img" aria-label="DuctCalc, residential duct design"><span class="dc-wordmark-name" aria-hidden="true"><span class="dc-wordmark-icon">
+    <img class="dc-mark-light" src="/images/brand/ductcalc-mark-light.webp" alt="" width="50" height="50">
+    <img class="dc-mark-dark" src="/images/brand/ductcalc-mark-dark.webp" alt="" width="50" height="50">
+    uct
+    C
+    alc
+    Residential duct design</span><span></span><span class="dc-wordmark-c"></span><span></span></span><span class="dc-wordmark-description" aria-hidden="true"></span></span></a>
+    <div class="app-nav-actions">
+      <a class="btn app-nav-link" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span>Fitting reference</span></a><a class="btn app-nav-ductulator" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span>Ductulator</span></a>
+      <details class="account-menu">
+        <summary class="btn"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>Account</summary>
+        <ul class="menu bg-base-200 rounded-box shadow-lg">
+          <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
+          <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
+          <li><a href="/filters">Filter library</a></li>
+          <li><a href="/filters?tab=preferences">Design preferences</a></li>
+          <li>
+            <form action="/logout" method="get">
+              <button type="submit">Logout</button>
+            </form>
+          </li>
+        </ul>
+      </details>
+    </div>
+  </nav>
+  <div class="account-layout">
+    <aside class="account-sidebar">
+      <h2>Account</h2>
+      <nav aria-label="Account sections"><a href="/profile">Profile</a><span class="account-nav-group" aria-hidden="true">Libraries &amp; preferences</span><a href="/path-templates" aria-current="page">Path templates</a><a href="/filters">Filter library</a><a href="/filters?tab=preferences">Design preferences</a></nav>
+    </aside>
+    <div class="account-content">
+      <div id="path-template-list" class="w-full p-4 space-y-6">
+        <link rel="stylesheet" href="/css/path-template-chooser.css?v=1">
+        <div class="page-title-row">
+          <h1 class="text-3xl font-bold">Path templates</h1>
+          <div class="tooltip tooltip-left" data-tip="Add path template">
+            <button type="button" class="btn btn-primary" aria-label="Add path template" data-open-dialog="newPathTemplate"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg></button>
+          </div>
+        </div>
+        <dialog id="newPathTemplate" class="modal" aria-labelledby="newPathTemplate-title">
+          <div class="modal-box">
+            <h2 id="newPathTemplate-title" class="text-2xl font-bold mb-6 pe-10">Add path template</h2>
+            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Add path template" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+            <div class="space-y-3 mt-4"><a class="btn btn-primary w-full" href="/path-templates/new/return">New return template</a><a class="btn btn-primary w-full" href="/path-templates/new/supply">New supply template</a><a class="btn w-full" href="/path-templates/import">Import JSON template</a></div>
+          </div>
+        </dialog>
+        <p>Use your usual fittings, with the choices and defaults you prefer.</p>
+        Import JSON template<a class="btn" href="/path-templates/import"></a>
+        <p>No saved templates. Add a template to get started.</p>
+      </div>
+    </div>
+  </div>
+</div>

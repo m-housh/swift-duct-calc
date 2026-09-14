@@ -1,0 +1,53 @@
+<form id="profile-form" class="account-profile-form" data-success-message="Changes saved." hx-post="/profile" hx-target="body" hx-swap="outerHTML">
+  <div class="account-form-heading">
+    <h2>Personal &amp; company details</h2>
+    <p>Your name and company address.</p>
+  </div>
+  <input type="hidden" name="userID" value="00000000-0000-0000-0000-000000000000">
+  <div class="account-form-content">
+    <div class="account-profile-fields">
+      <label class="account-profile-field"><span>First name</span>
+      <input class="input" name="firstName" value="" required autocomplete="given-name">
+      Last name</label><label class="account-profile-field"><span></span>
+      <input class="input" name="lastName" value="" required autocomplete="family-name">
+      Company</label><label class="account-profile-field account-field-wide"><span></span>
+      <input class="input" name="companyName" value="" required autocomplete="organization">
+      Street address</label><label class="account-profile-field account-field-wide"><span></span>
+      <input class="input" name="streetAddress" value="" required autocomplete="street-address"></label>
+      <div class="account-address-fields account-field-wide">
+        <label class="account-profile-field"><span>City</span>
+        <input class="input" name="city" value="" required autocomplete="address-level2">
+        State</label><label class="account-profile-field"><span></span>
+        <input class="input" name="state" value="" required autocomplete="address-level1">
+        ZIP code</label><label class="account-profile-field"><span></span>
+        <input class="input" name="zipCode" value="" required autocomplete="postal-code"></label>
+      </div>
+    </div>
+    <div class="account-appearance">
+      <h2>Appearance</h2>
+      <p>Choose the theme used throughout DuctCalc.</p>
+      Theme<label class="account-profile-field"><span></span>
+      <select name="theme" class="select">
+        <option value="default" selected>System default</option>
+        <optgroup label="Light">
+          <option value="cupcake">Cupcake</option>
+          <option value="light">Light</option>
+          <option value="nord">Nord</option>
+          <option value="retro">Retro</option>
+        </optgroup>
+        <optgroup label="Dark">
+          <option value="aqua">Aqua</option>
+          <option value="cyberpunk">Cyberpunk</option>
+          <option value="dark">Dark</option>
+          <option value="dracula">Dracula</option>
+          <option value="night">Night</option>
+          <option value="synthwave">Synthwave</option>
+        </optgroup>
+      </select></label>
+    </div>
+  </div>
+  <div class="account-form-actions">
+    <button type="reset" class="btn btn-ghost">Reset</button>
+    <button type="submit" class="btn btn-primary">Save changes</button>
+  </div>
+</form>

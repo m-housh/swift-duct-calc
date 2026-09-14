@@ -9,6 +9,10 @@ extension SiteRoute.View {
     case .privacyPolicy: title = "Privacy policy"
     case .login: title = "Login"
     case .signup: title = "Sign up"
+    case .user(.profile): title = "Profile"
+    case .user(.templates): title = "Path templates"
+    case .user(.filters(.index(let query))):
+      title = query.tab == "preferences" ? "Design preferences" : "Filter library"
     case .user: title = "Account"
     case .ductulator: title = "Ductulator"
     case .fittings: title = "Fitting picker"

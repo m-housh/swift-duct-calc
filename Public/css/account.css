@@ -1,0 +1,67 @@
+/* Account navigation follows the project workspace's spacing and theme colors. */
+.account-workspace {
+  --account-line: color-mix(in srgb, var(--color-base-content) 15%, transparent);
+  --account-muted: color-mix(in srgb, var(--color-base-content) 85%, var(--color-base-100));
+  min-height: 100vh;
+  background: var(--color-base-100);
+  color: var(--color-base-content);
+}
+.account-workspace .app-navbar { margin: 0; min-height: 72px; padding: 10px 22px; }
+.account-layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); min-height: calc(100vh - 72px); }
+.account-sidebar { padding: 30px 16px; border-right: 1px solid var(--account-line); background: var(--color-base-200); }
+.account-sidebar h2 { margin: 0 12px 24px; font-size: 17px; font-weight: 650; }
+.account-sidebar nav { display: flex; flex-direction: column; gap: 5px; }
+.account-sidebar a { padding: 12px; border-radius: 6px; font-size: 13px; }
+.account-sidebar a:hover { background: var(--color-base-300); }
+.account-sidebar a[aria-current] {
+  background: color-mix(in srgb, var(--color-primary) 13%, var(--color-base-100));
+  color: color-mix(in srgb, var(--color-primary) 15%, var(--color-base-content));
+  font-weight: 650;
+}
+.account-nav-group { padding: 20px 12px 8px; color: var(--account-muted); font-size: 10px; text-transform: uppercase; letter-spacing: .05em; }
+.account-content { min-width: 0; width: 100%; max-width: 1160px; padding: 36px 40px 48px; }
+.account-heading { margin-bottom: 28px; }
+.account-heading h1, .account-content h1 { font-size: 28px; font-weight: 650; letter-spacing: -.025em; }
+.account-heading p, .account-intro { margin-top: 6px; color: var(--account-muted); font-size: 14px; line-height: 1.6; }
+.account-profile-form {
+  --account-line: color-mix(in srgb, var(--color-base-content) 15%, transparent);
+  --account-muted: color-mix(in srgb, var(--color-base-content) 85%, var(--color-base-100));
+  max-width: 760px; border: 1px solid var(--account-line); border-radius: 9px;
+  background: var(--color-base-100); color: var(--color-base-content);
+}
+.account-form-heading { padding: 22px 24px; border-bottom: 1px solid var(--account-line); }
+.account-profile-form h2 { font-size: 16px; font-weight: 650; }
+.account-profile-form p { margin-top: 6px; color: var(--account-muted); font-size: 13px; line-height: 1.6; }
+.account-form-content { padding: 24px; }
+.account-profile-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.account-profile-field { display: flex; min-width: 0; flex-direction: column; gap: 8px; font-size: 13px; font-weight: 500; }
+.account-profile-field .input, .account-profile-field .select { width: 100%; min-width: 0; font-size: 14px; font-weight: 400; }
+.account-field-wide { grid-column: 1 / -1; }
+.account-address-fields { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 20px; }
+.account-appearance { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--account-line); }
+.account-appearance .account-profile-field { max-width: 340px; margin-top: 18px; }
+.account-form-actions { display: flex; justify-content: flex-end; gap: 10px; padding: 18px 24px; border-top: 1px solid var(--account-line); }
+.account-profile-form .btn { min-height: 36px; height: auto; padding: 8px 12px; border-radius: 6px; box-shadow: none; font-size: 13px; }
+.account-workspace :is(a, button, input, select):focus-visible, .account-profile-form :is(button, input, select):focus-visible { outline: 3px solid var(--color-primary); outline-offset: 3px; }
+.account-content #path-template-list, .account-content #path-template-page, .account-content .filter-account { padding: 0; margin: 0; max-width: none; }
+.account-content .filter-library-tools { gap: 12px; }
+.account-content .filter-cutoff input { width: 7rem; min-width: 0; }
+.account-content .filter-cutoff span { white-space: nowrap; flex-shrink: 0; }
+@media (max-width: 900px) {
+  .account-content { padding: 28px 24px; }
+  .account-address-fields { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .account-address-fields > :first-child { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+  .account-layout { display: block; }
+  .account-sidebar { padding: 12px; border-right: 0; border-bottom: 1px solid var(--account-line); }
+  .account-sidebar h2, .account-nav-group { display: none; }
+  .account-sidebar nav { flex-direction: row; flex-wrap: wrap; gap: 4px; }
+  .account-sidebar a { padding: 10px; font-size: 12px; }
+  .account-content { padding: 26px 18px; }
+  .account-heading h1, .account-content h1 { font-size: 25px; }
+  .account-form-heading, .account-form-content { padding: 20px; }
+  .account-profile-fields { grid-template-columns: minmax(0, 1fr); }
+  .account-form-actions { padding: 18px 20px; }
+  .account-workspace .app-navbar { padding: 12px; }
+}
