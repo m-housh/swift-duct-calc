@@ -155,15 +155,11 @@ struct DuctSizingViewTests {
     #expect(request.url?.path == "/projects/\(UUID(0))/duct-sizing/rectangular-sizes/clear")
     #expect(try SiteRoute.View.router.match(request: request)
       == .project(.detail(UUID(0), .ductSizing(route))))
-    let deletions = LockIsolated<[Room.RectangularSize.ID]>([])
+    let deletions = LockIsolated<[Int]>([])
     let response = await ViewControllerTests().withDefaultDependencies {
-      $0.database.rooms.get = { id in
+      $0.database.rooms.clearRectangularSize = { id, register in
         #expect(id == room.id)
-        return room
-      }
-      $0.database.rooms.deleteRectangularSize = { id, sizeID in
-        #expect(id == room.id)
-        deletions.withValue { $0.append(sizeID) }
+        deletions.withValue { $0.append(register) }
         return room
       }
       $0.database.projects.getCompletedSteps = { _ in
@@ -175,7 +171,7 @@ struct DuctSizingViewTests {
       await route.renderView(
         on: .test(.project(.detail(UUID(0), .ductSizing(route)))), projectID: UUID(0))
     }
-    #expect(deletions.value == [UUID(10)])
+    #expect(deletions.value == [1, 3])
     #expect(response.render().contains("Branch schedule"))
   }
 
@@ -198,7 +194,7 @@ struct DuctSizingViewTests {
       : .roomRectangularForm(room.id, .init(register: 1, height: 8))
     let response = await ViewControllerTests().withDefaultDependencies {
       $0.database.rooms.updateRectangularSize = { _, _ in room }
-      $0.database.rooms.deleteRectangularSize = { _, _ in room }
+      $0.database.rooms.clearRectangularSize = { _, _ in room }
       $0.projectClient.calculateRoomDuctSizes = { _ in sizes }
     } operation: {
       await route.renderView(

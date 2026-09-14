@@ -149,6 +149,23 @@ struct ProjectMutationAuthorizationTests {
       #expect(try await db.rooms.get(ownRoom.id) == ownRoom)
       #expect(try await db.rooms.get(room.id) == foreignSizedRoom)
 
+      _ = try await db.rooms.update(clearRoom.id, .init(rectangularSizes: [.init(height: 10)]))
+      _ = try await client.sendRequest(
+        .POST, base + "/duct-sizing/rectangular-sizes", headers: headers,
+        body: .init(string: "height=12&rooms=\(clearRoom.id)_1&rooms=\(clearRoom.id)_3"))
+      let bulkSet = try #require(try await db.rooms.get(clearRoom.id)?.rectangularSizes)
+      #expect(bulkSet.sorted { ($0.register ?? 0) < ($1.register ?? 0) }.map(\.height) == [12, 10, 12])
+      #expect(bulkSet.allSatisfy { $0.register != nil })
+
+      _ = try await db.rooms.update(clearRoom.id, .init(rectangularSizes: [.init(height: 10)]))
+      _ = try await client.sendRequest(
+        .POST, base + "/duct-sizing/rectangular-sizes/clear", headers: headers,
+        body: .init(string: "rooms=\(clearRoom.id)_1&rooms=\(clearRoom.id)_3"))
+      let bulkCleared = try #require(try await db.rooms.get(clearRoom.id)?.rectangularSizes)
+      #expect(bulkCleared.count == 1)
+      #expect(bulkCleared.first?.register == 2)
+      #expect(bulkCleared.first?.height == 10)
+
       let profileResponse = try await client.sendRequest(
         .POST, "/signup/profile", headers: ["Content-Type": "application/x-www-form-urlencoded"],
         body: .init(

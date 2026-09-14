@@ -134,6 +134,7 @@ public struct DatabaseClient: Sendable {
     public var delete: @Sendable (Room.ID) async throws -> Void
     public var deleteRectangularSize:
       @Sendable (Room.ID, Room.RectangularSize.ID) async throws -> Room
+    public var clearRectangularSize: @Sendable (Room.ID, Int) async throws -> Room
     public var get: @Sendable (Room.ID) async throws -> Room?
     public var fetch: @Sendable (Project.ID) async throws -> [Room]
     public var update: @Sendable (Room.ID, Room.Update) async throws -> Room

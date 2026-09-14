@@ -699,7 +699,7 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
 
     case .deleteRectangularSize(let roomID, let request):
       return await ResultView {
-        let room = try await database.rooms.deleteRectangularSize(roomID, request.rectangularSizeID)
+        let room = try await database.rooms.clearRectangularSize(roomID, request.register)
         let rooms = try await projectClient.calculateRoomDuctSizes(projectID)
         guard
           let result = rooms
@@ -750,12 +750,7 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
           throw ValidationError("Select at least one register.")
         }
         for item in rooms {
-          guard let room = try await database.rooms.get(item.roomID) else {
-            throw NotFoundError()
-          }
-          for size in room.rectangularSizes ?? [] where size.register == item.register {
-            _ = try await database.rooms.deleteRectangularSize(room.id, size.id)
-          }
+          _ = try await database.rooms.clearRectangularSize(item.roomID, item.register)
         }
       }
 

@@ -55,6 +55,23 @@ extension DatabaseClient.Rooms: TestDependencyKey {
         }
         return try model.toDTO()
       },
+      clearRectangularSize: { roomID, register in
+        guard let model = try await RoomModel.find(roomID, on: database) else {
+          throw NotFoundError()
+        }
+        guard register > 0, register <= model.registerCount else {
+          throw ValidationError("Choose a valid register.")
+        }
+        model.normalizeRectangularSizes()
+        model.rectangularSizes?.removeAll { $0.register == register }
+        if model.rectangularSizes?.isEmpty == true {
+          model.rectangularSizes = nil
+        }
+        if model.hasChanges {
+          try await model.validateAndSave(on: database)
+        }
+        return try model.toDTO()
+      },
       get: { id in
         try await RoomModel.find(id, on: database).map { try $0.toDTO() }
       },
@@ -85,6 +102,9 @@ extension DatabaseClient.Rooms: TestDependencyKey {
         else {
           throw ValidationError("Choose a valid register and a positive height.")
         }
+        if size.register != nil {
+          model.normalizeRectangularSizes()
+        }
         var rectangularSizes = model.rectangularSizes ?? []
         // A register has one rectangular size, so a new size replaces the register's old one.
         rectangularSizes.removeAll {
@@ -100,6 +120,21 @@ extension DatabaseClient.Rooms: TestDependencyKey {
 }
 
 extension RoomModel {
+  /// Expands room-wide sizes while preserving the calculator's first match for each register.
+  fileprivate func normalizeRectangularSizes() {
+    guard let sizes = rectangularSizes, sizes.contains(where: { $0.register == nil }),
+      registerCount > 0
+    else { return }
+    @Dependency(\.uuid) var uuid
+    rectangularSizes = (1...registerCount).compactMap { register in
+      guard let size = sizes.first(where: { $0.register == nil || $0.register == register }) else {
+        return nil
+      }
+      return .init(
+        id: size.register == nil ? uuid() : size.id, register: register, height: size.height)
+    }
+  }
+
   fileprivate static func createMany(
     projectID: Project.ID,
     rooms: [Room.Create],
