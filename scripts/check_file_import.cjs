@@ -178,4 +178,14 @@ test('room imports accept a CSV or a report and post each to its own route', t =
   assert.equal(pdfNote.hidden, false);
   assert.match(path(), /\/rooms\/pdf$/);
   assert.equal(part('import-file-name').textContent, 'Report.PDF');
+
+  // The matched type decides the route, not a missing or misleading suffix.
+  pick(file('Room loads export', 20_000));
+  assert.equal(pdfNote.hidden, false);
+  assert.match(path(), /\/rooms\/pdf$/);
+  pick(file('report.csv.download', 20_000));
+  assert.match(path(), /\/rooms\/pdf$/);
+  pick(file('rooms.csv', 200, 'application/vnd.ms-excel'));
+  assert.equal(csvNote.hidden, false);
+  assert.match(path(), /\/rooms\/csv$/);
 });

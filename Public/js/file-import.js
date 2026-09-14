@@ -38,16 +38,21 @@
     form.dispatchEvent(new CustomEvent('file-import:state', { bubbles: true, detail: { state } }));
   }
 
-  function accepts(input, file) {
+  // The accepted type a file matches, as a format: "application/pdf" or ".pdf" → "pdf".
+  // MIME types come first so a PDF without a matching suffix still selects the PDF route.
+  function acceptedFormat(input, file) {
     const name = file.name.toLowerCase();
-    return input.accept.split(',').map(type => type.trim().toLowerCase()).filter(Boolean)
-      .some(type => type.startsWith('.') ? name.endsWith(type) : file.type === type);
+    const types = input.accept.split(',').map(type => type.trim().toLowerCase()).filter(Boolean);
+    const mime = types.find(type => !type.startsWith('.') && type === file.type);
+    if (mime) return mime.split('/').pop();
+    return types.find(type => type.startsWith('.') && name.endsWith(type))?.slice(1);
   }
 
   function choose(form, file) {
     const input = fileInput(form);
+    const format = file && acceptedFormat(input, file);
     const problem = !file ? ''
-      : !accepts(input, file) ? `“${file.name}” can't be imported here. Choose a ${form.dataset.fileTypes}.`
+      : !format ? `“${file.name}” can't be imported here. Choose a ${form.dataset.fileTypes}.`
       : file.size > MAX_BYTES ? 'The file is too large. Choose a file smaller than 10 MB.' : '';
     form.dispatchEvent(new CustomEvent('file-import:choose', { bubbles: true }));
     showError(form, problem);
@@ -62,7 +67,7 @@
       transfer.items.add(file);
       input.files = transfer.files;
     }
-    form.dataset.chosenFormat = file.name.split('.').pop().toLowerCase();
+    form.dataset.chosenFormat = format;
     part(form, 'import-file-name').textContent = file.name;
     part(form, 'import-file-size').textContent = formatSize(file.size);
     show(form, 'chosen');
