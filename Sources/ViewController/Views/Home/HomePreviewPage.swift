@@ -65,7 +65,7 @@ struct HomePreviewPage: SendableHTMLDocument {
           supply: HomePreviewData.paths[0], return: HomePreviewData.paths[1]),
         frictionRate: HomePreviewData.frictionRate, blowerStatic: 0.5)
     case .sizes:
-      DuctSizingView(ductSizes: HomePreviewData.ductSizes)
+      DuctSizingView(ductSizes: HomePreviewData.ductSizes, readOnly: true)
     }
   }
 }

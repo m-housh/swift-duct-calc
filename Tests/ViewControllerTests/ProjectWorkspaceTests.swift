@@ -160,6 +160,24 @@ struct ProjectWorkspaceTests {
     #expect(view.render().contains("Return · 2"))
     assertSnapshot(of: view, as: .html)
   }
+
+  @Test(arguments: [false, true])
+  func trunkSizesAreVisibleWithoutExpanding(hasRectangle: Bool) {
+    let trunk = DuctSizes.TrunkContainer(
+      trunk: .init(
+        id: UUID(20), projectID: projectID, type: .supply, rooms: [],
+        height: hasRectangle ? 8 : nil, name: "Main supply trunk"),
+      ductSize: .init(
+        designCFM: .heating(400), roundSize: 9.8, finalSize: 10, velocity: 700, flexSize: 12,
+        height: hasRectangle ? 8 : nil, width: hasRectangle ? 12 : nil))
+    let view = DuctSizingView.TrunkRow(trunk: trunk, rooms: [])
+      .environment(ProjectViewValue.$projectID, projectID)
+    let visible = String(view.render().split(separator: "<details>")[0])
+    #expect(visible.contains("<dt>Round</dt><dd><span class=\"size-chip\">10″</span></dd>"))
+    #expect(visible.contains("<dt>Flex</dt><dd>12″</dd>"))
+    #expect(visible.contains("<dt>Rectangular</dt><dd>12 × 8 in.</dd>") == hasRectangle)
+    assertSnapshot(of: view, as: .html, named: hasRectangle ? "rectangular" : "round")
+  }
   @Test func invalidFrictionRateIsVisibleBesideTheSummaryValue() {
     for (name, rate) in [
       ("negative", -0.018), ("low", 0.02), ("high", 0.18), ("nonfinite", Double.infinity),

@@ -8,12 +8,17 @@ struct DuctSizingView: HTML, Sendable {
   @Environment(ProjectViewValue.$projectID) var projectID
 
   let ductSizes: DuctSizes
+  var readOnly = false
 
   var sortedRooms: [DuctSizes.RoomContainer] {
     ductSizes.rooms.sorted { $0.label < $1.label }
   }
 
   var body: some HTML {
+    if !readOnly {
+      link(.rel(.stylesheet), .href("/css/trunk-templates.css?v=2"))
+      script(.src("/js/trunk-templates.js?v=3"), .defer) {}
+    }
     div(.class("space-y-4")) {
       PageTitleRow {
         div {

@@ -8,6 +8,7 @@
     "test:login-form": "node --test scripts/check_login_form.cjs",
     "test:project-workspace": "node --test scripts/check_project_workspace.cjs",
     "test:equipment": "node --test scripts/check_equipment.cjs",
+    "test:trunk-templates": "node --test scripts/check_trunk_templates.cjs",
     "test:project-shortcuts": "node --test scripts/check_project_shortcuts.cjs",
     "test:file-import": "node --test scripts/check_file_import.cjs",
     "test:fitting-shortcuts": "node --test scripts/check_fitting_shortcuts.cjs",
