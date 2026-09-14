@@ -40,6 +40,16 @@ struct FilterLookupRouteTests {
       let headers: HTTPHeaders = [
         "Cookie": String(cookie), "Content-Type": "application/x-www-form-urlencoded",
       ]
+      for query in ["Aprilaire+213", "Aprilaire%20213"] {
+        let result = try await client.sendRequest(.GET, "/filters?q=\(query)", headers: headers)
+        #expect(result.status == .ok)
+        #expect(result.body.string.contains("aria-label=\"Edit Aprilaire 213\""))
+        #expect(result.body.string.contains("value=\"Aprilaire 213\""))
+      }
+      let literalPlus = try await client.sendRequest(
+        .GET, "/filters?q=Aprilaire%2B213", headers: headers)
+      #expect(literalPlus.status == .ok)
+      #expect(!literalPlus.body.string.contains("aria-label=\"Edit Aprilaire 213\""))
       let route = "/projects/\(ownProject.id)/friction-rate/filters"
       func post(_ body: String) async throws -> TestingHTTPResponse {
         try await client.sendRequest(.POST, route, headers: headers, body: .init(string: body))

@@ -38,6 +38,17 @@ assert(['localhost', '127.0.0.1'].includes(new URL(origin).hostname), 'Use an is
     await editor.getByRole('button', { name: 'Check chart' }).click();
     await editor.locator('#filter-chart-preview').getByText('0.09 in. w.c.', { exact: true }).waitFor();
     await saved(() => editor.getByRole('button', { name: 'Save filter' }).click());
+    const search = page.getByRole('searchbox', { name: 'Search filters' });
+    await search.fill('Example brand');
+    await search.press('Enter');
+    await page.waitForURL(/q=Example\+brand/);
+    assert.equal(await page.getByRole('button', { name: 'Edit Example brand Custom media', exact: true }).count(), 1);
+    assert.equal(await search.inputValue(), 'Example brand');
+    await search.fill('Example+brand');
+    await search.press('Enter');
+    await page.waitForURL(/q=Example%2Bbrand/);
+    assert.equal(await page.getByRole('button', { name: 'Edit Example brand Custom media', exact: true }).count(), 0);
+    await page.goto('/filters');
     await page.reload();
     await page.getByRole('button', { name: 'Edit Example brand Custom media', exact: true }).click();
     assert.equal(await editor.locator('[name=pointDrop]').nth(0).inputValue(), '0.015');
