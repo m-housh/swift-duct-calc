@@ -64,8 +64,7 @@
           dialog.scrollTop = 0;
         } catch (error) {
           if (error.name === 'AbortError') return;
-          if (active) status.textContent = error.message;
-          else dialog.querySelector('#path-status').textContent = error.message;
+          window.ductCalcRequestErrors.render(active ? status : dialog.querySelector('#path-status'), error);
         } finally { if (pending === controller) pending = null; }
       }
       host.addEventListener('click', event => {

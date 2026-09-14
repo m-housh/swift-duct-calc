@@ -31,7 +31,9 @@ struct RequestErrorMiddleware: AsyncMiddleware {
       }
       if failure.reference != nil {
         // Error descriptions can contain SQL bindings, credentials, or uploaded documents.
-        let underlying = (error as? SavedChangeRefreshError)?.underlying ?? error
+        let underlying =
+          (error as? SavedChangeRefreshError)?.underlying
+          ?? (error as? AccountCreatedError)?.underlying ?? error
         let nsError = underlying as NSError
         request.logger.error(
           "Request failed",

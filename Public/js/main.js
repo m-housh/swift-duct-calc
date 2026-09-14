@@ -71,12 +71,7 @@ if (!window.ductCalcFocusInitialized) {
         content.className = 'request-error-content';
         content.textContent = message;
         region.replaceChildren(content);
-        for (const action of actions) {
-          if (typeof action.label !== 'string' || typeof action.href !== 'string' || !/^\/(?!\/)/.test(action.href)) continue;
-          const link = document.createElement('a');
-          link.className = 'link'; link.textContent = action.label; link.href = action.href;
-          link.target = '_blank'; link.rel = 'noopener'; content.append(link);
-        }
+        window.ductCalcRequestErrors.appendActions(content, actions);
         const close = document.createElement('button');
         close.type = 'button';
         close.setAttribute('aria-label', 'Dismiss error');

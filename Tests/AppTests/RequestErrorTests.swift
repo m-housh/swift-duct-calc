@@ -102,6 +102,40 @@ struct RequestErrorTests {
     }
   }
 
+  @Test func accountCreationSurvivesFollowUpLoginFailure() async throws {
+    try await withApp(configure: { app in
+      app.logger.logLevel = .critical
+      try await configure(
+        app, in: .live(),
+        makeDatabaseClient: { database in
+          var client = DatabaseClient.live(database: database)
+          client.users.login = { _ in throw PrivateFailure() }
+          return client
+        })
+      try await app.autoMigrate()
+    }) { app in
+      let response = try await app.testing().sendRequest(
+        .POST, "/signup",
+        headers: ["HX-Request": "true", "Content-Type": "application/x-www-form-urlencoded"],
+        body: .init(
+          string:
+            "email=saved-account%40example.test&password=super-secret&confirmPassword=super-secret")
+      )
+      #expect(response.status == .internalServerError)
+      let failure = try JSONDecoder().decode(
+        PresentationError.self, from: Data(response.body.readableBytesView))
+      #expect(failure.title == "Account created")
+      #expect(failure.message.contains("do not need to sign up again"))
+      #expect(failure.actions == [.init("Sign in", href: "/login")])
+      #expect(failure.reference != nil)
+      #expect(!response.body.string.contains("private uploaded text"))
+      let database = DatabaseClient.live(database: app.db)
+      let token = try await database.users.login(
+        .init(email: "saved-account@example.test", password: "super-secret"))
+      #expect(try await database.users.get(token.userID)?.email == "saved-account@example.test")
+    }
+  }
+
   @Test func profileCreationDistinguishesValidationFromRefreshFailure() async throws {
     try await withApp(configure: { app in
       app.logger.logLevel = .critical

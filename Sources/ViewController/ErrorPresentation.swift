@@ -30,6 +30,13 @@ extension ViewController {
     _ error: any Error, title: String, reference: String
   ) -> PresentationError {
     if let error = error as? PresentationError { return error }
+    if error is AccountCreatedError {
+      return .init(
+        title: "Account created",
+        message:
+          "Your account was created, but sign-in could not be completed. Sign in to continue; you do not need to sign up again.",
+        reference: reference, status: 500, actions: [.init("Sign in", href: "/login")])
+    }
     if error is SavedChangeRefreshError {
       return .init(
         title: "Change saved",

@@ -241,3 +241,27 @@ test('binary PDF errors use the application description', async t => {
   await new Promise(resolve=>dom.window.requestAnimationFrame(resolve));
   assert.match(doc.getElementById('app-error').textContent,/Add equipment airflow/);
 });
+
+
+test('fetch errors retain safe recovery links and clear them with the next status', async t => {
+  const {dom,doc} = setup(t, '<p id="status"></p>');
+  const errors = dom.window.ductCalcRequestErrors;
+  let failure;
+  try {
+    await errors.check({ status: 401, headers: { get: () => 'application/vnd.ductcalc.error+json' },
+      json: async () => ({ message: 'Your session has ended.', actions: [
+        { label: 'Sign in in another tab', href: '/login' },
+        { label: 'External', href: '//example.com' },
+        { label: 'Unsafe', href: 'javascript:alert(1)' },
+      ] }) });
+  } catch (error) { failure = error; }
+  errors.render(doc.getElementById('status'), failure);
+  const links = [...doc.querySelectorAll('a')];
+  assert.equal(links.length, 1);
+  assert.equal(links[0].getAttribute('href'), '/login');
+  assert.equal(links[0].target, '_blank');
+  assert.equal(links[0].rel, 'noopener');
+  errors.render(doc.getElementById('status'), 'Saved.');
+  assert.equal(doc.getElementById('status').textContent, 'Saved.');
+  assert.equal(doc.querySelector('a'), null);
+});

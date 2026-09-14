@@ -116,6 +116,26 @@ assert(['localhost', '127.0.0.1'].includes(new URL(origin).hostname), 'Use an is
     assert.equal(await page.locator('#path-name').inputValue(), 'Preserved fitting draft');
     assert(await editor.evaluate(dialog => dialog.open && !dialog.inert));
 
+    await page.unroute('**/save-path');
+    await context.clearCookies();
+    await page.locator('#save-path').click();
+    const fittingLogin = page.locator('#path-status').getByRole('link', { name: 'Sign in in another tab', exact: true });
+    await fittingLogin.waitFor();
+    assert.equal(await fittingLogin.getAttribute('target'), '_blank');
+    assert.equal(await page.locator('#path-name').inputValue(), 'Preserved fitting draft');
+    await context.request.post('/login', { form: account });
+
+    await page.goto('/path-templates');
+    await page.getByRole('button', { name: 'Add path template', exact: true }).click();
+    await page.getByRole('link', { name: 'New supply template', exact: true }).click();
+    await page.locator('[data-config=name]').fill('Preserved template draft');
+    await context.clearCookies();
+    await page.locator('[data-action=save-template]').click();
+    const templateLogin = page.locator('#workspace-status').getByRole('link', { name: 'Sign in in another tab', exact: true });
+    await templateLogin.waitFor();
+    assert.equal(await templateLogin.getAttribute('target'), '_blank');
+    assert.equal(await page.locator('[data-config=name]').inputValue(), 'Preserved template draft');
+
     const missing = await page.goto('/missing-page');
     assert.equal(missing.status(), 404);
     await page.getByRole('link', { name: 'Back to projects', exact: true }).waitFor();

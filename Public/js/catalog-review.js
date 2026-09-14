@@ -80,7 +80,7 @@
         status.textContent = saved.textContent;
         const groupLink = root.querySelector(`[data-review-group="${root.dataset.group}"]`);
         groupLink.textContent = `Group ${root.dataset.group} · ${rows.filter(row => value(row).reviewed).length}/${rows.length}`;
-      } catch (error) { status.textContent = error.message; }
+      } catch (error) { window.ductCalcRequestErrors.render(status, error); }
       finally { busy = false; root.inert = false; update(); }
     });
     window.addEventListener('beforeunload', event => { if (dirty) { event.preventDefault(); event.returnValue = ''; } });
