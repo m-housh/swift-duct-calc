@@ -1,7 +1,4 @@
 .filter-account { max-width:960px; width:100%; min-width:0; margin:0 auto; padding:24px; }
-.filter-tabs { display:flex; gap:1.5rem; border-bottom:1px solid var(--color-base-300); }
-.filter-tabs a { padding:.75rem 0; border-bottom:3px solid transparent; font-weight:600; }
-.filter-tabs [aria-current] { color:var(--color-base-content); border-color:var(--color-primary); }
 .filter-library-tools { display:flex; gap:.75rem; flex-wrap:wrap; align-items:center; }
 .filter-library-tools > .input { flex:1; min-width:200px; }
 .filter-account .card-body { min-width:0; }
@@ -22,7 +19,6 @@
 @media(max-width:600px) {
   .filter-account { padding:16px 12px; }
   .filter-account .card-body { padding:16px; }
-  .filter-tabs { font-size:14px; gap:1rem; }
   .filter-account .row-actions { flex-wrap:nowrap; }
   .filter-preferences li { gap:2px; padding:8px 4px; }
   .filter-preferences li { flex-wrap:wrap; }

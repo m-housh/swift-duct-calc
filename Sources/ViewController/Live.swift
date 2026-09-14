@@ -97,7 +97,7 @@ extension ViewController.Request {
           try await loadView {
             try await createAndAuthenticate(request)
           } onSuccess: { user in
-            UserProfileForm(userID: user.id, profile: nil, dismiss: false, signup: true)
+            UserProfileForm(userID: user.id, signup: true)
           }
         }
       case .submitProfile(let profile):

@@ -53,7 +53,7 @@ assert(['localhost', '127.0.0.1'].includes(new URL(origin).hostname), 'Use an is
     await page.getByRole('button', { name: 'Edit Example brand Custom media', exact: true }).click();
     assert.equal(await editor.locator('[name=pointDrop]').nth(0).inputValue(), '0.015');
     await editor.getByRole('button', { name: 'Cancel', exact: true }).click();
-    await page.locator('.filter-tabs').getByRole('link', { name: 'Design preferences' }).click();
+    await page.getByRole('navigation', { name: 'Account sections' }).getByRole('link', { name: 'Design preferences' }).click();
     await page.locator('[name=maximumPressureDrop]').fill('0.08');
     await saved(() => page.locator('[data-filter-maximum] button').click());
     assert.match(await page.locator('#filter-account').innerText(), /No favorite meets/);

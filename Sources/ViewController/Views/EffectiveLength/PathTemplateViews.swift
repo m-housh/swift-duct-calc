@@ -11,7 +11,15 @@ struct PathTemplatesView: HTML, Sendable {
   var preferredType: EquivalentLength.EffectiveLengthType? = nil
 
   var body: some HTML {
-    Navbar(isLoggedIn: true)
+    if projectID == nil {
+      AccountPage(selected: .templates) { templateList }
+    } else {
+      Navbar(isLoggedIn: true)
+      templateList
+    }
+  }
+
+  private var templateList: some HTML & Sendable {
     div(.id("path-template-list"), .class("w-full p-4 space-y-6")) {
       link(.rel(.stylesheet), .href("/css/path-template-chooser.css?v=1"))
       if let projectID {
@@ -148,14 +156,24 @@ struct PathTemplateWorkspace: HTML, Sendable {
 
   init(data: Data) throws {
     self.data = data
-    self.encoded = String(decoding: try JSONEncoder().encode(data), as: UTF8.self)
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = .sortedKeys
+    self.encoded = String(decoding: try encoder.encode(data), as: UTF8.self)
       .replacingOccurrences(of: "<", with: "\\u003c")
       .replacingOccurrences(of: ">", with: "\\u003e")
       .replacingOccurrences(of: "&", with: "\\u0026")
   }
 
   var body: some HTML {
-    Navbar(isLoggedIn: true)
+    if data.projectID == nil && data.mode != "path" {
+      AccountPage(selected: .templates) { workspace }
+    } else {
+      Navbar(isLoggedIn: true)
+      workspace
+    }
+  }
+
+  private var workspace: some HTML & Sendable {
     div(.id("path-template-page"), .class("w-full p-4 space-y-4")) {
       div(.class("flex flex-wrap items-center gap-2")) {
         if data.mode != "path", let projectID = data.projectID {

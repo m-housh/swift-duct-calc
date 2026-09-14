@@ -4,118 +4,101 @@ import ManualDCore
 import Styleguide
 
 struct UserProfileForm: HTML, Sendable {
-
-  static func id(_ profile: User.Profile?) -> String {
-    let base = "userProfileForm"
-    guard let profile else { return base }
-    return "\(base)_\(profile.id.idString)"
-  }
-
   let userID: User.ID
-  let profile: User.Profile?
-  let dismiss: Bool
-  let signup: Bool
+  var profile: User.Profile? = nil
+  var signup = false
 
-  init(
-    userID: User.ID,
-    profile: User.Profile? = nil,
-    dismiss: Bool,
-    signup: Bool = false
-  ) {
-    self.userID = userID
-    self.profile = profile
-    self.dismiss = dismiss
-    self.signup = signup
-  }
-
-  var route: String {
-    guard !signup else {
-      return SiteRoute.View.router.path(for: .signup(.index))
-        .appendingPath("profile")
+  private var route: String {
+    if signup {
+      return SiteRoute.View.router.path(for: .signup(.index)).appendingPath("profile")
     }
-    return SiteRoute.View.router.path(for: .user(.profile(.index)))
-      .appendingPath(profile?.id)
+    return SiteRoute.View.router.path(for: .user(.profile(.index))).appendingPath(profile?.id)
   }
 
   var body: some HTML {
-    ModalForm(id: Self.id(profile), title: "Profile", dismiss: dismiss) {
+    if signup {
+      link(.rel(.stylesheet), .href("/css/account.css?v=1"))
+      ModalForm(id: "userProfileForm", title: "Profile", dismiss: false) { profileForm }
+    } else {
+      profileForm
+    }
+  }
 
-      form(
-        .data("success-message", value: "Changes saved."),
-        .class("grid grid-cols-1 gap-4 p-4"),
-        profile == nil
-          ? .hx.post(route)
-          : .hx.patch(route),
-        .hx.target("body"),
-        .hx.swap(.outerHTML)
-      ) {
-        if let profile {
-          input(.class("hidden"), .name("id"), .value(profile.id))
+  private var profileForm: some HTML & Sendable {
+    form(
+      .id("profile-form"), .class("account-profile-form"),
+      .data("success-message", value: "Changes saved."),
+      profile == nil ? .hx.post(route) : .hx.patch(route),
+      .hx.target("body"), .hx.swap(.outerHTML)
+    ) {
+      div(.class("account-form-heading")) {
+        h2 { "Personal & company details" }
+        p { "Your name and company address." }
+      }
+      if let profile { input(.type(.hidden), .name("id"), .value(profile.id)) }
+      input(.type(.hidden), .name("userID"), .value(userID))
+      div(.class("account-form-content")) {
+        div(.class("account-profile-fields")) {
+          field(
+            "First name", name: "firstName", value: profile?.firstName, autocomplete: "given-name")
+          field(
+            "Last name", name: "lastName", value: profile?.lastName, autocomplete: "family-name")
+          field(
+            "Company", name: "companyName", value: profile?.companyName,
+            autocomplete: "organization"
+          )
+          .attributes(.class("account-field-wide"))
+          field(
+            "Street address", name: "streetAddress", value: profile?.streetAddress,
+            autocomplete: "street-address"
+          )
+          .attributes(.class("account-field-wide"))
+          div(.class("account-address-fields account-field-wide")) {
+            field("City", name: "city", value: profile?.city, autocomplete: "address-level2")
+            field("State", name: "state", value: profile?.state, autocomplete: "address-level1")
+            field("ZIP code", name: "zipCode", value: profile?.zipCode, autocomplete: "postal-code")
+          }
         }
-        input(.class("hidden"), .name("userID"), .value(userID))
-
-        label(.class("input w-full")) {
-          span(.class("label")) { "First Name" }
-          input(.name("firstName"), .value(profile?.firstName), .required, .autofocus)
-        }
-
-        label(.class("input w-full")) {
-          span(.class("label")) { "Last Name" }
-          input(.name("lastName"), .value(profile?.lastName), .required)
-        }
-
-        label(.class("input w-full")) {
-          span(.class("label")) { "Company" }
-          input(.name("companyName"), .value(profile?.companyName), .required)
-        }
-
-        label(.class("input w-full")) {
-          span(.class("label")) { "Address" }
-          input(.name("streetAddress"), .value(profile?.streetAddress), .required)
-        }
-
-        label(.class("input w-full")) {
-          span(.class("label")) { "City" }
-          input(.name("city"), .value(profile?.city), .required)
-        }
-
-        label(.class("input w-full")) {
-          span(.class("label")) { "State" }
-          input(.name("state"), .value(profile?.state), .required)
-        }
-
-        label(.class("input w-full")) {
-          span(.class("label")) { "Zip" }
-          input(.name("zipCode"), .value(profile?.zipCode), .required)
-        }
-
-        label(.class("select w-full")) {
-          span(.class("label")) { "Theme" }
-          select(.name("theme")) {
-            option(.value("default")) { "System default" }
-              .attributes(.selected, when: profile?.theme == nil || profile?.theme == .default)
-            optgroup(.label("Light")) {
-              for theme in Theme.lightThemes {
-                option(.value(theme.rawValue)) { theme.rawValue.capitalized }
-                  .attributes(.selected, when: profile?.theme == theme)
+        div(.class("account-appearance")) {
+          h2 { "Appearance" }
+          p { "Choose the theme used throughout DuctCalc." }
+          label(.class("account-profile-field")) {
+            span { "Theme" }
+            select(.name("theme"), .class("select")) {
+              option(.value("default")) { "System default" }
+                .attributes(.selected, when: profile?.theme == nil || profile?.theme == .default)
+              optgroup(.label("Light")) {
+                for theme in Theme.lightThemes {
+                  option(.value(theme.rawValue)) { theme.rawValue.capitalized }
+                    .attributes(.selected, when: profile?.theme == theme)
+                }
               }
-            }
-            optgroup(.label("Dark")) {
-              for theme in Theme.darkThemes {
-                option(.value(theme.rawValue)) { theme.rawValue.capitalized }
-                  .attributes(.selected, when: profile?.theme == theme)
+              optgroup(.label("Dark")) {
+                for theme in Theme.darkThemes {
+                  option(.value(theme.rawValue)) { theme.rawValue.capitalized }
+                    .attributes(.selected, when: profile?.theme == theme)
+                }
               }
             }
           }
         }
-
-        SubmitButton()
-          .attributes(.class("btn-block"))
-
       }
-      .attributes(
-        .hx.pushURL("/projects"),
-        when: signup == true
+      div(.class("account-form-actions")) {
+        if !signup { button(.type(.reset), .class("btn btn-ghost")) { "Reset" } }
+        button(.type(.submit), .class("btn btn-primary")) { signup ? "Continue" : "Save changes" }
+      }
+    }
+    .attributes(.hx.pushURL("/projects"), when: signup)
+  }
+
+  private func field(
+    _ title: String, name: String, value: String?, autocomplete: String
+  ) -> some HTML<HTMLTag.label> & Sendable {
+    label(.class("account-profile-field")) {
+      span { title }
+      input(
+        .class("input"), .name(name), .value(value), .required,
+        .init(name: "autocomplete", value: autocomplete)
       )
     }
   }

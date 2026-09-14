@@ -1,152 +1,161 @@
-<nav class="app-navbar" aria-label="Main">
-  <a class="app-brand" href="/projects"><span class="dc-wordmark" role="img" aria-label="DuctCalc, residential duct design"><span class="dc-wordmark-name" aria-hidden="true"><span class="dc-wordmark-icon">
-  <img class="dc-mark-light" src="/images/brand/ductcalc-mark-light.webp" alt="" width="50" height="50">
-  <img class="dc-mark-dark" src="/images/brand/ductcalc-mark-dark.webp" alt="" width="50" height="50">
-  uct
-  C
-  alc
-  Residential duct design</span><span></span><span class="dc-wordmark-c"></span><span></span></span><span class="dc-wordmark-description" aria-hidden="true"></span></span></a>
-  <div class="app-nav-actions">
-    <a class="btn app-nav-link" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span>Fitting reference</span></a><a class="btn app-nav-ductulator" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span>Ductulator</span></a>
-    <details class="account-menu">
-      <summary class="btn"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>Account</summary>
-      <ul class="menu bg-base-200 rounded-box shadow-lg">
-        <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
-        <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
-        <li><a href="/filters">Filter library</a></li>
-        <li><a href="/filters?tab=preferences">Design preferences</a></li>
-        <li>
-          <form action="/logout" method="get">
-            <button type="submit">Logout</button>
-          </form>
-        </li>
-      </ul>
-    </details>
-  </div>
-</nav>
-<div id="filter-account" class="filter-account space-y-6" data-filter-revision="00000000-0000-0000-0000-000000000000">
-  <a href="/profile" class="btn btn-ghost">← Account</a>
-  <div class="page-title-row">
-    <h1 class="text-3xl font-bold">Filters</h1>
-    <button type="button" class="btn btn-primary" data-filter-editor="/filters/editor"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add filter</button>
-  </div>
-  <p>Pressure drop charts used when you add a filter to a project. Your account starts with Aprilaire's chart. Edit or delete those entries, or add filters from any manufacturer.</p>
-  <nav class="filter-tabs" aria-label="Filter settings"><a href="/filters">Filter library (0)</a><a href="/filters?tab=preferences" aria-current="page">Design preferences</a></nav>
-  <p id="filter-status" role="status" aria-live="polite"></p>
-  <section class="card border border-base-300 bg-base-100">
-    <div class="card-body gap-5">
-      <h2 class="card-title">Design preferences</h2>
-      <p class="muted">DuctCalc suggests the first favorite below its airflow cutoff and within your pressure drop limit and the filter's maximum airflow. You can still choose any filter in the picker.</p>
-      <form data-filter-maximum="" class="space-y-2">
-        <label class="grid gap-2"><span class="font-semibold">Maximum filter pressure drop</span><span class="flex items-center gap-2">
-        <input name="maximumPressureDrop" type="number" class="input w-28" min="0.01" max="1" step="0.01" placeholder="None" value="" aria-describedby="filter-maximum-help">
-        in. w.c.<span></span>
-        <button type="submit" class="btn btn-outline">Save</button></span></label>
-        <p id="filter-maximum-help" class="muted text-sm">Leave blank for no pressure drop limit. Uses the full chart drop before any equipment filter allowance.</p>
-      </form>
-      <h3 class="font-semibold">Favorite filters, in order</h3>
-      <p id="filter-cutoff-help" class="muted text-sm">Suggest below is optional. At or above that CFM, DuctCalc tries the next favorite. Leave blank for no additional cutoff.</p>
-      <p class="muted">No favorites yet. Add one here or star a filter in your library.</p>
-      <ol class="filter-preferences"></ol>
-      <div class="rounded-box bg-base-200 p-4 space-y-3">
-        <h3 class="font-semibold">Try your preferences</h3>
-        <form action="/filters" method="get" class="flex flex-wrap items-center gap-2">
-          <input type="hidden" name="tab" value="preferences">
-          Example airflow<label class="flex items-center gap-2"><span></span>
-          <input name="airflow" type="number" class="input w-28" min="1" max="100000" step="1" value="1200" required>
-          CFM<span></span></label>
-          <button type="submit" class="btn btn-outline">Check</button>
-        </form>
-        <p class="muted text-sm">This example does not change project airflow.</p>
-        <p>Add a favorite to get a suggestion.</p>
+<div class="account-workspace">
+  <link rel="stylesheet" href="/css/account.css?v=1">
+  <nav class="app-navbar" aria-label="Main">
+    <a class="app-brand" href="/projects"><span class="dc-wordmark" role="img" aria-label="DuctCalc, residential duct design"><span class="dc-wordmark-name" aria-hidden="true"><span class="dc-wordmark-icon">
+    <img class="dc-mark-light" src="/images/brand/ductcalc-mark-light.webp" alt="" width="50" height="50">
+    <img class="dc-mark-dark" src="/images/brand/ductcalc-mark-dark.webp" alt="" width="50" height="50">
+    uct
+    C
+    alc
+    Residential duct design</span><span></span><span class="dc-wordmark-c"></span><span></span></span><span class="dc-wordmark-description" aria-hidden="true"></span></span></a>
+    <div class="app-nav-actions">
+      <a class="btn app-nav-link" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span>Fitting reference</span></a><a class="btn app-nav-ductulator" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span>Ductulator</span></a>
+      <details class="account-menu">
+        <summary class="btn"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>Account</summary>
+        <ul class="menu bg-base-200 rounded-box shadow-lg">
+          <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
+          <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
+          <li><a href="/filters">Filter library</a></li>
+          <li><a href="/filters?tab=preferences">Design preferences</a></li>
+          <li>
+            <form action="/logout" method="get">
+              <button type="submit">Logout</button>
+            </form>
+          </li>
+        </ul>
+      </details>
+    </div>
+  </nav>
+  <div class="account-layout">
+    <aside class="account-sidebar">
+      <h2>Account</h2>
+      <nav aria-label="Account sections"><a href="/profile">Profile</a><span class="account-nav-group" aria-hidden="true">Libraries &amp; preferences</span><a href="/path-templates">Path templates</a><a href="/filters">Filter library</a><a href="/filters?tab=preferences" aria-current="page">Design preferences</a></nav>
+    </aside>
+    <div class="account-content">
+      <div id="filter-account" class="filter-account space-y-6" data-filter-revision="00000000-0000-0000-0000-000000000000">
+        <div class="page-title-row">
+          <h1 class="text-3xl font-bold">Design preferences</h1>
+          <button type="button" class="btn btn-primary" data-filter-editor="/filters/editor"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add filter</button>
+        </div>
+        <p class="account-intro">Choose the filters DuctCalc suggests for your projects.</p>
+        <p id="filter-status" role="status" aria-live="polite"></p>
+        <section class="card border border-base-300 bg-base-100">
+          <div class="card-body gap-5">
+            <h2 class="card-title">Filter suggestions</h2>
+            <p class="muted">DuctCalc suggests the first favorite below its airflow cutoff and within your pressure drop limit and the filter's maximum airflow. You can still choose any filter in the picker.</p>
+            <form data-filter-maximum="" class="space-y-2">
+              <label class="grid gap-2"><span class="font-semibold">Maximum filter pressure drop</span><span class="flex items-center gap-2">
+              <input name="maximumPressureDrop" type="number" class="input w-28" min="0.01" max="1" step="0.01" placeholder="None" value="" aria-describedby="filter-maximum-help">
+              in. w.c.<span></span>
+              <button type="submit" class="btn btn-outline">Save</button></span></label>
+              <p id="filter-maximum-help" class="muted text-sm">Leave blank for no pressure drop limit. Uses the full chart drop before any equipment filter allowance.</p>
+            </form>
+            <h3 class="font-semibold">Favorite filters, in order</h3>
+            <p id="filter-cutoff-help" class="muted text-sm">Suggest below is optional. At or above that CFM, DuctCalc tries the next favorite. Leave blank for no additional cutoff.</p>
+            <p class="muted">No favorites yet. Add one here or star a filter in your library.</p>
+            <ol class="filter-preferences"></ol>
+            <div class="rounded-box bg-base-200 p-4 space-y-3">
+              <h3 class="font-semibold">Try your preferences</h3>
+              <form action="/filters" method="get" class="flex flex-wrap items-center gap-2">
+                <input type="hidden" name="tab" value="preferences">
+                Example airflow<label class="flex items-center gap-2"><span></span>
+                <input name="airflow" type="number" class="input w-28" min="1" max="100000" step="1" value="1200" required>
+                CFM<span></span></label>
+                <button type="submit" class="btn btn-outline">Check</button>
+              </form>
+              <p class="muted text-sm">This example does not change project airflow.</p>
+              <p>Add a favorite to get a suggestion.</p>
+            </div>
+          </div>
+        </section>
+        <dialog id="restore-filters" class="modal" aria-labelledby="restore-filters-title">
+          <div class="modal-box">
+            <h2 id="restore-filters-title" class="text-2xl font-bold mb-6 pe-10">Restore Aprilaire filters</h2>
+            <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Restore Aprilaire filters" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+            <form data-filter-restore="" class="space-y-4">
+              <p role="alert" data-filter-restore-error=""></p>
+              <p>Choose filters to bring back from Aprilaire's chart. Custom filters are kept.</p><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="216" checked>
+              Aprilaire 216
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="416" checked>
+              Aprilaire 416
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="516" checked>
+              Aprilaire 516
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="113" checked>
+              Aprilaire 113
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="213" checked>
+              Aprilaire 213
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="313" checked>
+              Aprilaire 313
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="413" checked>
+              Aprilaire 413
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="513" checked>
+              Aprilaire 513
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="613" checked>
+              Aprilaire 613
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="813" checked>
+              Aprilaire 813
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="913" checked>
+              Aprilaire 913
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="213CBN" checked>
+              Aprilaire 213CBN
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="413CBN" checked>
+              Aprilaire 413CBN
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="513CBN" checked>
+              Aprilaire 513CBN
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="110" checked>
+              Aprilaire 110
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="210" checked>
+              Aprilaire 210
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="310" checked>
+              Aprilaire 310
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="410" checked>
+              Aprilaire 410
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="510" checked>
+              Aprilaire 510
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="610" checked>
+              Aprilaire 610
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="810" checked>
+              Aprilaire 810
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="910" checked>
+              Aprilaire 910
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="201" checked>
+              Aprilaire 201
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="401" checked>
+              Aprilaire 401
+              Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
+              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="501" checked>
+              Aprilaire 501
+              Deleted<small class="muted"></small></label>
+              <button type="submit" class="btn btn-primary">Restore selected</button>
+            </form>
+          </div>
+        </dialog>
       </div>
+      <div id="filter-editor-mount"></div>
     </div>
-  </section>
-  <dialog id="restore-filters" class="modal" aria-labelledby="restore-filters-title">
-    <div class="modal-box">
-      <h2 id="restore-filters-title" class="text-2xl font-bold mb-6 pe-10">Restore Aprilaire filters</h2>
-      <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Restore Aprilaire filters" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-      <form data-filter-restore="" class="space-y-4">
-        <p role="alert" data-filter-restore-error=""></p>
-        <p>Choose filters to bring back from Aprilaire's chart. Custom filters are kept.</p><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="216" checked>
-        Aprilaire 216
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="416" checked>
-        Aprilaire 416
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="516" checked>
-        Aprilaire 516
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="113" checked>
-        Aprilaire 113
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="213" checked>
-        Aprilaire 213
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="313" checked>
-        Aprilaire 313
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="413" checked>
-        Aprilaire 413
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="513" checked>
-        Aprilaire 513
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="613" checked>
-        Aprilaire 613
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="813" checked>
-        Aprilaire 813
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="913" checked>
-        Aprilaire 913
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="213CBN" checked>
-        Aprilaire 213CBN
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="413CBN" checked>
-        Aprilaire 413CBN
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="513CBN" checked>
-        Aprilaire 513CBN
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="110" checked>
-        Aprilaire 110
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="210" checked>
-        Aprilaire 210
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="310" checked>
-        Aprilaire 310
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="410" checked>
-        Aprilaire 410
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="510" checked>
-        Aprilaire 510
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="610" checked>
-        Aprilaire 610
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="810" checked>
-        Aprilaire 810
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="910" checked>
-        Aprilaire 910
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="201" checked>
-        Aprilaire 201
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="401" checked>
-        Aprilaire 401
-        Deleted<small class="muted"></small></label><label class="flex items-center gap-2">
-        <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="501" checked>
-        Aprilaire 501
-        Deleted<small class="muted"></small></label>
-        <button type="submit" class="btn btn-primary">Restore selected</button>
-      </form>
-    </div>
-  </dialog>
+  </div>
 </div>
-<div id="filter-editor-mount"></div>
