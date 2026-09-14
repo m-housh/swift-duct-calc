@@ -173,7 +173,7 @@ struct PathTemplateWorkspace: HTML, Sendable {
       script(.id("path-template-data"), .init(name: "type", value: "application/json")) {
         HTMLRaw(encoded)
       }
-      script(.src("/js/path-templates.js?v=browse-fittings-5"), .init(name: "defer", value: "")) {}
+      script(.src("/js/path-templates.js?v=quantity-click-6"), .init(name: "defer", value: "")) {}
     }
   }
 }

@@ -814,10 +814,21 @@
       event.preventDefault();
       run(() => act('apply-details', event.submitter ?? event.target));
     });
+    root.addEventListener('pointerdown', (event) => {
+      // A quantity blur can add rows and move the pressed button before pointerup.
+      // Keep focus until click, then commit the quantity before running the action.
+      if (
+        event.button === 0 &&
+        document.activeElement?.matches('[data-quantity]') &&
+        event.target.closest('[data-action]')
+      ) event.preventDefault();
+    });
     root.addEventListener('click', (event) => {
       const target = event.target.closest('[data-action]');
-      if (target && !target.disabled && target.type !== 'submit')
+      if (target && !target.disabled && target.type !== 'submit') {
+        if (document.activeElement?.matches('[data-quantity]')) document.activeElement.blur();
         run(() => act(target.dataset.action, target));
+      }
     });
     root.addEventListener('input', (event) => {
       const t = event.target;

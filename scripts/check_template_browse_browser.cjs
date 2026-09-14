@@ -8,7 +8,7 @@ assert(['127.0.0.1', 'localhost'].includes(new URL(base).hostname));
 (async () => {
   const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
   try {
-    const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
+    const context = await browser.newContext({ hasTouch: true, viewport: { width: 1440, height: 1000 } });
     const password = randomUUID();
     const signup = await context.request.post(base + '/signup', { form: {
       email: `browse-${randomUUID()}@example.test`, password, confirmPassword: password,
@@ -74,8 +74,42 @@ assert(['127.0.0.1', 'localhost'].includes(new URL(base).hostname));
       assert.equal(await page.locator('#step-fitting-rows [data-action="edit-row"]').count(), 1);
       await choose(id);
       await page.getByRole('heading', { name: type === 'supply' ? 'Boot' : 'Elbows', exact: true }).waitFor();
+      if (type === 'supply') await choose('4G');
+      let quantity = 1;
+      for (const width of [1440, 390]) {
+        await page.setViewportSize({ width, height: 1000 });
+        for (const input of ['mouse', 'keyboard', 'touch']) {
+          quantity++;
+          await page.locator('[data-quantity="8A-4-or-5-piece"]').fill(String(quantity));
+          const done = page.getByRole('button', { name: 'Done with Elbows', exact: true });
+          if (input === 'keyboard') {
+            // Tab commits the quantity before keyboard activation of Done.
+            for (let i = 0; i < 20 && !(await done.evaluate(node => node === document.activeElement)); i++)
+              await page.keyboard.press('Tab');
+            assert(await done.evaluate(node => node === document.activeElement));
+            await page.keyboard.press('Enter');
+          } else {
+            await done.scrollIntoViewIfNeeded();
+            if (input === 'touch') await done.tap();
+            else {
+              const bounds = await done.boundingBox();
+              await page.mouse.move(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
+              await page.mouse.down();
+              // Let a fast blur response render rows before releasing the mouse.
+              // This used to move Done away from the pointer and lose the click.
+              await page.waitForTimeout(250);
+              await page.mouse.up();
+            }
+          }
+          await page.getByRole('heading', { name: 'Transitions', exact: true }).waitFor();
+          await page.locator('[data-action="back"]').click();
+          assert.equal(await page.locator('[data-quantity="8A-4-or-5-piece"]').inputValue(), String(quantity));
+          assert.equal(await page.locator('#step-fitting-rows [data-action="edit-row"]').count(), 1);
+          assert((await page.locator('#step-fitting-rows').innerText()).includes(`× ${quantity}`));
+        }
+      }
     }
     assert.deepEqual(errors, []);
-    console.log('PASS: supply/return browse, current group, visible selector, desktop/mobile spacing, switching groups, nested Escape/reopen, retained fitting inputs, and auto-advance.');
+    console.log('PASS: supply/return browse, current group, visible selector, desktop/mobile spacing, switching groups, nested Escape/reopen, retained fitting inputs, auto-advance, and one-click quantity completion with mouse, keyboard, and touch.');
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });
