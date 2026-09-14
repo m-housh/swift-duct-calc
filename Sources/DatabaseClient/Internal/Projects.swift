@@ -74,14 +74,20 @@ extension DatabaseClient.Projects: TestDependencyKey {
               || (normalized($0.streetAddress) == normalized(report.project.streetAddress)
                 && normalized($0.zipCode).prefix(5) == normalized(report.project.zipCode).prefix(5))
           }
-          if !confirmDuplicate && !matches.isEmpty {
-            throw Project.ImportConflict(projects: try matches.map { try $0.toDTO() })
-          }
-          let names = Set(existing.map { normalized($0.name) })
-          var suffix = 2
-          while names.contains(normalized(model.name)) {
-            model.name = "\(report.project.name) (\(suffix))"
-            suffix += 1
+          // Confirming allows a matching address, but an imported project still needs its own name.
+          let sameName = matches.filter { normalized($0.name) == normalized(report.project.name) }
+          let conflicts = confirmDuplicate ? sameName : matches
+          if !conflicts.isEmpty {
+            let names = Set(existing.map { normalized($0.name) })
+            let name = report.project.name.trimmingCharacters(in: .whitespacesAndNewlines)
+            var suggestedName = name
+            var suffix = 2
+            while names.contains(normalized(suggestedName)) {
+              suggestedName = "\(name) (\(suffix))"
+              suffix += 1
+            }
+            throw Project.ImportConflict(
+              projects: try conflicts.map { try $0.toDTO() }, suggestedName: suggestedName)
           }
           try await model.validateAndSave(on: transaction)
           let projectID = try model.requireID()

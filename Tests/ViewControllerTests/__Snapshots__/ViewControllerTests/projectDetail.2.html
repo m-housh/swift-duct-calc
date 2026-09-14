@@ -18,11 +18,13 @@
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
     <script src="/js/htmx-download.js"></script>
     <script src="/js/main.js?v=equipment-8"></script>
+    <script src="/js/file-import.js?v=1" defer></script>
+    <script src="/js/project-import.js?v=1" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="/css/output.css?v=navbar-reference-1">
+    <link rel="stylesheet" href="/css/output.css?v=project-import-1">
     <link rel="stylesheet" href="/css/htmx.css">
     <link rel="stylesheet" href="/css/accessibility.css?v=request-toast-2">
-    <link rel="stylesheet" href="/css/project-workspace.css?v=equipment-7">
+    <link rel="stylesheet" href="/css/project-workspace.css?v=project-import-1">
     <link rel="icon" href="/images/favicon.ico?v=ductcalc-white-3" sizes="16x16 32x32 48x48">
     <link rel="icon" href="/images/favicon-32x32.png?v=ductcalc-white-3" type="image/png" sizes="32x32">
     <link rel="icon" href="/images/brand/favicon.svg?v=white-3" type="image/svg+xml" sizes="any">
@@ -567,46 +569,40 @@
                   <div class="modal-box">
                     <h2 id="uploadRooms-title" class="text-2xl font-bold mb-6 pe-10">Import room loads</h2>
                     <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Import room loads" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                    File type<label for="roomImportFormat" class="label"></label>
-                    <select id="roomImportFormat" class="select w-full mb-4" onchange="this.closest('dialog').querySelectorAll('[data-import-format]').forEach(panel => {
-  panel.hidden = panel.dataset.importFormat !== this.value;
-});">
-                      <option value="csv">CSV</option>
-                      <option value="pdf">Cool Calc PDF</option>
-                    </select>
-                    <div data-import-format="csv">
-                      <p class="mb-4">Upload a room-load CSV with names, levels, heating and cooling loads, register counts, and optional airflow delegation.</p>
-                      <p class="text-sm mb-4">Rooms are matched by name. Matching rooms will be updated, missing rooms will be added, and rooms absent from the file will be kept.</p>
-                      <form data-success-message="Import complete." hx-post="/projects/00000000-0000-0000-0000-000000000000/rooms/csv" hx-target="body" hx-swap="outerHTML" hx-encoding="multipart/form-data" hx-disabled-elt="find button" hx-on::response-error="const error = this.querySelector('[role=alert]');
+                    <p class="mb-4">Import a room-load CSV with names, levels, heating and cooling loads, register counts, and optional airflow delegation, or a Cool Calc MJ8 report. Rooms from a report start with one register and no airflow delegation.</p>
+                    <form data-success-message="Import complete." data-file-import="" data-file-types="room-load CSV or Cool Calc MJ8 report PDF" data-reading-label="Reading room loads…" hx-post="/projects/00000000-0000-0000-0000-000000000000/rooms/csv" hx-target="body" hx-swap="outerHTML" hx-encoding="multipart/form-data" hx-disabled-elt="find button" hx-on::response-error="const error = this.querySelector('[role=alert]');
 error.textContent = event.detail.xhr.status === 413
   ? 'The file is too large. Choose a file smaller than 10 MB.'
   : 'The server could not complete the upload. Please try again.';
 error.hidden = false;" hx-on::send-error="const error = this.querySelector('[role=alert]');
 error.textContent = 'The connection to the server was lost. Check your connection and try again.';
-error.hidden = false;" hx-on::before-request="this.querySelector('[role=alert]').hidden = true;" enctype="multipart/form-data" hx-confirm="This project already has rooms. Update matching room names with the CSV values, including register counts and airflow delegation, and add missing rooms? Rooms absent from the file will be kept.">
-                        <input type="file" name="file" accept=".csv,text/csv" aria-label="Room loads CSV" required>
-                        <button class="btn btn-secondary btn-block mt-6" type="submit">Import rooms</button>
-                        <p class="htmx-indicator text-sm mt-2">Reading room loads…</p>
-                        <p class="text-error mt-2" role="alert" hidden></p>
-                      </form>
-                    </div>
-                    <div data-import-format="pdf" hidden>
-                      <p class="mb-4">Upload a Cool Calc MJ8 report. New rooms start with one register and no airflow delegation. You can edit them after import.</p>
-                      <p class="text-sm mb-4">Maximum 10 MB and 200 pages.</p>
-                      <p class="text-sm mb-4">Rooms are matched by name. Matching rooms will be updated, missing rooms will be added, and rooms absent from the file will be kept.</p>
-                      <form data-success-message="Import complete." hx-post="/projects/00000000-0000-0000-0000-000000000000/rooms/pdf" hx-target="body" hx-swap="outerHTML" hx-encoding="multipart/form-data" hx-disabled-elt="find button" hx-on::response-error="const error = this.querySelector('[role=alert]');
-error.textContent = event.detail.xhr.status === 413
-  ? 'The file is too large. Choose a file smaller than 10 MB.'
-  : 'The server could not complete the upload. Please try again.';
-error.hidden = false;" hx-on::send-error="const error = this.querySelector('[role=alert]');
-error.textContent = 'The connection to the server was lost. Check your connection and try again.';
-error.hidden = false;" hx-on::before-request="this.querySelector('[role=alert]').hidden = true;" enctype="multipart/form-data" hx-confirm="This project already has rooms. Update loads and levels for matching room names and add missing rooms? Register counts, airflow delegation, and rooms absent from the file will be kept.">
-                        <input type="file" name="file" accept=".pdf,application/pdf" aria-label="Cool Calc PDF" required>
-                        <button class="btn btn-secondary btn-block mt-6" type="submit">Import rooms</button>
-                        <p class="htmx-indicator text-sm mt-2">Reading room loads…</p>
-                        <p class="text-error mt-2" role="alert" hidden></p>
-                      </form>
-                    </div>
+error.hidden = false;" hx-on::before-request="this.querySelector('[role=alert]').hidden = true;" enctype="multipart/form-data" data-import-action-pdf="/projects/00000000-0000-0000-0000-000000000000/rooms/pdf">
+                      <label data-import-dropzone="" class="import-dropzone flex cursor-pointer flex-col items-center gap-2 rounded-box border-2
+                      border-dashed border-base-content/25 px-6 py-8 text-center transition-colors
+                      hover:border-primary hover:bg-primary/5 focus-within:outline-2
+                      focus-within:outline-offset-2 focus-within:outline-primary
+                      data-[dragover]:border-primary data-[dragover]:bg-primary/10"><span class="grid size-14 place-items-center rounded-full bg-primary/10 text-primary"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload-icon lucide-upload"><path d="M12 3v12"/><path d="m17 8-5-5-5 5"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></svg></span><span class="mt-1 text-base font-medium">Drop a room-load CSV or Cool Calc MJ8 report</span><span class="text-sm">or <span class="link link-primary">browse files</span> · CSV, or PDF up to 10 MB and 200 pages</span>
+                      <input type="file" name="file" accept=".csv,text/csv,.pdf,application/pdf" class="sr-only" aria-label="Choose a room-load CSV or Cool Calc MJ8 report PDF" required></label>
+                      <div data-import-file="" hidden class="flex items-center gap-3 rounded-box border border-base-content/15 bg-base-200 p-3">
+                        <span class="grid size-9 shrink-0 place-items-center rounded-md bg-primary/10 text-primary"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text-icon lucide-file-text"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+                        <div class="min-w-0 flex-1">
+                          <p class="truncate font-medium" data-import-file-name=""></p>
+                          <p class="text-sm" data-import-file-size=""></p>
+                        </div>
+                        <button type="button" class="btn btn-ghost btn-sm" data-import-replace="">Replace</button>
+                        <button type="button" class="btn btn-ghost btn-sm btn-square" aria-label="Remove file" data-import-remove=""><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                      </div>
+                      <div data-import-progress="" class="mt-4" hidden>
+                        <p class="mb-1 flex justify-between text-sm" aria-live="polite"><span data-import-progress-label="">Uploading…</span><span data-import-progress-value=""></span></p>
+                        <progress class="progress progress-primary w-full" max="100" aria-label="Import progress"></progress>
+                      </div>
+                      <div data-import-when="chosen" hidden>
+                        <p class="mt-4 text-sm" data-import-format="csv">This project already has rooms. Rooms are matched by name: matching rooms are updated with the CSV values, including register counts and airflow delegation, and missing rooms are added. Rooms absent from the file are kept.</p>
+                        <p class="mt-4 text-sm" data-import-format="pdf">This project already has rooms. Rooms are matched by name: matching rooms get the report's loads and levels, and missing rooms are added. Register counts, airflow delegation, and rooms absent from the report are kept.</p>
+                        <button class="btn btn-secondary btn-block mt-4" type="submit">Import rooms</button>
+                      </div>
+                      <p class="text-error mt-2" role="alert" hidden></p>
+                    </form>
                   </div>
                 </dialog>
               </div>

@@ -8,6 +8,7 @@
     "test:project-workspace": "node --test scripts/check_project_workspace.cjs",
     "test:equipment": "node --test scripts/check_equipment.cjs",
     "test:project-shortcuts": "node --test scripts/check_project_shortcuts.cjs",
+    "test:file-import": "node --test scripts/check_file_import.cjs",
     "test:fitting-shortcuts": "node --test scripts/check_fitting_shortcuts.cjs",
     "test:path-templates": "node scripts/check_swift_path_templates.cjs",
     "test": "echo \"Error: no test specified\" && exit 1",

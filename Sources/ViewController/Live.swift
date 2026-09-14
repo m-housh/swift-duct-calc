@@ -177,7 +177,8 @@ extension ViewController.Request {
 
 private enum ProjectPDFImportResult: HTML, Sendable {
   case created(ProjectClient.CreateProjectResponse, ProjectNavigation)
-  case confirmation([Project])
+  /// `takenName` is set when a confirmed import's chosen name is already used.
+  case confirmation([Project], suggestedName: String, takenName: String?)
   case missingZIP
 
   var body: some HTML {
@@ -193,11 +194,22 @@ private enum ProjectPDFImportResult: HTML, Sendable {
       p(.custom(name: "data-project-import-missing-zip", value: "")) {
         "This report does not include a ZIP code. Enter it below to create the project."
       }
-    case .confirmation(let projects):
-      div(.custom(name: "data-project-import-conflict", value: "")) {
-        p(.class("font-bold mb-2")) { "Possible duplicate project" }
-        p(.class("mb-2")) { "The report's name or address matches an existing project:" }
-        ul(.class("mb-4")) {
+    case .confirmation(let projects, let suggestedName, let takenName):
+      div(
+        .custom(name: "data-project-import-conflict", value: ""),
+        .data("suggested-name", value: suggestedName)
+      ) {
+        p(.class("font-bold mb-2")) {
+          takenName == nil ? "Possible duplicate project" : "Project name already used"
+        }
+        p(.class("mb-2")) {
+          if let takenName {
+            "A project named “\(takenName)” already exists:"
+          } else {
+            "The report's name or address matches an existing project:"
+          }
+        }
+        ul(.class("mb-4 list-disc ps-5")) {
           for project in projects {
             li {
               "\(project.name) — \(project.streetAddress), \(project.city), \(project.state) \(project.zipCode)"
@@ -205,7 +217,11 @@ private enum ProjectPDFImportResult: HTML, Sendable {
           }
         }
         p {
-          "You can create another project for a different duct system at this location. Existing projects will be kept. A matching name will receive a numbered suffix."
+          if takenName == nil {
+            "You can create another project for a different duct system at this location. Existing projects will be kept. Keep the suggested name or enter a new one."
+          } else {
+            "Enter a different name for the new project."
+          }
         }
       }
     }
@@ -262,17 +278,20 @@ extension SiteRoute.View.ProjectRoute {
           let user = try request.currentUser()
           @Dependency(\.pdfImport) var pdfImport
           var report = try await pdfImport.parseProject(.init(file: pdf.file))
-          if report.project.zipCode.isEmpty {
+          let parsed = report.project
+          var zipCode = parsed.zipCode
+          if zipCode.isEmpty {
             guard let zip = pdf.zipCode?.trimmingCharacters(in: .whitespacesAndNewlines),
               zip.range(of: #"^\d{5}(?:-\d{4})?$"#, options: .regularExpression) != nil
             else { return ProjectPDFImportResult.missingZIP }
-            let parsed = report.project
-            report = .init(
-              project: .init(
-                name: parsed.name, streetAddress: parsed.streetAddress,
-                city: parsed.city, state: parsed.state, zipCode: zip,
-                sensibleHeatRatio: parsed.sensibleHeatRatio), rooms: report.rooms)
+            zipCode = zip
           }
+          let name = pdf.name?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+          report = .init(
+            project: .init(
+              name: name.isEmpty ? parsed.name : name, streetAddress: parsed.streetAddress,
+              city: parsed.city, state: parsed.state, zipCode: zipCode,
+              sensibleHeatRatio: parsed.sensibleHeatRatio), rooms: report.rooms)
           do {
             let project = try await database.projects.importPDF(
               user.id, report, pdf.confirmDuplicate)
@@ -286,7 +305,9 @@ extension SiteRoute.View.ProjectRoute {
                 sensibleHeatRatio: project.sensibleHeatRatio,
                 completedSteps: database.projects.getCompletedSteps(project.id)), navigation)
           } catch let conflict as Project.ImportConflict {
-            return ProjectPDFImportResult.confirmation(conflict.projects)
+            return ProjectPDFImportResult.confirmation(
+              conflict.projects, suggestedName: conflict.suggestedName,
+              takenName: pdf.confirmDuplicate ? report.project.name : nil)
           }
         }
       }

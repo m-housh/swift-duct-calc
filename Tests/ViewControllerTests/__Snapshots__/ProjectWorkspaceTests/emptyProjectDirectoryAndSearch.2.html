@@ -59,73 +59,62 @@
   </div>
   <dialog id="projectForm" class="modal" aria-labelledby="projectForm-title">
     <div class="modal-box">
-      <h2 id="projectForm-title" class="text-2xl font-bold mb-6 pe-10">Project</h2>
-      <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Project" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-      <button type="button" class="btn btn-primary btn-block mb-4" aria-controls="newProjectPDF" aria-expanded="false" onclick="const upload = document.getElementById('newProjectPDF');
-upload.hidden = !upload.hidden;
-document.getElementById('projectDetailsForm').hidden = !upload.hidden;
-this.textContent = upload.hidden ? 'Import from Cool Calc PDF' : 'Enter project manually';
-this.setAttribute('aria-expanded', String(!upload.hidden));">Import from Cool Calc PDF</button>
-      <div id="newProjectPDF" hidden>
-        <p class="mb-4">Create a project using the name, address, sensible heat ratio, and room loads from a Cool Calc MJ8 report. You can edit them after import.</p>
-        <p class="text-sm mb-4">Maximum 10 MB and 200 pages.</p>
-        <form data-success-message="Import complete." hx-post="/projects/import/pdf" hx-target="body" hx-swap="outerHTML" hx-encoding="multipart/form-data" hx-disabled-elt="find button" hx-on::response-error="const error = this.querySelector('[role=alert]');
+      <h2 id="projectForm-title" class="text-2xl font-bold mb-6 pe-10">New project</h2>
+      <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close New project" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+      <div role="tablist" class="tabs tabs-box mb-5 grid grid-cols-2" aria-label="How to start the project" data-project-form-tabs="">
+        <button type="button" id="projectImportTab" role="tab" class="tab tab-active" aria-controls="projectImportPanel" aria-selected="true" tabindex="0">Import report</button>
+        <button type="button" id="projectManualTab" role="tab" class="tab" aria-controls="projectDetailsForm" aria-selected="false" tabindex="-1">Enter manually</button>
+      </div>
+      <div id="projectImportPanel" role="tabpanel" aria-labelledby="projectImportTab">
+        <p class="mb-4">Creates the project with its name, address, sensible heat ratio, and room loads from a Cool Calc MJ8 report. You can edit them after import.</p>
+        <form data-success-message="Import complete." data-file-import="" data-file-types="Cool Calc MJ8 report PDF" data-reading-label="Reading project and room loads…" hx-post="/projects/import/pdf" hx-target="body" hx-swap="outerHTML" hx-encoding="multipart/form-data" hx-disabled-elt="find button" hx-on::response-error="const error = this.querySelector('[role=alert]');
 error.textContent = event.detail.xhr.status === 413
   ? 'The file is too large. Choose a file smaller than 10 MB.'
   : 'The server could not complete the upload. Please try again.';
 error.hidden = false;" hx-on::send-error="const error = this.querySelector('[role=alert]');
 error.textContent = 'The connection to the server was lost. Check your connection and try again.';
-error.hidden = false;" hx-on::before-request="this.querySelector('[role=alert]').hidden = true;" enctype="multipart/form-data" hx-on::before-on-load="const response = new DOMParser().parseFromString(event.detail.xhr.responseText, 'text/html');
-const missingZIP = response.querySelector('[data-project-import-missing-zip]');
-if (missingZIP) {
-  event.preventDefault();
-  this.querySelector('[data-missing-zip]').hidden = false;
-  this.querySelector('[data-zip-message]').textContent = missingZIP.textContent;
-  this.elements.zipCode.disabled = false;
-  this.elements.zipCode.required = true;
-  this.elements.zipCode.focus();
-}
-const conflict = response.querySelector('[data-project-import-conflict]');
-if (conflict) {
-  event.preventDefault();
-  const warning = this.querySelector('[data-duplicate-warning]');
-  warning.querySelector('[data-duplicate-details]').replaceChildren(conflict);
-  warning.hidden = false;
-  this.querySelector('[data-import-submit]').hidden = true;
-  warning.querySelector('button').focus();
-}" hx-on::after-request="this.elements.confirmDuplicate.value = 'false';">
+error.hidden = false;" hx-on::before-request="this.querySelector('[role=alert]').hidden = true;" enctype="multipart/form-data" data-project-import="">
+          <label data-import-dropzone="" class="import-dropzone flex cursor-pointer flex-col items-center gap-2 rounded-box border-2
+          border-dashed border-base-content/25 px-6 py-8 text-center transition-colors
+          hover:border-primary hover:bg-primary/5 focus-within:outline-2
+          focus-within:outline-offset-2 focus-within:outline-primary
+          data-[dragover]:border-primary data-[dragover]:bg-primary/10"><span class="grid size-14 place-items-center rounded-full bg-primary/10 text-primary"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload-icon lucide-upload"><path d="M12 3v12"/><path d="m17 8-5-5-5 5"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></svg></span><span class="mt-1 text-base font-medium">Drop your Cool Calc MJ8 report</span><span class="text-sm">or <span class="link link-primary">browse files</span> · PDF up to 10 MB and 200 pages</span>
+          <input type="file" name="file" accept=".pdf,application/pdf" class="sr-only" aria-label="Choose a Cool Calc MJ8 report PDF" required></label>
+          <div data-import-file="" hidden class="flex items-center gap-3 rounded-box border border-base-content/15 bg-base-200 p-3">
+            <span class="grid size-9 shrink-0 place-items-center rounded-md bg-primary/10 text-primary"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text-icon lucide-file-text"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+            <div class="min-w-0 flex-1">
+              <p class="truncate font-medium" data-import-file-name=""></p>
+              <p class="text-sm" data-import-file-size=""></p>
+            </div>
+            <button type="button" class="btn btn-ghost btn-sm" data-import-replace="">Replace</button>
+            <button type="button" class="btn btn-ghost btn-sm btn-square" aria-label="Remove file" data-import-remove=""><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+          </div>
+          <div data-import-progress="" class="mt-4" hidden>
+            <p class="mb-1 flex justify-between text-sm" aria-live="polite"><span data-import-progress-label="">Uploading…</span><span data-import-progress-value=""></span></p>
+            <progress class="progress progress-primary w-full" max="100" aria-label="Import progress"></progress>
+          </div>
           <input type="hidden" name="confirmDuplicate" value="false">
-          <input type="file" name="file" accept=".pdf,application/pdf" aria-label="Cool Calc PDF" required onchange="this.form.elements.confirmDuplicate.value = 'false';
-this.form.querySelector('[data-duplicate-warning]').hidden = true;
-this.form.querySelector('[data-import-submit]').hidden = false;
-this.form.querySelector('[data-missing-zip]').hidden = true;
-this.form.elements.zipCode.disabled = true;
-this.form.elements.zipCode.required = false;
-this.form.elements.zipCode.value = '';">
-          <div data-missing-zip="" class="mt-6" hidden>
-            <p class="mb-4" data-zip-message="" aria-live="polite"></p>
+          <div data-import-when="missing-zip" hidden>
+            <p class="mt-4 mb-4" data-zip-message="" aria-live="polite"></p>
             ZIP code<label class="input w-full"><span class="label"></span>
             <input name="zipCode" type="text" placeholder="ZIP code" pattern="[0-9]{5}(-[0-9]{4})?" disabled></label>
           </div>
-          <div data-import-submit="">
-            <button class="btn btn-secondary btn-block mt-6" type="submit">Create project from PDF</button>
-          </div>
-          <div data-duplicate-warning="" class="mt-6" hidden aria-live="polite">
+          <div data-import-when="duplicate" class="mt-4" hidden aria-live="polite">
             <div data-duplicate-details=""></div>
-            <div class="flex gap-4 mt-6">
-              <button type="button" class="btn btn-outline" onclick="this.form.elements.confirmDuplicate.value = 'false';
-this.form.querySelector('[data-duplicate-warning]').hidden = true;
-this.form.querySelector('[data-import-submit]').hidden = false;
-this.form.querySelector('input[type=file]').focus();">Cancel</button>
-              <button class="btn btn-secondary" type="submit" onclick="this.form.elements.confirmDuplicate.value = 'true';">Create another project</button>
+            Name<label class="input w-full mt-4"><span class="label"></span>
+            <input name="name" type="text" placeholder="Project name" disabled></label>
+            <div class="mt-6 grid grid-cols-2 gap-2">
+              <button type="button" class="btn btn-outline" data-import-cancel="">Cancel</button>
+              <button class="btn btn-secondary" type="submit">Create project</button>
             </div>
           </div>
-          <p class="htmx-indicator text-sm mt-2">Reading project and room loads…</p>
+          <div data-import-submit="" data-import-when="chosen missing-zip" hidden>
+            <button class="btn btn-secondary btn-block mt-4" type="submit">Create project</button>
+          </div>
           <p class="text-error mt-2" role="alert" hidden></p>
         </form>
       </div>
-      <div id="projectDetailsForm">
-        <div class="divider mt-2 mb-6 text-sm">or enter details manually</div>
+      <div id="projectDetailsForm" role="tabpanel" aria-labelledby="projectManualTab" hidden>
         <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4" hx-post="/projects" hx-target="body" hx-swap="outerHTML">
           <label class="input w-full"><span class="label">Name</span>
           <input name="name" type="text" value="" placeholder="Project Name" required autofocus>

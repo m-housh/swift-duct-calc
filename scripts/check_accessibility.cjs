@@ -99,7 +99,7 @@ const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'nig
 
     const addProject = page.getByRole('button', { name: 'Add Project', exact: true });
     await addProject.click();
-    let dialog = page.getByRole('dialog', { name: 'Project', exact: true });
+    let dialog = page.getByRole('dialog', { name: 'New project', exact: true });
     await dialog.waitFor();
     await audit('Project dialog', true);
     for (let tab = 0; tab < 12; tab++) {
@@ -109,6 +109,8 @@ const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'nig
     await page.keyboard.press('Escape');
     await focused(addProject);
     await addProject.click();
+    await dialog.getByRole('tab', { name: 'Enter manually', exact: true }).click();
+    await audit('Project dialog manual entry', true);
     await fill({ name: 'Accessibility test', streetAddress: '123 Test St', city: 'Test', state: 'OH', zipCode: '45040' }, dialog);
     await dialog.getByRole('button', { name: 'Submit', exact: true }).click();
     await page.getByRole('heading', { name: 'Room loads', exact: true }).waitFor();

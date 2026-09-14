@@ -24,30 +24,29 @@ struct ProjectForm: HTML, Sendable {
   }
 
   var body: some HTML {
-    ModalForm(id: Self.id, title: "Project", dismiss: dismiss) {
+    ModalForm(id: Self.id, title: project == nil ? "New project" : "Project", dismiss: dismiss) {
       if project == nil {
-        button(
-          .type(.button), .class("btn btn-primary btn-block mb-4"),
-          .custom(name: "aria-controls", value: "newProjectPDF"),
-          .custom(name: "aria-expanded", value: "false"),
-          .custom(
-            name: "onclick",
-            value: """
-              const upload = document.getElementById('newProjectPDF');
-              upload.hidden = !upload.hidden;
-              document.getElementById('projectDetailsForm').hidden = !upload.hidden;
-              this.textContent = upload.hidden ? 'Import from Cool Calc PDF' : 'Enter project manually';
-              this.setAttribute('aria-expanded', String(!upload.hidden));
-              """)
-        ) { "Import from Cool Calc PDF" }
-        div(.id("newProjectPDF"), .hidden) {
+        // Tab switching lives in project-import.js.
+        div(
+          .role("tablist"), .class("tabs tabs-box mb-5 grid grid-cols-2"),
+          .init(name: "aria-label", value: "How to start the project"),
+          .data("project-form-tabs", value: "")
+        ) {
+          Tab(
+            title: "Import report", id: "projectImportTab", panel: "projectImportPanel",
+            selected: true)
+          Tab(
+            title: "Enter manually", id: "projectManualTab", panel: "projectDetailsForm",
+            selected: false)
+        }
+        div(
+          .id("projectImportPanel"), .role("tabpanel"),
+          .init(name: "aria-labelledby", value: "projectImportTab")
+        ) {
           ProjectPDFForm()
         }
       }
       div(.id("projectDetailsForm")) {
-        if project == nil {
-          div(.class("divider mt-2 mb-6 text-sm")) { "or enter details manually" }
-        }
         form(
           .data("success-message", value: "Changes saved."),
           .class("grid grid-cols-1 gap-4"),
@@ -68,6 +67,7 @@ struct ProjectForm: HTML, Sendable {
             .value(project?.name),
             .placeholder("Project Name"),
             .required,
+            // Dialogs skip hidden autofocus targets, so this only applies when editing.
             .autofocus
           )
 
@@ -111,7 +111,25 @@ struct ProjectForm: HTML, Sendable {
             .attributes(.class("btn-block my-6"))
         }
       }
+      .attributes(
+        .role("tabpanel"), .init(name: "aria-labelledby", value: "projectManualTab"), .hidden,
+        when: project == nil)
     }
   }
 
+  private struct Tab: HTML, Sendable {
+    let title: String
+    let id: String
+    let panel: String
+    let selected: Bool
+
+    var body: some HTML<HTMLTag.button> {
+      button(
+        .type(.button), .id(id), .role("tab"), .class(selected ? "tab tab-active" : "tab"),
+        .init(name: "aria-controls", value: panel),
+        .init(name: "aria-selected", value: String(selected)),
+        .tabindex(selected ? 0 : -1)
+      ) { title }
+    }
+  }
 }
