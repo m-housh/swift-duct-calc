@@ -26,18 +26,20 @@ const assert = require('node:assert/strict');
   const endpoint=base+`/projects/${projectID}/effective-lengths`;
   const payload={name:'Review initial',straightLengths:[10],snapshot:{templateID:data.template.id,revision:data.template.revision,configuration:config},rows:[{id:randomUUID(),stepID,fittingID:'1B',inputs:{fixed:{}},quantity:1}]};
   const save=await owner.request.post(endpoint+'/guided',{data:payload}); assert((await save.text()).includes('data-redirect'));
-  await page.goto(endpoint); const href=await page.getByRole('link',{name:'Edit',exact:true}).first().getAttribute('href');
-  await page.goto(base+href); const saved=JSON.parse(await page.locator('#path-template-data').textContent()).path;
+  await page.goto(endpoint);
+  const href=await page.locator('.path-table').getByRole('link',{name:'Edit Review initial',exact:true}).getAttribute('href');
+  await page.goto(base+href);
+  const saved=JSON.parse(await page.locator('#fitting-path').getAttribute('data-baseline'));
   const first={...payload,id:saved.id,revision:saved.revision,name:'Newer saved edit',straightLengths:[25]};
   const stale={...payload,id:saved.id,revision:saved.revision,name:'Stale tab overwrite',straightLengths:[10]};
   assert((await (await owner.request.post(endpoint+'/guided',{data:first})).text()).includes('data-redirect'));
   const staleResponse=await owner.request.post(endpoint+'/guided',{data:stale});
   assert((await staleResponse.text()).includes('This path changed in another tab'));
-  // The browser keeps the stale draft open when the server refuses the save.
-  await page.locator('[data-path=name]').fill('Unsaved stale draft');
-  await page.locator('[data-action=save-path]').click();
-  await page.getByRole('status').filter({hasText:'This path changed in another tab'}).waitFor();
-  assert.equal(await page.locator('[data-path=name]').inputValue(),'Unsaved stale draft');
+  // The current editor keeps the stale draft open after a concurrent guided-path save.
+  await page.locator('#path-name').fill('Unsaved stale draft');
+  await page.locator('#save-path').click();
+  await page.locator('#path-status').filter({hasText:'This path changed since you opened it'}).waitFor();
+  assert.equal(await page.locator('#path-name').inputValue(),'Unsaved stale draft');
   page.on('dialog', dialog => dialog.accept());
   const leak=await other.request.get(endpoint);
   assert.equal(leak.status(),404);
@@ -62,6 +64,6 @@ const assert = require('node:assert/strict');
   const ownDelete=await owner.request.delete(endpoint+'/'+saved.id);
   assert.equal(ownDelete.status(),200);
   assert(!(await (await owner.request.get(endpoint)).text()).includes('Newer saved edit'));
-  console.log('PASS: ownership guards, stale guided save with retained browser draft, unusable template rejection, and owner deletion.');
+  console.log('PASS: ownership guards, stale guided and browser saves with retained draft, unusable template rejection, and owner deletion.');
  } finally {await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1)});

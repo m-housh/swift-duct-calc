@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* Indicator.Size and TooltipPosition construct these class names in Swift. */
+@source inline("loading-xs loading-sm loading-md loading-lg loading-xl tooltip-top tooltip-bottom tooltip-left tooltip-right");
 @plugin "daisyui" {
 	themes: all;
 }
