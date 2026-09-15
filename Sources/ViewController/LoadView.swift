@@ -1,15 +1,33 @@
+import DatabaseClient
+import Dependencies
 import Elementary
+import ManualDCore
 
-/// Load data before constructing HTML, allowing failures to reach the request error handler.
-func loadView<Value, Content: HTML & Sendable>(
-  _ load: () async throws -> Value,
-  onSuccess: (Value) async throws -> Content
-) async rethrows -> some HTML & Sendable {
-  try await onSuccess(load())
-}
+extension ViewController.Request {
+  /// Render a project tab, distinguishing failed writes from failed refreshes after a save.
+  func projectTab<Content: HTML & Sendable>(
+    _ projectID: Project.ID, _ tab: SiteRoute.View.ProjectRoute.DetailRoute.Tab,
+    catching: (@Sendable () async throws -> Void)? = nil,
+    completedSteps: Project.CompletedSteps? = nil,
+    hasStepActions: Bool = true,
+    @HTMLBuilder content: () async throws -> Content
+  ) async throws -> AnySendableHTML {
+    @Dependency(\.database) var database
 
-func loadView<Content: HTML & Sendable>(
-  _ content: () async throws -> Content
-) async rethrows -> some HTML & Sendable {
-  try await content()
+    return try await afterMutation(catching) {
+      try await view(projectID: projectID) {
+        let steps =
+          if let completedSteps { completedSteps } else {
+            try await database.projects.getCompletedSteps(projectID)
+          }
+        let content = try await content()
+        return ProjectView(
+          projectID: projectID, activeTab: tab, completedSteps: steps,
+          hasStepActions: hasStepActions
+        ) {
+          content
+        }
+      }
+    }
+  }
 }

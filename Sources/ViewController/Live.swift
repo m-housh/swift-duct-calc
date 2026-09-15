@@ -26,20 +26,18 @@ extension ViewController.Request {
       return HomePreviewPage(step: step)
     case .fittingReference(let query):
       @Dependency(\.fittingClient) var fittingClient
-      return try await loadView {
-        let page = try FittingReferencePage(
-          catalog: fittingClient.reference(), query: query, isLoggedIn: isLoggedIn)
-        let profile = await self.profile
-        return MainPage(
-          theme: profile?.theme ?? .default,
-          keybindings: (try? currentUser().keybindings) ?? .init(),
-          title: "Fitting reference · Duct Calc",
-          stylesheets: ["/fittings/styles.css"],
-          scripts: ["app.js?v=keybindings-1"]
-            .map { "/fittings/\($0)" }
-        ) {
-          FittingsView(page: page)
-        }
+      let page = try FittingReferencePage(
+        catalog: fittingClient.reference(), query: query, isLoggedIn: isLoggedIn)
+      let profile = await self.profile
+      return MainPage(
+        theme: profile?.theme ?? .default,
+        keybindings: (try? currentUser().keybindings) ?? .init(),
+        title: "Fitting reference · Duct Calc",
+        stylesheets: ["/fittings/styles.css"],
+        scripts: ["app.js?v=keybindings-1"]
+          .map { "/fittings/\($0)" }
+      ) {
+        FittingsView(page: page)
       }
     case .privacyPolicy:
       return await view {
@@ -57,11 +55,8 @@ extension ViewController.Request {
         }
       case .submit(let login):
         return try await view {
-          try await loadView {
-            try await authenticate(login)
-          } onSuccess: { _ in
-            LoggedIn(next: login.next)
-          }
+          _ = try await authenticate(login)
+          return LoggedIn(next: login.next)
         }
       }
     case .signup(let route):
@@ -73,22 +68,16 @@ extension ViewController.Request {
       case .submit(let request):
         // Create a new user and log them in.
         return try await view {
-          try await loadView {
-            try await createAndAuthenticate(request)
-          } onSuccess: { user in
-            UserProfileForm(userID: user.id, signup: true)
-          }
+          let user = try await createAndAuthenticate(request)
+          return UserProfileForm(userID: user.id, signup: true)
         }
       case .submitProfile(let profile):
         return try await afterMutation({
           _ = try await database.userProfiles.create(profile)
         }) {
           try await view {
-            try await loadView {
-              try await database.projects.fetch(profile.userID, .first)
-            } onSuccess: { projects in
-              ProjectsTable(userID: profile.userID, projects: projects)
-            }
+            let projects = try await database.projects.fetch(profile.userID, .first)
+            return ProjectsTable(userID: profile.userID, projects: projects)
           }
         }
       }
@@ -215,80 +204,59 @@ extension SiteRoute.View.ProjectRoute {
     switch self {
     case .index:
       return try await request.view {
-        try await loadView {
-          let user = try request.currentUser()
-          return try await (
-            user.id,
-            database.projects.fetch(user.id, .first)
-          )
-
-        } onSuccess: { (userID, projects) in
-          ProjectsTable(userID: userID, projects: projects)
-        }
+        let user = try request.currentUser()
+        let projects = try await database.projects.fetch(user.id, .first)
+        return ProjectsTable(userID: user.id, projects: projects)
       }
     case .search(let search):
       return try await request.view {
-        try await loadView {
-          let user = try request.currentUser()
-          return try await (
-            user.id,
-            database.projects.search(
-              user.id, search.query, .init(page: max(1, search.page), per: 25))
-          )
-        } onSuccess: { (userID, projects) in
-          ProjectsTable(userID: userID, projects: projects, query: search.query)
-        }
+        let user = try request.currentUser()
+        let projects = try await database.projects.search(
+          user.id, search.query, .init(page: max(1, search.page), per: 25))
+        return ProjectsTable(userID: user.id, projects: projects, query: search.query)
       }
     case .page(let page):
-      return try await loadView {
-        let user = try request.currentUser()
-        return try await (
-          user.id,
-          database.projects.fetch(user.id, page)
-        )
-      } onSuccess: { (_, projects) in
-        ProjectsTable.Rows(projects: projects)
-      }
+      let user = try request.currentUser()
+      let projects = try await database.projects.fetch(user.id, page)
+      return ProjectsTable.Rows(projects: projects)
 
     case .importPDF(let pdf):
       return try await request.view {
-        try await loadView {
-          let user = try request.currentUser()
-          @Dependency(\.pdfImport) var pdfImport
-          var report = try await pdfImport.parseProject(.init(file: pdf.file))
-          let parsed = report.project
-          var zipCode = parsed.zipCode
-          if zipCode.isEmpty {
-            guard let zip = pdf.zipCode?.trimmingCharacters(in: .whitespacesAndNewlines),
-              zip.range(of: #"^\d{5}(?:-\d{4})?$"#, options: .regularExpression) != nil
-            else { return ProjectPDFImportResult.missingZIP }
-            zipCode = zip
+        let user = try request.currentUser()
+        @Dependency(\.pdfImport) var pdfImport
+        var report = try await pdfImport.parseProject(.init(file: pdf.file))
+        let parsed = report.project
+        var zipCode = parsed.zipCode
+        if zipCode.isEmpty {
+          guard let zip = pdf.zipCode?.trimmingCharacters(in: .whitespacesAndNewlines),
+            zip.range(of: #"^\d{5}(?:-\d{4})?$"#, options: .regularExpression) != nil
+          else { return ProjectPDFImportResult.missingZIP }
+          zipCode = zip
+        }
+        let name = pdf.name?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        report = .init(
+          project: .init(
+            name: name.isEmpty ? parsed.name : name, streetAddress: parsed.streetAddress,
+            city: parsed.city, state: parsed.state, zipCode: zipCode,
+            sensibleHeatRatio: parsed.sensibleHeatRatio), rooms: report.rooms)
+        do {
+          let project = try await database.projects.importPDF(
+            user.id, report, pdf.confirmDuplicate)
+          return try await afterMutation({}) {
+            @Dependency(\.date.now) var now
+            try await database.projects.recordOpen(project.id, user.id, now)
+            let navigation = try await ProjectNavigation(
+              project: project, recent: database.projects.recent(user.id))
+            return try await ProjectPDFImportResult.created(
+              .init(
+                projectID: project.id, rooms: database.rooms.fetch(project.id),
+                sensibleHeatRatio: project.sensibleHeatRatio,
+                completedSteps: database.projects.getCompletedSteps(project.id)), navigation)
           }
-          let name = pdf.name?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-          report = .init(
-            project: .init(
-              name: name.isEmpty ? parsed.name : name, streetAddress: parsed.streetAddress,
-              city: parsed.city, state: parsed.state, zipCode: zipCode,
-              sensibleHeatRatio: parsed.sensibleHeatRatio), rooms: report.rooms)
-          do {
-            let project = try await database.projects.importPDF(
-              user.id, report, pdf.confirmDuplicate)
-            return try await afterMutation({}) {
-              @Dependency(\.date.now) var now
-              try await database.projects.recordOpen(project.id, user.id, now)
-              let navigation = try await ProjectNavigation(
-                project: project, recent: database.projects.recent(user.id))
-              return try await ProjectPDFImportResult.created(
-                .init(
-                  projectID: project.id, rooms: database.rooms.fetch(project.id),
-                  sensibleHeatRatio: project.sensibleHeatRatio,
-                  completedSteps: database.projects.getCompletedSteps(project.id)), navigation)
-            }
-          } catch let conflict as Project.ImportConflict {
-            return ProjectPDFImportResult.confirmation(
-              conflict.projects, suggestedName: conflict.suggestedName,
-              takenName: pdf.confirmDuplicate ? report.project.name : nil)
-          }
+        } catch let conflict as Project.ImportConflict {
+          return ProjectPDFImportResult.confirmation(
+            conflict.projects, suggestedName: conflict.suggestedName,
+            takenName: pdf.confirmDuplicate ? report.project.name : nil)
         }
       }
 
@@ -325,10 +293,7 @@ extension SiteRoute.View.ProjectRoute {
       case .frictionRate(let route):
         return try await route.renderView(on: request, projectID: projectID)
       case .pdf:
-        // FIX: This should return a pdf to download or be wrapped in a
-        //      result view.
-        // return try! await projectClient.toHTML(projectID)
-        // This get's handled elsewhere because it returns a response, not a view.
+        // PDF responses are handled by siteHandler in configure.swift.
         fatalError()
       case .rooms(let route):
         return try await route.renderView(on: request, projectID: projectID)
@@ -345,19 +310,13 @@ extension SiteRoute.View.ProjectRoute {
     @Dependency(\.database) var database
 
     return try await afterMutation(catching) {
-      return try await request.view(projectID: projectID) {
-        try await loadView {
-          guard let detail = try await database.projects.detail(projectID) else {
-            throw NotFoundError()
-          }
-          @Dependency(\.manualD) var manualD
-          let friction = try? await manualD.frictionRate(details: detail)
-          return (try await database.projects.getCompletedSteps(projectID), detail, friction)
-        } onSuccess: { (steps, detail, friction) in
-          ProjectView(projectID: projectID, activeTab: .project, completedSteps: steps) {
-            ProjectDetail(project: detail.project, detail: detail, frictionRate: friction)
-          }
-        }
+      guard let detail = try await database.projects.detail(projectID) else {
+        throw NotFoundError()
+      }
+      @Dependency(\.manualD) var manualD
+      let friction = try? await manualD.frictionRate(details: detail)
+      return try await request.projectTab(projectID, .project) {
+        ProjectDetail(project: detail.project, detail: detail, frictionRate: friction)
       }
     }
   }
@@ -394,19 +353,9 @@ extension SiteRoute.View.ProjectRoute.EquipmentInfoRoute {
   ) async throws -> AnySendableHTML {
     @Dependency(\.database) var database
 
-    return try await afterMutation(catching) {
-      return try await request.view(projectID: projectID) {
-        try await loadView {
-          return (
-            try await database.projects.getCompletedSteps(projectID),
-            try await database.equipment.fetch(projectID)
-          )
-        } onSuccess: { (steps, equipment) in
-          ProjectView(projectID: projectID, activeTab: .equipment, completedSteps: steps) {
-            EquipmentInfoView(equipmentInfo: equipment, projectID: projectID)
-          }
-        }
-      }
+    return try await request.projectTab(projectID, .equipment, catching: catching) {
+      let equipment = try await database.equipment.fetch(projectID)
+      return EquipmentInfoView(equipmentInfo: equipment, projectID: projectID)
     }
   }
 }
@@ -471,20 +420,10 @@ extension SiteRoute.View.ProjectRoute.RoomRoute {
   ) async throws -> AnySendableHTML {
     @Dependency(\.database) var database
 
-    return try await afterMutation(catching) {
-      return try await request.view(projectID: projectID) {
-        try await loadView {
-          return (
-            try await database.projects.getCompletedSteps(projectID),
-            try await database.rooms.fetch(projectID),
-            try await database.projects.getSensibleHeatRatio(projectID)
-          )
-        } onSuccess: { (steps, rooms, shr) in
-          ProjectView(projectID: projectID, activeTab: .rooms, completedSteps: steps) {
-            RoomsView(rooms: rooms, sensibleHeatRatio: shr)
-          }
-        }
-      }
+    return try await request.projectTab(projectID, .rooms, catching: catching) {
+      let rooms = try await database.rooms.fetch(projectID)
+      let shr = try await database.projects.getSensibleHeatRatio(projectID)
+      return RoomsView(rooms: rooms, sensibleHeatRatio: shr)
     }
   }
 }
@@ -531,33 +470,20 @@ extension SiteRoute.View.ProjectRoute.FrictionRateRoute {
     @Dependency(\.manualD) var manualD
 
     return try await afterMutation(catching) {
-      return try await request.view(projectID: projectID) {
-        try await loadView {
-          let library = try await database.filters.fetch(try request.currentUser().id)
-          let allowance = try await database.filters.allowance(projectID)
-          guard let details = try await database.projects.detail(projectID) else {
-            throw NotFoundError()
-          }
-
-          return (
-            try await database.projects.getCompletedSteps(projectID),
-            details.componentLosses,
-            details.maxContainer,
-            details.equipmentInfo, library, allowance,
-            try await manualD.frictionRate(details: details)
-          )
-        } onSuccess: { (steps, losses, lengths, equipment, library, allowance, frictionRate) in
-          ProjectView(projectID: projectID, activeTab: .frictionRate, completedSteps: steps) {
-            FrictionRateView(
-              componentLosses: losses,
-              equivalentLengths: lengths,
-              frictionRate: frictionRate, blowerStatic: equipment?.staticPressure,
-              airflow: equipment?.largerAirflow, filterLibrary: library,
-              filterAllowance: allowance, filterStep: filterStep
-            )
-          }
-
-        }
+      let library = try await database.filters.fetch(try request.currentUser().id)
+      let allowance = try await database.filters.allowance(projectID)
+      guard let details = try await database.projects.detail(projectID) else {
+        throw NotFoundError()
+      }
+      return try await request.projectTab(projectID, .frictionRate) {
+        let frictionRate = try await manualD.frictionRate(details: details)
+        return FrictionRateView(
+          componentLosses: details.componentLosses,
+          equivalentLengths: details.maxContainer,
+          frictionRate: frictionRate, blowerStatic: details.equipmentInfo?.staticPressure,
+          airflow: details.equipmentInfo?.largerAirflow, filterLibrary: library,
+          filterAllowance: allowance, filterStep: filterStep
+        )
       }
     }
   }
@@ -576,29 +502,25 @@ extension SiteRoute.View.ProjectRoute.ComponentLossRoute {
     case .index:
       return EmptyHTML()
     case .delete(let id):
-      return try await view(on: request, projectID: projectID) {
+      return try await SiteRoute.View.ProjectRoute.FrictionRateRoute.index.view(
+        on: request, projectID: projectID
+      ) {
         _ = try await database.componentLosses.delete(id)
       }
     case .submit(let form):
-      return try await view(on: request, projectID: projectID) {
+      return try await SiteRoute.View.ProjectRoute.FrictionRateRoute.index.view(
+        on: request, projectID: projectID
+      ) {
         _ = try await database.componentLosses.create(form)
       }
 
     case .update(let id, let form):
-      return try await view(on: request, projectID: projectID) {
+      return try await SiteRoute.View.ProjectRoute.FrictionRateRoute.index.view(
+        on: request, projectID: projectID
+      ) {
         _ = try await database.componentLosses.update(id, form)
       }
     }
-  }
-
-  func view(
-    on request: ViewController.Request,
-    projectID: Project.ID,
-    catching: (@Sendable () async throws -> Void)? = nil
-  ) async throws -> AnySendableHTML {
-
-    try await SiteRoute.View.ProjectRoute.FrictionRateRoute.index.view(
-      on: request, projectID: projectID, catching: catching)
   }
 
 }
@@ -639,21 +561,11 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
     catching: (@Sendable () async throws -> Void)? = nil
   ) async throws -> AnySendableHTML {
     @Dependency(\.database) var database
-    return try await afterMutation(catching) {
-      return try await request.view(projectID: projectID) {
-        try await loadView {
-          return (
-            try await database.projects.getCompletedSteps(projectID),
-            try await database.equivalentLengths.fetch(projectID),
-            try await database.equipment.fetch(projectID)?.coolingCFM
-          )
-        } onSuccess: { (steps, equivalentLengths, coolingCFM) in
-          ProjectView(projectID: projectID, activeTab: .equivalentLength, completedSteps: steps) {
-            EffectiveLengthsView(effectiveLengths: equivalentLengths, coolingCFM: coolingCFM)
-              .environment(ProjectViewValue.$projectID, projectID)
-          }
-        }
-      }
+    return try await request.projectTab(projectID, .equivalentLength, catching: catching) {
+      let equivalentLengths = try await database.equivalentLengths.fetch(projectID)
+      let coolingCFM = try await database.equipment.fetch(projectID)?.coolingCFM
+      return EffectiveLengthsView(effectiveLengths: equivalentLengths, coolingCFM: coolingCFM)
+        .environment(ProjectViewValue.$projectID, projectID)
     }
   }
 }
@@ -668,6 +580,26 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
     @Dependency(\.manualD) var manualD
     @Dependency(\.projectClient) var projectClient
 
+    func roomUpdate(_ roomID: Room.ID, register: Int) async throws -> AnySendableHTML {
+      try await afterMutation({}) {
+        let rooms = try await projectClient.calculateRoomDuctSizes(projectID)
+        guard let room = rooms.first(where: { $0.roomID == roomID && $0.roomRegister == register })
+        else {
+          throw ValidationError("This register is no longer available. Reload the duct sizes.")
+        }
+        return DuctSizingView.RoomUpdate(room: room, rooms: rooms)
+          .environment(ProjectViewValue.$projectID, projectID)
+      }
+    }
+
+    func setRectangularSizes(_ rooms: [RoomRegister], height: Int?) async throws -> AnySendableHTML
+    {
+      try await view(on: request, projectID: projectID) {
+        try await database.rooms.setRectangularSizes(
+          Dictionary(grouping: rooms, by: \.roomID).mapValues { $0.map(\.register) }, height)
+      }
+    }
+
     switch self {
     case .index:
       return try await view(on: request, projectID: projectID)
@@ -675,57 +607,20 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
     case .deleteRectangularSize(let roomID, let request):
       let room = try await database.rooms.clearRectangularSize(
         roomID, request.register, request.rectangularSizeID)
-      return try await afterMutation({}) {
-        try await loadView {
-          let rooms = try await projectClient.calculateRoomDuctSizes(projectID)
-          guard
-            let result =
-              rooms
-              .first(where: { $0.roomID == room.id && $0.roomRegister == request.register })
-          else {
-            throw ValidationError("This register is no longer available. Reload the duct sizes.")
-          }
-          return (room: result, rooms: rooms)
-        } onSuccess: { result in
-          DuctSizingView.RoomUpdate(room: result.room, rooms: result.rooms)
-            .environment(ProjectViewValue.$projectID, projectID)
-        }
-      }
+      return try await roomUpdate(room.id, register: request.register)
 
     case .roomRectangularForm(let roomID, let form):
       let room = try await database.rooms.updateRectangularSize(
         roomID,
         .init(id: form.id ?? .init(), register: form.register, height: form.height)
       )
-      return try await afterMutation({}) {
-        try await loadView {
-          let rooms = try await projectClient.calculateRoomDuctSizes(projectID)
-          guard
-            let result =
-              rooms
-              .first(where: { $0.roomID == room.id && $0.roomRegister == form.register })
-          else {
-            throw ValidationError("This register is no longer available. Reload the duct sizes.")
-          }
-          return (room: result, rooms: rooms)
-        } onSuccess: { result in
-          DuctSizingView.RoomUpdate(room: result.room, rooms: result.rooms)
-            .environment(ProjectViewValue.$projectID, projectID)
-        }
-      }
+      return try await roomUpdate(room.id, register: form.register)
 
     case .rectangularSizes(let form):
-      return try await view(on: request, projectID: projectID) {
-        try await database.rooms.setRectangularSizes(
-          Dictionary(grouping: form.rooms, by: \.roomID).mapValues { $0.map(\.register) },
-          form.height)
-      }
+      return try await setRectangularSizes(form.rooms, height: form.height)
 
     case .clearRectangularSizes(let rooms):
-      return try await view(on: request, projectID: projectID) {
-        try await database.rooms.setRectangularSizes(
-          Dictionary(grouping: rooms, by: \.roomID).mapValues { $0.map(\.register) }, nil)
-      }
+      return try await setRectangularSizes(rooms, height: nil)
 
     case .trunk(let route):
       switch route {
@@ -760,24 +655,20 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
     @Dependency(\.projectClient) var project
 
     return try await afterMutation(catching) {
-      return try await request.view(projectID: projectID) {
-        try await loadView {
-          let steps = try await database.projects.getCompletedSteps(projectID)
-          let content: Result<DuctSizes, Project.DuctSizingUnavailable>
-          do {
-            content = .success(try await project.calculateDuctSizes(projectID))
-          } catch let error as Project.DuctSizingUnavailable {
-            content = .failure(error)
-          }
-          return ProjectView(
-            projectID: projectID, activeTab: .ductSizing, completedSteps: steps,
-            hasStepActions: (try? content.get()) != nil
-          ) {
-            switch content {
-            case .success(let sizes): DuctSizingView(ductSizes: sizes)
-            case .failure(let error): DuctSizingErrorView(error: error)
-            }
-          }
+      let steps = try await database.projects.getCompletedSteps(projectID)
+      let content: Result<DuctSizes, Project.DuctSizingUnavailable>
+      do {
+        content = .success(try await project.calculateDuctSizes(projectID))
+      } catch let error as Project.DuctSizingUnavailable {
+        content = .failure(error)
+      }
+      return try await request.projectTab(
+        projectID, .ductSizing, completedSteps: steps,
+        hasStepActions: (try? content.get()) != nil
+      ) {
+        switch content {
+        case .success(let sizes): DuctSizingView(ductSizes: sizes)
+        case .failure(let error): DuctSizingErrorView(error: error)
         }
       }
     }
@@ -792,11 +683,8 @@ extension SiteRoute.View.UserRoute {
     switch self {
     case .logout:
       return try await request.view {
-        try await loadView {
-          try auth.logout()
-        } onSuccess: {
-          LoginForm(next: nil)
-        }
+        try auth.logout()
+        return LoginForm(next: nil)
       }
     case .keybindings(let route):
       return try await route.renderView(on: request)
@@ -839,15 +727,9 @@ extension SiteRoute.View.UserRoute.Profile {
 
     return try await afterMutation(catching) {
       return try await request.view {
-        try await loadView {
-          let user = try request.currentUser()
-          return (
-            user,
-            try await database.userProfiles.fetch(user.id)
-          )
-        } onSuccess: { (user, profile) in
-          UserView(user: user, profile: profile)
-        }
+        let user = try request.currentUser()
+        let profile = try await database.userProfiles.fetch(user.id)
+        return UserView(user: user, profile: profile)
       }
     }
   }
@@ -868,17 +750,13 @@ extension SiteRoute.View.DuctulatorRoute {
         )
       }
     case .submit(let form):
-      return try await loadView {
-        let ductSize = try await manualD.ductSize(cfm: form.cfm, frictionRate: form.frictionRate)
-        var rectangularSize: ManualDClient.RectangularSize? = nil
-        if let height = form.height {
-          rectangularSize = try await manualD.rectangularSize(
-            round: ductSize.finalSize, height: height)
-        }
-        return (ductSize, rectangularSize)
-      } onSuccess: { (ductSize, rectangularSize) in
-        DuctulatorView.Result(ductSize: ductSize, rectangularSize: rectangularSize)
+      let ductSize = try await manualD.ductSize(cfm: form.cfm, frictionRate: form.frictionRate)
+      var rectangularSize: ManualDClient.RectangularSize? = nil
+      if let height = form.height {
+        rectangularSize = try await manualD.rectangularSize(
+          round: ductSize.finalSize, height: height)
       }
+      return DuctulatorView.Result(ductSize: ductSize, rectangularSize: rectangularSize)
     }
   }
 }
