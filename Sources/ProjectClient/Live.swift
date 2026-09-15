@@ -52,7 +52,7 @@ extension ProjectClient: DependencyKey {
 
         response.headers.replaceOrAdd(name: .contentType, value: "application/pdf")
         response.headers.replaceOrAdd(
-          name: .contentDisposition, value: "attachment; filename=Duct-Calc.pdf"
+          name: .contentDisposition, value: "inline; filename=Duct-Calc.pdf"
         )
 
         return response

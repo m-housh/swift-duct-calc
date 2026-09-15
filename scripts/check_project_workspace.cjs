@@ -18,11 +18,11 @@ function setup(t, html = fixture) {
   };
   return {dom,doc,press,selected:() => doc.querySelector('.selected-row')?.dataset.record};
 }
-test('request errors announce a dismissible PDF-specific message', async t => {
-  const {dom,doc}=setup(t,'<button id="export" hx-ext="htmx-download">PDF</button><div id="app-error" role="alert"></div>');
-  doc.dispatchEvent(new dom.window.CustomEvent('htmx:responseError',{detail:{elt:doc.getElementById('export')}}));
+test('request errors announce a dismissible message', async t => {
+  const {dom,doc}=setup(t,'<button id="save">Save</button><div id="app-error" role="alert"></div>');
+  doc.dispatchEvent(new dom.window.CustomEvent('htmx:responseError',{detail:{elt:doc.getElementById('save')}}));
   await new Promise(resolve=>dom.window.requestAnimationFrame(resolve));
-  assert.match(doc.getElementById('app-error').textContent,/PDF export failed/);
+  assert.match(doc.getElementById('app-error').textContent,/The request could not be completed/);
   doc.querySelector('[aria-label="Dismiss error"]').click();
   assert.equal(doc.getElementById('app-error').textContent,'');
 });
@@ -230,18 +230,6 @@ test('application messages are text and diagnostic references remain visible', a
   assert(!doc.querySelector('img'));
   assert.match(doc.querySelector('[data-request-error]').textContent,/Error reference: example-reference/);
 });
-
-test('binary PDF errors use the application description', async t => {
-  const {dom,doc}=setup(t,'<button id="export" hx-ext="htmx-download">PDF</button><div id="app-error"></div>');
-  dom.window.TextDecoder=TextDecoder;
-  const failure={title:'Could not export PDF',message:'Add equipment airflow before exporting.',fields:[]};
-  const xhr={status:422,responseType:'arraybuffer',response:new TextEncoder().encode(JSON.stringify(failure)).buffer,getResponseHeader:()=> 'application/vnd.ductcalc.error+json'};
-  Object.defineProperty(xhr,'responseText',{get(){throw Error('Binary response cannot be read as text');}});
-  doc.dispatchEvent(new dom.window.CustomEvent('htmx:responseError',{detail:{xhr,elt:doc.getElementById('export')}}));
-  await new Promise(resolve=>dom.window.requestAnimationFrame(resolve));
-  assert.match(doc.getElementById('app-error').textContent,/Add equipment airflow/);
-});
-
 
 test('fetch errors retain safe recovery links and clear them with the next status', async t => {
   const {dom,doc} = setup(t, '<p id="status"></p>');

@@ -642,10 +642,10 @@ test('Import loads uses its own shortcut and preserves editing and dialog guards
 
 test('PDF shortcut activates the existing export control and respects page and editor scope', t => {
   const {document,press} = setup(t, snapshot(6));
-  const button = document.querySelector('#project-content button[hx-ext="htmx-download"]');
-  assert.equal(button.getAttribute('aria-keyshortcuts'), 'Control+Alt+E');
+  const link = document.querySelector('#project-content a[target="_blank"]');
+  assert.equal(link.getAttribute('aria-keyshortcuts'), 'Control+Alt+E');
   let exports = 0;
-  button.addEventListener('click', () => exports++);
+  link.addEventListener('click', () => exports++);
   assert(press('e').defaultPrevented);
   assert.equal(exports, 1);
   for (const options of [{ctrlKey:false}, {altKey:false}, {repeat:true}, {isComposing:true}, {shiftKey:true}]) {
@@ -656,14 +656,14 @@ test('PDF shortcut activates the existing export control and respects page and e
   const dialog = document.createElement('dialog'); dialog.open = true; document.body.append(dialog);
   assert.equal(press('e').defaultPrevented, false);
   dialog.remove();
-  button.disabled = true;
+  link.setAttribute('aria-disabled', 'true');
   assert.equal(press('e').defaultPrevented, false);
-  button.disabled = false;
+  link.removeAttribute('aria-disabled');
   document.querySelector('[data-keybindings]').dataset.keybindings = JSON.stringify({...bindings.defaults, exportPDF:'Alt+E'});
-  button.setAttribute('aria-keyshortcuts', 'Alt+E');
+  link.setAttribute('aria-keyshortcuts', 'Alt+E');
   assert.equal(press('e').defaultPrevented, false);
   assert(press('e', {ctrlKey:false}).defaultPrevented);
   assert.equal(exports, 2);
-  button.remove();
+  link.remove();
   assert.equal(press('e', {ctrlKey:false}).defaultPrevented, false);
 });

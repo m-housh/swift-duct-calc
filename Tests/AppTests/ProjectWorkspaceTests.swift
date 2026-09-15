@@ -68,6 +68,12 @@ struct ProjectWorkspaceIntegrationTests {
           #expect(!response.body.string.contains(">From template</a>"))
         }
       }
+      let pdf = try await client.sendRequest(.GET, base + "/pdf", headers: headers)
+      #expect(pdf.status == .ok)
+      #expect(pdf.headers.first(name: .contentType) == "application/pdf")
+      #expect(pdf.headers.first(name: .contentDisposition) == "inline; filename=Duct-Calc.pdf")
+      #expect(pdf.body.readableBytesView.starts(with: Array("%PDF".utf8)))
+
       let chooser = try await client.sendRequest(
         .GET, base + "/effective-lengths/guided", headers: headers)
       #expect(chooser.status == .ok)

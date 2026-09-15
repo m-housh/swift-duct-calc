@@ -27,21 +27,15 @@ struct DuctSizingView: HTML, Sendable {
         }
 
         div {
-          button(
+          a(
             .class("btn btn-primary"),
             .init(name: "aria-keyshortcuts", value: bindings[.exportPDF]),
-            .title("Export PDF, \(bindings.label(.exportPDF))"),
-            .hx.get(route: .project(.detail(projectID, .pdf))),
-            .hx.ext("htmx-download"),
-            .hx.swap(.none),
-            .hx.indicator()
+            .title("Export PDF in a new tab, \(bindings.label(.exportPDF))"),
+            .href(route: .project(.detail(projectID, .pdf))),
+            .target(.blank), .rel("noopener")
           ) {
-            span { "PDF" }
-            Indicator()
+            "PDF"
           }
-          // div {
-          //   Indicator()
-          // }
         }
 
       }
