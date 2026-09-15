@@ -16,6 +16,7 @@
     "test:keybindings-browser": "node scripts/check_keybindings_browser.cjs",
     "test:project-shortcuts": "node --test scripts/check_project_shortcuts.cjs",
     "test:file-import": "node --test scripts/check_file_import.cjs",
+    "test:fitting-merge-guards": "node scripts/check_fitting_merge_guards.cjs",
     "test:fitting-path-order": "node scripts/check_fitting_path_order.cjs",
     "test:fitting-shortcuts": "node --test scripts/check_fitting_shortcuts.cjs",
     "test:path-templates": "node scripts/check_swift_path_templates.cjs",
