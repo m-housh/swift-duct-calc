@@ -8,6 +8,53 @@ import VaporTesting
 
 @Suite(.dependencies { $0.context = .live })
 struct RequestErrorTests {
+  @Test func duplicateTrunkNamesReturnRenameMessage() async throws {
+    try await withApp(configure: { app in
+      app.logger.logLevel = .critical
+      try await configure(app, in: .live())
+      try await app.autoMigrate()
+    }) { app in
+      let database = DatabaseClient.live(database: app.db)
+      let user = try await database.users.create(
+        .init(
+          email: "trunks@example.test", password: "super-secret", confirmPassword: "super-secret"))
+      let project = try await database.projects.create(
+        user.id,
+        .init(
+          name: "Trunk tests", streetAddress: "1 Main", city: "Monroe", state: "OH",
+          zipCode: "45050"))
+      let trunk = try await database.trunkSizes.create(
+        .init(projectID: project.id, type: .supply, rooms: [:], height: 8, name: "Main trunk"))
+      let other = try await database.trunkSizes.create(
+        .init(projectID: project.id, type: .return, rooms: [:], height: 10, name: "Other trunk"))
+      let client = try app.testing()
+      let login = try await client.sendRequest(
+        .POST, "/login", headers: ["Content-Type": "application/x-www-form-urlencoded"],
+        body: .init(string: "email=trunks%40example.test&password=super-secret"))
+      let cookie = try #require(login.headers.first(name: .setCookie)).split(separator: ";")[0]
+      let headers: HTTPHeaders = [
+        "Cookie": String(cookie), "Content-Type": "application/x-www-form-urlencoded",
+        "HX-Request": "true",
+      ]
+      let path = "/projects/\(project.id)/duct-sizing/trunk"
+      for (method, url) in [(HTTPMethod.POST, path), (.PATCH, "\(path)/\(other.id)")] {
+        let response = try await client.sendRequest(
+          method, url, headers: headers,
+          body: .init(
+            string: "projectID=\(project.id)&type=return&name=Main+trunk&height=12"))
+        #expect(response.status == .unprocessableEntity)
+        let failure = try JSONDecoder().decode(
+          PresentationError.self, from: Data(response.body.readableBytesView))
+        #expect(
+          failure.message
+            == "A trunk with this name already exists in this project. Choose a different name.")
+        #expect(try await database.trunkSizes.fetch(project.id).count == 2)
+        #expect(try await database.trunkSizes.get(trunk.id) == trunk)
+        #expect(try await database.trunkSizes.get(other.id) == other)
+      }
+    }
+  }
+
   @Test func fallbackServerFailuresAreNotReportedAsMalformedForms() async throws {
     try await withApp(configure: { app in
       app.logger.logLevel = .critical

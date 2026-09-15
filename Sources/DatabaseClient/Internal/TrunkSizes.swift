@@ -17,6 +17,7 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
           let trunk = request.toModel()
           var roomProxies = [TrunkSize.RoomProxy]()
 
+          try await trunk.validateUniqueName(on: database)
           try await trunk.validateAndSave(on: database)
 
           for (roomID, registers) in request.rooms {
@@ -283,6 +284,7 @@ final class TrunkModel: Model, @unchecked Sendable {
     if let name = updates.name, name != self.name {
       self.name = name
     }
+    try await validateUniqueName(on: database)
     if hasChanges {
       try await self.validateAndSave(on: database)
     }
@@ -327,6 +329,22 @@ final class TrunkModel: Model, @unchecked Sendable {
 
     database.logger.debug("DONE WITH UPDATES")
 
+  }
+
+  /// Names identify trunks within a project, regardless of type or dimensions.
+  func validateUniqueName(on database: any Database) async throws {
+    guard let name else { return }
+    let normalizedName = name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+    let trunks = try await TrunkModel.query(on: database)
+      .filter(\.$project.$id == $project.id)
+      .all()
+    guard !trunks.contains(where: {
+      $0.id != id
+        && $0.name?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == normalizedName
+    }) else {
+      throw ValidationError(
+        "A trunk with this name already exists in this project. Choose a different name.")
+    }
   }
 }
 

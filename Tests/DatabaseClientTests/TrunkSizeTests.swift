@@ -48,6 +48,75 @@ struct TrunkSizeTests {
   }
 
   @Test
+  func duplicateNamesRequireRenaming() async throws {
+    try await withTestUserAndProject { _, project in
+      @Dependency(\.database) var database
+      let room = try await database.rooms.create(
+        project.id,
+        .init(name: "Living room", heatingLoad: 1000, coolingTotal: 800, registerCount: 2))
+      let trunk = try await database.trunkSizes.create(
+        .init(
+          projectID: project.id, type: .supply, rooms: [room.id: [1]], height: 8,
+          name: "Main trunk"))
+
+      for name in ["Main trunk", "main TRUNK", "  Main trunk\n"] {
+        for type in TrunkSize.TrunkType.allCases {
+          await #expect(throws: ValidationError.self) {
+            try await database.trunkSizes.create(
+              .init(
+                projectID: project.id, type: type, rooms: [room.id: [2]], height: 10,
+                name: name))
+          }
+        }
+      }
+      #expect(try await database.trunkSizes.fetch(project.id) == [trunk])
+
+      let other = try await database.trunkSizes.create(
+        .init(
+          projectID: project.id, type: .return, rooms: [room.id: [2]], height: 10,
+          name: "Other trunk"))
+      for name in ["Main trunk", "main TRUNK", "  Main trunk\n"] {
+        await #expect(throws: ValidationError.self) {
+          try await database.trunkSizes.update(
+            other.id, .init(type: .supply, rooms: [room.id: [1]], height: 12, name: name))
+        }
+        #expect(try await database.trunkSizes.get(other.id) == other)
+      }
+
+      let resized = try await database.trunkSizes.update(
+        trunk.id, .init(height: 12, name: "Main trunk"))
+      #expect(resized.height == 12)
+      #expect(resized.name == trunk.name)
+      let renamed = try await database.trunkSizes.update(other.id, .init(name: "Return trunk"))
+      #expect(renamed.name == "Return trunk")
+      try await database.trunkSizes.delete(trunk.id)
+      let reused = try await database.trunkSizes.update(other.id, .init(name: "Main trunk"))
+      #expect(reused.name == "Main trunk")
+    }
+  }
+
+  @Test
+  func namesAreScopedToProjectsAndUnnamedTrunksRemainSupported() async throws {
+    try await withTestUserAndProject { user, project in
+      @Dependency(\.database) var database
+      let otherProject = try await database.projects.create(
+        user.id,
+        .init(
+          name: "Other project", streetAddress: "1 Main", city: "Monroe", state: "OH",
+          zipCode: "45050"))
+      for projectID in [project.id, otherProject.id] {
+        _ = try await database.trunkSizes.create(
+          .init(projectID: projectID, type: .supply, rooms: [:], name: "Main trunk"))
+        for _ in 0..<2 {
+          _ = try await database.trunkSizes.create(
+            .init(projectID: projectID, type: .supply, rooms: [:]))
+        }
+        #expect(try await database.trunkSizes.fetch(projectID).count == 3)
+      }
+    }
+  }
+
+  @Test
   func notFound() async throws {
     try await withTestUserAndProject { _, project in
       @Dependency(\.database.trunkSizes) var trunks
