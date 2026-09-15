@@ -182,15 +182,12 @@ if (!window.ductCalcFocusInitialized) {
       let failure;
       if (name === 'htmx:responseError' && xhr?.getResponseHeader?.('Content-Type')?.startsWith('application/vnd.ductcalc.error+json')) {
         try {
-          const text = xhr.responseType === 'arraybuffer' ? new TextDecoder().decode(xhr.response) : xhr.responseText;
-          failure = JSON.parse(text);
+          failure = JSON.parse(xhr.responseText);
         } catch { /* A proxy or interrupted response may not contain the application error. */ }
       }
-      let message = elt?.closest('[hx-ext~="htmx-download"]')
-        ? 'PDF export failed. Please try again.'
-        : name === 'htmx:responseError'
-          ? 'The request could not be completed. Your current form is still on this page.'
-          : 'The connection was interrupted. We could not confirm whether the request completed. Check your connection and the saved result before trying again.';
+      let message = name === 'htmx:responseError'
+        ? 'The request could not be completed. Your current form is still on this page.'
+        : 'The connection was interrupted. We could not confirm whether the request completed. Check your connection and the saved result before trying again.';
       if (typeof failure?.message === 'string') {
         const fields = Array.isArray(failure.fields) ? failure.fields : [];
         message = window.ductCalcRequestErrors.message(failure);
@@ -274,7 +271,7 @@ if (!window.ductCalcShortcutsInitialized) {
         if (current < 0) return;
         control = links[Math.max(0, Math.min(links.length - 1, current + (action.startsWith('next') ? 1 : -1)))];
       } else {
-        control = [...document.querySelectorAll('#project-content button[hx-ext="htmx-download"][aria-keyshortcuts], .equipment-visual button[aria-keyshortcuts], [data-room-workspace] button[aria-keyshortcuts], .path-network a[aria-keyshortcuts], #project-sidebar a[aria-keyshortcuts], #fittings-page a[data-group][aria-keyshortcuts], nav a[aria-keyshortcuts]')].find(matchesControl);
+        control = [...document.querySelectorAll('#project-content a[target="_blank"][aria-keyshortcuts], .equipment-visual button[aria-keyshortcuts], [data-room-workspace] button[aria-keyshortcuts], .path-network a[aria-keyshortcuts], #project-sidebar a[aria-keyshortcuts], #fittings-page a[data-group][aria-keyshortcuts], nav a[aria-keyshortcuts]')].find(matchesControl);
       }
     }
     if (unavailable(control)) return;

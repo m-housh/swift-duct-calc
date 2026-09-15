@@ -4,7 +4,8 @@ const {randomUUID} = require('node:crypto');
 const {chromium} = require('playwright');
 const origin = process.env.DUCTCALC_KEYBINDINGS_ORIGIN || `http://127.0.0.1:${fs.readFileSync('.dev-port','utf8').trim()}`;
 (async () => {
-  const browser = await chromium.launch();
+  // Full Chromium includes the PDF viewer used by the export preview.
+  const browser = await chromium.launch({channel:'chromium'});
   try {
     const context = await browser.newContext({baseURL:origin, viewport:{width:1440,height:1000}});
     const page = await context.newPage();
@@ -268,19 +269,35 @@ const origin = process.env.DUCTCALC_KEYBINDINGS_ORIGIN || `http://127.0.0.1:${fs
     await status.filter({hasText:'Keybindings saved.'}).waitFor();
     await page.reload();
     assert.equal(await record('projects').getAttribute('data-binding'),'Control+Alt+P');
-    // Use a complete design snapshot and a stub PDF to exercise the browser download flow.
+    // Use a complete design snapshot and a stub PDF to exercise PDF previews in a new tab.
     const exportPage = await context.newPage();
     exportPage.on('pageerror', error => errors.push(error.message));
     await exportPage.route('**/export-shortcut-test', route => route.fulfill({contentType:'text/html',
       body:fs.readFileSync('Tests/ViewControllerTests/__Snapshots__/ViewControllerTests/projectDetail.6.html','utf8')}));
-    await exportPage.route('**/pdf', route => route.fulfill({contentType:'application/pdf',
-      headers:{'content-disposition':'attachment; filename="design.pdf"'}, body:'%PDF-1.4\n%%EOF'}));
+    await context.route('**/pdf', route => {
+      assert.equal(route.request().isNavigationRequest(), true);
+      assert.equal(route.request().headers()['hx-request'], undefined);
+      return route.fulfill({contentType:'application/pdf',
+        headers:{'content-disposition':'inline; filename="design.pdf"'}, body:'%PDF-1.4\n%%EOF'});
+    });
     await exportPage.goto('/export-shortcut-test');
     await exportPage.keyboard.press('Control+Alt+/');
     assert(await exportPage.locator('.shortcut-hint').allTextContents().then(labels => labels.includes('Ctrl+Alt+E')));
-    const download = exportPage.waitForEvent('download');
-    await exportPage.keyboard.press('Control+Alt+E');
-    assert.equal((await download).suggestedFilename(), 'design.pdf');
+    let downloads = 0;
+    exportPage.on('download', () => downloads++);
+    for (const activate of [
+      () => exportPage.getByRole('link', {name:'PDF', exact:true}).click(),
+      () => exportPage.keyboard.press('Control+Alt+E'),
+    ]) {
+      const popup = exportPage.waitForEvent('popup');
+      await activate();
+      const preview = await popup;
+      await preview.waitForURL('**/pdf');
+      assert.equal(exportPage.url(), origin + '/export-shortcut-test');
+      assert.equal(downloads, 0);
+      await preview.close();
+    }
+    await context.unroute('**/pdf');
     await exportPage.close();
     assert.deepEqual(errors,[]);
     console.log('Project step navigation and actions, key recording, conflicts, cancel, save, reload, cross-tab navigation, reset, errors, mobile layout and accessibility passed.');

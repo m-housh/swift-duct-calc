@@ -281,7 +281,8 @@ using a template clears the name and selected runs, keeping the type and height.
 
 Use Rectangular sizes to select registers and set a shared height or clear
 their rectangular sizes. Clearing leaves unselected registers unchanged and does
-not require a height. Use PDF or Ctrl+Alt+E on this page to download a report of the design.
+not require a height. Use PDF or Ctrl+Alt+E on this page to open the design report in a new tab.
+You can review it there, then download or print it from the browser's PDF viewer.
 
 ## Ductulator
 
