@@ -1,12 +1,53 @@
+import App
 import Dependencies
+import DependenciesTestSupport
+import Fluent
 import Foundation
 import ManualDCore
+import SQLKit
 import Testing
+import Vapor
 
 @testable import DatabaseClient
 
 @Suite
 struct TrunkSizeTests {
+
+  @Test(.dependencies { $0.uuid = .incrementing })
+  func trunkWritesPreserveProjectTimestamp() async throws {
+    let app = try await Application.make(.testing)
+    app.logger.logLevel = .critical
+    do {
+      try await configure(app, in: .live())
+      try await app.autoMigrate()
+      let database = DatabaseClient.live(database: app.db)
+      let sql = try #require(app.db as? any SQLDatabase)
+      let user = try await database.users.create(
+        .init(
+          email: "trunks@example.test", password: "super-secret", confirmPassword: "super-secret"))
+      let project = try await database.projects.create(user.id, .mock)
+      // A fixed past timestamp catches accidental writes regardless of clock precision.
+      try await sql.raw(
+        """
+        UPDATE project SET "updatedAt" = '2000-01-01T00:00:00Z' WHERE id = \(bind: project.id)
+        """
+      ).run()
+      let original = try #require(try await database.projects.get(project.id))
+      let trunk = try await database.trunkSizes.create(
+        .init(projectID: project.id, type: .supply, rooms: [:], height: 8, name: "Main trunk"))
+      #expect(try await database.projects.get(project.id) == original)
+      _ = try await database.trunkSizes.update(trunk.id, .init(height: 10, name: "Supply trunk"))
+      #expect(try await database.projects.get(project.id) == original)
+      _ = try await database.trunkSizes.update(trunk.id, .init(height: 10, name: "Supply trunk"))
+      #expect(try await database.projects.get(project.id) == original)
+      try await app.autoRevert()
+      try await app.asyncShutdown()
+    } catch {
+      try? await app.autoRevert()
+      try? await app.asyncShutdown()
+      throw error
+    }
+  }
 
   @Test
   func happyPath() async throws {

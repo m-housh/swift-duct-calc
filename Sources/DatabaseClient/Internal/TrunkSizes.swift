@@ -3,7 +3,9 @@ import DependenciesMacros
 import Fluent
 import Foundation
 import ManualDCore
+import SQLKit
 import Validations
+import struct Vapor.Abort
 
 extension DatabaseClient.TrunkSizes: TestDependencyKey {
   public static let testValue = Self()
@@ -14,6 +16,7 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
         try await TrunkModel.validateRooms(
           request.rooms, projectID: request.projectID, on: database)
         return try await database.transaction { database in
+          try await TrunkModel.lockProject(request.projectID, on: database)
           let trunk = request.toModel()
           var roomProxies = [TrunkSize.RoomProxy]()
 
@@ -74,20 +77,22 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
         return try model.toDTO()
       },
       update: { id, updates in
-        guard
-          let model =
-            try await TrunkModel
-            .query(on: database)
-            .with(\.$rooms, { $0.with(\.$room) })
-            .filter(\.$id == id)
-            .first()
-        else {
+        guard let existing = try await TrunkModel.find(id, on: database) else {
           throw NotFoundError()
         }
-        if let rooms = updates.rooms {
-          try await TrunkModel.validateRooms(rooms, projectID: model.$project.id, on: database)
-        }
         return try await database.transaction { database in
+          try await TrunkModel.lockProject(existing.$project.id, on: database)
+          guard
+            let model = try await TrunkModel.query(on: database)
+              .with(\.$rooms, { $0.with(\.$room) })
+              .filter(\.$id == id)
+              .first()
+          else {
+            throw NotFoundError()
+          }
+          if let rooms = updates.rooms {
+            try await TrunkModel.validateRooms(rooms, projectID: model.$project.id, on: database)
+          }
           try await model.applyUpdates(updates, on: database)
           return try model.toDTO()
         }
@@ -331,7 +336,21 @@ final class TrunkModel: Model, @unchecked Sendable {
 
   }
 
-  /// Names identify trunks within a project, regardless of type or dimensions.
+  /// Call inside the write transaction, before reading or validating trunks.
+  /// The no-op update serializes creates and updates on SQLite and PostgreSQL,
+  /// including the first named trunk in an empty project.
+  static func lockProject(_ projectID: Project.ID, on database: any Database) async throws {
+    // QueryBuilder.update also advances updatedAt, even when no trunk fields change.
+    guard let sql = database as? any SQLDatabase else { throw Abort(.internalServerError) }
+    try await sql.raw(
+      """
+      UPDATE \(ident: ProjectModel.schema) SET \(ident: "id") = \(bind: projectID)
+      WHERE \(ident: "id") = \(bind: projectID)
+      """
+    ).run()
+  }
+
+  /// Names identify trunks within a project. Hold the project lock until saving completes.
   func validateUniqueName(on database: any Database) async throws {
     guard let name else { return }
     let normalizedName = name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
