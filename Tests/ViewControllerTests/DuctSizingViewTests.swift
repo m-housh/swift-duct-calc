@@ -132,7 +132,7 @@ struct DuctSizingViewTests {
         .init(equipmentInfo: true, rooms: true, equivalentLength: true, frictionRate: true)
       }
       $0.projectClient.calculateRoomDuctSizes = { _ in [] }
-      $0.projectClient.calculateTrunkDuctSizes = { _ in [] }
+      $0.projectClient.calculateDuctSizes = { _ in .init(rooms: [], trunks: []) }
     } operation: {
       try await Route.rectangularSizes(form).renderView(
         on: .test(.project(.detail(UUID(0), .ductSizing(.rectangularSizes(form))))),
@@ -194,7 +194,7 @@ struct DuctSizingViewTests {
         .init(equipmentInfo: true, rooms: true, equivalentLength: true, frictionRate: true)
       }
       $0.projectClient.calculateRoomDuctSizes = { _ in [] }
-      $0.projectClient.calculateTrunkDuctSizes = { _ in [] }
+      $0.projectClient.calculateDuctSizes = { _ in .init(rooms: [], trunks: []) }
     } operation: {
       try await route.renderView(
         on: .test(.project(.detail(UUID(0), .ductSizing(route)))), projectID: UUID(0))
@@ -263,7 +263,7 @@ struct DuctSizingViewTests {
           equivalentLength: !missing.contains(.supplyPath) && !missing.contains(.returnPath),
           frictionRate: !missing.contains(.componentLosses))
       }
-      $0.projectClient.calculateRoomDuctSizes = { _ in throw error }
+      $0.projectClient.calculateDuctSizes = { _ in throw error }
     } operation: {
       let request = ViewController.Request.test(
         .project(.detail(UUID(0), .ductSizing(.index))), isHtmxRequest: htmx)

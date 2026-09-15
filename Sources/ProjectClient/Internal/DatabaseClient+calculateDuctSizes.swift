@@ -8,11 +8,14 @@ extension DatabaseClient {
   func calculateDuctSizes(
     details: Project.Detail
   ) async throws -> (DuctSizes, DuctSizeSharedRequest) {
+    @Dependency(\.manualD) var manualD
+
     let (rooms, shared) = try await calculateRoomDuctSizes(details: details)
     return try await (
       .init(
         rooms: rooms,
-        trunks: calculateTrunkDuctSizes(details: details, shared: shared)
+        trunks: manualD.calculateTrunkSizes(
+          rooms: details.rooms, trunks: details.trunks, sharedRequest: shared)
       ),
       shared
     )
@@ -26,26 +29,6 @@ extension DatabaseClient {
     let shared = try sharedDuctRequest(details: details)
     let rooms = try await manualD.calculateRoomSizes(rooms: details.rooms, sharedRequest: shared)
     return (rooms, shared)
-  }
-
-  func calculateTrunkDuctSizes(
-    details: Project.Detail,
-    shared: DuctSizeSharedRequest? = nil
-  ) async throws -> [DuctSizes.TrunkContainer] {
-    @Dependency(\.manualD) var manualD
-
-    let sharedRequest: DuctSizeSharedRequest
-    if let shared {
-      sharedRequest = shared
-    } else {
-      sharedRequest = try sharedDuctRequest(details: details)
-    }
-
-    return try await manualD.calculateTrunkSizes(
-      rooms: details.rooms,
-      trunks: details.trunks,
-      sharedRequest: sharedRequest
-    )
   }
 
   func sharedDuctRequest(details: Project.Detail) throws -> DuctSizeSharedRequest {
@@ -69,8 +52,8 @@ extension DatabaseClient {
 
     let availableStaticPressure = equipment.staticPressure - details.componentLosses.total
     let tel = supply.totalEquivalentLength + returnLength.totalEquivalentLength
-    let frictionRate = FrictionRate(
-      availableStaticPressure: availableStaticPressure, value: (availableStaticPressure * 100) / tel
+    let frictionRate = ManualDClient.designFrictionRate(
+      availableStaticPressure: availableStaticPressure, totalEquivalentLength: tel
     )
     if let error = frictionRate.error { throw ValidationError(error.reason) }
     return .init(
