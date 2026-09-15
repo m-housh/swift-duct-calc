@@ -225,7 +225,7 @@ struct DuctSizingViewTests {
       : .roomRectangularForm(room.id, .init(register: 1, height: 8))
     let response = try await ViewControllerTests().withDefaultDependencies {
       $0.database.rooms.updateRectangularSize = { _, _ in room }
-      $0.database.rooms.clearRectangularSize = { _, _ in room }
+      $0.database.rooms.clearRectangularSize = { _, _, _ in room }
       $0.projectClient.calculateRoomDuctSizes = { _ in sizes }
     } operation: {
       try await route.renderView(

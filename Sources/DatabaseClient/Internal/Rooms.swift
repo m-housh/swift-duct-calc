@@ -55,12 +55,19 @@ extension DatabaseClient.Rooms: TestDependencyKey {
         }
         return try model.toDTO()
       },
-      clearRectangularSize: { roomID, register in
+      clearRectangularSize: { roomID, register, sizeID in
         guard let model = try await RoomModel.find(roomID, on: database) else {
           throw NotFoundError()
         }
-        guard register > 0, register <= model.registerCount else {
+        guard model.$room.id == nil, register > 0, register <= model.registerCount else {
           throw ValidationError("Choose a valid register.")
+        }
+        if let sizeID {
+          guard model.rectangularSizes?.contains(where: {
+            $0.id == sizeID && ($0.register == nil || $0.register == register)
+          }) == true else {
+            throw NotFoundError()
+          }
         }
         guard model.rectangularSizes?.contains(where: {
           $0.register == nil || $0.register == register
@@ -102,10 +109,16 @@ extension DatabaseClient.Rooms: TestDependencyKey {
         guard let model = try await RoomModel.find(id, on: database) else {
           throw NotFoundError()
         }
-        guard size.height > 0,
+        guard model.$room.id == nil, size.height > 0,
           size.register.map({ $0 > 0 && $0 <= model.registerCount }) ?? true
         else {
           throw ValidationError("Choose a valid register and a positive height.")
+        }
+        // An existing size keeps its register; an unknown id adds a new size.
+        guard model.rectangularSizes?.contains(where: {
+          $0.id == size.id && $0.register != nil && $0.register != size.register
+        }) != true else {
+          throw NotFoundError()
         }
         if size.register != nil {
           model.normalizeRectangularSizes()
@@ -134,7 +147,7 @@ extension DatabaseClient.Rooms: TestDependencyKey {
                   _ = try await rooms.updateRectangularSize(
                     roomID, .init(register: register, height: height))
                 } else {
-                  _ = try await rooms.clearRectangularSize(roomID, register)
+                  _ = try await rooms.clearRectangularSize(roomID, register, nil)
                 }
               }
             }

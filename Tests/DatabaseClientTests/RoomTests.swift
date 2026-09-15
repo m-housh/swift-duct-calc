@@ -47,6 +47,37 @@ struct RoomTests {
   }
 
   @Test
+  func rectangularSizesRejectDelegatedRoomsAndMismatchedSizeIDs() async throws {
+    try await withTestUserAndProject { _, project in
+      @Dependency(\.database.rooms) var rooms
+      let room = try await rooms.create(
+        project.id, .init(name: "Parent", heatingLoad: 1000, coolingTotal: 800, registerCount: 2))
+      let delegated = try await rooms.create(
+        project.id, .init(name: "Delegated", heatingLoad: 100, coolingTotal: 80, delegatedTo: room.id))
+      await #expect(throws: ValidationError.self) {
+        try await rooms.updateRectangularSize(delegated.id, .init(height: 8))
+      }
+      #expect(try await rooms.get(delegated.id) == delegated)
+
+      let sized = try await rooms.update(
+        room.id, .init(rectangularSizes: [.init(id: UUID(0), register: 1, height: 8)]))
+      await #expect(throws: NotFoundError.self) {
+        try await rooms.updateRectangularSize(room.id, .init(id: UUID(0), register: 2, height: 6))
+      }
+      await #expect(throws: NotFoundError.self) {
+        try await rooms.clearRectangularSize(room.id, 2, UUID(0))
+      }
+      await #expect(throws: NotFoundError.self) {
+        try await rooms.clearRectangularSize(room.id, 1, UUID(9))
+      }
+      #expect(try await rooms.get(room.id) == sized)
+
+      let cleared = try await rooms.clearRectangularSize(room.id, 1, UUID(0))
+      #expect(cleared.rectangularSizes == nil)
+    }
+  }
+
+  @Test
   func happyPath() async throws {
     try await withTestUserAndProject { _, project in
       @Dependency(\.database.rooms) var rooms

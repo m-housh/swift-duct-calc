@@ -666,23 +666,6 @@ extension SiteRoute.View.ProjectRoute.EquivalentLengthRoute {
   ) async throws -> AnySendableHTML {
     @Dependency(\.database) var database
 
-    do {
-      let user = try request.currentUser()
-      guard try await database.projects.getForUser(projectID, user.id) != nil else {
-        throw NotFoundError()
-      }
-      let pathID: EquivalentLength.ID?
-      switch self {
-      case .delete(let id), .duplicate(let id): pathID = id
-      default: pathID = nil
-      }
-      if let pathID {
-        guard let path = try await database.equivalentLengths.get(pathID),
-          path.projectID == projectID
-        else { throw NotFoundError() }
-      }
-    }
-
     switch self {
     case .editor, .savePath, .favorite:
       return try await renderPathEditor(on: request, projectID: projectID)
@@ -745,7 +728,8 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
       return try await view(on: request, projectID: projectID)
 
     case .deleteRectangularSize(let roomID, let request):
-      let room = try await database.rooms.clearRectangularSize(roomID, request.register)
+      let room = try await database.rooms.clearRectangularSize(
+        roomID, request.register, request.rectangularSizeID)
       return try await afterMutation({}) {
         try await loadView {
           let rooms = try await projectClient.calculateRoomDuctSizes(projectID)
