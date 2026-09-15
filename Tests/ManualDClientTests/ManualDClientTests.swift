@@ -31,6 +31,17 @@ struct ManualDClientTests {
     #expect(response.velocity == 329)
   }
 
+  @Test(arguments: [
+    (2400, 20, 22, 1101),
+    (2800, 22, 24, 1061),
+  ])
+  func largeDuctSize(cfm: Int, finalSize: Int, flexSize: Int, velocity: Int) async throws {
+    let response = try await manualD.ductSize(cfm: cfm, frictionRate: 0.1)
+    #expect(response.finalSize == finalSize)
+    #expect(response.flexSize == flexSize)
+    #expect(response.velocity == velocity)
+  }
+
   @Test
   func equivalentRectangularDuct() async throws {
     let response = try await manualD.rectangularSize(round: 7, height: 8)
