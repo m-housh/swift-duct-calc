@@ -38,14 +38,14 @@ struct DuctSizingTests {
       #expect(try await client.calculateRoomDuctSizes(project.id).map(\.height) == [8, 10, 10])
       for register in [0, 4] {
         await #expect(throws: ValidationError.self) {
-          try await database.rooms.clearRectangularSize(room.id, register)
+          try await database.rooms.clearRectangularSize(room.id, register, nil)
         }
         #expect(try await database.rooms.get(room.id) == stored)
       }
 
       let changed: Room
       if clearing {
-        changed = try await database.rooms.clearRectangularSize(room.id, 2)
+        changed = try await database.rooms.clearRectangularSize(room.id, 2, nil)
       } else {
         changed = try await database.rooms.updateRectangularSize(
           room.id, .init(id: legacy.id, register: 2, height: 12))
@@ -58,7 +58,7 @@ struct DuctSizingTests {
       #expect(calculated.map(\.height) == [8, clearing ? nil : 12, 10])
 
       for register in 1...3 {
-        _ = try await database.rooms.clearRectangularSize(room.id, register)
+        _ = try await database.rooms.clearRectangularSize(room.id, register, nil)
       }
       #expect(try await database.rooms.get(room.id)?.rectangularSizes == nil)
       #expect(try await client.calculateRoomDuctSizes(project.id).allSatisfy { $0.height == nil })
