@@ -93,6 +93,10 @@ jobs:
       run: FITTING_APP_URL=http://127.0.0.1:58681 node scripts/check_fitting_reference_browser.cjs
     - name: Check fitting CSV import
       run: FITTING_APP_URL=http://127.0.0.1:58681 node scripts/check_fitting_csv_browser.cjs
+    - name: Check path template workflows
+      run: DUCT_TEMPLATE_QA_ORIGIN=http://127.0.0.1:58681 npm run test:path-templates
+    - name: Check path template browser navigation
+      run: DUCT_TEMPLATE_QA_ORIGIN=http://127.0.0.1:58681 node scripts/check_template_browse_browser.cjs
     - name: Stop accessibility test app
       if: always()
       run: docker stop ductcalc-accessibility || true

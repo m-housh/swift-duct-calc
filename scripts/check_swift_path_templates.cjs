@@ -206,6 +206,40 @@ async function mount(html, http) {
     new JSDOM(html).window.document.querySelector('[data-theme="dark"]'),
     'Workspace must inherit account theme'
   );
+  const optional = await mount(html, http);
+  await optional.click('done');
+  assert.equal(optional.heading(), 'Equipment connection', 'Required sections cannot be empty');
+  assert(optional.root.querySelector('#workspace-status').textContent.includes('Complete'));
+  await optional.click('choose', '[data-id="1B"]');
+  await optional.click('done');
+  assert.equal(optional.heading(), 'Boot', 'Continue must skip an empty optional choose-one section');
+  await optional.click('choose', '[data-id="4Q"]');
+  for (const value of ['', '-1', '1.5']) {
+    await optional.set('[data-quantity="8A-4-or-5-piece"]', value);
+    await optional.click('done');
+    assert.equal(optional.heading(), 'Elbows', 'Optional sections must reject invalid quantities');
+  }
+  await optional.click('quantity-details', '[data-id="8A-4-or-5-piece"]');
+  await optional.set('[data-scope="details"][data-field="0"]', '');
+  await optional.set('[data-detail-quantity]', '0');
+  await optional.click('apply-details');
+  await optional.set('[data-quantity="8A-4-or-5-piece"]', '1');
+  await optional.click('cancel-details');
+  await optional.click('done');
+  assert.equal(optional.heading(), 'Elbows', 'Positive quantities still require complete fitting inputs');
+  await optional.set('[data-quantity="8A-4-or-5-piece"]', '0');
+  await optional.click('done');
+  assert.equal(optional.heading(), 'Transitions', 'Done must accept zero elbows');
+  await optional.click('done');
+  assert.equal(optional.heading(), 'Review path', 'Done must skip empty transitions');
+  await optional.click('back');
+  assert.equal(optional.root.querySelectorAll('[data-action="edit-row"]').length, 0);
+  await optional.click('done');
+  await optional.set('[data-path="name"]', 'QA optional sections');
+  await optional.click('save-path');
+  assert.equal(optional.redirects.at(-1), `/projects/${projectID}/effective-lengths`);
+  optional.dom.window.close();
+
   const race = await mount(html, http);
   await race.click('choose', '[data-id="1B"]');
   await race.click('skip');
@@ -304,7 +338,9 @@ async function mount(html, http) {
   const addURL = listDocument.querySelector('a[aria-label="Add path"]').getAttribute('href');
   const addPage = await (await http(addURL)).text();
   assert.equal(new JSDOM(addPage).window.document.querySelector(`#fitting-path button[data-template-url="${base}"]`)?.textContent, 'From template');
-  const editURL = list.match(/\/projects\/[^" ]+\/editor\?id=[A-Fa-f0-9-]{36}/)?.[0];
+  const editURL = [...listDocument.querySelectorAll('tr')]
+    .find(row => row.textContent.includes('QA supply'))
+    ?.querySelector('a[href*="/editor?id="]')?.getAttribute('href');
   assert(editURL, 'Saved template path should reopen in the fitting editor');
   assert.equal(
     new JSDOM(list).window.document
@@ -394,8 +430,8 @@ async function mount(html, http) {
   await returns.click('choose', '[data-id="5A-round"]');
   await returns.click('choose', '[data-id="6F"]');
   await returns.click('done');
-  await returns.click('choose', '[data-id="12T"]');
   await returns.click('done');
+  assert.equal(returns.heading(), 'Review path', 'Return templates must allow empty optional sections');
   await returns.set('[data-path="name"]', 'QA return');
   await returns.click('save-path');
   assert.equal(returns.redirects.at(-1), `/projects/${projectID}/effective-lengths`);
@@ -422,6 +458,13 @@ async function mount(html, http) {
   await editor.set('[data-field="count"]', '0');
   await editor.submitDetails();
   assert.equal(editor.heading(), 'Boot');
+  await editor.click('choose', '[data-id="4Q"]');
+  await editor.click('done');
+  assert.equal(editor.heading(), 'Reducing trunk takeoff');
+  await editor.click('done');
+  assert.equal(editor.heading(), 'Transitions', 'Try must allow empty user-added optional sections');
+  await editor.click('done');
+  assert.equal(editor.heading(), 'Review path');
   await editor.click('exit-trial');
   assert.equal(editor.root.querySelector('[data-config="name"]').value, 'Customized supply');
   assert.equal(editor.redirects.length, 0, 'Try should not save the template or a project path');
@@ -436,6 +479,19 @@ async function mount(html, http) {
   assert.equal(updated.configuration.steps[4].group, 3);
   assert.equal(updated.configuration.steps[4].behavior, 'chooseMultiple');
   assert.equal(updated.configuration.steps[4].allowsSkipping, true);
+  const customized = await mount(await (await http(`${base}/start/${data.template.id}`)).text(), http);
+  await customized.click('choose', '[data-id="1B"]');
+  await customized.click('done');
+  await customized.click('choose', '[data-id="4Q"]');
+  await customized.click('done');
+  assert.equal(customized.heading(), 'Optional reducing takeoff');
+  await customized.click('done');
+  assert.equal(customized.heading(), 'Transitions', 'Saved user templates must allow empty optional sections');
+  await customized.click('done');
+  await customized.set('[data-path="name"]', 'QA customized optional sections');
+  await customized.click('save-path');
+  assert.equal(customized.redirects.at(-1), `/projects/${projectID}/effective-lengths`);
+  customized.dom.window.close();
   const manualEditor = new JSDOM(await (await http(editURL)).text()).window.document.querySelector('#fitting-path');
   const unchanged = JSON.parse(manualEditor.dataset.baseline);
   assert.deepEqual(unchanged, saved, 'Template edits must not affect saved paths');

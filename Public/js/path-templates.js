@@ -474,10 +474,7 @@
             return false;
         }
       }
-      return (
-        rows.length > 0 ||
-        (canSkip(step) && (step.behavior === 'quantities' || path.completed[step.id]))
-      );
+      return rows.length > 0 || canSkip(step);
     }
     async function act(action, target) {
       const i = Number(target.dataset.index),

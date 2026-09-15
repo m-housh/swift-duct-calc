@@ -34,6 +34,11 @@ assert(['127.0.0.1', 'localhost'].includes(new URL(base).hostname));
       await choose(type === 'supply' ? '1B' : '5A-round');
       const heading = type === 'supply' ? 'Supply trunk branch takeoff' : 'Return branch / boot';
       await page.getByRole('heading', { name: heading, exact: true }).waitFor();
+      if (type === 'supply') {
+        await page.locator('[data-action="done"]').click();
+        await page.getByRole('heading', { name: 'Boot', exact: true }).waitFor();
+        await page.locator('[data-action="back"]').click();
+      }
       await page.locator('[data-action="browse"]').click();
       const dialog = page.locator('#browse-fittings'), select = page.getByLabel('Fitting group', { exact: true });
       assert.equal(await select.inputValue(), type === 'supply' ? '2' : '6');
@@ -75,6 +80,12 @@ assert(['127.0.0.1', 'localhost'].includes(new URL(base).hostname));
       await choose(id);
       await page.getByRole('heading', { name: type === 'supply' ? 'Boot' : 'Elbows', exact: true }).waitFor();
       if (type === 'supply') await choose('4G');
+      await page.getByRole('button', { name: 'Done with Elbows', exact: true }).click();
+      await page.getByRole('button', { name: 'Done with Transitions', exact: true }).click();
+      await page.getByRole('heading', { name: 'Review path', exact: true }).waitFor();
+      await page.locator('[data-action="back"]').click();
+      assert.equal(await page.locator('#step-fitting-rows [data-action="edit-row"]').count(), 0);
+      await page.locator('[data-action="back"]').click();
       let quantity = 1;
       for (const width of [1440, 390]) {
         await page.setViewportSize({ width, height: 1000 });
