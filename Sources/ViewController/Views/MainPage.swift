@@ -70,7 +70,6 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     script(.src("/js/filters.js?v=1"), .defer) {}
     link(.rel(.stylesheet), .href("/css/filters.css?v=1"))
     script(.src("/js/project-import.js?v=1"), .defer) {}
-    script(.src("https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4")) {}
     link(.rel(.stylesheet), .href("/css/output.css?v=project-import-1"))
     link(.rel(.stylesheet), .href("/css/htmx.css"))
     link(.rel(.stylesheet), .href("/css/accessibility.css?v=errors-1"))
@@ -78,11 +77,6 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     AppIcons()
     link(.rel(.stylesheet), .href("/css/ductcalc-wordmark.css?v=2"))
     link(.rel(.stylesheet), .href("/css/navbar.css?v=3"))
-    script(
-      .src("https://unpkg.com/htmx-remove@latest"),
-      .crossorigin(.anonymous),
-      .integrity("sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT")
-    ) {}
     for stylesheet in stylesheets {
       link(.rel(.stylesheet), .href(stylesheet))
     }
