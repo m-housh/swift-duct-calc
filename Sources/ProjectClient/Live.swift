@@ -10,7 +10,6 @@ extension ProjectClient: DependencyKey {
 
   public static var liveValue: Self {
     @Dependency(\.database) var database
-    @Dependency(\.manualD) var manualD
     @Dependency(\.pdfClient) var pdfClient
     @Dependency(\.fileClient) var fileClient
 
@@ -22,23 +21,11 @@ extension ProjectClient: DependencyKey {
         }
         return try await database.calculateRoomDuctSizes(details: details).rooms
       },
-      calculateTrunkDuctSizes: { projectID in
+      calculateDuctSizes: { projectID in
         guard let details = try await database.projects.detail(projectID) else {
           throw ProjectClientError.notFound(.project(projectID))
         }
-        return try await database.calculateTrunkDuctSizes(details: details)
-      },
-      createProject: { userID, request in
-        let project = try await database.projects.create(userID, request)
-        return try await .init(
-          projectID: project.id,
-          rooms: database.rooms.fetch(project.id),
-          sensibleHeatRatio: database.projects.getSensibleHeatRatio(project.id),
-          completedSteps: database.projects.getCompletedSteps(project.id)
-        )
-      },
-      frictionRate: { projectID in
-        try await manualD.frictionRate(projectID: projectID)
+        return try await database.calculateDuctSizes(details: details).0
       },
       generatePdf: { projectID in
         let pdfResponse = try await pdfClient.generatePdf(

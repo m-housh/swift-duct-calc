@@ -113,28 +113,8 @@ where
           try await self.respond(request, route).encodeResponse(for: request)
         }
       ).respond(to: request).get()
-
-      // return try await middleware.respond(
-      //   to: request,
-      //   chainingTo: AsyncBasicResponder { request in
-      //     try await self.respond(request, route).encodeResponse(for: request)
-      //   }
-      // ).get()
     } else {
       return try await respond(request, route).encodeResponse(for: request)
     }
   }
 }
-
-// Usage:
-// app.mount(
-//   router,
-//   middleware: { route in
-//     case .onboarding: return nil
-//     case .signIn: return BasicAuthMiddleware()
-//     default: return BearerAuthMiddleware()
-//   },
-//   use: { request, route in
-//     // route handline
-//   }
-// )

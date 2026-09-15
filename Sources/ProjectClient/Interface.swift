@@ -26,22 +26,10 @@ public struct ProjectClient: Sendable {
   public var calculateRoomDuctSizes:
     @Sendable (Project.ID) async throws -> [DuctSizes.RoomContainer]
 
-  /// Calculates the trunk duct sizes for the given project.
-  public var calculateTrunkDuctSizes:
-    @Sendable (Project.ID) async throws -> [DuctSizes.TrunkContainer]
+  /// Calculates room and trunk duct sizes from one project-detail load.
+  public var calculateDuctSizes: @Sendable (Project.ID) async throws -> DuctSizes
 
-  public var createProject:
-    @Sendable (User.ID, Project.Create) async throws -> CreateProjectResponse
-
-  public var frictionRate: @Sendable (Project.ID) async throws -> FrictionRateResponse
   public var generatePdf: @Sendable (Project.ID) async throws -> Response
-
-  public func calculateDuctSizes(_ projectID: Project.ID) async throws -> DuctSizes {
-    .init(
-      rooms: try await calculateRoomDuctSizes(projectID),
-      trunks: try await calculateTrunkDuctSizes(projectID)
-    )
-  }
 }
 
 extension ProjectClient: TestDependencyKey {
@@ -67,23 +55,6 @@ extension ProjectClient {
       self.rooms = rooms
       self.sensibleHeatRatio = sensibleHeatRatio
       self.completedSteps = completedSteps
-    }
-  }
-
-  public struct FrictionRateResponse: Codable, Equatable, Sendable {
-
-    public let componentLosses: [ComponentPressureLoss]
-    public let equivalentLengths: EquivalentLength.MaxContainer
-    public let frictionRate: FrictionRate?
-
-    public init(
-      componentLosses: [ComponentPressureLoss],
-      equivalentLengths: EquivalentLength.MaxContainer,
-      frictionRate: FrictionRate? = nil
-    ) {
-      self.componentLosses = componentLosses
-      self.equivalentLengths = equivalentLengths
-      self.frictionRate = frictionRate
     }
   }
 }

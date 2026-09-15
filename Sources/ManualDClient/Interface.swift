@@ -25,6 +25,17 @@ public struct ManualDClient: Sendable {
   /// Calculates the equivalent rectangular size for the given round duct and rectangular height.
   public var rectangularSize: @Sendable (RoundSize, Height) async throws -> RectangularSize
 
+  /// Calculates friction rate without validating the caller's inputs or design range.
+  public static func designFrictionRate(
+    availableStaticPressure: Double,
+    totalEquivalentLength: Double
+  ) -> FrictionRate {
+    .init(
+      availableStaticPressure: availableStaticPressure,
+      value: availableStaticPressure * 100 / totalEquivalentLength
+    )
+  }
+
   /// Calculates the duct size for the given cfm and friction rate.
   ///
   /// - Paramaters:

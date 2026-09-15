@@ -90,7 +90,7 @@ struct TrunkTemplateTests {
         .init(equipmentInfo: true, rooms: true, equivalentLength: true, frictionRate: true)
       }
       $0.projectClient.calculateRoomDuctSizes = { _ in [] }
-      $0.projectClient.calculateTrunkDuctSizes = { _ in [] }
+      $0.projectClient.calculateDuctSizes = { _ in .init(rooms: [], trunks: []) }
     } operation: {
       try await route.renderView(on: .test(siteRoute), projectID: UUID(0))
     }

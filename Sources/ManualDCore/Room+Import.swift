@@ -1,14 +1,14 @@
 import Foundation
 
-extension Room {
-  public struct PDF: Equatable, Sendable {
-    public let file: Data
+public struct FileUpload: Equatable, Sendable {
+  public let file: Data
 
-    public init(file: Data) {
-      self.file = file
-    }
+  public init(file: Data) {
+    self.file = file
   }
+}
 
+extension Room {
   /// Extracted loads, before they are associated with a project.
   public struct LoadImport: Equatable, Sendable {
     public let rooms: [Room.Create]

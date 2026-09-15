@@ -18,8 +18,6 @@ extension SiteRoute {
     case ductulator(DuctulatorRoute)
     case fittingReference(FittingsQuery)
     case user(UserRoute)
-    //FIX: Remove.
-    case test
 
     public static let router = OneOf {
       Route(.case(Self.homePreview)) {
@@ -32,10 +30,6 @@ extension SiteRoute {
       Route(.case(Self.fittings)) {
         Path { "fittings" }
         FittingPickerRoute.router
-      }
-      Route(.case(Self.test)) {
-        Path { "test" }
-        Method.get
       }
       Route(.case(Self.home)) {
         Method.get
@@ -257,8 +251,8 @@ extension SiteRoute.View.ProjectRoute {
   }
 
   public enum RoomRoute: Equatable, Sendable {
-    case csv(Room.CSV)
-    case pdf(Room.PDF)
+    case csv(FileUpload)
+    case pdf(FileUpload)
     case delete(id: Room.ID)
     case index
     case submit(Room.Create)
@@ -277,7 +271,7 @@ extension SiteRoute.View.ProjectRoute {
           Field("Content-Type") { "multipart/form-data" }
         }
         Method.post
-        Body().map(.memberwise(Room.PDF.init))
+        Body().map(.memberwise(FileUpload.init))
       }
       Route(.case(Self.csv)) {
         Path {
@@ -288,7 +282,7 @@ extension SiteRoute.View.ProjectRoute {
           Field("Content-Type") { "multipart/form-data" }
         }
         Method.post
-        Body().map(.memberwise(Room.CSV.init))
+        Body().map(.memberwise(FileUpload.init))
       }
       Route(.case(Self.delete)) {
         Path {
