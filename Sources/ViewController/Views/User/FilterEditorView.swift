@@ -36,11 +36,11 @@ struct FilterEditorView: HTML, Sendable {
           let original = AirFilter.defaults.first(where: { $0.source == source })
         {
           div(.class("rounded-box bg-base-200 p-3 space-y-2")) {
-            p { "Shipped with DuctCalc from Aprilaire's chart." }
+            p { "Shipped with DuctCalc from \(original.manufacturer)'s chart." }
             button(
               .type(.button), .class("btn btn-sm btn-ghost"),
               .data("filter-reset", value: filterJSON(original))
-            ) { "Reset to Aprilaire chart" }
+            ) { "Reset to default chart" }
           }
         }
         label(.class("flex items-center gap-2")) {

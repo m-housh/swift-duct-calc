@@ -148,8 +148,8 @@ again after changing equipment airflow or the allowance.
 ### Your filter library
 
 Open Account > Filter library to add, edit, duplicate, or delete filters. Each
-account starts with Aprilaire charts. Add a filter from any manufacturer using at
-least two airflow and pressure drop points. For evenly spaced chart columns,
+account starts with Aprilaire and Dust Free Sixteen charts. Add a filter from any
+manufacturer using at least two airflow and pressure drop points. For evenly spaced chart columns,
 Fill from a chart row accepts the pressure drops in order. The highest chart
 airflow is treated as the filter's maximum recommended airflow.
 
@@ -163,8 +163,9 @@ Try your preferences checks an example airflow and explains skipped favorites
 without changing a project. You can still choose any filter in the picker.
 
 Library changes affect future lookups. They do not change filter losses already
-saved in projects. Restore Aprilaire filters lets you choose deleted entries to
-bring back or edited entries to reset; custom filters are kept.
+saved in projects. Restore default filters lets you add built-in charts missing
+from your library or reset edited entries; custom filters are kept. If you already
+have a saved library, use this to add the Dust Free Sixteen 3-ton and 5-ton filters.
 
 ## Equivalent-length paths
 

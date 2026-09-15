@@ -30,42 +30,83 @@
   <div class="account-layout">
     <aside class="account-sidebar">
       <h2>Account</h2>
-      <nav aria-label="Account sections"><a href="/profile">Profile</a><a href="/keybindings">Keybindings</a><span class="account-nav-group" aria-hidden="true">Libraries &amp; preferences</span><a href="/path-templates">Path templates</a><a href="/filters">Filter library</a><a href="/filters?tab=preferences" aria-current="page">Design preferences</a></nav>
+      <nav aria-label="Account sections"><a href="/profile">Profile</a><a href="/keybindings">Keybindings</a><span class="account-nav-group" aria-hidden="true">Libraries &amp; preferences</span><a href="/path-templates">Path templates</a><a href="/filters" aria-current="page">Filter library</a><a href="/filters?tab=preferences">Design preferences</a></nav>
     </aside>
     <div class="account-content">
       <div id="filter-account" class="filter-account space-y-6" data-filter-revision="00000000-0000-0000-0000-000000000000">
         <div class="page-title-row">
-          <h1 class="text-3xl font-bold">Design preferences</h1>
+          <h1 class="text-3xl font-bold">Filter library</h1>
           <button type="button" class="btn btn-primary" data-filter-editor="/filters/editor"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add filter</button>
         </div>
-        <p class="account-intro">Choose the filters DuctCalc suggests for your projects.</p>
+        <p class="account-intro">Pressure drop charts used when you add a filter to a project. Your account starts with Aprilaire and Dust Free charts. Edit or delete those entries, or add filters from any manufacturer.</p>
         <p id="filter-status" role="status" aria-live="polite"></p>
-        <section class="card border border-base-300 bg-base-100">
-          <div class="card-body gap-5">
-            <h2 class="card-title">Filter suggestions</h2>
-            <p class="muted">DuctCalc suggests the first favorite below its airflow cutoff and within your pressure drop limit and the filter's maximum airflow. You can still choose any filter in the picker.</p>
-            <form data-filter-maximum="" class="space-y-2">
-              <label class="grid gap-2"><span class="font-semibold">Maximum filter pressure drop</span><span class="flex items-center gap-2">
-              <input name="maximumPressureDrop" type="number" class="input w-28" min="0.01" max="1" step="0.01" placeholder="None" value="" aria-describedby="filter-maximum-help">
-              in. w.c.<span></span>
-              <button type="submit" class="btn btn-outline">Save</button></span></label>
-              <p id="filter-maximum-help" class="muted text-sm">Leave blank for no pressure drop limit. Uses the full chart drop before any equipment filter allowance.</p>
+        <section class="card border border-base-300 bg-base-100" aria-labelledby="library-title">
+          <div class="card-body gap-4">
+            <div class="flex flex-wrap justify-between gap-3">
+              <h2 id="library-title" class="card-title">Filter library</h2>
+              <button type="button" class="btn btn-outline btn-sm" data-open-dialog="restore-filters">Restore default filters</button>
+            </div>
+            <p class="muted">Changes apply to future lookups. Filter losses already saved in projects keep their values.</p>
+            <form action="/filters" method="get" class="filter-library-tools">
+              <label class="input"><span class="sr-only">Search filters</span>
+              <input name="q" type="search" value="Dust Free" placeholder="Manufacturer, model, or description">
+              Show filters</label><label><span class="sr-only"></span>
+              <select name="scope" class="select w-full">
+                <option value="all" selected>All filters</option>
+                <option value="favorites">Favorites</option>
+                <option value="custom">Custom filters</option>
+                <option value="edited">Edited defaults</option>
+              </select>
+              Compare at</label><label class="flex items-center gap-2"><span></span>
+              <input name="airflow" type="number" class="input w-28" min="1" max="100000" step="1" value="1200" required>
+              CFM<span></span></label>
+              <button type="submit" class="btn btn-outline">Update</button>
             </form>
-            <h3 class="font-semibold">Favorite filters, in order</h3>
-            <p id="filter-cutoff-help" class="muted text-sm">Suggest below is optional. At or above that CFM, DuctCalc tries the next favorite. Leave blank for no additional cutoff.</p>
-            <p class="muted">No favorites yet. Add one here or star a filter in your library.</p>
-            <ol class="filter-preferences"></ol>
-            <div class="rounded-box bg-base-200 p-4 space-y-3">
-              <h3 class="font-semibold">Try your preferences</h3>
-              <form action="/filters" method="get" class="flex flex-wrap items-center gap-2">
-                <input type="hidden" name="tab" value="preferences">
-                Example airflow<label class="flex items-center gap-2"><span></span>
-                <input name="airflow" type="number" class="input w-28" min="1" max="100000" step="1" value="1200" required>
-                CFM<span></span></label>
-                <button type="submit" class="btn btn-outline">Check</button>
-              </form>
-              <p class="muted text-sm">This example does not change project airflow.</p>
-              <p>Add a favorite to get a suggestion.</p>
+            <div class="table-scroll" tabindex="0" role="region" aria-label="Dust Free filters">
+              <table class="table project-table">
+                <caption class="text-left font-bold text-base pb-2">Dust Free</caption>
+                <thead>
+                  <tr>
+                    <th><span class="sr-only">Favorite</span></th>
+                    <th>Filter</th>
+                    <th>Chart airflow</th>
+                    <th>At 1200 CFM</th>
+                    <th><span class="sr-only">Actions</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <button type="button" class="btn btn-ghost btn-sm filter-star" aria-label="Add Dust Free Sixteen 3-ton to favorites" data-filter-change="{&quot;action&quot;:&quot;favorite&quot;,&quot;id&quot;:&quot;dust-free-08611&quot;,&quot;revision&quot;:&quot;00000000-0000-0000-0000-000000000000&quot;,&quot;selected&quot;:true}" aria-pressed="false">☆</button>
+                    </td>
+                    <th scope="row"><span class="font-bold">Sixteen 3-ton</span><small class="block muted font-normal">MERV 16</small></th>
+                    <td>300 to 1500 CFM<small class="block muted">6 points</small></td>
+                    <td class="tabular-nums">0.13</td>
+                    <td>
+                      <div class="row-actions">
+                        <button type="button" class="btn btn-ghost" data-filter-editor="/filters/editor?id=dust-free-08611" aria-label="Edit Dust Free Sixteen 3-ton"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></button>
+                        <button type="button" class="btn btn-ghost" data-filter-editor="/filters/editor?id=dust-free-08611&amp;duplicate=true" aria-label="Duplicate Dust Free Sixteen 3-ton"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></button>
+                        <button type="button" class="btn btn-ghost text-error" aria-label="Delete Dust Free Sixteen 3-ton" data-filter-delete="{&quot;action&quot;:&quot;delete&quot;,&quot;id&quot;:&quot;dust-free-08611&quot;,&quot;revision&quot;:&quot;00000000-0000-0000-0000-000000000000&quot;}" data-filter-name="Dust Free Sixteen 3-ton"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <button type="button" class="btn btn-ghost btn-sm filter-star" aria-label="Add Dust Free Sixteen 5-ton to favorites" data-filter-change="{&quot;action&quot;:&quot;favorite&quot;,&quot;id&quot;:&quot;dust-free-08610&quot;,&quot;revision&quot;:&quot;00000000-0000-0000-0000-000000000000&quot;,&quot;selected&quot;:true}" aria-pressed="false">☆</button>
+                    </td>
+                    <th scope="row"><span class="font-bold">Sixteen 5-ton</span><small class="block muted font-normal">MERV 16</small></th>
+                    <td>400 to 2200 CFM<small class="block muted">6 points</small></td>
+                    <td class="tabular-nums">0.09</td>
+                    <td>
+                      <div class="row-actions">
+                        <button type="button" class="btn btn-ghost" data-filter-editor="/filters/editor?id=dust-free-08610" aria-label="Edit Dust Free Sixteen 5-ton"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></button>
+                        <button type="button" class="btn btn-ghost" data-filter-editor="/filters/editor?id=dust-free-08610&amp;duplicate=true" aria-label="Duplicate Dust Free Sixteen 5-ton"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></button>
+                        <button type="button" class="btn btn-ghost text-error" aria-label="Delete Dust Free Sixteen 5-ton" data-filter-delete="{&quot;action&quot;:&quot;delete&quot;,&quot;id&quot;:&quot;dust-free-08610&quot;,&quot;revision&quot;:&quot;00000000-0000-0000-0000-000000000000&quot;}" data-filter-name="Dust Free Sixteen 5-ton"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </section>
@@ -150,12 +191,6 @@
               Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
               <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="501" checked>
               Aprilaire 501
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="dust-free-08611" checked>
-              Dust Free Sixteen 3-ton
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="dust-free-08610" checked>
-              Dust Free Sixteen 5-ton
               Not in library<small class="muted"></small></label>
               <button type="submit" class="btn btn-primary">Restore selected</button>
             </form>

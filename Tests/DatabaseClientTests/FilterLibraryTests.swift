@@ -6,6 +6,33 @@ import Testing
 @testable import DatabaseClient
 
 struct FilterLibraryTests {
+  @Test func dustFreeChartsCanBeRestoredAndApplied() async throws {
+    try await withTestUserAndProject { user, project in
+      @Dependency(\.database) var db
+      _ = try await db.equipment.create(
+        .init(projectID: project.id, heatingCFM: 900, coolingCFM: 1200))
+      var library = try await db.filters.fetch(user.id)
+      library = try await db.filters.update(
+        user.id,
+        .init(action: .delete, revision: library.revision, id: "dust-free-08611"))
+      #expect(try await db.filters.fetch(user.id) == library)
+      library = try await db.filters.update(
+        user.id,
+        .init(action: .restore, revision: library.revision, sources: ["dust-free-08611"]))
+      #expect(try await db.filters.fetch(user.id) == library)
+      for (id, name, drop) in [
+        ("dust-free-08611", "Dust Free Sixteen 3-ton", 0.10),
+        ("dust-free-08610", "Dust Free Sixteen 5-ton", 0.06),
+      ] {
+        try await db.filters.apply(user.id, project.id, .init(model: id, allowance: "0.03"))
+        let loss = try #require(
+          try await db.componentLosses.fetch(project.id).first { $0.name.hasPrefix(name) })
+        #expect(loss.name == "\(name) filter (less 0.03 in equipment rating)")
+        #expect(loss.value == drop)
+      }
+    }
+  }
+
   @Test func savedCutoffDoesNotRestrictManualSelection() async throws {
     try await withTestUserAndProject { user, project in
       @Dependency(\.database) var db

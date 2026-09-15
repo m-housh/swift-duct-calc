@@ -19,6 +19,8 @@ assert(['localhost', '127.0.0.1'].includes(new URL(origin).hostname), 'Use an is
     const project = `/projects/${projectID}`;
     await context.request.post(`${project}/equipment`, { form: { projectID, heatingCFM: '1000', coolingCFM: '1200', staticPressure: '0.5' } });
     await page.goto('/filters');
+    assert.equal(await page.getByRole('button', { name: 'Edit Dust Free Sixteen 3-ton', exact: true }).count(), 1);
+    assert.equal(await page.getByRole('button', { name: 'Edit Dust Free Sixteen 5-ton', exact: true }).count(), 1);
     await page.evaluate(() => window.dispatchEvent(new Event('focus')));
     async function saved(operation) {
       const revision = await page.locator('#filter-account').getAttribute('data-filter-revision');
@@ -64,6 +66,8 @@ assert(['localhost', '127.0.0.1'].includes(new URL(origin).hostname), 'Use an is
     await page.getByRole('button', { name: 'From template', exact: true }).click();
     await page.getByRole('button', { name: 'Use Furnace + evaporator coil template', exact: true }).click();
     const lookup = page.locator('#filterLookup[open]'); await lookup.waitFor();
+    await lookup.getByRole('button', { name: 'Use Dust Free Sixteen 3-ton, 0.13 inches of water column', exact: true }).waitFor();
+    await lookup.getByRole('button', { name: 'Use Dust Free Sixteen 5-ton, 0.09 inches of water column', exact: true }).waitFor();
     await lookup.locator('[name=allowance]').fill('0.03');
     await lookup.getByRole('button', { name: 'Use Example brand Custom media, 0.06 inches of water column', exact: true }).first().waitFor();
     await lookup.getByRole('button', { name: 'Use Example brand Custom media, 0.06 inches of water column', exact: true }).first().click();
@@ -93,7 +97,7 @@ assert(['localhost', '127.0.0.1'].includes(new URL(origin).hostname), 'Use an is
     assert.equal(await page.getByRole('button', { name: 'Edit Example brand Custom media', exact: true }).count(), 0);
     await page.getByRole('button', { name: 'Delete Aprilaire 213', exact: true }).click();
     await saved(() => page.locator('#filter-delete-dialog').getByRole('button', { name: 'Delete filter', exact: true }).click());
-    await page.getByRole('button', { name: 'Restore Aprilaire filters', exact: true }).click();
+    await page.getByRole('button', { name: 'Restore default filters', exact: true }).click();
     await saved(() => page.locator('#restore-filters').getByRole('button', { name: 'Restore selected' }).click());
     assert.equal(await page.getByRole('button', { name: 'Edit Aprilaire 213', exact: true }).count(), 1);
     const stale = await context.newPage(); await stale.goto('/filters');
