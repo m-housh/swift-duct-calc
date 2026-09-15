@@ -38,20 +38,24 @@ struct TrunkOrderMigrationTests {
         .init(
           name: "Other project", streetAddress: "2 Main St", city: "Monroe", state: "OH",
           zipCode: "45050"))
-      let sql = try #require(app.db as? any SQLDatabase)
-      let migration = TrunkSize.AddPosition()
-      try await migration.revert(on: app.db)
-      let rows: [(UUID, UUID, String)] = [
-        (UUID(40), project.id, "supply"), (UUID(20), project.id, "return"),
-        (UUID(30), project.id, "supply"), (UUID(10), project.id, "return"),
-        (UUID(50), other.id, "supply"),
-      ]
-      for (id, projectID, type) in rows {
-        try await sql.raw(
-          "INSERT INTO trunk (id, \(ident: "projectID"), type) VALUES (\(bind: id), \(bind: projectID), \(bind: type))"
-        ).run()
+      // SQLite can retain a stale schema when another connection drops a column.
+      // Keep rollback and reapplication on one connection.
+      try await app.db.withConnection { connection in
+        let sql = try #require(connection as? any SQLDatabase)
+        let migration = TrunkSize.AddPosition()
+        try await migration.revert(on: connection)
+        let rows: [(UUID, UUID, String)] = [
+          (UUID(40), project.id, "supply"), (UUID(20), project.id, "return"),
+          (UUID(30), project.id, "supply"), (UUID(10), project.id, "return"),
+          (UUID(50), other.id, "supply"),
+        ]
+        for (id, projectID, type) in rows {
+          try await sql.raw(
+            "INSERT INTO trunk (id, \(ident: "projectID"), type) VALUES (\(bind: id), \(bind: projectID), \(bind: type))"
+          ).run()
+        }
+        try await migration.prepare(on: connection)
       }
-      try await migration.prepare(on: app.db)
       #expect(
         try await database.trunkSizes.fetch(project.id).map(\.id) == [
           UUID(30), UUID(40), UUID(10), UUID(20),
