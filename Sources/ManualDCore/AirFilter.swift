@@ -83,14 +83,16 @@ public struct AirFilter: Codable, Equatable, Identifiable, Sendable {
     max(0, ((pressureDrop(at: airflow) - (allowance ?? 0)) * 100).rounded() / 100)
   }
 
-  public static let defaults = AprilaireFilter.all.map { filter in
-    Self(
-      id: filter.model, manufacturer: "Aprilaire", model: filter.model,
-      description: filter.rating.title,
-      points: filter.pressureDrops.enumerated().map {
-        Point(airflow: filter.firstCFM + $0.offset * AprilaireFilter.step, pressureDrop: $0.element)
-      }, source: filter.model)
-  }
+  public static let defaults: [Self] =
+    AprilaireFilter.all.map { filter in
+      Self(
+        id: filter.model, manufacturer: "Aprilaire", model: filter.model,
+        description: filter.rating.title,
+        points: filter.pressureDrops.enumerated().map {
+          Point(
+            airflow: filter.firstCFM + $0.offset * AprilaireFilter.step, pressureDrop: $0.element)
+        }, source: filter.model)
+    } + dustFree
 
   public struct Selection: Equatable, Sendable {
     public let model: String
@@ -277,7 +279,7 @@ public struct FilterLibrary: Codable, Equatable, Sendable {
       let sources = Set(change.sources ?? [])
       guard !sources.isEmpty, sources.isSubset(of: Set(AirFilter.defaults.compactMap(\.source)))
       else {
-        throw FilterError("Choose the Aprilaire filters to restore.")
+        throw FilterError("Choose the default filters to restore.")
       }
       for original in AirFilter.defaults where sources.contains(original.source!) {
         guard
@@ -286,7 +288,7 @@ public struct FilterLibrary: Codable, Equatable, Sendable {
           })
         else {
           throw FilterError(
-            "Rename or delete the existing \(original.name) entry before restoring the Aprilaire chart."
+            "Rename or delete the existing \(original.name) entry before restoring the default chart."
           )
         }
         if let i = filters.firstIndex(where: { $0.source == original.source }) {

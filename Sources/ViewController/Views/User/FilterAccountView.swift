@@ -42,7 +42,7 @@ struct FilterAccountView: HTML, Sendable {
         if preferences {
           "Choose the filters DuctCalc suggests for your projects."
         } else {
-          "Pressure drop charts used when you add a filter to a project. Your account starts with Aprilaire's chart. Edit or delete those entries, or add filters from any manufacturer."
+          "Pressure drop charts used when you add a filter to a project. Your account starts with Aprilaire and Dust Free charts. Edit or delete those entries, or add filters from any manufacturer."
         }
       }
       p(.id("filter-status"), .role("status"), .init(name: "aria-live", value: "polite")) {}
@@ -63,7 +63,7 @@ struct FilterAccountView: HTML, Sendable {
           if !restoreCandidates.isEmpty {
             button(
               .type(.button), .class("btn btn-outline btn-sm"), .showModal(id: "restore-filters")
-            ) { "Restore Aprilaire filters" }
+            ) { "Restore default filters" }
           }
         }
         p(.class("muted")) {
@@ -99,7 +99,7 @@ struct FilterAccountView: HTML, Sendable {
         if shown.isEmpty {
           p(.class("muted")) {
             library.filters.isEmpty
-              ? "Your library is empty. Add a filter or restore the Aprilaire starting filters."
+              ? "Your library is empty. Add a filter or restore the default filters."
               : "No filters match. Try another search or choose All filters."
           }
         }
@@ -321,10 +321,10 @@ struct FilterAccountView: HTML, Sendable {
     }
   }
   private var restoreDialog: some HTML & Sendable {
-    ModalForm(id: "restore-filters", title: "Restore Aprilaire filters", dismiss: true) {
+    ModalForm(id: "restore-filters", title: "Restore default filters", dismiss: true) {
       form(.data("filter-restore", value: ""), .class("space-y-4")) {
         p(.role("alert"), .data("filter-restore-error", value: "")) {}
-        p { "Choose filters to bring back from Aprilaire's chart. Custom filters are kept." }
+        p { "Choose built-in filters to add or reset. Custom filters are kept." }
         for filter in restoreCandidates {
           label(.class("flex items-center gap-2")) {
             input(
@@ -336,7 +336,7 @@ struct FilterAccountView: HTML, Sendable {
             "\(filter.name)"
             small(.class("muted")) {
               library.filters.contains(where: { $0.source == filter.source })
-                ? "Edited, resets values" : "Deleted"
+                ? "Edited, resets values" : "Not in library"
             }
           }
         }

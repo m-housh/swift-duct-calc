@@ -49,7 +49,7 @@
             <p class="muted">Changes apply to future lookups. Filter losses already saved in projects keep their values.</p>
             <form action="/filters" method="get" class="filter-library-tools">
               <label class="input"><span class="sr-only">Search filters</span>
-              <input name="q" type="search" value="" placeholder="Manufacturer, model, or description">
+              <input name="q" type="search" value="Dust Free" placeholder="Manufacturer, model, or description">
               Show filters</label><label><span class="sr-only"></span>
               <select name="scope" class="select w-full">
                 <option value="all" selected>All filters</option>
@@ -62,7 +62,7 @@
               CFM<span></span></label>
               <button type="submit" class="btn btn-outline">Update</button>
             </form>
-            <p class="muted">Your library is empty. Add a filter or restore the default filters.</p>
+            <p class="muted">No filters match. Try another search or choose All filters.</p>
           </div>
         </section>
         <dialog id="restore-filters" class="modal" aria-labelledby="restore-filters-title">
@@ -72,81 +72,6 @@
             <form data-filter-restore="" class="space-y-4">
               <p role="alert" data-filter-restore-error=""></p>
               <p>Choose built-in filters to add or reset. Custom filters are kept.</p><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="216" checked>
-              Aprilaire 216
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="416" checked>
-              Aprilaire 416
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="516" checked>
-              Aprilaire 516
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="113" checked>
-              Aprilaire 113
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="213" checked>
-              Aprilaire 213
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="313" checked>
-              Aprilaire 313
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="413" checked>
-              Aprilaire 413
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="513" checked>
-              Aprilaire 513
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="613" checked>
-              Aprilaire 613
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="813" checked>
-              Aprilaire 813
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="913" checked>
-              Aprilaire 913
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="213CBN" checked>
-              Aprilaire 213CBN
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="413CBN" checked>
-              Aprilaire 413CBN
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="513CBN" checked>
-              Aprilaire 513CBN
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="110" checked>
-              Aprilaire 110
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="210" checked>
-              Aprilaire 210
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="310" checked>
-              Aprilaire 310
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="410" checked>
-              Aprilaire 410
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="510" checked>
-              Aprilaire 510
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="610" checked>
-              Aprilaire 610
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="810" checked>
-              Aprilaire 810
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="910" checked>
-              Aprilaire 910
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="201" checked>
-              Aprilaire 201
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="401" checked>
-              Aprilaire 401
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
-              <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="501" checked>
-              Aprilaire 501
-              Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
               <input type="checkbox" class="checkbox checkbox-sm" name="sources" value="dust-free-08611" checked>
               Dust Free Sixteen 3-ton
               Not in library<small class="muted"></small></label><label class="flex items-center gap-2">
