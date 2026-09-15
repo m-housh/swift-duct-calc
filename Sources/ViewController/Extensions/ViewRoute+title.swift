@@ -18,7 +18,6 @@ extension SiteRoute.View {
     case .ductulator: title = "Ductulator"
     case .fittings: title = "Fitting picker"
     case .fittingReference: title = "Fitting reference"
-    case .test: title = "Preview"
     case .project(.detail(_, let detail)):
       switch detail {
       case .index: title = "Project"

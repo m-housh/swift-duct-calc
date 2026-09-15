@@ -136,12 +136,9 @@ public struct DatabaseClient: Sendable {
   @DependencyClient
   public struct Rooms: Sendable {
     public var create: @Sendable (Project.ID, Room.Create) async throws -> Room
-    public var createMany: @Sendable (Project.ID, [Room.Create]) async throws -> [Room]
     public var importLoads: @Sendable (Project.ID, User.ID, Room.LoadImport) async throws -> [Room]
     public var createFromCSV: @Sendable (Project.ID, User.ID, [Room.CSV.Row]) async throws -> [Room]
     public var delete: @Sendable (Room.ID) async throws -> Void
-    public var deleteRectangularSize:
-      @Sendable (Room.ID, Room.RectangularSize.ID) async throws -> Room
     public var clearRectangularSize: @Sendable (Room.ID, Int) async throws -> Room
     public var get: @Sendable (Room.ID) async throws -> Room?
     public var fetch: @Sendable (Project.ID) async throws -> [Room]

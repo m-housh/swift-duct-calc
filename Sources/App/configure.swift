@@ -51,10 +51,6 @@ public func configure(
   // Add the global middlewares.
   addMiddleware(
     to: app, database: databaseClient, environment: environment, fittingClient: fittingClient)
-  #if DEBUG
-    // Live reload of the application for development when launched with the `./swift-dev` command
-    // app.lifecycle.use(BrowserSyncHandler())
-  #endif
   // The bounded fitting-path payload includes saved snapshots for conflict detection.
   app.routes.defaultMaxBodySize = "2mb"
   // Add our route handlers.
@@ -65,8 +61,6 @@ public func configure(
   if app.environment != .testing {
     try await app.autoMigrate()
   }
-  // Add our custom cli-commands to the application.
-  addCommands(to: app)
 }
 
 private func addMiddleware(
@@ -139,13 +133,6 @@ private func addRoutes(to app: Application) {
     middleware: { $0.middleware() },
     use: siteHandler
   )
-}
-
-private func addCommands(to app: Application) {
-  // #if DEBUG
-  //   app.asyncCommands.use(SeedCommand(), as: "seed")
-  // #endif
-  // app.asyncCommands.use(GenerateAdminUserCommand(), as: "generate-admin")
 }
 
 extension SiteRoute {

@@ -18,8 +18,6 @@ extension SiteRoute {
     case ductulator(DuctulatorRoute)
     case fittingReference(FittingsQuery)
     case user(UserRoute)
-    //FIX: Remove.
-    case test
 
     public static let router = OneOf {
       Route(.case(Self.homePreview)) {
@@ -32,10 +30,6 @@ extension SiteRoute {
       Route(.case(Self.fittings)) {
         Path { "fittings" }
         FittingPickerRoute.router
-      }
-      Route(.case(Self.test)) {
-        Path { "test" }
-        Method.get
       }
       Route(.case(Self.home)) {
         Method.get
