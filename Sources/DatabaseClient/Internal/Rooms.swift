@@ -15,9 +15,6 @@ extension DatabaseClient.Rooms: TestDependencyKey {
         try await model.validateAndSave(on: database)
         return try model.toDTO()
       },
-      createMany: { projectID, rooms in
-        try await RoomModel.createMany(projectID: projectID, rooms: rooms, on: database)
-      },
       importLoads: { projectID, userID, loads in
         try await RoomModel.importRows(
           projectID: projectID, userID: userID,
@@ -39,21 +36,6 @@ extension DatabaseClient.Rooms: TestDependencyKey {
           throw NotFoundError()
         }
         try await model.delete(on: database)
-      },
-      deleteRectangularSize: { roomID, rectangularDuctID in
-        guard let model = try await RoomModel.find(roomID, on: database) else {
-          throw NotFoundError()
-        }
-        model.rectangularSizes?.removeAll {
-          $0.id == rectangularDuctID
-        }
-        if model.rectangularSizes?.count == 0 {
-          model.rectangularSizes = nil
-        }
-        if model.hasChanges {
-          try await model.validateAndSave(on: database)
-        }
-        return try model.toDTO()
       },
       clearRectangularSize: { roomID, register, sizeID in
         guard let model = try await RoomModel.find(roomID, on: database) else {
@@ -171,18 +153,6 @@ extension RoomModel {
       }
       return .init(
         id: size.register == nil ? uuid() : size.id, register: register, height: size.height)
-    }
-  }
-
-  fileprivate static func createMany(
-    projectID: Project.ID,
-    rooms: [Room.Create],
-    on database: any Database
-  ) async throws -> [Room] {
-    try await rooms.asyncMap { request in
-      let model = try request.toModel(projectID: projectID)
-      try await model.validateAndSave(on: database)
-      return try model.toDTO()
     }
   }
 }

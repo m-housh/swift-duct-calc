@@ -149,7 +149,7 @@ struct PdfImportClientTests {
     let url = try #require(
       Bundle.module.url(
         forResource: "ExampleHouse_ManJ", withExtension: "pdf", subdirectory: "Resources"))
-    let pdf = Room.PDF(file: try Data(contentsOf: url))
+    let pdf = FileUpload(file: try Data(contentsOf: url))
     let result = try await PdfImportClient.liveValue.parseProject(pdf)
     #expect(result.project.name == "Example House")
     #expect(result.project.streetAddress == "16 South Main Street")

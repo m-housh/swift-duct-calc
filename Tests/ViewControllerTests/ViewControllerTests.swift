@@ -176,12 +176,13 @@ struct ViewControllerTests {
         .init(supply: tels.first, return: tels.last)
       }
       $0.database.componentLosses.fetch = { _ in componentLosses }
+      $0.database.componentLosses.update = { id, _ in
+        try #require(componentLosses.first { $0.id == id })
+      }
       $0.projectClient.calculateRoomDuctSizes = { _ in
         mockDuctSizes.rooms
       }
-      $0.projectClient.calculateTrunkDuctSizes = { _ in
-        mockDuctSizes.trunks
-      }
+      $0.projectClient.calculateDuctSizes = { _ in mockDuctSizes }
     } operation: {
       @Dependency(\.viewController) var viewController
 
@@ -201,6 +202,12 @@ struct ViewControllerTests {
       html = try await viewController.view(
         .test(.project(.detail(project.id, .frictionRate(.index)))))
       assertSnapshot(of: html, as: .html)
+
+      let component = try #require(componentLosses.first)
+      let updated = try await viewController.view(
+        .test(.project(.detail(project.id, .componentLoss(
+          .update(component.id, .init(value: component.value)))))))
+      #expect(updated.render() == html.render())
 
       html = try await viewController.view(
         .test(.project(.detail(project.id, .ductSizing(.index)))))
