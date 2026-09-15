@@ -1,5 +1,5 @@
 .auth-layout {
-  --auth-muted: color-mix(in srgb, var(--color-base-content) 75%, var(--color-base-100));
+  --auth-muted: color-mix(in srgb, var(--color-base-content) 85%, var(--color-base-100));
   --auth-line: color-mix(in srgb, var(--color-base-content) 18%, transparent);
   display: flex; flex-direction: column; min-height: 100vh; min-height: 100svh;
   background: var(--color-base-100); color: var(--color-base-content);
