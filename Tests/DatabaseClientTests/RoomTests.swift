@@ -115,7 +115,7 @@ struct RoomTests {
       @Dependency(\.fileClient) var fileClient
 
       let csvPath = Bundle.module.path(forResource: "rooms", ofType: "csv")
-      let csvFile = Room.CSV(file: try Data(contentsOf: URL(filePath: csvPath!)))
+      let csvFile = FileUpload(file: try Data(contentsOf: URL(filePath: csvPath!)))
       let rows = try await csvParser.parseRooms(csvFile)
       let created = try await database.rooms.createFromCSV(project.id, user.id, rows)
       #expect(created.count == rows.count)

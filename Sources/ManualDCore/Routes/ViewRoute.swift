@@ -257,8 +257,8 @@ extension SiteRoute.View.ProjectRoute {
   }
 
   public enum RoomRoute: Equatable, Sendable {
-    case csv(Room.CSV)
-    case pdf(Room.PDF)
+    case csv(FileUpload)
+    case pdf(FileUpload)
     case delete(id: Room.ID)
     case index
     case submit(Room.Create)
@@ -277,7 +277,7 @@ extension SiteRoute.View.ProjectRoute {
           Field("Content-Type") { "multipart/form-data" }
         }
         Method.post
-        Body().map(.memberwise(Room.PDF.init))
+        Body().map(.memberwise(FileUpload.init))
       }
       Route(.case(Self.csv)) {
         Path {
@@ -288,7 +288,7 @@ extension SiteRoute.View.ProjectRoute {
           Field("Content-Type") { "multipart/form-data" }
         }
         Method.post
-        Body().map(.memberwise(Room.CSV.init))
+        Body().map(.memberwise(FileUpload.init))
       }
       Route(.case(Self.delete)) {
         Path {

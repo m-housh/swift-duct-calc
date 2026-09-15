@@ -158,13 +158,7 @@ extension Room {
     }
   }
 
-  public struct CSV: Equatable, Sendable {
-    public let file: Data
-
-    public init(file: Data) {
-      self.file = file
-    }
-
+  public enum CSV {
     /// Represents a row in a CSV file.
     ///
     /// This is similar to ``Room.Create``, but since the rooms are not yet
