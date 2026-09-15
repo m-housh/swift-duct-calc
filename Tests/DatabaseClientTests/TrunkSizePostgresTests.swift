@@ -28,6 +28,12 @@ struct TrunkSizePostgresTests {
         .init(
           email: "trunks@example.test", password: "super-secret", confirmPassword: "super-secret"))
       let project = try await database.projects.create(user.id, .mock)
+      try await sql.raw(
+        """
+        UPDATE project SET "updatedAt" = '2000-01-01T00:00:00Z' WHERE id = \(bind: project.id)
+        """
+      ).run()
+      let originalProject = try #require(try await database.projects.get(project.id))
       let room = try await database.rooms.create(
         project.id,
         .init(name: "Living room", heatingLoad: 1000, coolingTotal: 800, registerCount: 2))
@@ -92,6 +98,11 @@ struct TrunkSizePostgresTests {
           return results
         }
         #expect(results.count == 1)
+        #expect(try await database.projects.get(project.id) == originalProject)
+        if let winner = results.first {
+          _ = try await database.trunkSizes.update(winner.id, .init(name: winner.name))
+          #expect(try await database.projects.get(project.id) == originalProject)
+        }
         let saved = try await database.trunkSizes.fetch(project.id)
         #expect(
           saved.filter {

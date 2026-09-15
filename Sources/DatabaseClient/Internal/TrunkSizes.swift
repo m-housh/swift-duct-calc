@@ -3,7 +3,9 @@ import DependenciesMacros
 import Fluent
 import Foundation
 import ManualDCore
+import SQLKit
 import Validations
+import struct Vapor.Abort
 
 extension DatabaseClient.TrunkSizes: TestDependencyKey {
   public static let testValue = Self()
@@ -338,10 +340,14 @@ final class TrunkModel: Model, @unchecked Sendable {
   /// The no-op update serializes creates and updates on SQLite and PostgreSQL,
   /// including the first named trunk in an empty project.
   static func lockProject(_ projectID: Project.ID, on database: any Database) async throws {
-    try await ProjectModel.query(on: database)
-      .filter(\.$id == projectID)
-      .set(\.$id, to: projectID)
-      .update()
+    // QueryBuilder.update also advances updatedAt, even when no trunk fields change.
+    guard let sql = database as? any SQLDatabase else { throw Abort(.internalServerError) }
+    try await sql.raw(
+      """
+      UPDATE \(ident: ProjectModel.schema) SET \(ident: "id") = \(bind: projectID)
+      WHERE \(ident: "id") = \(bind: projectID)
+      """
+    ).run()
   }
 
   /// Names identify trunks within a project. Hold the project lock until saving completes.
