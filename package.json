@@ -10,6 +10,7 @@
     "test:account": "node scripts/check_account_browser.cjs",
     "test:filters": "node scripts/check_filters_browser.cjs",
     "test:equipment": "node --test scripts/check_equipment.cjs",
+    "test:trunk-order": "node scripts/check_trunk_order_browser.cjs",
     "test:trunk-templates": "node --test scripts/check_trunk_templates.cjs",
     "test:keybindings": "node --test scripts/check_keybinding_recorder.cjs scripts/check_shortcut_hints.cjs",
     "test:keybindings-browser": "node scripts/check_keybindings_browser.cjs",

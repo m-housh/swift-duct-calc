@@ -158,6 +158,8 @@ public struct DatabaseClient: Sendable {
     public var delete: @Sendable (TrunkSize.ID) async throws -> Void
     public var fetch: @Sendable (Project.ID) async throws -> [TrunkSize]
     public var get: @Sendable (TrunkSize.ID) async throws -> TrunkSize?
+    public var reorder:
+      @Sendable (Project.ID, TrunkSize.TrunkType, [TrunkSize.ID]) async throws -> Void
     public var update:
       @Sendable (TrunkSize.ID, TrunkSize.Update) async throws ->
         TrunkSize

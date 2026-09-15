@@ -88,8 +88,10 @@
               All projects<a class="all-projects-link" href="/projects"></a>
             </aside>
             <div class="project-content" id="project-content" tabindex="-1">
+              <link rel="stylesheet" href="/css/trunks.css?v=2">
               <link rel="stylesheet" href="/css/trunk-templates.css?v=2">
               <script src="/js/trunk-templates.js?v=3" defer></script>
+              <script src="/js/trunk-order.js?v=1" defer></script>
               <div class="space-y-4">
                 <div class="page-title-row">
                   <div>
@@ -103,48 +105,59 @@
                     <button type="button" class="btn btn-primary" data-open-dialog="trunkSizeForm" data-project-primary="" aria-keyshortcuts="Control+Alt+A" title="Add trunk, Ctrl+Alt+A"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add trunk</button>
                   </div>
                   <div class="trunk-columns">
-                    <section class="trunk-column supply">
+                    <section class="trunk-column supply" data-trunk-type="supply" data-trunk-order-url="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk/order">
                       <h3 class="system-label supply">Supply · 1</h3>
-                      <article class="trunk-card">
+                      <div class="trunk-column-head" aria-hidden="true"><span></span><span>Trunk</span><span>CFM</span><span>Round</span><span>Flex</span><span>Rectangular</span></div>
+                      <article class="trunk-card" data-trunk-id="00000000-0000-0000-0000-00000000000F">
                         <div class="trunk-card-main">
-                          <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>
-                          <div><strong>Supply trunk</strong><small>12 associated runs</small></div>
-                          1,000
-                          CFM<span><span></span><small></small></span>
-                          <button type="button" class="btn btn-error btn-ghost" aria-label="Delete trunk" title="Delete trunk" hx-delete="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk/00000000-0000-0000-0000-00000000000F" hx-confirm="Delete this trunk?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-                          <button class="btn btn-ghost" type="button" aria-label="Edit trunk" data-open-dialog="trunkSizeForm_0000000000000000000000000000000F">
-                            <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
-                          </button>
+                          <button type="button" class="trunk-drag-handle" data-trunk-name="Supply trunk" aria-label="Reorder Supply trunk" title="Drag to reorder, or use the Up and Down arrow keys"><span aria-hidden="true">↕</span></button>
+                          <div class="trunk-card-identity"><strong>Supply trunk</strong><small>12 associated runs</small></div>
+                          <dl class="trunk-card-sizes">
+                            <div class="trunk-airflow">
+                              <dt>CFM</dt>
+                              <dd><span>1,000</span></dd>
+                            </div>
+                            <div>
+                              <dt>Round</dt>
+                              <dd><span class="size-chip">20″</span></dd>
+                            </div>
+                            <div>
+                              <dt>Flex</dt>
+                              <dd>20″</dd>
+                            </div>
+                            <div>
+                              <dt>Rectangular</dt>
+                              <dd><span class="trunk-size-empty" aria-label="No rectangular size">—</span></dd>
+                            </div>
+                          </dl>
                         </div>
-                        <dl class="trunk-card-sizes">
-                          <div>
-                            <dt>Round</dt>
-                            <dd><span class="size-chip">20″</span></dd>
+                        <div class="trunk-card-footer">
+                          <details>
+                            <summary aria-label="Calculation details and associated runs">Details &amp; runs</summary>
+                            <p>Velocity: 987 FPM</p>
+                            <p>Calculated diameter: <span>18</span> in.</p>
+                            <ul>
+                              <li>Bed-1 - SR.1</li>
+                              <li>Entry - SR.1</li>
+                              <li>Entry - SR.2</li>
+                              <li>Family Room - SR.1</li>
+                              <li>Family Room - SR.2</li>
+                              <li>Family Room - SR.3</li>
+                              <li>Kitchen - SR.1</li>
+                              <li>Kitchen - SR.2</li>
+                              <li>Living Room - SR.1</li>
+                              <li>Living Room - SR.2</li>
+                              <li>Master - SR.1</li>
+                              <li>Master - SR.2</li>
+                            </ul>
+                          </details>
+                          <div class="trunk-card-actions">
+                            <button type="button" class="btn btn-error btn-ghost" aria-label="Delete trunk" title="Delete trunk" hx-delete="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk/00000000-0000-0000-0000-00000000000F" hx-confirm="Delete this trunk?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                            <button class="btn btn-ghost" type="button" aria-label="Edit trunk" data-open-dialog="trunkSizeForm_0000000000000000000000000000000F">
+                              <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                            </button>
                           </div>
-                          <div>
-                            <dt>Flex</dt>
-                            <dd>20″</dd>
-                          </div>
-                        </dl>
-                        <details>
-                          <summary>Calculation details and associated runs</summary>
-                          <p>Velocity: 987 FPM</p>
-                          <p>Calculated diameter: <span>18</span> in.</p>
-                          <ul>
-                            <li>Bed-1 - SR.1</li>
-                            <li>Entry - SR.1</li>
-                            <li>Entry - SR.2</li>
-                            <li>Family Room - SR.1</li>
-                            <li>Family Room - SR.2</li>
-                            <li>Family Room - SR.3</li>
-                            <li>Kitchen - SR.1</li>
-                            <li>Kitchen - SR.2</li>
-                            <li>Living Room - SR.1</li>
-                            <li>Living Room - SR.2</li>
-                            <li>Master - SR.1</li>
-                            <li>Master - SR.2</li>
-                          </ul>
-                        </details>
+                        </div>
                         <dialog id="trunkSizeForm_0000000000000000000000000000000F" class="modal" aria-labelledby="trunkSizeForm_0000000000000000000000000000000F-title">
                           <div class="modal-box">
                             <h2 id="trunkSizeForm_0000000000000000000000000000000F-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
@@ -201,49 +214,61 @@
                           </div>
                         </dialog>
                       </article>
+                      <p class="trunk-order-status" role="status" aria-live="polite"></p>
                     </section>
-                    <section class="trunk-column return">
+                    <section class="trunk-column return" data-trunk-type="return" data-trunk-order-url="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk/order">
                       <h3 class="system-label return">Return · 1</h3>
-                      <article class="trunk-card">
+                      <div class="trunk-column-head" aria-hidden="true"><span></span><span>Trunk</span><span>CFM</span><span>Round</span><span>Flex</span><span>Rectangular</span></div>
+                      <article class="trunk-card" data-trunk-id="00000000-0000-0000-0000-000000000010">
                         <div class="trunk-card-main">
-                          <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind-icon lucide-wind"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></svg>
-                          <div><strong>Return trunk</strong><small>12 associated runs</small></div>
-                          1,000
-                          CFM<span><span></span><small></small></span>
-                          <button type="button" class="btn btn-error btn-ghost" aria-label="Delete trunk" title="Delete trunk" hx-delete="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk/00000000-0000-0000-0000-000000000010" hx-confirm="Delete this trunk?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-                          <button class="btn btn-ghost" type="button" aria-label="Edit trunk" data-open-dialog="trunkSizeForm_00000000000000000000000000000010">
-                            <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
-                          </button>
+                          <button type="button" class="trunk-drag-handle" data-trunk-name="Return trunk" aria-label="Reorder Return trunk" title="Drag to reorder, or use the Up and Down arrow keys"><span aria-hidden="true">↕</span></button>
+                          <div class="trunk-card-identity"><strong>Return trunk</strong><small>12 associated runs</small></div>
+                          <dl class="trunk-card-sizes">
+                            <div class="trunk-airflow">
+                              <dt>CFM</dt>
+                              <dd><span>1,000</span></dd>
+                            </div>
+                            <div>
+                              <dt>Round</dt>
+                              <dd><span class="size-chip">20″</span></dd>
+                            </div>
+                            <div>
+                              <dt>Flex</dt>
+                              <dd>20″</dd>
+                            </div>
+                            <div>
+                              <dt>Rectangular</dt>
+                              <dd><span class="trunk-size-empty" aria-label="No rectangular size">—</span></dd>
+                            </div>
+                          </dl>
                         </div>
-                        <dl class="trunk-card-sizes">
-                          <div>
-                            <dt>Round</dt>
-                            <dd><span class="size-chip">20″</span></dd>
+                        <div class="trunk-card-footer">
+                          <details>
+                            <summary aria-label="Calculation details and associated runs">Details &amp; runs</summary>
+                            <p>Velocity: 987 FPM</p>
+                            <p>Calculated diameter: <span>18</span> in.</p>
+                            <ul>
+                              <li>Bed-1 - SR.1</li>
+                              <li>Entry - SR.1</li>
+                              <li>Entry - SR.2</li>
+                              <li>Family Room - SR.1</li>
+                              <li>Family Room - SR.2</li>
+                              <li>Family Room - SR.3</li>
+                              <li>Kitchen - SR.1</li>
+                              <li>Kitchen - SR.2</li>
+                              <li>Living Room - SR.1</li>
+                              <li>Living Room - SR.2</li>
+                              <li>Master - SR.1</li>
+                              <li>Master - SR.2</li>
+                            </ul>
+                          </details>
+                          <div class="trunk-card-actions">
+                            <button type="button" class="btn btn-error btn-ghost" aria-label="Delete trunk" title="Delete trunk" hx-delete="/projects/00000000-0000-0000-0000-000000000000/duct-sizing/trunk/00000000-0000-0000-0000-000000000010" hx-confirm="Delete this trunk?" hx-target="body" hx-swap="outerHTML"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                            <button class="btn btn-ghost" type="button" aria-label="Edit trunk" data-open-dialog="trunkSizeForm_00000000000000000000000000000010">
+                              <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                            </button>
                           </div>
-                          <div>
-                            <dt>Flex</dt>
-                            <dd>20″</dd>
-                          </div>
-                        </dl>
-                        <details>
-                          <summary>Calculation details and associated runs</summary>
-                          <p>Velocity: 987 FPM</p>
-                          <p>Calculated diameter: <span>18</span> in.</p>
-                          <ul>
-                            <li>Bed-1 - SR.1</li>
-                            <li>Entry - SR.1</li>
-                            <li>Entry - SR.2</li>
-                            <li>Family Room - SR.1</li>
-                            <li>Family Room - SR.2</li>
-                            <li>Family Room - SR.3</li>
-                            <li>Kitchen - SR.1</li>
-                            <li>Kitchen - SR.2</li>
-                            <li>Living Room - SR.1</li>
-                            <li>Living Room - SR.2</li>
-                            <li>Master - SR.1</li>
-                            <li>Master - SR.2</li>
-                          </ul>
-                        </details>
+                        </div>
                         <dialog id="trunkSizeForm_00000000000000000000000000000010" class="modal" aria-labelledby="trunkSizeForm_00000000000000000000000000000010-title">
                           <div class="modal-box">
                             <h2 id="trunkSizeForm_00000000000000000000000000000010-title" class="text-2xl font-bold mb-6 pe-10">Trunk / Runout Size</h2>
@@ -300,6 +325,7 @@
                           </div>
                         </dialog>
                       </article>
+                      <p class="trunk-order-status" role="status" aria-live="polite"></p>
                     </section>
                   </div>
                 </section>

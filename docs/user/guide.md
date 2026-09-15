@@ -279,6 +279,11 @@ saving. Templates add one trunk at a time and can be edited afterward. You can
 also start with No template and select runs yourself. Choosing No template after
 using a template clears the name and selected runs, keeping the type and height.
 
+New trunks go at the end of their supply or return list. Drag a trunk by its
+reorder handle to move it within that list. With the handle focused, use the Up
+and Down arrow keys instead. The order saves automatically and carries through
+to the PDF report.
+
 Use Rectangular sizes to select registers and set a shared height or clear
 their rectangular sizes. Clearing leaves unselected registers unchanged and does
 not require a height. Use PDF or Ctrl+Alt+E on this page to open the design report in a new tab.

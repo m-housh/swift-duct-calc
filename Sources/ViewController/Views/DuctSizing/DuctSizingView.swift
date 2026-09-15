@@ -16,9 +16,11 @@ struct DuctSizingView: HTML, Sendable {
   }
 
   var body: some HTML {
+    link(.rel(.stylesheet), .href("/css/trunks.css?v=2"))
     if !readOnly {
       link(.rel(.stylesheet), .href("/css/trunk-templates.css?v=2"))
       script(.src("/js/trunk-templates.js?v=3"), .defer) {}
+      script(.src("/js/trunk-order.js?v=1"), .defer) {}
     }
     div(.class("space-y-4")) {
       PageTitleRow {

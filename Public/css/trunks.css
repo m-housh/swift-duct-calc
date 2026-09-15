@@ -1,0 +1,52 @@
+.trunk-columns { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; padding:0 20px 12px; }
+.trunk-column { container:trunk-list / inline-size; --trunk-grid:24px minmax(0,1fr) 44px 44px 44px 90px; }
+.trunk-column > h3 { font-size:12px; margin-bottom:10px; }
+.trunk-column-head { display:grid; grid-template-columns:var(--trunk-grid); gap:8px; padding:0 13px 0 15px; margin-bottom:6px; color:var(--muted); font-size:10px; text-align:right; }
+.trunk-column-head > :nth-child(2) { text-align:left; }
+.trunk-card { --trunk-color:var(--accent); border:1px solid color-mix(in srgb,var(--trunk-color) 40%,var(--line)); border-left:3px solid var(--trunk-color); border-radius:6px; margin-bottom:8px; }
+.trunk-column.return .trunk-card { --trunk-color:var(--color-secondary); }
+.trunk-card-main { display:grid; grid-template-columns:var(--trunk-grid); gap:8px; align-items:center; min-height:80px; padding:10px 12px; }
+.trunk-card-identity { min-width:0; overflow-wrap:anywhere; }
+.trunk-card-identity strong { display:block; font-weight:500; font-size:12px; line-height:1.4; }
+.trunk-card-identity small { display:block; font-size:10px; margin-top:5px; color:var(--muted); }
+.trunk-card-sizes { display:contents; }
+.trunk-card-sizes dt { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
+.trunk-card-sizes dd { margin:0; font-size:14px; font-weight:500; white-space:nowrap; line-height:22px; text-align:right; }
+.trunk-card-sizes .trunk-airflow dd { font-size:12px; }
+.trunk-card-sizes .size-chip { background:color-mix(in srgb,var(--trunk-color) 13%,var(--color-base-100)); border-color:color-mix(in srgb,var(--trunk-color) 24%,var(--line)); padding:2px 6px; }
+.trunk-size-empty { color:var(--muted); font-weight:400; }
+.trunk-card-footer { display:flex; align-items:flex-start; justify-content:space-between; gap:8px; min-height:28px; border-top:1px solid var(--line); padding:0 10px 0 12px; }
+.trunk-card-footer details { flex:1; min-width:0; padding:5px 0; color:var(--muted); font-size:11px; line-height:16px; }
+.trunk-card-footer summary { cursor:pointer; }
+.trunk-card-footer details p,.trunk-card-footer details ul { margin:8px 0; }
+.trunk-card-actions { display:flex; gap:2px; }
+.trunk-card-actions .btn { min-height:26px; height:26px; padding:4px; }
+.trunk-card-actions .btn svg { width:15px; height:15px; }
+.trunk-panel .project-toolbar { justify-content:space-between; }
+.trunk-drag-handle { width:24px; height:32px; border:0; border-radius:4px; background:transparent; color:var(--muted); font-size:20px; cursor:grab; touch-action:none; user-select:none; }
+.trunk-drag-handle:hover { background:var(--color-base-200); color:var(--color-base-content); }
+.trunk-drag-handle:focus-visible { outline:2px solid var(--color-primary); outline-offset:2px; }
+.trunk-drag-handle:disabled { cursor:wait; opacity:.5; }
+.trunk-card.is-dragging { opacity:.6; }
+.trunk-card.is-dragging .trunk-drag-handle { cursor:grabbing; }
+.trunk-order-status { font-size:12px; color:var(--muted); overflow-wrap:anywhere; }
+.trunk-order-status:empty { display:none; }
+.trunk-order-status[data-error] { color:var(--color-error); }
+@media(max-width:800px) { .trunk-columns { grid-template-columns:1fr; } }
+@media(max-width:400px) { .trunk-columns { padding:0 12px 12px; } }
+@container trunk-list (max-width:400px) {
+  .trunk-column-head { display:none; }
+  .trunk-card-main { grid-template-columns:20px minmax(0,1fr) 40px 40px 80px; gap:5px; padding:8px; }
+  .trunk-drag-handle { grid-row:1 / span 2; }
+  .trunk-card-identity { grid-column:2 / -1; }
+  .trunk-card-sizes dt { position:static; width:auto; height:auto; margin:0; overflow:visible; clip-path:none; color:var(--muted); font-size:9px; text-align:right; }
+  .trunk-card-sizes dd { font-size:12px; }
+  .trunk-airflow { display:flex; flex-direction:row-reverse; align-items:baseline; justify-content:flex-end; gap:3px; }
+}
+@container trunk-list (max-width:280px) {
+  .trunk-card-main { grid-template-columns:20px minmax(0,1fr); }
+  .trunk-drag-handle { grid-row:1; }
+  .trunk-card-sizes { display:grid; grid-column:1 / -1; grid-template-columns:minmax(0,1fr) 36px 32px 72px; gap:4px; }
+  .trunk-airflow { display:block; }
+  .trunk-card-sizes .trunk-airflow dt,.trunk-card-sizes .trunk-airflow dd { text-align:left; }
+}

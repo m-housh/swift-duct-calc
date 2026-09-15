@@ -18,6 +18,8 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
         return try await database.transaction { database in
           try await TrunkModel.lockProject(request.projectID, on: database)
           let trunk = request.toModel()
+          trunk.position = try await TrunkModel.nextPosition(
+            projectID: request.projectID, type: request.type.rawValue, on: database)
           var roomProxies = [TrunkSize.RoomProxy]()
 
           try await trunk.validateUniqueName(on: database)
@@ -53,7 +55,10 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
         guard let model = try await TrunkModel.find(id, on: database) else {
           throw NotFoundError()
         }
-        try await model.delete(on: database)
+        try await database.transaction { database in
+          try await TrunkModel.lockProject(model.$project.id, on: database)
+          try await model.delete(on: database)
+        }
       },
       fetch: { projectID in
         try await TrunkModel.query(on: database)
@@ -75,6 +80,28 @@ extension DatabaseClient.TrunkSizes: TestDependencyKey {
           return nil
         }
         return try model.toDTO()
+      },
+      reorder: { projectID, type, ids in
+        try await database.transaction { database in
+          try await TrunkModel.lockProject(projectID, on: database)
+          let trunks = try await TrunkModel.query(on: database)
+            .filter(\.$project.$id == projectID)
+            .filter(\.$type == type.rawValue)
+            .all()
+          guard ids.count == Set(ids).count,
+            Set(ids) == Set(trunks.compactMap(\.id))
+          else {
+            throw ValidationError("The trunk list changed. Reload the page and try again.")
+          }
+          let positions = Dictionary(uniqueKeysWithValues: ids.enumerated().map { ($1, $0) })
+          for trunk in trunks {
+            let position = positions[try trunk.requireID()]!
+            if trunk.position != position {
+              trunk.position = position
+              try await trunk.save(on: database)
+            }
+          }
+        }
       },
       update: { id, updates in
         guard let existing = try await TrunkModel.find(id, on: database) else {
@@ -114,6 +141,30 @@ extension TrunkSize.Create {
 }
 
 extension TrunkSize {
+
+  struct AddPosition: AsyncMigration {
+    let name = "AddTrunkPosition"
+
+    func prepare(on database: any Database) async throws {
+      try await database.schema(TrunkModel.schema).field("position", .int64).update()
+      guard let sql = database as? any SQLDatabase else { throw Abort(.internalServerError) }
+      // Preserve the UUID order shown by the old view within each supply/return list.
+      try await sql.raw(
+        """
+        UPDATE trunk SET position = (
+          SELECT ranked.position FROM (
+            SELECT id, ROW_NUMBER() OVER (PARTITION BY "projectID", type ORDER BY id) - 1 AS position
+            FROM trunk
+          ) AS ranked WHERE ranked.id = trunk.id
+        )
+        """
+      ).run()
+    }
+
+    func revert(on database: any Database) async throws {
+      try await database.schema(TrunkModel.schema).deleteField("position").update()
+    }
+  }
 
   struct Migrate: AsyncMigration {
     let name = "CreateTrunkSize"
@@ -224,6 +275,9 @@ final class TrunkModel: Model, @unchecked Sendable {
   @OptionalField(key: "name")
   var name: String?
 
+  @OptionalField(key: "position")
+  var position: Int?
+
   @Children(for: \.$trunk)
   var rooms: [TrunkRoomModel]
 
@@ -281,6 +335,8 @@ final class TrunkModel: Model, @unchecked Sendable {
     on database: any Database
   ) async throws {
     if let type = updates.type, type.rawValue != self.type {
+      position = try await Self.nextPosition(
+        projectID: $project.id, type: type.rawValue, on: database)
       self.type = type.rawValue
     }
     if let height = updates.height, height != self.height {
@@ -336,6 +392,16 @@ final class TrunkModel: Model, @unchecked Sendable {
 
   }
 
+  static func nextPosition(
+    projectID: Project.ID, type: String, on database: any Database
+  ) async throws -> Int {
+    let trunks = try await TrunkModel.query(on: database)
+      .filter(\.$project.$id == projectID)
+      .filter(\.$type == type)
+      .all()
+    return (trunks.compactMap(\.position).max() ?? -1) + 1
+  }
+
   /// Call inside the write transaction, before reading or validating trunks.
   /// The no-op update serializes creates and updates on SQLite and PostgreSQL,
   /// including the first named trunk in an empty project.
@@ -386,7 +452,11 @@ extension Array where Element == TrunkModel {
 
   func toDTO() throws -> [TrunkSize] {
 
-    return try reduce(into: [TrunkSize]()) {
+    return try sorted {
+      if $0.type != $1.type { return $0.type == TrunkSize.TrunkType.supply.rawValue }
+      if $0.position != $1.position { return ($0.position ?? 0) < ($1.position ?? 0) }
+      return ($0.id?.uuidString ?? "") < ($1.id?.uuidString ?? "")
+    }.reduce(into: [TrunkSize]()) {
       $0.append(try $1.toDTO())
     }
   }

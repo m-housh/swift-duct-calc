@@ -14,6 +14,29 @@ import Testing
 struct DuctSizingViewTests {
   typealias Input = Project.DuctSizingUnavailable.Input
 
+  @Test func reorderRouteSavesTheSelectedList() async throws {
+    typealias Route = SiteRoute.View.ProjectRoute.DuctSizingRoute
+    let ids = [UUID(30), UUID(10), UUID(20)]
+    let route = Route.trunk(.reorder(.supply, ids))
+    let site = SiteRoute.View.project(.detail(UUID(0), .ductSizing(route)))
+    let request = try SiteRoute.View.router.request(for: site)
+    #expect(request.url?.path == "/projects/\(UUID(0))/duct-sizing/trunk/order")
+    #expect(try SiteRoute.View.router.match(request: request) == site)
+    let saved = LockIsolated(false)
+    let response = try await ViewControllerTests().withDefaultDependencies {
+      $0.database.trunkSizes.reorder = { projectID, type, order in
+        #expect(projectID == UUID(0))
+        #expect(type == .supply)
+        #expect(order == ids)
+        saved.setValue(true)
+      }
+    } operation: {
+      try await route.renderView(on: .test(site), projectID: UUID(0))
+    }
+    #expect(saved.value)
+    #expect(response.render().isEmpty)
+  }
+
   @Test(
     arguments: Input.allCases.map { [$0] } + [
       [.equipment, .supplyPath, .returnPath], Input.allCases,
