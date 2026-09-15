@@ -43,7 +43,6 @@ extension ViewController {
 extension ViewController: DependencyKey {
   public static let testValue = Self()
 
-  // FIX: Fix.
   public static let liveValue = Self(
     view: { request in
       try await request.render()

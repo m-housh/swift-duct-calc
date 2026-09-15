@@ -36,12 +36,6 @@ extension ManualDClient: DependencyKey {
         value: frictionRate
       )
     },
-    // totalEquivalentLength: { request in
-    //   let trunkLengths = request.trunkLengths.reduce(0) { $0 + $1 }
-    //   let runoutLengths = request.runoutLengths.reduce(0) { $0 + $1 }
-    //   let groupLengths = request.effectiveLengthGroups.totalEffectiveLength
-    //   return trunkLengths + runoutLengths + groupLengths
-    // },
     rectangularSize: { round, height in
       let width = (Double.pi * (pow(Double(round.rawValue) / 2.0, 2.0))) / Double(height.rawValue)
       return .init(

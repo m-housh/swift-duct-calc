@@ -16,8 +16,6 @@ extension ViewController.Request {
   func render() async throws -> AnySendableHTML {
 
     @Dependency(\.database) var database
-    @Dependency(\.projectClient) var projectClient
-    @Dependency(\.pdfClient) var pdfClient
 
     switch route {
     case .fittings(let picker):
@@ -47,26 +45,6 @@ extension ViewController.Request {
       return await view {
         PrivacyPolicyView()
       }
-    case .test:
-      // let projectID = UUID(uuidString: "E796C96C-F527-4753-A00A-EBCF25630663")!
-      // return await view {
-      //   await ResultView {
-      //
-      //     // return (
-      //     //   try await database.projects.getCompletedSteps(projectID),
-      //     //   try await projectClient.calculateDuctSizes(projectID)
-      //     // )
-      //     return try await pdfClient.html(.mock())
-      //   } onSuccess: {
-      //     $0
-      //     // TestPage()
-      //     // TestPage(trunks: result.trunks, rooms: result.rooms)
-      //   }
-      // }
-      // return try! await pdfClient.html(.mock())
-      return await view {
-        TestPage()
-      }
     case .login(let route):
       switch route {
       case .index(let next):
@@ -78,7 +56,6 @@ extension ViewController.Request {
           }
         }
       case .submit(let login):
-        // let _ = try await authenticate(login)
         return try await view {
           try await loadView {
             try await authenticate(login)
@@ -461,7 +438,6 @@ extension SiteRoute.View.ProjectRoute.RoomRoute {
         let rooms = try await csvParser.parseRooms(csv)
         _ = try await database.rooms.createFromCSV(projectID, user.id, rooms)
       }
-    // return EmptyHTML()
 
     case .delete(let id):
       return try await roomsView(on: request, projectID: projectID) {

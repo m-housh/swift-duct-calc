@@ -30,9 +30,6 @@ public struct ProjectClient: Sendable {
   public var calculateTrunkDuctSizes:
     @Sendable (Project.ID) async throws -> [DuctSizes.TrunkContainer]
 
-  public var createProject:
-    @Sendable (User.ID, Project.Create) async throws -> CreateProjectResponse
-
   public var frictionRate: @Sendable (Project.ID) async throws -> FrictionRateResponse
   public var generatePdf: @Sendable (Project.ID) async throws -> Response
 

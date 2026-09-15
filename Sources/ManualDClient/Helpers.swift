@@ -1,12 +1,6 @@
 import Foundation
 import ManualDCore
 
-extension Array where Element == EffectiveLengthGroup {
-  var totalEffectiveLength: Int {
-    reduce(0) { $0 + $1.effectiveLength }
-  }
-}
-
 func roundSize(_ size: Double) throws -> Int {
   guard size > 0 else {
     throw ManualDError(message: "Size should be greater than 0.")
