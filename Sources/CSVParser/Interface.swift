@@ -13,7 +13,7 @@ extension DependencyValues {
 
 @DependencyClient
 public struct CSVParser: Sendable {
-  public var parseRooms: @Sendable (Room.CSV) async throws -> [Room.CSV.Row]
+  public var parseRooms: @Sendable (FileUpload) async throws -> [Room.CSV.Row]
 }
 
 extension CSVParser: DependencyKey {
