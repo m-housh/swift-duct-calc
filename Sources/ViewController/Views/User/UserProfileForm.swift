@@ -18,7 +18,11 @@ struct UserProfileForm: HTML, Sendable {
   var body: some HTML {
     if signup {
       link(.rel(.stylesheet), .href("/css/account.css?v=1"))
-      ModalForm(id: "userProfileForm", title: "Profile", dismiss: false) { profileForm }
+      AuthLayout(
+        id: "userProfileForm", title: "Make it yours",
+        subtitle: "Add your name and company details to finish setting up your account.",
+        step: "Step 2 of 2 · Profile"
+      ) { profileForm }
     } else {
       profileForm
     }

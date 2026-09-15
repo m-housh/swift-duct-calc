@@ -41,30 +41,46 @@
     <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
       <a class="skip-link" href="#main-content">Skip to content</a>
       <main id="main-content" tabindex="-1" class="flex flex-col min-h-screen min-w-full grow mb-auto">
-        <section id="loginForm" class="page-form" aria-labelledby="loginForm-title">
-          <h1 id="loginForm-title" class="text-2xl font-bold mb-6">Sign Up</h1>
-          <div class="flex flex-wrap items-center justify-between gap-3"><a class="btn btn-link" href="/privacy-policy" target="_blank">Privacy Policy</a></div>
-          <form method="post" hx-post="/signup" hx-target="body" hx-swap="outerHTML" class="space-y-4">
-            <div>
-              <label class="input validator w-full"><span class="label">Email</span>
-              <input type="email" placeholder="Email" required name="email" id="email" autocomplete="username" autofocus></label>
-              <div class="validator-hint hidden">Enter valid email address.</div>
+        <link rel="stylesheet" href="/css/auth.css?v=1">
+        <div class="auth-layout">
+          <header class="auth-header">
+            <a class="auth-brand" href="/"><span class="dc-wordmark" role="img" aria-label="DuctCalc, residential duct design"><span class="dc-wordmark-name" aria-hidden="true">
+            <picture class="dc-wordmark-icon">
+              <source media="(prefers-color-scheme: dark)" srcset="/images/brand/ductcalc-mark-dark.webp">
+              <img src="/images/brand/ductcalc-mark-light.webp" alt="" width="50" height="50">
+            </picture>
+            uct
+            C
+            alc
+            Residential duct design
+            Back to home<span></span><span class="dc-wordmark-c"></span><span></span></span><span class="dc-wordmark-description" aria-hidden="true"></span></span></a><a href="/"></a>
+          </header>
+          <section id="loginForm" class="auth-content" aria-labelledby="loginForm-title">
+            <div class="auth-heading">
+              <p class="auth-step">Step 1 of 2 · Account</p>
+              <h1 id="loginForm-title">Create your account</h1>
+              <p>Save your projects and keep your designs together.</p>
             </div>
-            <div>
-              <label class="input validator w-full"><span class="label">Password</span>
-              <input type="password" placeholder="Password" required name="password" id="password" autocomplete="new-password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" aria-describedby="password-help"></label>
-            </div>
-            <div>
-              <label class="input validator w-full"><span class="label">Confirm password</span>
-              <input type="password" placeholder="Confirm Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" name="confirmPassword" id="confirmPassword" autocomplete="new-password" aria-describedby="password-help"></label>
-            </div>
-            <p id="password-help" class="text-sm">Use at least 8 characters, including an uppercase letter, a lowercase letter, and a number.</p>
-            <div class="flex">
-              <button class="btn btn-secondary mt-4 w-full">Sign Up</button>
-            </div>
-            <div class="flex justify-center"><a class="btn btn-link" href="/login">Login</a></div>
-          </form>
-        </section>
+            <form method="post" hx-post="/signup" hx-target="body" hx-swap="outerHTML" class="auth-form">
+              <div class="auth-field">
+                <label for="email">Email</label>
+                <input class="input validator" type="email" required name="email" id="email" autocomplete="username" autofocus>
+              </div>
+              <div class="auth-field">
+                <label for="password">Password</label>
+                <input class="input validator" type="password" required name="password" id="password" autocomplete="new-password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" aria-describedby="password-help">
+              </div>
+              <div class="auth-field">
+                <label for="confirmPassword">Confirm password</label>
+                <input class="input validator" type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" name="confirmPassword" id="confirmPassword" autocomplete="new-password" aria-describedby="password-help">
+              </div>
+              <p id="password-help" class="auth-password-help">Use at least 8 characters, including an uppercase letter, a lowercase letter, and a number.</p>
+              <button type="submit" class="btn btn-primary auth-submit">Sign Up</button>
+              <p class="auth-switch"><span>Already have an account? </span><a href="/login">Log in</a></p>
+            </form>
+          </section>
+          <footer class="auth-footer"><a href="/privacy-policy" target="_blank">Privacy Policy</a><a href="mailto:support@ductcalc.pro">Contact Michael</a></footer>
+        </div>
       </main>
       <div id="app-status" class="sr-only" role="status" aria-atomic="true"></div>
       <div id="app-error" class="request-error" role="alert"></div>
