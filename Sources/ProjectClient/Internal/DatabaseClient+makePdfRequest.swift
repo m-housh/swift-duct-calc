@@ -16,8 +16,7 @@ extension DatabaseClient {
 
     let (ductSizes, shared) = try await calculateDuctSizes(details: projectDetails)
 
-    let frictionRateResponse = try await manualD.frictionRate(details: projectDetails)
-    guard let frictionRate = frictionRateResponse.frictionRate else {
+    guard let frictionRate = try await manualD.frictionRate(details: projectDetails) else {
       throw ProjectClientError.notFound(.frictionRate(projectID))
     }
 

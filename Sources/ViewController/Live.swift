@@ -351,10 +351,7 @@ extension SiteRoute.View.ProjectRoute {
             throw NotFoundError()
           }
           @Dependency(\.manualD) var manualD
-          let lengths = try await database.equivalentLengths.fetchMax(projectID)
-          let friction = try? await manualD.frictionRate(
-            equipmentInfo: detail.equipmentInfo,
-            componentLosses: detail.componentLosses, effectiveLength: lengths)
+          let friction = try? await manualD.frictionRate(details: detail)
           return (try await database.projects.getCompletedSteps(projectID), detail, friction)
         } onSuccess: { (steps, detail, friction) in
           ProjectView(projectID: projectID, activeTab: .project, completedSteps: steps) {
@@ -538,20 +535,16 @@ extension SiteRoute.View.ProjectRoute.FrictionRateRoute {
         try await loadView {
           let library = try await database.filters.fetch(try request.currentUser().id)
           let allowance = try await database.filters.allowance(projectID)
-          let equipment = try await database.equipment.fetch(projectID)
-          let componentLosses = try await database.componentLosses.fetch(projectID)
-          let lengths = try await database.equivalentLengths.fetchMax(projectID)
+          guard let details = try await database.projects.detail(projectID) else {
+            throw NotFoundError()
+          }
 
           return (
             try await database.projects.getCompletedSteps(projectID),
-            componentLosses,
-            lengths,
-            equipment, library, allowance,
-            try await manualD.frictionRate(
-              equipmentInfo: equipment,
-              componentLosses: componentLosses,
-              effectiveLength: lengths
-            )
+            details.componentLosses,
+            details.maxContainer,
+            details.equipmentInfo, library, allowance,
+            try await manualD.frictionRate(details: details)
           )
         } onSuccess: { (steps, losses, lengths, equipment, library, allowance, frictionRate) in
           ProjectView(projectID: projectID, activeTab: .frictionRate, completedSteps: steps) {
@@ -604,32 +597,8 @@ extension SiteRoute.View.ProjectRoute.ComponentLossRoute {
     catching: (@Sendable () async throws -> Void)? = nil
   ) async throws -> AnySendableHTML {
 
-    @Dependency(\.database) var database
-    @Dependency(\.projectClient) var projectClient
-
-    return try await afterMutation(catching) {
-      return try await request.view(projectID: projectID) {
-        try await loadView {
-          return (
-            try await database.projects.getCompletedSteps(projectID),
-            try await projectClient.frictionRate(projectID),
-            try await database.equipment.fetch(projectID),
-            try await database.filters.fetch(try request.currentUser().id),
-            try await database.filters.allowance(projectID)
-          )
-        } onSuccess: { (steps, response, equipment, library, allowance) in
-          ProjectView(projectID: projectID, activeTab: .frictionRate, completedSteps: steps) {
-            FrictionRateView(
-              componentLosses: response.componentLosses,
-              equivalentLengths: response.equivalentLengths,
-              frictionRate: response.frictionRate, blowerStatic: equipment?.staticPressure,
-              airflow: equipment?.largerAirflow, filterLibrary: library, filterAllowance: allowance
-            )
-          }
-
-        }
-      }
-    }
+    try await SiteRoute.View.ProjectRoute.FrictionRateRoute.index.view(
+      on: request, projectID: projectID, catching: catching)
   }
 
 }

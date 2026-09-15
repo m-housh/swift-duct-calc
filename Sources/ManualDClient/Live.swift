@@ -30,10 +30,9 @@ extension ManualDClient: DependencyKey {
 
       let totalComponentLosses = request.componentPressureLosses.total
       let availableStaticPressure = request.externalStaticPressure - totalComponentLosses
-      let frictionRate = availableStaticPressure * 100.0 / Double(request.totalEquivalentLength)
-      return .init(
+      return Self.designFrictionRate(
         availableStaticPressure: availableStaticPressure,
-        value: frictionRate
+        totalEquivalentLength: Double(request.totalEquivalentLength)
       )
     },
     rectangularSize: { round, height in
