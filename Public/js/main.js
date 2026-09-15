@@ -264,7 +264,7 @@ if (!window.ductCalcShortcutsInitialized) {
       if (current < 0) return;
       control = steps[current + (window.ductCalcMatches(event, 'nextStep') ? 1 : -1)];
     } else if (window.ductCalcMatches(event, 'primaryAction')) {
-      control = document.querySelector('#project-content [data-project-primary]');
+      control = document.querySelector('#project-content [data-project-primary], .project-directory [data-project-primary]');
     } else {
       const fittings = document.getElementById('fittings-page');
       const action = fittings && ['nextGroup', 'previousGroup', 'nextFitting', 'previousFitting'].find(action => window.ductCalcMatches(event, action));

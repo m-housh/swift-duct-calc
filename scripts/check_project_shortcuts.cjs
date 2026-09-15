@@ -514,6 +514,53 @@ test('current step action opens the correct control once and respects guards and
   }
 });
 
+test('Add Project uses the primary action on populated, empty and searched directories', t => {
+  const snapshots = [
+    'ViewControllerTests/projectIndex.1',
+    'ProjectWorkspaceTests/emptyProjectDirectoryAndSearch.1',
+    'ProjectWorkspaceTests/emptyProjectDirectoryAndSearch.2',
+  ];
+  for (const name of snapshots) {
+    const html = fs.readFileSync(path.join(root,
+      `Tests/ViewControllerTests/__Snapshots__/${name}.html`), 'utf8');
+    const { document, dom, press } = setup(t, html);
+    dom.window.HTMLDialogElement.prototype.showModal = function () { this.open = true; };
+    const button = document.querySelector('.project-directory [data-project-primary]');
+    const dialog = document.getElementById('projectForm');
+    assert.equal(button.getAttribute('aria-keyshortcuts'), 'Control+Alt+A');
+    assert.equal(button.title, 'Add Project, Ctrl+Alt+A');
+    assert(press('a').defaultPrevented);
+    assert(dialog.open);
+    assert.equal(press('a').defaultPrevented, false);
+    dialog.open = false;
+    assert(press('a', {}, document.getElementById('project-search')).defaultPrevented);
+    assert(dialog.open);
+    dialog.open = false;
+    for (const options of [{ctrlKey:false}, {altKey:false}, {shiftKey:true}, {repeat:true}, {isComposing:true}, {modifierAltGraph:true}]) {
+      assert.equal(press('a', options).defaultPrevented, false);
+    }
+    const input = document.createElement('input'); document.body.append(input);
+    assert.equal(press('a', {}, input).defaultPrevented, false);
+    button.disabled = true;
+    assert.equal(press('a').defaultPrevented, false);
+    button.disabled = false;
+    document.querySelector('[data-keybindings]').dataset.keybindings = JSON.stringify({...bindings.defaults, primaryAction:'Alt+Enter'});
+    button.setAttribute('aria-keyshortcuts', 'Alt+Enter');
+    assert.equal(press('a').defaultPrevented, false);
+    assert(press('Enter', {ctrlKey:false}).defaultPrevented);
+    assert(dialog.open);
+    document.body.innerHTML = '<main>Another page</main>';
+    assert.equal(press('a').defaultPrevented, false);
+    document.body.outerHTML = new dom.window.DOMParser().parseFromString(html, 'text/html').body.outerHTML;
+    dom.window.eval(script);
+    let clicks = 0;
+    document.querySelector('[data-project-primary]').addEventListener('click', () => clicks++);
+    assert(press('a').defaultPrevented);
+    assert(document.getElementById('projectForm').open);
+    assert.equal(clicks, 1);
+  }
+});
+
 test('register search displays its complete shortcut and Ctrl+K focuses it', t => {
   const { document, press } = setup(t, snapshot(6));
   const input = document.querySelector('#register-search');
