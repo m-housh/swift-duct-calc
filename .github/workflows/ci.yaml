@@ -48,6 +48,11 @@ jobs:
         docker run --rm --network host -e TEMPLATE_TEST_POSTGRES_HOST=127.0.0.1 \
           -v ductcalc-build:/app/.build ${{ github.repository_owner }}/ductcalc:test \
           swift test --skip-build --filter ComponentLossTemplatePostgresTests
+    - name: Check concurrent trunk names on PostgreSQL
+      run: |
+        docker run --rm --network host -e TRUNK_TEST_POSTGRES_HOST=127.0.0.1 \
+          -v ductcalc-build:/app/.build ${{ github.repository_owner }}/ductcalc:test \
+          swift test --skip-build --filter TrunkSizePostgresTests
     - name: Check equipment migration on PostgreSQL
       run: |
         docker run --rm --network host -e EQUIPMENT_TEST_POSTGRES_HOST=127.0.0.1 \
