@@ -904,6 +904,21 @@ extension SiteRoute.View {
 
 extension SiteRoute.View {
 
+  fileprivate static let profileCreateForm = SafeFormData {
+    Field("userID") { User.ID.parser() }
+    Field("firstName", .string)
+    Field("lastName", .string)
+    Field("companyName", .string)
+    Field("streetAddress", .string)
+    Field("city", .string)
+    Field("state", .string)
+    Field("zipCode", .string)
+    Optionally {
+      Field("theme") { Theme.parser() }
+    }
+  }
+  .map(.memberwise(User.Profile.Create.init))
+
   public enum SignupRoute: Equatable, Sendable {
     case index
     case submit(User.Create)
@@ -935,20 +950,7 @@ extension SiteRoute.View {
         }
         Method.post
         Body {
-          SafeFormData {
-            Field("userID") { User.ID.parser() }
-            Field("firstName", .string)
-            Field("lastName", .string)
-            Field("companyName", .string)
-            Field("streetAddress", .string)
-            Field("city", .string)
-            Field("state", .string)
-            Field("zipCode", .string)
-            Optionally {
-              Field("theme") { Theme.parser() }
-            }
-          }
-          .map(.memberwise(User.Profile.Create.init))
+          SiteRoute.View.profileCreateForm
         }
       }
     }
@@ -1004,20 +1006,7 @@ extension SiteRoute.View.UserRoute {
         Path { rootPath }
         Method.post
         Body {
-          SafeFormData {
-            Field("userID") { User.ID.parser() }
-            Field("firstName", .string)
-            Field("lastName", .string)
-            Field("companyName", .string)
-            Field("streetAddress", .string)
-            Field("city", .string)
-            Field("state", .string)
-            Field("zipCode", .string)
-            Optionally {
-              Field("theme") { Theme.parser() }
-            }
-          }
-          .map(.memberwise(User.Profile.Create.init))
+          SiteRoute.View.profileCreateForm
         }
       }
       Route(.case(Self.update)) {
