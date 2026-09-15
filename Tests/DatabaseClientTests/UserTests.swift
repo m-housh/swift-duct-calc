@@ -114,6 +114,26 @@ struct UserDatabaseTests {
     }
   }
 
+  @Test func keybindingsPersistPerUser() async throws {
+    try await withTestUser { user in
+      @Dependency(\.database.users) var users
+      let other = try await users.create(
+        .init(
+          email: "other@example.test", password: "super-secret", confirmPassword: "super-secret"))
+      #expect(try await users.get(user.id)?.keybindings == nil)
+      let bindings = Keybindings(overrides: ["projects": "Control+Shift+P", "search": "Alt+K"])
+      _ = try await users.saveKeybindings(user.id, bindings)
+      #expect(try await users.get(user.id)?.keybindings == bindings)
+      #expect(try await users.get(other.id)?.keybindings == nil)
+      await #expect(throws: KeybindingError.self) {
+        try await users.saveKeybindings(user.id, .init(overrides: ["projects": "Control+Alt+2"]))
+      }
+      #expect(try await users.get(user.id)?.keybindings == bindings)
+      _ = try await users.saveKeybindings(user.id, .init())
+      #expect(try await users.get(user.id)?.keybindings == Keybindings())
+    }
+  }
+
   @Test
   func testUserProfileFails() async throws {
     try await withDatabase {

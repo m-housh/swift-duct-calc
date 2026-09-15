@@ -5,6 +5,7 @@ import Styleguide
 struct AccountPage<Inner: HTML & Sendable>: HTML, Sendable {
   enum Section: String, CaseIterable {
     case profile = "Profile"
+    case keybindings = "Keybindings"
     case templates = "Path templates"
     case filters = "Filter library"
     case preferences = "Design preferences"
@@ -12,6 +13,7 @@ struct AccountPage<Inner: HTML & Sendable>: HTML, Sendable {
     var path: String {
       switch self {
       case .profile: "/profile"
+      case .keybindings: "/keybindings"
       case .templates: "/path-templates"
       case .filters: "/filters"
       case .preferences: "/filters?tab=preferences"
@@ -29,7 +31,7 @@ struct AccountPage<Inner: HTML & Sendable>: HTML, Sendable {
 
   var body: some HTML {
     div(.class("account-workspace")) {
-      link(.rel(.stylesheet), .href("/css/account.css?v=1"))
+      link(.rel(.stylesheet), .href("/css/account.css?v=keybindings-2"))
       Navbar()
       div(.class("account-layout")) {
         aside(.class("account-sidebar")) {

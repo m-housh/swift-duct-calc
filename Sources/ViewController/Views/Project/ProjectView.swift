@@ -16,21 +16,25 @@ enum ProjectViewValue {
 }
 
 struct ProjectView<Inner: HTML & Sendable>: HTML, Sendable {
+  @Environment(ShortcutViewValue.$bindings) private var bindings
+
   @Environment(ProjectViewValue.$navigation) var navigation
   let projectID: Project.ID
   let activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab
   let inner: Inner
   let completedSteps: Project.CompletedSteps?
+  var hasStepActions: Bool
   var project: Project?
 
   init(
     projectID: Project.ID, activeTab: SiteRoute.View.ProjectRoute.DetailRoute.Tab,
-    completedSteps: Project.CompletedSteps?, project: Project? = nil,
+    completedSteps: Project.CompletedSteps?, project: Project? = nil, hasStepActions: Bool = true,
     @HTMLBuilder content: () -> Inner
   ) {
     self.projectID = projectID
     self.activeTab = activeTab
     self.completedSteps = completedSteps
+    self.hasStepActions = hasStepActions
     self.project = project
     self.inner = content()
   }
@@ -56,23 +60,25 @@ struct ProjectView<Inner: HTML & Sendable>: HTML, Sendable {
           nav(.init(name: "aria-label", value: "Project")) {
             ul(.id("project-sidebar")) {
               row(
-                "Project", icon: .mapPin, shortcut: "1", tab: .project, route: .index, complete: nil
+                "Project", icon: .mapPin, shortcut: .project, tab: .project, route: .index,
+                complete: nil
               )
               row(
-                "Rooms", icon: .doorClosed, shortcut: "2", tab: .rooms, route: .rooms(.index),
+                "Rooms", icon: .doorClosed, shortcut: .rooms, tab: .rooms, route: .rooms(.index),
                 complete: completedSteps?.rooms)
               row(
-                "Equipment", icon: .fan, shortcut: "3", tab: .equipment, route: .equipment(.index),
+                "Equipment", icon: .fan, shortcut: .equipment, tab: .equipment,
+                route: .equipment(.index),
                 complete: completedSteps?.equipmentInfo)
               row(
-                "Total effective length", icon: .rulerDimensionLine, shortcut: "4",
+                "Total effective length", icon: .rulerDimensionLine, shortcut: .effectiveLength,
                 tab: .equivalentLength, route: .equivalentLength(.index),
                 complete: completedSteps?.equivalentLength)
               row(
-                "Friction rate", icon: .squareFunction, shortcut: "5", tab: .frictionRate,
+                "Friction rate", icon: .squareFunction, shortcut: .frictionRate, tab: .frictionRate,
                 route: .frictionRate(.index), complete: completedSteps?.frictionRate)
               row(
-                "Duct sizes", icon: .wind, shortcut: "6", tab: .ductSizing,
+                "Duct sizes", icon: .wind, shortcut: .ductSizes, tab: .ductSizing,
                 route: .ductSizing(.index), complete: nil)
             }
           }
@@ -98,20 +104,20 @@ struct ProjectView<Inner: HTML & Sendable>: HTML, Sendable {
         }
         a(.class("btn btn-outline mt-4"), .href(route: .project(.index))) { "View all projects" }
       }
-      ProjectShortcutsDialog()
+      ProjectShortcutsDialog(activeTab: activeTab, hasStepActions: hasStepActions)
     }
   }
 
   private func row(
-    _ title: String, icon: SVG.Key, shortcut: String,
+    _ title: String, icon: SVG.Key, shortcut: KeybindingAction,
     tab: SiteRoute.View.ProjectRoute.DetailRoute.Tab,
     route: SiteRoute.View.ProjectRoute.DetailRoute, complete: Bool?
   ) -> some HTML {
     li {
       a(
         .href(route: .project(.detail(projectID, route))),
-        .title("\(title), Ctrl+Alt+\(shortcut)"),
-        .init(name: "aria-keyshortcuts", value: "Control+Alt+\(shortcut)")
+        .title("\(title), \(bindings.label(shortcut))"),
+        .init(name: "aria-keyshortcuts", value: bindings[shortcut])
       ) {
         SVG(icon)
         span(.class("nav-label")) { title }

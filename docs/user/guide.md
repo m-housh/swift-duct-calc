@@ -6,23 +6,47 @@ available without an account.
 
 ## Project navigation
 
-Open Keyboard shortcuts in the project navigation to see the project and app shortcuts.
-Close the dialog with Close or Escape.
+Press Ctrl+Alt+/ to reveal shortcut labels beside controls on the page. Press it
+again or Escape to hide them. Labels follow you between pages in the same tab
+and hide while an editor is open.
+
+Press Ctrl+Alt+Shift+/ or open Keyboard shortcuts in the project navigation
+for the full list, with the current page first. Close the dialog with Close or Escape.
+
+Open Account → Keybindings to customize a shortcut. Select its current keys,
+press a new combination, then save your changes. Escape cancels recording.
+Use Reset to restore one action or Reset all to restore the defaults. Actions
+that work in the same context must use different combinations. Search is
+customizable too. The shortcuts below describe the defaults.
 
 Use Ctrl+Alt+1 through Ctrl+Alt+6 to open Project, Rooms, Equipment, T.E.L.,
 Friction Rate, and Duct Sizes in sidebar order. In Rooms, Ctrl+Alt+J selects the
 next visible row and Ctrl+Alt+K selects the previous one. Row navigation stops at
 the first and last visible rows. Ctrl+K focuses search in Rooms and Duct Sizes.
 Clicking a room row selects it; the pencil opens its editor.
-They pause while a form field has focus or a dialog is open. Save your changes
-before switching sections.
+
+Ctrl+Alt+Enter opens the next project step. Ctrl+Alt+Shift+Enter opens the
+previous step. Both follow sidebar order and stop at either end.
+Ctrl+Alt+A opens the current step's main action:
+
+| Step | Action |
+| --- | --- |
+| Project | Project details |
+| Rooms | Add room |
+| Equipment | Edit all |
+| Total effective length | Add path |
+| Friction rate | Use template |
+| Duct sizes | Add trunk |
+
+Shortcuts work while a search box has focus. They pause in other form fields
+or when a dialog is open. Save your changes before switching sections.
 
 Ctrl+Alt+D opens the ductulator in a new tab. Ctrl+Alt+F opens the fitting
 reference in a new tab. These shortcuts work wherever the corresponding
 navigation links appear, with the same field and dialog restrictions.
 
 While signed in, Ctrl+Alt+P returns to Projects. Ctrl+Alt+U opens your Profile
-in the current tab. These shortcuts also pause in form fields and dialogs.
+in the current tab. These shortcuts also work from search boxes and pause in other fields and dialogs.
 
 ## Room loads
 
@@ -33,6 +57,8 @@ other value. Use airflow delegation when another room's ducts will serve a room'
 load, and review the register counts before sizing.
 
 ### Import from CoolCalc
+
+In Rooms, Ctrl+Alt+I opens Import loads.
 
 To create a project from a report, choose Add Project and drop the report on
 Import report, or browse for it. The import fills in the project name, US address,
@@ -87,9 +113,9 @@ matched rooms. Invalid or incomplete imports leave the project unchanged.
 
 Select the heating card, cooling card, or air handler under Equipment to enter its
 value. You can save either airflow first; both are required before equipment is
-complete and duct sizing or PDF export is available. Use Edit equipment to enter
-all three values together. On this page, Ctrl+Alt+H, C, S, and E open heating,
-cooling, static pressure, and the full form, respectively.
+complete and duct sizing or PDF export is available. Use Edit all or Ctrl+Alt+A to enter
+all three values together. Ctrl+Alt+H opens heating, Ctrl+Alt+C opens cooling,
+and Ctrl+Alt+S opens static pressure.
 
 Add supply and return paths under T.E.L., the Equivalent Lengths page.
 Then open Friction Rate to enter component pressure losses and review the resulting
@@ -114,8 +140,8 @@ segments; Over max CFM marks airflow above the filter's recommended maximum.
 
 If the equipment rating already includes a filter loss, enter that allowance in
 Filter loss included in equipment rating. Only the chart drop above the allowance
-is added. If the allowance covers the whole loss, no filter component is added;
-a filter selected for replacement is removed. The allowance is saved with the
+is added. If the allowance covers the whole loss, the filter stays in the component
+list at 0.00, marked "Accounted for". The allowance is saved with the
 project when you choose a filter. A saved component is a copy, so look up the filter
 again after changing equipment airflow or the allowance.
 
@@ -142,7 +168,10 @@ bring back or edited entries to reset; custom filters are kept.
 
 ## Equivalent-length paths
 
-Add a path on Equivalent Lengths, choose supply or return, and enter its name and
+On Equivalent Lengths, use Ctrl+Alt+R to add a return path or Ctrl+Alt+S to add
+a supply path from the visual network. Ctrl+Alt+A opens Add path beside the table.
+
+Add a path, choose supply or return, and enter its name and
 straight duct lengths. Use Add fitting to select the fittings along that path
 and supply any required dimensions or other inputs. Quantity counts complete
 fittings or illustrated assemblies. For Group 6 junctions, select the branch or
@@ -229,7 +258,7 @@ Ctrl+Alt+N selects the next group; Ctrl+Alt+B selects the previous group.
 These follow the group list, including All groups, within the current air path
 filter. Ctrl+Alt+J selects the next fitting in the filtered list; Ctrl+Alt+K
 selects the previous fitting. Navigation stops at either end and pauses while
-editing a field or when a dialog is open. Open Keyboard shortcuts in the
+editing a field other than search, or when a dialog is open. Open Keyboard shortcuts in the
 navigation to see the bindings.
 
 Sign in to inspect or download JSON and CSV for a fitting or filtered selection.
@@ -251,7 +280,7 @@ using a template clears the name and selected runs, keeping the type and height.
 
 Use Rectangular sizes to select registers and set a shared height or clear
 their rectangular sizes. Clearing leaves unselected registers unchanged and does
-not require a height. Use PDF on this page to download a report of the design.
+not require a height. Use PDF or Ctrl+Alt+E on this page to download a report of the design.
 
 ## Ductulator
 

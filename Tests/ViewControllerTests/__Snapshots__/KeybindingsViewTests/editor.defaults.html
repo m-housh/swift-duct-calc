@@ -1,0 +1,519 @@
+<div class="account-workspace">
+  <link rel="stylesheet" href="/css/account.css?v=keybindings-2">
+  <nav class="app-navbar" aria-label="Main">
+    <a class="app-brand" href="/projects"><span class="dc-wordmark" role="img" aria-label="DuctCalc, residential duct design"><span class="dc-wordmark-name" aria-hidden="true"><span class="dc-wordmark-icon">
+    <img class="dc-mark-light" src="/images/brand/ductcalc-mark-light.webp" alt="" width="50" height="50">
+    <img class="dc-mark-dark" src="/images/brand/ductcalc-mark-dark.webp" alt="" width="50" height="50">
+    uct
+    C
+    alc
+    Residential duct design</span><span></span><span class="dc-wordmark-c"></span><span></span></span><span class="dc-wordmark-description" aria-hidden="true"></span></span></a>
+    <div class="app-nav-actions">
+      <a class="btn app-nav-link" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span>Fitting reference</span></a><a class="btn app-nav-ductulator" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span>Ductulator</span></a>
+      <details class="account-menu">
+        <summary class="btn"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>Account</summary>
+        <ul class="menu bg-base-200 rounded-box shadow-lg">
+          <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
+          <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
+          <li><a href="/keybindings">Keybindings</a></li>
+          <li><a href="/filters">Filter library</a></li>
+          <li><a href="/filters?tab=preferences">Design preferences</a></li>
+          <li>
+            <form action="/logout" method="get">
+              <button type="submit">Logout</button>
+            </form>
+          </li>
+        </ul>
+      </details>
+    </div>
+  </nav>
+  <div class="account-layout">
+    <aside class="account-sidebar">
+      <h2>Account</h2>
+      <nav aria-label="Account sections"><a href="/profile">Profile</a><a href="/keybindings" aria-current="page">Keybindings</a><span class="account-nav-group" aria-hidden="true">Libraries &amp; preferences</span><a href="/path-templates">Path templates</a><a href="/filters">Filter library</a><a href="/filters?tab=preferences">Design preferences</a></nav>
+    </aside>
+    <div class="account-content">
+      <header class="account-heading">
+        <h1>Keybindings</h1>
+        <p>Select a shortcut and press a new combination. Use Ctrl, Alt, or Command with another key. Escape cancels recording.</p>
+      </header>
+      <form id="keybindings-form" hx-post="/keybindings" hx-target="body" hx-swap="outerHTML" hx-disabled-elt="find button" data-success-message="Keybindings saved.">
+        <input type="hidden" name="bindings" value="{&quot;overrides&quot;:{}}">
+        <div class="keybindings-toolbar">
+          <label class="account-profile-field"><span class="sr-only">Find a keybinding</span>
+          <input type="search" class="input" id="keybinding-search" placeholder="Find an action…">
+          42 bindings</label><span class="keybindings-count"></span>
+          <button type="button" class="btn btn-ghost" data-reset-keybindings="">Reset all</button>
+        </div>
+        <section class="keybindings-section">
+          <h2>App</h2>
+          <div class="keybindings-list">
+            <div class="keybinding-row" data-keybinding-action="reveal" data-title="Reveal shortcuts" data-default="Control+Alt+/" data-contexts="account ductSizing effectiveLength equipment fittings project rooms">
+              <div class="keybinding-description">
+                <h3>Reveal shortcuts</h3>
+                <p>Where the action is available</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+/" aria-label="Change Reveal shortcuts shortcut, Ctrl+Alt+/" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">/</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Reveal shortcuts shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="help" data-title="Keyboard shortcuts" data-default="Control+Alt+Shift+/" data-contexts="account ductSizing effectiveLength equipment fittings project rooms">
+              <div class="keybinding-description">
+                <h3>Keyboard shortcuts</h3>
+                <p>Where the action is available</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+Shift+/" aria-label="Change Keyboard shortcuts shortcut, Ctrl+Alt+Shift+/" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">Shift</kbd><kbd class="kbd kbd-sm">/</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Keyboard shortcuts shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="search" data-title="Focus search" data-default="Control+K" data-contexts="account ductSizing effectiveLength equipment fittings project rooms">
+              <div class="keybinding-description">
+                <h3>Focus search</h3>
+                <p>Where the action is available</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+K" aria-label="Change Focus search shortcut, Ctrl+K" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">K</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Focus search shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="projects" data-title="Projects" data-default="Control+Alt+P" data-contexts="account ductSizing effectiveLength equipment fittings project rooms">
+              <div class="keybinding-description">
+                <h3>Projects</h3>
+                <p>Where the action is available</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+P" aria-label="Change Projects shortcut, Ctrl+Alt+P" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">P</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Projects shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="profile" data-title="Profile" data-default="Control+Alt+U" data-contexts="account ductSizing effectiveLength equipment fittings project rooms">
+              <div class="keybinding-description">
+                <h3>Profile</h3>
+                <p>Where the action is available</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+U" aria-label="Change Profile shortcut, Ctrl+Alt+U" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">U</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Profile shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="ductulator" data-title="Ductulator" data-default="Control+Alt+D" data-contexts="account ductSizing effectiveLength equipment fittings project rooms">
+              <div class="keybinding-description">
+                <h3>Ductulator</h3>
+                <p>Where the action is available</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+D" aria-label="Change Ductulator shortcut, Ctrl+Alt+D" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">D</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Ductulator shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="fittings" data-title="Fitting reference" data-default="Control+Alt+F" data-contexts="account ductSizing effectiveLength equipment fittings project rooms">
+              <div class="keybinding-description">
+                <h3>Fitting reference</h3>
+                <p>Where the action is available</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+F" aria-label="Change Fitting reference shortcut, Ctrl+Alt+F" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">F</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Fitting reference shortcut" disabled>Reset</button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="keybindings-section">
+          <h2>Project navigation</h2>
+          <div class="keybindings-list">
+            <div class="keybinding-row" data-keybinding-action="project" data-title="Project overview" data-default="Control+Alt+1" data-contexts="ductSizing effectiveLength equipment project rooms">
+              <div class="keybinding-description">
+                <h3>Project overview</h3>
+                <p>In a project</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+1" aria-label="Change Project overview shortcut, Ctrl+Alt+1" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">1</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Project overview shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="rooms" data-title="Rooms" data-default="Control+Alt+2" data-contexts="ductSizing effectiveLength equipment project rooms">
+              <div class="keybinding-description">
+                <h3>Rooms</h3>
+                <p>In a project</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+2" aria-label="Change Rooms shortcut, Ctrl+Alt+2" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">2</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Rooms shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="equipment" data-title="Equipment" data-default="Control+Alt+3" data-contexts="ductSizing effectiveLength equipment project rooms">
+              <div class="keybinding-description">
+                <h3>Equipment</h3>
+                <p>In a project</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+3" aria-label="Change Equipment shortcut, Ctrl+Alt+3" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">3</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Equipment shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="effectiveLength" data-title="Total effective length" data-default="Control+Alt+4" data-contexts="ductSizing effectiveLength equipment project rooms">
+              <div class="keybinding-description">
+                <h3>Total effective length</h3>
+                <p>In a project</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+4" aria-label="Change Total effective length shortcut, Ctrl+Alt+4" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">4</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Total effective length shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="frictionRate" data-title="Friction rate" data-default="Control+Alt+5" data-contexts="ductSizing effectiveLength equipment project rooms">
+              <div class="keybinding-description">
+                <h3>Friction rate</h3>
+                <p>In a project</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+5" aria-label="Change Friction rate shortcut, Ctrl+Alt+5" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">5</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Friction rate shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="ductSizes" data-title="Duct sizes" data-default="Control+Alt+6" data-contexts="ductSizing effectiveLength equipment project rooms">
+              <div class="keybinding-description">
+                <h3>Duct sizes</h3>
+                <p>In a project</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+6" aria-label="Change Duct sizes shortcut, Ctrl+Alt+6" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">6</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Duct sizes shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="nextStep" data-title="Next project step" data-default="Control+Alt+Enter" data-contexts="ductSizing effectiveLength equipment project rooms">
+              <div class="keybinding-description">
+                <h3>Next project step</h3>
+                <p>In a project</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+Enter" aria-label="Change Next project step shortcut, Ctrl+Alt+Enter" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">Enter</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Next project step shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="previousStep" data-title="Previous project step" data-default="Control+Alt+Shift+Enter" data-contexts="ductSizing effectiveLength equipment project rooms">
+              <div class="keybinding-description">
+                <h3>Previous project step</h3>
+                <p>In a project</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+Shift+Enter" aria-label="Change Previous project step shortcut, Ctrl+Alt+Shift+Enter" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">Shift</kbd><kbd class="kbd kbd-sm">Enter</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Previous project step shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="primaryAction" data-title="Current step action" data-default="Control+Alt+A" data-contexts="ductSizing effectiveLength equipment project rooms">
+              <div class="keybinding-description">
+                <h3>Current step action</h3>
+                <p>In a project</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+A" aria-label="Change Current step action shortcut, Ctrl+Alt+A" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">A</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Current step action shortcut" disabled>Reset</button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="keybindings-section">
+          <h2>Rooms</h2>
+          <div class="keybindings-list">
+            <div class="keybinding-row" data-keybinding-action="nextRoom" data-title="Next room row" data-default="Control+Alt+J" data-contexts="rooms">
+              <div class="keybinding-description">
+                <h3>Next room row</h3>
+                <p>In rooms</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+J" aria-label="Change Next room row shortcut, Ctrl+Alt+J" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">J</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Next room row shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="previousRoom" data-title="Previous room row" data-default="Control+Alt+K" data-contexts="rooms">
+              <div class="keybinding-description">
+                <h3>Previous room row</h3>
+                <p>In rooms</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+K" aria-label="Change Previous room row shortcut, Ctrl+Alt+K" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">K</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Previous room row shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="importLoads" data-title="Import loads" data-default="Control+Alt+I" data-contexts="rooms">
+              <div class="keybinding-description">
+                <h3>Import loads</h3>
+                <p>In rooms</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+I" aria-label="Change Import loads shortcut, Ctrl+Alt+I" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">I</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Import loads shortcut" disabled>Reset</button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="keybindings-section">
+          <h2>Total effective length</h2>
+          <div class="keybindings-list">
+            <div class="keybinding-row" data-keybinding-action="addReturn" data-title="Add return path" data-default="Control+Alt+R" data-contexts="effectiveLength">
+              <div class="keybinding-description">
+                <h3>Add return path</h3>
+                <p>In total effective length</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+R" aria-label="Change Add return path shortcut, Ctrl+Alt+R" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">R</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Add return path shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="addSupply" data-title="Add supply path" data-default="Control+Alt+S" data-contexts="effectiveLength">
+              <div class="keybinding-description">
+                <h3>Add supply path</h3>
+                <p>In total effective length</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+S" aria-label="Change Add supply path shortcut, Ctrl+Alt+S" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">S</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Add supply path shortcut" disabled>Reset</button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="keybindings-section">
+          <h2>Duct sizes</h2>
+          <div class="keybindings-list">
+            <div class="keybinding-row" data-keybinding-action="exportPDF" data-title="Export PDF" data-default="Control+Alt+E" data-contexts="ductSizing">
+              <div class="keybinding-description">
+                <h3>Export PDF</h3>
+                <p>In duct sizes</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+E" aria-label="Change Export PDF shortcut, Ctrl+Alt+E" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">E</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Export PDF shortcut" disabled>Reset</button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="keybindings-section">
+          <h2>Equipment</h2>
+          <div class="keybindings-list">
+            <div class="keybinding-row" data-keybinding-action="heating" data-title="Heating airflow" data-default="Control+Alt+H" data-contexts="equipment">
+              <div class="keybinding-description">
+                <h3>Heating airflow</h3>
+                <p>In equipment</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+H" aria-label="Change Heating airflow shortcut, Ctrl+Alt+H" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">H</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Heating airflow shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="cooling" data-title="Cooling airflow" data-default="Control+Alt+C" data-contexts="equipment">
+              <div class="keybinding-description">
+                <h3>Cooling airflow</h3>
+                <p>In equipment</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+C" aria-label="Change Cooling airflow shortcut, Ctrl+Alt+C" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">C</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Cooling airflow shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="pressure" data-title="Static pressure" data-default="Control+Alt+S" data-contexts="equipment">
+              <div class="keybinding-description">
+                <h3>Static pressure</h3>
+                <p>In equipment</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+S" aria-label="Change Static pressure shortcut, Ctrl+Alt+S" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">S</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Static pressure shortcut" disabled>Reset</button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="keybindings-section">
+          <h2>System templates</h2>
+          <div class="keybindings-list">
+            <div class="keybinding-row" data-keybinding-action="templateShared" data-title="Shared system template" data-default="Control+Alt+D" data-contexts="templates">
+              <div class="keybinding-description">
+                <h3>Shared system template</h3>
+                <p>In the system template chooser</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+D" aria-label="Change Shared system template shortcut, Ctrl+Alt+D" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">D</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Shared system template shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="templateFurnace" data-title="Furnace template" data-default="Control+Alt+F" data-contexts="templates">
+              <div class="keybinding-description">
+                <h3>Furnace template</h3>
+                <p>In the system template chooser</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+F" aria-label="Change Furnace template shortcut, Ctrl+Alt+F" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">F</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Furnace template shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="templateAirHandler" data-title="Air handler template" data-default="Control+Alt+A" data-contexts="templates">
+              <div class="keybinding-description">
+                <h3>Air handler template</h3>
+                <p>In the system template chooser</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+A" aria-label="Change Air handler template shortcut, Ctrl+Alt+A" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">A</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Air handler template shortcut" disabled>Reset</button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="keybindings-section">
+          <h2>Fitting reference</h2>
+          <div class="keybindings-list">
+            <div class="keybinding-row" data-keybinding-action="group1" data-title="Group 1" data-default="Control+Alt+1" data-contexts="fittings">
+              <div class="keybinding-description">
+                <h3>Group 1</h3>
+                <p>In fitting reference</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+1" aria-label="Change Group 1 shortcut, Ctrl+Alt+1" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">1</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Group 1 shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="group2" data-title="Group 2" data-default="Control+Alt+2" data-contexts="fittings">
+              <div class="keybinding-description">
+                <h3>Group 2</h3>
+                <p>In fitting reference</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+2" aria-label="Change Group 2 shortcut, Ctrl+Alt+2" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">2</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Group 2 shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="group3" data-title="Group 3" data-default="Control+Alt+3" data-contexts="fittings">
+              <div class="keybinding-description">
+                <h3>Group 3</h3>
+                <p>In fitting reference</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+3" aria-label="Change Group 3 shortcut, Ctrl+Alt+3" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">3</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Group 3 shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="group4" data-title="Group 4" data-default="Control+Alt+4" data-contexts="fittings">
+              <div class="keybinding-description">
+                <h3>Group 4</h3>
+                <p>In fitting reference</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+4" aria-label="Change Group 4 shortcut, Ctrl+Alt+4" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">4</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Group 4 shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="group5" data-title="Group 5" data-default="Control+Alt+5" data-contexts="fittings">
+              <div class="keybinding-description">
+                <h3>Group 5</h3>
+                <p>In fitting reference</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+5" aria-label="Change Group 5 shortcut, Ctrl+Alt+5" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">5</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Group 5 shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="group6" data-title="Group 6" data-default="Control+Alt+6" data-contexts="fittings">
+              <div class="keybinding-description">
+                <h3>Group 6</h3>
+                <p>In fitting reference</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+6" aria-label="Change Group 6 shortcut, Ctrl+Alt+6" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">6</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Group 6 shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="group7" data-title="Group 7" data-default="Control+Alt+7" data-contexts="fittings">
+              <div class="keybinding-description">
+                <h3>Group 7</h3>
+                <p>In fitting reference</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+7" aria-label="Change Group 7 shortcut, Ctrl+Alt+7" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">7</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Group 7 shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="group8" data-title="Group 8" data-default="Control+Alt+8" data-contexts="fittings">
+              <div class="keybinding-description">
+                <h3>Group 8</h3>
+                <p>In fitting reference</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+8" aria-label="Change Group 8 shortcut, Ctrl+Alt+8" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">8</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Group 8 shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="group9" data-title="Group 9" data-default="Control+Alt+9" data-contexts="fittings">
+              <div class="keybinding-description">
+                <h3>Group 9</h3>
+                <p>In fitting reference</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+9" aria-label="Change Group 9 shortcut, Ctrl+Alt+9" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">9</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Group 9 shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="group10" data-title="Group 10" data-default="Control+Alt+0" data-contexts="fittings">
+              <div class="keybinding-description">
+                <h3>Group 10</h3>
+                <p>In fitting reference</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+0" aria-label="Change Group 10 shortcut, Ctrl+Alt+0" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">0</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Group 10 shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="nextGroup" data-title="Next group" data-default="Control+Alt+N" data-contexts="fittings">
+              <div class="keybinding-description">
+                <h3>Next group</h3>
+                <p>In fitting reference</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+N" aria-label="Change Next group shortcut, Ctrl+Alt+N" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">N</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Next group shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="previousGroup" data-title="Previous group" data-default="Control+Alt+B" data-contexts="fittings">
+              <div class="keybinding-description">
+                <h3>Previous group</h3>
+                <p>In fitting reference</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+B" aria-label="Change Previous group shortcut, Ctrl+Alt+B" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">B</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Previous group shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="nextFitting" data-title="Next fitting" data-default="Control+Alt+J" data-contexts="fittings">
+              <div class="keybinding-description">
+                <h3>Next fitting</h3>
+                <p>In fitting reference</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+J" aria-label="Change Next fitting shortcut, Ctrl+Alt+J" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">J</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Next fitting shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="previousFitting" data-title="Previous fitting" data-default="Control+Alt+K" data-contexts="fittings">
+              <div class="keybinding-description">
+                <h3>Previous fitting</h3>
+                <p>In fitting reference</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+K" aria-label="Change Previous fitting shortcut, Ctrl+Alt+K" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">K</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Previous fitting shortcut" disabled>Reset</button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <p id="keybinding-empty" hidden>No matching actions.</p>
+        <div class="keybindings-footer">
+          <p id="keybinding-status" role="status" aria-live="polite">Changes apply after saving.</p>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+        <noscript>
+          <p>Enable JavaScript to record and save keybindings.</p>
+        </noscript>
+      </form>
+    </div>
+  </div>
+</div>

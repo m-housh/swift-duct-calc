@@ -166,7 +166,7 @@ extension ComponentLossModel: Validatable {
         .errorLabel("Name", inline: true)
 
       Validator.validate(\.value) {
-        Double.greaterThan(0.0)
+        Double.greaterThanOrEquals(0.0)
         Double.lessThanOrEquals(1.0)
       }
       .errorLabel("Component Pressure Loss", inline: true)

@@ -65,3 +65,32 @@
   .account-form-actions { padding: 18px 20px; }
   .account-workspace .app-navbar { padding: 12px; }
 }
+
+.keybindings-toolbar { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+.keybindings-toolbar label { flex: 1; max-width: 380px; }
+.keybindings-count { margin-left: auto; color: var(--account-muted); font-size: 13px; white-space: nowrap; }
+.keybindings-section { margin-bottom: 28px; }
+.keybindings-section > h2 { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.keybindings-list { border: 1px solid var(--account-line); border-radius: 9px; overflow: hidden; }
+.keybinding-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px 22px; }
+.keybinding-row + .keybinding-row { border-top: 1px solid var(--account-line); }
+.keybinding-row[hidden], .keybindings-section[hidden] { display: none; }
+.keybinding-description h3 { font-size: 14px; font-weight: 550; }
+.keybinding-description p { margin-top: 5px; font-size: 12px; color: var(--account-muted); }
+.keybinding-controls { display: flex; align-items: center; gap: 14px; }
+.keybinding-record { display: inline-flex; justify-content: flex-end; border-radius: 6px; padding: 8px; min-height: 40px; cursor: pointer; }
+.keycaps { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 5px; }
+.keybinding-record:hover, .keybinding-record[data-recording] { background: var(--color-base-300); }
+.keybinding-record[data-recording] { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+.keybinding-reset { font-size: 12px; }
+.keybindings-footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 16px 0; position: sticky; bottom: 0; background: var(--color-base-100); border-top: 1px solid var(--account-line); }
+.keybindings-footer p { font-size: 13px; }
+@media (max-width: 600px) {
+  .keybindings-toolbar { flex-wrap: wrap; gap: 10px; }
+  .keybindings-toolbar label { flex-basis: 100%; max-width: none; }
+  .keybindings-count { margin-left: 0; margin-right: auto; }
+  .keybinding-row { flex-direction: column; align-items: stretch; gap: 10px; padding: 16px; }
+  .keybinding-controls { justify-content: space-between; }
+  .keybinding-record { justify-content: flex-start; }
+  .keybindings-footer { align-items: flex-start; }
+}

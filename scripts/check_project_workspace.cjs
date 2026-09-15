@@ -2,13 +2,14 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { test } = require('node:test');
 const { JSDOM } = require('jsdom');
+const bindings = require('./keybinding_test_helpers.cjs');
 const script = fs.readFileSync('Public/js/request-errors.js', 'utf8') + '\n' + fs.readFileSync('Public/js/main.js', 'utf8');
 const row = (id, name, level) => `<tr data-record="${id}" data-search="${name}" data-level="${level}"><td><button class="row-select">${name}</button></td><td class="number">42</td><td><button class="pencil">Edit</button></td></tr>`;
-const fixture = `<div data-project-id="one"><input id="room-search"><select data-room-level><option value="all">All</option><option value="1">Level 1</option></select><table data-selectable-table="rooms"><tbody>${row('a','Kitchen','1')}${row('b','Living room','1')}${row('c','Bedroom','2')}</tbody></table><p data-no-rooms hidden></p><p data-inspector-empty></p><aside data-room-inspector="a"></aside><aside data-room-inspector="b"></aside><aside data-room-inspector="c"></aside></div>`;
+const fixture = bindings.wrap(`<div data-project-id="one"><input id="room-search"><select data-room-level><option value="all">All</option><option value="1">Level 1</option></select><table data-selectable-table="rooms"><tbody>${row('a','Kitchen','1')}${row('b','Living room','1')}${row('c','Bedroom','2')}</tbody></table><p data-no-rooms hidden></p></div>`);
 function setup(t, html = fixture) {
   const dom = new JSDOM(html, {runScripts:'outside-only', pretendToBeVisual:true});
   t.after(() => dom.window.close());
-  dom.window.eval(script);
+  dom.window.eval(bindings.script(script));
   const doc = dom.window.document;
   doc.dispatchEvent(new dom.window.Event('DOMContentLoaded'));
   const press = (key, options = {}, target = doc.body) => {
@@ -31,7 +32,6 @@ test('whole row selects without opening its editor; pencil leaves selection alon
   doc.querySelector('[data-record="b"] .number').click();
   assert.equal(selected(),'b');
   assert.equal(doc.activeElement.textContent,'Living room');
-  assert.equal(doc.querySelector('[data-room-inspector="b"]').hidden,false);
   doc.querySelector('[data-record="c"] .pencil').click();
   assert.equal(selected(),'b');
 });
@@ -45,7 +45,7 @@ test('Ctrl+Alt+J/K navigate visible rows, stop at boundaries, and Ctrl+K focuses
   assert.equal(press('j',{},doc.activeElement).defaultPrevented,false);
   for (const options of [{repeat:true},{isComposing:true},{modifierAltGraph:true},{metaKey:true},{shiftKey:true}]) assert.equal(press('j',options).defaultPrevented,false);
 });
-test('filtering updates selection and inspector, including no results', t => {
+test('filtering updates selection, including no results', t => {
   const {dom,doc,press,selected} = setup(t);
   const search=doc.getElementById('room-search');
   search.value='bed'; search.dispatchEvent(new dom.window.Event('input',{bubbles:true}));

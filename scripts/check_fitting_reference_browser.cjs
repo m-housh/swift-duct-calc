@@ -72,7 +72,7 @@ const fs = require('node:fs');
         return event.defaultPrevented;
       };
       const search = document.getElementById('search');
-      if (press(search)) return false;
+      if (!press(search)) return false;
       search.blur();
       for (const options of [{ ctrlKey: false }, { shiftKey: true }, { metaKey: true }, { repeat: true }, { isComposing: true }]) {
         if (press(document.body, options)) return false;
@@ -85,10 +85,15 @@ const fs = require('node:fs');
       editor.remove();
       return !intercepted;
     }));
+    await page.evaluate(() => {
+      window.fittingPageUpdates = 0;
+      document.addEventListener('ductcalc:page-updated', () => window.fittingPageUpdates++);
+    });
     for (const [index, key] of [...'1234567890'].entries()) {
       await shortcut(key);
       assert.equal(new URL(page.url()).searchParams.get('group'), String(index + 1));
     }
+    assert.equal(await page.evaluate(() => window.fittingPageUpdates), 10);
     await page.goto(base + '/fittings?group=all');
     for (let index = 0; index < 12; index++) {
       await shortcut('n');
@@ -112,7 +117,7 @@ const fs = require('node:fs');
     }));
     await page.goBack();
     await page.locator(`[data-select="${fittingIDs[10]}"][aria-current="true"]`).waitFor();
-    await page.keyboard.press('Control+Alt+/');
+    await page.keyboard.press('Control+Alt+Shift+/');
     await page.locator('#fittingsShortcuts[open]').waitFor();
     const beforeDialogKey = page.url();
     await page.keyboard.press('Control+k');
@@ -127,7 +132,7 @@ const fs = require('node:fs');
     assert.equal(await page.getByRole('button', { name: 'Keyboard shortcuts', exact: true }).evaluate(el => el === document.activeElement), true);
     await page.locator('#search').focus();
     await shortcut('n');
-    assert.equal(page.url(), beforeDialogKey);
+    assert.notEqual(page.url(), beforeDialogKey);
     await page.goto(base + '/fittings?system=return&group=8&q=8a%20smooth');
     await shortcut('n');
     assert.equal(new URL(page.url()).searchParams.get('group'), '10');

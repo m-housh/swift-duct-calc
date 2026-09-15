@@ -4,6 +4,8 @@ import ManualDCore
 import Styleguide
 
 struct EffectiveLengthsView: HTML, Sendable {
+  @Environment(ShortcutViewValue.$bindings) private var bindings
+
   @Environment(ProjectViewValue.$projectID) var projectID
   let effectiveLengths: [EquivalentLength]
   var coolingCFM: Int?
@@ -30,13 +32,7 @@ struct EffectiveLengthsView: HTML, Sendable {
         }
         div(.class("row-actions")) {
           a(.class("btn btn-outline"), .href(pathTemplatesURL(projectID))) { "Manage templates" }
-          a(
-            .class("btn btn-primary"), .init(name: "aria-label", value: "Add path"),
-            .href("/projects/\(projectID)/effective-lengths/editor")
-          ) {
-            SVG(.circlePlus)
-            "Add path"
-          }
+
         }
       }
       div(.class("project-panel tel-equation")) {
@@ -152,8 +148,18 @@ struct EffectiveLengthsView: HTML, Sendable {
             "All paths"
             span { "\(effectiveLengths.count)" }
           }
-          div {
+          div(.class("row-actions")) {
             span { "Select a row · Expand fittings to compare" }
+            a(
+              .class("btn btn-primary"), .init(name: "aria-label", value: "Add path"),
+              .href("/projects/\(projectID)/effective-lengths/editor"),
+              .data("project-primary", value: ""),
+              .init(name: "aria-keyshortcuts", value: bindings[.primaryAction]),
+              .title("Add path, \(bindings.label(.primaryAction))")
+            ) {
+              SVG(.circlePlus)
+              "Add path"
+            }
           }
         }
         div(
@@ -167,6 +173,10 @@ struct EffectiveLengthsView: HTML, Sendable {
   }
 
   private struct AddPathCard: HTML, Sendable {
+    @Environment(ShortcutViewValue.$bindings) private var bindings
+
+    private var action: KeybindingAction { type == .return ? .addReturn : .addSupply }
+
     let projectID: Project.ID
     let type: EquivalentLength.EffectiveLengthType
     let side: Int
@@ -177,7 +187,9 @@ struct EffectiveLengthsView: HTML, Sendable {
         .class("network-endpoint missing-path \(type.rawValue)"),
         .href(route: .project(.detail(projectID, .equivalentLength(.editor(nil, type: type))))),
         .style("left:\(side == 0 ? 16 : 84)%;top:\(hasPath ? 75 : 30)%"),
-        .init(name: "aria-label", value: "Add \(type.rawValue) path")
+        .init(name: "aria-label", value: "Add \(type.rawValue) path"),
+        .init(name: "aria-keyshortcuts", value: bindings[action]),
+        .title("Add \(type.rawValue), \(bindings.label(action))")
       ) {
         span { "\(type.rawValue.capitalized) path" }
         strong { hasPath ? "Add another path" : "Required for TEL" }

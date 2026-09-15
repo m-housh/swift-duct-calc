@@ -11,6 +11,8 @@
     "test:filters": "node scripts/check_filters_browser.cjs",
     "test:equipment": "node --test scripts/check_equipment.cjs",
     "test:trunk-templates": "node --test scripts/check_trunk_templates.cjs",
+    "test:keybindings": "node --test scripts/check_keybinding_recorder.cjs scripts/check_shortcut_hints.cjs",
+    "test:keybindings-browser": "node scripts/check_keybindings_browser.cjs",
     "test:project-shortcuts": "node --test scripts/check_project_shortcuts.cjs",
     "test:file-import": "node --test scripts/check_file_import.cjs",
     "test:fitting-shortcuts": "node --test scripts/check_fitting_shortcuts.cjs",

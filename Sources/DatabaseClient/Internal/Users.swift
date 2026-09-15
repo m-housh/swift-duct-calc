@@ -11,6 +11,15 @@ extension DatabaseClient.Users: TestDependencyKey {
 
   public static func live(database: any Database) -> Self {
     .init(
+      saveKeybindings: { userID, bindings in
+        let bindings = try bindings.validated()
+        guard let model = try await UserModel.find(userID, on: database) else {
+          throw NotFoundError()
+        }
+        model.keybindings = String(decoding: try JSONEncoder().encode(bindings), as: UTF8.self)
+        try await model.save(on: database)
+        return bindings
+      },
       administratorAccounts: { emails in
         guard let sql = database as? any SQLDatabase else { throw Abort(.internalServerError) }
         var ids = Set<User.ID>()
@@ -159,6 +168,9 @@ final class UserModel: Model, @unchecked Sendable {
   @Field(key: "email")
   var email: String
 
+  @OptionalField(key: "keybindings")
+  var keybindings: String?
+
   @Field(key: "password_hash")
   var passwordHash: String
 
@@ -188,7 +200,10 @@ final class UserModel: Model, @unchecked Sendable {
       id: requireID(),
       email: email,
       createdAt: createdAt!,
-      updatedAt: updatedAt!
+      updatedAt: updatedAt!,
+      keybindings: try keybindings.map {
+        try JSONDecoder().decode(Keybindings.self, from: Data($0.utf8))
+      }
     )
   }
 
@@ -290,5 +305,16 @@ public struct UserSessionAuthenticator: AsyncSessionAuthenticator {
       return
     }
     try request.auth.login(user.toDTO())
+  }
+}
+
+extension User {
+  struct AddKeybindings: AsyncMigration {
+    func prepare(on database: any Database) async throws {
+      try await database.schema(UserModel.schema).field("keybindings", .string).update()
+    }
+    func revert(on database: any Database) async throws {
+      try await database.schema(UserModel.schema).deleteField("keybindings").update()
+    }
   }
 }

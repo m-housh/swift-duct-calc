@@ -4,6 +4,8 @@ import ManualDCore
 import Styleguide
 
 struct EquipmentInfoView: HTML, Sendable {
+  @Environment(ShortcutViewValue.$bindings) private var bindings
+
   let equipmentInfo: EquipmentInfo?
   var projectID: Project.ID
   var readOnly = false
@@ -18,11 +20,12 @@ struct EquipmentInfoView: HTML, Sendable {
         button(
           .type(.button), .class("btn btn-primary"),
           .showModal(id: EquipmentInfoForm.Field.all.id),
-          .init(name: "aria-keyshortcuts", value: "Control+Alt+E"),
-          .title("Edit equipment, Ctrl+Alt+E")
+          .data("project-primary", value: ""),
+          .init(name: "aria-keyshortcuts", value: bindings[.primaryAction]),
+          .title("Edit all, \(bindings.label(.primaryAction))")
         ) {
           SVG(.squarePen)
-          "Edit equipment"
+          "Edit all"
         }
       }
       details(
@@ -57,15 +60,16 @@ struct EquipmentInfoView: HTML, Sendable {
   }
 
   private func airflowCard(_ field: EquipmentInfoForm.Field, value: Int?) -> some HTML & Sendable {
+    let action: KeybindingAction = field == .heating ? .heating : .cooling
     let mode = field.rawValue
     let label = field == .heating ? "Heating" : "Cooling"
     return button(
       .type(.button), .class("mode-card \(mode)\(value == nil ? " is-empty" : "")"),
       .data("equipment-mode", value: mode), .showModal(id: field.id),
-      .init(name: "aria-keyshortcuts", value: "Control+Alt+\(field.key)"),
+      .init(name: "aria-keyshortcuts", value: bindings[action]),
       .init(
         name: "aria-label", value: value.map { "Edit \(mode) airflow, \($0) CFM" } ?? "Add \(mode)"),
-      .title("\(field.title), Ctrl+Alt+\(field.key)")
+      .title("\(field.title), \(bindings.label(action))")
     ) {
       span(.class("mode-label")) {
         modeIcon(heating: field == .heating)
@@ -93,11 +97,11 @@ struct EquipmentInfoView: HTML, Sendable {
   private var blower: some HTML & Sendable {
     button(
       .type(.button), .class("blower"), .showModal(id: EquipmentInfoForm.Field.pressure.id),
-      .init(name: "aria-keyshortcuts", value: "Control+Alt+S"),
+      .init(name: "aria-keyshortcuts", value: bindings[.pressure]),
       .init(
         name: "aria-label",
         value: "Edit external static pressure, \(pressure) inches of water column"),
-      .title("External static pressure, Ctrl+Alt+S")
+      .title("External static pressure, \(bindings.label(.pressure))")
     ) {
       housing
       span(.class("pressure-readout")) {

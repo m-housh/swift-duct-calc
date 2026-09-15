@@ -18,7 +18,9 @@
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
     <script src="/js/htmx-download.js"></script>
     <script src="/js/request-errors.js?v=1"></script>
-    <script src="/js/main.js?v=errors-1"></script>
+    <script src="/js/main.js?v=keybindings-9"></script>
+    <script src="/js/shortcut-hints.js?v=6"></script>
+    <link rel="stylesheet" href="/css/shortcut-hints.css?v=1">
     <script src="/js/file-import.js?v=1" defer></script>
     <script src="/js/filters.js?v=1" defer></script>
     <link rel="stylesheet" href="/css/filters.css?v=1">
@@ -27,7 +29,7 @@
     <link rel="stylesheet" href="/css/output.css?v=project-import-1">
     <link rel="stylesheet" href="/css/htmx.css">
     <link rel="stylesheet" href="/css/accessibility.css?v=errors-1">
-    <link rel="stylesheet" href="/css/project-workspace.css?v=trunk-sizes-2">
+    <link rel="stylesheet" href="/css/project-workspace.css?v=rooms-table-1">
     <link rel="icon" href="/images/favicon.ico?v=ductcalc-white-3" sizes="16x16 32x32 48x48">
     <link rel="icon" href="/images/favicon-32x32.png?v=ductcalc-white-3" type="image/png" sizes="32x32">
     <link rel="icon" href="/images/brand/favicon.svg?v=white-3" type="image/svg+xml" sizes="any">
@@ -38,7 +40,7 @@
     <script src="https://unpkg.com/htmx-remove@latest" crossorigin="anonymous" integrity="sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT"></script>
   </head>
   <body>
-    <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
+    <div class="flex flex-col min-h-screen min-w-full justify-between" data-keybindings="{&quot;addReturn&quot;:&quot;Control+Alt+R&quot;,&quot;addSupply&quot;:&quot;Control+Alt+S&quot;,&quot;cooling&quot;:&quot;Control+Alt+C&quot;,&quot;ductSizes&quot;:&quot;Control+Alt+6&quot;,&quot;ductulator&quot;:&quot;Control+Alt+D&quot;,&quot;effectiveLength&quot;:&quot;Control+Alt+4&quot;,&quot;equipment&quot;:&quot;Control+Alt+3&quot;,&quot;exportPDF&quot;:&quot;Control+Alt+E&quot;,&quot;fittings&quot;:&quot;Control+Alt+F&quot;,&quot;frictionRate&quot;:&quot;Control+Alt+5&quot;,&quot;group1&quot;:&quot;Control+Alt+1&quot;,&quot;group10&quot;:&quot;Control+Alt+0&quot;,&quot;group2&quot;:&quot;Control+Alt+2&quot;,&quot;group3&quot;:&quot;Control+Alt+3&quot;,&quot;group4&quot;:&quot;Control+Alt+4&quot;,&quot;group5&quot;:&quot;Control+Alt+5&quot;,&quot;group6&quot;:&quot;Control+Alt+6&quot;,&quot;group7&quot;:&quot;Control+Alt+7&quot;,&quot;group8&quot;:&quot;Control+Alt+8&quot;,&quot;group9&quot;:&quot;Control+Alt+9&quot;,&quot;heating&quot;:&quot;Control+Alt+H&quot;,&quot;help&quot;:&quot;Control+Alt+Shift+\/&quot;,&quot;importLoads&quot;:&quot;Control+Alt+I&quot;,&quot;nextFitting&quot;:&quot;Control+Alt+J&quot;,&quot;nextGroup&quot;:&quot;Control+Alt+N&quot;,&quot;nextRoom&quot;:&quot;Control+Alt+J&quot;,&quot;nextStep&quot;:&quot;Control+Alt+Enter&quot;,&quot;pressure&quot;:&quot;Control+Alt+S&quot;,&quot;previousFitting&quot;:&quot;Control+Alt+K&quot;,&quot;previousGroup&quot;:&quot;Control+Alt+B&quot;,&quot;previousRoom&quot;:&quot;Control+Alt+K&quot;,&quot;previousStep&quot;:&quot;Control+Alt+Shift+Enter&quot;,&quot;primaryAction&quot;:&quot;Control+Alt+A&quot;,&quot;profile&quot;:&quot;Control+Alt+U&quot;,&quot;project&quot;:&quot;Control+Alt+1&quot;,&quot;projects&quot;:&quot;Control+Alt+P&quot;,&quot;reveal&quot;:&quot;Control+Alt+\/&quot;,&quot;rooms&quot;:&quot;Control+Alt+2&quot;,&quot;search&quot;:&quot;Control+K&quot;,&quot;templateAirHandler&quot;:&quot;Control+Alt+A&quot;,&quot;templateFurnace&quot;:&quot;Control+Alt+F&quot;,&quot;templateShared&quot;:&quot;Control+Alt+D&quot;}" data-theme="default">
       <a class="skip-link" href="#main-content">Skip to content</a>
       <main id="main-content" tabindex="-1" class="flex flex-col min-h-screen min-w-full grow mb-auto">
         <div class="project-workspace" data-project-id="00000000-0000-0000-0000-000000000000">
@@ -51,7 +53,7 @@
             alc
             Residential duct design</span><span></span><span class="dc-wordmark-c"></span><span></span></span><span class="dc-wordmark-description" aria-hidden="true"></span></span></a>
             <div class="app-nav-actions">
-              <button type="button" class="btn" aria-label="Keyboard shortcuts" title="Keyboard shortcuts, Ctrl+Alt+? or Ctrl+Alt+/" aria-keyshortcuts="Control+Alt+/ Control+Alt+Shift+/" aria-haspopup="dialog" aria-controls="projectShortcuts" data-open-dialog="projectShortcuts"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 15h12"/></svg></button>
+              <button type="button" class="btn" aria-label="Keyboard shortcuts" title="Keyboard shortcuts, Ctrl+Alt+Shift+/" aria-keyshortcuts="Control+Alt+Shift+/" aria-haspopup="dialog" aria-controls="projectShortcuts" data-open-dialog="projectShortcuts"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 15h12"/></svg></button>
               Fitting reference
               Ductulator<a class="btn app-nav-link" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span></span></a><a class="btn app-nav-ductulator" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span></span></a>
               <details class="account-menu">
@@ -59,6 +61,7 @@
                 <ul class="menu bg-base-200 rounded-box shadow-lg">
                   <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
                   <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
+                  <li><a href="/keybindings">Keybindings</a></li>
                   <li><a href="/filters">Filter library</a></li>
                   <li><a href="/filters?tab=preferences">Design preferences</a></li>
                   <li>
@@ -93,8 +96,7 @@
                     <p class="muted">Heating and cooling loads, organized by room.</p>
                   </div>
                   <div class="row-actions">
-                    <button type="button" class="btn btn-outline" data-open-dialog="uploadRooms"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-plus-corner-icon lucide-file-plus-corner"><path d="M11.35 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v5.35"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M14 19h6"/><path d="M17 16v6"/></svg>Import loads</button>
-                    <button type="button" class="btn btn-primary" data-open-dialog="roomForm"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add room</button>
+                    <button type="button" class="btn btn-outline" data-open-dialog="uploadRooms" aria-keyshortcuts="Control+Alt+I" title="Import loads, Ctrl+Alt+I"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-plus-corner-icon lucide-file-plus-corner"><path d="M11.35 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v5.35"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M14 19h6"/><path d="M17 16v6"/></svg>Import loads</button>
                   </div>
                 </div>
                 <div class="design-metrics">
@@ -117,410 +119,357 @@
                   Find a room</label><label class="project-search"><span class="sr-only"></span>
                   <input type="search" id="room-search" class="input" placeholder="Find a room…" aria-keyshortcuts="Control+K">
                   Ctrl+K<kbd></kbd></label>
+                  <button type="button" class="btn btn-primary" data-open-dialog="roomForm" data-project-primary="" aria-keyshortcuts="Control+Alt+A" title="Add room, Ctrl+Alt+A"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add room</button>
                 </div>
-                <div class="rooms-layout">
-                  <div class="project-panel">
-                    <div class="table-scroll" tabindex="0" role="region" aria-label="Room loads">
-                      <table class="table project-table" id="roomsTable" data-selectable-table="rooms">
-                        <thead>
-                          <tr>
-                            <th>Room</th>
-                            <th>Heating</th>
-                            <th>Cooling total</th>
-                            <th>Cooling sensible</th>
-                            <th>Registers</th>
-                            <th>Delegated to</th>
-                            <th><span class="sr-only">Actions</span></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr id="roomRow_00000000000000000000000000000001" data-record="00000000000000000000000000000001" data-search="Bed-1" data-level="none">
-                            <td>
-                              <button type="button" class="row-select" aria-pressed="false">Bed-1<small>No level</small></button>
-                            </td>
-                            <td><span>3,913</span></td>
-                            <td><span>2,472</span></td>
-                            <td><span>2,052</span></td>
-                            <td><span>1</span></td>
-                            <td>—</td>
-                            <td>
-                              <div class="row-actions">
-                                <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Bed-1" hx-delete="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000001" hx-target="body" hx-swap="outerHTML" hx-confirm="Delete this room?"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-                                <button class="btn btn-ghost" type="button" aria-label="Edit Bed-1" data-open-dialog="roomForm_00000000000000000000000000000001">
-                                  <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
-                                </button>
+                <div class="project-panel">
+                  <div class="table-scroll" tabindex="0" role="region" aria-label="Room loads">
+                    <table class="table project-table" id="roomsTable" data-selectable-table="rooms">
+                      <thead>
+                        <tr>
+                          <th>Room</th>
+                          <th>Heating</th>
+                          <th>Cooling total</th>
+                          <th>Cooling sensible</th>
+                          <th>Registers</th>
+                          <th>Delegated to</th>
+                          <th><span class="sr-only">Actions</span></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr id="roomRow_00000000000000000000000000000001" data-record="00000000000000000000000000000001" data-search="Bed-1" data-level="none">
+                          <td>
+                            <button type="button" class="row-select" aria-pressed="false">Bed-1<small>No level</small></button>
+                          </td>
+                          <td><span>3,913</span></td>
+                          <td><span>2,472</span></td>
+                          <td><span>2,052</span></td>
+                          <td><span>1</span></td>
+                          <td>—</td>
+                          <td>
+                            <div class="row-actions">
+                              <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Bed-1" hx-delete="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000001" hx-target="body" hx-swap="outerHTML" hx-confirm="Delete this room?"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                              <button class="btn btn-ghost" type="button" aria-label="Edit Bed-1" data-open-dialog="roomForm_00000000000000000000000000000001">
+                                <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                              </button>
+                            </div>
+                            <dialog id="roomForm_00000000000000000000000000000001" class="modal" aria-labelledby="roomForm_00000000000000000000000000000001-title">
+                              <div class="modal-box">
+                                <h2 id="roomForm_00000000000000000000000000000001-title" class="text-2xl font-bold mb-6 pe-10">Room</h2>
+                                <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Room" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                                <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000001" hx-target="body" hx-swap="outerHTML">
+                                  <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000001">
+                                  Name<label class="input w-full"><span class="label"></span>
+                                  <input name="name" type="text" placeholder="Name" required autofocus value="Bed-1">
+                                  Level (optional)</label><label class="input w-full"><span class="label"></span>
+                                  <input name="level" aria-describedby="roomForm_00000000000000000000000000000001-level-help" type="number" placeholder="1 (Optional)" value="" min="-1" step="1"></label>
+                                  <div id="roomForm_00000000000000000000000000000001-level-help" class="text-sm italic -mt-2"><span>Use -1 or 0 for a basement</span></div>
+                                  Heating Load<label class="input w-full"><span class="label"></span>
+                                  <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="3913.0">
+                                  Cooling Total</label><label class="input w-full"><span class="label"></span>
+                                  <input name="coolingTotal" aria-describedby="roomForm_00000000000000000000000000000001-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value="2472.0">
+                                  Cooling Sensible</label><label class="input w-full"><span class="label"></span>
+                                  <input name="coolingSensible" aria-describedby="roomForm_00000000000000000000000000000001-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value=""></label>
+                                  <div id="roomForm_00000000000000000000000000000001-cooling-help" class="text-sm italic -mt-2">
+                                    <p>Should enter at least one of the cooling loads.</p>
+                                    <p>Both are also acceptable.</p>
+                                  </div>
+                                  Registers<label class="input w-full"><span class="label"></span>
+                                  <input name="registerCount" type="number" min="1" required value="1">
+                                  Room</label><label class="select w-full"><span class="label"></span>
+                                  <select name="delegatedTo">
+                                    <option selected disabled>Delegate Airflow</option>
+                                    <option value="00000000-0000-0000-0000-000000000001">Bed-1</option>
+                                    <option value="00000000-0000-0000-0000-000000000002">Entry</option>
+                                    <option value="00000000-0000-0000-0000-000000000003">Family Room</option>
+                                    <option value="00000000-0000-0000-0000-000000000004">Kitchen</option>
+                                    <option value="00000000-0000-0000-0000-000000000005">Living Room</option>
+                                    <option value="00000000-0000-0000-0000-000000000006">Master</option>
+                                  </select></label>
+                                  <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                                </form>
                               </div>
-                              <dialog id="roomForm_00000000000000000000000000000001" class="modal" aria-labelledby="roomForm_00000000000000000000000000000001-title">
-                                <div class="modal-box">
-                                  <h2 id="roomForm_00000000000000000000000000000001-title" class="text-2xl font-bold mb-6 pe-10">Room</h2>
-                                  <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Room" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                                  <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000001" hx-target="body" hx-swap="outerHTML">
-                                    <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000001">
-                                    Name<label class="input w-full"><span class="label"></span>
-                                    <input name="name" type="text" placeholder="Name" required autofocus value="Bed-1">
-                                    Level (optional)</label><label class="input w-full"><span class="label"></span>
-                                    <input name="level" aria-describedby="roomForm_00000000000000000000000000000001-level-help" type="number" placeholder="1 (Optional)" value="" min="-1" step="1"></label>
-                                    <div id="roomForm_00000000000000000000000000000001-level-help" class="text-sm italic -mt-2"><span>Use -1 or 0 for a basement</span></div>
-                                    Heating Load<label class="input w-full"><span class="label"></span>
-                                    <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="3913.0">
-                                    Cooling Total</label><label class="input w-full"><span class="label"></span>
-                                    <input name="coolingTotal" aria-describedby="roomForm_00000000000000000000000000000001-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value="2472.0">
-                                    Cooling Sensible</label><label class="input w-full"><span class="label"></span>
-                                    <input name="coolingSensible" aria-describedby="roomForm_00000000000000000000000000000001-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value=""></label>
-                                    <div id="roomForm_00000000000000000000000000000001-cooling-help" class="text-sm italic -mt-2">
-                                      <p>Should enter at least one of the cooling loads.</p>
-                                      <p>Both are also acceptable.</p>
-                                    </div>
-                                    Registers<label class="input w-full"><span class="label"></span>
-                                    <input name="registerCount" type="number" min="1" required value="1">
-                                    Room</label><label class="select w-full"><span class="label"></span>
-                                    <select name="delegatedTo">
-                                      <option selected disabled>Delegate Airflow</option>
-                                      <option value="00000000-0000-0000-0000-000000000001">Bed-1</option>
-                                      <option value="00000000-0000-0000-0000-000000000002">Entry</option>
-                                      <option value="00000000-0000-0000-0000-000000000003">Family Room</option>
-                                      <option value="00000000-0000-0000-0000-000000000004">Kitchen</option>
-                                      <option value="00000000-0000-0000-0000-000000000005">Living Room</option>
-                                      <option value="00000000-0000-0000-0000-000000000006">Master</option>
-                                    </select></label>
-                                    <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                                  </form>
-                                </div>
-                              </dialog>
-                            </td>
-                          </tr>
-                          <tr id="roomRow_00000000000000000000000000000002" data-record="00000000000000000000000000000002" data-search="Entry" data-level="none">
-                            <td>
-                              <button type="button" class="row-select" aria-pressed="false">Entry<small>No level</small></button>
-                            </td>
-                            <td><span>8,284</span></td>
-                            <td><span>2,916</span></td>
-                            <td><span>2,420</span></td>
-                            <td><span>2</span></td>
-                            <td>—</td>
-                            <td>
-                              <div class="row-actions">
-                                <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Entry" hx-delete="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000002" hx-target="body" hx-swap="outerHTML" hx-confirm="Delete this room?"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-                                <button class="btn btn-ghost" type="button" aria-label="Edit Entry" data-open-dialog="roomForm_00000000000000000000000000000002">
-                                  <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
-                                </button>
+                            </dialog>
+                          </td>
+                        </tr>
+                        <tr id="roomRow_00000000000000000000000000000002" data-record="00000000000000000000000000000002" data-search="Entry" data-level="none">
+                          <td>
+                            <button type="button" class="row-select" aria-pressed="false">Entry<small>No level</small></button>
+                          </td>
+                          <td><span>8,284</span></td>
+                          <td><span>2,916</span></td>
+                          <td><span>2,420</span></td>
+                          <td><span>2</span></td>
+                          <td>—</td>
+                          <td>
+                            <div class="row-actions">
+                              <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Entry" hx-delete="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000002" hx-target="body" hx-swap="outerHTML" hx-confirm="Delete this room?"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                              <button class="btn btn-ghost" type="button" aria-label="Edit Entry" data-open-dialog="roomForm_00000000000000000000000000000002">
+                                <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                              </button>
+                            </div>
+                            <dialog id="roomForm_00000000000000000000000000000002" class="modal" aria-labelledby="roomForm_00000000000000000000000000000002-title">
+                              <div class="modal-box">
+                                <h2 id="roomForm_00000000000000000000000000000002-title" class="text-2xl font-bold mb-6 pe-10">Room</h2>
+                                <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Room" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                                <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000002" hx-target="body" hx-swap="outerHTML">
+                                  <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000002">
+                                  Name<label class="input w-full"><span class="label"></span>
+                                  <input name="name" type="text" placeholder="Name" required autofocus value="Entry">
+                                  Level (optional)</label><label class="input w-full"><span class="label"></span>
+                                  <input name="level" aria-describedby="roomForm_00000000000000000000000000000002-level-help" type="number" placeholder="1 (Optional)" value="" min="-1" step="1"></label>
+                                  <div id="roomForm_00000000000000000000000000000002-level-help" class="text-sm italic -mt-2"><span>Use -1 or 0 for a basement</span></div>
+                                  Heating Load<label class="input w-full"><span class="label"></span>
+                                  <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="8284.0">
+                                  Cooling Total</label><label class="input w-full"><span class="label"></span>
+                                  <input name="coolingTotal" aria-describedby="roomForm_00000000000000000000000000000002-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value="2916.0">
+                                  Cooling Sensible</label><label class="input w-full"><span class="label"></span>
+                                  <input name="coolingSensible" aria-describedby="roomForm_00000000000000000000000000000002-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value=""></label>
+                                  <div id="roomForm_00000000000000000000000000000002-cooling-help" class="text-sm italic -mt-2">
+                                    <p>Should enter at least one of the cooling loads.</p>
+                                    <p>Both are also acceptable.</p>
+                                  </div>
+                                  Registers<label class="input w-full"><span class="label"></span>
+                                  <input name="registerCount" type="number" min="1" required value="2">
+                                  Room</label><label class="select w-full"><span class="label"></span>
+                                  <select name="delegatedTo">
+                                    <option selected disabled>Delegate Airflow</option>
+                                    <option value="00000000-0000-0000-0000-000000000001">Bed-1</option>
+                                    <option value="00000000-0000-0000-0000-000000000002">Entry</option>
+                                    <option value="00000000-0000-0000-0000-000000000003">Family Room</option>
+                                    <option value="00000000-0000-0000-0000-000000000004">Kitchen</option>
+                                    <option value="00000000-0000-0000-0000-000000000005">Living Room</option>
+                                    <option value="00000000-0000-0000-0000-000000000006">Master</option>
+                                  </select></label>
+                                  <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                                </form>
                               </div>
-                              <dialog id="roomForm_00000000000000000000000000000002" class="modal" aria-labelledby="roomForm_00000000000000000000000000000002-title">
-                                <div class="modal-box">
-                                  <h2 id="roomForm_00000000000000000000000000000002-title" class="text-2xl font-bold mb-6 pe-10">Room</h2>
-                                  <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Room" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                                  <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000002" hx-target="body" hx-swap="outerHTML">
-                                    <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000002">
-                                    Name<label class="input w-full"><span class="label"></span>
-                                    <input name="name" type="text" placeholder="Name" required autofocus value="Entry">
-                                    Level (optional)</label><label class="input w-full"><span class="label"></span>
-                                    <input name="level" aria-describedby="roomForm_00000000000000000000000000000002-level-help" type="number" placeholder="1 (Optional)" value="" min="-1" step="1"></label>
-                                    <div id="roomForm_00000000000000000000000000000002-level-help" class="text-sm italic -mt-2"><span>Use -1 or 0 for a basement</span></div>
-                                    Heating Load<label class="input w-full"><span class="label"></span>
-                                    <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="8284.0">
-                                    Cooling Total</label><label class="input w-full"><span class="label"></span>
-                                    <input name="coolingTotal" aria-describedby="roomForm_00000000000000000000000000000002-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value="2916.0">
-                                    Cooling Sensible</label><label class="input w-full"><span class="label"></span>
-                                    <input name="coolingSensible" aria-describedby="roomForm_00000000000000000000000000000002-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value=""></label>
-                                    <div id="roomForm_00000000000000000000000000000002-cooling-help" class="text-sm italic -mt-2">
-                                      <p>Should enter at least one of the cooling loads.</p>
-                                      <p>Both are also acceptable.</p>
-                                    </div>
-                                    Registers<label class="input w-full"><span class="label"></span>
-                                    <input name="registerCount" type="number" min="1" required value="2">
-                                    Room</label><label class="select w-full"><span class="label"></span>
-                                    <select name="delegatedTo">
-                                      <option selected disabled>Delegate Airflow</option>
-                                      <option value="00000000-0000-0000-0000-000000000001">Bed-1</option>
-                                      <option value="00000000-0000-0000-0000-000000000002">Entry</option>
-                                      <option value="00000000-0000-0000-0000-000000000003">Family Room</option>
-                                      <option value="00000000-0000-0000-0000-000000000004">Kitchen</option>
-                                      <option value="00000000-0000-0000-0000-000000000005">Living Room</option>
-                                      <option value="00000000-0000-0000-0000-000000000006">Master</option>
-                                    </select></label>
-                                    <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                                  </form>
-                                </div>
-                              </dialog>
-                            </td>
-                          </tr>
-                          <tr id="roomRow_00000000000000000000000000000003" data-record="00000000000000000000000000000003" data-search="Family Room" data-level="none">
-                            <td>
-                              <button type="button" class="row-select" aria-pressed="false">Family Room<small>No level</small></button>
-                            </td>
-                            <td><span>9,785</span></td>
-                            <td><span>7,446</span></td>
-                            <td><span>6,180</span></td>
-                            <td><span>3</span></td>
-                            <td>—</td>
-                            <td>
-                              <div class="row-actions">
-                                <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Family Room" hx-delete="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000003" hx-target="body" hx-swap="outerHTML" hx-confirm="Delete this room?"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-                                <button class="btn btn-ghost" type="button" aria-label="Edit Family Room" data-open-dialog="roomForm_00000000000000000000000000000003">
-                                  <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
-                                </button>
+                            </dialog>
+                          </td>
+                        </tr>
+                        <tr id="roomRow_00000000000000000000000000000003" data-record="00000000000000000000000000000003" data-search="Family Room" data-level="none">
+                          <td>
+                            <button type="button" class="row-select" aria-pressed="false">Family Room<small>No level</small></button>
+                          </td>
+                          <td><span>9,785</span></td>
+                          <td><span>7,446</span></td>
+                          <td><span>6,180</span></td>
+                          <td><span>3</span></td>
+                          <td>—</td>
+                          <td>
+                            <div class="row-actions">
+                              <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Family Room" hx-delete="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000003" hx-target="body" hx-swap="outerHTML" hx-confirm="Delete this room?"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                              <button class="btn btn-ghost" type="button" aria-label="Edit Family Room" data-open-dialog="roomForm_00000000000000000000000000000003">
+                                <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                              </button>
+                            </div>
+                            <dialog id="roomForm_00000000000000000000000000000003" class="modal" aria-labelledby="roomForm_00000000000000000000000000000003-title">
+                              <div class="modal-box">
+                                <h2 id="roomForm_00000000000000000000000000000003-title" class="text-2xl font-bold mb-6 pe-10">Room</h2>
+                                <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Room" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                                <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000003" hx-target="body" hx-swap="outerHTML">
+                                  <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000003">
+                                  Name<label class="input w-full"><span class="label"></span>
+                                  <input name="name" type="text" placeholder="Name" required autofocus value="Family Room">
+                                  Level (optional)</label><label class="input w-full"><span class="label"></span>
+                                  <input name="level" aria-describedby="roomForm_00000000000000000000000000000003-level-help" type="number" placeholder="1 (Optional)" value="" min="-1" step="1"></label>
+                                  <div id="roomForm_00000000000000000000000000000003-level-help" class="text-sm italic -mt-2"><span>Use -1 or 0 for a basement</span></div>
+                                  Heating Load<label class="input w-full"><span class="label"></span>
+                                  <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="9785.0">
+                                  Cooling Total</label><label class="input w-full"><span class="label"></span>
+                                  <input name="coolingTotal" aria-describedby="roomForm_00000000000000000000000000000003-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value="7446.0">
+                                  Cooling Sensible</label><label class="input w-full"><span class="label"></span>
+                                  <input name="coolingSensible" aria-describedby="roomForm_00000000000000000000000000000003-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value=""></label>
+                                  <div id="roomForm_00000000000000000000000000000003-cooling-help" class="text-sm italic -mt-2">
+                                    <p>Should enter at least one of the cooling loads.</p>
+                                    <p>Both are also acceptable.</p>
+                                  </div>
+                                  Registers<label class="input w-full"><span class="label"></span>
+                                  <input name="registerCount" type="number" min="1" required value="3">
+                                  Room</label><label class="select w-full"><span class="label"></span>
+                                  <select name="delegatedTo">
+                                    <option selected disabled>Delegate Airflow</option>
+                                    <option value="00000000-0000-0000-0000-000000000001">Bed-1</option>
+                                    <option value="00000000-0000-0000-0000-000000000002">Entry</option>
+                                    <option value="00000000-0000-0000-0000-000000000003">Family Room</option>
+                                    <option value="00000000-0000-0000-0000-000000000004">Kitchen</option>
+                                    <option value="00000000-0000-0000-0000-000000000005">Living Room</option>
+                                    <option value="00000000-0000-0000-0000-000000000006">Master</option>
+                                  </select></label>
+                                  <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                                </form>
                               </div>
-                              <dialog id="roomForm_00000000000000000000000000000003" class="modal" aria-labelledby="roomForm_00000000000000000000000000000003-title">
-                                <div class="modal-box">
-                                  <h2 id="roomForm_00000000000000000000000000000003-title" class="text-2xl font-bold mb-6 pe-10">Room</h2>
-                                  <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Room" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                                  <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000003" hx-target="body" hx-swap="outerHTML">
-                                    <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000003">
-                                    Name<label class="input w-full"><span class="label"></span>
-                                    <input name="name" type="text" placeholder="Name" required autofocus value="Family Room">
-                                    Level (optional)</label><label class="input w-full"><span class="label"></span>
-                                    <input name="level" aria-describedby="roomForm_00000000000000000000000000000003-level-help" type="number" placeholder="1 (Optional)" value="" min="-1" step="1"></label>
-                                    <div id="roomForm_00000000000000000000000000000003-level-help" class="text-sm italic -mt-2"><span>Use -1 or 0 for a basement</span></div>
-                                    Heating Load<label class="input w-full"><span class="label"></span>
-                                    <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="9785.0">
-                                    Cooling Total</label><label class="input w-full"><span class="label"></span>
-                                    <input name="coolingTotal" aria-describedby="roomForm_00000000000000000000000000000003-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value="7446.0">
-                                    Cooling Sensible</label><label class="input w-full"><span class="label"></span>
-                                    <input name="coolingSensible" aria-describedby="roomForm_00000000000000000000000000000003-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value=""></label>
-                                    <div id="roomForm_00000000000000000000000000000003-cooling-help" class="text-sm italic -mt-2">
-                                      <p>Should enter at least one of the cooling loads.</p>
-                                      <p>Both are also acceptable.</p>
-                                    </div>
-                                    Registers<label class="input w-full"><span class="label"></span>
-                                    <input name="registerCount" type="number" min="1" required value="3">
-                                    Room</label><label class="select w-full"><span class="label"></span>
-                                    <select name="delegatedTo">
-                                      <option selected disabled>Delegate Airflow</option>
-                                      <option value="00000000-0000-0000-0000-000000000001">Bed-1</option>
-                                      <option value="00000000-0000-0000-0000-000000000002">Entry</option>
-                                      <option value="00000000-0000-0000-0000-000000000003">Family Room</option>
-                                      <option value="00000000-0000-0000-0000-000000000004">Kitchen</option>
-                                      <option value="00000000-0000-0000-0000-000000000005">Living Room</option>
-                                      <option value="00000000-0000-0000-0000-000000000006">Master</option>
-                                    </select></label>
-                                    <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                                  </form>
-                                </div>
-                              </dialog>
-                            </td>
-                          </tr>
-                          <tr id="roomRow_00000000000000000000000000000004" data-record="00000000000000000000000000000004" data-search="Kitchen" data-level="none">
-                            <td>
-                              <button type="button" class="row-select" aria-pressed="false">Kitchen<small>No level</small></button>
-                            </td>
-                            <td><span>4,518</span></td>
-                            <td><span>5,096</span></td>
-                            <td><span>4,230</span></td>
-                            <td><span>2</span></td>
-                            <td>—</td>
-                            <td>
-                              <div class="row-actions">
-                                <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Kitchen" hx-delete="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000004" hx-target="body" hx-swap="outerHTML" hx-confirm="Delete this room?"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-                                <button class="btn btn-ghost" type="button" aria-label="Edit Kitchen" data-open-dialog="roomForm_00000000000000000000000000000004">
-                                  <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
-                                </button>
+                            </dialog>
+                          </td>
+                        </tr>
+                        <tr id="roomRow_00000000000000000000000000000004" data-record="00000000000000000000000000000004" data-search="Kitchen" data-level="none">
+                          <td>
+                            <button type="button" class="row-select" aria-pressed="false">Kitchen<small>No level</small></button>
+                          </td>
+                          <td><span>4,518</span></td>
+                          <td><span>5,096</span></td>
+                          <td><span>4,230</span></td>
+                          <td><span>2</span></td>
+                          <td>—</td>
+                          <td>
+                            <div class="row-actions">
+                              <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Kitchen" hx-delete="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000004" hx-target="body" hx-swap="outerHTML" hx-confirm="Delete this room?"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                              <button class="btn btn-ghost" type="button" aria-label="Edit Kitchen" data-open-dialog="roomForm_00000000000000000000000000000004">
+                                <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                              </button>
+                            </div>
+                            <dialog id="roomForm_00000000000000000000000000000004" class="modal" aria-labelledby="roomForm_00000000000000000000000000000004-title">
+                              <div class="modal-box">
+                                <h2 id="roomForm_00000000000000000000000000000004-title" class="text-2xl font-bold mb-6 pe-10">Room</h2>
+                                <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Room" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                                <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000004" hx-target="body" hx-swap="outerHTML">
+                                  <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000004">
+                                  Name<label class="input w-full"><span class="label"></span>
+                                  <input name="name" type="text" placeholder="Name" required autofocus value="Kitchen">
+                                  Level (optional)</label><label class="input w-full"><span class="label"></span>
+                                  <input name="level" aria-describedby="roomForm_00000000000000000000000000000004-level-help" type="number" placeholder="1 (Optional)" value="" min="-1" step="1"></label>
+                                  <div id="roomForm_00000000000000000000000000000004-level-help" class="text-sm italic -mt-2"><span>Use -1 or 0 for a basement</span></div>
+                                  Heating Load<label class="input w-full"><span class="label"></span>
+                                  <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="4518.0">
+                                  Cooling Total</label><label class="input w-full"><span class="label"></span>
+                                  <input name="coolingTotal" aria-describedby="roomForm_00000000000000000000000000000004-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value="5096.0">
+                                  Cooling Sensible</label><label class="input w-full"><span class="label"></span>
+                                  <input name="coolingSensible" aria-describedby="roomForm_00000000000000000000000000000004-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value=""></label>
+                                  <div id="roomForm_00000000000000000000000000000004-cooling-help" class="text-sm italic -mt-2">
+                                    <p>Should enter at least one of the cooling loads.</p>
+                                    <p>Both are also acceptable.</p>
+                                  </div>
+                                  Registers<label class="input w-full"><span class="label"></span>
+                                  <input name="registerCount" type="number" min="1" required value="2">
+                                  Room</label><label class="select w-full"><span class="label"></span>
+                                  <select name="delegatedTo">
+                                    <option selected disabled>Delegate Airflow</option>
+                                    <option value="00000000-0000-0000-0000-000000000001">Bed-1</option>
+                                    <option value="00000000-0000-0000-0000-000000000002">Entry</option>
+                                    <option value="00000000-0000-0000-0000-000000000003">Family Room</option>
+                                    <option value="00000000-0000-0000-0000-000000000004">Kitchen</option>
+                                    <option value="00000000-0000-0000-0000-000000000005">Living Room</option>
+                                    <option value="00000000-0000-0000-0000-000000000006">Master</option>
+                                  </select></label>
+                                  <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                                </form>
                               </div>
-                              <dialog id="roomForm_00000000000000000000000000000004" class="modal" aria-labelledby="roomForm_00000000000000000000000000000004-title">
-                                <div class="modal-box">
-                                  <h2 id="roomForm_00000000000000000000000000000004-title" class="text-2xl font-bold mb-6 pe-10">Room</h2>
-                                  <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Room" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                                  <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000004" hx-target="body" hx-swap="outerHTML">
-                                    <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000004">
-                                    Name<label class="input w-full"><span class="label"></span>
-                                    <input name="name" type="text" placeholder="Name" required autofocus value="Kitchen">
-                                    Level (optional)</label><label class="input w-full"><span class="label"></span>
-                                    <input name="level" aria-describedby="roomForm_00000000000000000000000000000004-level-help" type="number" placeholder="1 (Optional)" value="" min="-1" step="1"></label>
-                                    <div id="roomForm_00000000000000000000000000000004-level-help" class="text-sm italic -mt-2"><span>Use -1 or 0 for a basement</span></div>
-                                    Heating Load<label class="input w-full"><span class="label"></span>
-                                    <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="4518.0">
-                                    Cooling Total</label><label class="input w-full"><span class="label"></span>
-                                    <input name="coolingTotal" aria-describedby="roomForm_00000000000000000000000000000004-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value="5096.0">
-                                    Cooling Sensible</label><label class="input w-full"><span class="label"></span>
-                                    <input name="coolingSensible" aria-describedby="roomForm_00000000000000000000000000000004-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value=""></label>
-                                    <div id="roomForm_00000000000000000000000000000004-cooling-help" class="text-sm italic -mt-2">
-                                      <p>Should enter at least one of the cooling loads.</p>
-                                      <p>Both are also acceptable.</p>
-                                    </div>
-                                    Registers<label class="input w-full"><span class="label"></span>
-                                    <input name="registerCount" type="number" min="1" required value="2">
-                                    Room</label><label class="select w-full"><span class="label"></span>
-                                    <select name="delegatedTo">
-                                      <option selected disabled>Delegate Airflow</option>
-                                      <option value="00000000-0000-0000-0000-000000000001">Bed-1</option>
-                                      <option value="00000000-0000-0000-0000-000000000002">Entry</option>
-                                      <option value="00000000-0000-0000-0000-000000000003">Family Room</option>
-                                      <option value="00000000-0000-0000-0000-000000000004">Kitchen</option>
-                                      <option value="00000000-0000-0000-0000-000000000005">Living Room</option>
-                                      <option value="00000000-0000-0000-0000-000000000006">Master</option>
-                                    </select></label>
-                                    <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                                  </form>
-                                </div>
-                              </dialog>
-                            </td>
-                          </tr>
-                          <tr id="roomRow_00000000000000000000000000000005" data-record="00000000000000000000000000000005" data-search="Living Room" data-level="none">
-                            <td>
-                              <button type="button" class="row-select" aria-pressed="false">Living Room<small>No level</small></button>
-                            </td>
-                            <td><span>7,553</span></td>
-                            <td><span>6,829</span></td>
-                            <td><span>5,668</span></td>
-                            <td><span>2</span></td>
-                            <td>—</td>
-                            <td>
-                              <div class="row-actions">
-                                <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Living Room" hx-delete="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000005" hx-target="body" hx-swap="outerHTML" hx-confirm="Delete this room?"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-                                <button class="btn btn-ghost" type="button" aria-label="Edit Living Room" data-open-dialog="roomForm_00000000000000000000000000000005">
-                                  <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
-                                </button>
+                            </dialog>
+                          </td>
+                        </tr>
+                        <tr id="roomRow_00000000000000000000000000000005" data-record="00000000000000000000000000000005" data-search="Living Room" data-level="none">
+                          <td>
+                            <button type="button" class="row-select" aria-pressed="false">Living Room<small>No level</small></button>
+                          </td>
+                          <td><span>7,553</span></td>
+                          <td><span>6,829</span></td>
+                          <td><span>5,668</span></td>
+                          <td><span>2</span></td>
+                          <td>—</td>
+                          <td>
+                            <div class="row-actions">
+                              <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Living Room" hx-delete="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000005" hx-target="body" hx-swap="outerHTML" hx-confirm="Delete this room?"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                              <button class="btn btn-ghost" type="button" aria-label="Edit Living Room" data-open-dialog="roomForm_00000000000000000000000000000005">
+                                <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                              </button>
+                            </div>
+                            <dialog id="roomForm_00000000000000000000000000000005" class="modal" aria-labelledby="roomForm_00000000000000000000000000000005-title">
+                              <div class="modal-box">
+                                <h2 id="roomForm_00000000000000000000000000000005-title" class="text-2xl font-bold mb-6 pe-10">Room</h2>
+                                <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Room" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                                <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000005" hx-target="body" hx-swap="outerHTML">
+                                  <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000005">
+                                  Name<label class="input w-full"><span class="label"></span>
+                                  <input name="name" type="text" placeholder="Name" required autofocus value="Living Room">
+                                  Level (optional)</label><label class="input w-full"><span class="label"></span>
+                                  <input name="level" aria-describedby="roomForm_00000000000000000000000000000005-level-help" type="number" placeholder="1 (Optional)" value="" min="-1" step="1"></label>
+                                  <div id="roomForm_00000000000000000000000000000005-level-help" class="text-sm italic -mt-2"><span>Use -1 or 0 for a basement</span></div>
+                                  Heating Load<label class="input w-full"><span class="label"></span>
+                                  <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="7553.0">
+                                  Cooling Total</label><label class="input w-full"><span class="label"></span>
+                                  <input name="coolingTotal" aria-describedby="roomForm_00000000000000000000000000000005-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value="6829.0">
+                                  Cooling Sensible</label><label class="input w-full"><span class="label"></span>
+                                  <input name="coolingSensible" aria-describedby="roomForm_00000000000000000000000000000005-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value=""></label>
+                                  <div id="roomForm_00000000000000000000000000000005-cooling-help" class="text-sm italic -mt-2">
+                                    <p>Should enter at least one of the cooling loads.</p>
+                                    <p>Both are also acceptable.</p>
+                                  </div>
+                                  Registers<label class="input w-full"><span class="label"></span>
+                                  <input name="registerCount" type="number" min="1" required value="2">
+                                  Room</label><label class="select w-full"><span class="label"></span>
+                                  <select name="delegatedTo">
+                                    <option selected disabled>Delegate Airflow</option>
+                                    <option value="00000000-0000-0000-0000-000000000001">Bed-1</option>
+                                    <option value="00000000-0000-0000-0000-000000000002">Entry</option>
+                                    <option value="00000000-0000-0000-0000-000000000003">Family Room</option>
+                                    <option value="00000000-0000-0000-0000-000000000004">Kitchen</option>
+                                    <option value="00000000-0000-0000-0000-000000000005">Living Room</option>
+                                    <option value="00000000-0000-0000-0000-000000000006">Master</option>
+                                  </select></label>
+                                  <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                                </form>
                               </div>
-                              <dialog id="roomForm_00000000000000000000000000000005" class="modal" aria-labelledby="roomForm_00000000000000000000000000000005-title">
-                                <div class="modal-box">
-                                  <h2 id="roomForm_00000000000000000000000000000005-title" class="text-2xl font-bold mb-6 pe-10">Room</h2>
-                                  <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Room" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                                  <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000005" hx-target="body" hx-swap="outerHTML">
-                                    <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000005">
-                                    Name<label class="input w-full"><span class="label"></span>
-                                    <input name="name" type="text" placeholder="Name" required autofocus value="Living Room">
-                                    Level (optional)</label><label class="input w-full"><span class="label"></span>
-                                    <input name="level" aria-describedby="roomForm_00000000000000000000000000000005-level-help" type="number" placeholder="1 (Optional)" value="" min="-1" step="1"></label>
-                                    <div id="roomForm_00000000000000000000000000000005-level-help" class="text-sm italic -mt-2"><span>Use -1 or 0 for a basement</span></div>
-                                    Heating Load<label class="input w-full"><span class="label"></span>
-                                    <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="7553.0">
-                                    Cooling Total</label><label class="input w-full"><span class="label"></span>
-                                    <input name="coolingTotal" aria-describedby="roomForm_00000000000000000000000000000005-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value="6829.0">
-                                    Cooling Sensible</label><label class="input w-full"><span class="label"></span>
-                                    <input name="coolingSensible" aria-describedby="roomForm_00000000000000000000000000000005-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value=""></label>
-                                    <div id="roomForm_00000000000000000000000000000005-cooling-help" class="text-sm italic -mt-2">
-                                      <p>Should enter at least one of the cooling loads.</p>
-                                      <p>Both are also acceptable.</p>
-                                    </div>
-                                    Registers<label class="input w-full"><span class="label"></span>
-                                    <input name="registerCount" type="number" min="1" required value="2">
-                                    Room</label><label class="select w-full"><span class="label"></span>
-                                    <select name="delegatedTo">
-                                      <option selected disabled>Delegate Airflow</option>
-                                      <option value="00000000-0000-0000-0000-000000000001">Bed-1</option>
-                                      <option value="00000000-0000-0000-0000-000000000002">Entry</option>
-                                      <option value="00000000-0000-0000-0000-000000000003">Family Room</option>
-                                      <option value="00000000-0000-0000-0000-000000000004">Kitchen</option>
-                                      <option value="00000000-0000-0000-0000-000000000005">Living Room</option>
-                                      <option value="00000000-0000-0000-0000-000000000006">Master</option>
-                                    </select></label>
-                                    <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                                  </form>
-                                </div>
-                              </dialog>
-                            </td>
-                          </tr>
-                          <tr id="roomRow_00000000000000000000000000000006" data-record="00000000000000000000000000000006" data-search="Master" data-level="none">
-                            <td>
-                              <button type="button" class="row-select" aria-pressed="false">Master<small>No level</small></button>
-                            </td>
-                            <td><span>8,202</span></td>
-                            <td><span>2,076</span></td>
-                            <td><span>1,723</span></td>
-                            <td><span>2</span></td>
-                            <td>—</td>
-                            <td>
-                              <div class="row-actions">
-                                <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Master" hx-delete="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000006" hx-target="body" hx-swap="outerHTML" hx-confirm="Delete this room?"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-                                <button class="btn btn-ghost" type="button" aria-label="Edit Master" data-open-dialog="roomForm_00000000000000000000000000000006">
-                                  <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
-                                </button>
+                            </dialog>
+                          </td>
+                        </tr>
+                        <tr id="roomRow_00000000000000000000000000000006" data-record="00000000000000000000000000000006" data-search="Master" data-level="none">
+                          <td>
+                            <button type="button" class="row-select" aria-pressed="false">Master<small>No level</small></button>
+                          </td>
+                          <td><span>8,202</span></td>
+                          <td><span>2,076</span></td>
+                          <td><span>1,723</span></td>
+                          <td><span>2</span></td>
+                          <td>—</td>
+                          <td>
+                            <div class="row-actions">
+                              <button type="button" class="btn btn-error btn-ghost" aria-label="Delete Master" hx-delete="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000006" hx-target="body" hx-swap="outerHTML" hx-confirm="Delete this room?"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                              <button class="btn btn-ghost" type="button" aria-label="Edit Master" data-open-dialog="roomForm_00000000000000000000000000000006">
+                                <div class="flex"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></div>
+                              </button>
+                            </div>
+                            <dialog id="roomForm_00000000000000000000000000000006" class="modal" aria-labelledby="roomForm_00000000000000000000000000000006-title">
+                              <div class="modal-box">
+                                <h2 id="roomForm_00000000000000000000000000000006-title" class="text-2xl font-bold mb-6 pe-10">Room</h2>
+                                <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Room" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                                <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000006" hx-target="body" hx-swap="outerHTML">
+                                  <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000006">
+                                  Name<label class="input w-full"><span class="label"></span>
+                                  <input name="name" type="text" placeholder="Name" required autofocus value="Master">
+                                  Level (optional)</label><label class="input w-full"><span class="label"></span>
+                                  <input name="level" aria-describedby="roomForm_00000000000000000000000000000006-level-help" type="number" placeholder="1 (Optional)" value="" min="-1" step="1"></label>
+                                  <div id="roomForm_00000000000000000000000000000006-level-help" class="text-sm italic -mt-2"><span>Use -1 or 0 for a basement</span></div>
+                                  Heating Load<label class="input w-full"><span class="label"></span>
+                                  <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="8202.0">
+                                  Cooling Total</label><label class="input w-full"><span class="label"></span>
+                                  <input name="coolingTotal" aria-describedby="roomForm_00000000000000000000000000000006-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value="2076.0">
+                                  Cooling Sensible</label><label class="input w-full"><span class="label"></span>
+                                  <input name="coolingSensible" aria-describedby="roomForm_00000000000000000000000000000006-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value=""></label>
+                                  <div id="roomForm_00000000000000000000000000000006-cooling-help" class="text-sm italic -mt-2">
+                                    <p>Should enter at least one of the cooling loads.</p>
+                                    <p>Both are also acceptable.</p>
+                                  </div>
+                                  Registers<label class="input w-full"><span class="label"></span>
+                                  <input name="registerCount" type="number" min="1" required value="2">
+                                  Room</label><label class="select w-full"><span class="label"></span>
+                                  <select name="delegatedTo">
+                                    <option selected disabled>Delegate Airflow</option>
+                                    <option value="00000000-0000-0000-0000-000000000001">Bed-1</option>
+                                    <option value="00000000-0000-0000-0000-000000000002">Entry</option>
+                                    <option value="00000000-0000-0000-0000-000000000003">Family Room</option>
+                                    <option value="00000000-0000-0000-0000-000000000004">Kitchen</option>
+                                    <option value="00000000-0000-0000-0000-000000000005">Living Room</option>
+                                    <option value="00000000-0000-0000-0000-000000000006">Master</option>
+                                  </select></label>
+                                  <button class="btn btn-secondary btn-block" type="submit">Submit</button>
+                                </form>
                               </div>
-                              <dialog id="roomForm_00000000000000000000000000000006" class="modal" aria-labelledby="roomForm_00000000000000000000000000000006-title">
-                                <div class="modal-box">
-                                  <h2 id="roomForm_00000000000000000000000000000006-title" class="text-2xl font-bold mb-6 pe-10">Room</h2>
-                                  <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Room" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-                                  <form data-success-message="Changes saved." class="grid grid-cols-1 gap-4" hx-patch="/projects/00000000-0000-0000-0000-000000000000/rooms/00000000-0000-0000-0000-000000000006" hx-target="body" hx-swap="outerHTML">
-                                    <input class="hidden" name="id" value="00000000-0000-0000-0000-000000000006">
-                                    Name<label class="input w-full"><span class="label"></span>
-                                    <input name="name" type="text" placeholder="Name" required autofocus value="Master">
-                                    Level (optional)</label><label class="input w-full"><span class="label"></span>
-                                    <input name="level" aria-describedby="roomForm_00000000000000000000000000000006-level-help" type="number" placeholder="1 (Optional)" value="" min="-1" step="1"></label>
-                                    <div id="roomForm_00000000000000000000000000000006-level-help" class="text-sm italic -mt-2"><span>Use -1 or 0 for a basement</span></div>
-                                    Heating Load<label class="input w-full"><span class="label"></span>
-                                    <input name="heatingLoad" type="number" placeholder="1234" required min="0" value="8202.0">
-                                    Cooling Total</label><label class="input w-full"><span class="label"></span>
-                                    <input name="coolingTotal" aria-describedby="roomForm_00000000000000000000000000000006-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value="2076.0">
-                                    Cooling Sensible</label><label class="input w-full"><span class="label"></span>
-                                    <input name="coolingSensible" aria-describedby="roomForm_00000000000000000000000000000006-cooling-help" type="number" placeholder="1234 (Optional)" min="0" value=""></label>
-                                    <div id="roomForm_00000000000000000000000000000006-cooling-help" class="text-sm italic -mt-2">
-                                      <p>Should enter at least one of the cooling loads.</p>
-                                      <p>Both are also acceptable.</p>
-                                    </div>
-                                    Registers<label class="input w-full"><span class="label"></span>
-                                    <input name="registerCount" type="number" min="1" required value="2">
-                                    Room</label><label class="select w-full"><span class="label"></span>
-                                    <select name="delegatedTo">
-                                      <option selected disabled>Delegate Airflow</option>
-                                      <option value="00000000-0000-0000-0000-000000000001">Bed-1</option>
-                                      <option value="00000000-0000-0000-0000-000000000002">Entry</option>
-                                      <option value="00000000-0000-0000-0000-000000000003">Family Room</option>
-                                      <option value="00000000-0000-0000-0000-000000000004">Kitchen</option>
-                                      <option value="00000000-0000-0000-0000-000000000005">Living Room</option>
-                                      <option value="00000000-0000-0000-0000-000000000006">Master</option>
-                                    </select></label>
-                                    <button class="btn btn-secondary btn-block" type="submit">Submit</button>
-                                  </form>
-                                </div>
-                              </dialog>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <p class="empty-state" data-no-rooms="" hidden>No rooms match this filter.</p>
-                    <p class="table-note">Select a room to inspect it. Use the pencil to edit.</p>
+                            </dialog>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                  <aside class="room-inspector project-panel" aria-label="Selected room">
-                    <p class="muted" data-inspector-empty="">Select a room to inspect its loads.</p>
-                    <div data-room-inspector="00000000000000000000000000000001" hidden>
-                      <span class="eyebrow">No level</span>
-                      <h2>Bed-1</h2>
-                      <div class="design-metric"><span>Heating load</span><strong>3,913<small>BTU/h</small></strong></div>
-                      <div class="design-metric"><span>Cooling sensible</span><strong>2,052<small>BTU/h</small></strong></div>
-                      <div class="design-metric"><span>Registers</span><strong>1<small></small></strong></div>
-                      <button type="button" class="btn btn-outline" data-open-dialog="roomForm_00000000000000000000000000000001"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>Edit room</button>
-                    </div>
-                    <div data-room-inspector="00000000000000000000000000000002" hidden>
-                      <span class="eyebrow">No level</span>
-                      <h2>Entry</h2>
-                      <div class="design-metric"><span>Heating load</span><strong>8,284<small>BTU/h</small></strong></div>
-                      <div class="design-metric"><span>Cooling sensible</span><strong>2,420<small>BTU/h</small></strong></div>
-                      <div class="design-metric"><span>Registers</span><strong>2<small></small></strong></div>
-                      <button type="button" class="btn btn-outline" data-open-dialog="roomForm_00000000000000000000000000000002"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>Edit room</button>
-                    </div>
-                    <div data-room-inspector="00000000000000000000000000000003" hidden>
-                      <span class="eyebrow">No level</span>
-                      <h2>Family Room</h2>
-                      <div class="design-metric"><span>Heating load</span><strong>9,785<small>BTU/h</small></strong></div>
-                      <div class="design-metric"><span>Cooling sensible</span><strong>6,180<small>BTU/h</small></strong></div>
-                      <div class="design-metric"><span>Registers</span><strong>3<small></small></strong></div>
-                      <button type="button" class="btn btn-outline" data-open-dialog="roomForm_00000000000000000000000000000003"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>Edit room</button>
-                    </div>
-                    <div data-room-inspector="00000000000000000000000000000004" hidden>
-                      <span class="eyebrow">No level</span>
-                      <h2>Kitchen</h2>
-                      <div class="design-metric"><span>Heating load</span><strong>4,518<small>BTU/h</small></strong></div>
-                      <div class="design-metric"><span>Cooling sensible</span><strong>4,230<small>BTU/h</small></strong></div>
-                      <div class="design-metric"><span>Registers</span><strong>2<small></small></strong></div>
-                      <button type="button" class="btn btn-outline" data-open-dialog="roomForm_00000000000000000000000000000004"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>Edit room</button>
-                    </div>
-                    <div data-room-inspector="00000000000000000000000000000005" hidden>
-                      <span class="eyebrow">No level</span>
-                      <h2>Living Room</h2>
-                      <div class="design-metric"><span>Heating load</span><strong>7,553<small>BTU/h</small></strong></div>
-                      <div class="design-metric"><span>Cooling sensible</span><strong>5,668<small>BTU/h</small></strong></div>
-                      <div class="design-metric"><span>Registers</span><strong>2<small></small></strong></div>
-                      <button type="button" class="btn btn-outline" data-open-dialog="roomForm_00000000000000000000000000000005"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>Edit room</button>
-                    </div>
-                    <div data-room-inspector="00000000000000000000000000000006" hidden>
-                      <span class="eyebrow">No level</span>
-                      <h2>Master</h2>
-                      <div class="design-metric"><span>Heating load</span><strong>8,202<small>BTU/h</small></strong></div>
-                      <div class="design-metric"><span>Cooling sensible</span><strong>1,723<small>BTU/h</small></strong></div>
-                      <div class="design-metric"><span>Registers</span><strong>2<small></small></strong></div>
-                      <button type="button" class="btn btn-outline" data-open-dialog="roomForm_00000000000000000000000000000006"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>Edit room</button>
-                    </div>
-                  </aside>
+                  <p class="empty-state" data-no-rooms="" hidden>No rooms match this filter.</p>
                 </div>
                 <dialog id="shrForm" class="modal" aria-labelledby="shrForm-title">
                   <div class="modal-box">
@@ -627,87 +576,167 @@ error.hidden = false;" hx-on::before-request="this.querySelector('[role=alert]')
             <div class="modal-box">
               <h2 id="projectShortcuts-title" class="text-2xl font-bold mb-6 pe-10">Keyboard shortcuts</h2>
               <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Keyboard shortcuts" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-              <p class="text-sm mt-2">Press Ctrl+Alt+? or Ctrl+Alt+/ to open this help. Hold Ctrl+Alt and press a key below.</p>
               <table class="table table-sm mt-4">
-                <caption class="text-left font-bold p-2">Project sections</caption>
+                <caption class="text-left font-bold p-2">On this page · Rooms</caption>
                 <tbody>
                   <tr>
-                    <th scope="row">Project</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">1</kbd></td>
+                    <th scope="row">Add room</th>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">A</kbd></span></td>
                   </tr>
                   <tr>
-                    <th scope="row">Rooms</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">2</kbd></td>
+                    <th scope="row">Import loads</th>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">I</kbd></span></td>
                   </tr>
                   <tr>
-                    <th scope="row">Equipment</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">3</kbd></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Total effective length</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">4</kbd></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Friction rate</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">5</kbd></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Duct sizes</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">6</kbd></td>
+                    <th scope="row">Find a room</th>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">K</kbd></span></td>
                   </tr>
                   <tr>
                     <th scope="row">Next room row</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">J</kbd></td>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">J</kbd></span></td>
                   </tr>
                   <tr>
                     <th scope="row">Previous room row</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">K</kbd></td>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">K</kbd></span></td>
                   </tr>
                 </tbody>
               </table>
               <table class="table table-sm mt-4">
-                <caption class="text-left font-bold p-2">Equipment editing</caption>
+                <caption class="text-left font-bold p-2">Project navigation</caption>
                 <tbody>
                   <tr>
-                    <th scope="row">Heating airflow</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">H</kbd></td>
+                    <th scope="row">Next project step</th>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">Enter</kbd></span></td>
                   </tr>
                   <tr>
-                    <th scope="row">Cooling airflow</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">C</kbd></td>
+                    <th scope="row">Previous project step</th>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">Shift</kbd><kbd class="kbd kbd-sm">Enter</kbd></span></td>
                   </tr>
                   <tr>
-                    <th scope="row">Static pressure</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">S</kbd></td>
+                    <th scope="row">Project</th>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">1</kbd></span></td>
                   </tr>
                   <tr>
-                    <th scope="row">Edit equipment</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">E</kbd></td>
+                    <th scope="row">Rooms</th>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">2</kbd></span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Equipment</th>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">3</kbd></span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Total effective length</th>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">4</kbd></span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Friction rate</th>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">5</kbd></span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Duct sizes</th>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">6</kbd></span></td>
                   </tr>
                 </tbody>
               </table>
+              <p class="text-sm mt-2">Next and previous follow sidebar order and stop at either end.</p>
               <table class="table table-sm mt-4">
                 <caption class="text-left font-bold p-2">App navigation</caption>
                 <tbody>
                   <tr>
                     <th scope="row">Ductulator</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">D</kbd></td>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">D</kbd></span></td>
                   </tr>
                   <tr>
                     <th scope="row">Fitting reference</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">F</kbd></td>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">F</kbd></span></td>
                   </tr>
                   <tr>
                     <th scope="row">Projects</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">P</kbd></td>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">P</kbd></span></td>
                   </tr>
                   <tr>
                     <th scope="row">Profile</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">U</kbd></td>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">U</kbd></span></td>
                   </tr>
                 </tbody>
               </table>
-              <p class="text-sm mt-2">Ctrl+K focuses room or register search. Ductulator and fitting reference open in new tabs. Navigation shortcuts pause while editing a field or when a dialog is open.</p>
+              <details class="mt-4">
+                <summary class="font-bold cursor-pointer">Other project pages</summary>
+                <table class="table table-sm mt-4">
+                  <caption class="text-left font-bold p-2">Project</caption>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Project details</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">A</kbd></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table table-sm mt-4">
+                  <caption class="text-left font-bold p-2">Equipment</caption>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Edit all</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">A</kbd></span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Heating airflow</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">H</kbd></span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Cooling airflow</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">C</kbd></span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Static pressure</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">S</kbd></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table table-sm mt-4">
+                  <caption class="text-left font-bold p-2">Total effective length</caption>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Add return</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">R</kbd></span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Add supply</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">S</kbd></span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Add path</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">A</kbd></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table table-sm mt-4">
+                  <caption class="text-left font-bold p-2">Friction rate</caption>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Use template</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">A</kbd></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table table-sm mt-4">
+                  <caption class="text-left font-bold p-2">Duct sizes</caption>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Add trunk</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">A</kbd></span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Export PDF</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">E</kbd></span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Find a register</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">K</kbd></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </details>
+              <p class="text-sm mt-4">Press Ctrl+Alt+/ to reveal shortcuts on the page, or Ctrl+Alt+Shift+/ to open this help. Customize shortcuts in Account → Keybindings. Ductulator and fitting reference open in new tabs. Shortcuts work in search boxes and pause in other fields or open dialogs.</p>
             </div>
           </dialog>
         </div>

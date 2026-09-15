@@ -5,6 +5,7 @@ import ManualDCore
 import Styleguide
 
 struct FittingsView: HTML, Sendable {
+  @Environment(ShortcutViewValue.$bindings) private var bindings
   let page: FittingReferencePage
 
   var body: some HTML {
@@ -80,9 +81,9 @@ struct FittingsView: HTML, Sendable {
           .id("search"), .name("q"), .type(.search), .value(page.search),
           .placeholder("Search \(page.system) groups by ID, name, or shape…"),
           .custom(name: "aria-label", value: "Search \(page.system) groups by ID, name, or shape"),
-          .custom(name: "aria-keyshortcuts", value: "Control+K"),
+          .custom(name: "aria-keyshortcuts", value: bindings[.search]),
           .custom(name: "autocomplete", value: "off"))
-        kbd { "Ctrl+K" }
+        kbd { bindings.label(.search) }
       }
       label(.class("select-label group-control")) {
         span { "Fitting group" }
@@ -306,6 +307,8 @@ struct FittingReferenceDrawing: HTML, Sendable {
 }
 
 private struct FittingReferenceGroupLink: HTML, Sendable {
+  @Environment(ShortcutViewValue.$bindings) private var bindings
+
   let page: FittingReferencePage
   let id: String
   let name: String
@@ -332,8 +335,12 @@ private struct FittingReferenceGroupLink: HTML, Sendable {
     }
     .attributes(.custom(name: "aria-current", value: "true"), when: page.group == id)
     .attributes(
-      .custom(name: "aria-keyshortcuts", value: "Control+Alt+\(shortcut ?? "")"),
-      .title("Group \(id): \(name), Ctrl+Alt+\(shortcut ?? "")"), when: shortcut != nil)
+      .custom(
+        name: "aria-keyshortcuts",
+        value: bindings[KeybindingAction(rawValue: "group\(id)") ?? .group1]),
+      .title(
+        "Group \(id): \(name), \(bindings.label(KeybindingAction(rawValue: "group\(id)") ?? .group1))"
+      ), when: shortcut != nil)
   }
 
 }

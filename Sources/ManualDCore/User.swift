@@ -9,6 +9,7 @@ public struct User: Codable, Equatable, Identifiable, Sendable {
   public let id: UUID
   /// The user's email address.
   public let email: String
+  public let keybindings: Keybindings?
   /// When the user was created in the database.
   public let createdAt: Date
   /// When the user was updated in the database.
@@ -18,10 +19,12 @@ public struct User: Codable, Equatable, Identifiable, Sendable {
     id: UUID,
     email: String,
     createdAt: Date,
-    updatedAt: Date
+    updatedAt: Date,
+    keybindings: Keybindings? = nil
   ) {
     self.id = id
     self.email = email
+    self.keybindings = keybindings
     self.createdAt = createdAt
     self.updatedAt = updatedAt
   }

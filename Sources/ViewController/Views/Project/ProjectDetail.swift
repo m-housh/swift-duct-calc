@@ -3,6 +3,8 @@ import ManualDCore
 import Styleguide
 
 struct ProjectDetail: HTML, Sendable {
+  @Environment(ShortcutViewValue.$bindings) private var bindings
+
   let project: Project
   var detail: Project.Detail?
   var frictionRate: FrictionRate?
@@ -25,7 +27,12 @@ struct ProjectDetail: HTML, Sendable {
           PageTitle { "The whole design, connected." }
           p(.class("muted")) { "Select a part of the system to work on it." }
         }
-        button(.type(.button), .class("btn btn-outline"), .showModal(id: ProjectForm.id)) {
+        button(
+          .type(.button), .class("btn btn-outline"), .showModal(id: ProjectForm.id),
+          .data("project-primary", value: ""),
+          .init(name: "aria-keyshortcuts", value: bindings[.primaryAction]),
+          .title("Project details, \(bindings.label(.primaryAction))")
+        ) {
           SVG(.squarePen)
           "Project details"
         }

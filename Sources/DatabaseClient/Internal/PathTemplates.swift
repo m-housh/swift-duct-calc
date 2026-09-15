@@ -70,7 +70,8 @@ extension PathTemplate {
       let dependencies = withEscapedDependencies { $0 }
       try await database.transaction { transaction in
         try await dependencies.yield {
-          for user in try await UserModel.query(on: transaction).all() {
+          // This backfill runs before later user columns are added.
+          for user in try await UserModel.query(on: transaction).field(\.$id).all() {
             try await PathTemplateModel.addMissingDefaults(for: user.requireID(), on: transaction)
           }
         }

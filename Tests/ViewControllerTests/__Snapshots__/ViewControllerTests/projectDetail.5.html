@@ -18,7 +18,9 @@
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
     <script src="/js/htmx-download.js"></script>
     <script src="/js/request-errors.js?v=1"></script>
-    <script src="/js/main.js?v=errors-1"></script>
+    <script src="/js/main.js?v=keybindings-9"></script>
+    <script src="/js/shortcut-hints.js?v=6"></script>
+    <link rel="stylesheet" href="/css/shortcut-hints.css?v=1">
     <script src="/js/file-import.js?v=1" defer></script>
     <script src="/js/filters.js?v=1" defer></script>
     <link rel="stylesheet" href="/css/filters.css?v=1">
@@ -27,7 +29,7 @@
     <link rel="stylesheet" href="/css/output.css?v=project-import-1">
     <link rel="stylesheet" href="/css/htmx.css">
     <link rel="stylesheet" href="/css/accessibility.css?v=errors-1">
-    <link rel="stylesheet" href="/css/project-workspace.css?v=trunk-sizes-2">
+    <link rel="stylesheet" href="/css/project-workspace.css?v=rooms-table-1">
     <link rel="icon" href="/images/favicon.ico?v=ductcalc-white-3" sizes="16x16 32x32 48x48">
     <link rel="icon" href="/images/favicon-32x32.png?v=ductcalc-white-3" type="image/png" sizes="32x32">
     <link rel="icon" href="/images/brand/favicon.svg?v=white-3" type="image/svg+xml" sizes="any">
@@ -38,7 +40,7 @@
     <script src="https://unpkg.com/htmx-remove@latest" crossorigin="anonymous" integrity="sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT"></script>
   </head>
   <body>
-    <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
+    <div class="flex flex-col min-h-screen min-w-full justify-between" data-keybindings="{&quot;addReturn&quot;:&quot;Control+Alt+R&quot;,&quot;addSupply&quot;:&quot;Control+Alt+S&quot;,&quot;cooling&quot;:&quot;Control+Alt+C&quot;,&quot;ductSizes&quot;:&quot;Control+Alt+6&quot;,&quot;ductulator&quot;:&quot;Control+Alt+D&quot;,&quot;effectiveLength&quot;:&quot;Control+Alt+4&quot;,&quot;equipment&quot;:&quot;Control+Alt+3&quot;,&quot;exportPDF&quot;:&quot;Control+Alt+E&quot;,&quot;fittings&quot;:&quot;Control+Alt+F&quot;,&quot;frictionRate&quot;:&quot;Control+Alt+5&quot;,&quot;group1&quot;:&quot;Control+Alt+1&quot;,&quot;group10&quot;:&quot;Control+Alt+0&quot;,&quot;group2&quot;:&quot;Control+Alt+2&quot;,&quot;group3&quot;:&quot;Control+Alt+3&quot;,&quot;group4&quot;:&quot;Control+Alt+4&quot;,&quot;group5&quot;:&quot;Control+Alt+5&quot;,&quot;group6&quot;:&quot;Control+Alt+6&quot;,&quot;group7&quot;:&quot;Control+Alt+7&quot;,&quot;group8&quot;:&quot;Control+Alt+8&quot;,&quot;group9&quot;:&quot;Control+Alt+9&quot;,&quot;heating&quot;:&quot;Control+Alt+H&quot;,&quot;help&quot;:&quot;Control+Alt+Shift+\/&quot;,&quot;importLoads&quot;:&quot;Control+Alt+I&quot;,&quot;nextFitting&quot;:&quot;Control+Alt+J&quot;,&quot;nextGroup&quot;:&quot;Control+Alt+N&quot;,&quot;nextRoom&quot;:&quot;Control+Alt+J&quot;,&quot;nextStep&quot;:&quot;Control+Alt+Enter&quot;,&quot;pressure&quot;:&quot;Control+Alt+S&quot;,&quot;previousFitting&quot;:&quot;Control+Alt+K&quot;,&quot;previousGroup&quot;:&quot;Control+Alt+B&quot;,&quot;previousRoom&quot;:&quot;Control+Alt+K&quot;,&quot;previousStep&quot;:&quot;Control+Alt+Shift+Enter&quot;,&quot;primaryAction&quot;:&quot;Control+Alt+A&quot;,&quot;profile&quot;:&quot;Control+Alt+U&quot;,&quot;project&quot;:&quot;Control+Alt+1&quot;,&quot;projects&quot;:&quot;Control+Alt+P&quot;,&quot;reveal&quot;:&quot;Control+Alt+\/&quot;,&quot;rooms&quot;:&quot;Control+Alt+2&quot;,&quot;search&quot;:&quot;Control+K&quot;,&quot;templateAirHandler&quot;:&quot;Control+Alt+A&quot;,&quot;templateFurnace&quot;:&quot;Control+Alt+F&quot;,&quot;templateShared&quot;:&quot;Control+Alt+D&quot;}" data-theme="default">
       <a class="skip-link" href="#main-content">Skip to content</a>
       <main id="main-content" tabindex="-1" class="flex flex-col min-h-screen min-w-full grow mb-auto">
         <div class="project-workspace" data-project-id="00000000-0000-0000-0000-000000000000">
@@ -51,7 +53,7 @@
             alc
             Residential duct design</span><span></span><span class="dc-wordmark-c"></span><span></span></span><span class="dc-wordmark-description" aria-hidden="true"></span></span></a>
             <div class="app-nav-actions">
-              <button type="button" class="btn" aria-label="Keyboard shortcuts" title="Keyboard shortcuts, Ctrl+Alt+? or Ctrl+Alt+/" aria-keyshortcuts="Control+Alt+/ Control+Alt+Shift+/" aria-haspopup="dialog" aria-controls="projectShortcuts" data-open-dialog="projectShortcuts"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 15h12"/></svg></button>
+              <button type="button" class="btn" aria-label="Keyboard shortcuts" title="Keyboard shortcuts, Ctrl+Alt+Shift+/" aria-keyshortcuts="Control+Alt+Shift+/" aria-haspopup="dialog" aria-controls="projectShortcuts" data-open-dialog="projectShortcuts"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 15h12"/></svg></button>
               Fitting reference
               Ductulator<a class="btn app-nav-link" href="/fittings" target="_blank" title="Fitting reference, Ctrl+Alt+F" aria-keyshortcuts="Control+Alt+F"><span></span></a><a class="btn app-nav-ductulator" href="/ductulator" target="_blank" title="Ductulator, Ctrl+Alt+D" aria-keyshortcuts="Control+Alt+D"><span></span></a>
               <details class="account-menu">
@@ -59,6 +61,7 @@
                 <ul class="menu bg-base-200 rounded-box shadow-lg">
                   <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
                   <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
+                  <li><a href="/keybindings">Keybindings</a></li>
                   <li><a href="/filters">Filter library</a></li>
                   <li><a href="/filters?tab=preferences">Design preferences</a></li>
                   <li>
@@ -93,7 +96,7 @@
                     <p class="muted">The width of each stream represents its share of blower static.</p>
                   </div>
                   <div class="flex flex-wrap gap-2">
-                    <button type="button" class="btn btn-secondary" data-open-dialog="frictionRateTemplates">Use template</button>
+                    <button type="button" class="btn btn-secondary" data-open-dialog="frictionRateTemplates" data-project-primary="" aria-keyshortcuts="Control+Alt+A" title="Use template, Ctrl+Alt+A">Use template</button>
                     <button type="button" class="btn btn-outline" data-open-dialog="filterLookup">Look up filter</button>
                     <button type="button" class="btn btn-outline" data-open-dialog="componentLossForm"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add component</button>
                   </div>
@@ -189,7 +192,7 @@
                             <form class="loss-inline-form" data-loss-form="0000000000000000000000000000000A" data-success-message="Component loss saved." hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000A" hx-target="body" hx-swap="outerHTML">
                               <input type="hidden" name="name" value="evaporator-coil">
                               <input type="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
-                              <input class="input" type="number" name="value" value="0.20" aria-label="Pressure loss for evaporator-coil" min="0.01" max="1" step="0.01" required>
+                              <input class="input" type="number" name="value" value="0.20" aria-label="Pressure loss for evaporator-coil" min="0" max="1" step="0.01" required>
                               <button type="submit" class="btn btn-primary">Apply loss</button>
                             </form>
                           </td>
@@ -211,7 +214,7 @@
                             <form class="loss-inline-form" data-loss-form="0000000000000000000000000000000B" data-success-message="Component loss saved." hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000B" hx-target="body" hx-swap="outerHTML">
                               <input type="hidden" name="name" value="filter">
                               <input type="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
-                              <input class="input" type="number" name="value" value="0.10" aria-label="Pressure loss for filter" min="0.01" max="1" step="0.01" required>
+                              <input class="input" type="number" name="value" value="0.10" aria-label="Pressure loss for filter" min="0" max="1" step="0.01" required>
                               <button type="submit" class="btn btn-primary">Apply loss</button>
                             </form>
                           </td>
@@ -233,7 +236,7 @@
                             <form class="loss-inline-form" data-loss-form="0000000000000000000000000000000C" data-success-message="Component loss saved." hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000C" hx-target="body" hx-swap="outerHTML">
                               <input type="hidden" name="name" value="supply-outlet">
                               <input type="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
-                              <input class="input" type="number" name="value" value="0.03" aria-label="Pressure loss for supply-outlet" min="0.01" max="1" step="0.01" required>
+                              <input class="input" type="number" name="value" value="0.03" aria-label="Pressure loss for supply-outlet" min="0" max="1" step="0.01" required>
                               <button type="submit" class="btn btn-primary">Apply loss</button>
                             </form>
                           </td>
@@ -255,7 +258,7 @@
                             <form class="loss-inline-form" data-loss-form="0000000000000000000000000000000D" data-success-message="Component loss saved." hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000D" hx-target="body" hx-swap="outerHTML">
                               <input type="hidden" name="name" value="return-grille">
                               <input type="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
-                              <input class="input" type="number" name="value" value="0.03" aria-label="Pressure loss for return-grille" min="0.01" max="1" step="0.01" required>
+                              <input class="input" type="number" name="value" value="0.03" aria-label="Pressure loss for return-grille" min="0" max="1" step="0.01" required>
                               <button type="submit" class="btn btn-primary">Apply loss</button>
                             </form>
                           </td>
@@ -277,7 +280,7 @@
                             <form class="loss-inline-form" data-loss-form="0000000000000000000000000000000E" data-success-message="Component loss saved." hx-patch="/projects/00000000-0000-0000-0000-000000000000/component-loss/00000000-0000-0000-0000-00000000000E" hx-target="body" hx-swap="outerHTML">
                               <input type="hidden" name="name" value="balancing-damper">
                               <input type="hidden" name="projectID" value="00000000-0000-0000-0000-000000000000">
-                              <input class="input" type="number" name="value" value="0.03" aria-label="Pressure loss for balancing-damper" min="0.01" max="1" step="0.01" required>
+                              <input class="input" type="number" name="value" value="0.03" aria-label="Pressure loss for balancing-damper" min="0" max="1" step="0.01" required>
                               <button type="submit" class="btn btn-primary">Apply loss</button>
                             </form>
                           </td>
@@ -304,7 +307,7 @@
                       Component<label class="input w-full"><span class="label"></span>
                       <input name="name" type="text" value="" placeholder="e.g. Filter" autocomplete="off" data-1p-ignore="true" data-bwignore="true" data-lpignore="true" data-protonpass-ignore="true" required autofocus>
                       Value</label><label class="input w-full"><span class="label"></span>
-                      <input name="value" type="number" value="" placeholder="0.2" min="0.01" max="1.0" step="0.01" required></label>
+                      <input name="value" type="number" value="" placeholder="0.2" min="0" max="1.0" step="0.01" required></label>
                       <button class="btn btn-secondary btn-block" type="submit">Submit</button>
                     </form>
                   </div>
@@ -745,7 +748,7 @@
                       Component<label class="input w-full"><span class="label"></span>
                       <input name="name" type="text" value="evaporator-coil" placeholder="e.g. Filter" autocomplete="off" data-1p-ignore="true" data-bwignore="true" data-lpignore="true" data-protonpass-ignore="true" required autofocus>
                       Value</label><label class="input w-full"><span class="label"></span>
-                      <input name="value" type="number" value="0.2" placeholder="0.2" min="0.01" max="1.0" step="0.01" required></label>
+                      <input name="value" type="number" value="0.2" placeholder="0.2" min="0" max="1.0" step="0.01" required></label>
                       <button class="btn btn-secondary btn-block" type="submit">Submit</button>
                     </form>
                   </div>
@@ -760,7 +763,7 @@
                       Component<label class="input w-full"><span class="label"></span>
                       <input name="name" type="text" value="filter" placeholder="e.g. Filter" autocomplete="off" data-1p-ignore="true" data-bwignore="true" data-lpignore="true" data-protonpass-ignore="true" required autofocus>
                       Value</label><label class="input w-full"><span class="label"></span>
-                      <input name="value" type="number" value="0.1" placeholder="0.2" min="0.01" max="1.0" step="0.01" required></label>
+                      <input name="value" type="number" value="0.1" placeholder="0.2" min="0" max="1.0" step="0.01" required></label>
                       <button class="btn btn-secondary btn-block" type="submit">Submit</button>
                     </form>
                   </div>
@@ -775,7 +778,7 @@
                       Component<label class="input w-full"><span class="label"></span>
                       <input name="name" type="text" value="supply-outlet" placeholder="e.g. Filter" autocomplete="off" data-1p-ignore="true" data-bwignore="true" data-lpignore="true" data-protonpass-ignore="true" required autofocus>
                       Value</label><label class="input w-full"><span class="label"></span>
-                      <input name="value" type="number" value="0.03" placeholder="0.2" min="0.01" max="1.0" step="0.01" required></label>
+                      <input name="value" type="number" value="0.03" placeholder="0.2" min="0" max="1.0" step="0.01" required></label>
                       <button class="btn btn-secondary btn-block" type="submit">Submit</button>
                     </form>
                   </div>
@@ -790,7 +793,7 @@
                       Component<label class="input w-full"><span class="label"></span>
                       <input name="name" type="text" value="return-grille" placeholder="e.g. Filter" autocomplete="off" data-1p-ignore="true" data-bwignore="true" data-lpignore="true" data-protonpass-ignore="true" required autofocus>
                       Value</label><label class="input w-full"><span class="label"></span>
-                      <input name="value" type="number" value="0.03" placeholder="0.2" min="0.01" max="1.0" step="0.01" required></label>
+                      <input name="value" type="number" value="0.03" placeholder="0.2" min="0" max="1.0" step="0.01" required></label>
                       <button class="btn btn-secondary btn-block" type="submit">Submit</button>
                     </form>
                   </div>
@@ -805,7 +808,7 @@
                       Component<label class="input w-full"><span class="label"></span>
                       <input name="name" type="text" value="balancing-damper" placeholder="e.g. Filter" autocomplete="off" data-1p-ignore="true" data-bwignore="true" data-lpignore="true" data-protonpass-ignore="true" required autofocus>
                       Value</label><label class="input w-full"><span class="label"></span>
-                      <input name="value" type="number" value="0.03" placeholder="0.2" min="0.01" max="1.0" step="0.01" required></label>
+                      <input name="value" type="number" value="0.03" placeholder="0.2" min="0" max="1.0" step="0.01" required></label>
                       <button class="btn btn-secondary btn-block" type="submit">Submit</button>
                     </form>
                   </div>
@@ -826,87 +829,167 @@
             <div class="modal-box">
               <h2 id="projectShortcuts-title" class="text-2xl font-bold mb-6 pe-10">Keyboard shortcuts</h2>
               <button type="button" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" aria-label="Close Keyboard shortcuts" onclick="this.closest('dialog').close()"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-              <p class="text-sm mt-2">Press Ctrl+Alt+? or Ctrl+Alt+/ to open this help. Hold Ctrl+Alt and press a key below.</p>
               <table class="table table-sm mt-4">
-                <caption class="text-left font-bold p-2">Project sections</caption>
+                <caption class="text-left font-bold p-2">On this page · Friction rate</caption>
                 <tbody>
                   <tr>
+                    <th scope="row">Use template</th>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">A</kbd></span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="table table-sm mt-4">
+                <caption class="text-left font-bold p-2">Project navigation</caption>
+                <tbody>
+                  <tr>
+                    <th scope="row">Next project step</th>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">Enter</kbd></span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Previous project step</th>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">Shift</kbd><kbd class="kbd kbd-sm">Enter</kbd></span></td>
+                  </tr>
+                  <tr>
                     <th scope="row">Project</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">1</kbd></td>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">1</kbd></span></td>
                   </tr>
                   <tr>
                     <th scope="row">Rooms</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">2</kbd></td>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">2</kbd></span></td>
                   </tr>
                   <tr>
                     <th scope="row">Equipment</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">3</kbd></td>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">3</kbd></span></td>
                   </tr>
                   <tr>
                     <th scope="row">Total effective length</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">4</kbd></td>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">4</kbd></span></td>
                   </tr>
                   <tr>
                     <th scope="row">Friction rate</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">5</kbd></td>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">5</kbd></span></td>
                   </tr>
                   <tr>
                     <th scope="row">Duct sizes</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">6</kbd></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Next room row</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">J</kbd></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Previous room row</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">K</kbd></td>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">6</kbd></span></td>
                   </tr>
                 </tbody>
               </table>
-              <table class="table table-sm mt-4">
-                <caption class="text-left font-bold p-2">Equipment editing</caption>
-                <tbody>
-                  <tr>
-                    <th scope="row">Heating airflow</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">H</kbd></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Cooling airflow</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">C</kbd></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Static pressure</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">S</kbd></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Edit equipment</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">E</kbd></td>
-                  </tr>
-                </tbody>
-              </table>
+              <p class="text-sm mt-2">Next and previous follow sidebar order and stop at either end.</p>
               <table class="table table-sm mt-4">
                 <caption class="text-left font-bold p-2">App navigation</caption>
                 <tbody>
                   <tr>
                     <th scope="row">Ductulator</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">D</kbd></td>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">D</kbd></span></td>
                   </tr>
                   <tr>
                     <th scope="row">Fitting reference</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">F</kbd></td>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">F</kbd></span></td>
                   </tr>
                   <tr>
                     <th scope="row">Projects</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">P</kbd></td>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">P</kbd></span></td>
                   </tr>
                   <tr>
                     <th scope="row">Profile</th>
-                    <td class="text-right"><kbd class="kbd kbd-sm">U</kbd></td>
+                    <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">U</kbd></span></td>
                   </tr>
                 </tbody>
               </table>
-              <p class="text-sm mt-2">Ctrl+K focuses room or register search. Ductulator and fitting reference open in new tabs. Navigation shortcuts pause while editing a field or when a dialog is open.</p>
+              <details class="mt-4">
+                <summary class="font-bold cursor-pointer">Other project pages</summary>
+                <table class="table table-sm mt-4">
+                  <caption class="text-left font-bold p-2">Project</caption>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Project details</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">A</kbd></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table table-sm mt-4">
+                  <caption class="text-left font-bold p-2">Rooms</caption>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Add room</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">A</kbd></span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Import loads</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">I</kbd></span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Find a room</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">K</kbd></span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Next room row</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">J</kbd></span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Previous room row</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">K</kbd></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table table-sm mt-4">
+                  <caption class="text-left font-bold p-2">Equipment</caption>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Edit all</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">A</kbd></span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Heating airflow</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">H</kbd></span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Cooling airflow</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">C</kbd></span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Static pressure</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">S</kbd></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table table-sm mt-4">
+                  <caption class="text-left font-bold p-2">Total effective length</caption>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Add return</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">R</kbd></span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Add supply</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">S</kbd></span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Add path</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">A</kbd></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table table-sm mt-4">
+                  <caption class="text-left font-bold p-2">Duct sizes</caption>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Add trunk</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">A</kbd></span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Export PDF</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">E</kbd></span></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Find a register</th>
+                      <td class="text-right"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">K</kbd></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </details>
+              <p class="text-sm mt-4">Press Ctrl+Alt+/ to reveal shortcuts on the page, or Ctrl+Alt+Shift+/ to open this help. Customize shortcuts in Account → Keybindings. Ductulator and fitting reference open in new tabs. Shortcuts work in search boxes and pause in other fields or open dialogs.</p>
             </div>
           </dialog>
         </div>

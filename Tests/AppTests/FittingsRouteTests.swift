@@ -102,11 +102,30 @@ struct FittingsRouteTests {
       let cookie = try #require(login.headers.first(name: .setCookie)).split(separator: ";")[0]
       let headers: HTTPHeaders = ["Cookie": String(cookie)]
 
+      let saved = try await client.sendRequest(
+        .POST, "/keybindings",
+        headers: ["Cookie": String(cookie), "Content-Type": "application/x-www-form-urlencoded"],
+        body: .init(
+          string:
+            "bindings=%7B%22overrides%22%3A%7B%22projects%22%3A%22Control%2BShift%2BP%22%7D%7D"))
+      #expect(saved.status == .ok)
+      #expect(try await database.users.get(user.id)?.keybindings?[.projects] == "Control+Shift+P")
+      #expect(saved.body.string.contains("aria-keyshortcuts=\"Control+Shift+P\""))
+      let invalid = try await client.sendRequest(
+        .POST, "/keybindings",
+        headers: ["Cookie": String(cookie), "Content-Type": "application/x-www-form-urlencoded"],
+        body: .init(
+          string: "bindings=%7B%22overrides%22%3A%7B%22projects%22%3A%22Control%2BAlt%2B2%22%7D%7D")
+      )
+      #expect(invalid.status == .unprocessableEntity)
+      #expect(try await database.users.get(user.id)?.keybindings?[.projects] == "Control+Shift+P")
+
       let reference = try await client.sendRequest(.GET, "/fittings?data=json", headers: headers)
       #expect(reference.status == .ok)
       #expect(reference.body.string.contains("data-tools=\"enabled\""))
       #expect(reference.body.string.contains("/projects"))
       #expect(reference.body.string.contains("data-theme=\"nord\""))
+      #expect(reference.body.string.contains("aria-keyshortcuts=\"Control+Shift+P\""))
 
       let download = try await client.sendRequest(
         .GET, "/fittings?group=8&fitting=8A-smooth&data=json&download=1", headers: headers)
@@ -126,6 +145,7 @@ struct FittingsRouteTests {
       let ductulator = try await client.sendRequest(.GET, "/ductulator", headers: headers)
       #expect(ductulator.status == .ok)
       #expect(ductulator.body.string.contains("/profile"))
+      #expect(ductulator.body.string.contains("aria-keyshortcuts=\"Control+Shift+P\""))
 
       let projects = try await client.sendRequest(.GET, "/projects", headers: headers)
       #expect(projects.status == .ok)

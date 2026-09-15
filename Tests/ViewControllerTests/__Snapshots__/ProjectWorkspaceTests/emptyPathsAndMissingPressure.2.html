@@ -5,7 +5,7 @@
       <p class="muted">The width of each stream represents its share of blower static.</p>
     </div>
     <div class="flex flex-wrap gap-2">
-      <button type="button" class="btn btn-secondary" data-open-dialog="frictionRateTemplates">Use template</button>
+      <button type="button" class="btn btn-secondary" data-open-dialog="frictionRateTemplates" data-project-primary="" aria-keyshortcuts="Control+Alt+A" title="Use template, Ctrl+Alt+A">Use template</button>
       <button type="button" class="btn btn-outline" data-open-dialog="filterLookup">Look up filter</button>
       <button type="button" class="btn btn-outline" data-open-dialog="componentLossForm"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>Add component</button>
     </div>
@@ -57,7 +57,7 @@
               <form class="loss-inline-form" data-loss-form="00000000000000000000000000000002" data-success-message="Component loss saved." hx-patch="/projects/00000000-0000-0000-0000-000000000001/component-loss/00000000-0000-0000-0000-000000000002" hx-target="body" hx-swap="outerHTML">
                 <input type="hidden" name="name" value="Filter">
                 <input type="hidden" name="projectID" value="00000000-0000-0000-0000-000000000001">
-                <input class="input" type="number" name="value" value="0.10" aria-label="Pressure loss for Filter" min="0.01" max="1" step="0.01" required>
+                <input class="input" type="number" name="value" value="0.10" aria-label="Pressure loss for Filter" min="0" max="1" step="0.01" required>
                 <button type="submit" class="btn btn-primary">Apply loss</button>
               </form>
             </td>
@@ -88,7 +88,7 @@
         Component<label class="input w-full"><span class="label"></span>
         <input name="name" type="text" value="" placeholder="e.g. Filter" autocomplete="off" data-1p-ignore="true" data-bwignore="true" data-lpignore="true" data-protonpass-ignore="true" required autofocus>
         Value</label><label class="input w-full"><span class="label"></span>
-        <input name="value" type="number" value="" placeholder="0.2" min="0.01" max="1.0" step="0.01" required></label>
+        <input name="value" type="number" value="" placeholder="0.2" min="0" max="1.0" step="0.01" required></label>
         <button class="btn btn-secondary btn-block" type="submit">Submit</button>
       </form>
     </div>
@@ -213,7 +213,7 @@
         Component<label class="input w-full"><span class="label"></span>
         <input name="name" type="text" value="Filter" placeholder="e.g. Filter" autocomplete="off" data-1p-ignore="true" data-bwignore="true" data-lpignore="true" data-protonpass-ignore="true" required autofocus>
         Value</label><label class="input w-full"><span class="label"></span>
-        <input name="value" type="number" value="0.1" placeholder="0.2" min="0.01" max="1.0" step="0.01" required></label>
+        <input name="value" type="number" value="0.1" placeholder="0.2" min="0" max="1.0" step="0.01" required></label>
         <button class="btn btn-secondary btn-block" type="submit">Submit</button>
       </form>
     </div>

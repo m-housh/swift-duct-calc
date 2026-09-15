@@ -42,7 +42,11 @@
       const next = document.getElementById('fittings-page');
       if (!next) throw new Error('Reference page missing');
       if (controller.signal.aborted) return;
+      // A preference saved in another tab also changes the navbar and shortcut help.
+      const bindings = JSON.parse(document.querySelector('[data-keybindings]')?.dataset.keybindings || '{}');
+      if (JSON.stringify(bindings) !== JSON.stringify(window.ductCalcKeybindings())) { location.assign(url); return; }
       page.replaceWith(next);
+      window.document.dispatchEvent(new Event('ductcalc:page-updated'));
       enhance();
       if (history) window.history[replace ? 'replaceState' : 'pushState'](null, '', next.dataset.url);
       const selected = next.querySelector('[data-select][aria-current]')?.dataset.select;
@@ -104,11 +108,10 @@
   });
   document.addEventListener('keydown', event => {
     if (!root() || event.defaultPrevented || event.repeat || event.isComposing
-        || event.key.toLowerCase() !== 'k' || !event.ctrlKey
-        || event.altKey || event.shiftKey || event.metaKey) return;
+        || !window.ductCalcMatches(event, 'search') || event.getModifierState('AltGraph')) return;
     const editing = event.composedPath().some(node => node instanceof Element && (
       node.isContentEditable
-      || node.matches('input, textarea, select, [contenteditable]:not([contenteditable="false"]), [role="textbox"], [role="combobox"], [role="spinbutton"]')
+      || node.matches('input:not([type="search"]), textarea, select, [contenteditable]:not([contenteditable="false"]), [role="textbox"], [role="combobox"], [role="spinbutton"]')
     ));
     if (editing || document.querySelector('dialog[open], [role="dialog"][aria-modal="true"]')) return;
     event.preventDefault(); root().querySelector('#search').focus();

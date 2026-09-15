@@ -18,7 +18,9 @@
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
     <script src="/js/htmx-download.js"></script>
     <script src="/js/request-errors.js?v=1"></script>
-    <script src="/js/main.js?v=errors-1"></script>
+    <script src="/js/main.js?v=keybindings-9"></script>
+    <script src="/js/shortcut-hints.js?v=6"></script>
+    <link rel="stylesheet" href="/css/shortcut-hints.css?v=1">
     <script src="/js/file-import.js?v=1" defer></script>
     <script src="/js/filters.js?v=1" defer></script>
     <link rel="stylesheet" href="/css/filters.css?v=1">
@@ -27,7 +29,7 @@
     <link rel="stylesheet" href="/css/output.css?v=project-import-1">
     <link rel="stylesheet" href="/css/htmx.css">
     <link rel="stylesheet" href="/css/accessibility.css?v=errors-1">
-    <link rel="stylesheet" href="/css/project-workspace.css?v=trunk-sizes-2">
+    <link rel="stylesheet" href="/css/project-workspace.css?v=rooms-table-1">
     <link rel="icon" href="/images/favicon.ico?v=ductcalc-white-3" sizes="16x16 32x32 48x48">
     <link rel="icon" href="/images/favicon-32x32.png?v=ductcalc-white-3" type="image/png" sizes="32x32">
     <link rel="icon" href="/images/brand/favicon.svg?v=white-3" type="image/svg+xml" sizes="any">
@@ -38,11 +40,11 @@
     <script src="https://unpkg.com/htmx-remove@latest" crossorigin="anonymous" integrity="sha384-NwB2Xh66PNEYfVki0ao13UAFmdNtMIdBKZ8sNGRT6hKfCPaINuZ4ScxS6vVAycPT"></script>
   </head>
   <body>
-    <div class="flex flex-col min-h-screen min-w-full justify-between" data-theme="default">
+    <div class="flex flex-col min-h-screen min-w-full justify-between" data-keybindings="{&quot;addReturn&quot;:&quot;Control+Alt+R&quot;,&quot;addSupply&quot;:&quot;Control+Alt+S&quot;,&quot;cooling&quot;:&quot;Control+Alt+C&quot;,&quot;ductSizes&quot;:&quot;Control+Alt+6&quot;,&quot;ductulator&quot;:&quot;Control+Alt+D&quot;,&quot;effectiveLength&quot;:&quot;Control+Alt+4&quot;,&quot;equipment&quot;:&quot;Control+Alt+3&quot;,&quot;exportPDF&quot;:&quot;Control+Alt+E&quot;,&quot;fittings&quot;:&quot;Control+Alt+F&quot;,&quot;frictionRate&quot;:&quot;Control+Alt+5&quot;,&quot;group1&quot;:&quot;Control+Alt+1&quot;,&quot;group10&quot;:&quot;Control+Alt+0&quot;,&quot;group2&quot;:&quot;Control+Alt+2&quot;,&quot;group3&quot;:&quot;Control+Alt+3&quot;,&quot;group4&quot;:&quot;Control+Alt+4&quot;,&quot;group5&quot;:&quot;Control+Alt+5&quot;,&quot;group6&quot;:&quot;Control+Alt+6&quot;,&quot;group7&quot;:&quot;Control+Alt+7&quot;,&quot;group8&quot;:&quot;Control+Alt+8&quot;,&quot;group9&quot;:&quot;Control+Alt+9&quot;,&quot;heating&quot;:&quot;Control+Alt+H&quot;,&quot;help&quot;:&quot;Control+Alt+Shift+\/&quot;,&quot;importLoads&quot;:&quot;Control+Alt+I&quot;,&quot;nextFitting&quot;:&quot;Control+Alt+J&quot;,&quot;nextGroup&quot;:&quot;Control+Alt+N&quot;,&quot;nextRoom&quot;:&quot;Control+Alt+J&quot;,&quot;nextStep&quot;:&quot;Control+Alt+Enter&quot;,&quot;pressure&quot;:&quot;Control+Alt+S&quot;,&quot;previousFitting&quot;:&quot;Control+Alt+K&quot;,&quot;previousGroup&quot;:&quot;Control+Alt+B&quot;,&quot;previousRoom&quot;:&quot;Control+Alt+K&quot;,&quot;previousStep&quot;:&quot;Control+Alt+Shift+Enter&quot;,&quot;primaryAction&quot;:&quot;Control+Alt+A&quot;,&quot;profile&quot;:&quot;Control+Alt+U&quot;,&quot;project&quot;:&quot;Control+Alt+1&quot;,&quot;projects&quot;:&quot;Control+Alt+P&quot;,&quot;reveal&quot;:&quot;Control+Alt+\/&quot;,&quot;rooms&quot;:&quot;Control+Alt+2&quot;,&quot;search&quot;:&quot;Control+K&quot;,&quot;templateAirHandler&quot;:&quot;Control+Alt+A&quot;,&quot;templateFurnace&quot;:&quot;Control+Alt+F&quot;,&quot;templateShared&quot;:&quot;Control+Alt+D&quot;}" data-theme="default">
       <a class="skip-link" href="#main-content">Skip to content</a>
       <main id="main-content" tabindex="-1" class="flex flex-col min-h-screen min-w-full grow mb-auto">
         <div class="account-workspace">
-          <link rel="stylesheet" href="/css/account.css?v=1">
+          <link rel="stylesheet" href="/css/account.css?v=keybindings-2">
           <nav class="app-navbar" aria-label="Main">
             <a class="app-brand" href="/projects"><span class="dc-wordmark" role="img" aria-label="DuctCalc, residential duct design"><span class="dc-wordmark-name" aria-hidden="true"><span class="dc-wordmark-icon">
             <img class="dc-mark-light" src="/images/brand/ductcalc-mark-light.webp" alt="" width="50" height="50">
@@ -58,6 +60,7 @@
                 <ul class="menu bg-base-200 rounded-box shadow-lg">
                   <li><a href="/profile" aria-keyshortcuts="Control+Alt+U"><span>Profile</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+U</span></a></li>
                   <li><a href="/projects" aria-keyshortcuts="Control+Alt+P"><span>Projects</span><span class="text-xs" aria-hidden="true">Ctrl+Alt+P</span></a></li>
+                  <li><a href="/keybindings">Keybindings</a></li>
                   <li><a href="/filters">Filter library</a></li>
                   <li><a href="/filters?tab=preferences">Design preferences</a></li>
                   <li>
@@ -72,7 +75,7 @@
           <div class="account-layout">
             <aside class="account-sidebar">
               <h2>Account</h2>
-              <nav aria-label="Account sections"><a href="/profile" aria-current="page">Profile</a><span class="account-nav-group" aria-hidden="true">Libraries &amp; preferences</span><a href="/path-templates">Path templates</a><a href="/filters">Filter library</a><a href="/filters?tab=preferences">Design preferences</a></nav>
+              <nav aria-label="Account sections"><a href="/profile" aria-current="page">Profile</a><a href="/keybindings">Keybindings</a><span class="account-nav-group" aria-hidden="true">Libraries &amp; preferences</span><a href="/path-templates">Path templates</a><a href="/filters">Filter library</a><a href="/filters?tab=preferences">Design preferences</a></nav>
             </aside>
             <div class="account-content">
               <header class="account-heading">

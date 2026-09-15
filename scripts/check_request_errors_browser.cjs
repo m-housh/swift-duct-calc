@@ -41,7 +41,7 @@ assert(['localhost', '127.0.0.1'].includes(new URL(origin).hostname), 'Use an is
     await login.locator('[name=password]').fill(account.password);
     await login.getByRole('button', { name: 'Login', exact: true }).click();
     await page.waitForURL(`**${project}/equipment`);
-    await page.getByRole('button', { name: 'Edit equipment', exact: true }).click();
+    await page.getByRole('button', { name: 'Edit all', exact: true }).click();
     const equipment = page.locator('#equipmentForm-all[open]');
     await equipment.locator('[name=heatingCFM]').fill('900');
     await equipment.locator('[name=coolingCFM]').fill('1200');
