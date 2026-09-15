@@ -64,7 +64,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     script(.src("https://unpkg.com/htmx.org@2.0.8")) {}
     script(.src("/js/htmx-download.js")) {}
     script(.src("/js/request-errors.js?v=1")) {}
-    script(.src("/js/main.js?v=keybindings-9")) {}
+    script(.src("/js/main.js?v=keybindings-10")) {}
     script(.src("/js/shortcut-hints.js?v=6")) {}
     link(.rel(.stylesheet), .href("/css/shortcut-hints.css?v=1"))
     script(.src("/js/file-import.js?v=1"), .defer) {}

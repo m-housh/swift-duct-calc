@@ -21,7 +21,12 @@ struct ProjectsTable: HTML, Sendable {
             PageTitle { "Projects" }
             p(.class("muted")) { "Your residential duct designs." }
           }
-          button(.type(.button), .class("btn btn-primary"), .showModal(id: ProjectForm.id)) {
+          button(
+            .type(.button), .class("btn btn-primary"), .showModal(id: ProjectForm.id),
+            .data("project-primary", value: ""),
+            .init(name: "aria-keyshortcuts", value: bindings[.primaryAction]),
+            .title("Add Project, \(bindings.label(.primaryAction))")
+          ) {
             SVG(.circlePlus)
             "Add Project"
           }
