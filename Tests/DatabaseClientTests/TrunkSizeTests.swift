@@ -38,6 +38,8 @@ struct TrunkSizeTests {
       #expect(try await database.projects.get(project.id) == original)
       _ = try await database.trunkSizes.update(trunk.id, .init(height: 10, name: "Supply trunk"))
       #expect(try await database.projects.get(project.id) == original)
+      try await database.trunkSizes.reorder(project.id, .supply, [trunk.id])
+      #expect(try await database.projects.get(project.id) == original)
       _ = try await database.trunkSizes.update(trunk.id, .init(height: 10, name: "Supply trunk"))
       #expect(try await database.projects.get(project.id) == original)
       try await app.autoRevert()

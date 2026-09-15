@@ -28,6 +28,7 @@ extension DatabaseClient.Migrations: DependencyKey {
         EquipmentInfo.AllowMissingAirflow(),
         FilterLibraryMigration(),
         User.AddKeybindings(),
+        TrunkSize.AddPosition(),
       ]
     }
   )

@@ -800,6 +800,9 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
 
     case .trunk(let route):
       switch route {
+      case .reorder(let type, let ids):
+        try await database.trunkSizes.reorder(projectID, type, ids)
+        return EmptyHTML()
       case .delete(let id):
         return try await view(on: request, projectID: projectID) {
           try await database.trunkSizes.delete(id)

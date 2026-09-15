@@ -7,6 +7,19 @@ import Testing
 @testable import PdfClient
 
 struct PdfRenderingTests {
+  @Test func trunkTablePreservesSavedOrder() {
+    let trunks: [DuctSizes.TrunkContainer] = [30, 10, 20].map { id in
+      .init(
+        trunk: .init(
+          id: UUID(id), projectID: UUID(0), type: .supply, rooms: [], name: "Trunk \(id)"),
+        ductSize: .init(
+          designCFM: .heating(400), roundSize: 10, finalSize: 10, velocity: 700, flexSize: 12))
+    }
+    let html = TrunkTable(sizes: .init(rooms: [], trunks: trunks)).render()
+    #expect(html.range(of: "Trunk 30")!.lowerBound < html.range(of: "Trunk 10")!.lowerBound)
+    #expect(html.range(of: "Trunk 10")!.lowerBound < html.range(of: "Trunk 20")!.lowerBound)
+  }
+
   @Test
   func roundAndFlexColumnsAndRectangularHighlighting() {
     let size = DuctSizes.SizeContainer(

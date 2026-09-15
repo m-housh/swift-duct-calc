@@ -50,6 +50,12 @@ struct ProjectMutationAuthorizationTests {
         "Cookie": String(cookie), "Content-Type": "application/x-www-form-urlencoded",
       ]
       let base = "/projects/\(ownProject.id)"
+      for projectID in [ownProject.id, privateProject.id] {
+        let response = try await client.sendRequest(
+          .POST, "/projects/\(projectID)/duct-sizing/trunk/order", headers: headers,
+          body: .init(string: "type=supply&trunks=\(trunk.id)"))
+        #expect(response.status == .notFound)
+      }
       _ = try await client.sendRequest(
         .DELETE, base + "/duct-sizing/trunk/\(trunk.id)", headers: headers)
       #expect(try await db.trunkSizes.get(trunk.id) == trunk)

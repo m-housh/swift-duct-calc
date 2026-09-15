@@ -43,6 +43,10 @@ struct ProjectOwnershipMiddleware: AsyncMiddleware {
       try await requireProject(database.componentLosses.get(id)?.projectID)
     case .ductSizing(.trunk(let route)):
       switch route {
+      case .reorder(_, let ids):
+        for id in ids {
+          try await requireProject(database.trunkSizes.get(id)?.projectID)
+        }
       case .delete(let id):
         try await requireProject(database.trunkSizes.get(id)?.projectID)
       case .update(let id, let form):

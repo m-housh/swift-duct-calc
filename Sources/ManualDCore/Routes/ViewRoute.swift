@@ -728,12 +728,26 @@ extension SiteRoute.View.ProjectRoute {
 
     public enum TrunkRoute: Equatable, Sendable {
       case delete(TrunkSize.ID)
+      case reorder(TrunkSize.TrunkType, [TrunkSize.ID])
       case submit(TrunkSizeForm)
       case update(TrunkSize.ID, TrunkSizeForm)
 
       public static let rootPath = "trunk"
 
       static let router = OneOf {
+        Route(.case(Self.reorder)) {
+          Path {
+            rootPath
+            "order"
+          }
+          Method.post
+          Body {
+            SafeFormData {
+              Field("type") { TrunkSize.TrunkType.parser() }
+              Many { Field("trunks") { TrunkSize.ID.parser() } }
+            }
+          }
+        }
         Route(.case(Self.delete)) {
           Path {
             rootPath

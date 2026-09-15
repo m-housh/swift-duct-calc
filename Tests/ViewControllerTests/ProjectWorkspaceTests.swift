@@ -151,13 +151,17 @@ struct ProjectWorkspaceTests {
     let trunks: [DuctSizes.TrunkContainer] = (0..<5).map { index in
       .init(
         trunk: .init(
-          id: UUID(index + 20), projectID: projectID, type: index % 2 == 0 ? .supply : .return,
+          id: UUID(30 - index), projectID: projectID, type: index % 2 == 0 ? .supply : .return,
           rooms: [], height: 8, name: "Trunk \(index)"), ductSize: size)
     }
     let view = DuctSizingView.TrunkTable(ductSizes: .init(rooms: [], trunks: trunks)).environment(
       ProjectViewValue.$projectID, projectID)
     #expect(view.render().contains("Supply · 3"))
     #expect(view.render().contains("Return · 2"))
+    let html = view.render()
+    #expect(html.range(of: "Trunk 0")!.lowerBound < html.range(of: "Trunk 2")!.lowerBound)
+    #expect(html.range(of: "Trunk 2")!.lowerBound < html.range(of: "Trunk 4")!.lowerBound)
+    #expect(html.range(of: "Trunk 1")!.lowerBound < html.range(of: "Trunk 3")!.lowerBound)
     assertSnapshot(of: view, as: .html)
   }
 
@@ -176,6 +180,9 @@ struct ProjectWorkspaceTests {
     #expect(visible.contains("<dt>Round</dt><dd><span class=\"size-chip\">10″</span></dd>"))
     #expect(visible.contains("<dt>Flex</dt><dd>12″</dd>"))
     #expect(visible.contains("<dt>Rectangular</dt><dd>12 × 8 in.</dd>") == hasRectangle)
+    #expect(visible.contains("No rectangular size") == !hasRectangle)
+    #expect(visible.contains("<dt>CFM</dt>"))
+    #expect(view.render().contains("Details &amp; runs"))
     assertSnapshot(of: view, as: .html, named: hasRectangle ? "rectangular" : "round")
   }
   @Test func invalidFrictionRateIsVisibleBesideTheSummaryValue() {
