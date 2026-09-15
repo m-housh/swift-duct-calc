@@ -47,6 +47,7 @@ extension DuctSizingView {
     @Environment(ProjectViewValue.$projectID) var projectID
     let trunk: DuctSizes.TrunkContainer
     let rooms: [DuctSizes.RoomContainer]
+    private var displayName: String { trunk.name ?? "\(trunk.type.rawValue.capitalized) trunk" }
     private var associated: [DuctSizes.RoomContainer] {
       rooms.filter { room in
         trunk.rooms.contains { $0.id == room.roomID && $0.registers.contains(room.roomRegister) }
@@ -57,12 +58,12 @@ extension DuctSizingView {
         div(.class("trunk-card-main")) {
           button(
             .type(.button), .class("trunk-drag-handle"),
-            .data("trunk-name", value: trunk.name ?? "\(trunk.type.rawValue) trunk"),
-            .init(name: "aria-label", value: "Reorder \(trunk.name ?? "trunk")"),
+            .data("trunk-name", value: displayName),
+            .init(name: "aria-label", value: "Reorder \(displayName)"),
             .title("Drag to reorder, or use the Up and Down arrow keys")
           ) { span(.init(name: "aria-hidden", value: "true")) { "↕" } }
           div(.class("trunk-card-identity")) {
-            strong { trunk.name ?? "\(trunk.type.rawValue.capitalized) trunk" }
+            strong { displayName }
             small { "\(associated.count) associated runs" }
           }
           dl(.class("trunk-card-sizes")) {
