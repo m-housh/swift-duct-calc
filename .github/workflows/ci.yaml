@@ -59,6 +59,7 @@ jobs:
         cache: npm
     - run: npm ci
     - run: npm run test:project-shortcuts
+    - run: npm run test:keybindings
     - run: npm run test:fitting-shortcuts
     - run: npm run test:equipment
     - run: npm run test:trunk-templates
@@ -85,6 +86,8 @@ jobs:
       run: DUCTCALC_ERROR_ORIGIN=http://127.0.0.1:58681 npm run test:request-errors
     - name: Check account profile and navigation
       run: DUCTCALC_ACCOUNT_ORIGIN=http://127.0.0.1:58681 npm run test:account
+    - name: Check customizable shortcuts and reveal mode
+      run: DUCTCALC_KEYBINDINGS_ORIGIN=http://127.0.0.1:58681 npm run test:keybindings-browser
     - name: Check filter library and design preferences
       run: DUCTCALC_FILTER_ORIGIN=http://127.0.0.1:58681 npm run test:filters
     - name: Check accessibility and keyboard workflows

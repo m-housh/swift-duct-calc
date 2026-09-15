@@ -11,6 +11,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
 
   let inner: Inner
   let theme: Theme?
+  let keybindings: Keybindings
   let displayFooter: Bool
   let pageTitle: String
   let stylesheets: [String]
@@ -19,6 +20,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
   init(
     displayFooter: Bool = true,
     theme: Theme? = nil,
+    keybindings: Keybindings = .init(),
     title: String = "Duct Calc",
     stylesheets: [String] = [],
     scripts: [String] = [],
@@ -26,6 +28,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
   ) {
     self.displayFooter = displayFooter
     self.theme = theme
+    self.keybindings = keybindings
     self.pageTitle = title
     self.stylesheets = stylesheets
     self.scripts = scripts
@@ -61,7 +64,9 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     script(.src("https://unpkg.com/htmx.org@2.0.8")) {}
     script(.src("/js/htmx-download.js")) {}
     script(.src("/js/request-errors.js?v=1")) {}
-    script(.src("/js/main.js?v=errors-1")) {}
+    script(.src("/js/main.js?v=keybindings-9")) {}
+    script(.src("/js/shortcut-hints.js?v=6")) {}
+    link(.rel(.stylesheet), .href("/css/shortcut-hints.css?v=1"))
     script(.src("/js/file-import.js?v=1"), .defer) {}
     script(.src("/js/filters.js?v=1"), .defer) {}
     link(.rel(.stylesheet), .href("/css/filters.css?v=1"))
@@ -70,7 +75,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     link(.rel(.stylesheet), .href("/css/output.css?v=project-import-1"))
     link(.rel(.stylesheet), .href("/css/htmx.css"))
     link(.rel(.stylesheet), .href("/css/accessibility.css?v=errors-1"))
-    link(.rel(.stylesheet), .href("/css/project-workspace.css?v=trunk-sizes-2"))
+    link(.rel(.stylesheet), .href("/css/project-workspace.css?v=rooms-table-1"))
     AppIcons()
     link(.rel(.stylesheet), .href("/css/ductcalc-wordmark.css?v=2"))
     link(.rel(.stylesheet), .href("/css/navbar.css?v=3"))
@@ -94,7 +99,7 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
         .id("main-content"), .tabindex(-1),
         .class("flex flex-col min-h-screen min-w-full grow mb-auto")
       ) {
-        inner
+        inner.environment(ShortcutViewValue.$bindings, keybindings)
       }
 
       div(
@@ -142,6 +147,9 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
         }
       }
     }
+    .attributes(
+      .data("keybindings", value: keybindingsJSON(keybindings.resolved))
+    )
     .attributes(.data("theme", value: theme?.rawValue ?? "default"), when: theme != nil)
 
   }

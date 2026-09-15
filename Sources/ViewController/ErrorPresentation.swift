@@ -139,7 +139,7 @@ extension ViewController.Request {
           (try? await database.projects.getForUser(id, user.id)) != nil
         {
           let steps = try? await database.projects.getCompletedSteps(id)
-          ProjectView(projectID: id, activeTab: tab, completedSteps: steps) {
+          ProjectView(projectID: id, activeTab: tab, completedSteps: steps, hasStepActions: false) {
             ErrorMessage(error)
           }
         } else {

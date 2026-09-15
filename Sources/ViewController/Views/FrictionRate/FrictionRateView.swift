@@ -5,6 +5,8 @@ import ManualDCore
 import Styleguide
 
 struct FrictionRateView: HTML, Sendable {
+  @Environment(ShortcutViewValue.$bindings) private var bindings
+
   @Environment(ProjectViewValue.$projectID) var projectID
   let componentLosses: [ComponentPressureLoss]
   let equivalentLengths: EquivalentLength.MaxContainer
@@ -46,7 +48,10 @@ struct FrictionRateView: HTML, Sendable {
           div(.class("flex flex-wrap gap-2")) {
             button(
               .type(.button), .class("btn btn-secondary"),
-              .showModal(id: FrictionRateTemplatesView.id)
+              .showModal(id: FrictionRateTemplatesView.id),
+              .data("project-primary", value: ""),
+              .init(name: "aria-keyshortcuts", value: bindings[.primaryAction]),
+              .title("Use template, \(bindings.label(.primaryAction))")
             ) { "Use template" }
             button(
               .type(.button), .class("btn btn-outline"), .showModal(id: FilterLookupView.id)
@@ -88,7 +93,10 @@ struct FrictionRateView: HTML, Sendable {
       div(.class("flex flex-wrap gap-2")) {
         button(
           .type(.button), .class("btn btn-secondary"),
-          .showModal(id: FrictionRateTemplatesView.id)
+          .showModal(id: FrictionRateTemplatesView.id),
+          .data("project-primary", value: ""),
+          .init(name: "aria-keyshortcuts", value: bindings[.primaryAction]),
+          .title("Use template, \(bindings.label(.primaryAction))")
         ) { "From template" }
         button(
           .type(.button), .class("btn btn-outline"), .showModal(id: FilterLookupView.id)
@@ -174,7 +182,9 @@ struct FrictionRateView: HTML, Sendable {
               span {
                 loss.name
                 small {
-                  if let percent = share(loss) {
+                  if loss.value == 0 {
+                    "Accounted for"
+                  } else if let percent = share(loss) {
                     Number(percent, digits: 1)
                     "% of blower static"
                   } else {
@@ -242,12 +252,14 @@ struct FrictionRateView: HTML, Sendable {
                       .class("input"), .type(.number), .name("value"),
                       .value(String(format: "%.2f", loss.value)),
                       .init(name: "aria-label", value: "Pressure loss for \(loss.name)"),
-                      .min("0.01"), .max("1"), .step("0.01"), .required)
+                      .min("0"), .max("1"), .step("0.01"), .required)
                     button(.type(.submit), .class("btn btn-primary")) { "Apply loss" }
                   }
                 }
                 td {
-                  if let percent = share(loss) {
+                  if loss.value == 0 {
+                    span(.class("muted")) { "Accounted for" }
+                  } else if let percent = share(loss) {
                     Number(percent, digits: 1)
                     "%"
                   } else {

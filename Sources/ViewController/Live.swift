@@ -31,11 +31,13 @@ extension ViewController.Request {
       return try await loadView {
         let page = try FittingReferencePage(
           catalog: fittingClient.reference(), query: query, isLoggedIn: isLoggedIn)
+        let profile = await self.profile
         return MainPage(
-          theme: await theme ?? .default,
+          theme: profile?.theme ?? .default,
+          keybindings: (try? currentUser().keybindings) ?? .init(),
           title: "Fitting reference · Duct Calc",
           stylesheets: ["/fittings/styles.css"],
-          scripts: ["app.js"]
+          scripts: ["app.js?v=keybindings-1"]
             .map { "/fittings/\($0)" }
         ) {
           FittingsView(page: page)
@@ -129,7 +131,7 @@ extension ViewController.Request {
     @HTMLBuilder inner: () async throws -> C
   ) async rethrows -> AnySendableHTML where C: Sendable {
     let inner = try await inner()
-    let theme = await self.theme
+    let profile = await self.profile
     let routeProjectID: Project.ID?
     switch route {
     case .project(.detail(let id, _)), .project(.update(let id, _)): routeProjectID = id
@@ -148,17 +150,19 @@ extension ViewController.Request {
       }
     }
 
-    return MainPage(displayFooter: displayFooter, theme: theme ?? .default, title: route.pageTitle)
-    {
+    return MainPage(
+      displayFooter: displayFooter, theme: profile?.theme ?? .default,
+      keybindings: (try? currentUser().keybindings) ?? .init(), title: route.pageTitle
+    ) {
       inner.environment(ProjectViewValue.$navigation, navigation)
     }
   }
 
-  var theme: Theme? {
+  var profile: User.Profile? {
     get async {
       @Dependency(\.database) var database
       guard let user = try? currentUser() else { return nil }
-      return try? await database.userProfiles.fetch(user.id)?.theme
+      return try? await database.userProfiles.fetch(user.id)
     }
   }
 
@@ -833,7 +837,10 @@ extension SiteRoute.View.ProjectRoute.DuctSizingRoute {
           } catch let error as Project.DuctSizingUnavailable {
             content = .failure(error)
           }
-          return ProjectView(projectID: projectID, activeTab: .ductSizing, completedSteps: steps) {
+          return ProjectView(
+            projectID: projectID, activeTab: .ductSizing, completedSteps: steps,
+            hasStepActions: (try? content.get()) != nil
+          ) {
             switch content {
             case .success(let sizes): DuctSizingView(ductSizes: sizes)
             case .failure(let error): DuctSizingErrorView(error: error)
@@ -859,6 +866,8 @@ extension SiteRoute.View.UserRoute {
           LoginForm(next: nil)
         }
       }
+    case .keybindings(let route):
+      return try await route.renderView(on: request)
     case .profile(let route):
       return try await route.renderView(on: request)
     case .templates(let route):

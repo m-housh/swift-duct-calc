@@ -5,7 +5,8 @@ const { test } = require('node:test');
 const { JSDOM } = require('jsdom');
 
 const root = path.resolve(__dirname, '..');
-const script = fs.readFileSync(path.join(root, 'Public/js/main.js'), 'utf8');
+const bindings = require('./keybinding_test_helpers.cjs');
+const script = bindings.script(fs.readFileSync(path.join(root, 'Public/js/main.js'), 'utf8'));
 const snapshot = name => fs.readFileSync(path.join(root,
   `Tests/ViewControllerTests/__Snapshots__/FittingsSnapshotTests/${name}.1.html`), 'utf8');
 
@@ -106,7 +107,7 @@ test('fitting shortcuts pause in editors and dialogs and ignore extra modifiers'
       { ctrlKey: false }, { altKey: false }, { shiftKey: true }, { metaKey: true },
       { repeat: true }, { isComposing: true }, { modifierAltGraph: true },
     ]) assert.equal(press(key, options).defaultPrevented, false);
-    for (const target of document.querySelectorAll('input, select, textarea')) {
+    for (const target of document.querySelectorAll('input:not([type="search"]), select, textarea')) {
       assert.equal(press(key, {}, target).defaultPrevented, false);
     }
     const editor = document.createElement('div');
@@ -156,10 +157,10 @@ test('help dialog describes fitting bindings and only available app shortcuts', 
     assert.equal(trigger.getAttribute('aria-haspopup'), 'dialog');
     assert.equal(document.getElementById(dialog.getAttribute('aria-labelledby')).textContent, 'Keyboard shortcuts');
     const rows = Object.fromEntries([...dialog.querySelectorAll('tr')].map(row => [
-      row.querySelector('kbd').textContent.trim(), row.querySelector('th').textContent.trim(),
+      [...row.querySelectorAll('kbd')].at(-1).textContent.trim(), row.querySelector('th').textContent.trim(),
     ]));
     assert.deepEqual(rows, {
-      '1–9': 'Groups 1–9', '0': 'Group 10', N: 'Next group', B: 'Previous group',
+      ...Object.fromEntries(Array.from({length:9}, (_,i) => [String(i+1), `Group ${i+1}`])), '0': 'Group 10', N: 'Next group', B: 'Previous group',
       J: 'Next fitting', K: 'Previous fitting', D: 'Ductulator',
       ...(name === 'returnGroupSignedIn' ? { P: 'Projects', U: 'Profile' } : {}),
     });
@@ -183,4 +184,25 @@ test('navigation replacements resolve new controls without duplicate handlers', 
   document.body.innerHTML = snapshot('allGroupsGuest');
   press('j');
   assert.equal(clicks.length, 4);
+});
+
+
+test('individual fitting movement bindings do not use old keys', t => {
+  const { document, press, clicks } = setup(t);
+  document.body.dataset.keybindings = JSON.stringify({...bindings.defaults, nextGroup:'Alt+ArrowRight', nextFitting:'Alt+ArrowDown'});
+  assert(press('ArrowRight', {ctrlKey:false}).defaultPrevented);
+  assert.equal(clicks.at(-1).dataset.group, '1');
+  assert(press('ArrowDown', {ctrlKey:false}).defaultPrevented);
+  assert(clicks.at(-1).hasAttribute('data-select'));
+  assert.equal(press('j').defaultPrevented, false);
+});
+
+test('fitting navigation works from search without consuming ordinary typing', t => {
+  const { document, press, clicks } = setup(t);
+  const search = document.getElementById('search'); search.focus();
+  const query = search.value;
+  assert(press('2', {}, search).defaultPrevented);
+  assert.equal(clicks.at(-1).dataset.group, '2');
+  assert.equal(search.value, query);
+  assert.equal(press('j', {ctrlKey:false,altKey:false}, search).defaultPrevented, false);
 });

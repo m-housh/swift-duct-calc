@@ -6,6 +6,8 @@ import Styleguide
 import Vapor
 
 struct ProjectsTable: HTML, Sendable {
+  @Elementary.Environment(ShortcutViewValue.$bindings) private var bindings
+
   let userID: User.ID
   let projects: Page<Project>
   var query = ""
@@ -32,8 +34,8 @@ struct ProjectsTable: HTML, Sendable {
               input(
                 .type(.search), .id("project-search"), .name("q"), .value(query),
                 .placeholder("Find a project…"), .class("input"),
-                .init(name: "aria-keyshortcuts", value: "Control+K"))
-              kbd { "Ctrl+K" }
+                .init(name: "aria-keyshortcuts", value: bindings[.search]))
+              kbd { bindings.label(.search) }
             }
             button(.type(.submit), .class("btn btn-outline")) { "Search" }
           }

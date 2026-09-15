@@ -8,6 +8,8 @@ public enum AdminViewValue {
 }
 
 struct Navbar: HTML, Sendable {
+  @Environment(ShortcutViewValue.$bindings) private var bindings
+
   var showFittingsButton = true
   var showDuctulatorButton = true
   var isLoggedIn = true
@@ -23,8 +25,8 @@ struct Navbar: HTML, Sendable {
           button(
             .type(.button), .class("btn"),
             .init(name: "aria-label", value: "Keyboard shortcuts"),
-            .title("Keyboard shortcuts, Ctrl+Alt+? or Ctrl+Alt+/"),
-            .init(name: "aria-keyshortcuts", value: "Control+Alt+/ Control+Alt+Shift+/"),
+            .title("Keyboard shortcuts, \(bindings.label(.help))"),
+            .init(name: "aria-keyshortcuts", value: bindings[.help]),
             .init(name: "aria-haspopup", value: "dialog"),
             .init(name: "aria-controls", value: shortcutsDialogID),
             .showModal(id: shortcutsDialogID)
@@ -34,16 +36,16 @@ struct Navbar: HTML, Sendable {
           a(
             .class("btn app-nav-link"), .href(route: .fittingReference(.init())),
             .target(.blank),
-            .title("Fitting reference, Ctrl+Alt+F"),
-            .init(name: "aria-keyshortcuts", value: "Control+Alt+F")
+            .title("Fitting reference, \(bindings.label(.fittings))"),
+            .init(name: "aria-keyshortcuts", value: bindings[.fittings])
           ) {
             span { "Fitting reference" }
           }
         }
         if showDuctulatorButton {
           DuctulatorButton().attributes(
-            .class("app-nav-ductulator"), .title("Ductulator, Ctrl+Alt+D"),
-            .init(name: "aria-keyshortcuts", value: "Control+Alt+D")
+            .class("app-nav-ductulator"), .title("Ductulator, \(bindings.label(.ductulator))"),
+            .init(name: "aria-keyshortcuts", value: bindings[.ductulator])
           )
         }
         if isLoggedIn {
@@ -59,11 +61,11 @@ struct Navbar: HTML, Sendable {
               li {
                 a(
                   .href(route: .user(.profile(.index))),
-                  .init(name: "aria-keyshortcuts", value: "Control+Alt+U")
+                  .init(name: "aria-keyshortcuts", value: bindings[.profile])
                 ) {
                   span { "Profile" }
                   span(.class("text-xs"), .init(name: "aria-hidden", value: "true")) {
-                    "Ctrl+Alt+U"
+                    "\(bindings.label(.profile))"
                   }
                 }
               }
@@ -73,11 +75,12 @@ struct Navbar: HTML, Sendable {
                 ) {
                   span { "Projects" }
                   span(.class("text-xs"), .init(name: "aria-hidden", value: "true")) {
-                    "Ctrl+Alt+P"
+                    "\(bindings.label(.projects))"
                   }
                 }.attributes(
-                  .init(name: "aria-keyshortcuts", value: "Control+Alt+P"))
+                  .init(name: "aria-keyshortcuts", value: bindings[.projects]))
               }
+              li { a(.href("/keybindings")) { "Keybindings" } }
               li { a(.href("/filters")) { "Filter library" } }
               li { a(.href("/filters?tab=preferences")) { "Design preferences" } }
               li {

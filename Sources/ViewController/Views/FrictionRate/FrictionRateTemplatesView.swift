@@ -5,15 +5,17 @@ import ManualDCore
 import Styleguide
 
 struct FrictionRateTemplatesView: HTML, Sendable {
+  @Environment(ShortcutViewValue.$bindings) private var bindings
+
   static let id = "frictionRateTemplates"
   let projectID: Project.ID
   let hasComponents: Bool
 
-  private func shortcut(for template: FrictionRateTemplate) -> String {
+  private func shortcut(for template: FrictionRateTemplate) -> KeybindingAction {
     switch template {
-    case .shared: "D"
-    case .furnace: "F"
-    case .airHandler: "A"
+    case .shared: .templateShared
+    case .furnace: .templateFurnace
+    case .airHandler: .templateAirHandler
     }
   }
 
@@ -38,7 +40,7 @@ struct FrictionRateTemplatesView: HTML, Sendable {
                 h3(.class("card-title")) { template.name }
                 // A block wrapper keeps Elementary's formatted snapshots from moving inline text.
                 div(.class("template-card-shortcut")) {
-                  kbd(.class("kbd kbd-sm")) { "Ctrl+Alt+\(shortcut(for: template))" }
+                  kbd(.class("kbd kbd-sm")) { bindings.label(shortcut(for: template)) }
                 }
               }
               dl {
@@ -60,7 +62,8 @@ struct FrictionRateTemplatesView: HTML, Sendable {
                   button(
                     .type(.submit), .class("btn btn-secondary"),
                     .init(
-                      name: "aria-keyshortcuts", value: "Control+Alt+\(shortcut(for: template))"),
+                      name: "aria-keyshortcuts",
+                      value: bindings[shortcut(for: template)]),
                     .init(name: "aria-label", value: "Use \(template.name) template")
                   ) { "Use template" }
                 }

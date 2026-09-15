@@ -110,8 +110,11 @@ struct FilterLibraryTests {
       #expect(try await db.componentLosses.get(loss.id)?.value == 0.15)
       try await db.filters.apply(
         user.id, project.id, .init(model: "213", replacing: loss.id, allowance: "0.20"))
-      #expect(try await db.componentLosses.get(loss.id) == nil)
-      #expect(try await db.componentLosses.fetch(project.id).count == 4)
+      #expect(try await db.componentLosses.get(loss.id)?.value == 0)
+      #expect(
+        try await db.componentLosses.get(loss.id)?.name
+          == "Aprilaire 213 filter (less 0.20 in equipment rating)")
+      #expect(try await db.componentLosses.fetch(project.id).count == 5)
       #expect(try await db.filters.allowance(project.id) == 0.20)
       _ = try await db.filters.update(
         user.id, .init(action: .delete, revision: changed.revision, id: "213"))

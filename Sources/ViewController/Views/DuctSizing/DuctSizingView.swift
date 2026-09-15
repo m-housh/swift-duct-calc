@@ -4,6 +4,7 @@ import ManualDCore
 import Styleguide
 
 struct DuctSizingView: HTML, Sendable {
+  @Environment(ShortcutViewValue.$bindings) private var bindings
 
   @Environment(ProjectViewValue.$projectID) var projectID
 
@@ -28,6 +29,8 @@ struct DuctSizingView: HTML, Sendable {
         div {
           button(
             .class("btn btn-primary"),
+            .init(name: "aria-keyshortcuts", value: bindings[.exportPDF]),
+            .title("Export PDF, \(bindings.label(.exportPDF))"),
             .hx.get(route: .project(.detail(projectID, .pdf))),
             .hx.ext("htmx-download"),
             .hx.swap(.none),
@@ -46,7 +49,12 @@ struct DuctSizingView: HTML, Sendable {
       section(.class("project-panel trunk-panel")) {
         div(.class("project-toolbar")) {
           h2 { "Supply & return trunks" }
-          button(.type(.button), .class("btn btn-primary"), .showModal(id: TrunkSizeForm.id())) {
+          button(
+            .type(.button), .class("btn btn-primary"), .showModal(id: TrunkSizeForm.id()),
+            .data("project-primary", value: ""),
+            .init(name: "aria-keyshortcuts", value: bindings[.primaryAction]),
+            .title("Add trunk, \(bindings.label(.primaryAction))")
+          ) {
             SVG(.circlePlus)
             "Add trunk"
           }
@@ -59,7 +67,8 @@ struct DuctSizingView: HTML, Sendable {
           span(.class("sr-only")) { "Find a register" }
           input(
             .type(.search), .class("input"), .id("register-search"), .placeholder("Find a room…"),
-            .init(name: "aria-keyshortcuts", value: "Control+K"))
+            .init(name: "aria-keyshortcuts", value: bindings[.search]))
+          kbd { bindings.label(.search) }
         }
         button(
           .type(.button), .class("btn btn-primary"), .showModal(id: RectangularSizesForm.id)

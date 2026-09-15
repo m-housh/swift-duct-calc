@@ -1,0 +1,13 @@
+#shortcut-hints { position: fixed; inset: 0; z-index: 1000; pointer-events: none; }
+.shortcut-hint, .shortcut-hints-note {
+  color: #fff; background: #4338ca; border: 1px solid #c7d2fe;
+  border-radius: 5px; box-shadow: 0 2px 5px #0004;
+  padding: 3px 6px; font: 600 11px/1.4 ui-monospace, monospace;
+}
+.shortcut-hint { position: absolute; max-width: calc(100vw - 8px); }
+.shortcut-hint > span { display: block; }
+.shortcut-hints-note {
+  position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+  width: max-content; max-width: calc(100vw - 20px); text-align: center;
+}
+@media print { #shortcut-hints { display: none; } }

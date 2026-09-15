@@ -81,6 +81,34 @@ struct FilterLookupRouteTests {
       _ = try await post("model=413&replacing=\(foreignFilter.id)")
       #expect(try await db.componentLosses.fetch(ownProject.id) == replaced)
       #expect(try await db.componentLosses.get(foreignFilter.id) == foreignFilter)
+
+      _ = try await client.sendRequest(
+        .POST, "/projects/\(ownProject.id)/friction-rate/templates/air-handler", headers: headers)
+      let defaults = try await db.componentLosses.fetch(ownProject.id)
+      let accounted = try await post("model=516&allowance=0.2")
+      #expect(accounted.status == .ok)
+      #expect(accounted.body.string.contains("Accounted for"))
+      let losses = try await db.componentLosses.fetch(ownProject.id)
+      let zeroFilter = try #require(losses.first { $0.name.contains("filter") })
+      #expect(zeroFilter.name == "Aprilaire 516 filter (less 0.20 in equipment rating)")
+      #expect(zeroFilter.value == 0)
+      #expect(losses.count == defaults.count + 1)
+      #expect(losses.total == defaults.total)
+      let reloaded = try await client.sendRequest(
+        .GET, "/projects/\(ownProject.id)/friction-rate", headers: headers)
+      #expect(reloaded.body.string.contains(zeroFilter.name))
+      #expect(reloaded.body.string.contains("Accounted for"))
+
+      let edited = try await client.sendRequest(
+        .PATCH, "/projects/\(ownProject.id)/component-loss/\(zeroFilter.id)", headers: headers,
+        body: .init(string: "name=Accounted+filter&value=0"))
+      #expect(edited.status == .ok)
+      #expect(try await db.componentLosses.get(zeroFilter.id)?.name == "Accounted filter")
+      #expect(try await db.componentLosses.get(zeroFilter.id)?.value == 0)
+
+      _ = try await post("model=413&replacing=\(zeroFilter.id)")
+      #expect(try await db.componentLosses.get(zeroFilter.id)?.value == 0.20)
+      #expect(try await db.componentLosses.fetch(ownProject.id).count == losses.count)
     }
   }
 }

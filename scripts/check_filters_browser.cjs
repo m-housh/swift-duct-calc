@@ -78,7 +78,9 @@ assert(['localhost', '127.0.0.1'].includes(new URL(origin).hostname), 'Use an is
     await lookup.locator('[name=allowance]').fill('0.10');
     await lookup.getByRole('button', { name: 'Use Example brand Custom media, 0.00 inches of water column', exact: true }).first().click();
     await page.locator('#filterLookup[open]').waitFor({ state: 'hidden' });
-    assert.equal(await page.locator('.loss-table tbody tr').count(), 4);
+    assert.equal(await page.locator('.loss-table tbody tr').count(), 5);
+    assert.equal(await loss.locator('input[type=number]').inputValue(), '0.00');
+    assert.match(await loss.innerText(), /Accounted for/);
     await page.getByRole('button', { name: 'Use template', exact: true }).click();
     await page.getByRole('button', { name: 'Use Air handler template', exact: true }).click();
     await lookup.waitFor(); await lookup.getByRole('button', { name: 'Skip filter', exact: true }).click();

@@ -58,9 +58,7 @@ extension DatabaseClient.Filters {
           }
           var name = "\(filter.name) filter"
           if let allowance { name += String(format: " (less %.2f in equipment rating)", allowance) }
-          if value == 0 {
-            if let id = selection.replacing { try await losses.delete(id) }
-          } else if let id = selection.replacing {
+          if let id = selection.replacing {
             _ = try await losses.update(id, .init(name: name, value: value))
           } else {
             _ = try await losses.create(.init(projectID: projectID, name: name, value: value))

@@ -5,7 +5,8 @@ const { test } = require('node:test');
 const { JSDOM } = require('jsdom');
 
 const root = path.resolve(__dirname, '..');
-const script = fs.readFileSync(path.join(root, 'Public/js/main.js'), 'utf8');
+const bindings = require('./keybinding_test_helpers.cjs');
+const script = bindings.script(fs.readFileSync(path.join(root, 'Public/js/main.js'), 'utf8'));
 const snapshot = number => fs.readFileSync(path.join(root,
   `Tests/ViewControllerTests/__Snapshots__/ViewControllerTests/projectDetail.${number}.html`), 'utf8');
 
@@ -190,18 +191,28 @@ test('every project page lists its shortcuts in an accessible help dialog', t =>
     const trigger = document.querySelector('nav button[aria-haspopup="dialog"][aria-controls="projectShortcuts"]');
     assert.equal(trigger.getAttribute('aria-label'), 'Keyboard shortcuts');
     assert(trigger.querySelector('svg[aria-hidden="true"]'));
-    assert.deepEqual([...dialog.querySelectorAll('caption')].map(node => node.textContent), ['Project sections', 'Equipment editing', 'App navigation']);
-    const expected = { J: 'Next room row', K: 'Previous room row', H: 'Heating airflow', C: 'Cooling airflow', S: 'Static pressure', E: 'Edit equipment' };
-    for (const control of document.querySelectorAll('#project-sidebar [aria-keyshortcuts], nav a[aria-keyshortcuts]')) {
-      const key = control.getAttribute('aria-keyshortcuts').split('+').at(-1);
-      // The formatted snapshot renderer can hoist inline text; live browser tests check control names.
-      expected[key] = (control.querySelector('span') || control).textContent.trim()
-        || control.getAttribute('title').split(',')[0];
+    const sections = [...dialog.querySelectorAll(':scope > .modal-box > table')];
+    const titles = ['Project', 'Rooms', 'Equipment', 'Total effective length', 'Friction rate', 'Duct sizes'];
+    assert.deepEqual(sections.map(table => table.querySelector('caption').textContent),
+      ['On this page · ' + titles[page - 1], 'Project navigation', 'App navigation']);
+    const actions = [
+      ['Project details'],
+      ['Add room', 'Import loads', 'Find a room', 'Next room row', 'Previous room row'],
+      ['Edit all', 'Heating airflow', 'Cooling airflow', 'Static pressure'],
+      ['Add return', 'Add supply', 'Add path'], ['Use template'], ['Add trunk', 'Export PDF', 'Find a register'],
+    ];
+    assert.deepEqual([...sections[0].querySelectorAll('th')].map(th => th.textContent), actions[page - 1]);
+    const other = dialog.querySelector('details');
+    assert.equal(other.open, false);
+    assert.equal(other.querySelector('summary').textContent, 'Other project pages');
+    assert.deepEqual([...other.querySelectorAll('caption')].map(caption => caption.textContent), titles.filter((_, index) => index !== page - 1));
+    assert(!dialog.textContent.includes('Current step action'));
+    const keybindings = JSON.parse(document.querySelector('[data-keybindings]').dataset.keybindings);
+    for (const keycaps of dialog.querySelectorAll('.keycaps')) {
+      const chord = [...keycaps.querySelectorAll('kbd')].map(key => key.textContent.trim()).join('+').replace('Ctrl', 'Control');
+      assert(Object.values(keybindings).includes(chord), chord);
     }
-    const listed = Object.fromEntries([...dialog.querySelectorAll('tr')].map(row => [
-      row.querySelector('kbd').textContent.trim(), row.querySelector('th').textContent.trim(),
-    ]));
-    assert.deepEqual(listed, expected);
+
   }
 });
 
@@ -217,13 +228,13 @@ test('help shortcuts open the current dialog after body replacement and restore 
     dom.window.eval(script);
     const trigger = document.querySelector('nav button[data-open-dialog]');
     const dialog = document.getElementById(trigger.dataset.openDialog);
-    assert.equal(trigger.getAttribute('aria-keyshortcuts'), 'Control+Alt+/ Control+Alt+Shift+/');
-    assert.match(trigger.title, /Ctrl\+Alt\+\?/);
-    assert.match(dialog.textContent, /Ctrl\+Alt\+\? or Ctrl\+Alt\+\//);
+    assert.equal(trigger.getAttribute('aria-keyshortcuts'), 'Control+Alt+Shift+/');
+    assert.match(trigger.title, /Ctrl\+Alt\+Shift\+\//);
+    assert.match(dialog.textContent, /Ctrl\+Alt\+\//);
     let opens = 0;
     dialog.showModal = () => { opens++; dialog.setAttribute('open', ''); };
     trigger.getClientRects = () => [{}];
-    for (const [key, options] of [['/', {}], ['/', { shiftKey: true }], ['?', { shiftKey: true }], ['?', {}]]) {
+    for (const [key, options] of [['/', { shiftKey: true }], ['?', { shiftKey: true }]]) {
       const before = opens;
       assert.equal(press(key, options).defaultPrevented, true);
       assert.equal(opens, before + 1, 'The existing dialog opener runs exactly once');
@@ -234,12 +245,12 @@ test('help shortcuts open the current dialog after body replacement and restore 
     }
     for (const attribute of ['disabled', 'inert', 'aria-disabled']) {
       trigger.setAttribute(attribute, 'true');
-      assert.equal(press('/').defaultPrevented, false);
+      assert.equal(press('/', {shiftKey:true}).defaultPrevented, false);
       trigger.removeAttribute(attribute);
     }
   }
   document.body.outerHTML = '<body><main>No shortcut help on this page</main></body>';
-  assert.equal(press('/').defaultPrevented, false);
+  assert.equal(press('/', {shiftKey:true}).defaultPrevented, false);
   assert.equal(press('?', { shiftKey: true }).defaultPrevented, false);
 });
 
@@ -302,7 +313,9 @@ test('template shortcuts apply only in the chooser and preserve navigation elsew
   assert.equal(clicks.at(-1), '/ductulator');
   assert(press('f').defaultPrevented);
   assert.equal(clicks.at(-1), '/fittings');
-  assert.equal(press('a').defaultPrevented, false);
+  dialog.showModal = () => { dialog.open = true; };
+  assert(press('a').defaultPrevented);
+  assert(dialog.open, 'The current step action opens the template chooser');
   assert.equal(applied.length, 6);
 });
 
@@ -356,14 +369,16 @@ test('template shortcuts resolve buttons after body replacement without duplicat
 
 test('equipment shortcuts open each editor, pause inside dialogs and survive body replacement', t => {
   const { dom, document, press } = setup(t, snapshot(3));
+  assert.equal(press('e').defaultPrevented, false);
+  assert.equal(document.querySelector('[data-project-primary]').getAttribute('aria-keyshortcuts'), 'Control+Alt+A');
   dom.window.HTMLDialogElement.prototype.showModal = function () { this.open = true; };
   for (let pass = 0; pass < 2; pass++) {
-    for (const [key, field] of [['h', 'heating'], ['c', 'cooling'], ['s', 'pressure'], ['e', 'all']]) {
+    for (const [key, field] of [['h', 'heating'], ['c', 'cooling'], ['s', 'pressure'], ['a', 'all']]) {
       const dialog = document.getElementById(`equipmentForm-${field}`);
       assert(dialog);
       assert(press(key).defaultPrevented);
       assert(dialog.open);
-      for (const other of ['h', 'c', 's', 'e']) assert.equal(press(other).defaultPrevented, false);
+      for (const other of ['h', 'c', 's', 'a']) assert.equal(press(other).defaultPrevented, false);
       dialog.open = false;
       for (const options of [{ctrlKey:false}, {altKey:false}, {shiftKey:true}, {metaKey:true},
         {repeat:true}, {isComposing:true}, {modifierAltGraph:true}]) {
@@ -375,5 +390,233 @@ test('equipment shortcuts open each editor, pause inside dialogs and survive bod
     dom.window.eval(script);
   }
   document.body.innerHTML = '<main>Another page</main>';
-  for (const key of ['h', 'c', 's', 'e']) assert.equal(press(key).defaultPrevented, false);
+  for (const key of ['h', 'c', 's', 'a']) assert.equal(press(key).defaultPrevented, false);
+});
+
+
+test('individual bindings work after page replacement, including shifted number keys', t => {
+  const { dom, document, press, clicks } = setup(t);
+  for (const [action, combo, key, options] of [
+    ['rooms', 'Control+Shift+2', '@', {altKey:false,shiftKey:true,code:'Digit2'}],
+    ['ductulator', 'Alt+Meta+D', '∂', {ctrlKey:false,altKey:true,metaKey:true,code:'KeyD'}],
+    ['projects', 'Alt+ArrowUp', 'ArrowUp', {ctrlKey:false}],
+  ]) {
+    document.body.outerHTML = new dom.window.DOMParser().parseFromString(snapshot(1), 'text/html').body.outerHTML;
+    const root = document.querySelector('[data-keybindings]');
+    root.dataset.keybindings = JSON.stringify({...bindings.defaults, [action]:combo});
+    document.querySelector(`[aria-keyshortcuts="${bindings.defaults[action]}"]`).setAttribute('aria-keyshortcuts', combo);
+    dom.window.eval(script);
+    const before = clicks.length;
+    assert(press(key, options).defaultPrevented);
+    assert.equal(clicks.length, before + 1);
+    assert.equal(press(key, {...options,repeat:true}).defaultPrevented, false);
+  }
+});
+
+test('room navigation and search use their own bindings', t => {
+  const { document, press } = setup(t, snapshot(2));
+  document.querySelector('[data-keybindings]').dataset.keybindings = JSON.stringify({ ...bindings.defaults,
+    nextRoom:'Alt+ArrowDown', previousRoom:'Alt+ArrowUp', search:'Control+Shift+F' });
+  assert(press('ArrowDown', {ctrlKey:false}).defaultPrevented);
+  assert(document.querySelector('[data-selectable-table="rooms"] .selected-row'));
+  assert.equal(press('j').defaultPrevented, false);
+  assert(press('F', {altKey:false,shiftKey:true}).defaultPrevented);
+  assert.equal(document.activeElement.id, 'room-search');
+});
+
+test('app shortcuts work after Ctrl+K focuses search, while data entry fields keep their keys', t => {
+  for (const name of ['userProfile', 'projectIndex']) {
+    const html = fs.readFileSync(path.join(root,
+      `Tests/ViewControllerTests/__Snapshots__/ViewControllerTests/${name}.1.html`), 'utf8');
+    const { document, press, clicks } = setup(t, html);
+    if (!document.getElementById('project-search')) {
+      document.body.insertAdjacentHTML('beforeend', '<input id="keybinding-search" type="search">');
+    }
+    assert(press('k', {altKey:false}).defaultPrevented);
+    const search = document.activeElement;
+    assert.equal(search.type, 'search');
+    search.value = 'Keep this query';
+    assert(press('p', {}, search).defaultPrevented);
+    assert.equal(clicks.at(-1), '/projects');
+    assert.equal(search.value, 'Keep this query');
+    assert.equal(press('p', {ctrlKey:false,altKey:false}, search).defaultPrevented, false);
+    const input = document.createElement('input'); input.type = 'text'; document.body.append(input);
+    assert.equal(press('p', {}, input).defaultPrevented, false);
+  }
+});
+
+test('custom search and room navigation bindings work while a room search has focus', t => {
+  const { document, press } = setup(t, snapshot(2));
+  document.querySelector('[data-keybindings]').dataset.keybindings = JSON.stringify({ ...bindings.defaults,
+    search:'Alt+K', nextRoom:'Alt+ArrowDown' });
+  assert(press('k', {ctrlKey:false}).defaultPrevented);
+  const search = document.activeElement;
+  assert.equal(search.id, 'room-search');
+  assert(press('ArrowDown', {ctrlKey:false}, search).defaultPrevented);
+  assert(document.querySelector('[data-selectable-table="rooms"] .selected-row'));
+});
+
+
+test('next and previous steps follow the current sidebar and stop at its ends', t => {
+  for (let page = 1; page <= 6; page++) {
+    const { document, clicks, press } = setup(t, snapshot(page));
+    const links = [...document.querySelectorAll('#project-sidebar a')];
+    const current = links.findIndex(link => link.getAttribute('aria-current') === 'page');
+    for (const [delta, options] of [[1, {}], [-1, {shiftKey:true}]]) {
+      clicks.length = 0;
+      const target = links[current + delta];
+      assert.equal(press('Enter', options).defaultPrevented, !!target);
+      assert.deepEqual(clicks, target ? [target.getAttribute('href')] : []);
+    }
+    const root = document.querySelector('[data-keybindings]');
+    root.dataset.keybindings = JSON.stringify({...bindings.defaults, nextStep:'Alt+ArrowRight', previousStep:'Alt+ArrowLeft'});
+    assert.equal(press('Enter').defaultPrevented, false);
+    assert.equal(press('ArrowRight', {ctrlKey:false}).defaultPrevented, current < 5);
+    assert.equal(press('ArrowLeft', {ctrlKey:false}).defaultPrevented, current > 0);
+    const input = document.createElement('input'); document.body.append(input);
+    assert.equal(press('ArrowRight', {ctrlKey:false}, input).defaultPrevented, false);
+    document.querySelector('dialog').open = true;
+    assert.equal(press('ArrowRight', {ctrlKey:false}).defaultPrevented, false);
+  }
+});
+
+test('current step action opens the correct control once and respects guards and customization', t => {
+  const titles = ['Project details', 'Add room', 'Edit all', 'Add path', 'Use template', 'Add trunk'];
+  for (let page = 1; page <= 6; page++) {
+    const { document, press, dom } = setup(t, snapshot(page));
+    dom.window.HTMLDialogElement.prototype.showModal = function () { this.open = true; };
+    const control = document.querySelector('#project-content [data-project-primary]');
+    assert(control, titles[page - 1]);
+    assert(control.title.startsWith(titles[page - 1]));
+    assert(control.getAttribute('aria-keyshortcuts').split(' ').includes('Control+Alt+A'));
+    let clicks = 0;
+    control.addEventListener('click', event => { clicks++; event.preventDefault(); });
+    assert(press('a').defaultPrevented);
+    assert.equal(clicks, 1);
+    if (control.dataset.openDialog) {
+      assert(document.getElementById(control.dataset.openDialog).open);
+      if (control.dataset.openDialog !== 'frictionRateTemplates') assert.equal(press('a').defaultPrevented, false);
+      document.getElementById(control.dataset.openDialog).open = false;
+    }
+    document.querySelector('[data-keybindings]').dataset.keybindings = JSON.stringify({...bindings.defaults, primaryAction:'Alt+Enter'});
+    control.setAttribute('aria-keyshortcuts', control.getAttribute('aria-keyshortcuts').replace('Control+Alt+A', 'Alt+Enter'));
+    assert.equal(press('a').defaultPrevented, false);
+    assert(press('Enter', {ctrlKey:false}).defaultPrevented);
+    assert.equal(clicks, 2);
+    document.querySelectorAll('dialog').forEach(dialog => { dialog.open = false; });
+    for (const options of [{repeat:true}, {isComposing:true}, {modifierAltGraph:true}]) {
+      assert.equal(press('Enter', {ctrlKey:false, ...options}).defaultPrevented, false);
+    }
+    const input = document.createElement('input'); document.body.append(input);
+    assert.equal(press('Enter', {ctrlKey:false}, input).defaultPrevented, false);
+    control.setAttribute('aria-disabled', 'true');
+    assert.equal(press('Enter', {ctrlKey:false}).defaultPrevented, false);
+  }
+});
+
+test('register search displays its complete shortcut and Ctrl+K focuses it', t => {
+  const { document, press } = setup(t, snapshot(6));
+  const input = document.querySelector('#register-search');
+  assert(input);
+  assert.equal(input.closest('label').querySelectorAll('kbd').length, 1);
+  assert.match(input.closest('label').textContent.replace(/\s/g, ''), /Ctrl\+K/);
+  assert(press('k', {altKey:false}).defaultPrevented);
+  assert.equal(document.activeElement, input);
+});
+
+
+test('path shortcuts open the typed editor and Add path lives beside the table', t => {
+  const empty = fs.readFileSync(path.join(root,
+    'Tests/ViewControllerTests/__Snapshots__/ProjectWorkspaceTests/emptyPathsAndMissingPressure.1.html'), 'utf8');
+  for (const html of [empty, snapshot(4)]) {
+    const { document, dom, press } = setup(t, html);
+    assert.equal(document.querySelector('.page-title-row [data-project-primary]'), null);
+    assert(document.querySelector('.path-schedule-heading [data-project-primary]'));
+    assert.match(document.querySelector('.page-title-row').textContent, /Manage templates/);
+    const navigations = [];
+    document.addEventListener('click', event => {
+      const card = event.target.closest('.path-network a[aria-keyshortcuts]');
+      if (card) { navigations.push(card.getAttribute('href')); event.preventDefault(); }
+    });
+    for (const [key, type, action, custom] of [['r', 'return', 'addReturn', 'Alt+R'], ['s', 'supply', 'addSupply', 'Alt+S']]) {
+      const card = document.querySelector(`.missing-path.${type}`);
+      assert.equal(card.getAttribute('aria-keyshortcuts'), `Control+Alt+${key.toUpperCase()}`);
+      assert(press(key).defaultPrevented);
+      assert.equal(new URL(navigations.at(-1), 'http://localhost').searchParams.get('type'), type);
+      const config = document.querySelector('[data-keybindings]');
+      config.dataset.keybindings = JSON.stringify({...JSON.parse(config.dataset.keybindings), [action]:custom});
+      card.setAttribute('aria-keyshortcuts', custom);
+      assert.equal(press(key).defaultPrevented, false);
+      assert(press(key, {ctrlKey:false}).defaultPrevented);
+      assert.equal(navigations.at(-1), card.getAttribute('href'));
+      for (const options of [{repeat:true}, {isComposing:true}, {modifierAltGraph:true}]) {
+        assert.equal(press(key, {ctrlKey:false,...options}).defaultPrevented, false);
+      }
+      const input = document.createElement('input'); document.body.append(input);
+      assert.equal(press(key, {ctrlKey:false}, input).defaultPrevented, false);
+      input.remove();
+      const dialog = document.createElement('dialog'); dialog.open = true; document.body.append(dialog);
+      assert.equal(press(key, {ctrlKey:false}).defaultPrevented, false);
+      dialog.remove();
+    }
+    document.body.innerHTML = '<main>Another page</main>';
+    assert.equal(press('r', {ctrlKey:false}).defaultPrevented, false);
+    assert.equal(press('s', {ctrlKey:false}).defaultPrevented, false);
+  }
+});
+
+
+test('Import loads uses its own shortcut and preserves editing and dialog guards', t => {
+  const {document,dom,press} = setup(t, snapshot(2));
+  dom.window.HTMLDialogElement.prototype.showModal = function () { this.open = true; };
+  const button = document.querySelector('[data-open-dialog="uploadRooms"]');
+  const dialog = document.getElementById('uploadRooms');
+  assert.equal(button.getAttribute('aria-keyshortcuts'), 'Control+Alt+I');
+  assert(press('i').defaultPrevented);
+  assert(dialog.open);
+  assert.equal(press('i').defaultPrevented, false);
+  dialog.open = false;
+  const input = document.getElementById('room-search');
+  assert(press('i', {}, input).defaultPrevented);
+  assert(dialog.open); dialog.open = false;
+  for (const options of [{ctrlKey:false}, {altKey:false}, {repeat:true}, {isComposing:true}, {modifierAltGraph:true}]) {
+    assert.equal(press('i', options).defaultPrevented, false);
+  }
+  const name = document.createElement('input'); document.body.append(name);
+  assert.equal(press('i', {}, name).defaultPrevented, false);
+  document.querySelector('[data-keybindings]').dataset.keybindings = JSON.stringify({...bindings.defaults, importLoads:'Alt+I'});
+  button.setAttribute('aria-keyshortcuts', 'Alt+I');
+  assert.equal(press('i').defaultPrevented, false);
+  assert(press('i', {ctrlKey:false}).defaultPrevented);
+  assert(dialog.open); dialog.open = false;
+  document.body.innerHTML = '<main>Another page</main>';
+  assert.equal(press('i', {ctrlKey:false}).defaultPrevented, false);
+});
+
+test('PDF shortcut activates the existing export control and respects page and editor scope', t => {
+  const {document,press} = setup(t, snapshot(6));
+  const button = document.querySelector('#project-content button[hx-ext="htmx-download"]');
+  assert.equal(button.getAttribute('aria-keyshortcuts'), 'Control+Alt+E');
+  let exports = 0;
+  button.addEventListener('click', () => exports++);
+  assert(press('e').defaultPrevented);
+  assert.equal(exports, 1);
+  for (const options of [{ctrlKey:false}, {altKey:false}, {repeat:true}, {isComposing:true}, {shiftKey:true}]) {
+    assert.equal(press('e', options).defaultPrevented, false);
+  }
+  const input = document.createElement('input'); document.body.append(input);
+  assert.equal(press('e', {}, input).defaultPrevented, false);
+  const dialog = document.createElement('dialog'); dialog.open = true; document.body.append(dialog);
+  assert.equal(press('e').defaultPrevented, false);
+  dialog.remove();
+  button.disabled = true;
+  assert.equal(press('e').defaultPrevented, false);
+  button.disabled = false;
+  document.querySelector('[data-keybindings]').dataset.keybindings = JSON.stringify({...bindings.defaults, exportPDF:'Alt+E'});
+  button.setAttribute('aria-keyshortcuts', 'Alt+E');
+  assert.equal(press('e').defaultPrevented, false);
+  assert(press('e', {ctrlKey:false}).defaultPrevented);
+  assert.equal(exports, 2);
+  button.remove();
+  assert.equal(press('e', {ctrlKey:false}).defaultPrevented, false);
 });

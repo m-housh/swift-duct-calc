@@ -174,6 +174,7 @@ public struct DatabaseClient: Sendable {
 
   @DependencyClient
   public struct Users: Sendable {
+    public var saveKeybindings: @Sendable (User.ID, Keybindings) async throws -> Keybindings
     /// Resolves deployment-configured admin emails to existing accounts, failing on ambiguity.
     public var administratorAccounts: @Sendable (Set<String>) async throws -> Set<User.ID>
     public var create: @Sendable (User.Create) async throws -> User

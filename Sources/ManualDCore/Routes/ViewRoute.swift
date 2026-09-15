@@ -949,12 +949,17 @@ extension SiteRoute.View {
 
 extension SiteRoute.View {
   public enum UserRoute: Equatable, Sendable {
+    case keybindings(KeybindingsRoute)
     case filters(FilterRoute)
     case templates(PathTemplateRoute)
     case profile(Profile)
     case logout
 
     static let router = OneOf {
+      Route(.case(Self.keybindings)) {
+        Path { "keybindings" }
+        KeybindingsRoute.router
+      }
       Route(.case(Self.filters)) {
         Path { "filters" }
         FilterRoute.router

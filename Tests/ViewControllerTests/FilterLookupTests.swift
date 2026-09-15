@@ -62,6 +62,21 @@ struct FilterLookupTests {
     assertSnapshot(of: view, as: .html, named: "no-airflow")
   }
 
+  @Test func fullyAccountedFilterRemainsVisible() {
+    let view = FrictionRateView(
+      componentLosses: [
+        loss(1, "supply-outlet", 0.03),
+        loss(2, "Aprilaire 516 filter (less 0.20 in equipment rating)", 0),
+      ],
+      equivalentLengths: .init(), frictionRate: nil, blowerStatic: 0.5,
+      airflow: 1300, filterAllowance: 0.2
+    ).environment(ProjectViewValue.$projectID, UUID(0))
+    let html = view.render()
+    #expect(html.components(separatedBy: "Accounted for").count - 1 == 2)
+    #expect(html.contains("Replace Aprilaire 516 filter (less 0.20 in equipment rating) (0.00)"))
+    assertSnapshot(of: view, as: .html)
+  }
+
   private func loss(_ id: Int, _ name: String, _ value: Double) -> ComponentPressureLoss {
     .init(
       id: UUID(id), projectID: UUID(0), name: name, value: value, createdAt: .mock,

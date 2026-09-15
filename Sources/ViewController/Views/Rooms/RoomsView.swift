@@ -6,6 +6,8 @@ import ManualDCore
 import Styleguide
 
 struct RoomsView: HTML, Sendable {
+  @Environment(ShortcutViewValue.$bindings) private var bindings
+
   @Environment(ProjectViewValue.$projectID) var projectID
   let rooms: [Room]
   let sensibleHeatRatio: Double?
@@ -26,13 +28,13 @@ struct RoomsView: HTML, Sendable {
           p(.class("muted")) { "Heating and cooling loads, organized by room." }
         }
         div(.class("row-actions")) {
-          button(.type(.button), .class("btn btn-outline"), .showModal(id: UploadRoomsForm.id)) {
+          button(
+            .type(.button), .class("btn btn-outline"), .showModal(id: UploadRoomsForm.id),
+            .init(name: "aria-keyshortcuts", value: bindings[.importLoads]),
+            .title("Import loads, \(bindings.label(.importLoads))")
+          ) {
             SVG(.filePlusCorner)
             "Import loads"
-          }
-          button(.type(.button), .class("btn btn-primary"), .showModal(id: RoomForm.id())) {
-            SVG(.circlePlus)
-            "Add room"
           }
         }
       }
@@ -71,72 +73,50 @@ struct RoomsView: HTML, Sendable {
           span(.class("sr-only")) { "Find a room" }
           input(
             .type(.search), .id("room-search"), .class("input"), .placeholder("Find a room…"),
-            .init(name: "aria-keyshortcuts", value: "Control+K"))
-          kbd { "Ctrl+K" }
+            .init(name: "aria-keyshortcuts", value: bindings[.search]))
+          kbd { bindings.label(.search) }
+        }
+        button(
+          .type(.button), .class("btn btn-primary"), .showModal(id: RoomForm.id()),
+          .data("project-primary", value: ""),
+          .init(name: "aria-keyshortcuts", value: bindings[.primaryAction]),
+          .title("Add room, \(bindings.label(.primaryAction))")
+        ) {
+          SVG(.circlePlus)
+          "Add room"
         }
       }
-      div(.class("rooms-layout")) {
-        div(.class("project-panel")) {
-          div(
-            .class("table-scroll"), .tabindex(0), .role("region"),
-            .init(name: "aria-label", value: "Room loads")
-          ) {
-            table(
-              .class("table project-table"), .id("roomsTable"),
-              .data("selectable-table", value: "rooms")
-            ) {
-              thead {
-                tr {
-                  th { "Room" }
-                  th { "Heating" }
-                  th { "Cooling total" }
-                  th { "Cooling sensible" }
-                  th { "Registers" }
-                  th { "Delegated to" }
-                  th { span(.class("sr-only")) { "Actions" } }
-                }
-              }
-              tbody {
-                for room in sortedRooms {
-                  RoomRow(room: room, shr: sensibleHeatRatio, rooms: rooms)
-                }
-              }
-            }
-          }
-          p(.class("empty-state"), .data("no-rooms", value: "")) {
-            rooms.isEmpty ? "Add or import rooms to get started." : "No rooms match this filter."
-          }
-          .attributes(.hidden, when: !rooms.isEmpty)
-          p(.class("table-note")) { "Select a room to inspect it. Use the pencil to edit." }
-        }
-        aside(
-          .class("room-inspector project-panel"), .init(name: "aria-label", value: "Selected room")
+      div(.class("project-panel")) {
+        div(
+          .class("table-scroll"), .tabindex(0), .role("region"),
+          .init(name: "aria-label", value: "Room loads")
         ) {
-          p(.class("muted"), .data("inspector-empty", value: "")) {
-            "Select a room to inspect its loads."
-          }
-          for room in sortedRooms {
-            div(.data("room-inspector", value: room.id.idString), .hidden) {
-              span(.class("eyebrow")) { room.level?.label ?? "No level" }
-              h2 { room.name }
-              DesignMetric("Heating load", value: room.heatingLoad.string(digits: 0), unit: "BTU/h")
-              DesignMetric(
-                "Cooling sensible",
-                value: (try? room.coolingLoad.ensured(shr: sensibleHeatRatio ?? 1).sensible).map {
-                  $0.string(digits: 0)
-                } ?? "Not set", unit: "BTU/h")
-              DesignMetric(
-                "Registers", value: "\(room.delegatedTo == nil ? room.registerCount : 0)")
-              if let delegated = rooms.first(where: { $0.id == room.delegatedTo }) {
-                p(.class("muted")) { "Airflow delegated to \(delegated.name)" }
+          table(
+            .class("table project-table"), .id("roomsTable"),
+            .data("selectable-table", value: "rooms")
+          ) {
+            thead {
+              tr {
+                th { "Room" }
+                th { "Heating" }
+                th { "Cooling total" }
+                th { "Cooling sensible" }
+                th { "Registers" }
+                th { "Delegated to" }
+                th { span(.class("sr-only")) { "Actions" } }
               }
-              button(.type(.button), .class("btn btn-outline"), .showModal(id: RoomForm.id(room))) {
-                SVG(.squarePen)
-                "Edit room"
+            }
+            tbody {
+              for room in sortedRooms {
+                RoomRow(room: room, shr: sensibleHeatRatio, rooms: rooms)
               }
             }
           }
         }
+        p(.class("empty-state"), .data("no-rooms", value: "")) {
+          rooms.isEmpty ? "Add or import rooms to get started." : "No rooms match this filter."
+        }
+        .attributes(.hidden, when: !rooms.isEmpty)
       }
       SHRForm(sensibleHeatRatio: sensibleHeatRatio, dismiss: true)
       RoomForm(dismiss: true, projectID: projectID, rooms: rooms, room: nil)

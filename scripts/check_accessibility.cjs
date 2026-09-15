@@ -85,7 +85,7 @@ const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'nig
     const account = page.locator('.account-menu > summary');
     await account.focus();
     await page.keyboard.press('Enter');
-    for (const name of ['Profile', 'Projects', 'Filter library', 'Design preferences', 'Logout']) {
+    for (const name of ['Profile', 'Projects', 'Keybindings', 'Filter library', 'Design preferences', 'Logout']) {
       await page.keyboard.press('Tab');
       await focused(page.getByRole(name === 'Logout' ? 'button' : 'link', { name, exact: true }));
     }
@@ -166,7 +166,7 @@ const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'nig
     await fill({ staticPressure: '0.65' }, dialog);
     await dialog.getByRole('button', { name: 'Save', exact: true }).click();
     await page.getByText('0.65', { exact: true }).waitFor();
-    await page.keyboard.press('Control+Alt+e');
+    await page.keyboard.press('Control+Alt+a');
     dialog = page.locator('#equipmentForm-all[open]');
     await dialog.waitFor();
     await audit('Edit equipment dialog', true);
@@ -264,7 +264,11 @@ const themes = ['light', 'dark', 'aqua', 'cupcake', 'cyberpunk', 'dracula', 'nig
     await dialog.getByRole('button', { name: 'Submit', exact: true }).click();
     await page.getByRole('button', { name: 'Edit Kitchen trunk', exact: true }).click();
     assert.equal(await page.getByRole('dialog').locator('input[name=rooms]:checked').count(), 1, 'Checkbox values must persist');
+    await page.getByRole('dialog').evaluate(dialog => {
+      dialog.addEventListener('close', () => { dialog.dataset.closeObserved = 'true'; }, { once: true });
+    });
     await page.keyboard.press('Escape');
+    await page.locator('dialog[data-close-observed="true"]').waitFor({ state: 'attached' });
     await focused(page.getByRole('button', { name: 'Edit Kitchen trunk', exact: true }));
     await page.locator('.skip-link').focus();
     await page.keyboard.press('Enter');
