@@ -126,7 +126,7 @@ extension SiteRoute {
     case .health: return nil
     case .view(let view):
       switch view {
-      case .test, .homePreview: return nil
+      case .homePreview: return nil
       case .home, .privacyPolicy: return .home
       case .login, .signup: return .accounts
       case .user(.templates): return .templates

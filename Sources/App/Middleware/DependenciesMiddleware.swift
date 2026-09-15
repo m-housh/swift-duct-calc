@@ -1,4 +1,3 @@
-// import ApiController
 import AuthClient
 import DatabaseClient
 import Dependencies
@@ -14,7 +13,6 @@ import ViewController
 struct DependenciesMiddleware: AsyncMiddleware {
 
   private let values: DependencyValues.Continuation
-  // private let apiController: ApiController
   private let database: DatabaseClient
   private let environment: EnvVars
   private let fittingClient: FittingClient
@@ -24,11 +22,9 @@ struct DependenciesMiddleware: AsyncMiddleware {
     database: DatabaseClient,
     environment: EnvVars,
     fittingClient: FittingClient,
-    // apiController: ApiController = .liveValue,
     viewController: ViewController = .liveValue
   ) {
     self.values = withEscapedDependencies { $0 }
-    // self.apiController = apiController
     self.database = database
     self.environment = environment
     self.fittingClient = fittingClient
@@ -39,7 +35,6 @@ struct DependenciesMiddleware: AsyncMiddleware {
     let adminAccess = request.application.storage[AdminAccessKey.self]
     return try await values.yield {
       try await withDependencies {
-        // $0.apiController = apiController
         $0.database = database
         $0.auth = .live(
           on: request,
@@ -49,7 +44,6 @@ struct DependenciesMiddleware: AsyncMiddleware {
         $0.environment = environment
         $0.fittingClient = fittingClient
         $0.templateFittingClient = .live(using: fittingClient)
-        // $0.dateFormatter = .liveValue
         $0.viewController = viewController
         $0.pdfClient = .liveValue
         $0.fileClient = .live(fileIO: request.fileio)

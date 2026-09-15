@@ -16,11 +16,10 @@ struct ProjectOwnershipMiddleware: AsyncMiddleware {
     func requireProject(_ id: Project.ID?) throws {
       guard id == projectID else { throw Abort(.notFound) }
     }
-    func requireRoom(_ id: Room.ID) async throws -> Room {
-      guard let room = try await database.rooms.get(id), room.projectID == projectID else {
+    func requireRoom(_ id: Room.ID) async throws {
+      guard try await database.rooms.get(id)?.projectID == projectID else {
         throw Abort(.notFound)
       }
-      return room
     }
     switch detail {
     case .equipment(.submit(let form)):
@@ -28,9 +27,9 @@ struct ProjectOwnershipMiddleware: AsyncMiddleware {
     case .equipment(.update(let id, _)):
       try await requireProject(database.equipment.get(id)?.projectID)
     case .rooms(.delete(let id)), .rooms(.update(let id, _)):
-      _ = try await requireRoom(id)
+      try await requireRoom(id)
     case .rooms(.submit(let form)):
-      if let id = form.delegatedTo { _ = try await requireRoom(id) }
+      if let id = form.delegatedTo { try await requireRoom(id) }
     case .rooms(.updateSensibleHeatRatio(let form)):
       try requireProject(form.projectID)
     case .componentLoss(.submit(let form)):
@@ -55,39 +54,17 @@ struct ProjectOwnershipMiddleware: AsyncMiddleware {
       case .submit(let form):
         try requireProject(form.projectID)
       }
-    case .ductSizing(.roomRectangularForm(let id, let form)):
-      let room = try await requireRoom(id)
-      guard room.delegatedTo == nil, form.register > 0, form.register <= room.registerCount,
-        form.height > 0
-      else { throw Abort(.badRequest, reason: "Choose a valid register and a positive height.") }
-      if let sizeID = form.id {
-        guard
-          room.rectangularSizes?.contains(where: {
-            $0.id == sizeID && ($0.register == nil || $0.register == form.register)
-          }) == true
-        else { throw Abort(.notFound) }
-      }
+    case .ductSizing(.roomRectangularForm(let id, _)),
+      .ductSizing(.deleteRectangularSize(let id, _)):
+      try await requireRoom(id)
     case .ductSizing(.rectangularSizes(let form)):
-      guard form.height > 0 else {
-        throw Abort(.badRequest, reason: "Choose a positive height.")
-      }
-      for item in form.rooms {
-        let room = try await requireRoom(item.roomID)
-        guard room.delegatedTo == nil, item.register > 0, item.register <= room.registerCount
-        else { throw Abort(.badRequest, reason: "Choose a valid register.") }
-      }
-    case .ductSizing(.deleteRectangularSize(let id, let form)):
-      let room = try await requireRoom(id)
-      guard form.register > 0, form.register <= room.registerCount,
-        room.rectangularSizes?.contains(where: {
-          $0.id == form.rectangularSizeID && ($0.register == nil || $0.register == form.register)
-        }) == true
-      else { throw Abort(.notFound) }
+      for item in form.rooms { try await requireRoom(item.roomID) }
     case .ductSizing(.clearRectangularSizes(let rooms)):
-      for item in rooms {
-        let room = try await requireRoom(item.roomID)
-        guard room.delegatedTo == nil, item.register > 0, item.register <= room.registerCount
-        else { throw Abort(.badRequest, reason: "Choose a valid register.") }
+      for item in rooms { try await requireRoom(item.roomID) }
+    case .equivalentLength(.delete(let id)), .equivalentLength(.duplicate(let id)):
+      // Stale paths keep the "no longer available" message the path pages show.
+      guard try await database.equivalentLengths.get(id)?.projectID == projectID else {
+        throw NotFoundError()
       }
     default: break
     }

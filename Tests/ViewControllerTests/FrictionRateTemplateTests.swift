@@ -31,16 +31,7 @@ struct FrictionRateTemplateViewTests {
       equipmentInfo: details.equipmentInfo, componentLosses: details.componentLosses,
       effectiveLength: details.maxContainer)
     #expect((rate != nil) == hasComponents)
-    let detailResponse = try await manualD.frictionRate(details: details)
-    #expect(detailResponse.frictionRate == rate)
-    let projectResponse = try await withDependencies {
-      $0.database.componentLosses.fetch = { _ in details.componentLosses }
-      $0.database.equivalentLengths.fetchMax = { _ in details.maxContainer }
-      $0.database.equipment.fetch = { _ in details.equipmentInfo }
-    } operation: {
-      try await manualD.frictionRate(projectID: details.project.id)
-    }
-    #expect(projectResponse.frictionRate == rate)
+    #expect(try await manualD.frictionRate(details: details) == rate)
     let view = FrictionRateView(
       componentLosses: details.componentLosses, equivalentLengths: details.maxContainer,
       frictionRate: rate, blowerStatic: details.equipmentInfo?.staticPressure

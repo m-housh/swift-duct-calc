@@ -47,6 +47,37 @@ struct RoomTests {
   }
 
   @Test
+  func rectangularSizesRejectDelegatedRoomsAndMismatchedSizeIDs() async throws {
+    try await withTestUserAndProject { _, project in
+      @Dependency(\.database.rooms) var rooms
+      let room = try await rooms.create(
+        project.id, .init(name: "Parent", heatingLoad: 1000, coolingTotal: 800, registerCount: 2))
+      let delegated = try await rooms.create(
+        project.id, .init(name: "Delegated", heatingLoad: 100, coolingTotal: 80, delegatedTo: room.id))
+      await #expect(throws: ValidationError.self) {
+        try await rooms.updateRectangularSize(delegated.id, .init(height: 8))
+      }
+      #expect(try await rooms.get(delegated.id) == delegated)
+
+      let sized = try await rooms.update(
+        room.id, .init(rectangularSizes: [.init(id: UUID(0), register: 1, height: 8)]))
+      await #expect(throws: NotFoundError.self) {
+        try await rooms.updateRectangularSize(room.id, .init(id: UUID(0), register: 2, height: 6))
+      }
+      await #expect(throws: NotFoundError.self) {
+        try await rooms.clearRectangularSize(room.id, 2, UUID(0))
+      }
+      await #expect(throws: NotFoundError.self) {
+        try await rooms.clearRectangularSize(room.id, 1, UUID(9))
+      }
+      #expect(try await rooms.get(room.id) == sized)
+
+      let cleared = try await rooms.clearRectangularSize(room.id, 1, UUID(0))
+      #expect(cleared.rectangularSizes == nil)
+    }
+  }
+
+  @Test
   func happyPath() async throws {
     try await withTestUserAndProject { _, project in
       @Dependency(\.database.rooms) var rooms
@@ -78,30 +109,11 @@ struct RoomTests {
       )
       #expect(replacedSize.rectangularSizes == [.init(id: UUID(1), register: 1, height: 12)])
 
-      let deletedSize = try await rooms.deleteRectangularSize(room.id, UUID(1))
+      let deletedSize = try await rooms.clearRectangularSize(room.id, 1, nil)
       #expect(deletedSize.rectangularSizes == nil)
 
       try await rooms.delete(room.id)
 
-    }
-  }
-
-  @Test
-  func createMany() async throws {
-    try await withTestUserAndProject { _, project in
-      @Dependency(\.database.rooms) var rooms
-
-      let created = try await rooms.createMany(
-        project.id,
-        [
-          .init(name: "Test 1", heatingLoad: 1234, coolingTotal: 1234),
-          .init(name: "Test 2", heatingLoad: 1234, coolingTotal: 1234),
-        ]
-      )
-
-      #expect(created.count == 2)
-      #expect(created[0].name == "Test 1")
-      #expect(created[1].name == "Test 2")
     }
   }
 
@@ -115,7 +127,7 @@ struct RoomTests {
       @Dependency(\.fileClient) var fileClient
 
       let csvPath = Bundle.module.path(forResource: "rooms", ofType: "csv")
-      let csvFile = Room.CSV(file: try Data(contentsOf: URL(filePath: csvPath!)))
+      let csvFile = FileUpload(file: try Data(contentsOf: URL(filePath: csvPath!)))
       let rows = try await csvParser.parseRooms(csvFile)
       let created = try await database.rooms.createFromCSV(project.id, user.id, rows)
       #expect(created.count == rows.count)
@@ -137,7 +149,7 @@ struct RoomTests {
       }
 
       await #expect(throws: NotFoundError.self) {
-        try await rooms.deleteRectangularSize(UUID(0), UUID(1))
+        try await rooms.clearRectangularSize(UUID(0), 1, nil)
       }
 
       await #expect(throws: NotFoundError.self) {

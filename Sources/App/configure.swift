@@ -51,10 +51,6 @@ public func configure(
   // Add the global middlewares.
   addMiddleware(
     to: app, database: databaseClient, environment: environment, fittingClient: fittingClient)
-  #if DEBUG
-    // Live reload of the application for development when launched with the `./swift-dev` command
-    // app.lifecycle.use(BrowserSyncHandler())
-  #endif
   // The bounded fitting-path payload includes saved snapshots for conflict detection.
   app.routes.defaultMaxBodySize = "2mb"
   // Add our route handlers.
@@ -65,8 +61,6 @@ public func configure(
   if app.environment != .testing {
     try await app.autoMigrate()
   }
-  // Add our custom cli-commands to the application.
-  addCommands(to: app)
 }
 
 private func addMiddleware(
@@ -141,13 +135,6 @@ private func addRoutes(to app: Application) {
   )
 }
 
-private func addCommands(to app: Application) {
-  // #if DEBUG
-  //   app.asyncCommands.use(SeedCommand(), as: "seed")
-  // #endif
-  // app.asyncCommands.use(GenerateAdminUserCommand(), as: "generate-admin")
-}
-
 extension SiteRoute {
 
   fileprivate func middleware() -> [any Middleware]? {
@@ -187,27 +174,19 @@ private func siteHandler(
             confirmDuplicate: upload.confirmDuplicate == "true", zipCode: upload.zipCode,
             name: upload.name))),
       request: request)
-  case .view(.project(.detail(let projectID, .rooms(.csv)))):
-    let upload = try decodeUpload(RoomFileUpload.self, from: request)
-    let route = SiteRoute.View.project(
-      .detail(
-        projectID,
-        .rooms(
-          .csv(
-            .init(file: Data(buffer: upload.file.data))
-          ))))
-    return try await viewController.respond(route: route, request: request)
-  case .view(.project(.detail(let projectID, .rooms(.pdf)))):
+  case .view(.project(.detail(let projectID, .rooms(.csv)))),
+    .view(.project(.detail(let projectID, .rooms(.pdf)))):
     // The router consumes the multipart envelope; Vapor decodes the binary file part.
     let upload = try decodeUpload(RoomFileUpload.self, from: request)
-    let route = SiteRoute.View.project(
-      .detail(
-        projectID,
-        .rooms(
-          .pdf(
-            .init(file: Data(buffer: upload.file.data))
-          ))))
-    return try await viewController.respond(route: route, request: request)
+    let file = FileUpload(file: Data(buffer: upload.file.data))
+    let roomRoute: SiteRoute.View.ProjectRoute.RoomRoute
+    if case .view(.project(.detail(_, .rooms(.csv)))) = route {
+      roomRoute = .csv(file)
+    } else {
+      roomRoute = .pdf(file)
+    }
+    return try await viewController.respond(
+      route: .project(.detail(projectID, .rooms(roomRoute))), request: request)
   case .view(let route):
     return try await viewController.respond(route: route, request: request)
   }

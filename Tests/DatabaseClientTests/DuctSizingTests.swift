@@ -38,14 +38,14 @@ struct DuctSizingTests {
       #expect(try await client.calculateRoomDuctSizes(project.id).map(\.height) == [8, 10, 10])
       for register in [0, 4] {
         await #expect(throws: ValidationError.self) {
-          try await database.rooms.clearRectangularSize(room.id, register)
+          try await database.rooms.clearRectangularSize(room.id, register, nil)
         }
         #expect(try await database.rooms.get(room.id) == stored)
       }
 
       let changed: Room
       if clearing {
-        changed = try await database.rooms.clearRectangularSize(room.id, 2)
+        changed = try await database.rooms.clearRectangularSize(room.id, 2, nil)
       } else {
         changed = try await database.rooms.updateRectangularSize(
           room.id, .init(id: legacy.id, register: 2, height: 12))
@@ -58,7 +58,7 @@ struct DuctSizingTests {
       #expect(calculated.map(\.height) == [8, clearing ? nil : 12, 10])
 
       for register in 1...3 {
-        _ = try await database.rooms.clearRectangularSize(room.id, register)
+        _ = try await database.rooms.clearRectangularSize(room.id, register, nil)
       }
       #expect(try await database.rooms.get(room.id)?.rectangularSizes == nil)
       #expect(try await client.calculateRoomDuctSizes(project.id).allSatisfy { $0.height == nil })
@@ -113,7 +113,18 @@ struct DuctSizingTests {
       }
 
       if missing.isEmpty {
-        let sizes = try await client.calculateDuctSizes(project.id)
+        let detailLoads = LockIsolated(0)
+        let sizes = try await withDependencies {
+          $0.database.projects.detail = { [database] id in
+            detailLoads.withValue { $0 += 1 }
+            return try await database.projects.detail(id)
+          }
+          $0.projectClient = .liveValue
+        } operation: {
+          @Dependency(\.projectClient) var measuredClient
+          return try await measuredClient.calculateDuctSizes(project.id)
+        }
+        #expect(detailLoads.value == 1)
         let room = try #require(sizes.rooms.first)
         #expect(sizes.rooms.count == 1)
         #expect(room.heatingCFM == 1000)
@@ -129,10 +140,10 @@ struct DuctSizingTests {
           }
         }
       } else {
-        for trunks in [false, true] {
+        for allDucts in [false, true] {
           do {
-            if trunks {
-              _ = try await client.calculateTrunkDuctSizes(project.id)
+            if allDucts {
+              _ = try await client.calculateDuctSizes(project.id)
             } else {
               _ = try await client.calculateRoomDuctSizes(project.id)
             }
@@ -158,12 +169,11 @@ struct DuctSizingTests {
           projectID: project.id,
           heatingCFM: first == "heating" ? 900 : nil,
           coolingCFM: first == "cooling" ? 1200 : nil))
-      for operation in 0..<4 {
+      for operation in 0..<3 {
         do {
           switch operation {
           case 0: _ = try await client.calculateRoomDuctSizes(project.id)
-          case 1: _ = try await client.calculateTrunkDuctSizes(project.id)
-          case 2: _ = try await client.calculateDuctSizes(project.id)
+          case 1: _ = try await client.calculateDuctSizes(project.id)
           default: _ = try await client.generatePdf(project.id)
           }
           Issue.record("Expected incomplete equipment to block calculation")
@@ -178,10 +188,10 @@ struct DuctSizingTests {
   @Test func missingProject() async throws {
     try await withDatabase(setupDependencies: { $0.projectClient = .liveValue }) {
       @Dependency(\.projectClient) var client
-      for trunks in [false, true] {
+      for allDucts in [false, true] {
         do {
-          if trunks {
-            _ = try await client.calculateTrunkDuctSizes(UUID(999))
+          if allDucts {
+            _ = try await client.calculateDuctSizes(UUID(999))
           } else {
             _ = try await client.calculateRoomDuctSizes(UUID(999))
           }

@@ -106,7 +106,7 @@ struct ProjectMutationAuthorizationTests {
         let response = try await client.sendRequest(
           .POST, base + "/duct-sizing/room/\(ownRoom.id)", headers: headers,
           body: .init(string: body))
-        #expect(response.status == .badRequest)
+        #expect(response.status == .unprocessableEntity)
         #expect(try await db.rooms.get(ownRoom.id) == ownRoom)
       }
       let foreignRectangle = try await client.sendRequest(
@@ -116,8 +116,8 @@ struct ProjectMutationAuthorizationTests {
       #expect(try await db.rooms.get(room.id) == room)
       for (body, status) in [
         ("height=8&rooms=\(ownRoom.id)_1&rooms=\(room.id)_1", HTTPStatus.notFound),
-        ("height=8&rooms=\(ownRoom.id)_2", .badRequest),
-        ("height=0&rooms=\(ownRoom.id)_1", .badRequest),
+        ("height=8&rooms=\(ownRoom.id)_2", .unprocessableEntity),
+        ("height=0&rooms=\(ownRoom.id)_1", .unprocessableEntity),
       ] {
         let response = try await client.sendRequest(
           .POST, base + "/duct-sizing/rectangular-sizes", headers: headers,
@@ -136,8 +136,8 @@ struct ProjectMutationAuthorizationTests {
         room.id, .init(register: 1, height: 8))
       for (body, status) in [
         ("rooms=\(clearRoom.id)_1&rooms=\(room.id)_1", HTTPStatus.notFound),
-        ("rooms=\(clearRoom.id)_1&rooms=\(clearRoom.id)_4", .badRequest),
-        ("rooms=\(clearRoom.id)_0", .badRequest),
+        ("rooms=\(clearRoom.id)_1&rooms=\(clearRoom.id)_4", .unprocessableEntity),
+        ("rooms=\(clearRoom.id)_0", .unprocessableEntity),
       ] {
         let response = try await client.sendRequest(
           .POST, base + "/duct-sizing/rectangular-sizes/clear", headers: headers,

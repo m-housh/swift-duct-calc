@@ -19,8 +19,8 @@ extension DependencyValues {
 
 @DependencyClient
 public struct PdfImportClient: Sendable {
-  public var parseProject: @Sendable (Room.PDF) async throws -> Project.PDFImport
-  public var parseRooms: @Sendable (Room.PDF) async throws -> Room.LoadImport
+  public var parseProject: @Sendable (FileUpload) async throws -> Project.PDFImport
+  public var parseRooms: @Sendable (FileUpload) async throws -> Room.LoadImport
 }
 
 extension PdfImportClient: DependencyKey {
@@ -32,7 +32,7 @@ extension PdfImportClient: DependencyKey {
   )
 }
 
-private func readPDF(_ pdf: Room.PDF) async throws -> String {
+private func readPDF(_ pdf: FileUpload) async throws -> String {
   @Dependency(\.environment) var environment
   let executable = environment.pdfToTextPath
   guard pdf.file.count <= 10 * 1024 * 1024 else {

@@ -21,7 +21,7 @@ extension SiteRoute.View {
       return viewRouteMiddleware + [ProfileOwnershipMiddleware(target: .user(form.userID))]
     case .user(.profile(.update(let id, _))):
       return viewRouteMiddleware + [ProfileOwnershipMiddleware(target: .profile(id))]
-    case .home, .homePreview, .login, .signup, .test, .ductulator, .privacyPolicy, .fittings, .fittingReference:
+    case .home, .homePreview, .login, .signup, .ductulator, .privacyPolicy, .fittings, .fittingReference:
       return nil
     case .project(let route):
       switch route {
