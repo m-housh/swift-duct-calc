@@ -30,7 +30,7 @@ struct DuctulatorView: HTML, Sendable {
           }
 
           p(.class("font-bold italic")) {
-            "Calculate duct size for the given parameters"
+            "Calculate duct size from airflow (CFM) and friction rate. Add a height for a rectangular size."
           }
 
           form(

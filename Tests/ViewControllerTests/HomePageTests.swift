@@ -23,16 +23,20 @@ struct HomePageTests {
 
   @Test func publicHome() {
     let html = HomePage().render()
-    #expect(html.contains("<title>DuctCalc · Residential duct design</title>"))
+    #expect(html.contains("<title>Residential HVAC Duct Design Software | DuctCalc</title>"))
     #expect(html.contains("name=\"description\""))
     #expect(html.contains("href=\"/signup\""))
     #expect(html.contains("href=\"/login\""))
     #expect(html.contains("href=\"/ductulator\""))
-    #expect(html.contains("Try the ductulator"))
+    #expect(html.contains("Just need a quick answer?"))
+    #expect(html.contains("The speed sheet"))
+    #expect(html.contains("/images/home/sizes-dark.jpg"))
+    #expect(!html.contains("DESIGN STUDIES"))
+    #expect(!html.contains("<iframe"))
     #expect(!html.contains("noindex"))
     #expect(!html.contains("prototype"))
     #expect(!html.contains("srcdoc="))
-    #expect(html.utf8.count < 15_000)
+    #expect(html.utf8.count < 25_000)
   }
 
   @Test(arguments: HomePreviewStep.allCases)

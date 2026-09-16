@@ -21,7 +21,9 @@ struct FittingsView: HTML, Sendable {
       section(.class("intro")) {
         div {
           h1 { "Fitting reference" }
-          p { "Drawings, reference values, and conditions for your duct path." }
+          p {
+            "Duct fitting drawings, equivalent lengths, and reference conditions. Choose a fitting to check the values that apply to your duct path."
+          }
         }
         div(.class("catalog-stat")) {
           strong {

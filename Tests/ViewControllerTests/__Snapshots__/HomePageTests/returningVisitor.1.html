@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>DuctCalc · Residential duct design</title>
+    <title>Residential HVAC Duct Design Software | DuctCalc</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="description" content="Residential duct design based on the Manual-D workflow. Import room loads, trace duct paths, calculate friction rate, and size ducts in your browser.">
+    <meta name="description" content="Residential HVAC duct design based on the Manual-D workflow. Import CoolCalc room loads, calculate friction rate, size ducts, and export a PDF for the job.">
+    <link rel="canonical" href="https://ductcalc.pro/">
     <meta property="og:site_name" content="DuctCalc">
-    <meta property="og:title" content="DuctCalc · Residential duct design">
-    <meta property="og:description" content="Residential duct design based on the Manual-D workflow. Import room loads, trace duct paths, calculate friction rate, and size ducts in your browser.">
+    <meta property="og:title" content="Residential HVAC Duct Design Software | DuctCalc">
+    <meta property="og:description" content="Residential HVAC duct design based on the Manual-D workflow. Import CoolCalc room loads, calculate friction rate, size ducts, and export a PDF for the job.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ductcalc.pro/">
     <meta property="og:image" content="https://ductcalc.pro/images/brand/social-preview.png">
@@ -17,8 +18,8 @@
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="DuctCalc logo. Residential duct design. ductcalc.pro">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="DuctCalc · Residential duct design">
-    <meta name="twitter:description" content="Residential duct design based on the Manual-D workflow. Import room loads, trace duct paths, calculate friction rate, and size ducts in your browser.">
+    <meta name="twitter:title" content="Residential HVAC Duct Design Software | DuctCalc">
+    <meta name="twitter:description" content="Residential HVAC duct design based on the Manual-D workflow. Import CoolCalc room loads, calculate friction rate, size ducts, and export a PDF for the job.">
     <meta name="twitter:image" content="https://ductcalc.pro/images/brand/social-preview.png">
     <meta name="twitter:image:alt" content="DuctCalc logo. Residential duct design. ductcalc.pro">
     <link rel="icon" href="/images/favicon.ico?v=ductcalc-white-3" sizes="16x16 32x32 48x48">
@@ -26,15 +27,15 @@
     <link rel="icon" href="/images/brand/favicon.svg?v=white-3" type="image/svg+xml" sizes="any">
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png?v=ductcalc-2" sizes="180x180">
     <link rel="manifest" href="/site.webmanifest?v=ductcalc-2">
-    <link rel="stylesheet" href="/css/home.css?v=1">
+    <link rel="stylesheet" href="/css/home.css?v=3">
     <link rel="stylesheet" href="/css/ductcalc-wordmark.css?v=2">
-    <script src="/js/home.js?v=1" defer=""></script>
+    <script src="/js/home.js?v=2" defer=""></script>
   </head>
   <body>
-    <div class="landing workspace">
-      <a class="landing-skip" href="#landing-content">Skip to content</a>
-      <header class="landing-header wrap">
-        <a class="landing-brand" href="/"><span class="dc-wordmark" role="img" aria-label="DuctCalc, residential duct design"><span class="dc-wordmark-name" aria-hidden="true">
+    <div class="landing">
+      <a class="skip-link" href="#main-content">Skip to content</a>
+      <header class="site-header wrap">
+        <a class="brand" href="/"><span class="dc-wordmark" role="img" aria-label="DuctCalc, residential duct design"><span class="dc-wordmark-name" aria-hidden="true">
         <picture class="dc-wordmark-icon">
           <source media="(prefers-color-scheme: dark)" srcset="/images/brand/ductcalc-mark-dark.webp">
           <img src="/images/brand/ductcalc-mark-light.webp" alt="" width="50" height="50">
@@ -42,60 +43,246 @@
         uct
         C
         alc
-        Residential duct design
-        BETA<span></span><span class="dc-wordmark-c"></span><span></span></span><span class="dc-wordmark-description" aria-hidden="true"></span></span><span class="brand-beta"></span></a>
-        <nav aria-label="Main navigation"><a href="/fittings">Fitting reference</a><a href="/projects">Projects ↗</a></nav>
+        Residential duct design<span></span><span class="dc-wordmark-c"></span><span></span></span><span class="dc-wordmark-description" aria-hidden="true"></span></span></a>
+        <nav aria-label="Main navigation"><a href="#chapters">The workflow</a><a href="#quick-tools">Quick tools</a><a href="/projects">Projects ↗</a></nav>
       </header>
-      <main id="landing-content" tabindex="-1" class="wrap workspace-main">
-        <section class="workspace-intro">
+      <main id="main-content" tabindex="-1">
+        <section class="hero wrap">
+          <div class="hero-copy">
+            <p class="eyebrow">RESIDENTIAL DUCT DESIGN, RECONSIDERED</p>
+            <h1><span>The speed sheet</span><em>grew up.</em></h1>
+            <p class="hero-deck">All the calculations. A lot less repetition.</p>
+            <p class="hero-description">Your familiar Manual-D workflow, rebuilt for the browser. From CoolCalc room loads to duct sizes and a PDF for the job.</p>
+            <div class="hero-actions"><a class="primary-link" href="/projects"><span>Open your projects</span><span aria-hidden="true">↗</span></a><a class="quiet-link" href="#chapters">Take a closer look ↓</a></div>
+          </div>
+          <div class="hero-art">
+            <div class="screen-frame">
+              <picture>
+                <source media="(prefers-color-scheme: dark)" srcset="/images/home/sizes-dark.jpg">
+                <img src="/images/home/sizes-light.jpg" alt="Calculated supply and return trunk sizes and room branch duct sizes" width="1200" height="820" loading="eager" decoding="async" fetchpriority="high">
+              </picture>
+            </div>
+            <div class="hero-note"><span class="status-dot" aria-hidden="true"></span>The workflow you know. Room to work.</div>
+          </div>
+        </section>
+        <section class="quick-tools wrap" id="quick-tools">
+          <div class="quick-heading">
+            <p class="eyebrow">NO ACCOUNT NEEDED</p>
+            <h2>Just need a quick answer?</h2>
+          </div>
+          Ø<a class="quick-tool" href="/ductulator"><span class="tool-symbol" aria-hidden="true"></span>
           <div>
-            <h1>
-              Your next duct design,
-              <br>
-              all in one place.<em></em>
-            </h1>
+            <h3>Duct sizing calculator</h3>
+            <p>Airflow + friction rate → duct size</p>
           </div>
-          <div class="workspace-pitch"><a class="landing-cta" href="/projects">Open your projects<span aria-hidden="true">↗</span></a><a class="text-link" href="/ductulator">Just need a duct size? Try the ductulator →</a></div>
+          ↗
+          ↳<span class="tool-arrow" aria-hidden="true"></span></a><a class="quick-tool" href="/fittings"><span class="tool-symbol fitting-symbol" aria-hidden="true"></span>
+          <div>
+            <h3>Fitting reference</h3>
+            <p>Drawings, equivalent lengths, conditions</p>
+          </div>
+          ↗<span class="tool-arrow" aria-hidden="true"></span></a>
         </section>
-        <section class="workspace-demo" aria-label="Project preview with sample data">
-          <div class="demo-top">
-            <span>PROJECT PREVIEW</span><span>Sample data · Maple Avenue</span>
-            <button type="button" class="demo-playback" disabled>Play preview</button>
-          </div>
-          <div class="demo-stage">
-            <div class="demo-panel" id="preview-panel-0" data-preview-panel="0" aria-hidden="false">
-              <iframe class="demo-app-frame" title="Room loads · sample project" tabindex="-1" sandbox="allow-same-origin" loading="lazy" src="/home-preview/rooms"></iframe>
-            </div>
-            <div class="demo-panel" id="preview-panel-1" data-preview-panel="1" aria-hidden="true">
-              <iframe class="demo-app-frame" title="Equipment · sample project" tabindex="-1" sandbox="allow-same-origin" loading="lazy" src="/home-preview/equipment"></iframe>
-            </div>
-            <div class="demo-panel" id="preview-panel-2" data-preview-panel="2" aria-hidden="true">
-              <iframe class="demo-app-frame" title="Duct paths · sample project" tabindex="-1" sandbox="allow-same-origin" loading="lazy" src="/home-preview/paths"></iframe>
-            </div>
-            <div class="demo-panel" id="preview-panel-3" data-preview-panel="3" aria-hidden="true">
-              <iframe class="demo-app-frame" title="Friction rate · sample project" tabindex="-1" sandbox="allow-same-origin" loading="lazy" src="/home-preview/pressure"></iframe>
-            </div>
-            <div class="demo-panel" id="preview-panel-4" data-preview-panel="4" aria-hidden="true">
-              <iframe class="demo-app-frame" title="Duct sizes · sample project" tabindex="-1" sandbox="allow-same-origin" loading="lazy" src="/home-preview/sizes"></iframe>
-            </div>
-          </div>
-          <nav class="demo-steps" aria-label="Preview steps">
-            <button type="button" disabled data-preview-step="0" aria-controls="preview-panel-0" aria-pressed="true"><small>01</small><span>Room loads</span></button>
-            <button type="button" disabled data-preview-step="1" aria-controls="preview-panel-1" aria-pressed="false"><small>02</small><span>Equipment</span></button>
-            <button type="button" disabled data-preview-step="2" aria-controls="preview-panel-2" aria-pressed="false"><small>03</small><span>Duct paths</span></button>
-            <button type="button" disabled data-preview-step="3" aria-controls="preview-panel-3" aria-pressed="false"><small>04</small><span>Friction rate</span></button>
-            <button type="button" disabled data-preview-step="4" aria-controls="preview-panel-4" aria-pressed="false"><small>05</small><span>Duct sizes</span></button>
-          </nav>
+        <section class="chapter-intro wrap" id="chapters">
+          <p class="eyebrow">ONE JOB. EVERY CALCULATION.</p>
+          <h2>A better way through the whole job.</h2>
+          <p>Bring the loads. Build the paths. Work out the pressure. Size the ducts.</p>
+          <nav class="chapter-links" aria-label="Feature sections"><a href="#loads">Room loads</a><a href="#paths">TEL templates</a><a href="#fittings">Fittings</a><a href="#pressure">Friction rate</a><a href="#filters">Filters</a><a href="#shortcuts">Shortcuts</a><a href="#sizes">Duct sizes</a></nav>
         </section>
-        <p class="workspace-summary">Bring your room loads. Work through the paths, pressure losses, and duct sizes. Keep the whole job together.</p>
-        <section class="workspace-bottom">
-          <h2>The speed sheet grew up.</h2>
-          <p>The familiar Manual-D workflow, with CoolCalc imports, reusable path templates, and a PDF to take to the job.</p>
-          See how it's built ↗<a class="text-link" href="https://github.com/m-housh/swift-duct-calc"></a>
+        <div class="feature-chapters">
+          <section class="feature feature-loads" id="loads">
+            <div class="feature-inner wrap">
+              <div class="feature-copy reveal">
+                <p class="eyebrow">01 / ROOM LOADS</p>
+                <h2>
+                  You already did
+                  the load calc.
+                </h2>
+                <p class="feature-description">Bring it with you. Import room loads from a current or legacy CoolCalc PDF and get straight to the duct design.</p>
+                <p class="feature-detail">Room-by-room heating and cooling loads stay together, ready for the rest of the Manual-D workflow.</p><span class="feature-rule" aria-hidden="true"></span>
+              </div>
+              <div class="feature-visual reveal">
+                <figure class="feature-art art-loads">
+                  <div class="screen-frame">
+                    <picture>
+                      <source media="(prefers-color-scheme: dark)" srcset="/images/home/rooms-dark.jpg">
+                      <img src="/images/home/rooms-light.jpg" alt="Room heating and cooling loads imported into a sample DuctCalc project" width="1200" height="820" loading="lazy" decoding="async">
+                    </picture>
+                  </div>
+                  <figcaption class="art-caption">Current and legacy CoolCalc PDFs</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+          <section class="feature feature-paths" id="paths">
+            <div class="feature-inner wrap">
+              <div class="feature-copy reveal">
+                <p class="eyebrow">02 / TEL TEMPLATES</p>
+                <h2>
+                  Your usual paths.
+                  Ready to reuse.
+                </h2>
+                <p class="feature-description">Save total equivalent length paths for the duct systems you design often. Start the next job with your familiar fittings and straight lengths.</p>
+                <p class="feature-detail">Templates save the setup. You still adjust the path to the job in front of you.</p><span class="feature-rule" aria-hidden="true"></span>
+              </div>
+              <div class="feature-visual reveal">
+                <figure class="feature-art art-paths">
+                  <div class="screen-frame">
+                    <picture>
+                      <source media="(prefers-color-scheme: dark)" srcset="/images/home/paths-dark.jpg">
+                      <img src="/images/home/paths-light.jpg" alt="Supply and return duct paths with fittings and total equivalent lengths" width="1200" height="820" loading="lazy" decoding="async">
+                    </picture>
+                  </div>
+                  <figcaption class="art-caption">Your fittings. Your repeatable setups.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+          <section class="feature feature-fittings" id="fittings">
+            <div class="feature-inner wrap">
+              <div class="feature-copy reveal">
+                <p class="eyebrow">03 / FITTINGS</p>
+                <h2>
+                  The right fitting.
+                  Right in front of you.
+                </h2>
+                <p class="feature-description">Browse drawings and reference conditions as you build a duct path. Put the fittings you actually use into the calculation.</p>
+                <p class="feature-detail">Equivalent lengths and the conditions behind them sit alongside the drawings. The same reference is available without an account.</p>
+                Explore the fitting reference ↗<a class="quiet-link" href="/fittings"></a><span class="feature-rule" aria-hidden="true"></span>
+              </div>
+              <div class="feature-visual reveal">
+                <figure class="feature-art art-fittings">
+                  <div class="screen-frame">
+                    <picture>
+                      <source media="(prefers-color-scheme: dark)" srcset="/images/home/fittings-dark.jpg">
+                      <img src="/images/home/fittings-light.jpg" alt="Duct fitting drawings and equivalent length reference values" width="1168" height="997" loading="lazy" decoding="async">
+                    </picture>
+                  </div>
+                  <figcaption class="art-caption">Drawings + equivalent lengths + conditions</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+          <section class="feature feature-pressure" id="pressure">
+            <div class="feature-inner wrap">
+              <div class="feature-copy reveal">
+                <p class="eyebrow">04 / FRICTION RATE</p>
+                <h2>
+                  Every pressure loss
+                  has a place.
+                </h2>
+                <p class="feature-description">Work from equipment static pressure through the component losses to available static pressure and design friction rate.</p>
+                <p class="feature-detail">Friction rate templates carry your repeat setups forward, with each component loss still visible.</p><span class="feature-rule" aria-hidden="true"></span>
+              </div>
+              <div class="feature-visual reveal">
+                <figure class="feature-art art-pressure">
+                  <div class="screen-frame">
+                    <picture>
+                      <source media="(prefers-color-scheme: dark)" srcset="/images/home/pressure-dark.jpg">
+                      <img src="/images/home/pressure-light.jpg" alt="Component pressure losses and calculated design friction rate" width="1200" height="820" loading="lazy" decoding="async">
+                    </picture>
+                  </div>
+                  <figcaption class="art-caption">See how the friction rate comes together</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+          <section class="feature feature-filters" id="filters">
+            <div class="feature-inner wrap">
+              <div class="feature-copy reveal">
+                <p class="eyebrow">05 / FILTERS</p>
+                <h2>
+                  Pick the filter
+                  for the airflow.
+                </h2>
+                <p class="feature-description">Look up pressure drop at the project's airflow. Keep favorites close so choosing the filter is part of the design.</p>
+                <p class="feature-detail">Compare filters from your library and carry the selected pressure loss into the friction rate calculation.</p><span class="feature-rule" aria-hidden="true"></span>
+              </div>
+              <div class="feature-visual reveal">
+                <figure class="feature-art art-filters">
+                  <div class="screen-frame">
+                    <picture>
+                      <source media="(prefers-color-scheme: dark)" srcset="/images/home/filters-dark.jpg">
+                      <img src="/images/home/filters-light.jpg" alt="Filter pressure drops compared at the project's airflow" width="1000" height="720" loading="lazy" decoding="async">
+                    </picture>
+                  </div>
+                  <figcaption class="art-caption">Pressure drop at your project's airflow</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+          <section class="feature feature-shortcuts" id="shortcuts">
+            <div class="feature-inner wrap">
+              <div class="feature-copy reveal">
+                <p class="eyebrow">06 / SHORTCUTS</p>
+                <h2>
+                  Keep your hands
+                  on the keys.
+                </h2>
+                <p class="feature-description">Move between rooms, equipment, paths, and duct sizes without reaching for the mouse at every step.</p>
+                <p class="feature-detail">Find a room, add an item, or jump to the next step. Shortcuts are customizable. The mouse works too.</p>
+                <div class="shortcut-demo" aria-label="Control Alt Enter: next project step"><kbd>ctrl</kbd><kbd>alt</kbd><kbd>enter</kbd><span>Next step</span></div><span class="feature-rule" aria-hidden="true"></span>
+              </div>
+              <div class="feature-visual reveal">
+                <figure class="feature-art art-shortcuts">
+                  <div class="screen-frame">
+                    <picture>
+                      <source media="(prefers-color-scheme: dark)" srcset="/images/home/shortcuts-dark.jpg">
+                      <img src="/images/home/shortcuts-light.jpg" alt="Keyboard shortcuts for navigating and editing a DuctCalc project" width="1200" height="820" loading="lazy" decoding="async">
+                    </picture>
+                  </div>
+                  <figcaption class="art-caption">Keyboard shortcuts throughout the app</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+          <section class="feature feature-sizes" id="sizes">
+            <div class="feature-inner wrap">
+              <div class="feature-copy reveal">
+                <p class="eyebrow">07 / DUCT SIZES</p>
+                <h2>
+                  Finish the design.
+                  Take it to the job.
+                </h2>
+                <p class="feature-description">Work through round and rectangular duct sizes, then export a PDF that brings the project's calculations together.</p>
+                <p class="feature-detail">A browser-based workspace from the first room load to the report you take with you.</p><span class="feature-rule" aria-hidden="true"></span>
+              </div>
+              <div class="feature-visual reveal">
+                <figure class="feature-art art-sizes">
+                  <div class="screen-frame">
+                    <picture>
+                      <source media="(prefers-color-scheme: dark)" srcset="/images/home/sizes-dark.jpg">
+                      <img src="/images/home/sizes-light.jpg" alt="Calculated supply and return trunk sizes and room branch duct sizes" width="1200" height="820" loading="lazy" decoding="async">
+                    </picture>
+                  </div>
+                  <figcaption class="art-caption">Round and rectangular duct sizing</figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+        </div>
+        <section class="closing wrap">
+          <p class="eyebrow">BUILT BY AN HVAC CONTRACTOR</p>
+          <h2>
+            Years in a spreadsheet.
+            Now in your browser.
+          </h2>
+          <p>DuctCalc grew out of the speed sheet I used on my own jobs. The goal is the same: work through the design, know where the numbers came from, and get on with the installation.</p>
+          <div class="closing-actions"><a class="primary-link" href="/projects"><span>Open your projects</span><span aria-hidden="true">↗</span></a><a class="quiet-link" href="https://github.com/m-housh/swift-duct-calc">Explore the source ↗</a></div>
+          <div class="closing-notes"><span>Source available</span><span>Self-hostable</span><span>Built around real jobs</span></div>
         </section>
       </main>
-      <footer class="landing-footer wrap">
-        <a href="https://github.com/m-housh/swift-duct-calc">Source available ↗</a><a href="mailto:support@ductcalc.pro">Contact Michael</a><a href="/privacy-policy">Privacy</a>
+      <footer class="site-footer wrap">
+        <span class="dc-wordmark" role="img" aria-label="DuctCalc, residential duct design"><span class="dc-wordmark-name" aria-hidden="true">
+        <picture class="dc-wordmark-icon">
+          <source media="(prefers-color-scheme: dark)" srcset="/images/brand/ductcalc-mark-dark.webp">
+          <img src="/images/brand/ductcalc-mark-light.webp" alt="" width="50" height="50">
+        </picture>
+        uct
+        C
+        alc
+        Residential duct design<span></span><span class="dc-wordmark-c"></span><span></span></span><span class="dc-wordmark-description" aria-hidden="true"></span></span>
+        <div><a href="mailto:support@ductcalc.pro">Contact Michael</a><a href="/privacy-policy">Privacy</a></div>
         <p>Manual-D™ is a trademark of ACCA. DuctCalc is not affiliated with or endorsed by ACCA.</p>
       </footer>
     </div>

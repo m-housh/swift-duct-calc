@@ -15,9 +15,9 @@ extension SiteRoute.View {
     case .user(.filters(.index(let query))):
       title = query.tab == "preferences" ? "Design preferences" : "Filter library"
     case .user: title = "Account"
-    case .ductulator: title = "Ductulator"
+    case .ductulator: return "Duct Sizing Calculator / Ductulator | DuctCalc"
     case .fittings: title = "Fitting picker"
-    case .fittingReference: title = "Fitting reference"
+    case .fittingReference: return "Duct Fitting Equivalent Length Reference | DuctCalc"
     case .project(.detail(_, let detail)):
       switch detail {
       case .index: title = "Project"
