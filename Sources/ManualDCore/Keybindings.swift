@@ -125,6 +125,25 @@ public struct Keybindings: Codable, Equatable, Sendable {
     }.joined(separator: "+")
   }
 
+  /// Apply only when loading persisted settings. Preserve older overrides that predate fitting navigation.
+  public func resolvingLegacyFittingConflicts() throws -> Self {
+    var result = self
+    for action in [KeybindingAction.fittingLeft, .fittingDown, .fittingUp, .fittingRight]
+    where overrides[action.rawValue] == nil {
+      let occupied = Set(KeybindingAction.allCases.filter {
+        $0 != action && !$0.contexts.isDisjoint(with: action.contexts)
+      }.map { result[$0] })
+      guard occupied.contains(result[action]) else { continue }
+      let preferred = action.defaultBinding.replacingOccurrences(of: "Control+Alt+", with: "Control+Alt+Shift+")
+      let candidates = [preferred] + "ABCDEFGHIJKLMNOPQRSTUVWXYZ".map { "Control+Alt+Shift+\($0)" }
+      guard let replacement = candidates.first(where: { !occupied.contains($0) }) else {
+        throw KeybindingError("No available shortcut for \(action.title).")
+      }
+      result.overrides[action.rawValue] = replacement
+    }
+    return result
+  }
+
   public func validated() throws -> Self {
     for (id, binding) in overrides {
       guard KeybindingAction(rawValue: id) != nil, Self.isValid(binding) else {

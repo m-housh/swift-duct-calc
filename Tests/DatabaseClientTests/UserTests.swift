@@ -134,6 +134,24 @@ struct UserDatabaseTests {
     }
   }
 
+  @Test func legacyKeybindingsLoadAndRemainEditable() async throws {
+    try await withTestUser { user in
+      @Dependency(\.database.users) var users
+      let model = UserModel(id: user.id, email: user.email, passwordHash: "unused")
+      model.createdAt = user.createdAt
+      model.updatedAt = user.updatedAt
+      model.keybindings = #"{"overrides":{"nextStep":"Control+Alt+L"}}"#
+      var loaded = try #require(model.toDTO().keybindings)
+      #expect(loaded.resolved["nextStep"] == "Control+Alt+L")
+      #expect(loaded.resolved["fittingRight"] == "Control+Alt+Shift+L")
+
+      // An unrelated edit can be saved, and the fallback survives the next database load.
+      loaded.overrides["search"] = "Control+Shift+S"
+      #expect(try await users.saveKeybindings(user.id, loaded) == loaded)
+      #expect(try await users.get(user.id)?.keybindings == loaded)
+    }
+  }
+
   @Test
   func testUserProfileFails() async throws {
     try await withDatabase {
