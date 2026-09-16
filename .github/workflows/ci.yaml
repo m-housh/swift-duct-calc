@@ -111,6 +111,8 @@ jobs:
       run: DUCT_TEMPLATE_QA_ORIGIN=http://127.0.0.1:58681 npm run test:path-templates
     - name: Check path template browser navigation
       run: DUCT_TEMPLATE_QA_ORIGIN=http://127.0.0.1:58681 node scripts/check_template_browse_browser.cjs
+    - name: Check path template review and keyboard selection
+      run: DUCT_TEMPLATE_QA_ORIGIN=http://127.0.0.1:58681 npm run test:path-template-review
     - name: Stop accessibility test app
       if: always()
       run: docker stop ductcalc-accessibility || true

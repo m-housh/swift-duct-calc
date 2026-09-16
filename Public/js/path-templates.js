@@ -27,6 +27,16 @@
     chooseMultiple: 'Choose multiple fittings',
     quantities: 'Enter quantities',
   };
+  const fittingDirections = {
+    fittingLeft: 'ArrowLeft', fittingDown: 'ArrowDown', fittingUp: 'ArrowUp', fittingRight: 'ArrowRight',
+  };
+  function fittingNavigationHint() {
+    const bindings = window.ductCalcKeybindings?.() ?? {};
+    const keys = Object.keys(fittingDirections).map(action => bindings[action]);
+    if (keys.some(key => !key)) return 'Arrow keys';
+    if (keys.join(' ') === 'Control+Alt+H Control+Alt+J Control+Alt+K Control+Alt+L') return 'Ctrl+Alt+H/J/K/L or arrows';
+    return keys.map(key => key.replaceAll('Control', 'Ctrl').replaceAll('Meta', 'Command')).join(' / ') + ' or arrows';
+  }
   const uuid = () => {
     if (typeof crypto.randomUUID === 'function') return crypto.randomUUID();
     // HTTP access through a LAN hostname or IP has getRandomValues, but not randomUUID.
@@ -140,6 +150,8 @@
       mode = 'path';
       message = '';
       render();
+      if (busy) focusNext = true;
+      else root.querySelector('#section-heading')?.focus();
     }
     function currentStep() {
       return path.config.steps[path.cursor];
@@ -173,7 +185,7 @@
       return `<article class="card bg-base-200 p-3">${button(
         action,
         `${artwork(d)}<span class="block mt-2">${esc(label)}</span>`,
-        `data-id="${esc(d.id)}" aria-label="Choose ${esc(label)}" ${unavailable ? 'disabled' : ''}`,
+        `data-id="${esc(d.id)}" data-fitting-choice aria-label="Choose ${esc(label)}" ${unavailable ? 'disabled' : ''}`,
         'btn-ghost h-auto min-h-12 w-full flex-col items-stretch whitespace-normal p-2'
       )}${unavailable ? '<p class="text-warning">Guided inputs are not available for this fitting. Use the project picker.</p>' : ''}${source(d)}</article>`;
     }
@@ -318,12 +330,44 @@
         )
         .join('');
     }
+    function review(total) {
+      return `<div class="path-review">
+        <fieldset class="path-review-fields">
+          <legend>Path details</legend>
+          <label for="review-path-name">Path name
+            <input id="review-path-name" class="input" name="name" maxlength="200" required data-path="name" value="${esc(path.name)}" placeholder="e.g. Upstairs supply">
+          </label>
+          <label for="review-path-straight">Straight duct lengths <span class="path-review-muted">(ft)</span>
+            <input id="review-path-straight" class="input" name="straight" data-path="straight" value="${esc(path.straight)}" placeholder="10, 25, 15" aria-describedby="review-straight-help">
+            <span id="review-straight-help" class="path-review-help">Separate whole-foot lengths with commas. Leave blank if there are none.</span>
+          </label>
+        </fieldset>
+        <section class="path-review-fittings" aria-labelledby="review-fittings-heading">
+          <div class="path-review-heading"><h3 id="review-fittings-heading">Fittings</h3>${button('browse', 'Add fitting', '', 'btn-outline btn-sm')}</div>
+          ${path.rows.length ? `<table class="path-review-table">
+            <caption class="sr-only">Fittings in this path</caption>
+            <thead><tr><th scope="col">Fitting</th><th scope="col" class="path-review-number">Quantity</th><th scope="col" class="path-review-number">Equivalent length</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead>
+            <tbody>${path.rows.map(row => {
+              const d = definitions.get(row.fittingID);
+              const name = d?.name || row.fittingID;
+              return `<tr>
+                <th scope="row"><span class="path-review-name">${esc(name)}</span><span class="path-review-help">${esc(d?.sourceCode || row.fittingID)} · ${Number(row.value.toFixed(3))} ft each</span></th>
+                <td class="path-review-number" data-label="Quantity">${row.quantity}</td>
+                <td class="path-review-number" data-label="Equivalent length">${Number((row.value * row.quantity).toFixed(3))} ft</td>
+                <td><div class="path-review-actions">${button('remove-row', document.getElementById('path-review-remove-icon').innerHTML, `data-row="${esc(row.id)}" aria-label="Remove ${esc(name)}" title="Remove fitting"`, 'btn-sm btn-ghost text-error')}${button('edit-row', document.getElementById('path-review-edit-icon').innerHTML, `data-row="${esc(row.id)}" aria-label="Edit ${esc(name)}" title="Edit fitting"`, 'btn-sm btn-ghost')}</div></td>
+              </tr>`;
+            }).join('')}</tbody>
+          </table>` : '<p class="path-review-empty">No fittings in this path. Add a fitting or go back to a section to choose one.</p>'}
+          <div class="path-review-total"><span>Total fitting equivalent length</span><strong>${Number(total.toFixed(3))} <span>ft</span></strong></div>
+        </section>
+      </div>`;
+    }
     function flow() {
       const step = currentStep(),
         total = path.rows.reduce((sum, r) => sum + r.value * r.quantity, 0);
       return `<h1 class="text-2xl font-bold">${path.trial ? 'Try template' : data.path ? 'Edit path' : 'Build path'} · ${esc(path.config.name)}</h1>${status()}
         <div class="grid lg:grid-cols-[16rem_1fr] gap-6"><nav aria-label="Path sections" class="space-y-2">${path.config.steps.map((s, i) => button('visit', `${i + 1}. ${esc(s.title)}${path.completed[s.id] ? ' ✓' : ''}`, `data-index="${i}" ${i > path.visited ? 'disabled' : ''}`, `w-full ${i === path.cursor ? 'btn-primary' : ''}`)).join('')}${button('visit', 'Review path', `data-index="${path.config.steps.length}" ${path.visited < path.config.steps.length ? 'disabled' : ''}`, 'w-full')}${path.trial ? button('exit-trial', 'Back to template', '', 'w-full') : ''}</nav>
-        <section class="min-w-0 space-y-4"><h2 id="section-heading" tabindex="-1" class="text-xl font-bold">${step ? esc(step.title) : 'Review path'}</h2>
+        <form id="path-step-form" class="min-w-0 space-y-4" novalidate aria-labelledby="section-heading"><h2 id="section-heading" tabindex="-1" class="text-xl font-bold">${step ? esc(step.title) : 'Review path'}</h2>
         ${
           step
             ? `${step.allowsSkipping && step.behavior !== 'quantities' ? `<p>Do you want to add ${esc(step.title === 'Supply trunk branch takeoff' ? 'a Supply trunk branch takeoff' : 'a fitting from this section')} to the path?</p>` : ''}${
@@ -335,20 +379,27 @@
                         return `<div class="card bg-base-200 p-4"><h3 class="font-bold">${esc(d.name)}</h3><div class="grid sm:grid-cols-2 gap-3">${artwork(d)}<div class="space-y-3"><label>Quantity<input class="input w-full" type="number" min="0" step="1" data-quantity="${esc(d.id)}" value="${esc(path.quantities[key] ?? '0')}"></label>${button('quantity-details', 'Fitting details', `data-id="${esc(d.id)}"`)}<p class="text-sm">${d.id === '8A-4-or-5-piece' ? `R/D: ${esc(inputsFor(step, choice)?.sourceTable?.choices[0] === '1' ? '1.0' : inputsFor(step, choice)?.sourceTable?.choices[0] || 'Choose')}` : 'Zero omits this fitting.'}</p></div></div>${source(d)}</div>`;
                       })
                       .join('')}</div>`
-                  : `<div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-3">${step.choices
+                  : `<div data-fitting-choices class="grid sm:grid-cols-2 xl:grid-cols-3 gap-3">${step.choices
                       .map((choice) => {
                         const d = definitions.get(choice.fittingID);
                         return fittingCard(d, 'choose');
                       })
                       .join('')}</div>`
               }<div id="step-fitting-rows">${rowList(stepRows(step))}</div>`
-            : `<label class="block">Path name<input class="input w-full" maxlength="200" data-path="name" value="${esc(path.name)}"></label><label class="block">Straight duct lengths (ft)<input class="input w-full" data-path="straight" placeholder="10, 25, 5" value="${esc(path.straight)}"></label><p class="text-sm">Separate whole-foot lengths with commas. Leave blank if there are none.</p>${rowList(path.rows)}<p class="font-bold">Fittings: ${Number(total.toFixed(3))} ft</p>`
+            : review(total)
         }
-        ${button('browse', 'Browse all fittings')}<div class="sticky bottom-0 bg-base-100 border-t border-base-300 p-3 flex flex-wrap gap-2 justify-end">${button('back', 'Back', path.cursor === 0 ? 'disabled' : '')}${step && canSkip(step) ? button('skip', stepRows(step).length ? 'Clear and skip' : 'Skip') : ''}${step ? button('done', step.behavior === 'chooseOne' ? 'Continue' : `Done with ${esc(step.title)}`, '', 'btn-secondary') : path.trial ? button('exit-trial', 'Back to template', '', 'btn-secondary') : button('save-path', 'Save path', '', 'btn-secondary')}</div></section></div>`;
+        ${step ? button('browse', 'Browse all fittings') : ''}<div class="path-flow-actions sticky bottom-0 bg-base-100 border-t border-base-300 p-3 flex flex-wrap gap-2 justify-end"><span class="path-flow-key-help">${step && step.behavior !== 'quantities' ? `<kbd>${esc(fittingNavigationHint())}</kbd> fittings · ` : ''}<kbd>Enter</kbd> ${step ? step.behavior === 'quantities' ? 'continue' : 'select / continue' : path.trial ? 'finish trial' : 'save'} · <kbd>Shift + Enter</kbd> back</span>${button('back', 'Back', path.cursor === 0 ? 'disabled' : '')}${step && canSkip(step) ? button('skip', stepRows(step).length ? 'Clear and skip' : 'Skip') : ''}<button type="submit" class="btn btn-secondary" data-action="${step ? 'done' : path.trial ? 'exit-trial' : 'save-path'}">${step ? step.behavior === 'chooseOne' ? 'Continue' : `Done with ${esc(step.title)}` : path.trial ? 'Back to template' : 'Save path'}</button></div></form></div>`;
     }
     function render(focus = false) {
       const fileInput = mode === 'import' ? root.querySelector('#import-template-file') : null;
       root.innerHTML = mode === 'editor' ? editor() : mode === 'import' ? importView() : flow();
+      if (mode === 'path') {
+        const bindings = window.ductCalcKeybindings?.() ?? {};
+        root.querySelector('[data-action="back"]').setAttribute('aria-keyshortcuts',
+          ['Shift+Enter', bindings.previousStep].filter(Boolean).join(' '));
+        root.querySelector('#path-step-form button[type="submit"]').setAttribute('aria-keyshortcuts',
+          ['Enter', bindings.nextStep, bindings.primaryAction].filter(Boolean).join(' '));
+      }
       window.ductCalcRequestErrors.appendActions(root.querySelector('#workspace-status'), message.actions);
       if (fileInput) root.querySelector('#import-template-file').replaceWith(fileInput);
       if (focus) focusNext = true;
@@ -661,7 +712,7 @@
           path.completed[step.id] = stepRows(step).length > 0 || canSkip(step);
         }
         dirty = true;
-        render();
+        render(true);
         return;
       }
       if (action === 'cancel-details') {
@@ -699,7 +750,7 @@
         dialog.className = 'modal';
         dialog.id = 'browse-fittings';
         dialog.setAttribute('aria-labelledby', 'browse-heading');
-        dialog.innerHTML = `<div class="modal-box max-w-4xl space-y-4"><h2 id="browse-heading" class="text-xl font-bold">Add a fitting to this path</h2><p>Choose a fitting for this section, or switch groups to add an extra fitting to the path. Your saved template stays the same.</p><div class="flex flex-col gap-2"><label for="browse-group">Fitting group</label><select class="select w-full appearance-auto bg-none border-base-content/50 cursor-pointer" id="browse-group">${allowed[path.config.type].map((g) => `<option value="${g}" ${g === group ? 'selected' : ''}>${g} · ${groups[g]}</option>`).join('')}</select></div><div id="browse-choices" class="grid sm:grid-cols-2 gap-3"></div><div class="modal-action">${button('close-browse', 'Close')}</div></div>`;
+        dialog.innerHTML = `<div class="modal-box max-w-4xl space-y-4"><h2 id="browse-heading" class="text-xl font-bold">Add a fitting to this path</h2><p>Choose a fitting for this section, or switch groups to add an extra fitting to the path. Your saved template stays the same.</p><div class="flex flex-col gap-2"><label for="browse-group">Fitting group</label><select class="select w-full appearance-auto bg-none border-base-content/50 cursor-pointer" id="browse-group">${allowed[path.config.type].map((g) => `<option value="${g}" ${g === group ? 'selected' : ''}>${g} · ${groups[g]}</option>`).join('')}</select></div><div id="browse-choices" data-fitting-choices class="grid sm:grid-cols-2 gap-3"></div><div class="modal-action">${button('close-browse', 'Close')}</div></div>`;
         root.append(dialog);
         renderBrowse();
         dialog.showModal();
@@ -809,9 +860,64 @@
       }
     }
     root.addEventListener('submit', (event) => {
-      if (event.target.id !== 'fitting-details-form') return;
+      if (!['fitting-details-form', 'path-step-form'].includes(event.target.id)) return;
       event.preventDefault();
-      run(() => act('apply-details', event.submitter ?? event.target));
+      if (event.target.id === 'fitting-details-form') {
+        run(() => act('apply-details', event.submitter ?? event.target));
+        return;
+      }
+      if (document.activeElement?.matches('[data-quantity]')) document.activeElement.blur();
+      const target = event.target.querySelector('button[type="submit"]');
+      run(() => {
+        // Committing a quantity may open fitting details that must be completed first.
+        if (!root.querySelector('dialog[open]')) return act(target.dataset.action, target);
+      });
+    });
+    root.addEventListener('keydown', (event) => {
+      if (mode !== 'path' || busy || event.defaultPrevented || event.isComposing
+        || event.getModifierState('AltGraph')) return;
+      const action = Object.keys(fittingDirections).find(action => window.ductCalcMatches?.(event, action));
+      const directionKey = action ? fittingDirections[action]
+        : !event.ctrlKey && !event.altKey && !event.metaKey && !event.shiftKey ? event.key : null;
+      if (!Object.values(fittingDirections).includes(directionKey)) return;
+      const card = event.target.closest('[data-fitting-choice]');
+      const grid = card?.closest('[data-fitting-choices]')
+        ?? (event.target.matches('h1, #section-heading') ? root.querySelector('#path-step-form [data-fitting-choices]') : null);
+      if (!grid || [...root.querySelectorAll('dialog[open]')].some(dialog => !dialog.contains(grid))) return;
+      const cards = [...grid.querySelectorAll('[data-fitting-choice]:not(:disabled)')];
+      if (!cards.length) return;
+      event.preventDefault();
+      let next = cards[0];
+      if (card) {
+        const index = cards.indexOf(card);
+        if (directionKey === 'ArrowLeft' || directionKey === 'ArrowRight') {
+          next = cards[Math.max(0, Math.min(cards.length - 1, index + (directionKey === 'ArrowRight' ? 1 : -1)))];
+        } else {
+          // Use the rendered rows so vertical movement follows every responsive layout.
+          const position = card.closest('article').getBoundingClientRect();
+          const direction = directionKey === 'ArrowDown' ? 1 : -1;
+          const candidates = cards.map(button => ({ button, rect: button.closest('article').getBoundingClientRect() }))
+            .filter(({ rect }) => (rect.top - position.top) * direction > 1)
+            .sort((a, b) => Math.abs(a.rect.top - position.top) - Math.abs(b.rect.top - position.top)
+              || Math.abs(a.rect.left - position.left) - Math.abs(b.rect.left - position.left));
+          next = candidates[0]?.button ?? card;
+        }
+      }
+      next.focus({ preventScroll: true });
+      next.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    });
+    root.addEventListener('keydown', (event) => {
+      if (mode !== 'path' || event.defaultPrevented || event.isComposing || event.getModifierState('AltGraph')
+        || root.querySelector('dialog[open]')) return;
+      const plainEnter = event.key === 'Enter' && !event.ctrlKey && !event.altKey && !event.metaKey;
+      const previous = (plainEnter && event.shiftKey) || window.ductCalcMatches?.(event, 'previousStep');
+      const next = window.ductCalcMatches?.(event, 'nextStep') || window.ductCalcMatches?.(event, 'primaryAction');
+      const interactive = event.target.closest('button, a, input, select, textarea, summary, [contenteditable], [role="button"], [role="combobox"], [role="textbox"]');
+      if (!previous && !next && !(plainEnter && !interactive)) return;
+      event.preventDefault();
+      if (event.repeat || busy) return;
+      if (previous) root.querySelector('[data-action="back"]')?.click();
+      else root.querySelector('#path-step-form').requestSubmit();
     });
     root.addEventListener('pointerdown', (event) => {
       // A quantity blur can add rows and move the pressed button before pointerup.

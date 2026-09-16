@@ -28,6 +28,21 @@ struct KeybindingsTests {
       "nextRoom": "Control+Shift+J", "nextFitting": "Control+Shift+J",
     ]).validated()
   }
+  @Test func fittingDirectionsRespectTemplateContext() throws {
+    for binding in ["Control+Alt+J", "Control+Alt+Enter", "Control+Alt+A", "Control+Alt+P"] {
+      #expect(throws: KeybindingError.self) {
+        try Keybindings(overrides: ["fittingLeft": binding]).validated()
+      }
+    }
+    let bindings = try Keybindings(overrides: ["fittingRight": "Control+Shift+L"]).validated()
+    #expect(bindings[.fittingLeft] == "Control+Alt+H")
+    #expect(bindings[.fittingDown] == "Control+Alt+J")
+    #expect(bindings[.fittingUp] == "Control+Alt+K")
+    #expect(bindings[.fittingRight] == "Control+Shift+L")
+    // Room rows and reference fittings are separate from the guided path's card grid.
+    _ = try Keybindings(overrides: ["fittingDown": "Control+Shift+J", "nextRoom": "Control+Shift+J",
+      "nextFitting": "Control+Shift+J"]).validated()
+  }
   @Test func pathShortcutsRespectPageContexts() throws {
     #expect(try Keybindings().validated()[.addSupply] == "Control+Alt+S")
     #expect(Keybindings()[.pressure] == "Control+Alt+S")

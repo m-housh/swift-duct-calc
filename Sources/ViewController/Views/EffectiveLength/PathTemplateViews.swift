@@ -183,6 +183,9 @@ struct PathTemplateWorkspace: HTML, Sendable {
           "Back to \(data.mode != "path" ? "templates" : "paths")"
         }
       }
+      link(.rel(.stylesheet), .href("/css/path-template-workspace.css?v=3"))
+      template(.id("path-review-edit-icon")) { SVG(.squarePen) }
+      template(.id("path-review-remove-icon")) { SVG(.trash) }
       div(.id("path-template-workspace"), .class("space-y-4")) {
         PageTitle { data.mode == "editor" ? "Configure template" : "Build path" }
         p { "Loading fittings…" }
@@ -191,7 +194,7 @@ struct PathTemplateWorkspace: HTML, Sendable {
       script(.id("path-template-data"), .init(name: "type", value: "application/json")) {
         HTMLRaw(encoded)
       }
-      script(.src("/js/path-templates.js?v=optional-steps-7"), .init(name: "defer", value: "")) {}
+      script(.src("/js/path-templates.js?v=review-keyboard-5"), .init(name: "defer", value: "")) {}
     }
   }
 }

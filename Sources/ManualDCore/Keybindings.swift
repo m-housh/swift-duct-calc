@@ -11,6 +11,7 @@ public enum KeybindingAction: String, CaseIterable, Codable, Sendable {
   case templateShared, templateFurnace, templateAirHandler
   case group1, group2, group3, group4, group5, group6, group7, group8, group9, group10
   case nextGroup, previousGroup, nextFitting, previousFitting
+  case fittingLeft, fittingDown, fittingUp, fittingRight
 
   private var description: (String, String) {
     switch self {
@@ -46,6 +47,10 @@ public enum KeybindingAction: String, CaseIterable, Codable, Sendable {
     case .previousGroup: ("Previous group", "B")
     case .nextFitting: ("Next fitting", "J")
     case .previousFitting: ("Previous fitting", "K")
+    case .fittingLeft: ("Fitting to the left", "H")
+    case .fittingDown: ("Fitting below", "J")
+    case .fittingUp: ("Fitting above", "K")
+    case .fittingRight: ("Fitting to the right", "L")
     default: ("Group \(rawValue.dropFirst(5))", self == .group10 ? "0" : String(rawValue.suffix(1)))
     }
   }
@@ -66,6 +71,7 @@ public enum KeybindingAction: String, CaseIterable, Codable, Sendable {
     case .exportPDF: "Duct sizes"
     case .heating, .cooling, .pressure: "Equipment"
     case .templateShared, .templateFurnace, .templateAirHandler: "System templates"
+    case .fittingLeft, .fittingDown, .fittingUp, .fittingRight: "Path templates"
     default: "Fitting reference"
     }
   }
@@ -74,13 +80,14 @@ public enum KeybindingAction: String, CaseIterable, Codable, Sendable {
   public var contexts: Set<String> {
     switch section {
     case "App":
-      ["account", "project", "rooms", "equipment", "effectiveLength", "ductSizing", "fittings"]
-    case "Project navigation": ["project", "rooms", "equipment", "effectiveLength", "ductSizing"]
+      ["account", "project", "rooms", "equipment", "effectiveLength", "ductSizing", "fittings", "pathTemplates"]
+    case "Project navigation": ["project", "rooms", "equipment", "effectiveLength", "ductSizing", "pathTemplates"]
     case "Rooms": ["rooms"]
     case "Total effective length": ["effectiveLength"]
     case "Duct sizes": ["ductSizing"]
     case "Equipment": ["equipment"]
     case "System templates": ["templates"]
+    case "Path templates": ["pathTemplates"]
     default: ["fittings"]
     }
   }
@@ -90,6 +97,7 @@ public enum KeybindingAction: String, CaseIterable, Codable, Sendable {
     case "App": "Where the action is available"
     case "Project navigation": "In a project"
     case "System templates": "In the system template chooser"
+    case "Path templates": "Choosing a fitting in a path template"
     default: "In \(section.lowercased())"
     }
   }

@@ -20,6 +20,7 @@
     "test:fitting-path-order": "node scripts/check_fitting_path_order.cjs",
     "test:fitting-shortcuts": "node --test scripts/check_fitting_shortcuts.cjs",
     "test:path-templates": "node scripts/check_swift_path_templates.cjs",
+    "test:path-template-review": "node scripts/check_path_template_review_browser.cjs",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:css": "npx @tailwindcss/cli -i Public/css/main.css -o Public/css/output.css",
     "test:accessibility": "node scripts/check_accessibility.cjs",

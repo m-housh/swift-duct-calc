@@ -42,13 +42,13 @@
         <div class="keybindings-toolbar">
           <label class="account-profile-field"><span class="sr-only">Find a keybinding</span>
           <input type="search" class="input" id="keybinding-search" placeholder="Find an action…">
-          42 bindings</label><span class="keybindings-count"></span>
+          46 bindings</label><span class="keybindings-count"></span>
           <button type="button" class="btn btn-ghost" data-reset-keybindings="">Reset all</button>
         </div>
         <section class="keybindings-section">
           <h2>App</h2>
           <div class="keybindings-list">
-            <div class="keybinding-row" data-keybinding-action="reveal" data-title="Reveal shortcuts" data-default="Control+Alt+/" data-contexts="account ductSizing effectiveLength equipment fittings project rooms">
+            <div class="keybinding-row" data-keybinding-action="reveal" data-title="Reveal shortcuts" data-default="Control+Alt+/" data-contexts="account ductSizing effectiveLength equipment fittings pathTemplates project rooms">
               <div class="keybinding-description">
                 <h3>Reveal shortcuts</h3>
                 <p>Where the action is available</p>
@@ -58,7 +58,7 @@
                 <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Reveal shortcuts shortcut" disabled>Reset</button>
               </div>
             </div>
-            <div class="keybinding-row" data-keybinding-action="help" data-title="Keyboard shortcuts" data-default="Control+Alt+Shift+/" data-contexts="account ductSizing effectiveLength equipment fittings project rooms">
+            <div class="keybinding-row" data-keybinding-action="help" data-title="Keyboard shortcuts" data-default="Control+Alt+Shift+/" data-contexts="account ductSizing effectiveLength equipment fittings pathTemplates project rooms">
               <div class="keybinding-description">
                 <h3>Keyboard shortcuts</h3>
                 <p>Where the action is available</p>
@@ -68,7 +68,7 @@
                 <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Keyboard shortcuts shortcut" disabled>Reset</button>
               </div>
             </div>
-            <div class="keybinding-row" data-keybinding-action="search" data-title="Focus search" data-default="Control+K" data-contexts="account ductSizing effectiveLength equipment fittings project rooms">
+            <div class="keybinding-row" data-keybinding-action="search" data-title="Focus search" data-default="Control+K" data-contexts="account ductSizing effectiveLength equipment fittings pathTemplates project rooms">
               <div class="keybinding-description">
                 <h3>Focus search</h3>
                 <p>Where the action is available</p>
@@ -78,7 +78,7 @@
                 <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Focus search shortcut" disabled>Reset</button>
               </div>
             </div>
-            <div class="keybinding-row" data-keybinding-action="projects" data-title="Projects" data-default="Control+Alt+P" data-contexts="account ductSizing effectiveLength equipment fittings project rooms">
+            <div class="keybinding-row" data-keybinding-action="projects" data-title="Projects" data-default="Control+Alt+P" data-contexts="account ductSizing effectiveLength equipment fittings pathTemplates project rooms">
               <div class="keybinding-description">
                 <h3>Projects</h3>
                 <p>Where the action is available</p>
@@ -88,7 +88,7 @@
                 <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Projects shortcut" disabled>Reset</button>
               </div>
             </div>
-            <div class="keybinding-row" data-keybinding-action="profile" data-title="Profile" data-default="Control+Alt+U" data-contexts="account ductSizing effectiveLength equipment fittings project rooms">
+            <div class="keybinding-row" data-keybinding-action="profile" data-title="Profile" data-default="Control+Alt+U" data-contexts="account ductSizing effectiveLength equipment fittings pathTemplates project rooms">
               <div class="keybinding-description">
                 <h3>Profile</h3>
                 <p>Where the action is available</p>
@@ -98,7 +98,7 @@
                 <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Profile shortcut" disabled>Reset</button>
               </div>
             </div>
-            <div class="keybinding-row" data-keybinding-action="ductulator" data-title="Ductulator" data-default="Control+Alt+D" data-contexts="account ductSizing effectiveLength equipment fittings project rooms">
+            <div class="keybinding-row" data-keybinding-action="ductulator" data-title="Ductulator" data-default="Control+Alt+D" data-contexts="account ductSizing effectiveLength equipment fittings pathTemplates project rooms">
               <div class="keybinding-description">
                 <h3>Ductulator</h3>
                 <p>Where the action is available</p>
@@ -108,7 +108,7 @@
                 <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Ductulator shortcut" disabled>Reset</button>
               </div>
             </div>
-            <div class="keybinding-row" data-keybinding-action="fittings" data-title="Fitting reference" data-default="Control+Alt+F" data-contexts="account ductSizing effectiveLength equipment fittings project rooms">
+            <div class="keybinding-row" data-keybinding-action="fittings" data-title="Fitting reference" data-default="Control+Alt+F" data-contexts="account ductSizing effectiveLength equipment fittings pathTemplates project rooms">
               <div class="keybinding-description">
                 <h3>Fitting reference</h3>
                 <p>Where the action is available</p>
@@ -123,7 +123,7 @@
         <section class="keybindings-section">
           <h2>Project navigation</h2>
           <div class="keybindings-list">
-            <div class="keybinding-row" data-keybinding-action="project" data-title="Project overview" data-default="Control+Alt+1" data-contexts="ductSizing effectiveLength equipment project rooms">
+            <div class="keybinding-row" data-keybinding-action="project" data-title="Project overview" data-default="Control+Alt+1" data-contexts="ductSizing effectiveLength equipment pathTemplates project rooms">
               <div class="keybinding-description">
                 <h3>Project overview</h3>
                 <p>In a project</p>
@@ -133,7 +133,7 @@
                 <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Project overview shortcut" disabled>Reset</button>
               </div>
             </div>
-            <div class="keybinding-row" data-keybinding-action="rooms" data-title="Rooms" data-default="Control+Alt+2" data-contexts="ductSizing effectiveLength equipment project rooms">
+            <div class="keybinding-row" data-keybinding-action="rooms" data-title="Rooms" data-default="Control+Alt+2" data-contexts="ductSizing effectiveLength equipment pathTemplates project rooms">
               <div class="keybinding-description">
                 <h3>Rooms</h3>
                 <p>In a project</p>
@@ -143,7 +143,7 @@
                 <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Rooms shortcut" disabled>Reset</button>
               </div>
             </div>
-            <div class="keybinding-row" data-keybinding-action="equipment" data-title="Equipment" data-default="Control+Alt+3" data-contexts="ductSizing effectiveLength equipment project rooms">
+            <div class="keybinding-row" data-keybinding-action="equipment" data-title="Equipment" data-default="Control+Alt+3" data-contexts="ductSizing effectiveLength equipment pathTemplates project rooms">
               <div class="keybinding-description">
                 <h3>Equipment</h3>
                 <p>In a project</p>
@@ -153,7 +153,7 @@
                 <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Equipment shortcut" disabled>Reset</button>
               </div>
             </div>
-            <div class="keybinding-row" data-keybinding-action="effectiveLength" data-title="Total effective length" data-default="Control+Alt+4" data-contexts="ductSizing effectiveLength equipment project rooms">
+            <div class="keybinding-row" data-keybinding-action="effectiveLength" data-title="Total effective length" data-default="Control+Alt+4" data-contexts="ductSizing effectiveLength equipment pathTemplates project rooms">
               <div class="keybinding-description">
                 <h3>Total effective length</h3>
                 <p>In a project</p>
@@ -163,7 +163,7 @@
                 <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Total effective length shortcut" disabled>Reset</button>
               </div>
             </div>
-            <div class="keybinding-row" data-keybinding-action="frictionRate" data-title="Friction rate" data-default="Control+Alt+5" data-contexts="ductSizing effectiveLength equipment project rooms">
+            <div class="keybinding-row" data-keybinding-action="frictionRate" data-title="Friction rate" data-default="Control+Alt+5" data-contexts="ductSizing effectiveLength equipment pathTemplates project rooms">
               <div class="keybinding-description">
                 <h3>Friction rate</h3>
                 <p>In a project</p>
@@ -173,7 +173,7 @@
                 <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Friction rate shortcut" disabled>Reset</button>
               </div>
             </div>
-            <div class="keybinding-row" data-keybinding-action="ductSizes" data-title="Duct sizes" data-default="Control+Alt+6" data-contexts="ductSizing effectiveLength equipment project rooms">
+            <div class="keybinding-row" data-keybinding-action="ductSizes" data-title="Duct sizes" data-default="Control+Alt+6" data-contexts="ductSizing effectiveLength equipment pathTemplates project rooms">
               <div class="keybinding-description">
                 <h3>Duct sizes</h3>
                 <p>In a project</p>
@@ -183,7 +183,7 @@
                 <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Duct sizes shortcut" disabled>Reset</button>
               </div>
             </div>
-            <div class="keybinding-row" data-keybinding-action="nextStep" data-title="Next project step" data-default="Control+Alt+Enter" data-contexts="ductSizing effectiveLength equipment project rooms">
+            <div class="keybinding-row" data-keybinding-action="nextStep" data-title="Next project step" data-default="Control+Alt+Enter" data-contexts="ductSizing effectiveLength equipment pathTemplates project rooms">
               <div class="keybinding-description">
                 <h3>Next project step</h3>
                 <p>In a project</p>
@@ -193,7 +193,7 @@
                 <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Next project step shortcut" disabled>Reset</button>
               </div>
             </div>
-            <div class="keybinding-row" data-keybinding-action="previousStep" data-title="Previous project step" data-default="Control+Alt+Shift+Enter" data-contexts="ductSizing effectiveLength equipment project rooms">
+            <div class="keybinding-row" data-keybinding-action="previousStep" data-title="Previous project step" data-default="Control+Alt+Shift+Enter" data-contexts="ductSizing effectiveLength equipment pathTemplates project rooms">
               <div class="keybinding-description">
                 <h3>Previous project step</h3>
                 <p>In a project</p>
@@ -203,7 +203,7 @@
                 <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Previous project step shortcut" disabled>Reset</button>
               </div>
             </div>
-            <div class="keybinding-row" data-keybinding-action="primaryAction" data-title="Current step action" data-default="Control+Alt+A" data-contexts="ductSizing effectiveLength equipment project rooms">
+            <div class="keybinding-row" data-keybinding-action="primaryAction" data-title="Current step action" data-default="Control+Alt+A" data-contexts="ductSizing effectiveLength equipment pathTemplates project rooms">
               <div class="keybinding-description">
                 <h3>Current step action</h3>
                 <p>In a project</p>
@@ -501,6 +501,51 @@
               <div class="keybinding-controls">
                 <button type="button" class="keybinding-record" data-binding="Control+Alt+K" aria-label="Change Previous fitting shortcut, Ctrl+Alt+K" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">K</kbd></span></button>
                 <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Previous fitting shortcut" disabled>Reset</button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="keybindings-section">
+          <h2>Path templates</h2>
+          <div class="keybindings-list">
+            <div class="keybinding-row" data-keybinding-action="fittingLeft" data-title="Fitting to the left" data-default="Control+Alt+H" data-contexts="pathTemplates">
+              <div class="keybinding-description">
+                <h3>Fitting to the left</h3>
+                <p>Choosing a fitting in a path template</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+H" aria-label="Change Fitting to the left shortcut, Ctrl+Alt+H" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">H</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Fitting to the left shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="fittingDown" data-title="Fitting below" data-default="Control+Alt+J" data-contexts="pathTemplates">
+              <div class="keybinding-description">
+                <h3>Fitting below</h3>
+                <p>Choosing a fitting in a path template</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+J" aria-label="Change Fitting below shortcut, Ctrl+Alt+J" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">J</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Fitting below shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="fittingUp" data-title="Fitting above" data-default="Control+Alt+K" data-contexts="pathTemplates">
+              <div class="keybinding-description">
+                <h3>Fitting above</h3>
+                <p>Choosing a fitting in a path template</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+K" aria-label="Change Fitting above shortcut, Ctrl+Alt+K" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">K</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Fitting above shortcut" disabled>Reset</button>
+              </div>
+            </div>
+            <div class="keybinding-row" data-keybinding-action="fittingRight" data-title="Fitting to the right" data-default="Control+Alt+L" data-contexts="pathTemplates">
+              <div class="keybinding-description">
+                <h3>Fitting to the right</h3>
+                <p>Choosing a fitting in a path template</p>
+              </div>
+              <div class="keybinding-controls">
+                <button type="button" class="keybinding-record" data-binding="Control+Alt+L" aria-label="Change Fitting to the right shortcut, Ctrl+Alt+L" aria-describedby="keybinding-status"><span class="keycaps"><kbd class="kbd kbd-sm">Ctrl</kbd><kbd class="kbd kbd-sm">Alt</kbd><kbd class="kbd kbd-sm">L</kbd></span></button>
+                <button type="button" class="btn btn-ghost keybinding-reset" data-reset-keybinding="" aria-label="Reset Fitting to the right shortcut" disabled>Reset</button>
               </div>
             </div>
           </div>

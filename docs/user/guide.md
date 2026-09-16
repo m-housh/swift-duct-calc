@@ -39,7 +39,8 @@ Ctrl+Alt+A opens the current step's main action:
 | Duct sizes | Add trunk |
 
 Shortcuts work while a search box has focus. They pause in other form fields
-or when a dialog is open. Save your changes before switching sections.
+or when a dialog is open, except for the guided path navigation described below.
+Save your changes before switching sections.
 
 Ctrl+Alt+D opens the ductulator in a new tab. Ctrl+Alt+F opens the fitting
 reference in a new tab. These shortcuts work wherever the corresponding
@@ -224,6 +225,17 @@ sequence of fittings. Each account starts with editable Default supply and Defau
 return templates. Customize or rename these for your usual designs, or add more.
 Deleted templates are not automatically replaced. The path name and straight duct
 lengths carry into the guided flow. Back to path restores the original path form.
+
+Press Enter to continue a section or save from Review path, and Shift+Enter to
+go back. A focused button keeps its usual Enter action. Your next-step,
+previous-step, and current-step-action shortcuts also work in the guided flow,
+including while entering quantities. In fitting details, Enter applies the edit.
+Use Ctrl+Alt+H/J/K/L to move left/down/up/right between fitting cards, then Enter
+or Space to choose the focused fitting. Plain arrow keys also work. Up and Down
+follow the displayed rows. From a section heading, any direction focuses the
+first available fitting. Customize these shortcuts in Account > Keybindings >
+Path templates. Tab still reaches reference details and the other controls.
+Card navigation also works in Browse all fittings.
 
 Manage templates through Account > Path templates or from a project. Configure
 sections to choose one fitting, choose several, or enter quantities. Allow skipping
