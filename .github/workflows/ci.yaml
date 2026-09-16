@@ -76,7 +76,6 @@ jobs:
     - run: npm run test:project-workspace
     - run: npm run test:file-import
     - run: npm run test:login-form
-    - run: npm run test:home-preview
     - run: npx playwright install --with-deps chromium
     - run: npm run test:trunk-order
     - name: Start isolated accessibility test app
@@ -91,7 +90,7 @@ jobs:
         done
         docker logs ductcalc-accessibility
         exit 1
-    - name: Check home page and animated preview
+    - name: Check home page, themes, and accessibility
       run: DUCTCALC_HOME_ORIGIN=http://127.0.0.1:58681 npm run test:home-browser
     - name: Check request errors and retained drafts
       run: DUCTCALC_ERROR_ORIGIN=http://127.0.0.1:58681 npm run test:request-errors

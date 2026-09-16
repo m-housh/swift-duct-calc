@@ -32,7 +32,10 @@ extension ViewController.Request {
       return MainPage(
         theme: profile?.theme ?? .default,
         keybindings: (try? currentUser().keybindings) ?? .init(),
-        title: "Fitting reference · Duct Calc",
+        title: route.pageTitle,
+        description:
+          "Browse duct fitting drawings, equivalent lengths, and reference conditions for residential HVAC duct design. No account required.",
+        canonicalURL: "https://ductcalc.pro/fittings",
         stylesheets: ["/fittings/styles.css"],
         scripts: ["app.js?v=keybindings-1"]
           .map { "/fittings/\($0)" }
@@ -94,6 +97,8 @@ extension ViewController.Request {
 
   func view<C: HTML>(
     projectID: Project.ID? = nil,
+    description: String = "Duct sizing based on ACCA, Manual-D.",
+    canonicalURL: String? = nil,
     @HTMLBuilder inner: () async throws -> C
   ) async rethrows -> AnySendableHTML where C: Sendable {
     let inner = try await inner()
@@ -118,7 +123,8 @@ extension ViewController.Request {
 
     return MainPage(
       displayFooter: displayFooter, theme: profile?.theme ?? .default,
-      keybindings: (try? currentUser().keybindings) ?? .init(), title: route.pageTitle
+      keybindings: (try? currentUser().keybindings) ?? .init(), title: route.pageTitle,
+      description: description, canonicalURL: canonicalURL
     ) {
       inner.environment(ProjectViewValue.$navigation, navigation)
     }
@@ -744,7 +750,11 @@ extension SiteRoute.View.DuctulatorRoute {
 
     switch self {
     case .index:
-      return await request.view {
+      return await request.view(
+        description:
+          "Calculate round and rectangular duct sizes from airflow and friction rate with the DuctCalc ductulator. Use the calculator without an account.",
+        canonicalURL: "https://ductcalc.pro/ductulator"
+      ) {
         DuctulatorView(
           isLoggedIn: request.isLoggedIn
         )

@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Ductulator · Duct Calc</title>
+    <title>Duct Sizing Calculator / Ductulator | DuctCalc</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Duct sizing based on ACCA, Manual-D." name="description">
+    <meta content="Calculate round and rectangular duct sizes from airflow and friction rate with the DuctCalc ductulator. Use the calculator without an account." name="description">
     <meta property="og:site_name" content="DuctCalc">
-    <meta property="og:title" content="DuctCalc">
-    <meta property="og:description" content="Duct sizing based on ACCA, Manual-D.">
+    <meta property="og:title" content="Duct Sizing Calculator / Ductulator | DuctCalc">
+    <meta property="og:description" content="Calculate round and rectangular duct sizes from airflow and friction rate with the DuctCalc ductulator. Use the calculator without an account.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ductcalc.pro/ductulator">
     <meta property="og:image" content="https://ductcalc.pro/images/brand/social-preview.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="DuctCalc logo. Residential duct design. ductcalc.pro">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="DuctCalc">
-    <meta name="twitter:description" content="Duct sizing based on ACCA, Manual-D.">
+    <meta name="twitter:title" content="Duct Sizing Calculator / Ductulator | DuctCalc">
+    <meta name="twitter:description" content="Calculate round and rectangular duct sizes from airflow and friction rate with the DuctCalc ductulator. Use the calculator without an account.">
     <meta name="twitter:image" content="https://ductcalc.pro/images/brand/social-preview.png">
     <meta name="twitter:image:alt" content="DuctCalc logo. Residential duct design. ductcalc.pro">
-    <meta content="duct, hvac, duct-design, duct design, manual-d, manual d, design" name="keywords">
+    <link rel="canonical" href="https://ductcalc.pro/ductulator">
     <script src="https://unpkg.com/htmx.org@2.0.8"></script>
     <script src="/js/request-errors.js?v=1"></script>
     <script src="/js/main.js?v=keybindings-11"></script>
@@ -62,7 +63,7 @@
                 <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calculator-icon lucide-calculator"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
                 <h1 class="text-3xl font-bold">Ductulator</h1>
               </div>
-              <p class="font-bold italic">Calculate duct size for the given parameters</p>
+              <p class="font-bold italic">Calculate duct size from airflow (CFM) and friction rate. Add a height for a rectangular size.</p>
               <form class="space-y-4 mt-6" hx-post="/ductulator" hx-target="#resultView" hx-swap="outerHTML">
                 <label class="input w-full"><span class="label">CFM</span>
                 <input name="cfm" type="number" placeholder="1000" required autofocus></label>

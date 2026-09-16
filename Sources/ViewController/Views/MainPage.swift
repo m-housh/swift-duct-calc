@@ -14,6 +14,8 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
   let keybindings: Keybindings
   let displayFooter: Bool
   let pageTitle: String
+  let summary: String
+  let canonicalURL: String?
   let stylesheets: [String]
   let scripts: [String]
 
@@ -22,6 +24,8 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     theme: Theme? = nil,
     keybindings: Keybindings = .init(),
     title: String = "Duct Calc",
+    description: String = "Duct sizing based on ACCA, Manual-D.",
+    canonicalURL: String? = nil,
     stylesheets: [String] = [],
     scripts: [String] = [],
     _ inner: () -> Inner
@@ -30,29 +34,21 @@ public struct MainPage<Inner: HTML>: SendableHTMLDocument where Inner: Sendable 
     self.theme = theme
     self.keybindings = keybindings
     self.pageTitle = title
+    self.summary = description
+    self.canonicalURL = canonicalURL
     self.stylesheets = stylesheets
     self.scripts = scripts
     self.inner = inner()
-  }
-
-  private var summary: String {
-    """
-    Duct sizing based on ACCA, Manual-D.
-    """
-  }
-
-  private var keywords: String {
-    """
-    duct, hvac, duct-design, duct design, manual-d, manual d, design
-    """
   }
 
   public var head: some HTML {
     meta(.charset(.utf8))
     meta(.name(.viewport), .content("width=device-width, initial-scale=1.0"))
     meta(.content(summary), .name("description"))
-    SocialPreview(title: "DuctCalc", description: summary)
-    meta(.content(keywords), .name(.keywords))
+    SocialPreview(title: pageTitle, description: summary, url: canonicalURL)
+    if let canonicalURL {
+      link(.rel("canonical"), .href(canonicalURL))
+    }
     script(.src("https://unpkg.com/htmx.org@2.0.8")) {}
     script(.src("/js/request-errors.js?v=1")) {}
     script(.src("/js/main.js?v=keybindings-11")) {}
