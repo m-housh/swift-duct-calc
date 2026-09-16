@@ -28,6 +28,42 @@ struct KeybindingsTests {
       "nextRoom": "Control+Shift+J", "nextFitting": "Control+Shift+J",
     ]).validated()
   }
+  @Test func fittingDirectionsRespectTemplateContext() throws {
+    for binding in ["Control+Alt+J", "Control+Alt+Enter", "Control+Alt+A", "Control+Alt+P"] {
+      #expect(throws: KeybindingError.self) {
+        try Keybindings(overrides: ["fittingLeft": binding]).validated()
+      }
+    }
+    let bindings = try Keybindings(overrides: ["fittingRight": "Control+Shift+L"]).validated()
+    #expect(bindings[.fittingLeft] == "Control+Alt+H")
+    #expect(bindings[.fittingDown] == "Control+Alt+J")
+    #expect(bindings[.fittingUp] == "Control+Alt+K")
+    #expect(bindings[.fittingRight] == "Control+Shift+L")
+    // Room rows and reference fittings are separate from the guided path's card grid.
+    _ = try Keybindings(overrides: ["fittingDown": "Control+Shift+J", "nextRoom": "Control+Shift+J",
+      "nextFitting": "Control+Shift+J"]).validated()
+  }
+  @Test func legacyFittingConflictsPreserveExistingShortcuts() throws {
+    let original = Keybindings(overrides: ["nextStep": "Control+Alt+L"])
+    // New submissions must still reject the collision; only stored settings are repaired.
+    #expect(throws: KeybindingError.self) { try original.validated() }
+    let resolved = try original.resolvingLegacyFittingConflicts().validated()
+    #expect(resolved[.nextStep] == "Control+Alt+L")
+    #expect(resolved[.fittingRight] == "Control+Alt+Shift+L")
+    #expect(try resolved.resolvingLegacyFittingConflicts() == resolved)
+
+    let occupied = Keybindings(overrides: [
+      "nextStep": "Control+Alt+L", "previousStep": "Control+Alt+Shift+L",
+      "fittingUp": "Control+Alt+Shift+A",
+    ])
+    let fallback = try occupied.resolvingLegacyFittingConflicts().validated()
+    #expect(fallback[.fittingRight] == "Control+Alt+Shift+B")
+    for (action, binding) in occupied.overrides { #expect(fallback.overrides[action] == binding) }
+
+    #expect(try Keybindings().resolvingLegacyFittingConflicts() == Keybindings())
+    let separateContext = Keybindings(overrides: ["nextRoom": "Control+Alt+L"])
+    #expect(try separateContext.resolvingLegacyFittingConflicts() == separateContext)
+  }
   @Test func pathShortcutsRespectPageContexts() throws {
     #expect(try Keybindings().validated()[.addSupply] == "Control+Alt+S")
     #expect(Keybindings()[.pressure] == "Control+Alt+S")

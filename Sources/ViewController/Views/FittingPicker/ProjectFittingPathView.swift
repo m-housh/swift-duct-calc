@@ -20,7 +20,7 @@ struct ProjectFittingPathView: HTML, Sendable {
     link(.rel(.stylesheet), .href("/css/fitting-favorites.css"))
     link(.rel(.stylesheet), .href("/css/fitting-path-modal.css?v=close-button-3"))
     script(.src("/js/group-carousel.js"), .defer) {}
-    script(.src("/js/path-templates.js?v=optional-steps-7"), .defer) {}
+    script(.src("/js/path-templates.js?v=review-keyboard-5"), .defer) {}
     script(.src("/js/template-modal.js?v=template-modal-2"), .defer) {}
     script(.src("/js/fitting-path.js?v=reference-import-6"), .defer) {}
     EditorDialog(id: "fitting-path", titleID: "path-title") {

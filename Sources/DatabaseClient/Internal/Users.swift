@@ -203,6 +203,7 @@ final class UserModel: Model, @unchecked Sendable {
       updatedAt: updatedAt!,
       keybindings: try keybindings.map {
         try JSONDecoder().decode(Keybindings.self, from: Data($0.utf8))
+          .resolvingLegacyFittingConflicts()
       }
     )
   }
